@@ -1,0 +1,626 @@
+[
+  {
+    "id": "family_121",
+    "title": "Pazar Kahvaltısı ve Bisiklet Turu",
+    "category": "disarda",
+    "bonding_level": 7,
+    "fun_factor": 9,
+    "cost": "az",
+    "duration": "3-4 saat",
+    "planning_time": 22,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "disarisi",
+    "season": [
+      "kis",
+      "yaz"
+    ],
+    "weather_dependency": true,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 5.0,
+    "review_count": 415
+  },
+  {
+    "id": "family_122",
+    "title": "Kamp ve Doğa Yürüyüşü",
+    "category": "disarda",
+    "bonding_level": 9,
+    "fun_factor": 9,
+    "cost": "orta",
+    "duration": "2-3 gün",
+    "planning_time": 27,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "dogada",
+    "season": [
+      "sonbahar",
+      "yaz",
+      "ilkbahar",
+      "kis"
+    ],
+    "weather_dependency": true,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.2,
+    "review_count": 254
+  },
+  {
+    "id": "family_123",
+    "title": "Aile Oyun Gecesi",
+    "category": "disarda",
+    "bonding_level": 10,
+    "fun_factor": 8,
+    "cost": "az",
+    "duration": "2-3 saat",
+    "planning_time": 20,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "evde",
+    "season": [
+      "yaz",
+      "sonbahar"
+    ],
+    "weather_dependency": true,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.4,
+    "review_count": 276
+  },
+  {
+    "id": "family_124",
+    "title": "Sabah Yürüyüşü ve Kahve",
+    "category": "disarda",
+    "bonding_level": 7,
+    "fun_factor": 10,
+    "cost": "az",
+    "duration": "1-2 saat",
+    "planning_time": 6,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "disarisi",
+    "season": [
+      "sonbahar"
+    ],
+    "weather_dependency": false,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.9,
+    "review_count": 921
+  },
+  {
+    "id": "family_125",
+    "title": "Plaj ve Deniz Keyfi",
+    "category": "disarda",
+    "bonding_level": 10,
+    "fun_factor": 9,
+    "cost": "orta",
+    "duration": "1 gün",
+    "planning_time": 17,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "disarisi",
+    "season": [
+      "yaz",
+      "sonbahar",
+      "ilkbahar",
+      "kis"
+    ],
+    "weather_dependency": true,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.4,
+    "review_count": 335
+  },
+  {
+    "id": "family_126",
+    "title": "Müze Gezisi",
+    "category": "disarda",
+    "bonding_level": 8,
+    "fun_factor": 7,
+    "cost": "az",
+    "duration": "3-4 saat",
+    "planning_time": 19,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "disarisi",
+    "season": [
+      "kis",
+      "yaz"
+    ],
+    "weather_dependency": false,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.2,
+    "review_count": 420
+  },
+  {
+    "id": "family_127",
+    "title": "Orman Pikniği",
+    "category": "disarda",
+    "bonding_level": 7,
+    "fun_factor": 10,
+    "cost": "az",
+    "duration": "4-5 saat",
+    "planning_time": 11,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "disarisi",
+    "season": [
+      "yaz",
+      "ilkbahar"
+    ],
+    "weather_dependency": true,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.7,
+    "review_count": 476
+  },
+  {
+    "id": "family_128",
+    "title": "Film ve Patlamış Mısır Gecesi",
+    "category": "disarda",
+    "bonding_level": 8,
+    "fun_factor": 7,
+    "cost": "az",
+    "duration": "2-3 saat",
+    "planning_time": 28,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "evde",
+    "season": [
+      "sonbahar",
+      "ilkbahar"
+    ],
+    "weather_dependency": true,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "1 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.5,
+    "review_count": 667
+  },
+  {
+    "id": "family_129",
+    "title": "Yemek Yapma Yarışması",
+    "category": "disarda",
+    "bonding_level": 8,
+    "fun_factor": 9,
+    "cost": "az",
+    "duration": "2-3 saat",
+    "planning_time": 6,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "evde",
+    "season": [
+      "kis"
+    ],
+    "weather_dependency": false,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "1 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.5,
+    "review_count": 582
+  },
+  {
+    "id": "family_130",
+    "title": "Kartondan Şehir Yapımı",
+    "category": "disarda",
+    "bonding_level": 7,
+    "fun_factor": 7,
+    "cost": "az",
+    "duration": "2-3 saat",
+    "planning_time": 12,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "evde",
+    "season": [
+      "yaz",
+      "kis",
+      "sonbahar",
+      "ilkbahar"
+    ],
+    "weather_dependency": false,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "1 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.1,
+    "review_count": 142
+  }
+]

@@ -1,0 +1,70 @@
+{
+  "module": "budget",
+  "version": "1.0",
+  "language": "tr",
+  "region": "BE",
+  "generated_at": "2026-04-27T00:00:00Z",
+  "currency": "EUR",
+  "sample_family_budget": {
+    "monthly_income": 4500,
+    "allocation": {
+      "kira_ev_kredisi": {"amount": 1350, "percentage": 30, "type": "sabit"},
+      "market_yemek": {"amount": 675, "percentage": 15, "type": "degisken"},
+      "elektrik_su_dogalgaz": {"amount": 300, "percentage": 6.7, "type": "sabit"},
+      "internet_telefon_tv": {"amount": 100, "percentage": 2.2, "type": "sabit"},
+      "ulasim": {"amount": 200, "percentage": 4.4, "type": "degisken"},
+      "cocuk_giderleri": {"amount": 675, "percentage": 15, "type": "degisken"},
+      "saglik_sigorta": {"amount": 150, "percentage": 3.3, "type": "sabit"},
+      "birikim": {"amount": 675, "percentage": 15, "type": "sabit"},
+      "diger": {"amount": 375, "percentage": 8.3, "type": "degisken"}
+    }
+  },
+  "belgium_specific_benefits": {
+    "kindergeld": {
+      "description": "Çocuk yardımı",
+      "amount_per_child": "~170 EUR/ay (yaşa göre değişir)",
+      "eligibility": "Belgium'da ikamet eden tüm aileler"
+    },
+    "school_allowance": {
+      "description": "Okul yardımı",
+      "amount": "Yıllık ~100-400 EUR (gelir durumuna göre)"
+    },
+    "tax_advantages": [
+      "Çocuk bakımı vergi indirimi (crèche, okul öncesi)",
+      "13. maaş vergi avantajı",
+      "Ev alımında vergi indirimleri (Flanders)"
+    ]
+  },
+  "saving_strategies": [
+    {
+      "name": "Kavanoz Yöntemi (Envelope System)",
+      "description": "Her kategori için fiziksel/dijital kavanoz, nakit bittiğinde harcama biter",
+      "difficulty": "Kolay",
+      "estimated_savings": "%15-20 bütçe disiplini"
+    },
+    {
+      "name": "50/30/20 Kuralı (Aile Uyarlaması)",
+      "description": "50% ihtiyaçlar, 30% çocuk/aile, 20% birikim",
+      "difficulty": "Orta",
+      "estimated_savings": "Düzenli birikim alışkanlığı"
+    },
+    {
+      "name": "Otomatik Transfer",
+      "description": "Maaş günü otomatik birikim hesabına transfer",
+      "difficulty": "Kolay",
+      "estimated_savings": "Psikolojik direnci kaldırır"
+    }
+  ],
+  "cost_cutting_tips": [
+    {"category": "market", "tip": "Haftalık liste ile alışveriş, aç karnına gitmeme", "monthly_savings_eur": 80},
+    {"category": "market", "tip": "Aldi/Lidl gibi marketlerden temel ürünler", "monthly_savings_eur": 60},
+    {"category": "elektrik", "tip": "Gece tarifesi kullanımı (bulaşık, çamaşır)", "monthly_savings_eur": 25},
+    {"category": "ulasim", "tip": "De Lijn/STIB aylık abonelik vs tek bilet", "monthly_savings_eur": 40},
+    {"category": "cocuk", "tip": "Oyuncak takası grupları, kütüphane üyeliği", "monthly_savings_eur": 50}
+  ],
+  "emergency_fund": {
+    "recommended_months": 6,
+    "for_families_months": 9,
+    "calculation_example": "Aylık gider 3000 EUR → Acil durum fonu: 18,000-27,000 EUR"
+  }
+}

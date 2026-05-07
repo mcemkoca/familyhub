@@ -1,0 +1,512 @@
+[
+  {
+    "id": "edu_251",
+    "title": "Duygu Yönetimi Teknikleri",
+    "category": "yaraticilik",
+    "age_group": {
+      "min": 5,
+      "max": 12
+    },
+    "development_area": [
+      "yaraticilik",
+      "sosyal_beceriler"
+    ],
+    "learning_objectives": [
+      "Beceri geliştirme",
+      "Özgüven artırma",
+      "Eğlenceli öğrenme"
+    ],
+    "duration": "1 saat/hafta",
+    "frequency": "günlük",
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 3"
+      }
+    ],
+    "steps": [
+      "Adım 1: Örnek gösterin.",
+      "Adım 2: Örnek gösterin.",
+      "Adım 3: Konuyu tanıtın.",
+      "Adım 4: Pekiştirin.",
+      "Adım 5: Çocuğa uygulatın."
+    ],
+    "parent_tips": [
+      "Sabırlı olun.",
+      "Pozitif pekiştirme verin.",
+      "Günlük rutine ekleyin."
+    ],
+    "rating": 5.0,
+    "review_count": 241
+  },
+  {
+    "id": "edu_252",
+    "title": "Kumbara ve Birikim",
+    "category": "yaraticilik",
+    "age_group": {
+      "min": 6,
+      "max": 12
+    },
+    "development_area": [
+      "yaraticilik",
+      "yaraticilik"
+    ],
+    "learning_objectives": [
+      "Beceri geliştirme",
+      "Özgüven artırma",
+      "Eğlenceli öğrenme"
+    ],
+    "duration": "45 dk/hafta",
+    "frequency": "haftada 3 kez",
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 3"
+      }
+    ],
+    "steps": [
+      "Adım 1: Örnek gösterin.",
+      "Adım 2: Pekiştirin.",
+      "Adım 3: Çocuğa uygulatın.",
+      "Adım 4: Çocuğa uygulatın.",
+      "Adım 5: Konuyu tanıtın."
+    ],
+    "parent_tips": [
+      "Sabırlı olun.",
+      "Pozitif pekiştirme verin.",
+      "Günlük rutine ekleyin."
+    ],
+    "rating": 4.8,
+    "review_count": 240
+  },
+  {
+    "id": "edu_253",
+    "title": "Geri Dönüşüm Projesi",
+    "category": "yaraticilik",
+    "age_group": {
+      "min": 5,
+      "max": 14
+    },
+    "development_area": [
+      "yaraticilik",
+      "odaklanma"
+    ],
+    "learning_objectives": [
+      "Beceri geliştirme",
+      "Özgüven artırma",
+      "Eğlenceli öğrenme"
+    ],
+    "duration": "15 dk/gün",
+    "frequency": "haftada 3 kez",
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 3"
+      }
+    ],
+    "steps": [
+      "Adım 1: Konuyu tanıtın.",
+      "Adım 2: Çocuğa uygulatın.",
+      "Adım 3: Değerlendirin.",
+      "Adım 4: Örnek gösterin.",
+      "Adım 5: Örnek gösterin."
+    ],
+    "parent_tips": [
+      "Sabırlı olun.",
+      "Pozitif pekiştirme verin.",
+      "Günlük rutine ekleyin."
+    ],
+    "rating": 4.7,
+    "review_count": 297
+  },
+  {
+    "id": "edu_254",
+    "title": "Güvenli İnternet Kullanımı",
+    "category": "yaraticilik",
+    "age_group": {
+      "min": 8,
+      "max": 14
+    },
+    "development_area": [
+      "yaraticilik",
+      "yaraticilik"
+    ],
+    "learning_objectives": [
+      "Beceri geliştirme",
+      "Özgüven artırma",
+      "Eğlenceli öğrenme"
+    ],
+    "duration": "45 dk/hafta",
+    "frequency": "haftada 5 kez",
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 3"
+      }
+    ],
+    "steps": [
+      "Adım 1: Değerlendirin.",
+      "Adım 2: Değerlendirin.",
+      "Adım 3: Çocuğa uygulatın.",
+      "Adım 4: Örnek gösterin.",
+      "Adım 5: Konuyu tanıtın."
+    ],
+    "parent_tips": [
+      "Sabırlı olun.",
+      "Pozitif pekiştirme verin.",
+      "Günlük rutine ekleyin."
+    ],
+    "rating": 4.3,
+    "review_count": 75
+  },
+  {
+    "id": "edu_255",
+    "title": "Resim ve Heykel Atölyesi",
+    "category": "yaraticilik",
+    "age_group": {
+      "min": 5,
+      "max": 12
+    },
+    "development_area": [
+      "yaraticilik",
+      "yaraticilik"
+    ],
+    "learning_objectives": [
+      "Beceri geliştirme",
+      "Özgüven artırma",
+      "Eğlenceli öğrenme"
+    ],
+    "duration": "45 dk/hafta",
+    "frequency": "günlük",
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 3"
+      }
+    ],
+    "steps": [
+      "Adım 1: Çocuğa uygulatın.",
+      "Adım 2: Pekiştirin.",
+      "Adım 3: Örnek gösterin.",
+      "Adım 4: Örnek gösterin.",
+      "Adım 5: Konuyu tanıtın."
+    ],
+    "parent_tips": [
+      "Sabırlı olun.",
+      "Pozitif pekiştirme verin.",
+      "Günlük rutine ekleyin."
+    ],
+    "rating": 4.6,
+    "review_count": 291
+  },
+  {
+    "id": "edu_256",
+    "title": "Hafıza Oyunları",
+    "category": "problem_cozme",
+    "age_group": {
+      "min": 6,
+      "max": 12
+    },
+    "development_area": [
+      "problem_cozme",
+      "sosyal_beceriler"
+    ],
+    "learning_objectives": [
+      "Beceri geliştirme",
+      "Özgüven artırma",
+      "Eğlenceli öğrenme"
+    ],
+    "duration": "1 saat/hafta",
+    "frequency": "haftada 5 kez",
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 3"
+      }
+    ],
+    "steps": [
+      "Adım 1: Değerlendirin.",
+      "Adım 2: Pekiştirin.",
+      "Adım 3: Konuyu tanıtın.",
+      "Adım 4: Değerlendirin.",
+      "Adım 5: Örnek gösterin."
+    ],
+    "parent_tips": [
+      "Sabırlı olun.",
+      "Pozitif pekiştirme verin.",
+      "Günlük rutine ekleyin."
+    ],
+    "rating": 4.0,
+    "review_count": 182
+  },
+  {
+    "id": "edu_257",
+    "title": "Mindfulness Çocuklar İçin",
+    "category": "problem_cozme",
+    "age_group": {
+      "min": 5,
+      "max": 12
+    },
+    "development_area": [
+      "problem_cozme",
+      "problem_cozme"
+    ],
+    "learning_objectives": [
+      "Beceri geliştirme",
+      "Özgüven artırma",
+      "Eğlenceli öğrenme"
+    ],
+    "duration": "45 dk/hafta",
+    "frequency": "haftada 3 kez",
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 3"
+      }
+    ],
+    "steps": [
+      "Adım 1: Değerlendirin.",
+      "Adım 2: Konuyu tanıtın.",
+      "Adım 3: Örnek gösterin.",
+      "Adım 4: Örnek gösterin.",
+      "Adım 5: Pekiştirin."
+    ],
+    "parent_tips": [
+      "Sabırlı olun.",
+      "Pozitif pekiştirme verin.",
+      "Günlük rutine ekleyin."
+    ],
+    "rating": 4.7,
+    "review_count": 77
+  },
+  {
+    "id": "edu_258",
+    "title": "Yaratıcı Yazma",
+    "category": "problem_cozme",
+    "age_group": {
+      "min": 8,
+      "max": 14
+    },
+    "development_area": [
+      "problem_cozme",
+      "yaraticilik"
+    ],
+    "learning_objectives": [
+      "Beceri geliştirme",
+      "Özgüven artırma",
+      "Eğlenceli öğrenme"
+    ],
+    "duration": "45 dk/hafta",
+    "frequency": "haftada 5 kez",
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 3"
+      }
+    ],
+    "steps": [
+      "Adım 1: Değerlendirin.",
+      "Adım 2: Değerlendirin.",
+      "Adım 3: Konuyu tanıtın.",
+      "Adım 4: Konuyu tanıtın.",
+      "Adım 5: Konuyu tanıtın."
+    ],
+    "parent_tips": [
+      "Sabırlı olun.",
+      "Pozitif pekiştirme verin.",
+      "Günlük rutine ekleyin."
+    ],
+    "rating": 4.2,
+    "review_count": 208
+  },
+  {
+    "id": "edu_259",
+    "title": "Problem Çözme Stratejileri",
+    "category": "problem_cozme",
+    "age_group": {
+      "min": 8,
+      "max": 14
+    },
+    "development_area": [
+      "problem_cozme",
+      "problem_cozme"
+    ],
+    "learning_objectives": [
+      "Beceri geliştirme",
+      "Özgüven artırma",
+      "Eğlenceli öğrenme"
+    ],
+    "duration": "45 dk/hafta",
+    "frequency": "haftada 3 kez",
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 3"
+      }
+    ],
+    "steps": [
+      "Adım 1: Örnek gösterin.",
+      "Adım 2: Çocuğa uygulatın.",
+      "Adım 3: Konuyu tanıtın.",
+      "Adım 4: Değerlendirin.",
+      "Adım 5: Pekiştirin."
+    ],
+    "parent_tips": [
+      "Sabırlı olun.",
+      "Pozitif pekiştirme verin.",
+      "Günlük rutine ekleyin."
+    ],
+    "rating": 4.4,
+    "review_count": 134
+  },
+  {
+    "id": "edu_260",
+    "title": "Tartışma ve Münazara",
+    "category": "problem_cozme",
+    "age_group": {
+      "min": 12,
+      "max": 18
+    },
+    "development_area": [
+      "problem_cozme",
+      "odaklanma"
+    ],
+    "learning_objectives": [
+      "Beceri geliştirme",
+      "Özgüven artırma",
+      "Eğlenceli öğrenme"
+    ],
+    "duration": "1 saat/hafta",
+    "frequency": "günlük",
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 3"
+      }
+    ],
+    "steps": [
+      "Adım 1: Çocuğa uygulatın.",
+      "Adım 2: Değerlendirin.",
+      "Adım 3: Konuyu tanıtın.",
+      "Adım 4: Değerlendirin.",
+      "Adım 5: Örnek gösterin."
+    ],
+    "parent_tips": [
+      "Sabırlı olun.",
+      "Pozitif pekiştirme verin.",
+      "Günlük rutine ekleyin."
+    ],
+    "rating": 5.0,
+    "review_count": 65
+  }
+]

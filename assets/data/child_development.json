@@ -1,0 +1,375 @@
+{
+  "framework_name": "FamilyHub Child Development Reference (0-12)",
+  "source_basis": "WHO Motor Development Study, AAP Developmental Milestones, Turkish Ministry of Health Guidelines",
+  "module": "child_development",
+  "version": "2.0",
+  "language": "tr",
+  "region": "BE",
+  "generated_at": "2026-05-03T00:00:00Z",
+  "age_groups": {
+    "0_12_months": {
+      "milestones": {
+        "physical": [
+          "0-3 ay: Baş kontrolü, kavrama refleksi, görsel takip",
+          "4-6 ay: Yuvarlanma, destekli oturma, uzanma",
+          "7-9 ay: Bağımsız oturma, emekleme, pence kavrama",
+          "10-12 ay: Ayağa kalkma, destekli yürüme, ilk adımlar"
+        ],
+        "cognitive": [
+          "Nesne kalıcılığı gelişimi (4-8 ay)",
+          "Neden-sonuç ilişkisi anlama (8-12 ay)",
+          "Basit hareketleri taklit etme"
+        ],
+        "language": [
+          "Cıvıldama (2-4 ay)",
+          "Ünsüz sesler çıkarma (4-6 ay)",
+          "İlk kelimeler (10-12 ay): 'anne', 'baba', 'daha'",
+          "Basit komutları anlama"
+        ],
+        "social_emotional": [
+          "Sosyal gülümseme (6-8 hafta)",
+          "Yabancı kaygısı (6-9 ay)",
+          "Ayrılma kaygısı zirve (9-12 ay)",
+          "Birincil bakıcılara bağlanma"
+        ]
+      },
+      "red_flags": [
+        "3 aya kadar görsel takip yok",
+        "3 aya kadar sosyal gülümseme yok",
+        "12 aya kadar gevezelik yok",
+        "9 aya kadar oturamama",
+        "12 aya kadar işaret etme/sallama yok"
+      ],
+      "activities": [
+        {
+          "name": "Tummy Time Türküleri",
+          "description": "Yüzüstü yatma egzersizleri eşliğinde Türkçe ninni veya tekerlemeler",
+          "duration_minutes": 10,
+          "age": "0-12 ay",
+          "materials": ["Yumuşak mat", "Renkli oyuncaklar"],
+          "learning_outcome": "Boyun ve omuz kaslarını güçlendirme, görsel takip",
+          "safety_notes": "Bebek uyanık ve nefes alabilir pozisyonda tutulmalı"
+        },
+        {
+          "name": "Kaçan Oyuncak",
+          "description": "Nesne kalıcılığı geliştirme oyunu: örtünün altındaki oyuncağı bul",
+          "duration_minutes": 10,
+          "age": "6-12 ay",
+          "materials": ["Yumuşak örtü", "Sevdiği oyuncak"],
+          "learning_outcome": "Nesne kalıcılığı, problem çözme",
+          "safety_notes": "Örtü nefes almayı engellemeyecek kadar hafif olmalı"
+        },
+        {
+          "name": "Parmak Oyunları",
+          "description": "İşaret parmağı ile renkli nesneleri gösterme ve adlandırma",
+          "duration_minutes": 15,
+          "age": "8-12 ay",
+          "materials": ["Renkli bloklar", "Çıngırak"],
+          "learning_outcome": "Pence kavrama, el-göz koordinasyonu",
+          "safety_notes": "Küçük parçalar yutma riski taşımamalı"
+        }
+      ],
+      "nutrition_tips": [
+        "0-6 ay: Sadece anne sütü veya mama",
+        "6+ ay: Demir zengini ek gıdalar (tahıl püreleri, yoğurt)",
+        "8+ ay: Parmak gıdalar başlatılabilir",
+        "Su: 6 aydan önce önerilmez"
+      ],
+      "sleep_guidelines": {
+        "hours": "14-17 saat/gün (0-3 ay), 12-15 saat/gün (4-11 ay)",
+        "schedule_tips": [
+          "Düzenli uyku rutini oluşturun (banyo, ninni, uyku)",
+          "Gece beslenmelerini yavaşça azaltın (6+ ay)",
+          "Uykulu ama uyanıkken yatağa bırakın"
+        ]
+      }
+    },
+    "1_2_years": {
+      "milestones": {
+        "physical": [
+          "Bağımsız yürüme (12-15 ay)",
+          "Koşma (18-24 ay)",
+          "Yardımla merdiven çıkma",
+          "Topa vurma, karalama yapma"
+        ],
+        "cognitive": [
+          "Sembolik oyun başlangıcı",
+          "Şekil/renge göre sıralama",
+          "2 adımlı talimatları takip etme"
+        ],
+        "language": [
+          "18 aya kadar 50+ kelime",
+          "24 aya kadar 2 kelimeli ifadeler",
+          "Vücut bölümlerini gösterme",
+          "'Hayır'ı anlama (ama uymayabilir)"
+        ],
+        "social_emotional": [
+          "Yan yana oynama (diğer çocukların yanında ama birlikte değil)",
+          "Öfke nöbetleri zirve (18-24 ay)",
+          "Sevgi gösterme",
+          "Yetişkin davranışlarını taklit etme"
+        ]
+      },
+      "red_flags": [
+        "16 aya kadar tek kelime yok",
+        "24 aya kadar 2 kelimeli ifade yok",
+        "18 aya kadar yürüyememe",
+        "18 aya kadar taklit yapmama",
+        "Önceden kazanılmış becerilerin kaybı"
+      ],
+      "activities": [
+        {
+          "name": "Hamur Oyunu",
+          "description": "Evde tuz hamuru yaparak şekil oluşturma, dokunsal gelişim",
+          "duration_minutes": 20,
+          "age": "12-24 ay",
+          "materials": ["2 su un", "1 su tuz", "Su", "Mama kabı"],
+          "learning_outcome": "İnce motor beceriler, yaratıcılık, dokunsal algı",
+          "safety_notes": "Hamur yutulmamalı, tuzlu olduğu için denetim şart"
+        },
+        {
+          "name": "Yardımcı Anne",
+          "description": "Basit ev işlerinde yardım: çorapları eşleme, oyuncakları kutuya atma",
+          "duration_minutes": 15,
+          "age": "18-24 ay",
+          "materials": ["Çoraplar", "Oyuncak kutusu"],
+          "learning_outcome": "Sınıflandırma, sorumluluk, motor beceriler",
+          "safety_notes": "Küçük parçalar yok edilmeli"
+        }
+      ],
+      "nutrition_tips": [
+        "Tam yağlı süt ve süt ürünleri",
+        "Çeşitli sebze ve meyveler",
+        "Küçük parçalar halinde protein kaynakları",
+        "Şeker ve tuz sınırlandırılmalı"
+      ],
+      "sleep_guidelines": {
+        "hours": "11-14 saat/gün (1-2 yaş)",
+        "schedule_tips": [
+          "Öğleden sonra uykusunu koruyun (1-3 saat)",
+          "Gece rutinini tutarlı tutun",
+          "Uykululuk belirtilerini tanıyın (göz ovuşturma, huzursuzluk)"
+        ]
+      }
+    },
+    "3_5_years": {
+      "milestones": {
+        "physical": [
+          "Üç tekerlekli bisiklet pedal çevirme",
+          "Tek ayak üzerinde zıplama (5 yaşta)",
+          "Makas kullanma, şekil çizme",
+          "Kendi kendine giyinme"
+        ],
+        "cognitive": [
+          "10'a kadar sayma, harfleri tanıma",
+          "Zaman kavramları (dün, yarın)",
+          "Sürekli 'neden' soruları sorma",
+          "Hayali oyun (hayali arkadaşlar)"
+        ],
+        "language": [
+          "3-5 kelimeli cümleler",
+          "Basit hikayeler anlatma",
+          "Tekerlemeleri anlama",
+          "Yabancılar tarafından anlaşılabilir konuşma"
+        ],
+        "social_emotional": [
+          "İşbirlikçi oyun başlangıcı (4-5 yaş)",
+          "Paylaşma (rehberlikle)",
+          "Cinsiyet kimliği farkındalığı",
+          "Hayali şeylerden korku (canavar, karanlık)"
+        ]
+      },
+      "red_flags": [
+        "4 yaşta belirsiz konuşma",
+        "4 yaşta yerinde zıplayamama",
+        "Etkileşimli oyunlara ilgi yok",
+        "Ebeveynden ayrılmada aşırı zorluk",
+        "5 yaşta insan çizememe"
+      ],
+      "activities": [
+        {
+          "name": "Pazar Oyunu",
+          "description": "Oyuncak para ve ürünlerle alışveriş oyunu, matematik ve sosyal beceriler",
+          "duration_minutes": 30,
+          "age": "3-5 yaş",
+          "materials": ["Oyuncak para", "Kutular", "Etiketler", "Meyve/sebze oyuncakları"],
+          "learning_outcome": "Erken matematik, sosyal beceriler, para kavramı",
+          "safety_notes": "Küçük paralar yutulmamalı"
+        },
+        {
+          "name": "Hikaye Zinciri",
+          "description": "Ailece sırayla hikaye anlatma, yaratıcılık ve dil gelişimi",
+          "duration_minutes": 20,
+          "age": "4-5 yaş",
+          "materials": ["Resimli kartlar", "Defter", "Kalem"],
+          "learning_outcome": "Yaratıcılık, dil gelişimi, dinleme becerileri",
+          "safety_notes": "Kalem uçları yuvarlak olmalı"
+        }
+      ],
+      "nutrition_tips": [
+        "Dengeli öğünler: tahıl, protein, sebze, meyve",
+        "Su içme alışkanlığı",
+        "Atıştırmalıklar sağlıklı olmalı",
+        "Ailece yemek yeme rutini"
+      ],
+      "sleep_guidelines": {
+        "hours": "10-13 saat/gün (3-5 yaş)",
+        "schedule_tips": [
+          "Öğleden sonra uykusu yavaşça azaltılabilir",
+          "Sakin gece rutini",
+          "Ekran süresi yatmadan 1 saat önce bitmeli"
+        ]
+      }
+    },
+    "6_8_years": {
+      "milestones": {
+        "physical": [
+          "Desteksiz bisiklet sürme",
+          "Sekme, küçük topu yakalama",
+          "Ayakkabı bağı bağlama",
+          "Baskı ve el yazısı"
+        ],
+        "cognitive": [
+          "Akıcı okuma",
+          "Sayıları ve temel matematiği anlama",
+          "Saati söyleme",
+          "Çoklu kriterlere göre sınıflandırma"
+        ],
+        "language": [
+          "Yaşına uygun kitapları bağımsız okuma",
+          "Basit paragraflar yazma",
+          "Şaka ve kelime oyunlarını anlama",
+          "Fikirlerini açıkça açıklama"
+        ],
+        "social_emotional": [
+          "Arkadaşlıklar daha önemli hale gelir",
+          "Kuralları ve adaleti anlama",
+          "Öz kavram gelişimi (akademik/sosyal karşılaştırma)",
+          "Ebeveynden bağımsızlık isteği"
+        ]
+      },
+      "red_flags": [
+        "7 yaşa kadar basit cümleleri okuyamama",
+        "7 yaşa kadar topu yakalayamama",
+        "Arkadaş yokluğu veya aşırı izolasyon",
+        "Günlük hayatı engelleyen aşırı korku veya kaygı"
+      ],
+      "activities": [
+        {
+          "name": "Aile Yemek Kitabı",
+          "description": "Çocuğun favori yemeklerini resimleyip tarif yazması",
+          "duration_minutes": 45,
+          "age": "6-8 yaş",
+          "materials": ["Boş defter", "Kalem", "Boya kalemleri"],
+          "learning_outcome": "Yaratıcılık, yazma becerileri, aile bağları",
+          "safety_notes": "Keskin alet kullanılmamalı"
+        },
+        {
+          "name": "Bütçe Oyunu",
+          "description": "Haftalık harçlıkla plan yapma, para yönetimi öğrenme",
+          "duration_minutes": 20,
+          "age": "7-8 yaş",
+          "materials": ["Oyuncak para", "Kalem", "Kağıt"],
+          "learning_outcome": "Erken finans okuryazarlığı, matematik",
+          "safety_notes": "—"
+        }
+      ],
+      "nutrition_tips": [
+        "Okul öncesi kahvaltı zorunlu",
+        "Sağlıklı atıştırmalıklar (meyve, kuruyemiş)",
+        "Su şişesi okul çantasında olmalı",
+        "Aşırı işlenmiş gıdalardan kaçınılmalı"
+      ],
+      "sleep_guidelines": {
+        "hours": "9-12 saat/gün (6-8 yaş)",
+        "schedule_tips": [
+          "Düzenli yatma saati",
+          "Yatak odası karanlık ve serin olmalı",
+          "Ekran süresi sınırlandırılmalı"
+        ]
+      }
+    },
+    "9_12_years": {
+      "milestones": {
+        "physical": [
+          "Ergenlik başlangıcı (kızlar genelde önce)",
+          "Koordinasyon ve güç gelişimi",
+          "El yazısı daha otomatik hale gelir",
+          "Büyüme atakları başlar"
+        ],
+        "cognitive": [
+          "Soyut düşünme gelişimi",
+          "Varsayımsal durumları anlama",
+          "Gelişmiş problem çözme stratejileri",
+          "Bağımsız planlama ve organizasyon"
+        ],
+        "language": [
+          "Karmaşık metinler okuma",
+          "Yapılandırılmış kompozisyonlar yazma",
+          "Mecaz dili anlama",
+          "Tartışma ve argümantasyon"
+        ],
+        "social_emotional": [
+          "Akran grubu etkisi artar",
+          "Kimlik keşfi başlar",
+          "Duygusal dalgalanmalar (hormonal değişimler)",
+          "Mahremiyet isteği",
+          "Sosyal konulara ilgi"
+        ]
+      },
+      "red_flags": [
+        "Aile ve arkadaşlardan aşırı çekilme",
+        "Okul performansında belirgin düşüş",
+        "2 haftadan uzun süren sürekli üzüntü veya sinirlilik",
+        "Tehlikeli veya riskli davranışlar",
+        "Yeme bozukluğu belirtileri"
+      ],
+      "activities": [
+        {
+          "name": "Aile Podcast'i",
+          "description": "Çocuğun ilgi alanında kısa podcast bölümü hazırlaması",
+          "duration_minutes": 60,
+          "age": "9-12 yaş",
+          "materials": ["Telefon/Tablet", "Not defteri"],
+          "learning_outcome": "Araştırma becerileri, sunum, teknoloji okuryazarlığı",
+          "safety_notes": "İnternet içerikleri denetlenmeli"
+        },
+        {
+          "name": "Gelecek Haritası",
+          "description": "5 yıllık kişisel hedefler vizyon panosu",
+          "duration_minutes": 90,
+          "age": "10-12 yaş",
+          "materials": ["Büyük kağıt", "Dergiler", "Makas", "Yapıştırıcı"],
+          "learning_outcome": "Hedef belirleme, planlama, öz farkındalık",
+          "safety_notes": "—"
+        }
+      ],
+      "nutrition_tips": [
+        "Protein ihtiyacı artar (büyüme atakları)",
+        "Kalsiyum ve D vitamini önemli",
+        "Aşırı şekerli içeceklerden kaçınılmalı",
+        "Düzenli öğün atlamamalı"
+      ],
+      "sleep_guidelines": {
+        "hours": "9-12 saat/gün (9-12 yaş)",
+        "schedule_tips": [
+          "Erken yatma saati korunmalı",
+          "Telefon yatak odasından çıkarılmalı",
+          "Hafta sonu uykusu da düzenli olmalı"
+        ]
+      }
+    }
+  },
+  "universal_safety_notes": [
+    "Tüm aktiviteler yetişkin gözetiminde yapılmalıdır",
+    "Küçük parçalar yutma riski taşıyan oyuncaklar 3 yaş altı için uygun değildir",
+    "Ekran süresi WHO önerilerine uygun sınırlandırılmalıdır (1 yaş altı yok, 2-5 yaş: 1 saat/gün)",
+    "Gelişimsel farklılıklar normaldir; her çocuk kendi hızında gelişir",
+    "Herhangi bir endişe durumunda çocuk doktorunuza danışın"
+  ],
+  "sources": [
+    "WHO Motor Development Study",
+    "AAP Developmental Milestones",
+    "Turkish Ministry of Health Guidelines"
+  ]
+}

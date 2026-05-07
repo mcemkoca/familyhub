@@ -1,0 +1,625 @@
+[
+  {
+    "id": "family_291",
+    "title": "Gönüllülük Etkinliği",
+    "category": "yeni_denemeler",
+    "bonding_level": 9,
+    "fun_factor": 7,
+    "cost": "az",
+    "duration": "3-4 saat",
+    "planning_time": 5,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "disarisi",
+    "season": [
+      "ilkbahar",
+      "sonbahar"
+    ],
+    "weather_dependency": true,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "1 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.0,
+    "review_count": 274
+  },
+  {
+    "id": "family_292",
+    "title": "Bayram Ziyaretleri",
+    "category": "yeni_denemeler",
+    "bonding_level": 9,
+    "fun_factor": 10,
+    "cost": "orta",
+    "duration": "1 gün",
+    "planning_time": 18,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "disarisi",
+    "season": [
+      "yaz"
+    ],
+    "weather_dependency": true,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "1 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 5.0,
+    "review_count": 865
+  },
+  {
+    "id": "family_293",
+    "title": "Yeni Spor Denemesi",
+    "category": "yeni_denemeler",
+    "bonding_level": 7,
+    "fun_factor": 9,
+    "cost": "az",
+    "duration": "1-2 saat",
+    "planning_time": 7,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "disarisi",
+    "season": [
+      "kis",
+      "yaz",
+      "ilkbahar",
+      "sonbahar"
+    ],
+    "weather_dependency": false,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "1 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "1 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.3,
+    "review_count": 564
+  },
+  {
+    "id": "family_294",
+    "title": "Yıldızları İzleme",
+    "category": "yeni_denemeler",
+    "bonding_level": 10,
+    "fun_factor": 9,
+    "cost": "az",
+    "duration": "2-3 saat",
+    "planning_time": 28,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "dogada",
+    "season": [
+      "ilkbahar"
+    ],
+    "weather_dependency": true,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.5,
+    "review_count": 677
+  },
+  {
+    "id": "family_295",
+    "title": "Çadır Kampı",
+    "category": "yeni_denemeler",
+    "bonding_level": 9,
+    "fun_factor": 8,
+    "cost": "orta",
+    "duration": "1-2 gece",
+    "planning_time": 20,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "dogada",
+    "season": [
+      "yaz",
+      "kis",
+      "ilkbahar"
+    ],
+    "weather_dependency": true,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.4,
+    "review_count": 501
+  },
+  {
+    "id": "family_296",
+    "title": "Piknik ve Oyun Parkı",
+    "category": "yeni_denemeler",
+    "bonding_level": 10,
+    "fun_factor": 10,
+    "cost": "az",
+    "duration": "3-4 saat",
+    "planning_time": 11,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "disarisi",
+    "season": [
+      "ilkbahar"
+    ],
+    "weather_dependency": true,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "1 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.3,
+    "review_count": 507
+  },
+  {
+    "id": "family_297",
+    "title": "Aile Müzik Gecesi",
+    "category": "yeni_denemeler",
+    "bonding_level": 7,
+    "fun_factor": 8,
+    "cost": "az",
+    "duration": "2 saat",
+    "planning_time": 24,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "evde",
+    "season": [
+      "sonbahar",
+      "yaz",
+      "ilkbahar",
+      "kis"
+    ],
+    "weather_dependency": true,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "1 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.4,
+    "review_count": 992
+  },
+  {
+    "id": "family_298",
+    "title": "Sanat Sergisi Ziyareti",
+    "category": "yeni_denemeler",
+    "bonding_level": 9,
+    "fun_factor": 9,
+    "cost": "az",
+    "duration": "2-3 saat",
+    "planning_time": 11,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "disarisi",
+    "season": [
+      "sonbahar",
+      "yaz",
+      "ilkbahar",
+      "kis"
+    ],
+    "weather_dependency": false,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "1 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.0,
+    "review_count": 114
+  },
+  {
+    "id": "family_299",
+    "title": "Yeni Restoran Deneyimi",
+    "category": "yeni_denemeler",
+    "bonding_level": 10,
+    "fun_factor": 10,
+    "cost": "orta",
+    "duration": "2-3 saat",
+    "planning_time": 29,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "disarisi",
+    "season": [
+      "sonbahar",
+      "ilkbahar"
+    ],
+    "weather_dependency": false,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.5,
+    "review_count": 296
+  },
+  {
+    "id": "family_300",
+    "title": "Maraton ve Yürüyüş",
+    "category": "yeni_denemeler",
+    "bonding_level": 10,
+    "fun_factor": 9,
+    "cost": "az",
+    "duration": "3-4 saat",
+    "planning_time": 21,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "disarisi",
+    "season": [
+      "kis"
+    ],
+    "weather_dependency": true,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.9,
+    "review_count": 734
+  }
+]

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- TODO: Replace with your real Google Sign-In OAuth 2.0 client ID from Google Cloud Console -->
+    <string name="default_web_client_id">YOUR_CLIENT_ID</string>
+</resources>

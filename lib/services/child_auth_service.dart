@@ -1,0 +1,158 @@
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../core/supabase_client.dart';
+import '../core/errors.dart';
+import '../domain/models/child_session.dart';
+
+class ChildAuthService {
+  static const _secureStorage = FlutterSecureStorage();
+  static const _childSessionKey = 'child_session';
+  static const _childModeKey = 'child_mode_active';
+
+  static ChildSession? _currentSession;
+
+  static ChildSession? get currentSession => _currentSession;
+
+  static bool get isChildMode => _currentSession != null;
+
+  static String? get currentChildId => _currentSession?.childId;
+
+  static String? get currentFamilyId => _currentSession?.familyId;
+
+  /// Hash PIN for secure local storage comparison using SHA-256.
+  /// Server-side verification is performed via Supabase RPC.
+  static String hashPin(String pin) {
+    final bytes = utf8.encode(pin);
+    final digest = sha256.convert(bytes);
+    return digest.toString();
+  }
+
+  /// Sign in as a child using name selection + PIN
+  static Future<ChildSession> signIn({
+    required String childId,
+    required String pin,
+  }) async {
+    final supabase = SupabaseConfig.safeClient;
+    if (supabase == null) throw AppAuthException('Sunucu bağlantısı kurulmadı');
+
+    // Use RPC function to verify PIN and create session
+    final response = await supabase.rpc(
+      'verify_child_pin',
+      params: {
+        'p_child_id': childId,
+        'p_pin': pin, // Server validates
+        'p_device_info': 'Flutter App',
+      },
+    );
+
+    if (response == null || (response as List).isEmpty) {
+      throw AppAuthException('PIN hatalı veya hesap bulunamadı');
+    }
+
+    final session = ChildSession.fromJson(
+      (response).first as Map<String, dynamic>,
+    );
+    await _persistSession(session);
+    _currentSession = session;
+    return session;
+  }
+
+  /// Restore child session from secure storage
+  static Future<bool> restoreSession() async {
+    final jsonStr = await _secureStorage.read(key: _childSessionKey);
+    if (jsonStr == null) return false;
+
+    try {
+      final session = ChildSession.fromJson(
+        jsonDecode(jsonStr) as Map<String, dynamic>,
+      );
+
+      if (session.isExpired) {
+        await signOut();
+        return false;
+      }
+
+      // Validate with server
+      final supabase = SupabaseConfig.safeClient;
+      if (supabase != null) {
+        final response = await supabase.rpc(
+          'validate_child_session',
+          params: {'p_token': session.token},
+        );
+
+        if (response == null || (response as List).isEmpty) {
+          await signOut();
+          return false;
+        }
+
+        final validated = (response).first as Map<String, dynamic>;
+        if (validated['is_valid'] != true) {
+          await signOut();
+          return false;
+        }
+      }
+
+      _currentSession = session;
+      return true;
+    } catch (_) {
+      await signOut();
+      return false;
+    }
+  }
+
+  /// Sign out child
+  static Future<void> signOut() async {
+    final session = _currentSession;
+    if (session != null) {
+      try {
+        final supabase = SupabaseConfig.safeClient;
+        if (supabase != null) {
+          await supabase.rpc(
+            'revoke_child_session',
+            params: {'p_token': session.token},
+          );
+        }
+      } catch (_) {
+        // Ignore revoke errors
+      }
+    }
+
+    _currentSession = null;
+    await _secureStorage.delete(key: _childSessionKey);
+    await _secureStorage.delete(key: _childModeKey);
+  }
+
+  /// Log child activity
+  static Future<void> logActivity(
+    String activityType, {
+    Map<String, dynamic>? details,
+  }) async {
+    final childId = currentChildId;
+    if (childId == null) return;
+
+    try {
+      final supabase = SupabaseConfig.safeClient;
+      if (supabase != null) {
+        await supabase.rpc(
+          'log_child_activity',
+          params: {
+            'p_child_id': childId,
+            'p_activity_type': activityType,
+            'p_details': details ?? {},
+          },
+        );
+      }
+    } catch (_) {
+      // Ignore logging errors
+    }
+  }
+
+  static Future<void> _persistSession(ChildSession session) async {
+    await _secureStorage.write(
+      key: _childSessionKey,
+      value: jsonEncode(session.toJson()),
+    );
+    await _secureStorage.write(key: _childModeKey, value: 'true');
+  }
+}

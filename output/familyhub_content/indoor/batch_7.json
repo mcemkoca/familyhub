@@ -1,0 +1,542 @@
+[
+  {
+    "id": "indoor_061",
+    "title": "Evde Volkan Deneyi",
+    "category": "egitici",
+    "difficulty": "zor",
+    "duration": "20-30 dk",
+    "age_suitable": {
+      "min": 4,
+      "max": 12
+    },
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "amount": "1 adet",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "5 adet",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "2 adet",
+        "alternative": "Alternatif 3"
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "3 adet",
+        "alternative": "Alternatif 4"
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "5 adet",
+        "alternative": "Alternatif 5"
+      }
+    ],
+    "instructions": [
+      "Adım 1: Kontrol edin.",
+      "Adım 2: İşleme başlayın.",
+      "Adım 3: Hazırlık yapın.",
+      "Adım 4: Kontrol edin.",
+      "Adım 5: Tamamlayın."
+    ],
+    "safety_notes": [
+      "Çocuklar ebeveyn gözetiminde yapmalı.",
+      "Malzemeleri ağzınıza almayın.",
+      "Sonrası elleri yıkayın."
+    ],
+    "fun_factor": 6,
+    "mess_level": "kirli",
+    "rating": 4.1,
+    "review_count": 498
+  },
+  {
+    "id": "indoor_062",
+    "title": "Origami Kelebek Yapımı",
+    "category": "egitici",
+    "difficulty": "zor",
+    "duration": "15-20 dk",
+    "age_suitable": {
+      "min": 5,
+      "max": 99
+    },
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "amount": "4 adet",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "5 adet",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "5 adet",
+        "alternative": "Alternatif 3"
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "5 adet",
+        "alternative": "Alternatif 4"
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "4 adet",
+        "alternative": "Alternatif 5"
+      }
+    ],
+    "instructions": [
+      "Adım 1: Hazırlık yapın.",
+      "Adım 2: İşleme başlayın.",
+      "Adım 3: İşleme başlayın.",
+      "Adım 4: Malzemeleri yerleştirin.",
+      "Adım 5: Hazırlık yapın."
+    ],
+    "safety_notes": [
+      "Çocuklar ebeveyn gözetiminde yapmalı.",
+      "Malzemeleri ağzınıza almayın.",
+      "Sonrası elleri yıkayın."
+    ],
+    "fun_factor": 10,
+    "mess_level": "temiz",
+    "rating": 4.9,
+    "review_count": 376
+  },
+  {
+    "id": "indoor_063",
+    "title": "Karton Kukla Tiyatrosu",
+    "category": "egitici",
+    "difficulty": "orta",
+    "duration": "45-60 dk",
+    "age_suitable": {
+      "min": 3,
+      "max": 10
+    },
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "amount": "1 adet",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "1 adet",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "1 adet",
+        "alternative": "Alternatif 3"
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "3 adet",
+        "alternative": "Alternatif 4"
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "1 adet",
+        "alternative": "Alternatif 5"
+      }
+    ],
+    "instructions": [
+      "Adım 1: Kontrol edin.",
+      "Adım 2: Hazırlık yapın.",
+      "Adım 3: Hazırlık yapın.",
+      "Adım 4: İşleme başlayın.",
+      "Adım 5: Kontrol edin."
+    ],
+    "safety_notes": [
+      "Çocuklar ebeveyn gözetiminde yapmalı.",
+      "Malzemeleri ağzınıza almayın.",
+      "Sonrası elleri yıkayın."
+    ],
+    "fun_factor": 6,
+    "mess_level": "orta",
+    "rating": 4.4,
+    "review_count": 487
+  },
+  {
+    "id": "indoor_064",
+    "title": "Sulu Boya Manzara",
+    "category": "egitici",
+    "difficulty": "zor",
+    "duration": "30-45 dk",
+    "age_suitable": {
+      "min": 5,
+      "max": 99
+    },
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "amount": "1 adet",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "5 adet",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "1 adet",
+        "alternative": "Alternatif 3"
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "1 adet",
+        "alternative": "Alternatif 4"
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "4 adet",
+        "alternative": "Alternatif 5"
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri yerleştirin.",
+      "Adım 2: Hazırlık yapın.",
+      "Adım 3: Tamamlayın.",
+      "Adım 4: Kontrol edin.",
+      "Adım 5: Kontrol edin."
+    ],
+    "safety_notes": [
+      "Çocuklar ebeveyn gözetiminde yapmalı.",
+      "Malzemeleri ağzınıza almayın.",
+      "Sonrası elleri yıkayın."
+    ],
+    "fun_factor": 10,
+    "mess_level": "kirli",
+    "rating": 4.0,
+    "review_count": 251
+  },
+  {
+    "id": "indoor_065",
+    "title": "Evde Pizza Yapımı",
+    "category": "egitici",
+    "difficulty": "orta",
+    "duration": "60-90 dk",
+    "age_suitable": {
+      "min": 4,
+      "max": 99
+    },
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "amount": "2 adet",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "3 adet",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "3 adet",
+        "alternative": "Alternatif 3"
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "5 adet",
+        "alternative": "Alternatif 4"
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "1 adet",
+        "alternative": "Alternatif 5"
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri yerleştirin.",
+      "Adım 2: Tamamlayın.",
+      "Adım 3: Malzemeleri yerleştirin.",
+      "Adım 4: Kontrol edin.",
+      "Adım 5: Kontrol edin."
+    ],
+    "safety_notes": [
+      "Çocuklar ebeveyn gözetiminde yapmalı.",
+      "Malzemeleri ağzınıza almayın.",
+      "Sonrası elleri yıkayın."
+    ],
+    "fun_factor": 9,
+    "mess_level": "kirli",
+    "rating": 4.4,
+    "review_count": 434
+  },
+  {
+    "id": "indoor_066",
+    "title": "Yoga Seansı",
+    "category": "egitici",
+    "difficulty": "kolay",
+    "duration": "20-30 dk",
+    "age_suitable": {
+      "min": 5,
+      "max": 99
+    },
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "amount": "3 adet",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "2 adet",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "5 adet",
+        "alternative": "Alternatif 3"
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "3 adet",
+        "alternative": "Alternatif 4"
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "4 adet",
+        "alternative": "Alternatif 5"
+      }
+    ],
+    "instructions": [
+      "Adım 1: İşleme başlayın.",
+      "Adım 2: Kontrol edin.",
+      "Adım 3: Kontrol edin.",
+      "Adım 4: İşleme başlayın.",
+      "Adım 5: Hazırlık yapın."
+    ],
+    "safety_notes": [
+      "Çocuklar ebeveyn gözetiminde yapmalı.",
+      "Malzemeleri ağzınıza almayın.",
+      "Sonrası elleri yıkayın."
+    ],
+    "fun_factor": 6,
+    "mess_level": "temiz",
+    "rating": 4.2,
+    "review_count": 243
+  },
+  {
+    "id": "indoor_067",
+    "title": "Kutu Oyunları Gecesi",
+    "category": "egitici",
+    "difficulty": "orta",
+    "duration": "60-120 dk",
+    "age_suitable": {
+      "min": 6,
+      "max": 99
+    },
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "amount": "3 adet",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "2 adet",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "3 adet",
+        "alternative": "Alternatif 3"
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "5 adet",
+        "alternative": "Alternatif 4"
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "4 adet",
+        "alternative": "Alternatif 5"
+      }
+    ],
+    "instructions": [
+      "Adım 1: Hazırlık yapın.",
+      "Adım 2: Hazırlık yapın.",
+      "Adım 3: Tamamlayın.",
+      "Adım 4: İşleme başlayın.",
+      "Adım 5: Kontrol edin."
+    ],
+    "safety_notes": [
+      "Çocuklar ebeveyn gözetiminde yapmalı.",
+      "Malzemeleri ağzınıza almayın.",
+      "Sonrası elleri yıkayın."
+    ],
+    "fun_factor": 10,
+    "mess_level": "temiz",
+    "rating": 4.3,
+    "review_count": 193
+  },
+  {
+    "id": "indoor_068",
+    "title": "Kitap Okuma Kulübü",
+    "category": "egitici",
+    "difficulty": "orta",
+    "duration": "30-60 dk",
+    "age_suitable": {
+      "min": 7,
+      "max": 99
+    },
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "amount": "1 adet",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "5 adet",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "3 adet",
+        "alternative": "Alternatif 3"
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "1 adet",
+        "alternative": "Alternatif 4"
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "1 adet",
+        "alternative": "Alternatif 5"
+      }
+    ],
+    "instructions": [
+      "Adım 1: Kontrol edin.",
+      "Adım 2: Tamamlayın.",
+      "Adım 3: Malzemeleri yerleştirin.",
+      "Adım 4: İşleme başlayın.",
+      "Adım 5: Malzemeleri yerleştirin."
+    ],
+    "safety_notes": [
+      "Çocuklar ebeveyn gözetiminde yapmalı.",
+      "Malzemeleri ağzınıza almayın.",
+      "Sonrası elleri yıkayın."
+    ],
+    "fun_factor": 6,
+    "mess_level": "temiz",
+    "rating": 4.1,
+    "review_count": 382
+  },
+  {
+    "id": "indoor_069",
+    "title": "Müzik Dinleme Partisi",
+    "category": "egitici",
+    "difficulty": "zor",
+    "duration": "60 dk",
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "amount": "1 adet",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "3 adet",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "1 adet",
+        "alternative": "Alternatif 3"
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "5 adet",
+        "alternative": "Alternatif 4"
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "2 adet",
+        "alternative": "Alternatif 5"
+      }
+    ],
+    "instructions": [
+      "Adım 1: Hazırlık yapın.",
+      "Adım 2: Tamamlayın.",
+      "Adım 3: Malzemeleri yerleştirin.",
+      "Adım 4: Hazırlık yapın.",
+      "Adım 5: Kontrol edin."
+    ],
+    "safety_notes": [
+      "Çocuklar ebeveyn gözetiminde yapmalı.",
+      "Malzemeleri ağzınıza almayın.",
+      "Sonrası elleri yıkayın."
+    ],
+    "fun_factor": 8,
+    "mess_level": "temiz",
+    "rating": 4.4,
+    "review_count": 400
+  },
+  {
+    "id": "indoor_070",
+    "title": "Dans Etkinliği",
+    "category": "egitici",
+    "difficulty": "orta",
+    "duration": "30-45 dk",
+    "age_suitable": {
+      "min": 4,
+      "max": 99
+    },
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "amount": "5 adet",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "1 adet",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "2 adet",
+        "alternative": "Alternatif 3"
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "4 adet",
+        "alternative": "Alternatif 4"
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "5 adet",
+        "alternative": "Alternatif 5"
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri yerleştirin.",
+      "Adım 2: Malzemeleri yerleştirin.",
+      "Adım 3: İşleme başlayın.",
+      "Adım 4: Kontrol edin.",
+      "Adım 5: Hazırlık yapın."
+    ],
+    "safety_notes": [
+      "Çocuklar ebeveyn gözetiminde yapmalı.",
+      "Malzemeleri ağzınıza almayın.",
+      "Sonrası elleri yıkayın."
+    ],
+    "fun_factor": 7,
+    "mess_level": "temiz",
+    "rating": 4.1,
+    "review_count": 400
+  }
+]

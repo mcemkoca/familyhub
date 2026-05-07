@@ -1,0 +1,1708 @@
+{
+  "module": "safety_measures",
+  "version": "1.0.0",
+  "language": "tr",
+  "region": "TR",
+  "suggestions": [
+    {
+      "id": "sm001",
+      "title": "Acil Çıkış Planı",
+      "description": "Yangın tatbikatı, toplanma noktası.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "yangın"
+      ],
+      "tips": [
+        "Yılda en az 2 kez tekrarlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm002",
+      "title": "Bugün İlk Yardım Çantası",
+      "description": "Eksik malzemeleri not alın, tamamlayın.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "ilk yardım"
+      ],
+      "tips": [
+        "Son kullanma tarihlerini kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm003",
+      "title": "Bu Ay Ev Güvenlik Taraması",
+      "description": "Priz kapakları, dolap kilidi kontrolü.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "ev"
+      ],
+      "tips": [
+        "Çocukların ulaşabileceği her yeri kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm004",
+      "title": "Ailece Acil İletişim Listesi",
+      "description": "Önemli numaraları yazın, buzdolabına yapıştırın.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "iletişim"
+      ],
+      "tips": [
+        "112, itfaiye, polis, komşu ekleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm005",
+      "title": "Hafta Sonu Bilgisayar Güvenliği",
+      "description": "Şifreleri güncelleyin, çocuklara anlatın.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "dijital"
+      ],
+      "tips": [
+        "İki faktörlü doğrulama açın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm006",
+      "title": "Deprem Çantası Kontrolü",
+      "description": "Su, konserve, battaniye, el feneri kontrolü.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "deprem"
+      ],
+      "tips": [
+        "Her üye için ayrı çanta hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm007",
+      "title": "Bugün Gaz Kaçağı Testi",
+      "description": "Kokulu sabun suyu ile bağlantı kontrolü.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "gaz"
+      ],
+      "tips": [
+        "Gaz dedektörü bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm008",
+      "title": "Bu Ay Çocuk İnternet Güvenliği",
+      "description": "Ebeveyn kontrolü, güvenli arama ayarları.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "internet"
+      ],
+      "tips": [
+        "Ortak kullanım alanlarında internet erişimi."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm009",
+      "title": "Ailece Yangın Söndürücü Kontrolü",
+      "description": "Basınç göstergesi, son kullanma tarihi.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "yangın"
+      ],
+      "tips": [
+        "Kullanımını öğrenin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm010",
+      "title": "Hafta Sonu Aile GPS Paylaşımı",
+      "description": "Telefonda konum paylaşımı açık mı kontrol edin.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "konum"
+      ],
+      "tips": [
+        "FamilyHub uygulamasını kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm011",
+      "title": "Kimlik Fotokopisi",
+      "description": "Herkesin kimlik fotokopisi ayrı yerde dursun.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "evrak"
+      ],
+      "tips": [
+        "Dijital kopya da bulunsun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm012",
+      "title": "Bugün Ev Alarm Sistemi Testi",
+      "description": "Sensör, kamera, alarm testi.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "alarm"
+      ],
+      "tips": [
+        "Pilleri kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm013",
+      "title": "Bu Ay Aile Şifre Protokolü",
+      "description": "Kapı şifresi, telefon şifresi değiştirme.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "şifre"
+      ],
+      "tips": [
+        "Düzenli olarak değiştirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm014",
+      "title": "Ailece Bisiklet Kask Kontrolü",
+      "description": "Çocukların kaskı, dizliği, dirsekliği kontrolü.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "spor"
+      ],
+      "tips": [
+        "Kaskın iç etiketini kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm015",
+      "title": "Hafta Sonu Ev İlaç Dolabı Kontrolü",
+      "description": "Son kullanma tarihleri, bozulanlar.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "sağlık"
+      ],
+      "tips": [
+        "Çocukların ulaşamayacağı yerde saklayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm016",
+      "title": "Aile Güvenlik Şifresi",
+      "description": "SOS kod kelimesi belirleyin.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "acil"
+      ],
+      "tips": [
+        "Tüm aile bilsin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm017",
+      "title": "Bugün Duman Dedektörü Testi",
+      "description": "Pil kontrolü, test butonuna basın.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "yangın"
+      ],
+      "tips": [
+        "Her katta bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm018",
+      "title": "Bu Ay Çocuk Kaçırma Eğitimi",
+      "description": "Yabancıyla konuşmama, güvenli yetişkin.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "çocuk"
+      ],
+      "tips": [
+        "Rol yaparak öğretin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm019",
+      "title": "Ailece Ev Anahtar Yedekleme",
+      "description": "Yedek anahtar komşuda veya kasada.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "anahtar"
+      ],
+      "tips": [
+        "Birkaç yerde yedek bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm020",
+      "title": "Hafta Sonu Aile Afet Planı",
+      "description": "Deprem, yangın, sel için aile planı.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "afet"
+      ],
+      "tips": [
+        "Toplanma noktası belirleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm021",
+      "title": "Acil Çıkış Planı",
+      "description": "Yangın tatbikatı, toplanma noktası.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "yangın"
+      ],
+      "tips": [
+        "Yılda en az 2 kez tekrarlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm022",
+      "title": "Bugün İlk Yardım Çantası",
+      "description": "Eksik malzemeleri not alın, tamamlayın.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "ilk yardım"
+      ],
+      "tips": [
+        "Son kullanma tarihlerini kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm023",
+      "title": "Bu Ay Ev Güvenlik Taraması",
+      "description": "Priz kapakları, dolap kilidi kontrolü.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "ev"
+      ],
+      "tips": [
+        "Çocukların ulaşabileceği her yeri kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm024",
+      "title": "Ailece Acil İletişim Listesi",
+      "description": "Önemli numaraları yazın, buzdolabına yapıştırın.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "iletişim"
+      ],
+      "tips": [
+        "112, itfaiye, polis, komşu ekleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm025",
+      "title": "Hafta Sonu Bilgisayar Güvenliği",
+      "description": "Şifreleri güncelleyin, çocuklara anlatın.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "dijital"
+      ],
+      "tips": [
+        "İki faktörlü doğrulama açın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm026",
+      "title": "Deprem Çantası Kontrolü",
+      "description": "Su, konserve, battaniye, el feneri kontrolü.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "deprem"
+      ],
+      "tips": [
+        "Her üye için ayrı çanta hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm027",
+      "title": "Bugün Gaz Kaçağı Testi",
+      "description": "Kokulu sabun suyu ile bağlantı kontrolü.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "gaz"
+      ],
+      "tips": [
+        "Gaz dedektörü bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm028",
+      "title": "Bu Ay Çocuk İnternet Güvenliği",
+      "description": "Ebeveyn kontrolü, güvenli arama ayarları.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "internet"
+      ],
+      "tips": [
+        "Ortak kullanım alanlarında internet erişimi."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm029",
+      "title": "Ailece Yangın Söndürücü Kontrolü",
+      "description": "Basınç göstergesi, son kullanma tarihi.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "yangın"
+      ],
+      "tips": [
+        "Kullanımını öğrenin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm030",
+      "title": "Hafta Sonu Aile GPS Paylaşımı",
+      "description": "Telefonda konum paylaşımı açık mı kontrol edin.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "konum"
+      ],
+      "tips": [
+        "FamilyHub uygulamasını kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm031",
+      "title": "Kimlik Fotokopisi",
+      "description": "Herkesin kimlik fotokopisi ayrı yerde dursun.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "evrak"
+      ],
+      "tips": [
+        "Dijital kopya da bulunsun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm032",
+      "title": "Bugün Ev Alarm Sistemi Testi",
+      "description": "Sensör, kamera, alarm testi.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "alarm"
+      ],
+      "tips": [
+        "Pilleri kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm033",
+      "title": "Bu Ay Aile Şifre Protokolü",
+      "description": "Kapı şifresi, telefon şifresi değiştirme.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "şifre"
+      ],
+      "tips": [
+        "Düzenli olarak değiştirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm034",
+      "title": "Ailece Bisiklet Kask Kontrolü",
+      "description": "Çocukların kaskı, dizliği, dirsekliği kontrolü.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "spor"
+      ],
+      "tips": [
+        "Kaskın iç etiketini kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm035",
+      "title": "Hafta Sonu Ev İlaç Dolabı Kontrolü",
+      "description": "Son kullanma tarihleri, bozulanlar.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "sağlık"
+      ],
+      "tips": [
+        "Çocukların ulaşamayacağı yerde saklayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm036",
+      "title": "Aile Güvenlik Şifresi",
+      "description": "SOS kod kelimesi belirleyin.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "acil"
+      ],
+      "tips": [
+        "Tüm aile bilsin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm037",
+      "title": "Bugün Duman Dedektörü Testi",
+      "description": "Pil kontrolü, test butonuna basın.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "yangın"
+      ],
+      "tips": [
+        "Her katta bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm038",
+      "title": "Bu Ay Çocuk Kaçırma Eğitimi",
+      "description": "Yabancıyla konuşmama, güvenli yetişkin.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "çocuk"
+      ],
+      "tips": [
+        "Rol yaparak öğretin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm039",
+      "title": "Ailece Ev Anahtar Yedekleme",
+      "description": "Yedek anahtar komşuda veya kasada.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "anahtar"
+      ],
+      "tips": [
+        "Birkaç yerde yedek bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm040",
+      "title": "Hafta Sonu Aile Afet Planı",
+      "description": "Deprem, yangın, sel için aile planı.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "afet"
+      ],
+      "tips": [
+        "Toplanma noktası belirleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm041",
+      "title": "Acil Çıkış Planı",
+      "description": "Yangın tatbikatı, toplanma noktası.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "yangın"
+      ],
+      "tips": [
+        "Yılda en az 2 kez tekrarlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm042",
+      "title": "Bugün İlk Yardım Çantası",
+      "description": "Eksik malzemeleri not alın, tamamlayın.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "ilk yardım"
+      ],
+      "tips": [
+        "Son kullanma tarihlerini kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm043",
+      "title": "Bu Ay Ev Güvenlik Taraması",
+      "description": "Priz kapakları, dolap kilidi kontrolü.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "ev"
+      ],
+      "tips": [
+        "Çocukların ulaşabileceği her yeri kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm044",
+      "title": "Ailece Acil İletişim Listesi",
+      "description": "Önemli numaraları yazın, buzdolabına yapıştırın.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "iletişim"
+      ],
+      "tips": [
+        "112, itfaiye, polis, komşu ekleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm045",
+      "title": "Hafta Sonu Bilgisayar Güvenliği",
+      "description": "Şifreleri güncelleyin, çocuklara anlatın.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "dijital"
+      ],
+      "tips": [
+        "İki faktörlü doğrulama açın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm046",
+      "title": "Deprem Çantası Kontrolü",
+      "description": "Su, konserve, battaniye, el feneri kontrolü.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "deprem"
+      ],
+      "tips": [
+        "Her üye için ayrı çanta hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm047",
+      "title": "Bugün Gaz Kaçağı Testi",
+      "description": "Kokulu sabun suyu ile bağlantı kontrolü.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "gaz"
+      ],
+      "tips": [
+        "Gaz dedektörü bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm048",
+      "title": "Bu Ay Çocuk İnternet Güvenliği",
+      "description": "Ebeveyn kontrolü, güvenli arama ayarları.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "internet"
+      ],
+      "tips": [
+        "Ortak kullanım alanlarında internet erişimi."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm049",
+      "title": "Ailece Yangın Söndürücü Kontrolü",
+      "description": "Basınç göstergesi, son kullanma tarihi.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "yangın"
+      ],
+      "tips": [
+        "Kullanımını öğrenin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm050",
+      "title": "Hafta Sonu Aile GPS Paylaşımı",
+      "description": "Telefonda konum paylaşımı açık mı kontrol edin.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "konum"
+      ],
+      "tips": [
+        "FamilyHub uygulamasını kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm051",
+      "title": "Kimlik Fotokopisi",
+      "description": "Herkesin kimlik fotokopisi ayrı yerde dursun.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "evrak"
+      ],
+      "tips": [
+        "Dijital kopya da bulunsun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm052",
+      "title": "Bugün Ev Alarm Sistemi Testi",
+      "description": "Sensör, kamera, alarm testi.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "alarm"
+      ],
+      "tips": [
+        "Pilleri kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm053",
+      "title": "Bu Ay Aile Şifre Protokolü",
+      "description": "Kapı şifresi, telefon şifresi değiştirme.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "şifre"
+      ],
+      "tips": [
+        "Düzenli olarak değiştirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm054",
+      "title": "Ailece Bisiklet Kask Kontrolü",
+      "description": "Çocukların kaskı, dizliği, dirsekliği kontrolü.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "spor"
+      ],
+      "tips": [
+        "Kaskın iç etiketini kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm055",
+      "title": "Hafta Sonu Ev İlaç Dolabı Kontrolü",
+      "description": "Son kullanma tarihleri, bozulanlar.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "sağlık"
+      ],
+      "tips": [
+        "Çocukların ulaşamayacağı yerde saklayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm056",
+      "title": "Aile Güvenlik Şifresi",
+      "description": "SOS kod kelimesi belirleyin.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "acil"
+      ],
+      "tips": [
+        "Tüm aile bilsin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm057",
+      "title": "Bugün Duman Dedektörü Testi",
+      "description": "Pil kontrolü, test butonuna basın.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "yangın"
+      ],
+      "tips": [
+        "Her katta bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm058",
+      "title": "Bu Ay Çocuk Kaçırma Eğitimi",
+      "description": "Yabancıyla konuşmama, güvenli yetişkin.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "çocuk"
+      ],
+      "tips": [
+        "Rol yaparak öğretin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm059",
+      "title": "Ailece Ev Anahtar Yedekleme",
+      "description": "Yedek anahtar komşuda veya kasada.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "anahtar"
+      ],
+      "tips": [
+        "Birkaç yerde yedek bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm060",
+      "title": "Hafta Sonu Aile Afet Planı",
+      "description": "Deprem, yangın, sel için aile planı.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "afet"
+      ],
+      "tips": [
+        "Toplanma noktası belirleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm061",
+      "title": "Acil Çıkış Planı",
+      "description": "Yangın tatbikatı, toplanma noktası.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "yangın"
+      ],
+      "tips": [
+        "Yılda en az 2 kez tekrarlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm062",
+      "title": "Bugün İlk Yardım Çantası",
+      "description": "Eksik malzemeleri not alın, tamamlayın.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "ilk yardım"
+      ],
+      "tips": [
+        "Son kullanma tarihlerini kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm063",
+      "title": "Bu Ay Ev Güvenlik Taraması",
+      "description": "Priz kapakları, dolap kilidi kontrolü.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "ev"
+      ],
+      "tips": [
+        "Çocukların ulaşabileceği her yeri kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm064",
+      "title": "Ailece Acil İletişim Listesi",
+      "description": "Önemli numaraları yazın, buzdolabına yapıştırın.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "iletişim"
+      ],
+      "tips": [
+        "112, itfaiye, polis, komşu ekleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm065",
+      "title": "Hafta Sonu Bilgisayar Güvenliği",
+      "description": "Şifreleri güncelleyin, çocuklara anlatın.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "dijital"
+      ],
+      "tips": [
+        "İki faktörlü doğrulama açın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm066",
+      "title": "Deprem Çantası Kontrolü",
+      "description": "Su, konserve, battaniye, el feneri kontrolü.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "deprem"
+      ],
+      "tips": [
+        "Her üye için ayrı çanta hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm067",
+      "title": "Bugün Gaz Kaçağı Testi",
+      "description": "Kokulu sabun suyu ile bağlantı kontrolü.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "gaz"
+      ],
+      "tips": [
+        "Gaz dedektörü bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm068",
+      "title": "Bu Ay Çocuk İnternet Güvenliği",
+      "description": "Ebeveyn kontrolü, güvenli arama ayarları.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "internet"
+      ],
+      "tips": [
+        "Ortak kullanım alanlarında internet erişimi."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm069",
+      "title": "Ailece Yangın Söndürücü Kontrolü",
+      "description": "Basınç göstergesi, son kullanma tarihi.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "yangın"
+      ],
+      "tips": [
+        "Kullanımını öğrenin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm070",
+      "title": "Hafta Sonu Aile GPS Paylaşımı",
+      "description": "Telefonda konum paylaşımı açık mı kontrol edin.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "konum"
+      ],
+      "tips": [
+        "FamilyHub uygulamasını kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm071",
+      "title": "Kimlik Fotokopisi",
+      "description": "Herkesin kimlik fotokopisi ayrı yerde dursun.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "evrak"
+      ],
+      "tips": [
+        "Dijital kopya da bulunsun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm072",
+      "title": "Bugün Ev Alarm Sistemi Testi",
+      "description": "Sensör, kamera, alarm testi.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "alarm"
+      ],
+      "tips": [
+        "Pilleri kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm073",
+      "title": "Bu Ay Aile Şifre Protokolü",
+      "description": "Kapı şifresi, telefon şifresi değiştirme.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "şifre"
+      ],
+      "tips": [
+        "Düzenli olarak değiştirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm074",
+      "title": "Ailece Bisiklet Kask Kontrolü",
+      "description": "Çocukların kaskı, dizliği, dirsekliği kontrolü.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "spor"
+      ],
+      "tips": [
+        "Kaskın iç etiketini kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm075",
+      "title": "Hafta Sonu Ev İlaç Dolabı Kontrolü",
+      "description": "Son kullanma tarihleri, bozulanlar.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "sağlık"
+      ],
+      "tips": [
+        "Çocukların ulaşamayacağı yerde saklayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm076",
+      "title": "Aile Güvenlik Şifresi",
+      "description": "SOS kod kelimesi belirleyin.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "acil"
+      ],
+      "tips": [
+        "Tüm aile bilsin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm077",
+      "title": "Bugün Duman Dedektörü Testi",
+      "description": "Pil kontrolü, test butonuna basın.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "yangın"
+      ],
+      "tips": [
+        "Her katta bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm078",
+      "title": "Bu Ay Çocuk Kaçırma Eğitimi",
+      "description": "Yabancıyla konuşmama, güvenli yetişkin.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "çocuk"
+      ],
+      "tips": [
+        "Rol yaparak öğretin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm079",
+      "title": "Ailece Ev Anahtar Yedekleme",
+      "description": "Yedek anahtar komşuda veya kasada.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "anahtar"
+      ],
+      "tips": [
+        "Birkaç yerde yedek bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm080",
+      "title": "Hafta Sonu Aile Afet Planı",
+      "description": "Deprem, yangın, sel için aile planı.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "afet"
+      ],
+      "tips": [
+        "Toplanma noktası belirleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm081",
+      "title": "Acil Çıkış Planı",
+      "description": "Yangın tatbikatı, toplanma noktası.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "yangın"
+      ],
+      "tips": [
+        "Yılda en az 2 kez tekrarlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm082",
+      "title": "Bugün İlk Yardım Çantası",
+      "description": "Eksik malzemeleri not alın, tamamlayın.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "ilk yardım"
+      ],
+      "tips": [
+        "Son kullanma tarihlerini kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm083",
+      "title": "Bu Ay Ev Güvenlik Taraması",
+      "description": "Priz kapakları, dolap kilidi kontrolü.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "ev"
+      ],
+      "tips": [
+        "Çocukların ulaşabileceği her yeri kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm084",
+      "title": "Ailece Acil İletişim Listesi",
+      "description": "Önemli numaraları yazın, buzdolabına yapıştırın.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "iletişim"
+      ],
+      "tips": [
+        "112, itfaiye, polis, komşu ekleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm085",
+      "title": "Hafta Sonu Bilgisayar Güvenliği",
+      "description": "Şifreleri güncelleyin, çocuklara anlatın.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "dijital"
+      ],
+      "tips": [
+        "İki faktörlü doğrulama açın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm086",
+      "title": "Deprem Çantası Kontrolü",
+      "description": "Su, konserve, battaniye, el feneri kontrolü.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "deprem"
+      ],
+      "tips": [
+        "Her üye için ayrı çanta hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm087",
+      "title": "Bugün Gaz Kaçağı Testi",
+      "description": "Kokulu sabun suyu ile bağlantı kontrolü.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "gaz"
+      ],
+      "tips": [
+        "Gaz dedektörü bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm088",
+      "title": "Bu Ay Çocuk İnternet Güvenliği",
+      "description": "Ebeveyn kontrolü, güvenli arama ayarları.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "internet"
+      ],
+      "tips": [
+        "Ortak kullanım alanlarında internet erişimi."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm089",
+      "title": "Ailece Yangın Söndürücü Kontrolü",
+      "description": "Basınç göstergesi, son kullanma tarihi.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "yangın"
+      ],
+      "tips": [
+        "Kullanımını öğrenin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm090",
+      "title": "Hafta Sonu Aile GPS Paylaşımı",
+      "description": "Telefonda konum paylaşımı açık mı kontrol edin.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "konum"
+      ],
+      "tips": [
+        "FamilyHub uygulamasını kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm091",
+      "title": "Kimlik Fotokopisi",
+      "description": "Herkesin kimlik fotokopisi ayrı yerde dursun.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "evrak"
+      ],
+      "tips": [
+        "Dijital kopya da bulunsun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm092",
+      "title": "Bugün Ev Alarm Sistemi Testi",
+      "description": "Sensör, kamera, alarm testi.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "alarm"
+      ],
+      "tips": [
+        "Pilleri kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm093",
+      "title": "Bu Ay Aile Şifre Protokolü",
+      "description": "Kapı şifresi, telefon şifresi değiştirme.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "şifre"
+      ],
+      "tips": [
+        "Düzenli olarak değiştirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm094",
+      "title": "Ailece Bisiklet Kask Kontrolü",
+      "description": "Çocukların kaskı, dizliği, dirsekliği kontrolü.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "spor"
+      ],
+      "tips": [
+        "Kaskın iç etiketini kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm095",
+      "title": "Hafta Sonu Ev İlaç Dolabı Kontrolü",
+      "description": "Son kullanma tarihleri, bozulanlar.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "sağlık"
+      ],
+      "tips": [
+        "Çocukların ulaşamayacağı yerde saklayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm096",
+      "title": "Aile Güvenlik Şifresi",
+      "description": "SOS kod kelimesi belirleyin.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "acil"
+      ],
+      "tips": [
+        "Tüm aile bilsin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm097",
+      "title": "Bugün Duman Dedektörü Testi",
+      "description": "Pil kontrolü, test butonuna basın.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "yangın"
+      ],
+      "tips": [
+        "Her katta bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm098",
+      "title": "Bu Ay Çocuk Kaçırma Eğitimi",
+      "description": "Yabancıyla konuşmama, güvenli yetişkin.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "çocuk"
+      ],
+      "tips": [
+        "Rol yaparak öğretin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm099",
+      "title": "Ailece Ev Anahtar Yedekleme",
+      "description": "Yedek anahtar komşuda veya kasada.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "anahtar"
+      ],
+      "tips": [
+        "Birkaç yerde yedek bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sm100",
+      "title": "Hafta Sonu Aile Afet Planı",
+      "description": "Deprem, yangın, sel için aile planı.",
+      "category": "safety",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "güvenlik",
+        "afet"
+      ],
+      "tips": [
+        "Toplanma noktası belirleyin."
+      ],
+      "action_type": "show_detail"
+    }
+  ]
+}

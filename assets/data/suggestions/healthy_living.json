@@ -1,0 +1,1708 @@
+{
+  "module": "healthy_living",
+  "version": "1.0.0",
+  "language": "tr",
+  "region": "TR",
+  "suggestions": [
+    {
+      "id": "hl001",
+      "title": "Sabah Esneme Rutini",
+      "description": "Yataktan kalkınca 5 dk esneme hareketleri.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "spor"
+      ],
+      "tips": [
+        "Sırt ve boyun ağrılarını önler."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl002",
+      "title": "Bugün Günlük Su Takibi",
+      "description": "Herkes 8 bardak su içsin, takip edin.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "su"
+      ],
+      "tips": [
+        "Su şişenizi yanınızda taşıyın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl003",
+      "title": "Bu Hafta Akşam Yürüyüşü",
+      "description": "Yemekten sonra 20 dk hafif yürüyüş.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "yürüyüş"
+      ],
+      "tips": [
+        "Sindirimi hızlandırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl004",
+      "title": "Ailece Sebze Günü",
+      "description": "Bugün her öğünde farklı renkte sebze olsun.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "beslenme"
+      ],
+      "tips": [
+        "Renkli tabak = vitaminli tabak."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl005",
+      "title": "Herkesle Dijital Detoks",
+      "description": "2 saat telefonsuz aile zamanı.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 120,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "zihinsel"
+      ],
+      "tips": [
+        "Göz yorgunluğunu azaltır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl006",
+      "title": "Sabah Meditasyon Zamanı",
+      "description": "5 dk nefes egzersizi, sessizlik.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "zihinsel"
+      ],
+      "tips": [
+        "Stres hormonunu düşürür."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl007",
+      "title": "Akşam Evde Dans Partisi",
+      "description": "Enerjik müziklerle 20 dk dans.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "egzersiz"
+      ],
+      "tips": [
+        "Kalori yakmak hiç bu kadar eğlenceli olmamıştı."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl008",
+      "title": "Uyku Rutini",
+      "description": "Herkes aynı saatte yatağa, kitap okuyun.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "uyku"
+      ],
+      "tips": [
+        "Düzenli uyku bağışıklığı güçlendirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl009",
+      "title": "Bugün Vitamin Deposu Smoothie",
+      "description": "Ispanak, muz, elma, yoğurt karışımı.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "beslenme"
+      ],
+      "tips": [
+        "Çocuklar renkli smoothie'leri sever."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl010",
+      "title": "Bu Hafta Ekran Molası",
+      "description": "Her saat başı 10 dk göz egzersizi.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "göz"
+      ],
+      "tips": [
+        "20-20-20 kuralı: Her 20 dk'da 20 saniye 20 metre öteye bakın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl011",
+      "title": "Ailece Aile Yoga Seansı",
+      "description": "YouTube videosuyla birlikte yoga.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "yoga"
+      ],
+      "tips": [
+        "Esneklik ve dengeyi artırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl012",
+      "title": "Herkesle Evde Step Sayma",
+      "description": "Telefonu cebde bırakın, 5000 adım hedef.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "yürüyüş"
+      ],
+      "tips": [
+        "Merdiven çıkmak ekstra kalori yaktırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl013",
+      "title": "Sabah Sağlıklı Atıştırmalık",
+      "description": "Cips yerine kuruyemiş, meyve.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "beslenme"
+      ],
+      "tips": [
+        "Kuru yemişleri porsiyonlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl014",
+      "title": "Akşam Aile Bisiklet Turu",
+      "description": "Haftada bir kez, 5 km bisiklet.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "bisiklet"
+      ],
+      "tips": [
+        "Kask takmayı unutmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl015",
+      "title": "Duruş Düzeltme Egzersizi",
+      "description": "Sırt, boyun, omuz egzersizleri.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "postür"
+      ],
+      "tips": [
+        "Masa başı çalışanlar için özellikle önemli."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl016",
+      "title": "Bugün Güneş Işığı Alma",
+      "description": "Balkonda 15 dk güneş, D vitamini.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "vitamin"
+      ],
+      "tips": [
+        "Güneş kremi unutmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl017",
+      "title": "Bu Hafta Aile Koşusu",
+      "description": "Parkta hafif tempolu koşu.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "koşu"
+      ],
+      "tips": [
+        "Isınma hareketlerini atlamayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl018",
+      "title": "Ailece Şeker Detoksu",
+      "description": "Bugün hiç şekerli gıda yemeyin.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "beslenme"
+      ],
+      "tips": [
+        "Meyve ile tatlı krizini bastırabilirsiniz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl019",
+      "title": "Herkesle Aile Masaj Günü",
+      "description": "Omuz, sırt masajı, gevşeme.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "gevşeme"
+      ],
+      "tips": [
+        "Masaj yağı kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl020",
+      "title": "Sabah Bağışıklık Çayı",
+      "description": "Zencefil, zerdeçal, bal, limon çayı.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "bağışıklık"
+      ],
+      "tips": [
+        "Günde 2 fincan ideal."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl021",
+      "title": "Akşam Sabah Esneme Rutini",
+      "description": "Yataktan kalkınca 5 dk esneme hareketleri.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "spor"
+      ],
+      "tips": [
+        "Sırt ve boyun ağrılarını önler."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl022",
+      "title": "Günlük Su Takibi",
+      "description": "Herkes 8 bardak su içsin, takip edin.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "su"
+      ],
+      "tips": [
+        "Su şişenizi yanınızda taşıyın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl023",
+      "title": "Bugün Akşam Yürüyüşü",
+      "description": "Yemekten sonra 20 dk hafif yürüyüş.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "yürüyüş"
+      ],
+      "tips": [
+        "Sindirimi hızlandırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl024",
+      "title": "Bu Hafta Sebze Günü",
+      "description": "Bugün her öğünde farklı renkte sebze olsun.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "beslenme"
+      ],
+      "tips": [
+        "Renkli tabak = vitaminli tabak."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl025",
+      "title": "Ailece Dijital Detoks",
+      "description": "2 saat telefonsuz aile zamanı.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 120,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "zihinsel"
+      ],
+      "tips": [
+        "Göz yorgunluğunu azaltır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl026",
+      "title": "Herkesle Meditasyon Zamanı",
+      "description": "5 dk nefes egzersizi, sessizlik.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "zihinsel"
+      ],
+      "tips": [
+        "Stres hormonunu düşürür."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl027",
+      "title": "Sabah Evde Dans Partisi",
+      "description": "Enerjik müziklerle 20 dk dans.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "egzersiz"
+      ],
+      "tips": [
+        "Kalori yakmak hiç bu kadar eğlenceli olmamıştı."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl028",
+      "title": "Akşam Uyku Rutini",
+      "description": "Herkes aynı saatte yatağa, kitap okuyun.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "uyku"
+      ],
+      "tips": [
+        "Düzenli uyku bağışıklığı güçlendirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl029",
+      "title": "Vitamin Deposu Smoothie",
+      "description": "Ispanak, muz, elma, yoğurt karışımı.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "beslenme"
+      ],
+      "tips": [
+        "Çocuklar renkli smoothie'leri sever."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl030",
+      "title": "Bugün Ekran Molası",
+      "description": "Her saat başı 10 dk göz egzersizi.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "göz"
+      ],
+      "tips": [
+        "20-20-20 kuralı: Her 20 dk'da 20 saniye 20 metre öteye bakın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl031",
+      "title": "Bu Hafta Aile Yoga Seansı",
+      "description": "YouTube videosuyla birlikte yoga.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "yoga"
+      ],
+      "tips": [
+        "Esneklik ve dengeyi artırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl032",
+      "title": "Ailece Evde Step Sayma",
+      "description": "Telefonu cebde bırakın, 5000 adım hedef.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "yürüyüş"
+      ],
+      "tips": [
+        "Merdiven çıkmak ekstra kalori yaktırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl033",
+      "title": "Herkesle Sağlıklı Atıştırmalık",
+      "description": "Cips yerine kuruyemiş, meyve.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "beslenme"
+      ],
+      "tips": [
+        "Kuru yemişleri porsiyonlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl034",
+      "title": "Sabah Aile Bisiklet Turu",
+      "description": "Haftada bir kez, 5 km bisiklet.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "bisiklet"
+      ],
+      "tips": [
+        "Kask takmayı unutmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl035",
+      "title": "Akşam Duruş Düzeltme Egzersizi",
+      "description": "Sırt, boyun, omuz egzersizleri.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "postür"
+      ],
+      "tips": [
+        "Masa başı çalışanlar için özellikle önemli."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl036",
+      "title": "Güneş Işığı Alma",
+      "description": "Balkonda 15 dk güneş, D vitamini.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "vitamin"
+      ],
+      "tips": [
+        "Güneş kremi unutmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl037",
+      "title": "Bugün Aile Koşusu",
+      "description": "Parkta hafif tempolu koşu.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "koşu"
+      ],
+      "tips": [
+        "Isınma hareketlerini atlamayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl038",
+      "title": "Bu Hafta Şeker Detoksu",
+      "description": "Bugün hiç şekerli gıda yemeyin.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "beslenme"
+      ],
+      "tips": [
+        "Meyve ile tatlı krizini bastırabilirsiniz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl039",
+      "title": "Ailece Aile Masaj Günü",
+      "description": "Omuz, sırt masajı, gevşeme.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "gevşeme"
+      ],
+      "tips": [
+        "Masaj yağı kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl040",
+      "title": "Herkesle Bağışıklık Çayı",
+      "description": "Zencefil, zerdeçal, bal, limon çayı.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "bağışıklık"
+      ],
+      "tips": [
+        "Günde 2 fincan ideal."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl041",
+      "title": "Sabah Sabah Esneme Rutini",
+      "description": "Yataktan kalkınca 5 dk esneme hareketleri.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "spor"
+      ],
+      "tips": [
+        "Sırt ve boyun ağrılarını önler."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl042",
+      "title": "Akşam Günlük Su Takibi",
+      "description": "Herkes 8 bardak su içsin, takip edin.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "su"
+      ],
+      "tips": [
+        "Su şişenizi yanınızda taşıyın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl043",
+      "title": "Akşam Yürüyüşü",
+      "description": "Yemekten sonra 20 dk hafif yürüyüş.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "yürüyüş"
+      ],
+      "tips": [
+        "Sindirimi hızlandırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl044",
+      "title": "Bugün Sebze Günü",
+      "description": "Bugün her öğünde farklı renkte sebze olsun.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "beslenme"
+      ],
+      "tips": [
+        "Renkli tabak = vitaminli tabak."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl045",
+      "title": "Bu Hafta Dijital Detoks",
+      "description": "2 saat telefonsuz aile zamanı.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 120,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "zihinsel"
+      ],
+      "tips": [
+        "Göz yorgunluğunu azaltır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl046",
+      "title": "Ailece Meditasyon Zamanı",
+      "description": "5 dk nefes egzersizi, sessizlik.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "zihinsel"
+      ],
+      "tips": [
+        "Stres hormonunu düşürür."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl047",
+      "title": "Herkesle Evde Dans Partisi",
+      "description": "Enerjik müziklerle 20 dk dans.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "egzersiz"
+      ],
+      "tips": [
+        "Kalori yakmak hiç bu kadar eğlenceli olmamıştı."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl048",
+      "title": "Sabah Uyku Rutini",
+      "description": "Herkes aynı saatte yatağa, kitap okuyun.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "uyku"
+      ],
+      "tips": [
+        "Düzenli uyku bağışıklığı güçlendirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl049",
+      "title": "Akşam Vitamin Deposu Smoothie",
+      "description": "Ispanak, muz, elma, yoğurt karışımı.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "beslenme"
+      ],
+      "tips": [
+        "Çocuklar renkli smoothie'leri sever."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl050",
+      "title": "Ekran Molası",
+      "description": "Her saat başı 10 dk göz egzersizi.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "göz"
+      ],
+      "tips": [
+        "20-20-20 kuralı: Her 20 dk'da 20 saniye 20 metre öteye bakın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl051",
+      "title": "Bugün Aile Yoga Seansı",
+      "description": "YouTube videosuyla birlikte yoga.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "yoga"
+      ],
+      "tips": [
+        "Esneklik ve dengeyi artırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl052",
+      "title": "Bu Hafta Evde Step Sayma",
+      "description": "Telefonu cebde bırakın, 5000 adım hedef.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "yürüyüş"
+      ],
+      "tips": [
+        "Merdiven çıkmak ekstra kalori yaktırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl053",
+      "title": "Ailece Sağlıklı Atıştırmalık",
+      "description": "Cips yerine kuruyemiş, meyve.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "beslenme"
+      ],
+      "tips": [
+        "Kuru yemişleri porsiyonlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl054",
+      "title": "Herkesle Aile Bisiklet Turu",
+      "description": "Haftada bir kez, 5 km bisiklet.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "bisiklet"
+      ],
+      "tips": [
+        "Kask takmayı unutmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl055",
+      "title": "Sabah Duruş Düzeltme Egzersizi",
+      "description": "Sırt, boyun, omuz egzersizleri.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "postür"
+      ],
+      "tips": [
+        "Masa başı çalışanlar için özellikle önemli."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl056",
+      "title": "Akşam Güneş Işığı Alma",
+      "description": "Balkonda 15 dk güneş, D vitamini.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "vitamin"
+      ],
+      "tips": [
+        "Güneş kremi unutmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl057",
+      "title": "Aile Koşusu",
+      "description": "Parkta hafif tempolu koşu.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "koşu"
+      ],
+      "tips": [
+        "Isınma hareketlerini atlamayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl058",
+      "title": "Bugün Şeker Detoksu",
+      "description": "Bugün hiç şekerli gıda yemeyin.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "beslenme"
+      ],
+      "tips": [
+        "Meyve ile tatlı krizini bastırabilirsiniz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl059",
+      "title": "Bu Hafta Aile Masaj Günü",
+      "description": "Omuz, sırt masajı, gevşeme.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "gevşeme"
+      ],
+      "tips": [
+        "Masaj yağı kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl060",
+      "title": "Ailece Bağışıklık Çayı",
+      "description": "Zencefil, zerdeçal, bal, limon çayı.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "bağışıklık"
+      ],
+      "tips": [
+        "Günde 2 fincan ideal."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl061",
+      "title": "Herkesle Sabah Esneme Rutini",
+      "description": "Yataktan kalkınca 5 dk esneme hareketleri.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "spor"
+      ],
+      "tips": [
+        "Sırt ve boyun ağrılarını önler."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl062",
+      "title": "Sabah Günlük Su Takibi",
+      "description": "Herkes 8 bardak su içsin, takip edin.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "su"
+      ],
+      "tips": [
+        "Su şişenizi yanınızda taşıyın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl063",
+      "title": "Akşam Akşam Yürüyüşü",
+      "description": "Yemekten sonra 20 dk hafif yürüyüş.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "yürüyüş"
+      ],
+      "tips": [
+        "Sindirimi hızlandırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl064",
+      "title": "Sebze Günü",
+      "description": "Bugün her öğünde farklı renkte sebze olsun.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "beslenme"
+      ],
+      "tips": [
+        "Renkli tabak = vitaminli tabak."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl065",
+      "title": "Bugün Dijital Detoks",
+      "description": "2 saat telefonsuz aile zamanı.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 120,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "zihinsel"
+      ],
+      "tips": [
+        "Göz yorgunluğunu azaltır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl066",
+      "title": "Bu Hafta Meditasyon Zamanı",
+      "description": "5 dk nefes egzersizi, sessizlik.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "zihinsel"
+      ],
+      "tips": [
+        "Stres hormonunu düşürür."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl067",
+      "title": "Ailece Evde Dans Partisi",
+      "description": "Enerjik müziklerle 20 dk dans.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "egzersiz"
+      ],
+      "tips": [
+        "Kalori yakmak hiç bu kadar eğlenceli olmamıştı."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl068",
+      "title": "Herkesle Uyku Rutini",
+      "description": "Herkes aynı saatte yatağa, kitap okuyun.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "uyku"
+      ],
+      "tips": [
+        "Düzenli uyku bağışıklığı güçlendirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl069",
+      "title": "Sabah Vitamin Deposu Smoothie",
+      "description": "Ispanak, muz, elma, yoğurt karışımı.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "beslenme"
+      ],
+      "tips": [
+        "Çocuklar renkli smoothie'leri sever."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl070",
+      "title": "Akşam Ekran Molası",
+      "description": "Her saat başı 10 dk göz egzersizi.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "göz"
+      ],
+      "tips": [
+        "20-20-20 kuralı: Her 20 dk'da 20 saniye 20 metre öteye bakın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl071",
+      "title": "Aile Yoga Seansı",
+      "description": "YouTube videosuyla birlikte yoga.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "yoga"
+      ],
+      "tips": [
+        "Esneklik ve dengeyi artırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl072",
+      "title": "Bugün Evde Step Sayma",
+      "description": "Telefonu cebde bırakın, 5000 adım hedef.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "yürüyüş"
+      ],
+      "tips": [
+        "Merdiven çıkmak ekstra kalori yaktırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl073",
+      "title": "Bu Hafta Sağlıklı Atıştırmalık",
+      "description": "Cips yerine kuruyemiş, meyve.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "beslenme"
+      ],
+      "tips": [
+        "Kuru yemişleri porsiyonlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl074",
+      "title": "Ailece Aile Bisiklet Turu",
+      "description": "Haftada bir kez, 5 km bisiklet.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "bisiklet"
+      ],
+      "tips": [
+        "Kask takmayı unutmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl075",
+      "title": "Herkesle Duruş Düzeltme Egzersizi",
+      "description": "Sırt, boyun, omuz egzersizleri.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "postür"
+      ],
+      "tips": [
+        "Masa başı çalışanlar için özellikle önemli."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl076",
+      "title": "Sabah Güneş Işığı Alma",
+      "description": "Balkonda 15 dk güneş, D vitamini.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "vitamin"
+      ],
+      "tips": [
+        "Güneş kremi unutmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl077",
+      "title": "Akşam Aile Koşusu",
+      "description": "Parkta hafif tempolu koşu.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "koşu"
+      ],
+      "tips": [
+        "Isınma hareketlerini atlamayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl078",
+      "title": "Şeker Detoksu",
+      "description": "Bugün hiç şekerli gıda yemeyin.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "beslenme"
+      ],
+      "tips": [
+        "Meyve ile tatlı krizini bastırabilirsiniz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl079",
+      "title": "Bugün Aile Masaj Günü",
+      "description": "Omuz, sırt masajı, gevşeme.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "gevşeme"
+      ],
+      "tips": [
+        "Masaj yağı kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl080",
+      "title": "Bu Hafta Bağışıklık Çayı",
+      "description": "Zencefil, zerdeçal, bal, limon çayı.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "bağışıklık"
+      ],
+      "tips": [
+        "Günde 2 fincan ideal."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl081",
+      "title": "Ailece Sabah Esneme Rutini",
+      "description": "Yataktan kalkınca 5 dk esneme hareketleri.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "spor"
+      ],
+      "tips": [
+        "Sırt ve boyun ağrılarını önler."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl082",
+      "title": "Herkesle Günlük Su Takibi",
+      "description": "Herkes 8 bardak su içsin, takip edin.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "su"
+      ],
+      "tips": [
+        "Su şişenizi yanınızda taşıyın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl083",
+      "title": "Sabah Akşam Yürüyüşü",
+      "description": "Yemekten sonra 20 dk hafif yürüyüş.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "yürüyüş"
+      ],
+      "tips": [
+        "Sindirimi hızlandırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl084",
+      "title": "Akşam Sebze Günü",
+      "description": "Bugün her öğünde farklı renkte sebze olsun.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "beslenme"
+      ],
+      "tips": [
+        "Renkli tabak = vitaminli tabak."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl085",
+      "title": "Dijital Detoks",
+      "description": "2 saat telefonsuz aile zamanı.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 120,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "zihinsel"
+      ],
+      "tips": [
+        "Göz yorgunluğunu azaltır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl086",
+      "title": "Bugün Meditasyon Zamanı",
+      "description": "5 dk nefes egzersizi, sessizlik.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "zihinsel"
+      ],
+      "tips": [
+        "Stres hormonunu düşürür."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl087",
+      "title": "Bu Hafta Evde Dans Partisi",
+      "description": "Enerjik müziklerle 20 dk dans.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "egzersiz"
+      ],
+      "tips": [
+        "Kalori yakmak hiç bu kadar eğlenceli olmamıştı."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl088",
+      "title": "Ailece Uyku Rutini",
+      "description": "Herkes aynı saatte yatağa, kitap okuyun.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "uyku"
+      ],
+      "tips": [
+        "Düzenli uyku bağışıklığı güçlendirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl089",
+      "title": "Herkesle Vitamin Deposu Smoothie",
+      "description": "Ispanak, muz, elma, yoğurt karışımı.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "beslenme"
+      ],
+      "tips": [
+        "Çocuklar renkli smoothie'leri sever."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl090",
+      "title": "Sabah Ekran Molası",
+      "description": "Her saat başı 10 dk göz egzersizi.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "göz"
+      ],
+      "tips": [
+        "20-20-20 kuralı: Her 20 dk'da 20 saniye 20 metre öteye bakın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl091",
+      "title": "Akşam Aile Yoga Seansı",
+      "description": "YouTube videosuyla birlikte yoga.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "yoga"
+      ],
+      "tips": [
+        "Esneklik ve dengeyi artırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl092",
+      "title": "Evde Step Sayma",
+      "description": "Telefonu cebde bırakın, 5000 adım hedef.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "yürüyüş"
+      ],
+      "tips": [
+        "Merdiven çıkmak ekstra kalori yaktırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl093",
+      "title": "Bugün Sağlıklı Atıştırmalık",
+      "description": "Cips yerine kuruyemiş, meyve.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "beslenme"
+      ],
+      "tips": [
+        "Kuru yemişleri porsiyonlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl094",
+      "title": "Bu Hafta Aile Bisiklet Turu",
+      "description": "Haftada bir kez, 5 km bisiklet.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "bisiklet"
+      ],
+      "tips": [
+        "Kask takmayı unutmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl095",
+      "title": "Ailece Duruş Düzeltme Egzersizi",
+      "description": "Sırt, boyun, omuz egzersizleri.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "postür"
+      ],
+      "tips": [
+        "Masa başı çalışanlar için özellikle önemli."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl096",
+      "title": "Herkesle Güneş Işığı Alma",
+      "description": "Balkonda 15 dk güneş, D vitamini.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "vitamin"
+      ],
+      "tips": [
+        "Güneş kremi unutmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl097",
+      "title": "Sabah Aile Koşusu",
+      "description": "Parkta hafif tempolu koşu.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "koşu"
+      ],
+      "tips": [
+        "Isınma hareketlerini atlamayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl098",
+      "title": "Akşam Şeker Detoksu",
+      "description": "Bugün hiç şekerli gıda yemeyin.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "beslenme"
+      ],
+      "tips": [
+        "Meyve ile tatlı krizini bastırabilirsiniz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl099",
+      "title": "Aile Masaj Günü",
+      "description": "Omuz, sırt masajı, gevşeme.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "gevşeme"
+      ],
+      "tips": [
+        "Masaj yağı kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "hl100",
+      "title": "Bugün Bağışıklık Çayı",
+      "description": "Zencefil, zerdeçal, bal, limon çayı.",
+      "category": "health",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "sağlık",
+        "bağışıklık"
+      ],
+      "tips": [
+        "Günde 2 fincan ideal."
+      ],
+      "action_type": "show_detail"
+    }
+  ]
+}

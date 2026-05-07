@@ -1,0 +1,480 @@
+// lib/services/emergency_auto_actions_engine.dart
+// Emergency auto-actions engine: triggers, messages, calls, escalation chain
+
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../domain/models/emergency_action.dart';
+import '../domain/models/emergency_template.dart';
+
+/// High-level engine that orchestrates the entire emergency response pipeline.
+class EmergencyAutoActionsEngine {
+  static final EmergencyAutoActionsEngine _instance =
+      EmergencyAutoActionsEngine._internal();
+  factory EmergencyAutoActionsEngine() => _instance;
+  EmergencyAutoActionsEngine._internal();
+
+  final FlutterTts _tts = FlutterTts();
+
+  // ── Active action ──
+  EmergencyAction? _activeAction;
+  EmergencyAction? get activeAction => _activeAction;
+
+  // ── Streams ──
+  final _statusController = StreamController<EmergencyAction>.broadcast();
+  Stream<EmergencyAction> get statusStream => _statusController.stream;
+
+  // ── Timers ──
+  Timer? _escalationTimer;
+  Timer? _locationShareTimer;
+
+  // ── Callbacks ──
+  VoidCallback? onSOSStarted;
+  VoidCallback? onSOSResolved;
+
+  // ═══════════════════════════════════════════
+  // TRIGGER SOS
+  // ═══════════════════════════════════════════
+  Future<EmergencyAction> triggerSOS({
+    required String triggeredBy,
+    required String triggerType,
+    String? description,
+    EmergencySeverity initialSeverity = EmergencySeverity.high,
+    EmergencyCategory category = EmergencyCategory.other,
+  }) async {
+    // 1. Get current location
+    Position? position;
+    try {
+      position = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(accuracy: LocationAccuracy.best),
+      );
+    } catch (e) {
+    }
+
+    // 2. Build action
+    final now = DateTime.now();
+    final action = EmergencyAction(
+      familyId: '', // Filled by service layer
+      triggeredBy: triggeredBy,
+      trigger: EmergencyTrigger(
+        type: EmergencyTriggerType.values.firstWhere(
+          (e) => e.name == triggerType,
+          orElse: () => EmergencyTriggerType.manualSos,
+        ),
+        timestamp: now,
+        latitude: position?.latitude,
+        longitude: position?.longitude,
+      ),
+      emergency: EmergencyDetails(
+        severity: initialSeverity,
+        category: category,
+        description: description ?? 'Acil durum yardım çağrısı',
+      ),
+      autoActions: const AutoActions(),
+      escalationChain: const EscalationChain(),
+      status: EmergencyStatus(startedAt: now),
+      createdAt: now,
+      updatedAt: now,
+    );
+
+    _activeAction = action;
+    _statusController.add(action);
+    onSOSStarted?.call();
+
+    // 3. Execute auto actions
+    await _executeAutoActions(action);
+
+    // 4. Start escalation chain
+    await _startEscalationChain(action);
+
+    return action;
+  }
+
+  // ═══════════════════════════════════════════
+  // AUTO ACTIONS
+  // ═══════════════════════════════════════════
+  Future<void> _executeAutoActions(EmergencyAction action) async {
+    final auto = action.autoActions;
+
+    // A. Location share
+    if (auto.locationShare.enabled) {
+      await _startLocationSharing(action);
+    }
+
+    // B. Messages (parallel)
+    final futures = <Future>[];
+    for (final msg in auto.messages) {
+      futures.add(_sendMessage(action, msg));
+    }
+    await Future.wait(futures, eagerError: false);
+
+    // C. Calls (sequential)
+    for (final call in auto.calls) {
+      await _executeCall(action, call);
+    }
+
+    // D. Audio recording
+    if (auto.audioRecording.enabled) {
+      await _startAudioRecording(action);
+    }
+
+    action.status.state = EmergencyState.active;
+    action.status.lastActionAt = DateTime.now();
+    _statusController.add(action);
+  }
+
+  // ═══════════════════════════════════════════
+  // LOCATION SHARING
+  // ═══════════════════════════════════════════
+  Future<void> _startLocationSharing(EmergencyAction action) async {
+    final config = action.autoActions.locationShare;
+
+    // Immediate share
+    await _shareLocationOnce(action, isInitial: true);
+
+    // Continuous sharing
+    if (config.frequency == 'continuous' ||
+        config.frequency == 'every_minute') {
+      final interval = config.frequency == 'every_minute'
+          ? const Duration(minutes: 1)
+          : const Duration(seconds: 30);
+
+      final endTime = config.durationMinutes > 0
+          ? DateTime.now().add(Duration(minutes: config.durationMinutes))
+          : null;
+
+      _locationShareTimer?.cancel();
+      _locationShareTimer = Timer.periodic(interval, (timer) async {
+        if (endTime != null && DateTime.now().isAfter(endTime)) {
+          timer.cancel();
+          return;
+        }
+        if (!_isActive(action)) {
+          timer.cancel();
+          return;
+        }
+        await _shareLocationOnce(action, isInitial: false);
+      });
+    }
+  }
+
+  Future<void> _shareLocationOnce(
+    EmergencyAction action, {
+    required bool isInitial,
+  }) async {
+    try {
+      final pos = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(accuracy: LocationAccuracy.bestForNavigation),
+      );
+    } catch (e) {
+    }
+  }
+
+  // ═══════════════════════════════════════════
+  // SEND MESSAGE
+  // ═══════════════════════════════════════════
+  Future<void> _sendMessage(
+    EmergencyAction action,
+    EmergencyMessageConfig config,
+  ) async {
+    if (config.delaySeconds > 0) {
+      await Future.delayed(Duration(seconds: config.delaySeconds));
+    }
+
+    final template = await _getTemplate(config.templateId);
+    final messageText = _resolveTemplate(template.smsContent, {
+      'name': 'Kullanıcı',
+      'location':
+          '${action.trigger.latitude ?? 0}, ${action.trigger.longitude ?? 0}',
+      'time': _fmtTime(action.trigger.timestamp),
+    });
+
+    switch (config.channel) {
+      case MessageChannel.sms:
+        await _sendSms(_getRecipientTarget(config), messageText);
+        break;
+      case MessageChannel.push:
+        // TODO: Push via FCM
+        break;
+      case MessageChannel.whatsapp:
+        await _sendWhatsApp(_getRecipientTarget(config), messageText);
+        break;
+      case MessageChannel.telegram:
+      case MessageChannel.email:
+        await _sendEmail(_getRecipientTarget(config), messageText);
+        break;
+    }
+
+    _logResponse(
+      action,
+      'message',
+      config.channel.name,
+      config.recipientType.name,
+      'sent',
+    );
+  }
+
+  Future<void> _sendSms(String number, String message) async {
+    if (number.isEmpty) return;
+    final uri = Uri(scheme: 'sms', path: number, queryParameters: {'body': message});
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    }
+  }
+
+  Future<void> _sendWhatsApp(String number, String message) async {
+    if (number.isEmpty) return;
+    final cleanNumber = number.replaceAll(RegExp(r'[^\d+]'), '');
+    final uri = Uri.parse('https://wa.me/$cleanNumber?text=${Uri.encodeComponent(message)}');
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
+
+  Future<void> _sendEmail(String email, String message) async {
+    if (email.isEmpty) return;
+    final uri = Uri(scheme: 'mailto', path: email, queryParameters: {
+      'subject': 'Acil Durum Yardım Çağrısı',
+      'body': message,
+    });
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    }
+  }
+
+  String _getRecipientTarget(EmergencyMessageConfig config) {
+    if (config.customRecipients.isNotEmpty) {
+      return config.customRecipients.first;
+    }
+    return '';
+  }
+
+  // ═══════════════════════════════════════════
+  // EXECUTE CALL
+  // ═══════════════════════════════════════════
+  Future<void> _executeCall(
+    EmergencyAction action,
+    EmergencyCallConfig config,
+  ) async {
+    String number;
+    switch (config.type) {
+      case CallType.emergencyServices:
+        number = '112';
+        break;
+      case CallType.familyMember:
+      case CallType.emergencyContact:
+      case CallType.custom:
+        number = config.target;
+        break;
+    }
+
+    if (config.autoDial) {
+      await _autoDial(
+        number,
+        config.messageText ?? 'Acil durum yardım çağrısı',
+      );
+    } else {
+      // Prepare manual call UI
+    }
+  }
+
+  Future<void> _autoDial(String number, String message) async {
+    final uri = Uri.parse('tel:$number');
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    }
+
+    // Wait for connection then speak
+    await Future.delayed(const Duration(seconds: 5));
+    await _tts.setSpeechRate(0.8);
+    await _tts.setVolume(1.0);
+    await _tts.speak(message);
+  }
+
+  // ═══════════════════════════════════════════
+  // AUDIO RECORDING
+  // ═══════════════════════════════════════════
+  Future<void> _startAudioRecording(EmergencyAction action) async {
+    final duration = action.autoActions.audioRecording.durationSeconds;
+    // TODO: Use record package for actual recording
+  }
+
+  // ═══════════════════════════════════════════
+  // ESCALATION CHAIN
+  // ═══════════════════════════════════════════
+  Future<void> _startEscalationChain(EmergencyAction action) async {
+    final steps = action.escalationChain.steps;
+    if (steps.isEmpty) return;
+
+    for (final step in steps) {
+      if (!_isActive(action)) return;
+
+      // Wait for delay
+      await Future.delayed(Duration(minutes: step.delayMinutes));
+      if (!_isActive(action)) return;
+
+      // Check condition
+      final shouldExecute = await _checkEscalationCondition(
+        action,
+        step.condition,
+      );
+      if (!shouldExecute) continue;
+
+      // Execute step
+      await _executeEscalationStep(action, step);
+      action.status.currentStep = step.order;
+      action.status.state = EmergencyState.escalating;
+      action.status.lastActionAt = DateTime.now();
+      _statusController.add(action);
+
+      // Check for user response
+      if (step.requireConfirmation && _checkUserResponse(action)) {
+        await resolve(action.actionId!, 'user_responded');
+        return;
+      }
+    }
+
+    // Chain completed without resolution
+    if (_isActive(action)) {
+      await resolve(action.actionId!, 'timeout');
+    }
+  }
+
+  Future<bool> _checkEscalationCondition(
+    EmergencyAction action,
+    String condition,
+  ) async {
+    switch (condition) {
+      case 'no_response':
+        return !_checkUserResponse(action);
+      case 'always':
+        return true;
+      default:
+        return true;
+    }
+  }
+
+  Future<void> _executeEscalationStep(
+    EmergencyAction action,
+    EscalationStep step,
+  ) async {
+    switch (step.action) {
+      case EscalationAction.notify:
+        // Send notification to configured recipients
+        for (final msg in action.autoActions.messages) {
+          await _sendMessage(action, msg);
+        }
+        break;
+      case EscalationAction.call:
+        // Auto-dial emergency number
+        final number = step.recipients.isNotEmpty ? step.recipients.first : '112';
+        await _autoDial(number, 'Acil durum yardım çağrısı');
+        break;
+      case EscalationAction.alertServices:
+        // Alert emergency services (112)
+        await _autoDial('112', 'Acil durum yardım çağrısı');
+        break;
+      case EscalationAction.soundAlarm:
+        // Sound alarm is handled by CrashDetectionService
+        break;
+      case EscalationAction.lockdown:
+        // Lockdown is app-level security action
+        break;
+    }
+  }
+
+  // ═══════════════════════════════════════════
+  // USER RESPONSES
+  // ═══════════════════════════════════════════
+  Future<void> resolve(String actionId, String resolvedBy) async {
+    if (_activeAction?.actionId == actionId) {
+      _activeAction!.status.state = EmergencyState.resolved;
+      _activeAction!.status.resolvedAt = DateTime.now();
+      _activeAction!.status.resolvedBy = resolvedBy;
+      _statusController.add(_activeAction!);
+      onSOSResolved?.call();
+      _cleanup();
+    }
+  }
+
+  Future<void> cancelAsFalseAlarm(String actionId) async {
+    if (_activeAction?.actionId == actionId) {
+      _activeAction!.status.state = EmergencyState.falseAlarm;
+      _activeAction!.status.resolvedAt = DateTime.now();
+      _statusController.add(_activeAction!);
+      onSOSResolved?.call();
+      _cleanup();
+    }
+  }
+
+  void _cleanup() {
+    _escalationTimer?.cancel();
+    _locationShareTimer?.cancel();
+    _activeAction = null;
+  }
+
+  // ═══════════════════════════════════════════
+  // HELPERS
+  // ═══════════════════════════════════════════
+  bool _isActive(EmergencyAction action) {
+    return action.status.state == EmergencyState.triggered ||
+        action.status.state == EmergencyState.active ||
+        action.status.state == EmergencyState.escalating;
+  }
+
+  bool _checkUserResponse(EmergencyAction action) {
+    // In real implementation, check response_log for user responses
+    return false;
+  }
+
+  Future<EmergencyTemplate> _getTemplate(String templateId) async {
+    // TODO: Load from repository
+    return const EmergencyTemplate(
+      templateId: 'default',
+      name: 'Varsayılan',
+      smsContent:
+          '🆘 ACİL: {name} yardım istiyor! Konum: {location} Saat: {time}',
+      pushContent: 'Yardım çağrısı! Konum: {location}',
+      voiceContent:
+          'Bu otomatik bir acil durum çağrısıdır. {name} yardım istiyor.',
+      emailContent: 'Acil durum yardım çağrısı. {name} konum: {location}',
+    );
+  }
+
+  String _resolveTemplate(String template, Map<String, String> vars) {
+    var result = template;
+    vars.forEach((key, value) {
+      result = result.replaceAll('{$key}', value);
+    });
+    return result;
+  }
+
+  String _fmtTime(DateTime dt) {
+    return '${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
+  }
+
+  void _logResponse(
+    EmergencyAction action,
+    String actionType,
+    String channel,
+    String recipient,
+    String status,
+  ) {
+    action.responseLog.add(ResponseLogEntry(
+      timestamp: DateTime.now(),
+      action: actionType,
+      channel: channel,
+      recipient: recipient,
+      status: status,
+    ));
+  }
+
+  void dispose() {
+    _cleanup();
+    _statusController.close();
+  }
+}

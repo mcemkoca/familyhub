@@ -1,0 +1,92 @@
+{
+  "module": "future_planning",
+  "version": "2.0",
+  "language": "tr",
+  "region": "BE",
+  "generated_at": "2026-05-03T00:00:00Z",
+  "education_pathways_belgium": {
+    "primary": {
+      "ages": "6-12",
+      "options": [
+        "Devlet okulu (ücretsiz)",
+        "Özel okul (subsidized, ~100-500 EUR/yıl)",
+        "International school (~15,000-30,000 EUR/yıl)"
+      ],
+      "language_choices": {
+        "flanders": "Flamanca eğitim (Hollandaca)",
+        "wallonia": "Fransızca eğitim",
+        "brussels": "Flamanca veya Fransızca seçeneği",
+        "german_community": "Almanca eğitim (Doğu Belçika)"
+      },
+      "savings_target": {
+        "university_prep": "15,000-25,000 EUR (12 yıl birikim)",
+        "international_path": "100,000+ EUR"
+      }
+    },
+    "secondary": {
+      "ages": "12-18",
+      "tracks": [
+        "ASO (General Academic) - Üniversite yolu",
+        "TSO (Technical) - Teknik üniversite/çalışma",
+        "BSO (Vocational) - Meslek eğitimi",
+        "KSO (Artistic) - Sanat eğitimi"
+      ]
+    }
+  },
+  "emergency_plan_template": {
+    "contacts": [
+      {"name": "Acil Servis", "number": "112", "role": "Ambulans, itfaiye, polis"},
+      {"name": "Zehir Danışma", "number": "070/245.245", "role": "Çocuk zehirlenmeleri"},
+      {"name": "Aile Doktoru", "number": "[Eklenecek]", "role": "Genel sağlık"},
+      {"name": "Yakın Aile Üyesi", "number": "[Eklenecek]", "role": "Acil durum kontağı"}
+    ],
+    "documents_to_keep": [
+      "Pasaportlar ve kimlik kartları",
+      "Doğum belgeleri",
+      "Sağlık sigorta kartları",
+      "Aile doktoru iletişim bilgileri",
+      "Alerji ve ilaç listesi",
+      "Banka hesap bilgileri (güvenli yerde)"
+    ],
+    "financial_buffer": {
+      "recommended": "6 aylık giderler",
+      "for_families": "9-12 aylık giderler (çocuklu aileler için)"
+    }
+  },
+  "goal_setting_framework": {
+    "short_term": {
+      "horizon": "0-1 yıl",
+      "examples": [
+        "Çocuğun okula uyum süreci",
+        "Aile tatili planlaması",
+        "Bütçe disiplini oturtma",
+        "Evde düzen sistemleri kurma"
+      ]
+    },
+    "medium_term": {
+      "horizon": "1-5 yıl",
+      "examples": [
+        "Çocuğun dil gelişimi (2. dil hedefi)",
+        "Ev alımı / taşınma planı",
+        "Ebeveyn kariyer gelişimi",
+        "Aile sağlık sigortası optimizasyonu"
+      ]
+    },
+    "long_term": {
+      "horizon": "5-20 yıl",
+      "examples": [
+        "Çocukların üniversite eğitimi fonu",
+        "Emeklilik planlaması",
+        "Çok dilli aile kültürü sürdürme",
+        "Aile mirası / değer aktarımı"
+      ]
+    }
+  },
+  "legal_checklist_belgium": [
+    "Vatandaşlık/residence permit güncel mi?",
+    "Çocukların kayıt belgeleri tam mı?",
+    "Vasiyetname hazırlandı mı?",
+    "Vekaletname (acil durumlar için) tanımlandı mı?",
+    "Eğitim sigortası (studietoelage) başvurusu yapıldı mı?"
+  ]
+}

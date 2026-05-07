@@ -1,0 +1,368 @@
+Ignored/Empty catch block|c:\Temp\familyhub\lib\main.dart|47|} catch (e, st) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\main.dart|52|} catch (e, st) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\main.dart|57|} catch (e, st) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\main.dart|62|} catch (e, st) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\main.dart|68|} catch (e, st) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\main.dart|124|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\main.dart|202|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\main.dart|239|} catch (e, st) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\main.dart|256|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\main.dart|263|} catch (e) {|HIGH
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\main.dart|177|final profile = await Supabase.instance.client|MEDIUM
+Ignored/Empty catch block|c:\Temp\familyhub\lib\components\common\action_button.dart|96|} catch (e) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\components\hub\ai_suggestions_widget.dart|56|setState(() {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\core\sentry_config.dart|24|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\core\supabase_client.dart|8|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\core\analytics\heatmap_tracker.dart|86|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\core\error\global_error_handler.dart|69|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\core\error\global_error_handler.dart|116|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\core\navigation\action_registry.dart|118|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\domain\models\child_account.dart|53|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\domain\models\child_schedule.dart|37|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\providers\app_providers.dart|40|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\providers\app_providers.dart|53|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\providers\app_providers.dart|221|} catch (e, st) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\providers\app_providers.dart|231|} catch (e, st) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\providers\app_providers.dart|241|} catch (e, st) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\providers\app_providers.dart|251|} catch (e, st) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\providers\app_providers.dart|271|} catch (e, st) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\providers\app_providers.dart|281|} catch (e, st) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\providers\app_providers.dart|300|} catch (e, st) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\providers\app_providers.dart|310|} catch (e, st) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\providers\app_providers.dart|337|} catch (e, st) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\providers\app_providers.dart|351|} catch (e, st) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\providers\app_providers.dart|368|} catch (e, st) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\providers\app_providers.dart|378|} catch (e, st) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\providers\app_providers.dart|396|} catch (e, st) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\providers\app_providers.dart|419|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\providers\app_providers.dart|427|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\providers\app_providers.dart|464|} catch (_) {|HIGH
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\presentation\providers\app_providers.dart|33|final profile = await Supabase.instance.client|MEDIUM
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\presentation\providers\app_providers.dart|46|final fm = await Supabase.instance.client|MEDIUM
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\presentation\providers\hub_providers.dart|18|final profile = await Supabase.instance.client|MEDIUM
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\main_shell.dart|59|} catch (e, stack) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\auth\child_login_screen.dart|84|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\auth\child_login_screen.dart|99|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\auth\child_login_screen.dart|148|} catch (e) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\auth\child_login_screen.dart|50|setState(() {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\auth\child_login_screen.dart|79|setState(() {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\auth\child_login_screen.dart|94|setState(() {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\auth\forgot_password_screen.dart|60|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\auth\forgot_password_screen.dart|88|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\auth\forgot_password_screen.dart|119|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\auth\forgot_password_screen.dart|136|} catch (e) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\auth\forgot_password_screen.dart|87|setState(() => _step = 2);|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\auth\forgot_password_screen.dart|118|setState(() => _step = 3);|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\auth\login_screen.dart|49|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\auth\login_screen.dart|67|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\auth\registration_wizard_screen.dart|201|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\auth\registration_wizard_screen.dart|215|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\auth\registration_wizard_screen.dart|227|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\auth\splash_screen.dart|105|} catch (e, stack) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\auth\splash_screen.dart|125|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\auth\splash_screen.dart|135|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\auth\splash_screen.dart|159|} catch (e, stack) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\auth\steps\account_step.dart|105|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\auth\steps\children_step.dart|54|} catch (e) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\auth\steps\profile_step.dart|29|setState(() => _dateOfBirth = picked);|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\auth\steps\safe_zones_step.dart|54|} catch (e) {|HIGH
+Navigator after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\budget\budget_screen.dart|475|TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('İptal')),|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\call\call_contact_list_screen.dart|42|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\call\call_contact_list_screen.dart|101|} catch (e) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\call\call_contact_list_screen.dart|37|setState(() {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\call\voice_call_screen.dart|133|} catch (e) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\call\voice_call_screen.dart|157|if (mounted) setState(() {});|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\call\voice_call_screen.dart|163|if (mounted) setState(() {});|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\chat\chat_screen.dart|151|setState(() => _showAttachmentMenu = false);|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\chat\chat_screen.dart|172|setState(() => _showAttachmentMenu = false);|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\child\add_task_screen.dart|67|} catch (e) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\child\add_task_screen.dart|83|setState(() => _isListening = false);|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\child\add_task_screen.dart|91|setState(() => _isListening = false);|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\child\add_task_screen.dart|105|setState(() {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\child\add_task_screen.dart|337|if (d != null) setState(() => _dueDate = d);|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\child\child_detail_screen.dart|54|} catch (e) {|HIGH
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\presentation\screens\child\child_detail_screen.dart|45|final response = await Supabase.instance.client|MEDIUM
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\presentation\screens\child\child_detail_screen.dart|231|final _client = Supabase.instance.client;|MEDIUM
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\presentation\screens\child\child_detail_screen.dart|345|final _client = Supabase.instance.client;|MEDIUM
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\presentation\screens\child\child_detail_screen.dart|473|final _client = Supabase.instance.client;|MEDIUM
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\presentation\screens\child\child_detail_screen.dart|569|final client = Supabase.instance.client;|MEDIUM
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\child\child_detail_screen.dart|50|setState(() {|HIGH
+context.push after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\child\child_detail_screen.dart|146|final result = await context.push(AppRoutes.addTask, extra: {|HIGH
+Navigator after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\child\child_detail_screen.dart|163|TextButton(onPressed: () => Navigator.pop(c, false), child: const Text('İptal')),|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\child\child_detail_screen.dart|170|setState(() {});|HIGH
+Navigator after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\child\child_detail_screen.dart|312|final ok = await showDialog<bool>(context: context, builder: (c) => AlertDialog(backgroundColor: const Color(0xFF1E293B), title: const Text('Ödev Sil', style: TextStyle(color: Colors.white)), content: const Text('Bu ödevi silmek istiyor musun?', style: TextStyle(color: Colors.white70)), actions: [TextButton(onPressed: () => Navigator.pop(c, false), child: const Text('İptal')), FilledButton(onPressed: () => Navigator.pop(c, true), style: FilledButton.styleFrom(backgroundColor: Colors.red), child: const Text('Sil'))]));|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\child\child_detail_screen.dart|313|if (ok == true) { await _client.from('child_homeworks').delete().eq('id', id); setState(() {}); }|HIGH
+Navigator after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\child\child_detail_screen.dart|429|final ok = await showDialog<bool>(context: context, builder: (c) => AlertDialog(backgroundColor: const Color(0xFF1E293B), title: const Text('Ders Sil', style: TextStyle(color: Colors.white)), content: const Text('Bu dersi silmek istiyor musun?', style: TextStyle(color: Colors.white70)), actions: [TextButton(onPressed: () => Navigator.pop(c, false), child: const Text('İptal')), FilledButton(onPressed: () => Navigator.pop(c, true), style: FilledButton.styleFrom(backgroundColor: Colors.red), child: const Text('Sil'))]));|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\child\child_detail_screen.dart|430|if (ok == true) { await _client.from('child_schedules').delete().eq('id', id); setState(() {}); }|HIGH
+Navigator after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\child\child_detail_screen.dart|536|final ok = await showDialog<bool>(context: context, builder: (c) => AlertDialog(backgroundColor: const Color(0xFF1E293B), title: const Text('Kayıt Sil', style: TextStyle(color: Colors.white)), content: const Text('Bu kaydı silmek istiyor musun?', style: TextStyle(color: Colors.white70)), actions: [TextButton(onPressed: () => Navigator.pop(c, false), child: const Text('İptal')), FilledButton(onPressed: () => Navigator.pop(c, true), style: FilledButton.styleFrom(backgroundColor: Colors.red), child: const Text('Sil'))]));|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\child\child_detail_screen.dart|537|if (ok == true) { await _client.from('child_development_logs').delete().eq('id', id); setState(() {}); }|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\child\child_management_screen.dart|47|} catch (_) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\child\child_management_screen.dart|61|setState(() {|HIGH
+Navigator after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\child\child_management_screen.dart|81|onPressed: () => Navigator.pop(context, false),|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\child\child_management_screen.dart|96|setState(() => _children.removeWhere((c) => c.id == child.id));|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\child\child_management_screen.dart|289|setState(() {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\child\tabs\child_chat_tab.dart|48|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\child\tabs\child_safety_tab.dart|161|} catch (e) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\child\tabs\child_safety_tab.dart|59|if (mounted) setState(() => _activeAlerts = alerts);|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\child\tabs\child_safety_tab.dart|150|setState(() => _sharingLocation = ok);|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\child\tabs\child_tasks_tab.dart|28|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\contacts\contacts_screen.dart|127|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\contacts\contacts_screen.dart|316|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\contacts\contacts_screen.dart|369|} catch (e) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\contacts\contacts_screen.dart|56|setState(() {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\contacts\contacts_screen.dart|99|setState(() => _isLoading = true);|HIGH
+Navigator after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\contacts\contacts_screen.dart|283|onPressed: () => Navigator.pop(context, false),|HIGH
+Navigator after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\contacts\contacts_screen.dart|333|TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('İptal')),|HIGH
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\presentation\screens\crash\crash_history_screen.dart|16|final profile = await Supabase.instance.client|MEDIUM
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\documents\documents_screen.dart|70|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\documents\documents_screen.dart|141|} catch (e) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\documents\documents_screen.dart|47|(docs) => setState(() => _documents = docs),|HIGH
+Navigator after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\documents\documents_screen.dart|160|onPressed: () => Navigator.pop(context, false),|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\gallery\gallery_screen.dart|114|} catch (e) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\gallery\gallery_screen.dart|61|(media) => setState(() => _media = media),|HIGH
+Navigator after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\gallery\gallery_screen.dart|134|TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('İptal')),|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\hub\hub_screen.dart|584|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\hub\hub_screen.dart|638|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\organizer\calendar_sync_screen.dart|85|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\organizer\calendar_sync_screen.dart|105|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\organizer\smart_rotation_screen.dart|134|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\organizer\smart_rotation_screen.dart|145|} catch (e) {|HIGH
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\presentation\screens\organizer\smart_rotation_screen.dart|28|final _client = Supabase.instance.client;|MEDIUM
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\organizer\smart_rotation_screen.dart|170|setState(() {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\organizer\tasks_screen.dart|121|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\organizer\tasks_screen.dart|142|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\organizer\tasks_screen.dart|150|} catch (e) {|HIGH
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\presentation\screens\reminders\smart_reminders_screen.dart|48|final profile = await Supabase.instance.client|MEDIUM
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\reminders\smart_reminders_screen.dart|61|setState(() {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\reminders\smart_reminder_create_screen.dart|183|} catch (e) {|HIGH
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\presentation\screens\reminders\smart_reminder_create_screen.dart|139|final profile = await Supabase.instance.client|MEDIUM
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\reminders\smart_reminder_detail_screen.dart|34|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\routines\routines_screen.dart|80|} catch (_) {|HIGH
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\presentation\screens\routines\routines_screen.dart|33|final profile = await Supabase.instance.client|MEDIUM
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\routines\routines_screen.dart|46|setState(() {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\routines\routine_detail_screen.dart|30|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\routines\routine_detail_screen.dart|77|} catch (_) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\safety\ambient_listening_screen.dart|69|setState(() {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\safety\flashlight_screen.dart|22|setState(() => _isOn = FlashlightService.isOn);|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\safety\flashlight_screen.dart|169|setState(() {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\safety\health_card_edit_screen.dart|41|setState(() {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\safety\health_card_edit_screen.dart|78|setState(() => _saving = false);|HIGH
+Navigator after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\safety\health_card_screen.dart|78|final result = await Navigator.push(|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\safety\location_screen.dart|65|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\safety\location_screen.dart|92|} catch (e) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\safety\location_screen.dart|43|setState(() {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\safety\safety_screen.dart|155|setState(() => _currentLocation = location);|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\safety\safety_screen.dart|208|if (mounted) setState(() => _currentAddress = addr);|HIGH
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\presentation\screens\safety\safe_arrival_screen.dart|38|final client = Supabase.instance.client;|MEDIUM
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\safety\safe_arrival_screen.dart|68|if (mounted) setState(() => _familyMembers = members);|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\safety\safe_zones_screen.dart|27|setState(() {|HIGH
+Navigator after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\safety\safe_zones_screen.dart|181|final result = await Navigator.push(|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\safety\safe_zones_screen.dart|195|if (mounted) setState(() {});|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\appearance_settings_screen.dart|80|} catch (e) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\appearance_settings_screen.dart|72|setState(() => _hasChanges = false);|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\backup_settings_screen.dart|59|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\backup_settings_screen.dart|102|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\backup_settings_screen.dart|126|} catch (e) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\backup_settings_screen.dart|84|if (mounted) setState(() => _backups = backups);|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\cloud_backup_screen.dart|48|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\cloud_backup_screen.dart|65|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\cloud_backup_screen.dart|93|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\cloud_backup_screen.dart|107|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\cloud_backup_screen.dart|127|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\cloud_backup_screen.dart|177|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\cloud_backup_screen.dart|221|} catch (e) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\cloud_backup_screen.dart|106|if (mounted) setState(() => _backups = backups);|HIGH
+Navigator after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\cloud_backup_screen.dart|151|onPressed: () => Navigator.pop(c, false),|HIGH
+Navigator after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\cloud_backup_screen.dart|199|onPressed: () => Navigator.pop(c, false),|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\cloud_backup_screen.dart|462|setState(() {});|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\family_manage_screen.dart|55|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\family_manage_screen.dart|704|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\family_manage_screen.dart|715|} catch (e) {|HIGH
+Navigator after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\family_manage_screen.dart|612|onSubmitted: (value) => Navigator.pop(context, value),|HIGH
+Navigator after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\family_manage_screen.dart|666|onSubmitted: (value) => Navigator.pop(context, value),|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\family_permissions_screen.dart|72|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\family_permissions_screen.dart|136|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\family_permissions_screen.dart|181|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\family_permissions_screen.dart|208|} catch (e) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\family_permissions_screen.dart|51|setState(() {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\family_permissions_screen.dart|180|setState(() => _isLoading = false);|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\invite_code_screen.dart|54|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\leaderboard_screen.dart|28|} catch (_) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\leaderboard_screen.dart|27|if (mounted) setState(() => _leaderboard = data);|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\location_picker_screen.dart|47|setState(() => _isLoadingCurrentLocation = false);|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\location_picker_screen.dart|74|setState(() {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\notification_settings_screen.dart|113|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\premium_screen.dart|92|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\premium_screen.dart|102|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\premium_screen.dart|127|} catch (_) {|HIGH
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\presentation\screens\settings\premium_screen.dart|122|final response = await Supabase.instance.client.functions.invoke(|MEDIUM
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\presentation\screens\settings\premium_screen.dart|172|final supabase = Supabase.instance.client;|MEDIUM
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\privacy_settings_screen.dart|33|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\privacy_settings_screen.dart|86|} catch (e) {|HIGH
+Navigator after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\privacy_settings_screen.dart|52|onPressed: () => Navigator.pop(dialogContext, false),|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\profile_edit_screen.dart|67|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\profile_edit_screen.dart|109|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\profile_edit_screen.dart|161|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\profile_edit_screen.dart|237|} catch (e) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\profile_edit_screen.dart|69|setState(() => _isLoading = false);|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\profile_edit_screen.dart|83|setState(() => _saving = true);|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\profile_edit_screen.dart|100|setState(() => _avatarUrl = publicUrl);|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\screen_time_settings_screen.dart|61|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\screen_time_settings_screen.dart|91|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\screen_time_settings_screen.dart|117|} catch (e) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\screen_time_settings_screen.dart|47|setState(() => _isLoading = false);|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\screen_time_settings_screen.dart|57|setState(() {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\screen_time_settings_screen.dart|76|setState(() {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\security_questions_setup_screen.dart|62|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\security_questions_setup_screen.dart|109|} catch (e) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\security_questions_setup_screen.dart|48|setState(() {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\security_settings_screen.dart|87|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\security_settings_screen.dart|202|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\security_settings_screen.dart|271|} catch (e) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\security_settings_screen.dart|37|setState(() {|HIGH
+Navigator after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\security_settings_screen.dart|242|onPressed: () => Navigator.pop(dialogContext, false),|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\settings_actions.dart|121|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\settings_actions.dart|150|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\settings_actions.dart|175|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\settings_actions.dart|194|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\settings_actions.dart|210|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\screens\settings\settings_actions.dart|247|} catch (_) {|HIGH
+Navigator after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\settings_screen.dart|204|onChanged: (v) => Navigator.pop(context, v),|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\weather_settings_screen.dart|46|setState(() => _isRequestingPermission = false);|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\weather_settings_screen.dart|52|setState(() => _savedLocation = loc);|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\screens\settings\weather_settings_screen.dart|103|setState(() {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\widgets\calendar\event_modal.dart|104|setState(() {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\widgets\calendar\event_modal.dart|142|setState(() {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\widgets\chat\chat_bubble.dart|377|setState(() => _isPlaying = false);|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\widgets\chat\chat_bubble.dart|384|setState(() => _isPlaying = true);|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\widgets\chat\chat_composer.dart|93|} catch (e) {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\widgets\chat\chat_composer.dart|77|setState(() {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\widgets\chat\chat_composer.dart|101|setState(() {|HIGH
+setState after await without mounted check|c:\Temp\familyhub\lib\presentation\widgets\chat\chat_composer.dart|115|setState(() {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\presentation\widgets\settings\hive_settings_toggle.dart|43|} catch (e) {|HIGH
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\repositories\backup_repository.dart|10|final _client = Supabase.instance.client;|MEDIUM
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\repositories\budget_repository.dart|9|final _client = Supabase.instance.client;|MEDIUM
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\repositories\calendar_repository.dart|10|final _client = Supabase.instance.client;|MEDIUM
+Ignored/Empty catch block|c:\Temp\familyhub\lib\repositories\child_chat_repository.dart|36|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\repositories\child_development_repository.dart|43|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\repositories\child_homework_repository.dart|34|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\repositories\child_schedule_repository.dart|39|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\repositories\child_task_repository.dart|35|} catch (_) {|HIGH
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\repositories\crash_event_repository.dart|13|final SupabaseClient _client = Supabase.instance.client;|MEDIUM
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\repositories\crash_settings_repository.dart|11|final SupabaseClient _client = Supabase.instance.client;|MEDIUM
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\repositories\emergency_action_repository.dart|12|final SupabaseClient _client = Supabase.instance.client;|MEDIUM
+Ignored/Empty catch block|c:\Temp\familyhub\lib\repositories\family_members_repository.dart|28|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\repositories\family_members_repository.dart|121|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\repositories\family_members_repository.dart|164|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\repositories\gallery_repository.dart|100|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\repositories\hub_repository.dart|54|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\repositories\hub_repository.dart|66|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\repositories\hub_repository.dart|77|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\repositories\hub_repository.dart|88|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\repositories\hub_repository.dart|127|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\repositories\hub_repository.dart|160|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\repositories\hub_repository.dart|216|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\repositories\hub_repository.dart|334|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\repositories\hub_repository.dart|352|} catch (_) {|HIGH
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\repositories\location_tracking_repository.dart|11|final SupabaseClient _client = Supabase.instance.client;|MEDIUM
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\repositories\mood_repository.dart|10|final _client = Supabase.instance.client;|MEDIUM
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\repositories\safe_arrival_repository.dart|9|final _client = Supabase.instance.client;|MEDIUM
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\repositories\shopping_repository.dart|10|final _client = Supabase.instance.client;|MEDIUM
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\auth_service.dart|70|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\auth_service.dart|115|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\auth_service.dart|132|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\auth_service.dart|149|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\auth_service.dart|208|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\auth_service.dart|214|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\auth_service.dart|271|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\auth_service.dart|317|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\auth_service.dart|335|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\auth_service.dart|341|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\auth_service.dart|382|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\auth_service.dart|421|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\auth_service.dart|452|} on FunctionException catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\auth_service.dart|477|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\auth_service.dart|499|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\auth_service.dart|517|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\battery_aware_location_tracker.dart|236|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\biometric_service.dart|13|} on PlatformException catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\biometric_service.dart|21|} on PlatformException catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\biometric_service.dart|34|} on PlatformException catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\calendar_sync_service.dart|197|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\calendar_sync_service.dart|284|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\call_service.dart|337|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\child_ai_service.dart|214|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\child_auth_service.dart|98|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\child_auth_service.dart|116|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\child_auth_service.dart|146|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\digital_balance_service.dart|13|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\digital_balance_service.dart|23|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\emergency_auto_actions_engine.dart|55|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\emergency_auto_actions_engine.dart|173|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\emergency_service.dart|84|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\emergency_service.dart|188|} catch (_) {|HIGH
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\services\emergency_service.dart|16|static final _client = Supabase.instance.client;|MEDIUM
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\encryption_service.dart|132|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\encryption_service.dart|182|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\flashlight_service.dart|72|try { await TorchLight.enableTorch(); } catch (_) {}|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\flashlight_service.dart|74|try { await TorchLight.disableTorch(); } catch (_) {}|HIGH
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\services\gamification_service.dart|5|static final _client = Supabase.instance.client;|MEDIUM
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\google_drive_service.dart|63|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\google_drive_service.dart|119|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\health_card_service.dart|14|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\hive_service.dart|234|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\hive_service.dart|270|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\hive_service.dart|287|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\hive_service.dart|325|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\hive_service.dart|362|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\hive_service.dart|389|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\hive_service.dart|406|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\hive_service.dart|423|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\hive_service.dart|440|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\hive_service.dart|457|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\hub_offline_service.dart|39|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\hub_offline_service.dart|45|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\hub_offline_service.dart|57|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\location_service.dart|98|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\location_tracking_service.dart|70|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\location_tracking_service.dart|127|} catch (_) {|HIGH
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\services\location_tracking_service.dart|10|static final _client = Supabase.instance.client;|MEDIUM
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\payment_service.dart|50|} on StripeException catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\payment_service.dart|53|} catch (e) {|HIGH
+Navigator after await without mounted check|c:\Temp\familyhub\lib\services\permission_service.dart|137|onPressed: () => Navigator.pop(context, false),|HIGH
+Navigator after await without mounted check|c:\Temp\familyhub\lib\services\permission_service.dart|175|onPressed: () => Navigator.pop(context),|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\profile_service.dart|61|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\routine_service.dart|194|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\safety_service.dart|169|} catch (e) {|HIGH
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\services\safety_service.dart|14|static final _client = Supabase.instance.client;|MEDIUM
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\safe_arrival_service.dart|64|} catch (e) {|HIGH
+Direct Supabase.instance.client|c:\Temp\familyhub\lib\services\safe_arrival_service.dart|11|static final _client = Supabase.instance.client;|MEDIUM
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\safe_zone_service.dart|40|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\safe_zone_service.dart|91|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\safe_zone_service.dart|136|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\security_service.dart|36|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\security_service.dart|68|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\smart_reminder_service.dart|70|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\smart_reminder_service.dart|443|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\sync_service.dart|116|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\voice_message_service.dart|52|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\weather_service.dart|33|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\ai\ai_engine.dart|81|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\ai\ai_engine.dart|110|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\ai\ai_engine.dart|139|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\billing\subscription_service.dart|30|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\billing\subscription_service.dart|57|} on PlatformException catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\billing\subscription_service.dart|63|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\billing\subscription_service.dart|80|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\content\ai_content_service.dart|117|} on FormatException catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\content\ai_content_service.dart|119|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\content\content_cache_service.dart|75|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\content\content_cache_service.dart|82|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\content\content_cache_service.dart|182|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\content\content_engine.dart|117|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\content\content_engine.dart|137|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\content\content_engine.dart|296|} on AIContentException catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\content\content_engine.dart|322|} on AIContentException catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\content\family_suggestions_pool.dart|67|} catch (_) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\content\family_suggestions_pool.dart|81|} catch (e) {|HIGH
+Ignored/Empty catch block|c:\Temp\familyhub\lib\services\growth\referral_service.dart|82|} catch (_) {|HIGH

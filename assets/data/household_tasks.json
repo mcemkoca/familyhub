@@ -1,0 +1,3904 @@
+{
+  "tasks": [
+    {
+      "category": "daily",
+      "task_name": "Mutfak Tezgahı Temizliği (1)",
+      "description": "Mutfak Tezgahı Temizliği rutini 1",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Sirke suyu ile silin",
+        "Mikrofiber bez kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Çöp Atma (2)",
+      "description": "Çöp Atma rutini 2",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Poşetleri düğümleyin",
+        "Geri dönüşümü ayırın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Yer Süpürme (3)",
+      "description": "Yer Süpürme rutini 3",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 3,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Köşeleri atlamayın",
+        "Elektrikli süpürge kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Bulaşık Yıkama (4)",
+      "description": "Bulaşık Yıkama rutini 4",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Sıcak su ile ön durulama yapın",
+        "Makineyi tam doldurun"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Çamaşır Asma (5)",
+      "description": "Çamaşır Asma rutini 5",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Gölgelikte asın",
+        "Gömlekleri omuzdan asın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Banyo Lavabosu Temizliği (6)",
+      "description": "Banyo Lavabosu Temizliği rutini 6",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 3,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Kireç çözücü kullanın",
+        "Mikrofiber bez ile parlatın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Yatak Düzeltme (7)",
+      "description": "Yatak Düzeltme rutini 7",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 1,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Her sabah yapın",
+        "Yastıkları havalandırın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Toz Alma (8)",
+      "description": "Toz Alma rutini 8",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Yukarıdan aşağıya silin",
+        "Mikrofiber bez kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Cam Silme (9)",
+      "description": "Cam Silme rutini 9",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Gazete kağıdı ile silin",
+        "Bulutlu havada yapın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Buzdolabı Düzenleme (10)",
+      "description": "Buzdolabı Düzenleme rutini 10",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Son kullanma tarihlerini kontrol edin",
+        "Poşet kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Mutfak Tezgahı Temizliği (11)",
+      "description": "Mutfak Tezgahı Temizliği rutini 11",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Çöp Atma (12)",
+      "description": "Çöp Atma rutini 12",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Yer Süpürme (13)",
+      "description": "Yer Süpürme rutini 13",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 1,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Bulaşık Yıkama (14)",
+      "description": "Bulaşık Yıkama rutini 14",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Çamaşır Asma (15)",
+      "description": "Çamaşır Asma rutini 15",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Banyo Lavabosu Temizliği (16)",
+      "description": "Banyo Lavabosu Temizliği rutini 16",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Yatak Düzeltme (17)",
+      "description": "Yatak Düzeltme rutini 17",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 1,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Toz Alma (18)",
+      "description": "Toz Alma rutini 18",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 3,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Cam Silme (19)",
+      "description": "Cam Silme rutini 19",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Buzdolabı Düzenleme (20)",
+      "description": "Buzdolabı Düzenleme rutini 20",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Mutfak Tezgahı Temizliği (21)",
+      "description": "Mutfak Tezgahı Temizliği rutini 21",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 3,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Çöp Atma (22)",
+      "description": "Çöp Atma rutini 22",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Yer Süpürme (23)",
+      "description": "Yer Süpürme rutini 23",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 2,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Bulaşık Yıkama (24)",
+      "description": "Bulaşık Yıkama rutini 24",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Çamaşır Asma (25)",
+      "description": "Çamaşır Asma rutini 25",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Banyo Lavabosu Temizliği (26)",
+      "description": "Banyo Lavabosu Temizliği rutini 26",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Yatak Düzeltme (27)",
+      "description": "Yatak Düzeltme rutini 27",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 2,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Toz Alma (28)",
+      "description": "Toz Alma rutini 28",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 1,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Cam Silme (29)",
+      "description": "Cam Silme rutini 29",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Buzdolabı Düzenleme (30)",
+      "description": "Buzdolabı Düzenleme rutini 30",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Mutfak Tezgahı Temizliği (31)",
+      "description": "Mutfak Tezgahı Temizliği rutini 31",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Çöp Atma (32)",
+      "description": "Çöp Atma rutini 32",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Yer Süpürme (33)",
+      "description": "Yer Süpürme rutini 33",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 3,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Bulaşık Yıkama (34)",
+      "description": "Bulaşık Yıkama rutini 34",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Çamaşır Asma (35)",
+      "description": "Çamaşır Asma rutini 35",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Banyo Lavabosu Temizliği (36)",
+      "description": "Banyo Lavabosu Temizliği rutini 36",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 3,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Yatak Düzeltme (37)",
+      "description": "Yatak Düzeltme rutini 37",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 1,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Toz Alma (38)",
+      "description": "Toz Alma rutini 38",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 2,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Cam Silme (39)",
+      "description": "Cam Silme rutini 39",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Buzdolabı Düzenleme (40)",
+      "description": "Buzdolabı Düzenleme rutini 40",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Mutfak Tezgahı Temizliği (41)",
+      "description": "Mutfak Tezgahı Temizliği rutini 41",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Çöp Atma (42)",
+      "description": "Çöp Atma rutini 42",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Yer Süpürme (43)",
+      "description": "Yer Süpürme rutini 43",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 1,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Bulaşık Yıkama (44)",
+      "description": "Bulaşık Yıkama rutini 44",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Çamaşır Asma (45)",
+      "description": "Çamaşır Asma rutini 45",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Banyo Lavabosu Temizliği (46)",
+      "description": "Banyo Lavabosu Temizliği rutini 46",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Yatak Düzeltme (47)",
+      "description": "Yatak Düzeltme rutini 47",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 1,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Toz Alma (48)",
+      "description": "Toz Alma rutini 48",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 3,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Cam Silme (49)",
+      "description": "Cam Silme rutini 49",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Buzdolabı Düzenleme (50)",
+      "description": "Buzdolabı Düzenleme rutini 50",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Mutfak Tezgahı Temizliği (51)",
+      "description": "Mutfak Tezgahı Temizliği rutini 51",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 3,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Çöp Atma (52)",
+      "description": "Çöp Atma rutini 52",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Yer Süpürme (53)",
+      "description": "Yer Süpürme rutini 53",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 2,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Bulaşık Yıkama (54)",
+      "description": "Bulaşık Yıkama rutini 54",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Çamaşır Asma (55)",
+      "description": "Çamaşır Asma rutini 55",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Banyo Lavabosu Temizliği (56)",
+      "description": "Banyo Lavabosu Temizliği rutini 56",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Yatak Düzeltme (57)",
+      "description": "Yatak Düzeltme rutini 57",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Toz Alma (58)",
+      "description": "Toz Alma rutini 58",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 1,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Cam Silme (59)",
+      "description": "Cam Silme rutini 59",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "daily",
+      "task_name": "Buzdolabı Düzenleme (60)",
+      "description": "Buzdolabı Düzenleme rutini 60",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Mutfak Tezgahı Temizliği (1)",
+      "description": "Mutfak Tezgahı Temizliği rutini 1",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Sirke suyu ile silin",
+        "Mikrofiber bez kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Çöp Atma (2)",
+      "description": "Çöp Atma rutini 2",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Poşetleri düğümleyin",
+        "Geri dönüşümü ayırın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Yer Süpürme (3)",
+      "description": "Yer Süpürme rutini 3",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 3,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Köşeleri atlamayın",
+        "Elektrikli süpürge kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Bulaşık Yıkama (4)",
+      "description": "Bulaşık Yıkama rutini 4",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Sıcak su ile ön durulama yapın",
+        "Makineyi tam doldurun"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Çamaşır Asma (5)",
+      "description": "Çamaşır Asma rutini 5",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Gölgelikte asın",
+        "Gömlekleri omuzdan asın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Banyo Lavabosu Temizliği (6)",
+      "description": "Banyo Lavabosu Temizliği rutini 6",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 3,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Kireç çözücü kullanın",
+        "Mikrofiber bez ile parlatın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Yatak Düzeltme (7)",
+      "description": "Yatak Düzeltme rutini 7",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 1,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Her sabah yapın",
+        "Yastıkları havalandırın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Toz Alma (8)",
+      "description": "Toz Alma rutini 8",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Yukarıdan aşağıya silin",
+        "Mikrofiber bez kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Cam Silme (9)",
+      "description": "Cam Silme rutini 9",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Gazete kağıdı ile silin",
+        "Bulutlu havada yapın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Buzdolabı Düzenleme (10)",
+      "description": "Buzdolabı Düzenleme rutini 10",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Son kullanma tarihlerini kontrol edin",
+        "Poşet kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Mutfak Tezgahı Temizliği (11)",
+      "description": "Mutfak Tezgahı Temizliği rutini 11",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Çöp Atma (12)",
+      "description": "Çöp Atma rutini 12",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Yer Süpürme (13)",
+      "description": "Yer Süpürme rutini 13",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 1,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Bulaşık Yıkama (14)",
+      "description": "Bulaşık Yıkama rutini 14",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Çamaşır Asma (15)",
+      "description": "Çamaşır Asma rutini 15",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Banyo Lavabosu Temizliği (16)",
+      "description": "Banyo Lavabosu Temizliği rutini 16",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Yatak Düzeltme (17)",
+      "description": "Yatak Düzeltme rutini 17",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 1,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Toz Alma (18)",
+      "description": "Toz Alma rutini 18",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 3,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Cam Silme (19)",
+      "description": "Cam Silme rutini 19",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Buzdolabı Düzenleme (20)",
+      "description": "Buzdolabı Düzenleme rutini 20",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Mutfak Tezgahı Temizliği (21)",
+      "description": "Mutfak Tezgahı Temizliği rutini 21",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 3,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Çöp Atma (22)",
+      "description": "Çöp Atma rutini 22",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Yer Süpürme (23)",
+      "description": "Yer Süpürme rutini 23",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 2,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Bulaşık Yıkama (24)",
+      "description": "Bulaşık Yıkama rutini 24",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Çamaşır Asma (25)",
+      "description": "Çamaşır Asma rutini 25",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Banyo Lavabosu Temizliği (26)",
+      "description": "Banyo Lavabosu Temizliği rutini 26",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Yatak Düzeltme (27)",
+      "description": "Yatak Düzeltme rutini 27",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 2,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Toz Alma (28)",
+      "description": "Toz Alma rutini 28",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 1,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Cam Silme (29)",
+      "description": "Cam Silme rutini 29",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Buzdolabı Düzenleme (30)",
+      "description": "Buzdolabı Düzenleme rutini 30",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Mutfak Tezgahı Temizliği (31)",
+      "description": "Mutfak Tezgahı Temizliği rutini 31",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Çöp Atma (32)",
+      "description": "Çöp Atma rutini 32",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Yer Süpürme (33)",
+      "description": "Yer Süpürme rutini 33",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 3,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Bulaşık Yıkama (34)",
+      "description": "Bulaşık Yıkama rutini 34",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Çamaşır Asma (35)",
+      "description": "Çamaşır Asma rutini 35",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Banyo Lavabosu Temizliği (36)",
+      "description": "Banyo Lavabosu Temizliği rutini 36",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 3,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Yatak Düzeltme (37)",
+      "description": "Yatak Düzeltme rutini 37",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 1,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Toz Alma (38)",
+      "description": "Toz Alma rutini 38",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 2,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Cam Silme (39)",
+      "description": "Cam Silme rutini 39",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Buzdolabı Düzenleme (40)",
+      "description": "Buzdolabı Düzenleme rutini 40",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Mutfak Tezgahı Temizliği (41)",
+      "description": "Mutfak Tezgahı Temizliği rutini 41",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Çöp Atma (42)",
+      "description": "Çöp Atma rutini 42",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Yer Süpürme (43)",
+      "description": "Yer Süpürme rutini 43",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 1,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Bulaşık Yıkama (44)",
+      "description": "Bulaşık Yıkama rutini 44",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Çamaşır Asma (45)",
+      "description": "Çamaşır Asma rutini 45",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Banyo Lavabosu Temizliği (46)",
+      "description": "Banyo Lavabosu Temizliği rutini 46",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Yatak Düzeltme (47)",
+      "description": "Yatak Düzeltme rutini 47",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 1,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Toz Alma (48)",
+      "description": "Toz Alma rutini 48",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 3,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Cam Silme (49)",
+      "description": "Cam Silme rutini 49",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Buzdolabı Düzenleme (50)",
+      "description": "Buzdolabı Düzenleme rutini 50",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Mutfak Tezgahı Temizliği (51)",
+      "description": "Mutfak Tezgahı Temizliği rutini 51",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 3,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Çöp Atma (52)",
+      "description": "Çöp Atma rutini 52",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Yer Süpürme (53)",
+      "description": "Yer Süpürme rutini 53",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 2,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Bulaşık Yıkama (54)",
+      "description": "Bulaşık Yıkama rutini 54",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Çamaşır Asma (55)",
+      "description": "Çamaşır Asma rutini 55",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Banyo Lavabosu Temizliği (56)",
+      "description": "Banyo Lavabosu Temizliği rutini 56",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Yatak Düzeltme (57)",
+      "description": "Yatak Düzeltme rutini 57",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Toz Alma (58)",
+      "description": "Toz Alma rutini 58",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 1,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Cam Silme (59)",
+      "description": "Cam Silme rutini 59",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Buzdolabı Düzenleme (60)",
+      "description": "Buzdolabı Düzenleme rutini 60",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Mutfak Tezgahı Temizliği (61)",
+      "description": "Mutfak Tezgahı Temizliği rutini 61",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Çöp Atma (62)",
+      "description": "Çöp Atma rutini 62",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Yer Süpürme (63)",
+      "description": "Yer Süpürme rutini 63",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 3,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Bulaşık Yıkama (64)",
+      "description": "Bulaşık Yıkama rutini 64",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Çamaşır Asma (65)",
+      "description": "Çamaşır Asma rutini 65",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Banyo Lavabosu Temizliği (66)",
+      "description": "Banyo Lavabosu Temizliği rutini 66",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 3,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Yatak Düzeltme (67)",
+      "description": "Yatak Düzeltme rutini 67",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 1,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Toz Alma (68)",
+      "description": "Toz Alma rutini 68",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 2,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Cam Silme (69)",
+      "description": "Cam Silme rutini 69",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Buzdolabı Düzenleme (70)",
+      "description": "Buzdolabı Düzenleme rutini 70",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Mutfak Tezgahı Temizliği (71)",
+      "description": "Mutfak Tezgahı Temizliği rutini 71",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Çöp Atma (72)",
+      "description": "Çöp Atma rutini 72",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Yer Süpürme (73)",
+      "description": "Yer Süpürme rutini 73",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 1,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Bulaşık Yıkama (74)",
+      "description": "Bulaşık Yıkama rutini 74",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Çamaşır Asma (75)",
+      "description": "Çamaşır Asma rutini 75",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Banyo Lavabosu Temizliği (76)",
+      "description": "Banyo Lavabosu Temizliği rutini 76",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Yatak Düzeltme (77)",
+      "description": "Yatak Düzeltme rutini 77",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 1,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Toz Alma (78)",
+      "description": "Toz Alma rutini 78",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 3,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Cam Silme (79)",
+      "description": "Cam Silme rutini 79",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Buzdolabı Düzenleme (80)",
+      "description": "Buzdolabı Düzenleme rutini 80",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Mutfak Tezgahı Temizliği (81)",
+      "description": "Mutfak Tezgahı Temizliği rutini 81",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 3,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Çöp Atma (82)",
+      "description": "Çöp Atma rutini 82",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Yer Süpürme (83)",
+      "description": "Yer Süpürme rutini 83",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 2,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Bulaşık Yıkama (84)",
+      "description": "Bulaşık Yıkama rutini 84",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Çamaşır Asma (85)",
+      "description": "Çamaşır Asma rutini 85",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Banyo Lavabosu Temizliği (86)",
+      "description": "Banyo Lavabosu Temizliği rutini 86",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Yatak Düzeltme (87)",
+      "description": "Yatak Düzeltme rutini 87",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 2,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Toz Alma (88)",
+      "description": "Toz Alma rutini 88",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 1,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Cam Silme (89)",
+      "description": "Cam Silme rutini 89",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Buzdolabı Düzenleme (90)",
+      "description": "Buzdolabı Düzenleme rutini 90",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Mutfak Tezgahı Temizliği (91)",
+      "description": "Mutfak Tezgahı Temizliği rutini 91",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Çöp Atma (92)",
+      "description": "Çöp Atma rutini 92",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Yer Süpürme (93)",
+      "description": "Yer Süpürme rutini 93",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 3,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Bulaşık Yıkama (94)",
+      "description": "Bulaşık Yıkama rutini 94",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Çamaşır Asma (95)",
+      "description": "Çamaşır Asma rutini 95",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Banyo Lavabosu Temizliği (96)",
+      "description": "Banyo Lavabosu Temizliği rutini 96",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 3,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Yatak Düzeltme (97)",
+      "description": "Yatak Düzeltme rutini 97",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 1,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Toz Alma (98)",
+      "description": "Toz Alma rutini 98",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 2,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Cam Silme (99)",
+      "description": "Cam Silme rutini 99",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "weekly",
+      "task_name": "Buzdolabı Düzenleme (100)",
+      "description": "Buzdolabı Düzenleme rutini 100",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Mutfak Tezgahı Temizliği (1)",
+      "description": "Mutfak Tezgahı Temizliği rutini 1",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Sirke suyu ile silin",
+        "Mikrofiber bez kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Çöp Atma (2)",
+      "description": "Çöp Atma rutini 2",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Poşetleri düğümleyin",
+        "Geri dönüşümü ayırın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Yer Süpürme (3)",
+      "description": "Yer Süpürme rutini 3",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 3,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Köşeleri atlamayın",
+        "Elektrikli süpürge kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Bulaşık Yıkama (4)",
+      "description": "Bulaşık Yıkama rutini 4",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Sıcak su ile ön durulama yapın",
+        "Makineyi tam doldurun"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Çamaşır Asma (5)",
+      "description": "Çamaşır Asma rutini 5",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Gölgelikte asın",
+        "Gömlekleri omuzdan asın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Banyo Lavabosu Temizliği (6)",
+      "description": "Banyo Lavabosu Temizliği rutini 6",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 3,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Kireç çözücü kullanın",
+        "Mikrofiber bez ile parlatın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Yatak Düzeltme (7)",
+      "description": "Yatak Düzeltme rutini 7",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 1,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Her sabah yapın",
+        "Yastıkları havalandırın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Toz Alma (8)",
+      "description": "Toz Alma rutini 8",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Yukarıdan aşağıya silin",
+        "Mikrofiber bez kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Cam Silme (9)",
+      "description": "Cam Silme rutini 9",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Gazete kağıdı ile silin",
+        "Bulutlu havada yapın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Buzdolabı Düzenleme (10)",
+      "description": "Buzdolabı Düzenleme rutini 10",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Son kullanma tarihlerini kontrol edin",
+        "Poşet kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Mutfak Tezgahı Temizliği (11)",
+      "description": "Mutfak Tezgahı Temizliği rutini 11",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Çöp Atma (12)",
+      "description": "Çöp Atma rutini 12",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Yer Süpürme (13)",
+      "description": "Yer Süpürme rutini 13",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 1,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Bulaşık Yıkama (14)",
+      "description": "Bulaşık Yıkama rutini 14",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Çamaşır Asma (15)",
+      "description": "Çamaşır Asma rutini 15",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Banyo Lavabosu Temizliği (16)",
+      "description": "Banyo Lavabosu Temizliği rutini 16",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Yatak Düzeltme (17)",
+      "description": "Yatak Düzeltme rutini 17",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 1,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Toz Alma (18)",
+      "description": "Toz Alma rutini 18",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 3,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Cam Silme (19)",
+      "description": "Cam Silme rutini 19",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Buzdolabı Düzenleme (20)",
+      "description": "Buzdolabı Düzenleme rutini 20",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Mutfak Tezgahı Temizliği (21)",
+      "description": "Mutfak Tezgahı Temizliği rutini 21",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 3,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Çöp Atma (22)",
+      "description": "Çöp Atma rutini 22",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Yer Süpürme (23)",
+      "description": "Yer Süpürme rutini 23",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 2,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Bulaşık Yıkama (24)",
+      "description": "Bulaşık Yıkama rutini 24",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Çamaşır Asma (25)",
+      "description": "Çamaşır Asma rutini 25",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Banyo Lavabosu Temizliği (26)",
+      "description": "Banyo Lavabosu Temizliği rutini 26",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Yatak Düzeltme (27)",
+      "description": "Yatak Düzeltme rutini 27",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 2,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Toz Alma (28)",
+      "description": "Toz Alma rutini 28",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 1,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Cam Silme (29)",
+      "description": "Cam Silme rutini 29",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Buzdolabı Düzenleme (30)",
+      "description": "Buzdolabı Düzenleme rutini 30",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Mutfak Tezgahı Temizliği (31)",
+      "description": "Mutfak Tezgahı Temizliği rutini 31",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Çöp Atma (32)",
+      "description": "Çöp Atma rutini 32",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Yer Süpürme (33)",
+      "description": "Yer Süpürme rutini 33",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 3,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Bulaşık Yıkama (34)",
+      "description": "Bulaşık Yıkama rutini 34",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Çamaşır Asma (35)",
+      "description": "Çamaşır Asma rutini 35",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Banyo Lavabosu Temizliği (36)",
+      "description": "Banyo Lavabosu Temizliği rutini 36",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 3,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Yatak Düzeltme (37)",
+      "description": "Yatak Düzeltme rutini 37",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 1,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Toz Alma (38)",
+      "description": "Toz Alma rutini 38",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 2,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Cam Silme (39)",
+      "description": "Cam Silme rutini 39",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Buzdolabı Düzenleme (40)",
+      "description": "Buzdolabı Düzenleme rutini 40",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Mutfak Tezgahı Temizliği (41)",
+      "description": "Mutfak Tezgahı Temizliği rutini 41",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Çöp Atma (42)",
+      "description": "Çöp Atma rutini 42",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Yer Süpürme (43)",
+      "description": "Yer Süpürme rutini 43",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 1,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Bulaşık Yıkama (44)",
+      "description": "Bulaşık Yıkama rutini 44",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Çamaşır Asma (45)",
+      "description": "Çamaşır Asma rutini 45",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Banyo Lavabosu Temizliği (46)",
+      "description": "Banyo Lavabosu Temizliği rutini 46",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Yatak Düzeltme (47)",
+      "description": "Yatak Düzeltme rutini 47",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 1,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Toz Alma (48)",
+      "description": "Toz Alma rutini 48",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 3,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Cam Silme (49)",
+      "description": "Cam Silme rutini 49",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Buzdolabı Düzenleme (50)",
+      "description": "Buzdolabı Düzenleme rutini 50",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Mutfak Tezgahı Temizliği (51)",
+      "description": "Mutfak Tezgahı Temizliği rutini 51",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 3,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Çöp Atma (52)",
+      "description": "Çöp Atma rutini 52",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Yer Süpürme (53)",
+      "description": "Yer Süpürme rutini 53",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 2,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Bulaşık Yıkama (54)",
+      "description": "Bulaşık Yıkama rutini 54",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Çamaşır Asma (55)",
+      "description": "Çamaşır Asma rutini 55",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Banyo Lavabosu Temizliği (56)",
+      "description": "Banyo Lavabosu Temizliği rutini 56",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Yatak Düzeltme (57)",
+      "description": "Yatak Düzeltme rutini 57",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Toz Alma (58)",
+      "description": "Toz Alma rutini 58",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 1,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Cam Silme (59)",
+      "description": "Cam Silme rutini 59",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Buzdolabı Düzenleme (60)",
+      "description": "Buzdolabı Düzenleme rutini 60",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Mutfak Tezgahı Temizliği (61)",
+      "description": "Mutfak Tezgahı Temizliği rutini 61",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Çöp Atma (62)",
+      "description": "Çöp Atma rutini 62",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Yer Süpürme (63)",
+      "description": "Yer Süpürme rutini 63",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 3,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Bulaşık Yıkama (64)",
+      "description": "Bulaşık Yıkama rutini 64",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Çamaşır Asma (65)",
+      "description": "Çamaşır Asma rutini 65",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Banyo Lavabosu Temizliği (66)",
+      "description": "Banyo Lavabosu Temizliği rutini 66",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 3,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Yatak Düzeltme (67)",
+      "description": "Yatak Düzeltme rutini 67",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 1,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Toz Alma (68)",
+      "description": "Toz Alma rutini 68",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 2,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Cam Silme (69)",
+      "description": "Cam Silme rutini 69",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Buzdolabı Düzenleme (70)",
+      "description": "Buzdolabı Düzenleme rutini 70",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Mutfak Tezgahı Temizliği (71)",
+      "description": "Mutfak Tezgahı Temizliği rutini 71",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Çöp Atma (72)",
+      "description": "Çöp Atma rutini 72",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Yer Süpürme (73)",
+      "description": "Yer Süpürme rutini 73",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 1,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Bulaşık Yıkama (74)",
+      "description": "Bulaşık Yıkama rutini 74",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Çamaşır Asma (75)",
+      "description": "Çamaşır Asma rutini 75",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Banyo Lavabosu Temizliği (76)",
+      "description": "Banyo Lavabosu Temizliği rutini 76",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Yatak Düzeltme (77)",
+      "description": "Yatak Düzeltme rutini 77",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 1,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Toz Alma (78)",
+      "description": "Toz Alma rutini 78",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 3,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Cam Silme (79)",
+      "description": "Cam Silme rutini 79",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "monthly",
+      "task_name": "Buzdolabı Düzenleme (80)",
+      "description": "Buzdolabı Düzenleme rutini 80",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Mutfak Tezgahı Temizliği (1)",
+      "description": "Mutfak Tezgahı Temizliği rutini 1",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Sirke suyu ile silin",
+        "Mikrofiber bez kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Çöp Atma (2)",
+      "description": "Çöp Atma rutini 2",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "salon",
+      "season": "ilkbahar",
+      "tips": [
+        "Poşetleri düğümleyin",
+        "Geri dönüşümü ayırın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Yer Süpürme (3)",
+      "description": "Yer Süpürme rutini 3",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 3,
+      "room": "banyo",
+      "season": "yaz",
+      "tips": [
+        "Köşeleri atlamayın",
+        "Elektrikli süpürge kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Bulaşık Yıkama (4)",
+      "description": "Bulaşık Yıkama rutini 4",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "yatak_odasi",
+      "season": "sonbahar",
+      "tips": [
+        "Sıcak su ile ön durulama yapın",
+        "Makineyi tam doldurun"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Çamaşır Asma (5)",
+      "description": "Çamaşır Asma rutini 5",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "balkon",
+      "season": "kis",
+      "tips": [
+        "Gölgelikte asın",
+        "Gömlekleri omuzdan asın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Banyo Lavabosu Temizliği (6)",
+      "description": "Banyo Lavabosu Temizliği rutini 6",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 3,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Kireç çözücü kullanın",
+        "Mikrofiber bez ile parlatın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Yatak Düzeltme (7)",
+      "description": "Yatak Düzeltme rutini 7",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 1,
+      "room": "genel",
+      "season": "ilkbahar",
+      "tips": [
+        "Her sabah yapın",
+        "Yastıkları havalandırın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Toz Alma (8)",
+      "description": "Toz Alma rutini 8",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "yaz",
+      "tips": [
+        "Yukarıdan aşağıya silin",
+        "Mikrofiber bez kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Cam Silme (9)",
+      "description": "Cam Silme rutini 9",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "salon",
+      "season": "sonbahar",
+      "tips": [
+        "Gazete kağıdı ile silin",
+        "Bulutlu havada yapın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Buzdolabı Düzenleme (10)",
+      "description": "Buzdolabı Düzenleme rutini 10",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "banyo",
+      "season": "kis",
+      "tips": [
+        "Son kullanma tarihlerini kontrol edin",
+        "Poşet kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Mutfak Tezgahı Temizliği (11)",
+      "description": "Mutfak Tezgahı Temizliği rutini 11",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Çöp Atma (12)",
+      "description": "Çöp Atma rutini 12",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "balkon",
+      "season": "ilkbahar",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Yer Süpürme (13)",
+      "description": "Yer Süpürme rutini 13",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 1,
+      "room": "koridor",
+      "season": "yaz",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Bulaşık Yıkama (14)",
+      "description": "Bulaşık Yıkama rutini 14",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "genel",
+      "season": "sonbahar",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Çamaşır Asma (15)",
+      "description": "Çamaşır Asma rutini 15",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "kis",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Banyo Lavabosu Temizliği (16)",
+      "description": "Banyo Lavabosu Temizliği rutini 16",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Yatak Düzeltme (17)",
+      "description": "Yatak Düzeltme rutini 17",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 1,
+      "room": "banyo",
+      "season": "ilkbahar",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Toz Alma (18)",
+      "description": "Toz Alma rutini 18",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 3,
+      "room": "yatak_odasi",
+      "season": "yaz",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Cam Silme (19)",
+      "description": "Cam Silme rutini 19",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "balkon",
+      "season": "sonbahar",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Buzdolabı Düzenleme (20)",
+      "description": "Buzdolabı Düzenleme rutini 20",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "koridor",
+      "season": "kis",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Mutfak Tezgahı Temizliği (21)",
+      "description": "Mutfak Tezgahı Temizliği rutini 21",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 3,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Çöp Atma (22)",
+      "description": "Çöp Atma rutini 22",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "mutfak",
+      "season": "ilkbahar",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Yer Süpürme (23)",
+      "description": "Yer Süpürme rutini 23",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 2,
+      "room": "salon",
+      "season": "yaz",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Bulaşık Yıkama (24)",
+      "description": "Bulaşık Yıkama rutini 24",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "banyo",
+      "season": "sonbahar",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Çamaşır Asma (25)",
+      "description": "Çamaşır Asma rutini 25",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "yatak_odasi",
+      "season": "kis",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Banyo Lavabosu Temizliği (26)",
+      "description": "Banyo Lavabosu Temizliği rutini 26",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "balkon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Yatak Düzeltme (27)",
+      "description": "Yatak Düzeltme rutini 27",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 2,
+      "room": "koridor",
+      "season": "ilkbahar",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Toz Alma (28)",
+      "description": "Toz Alma rutini 28",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 1,
+      "room": "genel",
+      "season": "yaz",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Cam Silme (29)",
+      "description": "Cam Silme rutini 29",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "sonbahar",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Buzdolabı Düzenleme (30)",
+      "description": "Buzdolabı Düzenleme rutini 30",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "salon",
+      "season": "kis",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Mutfak Tezgahı Temizliği (31)",
+      "description": "Mutfak Tezgahı Temizliği rutini 31",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "banyo",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Çöp Atma (32)",
+      "description": "Çöp Atma rutini 32",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "yatak_odasi",
+      "season": "ilkbahar",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Yer Süpürme (33)",
+      "description": "Yer Süpürme rutini 33",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 3,
+      "room": "balkon",
+      "season": "yaz",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Bulaşık Yıkama (34)",
+      "description": "Bulaşık Yıkama rutini 34",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "koridor",
+      "season": "sonbahar",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Çamaşır Asma (35)",
+      "description": "Çamaşır Asma rutini 35",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "genel",
+      "season": "kis",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Banyo Lavabosu Temizliği (36)",
+      "description": "Banyo Lavabosu Temizliği rutini 36",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 3,
+      "room": "mutfak",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Yatak Düzeltme (37)",
+      "description": "Yatak Düzeltme rutini 37",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 1,
+      "room": "salon",
+      "season": "ilkbahar",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Toz Alma (38)",
+      "description": "Toz Alma rutini 38",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 2,
+      "room": "banyo",
+      "season": "yaz",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Cam Silme (39)",
+      "description": "Cam Silme rutini 39",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "yatak_odasi",
+      "season": "sonbahar",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Buzdolabı Düzenleme (40)",
+      "description": "Buzdolabı Düzenleme rutini 40",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "balkon",
+      "season": "kis",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Mutfak Tezgahı Temizliği (41)",
+      "description": "Mutfak Tezgahı Temizliği rutini 41",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "koridor",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Çöp Atma (42)",
+      "description": "Çöp Atma rutini 42",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "genel",
+      "season": "ilkbahar",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Yer Süpürme (43)",
+      "description": "Yer Süpürme rutini 43",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 1,
+      "room": "mutfak",
+      "season": "yaz",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Bulaşık Yıkama (44)",
+      "description": "Bulaşık Yıkama rutini 44",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "salon",
+      "season": "sonbahar",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Çamaşır Asma (45)",
+      "description": "Çamaşır Asma rutini 45",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "banyo",
+      "season": "kis",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Banyo Lavabosu Temizliği (46)",
+      "description": "Banyo Lavabosu Temizliği rutini 46",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "yatak_odasi",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Yatak Düzeltme (47)",
+      "description": "Yatak Düzeltme rutini 47",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 1,
+      "room": "balkon",
+      "season": "ilkbahar",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Toz Alma (48)",
+      "description": "Toz Alma rutini 48",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 3,
+      "room": "koridor",
+      "season": "yaz",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Cam Silme (49)",
+      "description": "Cam Silme rutini 49",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "genel",
+      "season": "sonbahar",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Buzdolabı Düzenleme (50)",
+      "description": "Buzdolabı Düzenleme rutini 50",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "kis",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Mutfak Tezgahı Temizliği (51)",
+      "description": "Mutfak Tezgahı Temizliği rutini 51",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 3,
+      "room": "salon",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Çöp Atma (52)",
+      "description": "Çöp Atma rutini 52",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 1,
+      "room": "banyo",
+      "season": "ilkbahar",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Yer Süpürme (53)",
+      "description": "Yer Süpürme rutini 53",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 2,
+      "room": "yatak_odasi",
+      "season": "yaz",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Bulaşık Yıkama (54)",
+      "description": "Bulaşık Yıkama rutini 54",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "balkon",
+      "season": "sonbahar",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Çamaşır Asma (55)",
+      "description": "Çamaşır Asma rutini 55",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 1,
+      "room": "koridor",
+      "season": "kis",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Banyo Lavabosu Temizliği (56)",
+      "description": "Banyo Lavabosu Temizliği rutini 56",
+      "estimated_duration_minutes": 10,
+      "difficulty_level": 2,
+      "room": "genel",
+      "season": "tum_sezon",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Yatak Düzeltme (57)",
+      "description": "Yatak Düzeltme rutini 57",
+      "estimated_duration_minutes": 15,
+      "difficulty_level": 2,
+      "room": "mutfak",
+      "season": "ilkbahar",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Toz Alma (58)",
+      "description": "Toz Alma rutini 58",
+      "estimated_duration_minutes": 25,
+      "difficulty_level": 1,
+      "room": "salon",
+      "season": "yaz",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Cam Silme (59)",
+      "description": "Cam Silme rutini 59",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 2,
+      "room": "banyo",
+      "season": "sonbahar",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    },
+    {
+      "category": "yearly",
+      "task_name": "Buzdolabı Düzenleme (60)",
+      "description": "Buzdolabı Düzenleme rutini 60",
+      "estimated_duration_minutes": 35,
+      "difficulty_level": 3,
+      "room": "yatak_odasi",
+      "season": "kis",
+      "tips": [
+        "Düzenli yapın",
+        "Doğal temizlik malzemeleri kullanın"
+      ]
+    }
+  ]
+}

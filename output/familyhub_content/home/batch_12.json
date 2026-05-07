@@ -1,0 +1,592 @@
+[
+  {
+    "id": "home_111",
+    "title": "Giysi Dolabı Organizasyonu",
+    "category": "cocuk_odasi",
+    "difficulty": "kolay",
+    "duration": "2-3 saat",
+    "cost": "20-60€",
+    "impact_level": 9,
+    "tools_needed": [
+      {
+        "tool": "Alet 1",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "tool": "Alet 2",
+        "alternative": "Alternatif 2"
+      }
+    ],
+    "materials": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "1 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "3 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "3 adet",
+        "estimated_cost": "5-20€"
+      }
+    ],
+    "step_by_step": [
+      "Adım 1: Ölçü alın.",
+      "Adım 2: Kesim yapın.",
+      "Adım 3: Test edin.",
+      "Adım 4: Hazırlık yapın.",
+      "Adım 5: Ölçü alın."
+    ],
+    "safety_warnings": [
+      "Elektrikli aletleri dikkatli kullanın.",
+      "Çocukları uzak tutun.",
+      "Maske ve gözlük takın."
+    ],
+    "family_involvement": {
+      "suitable_for_kids": false,
+      "kid_tasks": [
+        "Taşıma",
+        "Boyama",
+        "Temizlik"
+      ],
+      "adult_supervision_required": true
+    },
+    "rating": 4.5,
+    "review_count": 57
+  },
+  {
+    "id": "home_112",
+    "title": "Kapı Kilidi Değişimi",
+    "category": "cocuk_odasi",
+    "difficulty": "orta",
+    "duration": "30-60 dk",
+    "cost": "30-80€",
+    "impact_level": 10,
+    "tools_needed": [
+      {
+        "tool": "Alet 1",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "tool": "Alet 2",
+        "alternative": "Alternatif 2"
+      }
+    ],
+    "materials": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "5 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "1 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "2 adet",
+        "estimated_cost": "5-20€"
+      }
+    ],
+    "step_by_step": [
+      "Adım 1: Ölçü alın.",
+      "Adım 2: Test edin.",
+      "Adım 3: Monte edin.",
+      "Adım 4: Ölçü alın.",
+      "Adım 5: Kesim yapın."
+    ],
+    "safety_warnings": [
+      "Elektrikli aletleri dikkatli kullanın.",
+      "Çocukları uzak tutun.",
+      "Maske ve gözlük takın."
+    ],
+    "family_involvement": {
+      "suitable_for_kids": false,
+      "kid_tasks": [
+        "Taşıma",
+        "Boyama",
+        "Temizlik"
+      ],
+      "adult_supervision_required": true
+    },
+    "rating": 4.8,
+    "review_count": 419
+  },
+  {
+    "id": "home_113",
+    "title": "Akıllı Ampul Kurulumu",
+    "category": "cocuk_odasi",
+    "difficulty": "kolay",
+    "duration": "15-30 dk",
+    "cost": "50-150€",
+    "impact_level": 8,
+    "tools_needed": [
+      {
+        "tool": "Alet 1",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "tool": "Alet 2",
+        "alternative": "Alternatif 2"
+      }
+    ],
+    "materials": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "3 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "5 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "5 adet",
+        "estimated_cost": "5-20€"
+      }
+    ],
+    "step_by_step": [
+      "Adım 1: Kesim yapın.",
+      "Adım 2: Hazırlık yapın.",
+      "Adım 3: Kesim yapın.",
+      "Adım 4: Ölçü alın.",
+      "Adım 5: Hazırlık yapın."
+    ],
+    "safety_warnings": [
+      "Elektrikli aletleri dikkatli kullanın.",
+      "Çocukları uzak tutun.",
+      "Maske ve gözlük takın."
+    ],
+    "family_involvement": {
+      "suitable_for_kids": true,
+      "kid_tasks": [
+        "Taşıma",
+        "Boyama",
+        "Temizlik"
+      ],
+      "adult_supervision_required": true
+    },
+    "rating": 4.0,
+    "review_count": 265
+  },
+  {
+    "id": "home_114",
+    "title": "Pencere Ses Yalıtımı",
+    "category": "cocuk_odasi",
+    "difficulty": "orta",
+    "duration": "2-4 saat",
+    "cost": "40-100€",
+    "impact_level": 8,
+    "tools_needed": [
+      {
+        "tool": "Alet 1",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "tool": "Alet 2",
+        "alternative": "Alternatif 2"
+      }
+    ],
+    "materials": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "5 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "3 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "5 adet",
+        "estimated_cost": "5-20€"
+      }
+    ],
+    "step_by_step": [
+      "Adım 1: Ölçü alın.",
+      "Adım 2: Monte edin.",
+      "Adım 3: Monte edin.",
+      "Adım 4: Ölçü alın.",
+      "Adım 5: Ölçü alın."
+    ],
+    "safety_warnings": [
+      "Elektrikli aletleri dikkatli kullanın.",
+      "Çocukları uzak tutun.",
+      "Maske ve gözlük takın."
+    ],
+    "family_involvement": {
+      "suitable_for_kids": false,
+      "kid_tasks": [
+        "Taşıma",
+        "Boyama",
+        "Temizlik"
+      ],
+      "adult_supervision_required": true
+    },
+    "rating": 4.9,
+    "review_count": 121
+  },
+  {
+    "id": "home_115",
+    "title": "LED Şerit Işıklandırma",
+    "category": "cocuk_odasi",
+    "difficulty": "kolay",
+    "duration": "1-2 saat",
+    "cost": "20-50€",
+    "impact_level": 9,
+    "tools_needed": [
+      {
+        "tool": "Alet 1",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "tool": "Alet 2",
+        "alternative": "Alternatif 2"
+      }
+    ],
+    "materials": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "1 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "2 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "1 adet",
+        "estimated_cost": "5-20€"
+      }
+    ],
+    "step_by_step": [
+      "Adım 1: Test edin.",
+      "Adım 2: Hazırlık yapın.",
+      "Adım 3: Hazırlık yapın.",
+      "Adım 4: Monte edin.",
+      "Adım 5: Kesim yapın."
+    ],
+    "safety_warnings": [
+      "Elektrikli aletleri dikkatli kullanın.",
+      "Çocukları uzak tutun.",
+      "Maske ve gözlük takın."
+    ],
+    "family_involvement": {
+      "suitable_for_kids": false,
+      "kid_tasks": [
+        "Taşıma",
+        "Boyama",
+        "Temizlik"
+      ],
+      "adult_supervision_required": true
+    },
+    "rating": 4.9,
+    "review_count": 389
+  },
+  {
+    "id": "home_116",
+    "title": "Duvar Boyama",
+    "category": "cocuk_odasi",
+    "difficulty": "orta",
+    "duration": "4-6 saat",
+    "cost": "50-150€",
+    "impact_level": 9,
+    "tools_needed": [
+      {
+        "tool": "Alet 1",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "tool": "Alet 2",
+        "alternative": "Alternatif 2"
+      }
+    ],
+    "materials": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "5 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "2 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "5 adet",
+        "estimated_cost": "5-20€"
+      }
+    ],
+    "step_by_step": [
+      "Adım 1: Kesim yapın.",
+      "Adım 2: Hazırlık yapın.",
+      "Adım 3: Monte edin.",
+      "Adım 4: Kesim yapın.",
+      "Adım 5: Kesim yapın."
+    ],
+    "safety_warnings": [
+      "Elektrikli aletleri dikkatli kullanın.",
+      "Çocukları uzak tutun.",
+      "Maske ve gözlük takın."
+    ],
+    "family_involvement": {
+      "suitable_for_kids": false,
+      "kid_tasks": [
+        "Taşıma",
+        "Boyama",
+        "Temizlik"
+      ],
+      "adult_supervision_required": true
+    },
+    "rating": 4.9,
+    "review_count": 161
+  },
+  {
+    "id": "home_117",
+    "title": "Kitaplık Montajı",
+    "category": "cocuk_odasi",
+    "difficulty": "orta",
+    "duration": "2-3 saat",
+    "cost": "80-200€",
+    "impact_level": 9,
+    "tools_needed": [
+      {
+        "tool": "Alet 1",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "tool": "Alet 2",
+        "alternative": "Alternatif 2"
+      }
+    ],
+    "materials": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "3 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "2 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "5 adet",
+        "estimated_cost": "5-20€"
+      }
+    ],
+    "step_by_step": [
+      "Adım 1: Hazırlık yapın.",
+      "Adım 2: Monte edin.",
+      "Adım 3: Test edin.",
+      "Adım 4: Hazırlık yapın.",
+      "Adım 5: Monte edin."
+    ],
+    "safety_warnings": [
+      "Elektrikli aletleri dikkatli kullanın.",
+      "Çocukları uzak tutun.",
+      "Maske ve gözlük takın."
+    ],
+    "family_involvement": {
+      "suitable_for_kids": false,
+      "kid_tasks": [
+        "Taşıma",
+        "Boyama",
+        "Temizlik"
+      ],
+      "adult_supervision_required": true
+    },
+    "rating": 4.6,
+    "review_count": 203
+  },
+  {
+    "id": "home_118",
+    "title": "Geri Dönüşüm Kutusu Yapımı",
+    "category": "cocuk_odasi",
+    "difficulty": "kolay",
+    "duration": "30-60 dk",
+    "cost": "0-10€",
+    "impact_level": 6,
+    "tools_needed": [
+      {
+        "tool": "Alet 1",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "tool": "Alet 2",
+        "alternative": "Alternatif 2"
+      }
+    ],
+    "materials": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "1 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "1 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "5 adet",
+        "estimated_cost": "5-20€"
+      }
+    ],
+    "step_by_step": [
+      "Adım 1: Kesim yapın.",
+      "Adım 2: Hazırlık yapın.",
+      "Adım 3: Hazırlık yapın.",
+      "Adım 4: Test edin.",
+      "Adım 5: Monte edin."
+    ],
+    "safety_warnings": [
+      "Elektrikli aletleri dikkatli kullanın.",
+      "Çocukları uzak tutun.",
+      "Maske ve gözlük takın."
+    ],
+    "family_involvement": {
+      "suitable_for_kids": false,
+      "kid_tasks": [
+        "Taşıma",
+        "Boyama",
+        "Temizlik"
+      ],
+      "adult_supervision_required": true
+    },
+    "rating": 4.6,
+    "review_count": 369
+  },
+  {
+    "id": "home_119",
+    "title": "Balkon Süsleme",
+    "category": "cocuk_odasi",
+    "difficulty": "kolay",
+    "duration": "2-3 saat",
+    "cost": "30-80€",
+    "impact_level": 7,
+    "tools_needed": [
+      {
+        "tool": "Alet 1",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "tool": "Alet 2",
+        "alternative": "Alternatif 2"
+      }
+    ],
+    "materials": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "1 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "1 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "3 adet",
+        "estimated_cost": "5-20€"
+      }
+    ],
+    "step_by_step": [
+      "Adım 1: Kesim yapın.",
+      "Adım 2: Kesim yapın.",
+      "Adım 3: Monte edin.",
+      "Adım 4: Test edin.",
+      "Adım 5: Hazırlık yapın."
+    ],
+    "safety_warnings": [
+      "Elektrikli aletleri dikkatli kullanın.",
+      "Çocukları uzak tutun.",
+      "Maske ve gözlük takın."
+    ],
+    "family_involvement": {
+      "suitable_for_kids": false,
+      "kid_tasks": [
+        "Taşıma",
+        "Boyama",
+        "Temizlik"
+      ],
+      "adult_supervision_required": true
+    },
+    "rating": 4.8,
+    "review_count": 392
+  },
+  {
+    "id": "home_120",
+    "title": "Mutfak Tezgahı Düzenleme",
+    "category": "cocuk_odasi",
+    "difficulty": "kolay",
+    "duration": "1-2 saat",
+    "cost": "20-50€",
+    "impact_level": 10,
+    "tools_needed": [
+      {
+        "tool": "Alet 1",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "tool": "Alet 2",
+        "alternative": "Alternatif 2"
+      }
+    ],
+    "materials": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "3 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "1 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "4 adet",
+        "estimated_cost": "5-20€"
+      }
+    ],
+    "step_by_step": [
+      "Adım 1: Test edin.",
+      "Adım 2: Hazırlık yapın.",
+      "Adım 3: Kesim yapın.",
+      "Adım 4: Hazırlık yapın.",
+      "Adım 5: Hazırlık yapın."
+    ],
+    "safety_warnings": [
+      "Elektrikli aletleri dikkatli kullanın.",
+      "Çocukları uzak tutun.",
+      "Maske ve gözlük takın."
+    ],
+    "family_involvement": {
+      "suitable_for_kids": false,
+      "kid_tasks": [
+        "Taşıma",
+        "Boyama",
+        "Temizlik"
+      ],
+      "adult_supervision_required": true
+    },
+    "rating": 4.3,
+    "review_count": 201
+  }
+]

@@ -1,0 +1,1708 @@
+{
+  "module": "meal_nutrition",
+  "version": "1.0.0",
+  "language": "tr",
+  "region": "TR",
+  "suggestions": [
+    {
+      "id": "mn001",
+      "title": "Anne Köftesi (Fırında)",
+      "description": "Közlenmiş biberli, mercimekli. Hem sağlıklı hem doyurucu.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ana yemek"
+      ],
+      "tips": [
+        "Malzemeleri önceden hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn002",
+      "title": "Bugün Karnıyarık",
+      "description": "Patlıcanları önceden tuzlayın, acısı çıksın.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ana yemek"
+      ],
+      "tips": [
+        "Zeytinyağlı da yapabilirsiniz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn003",
+      "title": "Bu Akşam Mercimek Çorbası + Tost",
+      "description": "Klasik ama vazgeçilmez. Kızarmış ekmekle.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "çorba"
+      ],
+      "tips": [
+        "Limon sıkın, lezzet artsın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn004",
+      "title": "Ailece Fırında Makarna",
+      "description": "Beşamel soslu, bol kaşarlı. Çocuklar bayılır.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "makarna"
+      ],
+      "tips": [
+        "Farklı peynirler deneyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn005",
+      "title": "Hafta Sonu Zeytinyağlı Sarma",
+      "description": "Asma yaprağında, pirinçli, bol naneli.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 90,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "zeytinyağlı"
+      ],
+      "tips": [
+        "Yaprakları önceden haşlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn006",
+      "title": "Ev Pidesi",
+      "description": "Kıymalı, peynirli, kuşbaşılı. Her seferinde farklı.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "hamur işi"
+      ],
+      "tips": [
+        "Hamuru mayalanmaya bırakın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn007",
+      "title": "Bugün Tavuk Şiş + Pilav",
+      "description": "Düdüklüde pirinç, ızgarada tavuk.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ızgara"
+      ],
+      "tips": [
+        "Marine en az 2 saat beklesin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn008",
+      "title": "Bu Akşam Kumpir Akşamı",
+      "description": "Fırında patates, herkes kendi malzemesini koysun.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "atıştırmalık"
+      ],
+      "tips": [
+        "Mısır, zeytin, turşu, kaşar hazır bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn009",
+      "title": "Ailece Ev Mantısı",
+      "description": "Kayseri usulü, yoğurtlu, tereyağlı sos.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 120,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "hamur işi"
+      ],
+      "tips": [
+        "Birlikte yapmak eğlenceli."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn010",
+      "title": "Hafta Sonu Izgara Çipura + Roka",
+      "description": "Balık ve roka salatası. Hafif ve sağlıklı.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "deniz ürünleri"
+      ],
+      "tips": [
+        "Limon ve zeytinyağı ile servis edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn011",
+      "title": "Türlü Yemeği",
+      "description": "Biber, patlıcan, kabak, patates; zeytinyağlı.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "zeytinyağlı"
+      ],
+      "tips": [
+        "Sebzelerin tazesine dikkat edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn012",
+      "title": "Bugün Ev Pizzası",
+      "description": "Hamur mayalansın, herkes kendi pizzasına malzeme seçsin.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 105,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "pizza"
+      ],
+      "tips": [
+        "Yüksek ısıda kısa sürede pişirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn013",
+      "title": "Bu Akşam Yaprak Sarması",
+      "description": "Zeytinyağlı, nar ekşili, bol dolma fıstığı.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "zeytinyağlı"
+      ],
+      "tips": [
+        "Sıkı sarmaya dikkat edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn014",
+      "title": "Ailece Kurufasulye + Pilav",
+      "description": "Geleneksel ama her zaman güzel. Turşu yanında.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ana yemek"
+      ],
+      "tips": [
+        "Düdüklü tencere kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn015",
+      "title": "Hafta Sonu Çöp Şiş (Ev Usulü)",
+      "description": "Marine tavuk, sebzelerle şiş, fırında.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ızgara"
+      ],
+      "tips": [
+        "Sebzeleri ayrı şişe takın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn016",
+      "title": "Kabak Mücver",
+      "description": "Rendelenmiş kabak, maydanoz, dereotu.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "atıştırmalık"
+      ],
+      "tips": [
+        "Fazla yağ çekmemesi için kızgın yağda kızartın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn017",
+      "title": "Bugün Nohutlu Bulgur Pilavı",
+      "description": "Baharatlı nohut, bulgur, soğan kavurması.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "pilav"
+      ],
+      "tips": [
+        "Tereyağlı kavrulmuş soğan ile servis."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn018",
+      "title": "Bu Akşam Ispanaklı Börek",
+      "description": "El açması veya hazır yufka, bol ıspanak.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "börek"
+      ],
+      "tips": [
+        "Ispanağı soteleyip suyunu süzün."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn019",
+      "title": "Ailece Ev Yapımı Dondurma",
+      "description": "Muz dondurulup blenderdan geçirilir.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "tatlı"
+      ],
+      "tips": [
+        "Kakaolu veya çilekli de yapabilirsiniz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn020",
+      "title": "Hafta Sonu Menemen",
+      "description": "Yumurta, domates, biber, soğan. Kahvaltı klasik.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "kahvaltı"
+      ],
+      "tips": [
+        "Kekirip kıvamında pişirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn021",
+      "title": "Anne Köftesi (Fırında)",
+      "description": "Közlenmiş biberli, mercimekli. Hem sağlıklı hem doyurucu.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ana yemek"
+      ],
+      "tips": [
+        "Malzemeleri önceden hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn022",
+      "title": "Bugün Karnıyarık",
+      "description": "Patlıcanları önceden tuzlayın, acısı çıksın.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ana yemek"
+      ],
+      "tips": [
+        "Zeytinyağlı da yapabilirsiniz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn023",
+      "title": "Bu Akşam Mercimek Çorbası + Tost",
+      "description": "Klasik ama vazgeçilmez. Kızarmış ekmekle.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "çorba"
+      ],
+      "tips": [
+        "Limon sıkın, lezzet artsın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn024",
+      "title": "Ailece Fırında Makarna",
+      "description": "Beşamel soslu, bol kaşarlı. Çocuklar bayılır.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "makarna"
+      ],
+      "tips": [
+        "Farklı peynirler deneyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn025",
+      "title": "Hafta Sonu Zeytinyağlı Sarma",
+      "description": "Asma yaprağında, pirinçli, bol naneli.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 90,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "zeytinyağlı"
+      ],
+      "tips": [
+        "Yaprakları önceden haşlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn026",
+      "title": "Ev Pidesi",
+      "description": "Kıymalı, peynirli, kuşbaşılı. Her seferinde farklı.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "hamur işi"
+      ],
+      "tips": [
+        "Hamuru mayalanmaya bırakın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn027",
+      "title": "Bugün Tavuk Şiş + Pilav",
+      "description": "Düdüklüde pirinç, ızgarada tavuk.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ızgara"
+      ],
+      "tips": [
+        "Marine en az 2 saat beklesin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn028",
+      "title": "Bu Akşam Kumpir Akşamı",
+      "description": "Fırında patates, herkes kendi malzemesini koysun.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "atıştırmalık"
+      ],
+      "tips": [
+        "Mısır, zeytin, turşu, kaşar hazır bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn029",
+      "title": "Ailece Ev Mantısı",
+      "description": "Kayseri usulü, yoğurtlu, tereyağlı sos.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 120,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "hamur işi"
+      ],
+      "tips": [
+        "Birlikte yapmak eğlenceli."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn030",
+      "title": "Hafta Sonu Izgara Çipura + Roka",
+      "description": "Balık ve roka salatası. Hafif ve sağlıklı.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "deniz ürünleri"
+      ],
+      "tips": [
+        "Limon ve zeytinyağı ile servis edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn031",
+      "title": "Türlü Yemeği",
+      "description": "Biber, patlıcan, kabak, patates; zeytinyağlı.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "zeytinyağlı"
+      ],
+      "tips": [
+        "Sebzelerin tazesine dikkat edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn032",
+      "title": "Bugün Ev Pizzası",
+      "description": "Hamur mayalansın, herkes kendi pizzasına malzeme seçsin.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 105,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "pizza"
+      ],
+      "tips": [
+        "Yüksek ısıda kısa sürede pişirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn033",
+      "title": "Bu Akşam Yaprak Sarması",
+      "description": "Zeytinyağlı, nar ekşili, bol dolma fıstığı.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "zeytinyağlı"
+      ],
+      "tips": [
+        "Sıkı sarmaya dikkat edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn034",
+      "title": "Ailece Kurufasulye + Pilav",
+      "description": "Geleneksel ama her zaman güzel. Turşu yanında.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ana yemek"
+      ],
+      "tips": [
+        "Düdüklü tencere kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn035",
+      "title": "Hafta Sonu Çöp Şiş (Ev Usulü)",
+      "description": "Marine tavuk, sebzelerle şiş, fırında.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ızgara"
+      ],
+      "tips": [
+        "Sebzeleri ayrı şişe takın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn036",
+      "title": "Kabak Mücver",
+      "description": "Rendelenmiş kabak, maydanoz, dereotu.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "atıştırmalık"
+      ],
+      "tips": [
+        "Fazla yağ çekmemesi için kızgın yağda kızartın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn037",
+      "title": "Bugün Nohutlu Bulgur Pilavı",
+      "description": "Baharatlı nohut, bulgur, soğan kavurması.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "pilav"
+      ],
+      "tips": [
+        "Tereyağlı kavrulmuş soğan ile servis."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn038",
+      "title": "Bu Akşam Ispanaklı Börek",
+      "description": "El açması veya hazır yufka, bol ıspanak.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "börek"
+      ],
+      "tips": [
+        "Ispanağı soteleyip suyunu süzün."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn039",
+      "title": "Ailece Ev Yapımı Dondurma",
+      "description": "Muz dondurulup blenderdan geçirilir.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "tatlı"
+      ],
+      "tips": [
+        "Kakaolu veya çilekli de yapabilirsiniz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn040",
+      "title": "Hafta Sonu Menemen",
+      "description": "Yumurta, domates, biber, soğan. Kahvaltı klasik.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "kahvaltı"
+      ],
+      "tips": [
+        "Kekirip kıvamında pişirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn041",
+      "title": "Anne Köftesi (Fırında)",
+      "description": "Közlenmiş biberli, mercimekli. Hem sağlıklı hem doyurucu.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ana yemek"
+      ],
+      "tips": [
+        "Malzemeleri önceden hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn042",
+      "title": "Bugün Karnıyarık",
+      "description": "Patlıcanları önceden tuzlayın, acısı çıksın.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ana yemek"
+      ],
+      "tips": [
+        "Zeytinyağlı da yapabilirsiniz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn043",
+      "title": "Bu Akşam Mercimek Çorbası + Tost",
+      "description": "Klasik ama vazgeçilmez. Kızarmış ekmekle.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "çorba"
+      ],
+      "tips": [
+        "Limon sıkın, lezzet artsın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn044",
+      "title": "Ailece Fırında Makarna",
+      "description": "Beşamel soslu, bol kaşarlı. Çocuklar bayılır.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "makarna"
+      ],
+      "tips": [
+        "Farklı peynirler deneyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn045",
+      "title": "Hafta Sonu Zeytinyağlı Sarma",
+      "description": "Asma yaprağında, pirinçli, bol naneli.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 90,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "zeytinyağlı"
+      ],
+      "tips": [
+        "Yaprakları önceden haşlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn046",
+      "title": "Ev Pidesi",
+      "description": "Kıymalı, peynirli, kuşbaşılı. Her seferinde farklı.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "hamur işi"
+      ],
+      "tips": [
+        "Hamuru mayalanmaya bırakın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn047",
+      "title": "Bugün Tavuk Şiş + Pilav",
+      "description": "Düdüklüde pirinç, ızgarada tavuk.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ızgara"
+      ],
+      "tips": [
+        "Marine en az 2 saat beklesin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn048",
+      "title": "Bu Akşam Kumpir Akşamı",
+      "description": "Fırında patates, herkes kendi malzemesini koysun.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "atıştırmalık"
+      ],
+      "tips": [
+        "Mısır, zeytin, turşu, kaşar hazır bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn049",
+      "title": "Ailece Ev Mantısı",
+      "description": "Kayseri usulü, yoğurtlu, tereyağlı sos.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 120,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "hamur işi"
+      ],
+      "tips": [
+        "Birlikte yapmak eğlenceli."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn050",
+      "title": "Hafta Sonu Izgara Çipura + Roka",
+      "description": "Balık ve roka salatası. Hafif ve sağlıklı.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "deniz ürünleri"
+      ],
+      "tips": [
+        "Limon ve zeytinyağı ile servis edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn051",
+      "title": "Türlü Yemeği",
+      "description": "Biber, patlıcan, kabak, patates; zeytinyağlı.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "zeytinyağlı"
+      ],
+      "tips": [
+        "Sebzelerin tazesine dikkat edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn052",
+      "title": "Bugün Ev Pizzası",
+      "description": "Hamur mayalansın, herkes kendi pizzasına malzeme seçsin.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 105,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "pizza"
+      ],
+      "tips": [
+        "Yüksek ısıda kısa sürede pişirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn053",
+      "title": "Bu Akşam Yaprak Sarması",
+      "description": "Zeytinyağlı, nar ekşili, bol dolma fıstığı.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "zeytinyağlı"
+      ],
+      "tips": [
+        "Sıkı sarmaya dikkat edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn054",
+      "title": "Ailece Kurufasulye + Pilav",
+      "description": "Geleneksel ama her zaman güzel. Turşu yanında.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ana yemek"
+      ],
+      "tips": [
+        "Düdüklü tencere kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn055",
+      "title": "Hafta Sonu Çöp Şiş (Ev Usulü)",
+      "description": "Marine tavuk, sebzelerle şiş, fırında.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ızgara"
+      ],
+      "tips": [
+        "Sebzeleri ayrı şişe takın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn056",
+      "title": "Kabak Mücver",
+      "description": "Rendelenmiş kabak, maydanoz, dereotu.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "atıştırmalık"
+      ],
+      "tips": [
+        "Fazla yağ çekmemesi için kızgın yağda kızartın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn057",
+      "title": "Bugün Nohutlu Bulgur Pilavı",
+      "description": "Baharatlı nohut, bulgur, soğan kavurması.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "pilav"
+      ],
+      "tips": [
+        "Tereyağlı kavrulmuş soğan ile servis."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn058",
+      "title": "Bu Akşam Ispanaklı Börek",
+      "description": "El açması veya hazır yufka, bol ıspanak.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "börek"
+      ],
+      "tips": [
+        "Ispanağı soteleyip suyunu süzün."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn059",
+      "title": "Ailece Ev Yapımı Dondurma",
+      "description": "Muz dondurulup blenderdan geçirilir.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "tatlı"
+      ],
+      "tips": [
+        "Kakaolu veya çilekli de yapabilirsiniz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn060",
+      "title": "Hafta Sonu Menemen",
+      "description": "Yumurta, domates, biber, soğan. Kahvaltı klasik.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "kahvaltı"
+      ],
+      "tips": [
+        "Kekirip kıvamında pişirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn061",
+      "title": "Anne Köftesi (Fırında)",
+      "description": "Közlenmiş biberli, mercimekli. Hem sağlıklı hem doyurucu.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ana yemek"
+      ],
+      "tips": [
+        "Malzemeleri önceden hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn062",
+      "title": "Bugün Karnıyarık",
+      "description": "Patlıcanları önceden tuzlayın, acısı çıksın.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ana yemek"
+      ],
+      "tips": [
+        "Zeytinyağlı da yapabilirsiniz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn063",
+      "title": "Bu Akşam Mercimek Çorbası + Tost",
+      "description": "Klasik ama vazgeçilmez. Kızarmış ekmekle.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "çorba"
+      ],
+      "tips": [
+        "Limon sıkın, lezzet artsın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn064",
+      "title": "Ailece Fırında Makarna",
+      "description": "Beşamel soslu, bol kaşarlı. Çocuklar bayılır.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "makarna"
+      ],
+      "tips": [
+        "Farklı peynirler deneyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn065",
+      "title": "Hafta Sonu Zeytinyağlı Sarma",
+      "description": "Asma yaprağında, pirinçli, bol naneli.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 90,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "zeytinyağlı"
+      ],
+      "tips": [
+        "Yaprakları önceden haşlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn066",
+      "title": "Ev Pidesi",
+      "description": "Kıymalı, peynirli, kuşbaşılı. Her seferinde farklı.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "hamur işi"
+      ],
+      "tips": [
+        "Hamuru mayalanmaya bırakın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn067",
+      "title": "Bugün Tavuk Şiş + Pilav",
+      "description": "Düdüklüde pirinç, ızgarada tavuk.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ızgara"
+      ],
+      "tips": [
+        "Marine en az 2 saat beklesin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn068",
+      "title": "Bu Akşam Kumpir Akşamı",
+      "description": "Fırında patates, herkes kendi malzemesini koysun.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "atıştırmalık"
+      ],
+      "tips": [
+        "Mısır, zeytin, turşu, kaşar hazır bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn069",
+      "title": "Ailece Ev Mantısı",
+      "description": "Kayseri usulü, yoğurtlu, tereyağlı sos.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 120,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "hamur işi"
+      ],
+      "tips": [
+        "Birlikte yapmak eğlenceli."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn070",
+      "title": "Hafta Sonu Izgara Çipura + Roka",
+      "description": "Balık ve roka salatası. Hafif ve sağlıklı.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "deniz ürünleri"
+      ],
+      "tips": [
+        "Limon ve zeytinyağı ile servis edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn071",
+      "title": "Türlü Yemeği",
+      "description": "Biber, patlıcan, kabak, patates; zeytinyağlı.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "zeytinyağlı"
+      ],
+      "tips": [
+        "Sebzelerin tazesine dikkat edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn072",
+      "title": "Bugün Ev Pizzası",
+      "description": "Hamur mayalansın, herkes kendi pizzasına malzeme seçsin.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 105,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "pizza"
+      ],
+      "tips": [
+        "Yüksek ısıda kısa sürede pişirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn073",
+      "title": "Bu Akşam Yaprak Sarması",
+      "description": "Zeytinyağlı, nar ekşili, bol dolma fıstığı.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "zeytinyağlı"
+      ],
+      "tips": [
+        "Sıkı sarmaya dikkat edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn074",
+      "title": "Ailece Kurufasulye + Pilav",
+      "description": "Geleneksel ama her zaman güzel. Turşu yanında.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ana yemek"
+      ],
+      "tips": [
+        "Düdüklü tencere kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn075",
+      "title": "Hafta Sonu Çöp Şiş (Ev Usulü)",
+      "description": "Marine tavuk, sebzelerle şiş, fırında.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ızgara"
+      ],
+      "tips": [
+        "Sebzeleri ayrı şişe takın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn076",
+      "title": "Kabak Mücver",
+      "description": "Rendelenmiş kabak, maydanoz, dereotu.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "atıştırmalık"
+      ],
+      "tips": [
+        "Fazla yağ çekmemesi için kızgın yağda kızartın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn077",
+      "title": "Bugün Nohutlu Bulgur Pilavı",
+      "description": "Baharatlı nohut, bulgur, soğan kavurması.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "pilav"
+      ],
+      "tips": [
+        "Tereyağlı kavrulmuş soğan ile servis."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn078",
+      "title": "Bu Akşam Ispanaklı Börek",
+      "description": "El açması veya hazır yufka, bol ıspanak.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "börek"
+      ],
+      "tips": [
+        "Ispanağı soteleyip suyunu süzün."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn079",
+      "title": "Ailece Ev Yapımı Dondurma",
+      "description": "Muz dondurulup blenderdan geçirilir.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "tatlı"
+      ],
+      "tips": [
+        "Kakaolu veya çilekli de yapabilirsiniz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn080",
+      "title": "Hafta Sonu Menemen",
+      "description": "Yumurta, domates, biber, soğan. Kahvaltı klasik.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "kahvaltı"
+      ],
+      "tips": [
+        "Kekirip kıvamında pişirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn081",
+      "title": "Anne Köftesi (Fırında)",
+      "description": "Közlenmiş biberli, mercimekli. Hem sağlıklı hem doyurucu.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ana yemek"
+      ],
+      "tips": [
+        "Malzemeleri önceden hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn082",
+      "title": "Bugün Karnıyarık",
+      "description": "Patlıcanları önceden tuzlayın, acısı çıksın.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ana yemek"
+      ],
+      "tips": [
+        "Zeytinyağlı da yapabilirsiniz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn083",
+      "title": "Bu Akşam Mercimek Çorbası + Tost",
+      "description": "Klasik ama vazgeçilmez. Kızarmış ekmekle.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "çorba"
+      ],
+      "tips": [
+        "Limon sıkın, lezzet artsın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn084",
+      "title": "Ailece Fırında Makarna",
+      "description": "Beşamel soslu, bol kaşarlı. Çocuklar bayılır.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "makarna"
+      ],
+      "tips": [
+        "Farklı peynirler deneyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn085",
+      "title": "Hafta Sonu Zeytinyağlı Sarma",
+      "description": "Asma yaprağında, pirinçli, bol naneli.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 90,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "zeytinyağlı"
+      ],
+      "tips": [
+        "Yaprakları önceden haşlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn086",
+      "title": "Ev Pidesi",
+      "description": "Kıymalı, peynirli, kuşbaşılı. Her seferinde farklı.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "hamur işi"
+      ],
+      "tips": [
+        "Hamuru mayalanmaya bırakın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn087",
+      "title": "Bugün Tavuk Şiş + Pilav",
+      "description": "Düdüklüde pirinç, ızgarada tavuk.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ızgara"
+      ],
+      "tips": [
+        "Marine en az 2 saat beklesin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn088",
+      "title": "Bu Akşam Kumpir Akşamı",
+      "description": "Fırında patates, herkes kendi malzemesini koysun.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "atıştırmalık"
+      ],
+      "tips": [
+        "Mısır, zeytin, turşu, kaşar hazır bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn089",
+      "title": "Ailece Ev Mantısı",
+      "description": "Kayseri usulü, yoğurtlu, tereyağlı sos.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 120,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "hamur işi"
+      ],
+      "tips": [
+        "Birlikte yapmak eğlenceli."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn090",
+      "title": "Hafta Sonu Izgara Çipura + Roka",
+      "description": "Balık ve roka salatası. Hafif ve sağlıklı.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "deniz ürünleri"
+      ],
+      "tips": [
+        "Limon ve zeytinyağı ile servis edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn091",
+      "title": "Türlü Yemeği",
+      "description": "Biber, patlıcan, kabak, patates; zeytinyağlı.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "zeytinyağlı"
+      ],
+      "tips": [
+        "Sebzelerin tazesine dikkat edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn092",
+      "title": "Bugün Ev Pizzası",
+      "description": "Hamur mayalansın, herkes kendi pizzasına malzeme seçsin.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 105,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "pizza"
+      ],
+      "tips": [
+        "Yüksek ısıda kısa sürede pişirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn093",
+      "title": "Bu Akşam Yaprak Sarması",
+      "description": "Zeytinyağlı, nar ekşili, bol dolma fıstığı.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "zeytinyağlı"
+      ],
+      "tips": [
+        "Sıkı sarmaya dikkat edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn094",
+      "title": "Ailece Kurufasulye + Pilav",
+      "description": "Geleneksel ama her zaman güzel. Turşu yanında.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ana yemek"
+      ],
+      "tips": [
+        "Düdüklü tencere kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn095",
+      "title": "Hafta Sonu Çöp Şiş (Ev Usulü)",
+      "description": "Marine tavuk, sebzelerle şiş, fırında.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "ızgara"
+      ],
+      "tips": [
+        "Sebzeleri ayrı şişe takın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn096",
+      "title": "Kabak Mücver",
+      "description": "Rendelenmiş kabak, maydanoz, dereotu.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "atıştırmalık"
+      ],
+      "tips": [
+        "Fazla yağ çekmemesi için kızgın yağda kızartın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn097",
+      "title": "Bugün Nohutlu Bulgur Pilavı",
+      "description": "Baharatlı nohut, bulgur, soğan kavurması.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "pilav"
+      ],
+      "tips": [
+        "Tereyağlı kavrulmuş soğan ile servis."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn098",
+      "title": "Bu Akşam Ispanaklı Börek",
+      "description": "El açması veya hazır yufka, bol ıspanak.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "börek"
+      ],
+      "tips": [
+        "Ispanağı soteleyip suyunu süzün."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn099",
+      "title": "Ailece Ev Yapımı Dondurma",
+      "description": "Muz dondurulup blenderdan geçirilir.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "tatlı"
+      ],
+      "tips": [
+        "Kakaolu veya çilekli de yapabilirsiniz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "mn100",
+      "title": "Hafta Sonu Menemen",
+      "description": "Yumurta, domates, biber, soğan. Kahvaltı klasik.",
+      "category": "recipe",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "yemek",
+        "kahvaltı"
+      ],
+      "tips": [
+        "Kekirip kıvamında pişirin."
+      ],
+      "action_type": "show_detail"
+    }
+  ]
+}

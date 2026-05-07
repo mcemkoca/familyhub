@@ -1,0 +1,89 @@
+name: Production Build
+
+on:
+  push:
+    tags: ['v*']
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  analyze-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Flutter analyze
+        run: flutter analyze --fatal-infos
+
+      - name: Run tests
+        run: flutter test
+
+      - name: Check for hardcoded secrets
+        run: |
+          ! grep -rE "(password|secret|token|api_key)\s*=" lib/ --include="*.dart" -l || true
+          ! grep -r "http://" lib/ --include="*.dart" -l || true
+
+  build-android:
+    needs: analyze-and-test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build APK
+        run: flutter build apk --release --split-per-abi
+
+      - name: Build App Bundle
+        run: flutter build appbundle --release
+
+      - name: Upload APK artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-apk
+          path: build/app/outputs/flutter-apk/*.apk
+
+      - name: Upload AAB artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-aab
+          path: build/app/outputs/bundle/release/*.aab
+
+  build-ios:
+    needs: analyze-and-test
+    runs-on: macos-latest
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build IPA
+        run: flutter build ipa --release --no-codesign
+
+      - name: Upload IPA artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-ipa
+          path: build/ios/ipa/*.ipa

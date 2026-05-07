@@ -1,0 +1,1708 @@
+{
+  "module": "budget_management",
+  "version": "1.0.0",
+  "language": "tr",
+  "region": "TR",
+  "suggestions": [
+    {
+      "id": "bm001",
+      "title": "Market Alışveriş Listesi",
+      "description": "İhtiyaç listesi yapın, gereksiz almayın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "market"
+      ],
+      "tips": [
+        "Açken markete gitmeyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm002",
+      "title": "Bugün Enerji Tasarrufu Günü",
+      "description": "Gereksiz ışıkları kapatın, fişleri çekin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "fatura"
+      ],
+      "tips": [
+        "LED ampuller tasarruf sağlar."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm003",
+      "title": "Bu Ay Ev Yapımı Hediye",
+      "description": "Doğum günü için evde hediye yapın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "hediye"
+      ],
+      "tips": [
+        "Kişiselleştirilmiş hediyeler daha değerlidir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm004",
+      "title": "Ailece Bütçe Kontrolü",
+      "description": "Bu haftanın harcamalarını gözden geçirin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "kontrol"
+      ],
+      "tips": [
+        "Küçük harcamaları toplayın, şaşıracaksınız."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm005",
+      "title": "Hafta Sonu Kumbara Sayımı",
+      "description": "Biriken paraları sayın, hedef belirleyin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "birikim"
+      ],
+      "tips": [
+        "Çocuklara kumbara alışkanlığı kazandırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm006",
+      "title": "Abonelik İnceleme",
+      "description": "Kullanılmayan abonelikleri iptal edin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "abonelik"
+      ],
+      "tips": [
+        "Aylık toplamı hesaplayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm007",
+      "title": "Bugün Kupon ve İndirim Takibi",
+      "description": "Haftalık market broşürlerini inceleyin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "indirim"
+      ],
+      "tips": [
+        "Aynı ürünü farklı marketlerde karşılaştırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm008",
+      "title": "Bu Ay Evde Tamir Günü",
+      "description": "Küçük tamirleri kendiniz yapın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "tamir"
+      ],
+      "tips": [
+        "YouTube'dan öğrenin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm009",
+      "title": "Ailece Aile Harcama Limiti",
+      "description": "Bugün için harcama limiti belirleyin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "limit"
+      ],
+      "tips": [
+        "Nakit kullanmak kontrolü artırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm010",
+      "title": "Hafta Sonu Birikim Hedefi Belirle",
+      "description": "Ailece tatil, oyun hedefi seçin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "hedef"
+      ],
+      "tips": [
+        "Görsel bir hedef panosu yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm011",
+      "title": "Yemek Sepeti Analizi",
+      "description": "Son 1 ay yemek siparişi maliyetini hesaplayın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "yemek"
+      ],
+      "tips": [
+        "Ev yemeği çok daha ucuz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm012",
+      "title": "Bugün Geri Dönüşüm Getirisi",
+      "description": "Kağıt, plastik, cam geri dönüşüm kazancı.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "geri dönüşüm"
+      ],
+      "tips": [
+        "Çocuklara çevre bilinci kazandırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm013",
+      "title": "Bu Ay Aile İkinci El Günü",
+      "description": "Kullanılmayan eşyaları satın/takas edin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "satış"
+      ],
+      "tips": [
+        "Fotoğraf çekip online ilan verin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm014",
+      "title": "Ailece Fatura Karşılaştırma",
+      "description": "Son 3 ay elektrik, su, doğalgaz karşılaştırma.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "fatura"
+      ],
+      "tips": [
+        "Tüketim alışkanlıklarınızı analiz edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm015",
+      "title": "Hafta Sonu Ev Yapımı Temizlik",
+      "description": "Market ürünü yerine sirke, karbonat kullanın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "temizlik"
+      ],
+      "tips": [
+        "Doğal ve ucuz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm016",
+      "title": "Aile Borsa Oyunu",
+      "description": "Sanal para ile borsa oynayın, öğrenin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "yatırım"
+      ],
+      "tips": [
+        "Risk almadan öğrenin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm017",
+      "title": "Bugün Doğum Günü Bütçesi",
+      "description": "Ailece doğum günü bütçesi planlayın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "kutlama"
+      ],
+      "tips": [
+        "Evde parti daha ekonomik."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm018",
+      "title": "Bu Ay Yakıt Tasarrufu",
+      "description": "Toplu taşıma, yürüyüş, bisiklet günü.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "ulaşım"
+      ],
+      "tips": [
+        "Aynı zamanda sağlıklı."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm019",
+      "title": "Ailece Aile Kira Getirisi",
+      "description": "Boş oda, garaj, depo değerlendirin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "gelir"
+      ],
+      "tips": [
+        "Güvenlik kontrolü yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm020",
+      "title": "Hafta Sonu Elektrikli Alet Kontrolü",
+      "description": "Eski ampulleri LED ile değiştirin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "elektrik"
+      ],
+      "tips": [
+        "Uzun vadede çok tasarruf."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm021",
+      "title": "Market Alışveriş Listesi",
+      "description": "İhtiyaç listesi yapın, gereksiz almayın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "market"
+      ],
+      "tips": [
+        "Açken markete gitmeyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm022",
+      "title": "Bugün Enerji Tasarrufu Günü",
+      "description": "Gereksiz ışıkları kapatın, fişleri çekin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 0,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "fatura"
+      ],
+      "tips": [
+        "LED ampuller tasarruf sağlar."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm023",
+      "title": "Bu Ay Ev Yapımı Hediye",
+      "description": "Doğum günü için evde hediye yapın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "hediye"
+      ],
+      "tips": [
+        "Kişiselleştirilmiş hediyeler daha değerlidir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm024",
+      "title": "Ailece Bütçe Kontrolü",
+      "description": "Bu haftanın harcamalarını gözden geçirin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "kontrol"
+      ],
+      "tips": [
+        "Küçük harcamaları toplayın, şaşıracaksınız."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm025",
+      "title": "Hafta Sonu Kumbara Sayımı",
+      "description": "Biriken paraları sayın, hedef belirleyin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "birikim"
+      ],
+      "tips": [
+        "Çocuklara kumbara alışkanlığı kazandırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm026",
+      "title": "Abonelik İnceleme",
+      "description": "Kullanılmayan abonelikleri iptal edin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "abonelik"
+      ],
+      "tips": [
+        "Aylık toplamı hesaplayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm027",
+      "title": "Bugün Kupon ve İndirim Takibi",
+      "description": "Haftalık market broşürlerini inceleyin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "indirim"
+      ],
+      "tips": [
+        "Aynı ürünü farklı marketlerde karşılaştırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm028",
+      "title": "Bu Ay Evde Tamir Günü",
+      "description": "Küçük tamirleri kendiniz yapın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "tamir"
+      ],
+      "tips": [
+        "YouTube'dan öğrenin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm029",
+      "title": "Ailece Aile Harcama Limiti",
+      "description": "Bugün için harcama limiti belirleyin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "limit"
+      ],
+      "tips": [
+        "Nakit kullanmak kontrolü artırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm030",
+      "title": "Hafta Sonu Birikim Hedefi Belirle",
+      "description": "Ailece tatil, oyun hedefi seçin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "hedef"
+      ],
+      "tips": [
+        "Görsel bir hedef panosu yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm031",
+      "title": "Yemek Sepeti Analizi",
+      "description": "Son 1 ay yemek siparişi maliyetini hesaplayın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "yemek"
+      ],
+      "tips": [
+        "Ev yemeği çok daha ucuz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm032",
+      "title": "Bugün Geri Dönüşüm Getirisi",
+      "description": "Kağıt, plastik, cam geri dönüşüm kazancı.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "geri dönüşüm"
+      ],
+      "tips": [
+        "Çocuklara çevre bilinci kazandırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm033",
+      "title": "Bu Ay Aile İkinci El Günü",
+      "description": "Kullanılmayan eşyaları satın/takas edin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "satış"
+      ],
+      "tips": [
+        "Fotoğraf çekip online ilan verin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm034",
+      "title": "Ailece Fatura Karşılaştırma",
+      "description": "Son 3 ay elektrik, su, doğalgaz karşılaştırma.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "fatura"
+      ],
+      "tips": [
+        "Tüketim alışkanlıklarınızı analiz edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm035",
+      "title": "Hafta Sonu Ev Yapımı Temizlik",
+      "description": "Market ürünü yerine sirke, karbonat kullanın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "temizlik"
+      ],
+      "tips": [
+        "Doğal ve ucuz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm036",
+      "title": "Aile Borsa Oyunu",
+      "description": "Sanal para ile borsa oynayın, öğrenin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "yatırım"
+      ],
+      "tips": [
+        "Risk almadan öğrenin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm037",
+      "title": "Bugün Doğum Günü Bütçesi",
+      "description": "Ailece doğum günü bütçesi planlayın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "kutlama"
+      ],
+      "tips": [
+        "Evde parti daha ekonomik."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm038",
+      "title": "Bu Ay Yakıt Tasarrufu",
+      "description": "Toplu taşıma, yürüyüş, bisiklet günü.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "ulaşım"
+      ],
+      "tips": [
+        "Aynı zamanda sağlıklı."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm039",
+      "title": "Ailece Aile Kira Getirisi",
+      "description": "Boş oda, garaj, depo değerlendirin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "gelir"
+      ],
+      "tips": [
+        "Güvenlik kontrolü yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm040",
+      "title": "Hafta Sonu Elektrikli Alet Kontrolü",
+      "description": "Eski ampulleri LED ile değiştirin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "elektrik"
+      ],
+      "tips": [
+        "Uzun vadede çok tasarruf."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm041",
+      "title": "Market Alışveriş Listesi",
+      "description": "İhtiyaç listesi yapın, gereksiz almayın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "market"
+      ],
+      "tips": [
+        "Açken markete gitmeyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm042",
+      "title": "Bugün Enerji Tasarrufu Günü",
+      "description": "Gereksiz ışıkları kapatın, fişleri çekin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "fatura"
+      ],
+      "tips": [
+        "LED ampuller tasarruf sağlar."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm043",
+      "title": "Bu Ay Ev Yapımı Hediye",
+      "description": "Doğum günü için evde hediye yapın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "hediye"
+      ],
+      "tips": [
+        "Kişiselleştirilmiş hediyeler daha değerlidir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm044",
+      "title": "Ailece Bütçe Kontrolü",
+      "description": "Bu haftanın harcamalarını gözden geçirin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "kontrol"
+      ],
+      "tips": [
+        "Küçük harcamaları toplayın, şaşıracaksınız."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm045",
+      "title": "Hafta Sonu Kumbara Sayımı",
+      "description": "Biriken paraları sayın, hedef belirleyin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "birikim"
+      ],
+      "tips": [
+        "Çocuklara kumbara alışkanlığı kazandırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm046",
+      "title": "Abonelik İnceleme",
+      "description": "Kullanılmayan abonelikleri iptal edin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "abonelik"
+      ],
+      "tips": [
+        "Aylık toplamı hesaplayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm047",
+      "title": "Bugün Kupon ve İndirim Takibi",
+      "description": "Haftalık market broşürlerini inceleyin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "indirim"
+      ],
+      "tips": [
+        "Aynı ürünü farklı marketlerde karşılaştırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm048",
+      "title": "Bu Ay Evde Tamir Günü",
+      "description": "Küçük tamirleri kendiniz yapın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "tamir"
+      ],
+      "tips": [
+        "YouTube'dan öğrenin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm049",
+      "title": "Ailece Aile Harcama Limiti",
+      "description": "Bugün için harcama limiti belirleyin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "limit"
+      ],
+      "tips": [
+        "Nakit kullanmak kontrolü artırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm050",
+      "title": "Hafta Sonu Birikim Hedefi Belirle",
+      "description": "Ailece tatil, oyun hedefi seçin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "hedef"
+      ],
+      "tips": [
+        "Görsel bir hedef panosu yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm051",
+      "title": "Yemek Sepeti Analizi",
+      "description": "Son 1 ay yemek siparişi maliyetini hesaplayın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "yemek"
+      ],
+      "tips": [
+        "Ev yemeği çok daha ucuz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm052",
+      "title": "Bugün Geri Dönüşüm Getirisi",
+      "description": "Kağıt, plastik, cam geri dönüşüm kazancı.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "geri dönüşüm"
+      ],
+      "tips": [
+        "Çocuklara çevre bilinci kazandırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm053",
+      "title": "Bu Ay Aile İkinci El Günü",
+      "description": "Kullanılmayan eşyaları satın/takas edin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "satış"
+      ],
+      "tips": [
+        "Fotoğraf çekip online ilan verin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm054",
+      "title": "Ailece Fatura Karşılaştırma",
+      "description": "Son 3 ay elektrik, su, doğalgaz karşılaştırma.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "fatura"
+      ],
+      "tips": [
+        "Tüketim alışkanlıklarınızı analiz edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm055",
+      "title": "Hafta Sonu Ev Yapımı Temizlik",
+      "description": "Market ürünü yerine sirke, karbonat kullanın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "temizlik"
+      ],
+      "tips": [
+        "Doğal ve ucuz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm056",
+      "title": "Aile Borsa Oyunu",
+      "description": "Sanal para ile borsa oynayın, öğrenin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "yatırım"
+      ],
+      "tips": [
+        "Risk almadan öğrenin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm057",
+      "title": "Bugün Doğum Günü Bütçesi",
+      "description": "Ailece doğum günü bütçesi planlayın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "kutlama"
+      ],
+      "tips": [
+        "Evde parti daha ekonomik."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm058",
+      "title": "Bu Ay Yakıt Tasarrufu",
+      "description": "Toplu taşıma, yürüyüş, bisiklet günü.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 0,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "ulaşım"
+      ],
+      "tips": [
+        "Aynı zamanda sağlıklı."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm059",
+      "title": "Ailece Aile Kira Getirisi",
+      "description": "Boş oda, garaj, depo değerlendirin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "gelir"
+      ],
+      "tips": [
+        "Güvenlik kontrolü yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm060",
+      "title": "Hafta Sonu Elektrikli Alet Kontrolü",
+      "description": "Eski ampulleri LED ile değiştirin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "elektrik"
+      ],
+      "tips": [
+        "Uzun vadede çok tasarruf."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm061",
+      "title": "Market Alışveriş Listesi",
+      "description": "İhtiyaç listesi yapın, gereksiz almayın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "market"
+      ],
+      "tips": [
+        "Açken markete gitmeyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm062",
+      "title": "Bugün Enerji Tasarrufu Günü",
+      "description": "Gereksiz ışıkları kapatın, fişleri çekin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "fatura"
+      ],
+      "tips": [
+        "LED ampuller tasarruf sağlar."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm063",
+      "title": "Bu Ay Ev Yapımı Hediye",
+      "description": "Doğum günü için evde hediye yapın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "hediye"
+      ],
+      "tips": [
+        "Kişiselleştirilmiş hediyeler daha değerlidir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm064",
+      "title": "Ailece Bütçe Kontrolü",
+      "description": "Bu haftanın harcamalarını gözden geçirin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "kontrol"
+      ],
+      "tips": [
+        "Küçük harcamaları toplayın, şaşıracaksınız."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm065",
+      "title": "Hafta Sonu Kumbara Sayımı",
+      "description": "Biriken paraları sayın, hedef belirleyin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "birikim"
+      ],
+      "tips": [
+        "Çocuklara kumbara alışkanlığı kazandırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm066",
+      "title": "Abonelik İnceleme",
+      "description": "Kullanılmayan abonelikleri iptal edin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "abonelik"
+      ],
+      "tips": [
+        "Aylık toplamı hesaplayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm067",
+      "title": "Bugün Kupon ve İndirim Takibi",
+      "description": "Haftalık market broşürlerini inceleyin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "indirim"
+      ],
+      "tips": [
+        "Aynı ürünü farklı marketlerde karşılaştırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm068",
+      "title": "Bu Ay Evde Tamir Günü",
+      "description": "Küçük tamirleri kendiniz yapın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "tamir"
+      ],
+      "tips": [
+        "YouTube'dan öğrenin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm069",
+      "title": "Ailece Aile Harcama Limiti",
+      "description": "Bugün için harcama limiti belirleyin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "limit"
+      ],
+      "tips": [
+        "Nakit kullanmak kontrolü artırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm070",
+      "title": "Hafta Sonu Birikim Hedefi Belirle",
+      "description": "Ailece tatil, oyun hedefi seçin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "hedef"
+      ],
+      "tips": [
+        "Görsel bir hedef panosu yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm071",
+      "title": "Yemek Sepeti Analizi",
+      "description": "Son 1 ay yemek siparişi maliyetini hesaplayın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "yemek"
+      ],
+      "tips": [
+        "Ev yemeği çok daha ucuz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm072",
+      "title": "Bugün Geri Dönüşüm Getirisi",
+      "description": "Kağıt, plastik, cam geri dönüşüm kazancı.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "geri dönüşüm"
+      ],
+      "tips": [
+        "Çocuklara çevre bilinci kazandırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm073",
+      "title": "Bu Ay Aile İkinci El Günü",
+      "description": "Kullanılmayan eşyaları satın/takas edin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "satış"
+      ],
+      "tips": [
+        "Fotoğraf çekip online ilan verin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm074",
+      "title": "Ailece Fatura Karşılaştırma",
+      "description": "Son 3 ay elektrik, su, doğalgaz karşılaştırma.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "fatura"
+      ],
+      "tips": [
+        "Tüketim alışkanlıklarınızı analiz edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm075",
+      "title": "Hafta Sonu Ev Yapımı Temizlik",
+      "description": "Market ürünü yerine sirke, karbonat kullanın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "temizlik"
+      ],
+      "tips": [
+        "Doğal ve ucuz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm076",
+      "title": "Aile Borsa Oyunu",
+      "description": "Sanal para ile borsa oynayın, öğrenin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "yatırım"
+      ],
+      "tips": [
+        "Risk almadan öğrenin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm077",
+      "title": "Bugün Doğum Günü Bütçesi",
+      "description": "Ailece doğum günü bütçesi planlayın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "kutlama"
+      ],
+      "tips": [
+        "Evde parti daha ekonomik."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm078",
+      "title": "Bu Ay Yakıt Tasarrufu",
+      "description": "Toplu taşıma, yürüyüş, bisiklet günü.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "ulaşım"
+      ],
+      "tips": [
+        "Aynı zamanda sağlıklı."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm079",
+      "title": "Ailece Aile Kira Getirisi",
+      "description": "Boş oda, garaj, depo değerlendirin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "gelir"
+      ],
+      "tips": [
+        "Güvenlik kontrolü yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm080",
+      "title": "Hafta Sonu Elektrikli Alet Kontrolü",
+      "description": "Eski ampulleri LED ile değiştirin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "elektrik"
+      ],
+      "tips": [
+        "Uzun vadede çok tasarruf."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm081",
+      "title": "Market Alışveriş Listesi",
+      "description": "İhtiyaç listesi yapın, gereksiz almayın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "market"
+      ],
+      "tips": [
+        "Açken markete gitmeyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm082",
+      "title": "Bugün Enerji Tasarrufu Günü",
+      "description": "Gereksiz ışıkları kapatın, fişleri çekin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 0,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "fatura"
+      ],
+      "tips": [
+        "LED ampuller tasarruf sağlar."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm083",
+      "title": "Bu Ay Ev Yapımı Hediye",
+      "description": "Doğum günü için evde hediye yapın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "hediye"
+      ],
+      "tips": [
+        "Kişiselleştirilmiş hediyeler daha değerlidir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm084",
+      "title": "Ailece Bütçe Kontrolü",
+      "description": "Bu haftanın harcamalarını gözden geçirin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "kontrol"
+      ],
+      "tips": [
+        "Küçük harcamaları toplayın, şaşıracaksınız."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm085",
+      "title": "Hafta Sonu Kumbara Sayımı",
+      "description": "Biriken paraları sayın, hedef belirleyin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "birikim"
+      ],
+      "tips": [
+        "Çocuklara kumbara alışkanlığı kazandırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm086",
+      "title": "Abonelik İnceleme",
+      "description": "Kullanılmayan abonelikleri iptal edin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "abonelik"
+      ],
+      "tips": [
+        "Aylık toplamı hesaplayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm087",
+      "title": "Bugün Kupon ve İndirim Takibi",
+      "description": "Haftalık market broşürlerini inceleyin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "indirim"
+      ],
+      "tips": [
+        "Aynı ürünü farklı marketlerde karşılaştırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm088",
+      "title": "Bu Ay Evde Tamir Günü",
+      "description": "Küçük tamirleri kendiniz yapın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "tamir"
+      ],
+      "tips": [
+        "YouTube'dan öğrenin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm089",
+      "title": "Ailece Aile Harcama Limiti",
+      "description": "Bugün için harcama limiti belirleyin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "limit"
+      ],
+      "tips": [
+        "Nakit kullanmak kontrolü artırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm090",
+      "title": "Hafta Sonu Birikim Hedefi Belirle",
+      "description": "Ailece tatil, oyun hedefi seçin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "hedef"
+      ],
+      "tips": [
+        "Görsel bir hedef panosu yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm091",
+      "title": "Yemek Sepeti Analizi",
+      "description": "Son 1 ay yemek siparişi maliyetini hesaplayın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "yemek"
+      ],
+      "tips": [
+        "Ev yemeği çok daha ucuz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm092",
+      "title": "Bugün Geri Dönüşüm Getirisi",
+      "description": "Kağıt, plastik, cam geri dönüşüm kazancı.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "geri dönüşüm"
+      ],
+      "tips": [
+        "Çocuklara çevre bilinci kazandırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm093",
+      "title": "Bu Ay Aile İkinci El Günü",
+      "description": "Kullanılmayan eşyaları satın/takas edin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "satış"
+      ],
+      "tips": [
+        "Fotoğraf çekip online ilan verin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm094",
+      "title": "Ailece Fatura Karşılaştırma",
+      "description": "Son 3 ay elektrik, su, doğalgaz karşılaştırma.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "fatura"
+      ],
+      "tips": [
+        "Tüketim alışkanlıklarınızı analiz edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm095",
+      "title": "Hafta Sonu Ev Yapımı Temizlik",
+      "description": "Market ürünü yerine sirke, karbonat kullanın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "temizlik"
+      ],
+      "tips": [
+        "Doğal ve ucuz."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm096",
+      "title": "Aile Borsa Oyunu",
+      "description": "Sanal para ile borsa oynayın, öğrenin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "yatırım"
+      ],
+      "tips": [
+        "Risk almadan öğrenin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm097",
+      "title": "Bugün Doğum Günü Bütçesi",
+      "description": "Ailece doğum günü bütçesi planlayın.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "kutlama"
+      ],
+      "tips": [
+        "Evde parti daha ekonomik."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm098",
+      "title": "Bu Ay Yakıt Tasarrufu",
+      "description": "Toplu taşıma, yürüyüş, bisiklet günü.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "ulaşım"
+      ],
+      "tips": [
+        "Aynı zamanda sağlıklı."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm099",
+      "title": "Ailece Aile Kira Getirisi",
+      "description": "Boş oda, garaj, depo değerlendirin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "gelir"
+      ],
+      "tips": [
+        "Güvenlik kontrolü yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "bm100",
+      "title": "Hafta Sonu Elektrikli Alet Kontrolü",
+      "description": "Eski ampulleri LED ile değiştirin.",
+      "category": "finance",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "bütçe",
+        "elektrik"
+      ],
+      "tips": [
+        "Uzun vadede çok tasarruf."
+      ],
+      "action_type": "show_detail"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "module": "household",
+  "version": "2.0",
+  "language": "tr",
+  "region": "BE",
+  "generated_at": "2026-05-03T00:00:00Z",
+  "daily_routines": [
+    {
+      "name": "15 Dakikalık Hızlı Temizlik",
+      "time": "Akşam yatmadan önce",
+      "tasks": [
+        "Mutfak tezgahı silinir (3 dk)",
+        "Oyuncaklar toplanır (5 dk)",
+        "Yerdeki eşyalar yerine konur (4 dk)",
+        "Çöp kontrolü (3 dk)"
+      ],
+      "family_role": "Tüm aile üyeleri katılır"
+    },
+    {
+      "name": "Sabah Rutini",
+      "time": "Kahvaltı sonrası",
+      "tasks": [
+        "Yataklar toplanır",
+        "Kahvaltı tabakları bulaşığa/makineye",
+        "Çocukların okul çantası kontrolü"
+      ],
+      "family_role": "Ebeveyn + çocuk (yaşa uygun görevler)"
+    }
+  ],
+  "weekly_schedule": {
+    "pazartesi": "Banyo derinlemesine temizlik",
+    "sali": "Çamaşır yıkama (renkliler)",
+    "carsamba": "Mutfak dolapları ve buzdolabı kontrolü",
+    "persembe": "Çamaşır yıkama (beyazlar)",
+    "cuma": "Salon ve ortak alanlar toz alma",
+    "cumartesi": "Elektrikli süpürge ile genel süpürme",
+    "pazar": "Haftalık planlama ve pazar alışverişi listesi"
+  },
+  "seasonal_tasks": {
+    "spring": [
+      "Dolap bahar temizliği",
+      "Kışlıkları kaldır, yazlıkları çıkar",
+      "Pencere ve perde temizliği",
+      "Balkon/bahçe hazırlığı"
+    ],
+    "summer": [
+      "Buzdolabı derinlemesine temizlik",
+      "Klima/filtre kontrolü",
+      "Güneşlik/perde değişimi",
+      "Seyahat çantası hazırlık listesi"
+    ],
+    "autumn": [
+      "Kombi/boiler bakımı",
+      "Kışlık ayakkabı/mont kontrolü",
+      "Balkon kış hazırlığı",
+      "Okul malzemeleri organizasyonu"
+    ],
+    "winter": [
+      "Nem/küf kontrolü",
+      "Elektrikli ısıtıcı güvenlik kontrolü",
+      "Deprem/acil durum çantası kontrolü",
+      "Yılbaşı temizliği ve dekorasyon"
+    ]
+  },
+  "gamification": {
+    "point_system": {
+      "daily_task": 5,
+      "weekly_task": 15,
+      "seasonal_task": 30,
+      "bonus": 10
+    },
+    "rewards": [
+      "100 puan: Aile film gecesi seçim hakkı",
+      "200 puan: Özel tatlı yapımı",
+      "500 puan: Küçük aile gezisi"
+    ]
+  }
+}

@@ -1,0 +1,1708 @@
+{
+  "module": "education_support",
+  "version": "1.0.0",
+  "language": "tr",
+  "region": "TR",
+  "suggestions": [
+    {
+      "id": "es001",
+      "title": "Ödev Kontrol Rutini",
+      "description": "Çocukların ödevlerini birlikte gözden geçirin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "ödev"
+      ],
+      "tips": [
+        "Yardım etmek yerine yönlendirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es002",
+      "title": "Bugün Okuma Saati",
+      "description": "Her gün 30 dk kitap okuma.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "okuma"
+      ],
+      "tips": [
+        "Sesli okuma da yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es003",
+      "title": "Bu Hafta Bilgi Kartları",
+      "description": "Zor konular için kartlar hazırlayın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "teknik"
+      ],
+      "tips": [
+        "Görsel hafıza güçlüdür."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es004",
+      "title": "Ailece Sınav Takvimi",
+      "description": "Yaklaşan sınavları takvime yazın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "planlama"
+      ],
+      "tips": [
+        "Geriye sayım başlatın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es005",
+      "title": "Çocuklarla Öğretmen Görüşmesi",
+      "description": "Veli toplantısına hazırlık yapın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "iletişim"
+      ],
+      "tips": [
+        "Sorularınızı önceden yazın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es006",
+      "title": "Birlikte Öğrenme",
+      "description": "Çocuğunuzun konusunu siz de öğrenin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "destek"
+      ],
+      "tips": [
+        "YouTube eğitim videoları izleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es007",
+      "title": "Bugün Proje Yardımı",
+      "description": "Okul projesinde rehberlik edin, yapmayın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "proje"
+      ],
+      "tips": [
+        "Fikir verin, uygulamayı onlar yapsın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es008",
+      "title": "Bu Hafta Kütüphane Ziyareti",
+      "description": "Haftada bir kütüphaneye gidin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "kütüphane"
+      ],
+      "tips": [
+        "Kendi kartlarını olsun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es009",
+      "title": "Ailece Bilim Fuarı Hazırlığı",
+      "description": "Evde mini deneyler yapın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "bilim"
+      ],
+      "tips": [
+        "Günlük gözlem defteri tutun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es010",
+      "title": "Çocuklarla Yazma Pratiği",
+      "description": "Günlük tutma alışkanlığı kazandırın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "yazma"
+      ],
+      "tips": [
+        "Resimli günlük de olabilir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es011",
+      "title": "Matematik Oyunları",
+      "description": "Market hesabı, oran-orantı oyunu.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "matematik"
+      ],
+      "tips": [
+        "Günlük hayattan örnekler."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es012",
+      "title": "Bugün Tarih Canlandırma",
+      "description": "Tarihi olayları evde canlandırın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "tarih"
+      ],
+      "tips": [
+        "Kostümler giyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es013",
+      "title": "Bu Hafta Dil Pratiği",
+      "description": "Evde belirli saatlerde İngilizce konuşun.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "dil"
+      ],
+      "tips": [
+        "Film izleyip altyazısız tekrar edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es014",
+      "title": "Ailece Müze Ziyareti",
+      "description": "Sanat veya tarih müzesine gidin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 135,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "müze"
+      ],
+      "tips": [
+        "Önceden müze hakkında araştırma yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es015",
+      "title": "Çocuklarla Müzik Eğitimi",
+      "description": "Bir enstrüman çalmayı deneyin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "müzik"
+      ],
+      "tips": [
+        "Ukulele kolay başlangıçtır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es016",
+      "title": "Spor Aktivitesi",
+      "description": "Düzenli spor yapma alışkanlığı.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "spor"
+      ],
+      "tips": [
+        "Okul takımlarına katılmayı teşvik edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es017",
+      "title": "Bugün Sanat Atölyesi",
+      "description": "Resim, seramik, el işi deneyin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "sanat"
+      ],
+      "tips": [
+        "Malzemeleri birlikte seçin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es018",
+      "title": "Bu Hafta Doğa Gözlemi",
+      "description": "Parkta bitki ve hayvan gözlemi.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "doğa"
+      ],
+      "tips": [
+        "Gözlem defteri tutun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es019",
+      "title": "Ailece Teknoloji Eğitimi",
+      "description": "Güvenli internet kullanımını öğretin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "teknoloji"
+      ],
+      "tips": [
+        "Aile içi kurallar belirleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es020",
+      "title": "Çocuklarla Hedef Belirleme",
+      "description": "Dönemlik hedefler koyun, takip edin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "hedef"
+      ],
+      "tips": [
+        "Ulaşılabilir ve ölçülebilir hedefler."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es021",
+      "title": "Ödev Kontrol Rutini",
+      "description": "Çocukların ödevlerini birlikte gözden geçirin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "ödev"
+      ],
+      "tips": [
+        "Yardım etmek yerine yönlendirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es022",
+      "title": "Bugün Okuma Saati",
+      "description": "Her gün 30 dk kitap okuma.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "okuma"
+      ],
+      "tips": [
+        "Sesli okuma da yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es023",
+      "title": "Bu Hafta Bilgi Kartları",
+      "description": "Zor konular için kartlar hazırlayın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "teknik"
+      ],
+      "tips": [
+        "Görsel hafıza güçlüdür."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es024",
+      "title": "Ailece Sınav Takvimi",
+      "description": "Yaklaşan sınavları takvime yazın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "planlama"
+      ],
+      "tips": [
+        "Geriye sayım başlatın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es025",
+      "title": "Çocuklarla Öğretmen Görüşmesi",
+      "description": "Veli toplantısına hazırlık yapın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "iletişim"
+      ],
+      "tips": [
+        "Sorularınızı önceden yazın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es026",
+      "title": "Birlikte Öğrenme",
+      "description": "Çocuğunuzun konusunu siz de öğrenin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "destek"
+      ],
+      "tips": [
+        "YouTube eğitim videoları izleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es027",
+      "title": "Bugün Proje Yardımı",
+      "description": "Okul projesinde rehberlik edin, yapmayın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "proje"
+      ],
+      "tips": [
+        "Fikir verin, uygulamayı onlar yapsın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es028",
+      "title": "Bu Hafta Kütüphane Ziyareti",
+      "description": "Haftada bir kütüphaneye gidin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "kütüphane"
+      ],
+      "tips": [
+        "Kendi kartlarını olsun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es029",
+      "title": "Ailece Bilim Fuarı Hazırlığı",
+      "description": "Evde mini deneyler yapın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "bilim"
+      ],
+      "tips": [
+        "Günlük gözlem defteri tutun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es030",
+      "title": "Çocuklarla Yazma Pratiği",
+      "description": "Günlük tutma alışkanlığı kazandırın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "yazma"
+      ],
+      "tips": [
+        "Resimli günlük de olabilir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es031",
+      "title": "Matematik Oyunları",
+      "description": "Market hesabı, oran-orantı oyunu.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "matematik"
+      ],
+      "tips": [
+        "Günlük hayattan örnekler."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es032",
+      "title": "Bugün Tarih Canlandırma",
+      "description": "Tarihi olayları evde canlandırın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "tarih"
+      ],
+      "tips": [
+        "Kostümler giyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es033",
+      "title": "Bu Hafta Dil Pratiği",
+      "description": "Evde belirli saatlerde İngilizce konuşun.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "dil"
+      ],
+      "tips": [
+        "Film izleyip altyazısız tekrar edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es034",
+      "title": "Ailece Müze Ziyareti",
+      "description": "Sanat veya tarih müzesine gidin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 135,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "müze"
+      ],
+      "tips": [
+        "Önceden müze hakkında araştırma yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es035",
+      "title": "Çocuklarla Müzik Eğitimi",
+      "description": "Bir enstrüman çalmayı deneyin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "müzik"
+      ],
+      "tips": [
+        "Ukulele kolay başlangıçtır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es036",
+      "title": "Spor Aktivitesi",
+      "description": "Düzenli spor yapma alışkanlığı.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "spor"
+      ],
+      "tips": [
+        "Okul takımlarına katılmayı teşvik edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es037",
+      "title": "Bugün Sanat Atölyesi",
+      "description": "Resim, seramik, el işi deneyin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "sanat"
+      ],
+      "tips": [
+        "Malzemeleri birlikte seçin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es038",
+      "title": "Bu Hafta Doğa Gözlemi",
+      "description": "Parkta bitki ve hayvan gözlemi.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "doğa"
+      ],
+      "tips": [
+        "Gözlem defteri tutun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es039",
+      "title": "Ailece Teknoloji Eğitimi",
+      "description": "Güvenli internet kullanımını öğretin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "teknoloji"
+      ],
+      "tips": [
+        "Aile içi kurallar belirleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es040",
+      "title": "Çocuklarla Hedef Belirleme",
+      "description": "Dönemlik hedefler koyun, takip edin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "hedef"
+      ],
+      "tips": [
+        "Ulaşılabilir ve ölçülebilir hedefler."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es041",
+      "title": "Ödev Kontrol Rutini",
+      "description": "Çocukların ödevlerini birlikte gözden geçirin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "ödev"
+      ],
+      "tips": [
+        "Yardım etmek yerine yönlendirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es042",
+      "title": "Bugün Okuma Saati",
+      "description": "Her gün 30 dk kitap okuma.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "okuma"
+      ],
+      "tips": [
+        "Sesli okuma da yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es043",
+      "title": "Bu Hafta Bilgi Kartları",
+      "description": "Zor konular için kartlar hazırlayın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "teknik"
+      ],
+      "tips": [
+        "Görsel hafıza güçlüdür."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es044",
+      "title": "Ailece Sınav Takvimi",
+      "description": "Yaklaşan sınavları takvime yazın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "planlama"
+      ],
+      "tips": [
+        "Geriye sayım başlatın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es045",
+      "title": "Çocuklarla Öğretmen Görüşmesi",
+      "description": "Veli toplantısına hazırlık yapın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "iletişim"
+      ],
+      "tips": [
+        "Sorularınızı önceden yazın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es046",
+      "title": "Birlikte Öğrenme",
+      "description": "Çocuğunuzun konusunu siz de öğrenin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "destek"
+      ],
+      "tips": [
+        "YouTube eğitim videoları izleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es047",
+      "title": "Bugün Proje Yardımı",
+      "description": "Okul projesinde rehberlik edin, yapmayın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "proje"
+      ],
+      "tips": [
+        "Fikir verin, uygulamayı onlar yapsın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es048",
+      "title": "Bu Hafta Kütüphane Ziyareti",
+      "description": "Haftada bir kütüphaneye gidin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "kütüphane"
+      ],
+      "tips": [
+        "Kendi kartlarını olsun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es049",
+      "title": "Ailece Bilim Fuarı Hazırlığı",
+      "description": "Evde mini deneyler yapın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "bilim"
+      ],
+      "tips": [
+        "Günlük gözlem defteri tutun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es050",
+      "title": "Çocuklarla Yazma Pratiği",
+      "description": "Günlük tutma alışkanlığı kazandırın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "yazma"
+      ],
+      "tips": [
+        "Resimli günlük de olabilir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es051",
+      "title": "Matematik Oyunları",
+      "description": "Market hesabı, oran-orantı oyunu.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "matematik"
+      ],
+      "tips": [
+        "Günlük hayattan örnekler."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es052",
+      "title": "Bugün Tarih Canlandırma",
+      "description": "Tarihi olayları evde canlandırın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "tarih"
+      ],
+      "tips": [
+        "Kostümler giyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es053",
+      "title": "Bu Hafta Dil Pratiği",
+      "description": "Evde belirli saatlerde İngilizce konuşun.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "dil"
+      ],
+      "tips": [
+        "Film izleyip altyazısız tekrar edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es054",
+      "title": "Ailece Müze Ziyareti",
+      "description": "Sanat veya tarih müzesine gidin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 135,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "müze"
+      ],
+      "tips": [
+        "Önceden müze hakkında araştırma yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es055",
+      "title": "Çocuklarla Müzik Eğitimi",
+      "description": "Bir enstrüman çalmayı deneyin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "müzik"
+      ],
+      "tips": [
+        "Ukulele kolay başlangıçtır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es056",
+      "title": "Spor Aktivitesi",
+      "description": "Düzenli spor yapma alışkanlığı.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "spor"
+      ],
+      "tips": [
+        "Okul takımlarına katılmayı teşvik edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es057",
+      "title": "Bugün Sanat Atölyesi",
+      "description": "Resim, seramik, el işi deneyin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "sanat"
+      ],
+      "tips": [
+        "Malzemeleri birlikte seçin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es058",
+      "title": "Bu Hafta Doğa Gözlemi",
+      "description": "Parkta bitki ve hayvan gözlemi.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "doğa"
+      ],
+      "tips": [
+        "Gözlem defteri tutun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es059",
+      "title": "Ailece Teknoloji Eğitimi",
+      "description": "Güvenli internet kullanımını öğretin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "teknoloji"
+      ],
+      "tips": [
+        "Aile içi kurallar belirleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es060",
+      "title": "Çocuklarla Hedef Belirleme",
+      "description": "Dönemlik hedefler koyun, takip edin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "hedef"
+      ],
+      "tips": [
+        "Ulaşılabilir ve ölçülebilir hedefler."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es061",
+      "title": "Ödev Kontrol Rutini",
+      "description": "Çocukların ödevlerini birlikte gözden geçirin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "ödev"
+      ],
+      "tips": [
+        "Yardım etmek yerine yönlendirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es062",
+      "title": "Bugün Okuma Saati",
+      "description": "Her gün 30 dk kitap okuma.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "okuma"
+      ],
+      "tips": [
+        "Sesli okuma da yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es063",
+      "title": "Bu Hafta Bilgi Kartları",
+      "description": "Zor konular için kartlar hazırlayın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "teknik"
+      ],
+      "tips": [
+        "Görsel hafıza güçlüdür."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es064",
+      "title": "Ailece Sınav Takvimi",
+      "description": "Yaklaşan sınavları takvime yazın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "planlama"
+      ],
+      "tips": [
+        "Geriye sayım başlatın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es065",
+      "title": "Çocuklarla Öğretmen Görüşmesi",
+      "description": "Veli toplantısına hazırlık yapın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "iletişim"
+      ],
+      "tips": [
+        "Sorularınızı önceden yazın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es066",
+      "title": "Birlikte Öğrenme",
+      "description": "Çocuğunuzun konusunu siz de öğrenin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "destek"
+      ],
+      "tips": [
+        "YouTube eğitim videoları izleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es067",
+      "title": "Bugün Proje Yardımı",
+      "description": "Okul projesinde rehberlik edin, yapmayın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "proje"
+      ],
+      "tips": [
+        "Fikir verin, uygulamayı onlar yapsın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es068",
+      "title": "Bu Hafta Kütüphane Ziyareti",
+      "description": "Haftada bir kütüphaneye gidin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "kütüphane"
+      ],
+      "tips": [
+        "Kendi kartlarını olsun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es069",
+      "title": "Ailece Bilim Fuarı Hazırlığı",
+      "description": "Evde mini deneyler yapın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "bilim"
+      ],
+      "tips": [
+        "Günlük gözlem defteri tutun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es070",
+      "title": "Çocuklarla Yazma Pratiği",
+      "description": "Günlük tutma alışkanlığı kazandırın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "yazma"
+      ],
+      "tips": [
+        "Resimli günlük de olabilir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es071",
+      "title": "Matematik Oyunları",
+      "description": "Market hesabı, oran-orantı oyunu.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "matematik"
+      ],
+      "tips": [
+        "Günlük hayattan örnekler."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es072",
+      "title": "Bugün Tarih Canlandırma",
+      "description": "Tarihi olayları evde canlandırın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "tarih"
+      ],
+      "tips": [
+        "Kostümler giyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es073",
+      "title": "Bu Hafta Dil Pratiği",
+      "description": "Evde belirli saatlerde İngilizce konuşun.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "dil"
+      ],
+      "tips": [
+        "Film izleyip altyazısız tekrar edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es074",
+      "title": "Ailece Müze Ziyareti",
+      "description": "Sanat veya tarih müzesine gidin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 135,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "müze"
+      ],
+      "tips": [
+        "Önceden müze hakkında araştırma yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es075",
+      "title": "Çocuklarla Müzik Eğitimi",
+      "description": "Bir enstrüman çalmayı deneyin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "müzik"
+      ],
+      "tips": [
+        "Ukulele kolay başlangıçtır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es076",
+      "title": "Spor Aktivitesi",
+      "description": "Düzenli spor yapma alışkanlığı.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "spor"
+      ],
+      "tips": [
+        "Okul takımlarına katılmayı teşvik edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es077",
+      "title": "Bugün Sanat Atölyesi",
+      "description": "Resim, seramik, el işi deneyin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "sanat"
+      ],
+      "tips": [
+        "Malzemeleri birlikte seçin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es078",
+      "title": "Bu Hafta Doğa Gözlemi",
+      "description": "Parkta bitki ve hayvan gözlemi.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "doğa"
+      ],
+      "tips": [
+        "Gözlem defteri tutun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es079",
+      "title": "Ailece Teknoloji Eğitimi",
+      "description": "Güvenli internet kullanımını öğretin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "teknoloji"
+      ],
+      "tips": [
+        "Aile içi kurallar belirleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es080",
+      "title": "Çocuklarla Hedef Belirleme",
+      "description": "Dönemlik hedefler koyun, takip edin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "hedef"
+      ],
+      "tips": [
+        "Ulaşılabilir ve ölçülebilir hedefler."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es081",
+      "title": "Ödev Kontrol Rutini",
+      "description": "Çocukların ödevlerini birlikte gözden geçirin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "ödev"
+      ],
+      "tips": [
+        "Yardım etmek yerine yönlendirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es082",
+      "title": "Bugün Okuma Saati",
+      "description": "Her gün 30 dk kitap okuma.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "okuma"
+      ],
+      "tips": [
+        "Sesli okuma da yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es083",
+      "title": "Bu Hafta Bilgi Kartları",
+      "description": "Zor konular için kartlar hazırlayın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "teknik"
+      ],
+      "tips": [
+        "Görsel hafıza güçlüdür."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es084",
+      "title": "Ailece Sınav Takvimi",
+      "description": "Yaklaşan sınavları takvime yazın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "planlama"
+      ],
+      "tips": [
+        "Geriye sayım başlatın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es085",
+      "title": "Çocuklarla Öğretmen Görüşmesi",
+      "description": "Veli toplantısına hazırlık yapın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "iletişim"
+      ],
+      "tips": [
+        "Sorularınızı önceden yazın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es086",
+      "title": "Birlikte Öğrenme",
+      "description": "Çocuğunuzun konusunu siz de öğrenin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "destek"
+      ],
+      "tips": [
+        "YouTube eğitim videoları izleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es087",
+      "title": "Bugün Proje Yardımı",
+      "description": "Okul projesinde rehberlik edin, yapmayın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "proje"
+      ],
+      "tips": [
+        "Fikir verin, uygulamayı onlar yapsın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es088",
+      "title": "Bu Hafta Kütüphane Ziyareti",
+      "description": "Haftada bir kütüphaneye gidin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "kütüphane"
+      ],
+      "tips": [
+        "Kendi kartlarını olsun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es089",
+      "title": "Ailece Bilim Fuarı Hazırlığı",
+      "description": "Evde mini deneyler yapın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "bilim"
+      ],
+      "tips": [
+        "Günlük gözlem defteri tutun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es090",
+      "title": "Çocuklarla Yazma Pratiği",
+      "description": "Günlük tutma alışkanlığı kazandırın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "yazma"
+      ],
+      "tips": [
+        "Resimli günlük de olabilir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es091",
+      "title": "Matematik Oyunları",
+      "description": "Market hesabı, oran-orantı oyunu.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "matematik"
+      ],
+      "tips": [
+        "Günlük hayattan örnekler."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es092",
+      "title": "Bugün Tarih Canlandırma",
+      "description": "Tarihi olayları evde canlandırın.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "tarih"
+      ],
+      "tips": [
+        "Kostümler giyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es093",
+      "title": "Bu Hafta Dil Pratiği",
+      "description": "Evde belirli saatlerde İngilizce konuşun.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "dil"
+      ],
+      "tips": [
+        "Film izleyip altyazısız tekrar edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es094",
+      "title": "Ailece Müze Ziyareti",
+      "description": "Sanat veya tarih müzesine gidin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 135,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "müze"
+      ],
+      "tips": [
+        "Önceden müze hakkında araştırma yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es095",
+      "title": "Çocuklarla Müzik Eğitimi",
+      "description": "Bir enstrüman çalmayı deneyin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "müzik"
+      ],
+      "tips": [
+        "Ukulele kolay başlangıçtır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es096",
+      "title": "Spor Aktivitesi",
+      "description": "Düzenli spor yapma alışkanlığı.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "spor"
+      ],
+      "tips": [
+        "Okul takımlarına katılmayı teşvik edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es097",
+      "title": "Bugün Sanat Atölyesi",
+      "description": "Resim, seramik, el işi deneyin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "sanat"
+      ],
+      "tips": [
+        "Malzemeleri birlikte seçin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es098",
+      "title": "Bu Hafta Doğa Gözlemi",
+      "description": "Parkta bitki ve hayvan gözlemi.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "doğa"
+      ],
+      "tips": [
+        "Gözlem defteri tutun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es099",
+      "title": "Ailece Teknoloji Eğitimi",
+      "description": "Güvenli internet kullanımını öğretin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "teknoloji"
+      ],
+      "tips": [
+        "Aile içi kurallar belirleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "es100",
+      "title": "Çocuklarla Hedef Belirleme",
+      "description": "Dönemlik hedefler koyun, takip edin.",
+      "category": "education",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "eğitim",
+        "hedef"
+      ],
+      "tips": [
+        "Ulaşılabilir ve ölçülebilir hedefler."
+      ],
+      "action_type": "show_detail"
+    }
+  ]
+}

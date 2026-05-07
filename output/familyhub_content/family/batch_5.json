@@ -1,0 +1,630 @@
+[
+  {
+    "id": "family_041",
+    "title": "Pazar Kahvaltısı ve Bisiklet Turu",
+    "category": "aksam_aktivitesi",
+    "bonding_level": 10,
+    "fun_factor": 10,
+    "cost": "az",
+    "duration": "3-4 saat",
+    "planning_time": 13,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "disarisi",
+    "season": [
+      "kis",
+      "yaz"
+    ],
+    "weather_dependency": false,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.8,
+    "review_count": 462
+  },
+  {
+    "id": "family_042",
+    "title": "Kamp ve Doğa Yürüyüşü",
+    "category": "aksam_aktivitesi",
+    "bonding_level": 9,
+    "fun_factor": 7,
+    "cost": "orta",
+    "duration": "2-3 gün",
+    "planning_time": 16,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "dogada",
+    "season": [
+      "kis",
+      "ilkbahar",
+      "sonbahar"
+    ],
+    "weather_dependency": true,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.7,
+    "review_count": 237
+  },
+  {
+    "id": "family_043",
+    "title": "Aile Oyun Gecesi",
+    "category": "aksam_aktivitesi",
+    "bonding_level": 9,
+    "fun_factor": 9,
+    "cost": "az",
+    "duration": "2-3 saat",
+    "planning_time": 26,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "evde",
+    "season": [
+      "yaz",
+      "kis",
+      "ilkbahar"
+    ],
+    "weather_dependency": false,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.2,
+    "review_count": 242
+  },
+  {
+    "id": "family_044",
+    "title": "Sabah Yürüyüşü ve Kahve",
+    "category": "aksam_aktivitesi",
+    "bonding_level": 9,
+    "fun_factor": 8,
+    "cost": "az",
+    "duration": "1-2 saat",
+    "planning_time": 25,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "disarisi",
+    "season": [
+      "kis",
+      "ilkbahar",
+      "sonbahar",
+      "yaz"
+    ],
+    "weather_dependency": true,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.4,
+    "review_count": 963
+  },
+  {
+    "id": "family_045",
+    "title": "Plaj ve Deniz Keyfi",
+    "category": "aksam_aktivitesi",
+    "bonding_level": 9,
+    "fun_factor": 8,
+    "cost": "orta",
+    "duration": "1 gün",
+    "planning_time": 6,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "disarisi",
+    "season": [
+      "sonbahar"
+    ],
+    "weather_dependency": false,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 5.0,
+    "review_count": 625
+  },
+  {
+    "id": "family_046",
+    "title": "Müze Gezisi",
+    "category": "sabah_rutini",
+    "bonding_level": 10,
+    "fun_factor": 10,
+    "cost": "az",
+    "duration": "3-4 saat",
+    "planning_time": 21,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "disarisi",
+    "season": [
+      "sonbahar",
+      "yaz",
+      "kis",
+      "ilkbahar"
+    ],
+    "weather_dependency": false,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "1 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.6,
+    "review_count": 209
+  },
+  {
+    "id": "family_047",
+    "title": "Orman Pikniği",
+    "category": "sabah_rutini",
+    "bonding_level": 10,
+    "fun_factor": 10,
+    "cost": "az",
+    "duration": "4-5 saat",
+    "planning_time": 11,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "disarisi",
+    "season": [
+      "sonbahar",
+      "kis",
+      "yaz",
+      "ilkbahar"
+    ],
+    "weather_dependency": true,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "1 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.8,
+    "review_count": 807
+  },
+  {
+    "id": "family_048",
+    "title": "Film ve Patlamış Mısır Gecesi",
+    "category": "sabah_rutini",
+    "bonding_level": 8,
+    "fun_factor": 10,
+    "cost": "az",
+    "duration": "2-3 saat",
+    "planning_time": 5,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "evde",
+    "season": [
+      "sonbahar",
+      "yaz",
+      "ilkbahar"
+    ],
+    "weather_dependency": false,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "1 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.2,
+    "review_count": 140
+  },
+  {
+    "id": "family_049",
+    "title": "Yemek Yapma Yarışması",
+    "category": "sabah_rutini",
+    "bonding_level": 7,
+    "fun_factor": 9,
+    "cost": "az",
+    "duration": "2-3 saat",
+    "planning_time": 8,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "evde",
+    "season": [
+      "sonbahar",
+      "kis"
+    ],
+    "weather_dependency": true,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "1 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "2 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.7,
+    "review_count": 401
+  },
+  {
+    "id": "family_050",
+    "title": "Kartondan Şehir Yapımı",
+    "category": "sabah_rutini",
+    "bonding_level": 10,
+    "fun_factor": 9,
+    "cost": "az",
+    "duration": "2-3 saat",
+    "planning_time": 28,
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "participant_count": {
+      "min": 2,
+      "max": 8
+    },
+    "location_type": "evde",
+    "season": [
+      "yaz",
+      "ilkbahar"
+    ],
+    "weather_dependency": true,
+    "materials_needed": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "1 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "3 adet",
+        "estimated_cost": "0-10€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "4 adet",
+        "estimated_cost": "0-10€"
+      }
+    ],
+    "preparation_steps": [
+      "Plan yapın.",
+      "Malzemeleri hazırlayın.",
+      "Güzergahı belirleyin.",
+      "Güneş kremi alın.",
+      "İlk yardım çantası hazırlayın."
+    ],
+    "activity_flow": [
+      "08:00 - Başlangıç",
+      "10:00 - Ana aktivite",
+      "12:00 - Mola",
+      "14:00 - Devam",
+      "16:00 - Bitiş"
+    ],
+    "conversation_starters": [
+      "Bugün en güzel anın neydi?",
+      "Bir dahaki sefere ne yapalım?",
+      "Bugün ne öğrendin?"
+    ],
+    "rating": 4.6,
+    "review_count": 925
+  }
+]

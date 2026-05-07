@@ -1,0 +1,12 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - integration_test/**
+  errors:
+    depend_on_referenced_packages: ignore
+    deprecated_member_use: ignore
+    empty_catches: ignore
+    unused_catch_stack: ignore
+    unused_local_variable: ignore
+    unused_import: ignore

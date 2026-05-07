@@ -1,0 +1,486 @@
+[
+  {
+    "id": "travel_191",
+    "title": "Paris: Kültür Gezisi",
+    "destination": "Paris",
+    "country": "Avrupa",
+    "city": "Paris",
+    "category": "kultur",
+    "coordinates": {
+      "lat": 48.8566,
+      "lng": 2.3522
+    },
+    "best_season": [
+      "ilkbahar"
+    ],
+    "duration": "4-5 gün",
+    "budget": "luks",
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "activities": [
+      {
+        "name": "Gezi",
+        "description": "Yerel rehber eşliğinde keşif turu",
+        "duration": "2-3 saat",
+        "cost": "10-30€/kişi",
+        "booking_required": true,
+        "maps_location": "Paris"
+      },
+      {
+        "name": "Fotoğraf Turu",
+        "description": "En iyi manzara noktaları",
+        "duration": "1-2 saat",
+        "cost": "0€",
+        "booking_required": false,
+        "maps_location": "Paris"
+      }
+    ],
+    "tips": [
+      "Erken rezervasyon yapın.",
+      "Rahat ayakkabı giyin.",
+      "Çocuklar için atıştırmalık yanınızda bulundurun."
+    ],
+    "safety_info": "Genel olarak güvenli bölge.",
+    "rating": 5.0,
+    "review_count": 3304
+  },
+  {
+    "id": "travel_192",
+    "title": "Roma: Kültür Gezisi",
+    "destination": "Roma",
+    "country": "Avrupa",
+    "city": "Roma",
+    "category": "kultur",
+    "coordinates": {
+      "lat": 41.9028,
+      "lng": 12.4964
+    },
+    "best_season": [
+      "kis",
+      "yaz",
+      "ilkbahar"
+    ],
+    "duration": "3-4 gün",
+    "budget": "orta",
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "activities": [
+      {
+        "name": "Gezi",
+        "description": "Yerel rehber eşliğinde keşif turu",
+        "duration": "2-3 saat",
+        "cost": "10-30€/kişi",
+        "booking_required": false,
+        "maps_location": "Roma"
+      },
+      {
+        "name": "Fotoğraf Turu",
+        "description": "En iyi manzara noktaları",
+        "duration": "1-2 saat",
+        "cost": "0€",
+        "booking_required": false,
+        "maps_location": "Roma"
+      }
+    ],
+    "tips": [
+      "Erken rezervasyon yapın.",
+      "Rahat ayakkabı giyin.",
+      "Çocuklar için atıştırmalık yanınızda bulundurun."
+    ],
+    "safety_info": "Genel olarak güvenli bölge.",
+    "rating": 4.7,
+    "review_count": 1827
+  },
+  {
+    "id": "travel_193",
+    "title": "Barselona: Macera Rotası",
+    "destination": "Barselona",
+    "country": "Avrupa",
+    "city": "Barselona",
+    "category": "kultur",
+    "coordinates": {
+      "lat": 41.3851,
+      "lng": 2.1734
+    },
+    "best_season": [
+      "kis",
+      "yaz",
+      "ilkbahar"
+    ],
+    "duration": "3-4 gün",
+    "budget": "orta",
+    "age_suitable": {
+      "min": 2,
+      "max": 99
+    },
+    "activities": [
+      {
+        "name": "Gezi",
+        "description": "Yerel rehber eşliğinde keşif turu",
+        "duration": "2-3 saat",
+        "cost": "10-30€/kişi",
+        "booking_required": true,
+        "maps_location": "Barselona"
+      },
+      {
+        "name": "Fotoğraf Turu",
+        "description": "En iyi manzara noktaları",
+        "duration": "1-2 saat",
+        "cost": "0€",
+        "booking_required": false,
+        "maps_location": "Barselona"
+      }
+    ],
+    "tips": [
+      "Erken rezervasyon yapın.",
+      "Rahat ayakkabı giyin.",
+      "Çocuklar için atıştırmalık yanınızda bulundurun."
+    ],
+    "safety_info": "Genel olarak güvenli bölge.",
+    "rating": 4.7,
+    "review_count": 2726
+  },
+  {
+    "id": "travel_194",
+    "title": "Amsterdam: Keşif Turu",
+    "destination": "Amsterdam",
+    "country": "Avrupa",
+    "city": "Amsterdam",
+    "category": "kultur",
+    "coordinates": {
+      "lat": 52.3676,
+      "lng": 4.9041
+    },
+    "best_season": [
+      "ilkbahar",
+      "kis",
+      "sonbahar"
+    ],
+    "duration": "2-3 gün",
+    "budget": "orta",
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "activities": [
+      {
+        "name": "Gezi",
+        "description": "Yerel rehber eşliğinde keşif turu",
+        "duration": "2-3 saat",
+        "cost": "10-30€/kişi",
+        "booking_required": false,
+        "maps_location": "Amsterdam"
+      },
+      {
+        "name": "Fotoğraf Turu",
+        "description": "En iyi manzara noktaları",
+        "duration": "1-2 saat",
+        "cost": "0€",
+        "booking_required": false,
+        "maps_location": "Amsterdam"
+      }
+    ],
+    "tips": [
+      "Erken rezervasyon yapın.",
+      "Rahat ayakkabı giyin.",
+      "Çocuklar için atıştırmalık yanınızda bulundurun."
+    ],
+    "safety_info": "Genel olarak güvenli bölge.",
+    "rating": 4.5,
+    "review_count": 746
+  },
+  {
+    "id": "travel_195",
+    "title": "Tokyo: Aile Tatili",
+    "destination": "Tokyo",
+    "country": "Asya",
+    "city": "Tokyo",
+    "category": "kultur",
+    "coordinates": {
+      "lat": 35.6762,
+      "lng": 139.6503
+    },
+    "best_season": [
+      "sonbahar"
+    ],
+    "duration": "5-7 gün",
+    "budget": "luks",
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "activities": [
+      {
+        "name": "Gezi",
+        "description": "Yerel rehber eşliğinde keşif turu",
+        "duration": "2-3 saat",
+        "cost": "10-30€/kişi",
+        "booking_required": true,
+        "maps_location": "Tokyo"
+      },
+      {
+        "name": "Fotoğraf Turu",
+        "description": "En iyi manzara noktaları",
+        "duration": "1-2 saat",
+        "cost": "0€",
+        "booking_required": false,
+        "maps_location": "Tokyo"
+      }
+    ],
+    "tips": [
+      "Erken rezervasyon yapın.",
+      "Rahat ayakkabı giyin.",
+      "Çocuklar için atıştırmalık yanınızda bulundurun."
+    ],
+    "safety_info": "Genel olarak güvenli bölge.",
+    "rating": 4.8,
+    "review_count": 2136
+  },
+  {
+    "id": "travel_196",
+    "title": "Bali: Macera Rotası",
+    "destination": "Bali",
+    "country": "Asya",
+    "city": "Bali",
+    "category": "cocuk_dostu",
+    "coordinates": {
+      "lat": -8.3405,
+      "lng": 115.092
+    },
+    "best_season": [
+      "ilkbahar",
+      "sonbahar",
+      "yaz"
+    ],
+    "duration": "5-7 gün",
+    "budget": "orta",
+    "age_suitable": {
+      "min": 0,
+      "max": 99
+    },
+    "activities": [
+      {
+        "name": "Gezi",
+        "description": "Yerel rehber eşliğinde keşif turu",
+        "duration": "2-3 saat",
+        "cost": "10-30€/kişi",
+        "booking_required": false,
+        "maps_location": "Bali"
+      },
+      {
+        "name": "Fotoğraf Turu",
+        "description": "En iyi manzara noktaları",
+        "duration": "1-2 saat",
+        "cost": "0€",
+        "booking_required": false,
+        "maps_location": "Bali"
+      }
+    ],
+    "tips": [
+      "Erken rezervasyon yapın.",
+      "Rahat ayakkabı giyin.",
+      "Çocuklar için atıştırmalık yanınızda bulundurun."
+    ],
+    "safety_info": "Genel olarak güvenli bölge.",
+    "rating": 4.8,
+    "review_count": 1403
+  },
+  {
+    "id": "travel_197",
+    "title": "New York: Keşif Turu",
+    "destination": "New York",
+    "country": "Amerika",
+    "city": "New York",
+    "category": "cocuk_dostu",
+    "coordinates": {
+      "lat": 40.7128,
+      "lng": -74.006
+    },
+    "best_season": [
+      "yaz",
+      "kis"
+    ],
+    "duration": "5-7 gün",
+    "budget": "luks",
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "activities": [
+      {
+        "name": "Gezi",
+        "description": "Yerel rehber eşliğinde keşif turu",
+        "duration": "2-3 saat",
+        "cost": "10-30€/kişi",
+        "booking_required": false,
+        "maps_location": "New York"
+      },
+      {
+        "name": "Fotoğraf Turu",
+        "description": "En iyi manzara noktaları",
+        "duration": "1-2 saat",
+        "cost": "0€",
+        "booking_required": false,
+        "maps_location": "New York"
+      }
+    ],
+    "tips": [
+      "Erken rezervasyon yapın.",
+      "Rahat ayakkabı giyin.",
+      "Çocuklar için atıştırmalık yanınızda bulundurun."
+    ],
+    "safety_info": "Genel olarak güvenli bölge.",
+    "rating": 4.6,
+    "review_count": 1140
+  },
+  {
+    "id": "travel_198",
+    "title": "Bora Bora: Kültür Gezisi",
+    "destination": "Bora Bora",
+    "country": "Okyanusya",
+    "city": "Polinezya",
+    "category": "cocuk_dostu",
+    "coordinates": {
+      "lat": -16.5004,
+      "lng": -151.7415
+    },
+    "best_season": [
+      "yaz",
+      "kis",
+      "ilkbahar"
+    ],
+    "duration": "5-7 gün",
+    "budget": "luks",
+    "age_suitable": {
+      "min": 5,
+      "max": 99
+    },
+    "activities": [
+      {
+        "name": "Gezi",
+        "description": "Yerel rehber eşliğinde keşif turu",
+        "duration": "2-3 saat",
+        "cost": "10-30€/kişi",
+        "booking_required": true,
+        "maps_location": "Bora Bora"
+      },
+      {
+        "name": "Fotoğraf Turu",
+        "description": "En iyi manzara noktaları",
+        "duration": "1-2 saat",
+        "cost": "0€",
+        "booking_required": false,
+        "maps_location": "Bora Bora"
+      }
+    ],
+    "tips": [
+      "Erken rezervasyon yapın.",
+      "Rahat ayakkabı giyin.",
+      "Çocuklar için atıştırmalık yanınızda bulundurun."
+    ],
+    "safety_info": "Genel olarak güvenli bölge.",
+    "rating": 4.0,
+    "review_count": 1330
+  },
+  {
+    "id": "travel_199",
+    "title": "Kızılcahamam: Keşif Turu",
+    "destination": "Kızılcahamam",
+    "country": "Türkiye",
+    "city": "Ankara",
+    "category": "cocuk_dostu",
+    "coordinates": {
+      "lat": 40.456,
+      "lng": 32.6449
+    },
+    "best_season": [
+      "ilkbahar",
+      "sonbahar",
+      "kis"
+    ],
+    "duration": "1-2 gün",
+    "budget": "ekonomik",
+    "age_suitable": {
+      "min": 2,
+      "max": 99
+    },
+    "activities": [
+      {
+        "name": "Gezi",
+        "description": "Yerel rehber eşliğinde keşif turu",
+        "duration": "2-3 saat",
+        "cost": "10-30€/kişi",
+        "booking_required": true,
+        "maps_location": "Kızılcahamam"
+      },
+      {
+        "name": "Fotoğraf Turu",
+        "description": "En iyi manzara noktaları",
+        "duration": "1-2 saat",
+        "cost": "0€",
+        "booking_required": false,
+        "maps_location": "Kızılcahamam"
+      }
+    ],
+    "tips": [
+      "Erken rezervasyon yapın.",
+      "Rahat ayakkabı giyin.",
+      "Çocuklar için atıştırmalık yanınızda bulundurun."
+    ],
+    "safety_info": "Genel olarak güvenli bölge.",
+    "rating": 4.5,
+    "review_count": 1689
+  },
+  {
+    "id": "travel_200",
+    "title": "Marmaris: Kültür Gezisi",
+    "destination": "Marmaris",
+    "country": "Türkiye",
+    "city": "Muğla",
+    "category": "cocuk_dostu",
+    "coordinates": {
+      "lat": 36.8565,
+      "lng": 28.2602
+    },
+    "best_season": [
+      "ilkbahar",
+      "sonbahar"
+    ],
+    "duration": "3-5 gün",
+    "budget": "orta",
+    "age_suitable": {
+      "min": 0,
+      "max": 99
+    },
+    "activities": [
+      {
+        "name": "Gezi",
+        "description": "Yerel rehber eşliğinde keşif turu",
+        "duration": "2-3 saat",
+        "cost": "10-30€/kişi",
+        "booking_required": false,
+        "maps_location": "Marmaris"
+      },
+      {
+        "name": "Fotoğraf Turu",
+        "description": "En iyi manzara noktaları",
+        "duration": "1-2 saat",
+        "cost": "0€",
+        "booking_required": false,
+        "maps_location": "Marmaris"
+      }
+    ],
+    "tips": [
+      "Erken rezervasyon yapın.",
+      "Rahat ayakkabı giyin.",
+      "Çocuklar için atıştırmalık yanınızda bulundurun."
+    ],
+    "safety_info": "Genel olarak güvenli bölge.",
+    "rating": 4.2,
+    "review_count": 2059
+  }
+]

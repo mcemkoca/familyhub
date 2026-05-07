@@ -1,0 +1,52 @@
+Extracted 1206 unique strings
+Top 50 most frequent:
+  (37x) İptal
+  (15x) Çocuk
+  (8x) Genç
+  (7x) Yönetici
+  (7x) Büyük
+  (7x) Yüksek
+  (6x) Bugün
+  (6x) Düşük
+  (6x) Kullanıcı
+  (6x) Geri Yükle
+  (6x) Özel soru...
+  (5x) Güvenlik
+  (5x) İleri
+  (5x) Aile bilgisi bulunamadı
+  (5x) Aileden Ayrıl
+  (5x) Üye
+  (5x) Açık
+  (5x) Türkçe
+  (4x) Düzenle
+  (4x) 📷 Fotoğraf
+  (4x) Güvenli Varış
+  (4x) İş
+  (4x) ${diff.inMinutes} dk önce
+  (4x) Özel
+  (4x) Çevrimiçi
+  (4x) AI Önerileri
+  (4x) Aile Önerileri
+  (3x) Çocuk Girişi
+  (3x) Giriş Yap
+  (3x) En az 8 karakter, büyük/küçük harf, rakam ve özel karakter
+  (3x) Eğitim
+  (3x) Diğer
+  (3x) Dün
+  (3x) Bildirim Ayarları
+  (3x) Görev Başlığı
+  (3x) Konumumu Paylaş
+  (3x) Görevlerim
+  (3x) Açıklama
+  (3x) Çar
+  (3x) Çocuk Hesapları
+  (3x) Çocuk Ekle
+  (3x) İsim
+  (3x) Tür
+  (3x) Canlı Konum
+  (3x) ${diff.inHours} sa önce
+  (3x) Başlat
+  (3x) Başlık
+  (3x) Rol güncellenemedi: $e
+  (3x) Üyeyi Çıkar
+  (3x) Ayrıl

@@ -1,0 +1,1708 @@
+{
+  "module": "social_activities",
+  "version": "1.0.0",
+  "language": "tr",
+  "region": "TR",
+  "suggestions": [
+    {
+      "id": "sa001",
+      "title": "Aile Oyun Gecesi",
+      "description": "Tabu, kutu oyunları, kart. Kazanan sonrakini seçsin.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 90,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "oyun"
+      ],
+      "tips": [
+        "Müzik ve atıştırmalık hazır bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa002",
+      "title": "Bugün Piknik Planlayın",
+      "description": "En yakın parka battaniye, sandviç ve meyve.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 185,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "piknik"
+      ],
+      "tips": [
+        "Hava durumunu kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa003",
+      "title": "Bu Hafta Sonu Film Maratonu",
+      "description": "Herkes bir film seçsin, popcorn hazırlayın.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 160,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "film"
+      ],
+      "tips": [
+        "Yaş grubuna uygun filmler seçin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa004",
+      "title": "Ailece Gezinti Yürüyüşü",
+      "description": "Mahallede veya ormanda 30 dk yürüyüş.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "doğa"
+      ],
+      "tips": [
+        "Fotoğraf makinesi götürün."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa005",
+      "title": "Akşam Mangal Keyfi",
+      "description": "Balkonda veya bahçede pratik mangal.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 140,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "mangal"
+      ],
+      "tips": [
+        "Kömürü önceden hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa006",
+      "title": "Bisiklet Turu",
+      "description": "Güvenli rotada ailece bisiklet.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "bisiklet"
+      ],
+      "tips": [
+        "Kask takmayı unutmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa007",
+      "title": "Bugün Müze Ziyareti",
+      "description": "Çocuklar için etkileşimli müzeler.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 125,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "müze"
+      ],
+      "tips": [
+        "Önceden internetten araştırma yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa008",
+      "title": "Bu Hafta Sonu Aile Fotoğraf Çekimi",
+      "description": "Komik pozlar verin, galeriye ekleyin.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "fotoğraf"
+      ],
+      "tips": [
+        "Tripod kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa009",
+      "title": "Ailece Balkonda Kamp",
+      "description": "Çadır kurun, el feneri hikayeleri.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 75,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "kamp"
+      ],
+      "tips": [
+        "Yıldız gözlem uygulaması kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa010",
+      "title": "Akşam Kitap Okuma Saati",
+      "description": "Herkes kendi kitabını okur, özet anlatır.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "kitap"
+      ],
+      "tips": [
+        "Sessiz ve rahat bir köşe hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa011",
+      "title": "Origami Etkinliği",
+      "description": "Kağıttan hayvan, gemi, uçak yapımı.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "origami"
+      ],
+      "tips": [
+        "Renkli kağıtlar kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa012",
+      "title": "Bugün Aile Müzik Gecesi",
+      "description": "Herkes sevdiği şarkıyı söyler.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "müzik"
+      ],
+      "tips": [
+        "Karaoke uygulaması kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa013",
+      "title": "Bu Hafta Sonu Hayvanat Bahçesi",
+      "description": "Çocuklarla hayvanları besleyin.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 190,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "hayvanat"
+      ],
+      "tips": [
+        "Su ve atıştırmalık götürün."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa014",
+      "title": "Ailece Doğa Yürüyüşü",
+      "description": "Hafta sonu trekking parkuru.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 195,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "doğa"
+      ],
+      "tips": [
+        "Uygun ayakkabı giyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa015",
+      "title": "Akşam Aile Yarışması",
+      "description": "Mini olimpiyat: ip atlama, balon patlatma.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "yarışma"
+      ],
+      "tips": [
+        "Küçük ödüller hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa016",
+      "title": "Yıldız İzleme",
+      "description": "Battaniye serin, yıldızları sayın.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "gökyüzü"
+      ],
+      "tips": [
+        "Uygulama ile takımyıldızları tanıyın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa017",
+      "title": "Bugün Boyama Etkinliği",
+      "description": "Mandal, kum boyama, tuval.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "sanat"
+      ],
+      "tips": [
+        "Önlük giydirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa018",
+      "title": "Bu Hafta Sonu Podcast Dinleme",
+      "description": "Eğitici podcast, tartışın.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "podcast"
+      ],
+      "tips": [
+        "Herkes farklı bir bölüm seçsin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa019",
+      "title": "Ailece Yerel Pazara Gitmek",
+      "description": "Semt pazarında taze sebze meyve.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 105,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "pazar"
+      ],
+      "tips": [
+        "Pazarlık yapmayı öğretin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa020",
+      "title": "Akşam Aile Vlog Çekimi",
+      "description": "Gününüzü çekin, montaj yapın.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "vlog"
+      ],
+      "tips": [
+        "Kısa ve eğlenceli tutun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa021",
+      "title": "Kahvaltı Dışarıda",
+      "description": "Ailece brunch, farklı bir mekan.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 90,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "kahvaltı"
+      ],
+      "tips": [
+        "Rezervasyon yaptırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa022",
+      "title": "Bugün Scavenger Hunt",
+      "description": "Evde veya parkta ipuçlu hazine avı.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "oyun"
+      ],
+      "tips": [
+        "Ödül hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa023",
+      "title": "Bu Hafta Sonu Aile Resim Sergisi",
+      "description": "Çocukların resimlerini duvara asın.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "sergi"
+      ],
+      "tips": [
+        "Açılış kokteyli yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa024",
+      "title": "Ailece Gece Yürüyüşü",
+      "description": "Fenerli, güvenli parkta akşam yürüyüşü.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "yürüyüş"
+      ],
+      "tips": [
+        "Yansıtıcı aksesuarlar takın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa025",
+      "title": "Akşam Aile Bingo Gecesi",
+      "description": "Kendiniz kart yapın, ödüller koyun.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "bingo"
+      ],
+      "tips": [
+        "Aile içi şakalar içeren kartlar yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa026",
+      "title": "Aile Oyun Gecesi",
+      "description": "Tabu, kutu oyunları, kart. Kazanan sonrakini seçsin.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 90,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "oyun"
+      ],
+      "tips": [
+        "Müzik ve atıştırmalık hazır bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa027",
+      "title": "Bugün Piknik Planlayın",
+      "description": "En yakın parka battaniye, sandviç ve meyve.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 185,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "piknik"
+      ],
+      "tips": [
+        "Hava durumunu kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa028",
+      "title": "Bu Hafta Sonu Film Maratonu",
+      "description": "Herkes bir film seçsin, popcorn hazırlayın.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 160,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "film"
+      ],
+      "tips": [
+        "Yaş grubuna uygun filmler seçin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa029",
+      "title": "Ailece Gezinti Yürüyüşü",
+      "description": "Mahallede veya ormanda 30 dk yürüyüş.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "doğa"
+      ],
+      "tips": [
+        "Fotoğraf makinesi götürün."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa030",
+      "title": "Akşam Mangal Keyfi",
+      "description": "Balkonda veya bahçede pratik mangal.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 140,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "mangal"
+      ],
+      "tips": [
+        "Kömürü önceden hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa031",
+      "title": "Bisiklet Turu",
+      "description": "Güvenli rotada ailece bisiklet.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "bisiklet"
+      ],
+      "tips": [
+        "Kask takmayı unutmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa032",
+      "title": "Bugün Müze Ziyareti",
+      "description": "Çocuklar için etkileşimli müzeler.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 125,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "müze"
+      ],
+      "tips": [
+        "Önceden internetten araştırma yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa033",
+      "title": "Bu Hafta Sonu Aile Fotoğraf Çekimi",
+      "description": "Komik pozlar verin, galeriye ekleyin.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "fotoğraf"
+      ],
+      "tips": [
+        "Tripod kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa034",
+      "title": "Ailece Balkonda Kamp",
+      "description": "Çadır kurun, el feneri hikayeleri.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 75,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "kamp"
+      ],
+      "tips": [
+        "Yıldız gözlem uygulaması kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa035",
+      "title": "Akşam Kitap Okuma Saati",
+      "description": "Herkes kendi kitabını okur, özet anlatır.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "kitap"
+      ],
+      "tips": [
+        "Sessiz ve rahat bir köşe hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa036",
+      "title": "Origami Etkinliği",
+      "description": "Kağıttan hayvan, gemi, uçak yapımı.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "origami"
+      ],
+      "tips": [
+        "Renkli kağıtlar kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa037",
+      "title": "Bugün Aile Müzik Gecesi",
+      "description": "Herkes sevdiği şarkıyı söyler.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "müzik"
+      ],
+      "tips": [
+        "Karaoke uygulaması kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa038",
+      "title": "Bu Hafta Sonu Hayvanat Bahçesi",
+      "description": "Çocuklarla hayvanları besleyin.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 190,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "hayvanat"
+      ],
+      "tips": [
+        "Su ve atıştırmalık götürün."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa039",
+      "title": "Ailece Doğa Yürüyüşü",
+      "description": "Hafta sonu trekking parkuru.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 195,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "doğa"
+      ],
+      "tips": [
+        "Uygun ayakkabı giyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa040",
+      "title": "Akşam Aile Yarışması",
+      "description": "Mini olimpiyat: ip atlama, balon patlatma.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "yarışma"
+      ],
+      "tips": [
+        "Küçük ödüller hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa041",
+      "title": "Yıldız İzleme",
+      "description": "Battaniye serin, yıldızları sayın.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "gökyüzü"
+      ],
+      "tips": [
+        "Uygulama ile takımyıldızları tanıyın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa042",
+      "title": "Bugün Boyama Etkinliği",
+      "description": "Mandal, kum boyama, tuval.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "sanat"
+      ],
+      "tips": [
+        "Önlük giydirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa043",
+      "title": "Bu Hafta Sonu Podcast Dinleme",
+      "description": "Eğitici podcast, tartışın.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "podcast"
+      ],
+      "tips": [
+        "Herkes farklı bir bölüm seçsin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa044",
+      "title": "Ailece Yerel Pazara Gitmek",
+      "description": "Semt pazarında taze sebze meyve.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 105,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "pazar"
+      ],
+      "tips": [
+        "Pazarlık yapmayı öğretin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa045",
+      "title": "Akşam Aile Vlog Çekimi",
+      "description": "Gününüzü çekin, montaj yapın.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "vlog"
+      ],
+      "tips": [
+        "Kısa ve eğlenceli tutun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa046",
+      "title": "Kahvaltı Dışarıda",
+      "description": "Ailece brunch, farklı bir mekan.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 90,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "kahvaltı"
+      ],
+      "tips": [
+        "Rezervasyon yaptırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa047",
+      "title": "Bugün Scavenger Hunt",
+      "description": "Evde veya parkta ipuçlu hazine avı.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "oyun"
+      ],
+      "tips": [
+        "Ödül hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa048",
+      "title": "Bu Hafta Sonu Aile Resim Sergisi",
+      "description": "Çocukların resimlerini duvara asın.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "sergi"
+      ],
+      "tips": [
+        "Açılış kokteyli yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa049",
+      "title": "Ailece Gece Yürüyüşü",
+      "description": "Fenerli, güvenli parkta akşam yürüyüşü.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "yürüyüş"
+      ],
+      "tips": [
+        "Yansıtıcı aksesuarlar takın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa050",
+      "title": "Akşam Aile Bingo Gecesi",
+      "description": "Kendiniz kart yapın, ödüller koyun.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "bingo"
+      ],
+      "tips": [
+        "Aile içi şakalar içeren kartlar yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa051",
+      "title": "Aile Oyun Gecesi",
+      "description": "Tabu, kutu oyunları, kart. Kazanan sonrakini seçsin.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 90,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "oyun"
+      ],
+      "tips": [
+        "Müzik ve atıştırmalık hazır bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa052",
+      "title": "Bugün Piknik Planlayın",
+      "description": "En yakın parka battaniye, sandviç ve meyve.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 185,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "piknik"
+      ],
+      "tips": [
+        "Hava durumunu kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa053",
+      "title": "Bu Hafta Sonu Film Maratonu",
+      "description": "Herkes bir film seçsin, popcorn hazırlayın.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 160,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "film"
+      ],
+      "tips": [
+        "Yaş grubuna uygun filmler seçin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa054",
+      "title": "Ailece Gezinti Yürüyüşü",
+      "description": "Mahallede veya ormanda 30 dk yürüyüş.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "doğa"
+      ],
+      "tips": [
+        "Fotoğraf makinesi götürün."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa055",
+      "title": "Akşam Mangal Keyfi",
+      "description": "Balkonda veya bahçede pratik mangal.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 140,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "mangal"
+      ],
+      "tips": [
+        "Kömürü önceden hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa056",
+      "title": "Bisiklet Turu",
+      "description": "Güvenli rotada ailece bisiklet.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "bisiklet"
+      ],
+      "tips": [
+        "Kask takmayı unutmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa057",
+      "title": "Bugün Müze Ziyareti",
+      "description": "Çocuklar için etkileşimli müzeler.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 125,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "müze"
+      ],
+      "tips": [
+        "Önceden internetten araştırma yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa058",
+      "title": "Bu Hafta Sonu Aile Fotoğraf Çekimi",
+      "description": "Komik pozlar verin, galeriye ekleyin.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "fotoğraf"
+      ],
+      "tips": [
+        "Tripod kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa059",
+      "title": "Ailece Balkonda Kamp",
+      "description": "Çadır kurun, el feneri hikayeleri.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 75,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "kamp"
+      ],
+      "tips": [
+        "Yıldız gözlem uygulaması kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa060",
+      "title": "Akşam Kitap Okuma Saati",
+      "description": "Herkes kendi kitabını okur, özet anlatır.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "kitap"
+      ],
+      "tips": [
+        "Sessiz ve rahat bir köşe hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa061",
+      "title": "Origami Etkinliği",
+      "description": "Kağıttan hayvan, gemi, uçak yapımı.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "origami"
+      ],
+      "tips": [
+        "Renkli kağıtlar kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa062",
+      "title": "Bugün Aile Müzik Gecesi",
+      "description": "Herkes sevdiği şarkıyı söyler.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "müzik"
+      ],
+      "tips": [
+        "Karaoke uygulaması kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa063",
+      "title": "Bu Hafta Sonu Hayvanat Bahçesi",
+      "description": "Çocuklarla hayvanları besleyin.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 190,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "hayvanat"
+      ],
+      "tips": [
+        "Su ve atıştırmalık götürün."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa064",
+      "title": "Ailece Doğa Yürüyüşü",
+      "description": "Hafta sonu trekking parkuru.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 195,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "doğa"
+      ],
+      "tips": [
+        "Uygun ayakkabı giyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa065",
+      "title": "Akşam Aile Yarışması",
+      "description": "Mini olimpiyat: ip atlama, balon patlatma.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "yarışma"
+      ],
+      "tips": [
+        "Küçük ödüller hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa066",
+      "title": "Yıldız İzleme",
+      "description": "Battaniye serin, yıldızları sayın.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "gökyüzü"
+      ],
+      "tips": [
+        "Uygulama ile takımyıldızları tanıyın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa067",
+      "title": "Bugün Boyama Etkinliği",
+      "description": "Mandal, kum boyama, tuval.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "sanat"
+      ],
+      "tips": [
+        "Önlük giydirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa068",
+      "title": "Bu Hafta Sonu Podcast Dinleme",
+      "description": "Eğitici podcast, tartışın.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "podcast"
+      ],
+      "tips": [
+        "Herkes farklı bir bölüm seçsin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa069",
+      "title": "Ailece Yerel Pazara Gitmek",
+      "description": "Semt pazarında taze sebze meyve.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 105,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "pazar"
+      ],
+      "tips": [
+        "Pazarlık yapmayı öğretin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa070",
+      "title": "Akşam Aile Vlog Çekimi",
+      "description": "Gününüzü çekin, montaj yapın.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "vlog"
+      ],
+      "tips": [
+        "Kısa ve eğlenceli tutun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa071",
+      "title": "Kahvaltı Dışarıda",
+      "description": "Ailece brunch, farklı bir mekan.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 90,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "kahvaltı"
+      ],
+      "tips": [
+        "Rezervasyon yaptırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa072",
+      "title": "Bugün Scavenger Hunt",
+      "description": "Evde veya parkta ipuçlu hazine avı.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "oyun"
+      ],
+      "tips": [
+        "Ödül hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa073",
+      "title": "Bu Hafta Sonu Aile Resim Sergisi",
+      "description": "Çocukların resimlerini duvara asın.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "sergi"
+      ],
+      "tips": [
+        "Açılış kokteyli yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa074",
+      "title": "Ailece Gece Yürüyüşü",
+      "description": "Fenerli, güvenli parkta akşam yürüyüşü.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "yürüyüş"
+      ],
+      "tips": [
+        "Yansıtıcı aksesuarlar takın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa075",
+      "title": "Akşam Aile Bingo Gecesi",
+      "description": "Kendiniz kart yapın, ödüller koyun.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "bingo"
+      ],
+      "tips": [
+        "Aile içi şakalar içeren kartlar yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa076",
+      "title": "Aile Oyun Gecesi",
+      "description": "Tabu, kutu oyunları, kart. Kazanan sonrakini seçsin.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 90,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "oyun"
+      ],
+      "tips": [
+        "Müzik ve atıştırmalık hazır bulundurun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa077",
+      "title": "Bugün Piknik Planlayın",
+      "description": "En yakın parka battaniye, sandviç ve meyve.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 185,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "piknik"
+      ],
+      "tips": [
+        "Hava durumunu kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa078",
+      "title": "Bu Hafta Sonu Film Maratonu",
+      "description": "Herkes bir film seçsin, popcorn hazırlayın.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 160,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "film"
+      ],
+      "tips": [
+        "Yaş grubuna uygun filmler seçin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa079",
+      "title": "Ailece Gezinti Yürüyüşü",
+      "description": "Mahallede veya ormanda 30 dk yürüyüş.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "doğa"
+      ],
+      "tips": [
+        "Fotoğraf makinesi götürün."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa080",
+      "title": "Akşam Mangal Keyfi",
+      "description": "Balkonda veya bahçede pratik mangal.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 140,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "mangal"
+      ],
+      "tips": [
+        "Kömürü önceden hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa081",
+      "title": "Bisiklet Turu",
+      "description": "Güvenli rotada ailece bisiklet.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "bisiklet"
+      ],
+      "tips": [
+        "Kask takmayı unutmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa082",
+      "title": "Bugün Müze Ziyareti",
+      "description": "Çocuklar için etkileşimli müzeler.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 125,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "müze"
+      ],
+      "tips": [
+        "Önceden internetten araştırma yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa083",
+      "title": "Bu Hafta Sonu Aile Fotoğraf Çekimi",
+      "description": "Komik pozlar verin, galeriye ekleyin.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "fotoğraf"
+      ],
+      "tips": [
+        "Tripod kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa084",
+      "title": "Ailece Balkonda Kamp",
+      "description": "Çadır kurun, el feneri hikayeleri.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 75,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "kamp"
+      ],
+      "tips": [
+        "Yıldız gözlem uygulaması kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa085",
+      "title": "Akşam Kitap Okuma Saati",
+      "description": "Herkes kendi kitabını okur, özet anlatır.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "kitap"
+      ],
+      "tips": [
+        "Sessiz ve rahat bir köşe hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa086",
+      "title": "Origami Etkinliği",
+      "description": "Kağıttan hayvan, gemi, uçak yapımı.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "origami"
+      ],
+      "tips": [
+        "Renkli kağıtlar kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa087",
+      "title": "Bugün Aile Müzik Gecesi",
+      "description": "Herkes sevdiği şarkıyı söyler.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "müzik"
+      ],
+      "tips": [
+        "Karaoke uygulaması kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa088",
+      "title": "Bu Hafta Sonu Hayvanat Bahçesi",
+      "description": "Çocuklarla hayvanları besleyin.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 190,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "hayvanat"
+      ],
+      "tips": [
+        "Su ve atıştırmalık götürün."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa089",
+      "title": "Ailece Doğa Yürüyüşü",
+      "description": "Hafta sonu trekking parkuru.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 195,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "doğa"
+      ],
+      "tips": [
+        "Uygun ayakkabı giyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa090",
+      "title": "Akşam Aile Yarışması",
+      "description": "Mini olimpiyat: ip atlama, balon patlatma.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "yarışma"
+      ],
+      "tips": [
+        "Küçük ödüller hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa091",
+      "title": "Yıldız İzleme",
+      "description": "Battaniye serin, yıldızları sayın.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "gökyüzü"
+      ],
+      "tips": [
+        "Uygulama ile takımyıldızları tanıyın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa092",
+      "title": "Bugün Boyama Etkinliği",
+      "description": "Mandal, kum boyama, tuval.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "sanat"
+      ],
+      "tips": [
+        "Önlük giydirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa093",
+      "title": "Bu Hafta Sonu Podcast Dinleme",
+      "description": "Eğitici podcast, tartışın.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "podcast"
+      ],
+      "tips": [
+        "Herkes farklı bir bölüm seçsin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa094",
+      "title": "Ailece Yerel Pazara Gitmek",
+      "description": "Semt pazarında taze sebze meyve.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 105,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "pazar"
+      ],
+      "tips": [
+        "Pazarlık yapmayı öğretin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa095",
+      "title": "Akşam Aile Vlog Çekimi",
+      "description": "Gününüzü çekin, montaj yapın.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "vlog"
+      ],
+      "tips": [
+        "Kısa ve eğlenceli tutun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa096",
+      "title": "Kahvaltı Dışarıda",
+      "description": "Ailece brunch, farklı bir mekan.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 90,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "kahvaltı"
+      ],
+      "tips": [
+        "Rezervasyon yaptırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa097",
+      "title": "Bugün Scavenger Hunt",
+      "description": "Evde veya parkta ipuçlu hazine avı.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "oyun"
+      ],
+      "tips": [
+        "Ödül hazırlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa098",
+      "title": "Bu Hafta Sonu Aile Resim Sergisi",
+      "description": "Çocukların resimlerini duvara asın.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "sergi"
+      ],
+      "tips": [
+        "Açılış kokteyli yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa099",
+      "title": "Ailece Gece Yürüyüşü",
+      "description": "Fenerli, güvenli parkta akşam yürüyüşü.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "yürüyüş"
+      ],
+      "tips": [
+        "Yansıtıcı aksesuarlar takın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "sa100",
+      "title": "Akşam Aile Bingo Gecesi",
+      "description": "Kendiniz kart yapın, ödüller koyun.",
+      "category": "social",
+      "difficulty": "Kolay",
+      "duration_minutes": 80,
+      "participants": 4,
+      "tags": [
+        "sosyal",
+        "bingo"
+      ],
+      "tips": [
+        "Aile içi şakalar içeren kartlar yapın."
+      ],
+      "action_type": "show_detail"
+    }
+  ]
+}

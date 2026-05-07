@@ -1,0 +1,234 @@
+import 'package:flutter/material.dart';
+import '../../../config/constants.dart';
+import '../../../domain/entities.dart';
+
+class MemberCard extends StatelessWidget {
+  final FamilyMember member;
+  final bool isMe;
+  final VoidCallback onTap;
+
+  const MemberCard({
+    super.key,
+    required this.member,
+    required this.isMe,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final roleConfig = _roleConfig(member.role);
+    final statusText = member.isOnline
+        ? 'Çevrimiçi'
+        : _formatLastSeen(member.lastSeen);
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: isDark ? AppColors.darkCard : Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: isDark
+                ? Colors.black.withAlpha(15)
+                : Colors.black.withAlpha(5),
+            blurRadius: 10,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(16),
+        child: Row(
+          children: [
+            // Avatar with online indicator
+            Stack(
+              children: [
+                Container(
+                  width: 52,
+                  height: 52,
+                  decoration: BoxDecoration(
+                    color: member.color,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Center(
+                    child: Text(
+                      member.initial,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 2,
+                  right: 2,
+                  child: Container(
+                    width: 14,
+                    height: 14,
+                    decoration: BoxDecoration(
+                      color: member.isOnline
+                          ? AppColors.success
+                          : AppColors.lightGray,
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: isDark ? AppColors.darkCard : Colors.white,
+                        width: 2,
+                      ),
+                      boxShadow: member.isOnline
+                          ? [
+                              BoxShadow(
+                                color: AppColors.success.withAlpha(100),
+                                blurRadius: 6,
+                              ),
+                            ]
+                          : null,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(width: 14),
+            // Info
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        member.name,
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600,
+                          color: isDark
+                              ? AppColors.darkTextPrimary
+                              : AppColors.dark,
+                        ),
+                      ),
+                      if (isMe) ...[
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.cobalt.withAlpha(15),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Text(
+                            'Siz',
+                            style: TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.cobalt,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 3,
+                    ),
+                    decoration: BoxDecoration(
+                      color: roleConfig.color.withAlpha(isDark ? 25 : 15),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Text(
+                      roleConfig.label.toUpperCase(),
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w700,
+                        color: roleConfig.color,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Row(
+                    children: [
+                      Icon(
+                        member.isOnline
+                            ? Icons.circle
+                            : Icons.access_time,
+                        size: 10,
+                        color: member.isOnline
+                            ? AppColors.success
+                            : (isDark
+                                ? AppColors.darkTextSecondary
+                                : AppColors.lightGray),
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        statusText,
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: member.isOnline
+                              ? AppColors.success
+                              : (isDark
+                                  ? AppColors.darkTextSecondary
+                                  : AppColors.slate),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            // More
+            Icon(
+              Icons.more_vert,
+              color: isDark ? AppColors.darkBorder : AppColors.lightGray,
+              size: 20,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _RoleConfig _roleConfig(MemberRole role) {
+    return switch (role) {
+      MemberRole.admin =>
+        _RoleConfig(label: 'Yönetici', color: AppColors.cobalt),
+      MemberRole.parent =>
+        _RoleConfig(label: 'Ebeveyn', color: AppColors.pink),
+      MemberRole.teen =>
+        _RoleConfig(label: 'Genç', color: AppColors.warning),
+      MemberRole.child =>
+        _RoleConfig(label: 'Çocuk', color: AppColors.success),
+      MemberRole.elder =>
+        _RoleConfig(label: 'Büyük', color: AppColors.purple),
+      MemberRole.guest =>
+        _RoleConfig(label: 'Misafir', color: AppColors.slate),
+      MemberRole.baby =>
+        _RoleConfig(label: 'Bebek', color: AppColors.cyan),
+    };
+  }
+
+  String _formatLastSeen(DateTime? lastSeen) {
+    if (lastSeen == null) return 'Bilinmiyor';
+    final diff = DateTime.now().difference(lastSeen);
+    if (diff.inMinutes < 1) return 'Az önce';
+    if (diff.inMinutes < 60) return '${diff.inMinutes} dk önce';
+    if (diff.inHours < 24) return '${diff.inHours} sa önce';
+    if (diff.inDays < 7) return '${diff.inDays} gün önce';
+    return '${lastSeen.day}/${lastSeen.month}/${lastSeen.year}';
+  }
+}
+
+class _RoleConfig {
+  final String label;
+  final Color color;
+
+  _RoleConfig({required this.label, required this.color});
+}

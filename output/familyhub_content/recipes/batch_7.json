@@ -1,0 +1,662 @@
+[
+  {
+    "id": "recipe_061",
+    "title": "Türlü",
+    "category": "aksam_yemegi",
+    "difficulty": "zor",
+    "prep_time": 20,
+    "cook_time": 35,
+    "servings": 4,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "265",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "238",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "286",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "190",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "203",
+        "unit": "su bardağı",
+        "optional": true
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "aksam_yemegi",
+      "saglikli"
+    ],
+    "image_prompt": "Traditional Turkish Türlü beautifully plated, food photography, warm lighting",
+    "rating": 4.9,
+    "review_count": 306
+  },
+  {
+    "id": "recipe_062",
+    "title": "Kabak Mücveri",
+    "category": "aksam_yemegi",
+    "difficulty": "zor",
+    "prep_time": 15,
+    "cook_time": 20,
+    "servings": 4,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "186",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "176",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "110",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "264",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "159",
+        "unit": "adet",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "aksam_yemegi",
+      "cocuk_dostu"
+    ],
+    "image_prompt": "Traditional Turkish Kabak Mücveri beautifully plated, food photography, warm lighting",
+    "rating": 4.8,
+    "review_count": 150
+  },
+  {
+    "id": "recipe_063",
+    "title": "Yumurtalı Ekmek",
+    "category": "aksam_yemegi",
+    "difficulty": "kolay",
+    "prep_time": 5,
+    "cook_time": 10,
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "198",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "166",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "272",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "270",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "65",
+        "unit": "yemek kaşığı",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "aksam_yemegi",
+      "saglikli"
+    ],
+    "image_prompt": "Traditional Turkish Yumurtalı Ekmek beautifully plated, food photography, warm lighting",
+    "rating": 4.7,
+    "review_count": 313
+  },
+  {
+    "id": "recipe_064",
+    "title": "Pankek",
+    "category": "aksam_yemegi",
+    "difficulty": "kolay",
+    "prep_time": 10,
+    "cook_time": 15,
+    "servings": 4,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "138",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "92",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "125",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "94",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "93",
+        "unit": "yemek kaşığı",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "aksam_yemegi",
+      "cocuk_dostu"
+    ],
+    "image_prompt": "Traditional Turkish Pankek beautifully plated, food photography, warm lighting",
+    "rating": 4.9,
+    "review_count": 198
+  },
+  {
+    "id": "recipe_065",
+    "title": "Waffle",
+    "category": "aksam_yemegi",
+    "difficulty": "kolay",
+    "prep_time": 15,
+    "cook_time": 10,
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "268",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "168",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "171",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "52",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "152",
+        "unit": "yemek kaşığı",
+        "optional": true
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "aksam_yemegi",
+      "ekonomik"
+    ],
+    "image_prompt": "Traditional Turkish Waffle beautifully plated, food photography, warm lighting",
+    "rating": 4.6,
+    "review_count": 193
+  },
+  {
+    "id": "recipe_066",
+    "title": "Fırında Makarna",
+    "category": "aksam_yemegi",
+    "difficulty": "zor",
+    "prep_time": 15,
+    "cook_time": 25,
+    "servings": 4,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "38",
+        "unit": "gr",
+        "optional": true
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "64",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "122",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "214",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "22",
+        "unit": "adet",
+        "optional": true
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "aksam_yemegi",
+      "ekonomik"
+    ],
+    "image_prompt": "Traditional Turkish Fırında Makarna beautifully plated, food photography, warm lighting",
+    "rating": 4.6,
+    "review_count": 366
+  },
+  {
+    "id": "recipe_067",
+    "title": "Balık Izgara",
+    "category": "atistirmalik",
+    "difficulty": "kolay",
+    "prep_time": 15,
+    "cook_time": 15,
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "71",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "168",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "213",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "5",
+        "unit": "adet",
+        "optional": true
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "218",
+        "unit": "adet",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "atistirmalik",
+      "hizli"
+    ],
+    "image_prompt": "Traditional Turkish Balık Izgara beautifully plated, food photography, warm lighting",
+    "rating": 4.6,
+    "review_count": 482
+  },
+  {
+    "id": "recipe_068",
+    "title": "Sebze Çorbası",
+    "category": "atistirmalik",
+    "difficulty": "kolay",
+    "prep_time": 10,
+    "cook_time": 25,
+    "servings": 4,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "100",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "220",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "242",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "242",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "226",
+        "unit": "yemek kaşığı",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "atistirmalik",
+      "saglikli"
+    ],
+    "image_prompt": "Traditional Turkish Sebze Çorbası beautifully plated, food photography, warm lighting",
+    "rating": 4.6,
+    "review_count": 404
+  },
+  {
+    "id": "recipe_069",
+    "title": "Gözleme",
+    "category": "atistirmalik",
+    "difficulty": "orta",
+    "prep_time": 15,
+    "cook_time": 15,
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "54",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "31",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "64",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "255",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "140",
+        "unit": "gr",
+        "optional": true
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "atistirmalik",
+      "cocuk_dostu"
+    ],
+    "image_prompt": "Traditional Turkish Gözleme beautifully plated, food photography, warm lighting",
+    "rating": 5.0,
+    "review_count": 452
+  },
+  {
+    "id": "recipe_070",
+    "title": "Pizza",
+    "category": "atistirmalik",
+    "difficulty": "kolay",
+    "prep_time": 20,
+    "cook_time": 20,
+    "servings": 4,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "262",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "110",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "226",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "27",
+        "unit": "gr",
+        "optional": true
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "207",
+        "unit": "gr",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "atistirmalik",
+      "cocuk_dostu"
+    ],
+    "image_prompt": "Traditional Turkish Pizza beautifully plated, food photography, warm lighting",
+    "rating": 4.4,
+    "review_count": 427
+  }
+]

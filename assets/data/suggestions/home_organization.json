@@ -1,0 +1,1708 @@
+{
+  "module": "home_organization",
+  "version": "1.0.0",
+  "language": "tr",
+  "region": "TR",
+  "suggestions": [
+    {
+      "id": "ho001",
+      "title": "Dolap Düzenleme",
+      "description": "Giyilmeyenleri ayırın, bağış yapın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "düzen"
+      ],
+      "tips": [
+        "Mevsimlere göre ayırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho002",
+      "title": "Bugün Buzdolabı Temizliği",
+      "description": "Bozulmuşları atın, raf düzeni yapın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "mutfak"
+      ],
+      "tips": [
+        "Son kullanma tarihlerini kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho003",
+      "title": "Bu Hafta Kitaplık Düzenleme",
+      "description": "Kitapları kategoriye göre sıralayın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "kitap"
+      ],
+      "tips": [
+        "Okunmayanları bağışlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho004",
+      "title": "Ailece Balkon Düzenleme",
+      "description": "Saksıları yeniden dizayn edin, süpürün.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "balkon"
+      ],
+      "tips": [
+        "Vertikal bahçe düşünün."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho005",
+      "title": "Hafta Sonu Fotoğraf Arşivleme",
+      "description": "Telefondaki fotoğrafları kategorilere ayırın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "dijital"
+      ],
+      "tips": [
+        "Yedekleme yapmayı unutmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho006",
+      "title": "Ayakkabı Dolabı",
+      "description": "Eskileri temizleyin veya atın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "dolap"
+      ],
+      "tips": [
+        "Koku giderici koyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho007",
+      "title": "Bugün Çocuk Odası Revizyon",
+      "description": "Oyuncakları sınıflandırın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "çocuk odası"
+      ],
+      "tips": [
+        "Kırık oyuncakları ayırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho008",
+      "title": "Bu Hafta Mutfak Çekmecesi",
+      "description": "Kaşık, çatal, spatula düzenini yenileyin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "mutfak"
+      ],
+      "tips": [
+        "Çekmece içi düzenleyiciler kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho009",
+      "title": "Ailece Banyo Rafı Düzenleme",
+      "description": "Şampuan, sabun düzenini kontrol edin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "banyo"
+      ],
+      "tips": [
+        "Son kullanma tarihlerini atın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho010",
+      "title": "Hafta Sonu Yatak Odası Havalandırma",
+      "description": "Yorganları asın, pencere açın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "yatak odası"
+      ],
+      "tips": [
+        "Güneşli havada yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho011",
+      "title": "Garaj / Kiler Kontrolü",
+      "description": "Mevsimlik eşyaları yerleştirin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "depo"
+      ],
+      "tips": [
+        "Nem önleyici koyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho012",
+      "title": "Bugün E-posta ve Fatura Düzeni",
+      "description": "Ödenmemiş faturaları kontrol edin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "evrak"
+      ],
+      "tips": [
+        "Dijital arşiv oluşturun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho013",
+      "title": "Bu Hafta Aile Takvimi Güncelleme",
+      "description": "Yaklaşan özel günleri takvime ekleyin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "planlama"
+      ],
+      "tips": [
+        "Tüm aileye paylaşın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho014",
+      "title": "Ailece Evcil Hayvan Bakımı",
+      "description": "Kafes, diş, tırnak kontrolü.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "hayvan"
+      ],
+      "tips": [
+        "Veteriner takvimini kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho015",
+      "title": "Hafta Sonu Araba İçi Düzenleme",
+      "description": "Eşyaları çıkarın, vakumlayın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "araba"
+      ],
+      "tips": [
+        "Kokulu süs koyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho016",
+      "title": "Perde ve Yorgan Yıkama",
+      "description": "Büyük çamaşır günü, makineye atın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "çamaşır"
+      ],
+      "tips": [
+        "Etiket talimatlarını okuyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho017",
+      "title": "Bugün Halı ve Kilim Temizliği",
+      "description": "Çırpma, süpürme, leke çıkarma.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "temizlik"
+      ],
+      "tips": [
+        "Güneşte bekletin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho018",
+      "title": "Bu Hafta Mutfak Dolabı İçi",
+      "description": "Yağlı fırın, dolap içi silme.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "mutfak"
+      ],
+      "tips": [
+        "Doğal temizleyiciler kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho019",
+      "title": "Ailece Beyaz Eşya Temizliği",
+      "description": "Buzdolabı, çamaşır makinesi, bulaşık makinesi.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "bakım"
+      ],
+      "tips": [
+        "Kireç çözücü kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho020",
+      "title": "Hafta Sonu Pencere Temizliği",
+      "description": "Cam silme, pervaz tozu alma.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 75,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "temizlik"
+      ],
+      "tips": [
+        "Gazete kağıdı ile parlaklık artar."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho021",
+      "title": "Dolap Düzenleme",
+      "description": "Giyilmeyenleri ayırın, bağış yapın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "düzen"
+      ],
+      "tips": [
+        "Mevsimlere göre ayırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho022",
+      "title": "Bugün Buzdolabı Temizliği",
+      "description": "Bozulmuşları atın, raf düzeni yapın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "mutfak"
+      ],
+      "tips": [
+        "Son kullanma tarihlerini kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho023",
+      "title": "Bu Hafta Kitaplık Düzenleme",
+      "description": "Kitapları kategoriye göre sıralayın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "kitap"
+      ],
+      "tips": [
+        "Okunmayanları bağışlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho024",
+      "title": "Ailece Balkon Düzenleme",
+      "description": "Saksıları yeniden dizayn edin, süpürün.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "balkon"
+      ],
+      "tips": [
+        "Vertikal bahçe düşünün."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho025",
+      "title": "Hafta Sonu Fotoğraf Arşivleme",
+      "description": "Telefondaki fotoğrafları kategorilere ayırın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "dijital"
+      ],
+      "tips": [
+        "Yedekleme yapmayı unutmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho026",
+      "title": "Ayakkabı Dolabı",
+      "description": "Eskileri temizleyin veya atın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "dolap"
+      ],
+      "tips": [
+        "Koku giderici koyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho027",
+      "title": "Bugün Çocuk Odası Revizyon",
+      "description": "Oyuncakları sınıflandırın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "çocuk odası"
+      ],
+      "tips": [
+        "Kırık oyuncakları ayırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho028",
+      "title": "Bu Hafta Mutfak Çekmecesi",
+      "description": "Kaşık, çatal, spatula düzenini yenileyin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "mutfak"
+      ],
+      "tips": [
+        "Çekmece içi düzenleyiciler kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho029",
+      "title": "Ailece Banyo Rafı Düzenleme",
+      "description": "Şampuan, sabun düzenini kontrol edin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "banyo"
+      ],
+      "tips": [
+        "Son kullanma tarihlerini atın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho030",
+      "title": "Hafta Sonu Yatak Odası Havalandırma",
+      "description": "Yorganları asın, pencere açın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "yatak odası"
+      ],
+      "tips": [
+        "Güneşli havada yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho031",
+      "title": "Garaj / Kiler Kontrolü",
+      "description": "Mevsimlik eşyaları yerleştirin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "depo"
+      ],
+      "tips": [
+        "Nem önleyici koyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho032",
+      "title": "Bugün E-posta ve Fatura Düzeni",
+      "description": "Ödenmemiş faturaları kontrol edin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "evrak"
+      ],
+      "tips": [
+        "Dijital arşiv oluşturun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho033",
+      "title": "Bu Hafta Aile Takvimi Güncelleme",
+      "description": "Yaklaşan özel günleri takvime ekleyin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "planlama"
+      ],
+      "tips": [
+        "Tüm aileye paylaşın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho034",
+      "title": "Ailece Evcil Hayvan Bakımı",
+      "description": "Kafes, diş, tırnak kontrolü.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "hayvan"
+      ],
+      "tips": [
+        "Veteriner takvimini kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho035",
+      "title": "Hafta Sonu Araba İçi Düzenleme",
+      "description": "Eşyaları çıkarın, vakumlayın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "araba"
+      ],
+      "tips": [
+        "Kokulu süs koyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho036",
+      "title": "Perde ve Yorgan Yıkama",
+      "description": "Büyük çamaşır günü, makineye atın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "çamaşır"
+      ],
+      "tips": [
+        "Etiket talimatlarını okuyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho037",
+      "title": "Bugün Halı ve Kilim Temizliği",
+      "description": "Çırpma, süpürme, leke çıkarma.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "temizlik"
+      ],
+      "tips": [
+        "Güneşte bekletin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho038",
+      "title": "Bu Hafta Mutfak Dolabı İçi",
+      "description": "Yağlı fırın, dolap içi silme.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "mutfak"
+      ],
+      "tips": [
+        "Doğal temizleyiciler kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho039",
+      "title": "Ailece Beyaz Eşya Temizliği",
+      "description": "Buzdolabı, çamaşır makinesi, bulaşık makinesi.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "bakım"
+      ],
+      "tips": [
+        "Kireç çözücü kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho040",
+      "title": "Hafta Sonu Pencere Temizliği",
+      "description": "Cam silme, pervaz tozu alma.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 75,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "temizlik"
+      ],
+      "tips": [
+        "Gazete kağıdı ile parlaklık artar."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho041",
+      "title": "Dolap Düzenleme",
+      "description": "Giyilmeyenleri ayırın, bağış yapın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "düzen"
+      ],
+      "tips": [
+        "Mevsimlere göre ayırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho042",
+      "title": "Bugün Buzdolabı Temizliği",
+      "description": "Bozulmuşları atın, raf düzeni yapın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "mutfak"
+      ],
+      "tips": [
+        "Son kullanma tarihlerini kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho043",
+      "title": "Bu Hafta Kitaplık Düzenleme",
+      "description": "Kitapları kategoriye göre sıralayın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "kitap"
+      ],
+      "tips": [
+        "Okunmayanları bağışlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho044",
+      "title": "Ailece Balkon Düzenleme",
+      "description": "Saksıları yeniden dizayn edin, süpürün.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "balkon"
+      ],
+      "tips": [
+        "Vertikal bahçe düşünün."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho045",
+      "title": "Hafta Sonu Fotoğraf Arşivleme",
+      "description": "Telefondaki fotoğrafları kategorilere ayırın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "dijital"
+      ],
+      "tips": [
+        "Yedekleme yapmayı unutmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho046",
+      "title": "Ayakkabı Dolabı",
+      "description": "Eskileri temizleyin veya atın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "dolap"
+      ],
+      "tips": [
+        "Koku giderici koyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho047",
+      "title": "Bugün Çocuk Odası Revizyon",
+      "description": "Oyuncakları sınıflandırın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "çocuk odası"
+      ],
+      "tips": [
+        "Kırık oyuncakları ayırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho048",
+      "title": "Bu Hafta Mutfak Çekmecesi",
+      "description": "Kaşık, çatal, spatula düzenini yenileyin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "mutfak"
+      ],
+      "tips": [
+        "Çekmece içi düzenleyiciler kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho049",
+      "title": "Ailece Banyo Rafı Düzenleme",
+      "description": "Şampuan, sabun düzenini kontrol edin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "banyo"
+      ],
+      "tips": [
+        "Son kullanma tarihlerini atın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho050",
+      "title": "Hafta Sonu Yatak Odası Havalandırma",
+      "description": "Yorganları asın, pencere açın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "yatak odası"
+      ],
+      "tips": [
+        "Güneşli havada yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho051",
+      "title": "Garaj / Kiler Kontrolü",
+      "description": "Mevsimlik eşyaları yerleştirin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "depo"
+      ],
+      "tips": [
+        "Nem önleyici koyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho052",
+      "title": "Bugün E-posta ve Fatura Düzeni",
+      "description": "Ödenmemiş faturaları kontrol edin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "evrak"
+      ],
+      "tips": [
+        "Dijital arşiv oluşturun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho053",
+      "title": "Bu Hafta Aile Takvimi Güncelleme",
+      "description": "Yaklaşan özel günleri takvime ekleyin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "planlama"
+      ],
+      "tips": [
+        "Tüm aileye paylaşın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho054",
+      "title": "Ailece Evcil Hayvan Bakımı",
+      "description": "Kafes, diş, tırnak kontrolü.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "hayvan"
+      ],
+      "tips": [
+        "Veteriner takvimini kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho055",
+      "title": "Hafta Sonu Araba İçi Düzenleme",
+      "description": "Eşyaları çıkarın, vakumlayın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "araba"
+      ],
+      "tips": [
+        "Kokulu süs koyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho056",
+      "title": "Perde ve Yorgan Yıkama",
+      "description": "Büyük çamaşır günü, makineye atın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "çamaşır"
+      ],
+      "tips": [
+        "Etiket talimatlarını okuyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho057",
+      "title": "Bugün Halı ve Kilim Temizliği",
+      "description": "Çırpma, süpürme, leke çıkarma.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "temizlik"
+      ],
+      "tips": [
+        "Güneşte bekletin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho058",
+      "title": "Bu Hafta Mutfak Dolabı İçi",
+      "description": "Yağlı fırın, dolap içi silme.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "mutfak"
+      ],
+      "tips": [
+        "Doğal temizleyiciler kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho059",
+      "title": "Ailece Beyaz Eşya Temizliği",
+      "description": "Buzdolabı, çamaşır makinesi, bulaşık makinesi.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "bakım"
+      ],
+      "tips": [
+        "Kireç çözücü kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho060",
+      "title": "Hafta Sonu Pencere Temizliği",
+      "description": "Cam silme, pervaz tozu alma.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 75,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "temizlik"
+      ],
+      "tips": [
+        "Gazete kağıdı ile parlaklık artar."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho061",
+      "title": "Dolap Düzenleme",
+      "description": "Giyilmeyenleri ayırın, bağış yapın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "düzen"
+      ],
+      "tips": [
+        "Mevsimlere göre ayırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho062",
+      "title": "Bugün Buzdolabı Temizliği",
+      "description": "Bozulmuşları atın, raf düzeni yapın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "mutfak"
+      ],
+      "tips": [
+        "Son kullanma tarihlerini kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho063",
+      "title": "Bu Hafta Kitaplık Düzenleme",
+      "description": "Kitapları kategoriye göre sıralayın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "kitap"
+      ],
+      "tips": [
+        "Okunmayanları bağışlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho064",
+      "title": "Ailece Balkon Düzenleme",
+      "description": "Saksıları yeniden dizayn edin, süpürün.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "balkon"
+      ],
+      "tips": [
+        "Vertikal bahçe düşünün."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho065",
+      "title": "Hafta Sonu Fotoğraf Arşivleme",
+      "description": "Telefondaki fotoğrafları kategorilere ayırın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "dijital"
+      ],
+      "tips": [
+        "Yedekleme yapmayı unutmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho066",
+      "title": "Ayakkabı Dolabı",
+      "description": "Eskileri temizleyin veya atın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "dolap"
+      ],
+      "tips": [
+        "Koku giderici koyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho067",
+      "title": "Bugün Çocuk Odası Revizyon",
+      "description": "Oyuncakları sınıflandırın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "çocuk odası"
+      ],
+      "tips": [
+        "Kırık oyuncakları ayırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho068",
+      "title": "Bu Hafta Mutfak Çekmecesi",
+      "description": "Kaşık, çatal, spatula düzenini yenileyin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "mutfak"
+      ],
+      "tips": [
+        "Çekmece içi düzenleyiciler kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho069",
+      "title": "Ailece Banyo Rafı Düzenleme",
+      "description": "Şampuan, sabun düzenini kontrol edin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "banyo"
+      ],
+      "tips": [
+        "Son kullanma tarihlerini atın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho070",
+      "title": "Hafta Sonu Yatak Odası Havalandırma",
+      "description": "Yorganları asın, pencere açın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "yatak odası"
+      ],
+      "tips": [
+        "Güneşli havada yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho071",
+      "title": "Garaj / Kiler Kontrolü",
+      "description": "Mevsimlik eşyaları yerleştirin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "depo"
+      ],
+      "tips": [
+        "Nem önleyici koyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho072",
+      "title": "Bugün E-posta ve Fatura Düzeni",
+      "description": "Ödenmemiş faturaları kontrol edin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "evrak"
+      ],
+      "tips": [
+        "Dijital arşiv oluşturun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho073",
+      "title": "Bu Hafta Aile Takvimi Güncelleme",
+      "description": "Yaklaşan özel günleri takvime ekleyin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "planlama"
+      ],
+      "tips": [
+        "Tüm aileye paylaşın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho074",
+      "title": "Ailece Evcil Hayvan Bakımı",
+      "description": "Kafes, diş, tırnak kontrolü.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "hayvan"
+      ],
+      "tips": [
+        "Veteriner takvimini kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho075",
+      "title": "Hafta Sonu Araba İçi Düzenleme",
+      "description": "Eşyaları çıkarın, vakumlayın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "araba"
+      ],
+      "tips": [
+        "Kokulu süs koyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho076",
+      "title": "Perde ve Yorgan Yıkama",
+      "description": "Büyük çamaşır günü, makineye atın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "çamaşır"
+      ],
+      "tips": [
+        "Etiket talimatlarını okuyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho077",
+      "title": "Bugün Halı ve Kilim Temizliği",
+      "description": "Çırpma, süpürme, leke çıkarma.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "temizlik"
+      ],
+      "tips": [
+        "Güneşte bekletin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho078",
+      "title": "Bu Hafta Mutfak Dolabı İçi",
+      "description": "Yağlı fırın, dolap içi silme.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "mutfak"
+      ],
+      "tips": [
+        "Doğal temizleyiciler kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho079",
+      "title": "Ailece Beyaz Eşya Temizliği",
+      "description": "Buzdolabı, çamaşır makinesi, bulaşık makinesi.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "bakım"
+      ],
+      "tips": [
+        "Kireç çözücü kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho080",
+      "title": "Hafta Sonu Pencere Temizliği",
+      "description": "Cam silme, pervaz tozu alma.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 75,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "temizlik"
+      ],
+      "tips": [
+        "Gazete kağıdı ile parlaklık artar."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho081",
+      "title": "Dolap Düzenleme",
+      "description": "Giyilmeyenleri ayırın, bağış yapın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "düzen"
+      ],
+      "tips": [
+        "Mevsimlere göre ayırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho082",
+      "title": "Bugün Buzdolabı Temizliği",
+      "description": "Bozulmuşları atın, raf düzeni yapın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "mutfak"
+      ],
+      "tips": [
+        "Son kullanma tarihlerini kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho083",
+      "title": "Bu Hafta Kitaplık Düzenleme",
+      "description": "Kitapları kategoriye göre sıralayın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "kitap"
+      ],
+      "tips": [
+        "Okunmayanları bağışlayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho084",
+      "title": "Ailece Balkon Düzenleme",
+      "description": "Saksıları yeniden dizayn edin, süpürün.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "balkon"
+      ],
+      "tips": [
+        "Vertikal bahçe düşünün."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho085",
+      "title": "Hafta Sonu Fotoğraf Arşivleme",
+      "description": "Telefondaki fotoğrafları kategorilere ayırın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "dijital"
+      ],
+      "tips": [
+        "Yedekleme yapmayı unutmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho086",
+      "title": "Ayakkabı Dolabı",
+      "description": "Eskileri temizleyin veya atın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "dolap"
+      ],
+      "tips": [
+        "Koku giderici koyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho087",
+      "title": "Bugün Çocuk Odası Revizyon",
+      "description": "Oyuncakları sınıflandırın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "çocuk odası"
+      ],
+      "tips": [
+        "Kırık oyuncakları ayırın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho088",
+      "title": "Bu Hafta Mutfak Çekmecesi",
+      "description": "Kaşık, çatal, spatula düzenini yenileyin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "mutfak"
+      ],
+      "tips": [
+        "Çekmece içi düzenleyiciler kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho089",
+      "title": "Ailece Banyo Rafı Düzenleme",
+      "description": "Şampuan, sabun düzenini kontrol edin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "banyo"
+      ],
+      "tips": [
+        "Son kullanma tarihlerini atın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho090",
+      "title": "Hafta Sonu Yatak Odası Havalandırma",
+      "description": "Yorganları asın, pencere açın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "yatak odası"
+      ],
+      "tips": [
+        "Güneşli havada yapın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho091",
+      "title": "Garaj / Kiler Kontrolü",
+      "description": "Mevsimlik eşyaları yerleştirin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "depo"
+      ],
+      "tips": [
+        "Nem önleyici koyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho092",
+      "title": "Bugün E-posta ve Fatura Düzeni",
+      "description": "Ödenmemiş faturaları kontrol edin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "evrak"
+      ],
+      "tips": [
+        "Dijital arşiv oluşturun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho093",
+      "title": "Bu Hafta Aile Takvimi Güncelleme",
+      "description": "Yaklaşan özel günleri takvime ekleyin.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "planlama"
+      ],
+      "tips": [
+        "Tüm aileye paylaşın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho094",
+      "title": "Ailece Evcil Hayvan Bakımı",
+      "description": "Kafes, diş, tırnak kontrolü.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "hayvan"
+      ],
+      "tips": [
+        "Veteriner takvimini kontrol edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho095",
+      "title": "Hafta Sonu Araba İçi Düzenleme",
+      "description": "Eşyaları çıkarın, vakumlayın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "araba"
+      ],
+      "tips": [
+        "Kokulu süs koyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho096",
+      "title": "Perde ve Yorgan Yıkama",
+      "description": "Büyük çamaşır günü, makineye atın.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "çamaşır"
+      ],
+      "tips": [
+        "Etiket talimatlarını okuyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho097",
+      "title": "Bugün Halı ve Kilim Temizliği",
+      "description": "Çırpma, süpürme, leke çıkarma.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "temizlik"
+      ],
+      "tips": [
+        "Güneşte bekletin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho098",
+      "title": "Bu Hafta Mutfak Dolabı İçi",
+      "description": "Yağlı fırın, dolap içi silme.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "mutfak"
+      ],
+      "tips": [
+        "Doğal temizleyiciler kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho099",
+      "title": "Ailece Beyaz Eşya Temizliği",
+      "description": "Buzdolabı, çamaşır makinesi, bulaşık makinesi.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "bakım"
+      ],
+      "tips": [
+        "Kireç çözücü kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "ho100",
+      "title": "Hafta Sonu Pencere Temizliği",
+      "description": "Cam silme, pervaz tozu alma.",
+      "category": "chore",
+      "difficulty": "Kolay",
+      "duration_minutes": 75,
+      "participants": 4,
+      "tags": [
+        "ev",
+        "temizlik"
+      ],
+      "tips": [
+        "Gazete kağıdı ile parlaklık artar."
+      ],
+      "action_type": "show_detail"
+    }
+  ]
+}

@@ -1,0 +1,231 @@
+{
+  "cuisine_focus": "Turkish (Anatolian & Ottoman traditions)",
+  "region_adaptation": "Belgium ingredient availability",
+  "currency": "EUR",
+  "module": "meal_planning",
+  "version": "2.0",
+  "language": "tr",
+  "region": "BE",
+  "generated_at": "2026-05-03T00:00:00Z",
+  "recipes": [
+    {
+      "id": "mercimek_corbasi",
+      "name": "Mercimek Çorbası (Anne Usulü)",
+      "description": "Kırmızı mercimek, havuç, patates ve tereyağlı sos ile klasik Türk ev yemeği",
+      "prep_time": "10 dk",
+      "cook_time": "30 dk",
+      "servings": 6,
+      "difficulty": "Kolay",
+      "ingredients": [
+        {"item": "Kırmızı mercimek", "amount": "1.5 su bardağı", "alternative": "Yeşil mercimek", "belgium_availability": "Aldi, Lidl, Colruyt, Türk marketleri"},
+        {"item": "Havuç", "amount": "1 adet (rendelenmiş)", "alternative": null, "belgium_availability": "Her supermarket"},
+        {"item": "Patates", "amount": "1 adet (küçük doğranmış)", "alternative": null, "belgium_availability": "Her supermarket"},
+        {"item": "Soğan", "amount": "1 adet", "alternative": null, "belgium_availability": "Her supermarket"},
+        {"item": "Tereyağı", "amount": "2 yemek kaşığı", "alternative": "Zeytinyağı", "belgium_availability": "Her supermarket"},
+        {"item": "Pul biber", "amount": "1 tatlı kaşığı", "alternative": "Paprika", "belgium_availability": "Türk marketleri, Delhaize"},
+        {"item": "Nane", "amount": "1 çay kaşığı", "alternative": "Kuru nane", "belgium_availability": "Türk marketleri"},
+        {"item": "Limon", "amount": "Yarım adet", "alternative": null, "belgium_availability": "Her supermarket"}
+      ],
+      "instructions": [
+        "Mercimekleri yıkayıp süzün",
+        "Tencerede soğanı tereyağında kavurun",
+        "Havuç ve patatesi ekleyip 2 dk daha kavurun",
+        "Mercimek ve 6 su bardağı suyu ekleyin",
+        "Kaynadıktan sonra kısık ateşte 20 dk pişirin",
+        "Blenderdan geçirin, tuz ve baharatları ekleyin",
+        "Tereyağında pul biber kavurup üzerine gezdirin"
+      ],
+      "nutritional_highlights": ["Yüksek protein", "Demir kaynağı", "Lif açısından zengin"],
+      "kid_friendly_modifications": "Limon suyu ve pul biberi ayrı servis edin, çocuk versiyonu daha az baharatlı",
+      "cost_estimate_eur": 4.5,
+      "season": "Kış",
+      "tags": ["vegan", "glutensiz", "batch_cookable", "freezer_friendly"],
+      "turkish_cuisine_category": "corba",
+      "story": "Türk mutfağının en sevilen çorbalarından biri. Her evin kendine özgü tarifi vardır."
+    },
+    {
+      "id": "zeytinyagli_fasulye",
+      "name": "Zeytinyağlı Taze Fasulye",
+      "description": "Yaz sebzeleriyle hafif ve sağlıklı zeytinyağlı yemek",
+      "prep_time": "15 dk",
+      "cook_time": "25 dk",
+      "servings": 4,
+      "difficulty": "Kolay",
+      "ingredients": [
+        {"item": "Taze fasulye", "amount": "500g (ayıklanmış)", "alternative": "Dondurulmuş fasulye", "belgium_availability": "Yaz: her supermarket; Kış: dondurulmuş"},
+        {"item": "Domates", "amount": "2 adet (doğranmış)", "alternative": "Konserve domates", "belgium_availability": "Her supermarket"},
+        {"item": "Soğan", "amount": "1 adet", "alternative": null, "belgium_availability": "Her supermarket"},
+        {"item": "Sarımsak", "amount": "2 diş", "alternative": null, "belgium_availability": "Her supermarket"},
+        {"item": "Zeytinyağı", "amount": "3 yemek kaşığı", "alternative": null, "belgium_availability": "Her supermarket"},
+        {"item": "Şeker", "amount": "1 çay kaşığı", "alternative": "Bal", "belgium_availability": "Her supermarket"},
+        {"item": "Dereotu", "amount": "Yarım demet", "alternative": "Maydanoz", "belgium_availability": "Her supermarket"}
+      ],
+      "instructions": [
+        "Fasulyeleri yıkayıp uçlarını ayıklayın",
+        "Zeytinyağında soğan ve sarımsağı kavurun",
+        "Domatesleri ekleyip 5 dk pişirin",
+        "Fasulyeleri ekleyip üzerini geçecek kadar su koyun",
+        "Şeker ve tuzu ekleyip kısık ateşte 20 dk pişirin",
+        "Soğuyunca üzerine dereotu serpin, zeytinyağı gezdirin"
+      ],
+      "nutritional_highlights": ["A vitamini", "Antioksidan", "Düşük kalori"],
+      "kid_friendly_modifications": "Küçük parçalar halinde doğrayın, yanında yoğurt servis edin",
+      "cost_estimate_eur": 6.0,
+      "season": "Yaz",
+      "tags": ["vegan", "zeytinyağlı", "soğuk_yenebilir", "hafif"],
+      "turkish_cuisine_category": "zeytinyagli",
+      "story": "Ege ve Akdeniz mutfağının vazgeçilmezi. Soğuk olarak da servis edilen bu yemek yaz aylarının favorisidir."
+    },
+    {
+      "id": "anne_koftesi",
+      "name": "Anne Köftesi (Fırında)",
+      "description": "Fırında pişirilmiş, sebzeli, sağlıklı köfte tarifi",
+      "prep_time": "20 dk",
+      "cook_time": "35 dk",
+      "servings": 5,
+      "difficulty": "Orta",
+      "ingredients": [
+        {"item": "Kıyma (dana)", "amount": "500g", "alternative": "Kıyma (kuzu-dana karışık)", "belgium_availability": "Her supermarket"},
+        {"item": "Soğan", "amount": "1 adet (rendelenmiş)", "alternative": null, "belgium_availability": "Her supermarket"},
+        {"item": "Galeta unu", "amount": "Yarım su bardağı", "alternative": "Ekmek içi", "belgium_availability": "Türk marketleri, Carrefour"},
+        {"item": "Yumurta", "amount": "1 adet", "alternative": null, "belgium_availability": "Her supermarket"},
+        {"item": "Patates", "amount": "3 adet", "alternative": null, "belgium_availability": "Her supermarket"},
+        {"item": "Domates", "amount": "2 adet", "alternative": "Konserve domates", "belgium_availability": "Her supermarket"},
+        {"item": "Biber", "amount": "2 adet", "alternative": null, "belgium_availability": "Her supermarket"},
+        {"item": "Yoğurt", "amount": "1 kase", "alternative": "Greek yogurt", "belgium_availability": "Her supermarket"}
+      ],
+      "instructions": [
+        "Kıymaya soğan, galeta unu, yumurta, tuz ve baharat yoğurun",
+        "Köfte şekli verip tepsiye dizin",
+        "Patatesleri dilimleyip köftelerin arasına yerleştirin",
+        "Domates ve biberleri doğrayın üzerine serpin",
+        "Üzerine 1 su bardağı su gezdirin",
+        "180°C fırında 35 dk pişirin",
+        "Sarımsaklı yoğurt ile servis edin"
+      ],
+      "nutritional_highlights": ["Yüksek protein", "B12 vitamini", "Karbonhidrat dengesi"],
+      "kid_friendly_modifications": "Köfteleri küçük top şeklinde yapın, patatesleri parmak şeklinde kesin",
+      "cost_estimate_eur": 10.5,
+      "season": "Her mevsim",
+      "tags": ["protein_zengini", "fırın_yemeği", "aile_yemeği"],
+      "turkish_cuisine_category": "et_yemegi",
+      "story": "Her annenin kendine özgü tarifi olan bu köfte, fırında pişirilerek daha az yağlı ve daha sağlıklı hale getirilir."
+    },
+    {
+      "id": "tavuk_sote",
+      "name": "Tavuk Sote",
+      "description": "Hızlı ve pratik ev yemeği, sebzelerle birlikte",
+      "prep_time": "10 dk",
+      "cook_time": "20 dk",
+      "servings": 4,
+      "difficulty": "Kolay",
+      "ingredients": [
+        {"item": "Tavuk göğsü", "amount": "500g (kuşbaşı)", "alternative": "Tavuk but", "belgium_availability": "Her supermarket"},
+        {"item": "Soğan", "amount": "1 adet", "alternative": null, "belgium_availability": "Her supermarket"},
+        {"item": "Biber", "amount": "2 adet", "alternative": null, "belgium_availability": "Her supermarket"},
+        {"item": "Mantar", "amount": "200g", "alternative": "Konserve mantar", "belgium_availability": "Her supermarket"},
+        {"item": "Domates salçası", "amount": "1 yemek kaşığı", "alternative": null, "belgium_availability": "Türk marketleri"},
+        {"item": "Sarımsak", "amount": "2 diş", "alternative": null, "belgium_availability": "Her supermarket"},
+        {"item": "Zeytinyağı", "amount": "2 yemek kaşığı", "alternative": null, "belgium_availability": "Her supermarket"}
+      ],
+      "instructions": [
+        "Tavukları zeytinyağında kavurun",
+        "Soğan ve sarımsağı ekleyip kavurun",
+        "Biber ve mantarı ekleyin",
+        "Salçayı ekleyip karıştırın",
+        "Kısık ateşte 15 dk pişirin"
+      ],
+      "nutritional_highlights": ["Düşük yağ", "Yüksek protein", "Vitamin C"],
+      "kid_friendly_modifications": "Baharatı azaltın, yanında pilav servis edin",
+      "cost_estimate_eur": 8.0,
+      "season": "Her mevsim",
+      "tags": ["hızlı", "protein", "30_dk_altı"],
+      "turkish_cuisine_category": "et_yemegi",
+      "story": "İş günlerinin kurtarıcısı. 30 dakikadan kısa sürede hazır olan bu yemek, hem pratik hem besleyicidir."
+    },
+    {
+      "id": "karniyarik",
+      "name": "Karnıyarık (Anne Usulü)",
+      "description": "Kıymalı patlıcan yemeği, yaz akşamlarının vazgeçilmezi. Fırında pişirilmiş, hafif yağlı versiyon.",
+      "prep_time": "25 dk",
+      "cook_time": "40 dk",
+      "servings": 5,
+      "difficulty": "Orta",
+      "ingredients": [
+        {"item": "Patlıcan", "amount": "6 adet (ince uzun)", "alternative": null, "belgium_availability": "Türk marketleri, yaz mevsimi Carrefour/Delhaize"},
+        {"item": "Kıyma (dana)", "amount": "400g", "alternative": "Kıyma (kuzu-dana karışık)", "belgium_availability": "Her supermarket"},
+        {"item": "Soğan", "amount": "2 adet", "alternative": null, "belgium_availability": "Her supermarket"},
+        {"item": "Domates", "amount": "3 adet", "alternative": "Konserve domates", "belgium_availability": "Her supermarket"},
+        {"item": "Biber", "amount": "2 adet", "alternative": null, "belgium_availability": "Her supermarket"},
+        {"item": "Sarımsak", "amount": "3 diş", "alternative": null, "belgium_availability": "Her supermarket"},
+        {"item": "Zeytinyağı", "amount": "3 yemek kaşığı", "alternative": null, "belgium_availability": "Her supermarket"}
+      ],
+      "instructions": [
+        "Patlıcanları alacalı soyup tuzlu suda 30 dk bekletin",
+        "Zeytinyağında kızartın veya fırında 200°C'de 15 dk pişirin",
+        "Soğan ve sarımsağı kavurun, kıymayı ekleyin",
+        "Domates ve biberi ekleyip 10 dk pişirin",
+        "Patlıcanları ortadan yarıp içine kıymalı harç doldurun",
+        "Üzerine domates dilimi koyup 180°C fırında 25 dk pişirin"
+      ],
+      "nutritional_highlights": ["Lif açısından zengin", "Antioksidan", "Düşük karbonhidrat"],
+      "kid_friendly_modifications": "Patlıcanları küçük parçalar halinde kesip kıymayla karıştırın, üzerine kaşar peyniri serpin",
+      "cost_estimate_eur": 9.5,
+      "season": "Yaz",
+      "tags": ["geleneksel", "fırın_yemeği", "aile_yemeği", "sebze_ağırlıklı"],
+      "turkish_cuisine_category": "et_yemegi",
+      "story": "Adını patlıcanın ortadan yarılıp içinin doldurulmasından alır. Güneydoğu Anadolu'nun en sevilen yemeklerinden biridir."
+    },
+    {
+      "id": "ezogelin_corbasi",
+      "name": "Ezo Gelin Çorbası",
+      "description": "Kırmızı mercimek, bulgur ve pirinçle hazırlanan, Gaziantep'in meşhur çorbası. Ezo Gelin'in hikayesini taşır.",
+      "prep_time": "10 dk",
+      "cook_time": "35 dk",
+      "servings": 6,
+      "difficulty": "Kolay",
+      "ingredients": [
+        {"item": "Kırmızı mercimek", "amount": "1 su bardağı", "alternative": null, "belgium_availability": "Aldi, Lidl, Türk marketleri"},
+        {"item": "Bulgur", "amount": "Yarım su bardağı", "alternative": "Kuskus", "belgium_availability": "Türk marketleri, some bio shops"},
+        {"item": "Pirinç", "amount": "2 yemek kaşığı", "alternative": null, "belgium_availability": "Her supermarket"},
+        {"item": "Soğan", "amount": "1 adet", "alternative": null, "belgium_availability": "Her supermarket"},
+        {"item": "Sarımsak", "amount": "3 diş", "alternative": null, "belgium_availability": "Her supermarket"},
+        {"item": "Tereyağı", "amount": "2 yemek kaşığı", "alternative": "Zeytinyağı", "belgium_availability": "Her supermarket"},
+        {"item": "Nane", "amount": "1 çay kaşığı", "alternative": "Kuru nane", "belgium_availability": "Türk marketleri"},
+        {"item": "Pul biber", "amount": "1 tatlı kaşığı", "alternative": "Paprika", "belgium_availability": "Türk marketleri, Delhaize"}
+      ],
+      "instructions": [
+        "Mercimeği yıkayıp süzün",
+        "Tencerede tereyağında soğan ve sarımsağı kavurun",
+        "Mercimek, bulgur ve pirinci ekleyip karıştırın",
+        "6 su bardağı su ekleyip kaynatın",
+        "Kısık ateşte 25 dk pişirin",
+        "Blenderdan geçirin, nane ve tuz ekleyin",
+        "Tereyağında pul biber kavurup üzerine gezdirin"
+      ],
+      "nutritional_highlights": ["Yüksek protein", "Lif açısından zengin", "B vitamini kaynağı"],
+      "kid_friendly_modifications": "Baharatları azaltın, üzerine limon suyu ve kruton ekleyin",
+      "cost_estimate_eur": 3.5,
+      "season": "Kış",
+      "tags": ["vegan", "glutensiz", "geleneksel", "dondurucuya_uygun"],
+      "turkish_cuisine_category": "corba",
+      "story": "Gaziantep'e gelin gelen Ezo'nun hazırladığı çorba, Güneydoğu'nun en sevilen lezzetlerinden biri olmuştur."
+    }
+  ],
+  "weekly_template": {
+    "pazartesi": {"breakfast": "Menemen + Peynir + Zeytin", "lunch": "Mercimek Çorbası + Salata", "dinner": "Fırında Köfte + Patates"},
+    "sali": {"breakfast": "Börek (hazır yufka) + Çay", "lunch": "Zeytinyağlı Taze Fasulye + Yoğurt", "dinner": "Tavuk Sote + Pirinç Pilavı"},
+    "carsamba": {"breakfast": "Sahanda Yumurta + Ekmek", "lunch": "Ezogelin Çorbası + Salata", "dinner": "Karnıyarık + Bulgur Pilavı"},
+    "persembe": {"breakfast": "Peynirli Gözleme", "lunch": "Nohutlu Pilav (düdüklü)", "dinner": "Izgara Balık + Roka Salatası"},
+    "cuma": {"breakfast": "Simit + Peynir + Domates", "lunch": "Yayla Çorbası + Ekmek", "dinner": "Mantı (hazır) + Sarımsaklı Yoğurt"},
+    "cumartesi": {"breakfast": "Aile Kahvaltısı (serpme)", "lunch": "Kumpir (ev yapımı)", "dinner": "Lahmacun (ev yapımı) + Salata"},
+    "pazar": {"breakfast": "Sucuklu Yumurta + Börek", "lunch": "Türlü (sebze yemeği)", "dinner": "Kuru Fasulye + Pilav + Turşu"}
+  },
+  "meal_tips": [
+    "Haftalık liste ile alışveriş yapın, aç karnına gitmeyin",
+    "Aldi/Lidl gibi marketlerden temel ürünleri alın",
+    "Pazar günü haftalık yemek hazırlığı yapın (batch cooking)",
+    "Çocuklar için tabakları renkli ve eğlenceli sunun",
+    "Belgium'da taze sebze mevsimlerini takip edin"
+  ]
+}

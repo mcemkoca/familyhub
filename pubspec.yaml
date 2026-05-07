@@ -1,0 +1,141 @@
+name: familyhub
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+10
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  flutter_riverpod: ^2.6.1
+  go_router: ^14.8.1
+  google_fonts: ^6.2.1
+  flutter_slidable: ^4.0.0
+  table_calendar: ^3.2.0
+  intl: ^0.20.2
+  fl_chart: ^0.71.0
+  lottie: ^3.3.0
+  shimmer: ^3.0.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  local_auth: ^3.0.1
+  local_auth_android: ^2.0.0
+  local_auth_darwin: ^2.0.0
+  url_launcher: ^6.3.2
+  share_plus: ^13.1.0
+  geolocator: ^13.0.4
+  geocoding: ^3.0.0
+  flutter_map: ^8.0.0
+  latlong2: ^0.9.1
+  qr_flutter: ^4.1.0
+  audioplayers: ^6.4.0
+  flutter_secure_storage: ^8.1.0
+  sensors_plus: ^6.1.1
+  torch_light: ^1.1.0
+  emoji_picker_flutter: ^4.3.0
+  image_picker: ^1.1.2
+  record: ^6.0.0
+  permission_handler: ^11.4.0
+  crypto: ^3.0.3
+  flutter_tts: ^4.2.2
+  vibration: ^3.1.3
+  battery_plus: ^6.2.1
+  http: ^1.3.0
+  flutter_local_notifications: ^18.0.1
+  timezone: ^0.9.0
+  flutter_contacts: ^1.1.9
+  photo_manager: ^3.0.0
+  google_mlkit_text_recognition: ^0.15.0
+  flutter_stripe: ^11.5.0
+  flutter_webrtc: ^0.13.0
+  google_sign_in: ^6.2.1
+  googleapis: ^13.1.0
+  extension_google_sign_in_as_googleapis_auth: ^2.0.12
+  path_provider: ^2.1.5
+  flutter_svg: ^2.0.17
+  speech_to_text: ^7.0.0
+  firebase_core: ^3.6.0
+  firebase_crashlytics: ^4.1.3
+  firebase_analytics: ^11.3.3
+  firebase_messaging: ^15.2.10
+  firebase_storage: ^12.4.10
+  supabase_flutter: ^2.8.0
+  app_links: ^6.4.0
+  envied: ^1.1.0
+  encrypt: ^5.0.3
+  connectivity_plus: ^6.0.0
+  sentry: ^9.19.0
+  cached_network_image: ^3.4.1
+  package_info_plus: ^10.1.0
+  device_calendar: ^4.3.3
+  purchases_flutter: ^8.7.0
+  amplitude_flutter: ^4.3.0
+  mixpanel_flutter: ^2.3.3
+  uuid: ^4.5.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.3
+  mocktail: ^1.0.4
+  envied_generator: ^1.1.0
+  build_runner: ^2.4.0
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/app_icon.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/images/app_icon.png"
+
+flutter:
+  generate: true
+  uses-material-design: true
+  assets:
+    # App icon
+    - assets/images/app_icon.png
+    # Onboarding
+    - assets/images/onboarding/
+    # Data
+    - assets/data/child_development.json
+    - assets/data/meal_planning.json
+    - assets/data/household.json
+    - assets/data/budget.json
+    - assets/data/future_planning.json
+    - assets/data/content/recipes.json
+    - assets/data/content/travel.json
+    - assets/data/content/indoor.json
+    - assets/data/content/education.json
+    - assets/data/content/family.json
+    - assets/data/content/home.json
+    - assets/data/suggestions/family_communication.json
+    - assets/data/suggestions/healthy_living.json
+    - assets/data/suggestions/child_development.json
+    - assets/data/suggestions/home_organization.json
+    - assets/data/suggestions/budget_management.json
+    - assets/data/suggestions/safety_measures.json
+    - assets/data/suggestions/education_support.json
+    - assets/data/suggestions/meal_nutrition.json
+    - assets/data/suggestions/social_activities.json
+    - assets/data/suggestions/digital_balance.json
+    - assets/images/google_logo.svg
+    # Icons
+    - assets/icons/
+    # Images
+    - assets/images/
+    # Sounds
+    - assets/sounds/emergency_alarm.mp3
+    - assets/sounds/notification.mp3
+    # Animations
+    - assets/animations/loading.json
+    - assets/animations/success.json
+    - assets/animations/error.json
+    # Fonts
+    - assets/fonts/
+    - assets/images/google_drive_logo.svg

@@ -1,0 +1,1708 @@
+{
+  "module": "digital_balance",
+  "version": "1.0.0",
+  "language": "tr",
+  "region": "TR",
+  "suggestions": [
+    {
+      "id": "db001",
+      "title": "Teknolojisiz Akşam",
+      "description": "Bugün akşam 3 saat telefon yasak.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 180,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "detoks"
+      ],
+      "tips": [
+        "Kutu koyun, herkes telefonunu içine atsın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db002",
+      "title": "Bugün Ekran Süresi Kontrolü",
+      "description": "Herkes günlük ekran süresini kontrol etsin.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "kontrol"
+      ],
+      "tips": [
+        "Hedef koyun, azaltmaya çalışın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db003",
+      "title": "Bu Hafta Sosyal Medya Detoksu",
+      "description": "1 gün hiç sosyal medya kullanmayın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "detoks"
+      ],
+      "tips": [
+        "Uygulamaları geçici olarak silin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db004",
+      "title": "Ailece Aile Oyun Gecesi (Analog)",
+      "description": "Kutu oyunları, kart, puzzle.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 90,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "oyun"
+      ],
+      "tips": [
+        "Hiçbir elektronik cihaz olmasın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db005",
+      "title": "Akşam Kitap Okuma Maratonu",
+      "description": "Herkes 1 saat kitap okusun.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "okuma"
+      ],
+      "tips": [
+        "Telefonu başka odaya koyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db006",
+      "title": "Hafta Sonu Doğa Yürüyüşü (Telefonsuz)",
+      "description": "Sadece acil durum için telefon yanınızda.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "doğa"
+      ],
+      "tips": [
+        "Fotoğraf çekmek yasak, sadece yaşayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db007",
+      "title": "Yemek Masası Kuralı",
+      "description": "Yemek sırasında telefon masadan uzakta.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "yemek"
+      ],
+      "tips": [
+        "Konuşmaya odaklanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db008",
+      "title": "Bugün Uyku Öncesi Telefon Yasağı",
+      "description": "Yatmadan 1 saat önce telefon bırakma.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "uyku"
+      ],
+      "tips": [
+        "Mavi ışık uyku kalitesini bozar."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db009",
+      "title": "Bu Hafta Hafta Sonu Kampı (Offline)",
+      "description": "Şehir dışında internet olmayan yerde kalın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 1450,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "kamp"
+      ],
+      "tips": [
+        "GPS harici telefon kullanmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db010",
+      "title": "Ailece El Yazısı Günü",
+      "description": "Bugün her şeyi el yazısıyla yazın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 0,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "yazma"
+      ],
+      "tips": [
+        "Defter ve kalem kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db011",
+      "title": "Akşam Fotoğraf Makinesi ile Çekim",
+      "description": "Telefon yerine gerçek fotoğraf makinesi kullanın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "fotoğraf"
+      ],
+      "tips": [
+        "Anıları sonradan basın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db012",
+      "title": "Hafta Sonu Müzik Dinleme (Radyo)",
+      "description": "Spotify yerine radyo dinleyin.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "müzik"
+      ],
+      "tips": [
+        "Sürpriz şarkılar keşfedin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db013",
+      "title": "Harita Kullanma",
+      "description": "Navigasyon yerine fiziksel harita kullanın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 0,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "navigasyon"
+      ],
+      "tips": [
+        "Yön bulma becerisini geliştirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db014",
+      "title": "Bugün Telefon Şarj İstasyonu",
+      "description": "Evde tek şarj istasyonu belirleyin.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "düzen"
+      ],
+      "tips": [
+        "Yatak odasına şarj aleti koymayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db015",
+      "title": "Bu Hafta Çocuklar için Ekran Kuralı",
+      "description": "Günde max 1 saat eğitici ekran.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "çocuk"
+      ],
+      "tips": [
+        "Timer kullanın, sınır net olsun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db016",
+      "title": "Ailece Aile Sohbet Saati",
+      "description": "Her gün 20 dk sadece konuşma.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "iletişim"
+      ],
+      "tips": [
+        "Televizyon da kapalı olsun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db017",
+      "title": "Akşam Gazete Okuma Günü",
+      "description": "Online haber yerine fiziksel gazete.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "haber"
+      ],
+      "tips": [
+        "Farklı gazetelerden okuyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db018",
+      "title": "Hafta Sonu Mutfakta Telefon Yasak",
+      "description": "Yemek hazırlarken telefon kullanmayın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "mutfak"
+      ],
+      "tips": [
+        "Müzik dinlemek serbest."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db019",
+      "title": "Banyoda Telefon Yasak",
+      "description": "Banyo telefonsuz olsun.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 0,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "banyo"
+      ],
+      "tips": [
+        "Düşünmek için yalnız kalın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db020",
+      "title": "Bugün Araba Kullanırken Telefon",
+      "description": "Sürücü kesinlikle telefon kullanmasın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "güvenlik"
+      ],
+      "tips": [
+        "Aile güvenliği için kural."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db021",
+      "title": "Bu Hafta Akşam Rutini (Analog)",
+      "description": "Kitap, çay, sohbet.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "rutin"
+      ],
+      "tips": [
+        "Günü sakin bitirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db022",
+      "title": "Ailece Teknolojisiz Akşam",
+      "description": "Bugün akşam 3 saat telefon yasak.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 180,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "detoks"
+      ],
+      "tips": [
+        "Kutu koyun, herkes telefonunu içine atsın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db023",
+      "title": "Akşam Ekran Süresi Kontrolü",
+      "description": "Herkes günlük ekran süresini kontrol etsin.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "kontrol"
+      ],
+      "tips": [
+        "Hedef koyun, azaltmaya çalışın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db024",
+      "title": "Hafta Sonu Sosyal Medya Detoksu",
+      "description": "1 gün hiç sosyal medya kullanmayın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "detoks"
+      ],
+      "tips": [
+        "Uygulamaları geçici olarak silin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db025",
+      "title": "Aile Oyun Gecesi (Analog)",
+      "description": "Kutu oyunları, kart, puzzle.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 90,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "oyun"
+      ],
+      "tips": [
+        "Hiçbir elektronik cihaz olmasın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db026",
+      "title": "Bugün Kitap Okuma Maratonu",
+      "description": "Herkes 1 saat kitap okusun.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "okuma"
+      ],
+      "tips": [
+        "Telefonu başka odaya koyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db027",
+      "title": "Bu Hafta Doğa Yürüyüşü (Telefonsuz)",
+      "description": "Sadece acil durum için telefon yanınızda.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "doğa"
+      ],
+      "tips": [
+        "Fotoğraf çekmek yasak, sadece yaşayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db028",
+      "title": "Ailece Yemek Masası Kuralı",
+      "description": "Yemek sırasında telefon masadan uzakta.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "yemek"
+      ],
+      "tips": [
+        "Konuşmaya odaklanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db029",
+      "title": "Akşam Uyku Öncesi Telefon Yasağı",
+      "description": "Yatmadan 1 saat önce telefon bırakma.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "uyku"
+      ],
+      "tips": [
+        "Mavi ışık uyku kalitesini bozar."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db030",
+      "title": "Hafta Sonu Hafta Sonu Kampı (Offline)",
+      "description": "Şehir dışında internet olmayan yerde kalın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 1450,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "kamp"
+      ],
+      "tips": [
+        "GPS harici telefon kullanmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db031",
+      "title": "El Yazısı Günü",
+      "description": "Bugün her şeyi el yazısıyla yazın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 0,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "yazma"
+      ],
+      "tips": [
+        "Defter ve kalem kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db032",
+      "title": "Bugün Fotoğraf Makinesi ile Çekim",
+      "description": "Telefon yerine gerçek fotoğraf makinesi kullanın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "fotoğraf"
+      ],
+      "tips": [
+        "Anıları sonradan basın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db033",
+      "title": "Bu Hafta Müzik Dinleme (Radyo)",
+      "description": "Spotify yerine radyo dinleyin.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "müzik"
+      ],
+      "tips": [
+        "Sürpriz şarkılar keşfedin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db034",
+      "title": "Ailece Harita Kullanma",
+      "description": "Navigasyon yerine fiziksel harita kullanın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 0,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "navigasyon"
+      ],
+      "tips": [
+        "Yön bulma becerisini geliştirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db035",
+      "title": "Akşam Telefon Şarj İstasyonu",
+      "description": "Evde tek şarj istasyonu belirleyin.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "düzen"
+      ],
+      "tips": [
+        "Yatak odasına şarj aleti koymayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db036",
+      "title": "Hafta Sonu Çocuklar için Ekran Kuralı",
+      "description": "Günde max 1 saat eğitici ekran.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "çocuk"
+      ],
+      "tips": [
+        "Timer kullanın, sınır net olsun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db037",
+      "title": "Aile Sohbet Saati",
+      "description": "Her gün 20 dk sadece konuşma.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "iletişim"
+      ],
+      "tips": [
+        "Televizyon da kapalı olsun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db038",
+      "title": "Bugün Gazete Okuma Günü",
+      "description": "Online haber yerine fiziksel gazete.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "haber"
+      ],
+      "tips": [
+        "Farklı gazetelerden okuyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db039",
+      "title": "Bu Hafta Mutfakta Telefon Yasak",
+      "description": "Yemek hazırlarken telefon kullanmayın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "mutfak"
+      ],
+      "tips": [
+        "Müzik dinlemek serbest."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db040",
+      "title": "Ailece Banyoda Telefon Yasak",
+      "description": "Banyo telefonsuz olsun.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 0,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "banyo"
+      ],
+      "tips": [
+        "Düşünmek için yalnız kalın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db041",
+      "title": "Akşam Araba Kullanırken Telefon",
+      "description": "Sürücü kesinlikle telefon kullanmasın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "güvenlik"
+      ],
+      "tips": [
+        "Aile güvenliği için kural."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db042",
+      "title": "Hafta Sonu Akşam Rutini (Analog)",
+      "description": "Kitap, çay, sohbet.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "rutin"
+      ],
+      "tips": [
+        "Günü sakin bitirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db043",
+      "title": "Teknolojisiz Akşam",
+      "description": "Bugün akşam 3 saat telefon yasak.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 180,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "detoks"
+      ],
+      "tips": [
+        "Kutu koyun, herkes telefonunu içine atsın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db044",
+      "title": "Bugün Ekran Süresi Kontrolü",
+      "description": "Herkes günlük ekran süresini kontrol etsin.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "kontrol"
+      ],
+      "tips": [
+        "Hedef koyun, azaltmaya çalışın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db045",
+      "title": "Bu Hafta Sosyal Medya Detoksu",
+      "description": "1 gün hiç sosyal medya kullanmayın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "detoks"
+      ],
+      "tips": [
+        "Uygulamaları geçici olarak silin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db046",
+      "title": "Ailece Aile Oyun Gecesi (Analog)",
+      "description": "Kutu oyunları, kart, puzzle.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 90,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "oyun"
+      ],
+      "tips": [
+        "Hiçbir elektronik cihaz olmasın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db047",
+      "title": "Akşam Kitap Okuma Maratonu",
+      "description": "Herkes 1 saat kitap okusun.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "okuma"
+      ],
+      "tips": [
+        "Telefonu başka odaya koyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db048",
+      "title": "Hafta Sonu Doğa Yürüyüşü (Telefonsuz)",
+      "description": "Sadece acil durum için telefon yanınızda.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "doğa"
+      ],
+      "tips": [
+        "Fotoğraf çekmek yasak, sadece yaşayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db049",
+      "title": "Yemek Masası Kuralı",
+      "description": "Yemek sırasında telefon masadan uzakta.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "yemek"
+      ],
+      "tips": [
+        "Konuşmaya odaklanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db050",
+      "title": "Bugün Uyku Öncesi Telefon Yasağı",
+      "description": "Yatmadan 1 saat önce telefon bırakma.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "uyku"
+      ],
+      "tips": [
+        "Mavi ışık uyku kalitesini bozar."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db051",
+      "title": "Bu Hafta Hafta Sonu Kampı (Offline)",
+      "description": "Şehir dışında internet olmayan yerde kalın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 1450,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "kamp"
+      ],
+      "tips": [
+        "GPS harici telefon kullanmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db052",
+      "title": "Ailece El Yazısı Günü",
+      "description": "Bugün her şeyi el yazısıyla yazın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 0,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "yazma"
+      ],
+      "tips": [
+        "Defter ve kalem kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db053",
+      "title": "Akşam Fotoğraf Makinesi ile Çekim",
+      "description": "Telefon yerine gerçek fotoğraf makinesi kullanın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "fotoğraf"
+      ],
+      "tips": [
+        "Anıları sonradan basın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db054",
+      "title": "Hafta Sonu Müzik Dinleme (Radyo)",
+      "description": "Spotify yerine radyo dinleyin.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "müzik"
+      ],
+      "tips": [
+        "Sürpriz şarkılar keşfedin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db055",
+      "title": "Harita Kullanma",
+      "description": "Navigasyon yerine fiziksel harita kullanın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 0,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "navigasyon"
+      ],
+      "tips": [
+        "Yön bulma becerisini geliştirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db056",
+      "title": "Bugün Telefon Şarj İstasyonu",
+      "description": "Evde tek şarj istasyonu belirleyin.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "düzen"
+      ],
+      "tips": [
+        "Yatak odasına şarj aleti koymayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db057",
+      "title": "Bu Hafta Çocuklar için Ekran Kuralı",
+      "description": "Günde max 1 saat eğitici ekran.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "çocuk"
+      ],
+      "tips": [
+        "Timer kullanın, sınır net olsun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db058",
+      "title": "Ailece Aile Sohbet Saati",
+      "description": "Her gün 20 dk sadece konuşma.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "iletişim"
+      ],
+      "tips": [
+        "Televizyon da kapalı olsun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db059",
+      "title": "Akşam Gazete Okuma Günü",
+      "description": "Online haber yerine fiziksel gazete.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "haber"
+      ],
+      "tips": [
+        "Farklı gazetelerden okuyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db060",
+      "title": "Hafta Sonu Mutfakta Telefon Yasak",
+      "description": "Yemek hazırlarken telefon kullanmayın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "mutfak"
+      ],
+      "tips": [
+        "Müzik dinlemek serbest."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db061",
+      "title": "Banyoda Telefon Yasak",
+      "description": "Banyo telefonsuz olsun.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 0,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "banyo"
+      ],
+      "tips": [
+        "Düşünmek için yalnız kalın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db062",
+      "title": "Bugün Araba Kullanırken Telefon",
+      "description": "Sürücü kesinlikle telefon kullanmasın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "güvenlik"
+      ],
+      "tips": [
+        "Aile güvenliği için kural."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db063",
+      "title": "Bu Hafta Akşam Rutini (Analog)",
+      "description": "Kitap, çay, sohbet.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "rutin"
+      ],
+      "tips": [
+        "Günü sakin bitirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db064",
+      "title": "Ailece Teknolojisiz Akşam",
+      "description": "Bugün akşam 3 saat telefon yasak.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 180,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "detoks"
+      ],
+      "tips": [
+        "Kutu koyun, herkes telefonunu içine atsın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db065",
+      "title": "Akşam Ekran Süresi Kontrolü",
+      "description": "Herkes günlük ekran süresini kontrol etsin.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "kontrol"
+      ],
+      "tips": [
+        "Hedef koyun, azaltmaya çalışın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db066",
+      "title": "Hafta Sonu Sosyal Medya Detoksu",
+      "description": "1 gün hiç sosyal medya kullanmayın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "detoks"
+      ],
+      "tips": [
+        "Uygulamaları geçici olarak silin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db067",
+      "title": "Aile Oyun Gecesi (Analog)",
+      "description": "Kutu oyunları, kart, puzzle.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 90,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "oyun"
+      ],
+      "tips": [
+        "Hiçbir elektronik cihaz olmasın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db068",
+      "title": "Bugün Kitap Okuma Maratonu",
+      "description": "Herkes 1 saat kitap okusun.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "okuma"
+      ],
+      "tips": [
+        "Telefonu başka odaya koyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db069",
+      "title": "Bu Hafta Doğa Yürüyüşü (Telefonsuz)",
+      "description": "Sadece acil durum için telefon yanınızda.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "doğa"
+      ],
+      "tips": [
+        "Fotoğraf çekmek yasak, sadece yaşayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db070",
+      "title": "Ailece Yemek Masası Kuralı",
+      "description": "Yemek sırasında telefon masadan uzakta.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "yemek"
+      ],
+      "tips": [
+        "Konuşmaya odaklanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db071",
+      "title": "Akşam Uyku Öncesi Telefon Yasağı",
+      "description": "Yatmadan 1 saat önce telefon bırakma.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "uyku"
+      ],
+      "tips": [
+        "Mavi ışık uyku kalitesini bozar."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db072",
+      "title": "Hafta Sonu Hafta Sonu Kampı (Offline)",
+      "description": "Şehir dışında internet olmayan yerde kalın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 1450,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "kamp"
+      ],
+      "tips": [
+        "GPS harici telefon kullanmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db073",
+      "title": "El Yazısı Günü",
+      "description": "Bugün her şeyi el yazısıyla yazın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 0,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "yazma"
+      ],
+      "tips": [
+        "Defter ve kalem kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db074",
+      "title": "Bugün Fotoğraf Makinesi ile Çekim",
+      "description": "Telefon yerine gerçek fotoğraf makinesi kullanın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "fotoğraf"
+      ],
+      "tips": [
+        "Anıları sonradan basın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db075",
+      "title": "Bu Hafta Müzik Dinleme (Radyo)",
+      "description": "Spotify yerine radyo dinleyin.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "müzik"
+      ],
+      "tips": [
+        "Sürpriz şarkılar keşfedin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db076",
+      "title": "Ailece Harita Kullanma",
+      "description": "Navigasyon yerine fiziksel harita kullanın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 0,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "navigasyon"
+      ],
+      "tips": [
+        "Yön bulma becerisini geliştirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db077",
+      "title": "Akşam Telefon Şarj İstasyonu",
+      "description": "Evde tek şarj istasyonu belirleyin.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "düzen"
+      ],
+      "tips": [
+        "Yatak odasına şarj aleti koymayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db078",
+      "title": "Hafta Sonu Çocuklar için Ekran Kuralı",
+      "description": "Günde max 1 saat eğitici ekran.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "çocuk"
+      ],
+      "tips": [
+        "Timer kullanın, sınır net olsun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db079",
+      "title": "Aile Sohbet Saati",
+      "description": "Her gün 20 dk sadece konuşma.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "iletişim"
+      ],
+      "tips": [
+        "Televizyon da kapalı olsun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db080",
+      "title": "Bugün Gazete Okuma Günü",
+      "description": "Online haber yerine fiziksel gazete.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "haber"
+      ],
+      "tips": [
+        "Farklı gazetelerden okuyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db081",
+      "title": "Bu Hafta Mutfakta Telefon Yasak",
+      "description": "Yemek hazırlarken telefon kullanmayın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "mutfak"
+      ],
+      "tips": [
+        "Müzik dinlemek serbest."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db082",
+      "title": "Ailece Banyoda Telefon Yasak",
+      "description": "Banyo telefonsuz olsun.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 0,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "banyo"
+      ],
+      "tips": [
+        "Düşünmek için yalnız kalın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db083",
+      "title": "Akşam Araba Kullanırken Telefon",
+      "description": "Sürücü kesinlikle telefon kullanmasın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "güvenlik"
+      ],
+      "tips": [
+        "Aile güvenliği için kural."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db084",
+      "title": "Hafta Sonu Akşam Rutini (Analog)",
+      "description": "Kitap, çay, sohbet.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "rutin"
+      ],
+      "tips": [
+        "Günü sakin bitirin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db085",
+      "title": "Teknolojisiz Akşam",
+      "description": "Bugün akşam 3 saat telefon yasak.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 180,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "detoks"
+      ],
+      "tips": [
+        "Kutu koyun, herkes telefonunu içine atsın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db086",
+      "title": "Bugün Ekran Süresi Kontrolü",
+      "description": "Herkes günlük ekran süresini kontrol etsin.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "kontrol"
+      ],
+      "tips": [
+        "Hedef koyun, azaltmaya çalışın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db087",
+      "title": "Bu Hafta Sosyal Medya Detoksu",
+      "description": "1 gün hiç sosyal medya kullanmayın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "detoks"
+      ],
+      "tips": [
+        "Uygulamaları geçici olarak silin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db088",
+      "title": "Ailece Aile Oyun Gecesi (Analog)",
+      "description": "Kutu oyunları, kart, puzzle.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 90,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "oyun"
+      ],
+      "tips": [
+        "Hiçbir elektronik cihaz olmasın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db089",
+      "title": "Akşam Kitap Okuma Maratonu",
+      "description": "Herkes 1 saat kitap okusun.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "okuma"
+      ],
+      "tips": [
+        "Telefonu başka odaya koyun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db090",
+      "title": "Hafta Sonu Doğa Yürüyüşü (Telefonsuz)",
+      "description": "Sadece acil durum için telefon yanınızda.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "doğa"
+      ],
+      "tips": [
+        "Fotoğraf çekmek yasak, sadece yaşayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db091",
+      "title": "Yemek Masası Kuralı",
+      "description": "Yemek sırasında telefon masadan uzakta.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "yemek"
+      ],
+      "tips": [
+        "Konuşmaya odaklanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db092",
+      "title": "Bugün Uyku Öncesi Telefon Yasağı",
+      "description": "Yatmadan 1 saat önce telefon bırakma.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "uyku"
+      ],
+      "tips": [
+        "Mavi ışık uyku kalitesini bozar."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db093",
+      "title": "Bu Hafta Hafta Sonu Kampı (Offline)",
+      "description": "Şehir dışında internet olmayan yerde kalın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 1450,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "kamp"
+      ],
+      "tips": [
+        "GPS harici telefon kullanmayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db094",
+      "title": "Ailece El Yazısı Günü",
+      "description": "Bugün her şeyi el yazısıyla yazın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 0,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "yazma"
+      ],
+      "tips": [
+        "Defter ve kalem kullanın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db095",
+      "title": "Akşam Fotoğraf Makinesi ile Çekim",
+      "description": "Telefon yerine gerçek fotoğraf makinesi kullanın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "fotoğraf"
+      ],
+      "tips": [
+        "Anıları sonradan basın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db096",
+      "title": "Hafta Sonu Müzik Dinleme (Radyo)",
+      "description": "Spotify yerine radyo dinleyin.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "müzik"
+      ],
+      "tips": [
+        "Sürpriz şarkılar keşfedin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db097",
+      "title": "Harita Kullanma",
+      "description": "Navigasyon yerine fiziksel harita kullanın.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 0,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "navigasyon"
+      ],
+      "tips": [
+        "Yön bulma becerisini geliştirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db098",
+      "title": "Bugün Telefon Şarj İstasyonu",
+      "description": "Evde tek şarj istasyonu belirleyin.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "düzen"
+      ],
+      "tips": [
+        "Yatak odasına şarj aleti koymayın."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db099",
+      "title": "Bu Hafta Çocuklar için Ekran Kuralı",
+      "description": "Günde max 1 saat eğitici ekran.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "çocuk"
+      ],
+      "tips": [
+        "Timer kullanın, sınır net olsun."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "db100",
+      "title": "Ailece Aile Sohbet Saati",
+      "description": "Her gün 20 dk sadece konuşma.",
+      "category": "digital",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "dijital",
+        "iletişim"
+      ],
+      "tips": [
+        "Televizyon da kapalı olsun."
+      ],
+      "action_type": "show_detail"
+    }
+  ]
+}

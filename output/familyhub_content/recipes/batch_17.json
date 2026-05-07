@@ -1,0 +1,799 @@
+[
+  {
+    "id": "recipe_161",
+    "title": "Menemen",
+    "category": "cocuk_dostu",
+    "difficulty": "orta",
+    "prep_time": 15,
+    "cook_time": 20,
+    "servings": 4,
+    "ingredients": [
+      {
+        "name": "Yumurta",
+        "amount": "24",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Domates",
+        "amount": "39",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Biber",
+        "amount": "214",
+        "unit": "adet",
+        "optional": true
+      },
+      {
+        "name": "Soğan",
+        "amount": "170",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Zeytinyağı",
+        "amount": "94",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Tuz",
+        "amount": "183",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Karabiber",
+        "amount": "103",
+        "unit": "su bardağı",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Soğanı yemeklik doğrayıp zeytinyağında kavurun.",
+      "Doğranmış biberi ekleyip 2 dk daha kavurun.",
+      "Domatesleri rendeleyip tencereye ekleyin.",
+      "5 dk pişirdikten sonra yumurtaları kırın.",
+      "Yumurtalar pişene kadar karıştırın ve servis yapın."
+    ],
+    "nutrition": {
+      "calories": 320,
+      "protein": "18g",
+      "carbs": "22g",
+      "fat": "20g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "cocuk_dostu",
+      "saglikli"
+    ],
+    "image_prompt": "Traditional Turkish Menemen beautifully plated, food photography, warm lighting",
+    "rating": 4.1,
+    "review_count": 179
+  },
+  {
+    "id": "recipe_162",
+    "title": "Mercimek Çorbası",
+    "category": "cocuk_dostu",
+    "difficulty": "zor",
+    "prep_time": 10,
+    "cook_time": 30,
+    "servings": 6,
+    "ingredients": [
+      {
+        "name": "Kırmızı mercimek",
+        "amount": "235",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Soğan",
+        "amount": "78",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Havuç",
+        "amount": "269",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Patates",
+        "amount": "265",
+        "unit": "su bardağı",
+        "optional": true
+      },
+      {
+        "name": "Tereyağı",
+        "amount": "277",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Un",
+        "amount": "21",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Kimyon",
+        "amount": "226",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Nane",
+        "amount": "131",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Tuz",
+        "amount": "177",
+        "unit": "adet",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Mercimeği yıkayıp süzün.",
+      "Soğan, havuç ve patatesi küp küp doğrayın.",
+      "Tencereye sebzeleri ve mercimeği ekleyip su ilave edin.",
+      "Sebzeler yumuşayana kadar 25 dk pişirin.",
+      "Blenderdan geçirin, tereyağında nane ve kırmızı biber yakıp üzerine gezdirin."
+    ],
+    "nutrition": {
+      "calories": 180,
+      "protein": "12g",
+      "carbs": "28g",
+      "fat": "4g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "cocuk_dostu",
+      "ekonomik"
+    ],
+    "image_prompt": "Traditional Turkish Mercimek Çorbası beautifully plated, food photography, warm lighting",
+    "rating": 4.5,
+    "review_count": 308
+  },
+  {
+    "id": "recipe_163",
+    "title": "Izgara Tavuk",
+    "category": "cocuk_dostu",
+    "difficulty": "kolay",
+    "prep_time": 15,
+    "cook_time": 25,
+    "servings": 4,
+    "ingredients": [
+      {
+        "name": "Tavuk göğsü",
+        "amount": "176",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Zeytinyağı",
+        "amount": "224",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Limon suyu",
+        "amount": "75",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Sarımsak",
+        "amount": "10",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Kekik",
+        "amount": "121",
+        "unit": "yemek kaşığı",
+        "optional": true
+      },
+      {
+        "name": "Tuz",
+        "amount": "46",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Karabiber",
+        "amount": "286",
+        "unit": "yemek kaşığı",
+        "optional": true
+      }
+    ],
+    "instructions": [
+      "Tavuk göğüslerini yıkayıp kurulayın.",
+      "Zeytinyağı, limon suyu, sarımsak ve baharatları karıştırın.",
+      "Tavukları marine edip en az 30 dk dinlendirin.",
+      "Izgara tavada veya fırında 20-25 dk pişirin.",
+      "Dinlendirip dilimleyerek servis yapın."
+    ],
+    "nutrition": {
+      "calories": 280,
+      "protein": "35g",
+      "carbs": "2g",
+      "fat": "14g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "cocuk_dostu",
+      "cocuk_dostu"
+    ],
+    "image_prompt": "Traditional Turkish Izgara Tavuk beautifully plated, food photography, warm lighting",
+    "rating": 4.9,
+    "review_count": 217
+  },
+  {
+    "id": "recipe_164",
+    "title": "Kısır",
+    "category": "cocuk_dostu",
+    "difficulty": "zor",
+    "prep_time": 15,
+    "cook_time": 0,
+    "servings": 4,
+    "ingredients": [
+      {
+        "name": "İnce bulgur",
+        "amount": "281",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Domates salçası",
+        "amount": "108",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Biber salçası",
+        "amount": "158",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Nar ekşisi",
+        "amount": "289",
+        "unit": "yemek kaşığı",
+        "optional": true
+      },
+      {
+        "name": "Taze soğan",
+        "amount": "26",
+        "unit": "su bardağı",
+        "optional": true
+      },
+      {
+        "name": "Maydanoz",
+        "amount": "289",
+        "unit": "gr",
+        "optional": true
+      },
+      {
+        "name": "Dereotu",
+        "amount": "134",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Salatalık",
+        "amount": "215",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Domates",
+        "amount": "136",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Limon suyu",
+        "amount": "123",
+        "unit": "yemek kaşığı",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Bulguru sıcak suyla ıslatıp 15 dk dinlendirin.",
+      "Tüm sebzeleri ince ince doğrayın.",
+      "Şişen bulgura salça, baharat ve nar ekşisini ekleyin.",
+      "Doğranmış sebzeleri ilave edip karıştırın.",
+      "Limon suyu ve zeytinyağı gezdirip servis yapın."
+    ],
+    "nutrition": {
+      "calories": 220,
+      "protein": "6g",
+      "carbs": "38g",
+      "fat": "8g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "cocuk_dostu",
+      "hizli"
+    ],
+    "image_prompt": "Traditional Turkish Kısır beautifully plated, food photography, warm lighting",
+    "rating": 4.3,
+    "review_count": 78
+  },
+  {
+    "id": "recipe_165",
+    "title": "Sütlaç",
+    "category": "cocuk_dostu",
+    "difficulty": "orta",
+    "prep_time": 10,
+    "cook_time": 45,
+    "servings": 6,
+    "ingredients": [
+      {
+        "name": "Pirinç",
+        "amount": "293",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Süt",
+        "amount": "36",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Şeker",
+        "amount": "160",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Nişasta",
+        "amount": "24",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Vanilin",
+        "amount": "125",
+        "unit": "gr",
+        "optional": true
+      },
+      {
+        "name": "Tarçın",
+        "amount": "63",
+        "unit": "yemek kaşığı",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Pirinci yıkayıp suda haşlayın.",
+      "Haşlanmış pirince sütü ekleyip kaynatın.",
+      "Nişasta ve şekeri az süt ile açıp tencereye ekleyin.",
+      "Koyulaşana kadar karıştırarak pişirin.",
+      "Kaselere paylaştırıp soğutun, üzerine tarçın serpin."
+    ],
+    "nutrition": {
+      "calories": 200,
+      "protein": "5g",
+      "carbs": "32g",
+      "fat": "6g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "cocuk_dostu",
+      "hizli"
+    ],
+    "image_prompt": "Traditional Turkish Sütlaç beautifully plated, food photography, warm lighting",
+    "rating": 4.5,
+    "review_count": 492
+  },
+  {
+    "id": "recipe_166",
+    "title": "Ayran",
+    "category": "cocuk_dostu",
+    "difficulty": "orta",
+    "prep_time": 5,
+    "cook_time": 0,
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Yoğurt",
+        "amount": "180",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Su",
+        "amount": "218",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Tuz",
+        "amount": "203",
+        "unit": "su bardağı",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Yoğurdu bir kaseye alın.",
+      "Üzerine su ve tuzu ekleyin.",
+      "Çırpıcı ile köpürene kadar çırpın.",
+      "Buz ekleyerek servis yapın."
+    ],
+    "nutrition": {
+      "calories": 80,
+      "protein": "4g",
+      "carbs": "8g",
+      "fat": "3g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "cocuk_dostu",
+      "cocuk_dostu"
+    ],
+    "image_prompt": "Traditional Turkish Ayran beautifully plated, food photography, warm lighting",
+    "rating": 4.6,
+    "review_count": 56
+  },
+  {
+    "id": "recipe_167",
+    "title": "Sebzeli Nohut Yemeği",
+    "category": "cocuk_dostu",
+    "difficulty": "zor",
+    "prep_time": 15,
+    "cook_time": 35,
+    "servings": 4,
+    "ingredients": [
+      {
+        "name": "Nohut",
+        "amount": "253",
+        "unit": "yemek kaşığı",
+        "optional": true
+      },
+      {
+        "name": "Soğan",
+        "amount": "125",
+        "unit": "gr",
+        "optional": true
+      },
+      {
+        "name": "Biber",
+        "amount": "224",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Domates",
+        "amount": "171",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Havuç",
+        "amount": "44",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Zeytinyağı",
+        "amount": "296",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Kimyon",
+        "amount": "225",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Kekik",
+        "amount": "183",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Tuz",
+        "amount": "51",
+        "unit": "adet",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Nohutu bir gece önceden ıslatın ve haşlayın.",
+      "Soğan ve biberi doğrayıp zeytinyağında kavurun.",
+      "Doğranmış domates ve havucu ekleyin.",
+      "Haşlanmış nohutu ve baharatları ilave edin.",
+      "30 dk kısık ateşte pişirin."
+    ],
+    "nutrition": {
+      "calories": 280,
+      "protein": "14g",
+      "carbs": "42g",
+      "fat": "8g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "cocuk_dostu",
+      "saglikli"
+    ],
+    "image_prompt": "Traditional Turkish Sebzeli Nohut Yemeği beautifully plated, food photography, warm lighting",
+    "rating": 4.7,
+    "review_count": 260
+  },
+  {
+    "id": "recipe_168",
+    "title": "Köfte ve Patates",
+    "category": "cocuk_dostu",
+    "difficulty": "orta",
+    "prep_time": 20,
+    "cook_time": 30,
+    "servings": 4,
+    "ingredients": [
+      {
+        "name": "Kıyma",
+        "amount": "136",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Soğan",
+        "amount": "67",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Galeta unu",
+        "amount": "217",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Yumurta",
+        "amount": "282",
+        "unit": "su bardağı",
+        "optional": true
+      },
+      {
+        "name": "Patates",
+        "amount": "38",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Sıvı yağ",
+        "amount": "167",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Tuz",
+        "amount": "221",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Karabiber",
+        "amount": "41",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Kimyon",
+        "amount": "240",
+        "unit": "adet",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Kıymaya rendelenmiş soğan, yumurta ve galeta ununu ekleyin.",
+      "Baharatları katıp yoğurun ve köfte şekli verin.",
+      "Patatesleri dilimleyip yağlanmış tepsiye dizin.",
+      "Köfteleri patateslerin aralarına yerleştirin.",
+      "180 derece fırında 30 dk pişirin."
+    ],
+    "nutrition": {
+      "calories": 450,
+      "protein": "28g",
+      "carbs": "35g",
+      "fat": "22g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "cocuk_dostu",
+      "ekonomik"
+    ],
+    "image_prompt": "Traditional Turkish Köfte ve Patates beautifully plated, food photography, warm lighting",
+    "rating": 4.7,
+    "review_count": 86
+  },
+  {
+    "id": "recipe_169",
+    "title": "Tost Makinesinde Tavuk Dürüm",
+    "category": "cocuk_dostu",
+    "difficulty": "orta",
+    "prep_time": 5,
+    "cook_time": 5,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "Lavaş",
+        "amount": "262",
+        "unit": "su bardağı",
+        "optional": true
+      },
+      {
+        "name": "Tavuk göğsü",
+        "amount": "82",
+        "unit": "su bardağı",
+        "optional": true
+      },
+      {
+        "name": "Marul",
+        "amount": "96",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Domates",
+        "amount": "220",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Mayonez",
+        "amount": "254",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Ketçap",
+        "amount": "114",
+        "unit": "gr",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Tavuk göğsünü jülyen doğrayıp az yağda kavurun.",
+      "Lavaşı ısıtın.",
+      "Lavaşın üzerine marul, domates ve tavuk parçalarını koyun.",
+      "Mayonez ve ketçap ekleyip sarın.",
+      "Tost makinesinde 2-3 dk ısıtıp servis yapın."
+    ],
+    "nutrition": {
+      "calories": 380,
+      "protein": "25g",
+      "carbs": "40g",
+      "fat": "12g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "cocuk_dostu",
+      "ekonomik"
+    ],
+    "image_prompt": "Traditional Turkish Tost Makinesinde Tavuk Dürüm beautifully plated, food photography, warm lighting",
+    "rating": 5.0,
+    "review_count": 333
+  },
+  {
+    "id": "recipe_170",
+    "title": "Kuru Fasulye",
+    "category": "cocuk_dostu",
+    "difficulty": "zor",
+    "prep_time": 20,
+    "cook_time": 45,
+    "servings": 6,
+    "ingredients": [
+      {
+        "name": "Kuru fasulye",
+        "amount": "246",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Soğan",
+        "amount": "214",
+        "unit": "gr",
+        "optional": true
+      },
+      {
+        "name": "Biber salçası",
+        "amount": "188",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Domates salçası",
+        "amount": "143",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Sıvı yağ",
+        "amount": "178",
+        "unit": "su bardağı",
+        "optional": true
+      },
+      {
+        "name": "Tuz",
+        "amount": "283",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Karabiber",
+        "amount": "126",
+        "unit": "yemek kaşığı",
+        "optional": true
+      }
+    ],
+    "instructions": [
+      "Fasulyeyi bir gece önceden ıslatın.",
+      "Tencerede haşlayıp suyunu süzün.",
+      "Soğanı yemeklik doğrayıp yağda kavurun.",
+      "Salçaları ekleyip kokusu çıkana kadar kavurun.",
+      "Haşlanmış fasulyeyi ve suyunu ekleyip 30 dk pişirin."
+    ],
+    "nutrition": {
+      "calories": 320,
+      "protein": "18g",
+      "carbs": "48g",
+      "fat": "6g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "cocuk_dostu",
+      "cocuk_dostu"
+    ],
+    "image_prompt": "Traditional Turkish Kuru Fasulye beautifully plated, food photography, warm lighting",
+    "rating": 4.0,
+    "review_count": 482
+  }
+]

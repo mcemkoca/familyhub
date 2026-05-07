@@ -1,0 +1,1718 @@
+{
+  "module": "family_communication",
+  "version": "1.0.0",
+  "language": "tr",
+  "region": "TR",
+  "suggestions": [
+    {
+      "id": "fc001",
+      "title": "Günün Özeti Sohbeti",
+      "description": "Akşam yemeğinde herkes gününün en güzel anını anlatsın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "günlük rutin"
+      ],
+      "tips": [
+        "Aktif dinlemeye özen gösterin.",
+        "Yargılamadan dinlemek bağları güçlendirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc002",
+      "title": "Bugün Teşekkür Rutini",
+      "description": "Her akşam bir ailenize teşekkür edin.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "minnettarlık"
+      ],
+      "tips": [
+        "Küçük teşekkürler büyük fark yaratır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc003",
+      "title": "Bu Hafta Haftalık Aile Toplantısı",
+      "description": "Haftanın planını, sorunları ve kutlamaları konuşun.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "planlama"
+      ],
+      "tips": [
+        "Herkesin söz hakkı olsun.",
+        "Not alın, kararları takip edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc004",
+      "title": "Ailece Duygu Kartları Oyunu",
+      "description": "Kart çekip o duyguyu ifade edin, neden hissettiğinizi anlatın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "duygusal zeka"
+      ],
+      "tips": [
+        "Çocuklar için özellikle faydalıdır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc005",
+      "title": "Herkesle Rahatsız Eden Konuları Konuş",
+      "description": "Birikmeyen, açıkça konuşulan sorunlar daha kolay çözülür.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "çatışma çözümü"
+      ],
+      "tips": [
+        "\"Ben\"\" dili kullanın: \"\"Ben şunu hissediyorum..."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc006",
+      "title": "Aile Gazetesi",
+      "description": "Herkes bir haber yazsın, haftalık gazete oluşturun.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "yaratıcılık"
+      ],
+      "tips": [
+        "Çocukların yazma becerisini geliştirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc007",
+      "title": "Bugün Birlikte Müzik Dinleme",
+      "description": "Herkes sevdiği bir şarkıyı seçip neden sevdiğini anlatsın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "müzik"
+      ],
+      "tips": [
+        "Farklı zevkleri saygıyla dinleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc008",
+      "title": "Bu Hafta Anlat-Bakalım Oyunu",
+      "description": "Bir olayı farklı bakış açılarından anlatın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "empati"
+      ],
+      "tips": [
+        "Empati kurma yeteneğini geliştirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc009",
+      "title": "Ailece Aile Sözleşmesi",
+      "description": "Ev kurallarını birlikte belirleyip imzalayın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "kurallar"
+      ],
+      "tips": [
+        "Çocuklar da kural önermeli."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc010",
+      "title": "Herkesle Gülümseme Günü",
+      "description": "Bugün herkes birbirine en az 3 kez gülümsesin.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 0,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "pozitiflik"
+      ],
+      "tips": [
+        "Beden dili iletişimin %55'ini oluşturur."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc011",
+      "title": "Sessiz Kahvaltı",
+      "description": "Bazen sessizce bir arada olmak da iletişimdir.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "huzur"
+      ],
+      "tips": [
+        "Sessizlik de bağ kurar."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc012",
+      "title": "Bugün Rüya Paylaşımı",
+      "description": "Sabah kalkınca rüyalarınızı anlatın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "yaratıcılık"
+      ],
+      "tips": [
+        "Rüyalar yaratıcılığı tetikler."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc013",
+      "title": "Bu Hafta Aile Münazarası",
+      "description": "Bir konu seçin, tartışın, jüri oylasın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "eleştirel düşünme"
+      ],
+      "tips": [
+        "Fikirlere saygı, kişilere değil."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc014",
+      "title": "Ailece Hatırlatma Notları",
+      "description": "Buzdolabına sevgi dolu notlar yapıştırın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "sevgi"
+      ],
+      "tips": [
+        "Küçük jestler büyük etki yaratır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc015",
+      "title": "Herkesle Birlikte Yemek Yapmak",
+      "description": "Yemek hazırlarken sohbet edin, iş bölümü yapın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "yemek"
+      ],
+      "tips": [
+        "Ortak aktiviteler bağı güçlendirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc016",
+      "title": "Kutlama Gelenekleri",
+      "description": "Başarıları küçük de olsa kutlayın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "kutlama"
+      ],
+      "tips": [
+        "Takdir edilmek motivasyonu artırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc017",
+      "title": "Bugün Aile Fotoğraf Anıları",
+      "description": "Eski fotoğraflara bakıp anıları paylaşın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "anılar"
+      ],
+      "tips": [
+        "Geçmişi paylaşmak kimliği güçlendirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc018",
+      "title": "Bu Hafta Teknolojisiz Yemek",
+      "description": "Yemek sırasında telefon yasak.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "dijital denge"
+      ],
+      "tips": [
+        "Göz teması kurmak önemlidir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc019",
+      "title": "Ailece Özür Dileme Pratiği",
+      "description": "Hata yapan samimi özür dilesin.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "samimiyet"
+      ],
+      "tips": [
+        "Özür dilemek güçlülük göstergesidir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc020",
+      "title": "Herkesle Gelecek Hayalleri",
+      "description": "Herkes 5 yıl sonra kendini nerede görüyor anlatsın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "hedefler"
+      ],
+      "tips": [
+        "Hayalleri paylaşmak onları gerçekleştirmeye yaklaştırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc021",
+      "title": "Günün Özeti Sohbeti",
+      "description": "Akşam yemeğinde herkes gününün en güzel anını anlatsın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "günlük rutin"
+      ],
+      "tips": [
+        "Aktif dinlemeye özen gösterin.",
+        "Yargılamadan dinlemek bağları güçlendirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc022",
+      "title": "Bugün Teşekkür Rutini",
+      "description": "Her akşam bir ailenize teşekkür edin.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "minnettarlık"
+      ],
+      "tips": [
+        "Küçük teşekkürler büyük fark yaratır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc023",
+      "title": "Bu Hafta Haftalık Aile Toplantısı",
+      "description": "Haftanın planını, sorunları ve kutlamaları konuşun.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "planlama"
+      ],
+      "tips": [
+        "Herkesin söz hakkı olsun.",
+        "Not alın, kararları takip edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc024",
+      "title": "Ailece Duygu Kartları Oyunu",
+      "description": "Kart çekip o duyguyu ifade edin, neden hissettiğinizi anlatın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "duygusal zeka"
+      ],
+      "tips": [
+        "Çocuklar için özellikle faydalıdır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc025",
+      "title": "Herkesle Rahatsız Eden Konuları Konuş",
+      "description": "Birikmeyen, açıkça konuşulan sorunlar daha kolay çözülür.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "çatışma çözümü"
+      ],
+      "tips": [
+        "\"Ben\"\" dili kullanın: \"\"Ben şunu hissediyorum..."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc026",
+      "title": "Aile Gazetesi",
+      "description": "Herkes bir haber yazsın, haftalık gazete oluşturun.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "yaratıcılık"
+      ],
+      "tips": [
+        "Çocukların yazma becerisini geliştirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc027",
+      "title": "Bugün Birlikte Müzik Dinleme",
+      "description": "Herkes sevdiği bir şarkıyı seçip neden sevdiğini anlatsın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "müzik"
+      ],
+      "tips": [
+        "Farklı zevkleri saygıyla dinleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc028",
+      "title": "Bu Hafta Anlat-Bakalım Oyunu",
+      "description": "Bir olayı farklı bakış açılarından anlatın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "empati"
+      ],
+      "tips": [
+        "Empati kurma yeteneğini geliştirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc029",
+      "title": "Ailece Aile Sözleşmesi",
+      "description": "Ev kurallarını birlikte belirleyip imzalayın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "kurallar"
+      ],
+      "tips": [
+        "Çocuklar da kural önermeli."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc030",
+      "title": "Herkesle Gülümseme Günü",
+      "description": "Bugün herkes birbirine en az 3 kez gülümsesin.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "pozitiflik"
+      ],
+      "tips": [
+        "Beden dili iletişimin %55'ini oluşturur."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc031",
+      "title": "Sessiz Kahvaltı",
+      "description": "Bazen sessizce bir arada olmak da iletişimdir.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "huzur"
+      ],
+      "tips": [
+        "Sessizlik de bağ kurar."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc032",
+      "title": "Bugün Rüya Paylaşımı",
+      "description": "Sabah kalkınca rüyalarınızı anlatın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "yaratıcılık"
+      ],
+      "tips": [
+        "Rüyalar yaratıcılığı tetikler."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc033",
+      "title": "Bu Hafta Aile Münazarası",
+      "description": "Bir konu seçin, tartışın, jüri oylasın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "eleştirel düşünme"
+      ],
+      "tips": [
+        "Fikirlere saygı, kişilere değil."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc034",
+      "title": "Ailece Hatırlatma Notları",
+      "description": "Buzdolabına sevgi dolu notlar yapıştırın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "sevgi"
+      ],
+      "tips": [
+        "Küçük jestler büyük etki yaratır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc035",
+      "title": "Herkesle Birlikte Yemek Yapmak",
+      "description": "Yemek hazırlarken sohbet edin, iş bölümü yapın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "yemek"
+      ],
+      "tips": [
+        "Ortak aktiviteler bağı güçlendirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc036",
+      "title": "Kutlama Gelenekleri",
+      "description": "Başarıları küçük de olsa kutlayın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "kutlama"
+      ],
+      "tips": [
+        "Takdir edilmek motivasyonu artırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc037",
+      "title": "Bugün Aile Fotoğraf Anıları",
+      "description": "Eski fotoğraflara bakıp anıları paylaşın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "anılar"
+      ],
+      "tips": [
+        "Geçmişi paylaşmak kimliği güçlendirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc038",
+      "title": "Bu Hafta Teknolojisiz Yemek",
+      "description": "Yemek sırasında telefon yasak.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "dijital denge"
+      ],
+      "tips": [
+        "Göz teması kurmak önemlidir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc039",
+      "title": "Ailece Özür Dileme Pratiği",
+      "description": "Hata yapan samimi özür dilesin.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "samimiyet"
+      ],
+      "tips": [
+        "Özür dilemek güçlülük göstergesidir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc040",
+      "title": "Herkesle Gelecek Hayalleri",
+      "description": "Herkes 5 yıl sonra kendini nerede görüyor anlatsın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "hedefler"
+      ],
+      "tips": [
+        "Hayalleri paylaşmak onları gerçekleştirmeye yaklaştırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc041",
+      "title": "Günün Özeti Sohbeti",
+      "description": "Akşam yemeğinde herkes gününün en güzel anını anlatsın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "günlük rutin"
+      ],
+      "tips": [
+        "Aktif dinlemeye özen gösterin.",
+        "Yargılamadan dinlemek bağları güçlendirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc042",
+      "title": "Bugün Teşekkür Rutini",
+      "description": "Her akşam bir ailenize teşekkür edin.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "minnettarlık"
+      ],
+      "tips": [
+        "Küçük teşekkürler büyük fark yaratır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc043",
+      "title": "Bu Hafta Haftalık Aile Toplantısı",
+      "description": "Haftanın planını, sorunları ve kutlamaları konuşun.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "planlama"
+      ],
+      "tips": [
+        "Herkesin söz hakkı olsun.",
+        "Not alın, kararları takip edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc044",
+      "title": "Ailece Duygu Kartları Oyunu",
+      "description": "Kart çekip o duyguyu ifade edin, neden hissettiğinizi anlatın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "duygusal zeka"
+      ],
+      "tips": [
+        "Çocuklar için özellikle faydalıdır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc045",
+      "title": "Herkesle Rahatsız Eden Konuları Konuş",
+      "description": "Birikmeyen, açıkça konuşulan sorunlar daha kolay çözülür.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "çatışma çözümü"
+      ],
+      "tips": [
+        "\"Ben\"\" dili kullanın: \"\"Ben şunu hissediyorum..."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc046",
+      "title": "Aile Gazetesi",
+      "description": "Herkes bir haber yazsın, haftalık gazete oluşturun.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "yaratıcılık"
+      ],
+      "tips": [
+        "Çocukların yazma becerisini geliştirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc047",
+      "title": "Bugün Birlikte Müzik Dinleme",
+      "description": "Herkes sevdiği bir şarkıyı seçip neden sevdiğini anlatsın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "müzik"
+      ],
+      "tips": [
+        "Farklı zevkleri saygıyla dinleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc048",
+      "title": "Bu Hafta Anlat-Bakalım Oyunu",
+      "description": "Bir olayı farklı bakış açılarından anlatın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "empati"
+      ],
+      "tips": [
+        "Empati kurma yeteneğini geliştirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc049",
+      "title": "Ailece Aile Sözleşmesi",
+      "description": "Ev kurallarını birlikte belirleyip imzalayın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "kurallar"
+      ],
+      "tips": [
+        "Çocuklar da kural önermeli."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc050",
+      "title": "Herkesle Gülümseme Günü",
+      "description": "Bugün herkes birbirine en az 3 kez gülümsesin.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "pozitiflik"
+      ],
+      "tips": [
+        "Beden dili iletişimin %55'ini oluşturur."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc051",
+      "title": "Sessiz Kahvaltı",
+      "description": "Bazen sessizce bir arada olmak da iletişimdir.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "huzur"
+      ],
+      "tips": [
+        "Sessizlik de bağ kurar."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc052",
+      "title": "Bugün Rüya Paylaşımı",
+      "description": "Sabah kalkınca rüyalarınızı anlatın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "yaratıcılık"
+      ],
+      "tips": [
+        "Rüyalar yaratıcılığı tetikler."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc053",
+      "title": "Bu Hafta Aile Münazarası",
+      "description": "Bir konu seçin, tartışın, jüri oylasın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 45,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "eleştirel düşünme"
+      ],
+      "tips": [
+        "Fikirlere saygı, kişilere değil."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc054",
+      "title": "Ailece Hatırlatma Notları",
+      "description": "Buzdolabına sevgi dolu notlar yapıştırın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "sevgi"
+      ],
+      "tips": [
+        "Küçük jestler büyük etki yaratır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc055",
+      "title": "Herkesle Birlikte Yemek Yapmak",
+      "description": "Yemek hazırlarken sohbet edin, iş bölümü yapın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 60,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "yemek"
+      ],
+      "tips": [
+        "Ortak aktiviteler bağı güçlendirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc056",
+      "title": "Kutlama Gelenekleri",
+      "description": "Başarıları küçük de olsa kutlayın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "kutlama"
+      ],
+      "tips": [
+        "Takdir edilmek motivasyonu artırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc057",
+      "title": "Bugün Aile Fotoğraf Anıları",
+      "description": "Eski fotoğraflara bakıp anıları paylaşın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "anılar"
+      ],
+      "tips": [
+        "Geçmişi paylaşmak kimliği güçlendirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc058",
+      "title": "Bu Hafta Teknolojisiz Yemek",
+      "description": "Yemek sırasında telefon yasak.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "dijital denge"
+      ],
+      "tips": [
+        "Göz teması kurmak önemlidir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc059",
+      "title": "Ailece Özür Dileme Pratiği",
+      "description": "Hata yapan samimi özür dilesin.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "samimiyet"
+      ],
+      "tips": [
+        "Özür dilemek güçlülük göstergesidir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc060",
+      "title": "Herkesle Gelecek Hayalleri",
+      "description": "Herkes 5 yıl sonra kendini nerede görüyor anlatsın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "hedefler"
+      ],
+      "tips": [
+        "Hayalleri paylaşmak onları gerçekleştirmeye yaklaştırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc061",
+      "title": "Günün Özeti Sohbeti",
+      "description": "Akşam yemeğinde herkes gününün en güzel anını anlatsın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "günlük rutin"
+      ],
+      "tips": [
+        "Aktif dinlemeye özen gösterin.",
+        "Yargılamadan dinlemek bağları güçlendirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc062",
+      "title": "Bugün Teşekkür Rutini",
+      "description": "Her akşam bir ailenize teşekkür edin.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "minnettarlık"
+      ],
+      "tips": [
+        "Küçük teşekkürler büyük fark yaratır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc063",
+      "title": "Bu Hafta Haftalık Aile Toplantısı",
+      "description": "Haftanın planını, sorunları ve kutlamaları konuşun.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "planlama"
+      ],
+      "tips": [
+        "Herkesin söz hakkı olsun.",
+        "Not alın, kararları takip edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc064",
+      "title": "Ailece Duygu Kartları Oyunu",
+      "description": "Kart çekip o duyguyu ifade edin, neden hissettiğinizi anlatın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "duygusal zeka"
+      ],
+      "tips": [
+        "Çocuklar için özellikle faydalıdır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc065",
+      "title": "Herkesle Rahatsız Eden Konuları Konuş",
+      "description": "Birikmeyen, açıkça konuşulan sorunlar daha kolay çözülür.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "çatışma çözümü"
+      ],
+      "tips": [
+        "\"Ben\"\" dili kullanın: \"\"Ben şunu hissediyorum..."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc066",
+      "title": "Aile Gazetesi",
+      "description": "Herkes bir haber yazsın, haftalık gazete oluşturun.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 55,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "yaratıcılık"
+      ],
+      "tips": [
+        "Çocukların yazma becerisini geliştirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc067",
+      "title": "Bugün Birlikte Müzik Dinleme",
+      "description": "Herkes sevdiği bir şarkıyı seçip neden sevdiğini anlatsın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "müzik"
+      ],
+      "tips": [
+        "Farklı zevkleri saygıyla dinleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc068",
+      "title": "Bu Hafta Anlat-Bakalım Oyunu",
+      "description": "Bir olayı farklı bakış açılarından anlatın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "empati"
+      ],
+      "tips": [
+        "Empati kurma yeteneğini geliştirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc069",
+      "title": "Ailece Aile Sözleşmesi",
+      "description": "Ev kurallarını birlikte belirleyip imzalayın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "kurallar"
+      ],
+      "tips": [
+        "Çocuklar da kural önermeli."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc070",
+      "title": "Herkesle Gülümseme Günü",
+      "description": "Bugün herkes birbirine en az 3 kez gülümsesin.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 0,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "pozitiflik"
+      ],
+      "tips": [
+        "Beden dili iletişimin %55'ini oluşturur."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc071",
+      "title": "Sessiz Kahvaltı",
+      "description": "Bazen sessizce bir arada olmak da iletişimdir.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "huzur"
+      ],
+      "tips": [
+        "Sessizlik de bağ kurar."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc072",
+      "title": "Bugün Rüya Paylaşımı",
+      "description": "Sabah kalkınca rüyalarınızı anlatın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "yaratıcılık"
+      ],
+      "tips": [
+        "Rüyalar yaratıcılığı tetikler."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc073",
+      "title": "Bu Hafta Aile Münazarası",
+      "description": "Bir konu seçin, tartışın, jüri oylasın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "eleştirel düşünme"
+      ],
+      "tips": [
+        "Fikirlere saygı, kişilere değil."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc074",
+      "title": "Ailece Hatırlatma Notları",
+      "description": "Buzdolabına sevgi dolu notlar yapıştırın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "sevgi"
+      ],
+      "tips": [
+        "Küçük jestler büyük etki yaratır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc075",
+      "title": "Herkesle Birlikte Yemek Yapmak",
+      "description": "Yemek hazırlarken sohbet edin, iş bölümü yapın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 70,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "yemek"
+      ],
+      "tips": [
+        "Ortak aktiviteler bağı güçlendirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc076",
+      "title": "Kutlama Gelenekleri",
+      "description": "Başarıları küçük de olsa kutlayın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "kutlama"
+      ],
+      "tips": [
+        "Takdir edilmek motivasyonu artırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc077",
+      "title": "Bugün Aile Fotoğraf Anıları",
+      "description": "Eski fotoğraflara bakıp anıları paylaşın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "anılar"
+      ],
+      "tips": [
+        "Geçmişi paylaşmak kimliği güçlendirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc078",
+      "title": "Bu Hafta Teknolojisiz Yemek",
+      "description": "Yemek sırasında telefon yasak.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 40,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "dijital denge"
+      ],
+      "tips": [
+        "Göz teması kurmak önemlidir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc079",
+      "title": "Ailece Özür Dileme Pratiği",
+      "description": "Hata yapan samimi özür dilesin.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "samimiyet"
+      ],
+      "tips": [
+        "Özür dilemek güçlülük göstergesidir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc080",
+      "title": "Herkesle Gelecek Hayalleri",
+      "description": "Herkes 5 yıl sonra kendini nerede görüyor anlatsın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "hedefler"
+      ],
+      "tips": [
+        "Hayalleri paylaşmak onları gerçekleştirmeye yaklaştırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc081",
+      "title": "Günün Özeti Sohbeti",
+      "description": "Akşam yemeğinde herkes gününün en güzel anını anlatsın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "günlük rutin"
+      ],
+      "tips": [
+        "Aktif dinlemeye özen gösterin.",
+        "Yargılamadan dinlemek bağları güçlendirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc082",
+      "title": "Bugün Teşekkür Rutini",
+      "description": "Her akşam bir ailenize teşekkür edin.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "minnettarlık"
+      ],
+      "tips": [
+        "Küçük teşekkürler büyük fark yaratır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc083",
+      "title": "Bu Hafta Haftalık Aile Toplantısı",
+      "description": "Haftanın planını, sorunları ve kutlamaları konuşun.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "planlama"
+      ],
+      "tips": [
+        "Herkesin söz hakkı olsun.",
+        "Not alın, kararları takip edin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc084",
+      "title": "Ailece Duygu Kartları Oyunu",
+      "description": "Kart çekip o duyguyu ifade edin, neden hissettiğinizi anlatın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "duygusal zeka"
+      ],
+      "tips": [
+        "Çocuklar için özellikle faydalıdır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc085",
+      "title": "Herkesle Rahatsız Eden Konuları Konuş",
+      "description": "Birikmeyen, açıkça konuşulan sorunlar daha kolay çözülür.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "çatışma çözümü"
+      ],
+      "tips": [
+        "\"Ben\"\" dili kullanın: \"\"Ben şunu hissediyorum..."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc086",
+      "title": "Aile Gazetesi",
+      "description": "Herkes bir haber yazsın, haftalık gazete oluşturun.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "yaratıcılık"
+      ],
+      "tips": [
+        "Çocukların yazma becerisini geliştirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc087",
+      "title": "Bugün Birlikte Müzik Dinleme",
+      "description": "Herkes sevdiği bir şarkıyı seçip neden sevdiğini anlatsın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "müzik"
+      ],
+      "tips": [
+        "Farklı zevkleri saygıyla dinleyin."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc088",
+      "title": "Bu Hafta Anlat-Bakalım Oyunu",
+      "description": "Bir olayı farklı bakış açılarından anlatın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "empati"
+      ],
+      "tips": [
+        "Empati kurma yeteneğini geliştirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc089",
+      "title": "Ailece Aile Sözleşmesi",
+      "description": "Ev kurallarını birlikte belirleyip imzalayın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "kurallar"
+      ],
+      "tips": [
+        "Çocuklar da kural önermeli."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc090",
+      "title": "Herkesle Gülümseme Günü",
+      "description": "Bugün herkes birbirine en az 3 kez gülümsesin.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 10,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "pozitiflik"
+      ],
+      "tips": [
+        "Beden dili iletişimin %55'ini oluşturur."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc091",
+      "title": "Sessiz Kahvaltı",
+      "description": "Bazen sessizce bir arada olmak da iletişimdir.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 20,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "huzur"
+      ],
+      "tips": [
+        "Sessizlik de bağ kurar."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc092",
+      "title": "Bugün Rüya Paylaşımı",
+      "description": "Sabah kalkınca rüyalarınızı anlatın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "yaratıcılık"
+      ],
+      "tips": [
+        "Rüyalar yaratıcılığı tetikler."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc093",
+      "title": "Bu Hafta Aile Münazarası",
+      "description": "Bir konu seçin, tartışın, jüri oylasın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 50,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "eleştirel düşünme"
+      ],
+      "tips": [
+        "Fikirlere saygı, kişilere değil."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc094",
+      "title": "Ailece Hatırlatma Notları",
+      "description": "Buzdolabına sevgi dolu notlar yapıştırın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 5,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "sevgi"
+      ],
+      "tips": [
+        "Küçük jestler büyük etki yaratır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc095",
+      "title": "Herkesle Birlikte Yemek Yapmak",
+      "description": "Yemek hazırlarken sohbet edin, iş bölümü yapın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 65,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "yemek"
+      ],
+      "tips": [
+        "Ortak aktiviteler bağı güçlendirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc096",
+      "title": "Kutlama Gelenekleri",
+      "description": "Başarıları küçük de olsa kutlayın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "kutlama"
+      ],
+      "tips": [
+        "Takdir edilmek motivasyonu artırır."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc097",
+      "title": "Bugün Aile Fotoğraf Anıları",
+      "description": "Eski fotoğraflara bakıp anıları paylaşın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 30,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "anılar"
+      ],
+      "tips": [
+        "Geçmişi paylaşmak kimliği güçlendirir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc098",
+      "title": "Bu Hafta Teknolojisiz Yemek",
+      "description": "Yemek sırasında telefon yasak.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 35,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "dijital denge"
+      ],
+      "tips": [
+        "Göz teması kurmak önemlidir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc099",
+      "title": "Ailece Özür Dileme Pratiği",
+      "description": "Hata yapan samimi özür dilesin.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 15,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "samimiyet"
+      ],
+      "tips": [
+        "Özür dilemek güçlülük göstergesidir."
+      ],
+      "action_type": "show_detail"
+    },
+    {
+      "id": "fc100",
+      "title": "Herkesle Gelecek Hayalleri",
+      "description": "Herkes 5 yıl sonra kendini nerede görüyor anlatsın.",
+      "category": "communication",
+      "difficulty": "Kolay",
+      "duration_minutes": 25,
+      "participants": 4,
+      "tags": [
+        "iletişim",
+        "hedefler"
+      ],
+      "tips": [
+        "Hayalleri paylaşmak onları gerçekleştirmeye yaklaştırır."
+      ],
+      "action_type": "show_detail"
+    }
+  ]
+}

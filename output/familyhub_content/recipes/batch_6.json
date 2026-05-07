@@ -1,0 +1,662 @@
+[
+  {
+    "id": "recipe_051",
+    "title": "Karnıyarık",
+    "category": "aksam_yemegi",
+    "difficulty": "kolay",
+    "prep_time": 25,
+    "cook_time": 40,
+    "servings": 4,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "209",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "49",
+        "unit": "adet",
+        "optional": true
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "23",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "274",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "212",
+        "unit": "yemek kaşığı",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "aksam_yemegi",
+      "hizli"
+    ],
+    "image_prompt": "Traditional Turkish Karnıyarık beautifully plated, food photography, warm lighting",
+    "rating": 4.7,
+    "review_count": 197
+  },
+  {
+    "id": "recipe_052",
+    "title": "Mantı",
+    "category": "aksam_yemegi",
+    "difficulty": "kolay",
+    "prep_time": 45,
+    "cook_time": 30,
+    "servings": 6,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "228",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "193",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "210",
+        "unit": "yemek kaşığı",
+        "optional": true
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "69",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "187",
+        "unit": "adet",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "aksam_yemegi",
+      "saglikli"
+    ],
+    "image_prompt": "Traditional Turkish Mantı beautifully plated, food photography, warm lighting",
+    "rating": 4.7,
+    "review_count": 311
+  },
+  {
+    "id": "recipe_053",
+    "title": "Pilav",
+    "category": "aksam_yemegi",
+    "difficulty": "zor",
+    "prep_time": 5,
+    "cook_time": 20,
+    "servings": 4,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "51",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "250",
+        "unit": "yemek kaşığı",
+        "optional": true
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "290",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "275",
+        "unit": "su bardağı",
+        "optional": true
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "98",
+        "unit": "su bardağı",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "aksam_yemegi",
+      "hizli"
+    ],
+    "image_prompt": "Traditional Turkish Pilav beautifully plated, food photography, warm lighting",
+    "rating": 4.5,
+    "review_count": 76
+  },
+  {
+    "id": "recipe_054",
+    "title": "Ezogelin Çorbası",
+    "category": "aksam_yemegi",
+    "difficulty": "zor",
+    "prep_time": 10,
+    "cook_time": 25,
+    "servings": 6,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "49",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "68",
+        "unit": "su bardağı",
+        "optional": true
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "242",
+        "unit": "gr",
+        "optional": true
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "104",
+        "unit": "yemek kaşığı",
+        "optional": true
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "136",
+        "unit": "su bardağı",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "aksam_yemegi",
+      "hizli"
+    ],
+    "image_prompt": "Traditional Turkish Ezogelin Çorbası beautifully plated, food photography, warm lighting",
+    "rating": 4.2,
+    "review_count": 204
+  },
+  {
+    "id": "recipe_055",
+    "title": "Taze Fasulye Yemeği",
+    "category": "aksam_yemegi",
+    "difficulty": "kolay",
+    "prep_time": 15,
+    "cook_time": 30,
+    "servings": 4,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "205",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "62",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "87",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "50",
+        "unit": "yemek kaşığı",
+        "optional": true
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "194",
+        "unit": "su bardağı",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "aksam_yemegi",
+      "ekonomik"
+    ],
+    "image_prompt": "Traditional Turkish Taze Fasulye Yemeği beautifully plated, food photography, warm lighting",
+    "rating": 4.7,
+    "review_count": 242
+  },
+  {
+    "id": "recipe_056",
+    "title": "Kumpir",
+    "category": "aksam_yemegi",
+    "difficulty": "zor",
+    "prep_time": 10,
+    "cook_time": 45,
+    "servings": 2,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "57",
+        "unit": "yemek kaşığı",
+        "optional": true
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "129",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "158",
+        "unit": "yemek kaşığı",
+        "optional": true
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "207",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "252",
+        "unit": "su bardağı",
+        "optional": true
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "aksam_yemegi",
+      "hizli"
+    ],
+    "image_prompt": "Traditional Turkish Kumpir beautifully plated, food photography, warm lighting",
+    "rating": 4.9,
+    "review_count": 105
+  },
+  {
+    "id": "recipe_057",
+    "title": "Börek",
+    "category": "aksam_yemegi",
+    "difficulty": "zor",
+    "prep_time": 20,
+    "cook_time": 35,
+    "servings": 6,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "170",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "70",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "186",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "173",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "195",
+        "unit": "gr",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "aksam_yemegi",
+      "ekonomik"
+    ],
+    "image_prompt": "Traditional Turkish Börek beautifully plated, food photography, warm lighting",
+    "rating": 4.9,
+    "review_count": 138
+  },
+  {
+    "id": "recipe_058",
+    "title": "Mücver",
+    "category": "aksam_yemegi",
+    "difficulty": "orta",
+    "prep_time": 15,
+    "cook_time": 20,
+    "servings": 4,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "208",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "139",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "186",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "101",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "126",
+        "unit": "su bardağı",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "aksam_yemegi",
+      "hizli"
+    ],
+    "image_prompt": "Traditional Turkish Mücver beautifully plated, food photography, warm lighting",
+    "rating": 4.9,
+    "review_count": 373
+  },
+  {
+    "id": "recipe_059",
+    "title": "Karnabahar Kızartması",
+    "category": "aksam_yemegi",
+    "difficulty": "kolay",
+    "prep_time": 15,
+    "cook_time": 25,
+    "servings": 4,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "214",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "262",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "126",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "30",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "5",
+        "unit": "gr",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "aksam_yemegi",
+      "saglikli"
+    ],
+    "image_prompt": "Traditional Turkish Karnabahar Kızartması beautifully plated, food photography, warm lighting",
+    "rating": 4.0,
+    "review_count": 405
+  },
+  {
+    "id": "recipe_060",
+    "title": "Lahana Sarması",
+    "category": "aksam_yemegi",
+    "difficulty": "orta",
+    "prep_time": 40,
+    "cook_time": 50,
+    "servings": 8,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "246",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "219",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "154",
+        "unit": "su bardağı",
+        "optional": true
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "142",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "190",
+        "unit": "gr",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "aksam_yemegi",
+      "hizli"
+    ],
+    "image_prompt": "Traditional Turkish Lahana Sarması beautifully plated, food photography, warm lighting",
+    "rating": 5.0,
+    "review_count": 195
+  }
+]

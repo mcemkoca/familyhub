@@ -1,0 +1,480 @@
+[
+  {
+    "id": "travel_121",
+    "title": "Kapadokya: Kültür Gezisi",
+    "destination": "Kapadokya",
+    "country": "Türkiye",
+    "city": "Nevşehir",
+    "category": "sehir",
+    "coordinates": {
+      "lat": 38.6431,
+      "lng": 34.8289
+    },
+    "best_season": [
+      "sonbahar"
+    ],
+    "duration": "2-3 gün",
+    "budget": "orta",
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "activities": [
+      {
+        "name": "Gezi",
+        "description": "Yerel rehber eşliğinde keşif turu",
+        "duration": "2-3 saat",
+        "cost": "10-30€/kişi",
+        "booking_required": false,
+        "maps_location": "Kapadokya"
+      },
+      {
+        "name": "Fotoğraf Turu",
+        "description": "En iyi manzara noktaları",
+        "duration": "1-2 saat",
+        "cost": "0€",
+        "booking_required": false,
+        "maps_location": "Kapadokya"
+      }
+    ],
+    "tips": [
+      "Erken rezervasyon yapın.",
+      "Rahat ayakkabı giyin.",
+      "Çocuklar için atıştırmalık yanınızda bulundurun."
+    ],
+    "safety_info": "Genel olarak güvenli bölge.",
+    "rating": 4.3,
+    "review_count": 2264
+  },
+  {
+    "id": "travel_122",
+    "title": "Pamukkale: Keşif Turu",
+    "destination": "Pamukkale",
+    "country": "Türkiye",
+    "city": "Denizli",
+    "category": "sehir",
+    "coordinates": {
+      "lat": 37.9165,
+      "lng": 29.1165
+    },
+    "best_season": [
+      "kis",
+      "ilkbahar",
+      "sonbahar"
+    ],
+    "duration": "1-2 gün",
+    "budget": "ekonomik",
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "activities": [
+      {
+        "name": "Gezi",
+        "description": "Yerel rehber eşliğinde keşif turu",
+        "duration": "2-3 saat",
+        "cost": "10-30€/kişi",
+        "booking_required": true,
+        "maps_location": "Pamukkale"
+      },
+      {
+        "name": "Fotoğraf Turu",
+        "description": "En iyi manzara noktaları",
+        "duration": "1-2 saat",
+        "cost": "0€",
+        "booking_required": false,
+        "maps_location": "Pamukkale"
+      }
+    ],
+    "tips": [
+      "Erken rezervasyon yapın.",
+      "Rahat ayakkabı giyin.",
+      "Çocuklar için atıştırmalık yanınızda bulundurun."
+    ],
+    "safety_info": "Genel olarak güvenli bölge.",
+    "rating": 4.6,
+    "review_count": 431
+  },
+  {
+    "id": "travel_123",
+    "title": "Efes Antik Kenti: Aile Tatili",
+    "destination": "Efes Antik Kenti",
+    "country": "Türkiye",
+    "city": "İzmir",
+    "category": "sehir",
+    "coordinates": {
+      "lat": 37.949,
+      "lng": 27.364
+    },
+    "best_season": [
+      "sonbahar"
+    ],
+    "duration": "1 gün",
+    "budget": "ekonomik",
+    "age_suitable": {
+      "min": 5,
+      "max": 99
+    },
+    "activities": [
+      {
+        "name": "Gezi",
+        "description": "Yerel rehber eşliğinde keşif turu",
+        "duration": "2-3 saat",
+        "cost": "10-30€/kişi",
+        "booking_required": true,
+        "maps_location": "Efes Antik Kenti"
+      },
+      {
+        "name": "Fotoğraf Turu",
+        "description": "En iyi manzara noktaları",
+        "duration": "1-2 saat",
+        "cost": "0€",
+        "booking_required": false,
+        "maps_location": "Efes Antik Kenti"
+      }
+    ],
+    "tips": [
+      "Erken rezervasyon yapın.",
+      "Rahat ayakkabı giyin.",
+      "Çocuklar için atıştırmalık yanınızda bulundurun."
+    ],
+    "safety_info": "Genel olarak güvenli bölge.",
+    "rating": 5.0,
+    "review_count": 4475
+  },
+  {
+    "id": "travel_124",
+    "title": "Ayvalık: Kültür Gezisi",
+    "destination": "Ayvalık",
+    "country": "Türkiye",
+    "city": "Balıkesir",
+    "category": "sehir",
+    "coordinates": {
+      "lat": 39.3163,
+      "lng": 26.6914
+    },
+    "best_season": [
+      "ilkbahar",
+      "kis"
+    ],
+    "duration": "2-3 gün",
+    "budget": "orta",
+    "age_suitable": {
+      "min": 0,
+      "max": 99
+    },
+    "activities": [
+      {
+        "name": "Gezi",
+        "description": "Yerel rehber eşliğinde keşif turu",
+        "duration": "2-3 saat",
+        "cost": "10-30€/kişi",
+        "booking_required": true,
+        "maps_location": "Ayvalık"
+      },
+      {
+        "name": "Fotoğraf Turu",
+        "description": "En iyi manzara noktaları",
+        "duration": "1-2 saat",
+        "cost": "0€",
+        "booking_required": false,
+        "maps_location": "Ayvalık"
+      }
+    ],
+    "tips": [
+      "Erken rezervasyon yapın.",
+      "Rahat ayakkabı giyin.",
+      "Çocuklar için atıştırmalık yanınızda bulundurun."
+    ],
+    "safety_info": "Genel olarak güvenli bölge.",
+    "rating": 4.5,
+    "review_count": 4358
+  },
+  {
+    "id": "travel_125",
+    "title": "Bodrum: Macera Rotası",
+    "destination": "Bodrum",
+    "country": "Türkiye",
+    "city": "Muğla",
+    "category": "sehir",
+    "coordinates": {
+      "lat": 37.0344,
+      "lng": 27.4305
+    },
+    "best_season": [
+      "ilkbahar"
+    ],
+    "duration": "3-5 gün",
+    "budget": "luks",
+    "age_suitable": {
+      "min": 0,
+      "max": 99
+    },
+    "activities": [
+      {
+        "name": "Gezi",
+        "description": "Yerel rehber eşliğinde keşif turu",
+        "duration": "2-3 saat",
+        "cost": "10-30€/kişi",
+        "booking_required": true,
+        "maps_location": "Bodrum"
+      },
+      {
+        "name": "Fotoğraf Turu",
+        "description": "En iyi manzara noktaları",
+        "duration": "1-2 saat",
+        "cost": "0€",
+        "booking_required": false,
+        "maps_location": "Bodrum"
+      }
+    ],
+    "tips": [
+      "Erken rezervasyon yapın.",
+      "Rahat ayakkabı giyin.",
+      "Çocuklar için atıştırmalık yanınızda bulundurun."
+    ],
+    "safety_info": "Genel olarak güvenli bölge.",
+    "rating": 4.0,
+    "review_count": 4733
+  },
+  {
+    "id": "travel_126",
+    "title": "Antalya: Aile Tatili",
+    "destination": "Antalya",
+    "country": "Türkiye",
+    "city": "Antalya",
+    "category": "sehir",
+    "coordinates": {
+      "lat": 36.8969,
+      "lng": 30.7133
+    },
+    "best_season": [
+      "yaz",
+      "sonbahar"
+    ],
+    "duration": "3-5 gün",
+    "budget": "orta",
+    "age_suitable": {
+      "min": 0,
+      "max": 99
+    },
+    "activities": [
+      {
+        "name": "Gezi",
+        "description": "Yerel rehber eşliğinde keşif turu",
+        "duration": "2-3 saat",
+        "cost": "10-30€/kişi",
+        "booking_required": true,
+        "maps_location": "Antalya"
+      },
+      {
+        "name": "Fotoğraf Turu",
+        "description": "En iyi manzara noktaları",
+        "duration": "1-2 saat",
+        "cost": "0€",
+        "booking_required": false,
+        "maps_location": "Antalya"
+      }
+    ],
+    "tips": [
+      "Erken rezervasyon yapın.",
+      "Rahat ayakkabı giyin.",
+      "Çocuklar için atıştırmalık yanınızda bulundurun."
+    ],
+    "safety_info": "Genel olarak güvenli bölge.",
+    "rating": 5.0,
+    "review_count": 553
+  },
+  {
+    "id": "travel_127",
+    "title": "Karadeniz Yaylaları: Kültür Gezisi",
+    "destination": "Karadeniz Yaylaları",
+    "country": "Türkiye",
+    "city": "Rize",
+    "category": "sehir",
+    "coordinates": {
+      "lat": 41.0205,
+      "lng": 40.5236
+    },
+    "best_season": [
+      "sonbahar",
+      "kis",
+      "ilkbahar"
+    ],
+    "duration": "2-3 gün",
+    "budget": "ekonomik",
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "activities": [
+      {
+        "name": "Gezi",
+        "description": "Yerel rehber eşliğinde keşif turu",
+        "duration": "2-3 saat",
+        "cost": "10-30€/kişi",
+        "booking_required": false,
+        "maps_location": "Karadeniz Yaylaları"
+      },
+      {
+        "name": "Fotoğraf Turu",
+        "description": "En iyi manzara noktaları",
+        "duration": "1-2 saat",
+        "cost": "0€",
+        "booking_required": false,
+        "maps_location": "Karadeniz Yaylaları"
+      }
+    ],
+    "tips": [
+      "Erken rezervasyon yapın.",
+      "Rahat ayakkabı giyin.",
+      "Çocuklar için atıştırmalık yanınızda bulundurun."
+    ],
+    "safety_info": "Genel olarak güvenli bölge.",
+    "rating": 4.1,
+    "review_count": 4907
+  },
+  {
+    "id": "travel_128",
+    "title": "Safranbolu: Keşif Turu",
+    "destination": "Safranbolu",
+    "country": "Türkiye",
+    "city": "Karabük",
+    "category": "sehir",
+    "coordinates": {
+      "lat": 41.2498,
+      "lng": 32.6832
+    },
+    "best_season": [
+      "kis"
+    ],
+    "duration": "1-2 gün",
+    "budget": "ekonomik",
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "activities": [
+      {
+        "name": "Gezi",
+        "description": "Yerel rehber eşliğinde keşif turu",
+        "duration": "2-3 saat",
+        "cost": "10-30€/kişi",
+        "booking_required": false,
+        "maps_location": "Safranbolu"
+      },
+      {
+        "name": "Fotoğraf Turu",
+        "description": "En iyi manzara noktaları",
+        "duration": "1-2 saat",
+        "cost": "0€",
+        "booking_required": false,
+        "maps_location": "Safranbolu"
+      }
+    ],
+    "tips": [
+      "Erken rezervasyon yapın.",
+      "Rahat ayakkabı giyin.",
+      "Çocuklar için atıştırmalık yanınızda bulundurun."
+    ],
+    "safety_info": "Genel olarak güvenli bölge.",
+    "rating": 4.4,
+    "review_count": 4224
+  },
+  {
+    "id": "travel_129",
+    "title": "Göbeklitepe: Aile Tatili",
+    "destination": "Göbeklitepe",
+    "country": "Türkiye",
+    "city": "Şanlıurfa",
+    "category": "sehir",
+    "coordinates": {
+      "lat": 37.2231,
+      "lng": 38.9223
+    },
+    "best_season": [
+      "yaz",
+      "sonbahar",
+      "kis"
+    ],
+    "duration": "1 gün",
+    "budget": "ekonomik",
+    "age_suitable": {
+      "min": 5,
+      "max": 99
+    },
+    "activities": [
+      {
+        "name": "Gezi",
+        "description": "Yerel rehber eşliğinde keşif turu",
+        "duration": "2-3 saat",
+        "cost": "10-30€/kişi",
+        "booking_required": false,
+        "maps_location": "Göbeklitepe"
+      },
+      {
+        "name": "Fotoğraf Turu",
+        "description": "En iyi manzara noktaları",
+        "duration": "1-2 saat",
+        "cost": "0€",
+        "booking_required": false,
+        "maps_location": "Göbeklitepe"
+      }
+    ],
+    "tips": [
+      "Erken rezervasyon yapın.",
+      "Rahat ayakkabı giyin.",
+      "Çocuklar için atıştırmalık yanınızda bulundurun."
+    ],
+    "safety_info": "Genel olarak güvenli bölge.",
+    "rating": 4.8,
+    "review_count": 3901
+  },
+  {
+    "id": "travel_130",
+    "title": "Van Gölü: Aile Tatili",
+    "destination": "Van Gölü",
+    "country": "Türkiye",
+    "city": "Van",
+    "category": "sehir",
+    "coordinates": {
+      "lat": 38.5012,
+      "lng": 43.3727
+    },
+    "best_season": [
+      "sonbahar"
+    ],
+    "duration": "2-3 gün",
+    "budget": "ekonomik",
+    "age_suitable": {
+      "min": 3,
+      "max": 99
+    },
+    "activities": [
+      {
+        "name": "Gezi",
+        "description": "Yerel rehber eşliğinde keşif turu",
+        "duration": "2-3 saat",
+        "cost": "10-30€/kişi",
+        "booking_required": true,
+        "maps_location": "Van Gölü"
+      },
+      {
+        "name": "Fotoğraf Turu",
+        "description": "En iyi manzara noktaları",
+        "duration": "1-2 saat",
+        "cost": "0€",
+        "booking_required": false,
+        "maps_location": "Van Gölü"
+      }
+    ],
+    "tips": [
+      "Erken rezervasyon yapın.",
+      "Rahat ayakkabı giyin.",
+      "Çocuklar için atıştırmalık yanınızda bulundurun."
+    ],
+    "safety_info": "Genel olarak güvenli bölge.",
+    "rating": 5.0,
+    "review_count": 2842
+  }
+]

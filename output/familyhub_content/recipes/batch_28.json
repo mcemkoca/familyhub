@@ -1,0 +1,662 @@
+[
+  {
+    "id": "recipe_271",
+    "title": "Kadayıf",
+    "category": "ramazan",
+    "difficulty": "zor",
+    "prep_time": 20,
+    "cook_time": 30,
+    "servings": 6,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "228",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "208",
+        "unit": "yemek kaşığı",
+        "optional": true
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "194",
+        "unit": "gr",
+        "optional": true
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "7",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "145",
+        "unit": "su bardağı",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "ramazan",
+      "cocuk_dostu"
+    ],
+    "image_prompt": "Traditional Turkish Kadayıf beautifully plated, food photography, warm lighting",
+    "rating": 4.3,
+    "review_count": 117
+  },
+  {
+    "id": "recipe_272",
+    "title": "Baklava",
+    "category": "ramazan",
+    "difficulty": "kolay",
+    "prep_time": 60,
+    "cook_time": 40,
+    "servings": 12,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "90",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "161",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "218",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "251",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "107",
+        "unit": "gr",
+        "optional": true
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "ramazan",
+      "cocuk_dostu"
+    ],
+    "image_prompt": "Traditional Turkish Baklava beautifully plated, food photography, warm lighting",
+    "rating": 4.4,
+    "review_count": 481
+  },
+  {
+    "id": "recipe_273",
+    "title": "Revani",
+    "category": "ramazan",
+    "difficulty": "zor",
+    "prep_time": 15,
+    "cook_time": 30,
+    "servings": 8,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "208",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "5",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "104",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "97",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "237",
+        "unit": "yemek kaşığı",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "ramazan",
+      "ekonomik"
+    ],
+    "image_prompt": "Traditional Turkish Revani beautifully plated, food photography, warm lighting",
+    "rating": 4.3,
+    "review_count": 235
+  },
+  {
+    "id": "recipe_274",
+    "title": "Helva",
+    "category": "ramazan",
+    "difficulty": "zor",
+    "prep_time": 10,
+    "cook_time": 20,
+    "servings": 8,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "72",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "94",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "240",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "48",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "33",
+        "unit": "adet",
+        "optional": true
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "ramazan",
+      "hizli"
+    ],
+    "image_prompt": "Traditional Turkish Helva beautifully plated, food photography, warm lighting",
+    "rating": 4.5,
+    "review_count": 91
+  },
+  {
+    "id": "recipe_275",
+    "title": "Dondurma",
+    "category": "ramazan",
+    "difficulty": "orta",
+    "prep_time": 10,
+    "cook_time": 0,
+    "servings": 4,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "271",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "44",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "210",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "93",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "259",
+        "unit": "yemek kaşığı",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "ramazan",
+      "saglikli"
+    ],
+    "image_prompt": "Traditional Turkish Dondurma beautifully plated, food photography, warm lighting",
+    "rating": 4.8,
+    "review_count": 198
+  },
+  {
+    "id": "recipe_276",
+    "title": "Aşure",
+    "category": "ramazan",
+    "difficulty": "zor",
+    "prep_time": 30,
+    "cook_time": 45,
+    "servings": 10,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "200",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "244",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "230",
+        "unit": "gr",
+        "optional": true
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "199",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "262",
+        "unit": "su bardağı",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "ramazan",
+      "cocuk_dostu"
+    ],
+    "image_prompt": "Traditional Turkish Aşure beautifully plated, food photography, warm lighting",
+    "rating": 4.7,
+    "review_count": 238
+  },
+  {
+    "id": "recipe_277",
+    "title": "Güllaç",
+    "category": "ramazan",
+    "difficulty": "orta",
+    "prep_time": 20,
+    "cook_time": 0,
+    "servings": 6,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "277",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "230",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "173",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "55",
+        "unit": "gr",
+        "optional": true
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "188",
+        "unit": "yemek kaşığı",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "ramazan",
+      "saglikli"
+    ],
+    "image_prompt": "Traditional Turkish Güllaç beautifully plated, food photography, warm lighting",
+    "rating": 4.7,
+    "review_count": 134
+  },
+  {
+    "id": "recipe_278",
+    "title": "Höşmerim",
+    "category": "ramazan",
+    "difficulty": "zor",
+    "prep_time": 15,
+    "cook_time": 15,
+    "servings": 4,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "120",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "187",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "213",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "261",
+        "unit": "su bardağı",
+        "optional": true
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "114",
+        "unit": "su bardağı",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "ramazan",
+      "cocuk_dostu"
+    ],
+    "image_prompt": "Traditional Turkish Höşmerim beautifully plated, food photography, warm lighting",
+    "rating": 4.8,
+    "review_count": 177
+  },
+  {
+    "id": "recipe_279",
+    "title": "Lokma",
+    "category": "ramazan",
+    "difficulty": "orta",
+    "prep_time": 20,
+    "cook_time": 20,
+    "servings": 8,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "91",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "130",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "286",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "213",
+        "unit": "gr",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "242",
+        "unit": "adet",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "ramazan",
+      "saglikli"
+    ],
+    "image_prompt": "Traditional Turkish Lokma beautifully plated, food photography, warm lighting",
+    "rating": 4.9,
+    "review_count": 213
+  },
+  {
+    "id": "recipe_280",
+    "title": "Şekerpare",
+    "category": "ramazan",
+    "difficulty": "zor",
+    "prep_time": 20,
+    "cook_time": 25,
+    "servings": 8,
+    "ingredients": [
+      {
+        "name": "Malzeme 1",
+        "amount": "196",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 2",
+        "amount": "91",
+        "unit": "yemek kaşığı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 3",
+        "amount": "208",
+        "unit": "adet",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 4",
+        "amount": "110",
+        "unit": "su bardağı",
+        "optional": false
+      },
+      {
+        "name": "Malzeme 5",
+        "amount": "117",
+        "unit": "adet",
+        "optional": false
+      }
+    ],
+    "instructions": [
+      "Adım 1: Malzemeleri hazırlayın.",
+      "Adım 2: Pişirme işlemine başlayın.",
+      "Adım 3: Baharatları ekleyin.",
+      "Adım 4: Kısık ateşte pişirin.",
+      "Adım 5: Sıcak servis yapın."
+    ],
+    "nutrition": {
+      "calories": 350,
+      "protein": "20g",
+      "carbs": "40g",
+      "fat": "15g"
+    },
+    "tips": [
+      "Taze malzemeler kullanın.",
+      "Çocuklar için az baharatlı yapabilirsiniz.",
+      "Yanında salata ile servis edin."
+    ],
+    "tags": [
+      "ramazan",
+      "cocuk_dostu"
+    ],
+    "image_prompt": "Traditional Turkish Şekerpare beautifully plated, food photography, warm lighting",
+    "rating": 4.1,
+    "review_count": 120
+  }
+]

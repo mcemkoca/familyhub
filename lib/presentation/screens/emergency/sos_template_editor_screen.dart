@@ -1,0 +1,160 @@
+// lib/presentation/screens/emergency/sos_template_editor_screen.dart
+// Emergency message template editor with variable support
+
+import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
+
+class SosTemplateEditorScreen extends StatefulWidget {
+  const SosTemplateEditorScreen({super.key});
+
+  @override
+  State<SosTemplateEditorScreen> createState() => _SosTemplateEditorScreenState();
+}
+
+class _SosTemplateEditorScreenState extends State<SosTemplateEditorScreen> {
+  final _smsCtrl = TextEditingController(
+    text: '🆘 ACİL: {name} yardım istiyor!\nKonum: {location}\nSaat: {time}\nDurum: {status}\nHarita: {map_link}\nCanlı takip: {live_link}',
+  );
+  final _pushTitleCtrl = TextEditingController(text: '🆘 {name} - ACİL DURUM');
+  final _pushBodyCtrl = TextEditingController(text: 'Yardım çağrısı! Konum: {location}');
+  final _voiceCtrl = TextEditingController(
+    text: 'Bu otomatik bir acil durum çağrısıdır. {name} yardım istiyor. Konum: Enlem {lat}, Boylam {lng}. Lütfen yardım için hemen harekete geçin.',
+  );
+
+  final List<String> _variables = [
+    '{name}',
+    '{location}',
+    '{coordinates}',
+    '{time}',
+    '{status}',
+    '{map_link}',
+    '{live_link}',
+    '{health_info}',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context).acilDurumMesajSablonu),
+        actions: [
+          IconButton(icon: const Icon(Icons.save), onPressed: _save),
+          IconButton(icon: const Icon(Icons.restore), onPressed: _reset),
+        ],
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          _section('SMS ŞABLONU', [
+            TextField(
+              controller: _smsCtrl,
+              maxLines: 6,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'SMS mesajı...',
+              ),
+            ),
+          ]),
+
+          _section('PUSH BİLDİRİM ŞABLONU', [
+            TextField(
+              controller: _pushTitleCtrl,
+              decoration: const InputDecoration(labelText: 'Başlık', border: OutlineInputBorder()),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: _pushBodyCtrl,
+              maxLines: 3,
+              decoration: const InputDecoration(
+                labelText: 'İçerik',
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ]),
+
+          _section('SESLİ MESAJ ŞABLONU', [
+            TextField(
+              controller: _voiceCtrl,
+              maxLines: 5,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Sesli mesaj metni...',
+              ),
+            ),
+            const SizedBox(height: 12),
+            ElevatedButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.volume_up),
+              label: Text(AppLocalizations.of(context).onizleme),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.blue.shade800, foregroundColor: Colors.white),
+            ),
+          ]),
+
+          _section('KULLANILABİLİR DEĞİŞKENLER', [
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: _variables.map((v) => ActionChip(
+                label: Text(v, style: const TextStyle(fontSize: 12)),
+                onPressed: () => _insertVariable(v),
+              )).toList(),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              '• {name} - Kullanıcı adı\n'
+              '• {location} - Konum adresi\n'
+              '• {coordinates} - Enlem/Boylam\n'
+              '• {time} - Olay zamanı\n'
+              '• {status} - Acil durum açıklaması\n'
+              '• {map_link} - Google Maps linki\n'
+              '• {live_link} - Canlı takip linki\n'
+              '• {health_info} - Sağlık kartı özeti',
+              style: TextStyle(color: Colors.white70, fontSize: 12, height: 1.6),
+            ),
+          ]),
+
+          const SizedBox(height: 24),
+          ElevatedButton.icon(
+            onPressed: _save,
+            icon: const Icon(Icons.save),
+            label: const Text('KAYDET', style: TextStyle(fontSize: 16)),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.green.shade700, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _section(String title, List<Widget> children) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(color: const Color(0xFF16213E), borderRadius: BorderRadius.circular(16)),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text(title, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+        const SizedBox(height: 12),
+        ...children,
+      ]),
+    );
+  }
+
+  void _insertVariable(String variable) {
+    // Insert into currently focused field
+    // For simplicity, insert into SMS field
+    final text = _smsCtrl.text;
+    final selection = _smsCtrl.selection;
+    final newText = text.replaceRange(selection.start, selection.end, variable);
+    _smsCtrl.value = TextEditingValue(
+      text: newText,
+      selection: TextSelection.collapsed(offset: selection.start + variable.length),
+    );
+  }
+
+  void _save() {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).sablonKaydedildi)));
+  }
+
+  void _reset() {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).varsayilanaSifirlandi)));
+  }
+}

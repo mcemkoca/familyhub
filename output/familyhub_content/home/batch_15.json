@@ -1,0 +1,592 @@
+[
+  {
+    "id": "home_141",
+    "title": "Akıllı Telefon Şarj İstasyonu Yapımı",
+    "category": "salon",
+    "difficulty": "kolay",
+    "duration": "30-45 dk",
+    "cost": "10-20€",
+    "impact_level": 7,
+    "tools_needed": [
+      {
+        "tool": "Alet 1",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "tool": "Alet 2",
+        "alternative": "Alternatif 2"
+      }
+    ],
+    "materials": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "5 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "1 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "3 adet",
+        "estimated_cost": "5-20€"
+      }
+    ],
+    "step_by_step": [
+      "Adım 1: Hazırlık yapın.",
+      "Adım 2: Ölçü alın.",
+      "Adım 3: Monte edin.",
+      "Adım 4: Kesim yapın.",
+      "Adım 5: Monte edin."
+    ],
+    "safety_warnings": [
+      "Elektrikli aletleri dikkatli kullanın.",
+      "Çocukları uzak tutun.",
+      "Maske ve gözlük takın."
+    ],
+    "family_involvement": {
+      "suitable_for_kids": true,
+      "kid_tasks": [
+        "Taşıma",
+        "Boyama",
+        "Temizlik"
+      ],
+      "adult_supervision_required": true
+    },
+    "rating": 4.5,
+    "review_count": 399
+  },
+  {
+    "id": "home_142",
+    "title": "Banyo Dolabı Düzenleme",
+    "category": "salon",
+    "difficulty": "kolay",
+    "duration": "1-2 saat",
+    "cost": "20-50€",
+    "impact_level": 8,
+    "tools_needed": [
+      {
+        "tool": "Alet 1",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "tool": "Alet 2",
+        "alternative": "Alternatif 2"
+      }
+    ],
+    "materials": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "4 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "5 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "1 adet",
+        "estimated_cost": "5-20€"
+      }
+    ],
+    "step_by_step": [
+      "Adım 1: Ölçü alın.",
+      "Adım 2: Test edin.",
+      "Adım 3: Kesim yapın.",
+      "Adım 4: Ölçü alın.",
+      "Adım 5: Hazırlık yapın."
+    ],
+    "safety_warnings": [
+      "Elektrikli aletleri dikkatli kullanın.",
+      "Çocukları uzak tutun.",
+      "Maske ve gözlük takın."
+    ],
+    "family_involvement": {
+      "suitable_for_kids": false,
+      "kid_tasks": [
+        "Taşıma",
+        "Boyama",
+        "Temizlik"
+      ],
+      "adult_supervision_required": true
+    },
+    "rating": 5.0,
+    "review_count": 223
+  },
+  {
+    "id": "home_143",
+    "title": "Duvar Resmi Boyama",
+    "category": "salon",
+    "difficulty": "orta",
+    "duration": "2-3 saat",
+    "cost": "30-60€",
+    "impact_level": 7,
+    "tools_needed": [
+      {
+        "tool": "Alet 1",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "tool": "Alet 2",
+        "alternative": "Alternatif 2"
+      }
+    ],
+    "materials": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "2 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "2 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "1 adet",
+        "estimated_cost": "5-20€"
+      }
+    ],
+    "step_by_step": [
+      "Adım 1: Hazırlık yapın.",
+      "Adım 2: Ölçü alın.",
+      "Adım 3: Hazırlık yapın.",
+      "Adım 4: Test edin.",
+      "Adım 5: Hazırlık yapın."
+    ],
+    "safety_warnings": [
+      "Elektrikli aletleri dikkatli kullanın.",
+      "Çocukları uzak tutun.",
+      "Maske ve gözlük takın."
+    ],
+    "family_involvement": {
+      "suitable_for_kids": true,
+      "kid_tasks": [
+        "Taşıma",
+        "Boyama",
+        "Temizlik"
+      ],
+      "adult_supervision_required": true
+    },
+    "rating": 4.6,
+    "review_count": 312
+  },
+  {
+    "id": "home_144",
+    "title": "Musluk Tamiri",
+    "category": "salon",
+    "difficulty": "orta",
+    "duration": "30-60 dk",
+    "cost": "10-30€",
+    "impact_level": 6,
+    "tools_needed": [
+      {
+        "tool": "Alet 1",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "tool": "Alet 2",
+        "alternative": "Alternatif 2"
+      }
+    ],
+    "materials": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "4 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "3 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "2 adet",
+        "estimated_cost": "5-20€"
+      }
+    ],
+    "step_by_step": [
+      "Adım 1: Monte edin.",
+      "Adım 2: Test edin.",
+      "Adım 3: Test edin.",
+      "Adım 4: Kesim yapın.",
+      "Adım 5: Kesim yapın."
+    ],
+    "safety_warnings": [
+      "Elektrikli aletleri dikkatli kullanın.",
+      "Çocukları uzak tutun.",
+      "Maske ve gözlük takın."
+    ],
+    "family_involvement": {
+      "suitable_for_kids": true,
+      "kid_tasks": [
+        "Taşıma",
+        "Boyama",
+        "Temizlik"
+      ],
+      "adult_supervision_required": true
+    },
+    "rating": 4.6,
+    "review_count": 72
+  },
+  {
+    "id": "home_145",
+    "title": "Mini Sebze Bahçesi",
+    "category": "salon",
+    "difficulty": "kolay",
+    "duration": "2-3 saat",
+    "cost": "20-40€",
+    "impact_level": 6,
+    "tools_needed": [
+      {
+        "tool": "Alet 1",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "tool": "Alet 2",
+        "alternative": "Alternatif 2"
+      }
+    ],
+    "materials": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "4 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "3 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "5 adet",
+        "estimated_cost": "5-20€"
+      }
+    ],
+    "step_by_step": [
+      "Adım 1: Hazırlık yapın.",
+      "Adım 2: Monte edin.",
+      "Adım 3: Monte edin.",
+      "Adım 4: Hazırlık yapın.",
+      "Adım 5: Hazırlık yapın."
+    ],
+    "safety_warnings": [
+      "Elektrikli aletleri dikkatli kullanın.",
+      "Çocukları uzak tutun.",
+      "Maske ve gözlük takın."
+    ],
+    "family_involvement": {
+      "suitable_for_kids": true,
+      "kid_tasks": [
+        "Taşıma",
+        "Boyama",
+        "Temizlik"
+      ],
+      "adult_supervision_required": true
+    },
+    "rating": 4.5,
+    "review_count": 387
+  },
+  {
+    "id": "home_146",
+    "title": "Mutfak Rafı Düzenleme",
+    "category": "salon",
+    "difficulty": "kolay",
+    "duration": "1-2 saat",
+    "cost": "30-80€",
+    "impact_level": 6,
+    "tools_needed": [
+      {
+        "tool": "Alet 1",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "tool": "Alet 2",
+        "alternative": "Alternatif 2"
+      }
+    ],
+    "materials": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "1 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "3 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "3 adet",
+        "estimated_cost": "5-20€"
+      }
+    ],
+    "step_by_step": [
+      "Adım 1: Ölçü alın.",
+      "Adım 2: Monte edin.",
+      "Adım 3: Kesim yapın.",
+      "Adım 4: Monte edin.",
+      "Adım 5: Monte edin."
+    ],
+    "safety_warnings": [
+      "Elektrikli aletleri dikkatli kullanın.",
+      "Çocukları uzak tutun.",
+      "Maske ve gözlük takın."
+    ],
+    "family_involvement": {
+      "suitable_for_kids": true,
+      "kid_tasks": [
+        "Taşıma",
+        "Boyama",
+        "Temizlik"
+      ],
+      "adult_supervision_required": true
+    },
+    "rating": 4.2,
+    "review_count": 280
+  },
+  {
+    "id": "home_147",
+    "title": "Çocuk Odası Depolama Çözümleri",
+    "category": "salon",
+    "difficulty": "kolay",
+    "duration": "2-4 saat",
+    "cost": "50-150€",
+    "impact_level": 10,
+    "tools_needed": [
+      {
+        "tool": "Alet 1",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "tool": "Alet 2",
+        "alternative": "Alternatif 2"
+      }
+    ],
+    "materials": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "3 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "1 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "4 adet",
+        "estimated_cost": "5-20€"
+      }
+    ],
+    "step_by_step": [
+      "Adım 1: Test edin.",
+      "Adım 2: Test edin.",
+      "Adım 3: Monte edin.",
+      "Adım 4: Monte edin.",
+      "Adım 5: Kesim yapın."
+    ],
+    "safety_warnings": [
+      "Elektrikli aletleri dikkatli kullanın.",
+      "Çocukları uzak tutun.",
+      "Maske ve gözlük takın."
+    ],
+    "family_involvement": {
+      "suitable_for_kids": false,
+      "kid_tasks": [
+        "Taşıma",
+        "Boyama",
+        "Temizlik"
+      ],
+      "adult_supervision_required": true
+    },
+    "rating": 4.8,
+    "review_count": 128
+  },
+  {
+    "id": "home_148",
+    "title": "Yatak Odası Aydınlatma Değişimi",
+    "category": "salon",
+    "difficulty": "kolay",
+    "duration": "1 saat",
+    "cost": "40-100€",
+    "impact_level": 7,
+    "tools_needed": [
+      {
+        "tool": "Alet 1",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "tool": "Alet 2",
+        "alternative": "Alternatif 2"
+      }
+    ],
+    "materials": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "2 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "3 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "3 adet",
+        "estimated_cost": "5-20€"
+      }
+    ],
+    "step_by_step": [
+      "Adım 1: Ölçü alın.",
+      "Adım 2: Hazırlık yapın.",
+      "Adım 3: Ölçü alın.",
+      "Adım 4: Test edin.",
+      "Adım 5: Monte edin."
+    ],
+    "safety_warnings": [
+      "Elektrikli aletleri dikkatli kullanın.",
+      "Çocukları uzak tutun.",
+      "Maske ve gözlük takın."
+    ],
+    "family_involvement": {
+      "suitable_for_kids": false,
+      "kid_tasks": [
+        "Taşıma",
+        "Boyama",
+        "Temizlik"
+      ],
+      "adult_supervision_required": true
+    },
+    "rating": 4.7,
+    "review_count": 89
+  },
+  {
+    "id": "home_149",
+    "title": "Salon Duvar Rafı Montajı",
+    "category": "salon",
+    "difficulty": "orta",
+    "duration": "1-2 saat",
+    "cost": "40-80€",
+    "impact_level": 6,
+    "tools_needed": [
+      {
+        "tool": "Alet 1",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "tool": "Alet 2",
+        "alternative": "Alternatif 2"
+      }
+    ],
+    "materials": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "3 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "1 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "2 adet",
+        "estimated_cost": "5-20€"
+      }
+    ],
+    "step_by_step": [
+      "Adım 1: Kesim yapın.",
+      "Adım 2: Hazırlık yapın.",
+      "Adım 3: Ölçü alın.",
+      "Adım 4: Test edin.",
+      "Adım 5: Hazırlık yapın."
+    ],
+    "safety_warnings": [
+      "Elektrikli aletleri dikkatli kullanın.",
+      "Çocukları uzak tutun.",
+      "Maske ve gözlük takın."
+    ],
+    "family_involvement": {
+      "suitable_for_kids": false,
+      "kid_tasks": [
+        "Taşıma",
+        "Boyama",
+        "Temizlik"
+      ],
+      "adult_supervision_required": true
+    },
+    "rating": 4.4,
+    "review_count": 224
+  },
+  {
+    "id": "home_150",
+    "title": "Giriş Alanı Paspas ve Raf",
+    "category": "salon",
+    "difficulty": "kolay",
+    "duration": "1-2 saat",
+    "cost": "30-70€",
+    "impact_level": 10,
+    "tools_needed": [
+      {
+        "tool": "Alet 1",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "tool": "Alet 2",
+        "alternative": "Alternatif 2"
+      }
+    ],
+    "materials": [
+      {
+        "item": "Malzeme 1",
+        "quantity": "3 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 2",
+        "quantity": "4 adet",
+        "estimated_cost": "5-20€"
+      },
+      {
+        "item": "Malzeme 3",
+        "quantity": "3 adet",
+        "estimated_cost": "5-20€"
+      }
+    ],
+    "step_by_step": [
+      "Adım 1: Test edin.",
+      "Adım 2: Ölçü alın.",
+      "Adım 3: Test edin.",
+      "Adım 4: Kesim yapın.",
+      "Adım 5: Ölçü alın."
+    ],
+    "safety_warnings": [
+      "Elektrikli aletleri dikkatli kullanın.",
+      "Çocukları uzak tutun.",
+      "Maske ve gözlük takın."
+    ],
+    "family_involvement": {
+      "suitable_for_kids": true,
+      "kid_tasks": [
+        "Taşıma",
+        "Boyama",
+        "Temizlik"
+      ],
+      "adult_supervision_required": true
+    },
+    "rating": 4.5,
+    "review_count": 152
+  }
+]

@@ -1,0 +1,512 @@
+[
+  {
+    "id": "edu_081",
+    "title": "Günlük Matematik Oyunları",
+    "category": "dil_ogrenimi",
+    "age_group": {
+      "min": 6,
+      "max": 10
+    },
+    "development_area": [
+      "dil_ogrenimi",
+      "odaklanma"
+    ],
+    "learning_objectives": [
+      "Beceri geliştirme",
+      "Özgüven artırma",
+      "Eğlenceli öğrenme"
+    ],
+    "duration": "15 dk/gün",
+    "frequency": "haftada 5 kez",
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 3"
+      }
+    ],
+    "steps": [
+      "Adım 1: Çocuğa uygulatın.",
+      "Adım 2: Çocuğa uygulatın.",
+      "Adım 3: Konuyu tanıtın.",
+      "Adım 4: Konuyu tanıtın.",
+      "Adım 5: Örnek gösterin."
+    ],
+    "parent_tips": [
+      "Sabırlı olun.",
+      "Pozitif pekiştirme verin.",
+      "Günlük rutine ekleyin."
+    ],
+    "rating": 5.0,
+    "review_count": 237
+  },
+  {
+    "id": "edu_082",
+    "title": "Renkleri Öğrenme Aktiviteleri",
+    "category": "dil_ogrenimi",
+    "age_group": {
+      "min": 3,
+      "max": 5
+    },
+    "development_area": [
+      "dil_ogrenimi",
+      "odaklanma"
+    ],
+    "learning_objectives": [
+      "Beceri geliştirme",
+      "Özgüven artırma",
+      "Eğlenceli öğrenme"
+    ],
+    "duration": "1 saat/hafta",
+    "frequency": "günlük",
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 3"
+      }
+    ],
+    "steps": [
+      "Adım 1: Konuyu tanıtın.",
+      "Adım 2: Çocuğa uygulatın.",
+      "Adım 3: Pekiştirin.",
+      "Adım 4: Pekiştirin.",
+      "Adım 5: Değerlendirin."
+    ],
+    "parent_tips": [
+      "Sabırlı olun.",
+      "Pozitif pekiştirme verin.",
+      "Günlük rutine ekleyin."
+    ],
+    "rating": 4.6,
+    "review_count": 152
+  },
+  {
+    "id": "edu_083",
+    "title": "Okuma Alışkanlığı Geliştirme",
+    "category": "dil_ogrenimi",
+    "age_group": {
+      "min": 6,
+      "max": 10
+    },
+    "development_area": [
+      "dil_ogrenimi",
+      "yaraticilik"
+    ],
+    "learning_objectives": [
+      "Beceri geliştirme",
+      "Özgüven artırma",
+      "Eğlenceli öğrenme"
+    ],
+    "duration": "45 dk/hafta",
+    "frequency": "haftada 5 kez",
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 3"
+      }
+    ],
+    "steps": [
+      "Adım 1: Değerlendirin.",
+      "Adım 2: Pekiştirin.",
+      "Adım 3: Çocuğa uygulatın.",
+      "Adım 4: Çocuğa uygulatın.",
+      "Adım 5: Çocuğa uygulatın."
+    ],
+    "parent_tips": [
+      "Sabırlı olun.",
+      "Pozitif pekiştirme verin.",
+      "Günlük rutine ekleyin."
+    ],
+    "rating": 4.4,
+    "review_count": 187
+  },
+  {
+    "id": "edu_084",
+    "title": "Bilimsel Deney Setleri",
+    "category": "dil_ogrenimi",
+    "age_group": {
+      "min": 10,
+      "max": 14
+    },
+    "development_area": [
+      "dil_ogrenimi",
+      "yaraticilik"
+    ],
+    "learning_objectives": [
+      "Beceri geliştirme",
+      "Özgüven artırma",
+      "Eğlenceli öğrenme"
+    ],
+    "duration": "15 dk/gün",
+    "frequency": "haftada 5 kez",
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 3"
+      }
+    ],
+    "steps": [
+      "Adım 1: Pekiştirin.",
+      "Adım 2: Çocuğa uygulatın.",
+      "Adım 3: Örnek gösterin.",
+      "Adım 4: Pekiştirin.",
+      "Adım 5: Konuyu tanıtın."
+    ],
+    "parent_tips": [
+      "Sabırlı olun.",
+      "Pozitif pekiştirme verin.",
+      "Günlük rutine ekleyin."
+    ],
+    "rating": 4.7,
+    "review_count": 84
+  },
+  {
+    "id": "edu_085",
+    "title": "Eleştirel Düşünme Atölyesi",
+    "category": "dil_ogrenimi",
+    "age_group": {
+      "min": 14,
+      "max": 18
+    },
+    "development_area": [
+      "dil_ogrenimi",
+      "odaklanma"
+    ],
+    "learning_objectives": [
+      "Beceri geliştirme",
+      "Özgüven artırma",
+      "Eğlenceli öğrenme"
+    ],
+    "duration": "45 dk/hafta",
+    "frequency": "haftada 5 kez",
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 3"
+      }
+    ],
+    "steps": [
+      "Adım 1: Çocuğa uygulatın.",
+      "Adım 2: Örnek gösterin.",
+      "Adım 3: Örnek gösterin.",
+      "Adım 4: Örnek gösterin.",
+      "Adım 5: Değerlendirin."
+    ],
+    "parent_tips": [
+      "Sabırlı olun.",
+      "Pozitif pekiştirme verin.",
+      "Günlük rutine ekleyin."
+    ],
+    "rating": 4.7,
+    "review_count": 150
+  },
+  {
+    "id": "edu_086",
+    "title": "Robotik Kodlama",
+    "category": "dil_ogrenimi",
+    "age_group": {
+      "min": 8,
+      "max": 14
+    },
+    "development_area": [
+      "dil_ogrenimi",
+      "problem_cozme"
+    ],
+    "learning_objectives": [
+      "Beceri geliştirme",
+      "Özgüven artırma",
+      "Eğlenceli öğrenme"
+    ],
+    "duration": "45 dk/hafta",
+    "frequency": "günlük",
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 3"
+      }
+    ],
+    "steps": [
+      "Adım 1: Pekiştirin.",
+      "Adım 2: Pekiştirin.",
+      "Adım 3: Konuyu tanıtın.",
+      "Adım 4: Konuyu tanıtın.",
+      "Adım 5: Örnek gösterin."
+    ],
+    "parent_tips": [
+      "Sabırlı olun.",
+      "Pozitif pekiştirme verin.",
+      "Günlük rutine ekleyin."
+    ],
+    "rating": 4.8,
+    "review_count": 173
+  },
+  {
+    "id": "edu_087",
+    "title": "İngilizce Hikaye Anlatımı",
+    "category": "dil_ogrenimi",
+    "age_group": {
+      "min": 5,
+      "max": 12
+    },
+    "development_area": [
+      "dil_ogrenimi",
+      "yaraticilik"
+    ],
+    "learning_objectives": [
+      "Beceri geliştirme",
+      "Özgüven artırma",
+      "Eğlenceli öğrenme"
+    ],
+    "duration": "1 saat/hafta",
+    "frequency": "haftada 3 kez",
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 3"
+      }
+    ],
+    "steps": [
+      "Adım 1: Değerlendirin.",
+      "Adım 2: Değerlendirin.",
+      "Adım 3: Çocuğa uygulatın.",
+      "Adım 4: Değerlendirin.",
+      "Adım 5: Çocuğa uygulatın."
+    ],
+    "parent_tips": [
+      "Sabırlı olun.",
+      "Pozitif pekiştirme verin.",
+      "Günlük rutine ekleyin."
+    ],
+    "rating": 4.1,
+    "review_count": 141
+  },
+  {
+    "id": "edu_088",
+    "title": "Müzik Aleti Çalma",
+    "category": "dil_ogrenimi",
+    "age_group": {
+      "min": 6,
+      "max": 14
+    },
+    "development_area": [
+      "dil_ogrenimi",
+      "problem_cozme"
+    ],
+    "learning_objectives": [
+      "Beceri geliştirme",
+      "Özgüven artırma",
+      "Eğlenceli öğrenme"
+    ],
+    "duration": "45 dk/hafta",
+    "frequency": "günlük",
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 3"
+      }
+    ],
+    "steps": [
+      "Adım 1: Değerlendirin.",
+      "Adım 2: Pekiştirin.",
+      "Adım 3: Örnek gösterin.",
+      "Adım 4: Örnek gösterin.",
+      "Adım 5: Örnek gösterin."
+    ],
+    "parent_tips": [
+      "Sabırlı olun.",
+      "Pozitif pekiştirme verin.",
+      "Günlük rutine ekleyin."
+    ],
+    "rating": 4.2,
+    "review_count": 279
+  },
+  {
+    "id": "edu_089",
+    "title": "Yüzme Eğitimi",
+    "category": "dil_ogrenimi",
+    "age_group": {
+      "min": 5,
+      "max": 12
+    },
+    "development_area": [
+      "dil_ogrenimi",
+      "yaraticilik"
+    ],
+    "learning_objectives": [
+      "Beceri geliştirme",
+      "Özgüven artırma",
+      "Eğlenceli öğrenme"
+    ],
+    "duration": "1 saat/hafta",
+    "frequency": "günlük",
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 3"
+      }
+    ],
+    "steps": [
+      "Adım 1: Çocuğa uygulatın.",
+      "Adım 2: Değerlendirin.",
+      "Adım 3: Örnek gösterin.",
+      "Adım 4: Değerlendirin.",
+      "Adım 5: Örnek gösterin."
+    ],
+    "parent_tips": [
+      "Sabırlı olun.",
+      "Pozitif pekiştirme verin.",
+      "Günlük rutine ekleyin."
+    ],
+    "rating": 5.0,
+    "review_count": 272
+  },
+  {
+    "id": "edu_090",
+    "title": "Empati ve Duygu Kartları",
+    "category": "dil_ogrenimi",
+    "age_group": {
+      "min": 4,
+      "max": 10
+    },
+    "development_area": [
+      "dil_ogrenimi",
+      "sosyal_beceriler"
+    ],
+    "learning_objectives": [
+      "Beceri geliştirme",
+      "Özgüven artırma",
+      "Eğlenceli öğrenme"
+    ],
+    "duration": "45 dk/hafta",
+    "frequency": "haftada 3 kez",
+    "materials": [
+      {
+        "name": "Malzeme 1",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 1"
+      },
+      {
+        "name": "Malzeme 2",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 2"
+      },
+      {
+        "name": "Malzeme 3",
+        "purpose": "Eğitim için",
+        "alternative": "Alternatif 3"
+      }
+    ],
+    "steps": [
+      "Adım 1: Değerlendirin.",
+      "Adım 2: Pekiştirin.",
+      "Adım 3: Örnek gösterin.",
+      "Adım 4: Pekiştirin.",
+      "Adım 5: Çocuğa uygulatın."
+    ],
+    "parent_tips": [
+      "Sabırlı olun.",
+      "Pozitif pekiştirme verin.",
+      "Günlük rutine ekleyin."
+    ],
+    "rating": 4.5,
+    "review_count": 99
+  }
+]
