@@ -53,9 +53,9 @@ dependencies:
   google_mlkit_text_recognition: ^0.15.0
   flutter_stripe: ^11.5.0
   flutter_webrtc: ^0.13.0
-  google_sign_in: ^6.2.1
+  google_sign_in: ^7.2.0
   googleapis: ^13.1.0
-  extension_google_sign_in_as_googleapis_auth: ^2.0.12
+  extension_google_sign_in_as_googleapis_auth: ^3.0.0
   path_provider: ^2.1.5
   flutter_svg: ^2.0.17
   speech_to_text: ^7.0.0
