@@ -53,3 +53,5 @@ lib/env.g.dart
 *.apk
 node_modules/
 
+familyhub-27bf2-firebase-adminsdk*.json
+
