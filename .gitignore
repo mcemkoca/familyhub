@@ -40,7 +40,6 @@ app.*.symbols
 app.*.map.json
 
 # Firebase config (contains API keys - use dart-define or envied)
-lib/firebase_options.dart
 
 # Android Studio will place build artifacts here
 /android/app/debug
