@@ -49,3 +49,7 @@ lib/firebase_options.dart
 
 .env
 lib/env.g.dart
+
+*.apk
+node_modules/
+
