@@ -20,6 +20,9 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Generate code (env.g.dart, freezed, etc.)
+        run: dart run build_runner build --delete-conflicting-outputs
+
       - name: Flutter analyze
         run: flutter analyze --fatal-warnings 2>&1 | tee analyze.log
 
@@ -35,8 +38,30 @@ jobs:
 
       - name: Check for hardcoded secrets
         run: |
-          ! grep -rE "(password|secret|token|api_key)\s*=" lib/ --include="*.dart" -l || true
-          ! grep -r "http://" lib/ --include="*.dart" -l || true
+          # Check for hardcoded API keys, tokens, passwords
+          PATTERN='(apiKey|api_key|api-key|secret|token|password|private_key)\s*[:=]\s*["\x27][^"\x27]{8,}["\x27]'
+          if grep -rE "$PATTERN" lib/ --include="*.dart" -l 2>/dev/null; then
+            echo "❌ Potential hardcoded secrets found!"
+            grep -rE "$PATTERN" lib/ --include="*.dart" -n
+            exit 1
+          fi
+          echo "✅ No hardcoded secrets detected"
+
+          # Check for http:// URLs
+          if grep -r "http://" lib/ --include="*.dart" -l 2>/dev/null; then
+            echo "❌ Insecure HTTP URLs found!"
+            grep -r "http://" lib/ --include="*.dart" -n
+            exit 1
+          fi
+          echo "✅ No insecure HTTP URLs detected"
+
+      - name: Check for tracked generated files
+        run: |
+          if git ls-files | grep -q "lib/core/config/env.g.dart"; then
+            echo "❌ env.g.dart should not be tracked in git!"
+            exit 1
+          fi
+          echo "✅ No tracked generated secret files"
 
   build-android:
     needs: analyze-and-test
@@ -53,11 +78,51 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Build APK
-        run: flutter build apk --release --split-per-abi
+      - name: Generate code
+        run: dart run build_runner build --delete-conflicting-outputs
 
-      - name: Build App Bundle
-        run: flutter build appbundle --release
+      - name: Create .env.prod from secrets
+        run: |
+          cat > .env.prod <<EOF
+          SUPABASE_URL=${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}
+          FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }}
+          FIREBASE_APP_ID=${{ secrets.FIREBASE_APP_ID }}
+          FIREBASE_MESSAGING_SENDER_ID=${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
+          FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}
+          FIREBASE_STORAGE_BUCKET=${{ secrets.FIREBASE_STORAGE_BUCKET }}
+          STRIPE_PUBLISHABLE_KEY=${{ secrets.STRIPE_PUBLISHABLE_KEY }}
+          OPENWEATHER_API_KEY=${{ secrets.OPENWEATHER_API_KEY }}
+          EOF
+
+      - name: Decode keystore
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > android/app/keystore.jks
+
+      - name: Build APK (obfuscated)
+        env:
+          KEYSTORE_PATH: android/app/keystore.jks
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          flutter build apk --release \
+            --obfuscate \
+            --split-debug-info=./symbols \
+            --split-per-abi \
+            --dart-define-from-file=.env.prod
+
+      - name: Build App Bundle (obfuscated)
+        env:
+          KEYSTORE_PATH: android/app/keystore.jks
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          flutter build appbundle --release \
+            --obfuscate \
+            --split-debug-info=./symbols \
+            --dart-define-from-file=.env.prod
 
       - name: Upload APK artifacts
         uses: actions/upload-artifact@v4
@@ -70,6 +135,12 @@ jobs:
         with:
           name: android-aab
           path: build/app/outputs/bundle/release/*.aab
+
+      - name: Upload debug symbols
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-symbols
+          path: symbols/
 
   build-ios:
     needs: analyze-and-test
@@ -86,11 +157,38 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Generate code
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Create .env.prod from secrets
+        run: |
+          cat > .env.prod <<EOF
+          SUPABASE_URL=${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}
+          FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }}
+          FIREBASE_APP_ID=${{ secrets.FIREBASE_APP_ID }}
+          FIREBASE_MESSAGING_SENDER_ID=${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
+          FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}
+          FIREBASE_STORAGE_BUCKET=${{ secrets.FIREBASE_STORAGE_BUCKET }}
+          STRIPE_PUBLISHABLE_KEY=${{ secrets.STRIPE_PUBLISHABLE_KEY }}
+          OPENWEATHER_API_KEY=${{ secrets.OPENWEATHER_API_KEY }}
+          EOF
+
       - name: Build IPA
-        run: flutter build ipa --release --no-codesign
+        run: |
+          flutter build ipa --release --no-codesign \
+            --obfuscate \
+            --split-debug-info=./symbols \
+            --dart-define-from-file=.env.prod
 
       - name: Upload IPA artifacts
         uses: actions/upload-artifact@v4
         with:
           name: ios-ipa
           path: build/ios/ipa/*.ipa
+
+      - name: Upload debug symbols
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-debug-symbols
+          path: symbols/
