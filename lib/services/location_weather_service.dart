@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'weather_service.dart';
@@ -58,7 +59,7 @@ class LocationWeatherService {
             placemarks.first.subAdministrativeArea ??
             'Bilinmiyor';
       }
-    } catch (_) {}
+    } catch (e) { debugPrint('Location weather error: $e'); }
     return 'Bilinmiyor';
   }
 }

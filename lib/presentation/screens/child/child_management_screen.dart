@@ -52,7 +52,7 @@ class _ChildManagementScreenState extends ConsumerState<ChildManagementScreen> {
               .eq('user_id', userId)
               .maybeSingle();
           familyId = memberResponse?['family_id'] as String?;
-        } catch (_) {}
+        } catch (e) { debugPrint('Child management error: $e'); }
       }
 
       _familyId = familyId;

@@ -40,7 +40,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
         _biometricEnabled =
             HiveService.getBoolSetting('biometric_enabled', defaultValue: false);
       });
-    } catch (_) {}
+    } catch (e) { debugPrint('Security settings error: $e'); }
   }
 
   Future<void> _toggleBiometric(bool enabled) async {

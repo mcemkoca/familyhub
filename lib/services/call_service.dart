@@ -144,7 +144,7 @@ class CallService {
           .eq('id', userId)
           .maybeSingle();
       familyId = profile?['family_id'] as String?;
-    } catch (_) {}
+    } catch (e) { debugPrint('Call service error: $e'); }
 
     if (familyId == null || familyId.isEmpty) {
       throw CallException('Aile bilgisi bulunamadı');
@@ -366,7 +366,7 @@ class CallService {
         final duration = DateTime.now().difference(connectedAt).inSeconds;
         updates['duration_seconds'] = duration;
       }
-    } catch (_) {}
+    } catch (e) { debugPrint('Call service error: $e'); }
 
     await client.from('call_sessions').update(updates).eq('id', sessionId);
     _currentSessionId = null;

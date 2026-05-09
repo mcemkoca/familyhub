@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import '../../../core/supabase_client.dart';
 import '../../../config/constants.dart';
+import '../../../repositories/subscription_repository.dart';
 import '../../../services/auth_service.dart';
 import 'package:go_router/go_router.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
@@ -90,8 +91,8 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
           );
           ref.invalidate(isPremiumProvider);
         }
-      } catch (_) {
-        // ignore
+      } catch (e) {
+        debugPrint('Admin premium activation error: $e');
       } finally {
         if (mounted) setState(() => _isLoading = false);
       }
@@ -126,7 +127,8 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
         body: {'price_id': plan.stripePriceId, 'user_id': userId},
       );
       clientSecret = (response.data as Map<String, dynamic>)['client_secret'] as String?;
-    } catch (_) {
+    } catch (e) {
+      debugPrint('Stripe edge function error: $e');
       // Edge Function yoksa — test modu: doğrudan aktive et
       await _activatePremium(plan.id);
       if (mounted) {
@@ -170,24 +172,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
   Future<void> _activatePremium(String tier) async {
     final userId = AuthService.currentUserId;
     if (userId == null) return;
-
-    final supabase = SupabaseConfig.client;
-
-    await supabase.from('subscriptions').insert({
-      'user_id': userId,
-      'subscription_tier': tier,
-      'amount': tier == 'family' ? 9.99 : 4.99,
-      'currency': 'EUR',
-      'status': 'active',
-      'expires_at': DateTime.now().add(const Duration(days: 30)).toIso8601String(),
-    });
-
-    await supabase.from('profiles').update({
-      'is_premium': true,
-      'subscription_tier': tier,
-      'subscription_expires_at': DateTime.now().add(const Duration(days: 30)).toIso8601String(),
-      'updated_at': DateTime.now().toIso8601String(),
-    }).eq('id', userId);
+    await SubscriptionRepository().activatePremium(userId, tier);
   }
 
   @override

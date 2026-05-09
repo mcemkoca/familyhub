@@ -84,7 +84,7 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
               // Use the oldest active child's age, or first child's age
               childAge = children.firstWhere((c) => c.isActive, orElse: () => children.first).age;
             }
-          } catch (_) {}
+          } catch (e) { debugPrint('AI suggestions error: $e'); }
           familySuggestions = FamilySuggestionsPool.instance.pickDaily(
             date: today,
             enabledCategories: enabledCats,
@@ -92,7 +92,7 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
             count: perDay,
             childAge: childAge,
           );
-        } catch (_) {}
+        } catch (e) { debugPrint('AI suggestions error: $e'); }
       }
 
       // Also load AI suggestions as bonus
@@ -128,9 +128,9 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
               if (raw is Map<String, dynamic>) {
                 aiSuggestions.add(AISuggestion.fromJson(raw));
               }
-            } catch (_) {}
+            } catch (e) { debugPrint('AI suggestions error: $e'); }
           }
-        } catch (_) {}
+        } catch (e) { debugPrint('AI suggestions error: $e'); }
       }
 
       // Merge: pool suggestions first, family pool, then AI bonus
@@ -191,7 +191,7 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
           alreadyShownIds: shownIds,
           count: 3,
         );
-      } catch (_) {}
+      } catch (e) { debugPrint('AI suggestions error: $e'); }
     }
 
     final more = [...moreDaily, ...moreFamily];
@@ -213,7 +213,7 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
         suggestions.map((s) => s.toJson()).toList(),
         provider: provider,
       );
-    } catch (_) {}
+    } catch (e) { debugPrint('AI suggestions error: $e'); }
   }
 
   void _showDetailModal(AISuggestion suggestion) {

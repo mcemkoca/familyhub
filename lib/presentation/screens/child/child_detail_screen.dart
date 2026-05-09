@@ -7,6 +7,7 @@ import '../../../domain/models/child_account.dart';
 import '../../../domain/models/child_development_log.dart';
 import '../../../domain/models/child_homework.dart';
 import '../../../domain/models/child_schedule.dart';
+import '../../../repositories/child_account_repository.dart';
 import '../../../repositories/child_streak_repository.dart';
 import '../../../repositories/task_repository.dart';
 
@@ -42,17 +43,18 @@ class _ChildDetailScreenState extends ConsumerState<ChildDetailScreen>
 
   Future<void> _loadChild() async {
     try {
-      final response = await SupabaseConfig.client
-          .from('child_accounts')
-          .select()
-          .eq('id', widget.childId)
-          .single();
-      setState(() {
-        _child = ChildAccount.fromJson(response);
-        _isLoading = false;
-      });
+      final child = await ChildAccountRepository().getChildById(widget.childId);
+      if (mounted) {
+        setState(() {
+          _child = child;
+          _isLoading = false;
+        });
+      }
     } catch (e) {
-      setState(() => _isLoading = false);
+      debugPrint('Child load error: $e');
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
     }
   }
 

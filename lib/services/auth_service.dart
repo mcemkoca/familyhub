@@ -593,6 +593,12 @@ class AuthService {
       await _secureStorage.write(key: _sessionKey, value: session.refreshToken);
     }
   }
+
+  static void dispose() {
+    _authSub?.cancel();
+    _authSub = null;
+    _authListenerInitialized = false;
+  }
 }
 
 // Riverpod provider for auth state

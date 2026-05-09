@@ -96,7 +96,7 @@ class _SafetyScreenState extends State<SafetyScreen>
           _currentAddress = addr;
         });
       }
-    } catch (_) {}
+    } catch (e) { debugPrint('Safety screen error: $e'); }
   }
 
   @override
@@ -255,7 +255,7 @@ class _SafetyScreenState extends State<SafetyScreen>
             pos.longitude,
           );
           if (mounted) setState(() => _currentAddress = addr);
-        } catch (_) {}
+        } catch (e) { debugPrint('Safety screen error: $e'); }
       });
     } else {
       LocationService.stopLiveSharing();

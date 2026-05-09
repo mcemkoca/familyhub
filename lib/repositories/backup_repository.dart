@@ -89,7 +89,7 @@ class BackupRepository with RepositoryErrorHandler {
           }
           data[boxName] = map;
         }
-      } catch (_) {}
+      } catch (e) { debugPrint('Backup repository error: $e'); }
     }
 
     return data;

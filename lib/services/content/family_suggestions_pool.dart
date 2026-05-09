@@ -88,7 +88,7 @@ class FamilySuggestionsPool {
     try {
       final encoded = jsonEncode(_all.map((s) => s.toJson()).toList());
       await box.put(_cacheKey, encoded);
-    } catch (_) {}
+    } catch (e) { debugPrint('Suggestions pool error: $e'); }
 
     _initialized = true;
   }

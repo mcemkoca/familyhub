@@ -67,7 +67,7 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
         members.add({'id': c['id'], 'name': c['name'] ?? 'Çocuk'});
       }
       if (mounted) setState(() => _familyMembers = members);
-    } catch (_) {}
+    } catch (e) { debugPrint('Safe arrival error: $e'); }
   }
 
   @override

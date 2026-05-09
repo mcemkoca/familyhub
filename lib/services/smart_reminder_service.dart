@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import '../domain/models/smart_reminder.dart';
 import '../domain/models/context_snapshot.dart';
@@ -68,7 +69,7 @@ class SmartReminderService {
         }
       }
     } catch (e) {
-      // Silently fail to avoid crashes
+      debugPrint('Smart reminder evaluation error: $e');
     }
   }
 
@@ -81,7 +82,7 @@ class SmartReminderService {
     Position? position;
     try {
       position = await Geolocator.getCurrentPosition();
-    } catch (_) {}
+    } catch (e) { debugPrint('Smart reminder error: $e'); }
 
     final now = DateTime.now();
 

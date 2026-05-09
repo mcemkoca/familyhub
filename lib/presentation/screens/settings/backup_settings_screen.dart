@@ -43,7 +43,7 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
         await _loadBackups();
       }
       if (mounted) setState(() => _isSignedIn = signedIn);
-    } catch (_) {}
+    } catch (e) { debugPrint('Backup settings error: $e'); }
   }
 
   Future<void> _signIn() async {
@@ -76,14 +76,14 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
           _backups = [];
         });
       }
-    } catch (_) {}
+    } catch (e) { debugPrint('Backup settings error: $e'); }
   }
 
   Future<void> _loadBackups() async {
     try {
       final backups = await GoogleDriveService().listBackups();
       if (mounted) setState(() => _backups = backups);
-    } catch (_) {}
+    } catch (e) { debugPrint('Backup settings error: $e'); }
   }
 
   Future<void> _triggerBackup() async {

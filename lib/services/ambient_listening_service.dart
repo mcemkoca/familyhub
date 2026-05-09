@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
+import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:sensors_plus/sensors_plus.dart';
@@ -59,7 +60,7 @@ class AmbientListeningService {
     if (_currentPath != null) {
       try {
         await File(_currentPath!).delete();
-      } catch (_) {}
+      } catch (e) { debugPrint('Ambient listening error: $e'); }
     }
   }
 

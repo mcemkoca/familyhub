@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:torch_light/torch_light.dart';
 
 /// Flashlight with SOS morse and strobe modes.
@@ -16,7 +17,7 @@ class FlashlightService {
     try {
       await TorchLight.enableTorch();
       _isOn = true;
-    } catch (_) {}
+    } catch (e) { debugPrint('Flashlight error: $e'); }
   }
 
   static Future<void> turnOff() async {
@@ -24,7 +25,7 @@ class FlashlightService {
       await TorchLight.disableTorch();
       _isOn = false;
       _stopEffects();
-    } catch (_) {}
+    } catch (e) { debugPrint('Flashlight error: $e'); }
   }
 
   static Future<void> toggle() async {
@@ -69,9 +70,9 @@ class FlashlightService {
       final durationTicks = (pattern[step] / 100).round();
 
       if (isOnPhase) {
-        try { await TorchLight.enableTorch(); } catch (_) {}
+        try { await TorchLight.enableTorch(); } catch (e) { debugPrint('Flashlight error: $e'); }
       } else {
-        try { await TorchLight.disableTorch(); } catch (_) {}
+        try { await TorchLight.disableTorch(); } catch (e) { debugPrint('Flashlight error: $e'); }
       }
 
       tick++;
@@ -103,7 +104,7 @@ class FlashlightService {
           await TorchLight.enableTorch();
           _isOn = true;
         }
-      } catch (_) {}
+      } catch (e) { debugPrint('Flashlight error: $e'); }
     });
   }
 

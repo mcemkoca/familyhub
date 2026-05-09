@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import '../core/supabase_client.dart';
 import 'package:geolocator/geolocator.dart';
 import 'auth_service.dart';
@@ -45,7 +46,7 @@ class LocationTrackingService {
     _positionSub = Geolocator.getPositionStream(locationSettings: locationSettings)
         .listen(
       (position) => _uploadPosition(position),
-      onError: (_) {},
+      onError: (e) { debugPrint('Location stream error: $e'); },
     );
 
     // Backup timer: ensure upload even when not moving
@@ -53,7 +54,7 @@ class LocationTrackingService {
       try {
         final pos = await Geolocator.getCurrentPosition();
         await _uploadPosition(pos);
-      } catch (_) {}
+      } catch (e) { debugPrint('Location tracking error: $e'); }
     });
   }
 
@@ -67,8 +68,8 @@ class LocationTrackingService {
       } else if (isChild) {
         await _uploadAsChild(position);
       }
-    } catch (_) {
-      // Silently fail — location is best-effort
+    } catch (e) {
+      debugPrint('Location upload error: $e');
     }
   }
 

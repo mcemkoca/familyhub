@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:image_picker/image_picker.dart';
 import '../domain/entities.dart';
@@ -58,7 +59,7 @@ class OcrEventService {
               start = DateTime(year < 100 ? 2000 + year : year, month, day);
               end = start.add(const Duration(hours: 1));
             }
-          } catch (_) {}
+          } catch (e) { debugPrint('OCR error: $e'); }
         }
       }
 
@@ -69,7 +70,7 @@ class OcrEventService {
           final minute = int.parse(timeMatch.group(2)!);
           start = DateTime(start.year, start.month, start.day, hour, minute);
           end = start.add(const Duration(hours: 1));
-        } catch (_) {}
+        } catch (e) { debugPrint('OCR error: $e'); }
       }
 
       // Location heuristic: lines containing common location keywords

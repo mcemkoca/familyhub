@@ -105,7 +105,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
         location: pos,
         message: 'Çocuk acil durum butonuna bastı!',
       );
-    } catch (_) {}
+    } catch (e) { debugPrint('Child safety tab error: $e'); }
 
     if (mounted) {
       showDialog(

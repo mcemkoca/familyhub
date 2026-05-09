@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
 import '../core/errors.dart' as app_errors;
@@ -147,7 +148,7 @@ class DocumentRepository with RepositoryErrorHandler {
           await _safeClient!.storage.from('family-documents').remove([
             fileName,
           ]);
-        } catch (_) {}
+        } catch (e) { debugPrint('Document repository error: $e'); }
       }
       await _safeClient!.from('family_documents').delete().eq('id', id);
     }, 'deleteDocument');

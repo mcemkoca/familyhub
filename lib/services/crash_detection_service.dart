@@ -145,21 +145,21 @@ class CrashDetectionService {
     _flashTimer = Timer.periodic(const Duration(milliseconds: 500), (timer) async {
       if (!_alarmActive) {
         timer.cancel();
-        try { await TorchLight.disableTorch(); } catch (_) {}
+        try { await TorchLight.disableTorch(); } catch (e) { debugPrint('Crash detection error: $e'); }
         return;
       }
       try {
         await TorchLight.enableTorch();
         await Future.delayed(const Duration(milliseconds: 250));
         await TorchLight.disableTorch();
-      } catch (_) {}
+      } catch (e) { debugPrint('Crash detection error: $e'); }
     });
   }
 
   void _stopFlashAlarm() {
     _flashTimer?.cancel();
     _flashTimer = null;
-    try { TorchLight.disableTorch(); } catch (_) {}
+    try { TorchLight.disableTorch(); } catch (e) { debugPrint('Crash detection error: $e'); }
   }
 
   void _startVibration(VibrationPattern pattern) {

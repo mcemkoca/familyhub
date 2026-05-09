@@ -261,7 +261,7 @@ class SafetyService {
     if (val is String) {
       try {
         return Color(int.parse(val.replaceFirst('#', '0xFF')));
-      } catch (_) {}
+      } catch (e) { debugPrint('Safety error: $e'); }
     }
     return const Color(0xFF3B82F6);
   }
