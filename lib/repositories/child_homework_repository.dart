@@ -144,4 +144,54 @@ class ChildHomeworkRepository with RepositoryErrorHandler {
       await _client.from('child_homeworks').delete().eq('id', id);
     }, 'deleteHomework');
   }
+
+  // ── Parent methods (explicit childId) ──
+  Future<List<ChildHomework>> getHomeworksForChild(String childId) async {
+    return handleRepositoryCall(() async {
+      final response = await _client
+          .from('child_homeworks')
+          .select('*')
+          .eq('child_id', childId)
+          .order('due_date', ascending: true);
+      return (response as List)
+          .map((e) => ChildHomework.fromJson(e as Map<String, dynamic>))
+          .toList();
+    }, 'getHomeworksForChild');
+  }
+
+  Future<ChildHomework> createHomeworkForChild({
+    required String familyId,
+    required String childId,
+    required String subject,
+    required String title,
+    String? description,
+    DateTime? dueDate,
+    String priority = 'medium',
+    String? createdBy,
+  }) async {
+    return handleRepositoryCall(() async {
+      final response = await _client
+          .from('child_homeworks')
+          .insert({
+            'family_id': familyId,
+            'child_id': childId,
+            'subject': subject,
+            'title': title,
+            'description': description,
+            'due_date': dueDate?.toIso8601String(),
+            'status': HomeworkStatus.pending.name,
+            'priority': priority,
+            'created_by': createdBy,
+          })
+          .select()
+          .single();
+      return ChildHomework.fromJson(response);
+    }, 'createHomeworkForChild');
+  }
+
+  Future<void> deleteHomeworkById(String id) async {
+    return handleRepositoryCall(() async {
+      await _client.from('child_homeworks').delete().eq('id', id);
+    }, 'deleteHomeworkById');
+  }
 }

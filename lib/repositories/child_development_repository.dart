@@ -121,4 +121,59 @@ class ChildDevelopmentRepository with RepositoryErrorHandler {
       await _client.from('child_development_logs').delete().eq('id', id);
     }, 'deleteLog');
   }
+
+  // ── Parent methods (explicit childId) ──
+  Future<List<ChildDevelopmentLog>> getLogsForChild(
+    String childId, {
+    int limit = 50,
+  }) async {
+    return handleRepositoryCall(() async {
+      final response = await _client
+          .from('child_development_logs')
+          .select('*')
+          .eq('child_id', childId)
+          .order('logged_at', ascending: false)
+          .limit(limit);
+      return (response as List)
+          .map((e) => ChildDevelopmentLog.fromJson(e as Map<String, dynamic>))
+          .toList();
+    }, 'getLogsForChild');
+  }
+
+  Future<ChildDevelopmentLog> createLogForChild({
+    required String familyId,
+    required String childId,
+    required DevelopmentLogType logType,
+    required String value,
+    String? unit,
+    DateTime? loggedAt,
+    String? notes,
+    String? createdBy,
+  }) async {
+    return handleRepositoryCall(() async {
+      final response = await _client
+          .from('child_development_logs')
+          .insert({
+            'family_id': familyId,
+            'child_id': childId,
+            'log_type': logType.name,
+            'value': value,
+            'unit': unit,
+            'logged_at': (loggedAt ?? DateTime.now())
+                .toIso8601String()
+                .substring(0, 10),
+            'notes': notes,
+            'created_by': createdBy,
+          })
+          .select()
+          .single();
+      return ChildDevelopmentLog.fromJson(response);
+    }, 'createLogForChild');
+  }
+
+  Future<void> deleteLogById(String id) async {
+    return handleRepositoryCall(() async {
+      await _client.from('child_development_logs').delete().eq('id', id);
+    }, 'deleteLogById');
+  }
 }

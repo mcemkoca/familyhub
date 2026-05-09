@@ -120,4 +120,57 @@ class ChildScheduleRepository with RepositoryErrorHandler {
       await _client.from('child_schedules').delete().eq('id', id);
     }, 'deleteSchedule');
   }
+
+  // ── Parent methods (explicit childId) ──
+  Future<List<ChildSchedule>> getSchedulesForChild(String childId) async {
+    return handleRepositoryCall(() async {
+      final response = await _client
+          .from('child_schedules')
+          .select('*')
+          .eq('child_id', childId)
+          .eq('is_active', true)
+          .order('start_time', ascending: true);
+      return (response as List)
+          .map((e) => ChildSchedule.fromJson(e as Map<String, dynamic>))
+          .toList();
+    }, 'getSchedulesForChild');
+  }
+
+  Future<ChildSchedule> createScheduleForChild({
+    required String familyId,
+    required String childId,
+    required int dayOfWeek,
+    required String startTime,
+    required String endTime,
+    required String subject,
+    String? location,
+    String? teacher,
+    String color = '#3B82F6',
+  }) async {
+    return handleRepositoryCall(() async {
+      final response = await _client
+          .from('child_schedules')
+          .insert({
+            'family_id': familyId,
+            'child_id': childId,
+            'day_of_week': dayOfWeek,
+            'start_time': startTime,
+            'end_time': endTime,
+            'subject': subject,
+            'location': location,
+            'teacher': teacher,
+            'color': color,
+            'is_active': true,
+          })
+          .select()
+          .single();
+      return ChildSchedule.fromJson(response);
+    }, 'createScheduleForChild');
+  }
+
+  Future<void> deleteScheduleById(String id) async {
+    return handleRepositoryCall(() async {
+      await _client.from('child_schedules').delete().eq('id', id);
+    }, 'deleteScheduleById');
+  }
 }
