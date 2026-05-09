@@ -48,6 +48,9 @@ app.*.map.json
 
 .env
 lib/env.g.dart
+lib/core/config/env.g.dart
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
 
 *.apk
 node_modules/
