@@ -478,14 +478,14 @@ class _ChildFormSheetState extends State<_ChildFormSheet> {
               ButtonSegment(
                 value: ChildRole.child,
                 label: Text(AppLocalizations.of(context).child),
-                icon: Icon(Icons.child_care),
+                icon: const Icon(Icons.child_care),
               ),
               ButtonSegment(
                 value: ChildRole.teen,
                 label: Text(AppLocalizations.of(context).genc),
-                icon: Icon(Icons.emoji_people),
+                icon: const Icon(Icons.emoji_people),
               ),
-              ButtonSegment(
+              const ButtonSegment(
                 value: ChildRole.baby,
                 label: Text('Bebek'),
                 icon: Icon(Icons.crib),

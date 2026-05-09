@@ -605,7 +605,7 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
                   color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
                 ),
               ),
-              Text(
+              const Text(
                 'Son hata: Yok',
                 style: TextStyle(
                   fontSize: 12,
@@ -632,7 +632,7 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
           ),
         ),
         const SizedBox(height: 2),
-        Text(label, style: TextStyle(fontSize: 11, color: AppColors.slate)),
+        Text(label, style: const TextStyle(fontSize: 11, color: AppColors.slate)),
       ],
     );
   }

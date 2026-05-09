@@ -332,7 +332,7 @@ class _HubScreenState extends ConsumerState<HubScreen> {
           ],
         ),
       ),
-      loading: () => _ShimmerCard(height: 80),
+      loading: () => const _ShimmerCard(height: 80),
       error: (e, _) => _ErrorMiniCard(message: e.toString()),
     );
   }
@@ -344,7 +344,7 @@ class _HubScreenState extends ConsumerState<HubScreen> {
     return asyncValue.when(
       data: (events) {
         if (events.isEmpty) {
-          return _EmptyMiniCard(message: 'Yaklaşan etkinlik yok');
+          return const _EmptyMiniCard(message: 'Yaklaşan etkinlik yok');
         }
         return Column(
           children: events
@@ -353,7 +353,7 @@ class _HubScreenState extends ConsumerState<HubScreen> {
               .toList(),
         );
       },
-      loading: () => _ShimmerCard(height: 120),
+      loading: () => const _ShimmerCard(height: 120),
       error: (e, _) => _ErrorMiniCard(message: e.toString()),
     );
   }
@@ -362,7 +362,7 @@ class _HubScreenState extends ConsumerState<HubScreen> {
     return asyncValue.when(
       data: (tasks) {
         if (tasks.isEmpty) {
-          return _EmptyMiniCard(message: 'Bekleyen görev yok');
+          return const _EmptyMiniCard(message: 'Bekleyen görev yok');
         }
         return Column(
           children: tasks
@@ -377,7 +377,7 @@ class _HubScreenState extends ConsumerState<HubScreen> {
               .toList(),
         );
       },
-      loading: () => _ShimmerCard(height: 120),
+      loading: () => const _ShimmerCard(height: 120),
       error: (e, _) => _ErrorMiniCard(message: e.toString()),
     );
   }
@@ -389,7 +389,7 @@ class _HubScreenState extends ConsumerState<HubScreen> {
     return asyncValue.when(
       data: (moods) {
         if (moods.isEmpty) {
-          return _EmptyMiniCard(message: 'Henüz ruh hali paylaşılmamış');
+          return const _EmptyMiniCard(message: 'Henüz ruh hali paylaşılmamış');
         }
         return SizedBox(
           height: 72,
@@ -448,7 +448,7 @@ class _HubScreenState extends ConsumerState<HubScreen> {
           ),
         );
       },
-      loading: () => _ShimmerCard(height: 72),
+      loading: () => const _ShimmerCard(height: 72),
       error: (e, _) => _ErrorMiniCard(message: e.toString()),
     );
   }

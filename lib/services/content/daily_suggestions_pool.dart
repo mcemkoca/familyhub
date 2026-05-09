@@ -649,17 +649,17 @@ class ChoreRotationService {
       badge: '🧹 Günün Görevi',
       nutritionInfo: null,
       alternativeOptions: [
-        AlternativeOption(
+        const AlternativeOption(
           title: 'Başka Görev Seç',
           description: 'Bugün farklı bir temizlik görevi yapın.',
           reason: 'Değişiklik iyi gelir.',
         ),
-        AlternativeOption(
+        const AlternativeOption(
           title: 'Yardım Et',
           description: 'Aile üyesine yardım edin, birlikte yapın.',
           reason: 'Birlikte daha hızlı.',
         ),
-        AlternativeOption(
+        const AlternativeOption(
           title: 'Ertele',
           description: 'Yarın yapın ama unutmayın!',
           reason: 'Mola da hakkınız.',

@@ -192,7 +192,7 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
         rightAction: TextButton(
           onPressed: _saving ? null : _save,
           child: _saving
-              ? SizedBox(
+              ? const SizedBox(
                   width: 16,
                   height: 16,
                   child: CircularProgressIndicator(
@@ -200,7 +200,7 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
                     color: AppColors.cobalt,
                   ),
                 )
-              : Text(
+              : const Text(
                   'Kaydet',
                   style: TextStyle(
                     color: AppColors.cobalt,

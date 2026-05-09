@@ -153,27 +153,27 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
     ];
 
     final navItems = [
-      _NavItem(
+      const _NavItem(
         icon: Icons.home_outlined,
         activeIcon: Icons.home,
         label: 'Ana Sayfa',
       ),
-      _NavItem(
+      const _NavItem(
         icon: Icons.check_circle_outline,
         activeIcon: Icons.check_circle,
         label: 'Görevlerim',
       ),
-      _NavItem(
+      const _NavItem(
         icon: Icons.chat_bubble_outline,
         activeIcon: Icons.chat_bubble,
         label: 'Sohbet',
       ),
-      _NavItem(
+      const _NavItem(
         icon: Icons.calendar_today_outlined,
         activeIcon: Icons.calendar_today,
         label: 'Derslerim',
       ),
-      _NavItem(
+      const _NavItem(
         icon: Icons.shield_outlined,
         activeIcon: Icons.shield,
         label: 'Güvenlik',

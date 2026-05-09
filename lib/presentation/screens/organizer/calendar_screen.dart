@@ -218,7 +218,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
                       markerSize: 5,
                       // markerOffset removed for compatibility,
                       markersAlignment: Alignment.bottomCenter,
-                      markerDecoration: BoxDecoration(
+                      markerDecoration: const BoxDecoration(
                         color: AppColors.cobalt,
                         shape: BoxShape.circle,
                       ),

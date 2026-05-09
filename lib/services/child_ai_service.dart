@@ -146,7 +146,7 @@ class ChildAiService {
 
     // ── 6. Su içme önerisi (genel sağlık) ──
     suggestions.add(
-      AiSuggestion(
+      const AiSuggestion(
         id: 'drink_water',
         title: 'Her saat başı su iç 💧',
         description:
@@ -154,7 +154,7 @@ class ChildAiService {
         type: 'habit',
         reason: 'Genel sağlık',
         icon: Icons.water_drop_outlined,
-        color: const Color(0xFF06B6D4),
+        color: Color(0xFF06B6D4),
         actionLabel: 'Tamam',
       ),
     );
@@ -180,7 +180,7 @@ class ChildAiService {
     // ── 8. Haftasonu aktivite önerisi ──
     if (_isWeekendComing(schedules)) {
       suggestions.add(
-        AiSuggestion(
+        const AiSuggestion(
           id: 'weekend_activity',
           title: 'Haftasonu aile aktivitesi planla 🎉',
           description:
@@ -188,7 +188,7 @@ class ChildAiService {
           type: 'schedule',
           reason: 'Boş haftasonu',
           icon: Icons.celebration,
-          color: const Color(0xFFEC4899),
+          color: Color(0xFFEC4899),
           actionLabel: 'Tamam',
         ),
       );

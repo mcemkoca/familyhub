@@ -78,8 +78,8 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Row(
           children: [
-            Icon(Icons.location_on, color: AppColors.cobalt),
-            SizedBox(width: 8),
+            const Icon(Icons.location_on, color: AppColors.cobalt),
+            const SizedBox(width: 8),
             Text(AppLocalizations.of(context).konumIzniGerekli),
           ],
         ),
@@ -520,8 +520,8 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.cloud_off, size: 40, color: AppColors.gray),
-            SizedBox(height: 8),
+            const Icon(Icons.cloud_off, size: 40, color: AppColors.gray),
+            const SizedBox(height: 8),
             Text(AppLocalizations.of(context).havaDurumuAlinamadi),
           ],
         ),

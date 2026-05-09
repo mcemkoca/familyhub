@@ -116,13 +116,13 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                   // Header
                   Container(
                     padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
                         colors: [AppColors.error, Color(0xFFDC2626)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
-                      borderRadius: const BorderRadius.vertical(
+                      borderRadius: BorderRadius.vertical(
                         top: Radius.circular(20),
                       ),
                     ),
@@ -301,7 +301,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.info_outline, color: AppColors.warning, size: 20),
+                    const Icon(Icons.info_outline, color: AppColors.warning, size: 20),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(

@@ -508,12 +508,12 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
       body: Stack(
         children: [
           tasks.isEmpty
-              ? Center(
+              ? const Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.task_alt, size: 64, color: AppColors.lightGray),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16),
                       Text(
                         'Henüz görev yok',
                         style: TextStyle(
@@ -522,7 +522,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                           color: AppColors.gray,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       Text(
                         'Yeni görev eklemek için + butonuna basın',
                         style: TextStyle(fontSize: 14, color: AppColors.slate),

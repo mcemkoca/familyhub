@@ -6,9 +6,9 @@ void main() {
   group('AppCard', () {
     testWidgets('renders child content', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
-            body: AppCard(child: const Text('Card Content')),
+            body: AppCard(child: Text('Card Content')),
           ),
         ),
       );

@@ -105,10 +105,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 ),
               ),
             ),
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: const ProfileCard(),
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: ProfileCard(),
               ),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 24)),

@@ -229,8 +229,8 @@ class _AmbientListeningScreenState extends State<AmbientListeningScreen> {
                     secondary: const Icon(Icons.vibration),
                   ),
                   ListTile(
-                    leading: Icon(Icons.touch_app),
-                    title: Text('Manuel Buton'),
+                    leading: const Icon(Icons.touch_app),
+                    title: const Text('Manuel Buton'),
                     subtitle: Text(AppLocalizations.of(context).ekrandakiButonaBasarakBaslat),
                   ),
                 ],

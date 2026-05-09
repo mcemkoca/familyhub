@@ -354,7 +354,7 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
                             const SizedBox(height: 4),
                             Text(
                               _account?.email ?? '',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 13,
                                 color: AppColors.success,
                               ),
@@ -362,7 +362,7 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
                           ],
                         ),
                       ),
-                      Icon(Icons.verified, color: AppColors.success, size: 20),
+                      const Icon(Icons.verified, color: AppColors.success, size: 20),
                     ],
                   ),
                   const SizedBox(height: 12),

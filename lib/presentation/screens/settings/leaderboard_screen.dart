@@ -129,7 +129,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                                     spacing: 4,
                                     children: (user['badges'] as List)
                                         .take(3)
-                                        .map((b) => Icon(
+                                        .map((b) => const Icon(
                                               Icons.emoji_events,
                                               size: 14,
                                               color: AppColors.success,

@@ -378,14 +378,14 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
 
   Widget _buildGalleryTab() {
     if (_media.isEmpty) {
-      return Center(
+      return const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.photo_library, size: 64, color: AppColors.lightGray),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text('Henüz fotoğraf yok', style: TextStyle(fontSize: 18, color: AppColors.gray)),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text('Telefon galerisinden seçmek için + butonuna basın', style: TextStyle(color: AppColors.slate)),
           ],
         ),
@@ -446,14 +446,14 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
   Widget _buildMemoriesTab() {
     final memories = _buildMemories();
     if (memories.isEmpty) {
-      return Center(
+      return const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.auto_awesome, size: 64, color: AppColors.lightGray),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text('Henüz anı oluşmadı', style: TextStyle(fontSize: 18, color: AppColors.gray)),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text('Daha fazla fotoğraf ekledikçe anılar oluşacak', style: TextStyle(color: AppColors.slate)),
           ],
         ),

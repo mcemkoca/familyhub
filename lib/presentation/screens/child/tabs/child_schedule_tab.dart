@@ -115,7 +115,7 @@ class _DayView extends StatelessWidget {
                     ),
                     const SizedBox(height: AppSpacing.md),
                     if (daySchedules.isEmpty)
-                      _EmptyCard('Bugün ders yok 😊')
+                      const _EmptyCard('Bugün ders yok 😊')
                     else
                       ...daySchedules.map((s) => _ScheduleCard(schedule: s)),
                   ],
@@ -143,7 +143,7 @@ class _DayView extends StatelessWidget {
                     ),
                     const SizedBox(height: AppSpacing.md),
                     if (pendingHomeworks.isEmpty)
-                      _EmptyCard('Tüm ödevler tamamlandı! 🎉')
+                      const _EmptyCard('Tüm ödevler tamamlandı! 🎉')
                     else
                       ...pendingHomeworks.map((h) => _HomeworkCard(homework: h)),
                   ],

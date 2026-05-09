@@ -48,7 +48,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
       context: context,
       builder: (_) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: Row(children: [Icon(Icons.warning_amber_rounded, color: AppColors.red), SizedBox(width: 8), Text(AppLocalizations.of(context).emergency)]),
+        title: Row(children: [const Icon(Icons.warning_amber_rounded, color: AppColors.red), const SizedBox(width: 8), Text(AppLocalizations.of(context).emergency)]),
         content: Text(AppLocalizations.of(context).emergencySent),
         actions: [
           TextButton(onPressed: () => Navigator.pop(context), child: Text(AppLocalizations.of(context).ok)),

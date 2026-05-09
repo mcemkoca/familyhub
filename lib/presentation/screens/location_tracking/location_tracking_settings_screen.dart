@@ -58,9 +58,9 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
             const SizedBox(height: 8),
             SegmentedButton<TrackingPriority>(
               segments: [
-                ButtonSegment(value: TrackingPriority.battery, label: Text('Batarya')),
-                ButtonSegment(value: TrackingPriority.balanced, label: Text('Dengeli')),
-                ButtonSegment(value: TrackingPriority.accuracy, label: Text('Hassas')),
+                const ButtonSegment(value: TrackingPriority.battery, label: Text('Batarya')),
+                const ButtonSegment(value: TrackingPriority.balanced, label: Text('Dengeli')),
+                const ButtonSegment(value: TrackingPriority.accuracy, label: Text('Hassas')),
                 ButtonSegment(value: TrackingPriority.custom, label: Text(AppLocalizations.of(context).ozel)),
               ],
               selected: {_priority},

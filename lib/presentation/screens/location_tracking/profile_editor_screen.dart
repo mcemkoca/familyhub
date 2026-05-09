@@ -188,8 +188,8 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
               SegmentedButton<String>(
                 segments: [
                   ButtonSegment(value: 'speed', label: Text(AppLocalizations.of(context).hizEsigi)),
-                  ButtonSegment(value: 'activity', label: Text('Aktivite')),
-                  ButtonSegment(value: 'manual', label: Text('Manuel')),
+                  const ButtonSegment(value: 'activity', label: Text('Aktivite')),
+                  const ButtonSegment(value: 'manual', label: Text('Manuel')),
                 ],
                 selected: {_transitionType},
                 onSelectionChanged: (s) =>

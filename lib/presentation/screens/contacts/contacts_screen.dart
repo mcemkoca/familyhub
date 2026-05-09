@@ -348,7 +348,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
           if (_isLoading) const LinearProgressIndicator(),
           Expanded(
             child: _filtered.isEmpty
-                ? Center(
+                ? const Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -357,7 +357,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
                           size: 64,
                           color: AppColors.lightGray,
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16),
                         Text(
                           'Henüz kişi yok',
                           style: TextStyle(fontSize: 18, color: AppColors.gray),

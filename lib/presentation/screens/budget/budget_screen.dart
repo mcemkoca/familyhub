@@ -33,14 +33,14 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
 
   // Category definitions with icons & colors
   final _categories = [
-    _Cat('Market', Icons.shopping_cart_outlined, const Color(0xFF4CAF50)),
-    _Cat('Fatura', Icons.receipt_long_outlined, const Color(0xFF2196F3)),
-    _Cat('Ulaşım', Icons.directions_car_outlined, const Color(0xFFFF9800)),
-    _Cat('Sağlık', Icons.local_hospital_outlined, const Color(0xFFE91E63)),
-    _Cat('Eğlence', Icons.movie_outlined, const Color(0xFF9C27B0)),
-    _Cat('Giyim', Icons.checkroom_outlined, const Color(0xFF00BCD4)),
-    _Cat('Eğitim', Icons.school_outlined, const Color(0xFF3F51B5)),
-    _Cat('Diğer', Icons.more_horiz, const Color(0xFF607D8B)),
+    const _Cat('Market', Icons.shopping_cart_outlined, Color(0xFF4CAF50)),
+    const _Cat('Fatura', Icons.receipt_long_outlined, Color(0xFF2196F3)),
+    const _Cat('Ulaşım', Icons.directions_car_outlined, Color(0xFFFF9800)),
+    const _Cat('Sağlık', Icons.local_hospital_outlined, Color(0xFFE91E63)),
+    const _Cat('Eğlence', Icons.movie_outlined, Color(0xFF9C27B0)),
+    const _Cat('Giyim', Icons.checkroom_outlined, Color(0xFF00BCD4)),
+    const _Cat('Eğitim', Icons.school_outlined, Color(0xFF3F51B5)),
+    const _Cat('Diğer', Icons.more_horiz, Color(0xFF607D8B)),
   ];
 
   // Budget limits per category (planning feature)

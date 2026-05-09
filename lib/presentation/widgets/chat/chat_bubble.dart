@@ -215,14 +215,14 @@ class _ReplyPreview extends StatelessWidget {
                   ? AppColors.darkBackground.withAlpha(80)
                   : Colors.white.withAlpha(80)),
         borderRadius: BorderRadius.circular(10),
-        border: Border(left: BorderSide(color: AppColors.cobalt, width: 3)),
+        border: const Border(left: BorderSide(color: AppColors.cobalt, width: 3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             replyToSender,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
               color: AppColors.cobalt,

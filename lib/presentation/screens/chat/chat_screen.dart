@@ -348,7 +348,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         actions: [
           IconButton(
             onPressed: () => context.push(AppRoutes.mood),
-            icon: Icon(
+            icon: const Icon(
               Icons.emoji_emotions_outlined,
               color: AppColors.purple,
             ),
@@ -431,7 +431,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 20,
                                 ),
-                                child: Icon(
+                                child: const Icon(
                                   Icons.reply,
                                   color: AppColors.cobalt,
                                 ),

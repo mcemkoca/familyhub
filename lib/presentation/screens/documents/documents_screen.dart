@@ -234,17 +234,17 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('Aile Belgeleri'), centerTitle: true),
       body: _documents.isEmpty
-          ? Center(
+          ? const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.folder_open, size: 64, color: AppColors.lightGray),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Text(
                     'Henüz belge yok',
                     style: TextStyle(fontSize: 18, color: AppColors.gray),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Text(
                     'Yüklemek için + butonuna basın',
                     style: TextStyle(color: AppColors.slate),
@@ -297,7 +297,7 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
                                   ),
                                   Text(
                                     '${doc.createdAt.day}/${doc.createdAt.month}/${doc.createdAt.year}',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 12,
                                       color: AppColors.gray,
                                     ),
@@ -343,14 +343,14 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
+                                const Row(
                                   children: [
                                     Icon(
                                       Icons.text_snippet,
                                       size: 16,
                                       color: AppColors.cobalt,
                                     ),
-                                    const SizedBox(width: 4),
+                                    SizedBox(width: 4),
                                     Text(
                                       'OCR Sonucu',
                                       style: TextStyle(

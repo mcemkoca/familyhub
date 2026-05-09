@@ -127,7 +127,7 @@ class _ProfileContent extends StatelessWidget {
                 ),
                 child: Text(
                   profile.roleDisplay,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     color: AppColors.cobalt,
                     fontWeight: FontWeight.w600,
@@ -171,7 +171,7 @@ class _ProfileContent extends StatelessWidget {
                   const SizedBox(width: 8),
                   Text(
                     '${profile.xp} XP',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w700,
                       color: AppColors.cobalt,

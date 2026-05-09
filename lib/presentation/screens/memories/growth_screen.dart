@@ -37,7 +37,7 @@ class GrowthScreen extends StatelessWidget {
         children: [
           Text(title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
           const SizedBox(height: 4),
-          Text(meta, style: TextStyle(fontSize: 13, color: AppColors.gray)),
+          Text(meta, style: const TextStyle(fontSize: 13, color: AppColors.gray)),
         ],
       ),
     );

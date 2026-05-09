@@ -105,7 +105,7 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
             final repo = HubRepository();
             hubData = await repo.getTodaySummary(familyId);
           } catch (e) {
-            hubData = TodaySummary(
+            hubData = const TodaySummary(
               eventCount: 0,
               taskCount: 0,
               unreadMessages: 0,
@@ -482,14 +482,14 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
         ),
         GestureDetector(
           onTap: _loadMoreSuggestions,
-          child: Row(
+          child: const Row(
             children: [
               Icon(
                 Icons.auto_fix_high,
                 size: 16,
                 color: AppColors.cobalt,
               ),
-              const SizedBox(width: 4),
+              SizedBox(width: 4),
               Text(
                 'Başka Öneri',
                 style: TextStyle(
@@ -498,7 +498,7 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
                   color: AppColors.cobalt,
                 ),
               ),
-              const SizedBox(width: 2),
+              SizedBox(width: 2),
               Icon(
                 Icons.chevron_right,
                 size: 18,
@@ -746,9 +746,9 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
       ),
       child: Row(
         children: [
-          Icon(Icons.error_outline, color: AppColors.error, size: 20),
+          const Icon(Icons.error_outline, color: AppColors.error, size: 20),
           const SizedBox(width: AppSpacing.sm),
-          Expanded(
+          const Expanded(
             child: Text(
               'Öneriler yüklenirken bir hata oluştu. Tekrar deneyin.',
               style: TextStyle(color: AppColors.error, fontSize: 13),

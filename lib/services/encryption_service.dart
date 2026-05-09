@@ -86,7 +86,7 @@ class EncryptionService {
 
     final parts = ciphertext.split(':');
     if (parts.length != 4 || parts[0] != 'gcm' || parts[1] != 'v1') {
-      throw FormatException('Invalid GCM ciphertext format');
+      throw const FormatException('Invalid GCM ciphertext format');
     }
 
     final iv = enc.IV(base64Decode(parts[2]));
@@ -115,13 +115,13 @@ class EncryptionService {
     // Try legacy CBC format
     await _loadLegacyKey();
     if (_legacyKey == null) {
-      throw FormatException('Unknown ciphertext format and no legacy key found');
+      throw const FormatException('Unknown ciphertext format and no legacy key found');
     }
 
     try {
       final combined = utf8.decode(base64Decode(cipherBase64));
       final parts = combined.split(':');
-      if (parts.length != 2) throw FormatException('Invalid legacy payload');
+      if (parts.length != 2) throw const FormatException('Invalid legacy payload');
 
       final iv = enc.IV.fromBase64(parts[0]);
       final encrypted = enc.Encrypted.fromBase64(parts[1]);
@@ -130,7 +130,7 @@ class EncryptionService {
       );
       return encrypter.decrypt(encrypted, iv: iv);
     } catch (_) {
-      throw FormatException('Failed to decrypt legacy payload');
+      throw const FormatException('Failed to decrypt legacy payload');
     }
   }
 

@@ -262,7 +262,7 @@ class _AddChildDialogState extends State<_AddChildDialog> {
               items: [
                 DropdownMenuItem(value: 'child', child: Text(AppLocalizations.of(context).child)),
                 DropdownMenuItem(value: 'teen', child: Text(AppLocalizations.of(context).genc)),
-                DropdownMenuItem(value: 'baby', child: Text('Bebek')),
+                const DropdownMenuItem(value: 'baby', child: Text('Bebek')),
               ],
               onChanged: (v) => setState(() => _role = v!),
             ),

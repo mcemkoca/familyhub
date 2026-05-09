@@ -116,8 +116,8 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
           ),
           title: Row(
             children: [
-              Icon(Icons.warning_amber_rounded, color: AppColors.red),
-              SizedBox(width: 8),
+              const Icon(Icons.warning_amber_rounded, color: AppColors.red),
+              const SizedBox(width: 8),
               Text(AppLocalizations.of(context).emergency),
             ],
           ),

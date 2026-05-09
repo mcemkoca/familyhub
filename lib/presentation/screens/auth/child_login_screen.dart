@@ -213,7 +213,7 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
                 Center(
                   child: Column(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.error_outline,
                         color: AppColors.error,
                         size: 48,

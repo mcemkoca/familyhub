@@ -268,7 +268,7 @@ class _ChatComposerState extends State<ChatComposer>
                     // Attachment
                     IconButton(
                       onPressed: widget.onAttachment,
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.add_circle_outline,
                         color: AppColors.cobalt,
                         size: 28,

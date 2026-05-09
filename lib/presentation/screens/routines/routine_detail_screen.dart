@@ -289,9 +289,9 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
         child: Center(
           child: Column(
             children: [
-              Icon(Icons.celebration, size: 48, color: Colors.amber),
-              SizedBox(height: 12),
-              Text(
+              const Icon(Icons.celebration, size: 48, color: Colors.amber),
+              const SizedBox(height: 12),
+              const Text(
                 '🎉 Rutin Tamamlandı!',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),

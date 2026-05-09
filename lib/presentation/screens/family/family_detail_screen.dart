@@ -291,7 +291,7 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
             ? TextButton(
                 onPressed: _isSaving ? null : _saveInfo,
                 child: _isSaving
-                    ? SizedBox(
+                    ? const SizedBox(
                         width: 16,
                         height: 16,
                         child: CircularProgressIndicator(
@@ -299,7 +299,7 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
                           color: AppColors.cobalt,
                         ),
                       )
-                    : Text(
+                    : const Text(
                         'Kaydet',
                         style: TextStyle(
                           color: AppColors.cobalt,
@@ -310,7 +310,7 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
             : (_isAdminOrParent
                 ? TextButton(
                     onPressed: () => setState(() => _isEditing = true),
-                    child: Text(
+                    child: const Text(
                       'Düzenle',
                       style: TextStyle(
                         color: AppColors.cobalt,

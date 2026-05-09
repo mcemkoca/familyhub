@@ -26,13 +26,13 @@ class MemoriesScreen extends StatelessWidget {
           const SizedBox(height: 24),
           Text('Albümler', style: Theme.of(context).textTheme.displaySmall),
           const SizedBox(height: 12),
-          _AlbumCard(name: 'Aile Tatili 2025', count: 24),
-          _AlbumCard(name: 'Mirac\'ın Doğum Günü', count: 18),
+          const _AlbumCard(name: 'Aile Tatili 2025', count: 24),
+          const _AlbumCard(name: 'Mirac\'ın Doğum Günü', count: 18),
           const SizedBox(height: 24),
           Text('Son Anılar', style: Theme.of(context).textTheme.displaySmall),
           const SizedBox(height: 12),
-          _MemoryCard(title: 'İlk Adım', date: '12 Mart 2024', excerpt: 'Mirac bugün ilk adımını attı...'),
-          _MemoryCard(title: 'Yılbaşı 2026', date: '1 Ocak 2026', excerpt: 'Tüm aile bir aradaydık...'),
+          const _MemoryCard(title: 'İlk Adım', date: '12 Mart 2024', excerpt: 'Mirac bugün ilk adımını attı...'),
+          const _MemoryCard(title: 'Yılbaşı 2026', date: '1 Ocak 2026', excerpt: 'Tüm aile bir aradaydık...'),
         ],
       ),
     );
@@ -79,7 +79,7 @@ class _AlbumCard extends StatelessWidget {
           const SizedBox(width: 16),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [Text(name, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600)), Text('$count fotoğraf', style: TextStyle(fontSize: 12, color: AppColors.gray))],
+            children: [Text(name, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600)), Text('$count fotoğraf', style: const TextStyle(fontSize: 12, color: AppColors.gray))],
           ),
         ],
       ),
@@ -104,9 +104,9 @@ class _MemoryCard extends StatelessWidget {
         children: [
           Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
           const SizedBox(height: 4),
-          Text(date, style: TextStyle(fontSize: 12, color: AppColors.gray)),
+          Text(date, style: const TextStyle(fontSize: 12, color: AppColors.gray)),
           const SizedBox(height: 8),
-          Text(excerpt, style: TextStyle(fontSize: 14, color: AppColors.gray)),
+          Text(excerpt, style: const TextStyle(fontSize: 14, color: AppColors.gray)),
         ],
       ),
     );

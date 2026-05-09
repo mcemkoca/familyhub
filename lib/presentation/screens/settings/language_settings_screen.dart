@@ -189,7 +189,7 @@ class _LanguageSettingsScreenState extends ConsumerState<LanguageSettingsScreen>
               ),
             ),
             if (selected)
-              Icon(
+              const Icon(
                 Icons.check_circle,
                 color: AppColors.cobalt,
                 size: 22,

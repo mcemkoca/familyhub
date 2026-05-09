@@ -86,7 +86,7 @@ https://familyhub.app/join
       textAlign: TextAlign.center,
     );
     titlePainter.layout(maxWidth: width - 160);
-    titlePainter.paint(canvas, Offset(80, height * 0.35));
+    titlePainter.paint(canvas, const Offset(80, height * 0.35));
 
     // Date
     final datePainter = TextPainter(
@@ -110,7 +110,7 @@ https://familyhub.app/join
       textAlign: TextAlign.center,
     );
     brandPainter.layout(maxWidth: width - 160);
-    brandPainter.paint(canvas, Offset(80, height - 160));
+    brandPainter.paint(canvas, const Offset(80, height - 160));
 
     final picture = recorder.endRecording();
     final image = await picture.toImage(width, height);

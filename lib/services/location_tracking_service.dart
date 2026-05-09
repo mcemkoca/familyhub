@@ -38,7 +38,7 @@ class LocationTrackingService {
   // ═══════════════════════════════════════════════════════════════════════════
 
   static void _startPositionStream(Duration interval) {
-    final locationSettings = LocationSettings(
+    final locationSettings = const LocationSettings(
       accuracy: LocationAccuracy.best,
       distanceFilter: 10, // metres
     );

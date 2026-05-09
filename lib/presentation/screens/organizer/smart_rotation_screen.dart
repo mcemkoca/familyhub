@@ -414,7 +414,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
         children: [
           Row(
             children: [
-              Icon(Icons.balance, color: AppColors.cobalt, size: 20),
+              const Icon(Icons.balance, color: AppColors.cobalt, size: 20),
               const SizedBox(width: 8),
               Text(
                 'Aile Adalet Durumu',
@@ -583,7 +583,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
       alignment: Alignment.center,
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             width: 48,
             height: 48,
             child: CircularProgressIndicator(
@@ -734,7 +734,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
         ),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 11,
             color: AppColors.slate,
           ),
@@ -810,7 +810,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
                     color: AppColors.error.withAlpha(20),
                     borderRadius: BorderRadius.circular(6),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Yüksek',
                     style: TextStyle(
                       fontSize: 11,
@@ -931,10 +931,10 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          const Row(
             children: [
               Icon(Icons.lightbulb, size: 18, color: AppColors.orange),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Text(
                 'AI Önerileri',
                 style: TextStyle(

@@ -29,12 +29,12 @@ class InviteService {
         .eq('invite_code', code.toUpperCase())
         .maybeSingle();
 
-    if (family == null) throw FormatException('Geçersiz davet kodu');
-    if (family['invite_used'] == true) throw FormatException('Kod zaten kullanılmış');
+    if (family == null) throw const FormatException('Geçersiz davet kodu');
+    if (family['invite_used'] == true) throw const FormatException('Kod zaten kullanılmış');
 
     final expiresAt = DateTime.tryParse(family['invite_expires_at'].toString());
     if (expiresAt != null && expiresAt.isBefore(DateTime.now())) {
-      throw FormatException('Kodun süresi dolmuş (24 saat)');
+      throw const FormatException('Kodun süresi dolmuş (24 saat)');
     }
 
     // 2. Kullanıcıyı aileye ekle

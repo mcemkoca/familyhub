@@ -542,8 +542,8 @@ class _SafetyScreenState extends State<SafetyScreen>
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 24)),
             // Family Safety Status
-            SliverToBoxAdapter(
-              child: const Padding(
+            const SliverToBoxAdapter(
+              child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: FamilySafetyStatus(),
               ),

@@ -32,7 +32,7 @@ final todaySummaryProvider = FutureProvider.autoDispose<TodaySummary>((
 ) async {
   final familyId = await ref.watch(familyIdProvider.future);
   if (familyId == null) {
-    return TodaySummary(
+    return const TodaySummary(
       eventCount: 0,
       taskCount: 0,
       unreadMessages: 0,

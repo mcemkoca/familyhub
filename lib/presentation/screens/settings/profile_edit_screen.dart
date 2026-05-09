@@ -297,7 +297,7 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
               ? null
               : _save,
           child: _saving
-              ? SizedBox(
+              ? const SizedBox(
                   width: 16,
                   height: 16,
                   child: CircularProgressIndicator(

@@ -270,7 +270,7 @@ Future<void> _initAndRunApp() async {
 }
 
 void _runDefaultApp() {
-  runApp(ProviderScope(child: const FamilyHubApp()));
+  runApp(const ProviderScope(child: FamilyHubApp()));
 }
 
 Future<void> _safeInit(

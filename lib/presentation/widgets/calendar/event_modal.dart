@@ -759,7 +759,7 @@ class _DateTimeRow extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.calendar_today_outlined,
                     size: 18,
                     color: AppColors.cobalt,
@@ -795,7 +795,7 @@ class _DateTimeRow extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.access_time, size: 18, color: AppColors.cobalt),
+                  const Icon(Icons.access_time, size: 18, color: AppColors.cobalt),
                   const SizedBox(width: 10),
                   Text(
                     DateFormat('HH:mm').format(date),

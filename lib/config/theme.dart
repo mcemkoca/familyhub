@@ -43,7 +43,7 @@ class AppTheme {
         backgroundColor: AppColors.card,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.large)),
       ),
-      dividerTheme: DividerThemeData(
+      dividerTheme: const DividerThemeData(
         color: AppColors.border,
         thickness: 1,
         space: 1,
@@ -58,7 +58,7 @@ class AppTheme {
       ),
       checkboxTheme: CheckboxThemeData(
         fillColor: WidgetStateProperty.resolveWith((states) => states.contains(WidgetState.selected) ? accentColor : Colors.transparent),
-        side: BorderSide(color: AppColors.gray),
+        side: const BorderSide(color: AppColors.gray),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       ),
       inputDecorationTheme: InputDecorationTheme(
@@ -129,10 +129,10 @@ class AppTheme {
           TextStyle(color: AppColors.gray, fontSize: 12 * fontScale),
         ),
         iconTheme: WidgetStateProperty.all(
-          IconThemeData(color: AppColors.gray, size: 24),
+          const IconThemeData(color: AppColors.gray, size: 24),
         ),
       ),
-      iconTheme: IconThemeData(color: AppColors.slate, size: 24),
+      iconTheme: const IconThemeData(color: AppColors.slate, size: 24),
       sliderTheme: SliderThemeData(
         activeTrackColor: accentColor,
         inactiveTrackColor: AppColors.border,
@@ -183,7 +183,7 @@ class AppTheme {
         backgroundColor: AppColors.darkCard,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.large)),
       ),
-      dividerTheme: DividerThemeData(
+      dividerTheme: const DividerThemeData(
         color: AppColors.darkBorder,
         thickness: 1,
         space: 1,
@@ -198,7 +198,7 @@ class AppTheme {
       ),
       checkboxTheme: CheckboxThemeData(
         fillColor: WidgetStateProperty.resolveWith((states) => states.contains(WidgetState.selected) ? accentColor : Colors.transparent),
-        side: BorderSide(color: AppColors.darkTextSecondary),
+        side: const BorderSide(color: AppColors.darkTextSecondary),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       ),
       inputDecorationTheme: InputDecorationTheme(
@@ -269,10 +269,10 @@ class AppTheme {
           TextStyle(color: AppColors.darkTextSecondary, fontSize: 12 * fontScale),
         ),
         iconTheme: WidgetStateProperty.all(
-          IconThemeData(color: AppColors.darkTextSecondary, size: 24),
+          const IconThemeData(color: AppColors.darkTextSecondary, size: 24),
         ),
       ),
-      iconTheme: IconThemeData(color: AppColors.darkTextSecondary, size: 24),
+      iconTheme: const IconThemeData(color: AppColors.darkTextSecondary, size: 24),
       sliderTheme: SliderThemeData(
         activeTrackColor: accentColor,
         inactiveTrackColor: AppColors.darkBorder,

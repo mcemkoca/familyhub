@@ -221,9 +221,9 @@ class _AddZoneDialogState extends State<_AddZoneDialog> {
               initialValue: _type,
               decoration: const InputDecoration(labelText: 'Bölge Tipi'),
               items: [
-                DropdownMenuItem(value: 'home', child: Text('Ev')),
+                const DropdownMenuItem(value: 'home', child: Text('Ev')),
                 DropdownMenuItem(value: 'work', child: Text(AppLocalizations.of(context).isLabel)),
-                DropdownMenuItem(value: 'school', child: Text('Okul')),
+                const DropdownMenuItem(value: 'school', child: Text('Okul')),
                 DropdownMenuItem(value: 'custom', child: Text(AppLocalizations.of(context).ozel)),
               ],
               onChanged: (v) => setState(() => _type = v!),

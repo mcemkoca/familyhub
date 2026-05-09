@@ -304,7 +304,7 @@ class _FamilyScreenState extends ConsumerState<FamilyScreen> {
                                     : null,
                               ),
                               child: _familyInfo?.photoUrl == null
-                                  ? Icon(
+                                  ? const Icon(
                                       Icons.family_restroom,
                                       color: AppColors.cobalt,
                                       size: 28,

@@ -85,7 +85,7 @@ class FamilyService {
   }) async {
     // PIN 4 haneli, sadece rakam kontrolü
     if (!RegExp(r'^\d{4}\$').hasMatch(pin)) {
-      throw FormatException('PIN 4 haneli rakam olmalı');
+      throw const FormatException('PIN 4 haneli rakam olmalı');
     }
 
     await _supabase.from('child_accounts').insert({

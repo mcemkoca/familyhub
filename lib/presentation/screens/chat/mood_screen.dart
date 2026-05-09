@@ -60,7 +60,7 @@ class MoodScreen extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(member.name, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
-                        if (mood.note != null) Text(mood.note!, style: TextStyle(fontSize: 13, color: AppColors.gray)),
+                        if (mood.note != null) Text(mood.note!, style: const TextStyle(fontSize: 13, color: AppColors.gray)),
                       ],
                     ),
                   ),

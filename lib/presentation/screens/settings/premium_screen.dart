@@ -193,11 +193,11 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
           premiumAsync.when(
             data: (isPremium) => isPremium
                 ? Padding(
-                    padding: EdgeInsets.only(right: 16),
+                    padding: const EdgeInsets.only(right: 16),
                     child: Chip(
                       label: Text(AppLocalizations.of(context).premium),
                       backgroundColor: AppColors.success,
-                      labelStyle: TextStyle(color: Colors.white),
+                      labelStyle: const TextStyle(color: Colors.white),
                     ),
                   )
                 : const SizedBox.shrink(),

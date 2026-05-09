@@ -442,7 +442,7 @@ class _HomeworksTabState extends State<_HomeworksTab> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (c) => AlertDialog(
-        backgroundColor: Color(0xFF1E293B),
+        backgroundColor: const Color(0xFF1E293B),
         title: const Text('Ödev Sil', style: TextStyle(color: Colors.white)),
         content: const Text(
           'Bu ödevi silmek istiyor musun?',
@@ -482,7 +482,7 @@ class _HomeworksTabState extends State<_HomeworksTab> {
                 .map((e) => ChildHomework.fromJson(e as Map<String, dynamic>))
                 .toList();
             if (list.isEmpty) {
-              return _EmptyState(
+              return const _EmptyState(
                 icon: Icons.assignment_outlined,
                 text: 'Henüz ödev eklenmemiş',
                 subtext: 'Yeni ödev eklemek için + butonuna bas',
@@ -814,7 +814,7 @@ class _ScheduleTabState extends State<_ScheduleTab> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (c) => AlertDialog(
-        backgroundColor: Color(0xFF1E293B),
+        backgroundColor: const Color(0xFF1E293B),
         title: const Text('Ders Sil', style: TextStyle(color: Colors.white)),
         content: const Text(
           'Bu dersi silmek istiyor musun?',
@@ -858,7 +858,7 @@ class _ScheduleTabState extends State<_ScheduleTab> {
                 .map((e) => ChildSchedule.fromJson(e as Map<String, dynamic>))
                 .toList();
             if (list.isEmpty) {
-              return _EmptyState(
+              return const _EmptyState(
                 icon: Icons.schedule,
                 text: 'Henüz ders eklenmemiş',
                 subtext: 'Yeni ders eklemek için + butonuna bas',
@@ -1076,7 +1076,7 @@ class _DevelopmentTabState extends State<_DevelopmentTab> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (c) => AlertDialog(
-        backgroundColor: Color(0xFF1E293B),
+        backgroundColor: const Color(0xFF1E293B),
         title: const Text('Kayıt Sil', style: TextStyle(color: Colors.white)),
         content: const Text(
           'Bu kaydı silmek istiyor musun?',
@@ -1130,7 +1130,7 @@ class _DevelopmentTabState extends State<_DevelopmentTab> {
                 )
                 .toList();
             if (list.isEmpty) {
-              return _EmptyState(
+              return const _EmptyState(
                 icon: Icons.trending_up,
                 text: 'Henüz gelişim kaydı yok',
                 subtext: 'Yeni kayıt eklemek için + butonuna bas',
@@ -1184,7 +1184,7 @@ class _LocationTab extends StatelessWidget {
       builder: (context, snapshot) {
         final loc = snapshot.data;
         if (loc == null) {
-          return _EmptyState(
+          return const _EmptyState(
             icon: Icons.location_off,
             text: 'Konum verisi yok',
             subtext: 'Çocuk henüz konum paylaşmamış',

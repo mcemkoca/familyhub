@@ -179,12 +179,12 @@ class _LocationScreenState extends State<LocationScreen> {
                       ),
                     ],
                   ),
-                  Positioned(
+                  const Positioned(
                     top: 60,
                     right: 50,
                     child: _MemberPin(name: 'Üye 2', color: AppColors.pink),
                   ),
-                  Positioned(
+                  const Positioned(
                     bottom: 80,
                     left: 60,
                     child: _MemberPin(name: 'Üye 3', color: AppColors.orange),
@@ -253,12 +253,12 @@ class _LocationScreenState extends State<LocationScreen> {
                   else if (_loading)
                     Row(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 18,
                           height: 18,
                           child: CircularProgressIndicator(strokeWidth: 2),
                         ),
-                        SizedBox(width: 12),
+                        const SizedBox(width: 12),
                         Text(AppLocalizations.of(context).konumAliniyor),
                       ],
                     )
@@ -319,21 +319,21 @@ class _LocationScreenState extends State<LocationScreen> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  _LocationRow(
+                  const _LocationRow(
                     name: 'Üye 1',
                     status: 'Evde',
                     color: AppColors.blue,
                     isOnline: true,
                   ),
                   const Divider(height: 24),
-                  _LocationRow(
+                  const _LocationRow(
                     name: 'Üye 2',
                     status: 'İşte',
                     color: AppColors.pink,
                     isOnline: true,
                   ),
                   const Divider(height: 24),
-                  _LocationRow(
+                  const _LocationRow(
                     name: 'Üye 3',
                     status: 'Okulda',
                     color: AppColors.orange,

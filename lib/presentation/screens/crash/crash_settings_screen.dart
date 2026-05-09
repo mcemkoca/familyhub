@@ -196,11 +196,11 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
                     initialValue: _soundType,
                     decoration: const InputDecoration(labelText: 'Ses'),
                     items: [
-                      DropdownMenuItem(
+                      const DropdownMenuItem(
                         value: 'crash_alarm',
                         child: Text('Acil alarm'),
                       ),
-                      DropdownMenuItem(value: 'siren', child: Text('Siren')),
+                      const DropdownMenuItem(value: 'siren', child: Text('Siren')),
                       DropdownMenuItem(value: 'plain', child: Text(AppLocalizations.of(context).duzSes)),
                     ],
                     onChanged: (v) => setState(() => _soundType = v!),
@@ -216,11 +216,11 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
                   padding: const EdgeInsets.only(left: 16),
                   child: SegmentedButton<VibrationPattern>(
                     segments: [
-                      ButtonSegment(
+                      const ButtonSegment(
                         value: VibrationPattern.sos,
                         label: Text('SOS'),
                       ),
-                      ButtonSegment(
+                      const ButtonSegment(
                         value: VibrationPattern.alarm,
                         label: Text('Alarm'),
                       ),

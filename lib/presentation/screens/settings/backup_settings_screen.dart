@@ -308,7 +308,7 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
               ),
             ),
           ),
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: SettingsSection(
               title: 'AYARLAR',
               icon: Icons.settings_outlined,

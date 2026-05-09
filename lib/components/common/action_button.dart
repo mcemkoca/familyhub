@@ -82,11 +82,11 @@ class _ActionButtonState extends State<ActionButton> {
 
         if (widget.showFeedback) {
           scaffold.showSnackBar(
-            SnackBar(
-              content: const Text('✅ İşlem başarılı'),
+            const SnackBar(
+              content: Text('✅ İşlem başarılı'),
               backgroundColor: AppColors.success,
               behavior: SnackBarBehavior.floating,
-              duration: const Duration(seconds: 2),
+              duration: Duration(seconds: 2),
             ),
           );
         }
