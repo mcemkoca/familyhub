@@ -1,12 +1,14 @@
+// ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../../core/supabase_client.dart';
 import 'package:uuid/uuid.dart';
 import '../../../config/constants.dart';
 import '../../../domain/models/smart_reminder.dart';
 import '../../../repositories/smart_reminder_repository.dart';
 import '../../../services/auth_service.dart';
+import '../../../services/smart_reminder_background_service.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
 class SmartReminderCreateScreen extends StatefulWidget {
@@ -137,7 +139,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
       );
       return;
     }
-    final profile = await Supabase.instance.client
+    final profile = await SupabaseConfig.client
         .from('profiles')
         .select('family_id, display_name')
         .eq('id', userId)
@@ -174,7 +176,19 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
     );
 
     try {
-      await SmartReminderRepository().create(reminder);
+      final created = await SmartReminderRepository().create(reminder);
+      // Schedule background notification
+      final triggerTime = created.triggers.time.enabled
+          ? created.triggers.time.absoluteTime
+          : created.status.nextScheduled;
+      if (triggerTime != null && triggerTime.isAfter(DateTime.now())) {
+        await SmartReminderBackgroundService.scheduleReminder(
+          id: created.id,
+          when: triggerTime,
+          title: created.title,
+          body: created.description ?? 'Hatırlatma zamanı!',
+        );
+      }
       if (mounted) {
         ScaffoldMessenger.of(
           context,

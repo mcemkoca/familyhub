@@ -33,10 +33,10 @@ class FamilyMemberModel {
         (profile?['display_name'] as String?) ??
         'İsimsiz';
     return FamilyMemberModel(
-      id: map['user_id'] ?? map['id'] ?? '',
+      id: (map['user_id'] as String?) ?? (map['id'] as String?) ?? '',
       name: displayName,
       avatarUrl: profile?['avatar_url'] as String?,
-      role: map['role'] ?? 'member',
+      role: (map['role'] as String?) ?? 'member',
       memberType: 'adult',
       joinedAt: map['joined_at'] != null
           ? DateTime.tryParse(map['joined_at'].toString())
@@ -46,8 +46,8 @@ class FamilyMemberModel {
 
   factory FamilyMemberModel.fromChild(Map<String, dynamic> map) {
     return FamilyMemberModel(
-      id: map['id'] ?? '',
-      name: map['name'] ?? 'İsimsiz Çocuk',
+      id: (map['id'] as String?) ?? '',
+      name: (map['name'] as String?) ?? 'İsimsiz Çocuk',
       avatarUrl: map['avatar_url'] as String?,
       role: 'child',
       memberType: 'child',

@@ -106,6 +106,7 @@ class _SafetyScreenState extends State<SafetyScreen>
     _locationSub?.cancel();
     _alertSub?.cancel();
     _locationRefreshTimer?.cancel();
+    LocationTrackingService.stopTracking();
     super.dispose();
   }
 
@@ -155,6 +156,17 @@ class _SafetyScreenState extends State<SafetyScreen>
 
     final user = AuthService.currentUser;
     final userName = user?.userMetadata?['display_name'] as String? ?? 'Kullanıcı';
+    final familyId = AuthService.currentUser?.userMetadata?['family_id'] as String?;
+    if (familyId != null && familyId.isNotEmpty) {
+      await EmergencyService.triggerSOS(
+        familyId: familyId,
+        senderId: AuthService.currentUserId ?? '',
+        senderName: userName,
+        senderType: 'parent',
+        location: location,
+        message: '$userName acil durum butonunu kullandı!',
+      );
+    }
     await EmergencyService.sendSOSAlert(
       userName: userName,
       location: location,

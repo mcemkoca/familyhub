@@ -205,6 +205,7 @@ class AIEngine {
       throw _ProviderException('OpenAI', 200, 'Empty choices');
     }
 
+    // ignore: avoid_dynamic_calls
     final content = choices[0]['message']['content'] as String?;
     if (content == null) {
       throw _ProviderException('OpenAI', 200, 'Null content');
@@ -262,6 +263,7 @@ class AIEngine {
       throw _ProviderException('Anthropic', 200, 'Empty content');
     }
 
+    // ignore: avoid_dynamic_calls
     final text = content[0]['text'] as String?;
     if (text == null) throw _ProviderException('Anthropic', 200, 'Null text');
 
@@ -316,7 +318,9 @@ class AIEngine {
       throw _ProviderException('Gemini', 200, 'Empty candidates');
     }
 
+    // ignore: avoid_dynamic_calls
     final parts = candidates[0]['content']['parts'] as List<dynamic>;
+    // ignore: avoid_dynamic_calls
     final text = parts[0]['text'] as String?;
     if (text == null) throw _ProviderException('Gemini', 200, 'Null text');
 

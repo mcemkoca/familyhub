@@ -21,6 +21,14 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Create .env for code generation
+        run: |
+          cat > .env <<EOF
+          SUPABASE_URL=
+          SUPABASE_ANON_KEY=
+          STRIPE_PUBLISHABLE_KEY=
+          EOF
+
       - name: Generate code (env.g.dart, freezed, etc.)
         run: dart run build_runner build --delete-conflicting-outputs
 
@@ -97,6 +105,14 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
+
+      - name: Create .env for code generation
+        run: |
+          cat > .env <<EOF
+          SUPABASE_URL=
+          SUPABASE_ANON_KEY=
+          STRIPE_PUBLISHABLE_KEY=
+          EOF
 
       - name: Generate code
         run: dart run build_runner build --delete-conflicting-outputs

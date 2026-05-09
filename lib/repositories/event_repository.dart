@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import '../core/utils/repository_mixin.dart';
 import '../domain/entities.dart';
 import '../services/auth_service.dart';
 
-class EventRepository {
+class EventRepository with RepositoryErrorHandler {
   static final EventRepository _instance = EventRepository._internal();
   factory EventRepository() => _instance;
   EventRepository._internal();
@@ -16,24 +17,21 @@ class EventRepository {
   final String _table = 'events';
 
   Future<List<CalendarEvent>> getEvents(String familyId) async {
-    try {
+    return handleRepositoryCall(() async {
       final response = await _client
           .from(_table)
           .select('*')
           .eq('family_id', familyId)
           .order('start_time', ascending: true);
-      return (response as List).map((e) => _fromJson(e)).toList();
-    } catch (e) {
-      debugPrint('[EventRepository.getEvents] error: $e');
-      rethrow;
-    }
+      return (response as List).map((e) => _fromJson(e as Map<String, dynamic>)).toList();
+    }, 'getEvents');
   }
 
   Future<CalendarEvent> createEvent(
     CalendarEvent event,
     String familyId,
   ) async {
-    try {
+    return handleRepositoryCall(() async {
       final userId = AuthService.currentUserId;
       if (userId == null) throw Exception('Giriş yapmalısınız');
 
@@ -55,14 +53,11 @@ class EventRepository {
           .single();
 
       return _fromJson(response);
-    } catch (e) {
-      debugPrint('[EventRepository.createEvent] error: $e');
-      rethrow;
-    }
+    }, 'createEvent');
   }
 
   Future<void> updateEvent(CalendarEvent event) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client
           .from(_table)
           .update({
@@ -76,19 +71,13 @@ class EventRepository {
             'reminders': event.reminders,
           })
           .eq('id', event.id);
-    } catch (e) {
-      debugPrint('[EventRepository.updateEvent] error: $e');
-      rethrow;
-    }
+    }, 'updateEvent');
   }
 
   Future<void> deleteEvent(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client.from(_table).delete().eq('id', id);
-    } catch (e) {
-      debugPrint('[EventRepository.deleteEvent] error: $e');
-      rethrow;
-    }
+    }, 'deleteEvent');
   }
 
   Stream<List<CalendarEvent>> watchEvents(String familyId) {
@@ -100,27 +89,26 @@ class EventRepository {
           .order('start_time')
           .map((data) => data.map((e) => _fromJson(e)).toList());
     } catch (e) {
-      debugPrint('[EventRepository.watchEvents] error: $e');
-      return Stream.error(Exception('Veritabanı hatası: $e'));
+      return Stream.error(RepositoryException('Beklenmeyen hata [watchEvents]: $e'));
     }
   }
 
   CalendarEvent _fromJson(Map<String, dynamic> json) {
     return CalendarEvent(
       id: json['id']?.toString() ?? '',
-      title: json['title'] ?? '',
+      title: (json['title'] as String?) ?? '',
       start: json['start_time'] != null
-          ? DateTime.parse(json['start_time'])
+          ? DateTime.parse(json['start_time'] as String)
           : DateTime.now(),
       end: json['end_time'] != null
-          ? DateTime.parse(json['end_time'])
+          ? DateTime.parse(json['end_time'] as String)
           : DateTime.now(),
       location: json['location']?.toString(),
       description: json['description']?.toString(),
       category: _parseCategory(json['category']),
       color: const Color(0xFF3B82F6),
-      isAllDay: json['is_all_day'] ?? false,
-      reminders: List<int>.from(json['reminders'] ?? []),
+      isAllDay: (json['is_all_day'] as bool?) ?? false,
+      reminders: List<int>.from((json['reminders'] as List<dynamic>?) ?? []),
     );
   }
 

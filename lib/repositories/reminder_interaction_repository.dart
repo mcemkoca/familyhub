@@ -1,9 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import '../core/utils/repository_mixin.dart';
 import '../domain/models/reminder_interaction.dart';
 import '../services/auth_service.dart';
 
-class ReminderInteractionRepository {
+class ReminderInteractionRepository with RepositoryErrorHandler {
   static final ReminderInteractionRepository _instance =
       ReminderInteractionRepository._internal();
   factory ReminderInteractionRepository() => _instance;
@@ -20,7 +20,7 @@ class ReminderInteractionRepository {
     String reminderId, {
     int limit = 100,
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       final response = await _client
           .from(_table)
           .select('*')
@@ -28,21 +28,16 @@ class ReminderInteractionRepository {
           .order('created_at', ascending: false)
           .limit(limit);
       return (response as List)
-          .map((e) => ReminderInteraction.fromJson(e))
+          .map((e) => ReminderInteraction.fromJson(e as Map<String, dynamic>))
           .toList();
-    } catch (e) {
-      debugPrint(
-        '[ReminderInteractionRepository.getInteractionsForReminder] error: $e',
-      );
-      rethrow;
-    }
+    }, 'getInteractionsForReminder');
   }
 
   Future<List<ReminderInteraction>> getRecentInteractions(
     String reminderId, {
     int days = 30,
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       final since = DateTime.now()
           .subtract(Duration(days: days))
           .toIso8601String();
@@ -53,20 +48,15 @@ class ReminderInteractionRepository {
           .gte('created_at', since)
           .order('created_at', ascending: false);
       return (response as List)
-          .map((e) => ReminderInteraction.fromJson(e))
+          .map((e) => ReminderInteraction.fromJson(e as Map<String, dynamic>))
           .toList();
-    } catch (e) {
-      debugPrint(
-        '[ReminderInteractionRepository.getRecentInteractions] error: $e',
-      );
-      rethrow;
-    }
+    }, 'getRecentInteractions');
   }
 
   Future<ReminderInteraction> logInteraction(
     ReminderInteraction interaction,
   ) async {
-    try {
+    return handleRepositoryCall(() async {
       final data = interaction.toJson()..remove('id');
       final response = await _client
           .from(_table)
@@ -74,21 +64,15 @@ class ReminderInteractionRepository {
           .select()
           .single();
       return ReminderInteraction.fromJson(response);
-    } catch (e) {
-      debugPrint('[ReminderInteractionRepository.logInteraction] error: $e');
-      rethrow;
-    }
+    }, 'logInteraction');
   }
 
   Future<Map<String, dynamic>> getAnalytics(String reminderId) async {
-    try {
+    return handleRepositoryCall(() async {
       final response = await _client
           .rpc('get_reminder_analytics', params: {'p_reminder_id': reminderId})
           .single();
       return response;
-    } catch (e) {
-      debugPrint('[ReminderInteractionRepository.getAnalytics] error: $e');
-      rethrow;
-    }
+    }, 'getAnalytics');
   }
 }

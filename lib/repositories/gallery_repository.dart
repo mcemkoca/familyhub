@@ -1,8 +1,8 @@
 import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
 import '../core/errors.dart' as app_errors;
+import '../core/utils/repository_mixin.dart';
 
 class FamilyMedia {
   final String id;
@@ -25,18 +25,18 @@ class FamilyMedia {
 
   factory FamilyMedia.fromJson(Map<String, dynamic> json) => FamilyMedia(
     id: json['id']?.toString() ?? '',
-    url: json['url'] ?? '',
+    url: (json['url'] as String?) ?? '',
     thumbnailUrl: json['thumbnail_url']?.toString(),
-    type: json['type'] ?? 'image',
+    type: (json['type'] as String?) ?? 'image',
     caption: json['caption']?.toString(),
     uploadedBy: json['uploaded_by']?.toString(),
     createdAt: DateTime.parse(
-      json['created_at'] ?? DateTime.now().toIso8601String(),
+      (json['created_at'] as String?) ?? DateTime.now().toIso8601String(),
     ),
   );
 }
 
-class GalleryRepository {
+class GalleryRepository with RepositoryErrorHandler {
   static final GalleryRepository _instance = GalleryRepository._internal();
   factory GalleryRepository() => _instance;
   GalleryRepository._internal();
@@ -44,23 +44,23 @@ class GalleryRepository {
   String? get _userId => _safeClient?.auth.currentUser?.id;
 
   void _checkAuth() {
-    if (_userId == null)
+    if (_userId == null) {
       throw app_errors.AppAuthException('Giriş yapmalısınız');
+    }
   }
 
   Future<List<FamilyMedia>> getMedia(String familyId) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       final response = await _safeClient!
           .from('family_media')
           .select('*')
           .eq('family_id', familyId)
           .order('created_at', ascending: false);
-      return (response as List).map((e) => FamilyMedia.fromJson(e)).toList();
-    } catch (e) {
-      debugPrint('GalleryRepository.getMedia error: $e');
-      throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
-    }
+      return (response as List)
+          .map((e) => FamilyMedia.fromJson(e as Map<String, dynamic>))
+          .toList();
+    }, 'getMedia');
   }
 
   Stream<List<FamilyMedia>> watchMedia(String familyId) {
@@ -76,9 +76,8 @@ class GalleryRepository {
                 .toList(),
           );
     } catch (e) {
-      debugPrint('GalleryRepository.watchMedia error: $e');
       return Stream.error(
-        app_errors.AppDatabaseException('Veritabanı hatası: $e'),
+        RepositoryException('Beklenmeyen hata [watchMedia]: $e'),
       );
     }
   }
@@ -89,7 +88,7 @@ class GalleryRepository {
     required String type,
     String? caption,
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       final fileName =
           '${DateTime.now().millisecondsSinceEpoch}_${_userId}_${file.path.split('/').last}';
@@ -114,14 +113,11 @@ class GalleryRepository {
           .single();
 
       return FamilyMedia.fromJson(response);
-    } catch (e) {
-      debugPrint('GalleryRepository.uploadMedia error: $e');
-      throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'uploadMedia');
   }
 
   Future<void> deleteMedia(String id, String fileUrl) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       // Extract filename from URL
       final uri = Uri.parse(fileUrl);
@@ -135,9 +131,6 @@ class GalleryRepository {
         }
       }
       await _safeClient!.from('family_media').delete().eq('id', id);
-    } catch (e) {
-      debugPrint('GalleryRepository.deleteMedia error: $e');
-      throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'deleteMedia');
   }
 }

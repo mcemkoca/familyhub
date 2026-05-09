@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
+import '../core/utils/repository_mixin.dart';
 import '../domain/entities.dart';
 import '../services/child_auth_service.dart';
 import '../services/hive_service.dart';
 import '../services/notification_service.dart';
 
-class ChildChatRepository {
+class ChildChatRepository with RepositoryErrorHandler {
   static final ChildChatRepository _instance = ChildChatRepository._internal();
   factory ChildChatRepository() => _instance;
   ChildChatRepository._internal();
@@ -30,7 +31,7 @@ class ChildChatRepository {
           .select('*')
           .eq('family_id', _familyId!)
           .order('created_at', ascending: true);
-      final list = (response as List).map((e) => _fromJson(e)).toList();
+      final list = (response as List).map((e) => _fromJson(e as Map<String, dynamic>)).toList();
       await HiveService.saveChatMessages(list);
       return list;
     } catch (_) {
@@ -39,7 +40,7 @@ class ChildChatRepository {
   }
 
   Future<ChatMessage> sendMessage(String content) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkSession();
       final response = await _client
           .from('messages')
@@ -65,10 +66,7 @@ class ChildChatRepository {
       );
 
       return _fromJson(response);
-    } catch (e) {
-      debugPrint('ChildChatRepository.sendMessage error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'sendMessage');
   }
 
   Stream<List<ChatMessage>> watchMessages() {
@@ -85,7 +83,7 @@ class ChildChatRepository {
           .map((data) => data.map((e) => _fromJson(e)).toList());
     } catch (e) {
       debugPrint('ChildChatRepository.watchMessages error: $e');
-      return Stream.error(Exception('Veritabanı hatası: $e'));
+      return Stream.error(RepositoryException('Beklenmeyen hata [watchMessages]: $e'));
     }
   }
 
@@ -95,17 +93,17 @@ class ChildChatRepository {
       senderId: json['user_id']?.toString() ?? '',
       senderName: json['sender_name']?.toString() ?? 'Kullanıcı',
       senderColor: _parseColor(json['sender_color']),
-      content: json['content'] ?? '',
+      content: (json['content'] as String?) ?? '',
       createdAt: json['created_at'] != null
-          ? DateTime.parse(json['created_at'])
+          ? DateTime.parse(json['created_at'] as String)
           : DateTime.now(),
-      isRead: json['is_read'] ?? false,
+      isRead: (json['is_read'] as bool?) ?? false,
       type: MessageType.text,
       replyToId: json['reply_to_id']?.toString(),
       replyToContent: json['reply_to_content']?.toString(),
       replyToSender: json['reply_to_sender']?.toString(),
-      isPinned: json['is_pinned'] ?? false,
-      readCount: json['read_count'] ?? 0,
+      isPinned: (json['is_pinned'] as bool?) ?? false,
+      readCount: (json['read_count'] as int?) ?? 0,
     );
   }
 

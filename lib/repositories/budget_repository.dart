@@ -1,17 +1,17 @@
 import 'package:flutter/foundation.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
+import '../core/utils/repository_mixin.dart';
 import '../domain/entities.dart';
 import '../services/auth_service.dart';
 
-class BudgetRepository {
+class BudgetRepository with RepositoryErrorHandler {
   static final BudgetRepository _instance = BudgetRepository._internal();
   factory BudgetRepository() => _instance;
   BudgetRepository._internal();
   final _client = SupabaseConfig.client;
 
   Future<String?> _getFamilyId() async {
-    try {
+    return handleRepositoryCall(() async {
       final user = _client.auth.currentUser;
       if (user == null) return null;
       final profile = await _client
@@ -20,14 +20,11 @@ class BudgetRepository {
           .eq('id', user.id)
           .maybeSingle();
       return profile?['family_id'] as String?;
-    } catch (e) {
-      debugPrint('BudgetRepository._getFamilyId error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, '_getFamilyId');
   }
 
   Future<List<Transaction>> getTransactions() async {
-    try {
+    return handleRepositoryCall(() async {
       final familyId = await _getFamilyId();
       if (familyId == null) return [];
 
@@ -37,11 +34,8 @@ class BudgetRepository {
           .eq('family_id', familyId)
           .order('date', ascending: false);
 
-      return (response as List).map((e) => _transactionFromJson(e)).toList();
-    } catch (e) {
-      debugPrint('BudgetRepository.getTransactions error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+      return (response as List).map((e) => _transactionFromJson(e as Map<String, dynamic>)).toList();
+    }, 'getTransactions');
   }
 
   Future<Transaction> createTransaction({
@@ -50,7 +44,7 @@ class BudgetRepository {
     String? description,
     String? receiptUrl,
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       final familyId = await _getFamilyId();
       final userId = AuthService.currentUserId;
       if (familyId == null) throw Exception('Aile bilgisi bulunamadı');
@@ -72,23 +66,17 @@ class BudgetRepository {
           .single();
 
       return _transactionFromJson(response);
-    } catch (e) {
-      debugPrint('BudgetRepository.createTransaction error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'createTransaction');
   }
 
   Future<void> deleteTransaction(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client.from('budget_entries').delete().eq('id', id);
-    } catch (e) {
-      debugPrint('BudgetRepository.deleteTransaction error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'deleteTransaction');
   }
 
   Future<Budget> getCurrentBudget() async {
-    try {
+    return handleRepositoryCall(() async {
       final familyId = await _getFamilyId();
       if (familyId == null) {
         return const Budget(
@@ -113,11 +101,11 @@ class BudgetRepository {
 
       final entries = response as List;
       final totalIncome = entries
-          .where((e) => (e['amount'] as num) > 0)
-          .fold<double>(0, (s, e) => s + (e['amount'] as num).toDouble());
+          .where((e) => ((e as Map<String, dynamic>)['amount'] as num) > 0)
+          .fold<double>(0, (s, e) => s + ((e as Map<String, dynamic>)['amount'] as num).toDouble());
       final totalExpense = entries
-          .where((e) => (e['amount'] as num) < 0)
-          .fold<double>(0, (s, e) => s + (e['amount'] as num).toDouble().abs());
+          .where((e) => ((e as Map<String, dynamic>)['amount'] as num) < 0)
+          .fold<double>(0, (s, e) => s + ((e as Map<String, dynamic>)['amount'] as num).toDouble().abs());
 
       // Default monthly budget: total income or 10000 TRY
       final budgetLimit = totalIncome > 0 ? totalIncome * 1.2 : 10000;
@@ -130,10 +118,7 @@ class BudgetRepository {
         periodStart: startOfMonth,
         periodEnd: endOfMonth,
       );
-    } catch (e) {
-      debugPrint('BudgetRepository.getCurrentBudget error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getCurrentBudget');
   }
 
   Stream<List<Transaction>> watchTransactions() {
@@ -144,7 +129,7 @@ class BudgetRepository {
           .map((data) => data.map((e) => _transactionFromJson(e)).toList());
     } catch (e) {
       debugPrint('BudgetRepository.watchTransactions error: $e');
-      return Stream.error(Exception('Veritabanı hatası: $e'));
+      return Stream.error(RepositoryException('Beklenmeyen hata [watchTransactions]: $e'));
     }
   }
 

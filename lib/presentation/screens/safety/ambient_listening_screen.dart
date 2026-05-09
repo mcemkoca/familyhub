@@ -16,8 +16,8 @@ class _AmbientListeningScreenState extends State<AmbientListeningScreen> {
   bool _recording = false;
   bool _shakeEnabled = true;
   double _currentDb = 40;
-  StreamSubscription? _dbSub;
-  StreamSubscription? _shakeSub;
+  StreamSubscription<dynamic>? _dbSub;
+  StreamSubscription<dynamic>? _shakeSub;
   String? _lastRecordingPath;
   int _recordingSeconds = 0;
   Timer? _timer;

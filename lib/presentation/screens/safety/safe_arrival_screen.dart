@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../../core/supabase_client.dart';
 import '../../../config/constants.dart';
 import '../../../services/safe_arrival_service.dart';
 import '../../../services/child_auth_service.dart';
@@ -18,8 +18,8 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
   List<ArrivalMonitor> _active = [];
   List<ArrivalMonitor> _history = [];
   List<Map<String, dynamic>> _familyMembers = [];
-  StreamSubscription? _activeSub;
-  StreamSubscription? _histSub;
+  StreamSubscription<dynamic>? _activeSub;
+  StreamSubscription<dynamic>? _histSub;
 
   @override
   void initState() {
@@ -36,7 +36,7 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
 
   Future<void> _loadFamilyMembers() async {
     try {
-      final client = Supabase.instance.client;
+      final client = SupabaseConfig.client;
       String? familyId;
       final user = client.auth.currentUser;
       if (user != null) {
@@ -60,10 +60,10 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
           .eq('family_id', familyId);
 
       final members = <Map<String, dynamic>>[];
-      for (final p in profiles as List) {
+      for (final p in profiles) {
         members.add({'id': p['id'], 'name': p['display_name'] ?? 'Üye'});
       }
-      for (final c in children as List) {
+      for (final c in children) {
         members.add({'id': c['id'], 'name': c['name'] ?? 'Çocuk'});
       }
       if (mounted) setState(() => _familyMembers = members);

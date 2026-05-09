@@ -19,7 +19,7 @@ class MainShell extends StatefulWidget {
 class _MainShellState extends State<MainShell> {
   int _currentIndex = 0;
   bool _menuOpen = false;
-  StreamSubscription? _incomingCallSub;
+  StreamSubscription<dynamic>? _incomingCallSub;
 
   final _tabs = [
     {

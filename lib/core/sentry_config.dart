@@ -53,7 +53,7 @@ class SentryConfig {
             }
           });
 
-          event.contexts['secrets']?.clear();
+          (event.contexts['secrets'] as Map<String, dynamic>?)?.clear();
           final tags = event.tags ?? {};
           tags.remove('password');
           tags.remove('token');

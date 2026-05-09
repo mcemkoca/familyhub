@@ -2,13 +2,13 @@
 
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
+import '../core/utils/repository_mixin.dart';
 
 import '../domain/models/crash_event.dart';
 
-class CrashEventRepository {
+class CrashEventRepository with RepositoryErrorHandler {
   static final CrashEventRepository _instance =
       CrashEventRepository._internal();
   factory CrashEventRepository() => _instance;
@@ -21,40 +21,38 @@ class CrashEventRepository {
     String familyId, {
     int limit = 50,
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       final res = await _client
           .from(_table)
           .select()
           .eq('family_id', familyId)
           .order('created_at', ascending: false)
           .limit(limit);
-      return (res as List).map((e) => CrashEvent.fromJson(e)).toList();
-    } catch (e) {
-      debugPrint('CrashEventRepository.getFamilyEvents error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+      return (res as List)
+          .map((e) => CrashEvent.fromJson(e as Map<String, dynamic>))
+          .toList();
+    }, 'getFamilyEvents');
   }
 
   Future<List<CrashEvent>> getMemberEvents(
     String memberId, {
     int limit = 50,
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       final res = await _client
           .from(_table)
           .select()
           .eq('member_id', memberId)
           .order('created_at', ascending: false)
           .limit(limit);
-      return (res as List).map((e) => CrashEvent.fromJson(e)).toList();
-    } catch (e) {
-      debugPrint('CrashEventRepository.getMemberEvents error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+      return (res as List)
+          .map((e) => CrashEvent.fromJson(e as Map<String, dynamic>))
+          .toList();
+    }, 'getMemberEvents');
   }
 
   Future<CrashEvent?> getEventById(String eventId) async {
-    try {
+    return handleRepositoryCall(() async {
       final res = await _client
           .from(_table)
           .select()
@@ -62,50 +60,38 @@ class CrashEventRepository {
           .maybeSingle();
       if (res == null) return null;
       return CrashEvent.fromJson(res);
-    } catch (e) {
-      debugPrint('CrashEventRepository.getEventById error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getEventById');
   }
 
   Future<String> createEvent(CrashEvent event) async {
-    try {
+    return handleRepositoryCall(() async {
       final data = event.toJson()..remove('eventId');
       final res = await _client.from(_table).insert(data).select('id').single();
       return res['id'] as String;
-    } catch (e) {
-      debugPrint('CrashEventRepository.createEvent error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'createEvent');
   }
 
   Future<void> updateEvent(CrashEvent event) async {
-    try {
+    return handleRepositoryCall(() async {
       if (event.eventId == null) return;
       await _client
           .from(_table)
           .update(event.toJson())
           .eq('id', event.eventId!);
-    } catch (e) {
-      debugPrint('CrashEventRepository.updateEvent error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'updateEvent');
   }
 
   Future<void> markFalsePositive(String eventId) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client
           .from(_table)
           .update({'is_false_positive': true, 'response_status': 'false_alarm'})
           .eq('id', eventId);
-    } catch (e) {
-      debugPrint('CrashEventRepository.markFalsePositive error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'markFalsePositive');
   }
 
   Future<void> resolveEvent(String eventId) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client
           .from(_table)
           .update({
@@ -113,10 +99,7 @@ class CrashEventRepository {
             'resolved_at': DateTime.now().toIso8601String(),
           })
           .eq('id', eventId);
-    } catch (e) {
-      debugPrint('CrashEventRepository.resolveEvent error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'resolveEvent');
   }
 
   Stream<List<CrashEvent>> watchFamilyEvents(String familyId) {
@@ -128,8 +111,7 @@ class CrashEventRepository {
           .order('created_at', ascending: false)
           .map((data) => data.map((e) => CrashEvent.fromJson(e)).toList());
     } catch (e) {
-      debugPrint('CrashEventRepository.watchFamilyEvents error: $e');
-      return Stream.error(Exception('Veritabanı hatası: $e'));
+      return Stream.error(RepositoryException('Beklenmeyen hata [watchFamilyEvents]: $e'));
     }
   }
 }

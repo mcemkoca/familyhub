@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import '../core/utils/repository_mixin.dart';
 import '../domain/entities.dart';
 import '../services/auth_service.dart';
 
-class ChatRepository {
+class ChatRepository with RepositoryErrorHandler {
   static final ChatRepository _instance = ChatRepository._internal();
   factory ChatRepository() => _instance;
   ChatRepository._internal();
@@ -16,17 +17,14 @@ class ChatRepository {
   final String _table = 'messages';
 
   Future<List<ChatMessage>> getMessages(String familyId) async {
-    try {
+    return handleRepositoryCall(() async {
       final response = await _client
           .from(_table)
           .select('*')
           .eq('family_id', familyId)
           .order('created_at', ascending: true);
-      return (response as List).map((e) => _fromJson(e)).toList();
-    } catch (e) {
-      debugPrint('ChatRepository.getMessages error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+      return (response as List).map((e) => _fromJson(e as Map<String, dynamic>)).toList();
+    }, 'getMessages');
   }
 
   Future<ChatMessage> sendMessage({
@@ -39,7 +37,7 @@ class ChatRepository {
     String? audioUrl,
     int? audioDuration,
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       final userId = AuthService.currentUserId;
       if (userId == null) throw Exception('Giriş yapmalısınız');
 
@@ -74,28 +72,19 @@ class ChatRepository {
           .single();
 
       return _fromJson(response);
-    } catch (e) {
-      debugPrint('ChatRepository.sendMessage error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'sendMessage');
   }
 
   Future<void> deleteMessage(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client.from(_table).delete().eq('id', id);
-    } catch (e) {
-      debugPrint('ChatRepository.deleteMessage error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'deleteMessage');
   }
 
   Future<void> updateMessage(String id, String content) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client.from(_table).update({'content': content}).eq('id', id);
-    } catch (e) {
-      debugPrint('ChatRepository.updateMessage error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'updateMessage');
   }
 
   Stream<List<ChatMessage>> watchMessages(String familyId) {
@@ -108,7 +97,7 @@ class ChatRepository {
           .map((data) => data.map((e) => _fromJson(e)).toList());
     } catch (e) {
       debugPrint('ChatRepository.watchMessages error: $e');
-      return Stream.error(Exception('Veritabanı hatası: $e'));
+      return Stream.error(RepositoryException('Beklenmeyen hata [watchMessages]: $e'));
     }
   }
 
@@ -128,11 +117,11 @@ class ChatRepository {
       senderId: json['user_id']?.toString() ?? '',
       senderName: json['sender_name']?.toString() ?? 'Kullanıcı',
       senderColor: _parseColor(json['sender_color']),
-      content: json['content'] ?? '',
+      content: (json['content'] as String?) ?? '',
       createdAt: json['created_at'] != null
-          ? DateTime.parse(json['created_at'])
+          ? DateTime.parse(json['created_at'] as String)
           : DateTime.now(),
-      isRead: json['is_read'] ?? false,
+      isRead: (json['is_read'] as bool?) ?? false,
       type: type,
       imageUrl: json['image_url']?.toString(),
       audioUrl: json['audio_url']?.toString(),
@@ -140,8 +129,8 @@ class ChatRepository {
       replyToId: json['reply_to_id']?.toString(),
       replyToContent: json['reply_to_content']?.toString(),
       replyToSender: json['reply_to_sender']?.toString(),
-      isPinned: json['is_pinned'] ?? false,
-      readCount: json['read_count'] ?? 0,
+      isPinned: (json['is_pinned'] as bool?) ?? false,
+      readCount: (json['read_count'] as int?) ?? 0,
     );
   }
 

@@ -1,10 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import '../core/utils/repository_mixin.dart';
 import '../domain/entities.dart';
 import '../services/auth_service.dart';
 import '../services/gamification_service.dart';
 
-class TaskRepository {
+class TaskRepository with RepositoryErrorHandler {
   static final TaskRepository _instance = TaskRepository._internal();
   factory TaskRepository() => _instance;
   TaskRepository._internal();
@@ -17,21 +18,18 @@ class TaskRepository {
   String get _table => 'tasks';
 
   Future<List<Task>> getTasks(String familyId) async {
-    try {
+    return handleRepositoryCall(() async {
       final response = await _client
           .from(_table)
           .select('*')
           .eq('family_id', familyId)
           .order('due_date', ascending: true);
-      return (response as List).map((e) => _fromJson(e)).toList();
-    } catch (e) {
-      debugPrint('TaskRepository.getTasks error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+      return (response as List).map((e) => _fromJson(e as Map<String, dynamic>)).toList();
+    }, 'getTasks');
   }
 
   Future<Task> createTask(Task task, String familyId) async {
-    try {
+    return handleRepositoryCall(() async {
       final userId = AuthService.currentUserId;
       if (userId == null) throw Exception('Giriş yapmalısınız');
 
@@ -52,14 +50,11 @@ class TaskRepository {
           .single();
 
       return _fromJson(response);
-    } catch (e) {
-      debugPrint('TaskRepository.createTask error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'createTask');
   }
 
   Future<void> updateTask(Task task) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client
           .from(_table)
           .update({
@@ -72,23 +67,17 @@ class TaskRepository {
             'completed_at': task.completedAt?.toIso8601String(),
           })
           .eq('id', task.id);
-    } catch (e) {
-      debugPrint('TaskRepository.updateTask error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'updateTask');
   }
 
   Future<void> deleteTask(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client.from(_table).delete().eq('id', id);
-    } catch (e) {
-      debugPrint('TaskRepository.deleteTask error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'deleteTask');
   }
 
   Future<void> completeTask(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client
           .from(_table)
           .update({
@@ -98,10 +87,7 @@ class TaskRepository {
           .eq('id', id);
 
       await GamificationService.addXp(10);
-    } catch (e) {
-      debugPrint('TaskRepository.completeTask error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'completeTask');
   }
 
   Stream<List<Task>> watchTasks(String familyId) {
@@ -117,26 +103,26 @@ class TaskRepository {
           );
     } catch (e) {
       debugPrint('TaskRepository.watchTasks error: $e');
-      return Stream.error(Exception('Veritabanı hatası: $e'));
+      return Stream.error(RepositoryException('Beklenmeyen hata [watchTasks]: $e'));
     }
   }
 
   Task _fromJson(Map<String, dynamic> json) {
     return Task(
       id: json['id']?.toString() ?? '',
-      title: json['title'] ?? '',
-      description: json['description'] ?? '',
+      title: (json['title'] as String?) ?? '',
+      description: (json['description'] as String?) ?? '',
       assignedTo: json['assigned_to']?.toString() ?? '',
       status: _parseStatus(json['status']),
-      priority: json['priority'] ?? 'medium',
+      priority: (json['priority'] as String?) ?? 'medium',
       dueDate: json['due_date'] != null
-          ? DateTime.parse(json['due_date'])
+          ? DateTime.parse(json['due_date'] as String)
           : null,
       completedAt: json['completed_at'] != null
-          ? DateTime.parse(json['completed_at'])
+          ? DateTime.parse(json['completed_at'] as String)
           : null,
-      tags: List<String>.from(json['tags'] ?? []),
-      streakCount: json['streak_count'] ?? 0,
+      tags: List<String>.from((json['tags'] as List<dynamic>?) ?? []),
+      streakCount: (json['streak_count'] as int?) ?? 0,
     );
   }
 

@@ -30,7 +30,7 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
     widget.onSaved({
       'role': _role,
       'display_name': _displayNameController.text.trim().isEmpty ? null : _displayNameController.text.trim(),
-      'color': '#${_selectedColor.value.toRadixString(16).substring(2)}',
+      'color': '#${_selectedColor.toARGB32().toRadixString(16).substring(2)}',
     });
   }
 

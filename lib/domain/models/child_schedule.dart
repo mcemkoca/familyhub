@@ -46,13 +46,13 @@ class ChildSchedule {
       dayOfWeek: json['day_of_week'] as int? ?? 1,
       startTime: json['start_time']?.toString() ?? '08:00',
       endTime: json['end_time']?.toString() ?? '09:00',
-      subject: json['subject'] ?? '',
+      subject: (json['subject'] as String?) ?? '',
       location: json['location'] as String?,
       teacher: json['teacher'] as String?,
       color: parseColor(json['color'] as String?),
       isActive: json['is_active'] as bool? ?? true,
       createdAt: json['created_at'] != null
-          ? DateTime.parse(json['created_at'])
+          ? DateTime.parse(json['created_at'] as String)
           : DateTime.now(),
     );
   }
@@ -67,7 +67,7 @@ class ChildSchedule {
         'subject': subject,
         'location': location,
         'teacher': teacher,
-        'color': '#${color.value.toRadixString(16).substring(2).toUpperCase()}',
+        'color': '#${color.toARGB32().toRadixString(16).substring(2).toUpperCase()}',
         'is_active': isActive,
         'created_at': createdAt.toIso8601String(),
       };

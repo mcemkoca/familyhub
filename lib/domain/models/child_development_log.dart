@@ -30,11 +30,11 @@ class ChildDevelopmentLog {
       value: json['value']?.toString() ?? '',
       unit: json['unit'] as String?,
       loggedAt: json['logged_at'] != null
-          ? DateTime.parse(json['logged_at'])
+          ? DateTime.parse(json['logged_at'] as String)
           : DateTime.now(),
       notes: json['notes'] as String?,
       createdAt: json['created_at'] != null
-          ? DateTime.parse(json['created_at'])
+          ? DateTime.parse(json['created_at'] as String)
           : DateTime.now(),
     );
   }

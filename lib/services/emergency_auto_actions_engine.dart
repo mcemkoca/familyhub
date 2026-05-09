@@ -53,6 +53,7 @@ class EmergencyAutoActionsEngine {
         locationSettings: const LocationSettings(accuracy: LocationAccuracy.best),
       );
     } catch (e) {
+      // ignore: empty_catches
     }
 
     // 2. Build action
@@ -106,7 +107,7 @@ class EmergencyAutoActionsEngine {
     }
 
     // B. Messages (parallel)
-    final futures = <Future>[];
+    final futures = <Future<void>>[];
     for (final msg in auto.messages) {
       futures.add(_sendMessage(action, msg));
     }
@@ -167,10 +168,12 @@ class EmergencyAutoActionsEngine {
     required bool isInitial,
   }) async {
     try {
+      // ignore: unused_local_variable
       final pos = await Geolocator.getCurrentPosition(
         locationSettings: const LocationSettings(accuracy: LocationAccuracy.bestForNavigation),
       );
     } catch (e) {
+      // ignore: empty_catches
     }
   }
 
@@ -299,6 +302,7 @@ class EmergencyAutoActionsEngine {
   // AUDIO RECORDING
   // ═══════════════════════════════════════════
   Future<void> _startAudioRecording(EmergencyAction action) async {
+    // ignore: unused_local_variable
     final duration = action.autoActions.audioRecording.durationSeconds;
     // TODO: Use record package for actual recording
   }

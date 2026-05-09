@@ -1,13 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
+import '../core/utils/repository_mixin.dart';
 import '../core/errors.dart' as app_errors;
 import '../domain/models/today_summary.dart';
 import '../domain/models/hub_event.dart';
 import '../domain/models/hub_task.dart';
 import '../domain/models/family_mood.dart';
 
-class HubRepository {
+class HubRepository with RepositoryErrorHandler {
   static final HubRepository _instance = HubRepository._internal();
   factory HubRepository() => _instance;
   HubRepository._internal();
@@ -91,7 +92,7 @@ class HubRepository {
     }
 
     final onlineCount = members.where((m) {
-      final lastActive = DateTime.tryParse(m['last_active_at'] ?? '');
+      final lastActive = DateTime.tryParse(((m as Map<String, dynamic>)['last_active_at'] as String?) ?? '');
       if (lastActive == null) return false;
       return DateTime.now().difference(lastActive).inMinutes < 5;
     }).length;
@@ -124,7 +125,9 @@ class HubRepository {
           .order('start_time', ascending: true)
           .limit(limit);
 
-      return (response as List).map((e) => HubEvent.fromJson(e)).toList();
+      return (response as List)
+          .map((e) => HubEvent.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('HubRepository: getUpcomingEvents error: $e');
       return [];
@@ -147,7 +150,7 @@ class HubRepository {
     } catch (e) {
       debugPrint('HubRepository.watchUpcomingEvents error: $e');
       return Stream.error(
-        app_errors.AppDatabaseException('Veritabanı hatası: $e'),
+        RepositoryException('Beklenmeyen hata [watchUpcomingEvents]: $e'),
       );
     }
   }
@@ -166,7 +169,9 @@ class HubRepository {
           .order('due_date', ascending: true)
           .limit(5);
 
-      return (response as List).map((e) => HubTask.fromJson(e)).toList();
+      return (response as List)
+          .map((e) => HubTask.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('HubRepository: getMyTasks error: $e');
       return [];
@@ -174,7 +179,7 @@ class HubRepository {
   }
 
   Future<void> completeTask(String taskId) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       await _safeClient!
           .from('tasks')
@@ -184,23 +189,17 @@ class HubRepository {
             'completed_by': _userId,
           })
           .eq('id', taskId);
-    } catch (e) {
-      debugPrint('HubRepository.completeTask error: $e');
-      throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'completeTask');
   }
 
   Future<void> updateTaskStatus(String taskId, String status) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       await _safeClient!
           .from('tasks')
           .update({'status': status})
           .eq('id', taskId);
-    } catch (e) {
-      debugPrint('HubRepository.updateTaskStatus error: $e');
-      throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'updateTaskStatus');
   }
 
   // ==================== FAMILY MOOD ====================
@@ -211,7 +210,7 @@ class HubRepository {
     String? note,
     int? energyLevel,
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       await _safeClient!.from('family_moods').insert({
         'family_id': familyId,
@@ -220,10 +219,7 @@ class HubRepository {
         'mood_note': note,
         'energy_level': energyLevel,
       });
-    } catch (e) {
-      debugPrint('HubRepository.shareMood error: $e');
-      throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'shareMood');
   }
 
   Future<List<FamilyMood>> getRecentMoods(
@@ -240,7 +236,9 @@ class HubRepository {
           .order('created_at', ascending: false)
           .limit(limit);
 
-      return (response as List).map((e) => FamilyMood.fromJson(e)).toList();
+      return (response as List)
+          .map((e) => FamilyMood.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('HubRepository: getRecentMoods error: $e');
       return [];
@@ -263,7 +261,7 @@ class HubRepository {
     } catch (e) {
       debugPrint('HubRepository.watchFamilyMoods error: $e');
       return Stream.error(
-        app_errors.AppDatabaseException('Veritabanı hatası: $e'),
+        RepositoryException('Beklenmeyen hata [watchFamilyMoods]: $e'),
       );
     }
   }
@@ -272,9 +270,9 @@ class HubRepository {
 
   RealtimeChannel subscribeToHub(
     String familyId, {
-    required Function onEventChange,
-    required Function onTaskChange,
-    required Function onMoodChange,
+    required void Function(Map<String, dynamic>) onEventChange,
+    required void Function(Map<String, dynamic>) onTaskChange,
+    required void Function(Map<String, dynamic>) onMoodChange,
   }) {
     try {
       return _safeClient!
@@ -288,7 +286,7 @@ class HubRepository {
               column: 'family_id',
               value: familyId,
             ),
-            callback: (payload) => onEventChange(payload),
+            callback: (payload) => onEventChange(payload as Map<String, dynamic>),
           )
           .onPostgresChanges(
             event: PostgresChangeEvent.all,
@@ -299,7 +297,7 @@ class HubRepository {
               column: 'family_id',
               value: familyId,
             ),
-            callback: (payload) => onTaskChange(payload),
+            callback: (payload) => onTaskChange(payload as Map<String, dynamic>),
           )
           .onPostgresChanges(
             event: PostgresChangeEvent.all,
@@ -310,7 +308,7 @@ class HubRepository {
               column: 'family_id',
               value: familyId,
             ),
-            callback: (payload) => onMoodChange(payload),
+            callback: (payload) => onMoodChange(payload as Map<String, dynamic>),
           )
           .subscribe();
     } catch (e) {

@@ -28,14 +28,17 @@ class AppLoadingIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final indicator = SizedBox(
-      width: _dimension,
-      height: _dimension,
-      child: CircularProgressIndicator(
-        strokeWidth: _strokeWidth,
-        valueColor: color != null
-            ? AlwaysStoppedAnimation<Color>(color!)
-            : null,
+    final indicator = Semantics(
+      label: label ?? 'Loading',
+      child: SizedBox(
+        width: _dimension,
+        height: _dimension,
+        child: CircularProgressIndicator(
+          strokeWidth: _strokeWidth,
+          valueColor: color != null
+              ? AlwaysStoppedAnimation<Color>(color!)
+              : null,
+        ),
       ),
     );
 

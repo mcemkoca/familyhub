@@ -9,6 +9,7 @@ import '../../../domain/entities.dart';
 import '../../../domain/models/family_info.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/family_service.dart';
+import '../../../repositories/family_members_repository.dart';
 import '../../providers/app_providers.dart';
 import '../../widgets/family/member_card.dart';
 import '../../widgets/family/member_action_sheet.dart';
@@ -60,41 +61,64 @@ class _FamilyScreenState extends ConsumerState<FamilyScreen> {
 
   bool get _isAdmin {
     final members = ref.read(familyMembersProvider);
-    final me = members.firstWhere((m) => m.id == (members.isNotEmpty ? members.first.id : ''),
-        orElse: () => members.first);
+    final currentUserId = AuthService.currentUserId;
+    if (currentUserId == null || members.isEmpty) return false;
+    final me = members.firstWhere(
+      (m) => m.id == currentUserId,
+      orElse: () => members.first,
+    );
     return me.role == MemberRole.admin || me.role == MemberRole.parent;
   }
 
-  void _handleRoleChange(MemberRole newRole) {
-    if (_selectedMember == null) return;
+  void _handleRoleChange(MemberRole newRole) async {
+    if (_selectedMember == null || _familyId == null) return;
 
     final members = ref.read(familyMembersProvider);
     final index = members.indexWhere((m) => m.id == _selectedMember!.id);
     if (index == -1) return;
 
-    final updated = FamilyMember(
-      id: _selectedMember!.id,
-      name: _selectedMember!.name,
-      initial: _selectedMember!.initial,
-      color: _selectedMember!.color,
-      role: newRole,
-      isOnline: _selectedMember!.isOnline,
-      lastSeen: _selectedMember!.lastSeen,
-      joinedAt: _selectedMember!.joinedAt,
-    );
+    try {
+      await FamilyMembersRepository().updateRole(
+        _selectedMember!.id,
+        _familyId!,
+        newRole.name,
+      );
 
-    final newList = List<FamilyMember>.from(members);
-    newList[index] = updated;
-    ref.read(familyMembersProvider.notifier).state = newList;
+      final updated = FamilyMember(
+        id: _selectedMember!.id,
+        name: _selectedMember!.name,
+        initial: _selectedMember!.initial,
+        color: _selectedMember!.color,
+        role: newRole,
+        isOnline: _selectedMember!.isOnline,
+        lastSeen: _selectedMember!.lastSeen,
+        joinedAt: _selectedMember!.joinedAt,
+      );
 
-    HapticFeedback.mediumImpact();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          '${_selectedMember!.name} artık ${_roleLabel(newRole)}',
-        ),
-      ),
-    );
+      final newList = List<FamilyMember>.from(members);
+      newList[index] = updated;
+      ref.read(familyMembersProvider.notifier).state = newList;
+
+      HapticFeedback.mediumImpact();
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              '${_selectedMember!.name} artık ${_roleLabel(newRole)}',
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Rol güncellenemedi: $e'),
+            backgroundColor: AppColors.error,
+          ),
+        );
+      }
+    }
   }
 
   void _handleRemove() {
@@ -118,23 +142,43 @@ class _FamilyScreenState extends ConsumerState<FamilyScreen> {
             child: Text(AppLocalizations.of(context).cancel),
           ),
           ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               Navigator.pop(context);
-              final members = ref.read(familyMembersProvider);
-              ref.read(familyMembersProvider.notifier).state =
-                  members.where((m) => m.id != _selectedMember!.id).toList();
+              if (_familyId == null) return;
 
-              if (isSelf) {
-                context.go(AppRoutes.login);
-              } else {
-                HapticFeedback.heavyImpact();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('${_selectedMember!.name} çıkarıldı'),
-                  ),
+              try {
+                await FamilyMembersRepository().removeMember(
+                  _selectedMember!.id,
+                  _familyId!,
                 );
+
+                final members = ref.read(familyMembersProvider);
+                ref.read(familyMembersProvider.notifier).state =
+                    members.where((m) => m.id != _selectedMember!.id).toList();
+
+                if (isSelf) {
+                  if (mounted && context.mounted) context.go(AppRoutes.login);
+                } else {
+                  HapticFeedback.heavyImpact();
+                  if (mounted && context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('${_selectedMember!.name} çıkarıldı'),
+                      ),
+                    );
+                  }
+                }
+                setState(() => _selectedMember = null);
+              } catch (e) {
+                if (mounted && context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Üye çıkarılamadı: $e'),
+                      backgroundColor: AppColors.error,
+                    ),
+                  );
+                }
               }
-              setState(() => _selectedMember = null);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.error,

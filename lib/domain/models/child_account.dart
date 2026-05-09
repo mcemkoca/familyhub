@@ -99,7 +99,7 @@ class ChildAccount {
 
   Map<String, dynamic> toJson() {
     String colorToHex(Color c) {
-      return '#${c.value.toRadixString(16).substring(2).toUpperCase()}';
+      return '#${c.toARGB32().toRadixString(16).substring(2).toUpperCase()}';
     }
 
     return {

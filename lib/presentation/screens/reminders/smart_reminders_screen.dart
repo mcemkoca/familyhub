@@ -2,12 +2,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../../core/supabase_client.dart';
 import '../../../config/constants.dart';
 import '../../../config/routes.dart';
 import '../../../domain/models/smart_reminder.dart';
 import '../../../repositories/smart_reminder_repository.dart';
 import '../../../services/auth_service.dart';
+import '../../../services/smart_reminder_background_service.dart';
 import '../../../services/smart_reminder_service.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
@@ -46,7 +47,7 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
   Future<String?> _getFamilyId() async {
     final userId = AuthService.currentUserId;
     if (userId == null) return null;
-    final profile = await Supabase.instance.client
+    final profile = await SupabaseConfig.client
         .from('profiles')
         .select('family_id')
         .eq('id', userId)
@@ -422,10 +423,12 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
         actions: [
           TextButton(onPressed: () => Navigator.pop(ctx), child: Text(AppLocalizations.of(context).cancel)),
           TextButton(
-            onPressed: () {
+            onPressed: () async {
               setState(() => _reminders.removeWhere((r) => r.id == reminder.id));
               Navigator.pop(ctx);
               HapticFeedback.mediumImpact();
+              await SmartReminderRepository().delete(reminder.id);
+              await SmartReminderBackgroundService.cancelReminder(reminder.id);
             },
             child: const Text('Sil', style: TextStyle(color: Colors.red)),
           ),

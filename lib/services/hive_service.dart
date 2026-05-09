@@ -62,18 +62,19 @@ class HiveService {
   static List<Task> getTasks() {
     final raw = _taskBox.get('tasks');
     if (raw == null) return [];
-    final list = List<Map<String, dynamic>>.from(jsonDecode(raw));
+    // ignore: unnecessary_cast
+    final list = List<Map<String, dynamic>>.from(jsonDecode(raw as String) as List<dynamic>);
     return list.map((t) => Task(
-      id: t['id'],
-      title: t['title'],
-      description: t['description'],
-      assignedTo: t['assignedTo'],
-      status: _safeEnum(TaskStatus.values, t['status'], TaskStatus.pending),
-      dueDate: t['dueDate'] != null ? DateTime.parse(t['dueDate']) : null,
-      completedAt: t['completedAt'] != null ? DateTime.parse(t['completedAt']) : null,
-      tags: List<String>.from(t['tags']),
-      streakCount: t['streakCount'],
-      priority: t['priority'],
+      id: t['id'] as String,
+      title: t['title'] as String,
+      description: t['description'] as String?,
+      assignedTo: t['assignedTo'] as String,
+      status: _safeEnum(TaskStatus.values, t['status'] as String, TaskStatus.pending),
+      dueDate: t['dueDate'] != null ? DateTime.parse(t['dueDate'] as String) : null,
+      completedAt: t['completedAt'] != null ? DateTime.parse(t['completedAt'] as String) : null,
+      tags: List<String>.from(t['tags'] as List<dynamic>),
+      streakCount: t['streakCount'] as int,
+      priority: t['priority'] as String,
     )).toList();
   }
 
@@ -96,17 +97,18 @@ class HiveService {
   static List<Transaction> getTransactions() {
     final raw = _transactionBox.get('transactions');
     if (raw == null) return [];
-    final list = List<Map<String, dynamic>>.from(jsonDecode(raw));
+    // ignore: unnecessary_cast
+    final list = List<Map<String, dynamic>>.from(jsonDecode(raw as String) as List<dynamic>);
     return list.map((t) => Transaction(
-      id: t['id'],
-      amount: t['amount'],
-      currency: t['currency'],
-      type: _safeEnum(TransactionType.values, t['type'], TransactionType.expense),
-      category: t['category'],
-      description: t['description'],
-      createdBy: t['createdBy'],
-      createdAt: DateTime.parse(t['createdAt']),
-      attachments: List<String>.from(t['attachments']),
+      id: t['id'] as String,
+      amount: t['amount'] as double,
+      currency: t['currency'] as String,
+      type: _safeEnum(TransactionType.values, t['type'] as String, TransactionType.expense),
+      category: t['category'] as String,
+      description: t['description'] as String?,
+      createdBy: t['createdBy'] as String,
+      createdAt: DateTime.parse(t['createdAt'] as String),
+      attachments: List<String>.from(t['attachments'] as List<dynamic>),
     )).toList();
   }
 
@@ -116,7 +118,7 @@ class HiveService {
       'id': m.id,
       'senderId': m.senderId,
       'senderName': m.senderName,
-      'senderColor': m.senderColor.value,
+      'senderColor': m.senderColor.toARGB32(),
       'content': m.content,
       'createdAt': m.createdAt.toIso8601String(),
       'isRead': m.isRead,
@@ -137,28 +139,32 @@ class HiveService {
   static List<ChatMessage> getChatMessages() {
     final raw = _chatBox.get('messages');
     if (raw == null) return [];
-    final list = List<Map<String, dynamic>>.from(jsonDecode(raw));
+    // ignore: unnecessary_cast
+    final list = List<Map<String, dynamic>>.from(jsonDecode(raw as String) as List<dynamic>);
     return list.map((m) => ChatMessage(
-      id: m['id'],
-      senderId: m['senderId'],
-      senderName: m['senderName'],
-      senderColor: Color(m['senderColor']),
-      content: m['content'],
-      createdAt: DateTime.parse(m['createdAt']),
-      isRead: m['isRead'],
-      type: _safeEnum(MessageType.values, m['type'], MessageType.text),
-      imageUrl: m['imageUrl'],
-      audioUrl: m['audioUrl'],
-      audioDuration: m['audioDuration'],
-      reactions: (m['reactions'] as List).map((r) => MessageReaction(
-        emoji: r['emoji'],
-        userIds: List<String>.from(r['userIds']),
-      )).toList(),
-      replyToId: m['replyToId'],
-      replyToContent: m['replyToContent'],
-      replyToSender: m['replyToSender'],
-      isPinned: m['isPinned'],
-      readCount: m['readCount'],
+      id: m['id'] as String,
+      senderId: m['senderId'] as String,
+      senderName: m['senderName'] as String,
+      senderColor: Color(m['senderColor'] as int),
+      content: m['content'] as String,
+      createdAt: DateTime.parse(m['createdAt'] as String),
+      isRead: m['isRead'] as bool,
+      type: _safeEnum(MessageType.values, m['type'] as String, MessageType.text),
+      imageUrl: m['imageUrl'] as String?,
+      audioUrl: m['audioUrl'] as String?,
+      audioDuration: m['audioDuration'] as int?,
+      reactions: (m['reactions'] as List<dynamic>).map((r) {
+        final reaction = r as Map<String, dynamic>;
+        return MessageReaction(
+          emoji: reaction['emoji'] as String,
+          userIds: List<String>.from(reaction['userIds'] as List<dynamic>),
+        );
+      }).toList(),
+      replyToId: m['replyToId'] as String?,
+      replyToContent: m['replyToContent'] as String?,
+      replyToSender: m['replyToSender'] as String?,
+      isPinned: m['isPinned'] as bool,
+      readCount: m['readCount'] as int,
     )).toList();
   }
 
@@ -177,13 +183,14 @@ class HiveService {
   static List<StreakEntry> getStreaks() {
     final raw = _streakBox.get('streaks');
     if (raw == null) return [];
-    final list = List<Map<String, dynamic>>.from(jsonDecode(raw));
+    // ignore: unnecessary_cast
+    final list = List<Map<String, dynamic>>.from(jsonDecode(raw as String) as List<dynamic>);
     return list.map((s) => StreakEntry(
-      id: s['id'],
-      title: s['title'],
-      date: DateTime.parse(s['date']),
-      completed: s['completed'],
-      note: s['note'],
+      id: s['id'] as String,
+      title: s['title'] as String,
+      date: DateTime.parse(s['date'] as String),
+      completed: s['completed'] as bool,
+      note: s['note'] as String?,
     )).toList();
   }
 
@@ -230,7 +237,7 @@ class HiveService {
     final raw = _settingsBox.get('savedLocation');
     if (raw == null) return null;
     try {
-      return LocationModel.fromJson(jsonDecode(raw));
+      return LocationModel.fromJson(jsonDecode(raw as String) as Map<String, dynamic>);
     } catch (_) {
       return null;
     }
@@ -265,7 +272,8 @@ class HiveService {
     final raw = _settingsBox.get('child_homeworks');
     if (raw == null) return [];
     try {
-      final list = List<Map<String, dynamic>>.from(jsonDecode(raw));
+      // ignore: unnecessary_cast
+    final list = List<Map<String, dynamic>>.from(jsonDecode(raw as String) as List<dynamic>);
       return list.map((e) => ChildHomework.fromJson(e)).toList();
     } catch (_) {
       return [];
@@ -282,7 +290,9 @@ class HiveService {
     final raw = _settingsBox.get('child_schedules');
     if (raw == null) return [];
     try {
-      final list = List<Map<String, dynamic>>.from(jsonDecode(raw));
+      final list = (jsonDecode(raw as String) as List<dynamic>)
+          .map((e) => Map<String, dynamic>.from(e as Map))
+          .toList();
       return list.map((e) => ChildSchedule.fromJson(e)).toList();
     } catch (_) {
       return [];
@@ -321,7 +331,7 @@ class HiveService {
       ];
     }
     try {
-      return List<String>.from(jsonDecode(raw));
+      return List<String>.from(jsonDecode(raw as String) as List<dynamic>);
     } catch (_) {
       return [];
     }
@@ -358,7 +368,7 @@ class HiveService {
     final raw = _settingsBox.get('shown_suggestion_ids');
     if (raw == null) return [];
     try {
-      return List<String>.from(jsonDecode(raw));
+      return List<String>.from(jsonDecode(raw as String) as List<dynamic>);
     } catch (_) {
       return [];
     }
@@ -384,7 +394,9 @@ class HiveService {
     final raw = _settingsBox.get('child_dev_logs');
     if (raw == null) return [];
     try {
-      final list = List<Map<String, dynamic>>.from(jsonDecode(raw));
+      final list = (jsonDecode(raw as String) as List<dynamic>)
+          .map((e) => Map<String, dynamic>.from(e as Map))
+          .toList();
       return list.map((e) => ChildDevelopmentLog.fromJson(e)).toList();
     } catch (_) {
       return [];
@@ -401,7 +413,7 @@ class HiveService {
     final raw = _calendarBox.get('events');
     if (raw == null) return [];
     try {
-      final list = List<Map<String, dynamic>>.from(jsonDecode(raw));
+      final list = List<Map<String, dynamic>>.from(jsonDecode(raw) as List<dynamic>);
       return list.map((e) => CalendarEvent.fromJson(e)).toList();
     } catch (_) {
       return [];
@@ -418,7 +430,7 @@ class HiveService {
     final raw = _shoppingBox.get('items');
     if (raw == null) return [];
     try {
-      final list = List<Map<String, dynamic>>.from(jsonDecode(raw));
+      final list = List<Map<String, dynamic>>.from(jsonDecode(raw) as List<dynamic>);
       return list.map((e) => ShoppingItem.fromJson(e)).toList();
     } catch (_) {
       return [];
@@ -435,7 +447,7 @@ class HiveService {
     final raw = _familyBox.get('members');
     if (raw == null) return [];
     try {
-      final list = List<Map<String, dynamic>>.from(jsonDecode(raw));
+      final list = List<Map<String, dynamic>>.from(jsonDecode(raw) as List<dynamic>);
       return list.map((e) => FamilyMember.fromJson(e)).toList();
     } catch (_) {
       return [];
@@ -452,7 +464,7 @@ class HiveService {
     final raw = _moodBox.get('entries');
     if (raw == null) return [];
     try {
-      final list = List<Map<String, dynamic>>.from(jsonDecode(raw));
+      final list = List<Map<String, dynamic>>.from(jsonDecode(raw) as List<dynamic>);
       return list.map((e) => MoodEntry.fromJson(e)).toList();
     } catch (_) {
       return [];

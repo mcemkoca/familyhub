@@ -41,6 +41,7 @@ class _HiveSettingsToggleState extends State<HiveSettingsToggle> {
       try {
         await widget.onSupabaseSync!(newValue);
       } catch (e) {
+        debugPrint('Settings sync error: $e');
       }
     }
   }

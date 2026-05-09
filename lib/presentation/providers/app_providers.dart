@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/supabase_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 // import 'package:hive_flutter/hive_flutter.dart';
 import '../../config/constants.dart';
 import '../../domain/entities.dart';
@@ -18,7 +17,8 @@ import '../../repositories/mood_repository.dart';
 import '../../domain/models/hub_state.dart';
 
 // Re-export auth providers from auth_service.dart
-export '../../services/auth_service.dart' show authStateProvider, authUserProvider, currentUserProvider;
+export '../../services/auth_service.dart'
+    show authStateProvider, authUserProvider, currentUserProvider;
 
 // Re-export child auth providers
 export '../../services/child_auth_service.dart' show ChildAuthService;
@@ -130,7 +130,8 @@ final hubDataProvider = FutureProvider.autoDispose<HubState>((ref) async {
     upcomingEvents: results[1] as List<HubEvent>,
     myTasks: results[2] as List<HubTask>,
     familyMoods: results[3] as List<FamilyMood>,
-    familyMembers: [], // Populated by familyMembersProvider separately (realtime stream)
+    familyMembers:
+        [], // Populated by familyMembersProvider separately (realtime stream)
     familyId: familyId,
   );
 });
@@ -254,7 +255,9 @@ class CalendarNotifier extends StateNotifier<AsyncValue<List<CalendarEvent>>> {
     try {
       await CalendarRepository().updateEvent(event);
       final current = state.valueOrNull ?? [];
-      state = AsyncValue.data(current.map((e) => e.id == event.id ? event : e).toList());
+      state = AsyncValue.data(
+        current.map((e) => e.id == event.id ? event : e).toList(),
+      );
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }
@@ -271,7 +274,10 @@ class CalendarNotifier extends StateNotifier<AsyncValue<List<CalendarEvent>>> {
   }
 }
 
-final eventsProvider = StateNotifierProvider<CalendarNotifier, AsyncValue<List<CalendarEvent>>>((ref) => CalendarNotifier());
+final eventsProvider =
+    StateNotifierProvider<CalendarNotifier, AsyncValue<List<CalendarEvent>>>(
+      (ref) => CalendarNotifier(),
+    );
 
 // ── Shopping ──
 
@@ -290,9 +296,15 @@ class ShoppingNotifier extends StateNotifier<AsyncValue<List<ShoppingItem>>> {
     }
   }
 
-  Future<void> addItem(String name, {ShoppingCategory category = ShoppingCategory.grocery}) async {
+  Future<void> addItem(
+    String name, {
+    ShoppingCategory category = ShoppingCategory.grocery,
+  }) async {
     try {
-      final item = await ShoppingRepository().createItem(name, category: category);
+      final item = await ShoppingRepository().createItem(
+        name,
+        category: category,
+      );
       final current = state.valueOrNull ?? [];
       state = AsyncValue.data([item, ...current]);
     } catch (e, st) {
@@ -305,15 +317,17 @@ class ShoppingNotifier extends StateNotifier<AsyncValue<List<ShoppingItem>>> {
       final newValue = !item.isCompleted;
       await ShoppingRepository().toggleItem(item.id, newValue);
       final current = state.valueOrNull ?? [];
-      state = AsyncValue.data(current.map((i) {
-        if (i.id == item.id) {
-          return i.copyWith(
-            isCompleted: newValue,
-            completedBy: newValue ? '' : null,
-          );
-        }
-        return i;
-      }).toList());
+      state = AsyncValue.data(
+        current.map((i) {
+          if (i.id == item.id) {
+            return i.copyWith(
+              isCompleted: newValue,
+              completedBy: newValue ? '' : null,
+            );
+          }
+          return i;
+        }).toList(),
+      );
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }
@@ -335,9 +349,10 @@ class ShoppingNotifier extends StateNotifier<AsyncValue<List<ShoppingItem>>> {
   }
 }
 
-final shoppingItemsProvider = StateNotifierProvider<ShoppingNotifier, AsyncValue<List<ShoppingItem>>>(
-  (ref) => ShoppingNotifier(),
-);
+final shoppingItemsProvider =
+    StateNotifierProvider<ShoppingNotifier, AsyncValue<List<ShoppingItem>>>(
+      (ref) => ShoppingNotifier(),
+    );
 
 // ── Budget ──
 
@@ -381,7 +396,9 @@ class BudgetNotifier extends StateNotifier<AsyncValue<List<Transaction>>> {
         description: tx.description,
       );
       final current = state.valueOrNull ?? [];
-      state = AsyncValue.data(current.map((t) => t.id == tx.id ? created : t).toList());
+      state = AsyncValue.data(
+        current.map((t) => t.id == tx.id ? created : t).toList(),
+      );
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }
@@ -398,7 +415,10 @@ class BudgetNotifier extends StateNotifier<AsyncValue<List<Transaction>>> {
   }
 }
 
-final transactionsProvider = StateNotifierProvider<BudgetNotifier, AsyncValue<List<Transaction>>>((ref) => BudgetNotifier());
+final transactionsProvider =
+    StateNotifierProvider<BudgetNotifier, AsyncValue<List<Transaction>>>(
+      (ref) => BudgetNotifier(),
+    );
 
 class CurrentBudgetNotifier extends StateNotifier<AsyncValue<Budget>> {
   CurrentBudgetNotifier() : super(const AsyncValue.loading()) {
@@ -416,7 +436,10 @@ class CurrentBudgetNotifier extends StateNotifier<AsyncValue<Budget>> {
   }
 }
 
-final budgetProvider = StateNotifierProvider<CurrentBudgetNotifier, AsyncValue<Budget>>((ref) => CurrentBudgetNotifier());
+final budgetProvider =
+    StateNotifierProvider<CurrentBudgetNotifier, AsyncValue<Budget>>(
+      (ref) => CurrentBudgetNotifier(),
+    );
 
 // ── Chat ──
 
@@ -434,6 +457,7 @@ class MoodNotifier extends StateNotifier<List<MoodEntry>> {
       final entries = await MoodRepository().getEntries();
       state = entries;
     } catch (e) {
+      debugPrint('Mood load error: $e');
     }
   }
 
@@ -442,6 +466,7 @@ class MoodNotifier extends StateNotifier<List<MoodEntry>> {
       final entry = await MoodRepository().createEntry(emoji, note: note);
       state = [entry, ...state];
     } catch (e) {
+      debugPrint('Mood add error: $e');
     }
   }
 
@@ -451,7 +476,10 @@ class MoodNotifier extends StateNotifier<List<MoodEntry>> {
   }
 }
 
-final moodEntriesProvider = StateNotifierProvider<MoodNotifier, List<MoodEntry>>((ref) => MoodNotifier());
+final moodEntriesProvider =
+    StateNotifierProvider<MoodNotifier, List<MoodEntry>>(
+      (ref) => MoodNotifier(),
+    );
 
 // ── Streak ──
 
@@ -460,9 +488,15 @@ final streakEntriesProvider = StateProvider<List<StreakEntry>>((ref) => []);
 // ── Weather ──
 
 final weatherProvider = FutureProvider<WeatherData>((ref) async {
-  final useLocation = HiveService.getBoolSetting('weatherUseLocation', defaultValue: true);
+  final useLocation = HiveService.getBoolSetting(
+    'weatherUseLocation',
+    defaultValue: true,
+  );
   final cityName = HiveService.getSetting('weatherCity') ?? 'İstanbul';
-  final celsius = HiveService.getBoolSetting('weatherCelsius', defaultValue: true);
+  final celsius = HiveService.getBoolSetting(
+    'weatherCelsius',
+    defaultValue: true,
+  );
 
   // 1. Saved manual location from map picker
   final savedLoc = HiveService.getLocation();
@@ -477,7 +511,9 @@ final weatherProvider = FutureProvider<WeatherData>((ref) async {
   // 2. GPS current location
   if (useLocation) {
     try {
-      return await LocationWeatherService.getCurrentLocationWeather(celsius: celsius);
+      return await LocationWeatherService.getCurrentLocationWeather(
+        celsius: celsius,
+      );
     } catch (_) {
       // fallback
     }

@@ -1,7 +1,7 @@
 import 'dart:async';
 import '../core/supabase_client.dart';
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+
 import '../config/constants.dart';
 import '../domain/models/safety_models.dart';
 import 'child_auth_service.dart';
@@ -13,8 +13,8 @@ class SafetyService {
   SafetyService._();
 
   static final _client = SupabaseConfig.client;
-  static StreamSubscription? _sosSub;
-  static StreamSubscription? _geoSub;
+  static StreamSubscription<dynamic>? _sosSub;
+  static StreamSubscription<dynamic>? _geoSub;
 
   static final _statusController =
       StreamController<List<MemberSafetyStatus>>.broadcast();
@@ -79,20 +79,20 @@ class SafetyService {
           .eq('family_id', familyId);
 
       final members = <Map<String, dynamic>>[];
-      for (final p in profiles as List) {
+      for (final p in (profiles as List).cast<Map<String, dynamic>>()) {
         members.add({
-          'id': p['id'],
-          'name': p['display_name'] ?? 'Üye',
+          'id': p['id'] as String,
+          'name': p['display_name'] as String? ?? 'Üye',
           'type': 'parent',
           'color': null,
         });
       }
-      for (final c in children as List) {
+      for (final c in (children as List).cast<Map<String, dynamic>>()) {
         members.add({
-          'id': c['id'],
-          'name': c['name'] ?? 'Çocuk',
+          'id': c['id'] as String,
+          'name': c['name'] as String? ?? 'Çocuk',
           'type': 'child',
-          'color': c['color'],
+          'color': c['color'] as int?,
         });
       }
 

@@ -20,6 +20,14 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Create .env for code generation
+        run: |
+          cat > .env <<EOF
+          SUPABASE_URL=
+          SUPABASE_ANON_KEY=
+          STRIPE_PUBLISHABLE_KEY=
+          EOF
+
       - name: Generate code (env.g.dart, freezed, etc.)
         run: dart run build_runner build --delete-conflicting-outputs
 
@@ -40,17 +48,17 @@ jobs:
         run: |
           # Check for hardcoded API keys, tokens, passwords
           PATTERN='(apiKey|api_key|api-key|secret|token|password|private_key)\s*[:=]\s*["\x27][^"\x27]{8,}["\x27]'
-          if grep -rE "$PATTERN" lib/ --include="*.dart" -l 2>/dev/null; then
+          if grep -rE "$PATTERN" lib/ --include="*.dart" --exclude="*.g.dart" -l 2>/dev/null; then
             echo "❌ Potential hardcoded secrets found!"
-            grep -rE "$PATTERN" lib/ --include="*.dart" -n
+            grep -rE "$PATTERN" lib/ --include="*.dart" --exclude="*.g.dart" -n
             exit 1
           fi
           echo "✅ No hardcoded secrets detected"
 
           # Check for http:// URLs
-          if grep -r "http://" lib/ --include="*.dart" -l 2>/dev/null; then
+          if grep -r "http://" lib/ --include="*.dart" --exclude="*.g.dart" -l 2>/dev/null; then
             echo "❌ Insecure HTTP URLs found!"
-            grep -r "http://" lib/ --include="*.dart" -n
+            grep -r "http://" lib/ --include="*.dart" --exclude="*.g.dart" -n
             exit 1
           fi
           echo "✅ No insecure HTTP URLs detected"
@@ -81,7 +89,7 @@ jobs:
       - name: Generate code
         run: dart run build_runner build --delete-conflicting-outputs
 
-      - name: Create .env.prod from secrets
+      - name: Create .env and .env.prod from secrets
         run: |
           cat > .env.prod <<EOF
           SUPABASE_URL=${{ secrets.SUPABASE_URL }}
@@ -94,6 +102,7 @@ jobs:
           STRIPE_PUBLISHABLE_KEY=${{ secrets.STRIPE_PUBLISHABLE_KEY }}
           OPENWEATHER_API_KEY=${{ secrets.OPENWEATHER_API_KEY }}
           EOF
+          cp .env.prod .env
 
       - name: Decode keystore
         run: |
@@ -160,7 +169,7 @@ jobs:
       - name: Generate code
         run: dart run build_runner build --delete-conflicting-outputs
 
-      - name: Create .env.prod from secrets
+      - name: Create .env and .env.prod from secrets
         run: |
           cat > .env.prod <<EOF
           SUPABASE_URL=${{ secrets.SUPABASE_URL }}
@@ -173,6 +182,7 @@ jobs:
           STRIPE_PUBLISHABLE_KEY=${{ secrets.STRIPE_PUBLISHABLE_KEY }}
           OPENWEATHER_API_KEY=${{ secrets.OPENWEATHER_API_KEY }}
           EOF
+          cp .env.prod .env
 
       - name: Build IPA
         run: |

@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
+
 import 'package:http/http.dart' as http;
 
 /// OpenAI API integration for FamilyHub dynamic content generation.
@@ -108,6 +108,7 @@ Bu profile uygun içerik oluştur.
       }
 
       final data = jsonDecode(response.body) as Map<String, dynamic>;
+      // ignore: avoid_dynamic_calls
       final content = data['choices']?[0]?['message']?['content'] as String?;
       if (content == null || content.isEmpty) {
         throw AIContentException('Empty response from OpenAI API');

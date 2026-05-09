@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,9 +9,12 @@ import 'package:intl/intl.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import '../../../config/constants.dart';
 import '../../../config/routes.dart';
+import '../../../core/supabase_client.dart';
 import '../../../domain/entities.dart';
 import '../../providers/app_providers.dart';
+import '../../../repositories/chat_repository.dart';
 import '../../../services/hive_service.dart';
+import '../../../services/auth_service.dart';
 import '../../widgets/chat/chat_bubble.dart';
 import '../../widgets/chat/chat_composer.dart';
 import '../../widgets/chat/reaction_picker.dart';
@@ -30,6 +34,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   ChatMessage? _replyToMessage;
   ChatMessage? _reactingToMessage;
   final _focusNode = FocusNode();
+  StreamSubscription<List<ChatMessage>>? _messagesSub;
 
   @override
   void initState() {
@@ -39,38 +44,89 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         setState(() => _showEmojiPicker = false);
       }
     });
+    _loadFamilyIdAndListen();
   }
 
   @override
   void dispose() {
+    _messagesSub?.cancel();
     _scrollController.dispose();
     _focusNode.dispose();
     super.dispose();
   }
 
-  void _sendMessage(String text) {
+  Future<void> _loadFamilyIdAndListen() async {
+    try {
+      final userId = AuthService.currentUserId;
+      if (userId == null) return;
+      final profile = await SupabaseConfig.safeClient
+          ?.from('profiles')
+          .select('family_id')
+          .eq('id', userId)
+          .maybeSingle();
+      final familyId = profile?['family_id'] as String?;
+      if (familyId == null) return;
+
+      _messagesSub = ChatRepository().watchMessages(familyId).listen((messages) {
+        ref.read(chatMessagesProvider.notifier).state = messages;
+      });
+    } catch (e) {
+      debugPrint('ChatScreen _loadFamilyIdAndListen error: $e');
+    }
+  }
+
+  void _sendMessage(String text) async {
     if (text.trim().isEmpty) return;
 
-    final current = ref.read(chatMessagesProvider);
-    final newMsg = ChatMessage(
-      id: 'msg${current.length + 1}',
-      senderId: '',
-      senderName: 'Ben',
-      senderColor: AppColors.blue,
-      content: text.trim(),
-      createdAt: DateTime.now(),
-      replyToId: _replyToMessage?.id,
-      replyToContent: _replyToMessage?.content,
-      replyToSender: _replyToMessage?.senderName,
-    );
+    try {
+      final userId = AuthService.currentUserId;
+      if (userId == null) return;
 
-    ref.read(chatMessagesProvider.notifier).state = [...current, newMsg];
-    _replyToMessage = null;
-    setState(() {});
+      final profile = await SupabaseConfig.safeClient
+          ?.from('profiles')
+          .select('family_id')
+          .eq('id', userId)
+          .maybeSingle();
+      final familyId = profile?['family_id'] as String?;
+      if (familyId == null) return;
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollToBottom();
-    });
+      await ChatRepository().sendMessage(
+        familyId: familyId,
+        content: text.trim(),
+        replyToId: _replyToMessage?.id,
+        replyToContent: _replyToMessage?.content,
+        replyToSender: _replyToMessage?.senderName,
+      );
+      _replyToMessage = null;
+      setState(() {});
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _scrollToBottom();
+      });
+    } catch (e) {
+      debugPrint('ChatScreen _sendMessage error: $e');
+      // Fallback to local provider
+      final current = ref.read(chatMessagesProvider);
+      final userId = AuthService.currentUserId ?? 'unknown';
+      final userName = AuthService.currentUser?.userMetadata?['display_name'] as String? ?? 'Ben';
+      final newMsg = ChatMessage(
+        id: 'msg${current.length + 1}',
+        senderId: userId,
+        senderName: userName,
+        senderColor: AppColors.blue,
+        content: text.trim(),
+        createdAt: DateTime.now(),
+        replyToId: _replyToMessage?.id,
+        replyToContent: _replyToMessage?.content,
+        replyToSender: _replyToMessage?.senderName,
+      );
+      ref.read(chatMessagesProvider.notifier).state = [...current, newMsg];
+      _replyToMessage = null;
+      setState(() {});
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _scrollToBottom();
+      });
+    }
   }
 
   void _scrollToBottom() {

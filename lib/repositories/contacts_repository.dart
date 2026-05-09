@@ -1,7 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
 import '../core/errors.dart' as app_errors;
+import '../core/utils/repository_mixin.dart';
 
 class FamilyContact {
   final String id;
@@ -28,15 +28,15 @@ class FamilyContact {
 
   factory FamilyContact.fromJson(Map<String, dynamic> json) => FamilyContact(
     id: json['id']?.toString() ?? '',
-    name: json['name'] ?? '',
+    name: (json['name'] as String?) ?? '',
     phone: json['phone']?.toString(),
     email: json['email']?.toString(),
-    type: json['type'] ?? 'other',
+    type: (json['type'] as String?) ?? 'other',
     avatarUrl: json['avatar_url']?.toString(),
     notes: json['notes']?.toString(),
     createdBy: json['created_by']?.toString(),
     createdAt: DateTime.parse(
-      json['created_at'] ?? DateTime.now().toIso8601String(),
+      (json['created_at'] as String?) ?? DateTime.now().toIso8601String(),
     ),
   );
 
@@ -50,7 +50,7 @@ class FamilyContact {
   };
 }
 
-class ContactsRepository {
+class ContactsRepository with RepositoryErrorHandler {
   static final ContactsRepository _instance = ContactsRepository._internal();
   factory ContactsRepository() => _instance;
   ContactsRepository._internal();
@@ -58,23 +58,23 @@ class ContactsRepository {
   String? get _userId => _safeClient?.auth.currentUser?.id;
 
   void _checkAuth() {
-    if (_userId == null)
+    if (_userId == null) {
       throw app_errors.AppAuthException('Giriş yapmalısınız');
+    }
   }
 
   Future<List<FamilyContact>> getContacts(String familyId) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       final response = await _safeClient!
           .from('family_contacts')
           .select('*')
           .eq('family_id', familyId)
           .order('name', ascending: true);
-      return (response as List).map((e) => FamilyContact.fromJson(e)).toList();
-    } catch (e) {
-      debugPrint('ContactsRepository.getContacts error: $e');
-      throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
-    }
+      return (response as List)
+          .map((e) => FamilyContact.fromJson(e as Map<String, dynamic>))
+          .toList();
+    }, 'getContacts');
   }
 
   Stream<List<FamilyContact>> watchContacts(String familyId) {
@@ -90,9 +90,8 @@ class ContactsRepository {
                 .toList(),
           );
     } catch (e) {
-      debugPrint('ContactsRepository.watchContacts error: $e');
       return Stream.error(
-        app_errors.AppDatabaseException('Veritabanı hatası: $e'),
+        RepositoryException('Beklenmeyen hata [watchContacts]: $e'),
       );
     }
   }
@@ -105,7 +104,7 @@ class ContactsRepository {
     String type = 'other',
     String? notes,
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       final response = await _safeClient!
           .from('family_contacts')
@@ -121,29 +120,20 @@ class ContactsRepository {
           .select()
           .single();
       return FamilyContact.fromJson(response);
-    } catch (e) {
-      debugPrint('ContactsRepository.createContact error: $e');
-      throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'createContact');
   }
 
   Future<void> updateContact(String id, Map<String, dynamic> data) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       await _safeClient!.from('family_contacts').update(data).eq('id', id);
-    } catch (e) {
-      debugPrint('ContactsRepository.updateContact error: $e');
-      throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'updateContact');
   }
 
   Future<void> deleteContact(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       await _safeClient!.from('family_contacts').delete().eq('id', id);
-    } catch (e) {
-      debugPrint('ContactsRepository.deleteContact error: $e');
-      throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'deleteContact');
   }
 }

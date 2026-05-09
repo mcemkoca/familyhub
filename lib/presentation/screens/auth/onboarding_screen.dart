@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../config/constants.dart';
 import '../../../config/routes.dart';
 import '../../../services/hive_service.dart';
+import '../../../services/onboarding_service.dart';
 import '../../providers/app_providers.dart';
 
 class OnboardingScreen extends ConsumerStatefulWidget {
@@ -17,7 +18,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  final List<Map<String, String>> _slides = [
+  List<Map<String, String>> _slides = [
     {
       'image': 'assets/images/onboarding/onboarding_1.png',
       'title': 'Güvende Kalın',
@@ -34,6 +35,19 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       'desc': 'Görevler, takvim etkinlikleri ve alışveriş listeleri ile hayatı kolaylaştırın.',
     },
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _maybeLoadRemoteSlides();
+  }
+
+  Future<void> _maybeLoadRemoteSlides() async {
+    final remoteSlides = await OnboardingService.getSlides();
+    if (remoteSlides.isNotEmpty && mounted) {
+      setState(() => _slides = remoteSlides);
+    }
+  }
 
   void _nextPage() async {
     if (_currentPage < _slides.length - 1) {

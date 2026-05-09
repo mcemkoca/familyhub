@@ -22,6 +22,7 @@ class LocationWeatherService {
     );
 
     // 3. Reverse geocoding (şehir adı için)
+    // ignore: unused_local_variable
     String city = 'Bilinmiyor';
     try {
       final placemarks = await placemarkFromCoordinates(

@@ -7,7 +7,6 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/supabase_client.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../domain/entities.dart';
 import '../../repositories/hub_repository.dart';
 import '../../services/auth_service.dart';
@@ -33,7 +32,13 @@ final todaySummaryProvider = FutureProvider.autoDispose<TodaySummary>((
 ) async {
   final familyId = await ref.watch(familyIdProvider.future);
   if (familyId == null) {
-    return TodaySummary(eventCount: 0, taskCount: 0, unreadMessages: 0, onlineMembers: 0, totalMembers: 0);
+    return TodaySummary(
+      eventCount: 0,
+      taskCount: 0,
+      unreadMessages: 0,
+      onlineMembers: 0,
+      totalMembers: 0,
+    );
   }
   final repo = ref.watch(hubRepositoryProvider);
   return repo.getTodaySummary(familyId);

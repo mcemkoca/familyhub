@@ -1,18 +1,18 @@
 import 'package:flutter/foundation.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
+import '../core/utils/repository_mixin.dart';
 import '../domain/entities.dart';
 import '../services/auth_service.dart';
 import '../services/hive_service.dart';
 
-class CalendarRepository {
+class CalendarRepository with RepositoryErrorHandler {
   static final CalendarRepository _instance = CalendarRepository._internal();
   factory CalendarRepository() => _instance;
   CalendarRepository._internal();
   final _client = SupabaseConfig.client;
 
   Future<String?> _getFamilyId() async {
-    try {
+    return handleRepositoryCall(() async {
       final user = _client.auth.currentUser;
       if (user == null) return null;
       final profile = await _client
@@ -21,19 +21,16 @@ class CalendarRepository {
           .eq('id', user.id)
           .maybeSingle();
       return profile?['family_id'] as String?;
-    } catch (e) {
-      debugPrint('CalendarRepository._getFamilyId error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, '_getFamilyId');
   }
 
   Future<List<CalendarEvent>> getEvents() async {
-    // 1. Try Hive cache first
-    final cached = HiveService.getCalendarEvents();
-    if (cached.isNotEmpty) return cached;
+    return handleRepositoryCall(() async {
+      // 1. Try Hive cache first
+      final cached = HiveService.getCalendarEvents();
+      if (cached.isNotEmpty) return cached;
 
-    // 2. Fall back to Supabase
-    try {
+      // 2. Fall back to Supabase
       final familyId = await _getFamilyId();
       if (familyId == null) return [];
 
@@ -44,17 +41,14 @@ class CalendarRepository {
           .eq('status', 'active')
           .order('start_time', ascending: true);
 
-      final events = (response as List).map((e) => _fromJson(e)).toList();
+      final events = (response as List).map((e) => _fromJson(e as Map<String, dynamic>)).toList();
       await HiveService.saveCalendarEvents(events);
       return events;
-    } catch (e) {
-      debugPrint('CalendarRepository.getEvents error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getEvents');
   }
 
   Future<CalendarEvent> createEvent(CalendarEvent event) async {
-    try {
+    return handleRepositoryCall(() async {
       final familyId = await _getFamilyId();
       final userId = AuthService.currentUserId;
       if (familyId == null) throw Exception('Aile bilgisi bulunamadı');
@@ -81,14 +75,11 @@ class CalendarRepository {
       final all = await getEvents();
       await HiveService.saveCalendarEvents([...all, created]);
       return created;
-    } catch (e) {
-      debugPrint('CalendarRepository.createEvent error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'createEvent');
   }
 
   Future<void> updateEvent(CalendarEvent event) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client
           .from('events')
           .update({
@@ -108,23 +99,17 @@ class CalendarRepository {
       final all = await getEvents();
       final updated = all.map((e) => e.id == event.id ? event : e).toList();
       await HiveService.saveCalendarEvents(updated);
-    } catch (e) {
-      debugPrint('CalendarRepository.updateEvent error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'updateEvent');
   }
 
   Future<void> deleteEvent(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client.from('events').delete().eq('id', id);
       final all = await getEvents();
       await HiveService.saveCalendarEvents(
         all.where((e) => e.id != id).toList(),
       );
-    } catch (e) {
-      debugPrint('CalendarRepository.deleteEvent error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'deleteEvent');
   }
 
   Stream<List<CalendarEvent>> watchEvents() async* {

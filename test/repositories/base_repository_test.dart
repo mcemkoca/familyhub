@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:familyhub/core/errors.dart';
+import 'package:familyhub/core/utils/repository_mixin.dart';
 import 'package:familyhub/repositories/base_repository.dart';
 
 // Simple test model for BaseRepository
@@ -30,12 +30,12 @@ void main() {
       expect(repository, isNotNull);
     });
 
-    test('throws database exception when client is null', () {
+    test('throws repository exception when client is null', () {
       // When Supabase is not initialized, _safeClient is null
-      // query() catches the auth error and wraps it in AppDatabaseException
+      // query() catches the auth error and wraps it in RepositoryException
       expect(
         () => repository.query(),
-        throwsA(isA<AppDatabaseException>()),
+        throwsA(isA<RepositoryException>()),
       );
     });
 

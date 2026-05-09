@@ -1,6 +1,6 @@
 import 'dart:async';
 import '../core/supabase_client.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+
 import '../repositories/safe_arrival_repository.dart';
 import '../services/child_auth_service.dart';
 
@@ -11,7 +11,7 @@ class SafeArrivalService {
   static final _repo = SafeArrivalRepository();
   static final _client = SupabaseConfig.client;
   static Timer? _timer;
-  static StreamSubscription? _realtimeSub;
+  static StreamSubscription<dynamic>? _realtimeSub;
 
   static final _activeController = StreamController<List<ArrivalMonitor>>.broadcast();
   static final _historyController = StreamController<List<ArrivalMonitor>>.broadcast();

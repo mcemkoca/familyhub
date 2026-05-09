@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
+import '../core/utils/repository_mixin.dart';
 import '../domain/models/child_schedule.dart';
 import '../services/child_auth_service.dart';
 import '../services/hive_service.dart';
 
-class ChildScheduleRepository {
+class ChildScheduleRepository with RepositoryErrorHandler {
   static final ChildScheduleRepository _instance =
       ChildScheduleRepository._internal();
   factory ChildScheduleRepository() => _instance;
@@ -36,7 +37,7 @@ class ChildScheduleRepository {
 
       final response = await query.order('start_time', ascending: true);
       final list = (response as List)
-          .map((e) => ChildSchedule.fromJson(e))
+          .map((e) => ChildSchedule.fromJson(e as Map<String, dynamic>))
           .toList();
       await HiveService.saveChildSchedules(list);
       return list;
@@ -77,7 +78,7 @@ class ChildScheduleRepository {
           );
     } catch (e) {
       debugPrint('ChildScheduleRepository.watchMySchedule error: $e');
-      return Stream.error(Exception('Veritabanı hatası: $e'));
+      return Stream.error(RepositoryException('Beklenmeyen hata [watchMySchedule]: $e'));
     }
   }
 
@@ -91,7 +92,7 @@ class ChildScheduleRepository {
     String? teacher,
     String color = '#3B82F6',
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkSession();
       final response = await _client
           .from('child_schedules')
@@ -110,19 +111,13 @@ class ChildScheduleRepository {
           .select()
           .single();
       return ChildSchedule.fromJson(response);
-    } catch (e) {
-      debugPrint('ChildScheduleRepository.createSchedule error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'createSchedule');
   }
 
   Future<void> deleteSchedule(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkSession();
       await _client.from('child_schedules').delete().eq('id', id);
-    } catch (e) {
-      debugPrint('ChildScheduleRepository.deleteSchedule error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'deleteSchedule');
   }
 }

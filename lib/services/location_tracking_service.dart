@@ -1,7 +1,6 @@
 import 'dart:async';
 import '../core/supabase_client.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'auth_service.dart';
 import 'child_auth_service.dart';
 

@@ -68,13 +68,13 @@ class RoutineTrigger {
 
   factory RoutineTrigger.fromJson(Map<String, dynamic> json) => RoutineTrigger(
         type: TriggerType.values.firstWhere(
-          (e) => e.name == json['type'],
+          (e) => e.name == (json['type'] as String?),
           orElse: () => TriggerType.manual,
         ),
         time: json['time'] != null
             ? TimeOfDay(
-                hour: json['time']['hour'] as int? ?? 0,
-                minute: json['time']['minute'] as int? ?? 0,
+                hour: (json['time'] as Map<String, dynamic>)['hour'] as int? ?? 0,
+                minute: (json['time'] as Map<String, dynamic>)['minute'] as int? ?? 0,
               )
             : null,
         geofenceId: json['geofence_id'] as String?,
@@ -323,14 +323,14 @@ class RoutineStep {
         isFlexible: json['is_flexible'] as bool? ?? false,
         timeWindowStart: json['time_window_start'] != null
             ? TimeOfDay(
-                hour: json['time_window_start']['hour'] as int? ?? 0,
-                minute: json['time_window_start']['minute'] as int? ?? 0,
+                hour: (json['time_window_start'] as Map<String, dynamic>)['hour'] as int? ?? 0,
+                minute: (json['time_window_start'] as Map<String, dynamic>)['minute'] as int? ?? 0,
               )
             : null,
         timeWindowEnd: json['time_window_end'] != null
             ? TimeOfDay(
-                hour: json['time_window_end']['hour'] as int? ?? 0,
-                minute: json['time_window_end']['minute'] as int? ?? 0,
+                hour: (json['time_window_end'] as Map<String, dynamic>)['hour'] as int? ?? 0,
+                minute: (json['time_window_end'] as Map<String, dynamic>)['minute'] as int? ?? 0,
               )
             : null,
         dependsOn: (json['depends_on'] as List?)?.cast<String>() ?? [],

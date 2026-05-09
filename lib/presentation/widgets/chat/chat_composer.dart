@@ -40,7 +40,7 @@ class _ChatComposerState extends State<ChatComposer>
   List<double> _amplitudes = [];
   int _recordDuration = 0;
   Timer? _recordTimer;
-  StreamSubscription? _amplitudeSub;
+  StreamSubscription<dynamic>? _amplitudeSub;
 
   @override
   void initState() {
@@ -91,6 +91,7 @@ class _ChatComposerState extends State<ChatComposer>
         }
       });
     } catch (e) {
+      debugPrint('Chat composer init error: $e');
     }
   }
 

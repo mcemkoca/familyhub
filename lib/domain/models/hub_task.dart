@@ -15,7 +15,7 @@ class HubTask {
   factory HubTask.fromJson(Map<String, dynamic> json) => HubTask(
         id: json['id'] as String? ?? '',
         title: json['title'] as String? ?? 'Görev',
-        dueDate: DateTime.tryParse(json['due_date'] ?? ''),
+        dueDate: DateTime.tryParse((json['due_date'] as String?) ?? ''),
         priority: json['priority'] as String? ?? 'medium',
       );
 }

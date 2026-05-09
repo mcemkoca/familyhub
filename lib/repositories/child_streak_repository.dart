@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
+import '../core/utils/repository_mixin.dart';
 import '../domain/entities.dart';
 
-class ChildStreakRepository {
+class ChildStreakRepository with RepositoryErrorHandler {
   static final ChildStreakRepository _instance =
       ChildStreakRepository._internal();
   factory ChildStreakRepository() => _instance;
@@ -12,7 +13,7 @@ class ChildStreakRepository {
 
   /// Çocuğun streak istatistiklerini hesapla
   Future<StreakStats> getStreakStats(String childId) async {
-    try {
+    return handleRepositoryCall(() async {
       final response = await _client
           .from('tasks')
           .select('*')
@@ -20,7 +21,7 @@ class ChildStreakRepository {
           .eq('status', 'completed')
           .order('completed_at', ascending: false);
 
-      final tasks = (response as List).map((e) => _parseTask(e)).toList();
+      final tasks = (response as List).map((e) => _parseTask(e as Map<String, dynamic>)).toList();
 
       // Tüm tamamlanma tarihlerini al (sadece gün kısmı)
       final completedDates = tasks
@@ -48,10 +49,7 @@ class ChildStreakRepository {
         weeklyView: weeklyView,
         lastCompleted: completedDates.isNotEmpty ? completedDates.first : null,
       );
-    } catch (e) {
-      debugPrint('ChildStreakRepository.getStreakStats error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getStreakStats');
   }
 
   /// Realtime streak stream
@@ -93,29 +91,29 @@ class ChildStreakRepository {
           });
     } catch (e) {
       debugPrint('ChildStreakRepository.watchStreakStats error: $e');
-      return Stream.error(Exception('Veritabanı hatası: $e'));
+      return Stream.error(RepositoryException('Beklenmeyen hata [watchStreakStats]: $e'));
     }
   }
 
   Task _parseTask(Map<String, dynamic> json) {
     return Task(
       id: json['id']?.toString() ?? '',
-      title: json['title'] ?? '',
+      title: (json['title'] as String?) ?? '',
       description: json['description'] as String?,
       assignedTo: json['assigned_to']?.toString() ?? '',
       status: TaskStatus.values.firstWhere(
         (e) => e.name == (json['status']?.toString() ?? 'pending'),
         orElse: () => TaskStatus.pending,
       ),
-      priority: json['priority'] ?? 'medium',
+      priority: (json['priority'] as String?) ?? 'medium',
       dueDate: json['due_date'] != null
-          ? DateTime.parse(json['due_date'])
+          ? DateTime.parse(json['due_date'] as String)
           : null,
       completedAt: json['completed_at'] != null
-          ? DateTime.parse(json['completed_at'])
+          ? DateTime.parse(json['completed_at'] as String)
           : null,
-      tags: List<String>.from(json['tags'] ?? []),
-      streakCount: json['streak_count'] ?? 0,
+      tags: List<String>.from((json['tags'] as List<dynamic>?) ?? []),
+      streakCount: (json['streak_count'] as int?) ?? 0,
     );
   }
 

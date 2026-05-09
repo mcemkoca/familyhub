@@ -30,7 +30,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
   @override
   void initState() {
     super.initState();
-    _selectedCity = HiveService.getSetting('weatherCity') ?? 'Berlin';
+    _selectedCity = HiveService.getSetting('weatherCity') ?? 'İstanbul';
     _useCelsius = HiveService.getBoolSetting('weatherCelsius', defaultValue: true);
     _useCurrentLocation = HiveService.getBoolSetting('weatherUseLocation', defaultValue: true);
     _savedLocation = HiveService.getLocation();

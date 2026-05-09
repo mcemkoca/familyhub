@@ -2,7 +2,7 @@
 // Crash event history and statistics
 
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../../core/supabase_client.dart';
 import '../../../domain/models/crash_event.dart';
 import '../../../repositories/crash_event_repository.dart';
 import '../../../services/auth_service.dart';
@@ -14,7 +14,7 @@ class CrashHistoryScreen extends StatelessWidget {
   Future<String?> _getFamilyId() async {
     final userId = AuthService.currentUserId;
     if (userId == null) return null;
-    final profile = await Supabase.instance.client
+    final profile = await SupabaseConfig.client
         .from('profiles')
         .select('family_id')
         .eq('id', userId)

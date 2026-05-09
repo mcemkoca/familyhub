@@ -96,21 +96,21 @@ class HealthCardData {
 
   factory HealthCardData.fromJson(Map<String, dynamic> json) {
     return HealthCardData(
-      bloodType: json['bloodType'] ?? '',
-      allergies: List<String>.from(json['allergies'] ?? []),
+      bloodType: (json['bloodType'] as String?) ?? '',
+      allergies: List<String>.from((json['allergies'] as List<dynamic>?) ?? []),
       medications: (json['medications'] as List<dynamic>?)
               ?.map((e) => Medication.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      chronicConditions: List<String>.from(json['chronicConditions'] ?? []),
-      emergencyContactName: json['emergencyContactName'] ?? '',
-      emergencyContactPhone: json['emergencyContactPhone'] ?? '',
-      emergencyContactRelation: json['emergencyContactRelation'] ?? '',
-      doctorName: json['doctorName'] ?? '',
-      doctorPhone: json['doctorPhone'] ?? '',
-      doctorHospital: json['doctorHospital'] ?? '',
-      organDonor: json['organDonor'] ?? false,
-      notes: json['notes'] ?? '',
+      chronicConditions: List<String>.from((json['chronicConditions'] as List<dynamic>?) ?? []),
+      emergencyContactName: (json['emergencyContactName'] as String?) ?? '',
+      emergencyContactPhone: (json['emergencyContactPhone'] as String?) ?? '',
+      emergencyContactRelation: (json['emergencyContactRelation'] as String?) ?? '',
+      doctorName: (json['doctorName'] as String?) ?? '',
+      doctorPhone: (json['doctorPhone'] as String?) ?? '',
+      doctorHospital: (json['doctorHospital'] as String?) ?? '',
+      organDonor: (json['organDonor'] as bool?) ?? false,
+      notes: (json['notes'] as String?) ?? '',
     );
   }
 
@@ -145,9 +145,9 @@ class Medication {
 
   factory Medication.fromJson(Map<String, dynamic> json) {
     return Medication(
-      name: json['name'] ?? '',
-      dosage: json['dosage'] ?? '',
-      frequency: json['frequency'] ?? '',
+      name: (json['name'] as String?) ?? '',
+      dosage: (json['dosage'] as String?) ?? '',
+      frequency: (json['frequency'] as String?) ?? '',
     );
   }
 

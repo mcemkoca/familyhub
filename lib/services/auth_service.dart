@@ -508,6 +508,7 @@ class AuthService {
       );
       if (response.status != 200) {
         throw AppAuthException(
+          // ignore: avoid_dynamic_calls
           response.data?['error']?.toString() ?? 'Şifre değiştirilemedi',
         );
       }

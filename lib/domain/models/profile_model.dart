@@ -25,17 +25,17 @@ class ProfileModel {
 
   factory ProfileModel.fromMap(Map<String, dynamic> map) {
     return ProfileModel(
-      id: map['id'] ?? '',
-      fullName: map['display_name'] ?? map['full_name'],
-      avatarUrl: map['avatar_url'],
-      role: map['role'] ?? 'member',
-      familyId: map['family_id'],
-      isPremium: map['is_premium'] ?? false,
+      id: (map['id'] as String?) ?? '',
+      fullName: (map['display_name'] as String?) ?? (map['full_name'] as String?),
+      avatarUrl: map['avatar_url'] as String?,
+      role: (map['role'] as String?) ?? 'member',
+      familyId: map['family_id'] as String?,
+      isPremium: (map['is_premium'] as bool?) ?? false,
       premiumExpiry: map['premium_expires_at'] != null
           ? DateTime.tryParse(map['premium_expires_at'].toString())
           : null,
-      familyName: map['families']?['name'],
-      xp: map['xp'] ?? 0,
+      familyName: (map['families'] as Map<String, dynamic>?)?['name'] as String?,
+      xp: (map['xp'] as int?) ?? 0,
       badges: (map['badges'] as List<dynamic>? ?? []).cast<String>(),
     );
   }

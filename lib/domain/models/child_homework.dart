@@ -32,20 +32,20 @@ class ChildHomework {
       id: json['id']?.toString() ?? '',
       familyId: json['family_id']?.toString() ?? '',
       childId: json['child_id']?.toString() ?? '',
-      subject: json['subject'] ?? '',
-      title: json['title'] ?? '',
+      subject: (json['subject'] as String?) ?? '',
+      title: (json['title'] as String?) ?? '',
       description: json['description'] as String?,
       dueDate: json['due_date'] != null
-          ? DateTime.parse(json['due_date'])
+          ? DateTime.parse(json['due_date'] as String)
           : null,
       status: _parseStatus(json['status']),
-      priority: json['priority'] ?? 'medium',
+      priority: (json['priority'] as String?) ?? 'medium',
       estimatedMinutes: json['estimated_minutes'] as int?,
       completedAt: json['completed_at'] != null
-          ? DateTime.parse(json['completed_at'])
+          ? DateTime.parse(json['completed_at'] as String)
           : null,
       createdAt: json['created_at'] != null
-          ? DateTime.parse(json['created_at'])
+          ? DateTime.parse(json['created_at'] as String)
           : DateTime.now(),
     );
   }

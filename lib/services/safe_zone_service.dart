@@ -27,14 +27,15 @@ class SafeZoneService {
           .order('created_at', ascending: true);
 
       _zones = (data as List<dynamic>).map((row) {
+        final r = row as Map<String, dynamic>;
         return SafeZone(
-          id: row['id'] as String? ?? '',
-          name: row['name'] as String? ?? 'Bölge',
-          type: _parseType(row['type'] as String?),
-          latitude: (row['latitude'] as num?)?.toDouble() ?? 0.0,
-          longitude: (row['longitude'] as num?)?.toDouble() ?? 0.0,
-          radiusMeters: (row['radius_meters'] as num?)?.toDouble() ?? 100.0,
-          address: row['address'] as String?,
+          id: r['id'] as String? ?? '',
+          name: r['name'] as String? ?? 'Bölge',
+          type: _parseType(r['type'] as String?),
+          latitude: (r['latitude'] as num?)?.toDouble() ?? 0.0,
+          longitude: (r['longitude'] as num?)?.toDouble() ?? 0.0,
+          radiusMeters: (r['radius_meters'] as num?)?.toDouble() ?? 100.0,
+          address: r['address'] as String?,
         );
       }).toList();
     } catch (_) {

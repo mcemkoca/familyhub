@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 /// Central registry for subscriptions, timers, and stream controllers.
 /// Prevents memory leaks by tracking and disposing resources.
 class MemoryManager {
-  static final _subscriptions = <String, StreamSubscription>{};
+  static final _subscriptions = <String, StreamSubscription<dynamic>>{};
   static final _timers = <String, Timer>{};
-  static final _controllers = <String, StreamController>{};
+  static final _controllers = <String, StreamController<dynamic>>{};
 
-  static void registerSubscription(String id, StreamSubscription sub) {
+  static void registerSubscription(String id, StreamSubscription<dynamic> sub) {
     _subscriptions[id]?.cancel();
     _subscriptions[id] = sub;
   }
@@ -20,7 +20,7 @@ class MemoryManager {
     _timers[id] = timer;
   }
 
-  static void registerController(String id, StreamController ctrl) {
+  static void registerController(String id, StreamController<dynamic> ctrl) {
     _controllers[id]?.close();
     _controllers[id] = ctrl;
   }

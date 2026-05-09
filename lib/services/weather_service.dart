@@ -18,7 +18,7 @@ class WeatherService {
     );
     final response = await http.get(url);
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
+      final data = jsonDecode(response.body) as Map<String, dynamic>;
       return WeatherData.fromJson(data);
     }
     throw Exception('Hava durumu alınamadı');
@@ -84,6 +84,28 @@ class WeatherService {
   }
 
   static final List<Map<String, dynamic>> cities = [
+    // Türkiye
+    {'name': 'İstanbul', 'lat': 41.0082, 'lon': 28.9784},
+    {'name': 'Ankara', 'lat': 39.9334, 'lon': 32.8597},
+    {'name': 'İzmir', 'lat': 38.4192, 'lon': 27.1287},
+    {'name': 'Bursa', 'lat': 40.1826, 'lon': 29.0669},
+    {'name': 'Antalya', 'lat': 36.8969, 'lon': 30.7133},
+    {'name': 'Adana', 'lat': 37.0000, 'lon': 35.3213},
+    {'name': 'Konya', 'lat': 37.8713, 'lon': 32.4846},
+    {'name': 'Gaziantep', 'lat': 37.0662, 'lon': 37.3833},
+    {'name': 'Şanlıurfa', 'lat': 37.1591, 'lon': 38.7969},
+    {'name': 'Mersin', 'lat': 36.8121, 'lon': 34.6415},
+    {'name': 'Diyarbakır', 'lat': 37.9143, 'lon': 40.2306},
+    {'name': 'Kayseri', 'lat': 38.7205, 'lon': 35.4826},
+    {'name': 'Eskişehir', 'lat': 39.7767, 'lon': 30.5206},
+    {'name': 'Samsun', 'lat': 41.2867, 'lon': 36.3300},
+    {'name': 'Trabzon', 'lat': 41.0015, 'lon': 39.7178},
+    {'name': 'Erzurum', 'lat': 39.9043, 'lon': 41.2679},
+    {'name': 'Malatya', 'lat': 38.3554, 'lon': 38.3337},
+    {'name': 'Kocaeli', 'lat': 40.8533, 'lon': 29.8815},
+    {'name': 'Tekirdağ', 'lat': 40.9781, 'lon': 27.5112},
+    {'name': 'Van', 'lat': 38.5014, 'lon': 43.3727},
+    // Avrupa
     {'name': 'Berlin', 'lat': 52.5200, 'lon': 13.4050},
     {'name': 'Paris', 'lat': 48.8566, 'lon': 2.3522},
     {'name': 'Londra', 'lat': 51.5074, 'lon': -0.1278},
@@ -127,19 +149,19 @@ class WeatherData {
   });
 
   factory WeatherData.fromJson(Map<String, dynamic> json) {
-    final current = json['current'];
-    final daily = json['daily'];
+    final current = json['current'] as Map<String, dynamic>?;
+    final daily = json['daily'] as Map<String, dynamic>?;
     final List<DailyForecast> forecast = [];
     
     if (daily != null) {
-      final codes = daily['weather_code'] as List;
-      final maxTemps = daily['temperature_2m_max'] as List;
-      final minTemps = daily['temperature_2m_min'] as List;
-      final times = daily['time'] as List;
+      final codes = (daily['weather_code'] as List<dynamic>);
+      final maxTemps = (daily['temperature_2m_max'] as List<dynamic>);
+      final minTemps = (daily['temperature_2m_min'] as List<dynamic>);
+      final times = (daily['time'] as List<dynamic>);
       
       for (int i = 0; i < codes.length && i < 7; i++) {
         forecast.add(DailyForecast(
-          date: DateTime.parse(times[i]),
+          date: DateTime.parse(times[i] as String),
           maxTemp: (maxTemps[i] as num).toDouble(),
           minTemp: (minTemps[i] as num).toDouble(),
           weatherCode: codes[i] as int,
@@ -148,7 +170,7 @@ class WeatherData {
     }
 
     return WeatherData(
-      temperature: (current['temperature_2m'] as num).toDouble(),
+      temperature: (current!['temperature_2m'] as num).toDouble(),
       weatherCode: current['weather_code'] as int,
       humidity: current['relative_humidity_2m'] as int,
       feelsLike: (current['apparent_temperature'] as num).toDouble(),
