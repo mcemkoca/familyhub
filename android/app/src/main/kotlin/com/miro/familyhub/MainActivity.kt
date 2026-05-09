@@ -1,4 +1,4 @@
-package com.example.familyhub
+package com.miro.familyhub
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 

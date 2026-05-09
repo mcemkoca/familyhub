@@ -69,7 +69,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="com.familyhub.app" />
-                <data android:scheme="com.example.familyhub" android:host="login-callback" />
+                <data android:scheme="com.miro.familyhub" android:host="login-callback" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

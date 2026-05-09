@@ -3,8 +3,8 @@
 -keep class com.google.gson.** { *; }
 
 # Hive — keep models and the correct package
--keep class com.example.familyhub.** { *; }
--dontwarn com.example.familyhub.**
+-keep class com.miro.familyhub.** { *; }
+-dontwarn com.miro.familyhub.**
 
 # Remove debug logging in release
 -assumenosideeffects class android.util.Log {

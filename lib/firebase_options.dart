@@ -54,7 +54,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: String.fromEnvironment('FIREBASE_MESSAGING_SENDER_ID', defaultValue: '123456789'),
     projectId: String.fromEnvironment('FIREBASE_PROJECT_ID', defaultValue: 'familyhub-dummy'),
     storageBucket: String.fromEnvironment('FIREBASE_STORAGE_BUCKET', defaultValue: 'familyhub-dummy.appspot.com'),
-    iosBundleId: String.fromEnvironment('FIREBASE_IOS_BUNDLE_ID', defaultValue: 'com.example.familyhub'),
+    iosBundleId: String.fromEnvironment('FIREBASE_IOS_BUNDLE_ID', defaultValue: 'com.miro.familyhub'),
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -63,7 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: String.fromEnvironment('FIREBASE_MESSAGING_SENDER_ID', defaultValue: '123456789'),
     projectId: String.fromEnvironment('FIREBASE_PROJECT_ID', defaultValue: 'familyhub-dummy'),
     storageBucket: String.fromEnvironment('FIREBASE_STORAGE_BUCKET', defaultValue: 'familyhub-dummy.appspot.com'),
-    iosBundleId: String.fromEnvironment('FIREBASE_IOS_BUNDLE_ID', defaultValue: 'com.example.familyhub'),
+    iosBundleId: String.fromEnvironment('FIREBASE_IOS_BUNDLE_ID', defaultValue: 'com.miro.familyhub'),
   );
 
   static const FirebaseOptions windows = FirebaseOptions(

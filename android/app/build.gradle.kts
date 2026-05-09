@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.familyhub"
+    namespace = "com.miro.familyhub"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -33,7 +33,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.familyhub"
+        applicationId = "com.miro.familyhub"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
