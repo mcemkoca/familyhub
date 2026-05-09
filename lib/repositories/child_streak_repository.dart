@@ -20,7 +20,7 @@ class ChildStreakRepository {
           .eq('status', 'completed')
           .order('completed_at', ascending: false);
 
-      final tasks = (response as List).map((e) => _parseTask(e)).toList();
+      final tasks = (response as List).map((e) => _parseTask(e as Map<String, dynamic>)).toList();
 
       // Tüm tamamlanma tarihlerini al (sadece gün kısmı)
       final completedDates = tasks
@@ -100,22 +100,22 @@ class ChildStreakRepository {
   Task _parseTask(Map<String, dynamic> json) {
     return Task(
       id: json['id']?.toString() ?? '',
-      title: json['title'] ?? '',
+      title: (json['title'] as String?) ?? '',
       description: json['description'] as String?,
       assignedTo: json['assigned_to']?.toString() ?? '',
       status: TaskStatus.values.firstWhere(
         (e) => e.name == (json['status']?.toString() ?? 'pending'),
         orElse: () => TaskStatus.pending,
       ),
-      priority: json['priority'] ?? 'medium',
+      priority: (json['priority'] as String?) ?? 'medium',
       dueDate: json['due_date'] != null
-          ? DateTime.parse(json['due_date'])
+          ? DateTime.parse(json['due_date'] as String)
           : null,
       completedAt: json['completed_at'] != null
-          ? DateTime.parse(json['completed_at'])
+          ? DateTime.parse(json['completed_at'] as String)
           : null,
-      tags: List<String>.from(json['tags'] ?? []),
-      streakCount: json['streak_count'] ?? 0,
+      tags: List<String>.from((json['tags'] as List<dynamic>?) ?? []),
+      streakCount: (json['streak_count'] as int?) ?? 0,
     );
   }
 

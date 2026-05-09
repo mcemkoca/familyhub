@@ -25,13 +25,13 @@ class FamilyMedia {
 
   factory FamilyMedia.fromJson(Map<String, dynamic> json) => FamilyMedia(
     id: json['id']?.toString() ?? '',
-    url: json['url'] ?? '',
+    url: (json['url'] as String?) ?? '',
     thumbnailUrl: json['thumbnail_url']?.toString(),
-    type: json['type'] ?? 'image',
+    type: (json['type'] as String?) ?? 'image',
     caption: json['caption']?.toString(),
     uploadedBy: json['uploaded_by']?.toString(),
     createdAt: DateTime.parse(
-      json['created_at'] ?? DateTime.now().toIso8601String(),
+      (json['created_at'] as String?) ?? DateTime.now().toIso8601String(),
     ),
   );
 }
@@ -44,8 +44,9 @@ class GalleryRepository {
   String? get _userId => _safeClient?.auth.currentUser?.id;
 
   void _checkAuth() {
-    if (_userId == null)
+    if (_userId == null) {
       throw app_errors.AppAuthException('Giriş yapmalısınız');
+    }
   }
 
   Future<List<FamilyMedia>> getMedia(String familyId) async {
@@ -56,7 +57,9 @@ class GalleryRepository {
           .select('*')
           .eq('family_id', familyId)
           .order('created_at', ascending: false);
-      return (response as List).map((e) => FamilyMedia.fromJson(e)).toList();
+      return (response as List)
+          .map((e) => FamilyMedia.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('GalleryRepository.getMedia error: $e');
       throw app_errors.AppDatabaseException('Veritabanı hatası: $e');

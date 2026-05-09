@@ -26,7 +26,9 @@ class EmergencyActionRepository {
           .eq('family_id', familyId)
           .order('created_at', ascending: false)
           .limit(limit);
-      return (res as List).map((e) => EmergencyAction.fromJson(e)).toList();
+      return (res as List)
+          .map((e) => EmergencyAction.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('[EmergencyActionRepository.getFamilyActions] error: $e');
       rethrow;
@@ -41,7 +43,9 @@ class EmergencyActionRepository {
           .eq('family_id', familyId)
           .inFilter('status_state', ['triggered', 'active', 'escalating'])
           .order('created_at', ascending: false);
-      return (res as List).map((e) => EmergencyAction.fromJson(e)).toList();
+      return (res as List)
+          .map((e) => EmergencyAction.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('[EmergencyActionRepository.getActiveActions] error: $e');
       rethrow;
@@ -83,7 +87,9 @@ class EmergencyActionRepository {
           .from('emergency_templates')
           .select()
           .order('usage_count', ascending: false);
-      return (res as List).map((e) => EmergencyTemplate.fromJson(e)).toList();
+      return (res as List)
+          .map((e) => EmergencyTemplate.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('[EmergencyActionRepository.getTemplates] error: $e');
       rethrow;
@@ -115,7 +121,7 @@ class EmergencyActionRepository {
           .eq('is_active', true)
           .order('priority', ascending: true);
       return (res as List)
-          .map((e) => EmergencyContactModel.fromJson(e))
+          .map((e) => EmergencyContactModel.fromJson(e as Map<String, dynamic>))
           .toList();
     } catch (e) {
       debugPrint('[EmergencyActionRepository.getFamilyContacts] error: $e');

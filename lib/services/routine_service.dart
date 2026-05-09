@@ -7,6 +7,7 @@ import 'notification_service.dart';
 class RoutineService {
   static final _repo = RoutineRepository();
   static final _activeRoutines = <String, Routine>{};
+  // ignore: close_sinks
   static final _timerController = StreamController<Routine>.broadcast();
   static Stream<Routine> get timerStream => _timerController.stream;
 

@@ -41,7 +41,7 @@ class EnterpriseService {
   }
 
   static Future<Map<String, dynamic>> getDashboardData(String orgId) async {
-    final stats = await SupabaseConfig.client.rpc('get_org_stats', params: {'org_id': orgId});
+    final stats = await SupabaseConfig.client.rpc('get_org_stats', params: {'org_id': orgId}) as Map<String, dynamic>;
     return {
       'total_employees': stats['total_employees'],
       'active_families': stats['active_families'],

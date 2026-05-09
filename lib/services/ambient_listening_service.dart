@@ -10,7 +10,7 @@ class AmbientListeningService {
   static final _recorder = AudioRecorder();
   static bool _isRecording = false;
   static String? _currentPath;
-  static StreamSubscription? _accelSub;
+  static StreamSubscription<dynamic>? _accelSub;
   static Timer? _dbTimer;
   static final _dbController = StreamController<double>.broadcast();
   static final _shakeController = StreamController<void>.broadcast();

@@ -9,8 +9,8 @@ import 'auth_service.dart';
 class CallService {
   static RTCPeerConnection? _peerConnection;
   static MediaStream? _localStream;
-  static StreamSubscription? _incomingSub;
-  static StreamSubscription? _signalingSub;
+  static StreamSubscription<dynamic>? _incomingSub;
+  static StreamSubscription<dynamic>? _signalingSub;
   static final StreamController<CallSession> _incomingController =
       StreamController<CallSession>.broadcast();
   static final StreamController<bool> _remoteJoinedController =
@@ -335,6 +335,7 @@ class CallService {
       await _peerConnection?.close();
       _peerConnection = null;
     } catch (e) {
+      // ignore: empty_catches
     }
 
     final now = DateTime.now().toIso8601String();

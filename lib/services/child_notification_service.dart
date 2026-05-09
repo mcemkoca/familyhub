@@ -6,7 +6,7 @@ import 'notification_service.dart';
 /// Çocuk ↔ Ebeveyn arası cross-bildirim servisi
 /// Realtime stream'leri dinleyerek yeni aktivitelerde local notification gösterir.
 class ChildNotificationService {
-  static final List<StreamSubscription> _subscriptions = [];
+  static final List<StreamSubscription<dynamic>> _subscriptions = [];
   static bool _initialized = false;
 
   /// Bildirim servisini başlat (çocuk login olduktan sonra çağrılır)

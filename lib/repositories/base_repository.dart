@@ -31,22 +31,26 @@ abstract class BaseRepository<T> {
     try {
       _checkAuth();
 
+      // ignore: avoid_dynamic_calls
       dynamic query = _safeClient!.from(table).select();
 
       eq?.forEach((key, value) {
+        // ignore: avoid_dynamic_calls
         query = query.eq(key, value);
       });
 
       if (orderBy != null) {
+        // ignore: avoid_dynamic_calls
         query = query.order(orderBy, ascending: ascending);
       }
 
       if (limit != null) {
+        // ignore: avoid_dynamic_calls
         query = query.limit(limit);
       }
 
       final response = await query;
-      return (response as List).map((e) => fromJson(e)).toList();
+      return (response as List).map((e) => fromJson(e as Map<String, dynamic>)).toList();
     } catch (e) {
       debugPrint('BaseRepository.query error: $e');
       throw AppDatabaseException('Veritabanı hatası: $e');
@@ -103,13 +107,15 @@ abstract class BaseRepository<T> {
       final client = _safeClient;
       if (client == null) return const Stream.empty();
 
+      // ignore: avoid_dynamic_calls
       dynamic query = client.from(table).stream(primaryKey: ['id']);
 
       if (eqColumn != null && eqValue != null) {
+        // ignore: avoid_dynamic_calls
         query = query.eq(eqColumn, eqValue);
       }
 
-      return query.map((data) => data.map((e) => fromJson(e)).toList());
+      return (query as Stream<List<dynamic>>).map((data) => data.map((e) => fromJson(e as Map<String, dynamic>)).toList());
     } catch (e) {
       debugPrint('BaseRepository.watch error: $e');
       return Stream.error(AppDatabaseException('Veritabanı hatası: $e'));

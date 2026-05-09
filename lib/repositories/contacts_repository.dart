@@ -28,15 +28,15 @@ class FamilyContact {
 
   factory FamilyContact.fromJson(Map<String, dynamic> json) => FamilyContact(
     id: json['id']?.toString() ?? '',
-    name: json['name'] ?? '',
+    name: (json['name'] as String?) ?? '',
     phone: json['phone']?.toString(),
     email: json['email']?.toString(),
-    type: json['type'] ?? 'other',
+    type: (json['type'] as String?) ?? 'other',
     avatarUrl: json['avatar_url']?.toString(),
     notes: json['notes']?.toString(),
     createdBy: json['created_by']?.toString(),
     createdAt: DateTime.parse(
-      json['created_at'] ?? DateTime.now().toIso8601String(),
+      (json['created_at'] as String?) ?? DateTime.now().toIso8601String(),
     ),
   );
 
@@ -58,8 +58,9 @@ class ContactsRepository {
   String? get _userId => _safeClient?.auth.currentUser?.id;
 
   void _checkAuth() {
-    if (_userId == null)
+    if (_userId == null) {
       throw app_errors.AppAuthException('Giriş yapmalısınız');
+    }
   }
 
   Future<List<FamilyContact>> getContacts(String familyId) async {
@@ -70,7 +71,9 @@ class ContactsRepository {
           .select('*')
           .eq('family_id', familyId)
           .order('name', ascending: true);
-      return (response as List).map((e) => FamilyContact.fromJson(e)).toList();
+      return (response as List)
+          .map((e) => FamilyContact.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('ContactsRepository.getContacts error: $e');
       throw app_errors.AppDatabaseException('Veritabanı hatası: $e');

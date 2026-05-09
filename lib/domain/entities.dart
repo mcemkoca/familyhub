@@ -40,7 +40,7 @@ class FamilyMember {
     'id': id,
     'name': name,
     'initial': initial,
-    'color': color.value,
+    'color': color.toARGB32(),
     'avatarUrl': avatarUrl,
     'role': role.index,
     'isOnline': isOnline,
@@ -201,7 +201,7 @@ class CalendarEvent {
     'attendees': attendees,
     'category': category.index,
     'recurrenceRule': recurrenceRule,
-    'color': color.value,
+    'color': color.toARGB32(),
     'isAllDay': isAllDay,
     'reminders': reminders,
   };
@@ -213,12 +213,12 @@ class CalendarEvent {
     end: DateTime.parse(json['end'] as String),
     location: json['location'] as String?,
     description: json['description'] as String?,
-    attendees: List<String>.from(json['attendees'] ?? []),
+    attendees: List<String>.from((json['attendees'] as List<dynamic>?) ?? []),
     category: EventCategory.values[json['category'] as int],
     recurrenceRule: json['recurrenceRule'] as String?,
     color: Color(json['color'] as int),
     isAllDay: json['isAllDay'] as bool? ?? false,
-    reminders: List<int>.from(json['reminders'] ?? []),
+    reminders: List<int>.from((json['reminders'] as List<dynamic>?) ?? []),
   );
 }
 

@@ -229,7 +229,7 @@ class _AddChildDialogState extends State<_AddChildDialog> {
     widget.onAdd({
       'name': _nameController.text.trim(),
       'role': _role,
-      'color': '#${_color.value.toRadixString(16).substring(2)}',
+      'color': '#${_color.toARGB32().toRadixString(16).substring(2)}',
       'pin_hash': _pinController.text, // In production: hash this
     });
     Navigator.pop(context);

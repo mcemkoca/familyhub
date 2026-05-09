@@ -18,7 +18,7 @@ class WeatherService {
     );
     final response = await http.get(url);
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
+      final data = jsonDecode(response.body) as Map<String, dynamic>;
       return WeatherData.fromJson(data);
     }
     throw Exception('Hava durumu alınamadı');
@@ -127,19 +127,19 @@ class WeatherData {
   });
 
   factory WeatherData.fromJson(Map<String, dynamic> json) {
-    final current = json['current'];
-    final daily = json['daily'];
+    final current = json['current'] as Map<String, dynamic>?;
+    final daily = json['daily'] as Map<String, dynamic>?;
     final List<DailyForecast> forecast = [];
     
     if (daily != null) {
-      final codes = daily['weather_code'] as List;
-      final maxTemps = daily['temperature_2m_max'] as List;
-      final minTemps = daily['temperature_2m_min'] as List;
-      final times = daily['time'] as List;
+      final codes = (daily['weather_code'] as List<dynamic>);
+      final maxTemps = (daily['temperature_2m_max'] as List<dynamic>);
+      final minTemps = (daily['temperature_2m_min'] as List<dynamic>);
+      final times = (daily['time'] as List<dynamic>);
       
       for (int i = 0; i < codes.length && i < 7; i++) {
         forecast.add(DailyForecast(
-          date: DateTime.parse(times[i]),
+          date: DateTime.parse(times[i] as String),
           maxTemp: (maxTemps[i] as num).toDouble(),
           minTemp: (minTemps[i] as num).toDouble(),
           weatherCode: codes[i] as int,
@@ -148,7 +148,7 @@ class WeatherData {
     }
 
     return WeatherData(
-      temperature: (current['temperature_2m'] as num).toDouble(),
+      temperature: (current!['temperature_2m'] as num).toDouble(),
       weatherCode: current['weather_code'] as int,
       humidity: current['relative_humidity_2m'] as int,
       feelsLike: (current['apparent_temperature'] as num).toDouble(),

@@ -28,7 +28,7 @@ class ContextSnapshotRepository {
           .order('created_at', ascending: false)
           .limit(limit);
       return (response as List)
-          .map((e) => ContextSnapshot.fromJson(e))
+          .map((e) => ContextSnapshot.fromJson(e as Map<String, dynamic>))
           .toList();
     } catch (e) {
       debugPrint('ContextSnapshotRepository.getRecentSnapshots error: $e');

@@ -125,7 +125,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
         'create-payment-intent',
         body: {'price_id': plan.stripePriceId, 'user_id': userId},
       );
-      clientSecret = response.data['client_secret'] as String?;
+      clientSecret = (response.data as Map<String, dynamic>)['client_secret'] as String?;
     } catch (_) {
       // Edge Function yoksa — test modu: doğrudan aktive et
       await _activatePremium(plan.id);

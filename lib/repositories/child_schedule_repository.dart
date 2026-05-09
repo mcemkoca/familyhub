@@ -36,7 +36,7 @@ class ChildScheduleRepository {
 
       final response = await query.order('start_time', ascending: true);
       final list = (response as List)
-          .map((e) => ChildSchedule.fromJson(e))
+          .map((e) => ChildSchedule.fromJson(e as Map<String, dynamic>))
           .toList();
       await HiveService.saveChildSchedules(list);
       return list;

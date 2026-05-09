@@ -22,7 +22,9 @@ class RoutineRepository {
           .select('*')
           .eq('family_id', familyId)
           .order('created_at', ascending: false);
-      return (response as List).map((e) => Routine.fromJson(e)).toList();
+      return (response as List)
+          .map((e) => Routine.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('RoutineRepository.getRoutines error: $e');
       throw Exception('Veritabanı hatası: $e');
@@ -40,7 +42,9 @@ class RoutineRepository {
           .eq('family_id', familyId)
           .eq('type', type.name)
           .order('created_at', ascending: false);
-      return (response as List).map((e) => Routine.fromJson(e)).toList();
+      return (response as List)
+          .map((e) => Routine.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('RoutineRepository.getRoutinesByType error: $e');
       throw Exception('Veritabanı hatası: $e');

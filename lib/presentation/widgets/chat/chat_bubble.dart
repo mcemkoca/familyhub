@@ -357,8 +357,8 @@ class _AudioMessagePlayerState extends State<_AudioMessagePlayer> {
   final AudioPlayer _player = AudioPlayer();
   bool _isPlaying = false;
   int _currentPosition = 0;
-  StreamSubscription? _positionSub;
-  StreamSubscription? _completeSub;
+  StreamSubscription<dynamic>? _positionSub;
+  StreamSubscription<dynamic>? _completeSub;
 
   @override
   void initState() {

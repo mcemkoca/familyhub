@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
 import '../services/auth_service.dart';
 import '../services/health_card_service.dart';
@@ -53,7 +51,7 @@ class HealthCardRepository {
           .select('*')
           .eq('family_id', familyId);
 
-      return (response as List).map((e) => _fromJson(e)).toList();
+      return (response as List).map((e) => _fromJson(e as Map<String, dynamic>)).toList();
     } catch (e) {
       debugPrint('[HealthCardRepository.getForFamily] error: $e');
       rethrow;
@@ -112,22 +110,22 @@ class HealthCardRepository {
 
   HealthCardData _fromJson(Map<String, dynamic> json) {
     return HealthCardData(
-      bloodType: json['blood_type'] ?? '',
-      allergies: List<String>.from(json['allergies'] ?? []),
+      bloodType: (json['blood_type'] as String?) ?? '',
+      allergies: List<String>.from((json['allergies'] as List<dynamic>?) ?? []),
       medications:
           (json['medications'] as List<dynamic>?)
               ?.map((e) => Medication.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      chronicConditions: List<String>.from(json['chronic_conditions'] ?? []),
-      emergencyContactName: json['emergency_contact_name'] ?? '',
-      emergencyContactPhone: json['emergency_contact_phone'] ?? '',
-      emergencyContactRelation: json['emergency_contact_relation'] ?? '',
-      doctorName: json['doctor_name'] ?? '',
-      doctorPhone: json['doctor_phone'] ?? '',
-      doctorHospital: json['doctor_hospital'] ?? '',
-      organDonor: json['organ_donor'] ?? false,
-      notes: json['notes'] ?? '',
+      chronicConditions: List<String>.from((json['chronic_conditions'] as List<dynamic>?) ?? []),
+      emergencyContactName: (json['emergency_contact_name'] as String?) ?? '',
+      emergencyContactPhone: (json['emergency_contact_phone'] as String?) ?? '',
+      emergencyContactRelation: (json['emergency_contact_relation'] as String?) ?? '',
+      doctorName: (json['doctor_name'] as String?) ?? '',
+      doctorPhone: (json['doctor_phone'] as String?) ?? '',
+      doctorHospital: (json['doctor_hospital'] as String?) ?? '',
+      organDonor: (json['organ_donor'] as bool?) ?? false,
+      notes: (json['notes'] as String?) ?? '',
     );
   }
 

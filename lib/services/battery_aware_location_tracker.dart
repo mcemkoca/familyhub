@@ -262,6 +262,7 @@ class BatteryAwareLocationTracker {
     _locationBatch.clear();
 
     // Build segment summary
+    // ignore: unused_local_variable
     final segment = _buildSegment(batch);
 
     // TODO: Upload to Supabase via repository

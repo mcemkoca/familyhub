@@ -23,17 +23,17 @@ class FamilyInfo {
 
   factory FamilyInfo.fromJson(Map<String, dynamic> json) {
     return FamilyInfo(
-      id: json['id'] ?? '',
-      name: json['name'] ?? '',
-      description: json['description'],
-      photoUrl: json['photo_url'],
+      id: (json['id'] as String?) ?? '',
+      name: (json['name'] as String?) ?? '',
+      description: json['description'] as String?,
+      photoUrl: json['photo_url'] as String?,
       foundedDate: json['founded_date'] != null
-          ? DateTime.tryParse(json['founded_date'].toString())
+          ? DateTime.tryParse(json['founded_date'] as String)
           : null,
-      createdBy: json['created_by'],
-      memberCount: json['member_count'] ?? 0,
+      createdBy: json['created_by'] as String?,
+      memberCount: (json['member_count'] as int?) ?? 0,
       createdAt: json['created_at'] != null
-          ? DateTime.parse(json['created_at'].toString())
+          ? DateTime.parse(json['created_at'] as String)
           : DateTime.now(),
     );
   }
@@ -73,17 +73,17 @@ class FamilyHistory {
 
   factory FamilyHistory.fromJson(Map<String, dynamic> json) {
     return FamilyHistory(
-      id: json['id'] ?? '',
-      familyId: json['family_id'] ?? '',
-      title: json['title'] ?? '',
-      content: json['content'],
+      id: (json['id'] as String?) ?? '',
+      familyId: (json['family_id'] as String?) ?? '',
+      title: (json['title'] as String?) ?? '',
+      content: json['content'] as String?,
       eventDate: json['event_date'] != null
-          ? DateTime.tryParse(json['event_date'].toString())
+          ? DateTime.tryParse(json['event_date'] as String)
           : null,
-      type: json['type'] ?? 'memory',
-      createdBy: json['created_by'],
+      type: (json['type'] as String?) ?? 'memory',
+      createdBy: json['created_by'] as String?,
       createdAt: json['created_at'] != null
-          ? DateTime.parse(json['created_at'].toString())
+          ? DateTime.parse(json['created_at'] as String)
           : DateTime.now(),
     );
   }

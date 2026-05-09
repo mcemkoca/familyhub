@@ -60,7 +60,8 @@ class FamilySuggestionsPool {
     final cached = box.get(_cacheKey);
     if (cached != null && cached.isNotEmpty) {
       try {
-        final list = List<Map<String, dynamic>>.from(jsonDecode(cached));
+        // ignore: unnecessary_cast
+        final list = List<Map<String, dynamic>>.from(jsonDecode(cached as String) as List<dynamic>);
         _all.addAll(list.map((e) => _fromJson(e)));
         _initialized = true;
         return;

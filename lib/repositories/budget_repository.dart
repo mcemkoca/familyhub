@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
 import '../domain/entities.dart';
 import '../services/auth_service.dart';
@@ -37,7 +36,7 @@ class BudgetRepository {
           .eq('family_id', familyId)
           .order('date', ascending: false);
 
-      return (response as List).map((e) => _transactionFromJson(e)).toList();
+      return (response as List).map((e) => _transactionFromJson(e as Map<String, dynamic>)).toList();
     } catch (e) {
       debugPrint('BudgetRepository.getTransactions error: $e');
       throw Exception('Veritabanı hatası: $e');
@@ -113,11 +112,11 @@ class BudgetRepository {
 
       final entries = response as List;
       final totalIncome = entries
-          .where((e) => (e['amount'] as num) > 0)
-          .fold<double>(0, (s, e) => s + (e['amount'] as num).toDouble());
+          .where((e) => ((e as Map<String, dynamic>)['amount'] as num) > 0)
+          .fold<double>(0, (s, e) => s + ((e as Map<String, dynamic>)['amount'] as num).toDouble());
       final totalExpense = entries
-          .where((e) => (e['amount'] as num) < 0)
-          .fold<double>(0, (s, e) => s + (e['amount'] as num).toDouble().abs());
+          .where((e) => ((e as Map<String, dynamic>)['amount'] as num) < 0)
+          .fold<double>(0, (s, e) => s + ((e as Map<String, dynamic>)['amount'] as num).toDouble().abs());
 
       // Default monthly budget: total income or 10000 TRY
       final budgetLimit = totalIncome > 0 ? totalIncome * 1.2 : 10000;

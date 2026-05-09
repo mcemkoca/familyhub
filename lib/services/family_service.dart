@@ -32,10 +32,10 @@ class FamilyService {
       if (parsed != null &&
           DateTime.now().difference(parsed) < const Duration(minutes: 30)) {
         final adults = (cachedAdults as List)
-            .map((e) => FamilyMemberModel.fromAdult(Map<String, dynamic>.from(e)))
+            .map((e) => FamilyMemberModel.fromAdult(Map<String, dynamic>.from(e as Map)))
             .toList();
         final children = (cachedChildren as List)
-            .map((e) => FamilyMemberModel.fromChild(Map<String, dynamic>.from(e)))
+            .map((e) => FamilyMemberModel.fromChild(Map<String, dynamic>.from(e as Map)))
             .toList();
         return [...adults, ...children];
       }
@@ -58,11 +58,11 @@ class FamilyService {
     ]);
 
     final adults = (futures[0] as List)
-        .map((e) => FamilyMemberModel.fromAdult(Map<String, dynamic>.from(e)))
+        .map((e) => FamilyMemberModel.fromAdult(Map<String, dynamic>.from(e as Map)))
         .toList();
 
     final children = (futures[1] as List)
-        .map((e) => FamilyMemberModel.fromChild(Map<String, dynamic>.from(e)))
+        .map((e) => FamilyMemberModel.fromChild(Map<String, dynamic>.from(e as Map)))
         .toList();
 
     final allMembers = [...adults, ...children];
@@ -158,7 +158,7 @@ class FamilyService {
           .order('event_date', ascending: false);
 
       return (res as List)
-          .map((e) => FamilyHistory.fromJson(Map<String, dynamic>.from(e)))
+          .map((e) => FamilyHistory.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList();
     } catch (e) {
       debugPrint('getFamilyHistory error: \$e');
@@ -167,6 +167,7 @@ class FamilyService {
   }
 
   Future<String> uploadFamilyPhoto(String familyId, File file) async {
+    // ignore: unused_local_variable
     final ext = file.path.split('.').last;
     final path = 'family_photos/\$familyId.\$ext';
 

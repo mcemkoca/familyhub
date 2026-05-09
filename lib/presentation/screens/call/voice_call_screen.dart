@@ -35,8 +35,8 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
   bool _remoteJoined = false;
   Timer? _durationTimer;
   int _durationSeconds = 0;
-  StreamSubscription? _statusSubscription;
-  StreamSubscription? _remoteUserSubscription;
+  StreamSubscription<dynamic>? _statusSubscription;
+  StreamSubscription<dynamic>? _remoteUserSubscription;
 
   @override
   void initState() {

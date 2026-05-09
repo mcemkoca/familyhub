@@ -30,12 +30,12 @@ class SyncOperation {
   };
 
   factory SyncOperation.fromJson(Map<String, dynamic> json) => SyncOperation(
-    id: json['id'],
-    table: json['table'],
-    operation: json['operation'],
-    data: Map<String, dynamic>.from(json['data']),
-    createdAt: DateTime.parse(json['created_at']),
-    retryCount: json['retry_count'] ?? 0,
+    id: json['id'] as String,
+    table: json['table'] as String,
+    operation: json['operation'] as String,
+    data: Map<String, dynamic>.from(json['data'] as Map),
+    createdAt: DateTime.parse(json['created_at'] as String),
+    retryCount: (json['retry_count'] as int?) ?? 0,
   );
 }
 
@@ -43,7 +43,7 @@ class SyncService {
   static late Box<dynamic> _queueBox;
   static late Box<dynamic> _cacheBox;
   static bool _isSyncing = false;
-  static StreamSubscription? _connectivitySub;
+  static StreamSubscription<dynamic>? _connectivitySub;
   static Timer? _periodicSyncTimer;
 
   static Future<Box<dynamic>> _openBox(String name) async {
@@ -105,7 +105,7 @@ class SyncService {
 
     try {
       final operations = _queueBox.values
-          .map((v) => SyncOperation.fromJson(Map<String, dynamic>.from(v)))
+          .map((v) => SyncOperation.fromJson(Map<String, dynamic>.from(v as Map)))
           .toList()
         ..sort((a, b) => a.createdAt.compareTo(b.createdAt));
 
@@ -138,10 +138,10 @@ class SyncService {
         await supabase.from(op.table).insert(op.data);
         break;
       case 'update':
-        await supabase.from(op.table).update(op.data).eq('id', op.data['id']);
+        await supabase.from(op.table).update(op.data).eq('id', op.data['id'] as Object);
         break;
       case 'delete':
-        await supabase.from(op.table).delete().eq('id', op.data['id']);
+        await supabase.from(op.table).delete().eq('id', op.data['id'] as Object);
         break;
     }
   }
@@ -170,12 +170,13 @@ class SyncService {
     final entry = _cacheBox.get(key);
     if (entry == null) return null;
 
-    final expiresAt = entry['expires_at'] as int;
+    final map = entry as Map<dynamic, dynamic>;
+    final expiresAt = map['expires_at'] as int;
     if (DateTime.now().millisecondsSinceEpoch > expiresAt) {
       await _cacheBox.delete(key);
       return null;
     }
 
-    return entry['data'] as T?;
+    return map['data'] as T?;
   }
 }

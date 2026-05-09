@@ -31,16 +31,16 @@ class FamilyDocument {
 
   factory FamilyDocument.fromJson(Map<String, dynamic> json) => FamilyDocument(
     id: json['id']?.toString() ?? '',
-    title: json['title'] ?? '',
-    fileUrl: json['file_url'] ?? '',
-    fileType: json['file_type'] ?? 'pdf',
+    title: (json['title'] as String?) ?? '',
+    fileUrl: (json['file_url'] as String?) ?? '',
+    fileType: (json['file_type'] as String?) ?? 'pdf',
     ocrText: json['ocr_text']?.toString(),
     extractedData: json['extracted_data'] as Map<String, dynamic>?,
-    status: json['status'] ?? 'active',
+    status: (json['status'] as String?) ?? 'active',
     relatedTaskId: json['related_task_id']?.toString(),
     uploadedBy: json['uploaded_by']?.toString(),
     createdAt: DateTime.parse(
-      json['created_at'] ?? DateTime.now().toIso8601String(),
+      (json['created_at'] as String?) ?? DateTime.now().toIso8601String(),
     ),
   );
 }
@@ -66,7 +66,9 @@ class DocumentRepository {
           .select('*')
           .eq('family_id', familyId)
           .order('created_at', ascending: false);
-      return (response as List).map((e) => FamilyDocument.fromJson(e)).toList();
+      return (response as List)
+          .map((e) => FamilyDocument.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('DocumentRepository.getDocuments error: $e');
       throw app_errors.AppDatabaseException('Veritabanı hatası: $e');

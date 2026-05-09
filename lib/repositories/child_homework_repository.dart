@@ -31,7 +31,7 @@ class ChildHomeworkRepository {
           .eq('child_id', _childId!)
           .order('due_date', ascending: true);
       final list = (response as List)
-          .map((e) => ChildHomework.fromJson(e))
+          .map((e) => ChildHomework.fromJson(e as Map<String, dynamic>))
           .toList();
       await HiveService.saveChildHomeworks(list);
       return list;
@@ -51,7 +51,9 @@ class ChildHomeworkRepository {
           .eq('child_id', _childId!)
           .eq('status', status.name)
           .order('due_date', ascending: true);
-      return (response as List).map((e) => ChildHomework.fromJson(e)).toList();
+      return (response as List)
+          .map((e) => ChildHomework.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('ChildHomeworkRepository.getHomeworksByStatus error: $e');
       throw Exception('Veritabanı hatası: $e');

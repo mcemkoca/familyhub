@@ -23,7 +23,9 @@ class SmartReminderRepository {
           .select('*')
           .eq('family_id', familyId)
           .order('created_at', ascending: false);
-      return (response as List).map((e) => SmartReminder.fromJson(e)).toList();
+      return (response as List)
+          .map((e) => SmartReminder.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('SmartReminderRepository.getReminders error: $e');
       throw Exception('Veritabanı hatası: $e');
@@ -38,7 +40,7 @@ class SmartReminderRepository {
           .eq('family_id', familyId)
           .order('created_at', ascending: false);
       final all = (response as List)
-          .map((e) => SmartReminder.fromJson(e))
+          .map((e) => SmartReminder.fromJson(e as Map<String, dynamic>))
           .toList();
       return all.where((r) => r.status.state == ReminderState.active).toList();
     } catch (e) {

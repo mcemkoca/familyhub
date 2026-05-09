@@ -91,7 +91,7 @@ class HubRepository {
     }
 
     final onlineCount = members.where((m) {
-      final lastActive = DateTime.tryParse(m['last_active_at'] ?? '');
+      final lastActive = DateTime.tryParse(((m as Map<String, dynamic>)['last_active_at'] as String?) ?? '');
       if (lastActive == null) return false;
       return DateTime.now().difference(lastActive).inMinutes < 5;
     }).length;
@@ -124,7 +124,9 @@ class HubRepository {
           .order('start_time', ascending: true)
           .limit(limit);
 
-      return (response as List).map((e) => HubEvent.fromJson(e)).toList();
+      return (response as List)
+          .map((e) => HubEvent.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('HubRepository: getUpcomingEvents error: $e');
       return [];
@@ -166,7 +168,9 @@ class HubRepository {
           .order('due_date', ascending: true)
           .limit(5);
 
-      return (response as List).map((e) => HubTask.fromJson(e)).toList();
+      return (response as List)
+          .map((e) => HubTask.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('HubRepository: getMyTasks error: $e');
       return [];
@@ -240,7 +244,9 @@ class HubRepository {
           .order('created_at', ascending: false)
           .limit(limit);
 
-      return (response as List).map((e) => FamilyMood.fromJson(e)).toList();
+      return (response as List)
+          .map((e) => FamilyMood.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('HubRepository: getRecentMoods error: $e');
       return [];
@@ -272,9 +278,9 @@ class HubRepository {
 
   RealtimeChannel subscribeToHub(
     String familyId, {
-    required Function onEventChange,
-    required Function onTaskChange,
-    required Function onMoodChange,
+    required void Function(Map<String, dynamic>) onEventChange,
+    required void Function(Map<String, dynamic>) onTaskChange,
+    required void Function(Map<String, dynamic>) onMoodChange,
   }) {
     try {
       return _safeClient!
@@ -288,7 +294,7 @@ class HubRepository {
               column: 'family_id',
               value: familyId,
             ),
-            callback: (payload) => onEventChange(payload),
+            callback: (payload) => onEventChange(payload as Map<String, dynamic>),
           )
           .onPostgresChanges(
             event: PostgresChangeEvent.all,
@@ -299,7 +305,7 @@ class HubRepository {
               column: 'family_id',
               value: familyId,
             ),
-            callback: (payload) => onTaskChange(payload),
+            callback: (payload) => onTaskChange(payload as Map<String, dynamic>),
           )
           .onPostgresChanges(
             event: PostgresChangeEvent.all,
@@ -310,7 +316,7 @@ class HubRepository {
               column: 'family_id',
               value: familyId,
             ),
-            callback: (payload) => onMoodChange(payload),
+            callback: (payload) => onMoodChange(payload as Map<String, dynamic>),
           )
           .subscribe();
     } catch (e) {

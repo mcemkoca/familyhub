@@ -12,7 +12,9 @@ class HouseholdTaskRepository {
           .select()
           .eq('is_active', true)
           .order('category');
-      return (response as List).map((e) => HouseholdTask.fromJson(e)).toList();
+      return (response as List)
+          .map((e) => HouseholdTask.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('[HouseholdTaskRepository.getAllTasks] error: $e');
       rethrow;
@@ -28,7 +30,9 @@ class HouseholdTaskRepository {
           .select()
           .eq('category', category)
           .eq('is_active', true);
-      return (response as List).map((e) => HouseholdTask.fromJson(e)).toList();
+      return (response as List)
+          .map((e) => HouseholdTask.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('[HouseholdTaskRepository.getTasksByCategory] error: $e');
       rethrow;
@@ -44,7 +48,9 @@ class HouseholdTaskRepository {
           .select()
           .eq('family_id', familyId)
           .order('priority', ascending: false);
-      return (response as List).map((e) => TaskSchedule.fromJson(e)).toList();
+      return (response as List)
+          .map((e) => TaskSchedule.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('[HouseholdTaskRepository.getFamilySchedules] error: $e');
       rethrow;

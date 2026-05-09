@@ -42,7 +42,9 @@ class ChildAccountRepository {
           .eq('is_active', true)
           .order('created_at', ascending: true);
 
-      return (response as List).map((e) => ChildAccount.fromJson(e)).toList();
+      return (response as List)
+          .map((e) => ChildAccount.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('ChildAccountRepository.getChildrenForFamily error: $e');
       throw AppDatabaseException('Veritabanı hatası: $e');
@@ -100,7 +102,7 @@ class ChildAccountRepository {
         'role': role.name,
         'avatar_url': avatarUrl,
         'color': color != null
-            ? '#${color.value.toRadixString(16).substring(2).toUpperCase()}'
+            ? '#${color.toARGB32().toRadixString(16).substring(2).toUpperCase()}'
             : '#3B82F6',
         'created_by': currentUserId,
         'daily_screen_time_minutes': dailyScreenTimeMinutes ?? 120,
@@ -146,7 +148,7 @@ class ChildAccountRepository {
       if (avatarUrl != null) data['avatar_url'] = avatarUrl;
       if (color != null) {
         data['color'] =
-            '#${color.value.toRadixString(16).substring(2).toUpperCase()}';
+            '#${color.toARGB32().toRadixString(16).substring(2).toUpperCase()}';
       }
       if (isActive != null) data['is_active'] = isActive;
       if (dailyScreenTimeMinutes != null) {

@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+
 import '../core/supabase_client.dart';
 import '../services/auth_service.dart';
 import '../services/child_auth_service.dart';

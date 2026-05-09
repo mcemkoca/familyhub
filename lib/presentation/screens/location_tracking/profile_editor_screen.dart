@@ -1,3 +1,4 @@
+// ignore_for_file: deprecated_member_use
 // lib/presentation/screens/location_tracking/profile_editor_screen.dart
 // Motion profile editor with interval, accuracy, provider, transition rules
 

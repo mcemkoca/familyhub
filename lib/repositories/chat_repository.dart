@@ -22,7 +22,7 @@ class ChatRepository {
           .select('*')
           .eq('family_id', familyId)
           .order('created_at', ascending: true);
-      return (response as List).map((e) => _fromJson(e)).toList();
+      return (response as List).map((e) => _fromJson(e as Map<String, dynamic>)).toList();
     } catch (e) {
       debugPrint('ChatRepository.getMessages error: $e');
       throw Exception('Veritabanı hatası: $e');
@@ -128,11 +128,11 @@ class ChatRepository {
       senderId: json['user_id']?.toString() ?? '',
       senderName: json['sender_name']?.toString() ?? 'Kullanıcı',
       senderColor: _parseColor(json['sender_color']),
-      content: json['content'] ?? '',
+      content: (json['content'] as String?) ?? '',
       createdAt: json['created_at'] != null
-          ? DateTime.parse(json['created_at'])
+          ? DateTime.parse(json['created_at'] as String)
           : DateTime.now(),
-      isRead: json['is_read'] ?? false,
+      isRead: (json['is_read'] as bool?) ?? false,
       type: type,
       imageUrl: json['image_url']?.toString(),
       audioUrl: json['audio_url']?.toString(),
@@ -140,8 +140,8 @@ class ChatRepository {
       replyToId: json['reply_to_id']?.toString(),
       replyToContent: json['reply_to_content']?.toString(),
       replyToSender: json['reply_to_sender']?.toString(),
-      isPinned: json['is_pinned'] ?? false,
-      readCount: json['read_count'] ?? 0,
+      isPinned: (json['is_pinned'] as bool?) ?? false,
+      readCount: (json['read_count'] as int?) ?? 0,
     );
   }
 

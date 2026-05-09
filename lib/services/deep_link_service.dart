@@ -6,7 +6,7 @@ import '../config/routes.dart';
 /// Deep link handler using app_links.
 class DeepLinkService {
   static final _appLinks = AppLinks();
-  static StreamSubscription? _sub;
+  static StreamSubscription<dynamic>? _sub;
 
   static void initialize(GoRouter router) {
     _sub?.cancel();

@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
 import '../domain/entities.dart';
 import '../services/auth_service.dart';
@@ -44,7 +43,7 @@ class CalendarRepository {
           .eq('status', 'active')
           .order('start_time', ascending: true);
 
-      final events = (response as List).map((e) => _fromJson(e)).toList();
+      final events = (response as List).map((e) => _fromJson(e as Map<String, dynamic>)).toList();
       await HiveService.saveCalendarEvents(events);
       return events;
     } catch (e) {

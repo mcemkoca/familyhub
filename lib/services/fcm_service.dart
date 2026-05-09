@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+
 import '../core/supabase_client.dart';
 import 'notification_service.dart';
 
@@ -12,7 +11,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await NotificationService.showInstantNotification(
     title: message.notification?.title ?? 'FamilyHub',
     body: message.notification?.body ?? '',
-    payload: message.data['route'],
+    payload: message.data['route'] as String?
   );
 }
 
@@ -68,7 +67,7 @@ class FcmService {
     NotificationService.showInstantNotification(
       title: notification.title ?? 'FamilyHub',
       body: notification.body ?? '',
-      payload: message.data['route'],
+      payload: message.data['route'] as String?
     );
   }
 

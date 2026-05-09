@@ -9,7 +9,7 @@ class DigitalBalanceService {
   static Future<bool> requestPermission() async {
     if (!Platform.isAndroid) return false;
     try {
-      return await _channel.invokeMethod('requestPermission') ?? false;
+      return (await _channel.invokeMethod('requestPermission') as bool?) ?? false;
     } catch (_) {
       return false;
     }

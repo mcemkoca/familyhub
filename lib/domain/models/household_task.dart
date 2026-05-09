@@ -33,7 +33,7 @@ class HouseholdTask {
       difficultyLevel: json['difficulty_level'] as int? ?? 3,
       room: json['room'] as String?,
       season: json['season'] as String? ?? 'tum_sezon',
-      tips: List<String>.from(json['tips'] ?? []),
+      tips: List<String>.from((json['tips'] as List<dynamic>?) ?? []),
       isActive: json['is_active'] as bool? ?? true,
     );
   }

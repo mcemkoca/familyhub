@@ -96,12 +96,12 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                           CircleAvatar(
                             radius: 22,
                             backgroundImage: user['avatar_url'] != null
-                                ? NetworkImage(user['avatar_url'])
+                                ? NetworkImage(user['avatar_url'] as String)
                                 : null,
                             backgroundColor: AppColors.cobalt.withAlpha(30),
                             child: user['avatar_url'] == null
                                 ? Text(
-                                    (user['display_name'] ?? '?')[0].toUpperCase(),
+                                    ((user['display_name'] as String?) ?? '?')[0].toUpperCase(),
                                     style: const TextStyle(
                                       color: AppColors.cobalt,
                                       fontWeight: FontWeight.bold,
@@ -115,7 +115,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  user['display_name'] ?? 'Kullanıcı',
+                                  (user['display_name'] as String?) ?? 'Kullanıcı',
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600,

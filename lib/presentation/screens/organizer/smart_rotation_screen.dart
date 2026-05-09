@@ -52,14 +52,14 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
       }
 
       // Aile üyelerini çek (profiles + child_accounts)
-      final profiles = await _client.from('profiles').select('id, display_name, avatar_url').eq('family_id', familyId);
-      final children = await _client.from('child_accounts').select('id, name, color').eq('family_id', familyId);
+      final List<Map<String, dynamic>> profiles = await _client.from('profiles').select('id, display_name, avatar_url').eq('family_id', familyId);
+      final List<Map<String, dynamic>> children = await _client.from('child_accounts').select('id, name, color').eq('family_id', familyId);
 
       final memberList = <RotationMember>[];
-      for (final p in profiles as List) {
+      for (final p in profiles) {
         memberList.add(RotationMember(
           id: p['id'] as String,
-          name: (p['display_name'] ?? 'Üye') as String,
+          name: (p['display_name'] as String?) ?? 'Üye',
           avatar: p['avatar_url'] as String?,
           age: 0,
           workload: const MemberWorkload(),
@@ -67,10 +67,10 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
           notifications: const NotificationPrefs(),
         ));
       }
-      for (final c in children as List) {
+      for (final c in children) {
         memberList.add(RotationMember(
           id: c['id'] as String,
-          name: (c['name'] ?? 'Çocuk') as String,
+          name: (c['name'] as String?) ?? 'Çocuk',
           age: 0,
           workload: const MemberWorkload(),
           energyProfile: const EnergyProfile(),
@@ -79,8 +79,8 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
       }
 
       // Bekleyen görevleri çek
-      final tasksRaw = await _client.from('tasks').select('*').eq('family_id', familyId).eq('status', 'pending').order('created_at', ascending: false);
-      final taskList = (tasksRaw as List).map((t) {
+      final List<Map<String, dynamic>> tasksRaw = await _client.from('tasks').select('*').eq('family_id', familyId).eq('status', 'pending').order('created_at', ascending: false);
+      final taskList = tasksRaw.map((t) {
         final priority = (t['priority'] ?? 'medium') as String;
         final estMinutes = switch (priority) {
           'high' => 60,
@@ -90,20 +90,20 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
         };
         return RotationTask(
           id: t['id'] as String,
-          title: (t['title'] ?? 'Görev') as String,
+          title: (t['title'] as String?) ?? 'Görev',
           category: _priorityToCategory(priority),
           estimatedDuration: estMinutes,
           assignedTo: t['assigned_to'] as String?,
-          createdBy: (t['created_by'] ?? '') as String,
-          createdAt: DateTime.tryParse(t['created_at'] ?? '') ?? DateTime.now(),
+          createdBy: (t['created_by'] as String?) ?? '',
+          createdAt: DateTime.tryParse((t['created_at'] as String?) ?? '') ?? DateTime.now(),
         );
       }).toList();
 
       // Son 30 gündeki görev dağılımını çek (adalet durumu için)
       final thirtyDaysAgo = DateTime.now().subtract(const Duration(days: 30)).toIso8601String();
-      final allTasks = await _client.from('tasks').select('*').eq('family_id', familyId).gte('created_at', thirtyDaysAgo);
+      final List<Map<String, dynamic>> allTasks = await _client.from('tasks').select('*').eq('family_id', familyId).gte('created_at', thirtyDaysAgo);
       final workloads = <String, _MemberWorkload>{};
-      for (final t in allTasks as List) {
+      for (final t in allTasks) {
         final assignedTo = t['assigned_to'] as String?;
         if (assignedTo != null) {
           workloads.putIfAbsent(assignedTo, _MemberWorkload.new);
@@ -122,11 +122,11 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
           rules = FairnessRules(
             familyId: familyId,
             weights: FairnessWeights(
-              equalTime: rulesRaw['equal_time'] ?? 40,
-              skillMatch: rulesRaw['skill_match'] ?? 20,
-              energyAware: rulesRaw['energy_aware'] ?? 20,
-              preference: rulesRaw['preference'] ?? 10,
-              streakBalance: rulesRaw['streak_balance'] ?? 10,
+              equalTime: (rulesRaw['equal_time'] as int?) ?? 40,
+              skillMatch: (rulesRaw['skill_match'] as int?) ?? 20,
+              energyAware: (rulesRaw['energy_aware'] as int?) ?? 20,
+              preference: (rulesRaw['preference'] as int?) ?? 10,
+              streakBalance: (rulesRaw['streak_balance'] as int?) ?? 10,
             ),
           );
         } else {
@@ -174,29 +174,52 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
     });
   }
 
-  void _acceptAssignment(Assignment a) {
+  void _acceptAssignment(Assignment a) async {
     final idx = _tasks.indexWhere((t) => t.id == a.taskId);
     if (idx >= 0) {
-      setState(() {
-        _tasks[idx] = _tasks[idx].copyWith(
-          assignedTo: a.memberId,
-          assignedAt: DateTime.now(),
-          status: RotationStatus.pending,
-        );
-      });
+      try {
+        await _client.from('tasks').update({
+          'assigned_to': a.memberId,
+          'status': 'pending',
+        }).eq('id', a.taskId);
+        setState(() {
+          _tasks[idx] = _tasks[idx].copyWith(
+            assignedTo: a.memberId,
+            assignedAt: DateTime.now(),
+            status: RotationStatus.pending,
+          );
+        });
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Atama kaydedilemedi: $e')),
+          );
+        }
+      }
     }
     HapticFeedback.lightImpact();
   }
 
-  void _rejectAssignment(String taskId) {
-    setState(() {
-      _tasks = _tasks.map((t) {
-        if (t.id == taskId) {
-          return t.copyWith(status: RotationStatus.rejected);
-        }
-        return t;
-      }).toList();
-    });
+  void _rejectAssignment(String taskId) async {
+    try {
+      await _client.from('tasks').update({
+        'status': 'rejected',
+      }).eq('id', taskId);
+      setState(() {
+        _tasks = _tasks.map((t) {
+          if (t.id == taskId) {
+            return t.copyWith(status: RotationStatus.rejected);
+          }
+          return t;
+        }).toList();
+      });
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Reddetme kaydedilemedi: $e')),
+        );
+      }
+    }
   }
 
   void _toggleRules() => setState(() => _showRules = !_showRules);

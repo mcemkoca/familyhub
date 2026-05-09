@@ -32,7 +32,7 @@ class CalendarSyncService {
     if (!granted) return [];
 
     final result = await _plugin.retrieveCalendars();
-    final calendars = result.data ?? [];
+    final calendars = (result.data as List<dynamic>).cast<Calendar>();
 
     return calendars
         .map(
@@ -63,7 +63,7 @@ class CalendarSyncService {
       RetrieveEventsParams(startDate: start, endDate: end),
     );
 
-    final events = result.data ?? [];
+    final events = (result.data as List<dynamic>).cast<Event>();
     return events.map((e) => _convertToExternalEvent(e, calendarId)).toList();
   }
 
@@ -77,7 +77,7 @@ class CalendarSyncService {
     if (!granted) return null;
 
     final calendarResult = await _plugin.retrieveCalendars();
-    final calendars = calendarResult.data ?? [];
+    final calendars = (calendarResult.data as List<dynamic>).cast<Calendar>();
     final calendarExists = calendars.any((c) => c.id == calendarId);
     if (!calendarExists) return null;
 

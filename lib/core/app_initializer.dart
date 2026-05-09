@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
 import '../config/constants.dart';
-import '../config/routes.dart';
-import '../config/theme.dart';
+import '../main.dart';
 import '../domain/entities.dart';
 import '../presentation/providers/app_providers.dart';
 import '../services/notification_service.dart';
@@ -22,9 +22,7 @@ import '../services/encryption_service.dart';
 import '../services/smart_reminder_background_service.dart';
 import '../services/fcm_service.dart';
 import '../services/error_service.dart';
-import '../services/deep_link_service.dart';
 import '../services/safety_service.dart';
-import '../services/child_auth_service.dart';
 import 'supabase_client.dart';
 import 'config/env.dart';
 import 'sentry_config.dart';
@@ -70,7 +68,9 @@ class AppInitializer {
     // Wrap every critical init so a single failure never kills the app
     _safeCall(() => SslPinning.enable(), 'SSL Pinning');
     await _safeInit(
-      () => Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform),
+      () => Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      ),
       'Firebase',
     );
     await _safeInit(FirebaseCrashlyticsService.initialize, 'Crashlytics');
@@ -96,7 +96,7 @@ class AppInitializer {
       result = await _loadCoreData();
       _openApp(result);
       _initBackgroundServices();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('Fatal init error: $e');
       _runDefaultApp();
     }
@@ -137,7 +137,10 @@ class AppInitializer {
     fontScale = HiveService.getDoubleSetting('fontScale') ?? 1.0;
 
     savedTasks = _safeCallSync(HiveService.getTasks, 'getTasks');
-    savedChatMessages = _safeCallSync(HiveService.getChatMessages, 'getChatMessages');
+    savedChatMessages = _safeCallSync(
+      HiveService.getChatMessages,
+      'getChatMessages',
+    );
     savedStreaks = _safeCallSync(HiveService.getStreaks, 'getStreaks');
 
     // Background init — app is already open, user can interact
@@ -165,13 +168,29 @@ class AppInitializer {
 
     if (supabaseUrl.isNotEmpty && supabaseKey.isNotEmpty) {
       await _safeInit(
-        () => Supabase.initialize(url: supabaseUrl, anonKey: supabaseKey, debug: false),
+        () => Supabase.initialize(
+          url: supabaseUrl,
+          anonKey: supabaseKey,
+          debug: false,
+        ),
         'Supabase',
         ms: 5000,
       );
-      await _safeInit(AuthService.restoreSession, 'AuthService.restoreSession', ms: 5000);
-      await _safeInit(AuthService.initAuthListener, 'AuthService.initAuthListener', ms: 2000);
-      await _safeInit(ChildAuthService.restoreSession, 'ChildAuthService.restoreSession', ms: 3000);
+      await _safeInit(
+        AuthService.restoreSession,
+        'AuthService.restoreSession',
+        ms: 5000,
+      );
+      await _safeInit(
+        AuthService.initAuthListener,
+        'AuthService.initAuthListener',
+        ms: 2000,
+      );
+      await _safeInit(
+        ChildAuthService.restoreSession,
+        'ChildAuthService.restoreSession',
+        ms: 3000,
+      );
 
       // Load theme/accent from profile if logged in
       if (AuthService.currentUserId != null) {
@@ -243,14 +262,22 @@ class AppInitializer {
     _safeInit(AnalyticsService.initialize, 'AnalyticsService', ms: 3000);
     _safeInit(SubscriptionService.initialize, 'SubscriptionService', ms: 3000);
     _safeInit(ContentEngine.initialize, 'ContentEngine', ms: 5000);
-    _safeInit(FamilySuggestionsPool.initialize, 'FamilySuggestionsPool', ms: 5000);
+    _safeInit(
+      FamilySuggestionsPool.initialize,
+      'FamilySuggestionsPool',
+      ms: 5000,
+    );
     _safeInit(
       SmartReminderBackgroundService.initialize,
       'SmartReminderBackground',
       ms: 3000,
     );
     _safeInit(FcmService.initialize, 'FcmService', ms: 5000);
-    _safeInit(() async => SafetyService.startMonitoring(), 'SafetyService', ms: 2000);
+    _safeInit(
+      () async => SafetyService.startMonitoring(),
+      'SafetyService',
+      ms: 2000,
+    );
     HeatmapTracker.initialize();
   }
 

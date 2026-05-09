@@ -18,9 +18,7 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
   bool _saving = false;
 
   String? _bloodType;
-  final _bloodTypes = [
-    'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', '0+', '0-',
-  ];
+  final _bloodTypes = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', '0+', '0-'];
 
   final _allergiesController = TextEditingController();
   final _conditionsController = TextEditingController();
@@ -254,11 +252,11 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
                                     color: selected
                                         ? Colors.white
                                         : (isDark
-                                            ? AppColors.darkTextPrimary
-                                            : AppColors.dark),
+                                              ? AppColors.darkTextPrimary
+                                              : AppColors.dark),
                                   ),
-                                  onSelected: (_) => setState(
-                                      () => _bloodType = type),
+                                  onSelected: (_) =>
+                                      setState(() => _bloodType = type),
                                 );
                               }).toList(),
                             ),
@@ -442,11 +440,9 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
         ),
         value: value,
         onChanged: onChanged,
-        activeColor: AppColors.error,
+        activeThumbColor: AppColors.error,
         contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
     );
   }

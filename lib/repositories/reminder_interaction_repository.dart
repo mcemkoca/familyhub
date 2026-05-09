@@ -28,7 +28,7 @@ class ReminderInteractionRepository {
           .order('created_at', ascending: false)
           .limit(limit);
       return (response as List)
-          .map((e) => ReminderInteraction.fromJson(e))
+          .map((e) => ReminderInteraction.fromJson(e as Map<String, dynamic>))
           .toList();
     } catch (e) {
       debugPrint(
@@ -53,7 +53,7 @@ class ReminderInteractionRepository {
           .gte('created_at', since)
           .order('created_at', ascending: false);
       return (response as List)
-          .map((e) => ReminderInteraction.fromJson(e))
+          .map((e) => ReminderInteraction.fromJson(e as Map<String, dynamic>))
           .toList();
     } catch (e) {
       debugPrint(

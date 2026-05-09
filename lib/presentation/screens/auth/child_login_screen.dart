@@ -35,23 +35,11 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
     try {
       final userId = _repo.currentUserId;
 
-      // If user is not logged in, fetch children directly (for standalone child login)
+      // Require parent authentication for child login
       if (userId == null || userId.isEmpty) {
-        final response = await _repo.client
-            .from('child_accounts')
-            .select()
-            .eq('is_active', true)
-            .order('name')
-            .limit(20);
-
-        final children = (response as List)
-            .map((r) => ChildAccount.fromJson(r))
-            .toList();
-
         setState(() {
-          _children = children;
           _isLoadingChildren = false;
-          if (children.isNotEmpty) _selectedChild = children.first;
+          _error = 'Çocuk girişi için önce ebeveyn hesabıyla giriş yapmalısınız.';
         });
         return;
       }
@@ -65,29 +53,10 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
 
       final familyId = response?['family_id'] as String?;
       if (familyId == null) {
-        // Fallback: user is authenticated but not in family_members
-        // Try fetching children directly for standalone child login
-        try {
-          final response = await _repo.client
-              .from('child_accounts')
-              .select()
-              .eq('is_active', true)
-              .order('name')
-              .limit(20);
-          final children = (response as List)
-              .map((r) => ChildAccount.fromJson(r))
-              .toList();
-          setState(() {
-            _children = children;
-            _isLoadingChildren = false;
-            if (children.isNotEmpty) _selectedChild = children.first;
-          });
-        } catch (_) {
-          setState(() {
-            _isLoadingChildren = false;
-            _error = 'Aile bilgisi bulunamadı';
-          });
-        }
+        setState(() {
+          _isLoadingChildren = false;
+          _error = 'Aile bilgisi bulunamadı. Lütfen önce aile oluşturun.';
+        });
         return;
       }
 

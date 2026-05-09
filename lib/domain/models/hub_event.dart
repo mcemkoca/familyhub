@@ -13,6 +13,6 @@ class HubEvent {
   factory HubEvent.fromJson(Map<String, dynamic> json) => HubEvent(
         id: json['id'] as String? ?? '',
         title: json['title'] as String? ?? 'Etkinlik',
-        start: DateTime.tryParse(json['start_time'] ?? '') ?? DateTime.now(),
+        start: DateTime.tryParse((json['start_time'] as String?) ?? '') ?? DateTime.now(),
       );
 }

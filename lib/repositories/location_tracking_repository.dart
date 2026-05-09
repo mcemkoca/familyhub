@@ -60,7 +60,9 @@ class LocationTrackingRepository {
           .eq('member_id', memberId)
           .order('recorded_at', ascending: false)
           .limit(limit);
-      return (res as List).map((e) => LocationBatch.fromJson(e)).toList();
+      return (res as List)
+          .map((e) => LocationBatch.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('[LocationTrackingRepository.getMemberHistory] error: $e');
       rethrow;
@@ -97,7 +99,9 @@ class LocationTrackingRepository {
           .eq('member_id', memberId)
           .order('timestamp', ascending: false)
           .limit(limit);
-      return (res as List).map((e) => BatteryLog.fromJson(e)).toList();
+      return (res as List)
+          .map((e) => BatteryLog.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('[LocationTrackingRepository.getBatteryLogs] error: $e');
       rethrow;
@@ -140,7 +144,7 @@ class LocationTrackingRepository {
         await _client
             .from('tracking_analytics')
             .update(analytics.toJson())
-            .eq('id', existing['id']);
+            .eq('id', existing['id'] as Object);
       }
     } catch (e) {
       debugPrint('[LocationTrackingRepository.upsertAnalytics] error: $e');

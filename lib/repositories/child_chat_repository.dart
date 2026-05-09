@@ -30,7 +30,7 @@ class ChildChatRepository {
           .select('*')
           .eq('family_id', _familyId!)
           .order('created_at', ascending: true);
-      final list = (response as List).map((e) => _fromJson(e)).toList();
+      final list = (response as List).map((e) => _fromJson(e as Map<String, dynamic>)).toList();
       await HiveService.saveChatMessages(list);
       return list;
     } catch (_) {
@@ -95,17 +95,17 @@ class ChildChatRepository {
       senderId: json['user_id']?.toString() ?? '',
       senderName: json['sender_name']?.toString() ?? 'Kullanıcı',
       senderColor: _parseColor(json['sender_color']),
-      content: json['content'] ?? '',
+      content: (json['content'] as String?) ?? '',
       createdAt: json['created_at'] != null
-          ? DateTime.parse(json['created_at'])
+          ? DateTime.parse(json['created_at'] as String)
           : DateTime.now(),
-      isRead: json['is_read'] ?? false,
+      isRead: (json['is_read'] as bool?) ?? false,
       type: MessageType.text,
       replyToId: json['reply_to_id']?.toString(),
       replyToContent: json['reply_to_content']?.toString(),
       replyToSender: json['reply_to_sender']?.toString(),
-      isPinned: json['is_pinned'] ?? false,
-      readCount: json['read_count'] ?? 0,
+      isPinned: (json['is_pinned'] as bool?) ?? false,
+      readCount: (json['read_count'] as int?) ?? 0,
     );
   }
 

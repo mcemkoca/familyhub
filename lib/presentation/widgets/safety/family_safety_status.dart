@@ -14,7 +14,7 @@ class FamilySafetyStatus extends StatefulWidget {
 
 class _FamilySafetyStatusState extends State<FamilySafetyStatus> {
   List<MemberSafetyStatus> _members = [];
-  StreamSubscription? _sub;
+  StreamSubscription<dynamic>? _sub;
 
   @override
   void initState() {

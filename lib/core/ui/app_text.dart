@@ -58,12 +58,15 @@ class AppText extends StatelessWidget {
       AppTextStyle.caption => theme.textTheme.bodySmall?.copyWith(color: defaultColor.withValues(alpha: 0.6)),
     };
 
-    return Text(
-      data,
-      style: textStyle,
-      textAlign: textAlign,
-      maxLines: maxLines,
-      overflow: overflow,
+    return Semantics(
+      label: data,
+      child: Text(
+        data,
+        style: textStyle,
+        textAlign: textAlign,
+        maxLines: maxLines,
+        overflow: overflow,
+      ),
     );
   }
 }

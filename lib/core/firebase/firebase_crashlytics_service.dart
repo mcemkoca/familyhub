@@ -26,10 +26,10 @@ class FirebaseCrashlyticsService {
 
     _errorPort?.close();
     _errorPort = RawReceivePort((pair) async {
-      final List<dynamic> errorAndStacktrace = pair;
+      final List<dynamic> errorAndStacktrace = pair as List<dynamic>;
       await _crashlytics.recordError(
         errorAndStacktrace.first,
-        errorAndStacktrace.last,
+        errorAndStacktrace.last as StackTrace?,
         fatal: true,
       );
     });
@@ -46,7 +46,7 @@ class FirebaseCrashlyticsService {
   }
 
   static Future<void> setCustomKey(String key, dynamic value) async {
-    await _crashlytics.setCustomKey(key, value);
+    await _crashlytics.setCustomKey(key, value as Object);
   }
 
   static Future<void> log(String message) async {

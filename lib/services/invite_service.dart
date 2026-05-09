@@ -48,6 +48,6 @@ class InviteService {
     await _supabase
         .from('families')
         .update({'invite_used': true})
-        .eq('id', family['id']);
+        .eq('id', family['id'] as Object);
   }
 }

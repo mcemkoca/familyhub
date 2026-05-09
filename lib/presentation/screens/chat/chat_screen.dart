@@ -11,6 +11,7 @@ import '../../../config/routes.dart';
 import '../../../domain/entities.dart';
 import '../../providers/app_providers.dart';
 import '../../../services/hive_service.dart';
+import '../../../services/auth_service.dart';
 import '../../widgets/chat/chat_bubble.dart';
 import '../../widgets/chat/chat_composer.dart';
 import '../../widgets/chat/reaction_picker.dart';
@@ -52,10 +53,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     if (text.trim().isEmpty) return;
 
     final current = ref.read(chatMessagesProvider);
+    final userId = AuthService.currentUserId ?? 'unknown';
+    final userName = AuthService.currentUser?.userMetadata?['display_name'] as String? ?? 'Ben';
     final newMsg = ChatMessage(
       id: 'msg${current.length + 1}',
-      senderId: '',
-      senderName: 'Ben',
+      senderId: userId,
+      senderName: userName,
       senderColor: AppColors.blue,
       content: text.trim(),
       createdAt: DateTime.now(),

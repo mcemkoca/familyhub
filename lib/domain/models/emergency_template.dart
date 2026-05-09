@@ -150,17 +150,17 @@ class EmergencyContactModel {
         email: json['email'] as String?,
         relation: json['relation'] as String? ?? '',
         priority: (json['priority'] as num?)?.toInt() ?? 1,
-        timezone: json['availability']?['timezone'] as String?,
-        preferredHours: json['availability']?['preferredHours'] as String?,
+        timezone: (json['availability'] as Map<String, dynamic>?)?['timezone'] as String?,
+        preferredHours: (json['availability'] as Map<String, dynamic>?)?['preferredHours'] as String?,
         alwaysAvailable:
-            json['availability']?['alwaysAvailable'] as bool? ?? true,
-        canReceiveSMS: json['capabilities']?['canReceiveSMS'] as bool? ?? true,
-        canReceivePush: json['capabilities']?['canReceivePush'] as bool? ?? true,
-        canReceiveCall: json['capabilities']?['canReceiveCall'] as bool? ?? true,
+            (json['availability'] as Map<String, dynamic>?)?['alwaysAvailable'] as bool? ?? true,
+        canReceiveSMS: (json['capabilities'] as Map<String, dynamic>?)?['canReceiveSMS'] as bool? ?? true,
+        canReceivePush: (json['capabilities'] as Map<String, dynamic>?)?['canReceivePush'] as bool? ?? true,
+        canReceiveCall: (json['capabilities'] as Map<String, dynamic>?)?['canReceiveCall'] as bool? ?? true,
         canAccessLocation:
-            json['capabilities']?['canAccessLocation'] as bool? ?? true,
+            (json['capabilities'] as Map<String, dynamic>?)?['canAccessLocation'] as bool? ?? true,
         canAccessHealthData:
-            json['capabilities']?['canAccessHealthData'] as bool? ?? false,
+            (json['capabilities'] as Map<String, dynamic>?)?['canAccessHealthData'] as bool? ?? false,
         roles: (json['roles'] as List<dynamic>?)
                 ?.map((e) => ContactRole.fromJson(e as Map<String, dynamic>))
                 .toList() ??

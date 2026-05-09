@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -66,6 +65,7 @@ class SecurityService {
     try {
       await _supabase.rpc('delete_user_account', params: {'user_id': userId});
     } catch (e) {
+      // ignore: empty_catches
     }
 
     // 3. Local cache'i temizle

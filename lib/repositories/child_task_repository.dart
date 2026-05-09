@@ -30,7 +30,7 @@ class ChildTaskRepository {
           .eq('family_id', _familyId!)
           .eq('assigned_to', _childId!)
           .order('due_date', ascending: true);
-      final tasks = (response as List).map((e) => _fromJson(e)).toList();
+      final tasks = (response as List).map((e) => _fromJson(e as Map<String, dynamic>)).toList();
       await HiveService.saveTasks(tasks);
       return tasks;
     } catch (_) {
@@ -132,19 +132,19 @@ class ChildTaskRepository {
   Task _fromJson(Map<String, dynamic> json) {
     return Task(
       id: json['id']?.toString() ?? '',
-      title: json['title'] ?? '',
+      title: (json['title'] as String?) ?? '',
       description: json['description'] as String?,
       assignedTo: json['assigned_to']?.toString() ?? '',
       status: _parseStatus(json['status']),
-      priority: json['priority'] ?? 'medium',
+      priority: (json['priority'] as String?) ?? 'medium',
       dueDate: json['due_date'] != null
-          ? DateTime.parse(json['due_date'])
+          ? DateTime.parse(json['due_date'] as String)
           : null,
       completedAt: json['completed_at'] != null
-          ? DateTime.parse(json['completed_at'])
+          ? DateTime.parse(json['completed_at'] as String)
           : null,
-      tags: List<String>.from(json['tags'] ?? []),
-      streakCount: json['streak_count'] ?? 0,
+      tags: List<String>.from((json['tags'] as List<dynamic>?) ?? []),
+      streakCount: (json['streak_count'] as int?) ?? 0,
     );
   }
 

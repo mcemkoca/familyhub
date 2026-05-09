@@ -28,7 +28,9 @@ class CrashEventRepository {
           .eq('family_id', familyId)
           .order('created_at', ascending: false)
           .limit(limit);
-      return (res as List).map((e) => CrashEvent.fromJson(e)).toList();
+      return (res as List)
+          .map((e) => CrashEvent.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('CrashEventRepository.getFamilyEvents error: $e');
       throw Exception('Veritabanı hatası: $e');
@@ -46,7 +48,9 @@ class CrashEventRepository {
           .eq('member_id', memberId)
           .order('created_at', ascending: false)
           .limit(limit);
-      return (res as List).map((e) => CrashEvent.fromJson(e)).toList();
+      return (res as List)
+          .map((e) => CrashEvent.fromJson(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       debugPrint('CrashEventRepository.getMemberEvents error: $e');
       throw Exception('Veritabanı hatası: $e');

@@ -45,13 +45,16 @@ class AppCard extends StatelessWidget {
     );
 
     if (onTap != null) {
-      return InkWell(
-        onTap: onTap,
-        borderRadius: borderRadius ?? BorderRadius.circular(12),
-        child: card,
+      return Semantics(
+        button: true,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: borderRadius ?? BorderRadius.circular(12),
+          child: card,
+        ),
       );
     }
 
-    return card;
+    return Semantics(container: true, child: card);
   }
 }

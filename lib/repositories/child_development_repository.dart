@@ -40,7 +40,7 @@ class ChildDevelopmentRepository {
           .order('logged_at', ascending: false)
           .limit(limit);
       final list = (response as List)
-          .map((e) => ChildDevelopmentLog.fromJson(e))
+          .map((e) => ChildDevelopmentLog.fromJson(e as Map<String, dynamic>))
           .toList();
       await HiveService.saveChildDevLogs(list);
       return list;

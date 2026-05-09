@@ -489,7 +489,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      alert['sender_name'] ?? 'Bilinmeyen',
+                      (alert['sender_name'] as String?) ?? 'Bilinmeyen',
                       style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
@@ -518,7 +518,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  alert['message'] ?? 'Acil durum!',
+                  (alert['message'] as String?) ?? 'Acil durum!',
                   style: TextStyle(color: Colors.grey.shade300, fontSize: 13),
                 ),
                 if (alert['lat'] != null && alert['lng'] != null)

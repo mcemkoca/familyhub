@@ -22,7 +22,7 @@ class EventRepository {
           .select('*')
           .eq('family_id', familyId)
           .order('start_time', ascending: true);
-      return (response as List).map((e) => _fromJson(e)).toList();
+      return (response as List).map((e) => _fromJson(e as Map<String, dynamic>)).toList();
     } catch (e) {
       debugPrint('[EventRepository.getEvents] error: $e');
       rethrow;
@@ -108,19 +108,19 @@ class EventRepository {
   CalendarEvent _fromJson(Map<String, dynamic> json) {
     return CalendarEvent(
       id: json['id']?.toString() ?? '',
-      title: json['title'] ?? '',
+      title: (json['title'] as String?) ?? '',
       start: json['start_time'] != null
-          ? DateTime.parse(json['start_time'])
+          ? DateTime.parse(json['start_time'] as String)
           : DateTime.now(),
       end: json['end_time'] != null
-          ? DateTime.parse(json['end_time'])
+          ? DateTime.parse(json['end_time'] as String)
           : DateTime.now(),
       location: json['location']?.toString(),
       description: json['description']?.toString(),
       category: _parseCategory(json['category']),
       color: const Color(0xFF3B82F6),
-      isAllDay: json['is_all_day'] ?? false,
-      reminders: List<int>.from(json['reminders'] ?? []),
+      isAllDay: (json['is_all_day'] as bool?) ?? false,
+      reminders: List<int>.from((json['reminders'] as List<dynamic>?) ?? []),
     );
   }
 

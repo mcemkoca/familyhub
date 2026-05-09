@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
 import '../domain/entities.dart';
 import '../services/auth_service.dart';
@@ -42,7 +41,9 @@ class MoodRepository {
           .order('created_at', ascending: false)
           .limit(50);
 
-      final entries = (response as List).map((e) => _fromJson(e)).toList();
+      final entries = (response as List)
+          .map((e) => _fromJson(e as Map<String, dynamic>))
+          .toList();
       await HiveService.saveMoodEntries(entries);
       return entries;
     } catch (e) {

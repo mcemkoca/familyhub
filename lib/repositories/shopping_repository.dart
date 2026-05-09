@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+
 import '../core/supabase_client.dart';
 import '../domain/entities.dart';
 import '../services/auth_service.dart';
@@ -41,7 +41,7 @@ class ShoppingRepository {
           .eq('family_id', familyId)
           .order('created_at', ascending: false);
 
-      final items = (response as List).map((e) => _fromJson(e)).toList();
+      final items = (response as List).map((e) => _fromJson(e as Map<String, dynamic>)).toList();
       await HiveService.saveShoppingItems(items);
       return items;
     } catch (e) {
