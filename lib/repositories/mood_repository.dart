@@ -15,9 +15,13 @@ class MoodRepository {
     try {
       final user = _client.auth.currentUser;
       if (user == null) return null;
-      final profile = await _client.from('profiles').select('family_id').eq('id', user.id).maybeSingle();
+      final profile = await _client
+          .from('profiles')
+          .select('family_id')
+          .eq('id', user.id)
+          .maybeSingle();
       return profile?['family_id'] as String?;
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('MoodRepository._getFamilyId error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -41,7 +45,7 @@ class MoodRepository {
       final entries = (response as List).map((e) => _fromJson(e)).toList();
       await HiveService.saveMoodEntries(entries);
       return entries;
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('MoodRepository.getEntries error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -53,18 +57,22 @@ class MoodRepository {
       final userId = AuthService.currentUserId;
       if (familyId == null) throw Exception('Aile bilgisi bulunamadı');
 
-      final response = await _client.from('mood_entries').insert({
-        'family_id': familyId,
-        'user_id': userId,
-        'emoji': emoji,
-        'note': note,
-      }).select().single();
+      final response = await _client
+          .from('mood_entries')
+          .insert({
+            'family_id': familyId,
+            'user_id': userId,
+            'emoji': emoji,
+            'note': note,
+          })
+          .select()
+          .single();
 
       final created = _fromJson(response);
       final all = await getEntries();
       await HiveService.saveMoodEntries([created, ...all]);
       return created;
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('MoodRepository.createEntry error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -75,7 +83,7 @@ class MoodRepository {
       await _client.from('mood_entries').delete().eq('id', id);
       final all = await getEntries();
       await HiveService.saveMoodEntries(all.where((e) => e.id != id).toList());
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('MoodRepository.deleteEntry error: $e');
       throw Exception('Veritabanı hatası: $e');
     }

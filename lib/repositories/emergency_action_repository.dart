@@ -8,13 +8,17 @@ import '../domain/models/emergency_action.dart';
 import '../domain/models/emergency_template.dart';
 
 class EmergencyActionRepository {
-  static final EmergencyActionRepository _instance = EmergencyActionRepository._internal();
+  static final EmergencyActionRepository _instance =
+      EmergencyActionRepository._internal();
   factory EmergencyActionRepository() => _instance;
   EmergencyActionRepository._internal();
   final SupabaseClient _client = SupabaseConfig.client;
 
   // ── Emergency Actions ──
-  Future<List<EmergencyAction>> getFamilyActions(String familyId, {int limit = 50}) async {
+  Future<List<EmergencyAction>> getFamilyActions(
+    String familyId, {
+    int limit = 50,
+  }) async {
     try {
       final res = await _client
           .from('emergency_actions')
@@ -23,7 +27,7 @@ class EmergencyActionRepository {
           .order('created_at', ascending: false)
           .limit(limit);
       return (res as List).map((e) => EmergencyAction.fromJson(e)).toList();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[EmergencyActionRepository.getFamilyActions] error: $e');
       rethrow;
     }
@@ -38,7 +42,7 @@ class EmergencyActionRepository {
           .inFilter('status_state', ['triggered', 'active', 'escalating'])
           .order('created_at', ascending: false);
       return (res as List).map((e) => EmergencyAction.fromJson(e)).toList();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[EmergencyActionRepository.getActiveActions] error: $e');
       rethrow;
     }
@@ -47,9 +51,13 @@ class EmergencyActionRepository {
   Future<String> createAction(EmergencyAction action) async {
     try {
       final data = action.toJson()..remove('actionId');
-      final res = await _client.from('emergency_actions').insert(data).select('id').single();
+      final res = await _client
+          .from('emergency_actions')
+          .insert(data)
+          .select('id')
+          .single();
       return res['id'] as String;
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[EmergencyActionRepository.createAction] error: $e');
       rethrow;
     }
@@ -58,8 +66,11 @@ class EmergencyActionRepository {
   Future<void> updateAction(EmergencyAction action) async {
     try {
       if (action.actionId == null) return;
-      await _client.from('emergency_actions').update(action.toJson()).eq('id', action.actionId!);
-    } catch (e, st) {
+      await _client
+          .from('emergency_actions')
+          .update(action.toJson())
+          .eq('id', action.actionId!);
+    } catch (e) {
       debugPrint('[EmergencyActionRepository.updateAction] error: $e');
       rethrow;
     }
@@ -68,9 +79,12 @@ class EmergencyActionRepository {
   // ── Templates ──
   Future<List<EmergencyTemplate>> getTemplates() async {
     try {
-      final res = await _client.from('emergency_templates').select().order('usage_count', ascending: false);
+      final res = await _client
+          .from('emergency_templates')
+          .select()
+          .order('usage_count', ascending: false);
       return (res as List).map((e) => EmergencyTemplate.fromJson(e)).toList();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[EmergencyActionRepository.getTemplates] error: $e');
       rethrow;
     }
@@ -78,10 +92,14 @@ class EmergencyActionRepository {
 
   Future<EmergencyTemplate?> getTemplateById(String templateId) async {
     try {
-      final res = await _client.from('emergency_templates').select().eq('template_id', templateId).maybeSingle();
+      final res = await _client
+          .from('emergency_templates')
+          .select()
+          .eq('template_id', templateId)
+          .maybeSingle();
       if (res == null) return null;
       return EmergencyTemplate.fromJson(res);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[EmergencyActionRepository.getTemplateById] error: $e');
       rethrow;
     }
@@ -96,8 +114,10 @@ class EmergencyActionRepository {
           .eq('family_id', familyId)
           .eq('is_active', true)
           .order('priority', ascending: true);
-      return (res as List).map((e) => EmergencyContactModel.fromJson(e)).toList();
-    } catch (e, st) {
+      return (res as List)
+          .map((e) => EmergencyContactModel.fromJson(e))
+          .toList();
+    } catch (e) {
       debugPrint('[EmergencyActionRepository.getFamilyContacts] error: $e');
       rethrow;
     }
@@ -106,10 +126,14 @@ class EmergencyActionRepository {
   // ── Policies ──
   Future<EscalationPolicy?> getFamilyPolicy(String familyId) async {
     try {
-      final res = await _client.from('escalation_policies').select().eq('family_id', familyId).maybeSingle();
+      final res = await _client
+          .from('escalation_policies')
+          .select()
+          .eq('family_id', familyId)
+          .maybeSingle();
       if (res == null) return null;
       return EscalationPolicy.fromJson(res);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[EmergencyActionRepository.getFamilyPolicy] error: $e');
       rethrow;
     }

@@ -8,7 +8,8 @@ import '../core/errors.dart';
 import '../domain/models/child_account.dart';
 
 class ChildAccountRepository {
-  static final ChildAccountRepository _instance = ChildAccountRepository._internal();
+  static final ChildAccountRepository _instance =
+      ChildAccountRepository._internal();
   factory ChildAccountRepository() => _instance;
   ChildAccountRepository._internal();
   SupabaseClient? get _safeClient => SupabaseConfig.safeClient;
@@ -42,7 +43,7 @@ class ChildAccountRepository {
           .order('created_at', ascending: true);
 
       return (response as List).map((e) => ChildAccount.fromJson(e)).toList();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ChildAccountRepository.getChildrenForFamily error: $e');
       throw AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -58,7 +59,7 @@ class ChildAccountRepository {
           .single();
 
       return ChildAccount.fromJson(response);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ChildAccountRepository.getChildById error: $e');
       throw AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -81,7 +82,9 @@ class ChildAccountRepository {
       _checkAuth();
 
       if (familyId.trim().isEmpty) {
-        throw ValidationException('Aile bilgisi eksik. Lütfen sayfayı yenileyin.');
+        throw ValidationException(
+          'Aile bilgisi eksik. Lütfen sayfayı yenileyin.',
+        );
       }
       if (name.trim().length < 2) {
         throw ValidationException('İsim en az 2 karakter olmalı');
@@ -107,10 +110,13 @@ class ChildAccountRepository {
         'age': age,
       };
 
-      final response =
-          await client.from('child_accounts').insert(data).select().single();
+      final response = await client
+          .from('child_accounts')
+          .insert(data)
+          .select()
+          .single();
       return ChildAccount.fromJson(response);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ChildAccountRepository.createChild error: $e');
       throw AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -159,7 +165,7 @@ class ChildAccountRepository {
           .single();
 
       return ChildAccount.fromJson(response);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ChildAccountRepository.updateChild error: $e');
       throw AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -169,7 +175,7 @@ class ChildAccountRepository {
     try {
       _checkAuth();
       await client.from('child_accounts').delete().eq('id', childId);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ChildAccountRepository.deleteChild error: $e');
       throw AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -178,10 +184,13 @@ class ChildAccountRepository {
   Future<String?> uploadAvatar(String childId, String filePath) async {
     try {
       _checkAuth();
-      final fileName = 'avatars/$childId-${DateTime.now().millisecondsSinceEpoch}.jpg';
-      await client.storage.from('family-gallery').upload(fileName, File(filePath));
+      final fileName =
+          'avatars/$childId-${DateTime.now().millisecondsSinceEpoch}.jpg';
+      await client.storage
+          .from('family-gallery')
+          .upload(fileName, File(filePath));
       return client.storage.from('family-gallery').getPublicUrl(fileName);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ChildAccountRepository.uploadAvatar error: $e');
       throw AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -197,7 +206,7 @@ class ChildAccountRepository {
           .from('child_accounts')
           .update({'pin_hash': _hashPin(newPin)})
           .eq('id', childId);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ChildAccountRepository.updatePin error: $e');
       throw AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -211,12 +220,15 @@ class ChildAccountRepository {
   }) async {
     try {
       _checkAuth();
-      await client.from('child_accounts').update({
-        'remote_lock_enabled': enabled,
-        'remote_lock_until': lockUntil?.toIso8601String(),
-        'remote_lock_reason': reason,
-      }).eq('id', childId);
-    } catch (e, st) {
+      await client
+          .from('child_accounts')
+          .update({
+            'remote_lock_enabled': enabled,
+            'remote_lock_until': lockUntil?.toIso8601String(),
+            'remote_lock_reason': reason,
+          })
+          .eq('id', childId);
+    } catch (e) {
       debugPrint('ChildAccountRepository.updateRemoteLock error: $e');
       throw AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -228,11 +240,13 @@ class ChildAccountRepository {
           .from('child_accounts')
           .stream(primaryKey: ['id'])
           .eq('family_id', familyId)
-          .map((data) => data
-              .where((e) => e['is_active'] == true)
-              .map((e) => ChildAccount.fromJson(e))
-              .toList());
-    } catch (e, st) {
+          .map(
+            (data) => data
+                .where((e) => e['is_active'] == true)
+                .map((e) => ChildAccount.fromJson(e))
+                .toList(),
+          );
+    } catch (e) {
       debugPrint('ChildAccountRepository.watchChildren error: $e');
       return Stream.error(AppDatabaseException('Veritabanı hatası: $e'));
     }

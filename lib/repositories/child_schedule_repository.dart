@@ -6,7 +6,8 @@ import '../services/child_auth_service.dart';
 import '../services/hive_service.dart';
 
 class ChildScheduleRepository {
-  static final ChildScheduleRepository _instance = ChildScheduleRepository._internal();
+  static final ChildScheduleRepository _instance =
+      ChildScheduleRepository._internal();
   factory ChildScheduleRepository() => _instance;
   ChildScheduleRepository._internal();
   SupabaseClient get _client => SupabaseConfig.safeClient!;
@@ -34,7 +35,9 @@ class ChildScheduleRepository {
       }
 
       final response = await query.order('start_time', ascending: true);
-      final list = (response as List).map((e) => ChildSchedule.fromJson(e)).toList();
+      final list = (response as List)
+          .map((e) => ChildSchedule.fromJson(e))
+          .toList();
       await HiveService.saveChildSchedules(list);
       return list;
     } catch (_) {
@@ -64,11 +67,15 @@ class ChildScheduleRepository {
       return _client
           .from('child_schedules')
           .stream(primaryKey: ['id'])
-          .map((data) => data
-              .where((e) => e['child_id'] == childId && e['is_active'] == true)
-              .map((e) => ChildSchedule.fromJson(e))
-              .toList());
-    } catch (e, st) {
+          .map(
+            (data) => data
+                .where(
+                  (e) => e['child_id'] == childId && e['is_active'] == true,
+                )
+                .map((e) => ChildSchedule.fromJson(e))
+                .toList(),
+          );
+    } catch (e) {
       debugPrint('ChildScheduleRepository.watchMySchedule error: $e');
       return Stream.error(Exception('Veritabanı hatası: $e'));
     }
@@ -86,20 +93,24 @@ class ChildScheduleRepository {
   }) async {
     try {
       _checkSession();
-      final response = await _client.from('child_schedules').insert({
-        'family_id': _familyId!,
-        'child_id': _childId!,
-        'day_of_week': dayOfWeek,
-        'start_time': startTime,
-        'end_time': endTime,
-        'subject': subject,
-        'location': location,
-        'teacher': teacher,
-        'color': color,
-        'is_active': true,
-      }).select().single();
+      final response = await _client
+          .from('child_schedules')
+          .insert({
+            'family_id': _familyId!,
+            'child_id': _childId!,
+            'day_of_week': dayOfWeek,
+            'start_time': startTime,
+            'end_time': endTime,
+            'subject': subject,
+            'location': location,
+            'teacher': teacher,
+            'color': color,
+            'is_active': true,
+          })
+          .select()
+          .single();
       return ChildSchedule.fromJson(response);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ChildScheduleRepository.createSchedule error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -109,7 +120,7 @@ class ChildScheduleRepository {
     try {
       _checkSession();
       await _client.from('child_schedules').delete().eq('id', id);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ChildScheduleRepository.deleteSchedule error: $e');
       throw Exception('Veritabanı hatası: $e');
     }

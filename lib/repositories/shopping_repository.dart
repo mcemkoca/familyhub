@@ -15,9 +15,13 @@ class ShoppingRepository {
     try {
       final user = _client.auth.currentUser;
       if (user == null) return null;
-      final profile = await _client.from('profiles').select('family_id').eq('id', user.id).maybeSingle();
+      final profile = await _client
+          .from('profiles')
+          .select('family_id')
+          .eq('id', user.id)
+          .maybeSingle();
       return profile?['family_id'] as String?;
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ShoppingRepository._getFamilyId error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -40,31 +44,39 @@ class ShoppingRepository {
       final items = (response as List).map((e) => _fromJson(e)).toList();
       await HiveService.saveShoppingItems(items);
       return items;
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ShoppingRepository.getItems error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
   }
 
-  Future<ShoppingItem> createItem(String name, {ShoppingCategory category = ShoppingCategory.grocery, int quantity = 1}) async {
+  Future<ShoppingItem> createItem(
+    String name, {
+    ShoppingCategory category = ShoppingCategory.grocery,
+    int quantity = 1,
+  }) async {
     try {
       final familyId = await _getFamilyId();
       final userId = AuthService.currentUserId;
       if (familyId == null) throw Exception('Aile bilgisi bulunamadı');
 
-      final response = await _client.from('shopping_items').insert({
-        'family_id': familyId,
-        'name': name,
-        'category': _categoryToString(category),
-        'quantity': quantity,
-        'requested_by': userId,
-      }).select().single();
+      final response = await _client
+          .from('shopping_items')
+          .insert({
+            'family_id': familyId,
+            'name': name,
+            'category': _categoryToString(category),
+            'quantity': quantity,
+            'requested_by': userId,
+          })
+          .select()
+          .single();
 
       final created = _fromJson(response);
       final all = await getItems();
       await HiveService.saveShoppingItems([...all, created]);
       return created;
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ShoppingRepository.createItem error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -73,16 +85,28 @@ class ShoppingRepository {
   Future<void> toggleItem(String itemId, bool isCompleted) async {
     try {
       final userId = AuthService.currentUserId;
-      await _client.from('shopping_items').update({
-        'is_completed': isCompleted,
-        'completed_by': isCompleted ? userId : null,
-        'updated_at': DateTime.now().toIso8601String(),
-      }).eq('id', itemId);
+      await _client
+          .from('shopping_items')
+          .update({
+            'is_completed': isCompleted,
+            'completed_by': isCompleted ? userId : null,
+            'updated_at': DateTime.now().toIso8601String(),
+          })
+          .eq('id', itemId);
 
       final all = await getItems();
-      final updated = all.map((i) => i.id == itemId ? i.copyWith(isCompleted: isCompleted, completedBy: isCompleted ? userId : null) : i).toList();
+      final updated = all
+          .map(
+            (i) => i.id == itemId
+                ? i.copyWith(
+                    isCompleted: isCompleted,
+                    completedBy: isCompleted ? userId : null,
+                  )
+                : i,
+          )
+          .toList();
       await HiveService.saveShoppingItems(updated);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ShoppingRepository.toggleItem error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -92,8 +116,10 @@ class ShoppingRepository {
     try {
       await _client.from('shopping_items').delete().eq('id', itemId);
       final all = await getItems();
-      await HiveService.saveShoppingItems(all.where((i) => i.id != itemId).toList());
-    } catch (e, st) {
+      await HiveService.saveShoppingItems(
+        all.where((i) => i.id != itemId).toList(),
+      );
+    } catch (e) {
       debugPrint('ShoppingRepository.deleteItem error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -103,10 +129,11 @@ class ShoppingRepository {
     try {
       // Note: family_id is required for proper filtering.
       // For simplicity, we return all changes and filter client-side.
-      return _client.from('shopping_items').stream(primaryKey: ['id']).map(
-        (data) => data.map((e) => _fromJson(e)).toList(),
-      );
-    } catch (e, st) {
+      return _client
+          .from('shopping_items')
+          .stream(primaryKey: ['id'])
+          .map((data) => data.map((e) => _fromJson(e)).toList());
+    } catch (e) {
       debugPrint('ShoppingRepository.watchItems error: $e');
       return Stream.error(Exception('Veritabanı hatası: $e'));
     }

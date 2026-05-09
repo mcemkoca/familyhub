@@ -67,7 +67,7 @@ class DocumentRepository {
           .eq('family_id', familyId)
           .order('created_at', ascending: false);
       return (response as List).map((e) => FamilyDocument.fromJson(e)).toList();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('DocumentRepository.getDocuments error: $e');
       throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -85,9 +85,11 @@ class DocumentRepository {
                 .map((e) => FamilyDocument.fromJson(e))
                 .toList(),
           );
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('DocumentRepository.watchDocuments error: $e');
-      return Stream.error(app_errors.AppDatabaseException('Veritabanı hatası: $e'));
+      return Stream.error(
+        app_errors.AppDatabaseException('Veritabanı hatası: $e'),
+      );
     }
   }
 
@@ -126,7 +128,7 @@ class DocumentRepository {
           .single();
 
       return FamilyDocument.fromJson(response);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('DocumentRepository.uploadDocument error: $e');
       throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -136,7 +138,7 @@ class DocumentRepository {
     try {
       _checkAuth();
       await _safeClient!.from('family_documents').update(data).eq('id', id);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('DocumentRepository.updateDocument error: $e');
       throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -150,11 +152,13 @@ class DocumentRepository {
       if (pathSegments.length >= 2) {
         final fileName = pathSegments.sublist(1).join('/');
         try {
-          await _safeClient!.storage.from('family-documents').remove([fileName]);
+          await _safeClient!.storage.from('family-documents').remove([
+            fileName,
+          ]);
         } catch (_) {}
       }
       await _safeClient!.from('family_documents').delete().eq('id', id);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('DocumentRepository.deleteDocument error: $e');
       throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -167,7 +171,7 @@ class DocumentRepository {
           .from('family_documents')
           .update({'related_task_id': taskId})
           .eq('id', documentId);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('DocumentRepository.linkTask error: $e');
       throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
     }

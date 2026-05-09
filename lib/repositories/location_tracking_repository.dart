@@ -7,7 +7,8 @@ import '../core/supabase_client.dart';
 import '../domain/models/location_tracking.dart';
 
 class LocationTrackingRepository {
-  static final LocationTrackingRepository _instance = LocationTrackingRepository._internal();
+  static final LocationTrackingRepository _instance =
+      LocationTrackingRepository._internal();
   factory LocationTrackingRepository() => _instance;
   LocationTrackingRepository._internal();
   final SupabaseClient _client = SupabaseConfig.client;
@@ -22,7 +23,7 @@ class LocationTrackingRepository {
           .maybeSingle();
       if (res == null) return null;
       return LocationTrackingSettings.fromJson(res);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[LocationTrackingRepository.getSettings] error: $e');
       rethrow;
     }
@@ -32,21 +33,26 @@ class LocationTrackingRepository {
     try {
       final existing = await getSettings(settings.memberId);
       if (existing == null) {
-        await _client.from('location_tracking_settings').insert(settings.toJson());
+        await _client
+            .from('location_tracking_settings')
+            .insert(settings.toJson());
       } else {
         await _client
             .from('location_tracking_settings')
             .update(settings.toJson())
             .eq('member_id', settings.memberId);
       }
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[LocationTrackingRepository.upsertSettings] error: $e');
       rethrow;
     }
   }
 
   // ── Location History ──
-  Future<List<LocationBatch>> getMemberHistory(String memberId, {int limit = 50}) async {
+  Future<List<LocationBatch>> getMemberHistory(
+    String memberId, {
+    int limit = 50,
+  }) async {
     try {
       final res = await _client
           .from('location_history')
@@ -55,7 +61,7 @@ class LocationTrackingRepository {
           .order('recorded_at', ascending: false)
           .limit(limit);
       return (res as List).map((e) => LocationBatch.fromJson(e)).toList();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[LocationTrackingRepository.getMemberHistory] error: $e');
       rethrow;
     }
@@ -64,7 +70,7 @@ class LocationTrackingRepository {
   Future<void> insertBatch(LocationBatch batch) async {
     try {
       await _client.from('location_history').insert(batch.toJson());
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[LocationTrackingRepository.insertBatch] error: $e');
       rethrow;
     }
@@ -74,13 +80,16 @@ class LocationTrackingRepository {
   Future<void> insertBatteryLog(BatteryLog log) async {
     try {
       await _client.from('battery_logs').insert(log.toJson());
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[LocationTrackingRepository.insertBatteryLog] error: $e');
       rethrow;
     }
   }
 
-  Future<List<BatteryLog>> getBatteryLogs(String memberId, {int limit = 100}) async {
+  Future<List<BatteryLog>> getBatteryLogs(
+    String memberId, {
+    int limit = 100,
+  }) async {
     try {
       final res = await _client
           .from('battery_logs')
@@ -89,14 +98,17 @@ class LocationTrackingRepository {
           .order('timestamp', ascending: false)
           .limit(limit);
       return (res as List).map((e) => BatteryLog.fromJson(e)).toList();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[LocationTrackingRepository.getBatteryLogs] error: $e');
       rethrow;
     }
   }
 
   // ── Analytics ──
-  Future<TrackingAnalytics?> getAnalytics(String memberId, DateTime date) async {
+  Future<TrackingAnalytics?> getAnalytics(
+    String memberId,
+    DateTime date,
+  ) async {
     try {
       final res = await _client
           .from('tracking_analytics')
@@ -106,7 +118,7 @@ class LocationTrackingRepository {
           .maybeSingle();
       if (res == null) return null;
       return TrackingAnalytics.fromJson(res);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[LocationTrackingRepository.getAnalytics] error: $e');
       rethrow;
     }
@@ -130,7 +142,7 @@ class LocationTrackingRepository {
             .update(analytics.toJson())
             .eq('id', existing['id']);
       }
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[LocationTrackingRepository.upsertAnalytics] error: $e');
       rethrow;
     }

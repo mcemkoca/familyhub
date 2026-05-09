@@ -6,7 +6,8 @@ import '../services/child_auth_service.dart';
 import '../services/hive_service.dart';
 
 class FamilyMembersRepository {
-  static final FamilyMembersRepository _instance = FamilyMembersRepository._internal();
+  static final FamilyMembersRepository _instance =
+      FamilyMembersRepository._internal();
   factory FamilyMembersRepository() => _instance;
   FamilyMembersRepository._internal();
 
@@ -142,7 +143,7 @@ class FamilyMembersRepository {
           .stream(primaryKey: ['id'])
           .eq('family_id', familyId)
           .asyncMap((_) => getMembers());
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('FamilyMembersRepository.watchMembers error: $e');
       yield* Stream.error(Exception('Veritabanı hatası: $e'));
     }
@@ -170,7 +171,7 @@ class FamilyMembersRepository {
           .update({'role': role})
           .eq('user_id', userId)
           .eq('family_id', familyId);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('FamilyMembersRepository.updateRole error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -185,7 +186,7 @@ class FamilyMembersRepository {
           .delete()
           .eq('user_id', userId)
           .eq('family_id', familyId);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('FamilyMembersRepository.removeMember error: $e');
       throw Exception('Veritabanı hatası: $e');
     }

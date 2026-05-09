@@ -4,7 +4,8 @@ import '../domain/models/context_snapshot.dart';
 import '../services/auth_service.dart';
 
 class ContextSnapshotRepository {
-  static final ContextSnapshotRepository _instance = ContextSnapshotRepository._internal();
+  static final ContextSnapshotRepository _instance =
+      ContextSnapshotRepository._internal();
   factory ContextSnapshotRepository() => _instance;
   ContextSnapshotRepository._internal();
   SupabaseClient get _client {
@@ -26,8 +27,10 @@ class ContextSnapshotRepository {
           .eq('member_id', memberId)
           .order('created_at', ascending: false)
           .limit(limit);
-      return (response as List).map((e) => ContextSnapshot.fromJson(e)).toList();
-    } catch (e, st) {
+      return (response as List)
+          .map((e) => ContextSnapshot.fromJson(e))
+          .toList();
+    } catch (e) {
       debugPrint('ContextSnapshotRepository.getRecentSnapshots error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -43,7 +46,7 @@ class ContextSnapshotRepository {
           .limit(1)
           .single();
       return ContextSnapshot.fromJson(response);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ContextSnapshotRepository.getLatestSnapshot error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -58,7 +61,7 @@ class ContextSnapshotRepository {
           .select()
           .single();
       return ContextSnapshot.fromJson(response);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ContextSnapshotRepository.save error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -68,7 +71,7 @@ class ContextSnapshotRepository {
     try {
       final cutoff = DateTime.now().subtract(maxAge).toIso8601String();
       await _client.from(_table).delete().lt('created_at', cutoff);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ContextSnapshotRepository.deleteOldSnapshots error: $e');
       throw Exception('Veritabanı hatası: $e');
     }

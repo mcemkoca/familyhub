@@ -4,7 +4,8 @@ import '../core/supabase_client.dart';
 import '../domain/entities.dart';
 
 class ChildStreakRepository {
-  static final ChildStreakRepository _instance = ChildStreakRepository._internal();
+  static final ChildStreakRepository _instance =
+      ChildStreakRepository._internal();
   factory ChildStreakRepository() => _instance;
   ChildStreakRepository._internal();
   SupabaseClient get _client => SupabaseConfig.safeClient!;
@@ -24,7 +25,13 @@ class ChildStreakRepository {
       // Tüm tamamlanma tarihlerini al (sadece gün kısmı)
       final completedDates = tasks
           .where((t) => t.completedAt != null)
-          .map((t) => DateTime(t.completedAt!.year, t.completedAt!.month, t.completedAt!.day))
+          .map(
+            (t) => DateTime(
+              t.completedAt!.year,
+              t.completedAt!.month,
+              t.completedAt!.day,
+            ),
+          )
           .toSet()
           .toList();
 
@@ -41,7 +48,7 @@ class ChildStreakRepository {
         weeklyView: weeklyView,
         lastCompleted: completedDates.isNotEmpty ? completedDates.first : null,
       );
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ChildStreakRepository.getStreakStats error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -62,7 +69,13 @@ class ChildStreakRepository {
 
             final completedDates = tasks
                 .where((t) => t.completedAt != null)
-                .map((t) => DateTime(t.completedAt!.year, t.completedAt!.month, t.completedAt!.day))
+                .map(
+                  (t) => DateTime(
+                    t.completedAt!.year,
+                    t.completedAt!.month,
+                    t.completedAt!.day,
+                  ),
+                )
                 .toSet()
                 .toList();
 
@@ -73,10 +86,12 @@ class ChildStreakRepository {
               bestStreak: _calculateBestStreak(completedDates),
               totalCompleted: tasks.length,
               weeklyView: _buildWeeklyView(completedDates),
-              lastCompleted: completedDates.isNotEmpty ? completedDates.first : null,
+              lastCompleted: completedDates.isNotEmpty
+                  ? completedDates.first
+                  : null,
             );
           });
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ChildStreakRepository.watchStreakStats error: $e');
       return Stream.error(Exception('Veritabanı hatası: $e'));
     }
@@ -93,8 +108,12 @@ class ChildStreakRepository {
         orElse: () => TaskStatus.pending,
       ),
       priority: json['priority'] ?? 'medium',
-      dueDate: json['due_date'] != null ? DateTime.parse(json['due_date']) : null,
-      completedAt: json['completed_at'] != null ? DateTime.parse(json['completed_at']) : null,
+      dueDate: json['due_date'] != null
+          ? DateTime.parse(json['due_date'])
+          : null,
+      completedAt: json['completed_at'] != null
+          ? DateTime.parse(json['completed_at'])
+          : null,
       tags: List<String>.from(json['tags'] ?? []),
       streakCount: json['streak_count'] ?? 0,
     );
@@ -110,10 +129,13 @@ class ChildStreakRepository {
     DateTime expectedDate = todayDate;
 
     for (final date in dates) {
-      if (date == expectedDate || date == expectedDate.subtract(const Duration(days: 1))) {
+      if (date == expectedDate ||
+          date == expectedDate.subtract(const Duration(days: 1))) {
         streak++;
         expectedDate = date.subtract(const Duration(days: 1));
-      } else if (date.isBefore(expectedDate.subtract(const Duration(days: 1)))) {
+      } else if (date.isBefore(
+        expectedDate.subtract(const Duration(days: 1)),
+      )) {
         break;
       }
     }
@@ -152,7 +174,9 @@ class ChildStreakRepository {
 
     for (int i = 0; i < 7; i++) {
       final day = DateTime(monday.year, monday.month, monday.day + i);
-      result[day.weekday] = dates.any((d) => d.year == day.year && d.month == day.month && d.day == day.day);
+      result[day.weekday] = dates.any(
+        (d) => d.year == day.year && d.month == day.month && d.day == day.day,
+      );
     }
 
     return result;

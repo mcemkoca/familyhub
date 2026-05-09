@@ -27,25 +27,27 @@ class FamilyContact {
   });
 
   factory FamilyContact.fromJson(Map<String, dynamic> json) => FamilyContact(
-        id: json['id']?.toString() ?? '',
-        name: json['name'] ?? '',
-        phone: json['phone']?.toString(),
-        email: json['email']?.toString(),
-        type: json['type'] ?? 'other',
-        avatarUrl: json['avatar_url']?.toString(),
-        notes: json['notes']?.toString(),
-        createdBy: json['created_by']?.toString(),
-        createdAt: DateTime.parse(json['created_at'] ?? DateTime.now().toIso8601String()),
-      );
+    id: json['id']?.toString() ?? '',
+    name: json['name'] ?? '',
+    phone: json['phone']?.toString(),
+    email: json['email']?.toString(),
+    type: json['type'] ?? 'other',
+    avatarUrl: json['avatar_url']?.toString(),
+    notes: json['notes']?.toString(),
+    createdBy: json['created_by']?.toString(),
+    createdAt: DateTime.parse(
+      json['created_at'] ?? DateTime.now().toIso8601String(),
+    ),
+  );
 
   Map<String, dynamic> toJson() => {
-        'name': name,
-        'phone': phone,
-        'email': email,
-        'type': type,
-        'avatar_url': avatarUrl,
-        'notes': notes,
-      };
+    'name': name,
+    'phone': phone,
+    'email': email,
+    'type': type,
+    'avatar_url': avatarUrl,
+    'notes': notes,
+  };
 }
 
 class ContactsRepository {
@@ -56,7 +58,8 @@ class ContactsRepository {
   String? get _userId => _safeClient?.auth.currentUser?.id;
 
   void _checkAuth() {
-    if (_userId == null) throw app_errors.AppAuthException('Giriş yapmalısınız');
+    if (_userId == null)
+      throw app_errors.AppAuthException('Giriş yapmalısınız');
   }
 
   Future<List<FamilyContact>> getContacts(String familyId) async {
@@ -68,7 +71,7 @@ class ContactsRepository {
           .eq('family_id', familyId)
           .order('name', ascending: true);
       return (response as List).map((e) => FamilyContact.fromJson(e)).toList();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ContactsRepository.getContacts error: $e');
       throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -80,13 +83,17 @@ class ContactsRepository {
           .from('family_contacts')
           .stream(primaryKey: ['id'])
           .order('name')
-          .map((data) => data
-              .where((e) => e['family_id'] == familyId)
-              .map((e) => FamilyContact.fromJson(e))
-              .toList());
-    } catch (e, st) {
+          .map(
+            (data) => data
+                .where((e) => e['family_id'] == familyId)
+                .map((e) => FamilyContact.fromJson(e))
+                .toList(),
+          );
+    } catch (e) {
       debugPrint('ContactsRepository.watchContacts error: $e');
-      return Stream.error(app_errors.AppDatabaseException('Veritabanı hatası: $e'));
+      return Stream.error(
+        app_errors.AppDatabaseException('Veritabanı hatası: $e'),
+      );
     }
   }
 
@@ -100,17 +107,21 @@ class ContactsRepository {
   }) async {
     try {
       _checkAuth();
-      final response = await _safeClient!.from('family_contacts').insert({
-        'family_id': familyId,
-        'name': name,
-        'phone': phone,
-        'email': email,
-        'type': type,
-        'notes': notes,
-        'created_by': _userId,
-      }).select().single();
+      final response = await _safeClient!
+          .from('family_contacts')
+          .insert({
+            'family_id': familyId,
+            'name': name,
+            'phone': phone,
+            'email': email,
+            'type': type,
+            'notes': notes,
+            'created_by': _userId,
+          })
+          .select()
+          .single();
       return FamilyContact.fromJson(response);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ContactsRepository.createContact error: $e');
       throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -120,7 +131,7 @@ class ContactsRepository {
     try {
       _checkAuth();
       await _safeClient!.from('family_contacts').update(data).eq('id', id);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ContactsRepository.updateContact error: $e');
       throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -130,7 +141,7 @@ class ContactsRepository {
     try {
       _checkAuth();
       await _safeClient!.from('family_contacts').delete().eq('id', id);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ContactsRepository.deleteContact error: $e');
       throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
     }

@@ -4,7 +4,8 @@ import '../domain/models/reminder_interaction.dart';
 import '../services/auth_service.dart';
 
 class ReminderInteractionRepository {
-  static final ReminderInteractionRepository _instance = ReminderInteractionRepository._internal();
+  static final ReminderInteractionRepository _instance =
+      ReminderInteractionRepository._internal();
   factory ReminderInteractionRepository() => _instance;
   ReminderInteractionRepository._internal();
   SupabaseClient get _client {
@@ -29,8 +30,10 @@ class ReminderInteractionRepository {
       return (response as List)
           .map((e) => ReminderInteraction.fromJson(e))
           .toList();
-    } catch (e, st) {
-      debugPrint('[ReminderInteractionRepository.getInteractionsForReminder] error: $e');
+    } catch (e) {
+      debugPrint(
+        '[ReminderInteractionRepository.getInteractionsForReminder] error: $e',
+      );
       rethrow;
     }
   }
@@ -52,8 +55,10 @@ class ReminderInteractionRepository {
       return (response as List)
           .map((e) => ReminderInteraction.fromJson(e))
           .toList();
-    } catch (e, st) {
-      debugPrint('[ReminderInteractionRepository.getRecentInteractions] error: $e');
+    } catch (e) {
+      debugPrint(
+        '[ReminderInteractionRepository.getRecentInteractions] error: $e',
+      );
       rethrow;
     }
   }
@@ -63,9 +68,13 @@ class ReminderInteractionRepository {
   ) async {
     try {
       final data = interaction.toJson()..remove('id');
-      final response = await _client.from(_table).insert(data).select().single();
+      final response = await _client
+          .from(_table)
+          .insert(data)
+          .select()
+          .single();
       return ReminderInteraction.fromJson(response);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[ReminderInteractionRepository.logInteraction] error: $e');
       rethrow;
     }
@@ -77,7 +86,7 @@ class ReminderInteractionRepository {
           .rpc('get_reminder_analytics', params: {'p_reminder_id': reminderId})
           .single();
       return response;
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[ReminderInteractionRepository.getAnalytics] error: $e');
       rethrow;
     }

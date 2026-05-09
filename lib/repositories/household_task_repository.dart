@@ -13,7 +13,7 @@ class HouseholdTaskRepository {
           .eq('is_active', true)
           .order('category');
       return (response as List).map((e) => HouseholdTask.fromJson(e)).toList();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[HouseholdTaskRepository.getAllTasks] error: $e');
       rethrow;
     }
@@ -29,7 +29,7 @@ class HouseholdTaskRepository {
           .eq('category', category)
           .eq('is_active', true);
       return (response as List).map((e) => HouseholdTask.fromJson(e)).toList();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[HouseholdTaskRepository.getTasksByCategory] error: $e');
       rethrow;
     }
@@ -45,7 +45,7 @@ class HouseholdTaskRepository {
           .eq('family_id', familyId)
           .order('priority', ascending: false);
       return (response as List).map((e) => TaskSchedule.fromJson(e)).toList();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[HouseholdTaskRepository.getFamilySchedules] error: $e');
       rethrow;
     }
@@ -61,7 +61,7 @@ class HouseholdTaskRepository {
           .select()
           .single();
       return TaskSchedule.fromJson(response);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[HouseholdTaskRepository.createSchedule] error: $e');
       rethrow;
     }
@@ -71,11 +71,14 @@ class HouseholdTaskRepository {
     try {
       final client = SupabaseConfig.safeClient;
       if (client == null) return;
-      await client.from('task_schedules').update({
-        'is_completed': true,
-        'completed_at': DateTime.now().toIso8601String(),
-      }).eq('id', scheduleId);
-    } catch (e, st) {
+      await client
+          .from('task_schedules')
+          .update({
+            'is_completed': true,
+            'completed_at': DateTime.now().toIso8601String(),
+          })
+          .eq('id', scheduleId);
+    } catch (e) {
       debugPrint('[HouseholdTaskRepository.markCompleted] error: $e');
       rethrow;
     }

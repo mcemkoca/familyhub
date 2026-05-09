@@ -7,7 +7,8 @@ import '../core/supabase_client.dart';
 import '../domain/models/crash_settings.dart';
 
 class CrashSettingsRepository {
-  static final CrashSettingsRepository _instance = CrashSettingsRepository._internal();
+  static final CrashSettingsRepository _instance =
+      CrashSettingsRepository._internal();
   factory CrashSettingsRepository() => _instance;
   CrashSettingsRepository._internal();
   final SupabaseClient _client = SupabaseConfig.client;
@@ -23,7 +24,7 @@ class CrashSettingsRepository {
           .maybeSingle();
       if (res == null) return null;
       return CrashDetectionSettings.fromJson(res);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[CrashSettingsRepository.getSettings] error: $e');
       rethrow;
     }
@@ -32,7 +33,7 @@ class CrashSettingsRepository {
   Future<void> createSettings(CrashDetectionSettings settings) async {
     try {
       await _client.from(_table).insert(settings.toJson());
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[CrashSettingsRepository.createSettings] error: $e');
       rethrow;
     }
@@ -44,7 +45,7 @@ class CrashSettingsRepository {
           .from(_table)
           .update(settings.toJson())
           .eq('member_id', settings.memberId);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[CrashSettingsRepository.updateSettings] error: $e');
       rethrow;
     }
@@ -58,7 +59,7 @@ class CrashSettingsRepository {
       } else {
         await updateSettings(settings);
       }
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[CrashSettingsRepository.upsertSettings] error: $e');
       rethrow;
     }

@@ -24,14 +24,16 @@ class FamilyMedia {
   });
 
   factory FamilyMedia.fromJson(Map<String, dynamic> json) => FamilyMedia(
-        id: json['id']?.toString() ?? '',
-        url: json['url'] ?? '',
-        thumbnailUrl: json['thumbnail_url']?.toString(),
-        type: json['type'] ?? 'image',
-        caption: json['caption']?.toString(),
-        uploadedBy: json['uploaded_by']?.toString(),
-        createdAt: DateTime.parse(json['created_at'] ?? DateTime.now().toIso8601String()),
-      );
+    id: json['id']?.toString() ?? '',
+    url: json['url'] ?? '',
+    thumbnailUrl: json['thumbnail_url']?.toString(),
+    type: json['type'] ?? 'image',
+    caption: json['caption']?.toString(),
+    uploadedBy: json['uploaded_by']?.toString(),
+    createdAt: DateTime.parse(
+      json['created_at'] ?? DateTime.now().toIso8601String(),
+    ),
+  );
 }
 
 class GalleryRepository {
@@ -42,7 +44,8 @@ class GalleryRepository {
   String? get _userId => _safeClient?.auth.currentUser?.id;
 
   void _checkAuth() {
-    if (_userId == null) throw app_errors.AppAuthException('Giriş yapmalısınız');
+    if (_userId == null)
+      throw app_errors.AppAuthException('Giriş yapmalısınız');
   }
 
   Future<List<FamilyMedia>> getMedia(String familyId) async {
@@ -54,7 +57,7 @@ class GalleryRepository {
           .eq('family_id', familyId)
           .order('created_at', ascending: false);
       return (response as List).map((e) => FamilyMedia.fromJson(e)).toList();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('GalleryRepository.getMedia error: $e');
       throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -66,13 +69,17 @@ class GalleryRepository {
           .from('family_media')
           .stream(primaryKey: ['id'])
           .order('created_at', ascending: false)
-          .map((data) => data
-              .where((e) => e['family_id'] == familyId)
-              .map((e) => FamilyMedia.fromJson(e))
-              .toList());
-    } catch (e, st) {
+          .map(
+            (data) => data
+                .where((e) => e['family_id'] == familyId)
+                .map((e) => FamilyMedia.fromJson(e))
+                .toList(),
+          );
+    } catch (e) {
       debugPrint('GalleryRepository.watchMedia error: $e');
-      return Stream.error(app_errors.AppDatabaseException('Veritabanı hatası: $e'));
+      return Stream.error(
+        app_errors.AppDatabaseException('Veritabanı hatası: $e'),
+      );
     }
   }
 
@@ -84,21 +91,30 @@ class GalleryRepository {
   }) async {
     try {
       _checkAuth();
-      final fileName = '${DateTime.now().millisecondsSinceEpoch}_${_userId}_${file.path.split('/').last}';
+      final fileName =
+          '${DateTime.now().millisecondsSinceEpoch}_${_userId}_${file.path.split('/').last}';
       final bucket = _safeClient!.storage.from('family-gallery');
-      await bucket.upload(fileName, file, fileOptions: const FileOptions(upsert: true));
+      await bucket.upload(
+        fileName,
+        file,
+        fileOptions: const FileOptions(upsert: true),
+      );
       final url = bucket.getPublicUrl(fileName);
 
-      final response = await _safeClient!.from('family_media').insert({
-        'family_id': familyId,
-        'url': url,
-        'type': type,
-        'caption': caption,
-        'uploaded_by': _userId,
-      }).select().single();
+      final response = await _safeClient!
+          .from('family_media')
+          .insert({
+            'family_id': familyId,
+            'url': url,
+            'type': type,
+            'caption': caption,
+            'uploaded_by': _userId,
+          })
+          .select()
+          .single();
 
       return FamilyMedia.fromJson(response);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('GalleryRepository.uploadMedia error: $e');
       throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -119,7 +135,7 @@ class GalleryRepository {
         }
       }
       await _safeClient!.from('family_media').delete().eq('id', id);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('GalleryRepository.deleteMedia error: $e');
       throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
     }

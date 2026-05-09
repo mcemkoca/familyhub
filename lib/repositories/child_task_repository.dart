@@ -35,7 +35,9 @@ class ChildTaskRepository {
       return tasks;
     } catch (_) {
       // Offline fallback
-      return HiveService.getTasks().where((t) => t.assignedTo == _childId).toList();
+      return HiveService.getTasks()
+          .where((t) => t.assignedTo == _childId)
+          .toList();
     }
   }
 
@@ -49,7 +51,7 @@ class ChildTaskRepository {
           .eq('assigned_to', _childId!)
           .single();
       return _fromJson(response);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ChildTaskRepository.getTaskById error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -58,10 +60,14 @@ class ChildTaskRepository {
   Future<void> completeTask(String taskId) async {
     try {
       _checkSession();
-      await _client.from('tasks').update({
-        'status': TaskStatus.completed.name,
-        'completed_at': DateTime.now().toIso8601String(),
-      }).eq('id', taskId).eq('assigned_to', _childId!);
+      await _client
+          .from('tasks')
+          .update({
+            'status': TaskStatus.completed.name,
+            'completed_at': DateTime.now().toIso8601String(),
+          })
+          .eq('id', taskId)
+          .eq('assigned_to', _childId!);
 
       await ChildAuthService.logActivity(
         'task_completed',
@@ -73,7 +79,7 @@ class ChildTaskRepository {
         title: '🎉 Görev tamamlandı!',
         body: 'Bir görevi başarıyla tamamladın.',
       );
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ChildTaskRepository.completeTask error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -82,13 +88,17 @@ class ChildTaskRepository {
   Future<void> updateTaskStatus(String taskId, TaskStatus status) async {
     try {
       _checkSession();
-      await _client.from('tasks').update({
-        'status': status.name,
-        'completed_at': status == TaskStatus.completed
-            ? DateTime.now().toIso8601String()
-            : null,
-      }).eq('id', taskId).eq('assigned_to', _childId!);
-    } catch (e, st) {
+      await _client
+          .from('tasks')
+          .update({
+            'status': status.name,
+            'completed_at': status == TaskStatus.completed
+                ? DateTime.now().toIso8601String()
+                : null,
+          })
+          .eq('id', taskId)
+          .eq('assigned_to', _childId!);
+    } catch (e) {
       debugPrint('ChildTaskRepository.updateTaskStatus error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -104,11 +114,16 @@ class ChildTaskRepository {
       return _client
           .from('tasks')
           .stream(primaryKey: ['id'])
-          .map((data) => data
-              .where((e) => e['family_id'] == familyId && e['assigned_to'] == childId)
-              .map((e) => _fromJson(e))
-              .toList());
-    } catch (e, st) {
+          .map(
+            (data) => data
+                .where(
+                  (e) =>
+                      e['family_id'] == familyId && e['assigned_to'] == childId,
+                )
+                .map((e) => _fromJson(e))
+                .toList(),
+          );
+    } catch (e) {
       debugPrint('ChildTaskRepository.watchMyTasks error: $e');
       return Stream.error(Exception('Veritabanı hatası: $e'));
     }

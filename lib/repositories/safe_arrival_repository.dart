@@ -5,7 +5,8 @@ import '../services/auth_service.dart';
 import '../services/child_auth_service.dart';
 
 class SafeArrivalRepository {
-  static final SafeArrivalRepository _instance = SafeArrivalRepository._internal();
+  static final SafeArrivalRepository _instance =
+      SafeArrivalRepository._internal();
   factory SafeArrivalRepository() => _instance;
   SafeArrivalRepository._internal();
   final _client = SupabaseConfig.client;
@@ -23,7 +24,7 @@ class SafeArrivalRepository {
         if (familyId != null) return familyId;
       }
       return ChildAuthService.currentFamilyId;
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('SafeArrivalRepository._getFamilyId error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -40,7 +41,7 @@ class SafeArrivalRepository {
           .inFilter('status', ['active', 'delayed'])
           .order('created_at', ascending: false);
       return (response as List).cast<Map<String, dynamic>>();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('SafeArrivalRepository.getActiveMonitors error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -58,7 +59,7 @@ class SafeArrivalRepository {
           .order('created_at', ascending: false)
           .limit(20);
       return (response as List).cast<Map<String, dynamic>>();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('SafeArrivalRepository.getHistory error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -72,7 +73,8 @@ class SafeArrivalRepository {
   }) async {
     try {
       final familyId = await _getFamilyId();
-      final userId = AuthService.currentUserId ?? ChildAuthService.currentChildId;
+      final userId =
+          AuthService.currentUserId ?? ChildAuthService.currentChildId;
       if (familyId == null) throw Exception('Aile bilgisi bulunamadı');
 
       final response = await _client
@@ -92,7 +94,7 @@ class SafeArrivalRepository {
           .single();
 
       return response;
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('SafeArrivalRepository.createMonitor error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -107,7 +109,7 @@ class SafeArrivalRepository {
             'updated_at': DateTime.now().toIso8601String(),
           })
           .eq('id', id);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('SafeArrivalRepository.updateProgress error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -124,7 +126,7 @@ class SafeArrivalRepository {
             'updated_at': DateTime.now().toIso8601String(),
           })
           .eq('id', id);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('SafeArrivalRepository.markArrived error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -140,7 +142,7 @@ class SafeArrivalRepository {
             'updated_at': DateTime.now().toIso8601String(),
           })
           .eq('id', id);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('SafeArrivalRepository.markDelayed error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -155,7 +157,7 @@ class SafeArrivalRepository {
             'updated_at': DateTime.now().toIso8601String(),
           })
           .eq('id', id);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('SafeArrivalRepository.cancelMonitor error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -173,7 +175,7 @@ class SafeArrivalRepository {
           .stream(primaryKey: ['id'])
           .eq('family_id', familyId)
           .map((data) => data.cast<Map<String, dynamic>>());
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('SafeArrivalRepository.watchFamilyArrivals error: $e');
       yield* Stream.error(Exception('Veritabanı hatası: $e'));
     }

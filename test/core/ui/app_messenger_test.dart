@@ -7,10 +7,12 @@ void main() {
     testWidgets('showSuccess displays green SnackBar', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: Builder(
-            builder: (context) => ElevatedButton(
-              onPressed: () => AppMessenger.showSuccess(context, 'Success!'),
-              child: const Text('Tap'),
+          home: Scaffold(
+            body: Builder(
+              builder: (context) => ElevatedButton(
+                onPressed: () => AppMessenger.showSuccess(context, 'Success!'),
+                child: const Text('Tap'),
+              ),
             ),
           ),
         ),
@@ -28,10 +30,12 @@ void main() {
     testWidgets('showError displays red SnackBar', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: Builder(
-            builder: (context) => ElevatedButton(
-              onPressed: () => AppMessenger.showError(context, 'Error!'),
-              child: const Text('Tap'),
+          home: Scaffold(
+            body: Builder(
+              builder: (context) => ElevatedButton(
+                onPressed: () => AppMessenger.showError(context, 'Error!'),
+                child: const Text('Tap'),
+              ),
             ),
           ),
         ),
@@ -49,10 +53,12 @@ void main() {
     testWidgets('showInfo displays blue SnackBar', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: Builder(
-            builder: (context) => ElevatedButton(
-              onPressed: () => AppMessenger.showInfo(context, 'Info!'),
-              child: const Text('Tap'),
+          home: Scaffold(
+            body: Builder(
+              builder: (context) => ElevatedButton(
+                onPressed: () => AppMessenger.showInfo(context, 'Info!'),
+                child: const Text('Tap'),
+              ),
             ),
           ),
         ),
@@ -70,10 +76,12 @@ void main() {
     testWidgets('showWarning displays orange SnackBar', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: Builder(
-            builder: (context) => ElevatedButton(
-              onPressed: () => AppMessenger.showWarning(context, 'Warning!'),
-              child: const Text('Tap'),
+          home: Scaffold(
+            body: Builder(
+              builder: (context) => ElevatedButton(
+                onPressed: () => AppMessenger.showWarning(context, 'Warning!'),
+                child: const Text('Tap'),
+              ),
             ),
           ),
         ),

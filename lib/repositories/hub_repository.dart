@@ -79,12 +79,13 @@ class HubRepository {
     }
 
     try {
-      members = await _safeClient!
-              .from('family_members')
-              .select('user_id, last_active_at')
-              .eq('family_id', familyId)
-              .eq('is_active', true)
-          as List<dynamic>;
+      members =
+          await _safeClient!
+                  .from('family_members')
+                  .select('user_id, last_active_at')
+                  .eq('family_id', familyId)
+                  .eq('is_active', true)
+              as List<dynamic>;
     } catch (e) {
       debugPrint('HubRepository: family_members select error: $e');
     }
@@ -137,13 +138,17 @@ class HubRepository {
           .stream(primaryKey: ['id'])
           .order('start_time')
           .limit(20)
-          .map((data) => data
-              .where((e) => e['family_id'] == familyId)
-              .map((e) => HubEvent.fromJson(e))
-              .toList());
-    } catch (e, st) {
+          .map(
+            (data) => data
+                .where((e) => e['family_id'] == familyId)
+                .map((e) => HubEvent.fromJson(e))
+                .toList(),
+          );
+    } catch (e) {
       debugPrint('HubRepository.watchUpcomingEvents error: $e');
-      return Stream.error(app_errors.AppDatabaseException('Veritabanı hatası: $e'));
+      return Stream.error(
+        app_errors.AppDatabaseException('Veritabanı hatası: $e'),
+      );
     }
   }
 
@@ -179,7 +184,7 @@ class HubRepository {
             'completed_by': _userId,
           })
           .eq('id', taskId);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('HubRepository.completeTask error: $e');
       throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -188,8 +193,11 @@ class HubRepository {
   Future<void> updateTaskStatus(String taskId, String status) async {
     try {
       _checkAuth();
-      await _safeClient!.from('tasks').update({'status': status}).eq('id', taskId);
-    } catch (e, st) {
+      await _safeClient!
+          .from('tasks')
+          .update({'status': status})
+          .eq('id', taskId);
+    } catch (e) {
       debugPrint('HubRepository.updateTaskStatus error: $e');
       throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -212,7 +220,7 @@ class HubRepository {
         'mood_note': note,
         'energy_level': energyLevel,
       });
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('HubRepository.shareMood error: $e');
       throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -246,13 +254,17 @@ class HubRepository {
           .stream(primaryKey: ['id'])
           .order('created_at', ascending: false)
           .limit(20)
-          .map((data) => data
-              .where((e) => e['family_id'] == familyId)
-              .map((e) => FamilyMood.fromJson(e))
-              .toList());
-    } catch (e, st) {
+          .map(
+            (data) => data
+                .where((e) => e['family_id'] == familyId)
+                .map((e) => FamilyMood.fromJson(e))
+                .toList(),
+          );
+    } catch (e) {
       debugPrint('HubRepository.watchFamilyMoods error: $e');
-      return Stream.error(app_errors.AppDatabaseException('Veritabanı hatası: $e'));
+      return Stream.error(
+        app_errors.AppDatabaseException('Veritabanı hatası: $e'),
+      );
     }
   }
 
@@ -301,7 +313,7 @@ class HubRepository {
             callback: (payload) => onMoodChange(payload),
           )
           .subscribe();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('HubRepository.subscribeToHub error: $e');
       throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -322,8 +334,10 @@ class HubRepository {
           .eq('family_id', familyId)
           .eq('is_active', true);
 
-      final hasChildren = members.any((m) =>
-          m['role'] == 'child' || m['role'] == 'teen' || m['role'] == 'baby');
+      final hasChildren = members.any(
+        (m) =>
+            m['role'] == 'child' || m['role'] == 'teen' || m['role'] == 'baby',
+      );
 
       final suggestions = <Map<String, dynamic>>[];
 

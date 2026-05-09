@@ -6,7 +6,8 @@ import '../services/auth_service.dart';
 import '../services/health_card_service.dart';
 
 class HealthCardRepository {
-  static final HealthCardRepository _instance = HealthCardRepository._internal();
+  static final HealthCardRepository _instance =
+      HealthCardRepository._internal();
   factory HealthCardRepository() => _instance;
   HealthCardRepository._internal();
 
@@ -15,7 +16,11 @@ class HealthCardRepository {
   Future<String?> _getFamilyId() async {
     final user = _client.auth.currentUser;
     if (user == null) return null;
-    final profile = await _client.from('profiles').select('family_id').eq('id', user.id).maybeSingle();
+    final profile = await _client
+        .from('profiles')
+        .select('family_id')
+        .eq('id', user.id)
+        .maybeSingle();
     return profile?['family_id'] as String?;
   }
 
@@ -32,7 +37,7 @@ class HealthCardRepository {
 
       if (response == null) return null;
       return _fromJson(response);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[HealthCardRepository.getForCurrentUser] error: $e');
       rethrow;
     }
@@ -49,7 +54,7 @@ class HealthCardRepository {
           .eq('family_id', familyId);
 
       return (response as List).map((e) => _fromJson(e)).toList();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[HealthCardRepository.getForFamily] error: $e');
       rethrow;
     }
@@ -73,7 +78,11 @@ class HealthCardRepository {
 
       final Map<String, dynamic> response;
       if (existing == null) {
-        response = await _client.from('health_cards').insert(json).select().single();
+        response = await _client
+            .from('health_cards')
+            .insert(json)
+            .select()
+            .single();
       } else {
         response = await _client
             .from('health_cards')
@@ -84,7 +93,7 @@ class HealthCardRepository {
       }
 
       return _fromJson(response);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[HealthCardRepository.upsert] error: $e');
       rethrow;
     }
@@ -95,7 +104,7 @@ class HealthCardRepository {
       final userId = AuthService.currentUserId;
       if (userId == null) return;
       await _client.from('health_cards').delete().eq('user_id', userId);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('[HealthCardRepository.deleteForCurrentUser] error: $e');
       rethrow;
     }
@@ -105,7 +114,8 @@ class HealthCardRepository {
     return HealthCardData(
       bloodType: json['blood_type'] ?? '',
       allergies: List<String>.from(json['allergies'] ?? []),
-      medications: (json['medications'] as List<dynamic>?)
+      medications:
+          (json['medications'] as List<dynamic>?)
               ?.map((e) => Medication.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],

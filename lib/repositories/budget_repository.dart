@@ -14,9 +14,13 @@ class BudgetRepository {
     try {
       final user = _client.auth.currentUser;
       if (user == null) return null;
-      final profile = await _client.from('profiles').select('family_id').eq('id', user.id).maybeSingle();
+      final profile = await _client
+          .from('profiles')
+          .select('family_id')
+          .eq('id', user.id)
+          .maybeSingle();
       return profile?['family_id'] as String?;
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('BudgetRepository._getFamilyId error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -34,7 +38,7 @@ class BudgetRepository {
           .order('date', ascending: false);
 
       return (response as List).map((e) => _transactionFromJson(e)).toList();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('BudgetRepository.getTransactions error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -51,20 +55,24 @@ class BudgetRepository {
       final userId = AuthService.currentUserId;
       if (familyId == null) throw Exception('Aile bilgisi bulunamadı');
 
-      final response = await _client.from('budget_entries').insert({
-        'family_id': familyId,
-        'created_by': userId,
-        'amount': amount,
-        'currency': 'TRY',
-        'category': category,
-        'description': description,
-        'receipt_url': receiptUrl,
-        'paid_by': userId,
-        'date': DateTime.now().toIso8601String(),
-      }).select().single();
+      final response = await _client
+          .from('budget_entries')
+          .insert({
+            'family_id': familyId,
+            'created_by': userId,
+            'amount': amount,
+            'currency': 'TRY',
+            'category': category,
+            'description': description,
+            'receipt_url': receiptUrl,
+            'paid_by': userId,
+            'date': DateTime.now().toIso8601String(),
+          })
+          .select()
+          .single();
 
       return _transactionFromJson(response);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('BudgetRepository.createTransaction error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -73,7 +81,7 @@ class BudgetRepository {
   Future<void> deleteTransaction(String id) async {
     try {
       await _client.from('budget_entries').delete().eq('id', id);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('BudgetRepository.deleteTransaction error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -84,7 +92,11 @@ class BudgetRepository {
       final familyId = await _getFamilyId();
       if (familyId == null) {
         return const Budget(
-          id: '', totalAmount: 0, spentAmount: 0, periodStart: null, periodEnd: null,
+          id: '',
+          totalAmount: 0,
+          spentAmount: 0,
+          periodStart: null,
+          periodEnd: null,
         );
       }
 
@@ -100,8 +112,12 @@ class BudgetRepository {
           .lte('date', endOfMonth.toIso8601String());
 
       final entries = response as List;
-      final totalIncome = entries.where((e) => (e['amount'] as num) > 0).fold<double>(0, (s, e) => s + (e['amount'] as num).toDouble());
-      final totalExpense = entries.where((e) => (e['amount'] as num) < 0).fold<double>(0, (s, e) => s + (e['amount'] as num).toDouble().abs());
+      final totalIncome = entries
+          .where((e) => (e['amount'] as num) > 0)
+          .fold<double>(0, (s, e) => s + (e['amount'] as num).toDouble());
+      final totalExpense = entries
+          .where((e) => (e['amount'] as num) < 0)
+          .fold<double>(0, (s, e) => s + (e['amount'] as num).toDouble().abs());
 
       // Default monthly budget: total income or 10000 TRY
       final budgetLimit = totalIncome > 0 ? totalIncome * 1.2 : 10000;
@@ -114,7 +130,7 @@ class BudgetRepository {
         periodStart: startOfMonth,
         periodEnd: endOfMonth,
       );
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('BudgetRepository.getCurrentBudget error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -122,10 +138,11 @@ class BudgetRepository {
 
   Stream<List<Transaction>> watchTransactions() {
     try {
-      return _client.from('budget_entries').stream(primaryKey: ['id']).map(
-        (data) => data.map((e) => _transactionFromJson(e)).toList(),
-      );
-    } catch (e, st) {
+      return _client
+          .from('budget_entries')
+          .stream(primaryKey: ['id'])
+          .map((data) => data.map((e) => _transactionFromJson(e)).toList());
+    } catch (e) {
       debugPrint('BudgetRepository.watchTransactions error: $e');
       return Stream.error(Exception('Veritabanı hatası: $e'));
     }
@@ -141,8 +158,12 @@ class BudgetRepository {
       category: json['category'] as String? ?? 'Genel',
       description: json['description'] as String?,
       createdBy: json['created_by'] as String? ?? '',
-      createdAt: DateTime.tryParse(json['created_at']?.toString() ?? '') ?? DateTime.now(),
-      attachments: json['receipt_url'] != null ? [json['receipt_url'] as String] : const [],
+      createdAt:
+          DateTime.tryParse(json['created_at']?.toString() ?? '') ??
+          DateTime.now(),
+      attachments: json['receipt_url'] != null
+          ? [json['receipt_url'] as String]
+          : const [],
     );
   }
 }

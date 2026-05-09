@@ -15,9 +15,13 @@ class CalendarRepository {
     try {
       final user = _client.auth.currentUser;
       if (user == null) return null;
-      final profile = await _client.from('profiles').select('family_id').eq('id', user.id).maybeSingle();
+      final profile = await _client
+          .from('profiles')
+          .select('family_id')
+          .eq('id', user.id)
+          .maybeSingle();
       return profile?['family_id'] as String?;
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('CalendarRepository._getFamilyId error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -43,7 +47,7 @@ class CalendarRepository {
       final events = (response as List).map((e) => _fromJson(e)).toList();
       await HiveService.saveCalendarEvents(events);
       return events;
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('CalendarRepository.getEvents error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -55,25 +59,29 @@ class CalendarRepository {
       final userId = AuthService.currentUserId;
       if (familyId == null) throw Exception('Aile bilgisi bulunamadı');
 
-      final response = await _client.from('events').insert({
-        'family_id': familyId,
-        'created_by': userId,
-        'title': event.title,
-        'description': event.description,
-        'location': event.location,
-        'category': _categoryToString(event.category),
-        'start_time': event.start.toIso8601String(),
-        'end_time': event.end.toIso8601String(),
-        'is_all_day': event.isAllDay,
-        'recurrence_rule': event.recurrenceRule,
-        'reminders': event.reminders,
-      }).select().single();
+      final response = await _client
+          .from('events')
+          .insert({
+            'family_id': familyId,
+            'created_by': userId,
+            'title': event.title,
+            'description': event.description,
+            'location': event.location,
+            'category': _categoryToString(event.category),
+            'start_time': event.start.toIso8601String(),
+            'end_time': event.end.toIso8601String(),
+            'is_all_day': event.isAllDay,
+            'recurrence_rule': event.recurrenceRule,
+            'reminders': event.reminders,
+          })
+          .select()
+          .single();
 
       final created = _fromJson(response);
       final all = await getEvents();
       await HiveService.saveCalendarEvents([...all, created]);
       return created;
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('CalendarRepository.createEvent error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -81,23 +89,26 @@ class CalendarRepository {
 
   Future<void> updateEvent(CalendarEvent event) async {
     try {
-      await _client.from('events').update({
-        'title': event.title,
-        'description': event.description,
-        'location': event.location,
-        'category': _categoryToString(event.category),
-        'start_time': event.start.toIso8601String(),
-        'end_time': event.end.toIso8601String(),
-        'is_all_day': event.isAllDay,
-        'recurrence_rule': event.recurrenceRule,
-        'reminders': event.reminders,
-        'updated_at': DateTime.now().toIso8601String(),
-      }).eq('id', event.id);
+      await _client
+          .from('events')
+          .update({
+            'title': event.title,
+            'description': event.description,
+            'location': event.location,
+            'category': _categoryToString(event.category),
+            'start_time': event.start.toIso8601String(),
+            'end_time': event.end.toIso8601String(),
+            'is_all_day': event.isAllDay,
+            'recurrence_rule': event.recurrenceRule,
+            'reminders': event.reminders,
+            'updated_at': DateTime.now().toIso8601String(),
+          })
+          .eq('id', event.id);
 
       final all = await getEvents();
       final updated = all.map((e) => e.id == event.id ? event : e).toList();
       await HiveService.saveCalendarEvents(updated);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('CalendarRepository.updateEvent error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -107,8 +118,10 @@ class CalendarRepository {
     try {
       await _client.from('events').delete().eq('id', id);
       final all = await getEvents();
-      await HiveService.saveCalendarEvents(all.where((e) => e.id != id).toList());
-    } catch (e, st) {
+      await HiveService.saveCalendarEvents(
+        all.where((e) => e.id != id).toList(),
+      );
+    } catch (e) {
       debugPrint('CalendarRepository.deleteEvent error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -126,9 +139,12 @@ class CalendarRepository {
           .stream(primaryKey: ['id'])
           .eq('family_id', familyId)
           .map(
-            (data) => data.where((e) => e['status'] == 'active').map((e) => _fromJson(e)).toList(),
+            (data) => data
+                .where((e) => e['status'] == 'active')
+                .map((e) => _fromJson(e))
+                .toList(),
           );
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('CalendarRepository.watchEvents error: $e');
       yield [];
     }

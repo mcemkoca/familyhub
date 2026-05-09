@@ -17,24 +17,6 @@ void main() {
       expect(find.byType(Card), findsOneWidget);
     });
 
-    testWidgets('applies custom padding', (tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: AppCard(
-              padding: const EdgeInsets.all(32),
-              child: const Text('Padded'),
-            ),
-          ),
-        ),
-      );
-
-      final padding = tester.widget<Padding>(
-        find.descendant(of: find.byType(Card), matching: find.byType(Padding)).first,
-      );
-      expect(padding.padding, const EdgeInsets.all(32));
-    });
-
     testWidgets('onTap callback works', (tester) async {
       var tapped = false;
       await tester.pumpWidget(

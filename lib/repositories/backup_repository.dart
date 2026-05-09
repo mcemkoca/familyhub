@@ -23,7 +23,7 @@ class BackupRepository {
             .maybeSingle();
         final familyId = profile?['family_id'] as String?;
         if (familyId != null) return familyId;
-      } catch (e, st) {
+      } catch (e) {
         debugPrint('BackupRepository._getFamilyId error: $e');
       }
 
@@ -35,7 +35,7 @@ class BackupRepository {
             .eq('user_id', user.id)
             .maybeSingle();
         if (fm?['family_id'] != null) return fm!['family_id'] as String;
-      } catch (e, st) {
+      } catch (e) {
         debugPrint('BackupRepository._getFamilyId error: $e');
       }
     }
@@ -58,7 +58,7 @@ class BackupRepository {
             'email': profile['email'] as String? ?? user.email ?? '',
           };
         }
-      } catch (e, st) {
+      } catch (e) {
         debugPrint('BackupRepository._getCreatorInfo error: $e');
       }
     }
@@ -135,7 +135,7 @@ class BackupRepository {
           .single();
 
       return response;
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('BackupRepository.createBackup error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -154,7 +154,7 @@ class BackupRepository {
           .limit(50);
 
       return (response as List).cast<Map<String, dynamic>>();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('BackupRepository.getBackups error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -168,7 +168,7 @@ class BackupRepository {
           .eq('id', id)
           .maybeSingle();
       return response;
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('BackupRepository.getBackupById error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -177,7 +177,7 @@ class BackupRepository {
   Future<void> deleteBackup(String id) async {
     try {
       await _client.from('family_backups').delete().eq('id', id);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('BackupRepository.deleteBackup error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -195,7 +195,7 @@ class BackupRepository {
           .stream(primaryKey: ['id'])
           .eq('family_id', familyId)
           .map((data) => data.cast<Map<String, dynamic>>());
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('BackupRepository.watchBackups error: $e');
       yield* Stream.error(Exception('Veritabanı hatası: $e'));
     }

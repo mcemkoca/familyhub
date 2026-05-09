@@ -4,7 +4,8 @@ import '../core/supabase_client.dart';
 import '../services/child_auth_service.dart';
 
 class ChildLocationRepository {
-  static final ChildLocationRepository _instance = ChildLocationRepository._internal();
+  static final ChildLocationRepository _instance =
+      ChildLocationRepository._internal();
   factory ChildLocationRepository() => _instance;
   ChildLocationRepository._internal();
   SupabaseClient get _client => SupabaseConfig.safeClient!;
@@ -44,13 +45,9 @@ class ChildLocationRepository {
 
       await ChildAuthService.logActivity(
         'location_shared',
-        details: {
-          'lat': latitude,
-          'lng': longitude,
-          'battery': batteryLevel,
-        },
+        details: {'lat': latitude, 'lng': longitude, 'battery': batteryLevel},
       );
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ChildLocationRepository.shareLocation error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -68,14 +65,16 @@ class ChildLocationRepository {
           .limit(1)
           .maybeSingle();
       return response;
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ChildLocationRepository.getLastLocation error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
   }
 
   /// Get location history for current child
-  Future<List<Map<String, dynamic>>> getLocationHistory({int limit = 50}) async {
+  Future<List<Map<String, dynamic>>> getLocationHistory({
+    int limit = 50,
+  }) async {
     try {
       _checkSession();
       final response = await _client
@@ -85,7 +84,7 @@ class ChildLocationRepository {
           .order('created_at', ascending: false)
           .limit(limit);
       return (response as List).cast<Map<String, dynamic>>();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ChildLocationRepository.getLocationHistory error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -102,7 +101,7 @@ class ChildLocationRepository {
           .eq('family_id', familyId)
           .order('created_at')
           .map((data) => data.cast<Map<String, dynamic>>().toList());
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ChildLocationRepository.watchFamilyLocations error: $e');
       return Stream.error(Exception('Veritabanı hatası: $e'));
     }
@@ -119,7 +118,7 @@ class ChildLocationRepository {
           .limit(1)
           .maybeSingle();
       return response;
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ChildLocationRepository.getChildLastLocation error: $e');
       throw Exception('Veritabanı hatası: $e');
     }

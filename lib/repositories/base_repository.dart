@@ -47,7 +47,7 @@ abstract class BaseRepository<T> {
 
       final response = await query;
       return (response as List).map((e) => fromJson(e)).toList();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('BaseRepository.query error: $e');
       throw AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -64,7 +64,7 @@ abstract class BaseRepository<T> {
           .single();
 
       return fromJson(response);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('BaseRepository.insert error: $e');
       throw AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -82,7 +82,7 @@ abstract class BaseRepository<T> {
           .single();
 
       return fromJson(response);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('BaseRepository.update error: $e');
       throw AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -92,7 +92,7 @@ abstract class BaseRepository<T> {
     try {
       _checkAuth();
       await _safeClient!.from(table).delete().eq('id', id);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('BaseRepository.delete error: $e');
       throw AppDatabaseException('Veritabanı hatası: $e');
     }
@@ -110,7 +110,7 @@ abstract class BaseRepository<T> {
       }
 
       return query.map((data) => data.map((e) => fromJson(e)).toList());
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('BaseRepository.watch error: $e');
       return Stream.error(AppDatabaseException('Veritabanı hatası: $e'));
     }

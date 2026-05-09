@@ -41,14 +41,18 @@ class ChildChatRepository {
   Future<ChatMessage> sendMessage(String content) async {
     try {
       _checkSession();
-      final response = await _client.from('messages').insert({
-        'family_id': _familyId!,
-        'user_id': _childId!,
-        'sender_name': _childName ?? 'Çocuk',
-        'content': content,
-        'type': 'text',
-        'sender_type': 'child',
-      }).select().single();
+      final response = await _client
+          .from('messages')
+          .insert({
+            'family_id': _familyId!,
+            'user_id': _childId!,
+            'sender_name': _childName ?? 'Çocuk',
+            'content': content,
+            'type': 'text',
+            'sender_type': 'child',
+          })
+          .select()
+          .single();
 
       await ChildAuthService.logActivity(
         'message_sent',
@@ -61,7 +65,7 @@ class ChildChatRepository {
       );
 
       return _fromJson(response);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ChildChatRepository.sendMessage error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -79,7 +83,7 @@ class ChildChatRepository {
           .eq('family_id', familyId)
           .order('created_at')
           .map((data) => data.map((e) => _fromJson(e)).toList());
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('ChildChatRepository.watchMessages error: $e');
       return Stream.error(Exception('Veritabanı hatası: $e'));
     }

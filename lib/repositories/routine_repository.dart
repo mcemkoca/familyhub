@@ -23,13 +23,16 @@ class RoutineRepository {
           .eq('family_id', familyId)
           .order('created_at', ascending: false);
       return (response as List).map((e) => Routine.fromJson(e)).toList();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('RoutineRepository.getRoutines error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
   }
 
-  Future<List<Routine>> getRoutinesByType(String familyId, RoutineType type) async {
+  Future<List<Routine>> getRoutinesByType(
+    String familyId,
+    RoutineType type,
+  ) async {
     try {
       final response = await _client
           .from(_table)
@@ -38,7 +41,7 @@ class RoutineRepository {
           .eq('type', type.name)
           .order('created_at', ascending: false);
       return (response as List).map((e) => Routine.fromJson(e)).toList();
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('RoutineRepository.getRoutinesByType error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -52,7 +55,7 @@ class RoutineRepository {
           .eq('id', id)
           .single();
       return Routine.fromJson(response);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('RoutineRepository.getById error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -67,7 +70,7 @@ class RoutineRepository {
           .select()
           .single();
       return Routine.fromJson(response);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('RoutineRepository.create error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -87,7 +90,7 @@ class RoutineRepository {
           .select()
           .single();
       return Routine.fromJson(response);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('RoutineRepository.update error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -96,7 +99,7 @@ class RoutineRepository {
   Future<void> delete(String id) async {
     try {
       await _client.from(_table).delete().eq('id', id);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('RoutineRepository.delete error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -109,7 +112,7 @@ class RoutineRepository {
           .stream(primaryKey: ['id'])
           .eq('family_id', familyId)
           .map((data) => data.map((e) => Routine.fromJson(e)).toList());
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('RoutineRepository.watchRoutines error: $e');
       return Stream.error(Exception('Veritabanı hatası: $e'));
     }
@@ -121,7 +124,7 @@ class RoutineRepository {
           .from(_table)
           .update({'status': status.toJson()})
           .eq('id', id);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('RoutineRepository.updateStatus error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
@@ -133,7 +136,7 @@ class RoutineRepository {
           .from(_table)
           .update({'steps': steps.map((s) => s.toJson()).toList()})
           .eq('id', id);
-    } catch (e, st) {
+    } catch (e) {
       debugPrint('RoutineRepository.updateSteps error: $e');
       throw Exception('Veritabanı hatası: $e');
     }
