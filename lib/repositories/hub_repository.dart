@@ -1,13 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
+import '../core/utils/repository_mixin.dart';
 import '../core/errors.dart' as app_errors;
 import '../domain/models/today_summary.dart';
 import '../domain/models/hub_event.dart';
 import '../domain/models/hub_task.dart';
 import '../domain/models/family_mood.dart';
 
-class HubRepository {
+class HubRepository with RepositoryErrorHandler {
   static final HubRepository _instance = HubRepository._internal();
   factory HubRepository() => _instance;
   HubRepository._internal();
@@ -149,7 +150,7 @@ class HubRepository {
     } catch (e) {
       debugPrint('HubRepository.watchUpcomingEvents error: $e');
       return Stream.error(
-        app_errors.AppDatabaseException('Veritabanı hatası: $e'),
+        RepositoryException('Beklenmeyen hata [watchUpcomingEvents]: $e'),
       );
     }
   }
@@ -178,7 +179,7 @@ class HubRepository {
   }
 
   Future<void> completeTask(String taskId) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       await _safeClient!
           .from('tasks')
@@ -188,23 +189,17 @@ class HubRepository {
             'completed_by': _userId,
           })
           .eq('id', taskId);
-    } catch (e) {
-      debugPrint('HubRepository.completeTask error: $e');
-      throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'completeTask');
   }
 
   Future<void> updateTaskStatus(String taskId, String status) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       await _safeClient!
           .from('tasks')
           .update({'status': status})
           .eq('id', taskId);
-    } catch (e) {
-      debugPrint('HubRepository.updateTaskStatus error: $e');
-      throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'updateTaskStatus');
   }
 
   // ==================== FAMILY MOOD ====================
@@ -215,7 +210,7 @@ class HubRepository {
     String? note,
     int? energyLevel,
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       await _safeClient!.from('family_moods').insert({
         'family_id': familyId,
@@ -224,10 +219,7 @@ class HubRepository {
         'mood_note': note,
         'energy_level': energyLevel,
       });
-    } catch (e) {
-      debugPrint('HubRepository.shareMood error: $e');
-      throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'shareMood');
   }
 
   Future<List<FamilyMood>> getRecentMoods(
@@ -269,7 +261,7 @@ class HubRepository {
     } catch (e) {
       debugPrint('HubRepository.watchFamilyMoods error: $e');
       return Stream.error(
-        app_errors.AppDatabaseException('Veritabanı hatası: $e'),
+        RepositoryException('Beklenmeyen hata [watchFamilyMoods]: $e'),
       );
     }
   }

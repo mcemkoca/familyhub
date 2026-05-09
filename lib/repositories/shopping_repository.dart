@@ -1,18 +1,19 @@
 import 'package:flutter/foundation.dart';
 
 import '../core/supabase_client.dart';
+import '../core/utils/repository_mixin.dart';
 import '../domain/entities.dart';
 import '../services/auth_service.dart';
 import '../services/hive_service.dart';
 
-class ShoppingRepository {
+class ShoppingRepository with RepositoryErrorHandler {
   static final ShoppingRepository _instance = ShoppingRepository._internal();
   factory ShoppingRepository() => _instance;
   ShoppingRepository._internal();
   final _client = SupabaseConfig.client;
 
   Future<String?> _getFamilyId() async {
-    try {
+    return handleRepositoryCall(() async {
       final user = _client.auth.currentUser;
       if (user == null) return null;
       final profile = await _client
@@ -21,14 +22,11 @@ class ShoppingRepository {
           .eq('id', user.id)
           .maybeSingle();
       return profile?['family_id'] as String?;
-    } catch (e) {
-      debugPrint('ShoppingRepository._getFamilyId error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, '_getFamilyId');
   }
 
   Future<List<ShoppingItem>> getItems() async {
-    try {
+    return handleRepositoryCall(() async {
       final cached = HiveService.getShoppingItems();
       if (cached.isNotEmpty) return cached;
 
@@ -44,10 +42,7 @@ class ShoppingRepository {
       final items = (response as List).map((e) => _fromJson(e as Map<String, dynamic>)).toList();
       await HiveService.saveShoppingItems(items);
       return items;
-    } catch (e) {
-      debugPrint('ShoppingRepository.getItems error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getItems');
   }
 
   Future<ShoppingItem> createItem(
@@ -55,7 +50,7 @@ class ShoppingRepository {
     ShoppingCategory category = ShoppingCategory.grocery,
     int quantity = 1,
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       final familyId = await _getFamilyId();
       final userId = AuthService.currentUserId;
       if (familyId == null) throw Exception('Aile bilgisi bulunamadı');
@@ -76,14 +71,11 @@ class ShoppingRepository {
       final all = await getItems();
       await HiveService.saveShoppingItems([...all, created]);
       return created;
-    } catch (e) {
-      debugPrint('ShoppingRepository.createItem error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'createItem');
   }
 
   Future<void> toggleItem(String itemId, bool isCompleted) async {
-    try {
+    return handleRepositoryCall(() async {
       final userId = AuthService.currentUserId;
       await _client
           .from('shopping_items')
@@ -106,23 +98,17 @@ class ShoppingRepository {
           )
           .toList();
       await HiveService.saveShoppingItems(updated);
-    } catch (e) {
-      debugPrint('ShoppingRepository.toggleItem error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'toggleItem');
   }
 
   Future<void> deleteItem(String itemId) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client.from('shopping_items').delete().eq('id', itemId);
       final all = await getItems();
       await HiveService.saveShoppingItems(
         all.where((i) => i.id != itemId).toList(),
       );
-    } catch (e) {
-      debugPrint('ShoppingRepository.deleteItem error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'deleteItem');
   }
 
   Stream<List<ShoppingItem>> watchItems() {
@@ -135,7 +121,7 @@ class ShoppingRepository {
           .map((data) => data.map((e) => _fromJson(e)).toList());
     } catch (e) {
       debugPrint('ShoppingRepository.watchItems error: $e');
-      return Stream.error(Exception('Veritabanı hatası: $e'));
+      return Stream.error(RepositoryException('Beklenmeyen hata [watchItems]: $e'));
     }
   }
 

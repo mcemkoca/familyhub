@@ -29,6 +29,8 @@ import 'services/smart_reminder_background_service.dart';
 import 'services/fcm_service.dart';
 import 'services/error_service.dart';
 import 'services/deep_link_service.dart';
+import 'services/location_tracking_service.dart';
+import 'services/crash_detection_service.dart';
 import 'services/safety_service.dart';
 import 'core/sentry_config.dart';
 import 'core/ssl_pinning.dart';
@@ -247,6 +249,16 @@ Future<void> _initAndRunApp() async {
     _safeInit(
       () async => SafetyService.startMonitoring(),
       'SafetyService',
+      ms: 2000,
+    );
+    _safeInit(
+      () async => LocationTrackingService.startTracking(),
+      'LocationTracking',
+      ms: 2000,
+    );
+    _safeInit(
+      () async => CrashDetectionService().startMonitoring(),
+      'CrashDetection',
       ms: 2000,
     );
     HeatmapTracker.initialize();

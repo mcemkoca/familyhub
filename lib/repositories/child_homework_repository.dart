@@ -1,12 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
+import '../core/utils/repository_mixin.dart';
 import '../domain/models/child_homework.dart';
 import '../services/child_auth_service.dart';
 import '../services/hive_service.dart';
 import '../services/notification_service.dart';
 
-class ChildHomeworkRepository {
+class ChildHomeworkRepository with RepositoryErrorHandler {
   static final ChildHomeworkRepository _instance =
       ChildHomeworkRepository._internal();
   factory ChildHomeworkRepository() => _instance;
@@ -43,7 +44,7 @@ class ChildHomeworkRepository {
   Future<List<ChildHomework>> getHomeworksByStatus(
     HomeworkStatus status,
   ) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkSession();
       final response = await _client
           .from('child_homeworks')
@@ -54,14 +55,11 @@ class ChildHomeworkRepository {
       return (response as List)
           .map((e) => ChildHomework.fromJson(e as Map<String, dynamic>))
           .toList();
-    } catch (e) {
-      debugPrint('ChildHomeworkRepository.getHomeworksByStatus error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getHomeworksByStatus');
   }
 
   Future<void> completeHomework(String homeworkId) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkSession();
       await _client
           .from('child_homeworks')
@@ -75,14 +73,11 @@ class ChildHomeworkRepository {
         title: '📚 Ödev tamamlandı!',
         body: 'Bir ödevi başarıyla bitirdin.',
       );
-    } catch (e) {
-      debugPrint('ChildHomeworkRepository.completeHomework error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'completeHomework');
   }
 
   Future<void> updateStatus(String homeworkId, HomeworkStatus status) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkSession();
       await _client
           .from('child_homeworks')
@@ -94,10 +89,7 @@ class ChildHomeworkRepository {
           })
           .eq('id', homeworkId)
           .eq('child_id', _childId!);
-    } catch (e) {
-      debugPrint('ChildHomeworkRepository.updateStatus error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'updateStatus');
   }
 
   Stream<List<ChildHomework>> watchMyHomeworks() {
@@ -112,7 +104,7 @@ class ChildHomeworkRepository {
           .map((data) => data.map((e) => ChildHomework.fromJson(e)).toList());
     } catch (e) {
       debugPrint('ChildHomeworkRepository.watchMyHomeworks error: $e');
-      return Stream.error(Exception('Veritabanı hatası: $e'));
+      return Stream.error(RepositoryException('Beklenmeyen hata [watchMyHomeworks]: $e'));
     }
   }
 
@@ -125,7 +117,7 @@ class ChildHomeworkRepository {
     String priority = 'medium',
     int? estimatedMinutes,
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkSession();
       final response = await _client
           .from('child_homeworks')
@@ -143,19 +135,13 @@ class ChildHomeworkRepository {
           .select()
           .single();
       return ChildHomework.fromJson(response);
-    } catch (e) {
-      debugPrint('ChildHomeworkRepository.createHomework error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'createHomework');
   }
 
   Future<void> deleteHomework(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkSession();
       await _client.from('child_homeworks').delete().eq('id', id);
-    } catch (e) {
-      debugPrint('ChildHomeworkRepository.deleteHomework error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'deleteHomework');
   }
 }

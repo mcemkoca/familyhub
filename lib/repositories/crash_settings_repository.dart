@@ -1,12 +1,12 @@
 // lib/repositories/crash_settings_repository.dart
 
-import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
+import '../core/utils/repository_mixin.dart';
 
 import '../domain/models/crash_settings.dart';
 
-class CrashSettingsRepository {
+class CrashSettingsRepository with RepositoryErrorHandler {
   static final CrashSettingsRepository _instance =
       CrashSettingsRepository._internal();
   factory CrashSettingsRepository() => _instance;
@@ -16,7 +16,7 @@ class CrashSettingsRepository {
   String get _table => 'crash_detection_settings';
 
   Future<CrashDetectionSettings?> getSettings(String memberId) async {
-    try {
+    return handleRepositoryCall(() async {
       final res = await _client
           .from(_table)
           .select()
@@ -24,44 +24,32 @@ class CrashSettingsRepository {
           .maybeSingle();
       if (res == null) return null;
       return CrashDetectionSettings.fromJson(res);
-    } catch (e) {
-      debugPrint('[CrashSettingsRepository.getSettings] error: $e');
-      rethrow;
-    }
+    }, 'getSettings');
   }
 
   Future<void> createSettings(CrashDetectionSettings settings) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client.from(_table).insert(settings.toJson());
-    } catch (e) {
-      debugPrint('[CrashSettingsRepository.createSettings] error: $e');
-      rethrow;
-    }
+    }, 'createSettings');
   }
 
   Future<void> updateSettings(CrashDetectionSettings settings) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client
           .from(_table)
           .update(settings.toJson())
           .eq('member_id', settings.memberId);
-    } catch (e) {
-      debugPrint('[CrashSettingsRepository.updateSettings] error: $e');
-      rethrow;
-    }
+    }, 'updateSettings');
   }
 
   Future<void> upsertSettings(CrashDetectionSettings settings) async {
-    try {
+    return handleRepositoryCall(() async {
       final existing = await getSettings(settings.memberId);
       if (existing == null) {
         await createSettings(settings);
       } else {
         await updateSettings(settings);
       }
-    } catch (e) {
-      debugPrint('[CrashSettingsRepository.upsertSettings] error: $e');
-      rethrow;
-    }
+    }, 'upsertSettings');
   }
 }

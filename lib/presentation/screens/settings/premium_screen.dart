@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../../core/supabase_client.dart';
 import '../../../config/constants.dart';
 import '../../../services/auth_service.dart';
 import 'package:go_router/go_router.dart';
@@ -121,7 +121,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
 
     String? clientSecret;
     try {
-      final response = await Supabase.instance.client.functions.invoke(
+      final response = await SupabaseConfig.client.functions.invoke(
         'create-payment-intent',
         body: {'price_id': plan.stripePriceId, 'user_id': userId},
       );
@@ -171,7 +171,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
     final userId = AuthService.currentUserId;
     if (userId == null) return;
 
-    final supabase = Supabase.instance.client;
+    final supabase = SupabaseConfig.client;
 
     await supabase.from('subscriptions').insert({
       'user_id': userId,

@@ -2,9 +2,10 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../core/supabase_client.dart';
+import '../core/utils/repository_mixin.dart';
 import '../services/child_auth_service.dart';
 
-class BackupRepository {
+class BackupRepository with RepositoryErrorHandler {
   static final BackupRepository _instance = BackupRepository._internal();
   factory BackupRepository() => _instance;
   BackupRepository._internal();
@@ -104,7 +105,7 @@ class BackupRepository {
   }
 
   Future<Map<String, dynamic>> createBackup() async {
-    try {
+    return handleRepositoryCall(() async {
       final familyId = await _getFamilyId();
       final creator = await _getCreatorInfo();
       if (familyId == null || creator == null) {
@@ -134,14 +135,11 @@ class BackupRepository {
           .single();
 
       return response;
-    } catch (e) {
-      debugPrint('BackupRepository.createBackup error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'createBackup');
   }
 
   Future<List<Map<String, dynamic>>> getBackups() async {
-    try {
+    return handleRepositoryCall(() async {
       final familyId = await _getFamilyId();
       if (familyId == null) return [];
 
@@ -153,33 +151,24 @@ class BackupRepository {
           .limit(50);
 
       return (response as List).cast<Map<String, dynamic>>();
-    } catch (e) {
-      debugPrint('BackupRepository.getBackups error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getBackups');
   }
 
   Future<Map<String, dynamic>?> getBackupById(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       final response = await _client
           .from('family_backups')
           .select('*')
           .eq('id', id)
           .maybeSingle();
       return response;
-    } catch (e) {
-      debugPrint('BackupRepository.getBackupById error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getBackupById');
   }
 
   Future<void> deleteBackup(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client.from('family_backups').delete().eq('id', id);
-    } catch (e) {
-      debugPrint('BackupRepository.deleteBackup error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'deleteBackup');
   }
 
   Stream<List<Map<String, dynamic>>> watchBackups() async* {
@@ -196,7 +185,7 @@ class BackupRepository {
           .map((data) => data.cast<Map<String, dynamic>>());
     } catch (e) {
       debugPrint('BackupRepository.watchBackups error: $e');
-      yield* Stream.error(Exception('Veritabanı hatası: $e'));
+      yield* Stream.error(RepositoryException('Beklenmeyen hata [watchBackups]: $e'));
     }
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../../core/supabase_client.dart';
 import '../../../domain/entities.dart';
 import '../../../domain/models/child_account.dart';
 import '../../../domain/models/child_development_log.dart';
@@ -42,7 +42,7 @@ class _ChildDetailScreenState extends ConsumerState<ChildDetailScreen>
 
   Future<void> _loadChild() async {
     try {
-      final response = await Supabase.instance.client
+      final response = await SupabaseConfig.client
           .from('child_accounts')
           .select()
           .eq('id', widget.childId)
@@ -254,7 +254,7 @@ class _HomeworksTab extends StatefulWidget {
 }
 
 class _HomeworksTabState extends State<_HomeworksTab> {
-  final _client = Supabase.instance.client;
+  final _client = SupabaseConfig.client;
   final _subjectCtrl = TextEditingController();
   final _titleCtrl = TextEditingController();
   final _descCtrl = TextEditingController();
@@ -526,7 +526,7 @@ class _ScheduleTab extends StatefulWidget {
 }
 
 class _ScheduleTabState extends State<_ScheduleTab> {
-  final _client = Supabase.instance.client;
+  final _client = SupabaseConfig.client;
   final _subjectCtrl = TextEditingController();
   final _teacherCtrl = TextEditingController();
   final _locationCtrl = TextEditingController();
@@ -911,7 +911,7 @@ class _DevelopmentTab extends StatefulWidget {
 }
 
 class _DevelopmentTabState extends State<_DevelopmentTab> {
-  final _client = Supabase.instance.client;
+  final _client = SupabaseConfig.client;
   final _valueCtrl = TextEditingController();
   final _unitCtrl = TextEditingController();
   final _notesCtrl = TextEditingController();
@@ -1170,7 +1170,7 @@ class _LocationTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final client = Supabase.instance.client;
+    final client = SupabaseConfig.client;
     return FutureBuilder<Map<String, dynamic>?>(
       future: client
           .from('geolocations')

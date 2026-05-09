@@ -1,17 +1,17 @@
-import 'package:flutter/foundation.dart';
 import '../core/supabase_client.dart';
+import '../core/utils/repository_mixin.dart';
 import '../domain/entities.dart';
 import '../services/auth_service.dart';
 import '../services/hive_service.dart';
 
-class MoodRepository {
+class MoodRepository with RepositoryErrorHandler {
   static final MoodRepository _instance = MoodRepository._internal();
   factory MoodRepository() => _instance;
   MoodRepository._internal();
   final _client = SupabaseConfig.client;
 
   Future<String?> _getFamilyId() async {
-    try {
+    return handleRepositoryCall(() async {
       final user = _client.auth.currentUser;
       if (user == null) return null;
       final profile = await _client
@@ -20,14 +20,11 @@ class MoodRepository {
           .eq('id', user.id)
           .maybeSingle();
       return profile?['family_id'] as String?;
-    } catch (e) {
-      debugPrint('MoodRepository._getFamilyId error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, '_getFamilyId');
   }
 
   Future<List<MoodEntry>> getEntries() async {
-    try {
+    return handleRepositoryCall(() async {
       final cached = HiveService.getMoodEntries();
       if (cached.isNotEmpty) return cached;
 
@@ -46,14 +43,11 @@ class MoodRepository {
           .toList();
       await HiveService.saveMoodEntries(entries);
       return entries;
-    } catch (e) {
-      debugPrint('MoodRepository.getEntries error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getEntries');
   }
 
   Future<MoodEntry> createEntry(String emoji, {String? note}) async {
-    try {
+    return handleRepositoryCall(() async {
       final familyId = await _getFamilyId();
       final userId = AuthService.currentUserId;
       if (familyId == null) throw Exception('Aile bilgisi bulunamadı');
@@ -73,21 +67,15 @@ class MoodRepository {
       final all = await getEntries();
       await HiveService.saveMoodEntries([created, ...all]);
       return created;
-    } catch (e) {
-      debugPrint('MoodRepository.createEntry error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'createEntry');
   }
 
   Future<void> deleteEntry(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client.from('mood_entries').delete().eq('id', id);
       final all = await getEntries();
       await HiveService.saveMoodEntries(all.where((e) => e.id != id).toList());
-    } catch (e) {
-      debugPrint('MoodRepository.deleteEntry error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'deleteEntry');
   }
 
   MoodEntry _fromJson(Map<String, dynamic> json) {

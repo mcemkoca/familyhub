@@ -2,8 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
 import '../core/errors.dart';
+import '../core/utils/repository_mixin.dart';
 
-abstract class BaseRepository<T> {
+abstract class BaseRepository<T> with RepositoryErrorHandler {
   final String table;
 
   BaseRepository(this.table);
@@ -28,7 +29,7 @@ abstract class BaseRepository<T> {
     bool ascending = true,
     int? limit,
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
 
       // ignore: avoid_dynamic_calls
@@ -51,14 +52,11 @@ abstract class BaseRepository<T> {
 
       final response = await query;
       return (response as List).map((e) => fromJson(e as Map<String, dynamic>)).toList();
-    } catch (e) {
-      debugPrint('BaseRepository.query error: $e');
-      throw AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'query');
   }
 
   Future<T> insert(Map<String, dynamic> data) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
 
       final response = await _safeClient!
@@ -68,14 +66,11 @@ abstract class BaseRepository<T> {
           .single();
 
       return fromJson(response);
-    } catch (e) {
-      debugPrint('BaseRepository.insert error: $e');
-      throw AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'insert');
   }
 
   Future<T> update(String id, Map<String, dynamic> data) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
 
       final response = await _safeClient!
@@ -86,20 +81,14 @@ abstract class BaseRepository<T> {
           .single();
 
       return fromJson(response);
-    } catch (e) {
-      debugPrint('BaseRepository.update error: $e');
-      throw AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'update');
   }
 
   Future<void> delete(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       await _safeClient!.from(table).delete().eq('id', id);
-    } catch (e) {
-      debugPrint('BaseRepository.delete error: $e');
-      throw AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'delete');
   }
 
   Stream<List<T>> watch({String? eqColumn, dynamic eqValue}) {
@@ -118,7 +107,7 @@ abstract class BaseRepository<T> {
       return (query as Stream<List<dynamic>>).map((data) => data.map((e) => fromJson(e as Map<String, dynamic>)).toList());
     } catch (e) {
       debugPrint('BaseRepository.watch error: $e');
-      return Stream.error(AppDatabaseException('Veritabanı hatası: $e'));
+      return Stream.error(RepositoryException('Beklenmeyen hata [watch]: $e'));
     }
   }
 

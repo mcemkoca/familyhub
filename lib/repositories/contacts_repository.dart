@@ -1,7 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
 import '../core/errors.dart' as app_errors;
+import '../core/utils/repository_mixin.dart';
 
 class FamilyContact {
   final String id;
@@ -50,7 +50,7 @@ class FamilyContact {
   };
 }
 
-class ContactsRepository {
+class ContactsRepository with RepositoryErrorHandler {
   static final ContactsRepository _instance = ContactsRepository._internal();
   factory ContactsRepository() => _instance;
   ContactsRepository._internal();
@@ -64,7 +64,7 @@ class ContactsRepository {
   }
 
   Future<List<FamilyContact>> getContacts(String familyId) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       final response = await _safeClient!
           .from('family_contacts')
@@ -74,10 +74,7 @@ class ContactsRepository {
       return (response as List)
           .map((e) => FamilyContact.fromJson(e as Map<String, dynamic>))
           .toList();
-    } catch (e) {
-      debugPrint('ContactsRepository.getContacts error: $e');
-      throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'getContacts');
   }
 
   Stream<List<FamilyContact>> watchContacts(String familyId) {
@@ -93,9 +90,8 @@ class ContactsRepository {
                 .toList(),
           );
     } catch (e) {
-      debugPrint('ContactsRepository.watchContacts error: $e');
       return Stream.error(
-        app_errors.AppDatabaseException('Veritabanı hatası: $e'),
+        RepositoryException('Beklenmeyen hata [watchContacts]: $e'),
       );
     }
   }
@@ -108,7 +104,7 @@ class ContactsRepository {
     String type = 'other',
     String? notes,
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       final response = await _safeClient!
           .from('family_contacts')
@@ -124,29 +120,20 @@ class ContactsRepository {
           .select()
           .single();
       return FamilyContact.fromJson(response);
-    } catch (e) {
-      debugPrint('ContactsRepository.createContact error: $e');
-      throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'createContact');
   }
 
   Future<void> updateContact(String id, Map<String, dynamic> data) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       await _safeClient!.from('family_contacts').update(data).eq('id', id);
-    } catch (e) {
-      debugPrint('ContactsRepository.updateContact error: $e');
-      throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'updateContact');
   }
 
   Future<void> deleteContact(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       await _safeClient!.from('family_contacts').delete().eq('id', id);
-    } catch (e) {
-      debugPrint('ContactsRepository.deleteContact error: $e');
-      throw app_errors.AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'deleteContact');
   }
 }

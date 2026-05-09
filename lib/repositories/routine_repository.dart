@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import '../core/utils/repository_mixin.dart';
 import '../domain/models/routine.dart';
 import '../services/auth_service.dart';
 
-class RoutineRepository {
+class RoutineRepository with RepositoryErrorHandler {
   static final RoutineRepository _instance = RoutineRepository._internal();
   factory RoutineRepository() => _instance;
   RoutineRepository._internal();
@@ -16,7 +17,7 @@ class RoutineRepository {
   String get _table => 'routines';
 
   Future<List<Routine>> getRoutines(String familyId) async {
-    try {
+    return handleRepositoryCall(() async {
       final response = await _client
           .from(_table)
           .select('*')
@@ -25,17 +26,14 @@ class RoutineRepository {
       return (response as List)
           .map((e) => Routine.fromJson(e as Map<String, dynamic>))
           .toList();
-    } catch (e) {
-      debugPrint('RoutineRepository.getRoutines error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getRoutines');
   }
 
   Future<List<Routine>> getRoutinesByType(
     String familyId,
     RoutineType type,
   ) async {
-    try {
+    return handleRepositoryCall(() async {
       final response = await _client
           .from(_table)
           .select('*')
@@ -45,28 +43,22 @@ class RoutineRepository {
       return (response as List)
           .map((e) => Routine.fromJson(e as Map<String, dynamic>))
           .toList();
-    } catch (e) {
-      debugPrint('RoutineRepository.getRoutinesByType error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getRoutinesByType');
   }
 
   Future<Routine> getById(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       final response = await _client
           .from(_table)
           .select('*')
           .eq('id', id)
           .single();
       return Routine.fromJson(response);
-    } catch (e) {
-      debugPrint('RoutineRepository.getById error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getById');
   }
 
   Future<Routine> create(Routine routine) async {
-    try {
+    return handleRepositoryCall(() async {
       final data = routine.toJson()..remove('id');
       final response = await _client
           .from(_table)
@@ -74,14 +66,11 @@ class RoutineRepository {
           .select()
           .single();
       return Routine.fromJson(response);
-    } catch (e) {
-      debugPrint('RoutineRepository.create error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'create');
   }
 
   Future<Routine> update(Routine routine) async {
-    try {
+    return handleRepositoryCall(() async {
       final data = routine.toJson()
         ..remove('id')
         ..remove('created_at')
@@ -94,19 +83,13 @@ class RoutineRepository {
           .select()
           .single();
       return Routine.fromJson(response);
-    } catch (e) {
-      debugPrint('RoutineRepository.update error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'update');
   }
 
   Future<void> delete(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client.from(_table).delete().eq('id', id);
-    } catch (e) {
-      debugPrint('RoutineRepository.delete error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'delete');
   }
 
   Stream<List<Routine>> watchRoutines(String familyId) {
@@ -118,31 +101,25 @@ class RoutineRepository {
           .map((data) => data.map((e) => Routine.fromJson(e)).toList());
     } catch (e) {
       debugPrint('RoutineRepository.watchRoutines error: $e');
-      return Stream.error(Exception('Veritabanı hatası: $e'));
+      return Stream.error(RepositoryException('Beklenmeyen hata [watchRoutines]: $e'));
     }
   }
 
   Future<void> updateStatus(String id, RoutineStatus status) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client
           .from(_table)
           .update({'status': status.toJson()})
           .eq('id', id);
-    } catch (e) {
-      debugPrint('RoutineRepository.updateStatus error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'updateStatus');
   }
 
   Future<void> updateSteps(String id, List<RoutineStep> steps) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client
           .from(_table)
           .update({'steps': steps.map((s) => s.toJson()).toList()})
           .eq('id', id);
-    } catch (e) {
-      debugPrint('RoutineRepository.updateSteps error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'updateSteps');
   }
 }

@@ -1,10 +1,11 @@
 import 'package:flutter/foundation.dart';
 
 import '../core/supabase_client.dart';
+import '../core/utils/repository_mixin.dart';
 import '../services/auth_service.dart';
 import '../services/child_auth_service.dart';
 
-class SafeArrivalRepository {
+class SafeArrivalRepository with RepositoryErrorHandler {
   static final SafeArrivalRepository _instance =
       SafeArrivalRepository._internal();
   factory SafeArrivalRepository() => _instance;
@@ -12,7 +13,7 @@ class SafeArrivalRepository {
   final _client = SupabaseConfig.client;
 
   Future<String?> _getFamilyId() async {
-    try {
+    return handleRepositoryCall(() async {
       final user = _client.auth.currentUser;
       if (user != null) {
         final profile = await _client
@@ -24,14 +25,11 @@ class SafeArrivalRepository {
         if (familyId != null) return familyId;
       }
       return ChildAuthService.currentFamilyId;
-    } catch (e) {
-      debugPrint('SafeArrivalRepository._getFamilyId error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, '_getFamilyId');
   }
 
   Future<List<Map<String, dynamic>>> getActiveMonitors() async {
-    try {
+    return handleRepositoryCall(() async {
       final familyId = await _getFamilyId();
       if (familyId == null) return [];
       final response = await _client
@@ -41,14 +39,11 @@ class SafeArrivalRepository {
           .inFilter('status', ['active', 'delayed'])
           .order('created_at', ascending: false);
       return (response as List).cast<Map<String, dynamic>>();
-    } catch (e) {
-      debugPrint('SafeArrivalRepository.getActiveMonitors error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getActiveMonitors');
   }
 
   Future<List<Map<String, dynamic>>> getHistory() async {
-    try {
+    return handleRepositoryCall(() async {
       final familyId = await _getFamilyId();
       if (familyId == null) return [];
       final response = await _client
@@ -59,10 +54,7 @@ class SafeArrivalRepository {
           .order('created_at', ascending: false)
           .limit(20);
       return (response as List).cast<Map<String, dynamic>>();
-    } catch (e) {
-      debugPrint('SafeArrivalRepository.getHistory error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getHistory');
   }
 
   Future<Map<String, dynamic>> createMonitor({
@@ -71,7 +63,7 @@ class SafeArrivalRepository {
     required String destination,
     required int durationMinutes,
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       final familyId = await _getFamilyId();
       final userId =
           AuthService.currentUserId ?? ChildAuthService.currentChildId;
@@ -94,14 +86,11 @@ class SafeArrivalRepository {
           .single();
 
       return response;
-    } catch (e) {
-      debugPrint('SafeArrivalRepository.createMonitor error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'createMonitor');
   }
 
   Future<void> updateProgress(String id, double progress) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client
           .from('safe_arrivals')
           .update({
@@ -109,14 +98,11 @@ class SafeArrivalRepository {
             'updated_at': DateTime.now().toIso8601String(),
           })
           .eq('id', id);
-    } catch (e) {
-      debugPrint('SafeArrivalRepository.updateProgress error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'updateProgress');
   }
 
   Future<void> markArrived(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client
           .from('safe_arrivals')
           .update({
@@ -126,14 +112,11 @@ class SafeArrivalRepository {
             'updated_at': DateTime.now().toIso8601String(),
           })
           .eq('id', id);
-    } catch (e) {
-      debugPrint('SafeArrivalRepository.markArrived error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'markArrived');
   }
 
   Future<void> markDelayed(String id, int delayMinutes) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client
           .from('safe_arrivals')
           .update({
@@ -142,14 +125,11 @@ class SafeArrivalRepository {
             'updated_at': DateTime.now().toIso8601String(),
           })
           .eq('id', id);
-    } catch (e) {
-      debugPrint('SafeArrivalRepository.markDelayed error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'markDelayed');
   }
 
   Future<void> cancelMonitor(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client
           .from('safe_arrivals')
           .update({
@@ -157,10 +137,7 @@ class SafeArrivalRepository {
             'updated_at': DateTime.now().toIso8601String(),
           })
           .eq('id', id);
-    } catch (e) {
-      debugPrint('SafeArrivalRepository.cancelMonitor error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'cancelMonitor');
   }
 
   Stream<List<Map<String, dynamic>>> watchFamilyArrivals() async* {
@@ -177,7 +154,7 @@ class SafeArrivalRepository {
           .map((data) => data.cast<Map<String, dynamic>>());
     } catch (e) {
       debugPrint('SafeArrivalRepository.watchFamilyArrivals error: $e');
-      yield* Stream.error(Exception('Veritabanı hatası: $e'));
+      yield* Stream.error(RepositoryException('Beklenmeyen hata [watchFamilyArrivals]: $e'));
     }
   }
 }

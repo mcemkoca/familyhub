@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../domain/entities.dart';
 import '../core/supabase_client.dart';
+import '../core/utils/repository_mixin.dart';
+import '../domain/entities.dart';
 import '../services/child_auth_service.dart';
 import '../services/hive_service.dart';
 
-class FamilyMembersRepository {
+class FamilyMembersRepository with RepositoryErrorHandler {
   static final FamilyMembersRepository _instance =
       FamilyMembersRepository._internal();
   factory FamilyMembersRepository() => _instance;
@@ -43,7 +44,7 @@ class FamilyMembersRepository {
     final client = _client;
     if (client == null) return [];
 
-    try {
+    return handleRepositoryCall(() async {
       // Load family_members to get roles
       final fmResponse = await client
           .from('family_members')
@@ -86,7 +87,7 @@ class FamilyMembersRepository {
             color: _parseColor(fm['color']),
             avatarUrl: p['avatar_url'] as String?,
             role: role,
-            isOnline: false, // Will be updated by SafetyService
+            isOnline: false,
             lastSeen: null,
             joinedAt: fm['joined_at'] != null
                 ? DateTime.tryParse(fm['joined_at'].toString())
@@ -119,10 +120,7 @@ class FamilyMembersRepository {
 
       await HiveService.saveFamilyMembers(result);
       return result;
-    } catch (e) {
-      debugPrint('FamilyMembersRepository.getMembers error: $e');
-      return [];
-    }
+    }, 'getMembers');
   }
 
   Stream<List<FamilyMember>> watchMembers() async* {
@@ -137,7 +135,6 @@ class FamilyMembersRepository {
         yield [];
         return;
       }
-      // Watch both tables and reload on every change
       yield* client
           .from('family_members')
           .stream(primaryKey: ['id'])
@@ -145,7 +142,7 @@ class FamilyMembersRepository {
           .asyncMap((_) => getMembers());
     } catch (e) {
       debugPrint('FamilyMembersRepository.watchMembers error: $e');
-      yield* Stream.error(Exception('Veritabanı hatası: $e'));
+      yield* Stream.error(RepositoryException('Beklenmeyen hata [watchMembers]: $e'));
     }
   }
 
@@ -163,7 +160,7 @@ class FamilyMembersRepository {
   }
 
   Future<void> updateRole(String userId, String familyId, String role) async {
-    try {
+    return handleRepositoryCall(() async {
       final client = _client;
       if (client == null) throw Exception('Sunucu bağlantısı kurulmadı');
       await client
@@ -171,14 +168,11 @@ class FamilyMembersRepository {
           .update({'role': role})
           .eq('user_id', userId)
           .eq('family_id', familyId);
-    } catch (e) {
-      debugPrint('FamilyMembersRepository.updateRole error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'updateRole');
   }
 
   Future<void> removeMember(String userId, String familyId) async {
-    try {
+    return handleRepositoryCall(() async {
       final client = _client;
       if (client == null) throw Exception('Sunucu bağlantısı kurulmadı');
       await client
@@ -186,10 +180,7 @@ class FamilyMembersRepository {
           .delete()
           .eq('user_id', userId)
           .eq('family_id', familyId);
-    } catch (e) {
-      debugPrint('FamilyMembersRepository.removeMember error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'removeMember');
   }
 
   static Color _parseColor(dynamic val) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../../core/supabase_client.dart';
 import '../../../config/constants.dart';
 import '../../../config/routes.dart';
 import '../../../domain/models/routine.dart';
@@ -31,7 +31,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
   Future<String?> _getFamilyId() async {
     final userId = AuthService.currentUserId;
     if (userId == null) return null;
-    final profile = await Supabase.instance.client
+    final profile = await SupabaseConfig.client
         .from('profiles')
         .select('family_id')
         .eq('id', userId)

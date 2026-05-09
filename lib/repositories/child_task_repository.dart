@@ -1,12 +1,12 @@
-import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
+import '../core/utils/repository_mixin.dart';
 import '../domain/entities.dart';
 import '../services/child_auth_service.dart';
 import '../services/hive_service.dart';
 import '../services/notification_service.dart';
 
-class ChildTaskRepository {
+class ChildTaskRepository with RepositoryErrorHandler {
   static final ChildTaskRepository _instance = ChildTaskRepository._internal();
   factory ChildTaskRepository() => _instance;
   ChildTaskRepository._internal();
@@ -42,7 +42,7 @@ class ChildTaskRepository {
   }
 
   Future<Task> getTaskById(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkSession();
       final response = await _client
           .from('tasks')
@@ -51,14 +51,11 @@ class ChildTaskRepository {
           .eq('assigned_to', _childId!)
           .single();
       return _fromJson(response);
-    } catch (e) {
-      debugPrint('ChildTaskRepository.getTaskById error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getTaskById');
   }
 
   Future<void> completeTask(String taskId) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkSession();
       await _client
           .from('tasks')
@@ -79,14 +76,11 @@ class ChildTaskRepository {
         title: '🎉 Görev tamamlandı!',
         body: 'Bir görevi başarıyla tamamladın.',
       );
-    } catch (e) {
-      debugPrint('ChildTaskRepository.completeTask error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'completeTask');
   }
 
   Future<void> updateTaskStatus(String taskId, TaskStatus status) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkSession();
       await _client
           .from('tasks')
@@ -98,10 +92,7 @@ class ChildTaskRepository {
           })
           .eq('id', taskId)
           .eq('assigned_to', _childId!);
-    } catch (e) {
-      debugPrint('ChildTaskRepository.updateTaskStatus error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'updateTaskStatus');
   }
 
   Stream<List<Task>> watchMyTasks() {
@@ -124,8 +115,7 @@ class ChildTaskRepository {
                 .toList(),
           );
     } catch (e) {
-      debugPrint('ChildTaskRepository.watchMyTasks error: $e');
-      return Stream.error(Exception('Veritabanı hatası: $e'));
+      return Stream.error(RepositoryException('Beklenmeyen hata [watchMyTasks]: $e'));
     }
   }
 

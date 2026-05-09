@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../../core/supabase_client.dart';
 import '../../../config/constants.dart';
 import '../../../domain/models/smart_rotation.dart';
 import '../../../services/smart_rotation_service.dart';
@@ -26,7 +26,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
   String? _error;
   Map<String, _MemberWorkload> _workloads = {};
 
-  final _client = Supabase.instance.client;
+  final _client = SupabaseConfig.client;
 
   @override
   void initState() {

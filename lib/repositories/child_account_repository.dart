@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
 import '../core/errors.dart';
+import '../core/utils/repository_mixin.dart';
 import '../domain/models/child_account.dart';
 
-class ChildAccountRepository {
+class ChildAccountRepository with RepositoryErrorHandler {
   static final ChildAccountRepository _instance =
       ChildAccountRepository._internal();
   factory ChildAccountRepository() => _instance;
@@ -33,7 +34,7 @@ class ChildAccountRepository {
   }
 
   Future<List<ChildAccount>> getChildrenForFamily(String familyId) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       final response = await client
           .from('child_accounts')
@@ -45,14 +46,11 @@ class ChildAccountRepository {
       return (response as List)
           .map((e) => ChildAccount.fromJson(e as Map<String, dynamic>))
           .toList();
-    } catch (e) {
-      debugPrint('ChildAccountRepository.getChildrenForFamily error: $e');
-      throw AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'getChildrenForFamily');
   }
 
   Future<ChildAccount> getChildById(String childId) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       final response = await client
           .from('child_accounts')
@@ -61,10 +59,7 @@ class ChildAccountRepository {
           .single();
 
       return ChildAccount.fromJson(response);
-    } catch (e) {
-      debugPrint('ChildAccountRepository.getChildById error: $e');
-      throw AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'getChildById');
   }
 
   Future<ChildAccount> createChild({
@@ -80,7 +75,7 @@ class ChildAccountRepository {
     bool? canViewBudget,
     int? age,
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
 
       if (familyId.trim().isEmpty) {
@@ -98,7 +93,7 @@ class ChildAccountRepository {
       final data = {
         'family_id': familyId,
         'name': name.trim(),
-        'pin_hash': _hashPin(pin), // Client-side SHA-256 hash
+        'pin_hash': _hashPin(pin),
         'role': role.name,
         'avatar_url': avatarUrl,
         'color': color != null
@@ -118,10 +113,7 @@ class ChildAccountRepository {
           .select()
           .single();
       return ChildAccount.fromJson(response);
-    } catch (e) {
-      debugPrint('ChildAccountRepository.createChild error: $e');
-      throw AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'createChild');
   }
 
   Future<ChildAccount> updateChild(
@@ -138,7 +130,7 @@ class ChildAccountRepository {
     bool? canViewBudget,
     int? age,
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
 
       final data = <String, dynamic>{};
@@ -167,24 +159,18 @@ class ChildAccountRepository {
           .single();
 
       return ChildAccount.fromJson(response);
-    } catch (e) {
-      debugPrint('ChildAccountRepository.updateChild error: $e');
-      throw AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'updateChild');
   }
 
   Future<void> deleteChild(String childId) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       await client.from('child_accounts').delete().eq('id', childId);
-    } catch (e) {
-      debugPrint('ChildAccountRepository.deleteChild error: $e');
-      throw AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'deleteChild');
   }
 
   Future<String?> uploadAvatar(String childId, String filePath) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       final fileName =
           'avatars/$childId-${DateTime.now().millisecondsSinceEpoch}.jpg';
@@ -192,14 +178,11 @@ class ChildAccountRepository {
           .from('family-gallery')
           .upload(fileName, File(filePath));
       return client.storage.from('family-gallery').getPublicUrl(fileName);
-    } catch (e) {
-      debugPrint('ChildAccountRepository.uploadAvatar error: $e');
-      throw AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'uploadAvatar');
   }
 
   Future<void> updatePin(String childId, String newPin) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       if (newPin.length < 4 || newPin.length > 6) {
         throw ValidationException('PIN 4-6 haneli olmalı');
@@ -208,10 +191,7 @@ class ChildAccountRepository {
           .from('child_accounts')
           .update({'pin_hash': _hashPin(newPin)})
           .eq('id', childId);
-    } catch (e) {
-      debugPrint('ChildAccountRepository.updatePin error: $e');
-      throw AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'updatePin');
   }
 
   Future<void> updateRemoteLock(
@@ -220,7 +200,7 @@ class ChildAccountRepository {
     DateTime? lockUntil,
     String? reason,
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkAuth();
       await client
           .from('child_accounts')
@@ -230,10 +210,7 @@ class ChildAccountRepository {
             'remote_lock_reason': reason,
           })
           .eq('id', childId);
-    } catch (e) {
-      debugPrint('ChildAccountRepository.updateRemoteLock error: $e');
-      throw AppDatabaseException('Veritabanı hatası: $e');
-    }
+    }, 'updateRemoteLock');
   }
 
   Stream<List<ChildAccount>> watchChildren(String familyId) {
@@ -250,7 +227,7 @@ class ChildAccountRepository {
           );
     } catch (e) {
       debugPrint('ChildAccountRepository.watchChildren error: $e');
-      return Stream.error(AppDatabaseException('Veritabanı hatası: $e'));
+      return Stream.error(RepositoryException('Beklenmeyen hata [watchChildren]: $e'));
     }
   }
 }

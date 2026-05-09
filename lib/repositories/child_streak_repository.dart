@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
+import '../core/utils/repository_mixin.dart';
 import '../domain/entities.dart';
 
-class ChildStreakRepository {
+class ChildStreakRepository with RepositoryErrorHandler {
   static final ChildStreakRepository _instance =
       ChildStreakRepository._internal();
   factory ChildStreakRepository() => _instance;
@@ -12,7 +13,7 @@ class ChildStreakRepository {
 
   /// Çocuğun streak istatistiklerini hesapla
   Future<StreakStats> getStreakStats(String childId) async {
-    try {
+    return handleRepositoryCall(() async {
       final response = await _client
           .from('tasks')
           .select('*')
@@ -48,10 +49,7 @@ class ChildStreakRepository {
         weeklyView: weeklyView,
         lastCompleted: completedDates.isNotEmpty ? completedDates.first : null,
       );
-    } catch (e) {
-      debugPrint('ChildStreakRepository.getStreakStats error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getStreakStats');
   }
 
   /// Realtime streak stream
@@ -93,7 +91,7 @@ class ChildStreakRepository {
           });
     } catch (e) {
       debugPrint('ChildStreakRepository.watchStreakStats error: $e');
-      return Stream.error(Exception('Veritabanı hatası: $e'));
+      return Stream.error(RepositoryException('Beklenmeyen hata [watchStreakStats]: $e'));
     }
   }
 

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
+import '../core/utils/repository_mixin.dart';
 import '../domain/entities.dart';
 import '../services/child_auth_service.dart';
 import '../services/hive_service.dart';
 import '../services/notification_service.dart';
 
-class ChildChatRepository {
+class ChildChatRepository with RepositoryErrorHandler {
   static final ChildChatRepository _instance = ChildChatRepository._internal();
   factory ChildChatRepository() => _instance;
   ChildChatRepository._internal();
@@ -39,7 +40,7 @@ class ChildChatRepository {
   }
 
   Future<ChatMessage> sendMessage(String content) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkSession();
       final response = await _client
           .from('messages')
@@ -65,10 +66,7 @@ class ChildChatRepository {
       );
 
       return _fromJson(response);
-    } catch (e) {
-      debugPrint('ChildChatRepository.sendMessage error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'sendMessage');
   }
 
   Stream<List<ChatMessage>> watchMessages() {
@@ -85,7 +83,7 @@ class ChildChatRepository {
           .map((data) => data.map((e) => _fromJson(e)).toList());
     } catch (e) {
       debugPrint('ChildChatRepository.watchMessages error: $e');
-      return Stream.error(Exception('Veritabanı hatası: $e'));
+      return Stream.error(RepositoryException('Beklenmeyen hata [watchMessages]: $e'));
     }
   }
 

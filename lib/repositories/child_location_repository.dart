@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
+import '../core/utils/repository_mixin.dart';
 import '../services/child_auth_service.dart';
 
-class ChildLocationRepository {
+class ChildLocationRepository with RepositoryErrorHandler {
   static final ChildLocationRepository _instance =
       ChildLocationRepository._internal();
   factory ChildLocationRepository() => _instance;
@@ -29,7 +30,7 @@ class ChildLocationRepository {
     int? batteryLevel,
     bool isMoving = false,
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkSession();
       await _client.from('geolocations').insert({
         'family_id': _familyId!,
@@ -47,15 +48,12 @@ class ChildLocationRepository {
         'location_shared',
         details: {'lat': latitude, 'lng': longitude, 'battery': batteryLevel},
       );
-    } catch (e) {
-      debugPrint('ChildLocationRepository.shareLocation error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'shareLocation');
   }
 
   /// Get last known location for current child
   Future<Map<String, dynamic>?> getLastLocation() async {
-    try {
+    return handleRepositoryCall(() async {
       _checkSession();
       final response = await _client
           .from('geolocations')
@@ -65,17 +63,14 @@ class ChildLocationRepository {
           .limit(1)
           .maybeSingle();
       return response;
-    } catch (e) {
-      debugPrint('ChildLocationRepository.getLastLocation error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getLastLocation');
   }
 
   /// Get location history for current child
   Future<List<Map<String, dynamic>>> getLocationHistory({
     int limit = 50,
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkSession();
       final response = await _client
           .from('geolocations')
@@ -84,10 +79,7 @@ class ChildLocationRepository {
           .order('created_at', ascending: false)
           .limit(limit);
       return (response as List).cast<Map<String, dynamic>>();
-    } catch (e) {
-      debugPrint('ChildLocationRepository.getLocationHistory error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getLocationHistory');
   }
 
   /// Watch family geolocations (for parents to see child's location)
@@ -103,13 +95,13 @@ class ChildLocationRepository {
           .map((data) => data.cast<Map<String, dynamic>>().toList());
     } catch (e) {
       debugPrint('ChildLocationRepository.watchFamilyLocations error: $e');
-      return Stream.error(Exception('Veritabanı hatası: $e'));
+      return Stream.error(RepositoryException('Beklenmeyen hata [watchFamilyLocations]: $e'));
     }
   }
 
   /// Get last location for any child (parent view)
   Future<Map<String, dynamic>?> getChildLastLocation(String childId) async {
-    try {
+    return handleRepositoryCall(() async {
       final response = await _client
           .from('geolocations')
           .select('*')
@@ -118,9 +110,6 @@ class ChildLocationRepository {
           .limit(1)
           .maybeSingle();
       return response;
-    } catch (e) {
-      debugPrint('ChildLocationRepository.getChildLastLocation error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getChildLastLocation');
   }
 }

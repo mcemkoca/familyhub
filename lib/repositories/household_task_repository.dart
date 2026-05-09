@@ -1,10 +1,10 @@
-import 'package:flutter/foundation.dart';
 import '../core/supabase_client.dart';
+import '../core/utils/repository_mixin.dart';
 import '../domain/models/household_task.dart';
 
-class HouseholdTaskRepository {
+class HouseholdTaskRepository with RepositoryErrorHandler {
   Future<List<HouseholdTask>> getAllTasks() async {
-    try {
+    return handleRepositoryCall(() async {
       final client = SupabaseConfig.safeClient;
       if (client == null) return [];
       final response = await client
@@ -15,14 +15,11 @@ class HouseholdTaskRepository {
       return (response as List)
           .map((e) => HouseholdTask.fromJson(e as Map<String, dynamic>))
           .toList();
-    } catch (e) {
-      debugPrint('[HouseholdTaskRepository.getAllTasks] error: $e');
-      rethrow;
-    }
+    }, 'getAllTasks');
   }
 
   Future<List<HouseholdTask>> getTasksByCategory(String category) async {
-    try {
+    return handleRepositoryCall(() async {
       final client = SupabaseConfig.safeClient;
       if (client == null) return [];
       final response = await client
@@ -33,14 +30,11 @@ class HouseholdTaskRepository {
       return (response as List)
           .map((e) => HouseholdTask.fromJson(e as Map<String, dynamic>))
           .toList();
-    } catch (e) {
-      debugPrint('[HouseholdTaskRepository.getTasksByCategory] error: $e');
-      rethrow;
-    }
+    }, 'getTasksByCategory');
   }
 
   Future<List<TaskSchedule>> getFamilySchedules(String familyId) async {
-    try {
+    return handleRepositoryCall(() async {
       final client = SupabaseConfig.safeClient;
       if (client == null) return [];
       final response = await client
@@ -51,14 +45,11 @@ class HouseholdTaskRepository {
       return (response as List)
           .map((e) => TaskSchedule.fromJson(e as Map<String, dynamic>))
           .toList();
-    } catch (e) {
-      debugPrint('[HouseholdTaskRepository.getFamilySchedules] error: $e');
-      rethrow;
-    }
+    }, 'getFamilySchedules');
   }
 
   Future<TaskSchedule> createSchedule(TaskSchedule schedule) async {
-    try {
+    return handleRepositoryCall(() async {
       final client = SupabaseConfig.safeClient;
       if (client == null) throw Exception('Supabase client not initialized');
       final response = await client
@@ -67,14 +58,11 @@ class HouseholdTaskRepository {
           .select()
           .single();
       return TaskSchedule.fromJson(response);
-    } catch (e) {
-      debugPrint('[HouseholdTaskRepository.createSchedule] error: $e');
-      rethrow;
-    }
+    }, 'createSchedule');
   }
 
   Future<void> markCompleted(String scheduleId) async {
-    try {
+    return handleRepositoryCall(() async {
       final client = SupabaseConfig.safeClient;
       if (client == null) return;
       await client
@@ -84,9 +72,6 @@ class HouseholdTaskRepository {
             'completed_at': DateTime.now().toIso8601String(),
           })
           .eq('id', scheduleId);
-    } catch (e) {
-      debugPrint('[HouseholdTaskRepository.markCompleted] error: $e');
-      rethrow;
-    }
+    }, 'markCompleted');
   }
 }

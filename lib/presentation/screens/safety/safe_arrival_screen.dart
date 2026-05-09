@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../../core/supabase_client.dart';
 import '../../../config/constants.dart';
 import '../../../services/safe_arrival_service.dart';
 import '../../../services/child_auth_service.dart';
@@ -36,7 +36,7 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
 
   Future<void> _loadFamilyMembers() async {
     try {
-      final client = Supabase.instance.client;
+      final client = SupabaseConfig.client;
       String? familyId;
       final user = client.auth.currentUser;
       if (user != null) {

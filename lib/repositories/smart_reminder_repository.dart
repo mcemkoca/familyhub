@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import '../core/utils/repository_mixin.dart';
 import '../domain/models/smart_reminder.dart';
 import '../services/auth_service.dart';
 
-class SmartReminderRepository {
+class SmartReminderRepository with RepositoryErrorHandler {
   static final SmartReminderRepository _instance =
       SmartReminderRepository._internal();
   factory SmartReminderRepository() => _instance;
@@ -17,7 +18,7 @@ class SmartReminderRepository {
   String get _table => 'smart_reminders';
 
   Future<List<SmartReminder>> getReminders(String familyId) async {
-    try {
+    return handleRepositoryCall(() async {
       final response = await _client
           .from(_table)
           .select('*')
@@ -26,14 +27,11 @@ class SmartReminderRepository {
       return (response as List)
           .map((e) => SmartReminder.fromJson(e as Map<String, dynamic>))
           .toList();
-    } catch (e) {
-      debugPrint('SmartReminderRepository.getReminders error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getReminders');
   }
 
   Future<List<SmartReminder>> getActiveReminders(String familyId) async {
-    try {
+    return handleRepositoryCall(() async {
       final response = await _client
           .from(_table)
           .select('*')
@@ -43,28 +41,22 @@ class SmartReminderRepository {
           .map((e) => SmartReminder.fromJson(e as Map<String, dynamic>))
           .toList();
       return all.where((r) => r.status.state == ReminderState.active).toList();
-    } catch (e) {
-      debugPrint('SmartReminderRepository.getActiveReminders error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getActiveReminders');
   }
 
   Future<SmartReminder> getById(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       final response = await _client
           .from(_table)
           .select('*')
           .eq('id', id)
           .single();
       return SmartReminder.fromJson(response);
-    } catch (e) {
-      debugPrint('SmartReminderRepository.getById error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'getById');
   }
 
   Future<SmartReminder> create(SmartReminder reminder) async {
-    try {
+    return handleRepositoryCall(() async {
       final data = reminder.toJson()..remove('id');
       final response = await _client
           .from(_table)
@@ -72,14 +64,11 @@ class SmartReminderRepository {
           .select()
           .single();
       return SmartReminder.fromJson(response);
-    } catch (e) {
-      debugPrint('SmartReminderRepository.create error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'create');
   }
 
   Future<SmartReminder> update(SmartReminder reminder) async {
-    try {
+    return handleRepositoryCall(() async {
       final data = reminder.toJson()
         ..remove('id')
         ..remove('created_at')
@@ -92,19 +81,13 @@ class SmartReminderRepository {
           .select()
           .single();
       return SmartReminder.fromJson(response);
-    } catch (e) {
-      debugPrint('SmartReminderRepository.update error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'update');
   }
 
   Future<void> delete(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client.from(_table).delete().eq('id', id);
-    } catch (e) {
-      debugPrint('SmartReminderRepository.delete error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'delete');
   }
 
   Stream<List<SmartReminder>> watchReminders(String familyId) {
@@ -116,19 +99,16 @@ class SmartReminderRepository {
           .map((data) => data.map((e) => SmartReminder.fromJson(e)).toList());
     } catch (e) {
       debugPrint('SmartReminderRepository.watchReminders error: $e');
-      return Stream.error(Exception('Veritabanı hatası: $e'));
+      return Stream.error(RepositoryException('Beklenmeyen hata [watchReminders]: $e'));
     }
   }
 
   Future<void> updateStatus(String id, ReminderStatus status) async {
-    try {
+    return handleRepositoryCall(() async {
       await _client
           .from(_table)
           .update({'status': status.toJson()})
           .eq('id', id);
-    } catch (e) {
-      debugPrint('SmartReminderRepository.updateStatus error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'updateStatus');
   }
 }

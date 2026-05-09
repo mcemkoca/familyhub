@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
+import '../core/utils/repository_mixin.dart';
 import '../domain/models/child_development_log.dart';
 import '../services/child_auth_service.dart';
 import '../services/hive_service.dart';
 
-class ChildDevelopmentRepository {
+class ChildDevelopmentRepository with RepositoryErrorHandler {
   static final ChildDevelopmentRepository _instance =
       ChildDevelopmentRepository._internal();
   factory ChildDevelopmentRepository() => _instance;
@@ -81,7 +82,7 @@ class ChildDevelopmentRepository {
           });
     } catch (e) {
       debugPrint('ChildDevelopmentRepository.watchMyLogs error: $e');
-      return Stream.error(Exception('Veritabanı hatası: $e'));
+      return Stream.error(RepositoryException('Beklenmeyen hata [watchMyLogs]: $e'));
     }
   }
 
@@ -93,7 +94,7 @@ class ChildDevelopmentRepository {
     DateTime? loggedAt,
     String? notes,
   }) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkSession();
       final response = await _client
           .from('child_development_logs')
@@ -111,19 +112,13 @@ class ChildDevelopmentRepository {
           .select()
           .single();
       return ChildDevelopmentLog.fromJson(response);
-    } catch (e) {
-      debugPrint('ChildDevelopmentRepository.createLog error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'createLog');
   }
 
   Future<void> deleteLog(String id) async {
-    try {
+    return handleRepositoryCall(() async {
       _checkSession();
       await _client.from('child_development_logs').delete().eq('id', id);
-    } catch (e) {
-      debugPrint('ChildDevelopmentRepository.deleteLog error: $e');
-      throw Exception('Veritabanı hatası: $e');
-    }
+    }, 'deleteLog');
   }
 }
