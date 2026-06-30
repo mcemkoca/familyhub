@@ -10,71 +10,86 @@ class HubFABMenu extends StatelessWidget {
   const HubFABMenu({super.key, required this.isOpen, required this.onClose});
 
   final List<Map<String, dynamic>> _items = const [
-    {'icon': Icons.calendar_today, 'label': 'Planla', 'color': AppColors.cobalt, 'route': AppRoutes.calendar},
-    {'icon': Icons.check_box, 'label': 'Görev', 'color': AppColors.softMint, 'route': AppRoutes.tasks},
-    {'icon': Icons.chat_bubble, 'label': 'Mesaj', 'color': AppColors.purple, 'route': AppRoutes.chat},
-    {'icon': Icons.warning_amber, 'label': 'Acil', 'color': AppColors.error, 'route': AppRoutes.emergency},
-    {'icon': Icons.settings, 'label': 'Ayarlar', 'color': AppColors.slate, 'route': AppRoutes.settings},
+    {'icon': Icons.shopping_cart_outlined, 'label': 'Alışveriş', 'color': AppColors.softMint,  'route': AppRoutes.shopping},
+    {'icon': Icons.account_balance_wallet_outlined, 'label': 'Bütçe',     'color': AppColors.cobalt,   'route': AppRoutes.budget},
+    {'icon': Icons.photo_library_outlined,          'label': 'Galeri',    'color': AppColors.purple,   'route': AppRoutes.gallery},
+    {'icon': Icons.location_on_outlined,            'label': 'Konum',     'color': AppColors.orange,   'route': AppRoutes.location},
+    {'icon': Icons.child_care,                      'label': 'Çocuk',     'color': AppColors.pink,     'route': AppRoutes.childManagement},
+    {'icon': Icons.warning_amber,                   'label': 'Acil',      'color': AppColors.error,    'route': AppRoutes.emergency},
   ];
+
+  Widget _buildRow(BuildContext context, List<Map<String, dynamic>> items, int baseIndex) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: items.asMap().entries.map((entry) {
+        final i = baseIndex + entry.key;
+        final item = entry.value;
+        return AnimatedContainer(
+          duration: Duration(milliseconds: 180 + (i * 50)),
+          curve: Curves.easeOutBack,
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          child: GestureDetector(
+            onTap: () {
+              HapticFeedback.mediumImpact();
+              onClose();
+              context.push(item['route'] as String);
+            },
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 56,
+                  height: 56,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [item['color'] as Color, (item['color'] as Color).withAlpha(200)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(color: (item['color'] as Color).withAlpha(90), blurRadius: 14, offset: const Offset(0, 4)),
+                    ],
+                  ),
+                  child: Icon(item['icon'] as IconData, color: Colors.white, size: 26),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  item['label'] as String,
+                  style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w700,
+                      shadows: [Shadow(color: Colors.black54, blurRadius: 4)]),
+                ),
+              ],
+            ),
+          ),
+        );
+      }).toList(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     if (!isOpen) return const SizedBox.shrink();
 
+    final row1 = _items.sublist(0, 3);
+    final row2 = _items.sublist(3);
+
     return GestureDetector(
       onTap: onClose,
       child: Container(
-        color: Colors.black.withAlpha(100),
+        color: Colors.black.withAlpha(120),
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
             Positioned(
               bottom: 110,
-              child: Row(
+              child: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: _items.asMap().entries.map((entry) {
-                  final i = entry.key;
-                  final item = entry.value;
-                  return AnimatedContainer(
-                    duration: Duration(milliseconds: 200 + (i * 60)),
-                    curve: Curves.easeOutBack,
-                    margin: const EdgeInsets.symmetric(horizontal: 6),
-                    child: Transform.translate(
-                      offset: Offset(0, isOpen ? 0 : 20),
-                      child: Transform.scale(
-                        scale: isOpen ? 1.0 : 0.0,
-                        child: GestureDetector(
-                      onTap: () {
-                        HapticFeedback.mediumImpact();
-                        onClose();
-                        context.push(item['route'] as String);
-                      },
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            width: 52,
-                            height: 52,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [item['color'] as Color, (item['color'] as Color).withAlpha(180)],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                              ),
-                              shape: BoxShape.circle,
-                              boxShadow: [BoxShadow(color: (item['color'] as Color).withAlpha(80), blurRadius: 12)],
-                            ),
-                            child: Icon(item['icon'] as IconData, color: Colors.white, size: 24),
-                          ),
-                          const SizedBox(height: 6),
-                          Text(item['label'] as String, style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600)),
-                        ],
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              }).toList(),
+                children: [
+                  _buildRow(context, row2, 3),
+                  const SizedBox(height: 14),
+                  _buildRow(context, row1, 0),
+                ],
               ),
             ),
           ],

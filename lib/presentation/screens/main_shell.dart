@@ -28,20 +28,20 @@ class _MainShellState extends State<MainShell> {
       'label': 'Merkez',
     },
     {
-      'route': AppRoutes.tasks,
-      'icon': Icons.task_alt,
-      'label': 'Plan',
-    },
-    {
       'route': AppRoutes.chat,
       'icon': Icons.chat_bubble_outline,
       'label': 'Sohbet',
       'badge': 3,
     },
     {
-      'route': AppRoutes.safety,
-      'icon': Icons.shield_outlined,
-      'label': 'Güvenlik',
+      'route': AppRoutes.kitchen,
+      'icon': Icons.restaurant,
+      'label': 'Mutfak',
+    },
+    {
+      'route': AppRoutes.education,
+      'icon': Icons.school_outlined,
+      'label': 'Eğitim',
     },
     {
       'route': AppRoutes.settings,

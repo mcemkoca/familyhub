@@ -5,6 +5,8 @@ import '../presentation/screens/auth/registration_wizard_screen.dart';
 import '../presentation/screens/auth/splash_screen.dart';
 import '../presentation/screens/auth/onboarding_screen.dart';
 import '../presentation/screens/hub/hub_screen.dart';
+import '../presentation/screens/kitchen/kitchen_screen.dart';
+import '../presentation/screens/education/education_screen.dart';
 import '../presentation/screens/organizer/tasks_screen.dart';
 import '../presentation/screens/organizer/calendar_screen.dart';
 import '../presentation/screens/organizer/shopping_list_screen.dart';
@@ -155,6 +157,8 @@ class AppRoutes {
   static const String callContactList = '/call/contact-list';
   static const String contacts = '/contacts';
   static const String gallery = '/gallery';
+  static const String kitchen = '/kitchen';
+  static const String education = '/education';
   static const String documents = '/documents';
 }
 
@@ -210,6 +214,8 @@ final router = GoRouter(
         GoRoute(path: AppRoutes.safety, builder: (context, state) => const SafetyScreen()),
         GoRoute(path: AppRoutes.settings, builder: (context, state) => const SettingsScreen()),
         GoRoute(path: AppRoutes.memories, builder: (context, state) => const MemoriesScreen()),
+        GoRoute(path: AppRoutes.kitchen, builder: (context, state) => const KitchenScreen()),
+        GoRoute(path: AppRoutes.education, builder: (context, state) => const EducationScreen()),
       ],
     ),
     GoRoute(path: AppRoutes.location, builder: (context, state) => const LocationScreen()),
@@ -318,6 +324,8 @@ final router = GoRouter(
     GoRoute(path: AppRoutes.callContactList, builder: (context, state) => const CallContactListScreen()),
     GoRoute(path: AppRoutes.contacts, builder: (context, state) => const ContactsScreen()),
     GoRoute(path: AppRoutes.gallery, builder: (context, state) => const GalleryScreen()),
+    GoRoute(path: AppRoutes.kitchen, builder: (context, state) => const KitchenScreen()),
+    GoRoute(path: AppRoutes.education, builder: (context, state) => const EducationScreen()),
     GoRoute(path: AppRoutes.documents, builder: (context, state) => const DocumentsScreen()),
   ],
 );
