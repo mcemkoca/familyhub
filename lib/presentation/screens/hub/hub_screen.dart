@@ -86,6 +86,8 @@ class _HubScreenState extends ConsumerState<HubScreen> {
               ),
               // Quick Feature Strip
               SliverToBoxAdapter(child: _QuickFeatureStrip()),
+              // Family Status Banner
+              SliverToBoxAdapter(child: _FamilyStatusBanner(members: members)),
               // AI Suggestions
               const SliverToBoxAdapter(child: AISuggestionsWidget()),
               // Content Highlights (Daily Tips)
@@ -997,6 +999,147 @@ class _QuickFeatureStrip extends StatelessWidget {
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+}
+
+// Aile üyelerinin anlık durumunu gösteren özet şerit
+class _FamilyStatusBanner extends StatelessWidget {
+  final List<FamilyMember> members;
+  const _FamilyStatusBanner({required this.members});
+
+  @override
+  Widget build(BuildContext context) {
+    if (members.isEmpty) return const SizedBox.shrink();
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final onlineCount = members.where((m) => m.isOnline).length;
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
+      child: Container(
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          color: isDark ? AppColors.darkCard : Colors.white,
+          borderRadius: BorderRadius.circular(18),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withAlpha(isDark ? 20 : 6),
+                blurRadius: 8,
+                offset: const Offset(0, 2))
+          ],
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.people_outline,
+                    size: 16, color: AppColors.slate),
+                const SizedBox(width: 6),
+                Text('Aile Durumu',
+                    style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                        color: isDark
+                            ? AppColors.darkTextPrimary
+                            : AppColors.dark)),
+                const Spacer(),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: onlineCount > 0
+                        ? AppColors.success.withAlpha(20)
+                        : AppColors.slate.withAlpha(20),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    '$onlineCount çevrimiçi',
+                    style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        color: onlineCount > 0
+                            ? AppColors.success
+                            : AppColors.slate),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: members.take(5).map((m) {
+                final initial = m.name.isNotEmpty
+                    ? m.name[0].toUpperCase()
+                    : '?';
+                return Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: GestureDetector(
+                    onTap: () => context.push(AppRoutes.family),
+                    child: Column(
+                      children: [
+                        Stack(
+                          children: [
+                            Container(
+                              width: 42,
+                              height: 42,
+                              decoration: BoxDecoration(
+                                color: m.color.withAlpha(30),
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                    color: m.color.withAlpha(80),
+                                    width: 2),
+                              ),
+                              child: m.avatarUrl != null
+                                  ? ClipOval(
+                                      child: Image.network(
+                                          m.avatarUrl!,
+                                          fit: BoxFit.cover))
+                                  : Center(
+                                      child: Text(initial,
+                                          style: TextStyle(
+                                              color: m.color,
+                                              fontWeight:
+                                                  FontWeight.w800,
+                                              fontSize: 16))),
+                            ),
+                            if (m.isOnline)
+                              Positioned(
+                                right: 1,
+                                bottom: 1,
+                                child: Container(
+                                  width: 10,
+                                  height: 10,
+                                  decoration: BoxDecoration(
+                                      color: AppColors.success,
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color: isDark
+                                              ? AppColors.darkCard
+                                              : Colors.white,
+                                          width: 2)),
+                                ),
+                              ),
+                          ],
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                            m.name.length > 6
+                                ? '${m.name.substring(0, 5)}…'
+                                : m.name,
+                            style: TextStyle(
+                                fontSize: 9,
+                                fontWeight: FontWeight.w600,
+                                color: isDark
+                                    ? AppColors.darkTextSecondary
+                                    : AppColors.slate)),
+                      ],
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ],
         ),
       ),
     );
