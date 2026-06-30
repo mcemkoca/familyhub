@@ -5,7 +5,7 @@ export 'models/hub_event.dart';
 export 'models/hub_task.dart';
 export 'models/family_mood.dart';
 
-enum HubCardType { tasks, streak, calendar, budget, smartReminders, routines, crashDetection, locationTracking, sos, contacts, gallery, documents }
+enum HubCardType { tasks, streak, calendar, budget, smartReminders, routines, crashDetection, locationTracking, sos, contacts, gallery, documents, kitchen, education, shopping, childDev }
 enum TaskStatus { pending, inProgress, completed, cancelled }
 enum MemberRole { admin, parent, teen, child, elder, guest, baby }
 enum EventCategory { appointment, birthday, school, activity, work, family, travel, other }

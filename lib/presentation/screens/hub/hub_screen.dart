@@ -199,6 +199,18 @@ class _HubScreenState extends ConsumerState<HubScreen> {
                             case HubCardType.documents:
                               context.push(AppRoutes.documents);
                               break;
+                            case HubCardType.kitchen:
+                              context.push(AppRoutes.kitchen);
+                              break;
+                            case HubCardType.education:
+                              context.push(AppRoutes.education);
+                              break;
+                            case HubCardType.shopping:
+                              context.push(AppRoutes.shopping);
+                              break;
+                            case HubCardType.childDev:
+                              context.push(AppRoutes.childManagement);
+                              break;
                           }
                         },
                       );
