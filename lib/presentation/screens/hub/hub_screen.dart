@@ -84,6 +84,8 @@ class _HubScreenState extends ConsumerState<HubScreen> {
                   ),
                 ),
               ),
+              // Quick Feature Strip
+              SliverToBoxAdapter(child: _QuickFeatureStrip()),
               // AI Suggestions
               const SliverToBoxAdapter(child: AISuggestionsWidget()),
               // Content Highlights (Daily Tips)
@@ -933,6 +935,68 @@ class _WeatherBadge extends ConsumerWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+// Tüm özelliklere hızlı erişim şeridi
+class _QuickFeatureStrip extends StatelessWidget {
+  static const _features = [
+    (Icons.shopping_cart_outlined, 'Alışveriş', AppColors.softMint, AppRoutes.shopping),
+    (Icons.account_balance_wallet_outlined, 'Bütçe', AppColors.cobalt, AppRoutes.budget),
+    (Icons.photo_library_outlined, 'Galeri', AppColors.purple, AppRoutes.gallery),
+    (Icons.location_on_outlined, 'Konum', AppColors.orange, AppRoutes.location),
+    (Icons.child_care, 'Çocuk', AppColors.pink, AppRoutes.childManagement),
+    (Icons.restaurant, 'Mutfak', Color(0xFFF97316), AppRoutes.kitchen),
+    (Icons.school_outlined, 'Eğitim', Color(0xFF8B5CF6), AppRoutes.education),
+    (Icons.warning_amber_outlined, 'Acil', AppColors.error, AppRoutes.emergency),
+  ];
+
+  const _QuickFeatureStrip();
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+      child: SizedBox(
+        height: 82,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          itemCount: _features.length,
+          separatorBuilder: (_, _) => const SizedBox(width: 12),
+          itemBuilder: (context, i) {
+            final (icon, label, color, route) = _features[i];
+            return GestureDetector(
+              onTap: () => context.push(route),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: 52,
+                    height: 52,
+                    decoration: BoxDecoration(
+                      color: color.withAlpha(isDark ? 40 : 25),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: color.withAlpha(isDark ? 80 : 60)),
+                    ),
+                    child: Icon(icon, color: color, size: 24),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(label,
+                      style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w700,
+                          color: isDark
+                              ? AppColors.darkTextSecondary
+                              : AppColors.slate)),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );
