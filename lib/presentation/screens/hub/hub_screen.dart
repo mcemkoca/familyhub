@@ -947,7 +947,7 @@ class _QuickFeatureStrip extends StatelessWidget {
     (Icons.shopping_cart_outlined, 'Alışveriş', AppColors.softMint, AppRoutes.shopping),
     (Icons.account_balance_wallet_outlined, 'Bütçe', AppColors.cobalt, AppRoutes.budget),
     (Icons.photo_library_outlined, 'Galeri', AppColors.purple, AppRoutes.gallery),
-    (Icons.location_on_outlined, 'Konum', AppColors.orange, AppRoutes.location),
+    (Icons.location_on_outlined, 'Konum', AppColors.orange, AppRoutes.familyMap),
     (Icons.child_care, 'Çocuk', AppColors.pink, AppRoutes.childManagement),
     (Icons.restaurant, 'Mutfak', Color(0xFFF97316), AppRoutes.kitchen),
     (Icons.school_outlined, 'Eğitim', Color(0xFF8B5CF6), AppRoutes.education),

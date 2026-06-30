@@ -19,6 +19,7 @@ import '../presentation/screens/routines/routines_screen.dart';
 import '../presentation/screens/routines/routine_detail_screen.dart';
 import '../presentation/screens/crash/crash_screens.dart';
 import '../presentation/screens/location_tracking/location_tracking_screens.dart';
+import '../presentation/screens/location_tracking/family_map_screen.dart';
 import '../presentation/screens/emergency/emergency_screens.dart';
 import '../presentation/screens/budget/budget_screen.dart';
 import '../presentation/screens/family/family_screen.dart';
@@ -160,6 +161,7 @@ class AppRoutes {
   static const String kitchen = '/kitchen';
   static const String education = '/education';
   static const String documents = '/documents';
+  static const String familyMap = '/family-map';
 }
 
 final _publicRoutes = <String>{
@@ -216,6 +218,7 @@ final router = GoRouter(
         GoRoute(path: AppRoutes.memories, builder: (context, state) => const MemoriesScreen()),
         GoRoute(path: AppRoutes.kitchen, builder: (context, state) => const KitchenScreen()),
         GoRoute(path: AppRoutes.education, builder: (context, state) => const EducationScreen()),
+        GoRoute(path: AppRoutes.familyMap, builder: (context, state) => const FamilyMapScreen()),
       ],
     ),
     GoRoute(path: AppRoutes.location, builder: (context, state) => const LocationScreen()),
