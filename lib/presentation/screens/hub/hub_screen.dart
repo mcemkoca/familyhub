@@ -81,25 +81,44 @@ class _HubScreenState extends ConsumerState<HubScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
                         children: [
-                          const Text(
-                            'Merhaba,',
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 13,
-                              fontWeight: FontWeight.w600,
+                          Container(
+                            width: 44,
+                            height: 44,
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
+                            child: ClipOval(
+                              child: Image.asset(
+                                'assets/images/logo_full.png',
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                          const Text(
-                            'Koca Ailesi 👨‍👩‍👧‍👦',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontWeight: FontWeight.w900,
-                              letterSpacing: -0.5,
-                            ),
+                          const SizedBox(width: 12),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Merhaba,',
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              const Text(
+                                'Koca Ailesi 👨‍👩‍👧‍👦',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w900,
+                                  letterSpacing: -0.5,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -1023,169 +1042,172 @@ class _WeatherBadge extends ConsumerWidget {
   }
 }
 
-// Tüm özelliklere hızlı erişim şeridi
+// Kategorize edilmiş özellik grid'i
 class _QuickFeatureStrip extends StatelessWidget {
-  static const _features = [
+  const _QuickFeatureStrip();
+
+  static final _categories = [
     (
-      Icons.shopping_cart_outlined,
-      '🛒',
-      'Alışveriş',
-      [Color(0xFF43E97B), Color(0xFF38F9D7)],
-      Color(0xFF064E3B),
-      AppRoutes.shopping
+      'Aile & Ev',
+      [
+        ('🛒', 'Alışveriş', [Color(0xFF43E97B), Color(0xFF38F9D7)], AppRoutes.shopping),
+        ('🍽️', 'Mutfak', [Color(0xFFFDA085), Color(0xFFF6D365)], AppRoutes.kitchen),
+        ('⭐', 'Çocuk', [Color(0xFF84FAB0), Color(0xFF8FD3F4)], AppRoutes.childManagement),
+        ('🌱', 'Gelişim', [Color(0xFFFF6B6B), Color(0xFFFFD93D)], AppRoutes.childDevelopment),
+      ]
     ),
     (
-      Icons.account_balance_wallet_outlined,
-      '💳',
-      'Bütçe',
-      [Color(0xFFFA709A), Color(0xFFFEE140)],
-      Color(0xFF92400E),
-      AppRoutes.budget
+      'Sağlık & Güvenlik',
+      [
+        ('🏥', 'Sağlık', [Color(0xFF11998E), Color(0xFF38EF7D)], AppRoutes.familyHealth),
+        ('📍', 'Konum', [Color(0xFF4FACFE), Color(0xFF00F2FE)], AppRoutes.familyMap),
+        ('🆘', 'Acil', [Color(0xFFFF0844), Color(0xFFFFB199)], AppRoutes.emergency),
+      ]
     ),
     (
-      Icons.photo_library_outlined,
-      '🖼️',
-      'Galeri',
-      [Color(0xFFF093FB), Color(0xFFF5576C)],
-      Color(0xFF831843),
-      AppRoutes.gallery
+      'Finans',
+      [
+        ('💳', 'Bütçe', [Color(0xFFFA709A), Color(0xFFFEE140)], AppRoutes.budget),
+        ('📱', 'Abonelik', [Color(0xFF667EEA), Color(0xFF764BA2)], AppRoutes.subscriptions),
+      ]
     ),
     (
-      Icons.location_on_outlined,
-      '📍',
-      'Konum',
-      [Color(0xFF4FACFE), Color(0xFF00F2FE)],
-      Color(0xFF1E3A8A),
-      AppRoutes.familyMap
-    ),
-    (
-      Icons.child_care,
-      '⭐',
-      'Çocuk',
-      [Color(0xFF84FAB0), Color(0xFF8FD3F4)],
-      Color(0xFF164E63),
-      AppRoutes.childManagement
-    ),
-    (
-      Icons.restaurant,
-      '🍽️',
-      'Mutfak',
-      [Color(0xFFFDA085), Color(0xFFF6D365)],
-      Color(0xFF9A3412),
-      AppRoutes.kitchen
-    ),
-    (
-      Icons.school_outlined,
-      '📚',
-      'Eğitim',
-      [Color(0xFFA18CD1), Color(0xFFFBC2EB)],
-      Color(0xFF4C1D95),
-      AppRoutes.education
-    ),
-    (
-      Icons.warning_amber_outlined,
-      '🆘',
-      'Acil',
-      [Color(0xFFFF0844), Color(0xFFFFB199)],
-      Color(0xFF7F1D1D),
-      AppRoutes.emergency
-    ),
-    (
-      Icons.local_hospital_outlined,
-      '🏥',
-      'Sağlık',
-      [Color(0xFF11998E), Color(0xFF38EF7D)],
-      Color(0xFF065F46),
-      AppRoutes.familyHealth
-    ),
-    (
-      Icons.subscriptions_outlined,
-      '📱',
-      'Abonelik',
-      [Color(0xFF667EEA), Color(0xFF764BA2)],
-      Color(0xFF4338CA),
-      AppRoutes.subscriptions
-    ),
-    (
-      Icons.child_care_outlined,
-      '🌱',
-      'Gelişim',
-      [Color(0xFFFF6B6B), Color(0xFFFFD93D)],
-      Color(0xFF92400E),
-      AppRoutes.childDevelopment
-    ),
-    (
-      Icons.psychology_outlined,
-      '🤖',
-      'AI Asistan',
-      [Color(0xFF667EEA), Color(0xFF764BA2)],
-      Color(0xFF4C1D95),
-      AppRoutes.aiAssistant
+      'Eğlence & Eğitim',
+      [
+        ('🖼️', 'Galeri', [Color(0xFFF093FB), Color(0xFFF5576C)], AppRoutes.gallery),
+        ('📚', 'Eğitim', [Color(0xFFA18CD1), Color(0xFFFBC2EB)], AppRoutes.education),
+        ('🤖', 'AI Asistan', [Color(0xFF667EEA), Color(0xFF764BA2)], AppRoutes.aiAssistant),
+      ]
     ),
   ];
-
-  const _QuickFeatureStrip();
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
-      child: SizedBox(
-        height: 90,
-        child: ListView.separated(
-          scrollDirection: Axis.horizontal,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          itemCount: _features.length,
-          separatorBuilder: (_, _) => const SizedBox(width: 10),
-          itemBuilder: (context, i) {
-            final (icon, emoji, label, gradColors, shadowColor, route) = _features[i];
-            return GestureDetector(
-              onTap: () => context.push(route),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: isDark ? AppColors.darkCard : Colors.white,
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withAlpha(isDark ? 20 : 8),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 14, 16, 4),
+              child: Row(
                 children: [
-                  Container(
-                    width: 56,
-                    height: 56,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: gradColors,
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      borderRadius: BorderRadius.circular(18),
-                      boxShadow: [
-                        BoxShadow(
-                          color: shadowColor.withAlpha(isDark ? 100 : 60),
-                          blurRadius: 10,
-                          offset: const Offset(0, 5),
-                        ),
-                        BoxShadow(
-                          color: gradColors[0].withAlpha(isDark ? 80 : 40),
-                          blurRadius: 0,
-                          offset: const Offset(0, 4),
-                        ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Text(emoji, style: const TextStyle(fontSize: 22)),
-                    ),
-                  ),
-                  const SizedBox(height: 5),
+                  const Text('⚡', style: TextStyle(fontSize: 16)),
+                  const SizedBox(width: 6),
                   Text(
-                    label,
+                    'Hızlı Erişim',
                     style: TextStyle(
-                      fontSize: 10,
+                      fontSize: 15,
                       fontWeight: FontWeight.w800,
-                      color: isDark ? AppColors.darkTextSecondary : AppColors.dark,
+                      color: isDark ? Colors.white : AppColors.dark,
                     ),
                   ),
                 ],
               ),
-            );
-          },
+            ),
+            ..._categories.map((cat) {
+              final (catName, items) = cat;
+              return _CategoryRow(
+                name: catName,
+                items: items,
+                isDark: isDark,
+              );
+            }),
+            const SizedBox(height: 8),
+          ],
         ),
+      ),
+    );
+  }
+}
+
+class _CategoryRow extends StatelessWidget {
+  final String name;
+  final List<(String, String, List<Color>, String)> items;
+  final bool isDark;
+  const _CategoryRow({required this.name, required this.items, required this.isDark});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 10, 16, 2),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            name,
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w700,
+              color: isDark ? AppColors.darkTextSecondary : AppColors.gray,
+              letterSpacing: 0.5,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: items.map((item) {
+              final (emoji, label, gradColors, route) = item;
+              return Expanded(
+                child: GestureDetector(
+                  onTap: () => context.push(route),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 52,
+                        height: 52,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: gradColors,
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [
+                            BoxShadow(
+                              color: gradColors[0].withAlpha(60),
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: Center(
+                          child: Text(emoji, style: const TextStyle(fontSize: 22)),
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        label,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w700,
+                          color: isDark ? AppColors.darkTextSecondary : AppColors.dark,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+          Divider(
+            height: 16,
+            color: isDark ? Colors.white10 : Colors.black.withAlpha(8),
+          ),
+        ],
       ),
     );
   }

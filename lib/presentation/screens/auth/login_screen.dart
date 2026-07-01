@@ -181,19 +181,26 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
   Widget _buildHero() {
     return Column(
       children: [
-        // Family avatar stack
-        SizedBox(
-          height: 100,
-          child: Stack(
-            clipBehavior: Clip.none,
-            alignment: Alignment.center,
-            children: [
-              _avatar('👩', const Color(0xFFF093FB), -80),
-              _avatar('👴', const Color(0xFF4FACFE), -40),
-              _avatarCenter(),
-              _avatar('👦', const Color(0xFFFDA085), 40),
-              _avatar('👧', const Color(0xFF43E97B), 80),
+        // FamilyHub Logo
+        Container(
+          width: 120,
+          height: 120,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withAlpha(30),
+                blurRadius: 20,
+                offset: const Offset(0, 8),
+              ),
             ],
+          ),
+          child: ClipOval(
+            child: Image.asset(
+              'assets/images/logo_full.png',
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         const SizedBox(height: 16),

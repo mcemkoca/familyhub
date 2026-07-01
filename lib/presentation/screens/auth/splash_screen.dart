@@ -250,16 +250,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                         position: _textSlide,
                         child: Column(
                           children: [
-                            const Text(
-                              'FamilyHub',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 40,
-                                fontWeight: FontWeight.w900,
-                                letterSpacing: -1,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
                             Container(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 16, vertical: 6),
@@ -324,23 +314,24 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     return AnimatedBuilder(
       animation: _glowController,
       builder: (_, __) => Container(
-        width: 130,
-        height: 130,
+        width: 160,
+        height: 160,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: Colors.white.withAlpha(35),
-          border: Border.all(color: Colors.white.withAlpha(80), width: 2),
+          color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.white
-                  .withAlpha((30 + 20 * _glowPulse.value).round()),
-              blurRadius: 30,
-              spreadRadius: 5,
+              color: Colors.white.withAlpha((40 + 30 * _glowPulse.value).round()),
+              blurRadius: 40,
+              spreadRadius: 8,
             ),
           ],
         ),
-        child: const Center(
-          child: Text('👨‍👩‍👧‍👦', style: TextStyle(fontSize: 64)),
+        child: ClipOval(
+          child: Image.asset(
+            'assets/images/logo_full.png',
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );

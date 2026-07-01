@@ -200,11 +200,26 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
                       const Spacer(),
                       Column(
                         children: [
+                          Container(
+                            width: 48,
+                            height: 48,
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
+                            child: ClipOval(
+                              child: Image.asset(
+                                'assets/images/logo_full.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 4),
                           const Text(
-                            '🏠 Yeni Aile Kur',
+                            'FamilyHub',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 18,
+                              fontSize: 16,
                               fontWeight: FontWeight.w900,
                             ),
                           ),
@@ -212,7 +227,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
                             'Ailenizin dijital yuvası',
                             style: TextStyle(
                               color: Colors.white.withAlpha(180),
-                              fontSize: 12,
+                              fontSize: 11,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
