@@ -47,17 +47,14 @@ android {
     }
 
     signingConfigs {
-        create("release") {
-            storeFile = file(
-                System.getenv("KEYSTORE_PATH")
-                    ?: error("KEYSTORE_PATH environment variable is required for release builds")
-            )
-            storePassword = System.getenv("KEYSTORE_PASSWORD")
-                ?: error("KEYSTORE_PASSWORD environment variable is required for release builds")
-            keyAlias = System.getenv("KEY_ALIAS")
-                ?: error("KEY_ALIAS environment variable is required for release builds")
-            keyPassword = System.getenv("KEY_PASSWORD")
-                ?: error("KEY_PASSWORD environment variable is required for release builds")
+        val keystorePath = System.getenv("KEYSTORE_PATH")
+        if (keystorePath != null) {
+            create("release") {
+                storeFile = file(keystorePath)
+                storePassword = System.getenv("KEYSTORE_PASSWORD") ?: ""
+                keyAlias = System.getenv("KEY_ALIAS") ?: ""
+                keyPassword = System.getenv("KEY_PASSWORD") ?: ""
+            }
         }
     }
 
@@ -70,7 +67,10 @@ android {
                 "proguard-rules.pro"
             )
 
-            signingConfig = signingConfigs.getByName("release")
+            val releaseSigningConfig = signingConfigs.findByName("release")
+            if (releaseSigningConfig != null) {
+                signingConfig = releaseSigningConfig
+            }
         }
     }
 
