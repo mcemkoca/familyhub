@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../domain/models/crash_settings.dart';
+import '../../../services/crash_detection_service.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
 class CrashSettingsScreen extends StatefulWidget {
@@ -348,7 +349,9 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
   }
 
   void _editContacts() {
-    // TODO: Navigate to emergency contacts editor
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Acil kişiler yakında düzenlenebilecek')),
+    );
   }
 
   void _saveSettings() {
@@ -372,7 +375,7 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
           ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
-              // TODO: Trigger simulation via CrashDetectionService
+              CrashDetectionService().feedAccelerometer(50, 50, 50);
             },
             child: Text(AppLocalizations.of(context).baslat),
           ),

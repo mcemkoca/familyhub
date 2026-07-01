@@ -100,7 +100,7 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
                 color: Colors.purple,
                 onTap: () {
                   Navigator.pop(context);
-                  // TODO: Navigate to location share
+                  context.push(AppRoutes.familyMap);
                 },
               ),
               _QuickActionTile(

@@ -537,10 +537,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
   Widget _buildHealthCard() {
     return GestureDetector(
       onTap: () {
-        // TODO: Navigate to child's health card view
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context).saglikKartiYakindaGeliyor)),
-        );
+        context.push(AppRoutes.healthCard);
       },
       child: Container(
         padding: const EdgeInsets.all(16),
