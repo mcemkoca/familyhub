@@ -209,7 +209,24 @@ class LocalAIService {
         ),
       ];
 
-  List<AISuggestion> _alwaysRelevant() => [];
+  List<AISuggestion> _alwaysRelevant() => [
+        AISuggestion(
+          icon: '💊',
+          title: 'İlaç Takibi',
+          body: 'Aile üyelerinin günlük ilaç alımını kontrol edin.',
+          category: SuggestionCategory.health,
+          action: 'Sağlık',
+          actionRoute: '/family-health',
+        ),
+        AISuggestion(
+          icon: '📱',
+          title: 'Abonelikler',
+          body: 'Bu ay biten aboneliklerinizi gözden geçirin.',
+          category: SuggestionCategory.budget,
+          action: 'Abonelikler',
+          actionRoute: '/subscriptions',
+        ),
+      ];
 
   // ── AKILLI ALIŞVERIŞ ─────────────────────────────────────────────────────
 
@@ -307,6 +324,8 @@ enum SuggestionCategory {
   gallery,
   child,
   location,
+  health,
+  chore,
 }
 
 class AISuggestion {
@@ -336,6 +355,8 @@ class AISuggestion {
       SuggestionCategory.gallery => const Color(0xFFEC4899),
       SuggestionCategory.child => const Color(0xFFF59E0B),
       SuggestionCategory.location => const Color(0xFF06B6D4),
+      SuggestionCategory.health => const Color(0xFF11998E),
+      SuggestionCategory.chore => const Color(0xFF667EEA),
     };
   }
 }

@@ -1114,6 +1114,14 @@ class _QuickFeatureStrip extends StatelessWidget {
       Color(0xFF92400E),
       AppRoutes.childDevelopment
     ),
+    (
+      Icons.psychology_outlined,
+      '🤖',
+      'AI Asistan',
+      [Color(0xFF667EEA), Color(0xFF764BA2)],
+      Color(0xFF4C1D95),
+      AppRoutes.aiAssistant
+    ),
   ];
 
   const _QuickFeatureStrip();

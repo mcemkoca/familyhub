@@ -317,7 +317,166 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
           else
             _buildEmptyState(isDark),
 
+          const SizedBox(height: 20),
+          _buildLeaderboard(isDark),
+
           const SizedBox(height: 40),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLeaderboard(bool isDark) {
+    if (_members.isEmpty) return const SizedBox.shrink();
+
+    // Mock skor hesapla: tamamlanan görev sayısı + streak bonus
+    final scores = _members.map((m) {
+      final wl = _workloads[m.id];
+      final completed = wl?.completedThisWeek ?? 0;
+      final streak = wl?.currentStreak ?? 0;
+      final score = (completed * 10) + (streak * 5);
+      return (member: m, completed: completed, streak: streak, score: score);
+    }).toList()
+      ..sort((a, b) => b.score.compareTo(a.score));
+
+    final medals = ['🥇', '🥈', '🥉'];
+
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: isDark ? AppColors.darkCard : Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [BoxShadow(color: Colors.black.withAlpha(8), blurRadius: 12, offset: const Offset(0, 4))],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(colors: [Color(0xFFFFD700), Color(0xFFFF8C00)]),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Icon(Icons.emoji_events, color: Colors.white, size: 20),
+              ),
+              const SizedBox(width: 12),
+              Text(
+                'Haftalık Liderboard',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                ),
+              ),
+              const Spacer(),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: AppColors.cobalt.withAlpha(20),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  'Bu Hafta',
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.cobalt,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          ...scores.asMap().entries.map((entry) {
+            final rank = entry.key;
+            final data = entry.value;
+            final medal = rank < 3 ? medals[rank] : '${rank + 1}.';
+            final isFirst = rank == 0;
+            return Container(
+              margin: const EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              decoration: BoxDecoration(
+                color: isFirst
+                    ? const Color(0xFFFFD700).withAlpha(15)
+                    : (isDark ? AppColors.darkBackground.withAlpha(80) : AppColors.cloudWhite),
+                borderRadius: BorderRadius.circular(12),
+                border: isFirst
+                    ? Border.all(color: const Color(0xFFFFD700).withAlpha(60))
+                    : null,
+              ),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 28,
+                    child: Text(
+                      medal,
+                      style: const TextStyle(fontSize: 16),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  CircleAvatar(
+                    radius: 16,
+                    backgroundColor: AppColors.cobalt.withAlpha(30),
+                    child: Text(
+                      data.member.name.isNotEmpty ? data.member.name[0].toUpperCase() : '?',
+                      style: const TextStyle(color: AppColors.cobalt, fontWeight: FontWeight.w700, fontSize: 13),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          data.member.name,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 13,
+                            color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                          ),
+                        ),
+                        Text(
+                          '${data.completed} görev tamamlandı • ${data.streak} gün seri',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        '${data.score}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 18,
+                          color: isFirst ? const Color(0xFFB7791F) : AppColors.cobalt,
+                        ),
+                      ),
+                      const Text('puan', style: TextStyle(fontSize: 10, color: AppColors.slate)),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          }),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              Icon(Icons.info_outline, size: 13, color: isDark ? AppColors.darkTextSecondary : AppColors.slate),
+              const SizedBox(width: 4),
+              Text(
+                '10 puan/görev • 5 puan/seri günü',
+                style: TextStyle(fontSize: 11, color: isDark ? AppColors.darkTextSecondary : AppColors.slate),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -1322,4 +1481,6 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
 class _MemberWorkload {
   int assignedCount = 0;
   int completedCount = 0;
+  int get completedThisWeek => completedCount;
+  int get currentStreak => assignedCount > 0 ? (completedCount / assignedCount * 7).round().clamp(0, 7) : 0;
 }
