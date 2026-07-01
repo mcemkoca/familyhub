@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../config/constants.dart';
 import '../../../domain/entities.dart';
@@ -35,6 +37,22 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
   final _quantityController = TextEditingController();
   ShoppingCategory _selectedCategory = ShoppingCategory.grocery;
   bool _showSuggestions = false;
+  List<Map<String, dynamic>> _recipes = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadRecipes();
+  }
+
+  Future<void> _loadRecipes() async {
+    try {
+      final raw = await rootBundle.loadString('assets/data/content/recipes.json');
+      setState(() {
+        _recipes = (jsonDecode(raw) as List).cast<Map<String, dynamic>>();
+      });
+    } catch (_) {}
+  }
 
   @override
   void dispose() {
@@ -195,6 +213,12 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                 ),
               ),
               IconButton(
+                onPressed: _showRecipePicker,
+                icon: const Icon(Icons.restaurant_menu_outlined),
+                color: AppColors.orange,
+                tooltip: 'Tarife Göre Ekle',
+              ),
+              IconButton(
                 onPressed: () =>
                     setState(() => _showSuggestions = !_showSuggestions),
                 icon: Icon(
@@ -203,7 +227,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                       ? AppColors.softMint
                       : AppColors.slate,
                 ),
-                tooltip: 'AI Önerileri',
+                tooltip: 'Hızlı Ekle',
               ),
               IconButton(
                 onPressed: () =>
@@ -225,6 +249,157 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
             ),
           ],
         ],
+      ),
+    );
+  }
+
+  void _showRecipePicker() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) {
+        final isDark = Theme.of(ctx).brightness == Brightness.dark;
+        final searchCtrl = TextEditingController();
+        return StatefulBuilder(
+          builder: (ctx, setLocal) {
+            final query = searchCtrl.text.toLowerCase();
+            final filtered = _recipes.where((r) {
+              final title = (r['title'] as String? ?? '').toLowerCase();
+              final cat = (r['category'] as String? ?? '').toLowerCase();
+              return query.isEmpty || title.contains(query) || cat.contains(query);
+            }).toList();
+
+            return DraggableScrollableSheet(
+              initialChildSize: 0.85,
+              maxChildSize: 0.95,
+              minChildSize: 0.5,
+              builder: (_, scrollCtrl) => Container(
+                decoration: BoxDecoration(
+                  color: isDark ? AppColors.darkCard : Colors.white,
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(top: 12, bottom: 4),
+                      width: 40, height: 4,
+                      decoration: BoxDecoration(
+                        color: isDark ? AppColors.darkBorder : AppColors.border,
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Tarife Göre Alışveriş',
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700,
+                              color: isDark ? AppColors.darkTextPrimary : AppColors.dark)),
+                          const SizedBox(height: 4),
+                          Text('${_recipes.length} Türk tarifi',
+                            style: TextStyle(fontSize: 12, color: isDark ? AppColors.darkTextSecondary : AppColors.slate)),
+                          const SizedBox(height: 12),
+                          TextField(
+                            controller: searchCtrl,
+                            decoration: InputDecoration(
+                              hintText: 'Tarif ara...',
+                              prefixIcon: const Icon(Icons.search, size: 20),
+                              filled: true,
+                              fillColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                              contentPadding: const EdgeInsets.symmetric(vertical: 10),
+                            ),
+                            onChanged: (_) => setLocal(() {}),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: ListView.separated(
+                        controller: scrollCtrl,
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        itemCount: filtered.length,
+                        separatorBuilder: (_, __) => const Divider(height: 1),
+                        itemBuilder: (_, i) {
+                          final recipe = filtered[i];
+                          final title = recipe['title'] as String? ?? '';
+                          final time = (recipe['cook_time'] ?? recipe['prep_time'] ?? 0).toString();
+                          final ingredientCount = (recipe['ingredients'] as List?)?.length ?? 0;
+                          final cat = _categoryEmoji(recipe['category'] as String? ?? '');
+                          return ListTile(
+                            leading: Text(cat, style: const TextStyle(fontSize: 24)),
+                            title: Text(title, style: TextStyle(fontWeight: FontWeight.w600, color: isDark ? AppColors.darkTextPrimary : AppColors.dark)),
+                            subtitle: Text('$time dk • $ingredientCount malzeme',
+                              style: TextStyle(fontSize: 12, color: isDark ? AppColors.darkTextSecondary : AppColors.slate)),
+                            trailing: ElevatedButton.icon(
+                              onPressed: () {
+                                Navigator.pop(ctx);
+                                _addFromRecipe(recipe);
+                              },
+                              icon: const Icon(Icons.add, size: 16),
+                              label: const Text('Ekle'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.softMint,
+                                foregroundColor: Colors.white,
+                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                                minimumSize: Size.zero,
+                                textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  String _categoryEmoji(String cat) {
+    return switch (cat) {
+      'kahvalti' => '🍳',
+      'corba' => '🍲',
+      'ana_yemek' => '🍖',
+      'tatli' => '🍮',
+      'salata' => '🥗',
+      'meze' => '🫙',
+      'pilav' => '🍚',
+      'hamur_isi' => '🥙',
+      'dolma_sarma' => '🫑',
+      'makarna' => '🍝',
+      'balik' => '🐟',
+      'atistirmalik' => '🥨',
+      'icecek' => '🥤',
+      'sebze_yemegi' => '🥦',
+      _ => '🍽️',
+    };
+  }
+
+  void _addFromRecipe(Map<String, dynamic> recipe) {
+    final ingredients = (recipe['ingredients'] as List?) ?? [];
+    int added = 0;
+    for (final ing in ingredients) {
+      final name = ing['name'] as String? ?? '';
+      if (name.isNotEmpty) {
+        ref.read(shoppingItemsProvider.notifier).addItem(
+          name,
+          category: ShoppingCategory.grocery,
+        );
+        added++;
+      }
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('✅ ${recipe['title']} için $added malzeme eklendi'),
+        duration: const Duration(seconds: 2),
+        backgroundColor: AppColors.softMint,
       ),
     );
   }
