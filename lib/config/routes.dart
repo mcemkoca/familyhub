@@ -72,6 +72,9 @@ import '../presentation/screens/child/child_management_screen.dart';
 import '../presentation/screens/activities/activities_screen.dart';
 import '../presentation/screens/streak/streak_screen.dart';
 import '../presentation/screens/main_shell.dart';
+import '../presentation/screens/health/family_health_screen.dart';
+import '../presentation/screens/budget/subscription_screen.dart';
+import '../presentation/screens/child/child_development_screen.dart';
 import '../services/auth_service.dart';
 import '../services/child_auth_service.dart';
 import '../domain/models/crash_event.dart';
@@ -162,6 +165,9 @@ class AppRoutes {
   static const String education = '/education';
   static const String documents = '/documents';
   static const String familyMap = '/family-map';
+  static const String familyHealth = '/family-health';
+  static const String subscriptions = '/subscriptions';
+  static const String childDevelopment = '/child-development';
 }
 
 final _publicRoutes = <String>{
@@ -328,5 +334,8 @@ final router = GoRouter(
     GoRoute(path: AppRoutes.contacts, builder: (context, state) => const ContactsScreen()),
     GoRoute(path: AppRoutes.gallery, builder: (context, state) => const GalleryScreen()),
     GoRoute(path: AppRoutes.documents, builder: (context, state) => const DocumentsScreen()),
+    GoRoute(path: AppRoutes.familyHealth, builder: (context, state) => const FamilyHealthScreen()),
+    GoRoute(path: AppRoutes.subscriptions, builder: (context, state) => const SubscriptionScreen()),
+    GoRoute(path: AppRoutes.childDevelopment, builder: (context, state) => const ChildDevelopmentScreen()),
   ],
 );

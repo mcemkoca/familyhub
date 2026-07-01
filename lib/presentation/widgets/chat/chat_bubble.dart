@@ -105,6 +105,22 @@ class ChatBubble extends StatelessWidget {
                           durationSeconds: message.audioDuration ?? 0,
                           isMe: isMe,
                         )
+                      else if (message.type == MessageType.image && message.imageUrl != null)
+                        _ImagePreview(imageUrl: message.imageUrl!, isMe: isMe)
+                      else if (message.type == MessageType.gif && message.imageUrl != null)
+                        _GifPreview(gifUrl: message.imageUrl!, isMe: isMe)
+                      else if (message.type == MessageType.video)
+                        _VideoPreview(
+                          videoUrl: message.videoUrl ?? message.imageUrl,
+                          fileName: message.fileName ?? '🎬 Video',
+                          isMe: isMe,
+                        )
+                      else if (message.type == MessageType.file)
+                        _FilePreview(
+                          fileName: message.fileName ?? 'Dosya',
+                          fileSize: message.fileSize,
+                          isMe: isMe,
+                        )
                       else
                         Text(
                           message.content,
@@ -520,6 +536,145 @@ class _LocationPreview extends StatelessWidget {
         Text(
           content,
           style: const TextStyle(fontSize: 14, color: Colors.white),
+        ),
+      ],
+    );
+  }
+}
+
+// ─── Image Preview ────────────────────────────────────────────────────────────
+class _ImagePreview extends StatelessWidget {
+  final String imageUrl;
+  final bool isMe;
+  const _ImagePreview({required this.imageUrl, required this.isMe});
+
+  @override
+  Widget build(BuildContext context) {
+    final isNetwork = imageUrl.startsWith('http');
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8),
+      child: isNetwork
+          ? Image.network(imageUrl, width: 220, height: 160, fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) => _placeholder('📷'))
+          : Image.asset(imageUrl, width: 220, height: 160, fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) => _placeholder('📷')),
+    );
+  }
+
+  Widget _placeholder(String label) => Container(
+        width: 220, height: 120, color: Colors.black26,
+        child: Center(child: Text(label, style: const TextStyle(color: Colors.white70, fontSize: 20))),
+      );
+}
+
+// ─── GIF Preview ─────────────────────────────────────────────────────────────
+class _GifPreview extends StatelessWidget {
+  final String gifUrl;
+  final bool isMe;
+  const _GifPreview({required this.gifUrl, required this.isMe});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Image.network(gifUrl, width: 220, height: 160, fit: BoxFit.cover,
+            errorBuilder: (_, __, ___) => Container(
+              width: 220, height: 120, color: Colors.black26,
+              child: const Center(child: Text('GIF', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold))),
+            ),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 2),
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+          decoration: BoxDecoration(color: Colors.black38, borderRadius: BorderRadius.circular(4)),
+          child: const Text('GIF', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+        ),
+      ],
+    );
+  }
+}
+
+// ─── Video Preview ────────────────────────────────────────────────────────────
+class _VideoPreview extends StatelessWidget {
+  final String? videoUrl;
+  final String fileName;
+  final bool isMe;
+  const _VideoPreview({this.videoUrl, required this.fileName, required this.isMe});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 220, height: 120,
+      decoration: BoxDecoration(color: Colors.black54, borderRadius: BorderRadius.circular(10)),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          const Icon(Icons.play_circle_fill, size: 48, color: Colors.white),
+          Positioned(
+            bottom: 8, left: 8, right: 8,
+            child: Text(fileName, style: const TextStyle(color: Colors.white70, fontSize: 12),
+              maxLines: 1, overflow: TextOverflow.ellipsis),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ─── File Preview ─────────────────────────────────────────────────────────────
+class _FilePreview extends StatelessWidget {
+  final String fileName;
+  final int? fileSize;
+  final bool isMe;
+  const _FilePreview({required this.fileName, this.fileSize, required this.isMe});
+
+  String _formatSize(int? bytes) {
+    if (bytes == null) return '';
+    if (bytes < 1024) return '${bytes}B';
+    if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(1)}KB';
+    return '${(bytes / (1024 * 1024)).toStringAsFixed(1)}MB';
+  }
+
+  IconData _fileIcon(String name) {
+    final ext = name.split('.').last.toLowerCase();
+    if (ext == 'pdf') return Icons.picture_as_pdf;
+    if (['doc', 'docx'].contains(ext)) return Icons.description;
+    if (['xls', 'xlsx'].contains(ext)) return Icons.table_chart;
+    if (['mp3', 'wav', 'aac'].contains(ext)) return Icons.audio_file;
+    if (['mp4', 'mov', 'avi'].contains(ext)) return Icons.video_file;
+    if (['jpg', 'jpeg', 'png', 'gif'].contains(ext)) return Icons.image;
+    if (['zip', 'rar', '7z'].contains(ext)) return Icons.folder_zip;
+    return Icons.insert_drive_file;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: isMe ? Colors.white24 : Colors.blueGrey.shade100,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Icon(_fileIcon(fileName), size: 28, color: isMe ? Colors.white : Colors.blueGrey),
+        ),
+        const SizedBox(width: 10),
+        Flexible(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(fileName, style: TextStyle(color: isMe ? Colors.white : Colors.black87, fontWeight: FontWeight.w600, fontSize: 13),
+                maxLines: 2, overflow: TextOverflow.ellipsis),
+              if (fileSize != null)
+                Text(_formatSize(fileSize), style: TextStyle(color: isMe ? Colors.white70 : Colors.black45, fontSize: 11)),
+            ],
+          ),
         ),
       ],
     );

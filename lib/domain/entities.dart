@@ -11,7 +11,7 @@ enum MemberRole { admin, parent, teen, child, elder, guest, baby }
 enum EventCategory { appointment, birthday, school, activity, work, family, travel, other }
 enum TransactionType { income, expense }
 enum ShoppingCategory { grocery, pharmacy, stationery, household, other }
-enum MessageType { text, image, audio, location, event, system }
+enum MessageType { text, image, audio, location, event, system, gif, video, file }
 
 class FamilyMember {
   final String id;
@@ -367,6 +367,9 @@ class ChatMessage {
   final String? imageUrl;
   final String? audioUrl;
   final int? audioDuration;
+  final String? videoUrl;
+  final String? fileName;
+  final int? fileSize;
   final List<MessageReaction> reactions;
   final String? replyToId;
   final String? replyToContent;
@@ -386,6 +389,9 @@ class ChatMessage {
     this.imageUrl,
     this.audioUrl,
     this.audioDuration,
+    this.videoUrl,
+    this.fileName,
+    this.fileSize,
     this.reactions = const [],
     this.replyToId,
     this.replyToContent,
@@ -415,6 +421,9 @@ class ChatMessage {
       imageUrl: imageUrl,
       audioUrl: audioUrl,
       audioDuration: audioDuration,
+      videoUrl: videoUrl,
+      fileName: fileName,
+      fileSize: fileSize,
       reactions: reactions ?? this.reactions,
       replyToId: replyToId,
       replyToContent: replyToContent,

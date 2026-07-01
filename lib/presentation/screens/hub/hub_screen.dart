@@ -1090,6 +1090,30 @@ class _QuickFeatureStrip extends StatelessWidget {
       Color(0xFF7F1D1D),
       AppRoutes.emergency
     ),
+    (
+      Icons.local_hospital_outlined,
+      '🏥',
+      'Sağlık',
+      [Color(0xFF11998E), Color(0xFF38EF7D)],
+      Color(0xFF065F46),
+      AppRoutes.familyHealth
+    ),
+    (
+      Icons.subscriptions_outlined,
+      '📱',
+      'Abonelik',
+      [Color(0xFF667EEA), Color(0xFF764BA2)],
+      Color(0xFF4338CA),
+      AppRoutes.subscriptions
+    ),
+    (
+      Icons.child_care_outlined,
+      '🌱',
+      'Gelişim',
+      [Color(0xFFFF6B6B), Color(0xFFFFD93D)],
+      Color(0xFF92400E),
+      AppRoutes.childDevelopment
+    ),
   ];
 
   const _QuickFeatureStrip();

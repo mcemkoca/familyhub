@@ -262,6 +262,143 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     });
   }
 
+  Future<void> _pickVideo() async {
+    final picker = ImagePicker();
+    final picked = await picker.pickVideo(source: ImageSource.gallery);
+    if (picked == null) return;
+    final file = File(picked.path);
+    final size = await file.length();
+    final name = picked.path.split('/').last.split('\\').last;
+    final current = ref.read(chatMessagesProvider);
+    ref.read(chatMessagesProvider.notifier).state = [
+      ...current,
+      ChatMessage(
+        id: 'msg${current.length + 1}',
+        senderId: 'm1',
+        senderName: 'Ben',
+        senderColor: AppColors.blue,
+        content: '🎬 $name',
+        createdAt: DateTime.now(),
+        type: MessageType.video,
+        videoUrl: picked.path,
+        fileName: name,
+        fileSize: size,
+      ),
+    ];
+    setState(() => _showAttachmentMenu = false);
+    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+  }
+
+  Future<void> _pickFile() async {
+    // File picker — shows snackbar if no file_picker package
+    setState(() => _showAttachmentMenu = false);
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Dosya paylaşımı yakında aktif olacak'),
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
+
+  void _showGifPicker() {
+    setState(() => _showAttachmentMenu = false);
+    // Popular GIF URLs for demo
+    const gifs = [
+      'https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif',
+      'https://media.giphy.com/media/3oz8xAFtqoOUUrsh7W/giphy.gif',
+      'https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif',
+      'https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif',
+      'https://media.giphy.com/media/xT9IgG50Lg7russbDa/giphy.gif',
+      'https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif',
+      'https://media.giphy.com/media/3oEjHFOscgNwdSRRDy/giphy.gif',
+      'https://media.giphy.com/media/l0HlvtIPzPdt2usKs/giphy.gif',
+      'https://media.giphy.com/media/26BRuo6sLetdllPAQ/giphy.gif',
+    ];
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (ctx) {
+        final isDark = Theme.of(ctx).brightness == Brightness.dark;
+        return Container(
+          height: MediaQuery.of(ctx).size.height * 0.55,
+          decoration: BoxDecoration(
+            color: isDark ? AppColors.darkCard : Colors.white,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+          ),
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 12, bottom: 8),
+                width: 40, height: 4,
+                decoration: BoxDecoration(
+                  color: isDark ? AppColors.darkBorder : AppColors.border,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(16),
+                child: Text(
+                  'GIF Seç',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                ),
+              ),
+              Expanded(
+                child: GridView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3, mainAxisSpacing: 4, crossAxisSpacing: 4,
+                  ),
+                  itemCount: gifs.length,
+                  itemBuilder: (_, i) => GestureDetector(
+                    onTap: () {
+                      Navigator.pop(ctx);
+                      _sendGif(gifs[i]);
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.network(
+                        gifs[i],
+                        fit: BoxFit.cover,
+                        loadingBuilder: (_, child, progress) => progress == null
+                            ? child
+                            : const Center(child: CircularProgressIndicator()),
+                        errorBuilder: (_, __, ___) => Container(
+                          color: Colors.grey.shade200,
+                          child: const Icon(Icons.gif, size: 32, color: Colors.grey),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _sendGif(String gifUrl) {
+    final current = ref.read(chatMessagesProvider);
+    ref.read(chatMessagesProvider.notifier).state = [
+      ...current,
+      ChatMessage(
+        id: 'msg${current.length + 1}',
+        senderId: 'm1',
+        senderName: 'Ben',
+        senderColor: AppColors.blue,
+        content: '🎭 GIF',
+        createdAt: DateTime.now(),
+        type: MessageType.gif,
+        imageUrl: gifUrl,
+      ),
+    ];
+    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+  }
+
   void _pinMessage(ChatMessage message) {
     final current = ref.read(chatMessagesProvider);
     final newList = current.map((m) {
@@ -530,6 +667,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               onGallery: _pickImage,
               onLocation: _shareLocation,
               onClose: () => setState(() => _showAttachmentMenu = false),
+              onGif: _showGifPicker,
+              onVideo: _pickVideo,
+              onFile: _pickFile,
             ),
           // Reaction picker overlay
           if (_reactingToMessage != null)
@@ -709,12 +849,18 @@ class _AttachmentMenu extends StatelessWidget {
   final VoidCallback onGallery;
   final VoidCallback onLocation;
   final VoidCallback onClose;
+  final VoidCallback? onGif;
+  final VoidCallback? onVideo;
+  final VoidCallback? onFile;
 
   const _AttachmentMenu({
     required this.onCamera,
     required this.onGallery,
     required this.onLocation,
     required this.onClose,
+    this.onGif,
+    this.onVideo,
+    this.onFile,
   });
 
   @override
@@ -793,16 +939,22 @@ class _AttachmentMenu extends StatelessWidget {
                           onTap: () {},
                         ),
                         _AttachmentItem(
-                          icon: Icons.mic,
+                          icon: Icons.gif_box_outlined,
                           color: AppColors.orange,
-                          label: 'Ses',
-                          onTap: () {},
+                          label: 'GIF',
+                          onTap: onGif ?? () {},
+                        ),
+                        _AttachmentItem(
+                          icon: Icons.videocam_outlined,
+                          color: const Color(0xFF7C3AED),
+                          label: 'Video',
+                          onTap: onVideo ?? () {},
                         ),
                         _AttachmentItem(
                           icon: Icons.description,
                           color: AppColors.slate,
                           label: 'Dosya',
-                          onTap: () {},
+                          onTap: onFile ?? () {},
                         ),
                       ],
                     ),

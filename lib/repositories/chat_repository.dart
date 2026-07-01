@@ -51,6 +51,9 @@ class ChatRepository with RepositoryErrorHandler {
         MessageType.location => 'location',
         MessageType.event => 'event',
         MessageType.system => 'system',
+        MessageType.gif => 'gif',
+        MessageType.video => 'video',
+        MessageType.file => 'file',
         _ => 'text',
       };
 
@@ -109,6 +112,9 @@ class ChatRepository with RepositoryErrorHandler {
       'location' => MessageType.location,
       'event' => MessageType.event,
       'system' => MessageType.system,
+      'gif' => MessageType.gif,
+      'video' => MessageType.video,
+      'file' => MessageType.file,
       _ => MessageType.text,
     };
 
