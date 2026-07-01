@@ -149,40 +149,77 @@ class _KitchenScreenState extends State<KitchenScreen>
   }
 
   Widget _buildHeader(bool isDark) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+      padding: const EdgeInsets.fromLTRB(18, 16, 18, 20),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xFFFDA085), Color(0xFFF6D365)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFFFDA085).withAlpha(100),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(10),
+            width: 52,
+            height: 52,
             decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                  colors: [Color(0xFFF97316), Color(0xFFEF4444)]),
-              borderRadius: BorderRadius.circular(14),
+              color: Colors.white.withAlpha(40),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.white.withAlpha(60)),
             ),
-            child: const Icon(Icons.restaurant, color: Colors.white, size: 24),
+            child: const Center(child: Text('🍽️', style: TextStyle(fontSize: 26))),
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 14),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Mutfak',
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.w800,
-                      color: isDark
-                          ? AppColors.darkTextPrimary
-                          : AppColors.dark),
-                ),
-                Text(
-                  '${_recipes.length} tarif • haftalık plan • alışveriş',
+                const Text(
+                  'Aile Mutfağı',
                   style: TextStyle(
-                      fontSize: 12,
-                      color: isDark
-                          ? AppColors.darkTextSecondary
-                          : AppColors.slate),
+                    fontWeight: FontWeight.w900,
+                    fontSize: 20,
+                    color: Colors.white,
+                    letterSpacing: -0.5,
+                  ),
                 ),
+                Text(
+                  '${_recipes.length} tarif · haftalık plan · alışveriş',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Colors.white70,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            decoration: BoxDecoration(
+              color: Colors.white.withAlpha(50),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.white.withAlpha(80)),
+            ),
+            child: Row(
+              children: [
+                const Text('⭐', style: TextStyle(fontSize: 14)),
+                const SizedBox(width: 4),
+                const Text('12',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 14)),
               ],
             ),
           ),

@@ -55,27 +55,51 @@ class _HubScreenState extends ConsumerState<HubScreen> {
       body: SafeArea(
         child: RefreshIndicator(
           onRefresh: _refresh,
-          color: AppColors.cobalt,
+          color: const Color(0xFF8B5CF6),
           child: CustomScrollView(
             slivers: [
-              // Header
+              // Gradient Header
               SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+                child: Container(
+                  margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+                  padding: const EdgeInsets.fromLTRB(18, 16, 18, 20),
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFFFF9A56), Color(0xFFFF6B95), Color(0xFFC850C0)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(24),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFFFF6B95).withAlpha(80),
+                        blurRadius: 20,
+                        offset: const Offset(0, 8),
+                      ),
+                    ],
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Merhaba,',
-                            style: Theme.of(context).textTheme.bodyMedium
-                                ?.copyWith(color: AppColors.gray),
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
-                          Text(
-                            'Ailem',
-                            style: Theme.of(context).textTheme.displayMedium,
+                          const Text(
+                            'Koca Ailesi 👨‍👩‍👧‍👦',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: -0.5,
+                            ),
                           ),
                         ],
                       ),
@@ -84,6 +108,7 @@ class _HubScreenState extends ConsumerState<HubScreen> {
                   ),
                 ),
               ),
+              const SliverToBoxAdapter(child: SizedBox(height: 4)),
               // Quick Feature Strip
               SliverToBoxAdapter(child: _QuickFeatureStrip()),
               // Family Status Banner
@@ -312,38 +337,45 @@ class _HubScreenState extends ConsumerState<HubScreen> {
       data: (summary) => Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: isDark ? AppColors.darkCard : AppColors.card,
-          borderRadius: BorderRadius.circular(16),
+          color: isDark ? AppColors.darkCard : Colors.white,
+          borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: isDark ? AppColors.darkBorder : AppColors.border,
+            color: isDark ? AppColors.darkBorder : const Color(0xFFEDE9FE),
           ),
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xFF8B5CF6).withAlpha(isDark ? 20 : 15),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _SummaryItem(
-              icon: Icons.event,
+            _GradSummaryItem(
+              emoji: '📅',
               label: 'Etkinlik',
               value: '${summary.eventCount}',
-              color: AppColors.cobalt,
+              gradColors: const [Color(0xFF4FACFE), Color(0xFFA18CD1)],
             ),
-            _SummaryItem(
-              icon: Icons.task_alt,
+            _GradSummaryItem(
+              emoji: '✅',
               label: 'Görev',
               value: '${summary.taskCount}',
-              color: AppColors.green,
+              gradColors: const [Color(0xFF43E97B), Color(0xFF38F9D7)],
             ),
-            _SummaryItem(
-              icon: Icons.mark_email_unread,
+            _GradSummaryItem(
+              emoji: '💬',
               label: 'Mesaj',
               value: '${summary.unreadMessages}',
-              color: AppColors.orange,
+              gradColors: const [Color(0xFFF093FB), Color(0xFFF5576C)],
             ),
-            _SummaryItem(
-              icon: Icons.people,
+            _GradSummaryItem(
+              emoji: '👥',
               label: 'Çevrimiçi',
               value: '${summary.onlineMembers}/${summary.totalMembers}',
-              color: AppColors.purple,
+              gradColors: const [Color(0xFFFF9A56), Color(0xFFFF6B95)],
             ),
           ],
         ),
@@ -556,6 +588,66 @@ class _HubScreenState extends ConsumerState<HubScreen> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _GradSummaryItem extends StatelessWidget {
+  final String emoji;
+  final String label;
+  final String value;
+  final List<Color> gradColors;
+
+  const _GradSummaryItem({
+    required this.emoji,
+    required this.label,
+    required this.value,
+    required this.gradColors,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return Column(
+      children: [
+        Container(
+          width: 44,
+          height: 44,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: gradColors,
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(14),
+            boxShadow: [
+              BoxShadow(
+                color: gradColors[0].withAlpha(80),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Center(child: Text(emoji, style: const TextStyle(fontSize: 20))),
+        ),
+        const SizedBox(height: 6),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w900,
+            color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+          ),
+        ),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 10,
+            fontWeight: FontWeight.w600,
+            color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+          ),
+        ),
+      ],
     );
   }
 }
@@ -860,43 +952,35 @@ class _WeatherBadge extends ConsumerWidget {
       child: weatherAsync.when(
         data: (weather) {
           final icon = WeatherService.weatherIconData(weather.weatherCode);
-          final color = WeatherService.weatherColor(weather.weatherCode);
           final locName = _getLocationName();
           return Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
-              color: isDark ? AppColors.darkCard : AppColors.card,
+              color: Colors.white.withAlpha(50),
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: isDark ? AppColors.darkBorder : AppColors.border,
-              ),
+              border: Border.all(color: Colors.white.withAlpha(80)),
             ),
             child: Row(
               children: [
-                Icon(icon, color: color, size: 20),
+                Icon(icon, color: Colors.white, size: 20),
                 const SizedBox(width: 6),
                 Text(
                   '${weather.temperature.round()}°C',
                   style: const TextStyle(
                     fontSize: 14,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
                   ),
                 ),
                 const SizedBox(width: 4),
-                Container(
-                  width: 1,
-                  height: 12,
-                  color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
-                ),
+                Container(width: 1, height: 12, color: Colors.white54),
                 const SizedBox(width: 4),
                 Text(
                   locName,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: isDark
-                        ? AppColors.darkTextSecondary
-                        : AppColors.slate,
+                  style: const TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white70,
                   ),
                 ),
               ],
@@ -906,26 +990,22 @@ class _WeatherBadge extends ConsumerWidget {
         loading: () => Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
-            color: isDark ? AppColors.darkCard : AppColors.card,
+            color: Colors.white.withAlpha(50),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: isDark ? AppColors.darkBorder : AppColors.border,
-            ),
+            border: Border.all(color: Colors.white.withAlpha(80)),
           ),
           child: const SizedBox(
             width: 20,
             height: 20,
-            child: CircularProgressIndicator(strokeWidth: 2),
+            child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
           ),
         ),
         error: (e, st) => Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
-            color: isDark ? AppColors.darkCard : AppColors.card,
+            color: Colors.white.withAlpha(50),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: isDark ? AppColors.darkBorder : AppColors.border,
-            ),
+            border: Border.all(color: Colors.white.withAlpha(80)),
           ),
           child: const Row(
             children: [
@@ -946,14 +1026,70 @@ class _WeatherBadge extends ConsumerWidget {
 // Tüm özelliklere hızlı erişim şeridi
 class _QuickFeatureStrip extends StatelessWidget {
   static const _features = [
-    (Icons.shopping_cart_outlined, 'Alışveriş', AppColors.softMint, AppRoutes.shopping),
-    (Icons.account_balance_wallet_outlined, 'Bütçe', AppColors.cobalt, AppRoutes.budget),
-    (Icons.photo_library_outlined, 'Galeri', AppColors.purple, AppRoutes.gallery),
-    (Icons.location_on_outlined, 'Konum', AppColors.orange, AppRoutes.familyMap),
-    (Icons.child_care, 'Çocuk', AppColors.pink, AppRoutes.childManagement),
-    (Icons.restaurant, 'Mutfak', Color(0xFFF97316), AppRoutes.kitchen),
-    (Icons.school_outlined, 'Eğitim', Color(0xFF8B5CF6), AppRoutes.education),
-    (Icons.warning_amber_outlined, 'Acil', AppColors.error, AppRoutes.emergency),
+    (
+      Icons.shopping_cart_outlined,
+      '🛒',
+      'Alışveriş',
+      [Color(0xFF43E97B), Color(0xFF38F9D7)],
+      Color(0xFF064E3B),
+      AppRoutes.shopping
+    ),
+    (
+      Icons.account_balance_wallet_outlined,
+      '💳',
+      'Bütçe',
+      [Color(0xFFFA709A), Color(0xFFFEE140)],
+      Color(0xFF92400E),
+      AppRoutes.budget
+    ),
+    (
+      Icons.photo_library_outlined,
+      '🖼️',
+      'Galeri',
+      [Color(0xFFF093FB), Color(0xFFF5576C)],
+      Color(0xFF831843),
+      AppRoutes.gallery
+    ),
+    (
+      Icons.location_on_outlined,
+      '📍',
+      'Konum',
+      [Color(0xFF4FACFE), Color(0xFF00F2FE)],
+      Color(0xFF1E3A8A),
+      AppRoutes.familyMap
+    ),
+    (
+      Icons.child_care,
+      '⭐',
+      'Çocuk',
+      [Color(0xFF84FAB0), Color(0xFF8FD3F4)],
+      Color(0xFF164E63),
+      AppRoutes.childManagement
+    ),
+    (
+      Icons.restaurant,
+      '🍽️',
+      'Mutfak',
+      [Color(0xFFFDA085), Color(0xFFF6D365)],
+      Color(0xFF9A3412),
+      AppRoutes.kitchen
+    ),
+    (
+      Icons.school_outlined,
+      '📚',
+      'Eğitim',
+      [Color(0xFFA18CD1), Color(0xFFFBC2EB)],
+      Color(0xFF4C1D95),
+      AppRoutes.education
+    ),
+    (
+      Icons.warning_amber_outlined,
+      '🆘',
+      'Acil',
+      [Color(0xFFFF0844), Color(0xFFFFB199)],
+      Color(0xFF7F1D1D),
+      AppRoutes.emergency
+    ),
   ];
 
   const _QuickFeatureStrip();
@@ -962,39 +1098,57 @@ class _QuickFeatureStrip extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+      padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
       child: SizedBox(
-        height: 82,
+        height: 90,
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           itemCount: _features.length,
-          separatorBuilder: (_, _) => const SizedBox(width: 12),
+          separatorBuilder: (_, _) => const SizedBox(width: 10),
           itemBuilder: (context, i) {
-            final (icon, label, color, route) = _features[i];
+            final (icon, emoji, label, gradColors, shadowColor, route) = _features[i];
             return GestureDetector(
               onTap: () => context.push(route),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                    width: 52,
-                    height: 52,
+                    width: 56,
+                    height: 56,
                     decoration: BoxDecoration(
-                      color: color.withAlpha(isDark ? 40 : 25),
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: color.withAlpha(isDark ? 80 : 60)),
+                      gradient: LinearGradient(
+                        colors: gradColors,
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(18),
+                      boxShadow: [
+                        BoxShadow(
+                          color: shadowColor.withAlpha(isDark ? 100 : 60),
+                          blurRadius: 10,
+                          offset: const Offset(0, 5),
+                        ),
+                        BoxShadow(
+                          color: gradColors[0].withAlpha(isDark ? 80 : 40),
+                          blurRadius: 0,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
                     ),
-                    child: Icon(icon, color: color, size: 24),
+                    child: Center(
+                      child: Text(emoji, style: const TextStyle(fontSize: 22)),
+                    ),
                   ),
                   const SizedBox(height: 5),
-                  Text(label,
-                      style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w700,
-                          color: isDark
-                              ? AppColors.darkTextSecondary
-                              : AppColors.slate)),
+                  Text(
+                    label,
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w800,
+                      color: isDark ? AppColors.darkTextSecondary : AppColors.dark,
+                    ),
+                  ),
                 ],
               ),
             );
@@ -1017,127 +1171,141 @@ class _FamilyStatusBanner extends StatelessWidget {
     final onlineCount = members.where((m) => m.isOnline).length;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
       child: Container(
-        padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           color: isDark ? AppColors.darkCard : Colors.white,
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-                color: Colors.black.withAlpha(isDark ? 20 : 6),
-                blurRadius: 8,
-                offset: const Offset(0, 2))
+                color: Colors.black.withAlpha(isDark ? 20 : 8),
+                blurRadius: 12,
+                offset: const Offset(0, 4))
           ],
         ),
         child: Column(
           children: [
-            Row(
-              children: [
-                const Icon(Icons.people_outline,
-                    size: 16, color: AppColors.slate),
-                const SizedBox(width: 6),
-                Text('Aile Durumu',
-                    style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w700,
-                        color: isDark
-                            ? AppColors.darkTextPrimary
-                            : AppColors.dark)),
-                const Spacer(),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8, vertical: 3),
-                  decoration: BoxDecoration(
-                    color: onlineCount > 0
-                        ? AppColors.success.withAlpha(20)
-                        : AppColors.slate.withAlpha(20),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    '$onlineCount çevrimiçi',
-                    style: TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w700,
-                        color: onlineCount > 0
-                            ? AppColors.success
-                            : AppColors.slate),
-                  ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Color(0xFF4FACFE), Color(0xFFA18CD1)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
                 ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Row(
-              children: members.take(5).map((m) {
-                final initial = m.name.isNotEmpty
-                    ? m.name[0].toUpperCase()
-                    : '?';
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: GestureDetector(
-                    onTap: () => context.push(AppRoutes.family),
-                    child: Column(
-                      children: [
-                        Stack(
-                          children: [
-                            Container(
-                              width: 42,
-                              height: 42,
-                              decoration: BoxDecoration(
-                                color: m.color.withAlpha(30),
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: m.color.withAlpha(80),
-                                    width: 2),
-                              ),
-                              child: m.avatarUrl != null
-                                  ? ClipOval(
-                                      child: Image.network(
-                                          m.avatarUrl!,
-                                          fit: BoxFit.cover))
-                                  : Center(
-                                      child: Text(initial,
-                                          style: TextStyle(
-                                              color: m.color,
-                                              fontWeight:
-                                                  FontWeight.w800,
-                                              fontSize: 16))),
-                            ),
-                            if (m.isOnline)
-                              Positioned(
-                                right: 1,
-                                bottom: 1,
-                                child: Container(
-                                  width: 10,
-                                  height: 10,
-                                  decoration: BoxDecoration(
-                                      color: AppColors.success,
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                          color: isDark
-                                              ? AppColors.darkCard
-                                              : Colors.white,
-                                          width: 2)),
-                                ),
-                              ),
-                          ],
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                            m.name.length > 6
-                                ? '${m.name.substring(0, 5)}…'
-                                : m.name,
-                            style: TextStyle(
-                                fontSize: 9,
-                                fontWeight: FontWeight.w600,
-                                color: isDark
-                                    ? AppColors.darkTextSecondary
-                                    : AppColors.slate)),
-                      ],
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+              ),
+              child: Row(
+                children: [
+                  const Text('👨‍👩‍👧‍👦', style: TextStyle(fontSize: 16)),
+                  const SizedBox(width: 8),
+                  const Text('Aile Durumu',
+                      style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white)),
+                  const Spacer(),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withAlpha(50),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: Colors.white.withAlpha(80)),
+                    ),
+                    child: Text(
+                      '$onlineCount çevrimiçi',
+                      style: const TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white),
                     ),
                   ),
-                );
-              }).toList(),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),
+              child: Row(
+                children: members.take(5).map((m) {
+                  final initial = m.name.isNotEmpty ? m.name[0].toUpperCase() : '?';
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: GestureDetector(
+                      onTap: () => context.push(AppRoutes.family),
+                      child: Column(
+                        children: [
+                          Stack(
+                            children: [
+                              Container(
+                                width: 48,
+                                height: 48,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      m.color.withAlpha(200),
+                                      m.color,
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: m.color.withAlpha(80),
+                                      blurRadius: 8,
+                                      offset: const Offset(0, 3),
+                                    ),
+                                  ],
+                                ),
+                                child: m.avatarUrl != null
+                                    ? ClipOval(
+                                        child: Image.network(
+                                            m.avatarUrl!, fit: BoxFit.cover))
+                                    : Center(
+                                        child: Text(initial,
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w900,
+                                                fontSize: 18))),
+                              ),
+                              if (m.isOnline)
+                                Positioned(
+                                  right: 1,
+                                  bottom: 1,
+                                  child: Container(
+                                    width: 13,
+                                    height: 13,
+                                    decoration: BoxDecoration(
+                                        gradient: const LinearGradient(
+                                          colors: [Color(0xFF43E97B), Color(0xFF38F9D7)],
+                                        ),
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            color: isDark
+                                                ? AppColors.darkCard
+                                                : Colors.white,
+                                            width: 2)),
+                                  ),
+                                ),
+                            ],
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                              m.name.length > 6
+                                  ? '${m.name.substring(0, 5)}…'
+                                  : m.name,
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w700,
+                                  color: isDark
+                                      ? AppColors.darkTextSecondary
+                                      : AppColors.dark)),
+                        ],
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
             ),
           ],
         ),

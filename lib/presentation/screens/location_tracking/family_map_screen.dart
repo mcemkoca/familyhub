@@ -145,53 +145,73 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
   }
 
   Widget _buildHeader(bool isDark) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+    final homeCount = _members.where((m) => m.status == LocationStatus.home).length;
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+      padding: const EdgeInsets.fromLTRB(18, 14, 14, 18),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xFF43E97B), Color(0xFF38F9D7)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF43E97B).withAlpha(100),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(10),
+            width: 52,
+            height: 52,
             decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                  colors: [Color(0xFF10B981), Color(0xFF06B6D4)]),
-              borderRadius: BorderRadius.circular(14),
+              color: Colors.white.withAlpha(40),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.white.withAlpha(60)),
             ),
-            child: const Icon(Icons.location_on,
-                color: Colors.white, size: 24),
+            child: const Center(child: Text('🗺️', style: TextStyle(fontSize: 26))),
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 14),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Aile Konumu',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineSmall
-                        ?.copyWith(
-                            fontWeight: FontWeight.w800,
-                            color: isDark
-                                ? AppColors.darkTextPrimary
-                                : AppColors.dark)),
+                const Text('Aile Haritası',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      fontSize: 20,
+                      color: Colors.white,
+                      letterSpacing: -0.5,
+                    )),
                 Text(
-                    '${_members.length} üye • ${_members.where((m) => m.status == LocationStatus.home).length} evde',
+                    '${_members.length} üye takipte · $homeCount evde',
                     style: const TextStyle(
-                        fontSize: 12, color: AppColors.slate)),
+                        fontSize: 12,
+                        color: Colors.white70,
+                        fontWeight: FontWeight.w600)),
               ],
             ),
           ),
           RotationTransition(
             turns: _refreshController,
-            child: IconButton(
-              icon: const Icon(Icons.refresh),
-              onPressed: _refresh,
-              color: const Color(0xFF10B981),
+            child: GestureDetector(
+              onTap: _refresh,
+              child: Container(
+                width: 38,
+                height: 38,
+                decoration: BoxDecoration(
+                  color: Colors.white.withAlpha(40),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.white.withAlpha(60)),
+                ),
+                child: const Icon(Icons.refresh, color: Colors.white, size: 20),
+              ),
             ),
-          ),
-          IconButton(
-            icon: const Icon(Icons.settings_outlined),
-            onPressed: () {},
-            color: AppColors.slate,
           ),
         ],
       ),

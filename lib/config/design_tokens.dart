@@ -185,38 +185,81 @@ abstract class DesignTokens {
 
   // ─── GRADYAN TOKENLARı ───────────────────────────────────────────────────
 
+  // ─── AILE GRADYANLARI (sıcak, davetkar tonlar) ──────────────────────────────
+
+  // Ana ekran başlığı — gün batımı turuncu → pembe → mor
+  static const LinearGradient gradientHub = LinearGradient(
+    colors: [Color(0xFFFF9A56), Color(0xFFFF6B95), Color(0xFFC850C0)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  // Mutfak — şeftali → altın sarısı
+  static const LinearGradient gradientKitchen = LinearGradient(
+    colors: [Color(0xFFFDA085), Color(0xFFF6D365)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  // Eğitim — lavanta → pembe bulut
+  static const LinearGradient gradientEducation = LinearGradient(
+    colors: [Color(0xFFA18CD1), Color(0xFFFBC2EB)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  // GPS / Harita — gökyüzü mavi → turkuaz
+  static const LinearGradient gradientGps = LinearGradient(
+    colors: [Color(0xFF4FACFE), Color(0xFF00F2FE)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  // Bütçe — gün batımı turuncu → sarı
+  static const LinearGradient gradientBudget = LinearGradient(
+    colors: [Color(0xFFFA709A), Color(0xFFFEE140)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  // Güvenlik / Acil — kırmızı → turuncu
+  static const LinearGradient gradientSafety = LinearGradient(
+    colors: [Color(0xFFFF0844), Color(0xFFFFB199)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  // Sohbet — mor → mavi
+  static const LinearGradient gradientChat = LinearGradient(
+    colors: [Color(0xFF4FACFE), Color(0xFFA18CD1)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  // Alışveriş — yeşil nane → teal
+  static const LinearGradient gradientShopping = LinearGradient(
+    colors: [Color(0xFF43E97B), Color(0xFF38F9D7)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  // Galeri — orkide → kırmızı
+  static const LinearGradient gradientGallery = LinearGradient(
+    colors: [Color(0xFFF093FB), Color(0xFFF5576C)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  // Çocuk / Başarı — nane → gökyüzü
+  static const LinearGradient gradientChild = LinearGradient(
+    colors: [Color(0xFF84FAB0), Color(0xFF8FD3F4)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  // Eski brand gradyanı (uyumluluk için)
   static const LinearGradient gradientBrand = LinearGradient(
     colors: [brand500, Color(0xFF6366F1)],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
-
-  static const LinearGradient gradientKitchen = LinearGradient(
-    colors: [featureKitchen, Color(0xFFEF4444)],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
-
-  static const LinearGradient gradientEducation = LinearGradient(
-    colors: [featureEducation, brand500],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
-
-  static const LinearGradient gradientGps = LinearGradient(
-    colors: [featureGps, accent500],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
-
-  static const LinearGradient gradientBudget = LinearGradient(
-    colors: [accent500, featureGps],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
-
-  static const LinearGradient gradientSafety = LinearGradient(
-    colors: [danger500, Color(0xFFF97316)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
