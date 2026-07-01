@@ -327,8 +327,6 @@ final router = GoRouter(
     GoRoute(path: AppRoutes.callContactList, builder: (context, state) => const CallContactListScreen()),
     GoRoute(path: AppRoutes.contacts, builder: (context, state) => const ContactsScreen()),
     GoRoute(path: AppRoutes.gallery, builder: (context, state) => const GalleryScreen()),
-    GoRoute(path: AppRoutes.kitchen, builder: (context, state) => const KitchenScreen()),
-    GoRoute(path: AppRoutes.education, builder: (context, state) => const EducationScreen()),
     GoRoute(path: AppRoutes.documents, builder: (context, state) => const DocumentsScreen()),
   ],
 );
