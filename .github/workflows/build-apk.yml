@@ -24,6 +24,17 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
+      - name: Create dummy .env for code generation
+        run: |
+          cat > .env << 'EOF'
+          SUPABASE_URL=https://placeholder.supabase.co
+          SUPABASE_ANON_KEY=placeholder_anon_key
+          STRIPE_PUBLISHABLE_KEY=pk_test_placeholder
+          EOF
+
+      - name: Generate code (build_runner)
+        run: dart run build_runner build --delete-conflicting-outputs
+
       - name: Build APK (debug — no signing needed)
         run: flutter build apk --debug
 
