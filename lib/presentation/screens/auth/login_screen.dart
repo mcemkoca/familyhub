@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../../config/constants.dart';
 import '../../../config/routes.dart';
 import '../../../core/validation/input_validator.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/biometric_service.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../../providers/app_providers.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
@@ -385,8 +383,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
             // Google sign in
             _buildSocialButton(
               label: 'Google ile Giriş Yap',
-              icon: SvgPicture.asset('assets/images/google_logo.svg',
-                  width: 20, height: 20),
+              icon: const Text('G',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: Color(0xFF4285F4))),
               onTap: _isLoading
                   ? null
                   : AuthService.isGoogleSignInConfigured
