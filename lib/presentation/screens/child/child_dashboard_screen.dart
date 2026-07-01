@@ -5,6 +5,7 @@ import '../../../config/routes.dart';
 import '../../../services/child_auth_service.dart';
 import '../../../services/child_notification_service.dart';
 import '../../../services/location_tracking_service.dart';
+import 'tabs/child_achievements_tab.dart';
 import 'tabs/child_chat_tab.dart';
 import 'tabs/child_home_tab.dart';
 import 'tabs/child_safety_tab.dart';
@@ -148,7 +149,7 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
       ChildHomeTab(childName: session.childName),
       const ChildTasksTab(),
       const ChildChatTab(),
-      const ChildScheduleTab(),
+      ChildAchievementsTab(childName: session.childName),
       const ChildSafetyTab(),
     ];
 
@@ -169,9 +170,9 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
         label: 'Sohbet',
       ),
       const _NavItem(
-        icon: Icons.calendar_today_outlined,
-        activeIcon: Icons.calendar_today,
-        label: 'Derslerim',
+        icon: Icons.emoji_events_outlined,
+        activeIcon: Icons.emoji_events,
+        label: 'Rozetler',
       ),
       const _NavItem(
         icon: Icons.shield_outlined,
