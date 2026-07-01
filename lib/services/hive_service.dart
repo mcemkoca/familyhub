@@ -470,4 +470,25 @@ class HiveService {
       return [];
     }
   }
+
+  // ========== GENERIC JSON CACHE ==========
+  // Used by family_health_screen, subscription_screen, child_development_screen
+
+  static Future<void> saveJson(String key, dynamic data) async {
+    await _settingsBox.put('cache_$key', jsonEncode(data));
+  }
+
+  static dynamic loadJson(String key) {
+    final raw = _settingsBox.get('cache_$key');
+    if (raw == null) return null;
+    try {
+      return jsonDecode(raw as String);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  static Future<void> deleteJson(String key) async {
+    await _settingsBox.delete('cache_$key');
+  }
 }
