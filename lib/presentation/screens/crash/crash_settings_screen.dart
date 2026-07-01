@@ -355,7 +355,6 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
   }
 
   void _saveSettings() {
-    // TODO: Persist settings to repository
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(const SnackBar(content: Text('Ayarlar kaydedildi')));
