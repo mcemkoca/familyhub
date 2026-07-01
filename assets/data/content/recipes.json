@@ -1108,5 +1108,388 @@
       "180°C fırında 35-40 dk pişirin."
     ],
     "tips": "Üzerine pudra şekeri veya portakal sosu gezdirilebilir."
+  },
+  {
+    "id": "r051", "title": "Çikolatalı Sufle", "category": "tatli", "halal": true,
+    "difficulty": "orta", "prep_time": 15, "cook_time": 12, "servings": 4,
+    "tags": ["tatlı", "çikolata", "fırın"],
+    "ingredients": [
+      {"name": "Bitter çikolata", "amount": "150", "unit": "gr"},
+      {"name": "Tereyağı", "amount": "100", "unit": "gr"},
+      {"name": "Yumurta", "amount": "3", "unit": "adet"},
+      {"name": "Yumurta sarısı", "amount": "3", "unit": "adet"},
+      {"name": "Şeker", "amount": "4", "unit": "yemek kaşığı"},
+      {"name": "Un", "amount": "2", "unit": "yemek kaşığı"}
+    ],
+    "steps": ["Çikolata ve tereyağını eritin.", "Yumurta, şeker ve unu karıştırın.", "Hepsini birleştirin.", "Yağlanmış kaplara dökün.", "200°C fırında 10-12 dk pişirin.", "Sıcak servis edin."],
+    "tips": "İçi akışkan olmalı."
+  },
+  {
+    "id": "r052", "title": "Tavuk Döner", "category": "ana_yemek", "halal": true,
+    "difficulty": "orta", "prep_time": 480, "cook_time": 30, "servings": 6,
+    "tags": ["tavuk", "döner", "Türk mutfağı"],
+    "ingredients": [
+      {"name": "Tavuk but (kemiksiz)", "amount": "1", "unit": "kg"},
+      {"name": "Yoğurt", "amount": "1", "unit": "su bardağı"},
+      {"name": "Zeytinyağı", "amount": "3", "unit": "yemek kaşığı"},
+      {"name": "Biber salçası", "amount": "1", "unit": "yemek kaşığı"},
+      {"name": "Kimyon, pul biber, kekik", "amount": "1", "unit": "çay kaşığı"},
+      {"name": "Tuz, karabiber", "amount": "1", "unit": "çay kaşığı"}
+    ],
+    "steps": ["Tavukları marine edin, gece bekletin.", "Şişlere geçirin.", "Ateşte veya ızgarada pişirin.", "Pide ve salata ile servis edin."],
+    "tips": "Lavaş veya pide ile harika."
+  },
+  {
+    "id": "r053", "title": "Şalgam Suyu", "category": "icecek", "halal": true,
+    "difficulty": "zor", "prep_time": 10080, "cook_time": 0, "servings": 10,
+    "tags": ["içecek", "Adana", "fermente"],
+    "ingredients": [
+      {"name": "Şalgam", "amount": "5", "unit": "adet"},
+      {"name": "Havuç", "amount": "2", "unit": "adet"},
+      {"name": "Bulgur", "amount": "2", "unit": "yemek kaşığı"},
+      {"name": "Tuz", "amount": "2", "unit": "yemek kaşığı"},
+      {"name": "Su", "amount": "3", "unit": "litre"}
+    ],
+    "steps": ["Sebzeleri doğrayın.", "Kavanozu doldurun.", "Tuzlu suyla kapatın.", "1 hafta oda sıcaklığında bekletin.", "Süzün, servis edin."],
+    "tips": "Acılısını tercih ederseniz biber ekleyin."
+  },
+  {
+    "id": "r054", "title": "Tepsi Böreği", "category": "hamur_isi", "halal": true,
+    "difficulty": "kolay", "prep_time": 20, "cook_time": 40, "servings": 8,
+    "tags": ["börek", "peynir", "pratik"],
+    "ingredients": [
+      {"name": "Yufka", "amount": "4", "unit": "adet"},
+      {"name": "Beyaz peynir", "amount": "250", "unit": "gr"},
+      {"name": "Yumurta", "amount": "3", "unit": "adet"},
+      {"name": "Süt", "amount": "1", "unit": "su bardağı"},
+      {"name": "Sıvıyağ", "amount": "1/2", "unit": "su bardağı"},
+      {"name": "Maydanoz", "amount": "1/2", "unit": "demet"},
+      {"name": "Susam, çörek otu", "amount": "1", "unit": "yemek kaşığı"}
+    ],
+    "steps": ["Peynir ve maydanozu karıştırın.", "Yumurta, süt ve yağı çırpın.", "Yufkaları tepsiye dizerek aralarına harç koyun.", "Üzerine yumurtalı karışım dökün.", "Susam serpin.", "180°C fırında 35-40 dk pişirin."],
+    "tips": "Sıcak veya soğuk servis edilir."
+  },
+  {
+    "id": "r055", "title": "Zeytinyağlı Taze Fasulye", "category": "sebze_yemegi", "halal": true,
+    "difficulty": "kolay", "prep_time": 15, "cook_time": 35, "servings": 4,
+    "tags": ["fasulye", "zeytinyağlı", "yaz"],
+    "ingredients": [
+      {"name": "Taze fasulye", "amount": "500", "unit": "gr"},
+      {"name": "Soğan", "amount": "2", "unit": "adet"},
+      {"name": "Domates", "amount": "3", "unit": "adet"},
+      {"name": "Zeytinyağı", "amount": "4", "unit": "yemek kaşığı"},
+      {"name": "Şeker, tuz", "amount": "1", "unit": "çay kaşığı"}
+    ],
+    "steps": ["Fasulyeleri ayıklayın, yıkayın.", "Soğanı yağda kavurun.", "Fasulyeleri ekleyin, kavurun.", "Domatesi ekleyin.", "Kısık ateşte 30-35 dk pişirin."],
+    "tips": "Soğuk servis çok lezzetli."
+  },
+  {
+    "id": "r056", "title": "Patates Salatası", "category": "salata", "halal": true,
+    "difficulty": "kolay", "prep_time": 10, "cook_time": 25, "servings": 4,
+    "tags": ["patates", "soğuk", "piknik"],
+    "ingredients": [
+      {"name": "Patates", "amount": "4", "unit": "orta"},
+      {"name": "Soğan", "amount": "1", "unit": "adet"},
+      {"name": "Maydanoz", "amount": "1/2", "unit": "demet"},
+      {"name": "Zeytinyağı", "amount": "3", "unit": "yemek kaşığı"},
+      {"name": "Limon suyu", "amount": "1", "unit": "adet"},
+      {"name": "Tuz, karabiber", "amount": "1", "unit": "çay kaşığı"}
+    ],
+    "steps": ["Patatesleri haşlayın.", "Soğandı, maydanoz ve baharatları ekleyin.", "Zeytinyağı ve limon ile karıştırın.", "Soğuk servis edin."],
+    "tips": "Piknik ve barbekülerde klasik."
+  },
+  {
+    "id": "r057", "title": "Çerkez Tavuğu", "category": "meze", "halal": true,
+    "difficulty": "orta", "prep_time": 20, "cook_time": 40, "servings": 6,
+    "tags": ["tavuk", "cevizli", "Kafkas"],
+    "ingredients": [
+      {"name": "Tavuk (haşlanmış, parçalanmış)", "amount": "500", "unit": "gr"},
+      {"name": "Ceviz (öğütülmüş)", "amount": "200", "unit": "gr"},
+      {"name": "Bayat ekmek içi", "amount": "2", "unit": "dilim"},
+      {"name": "Tavuk suyu", "amount": "1", "unit": "su bardağı"},
+      {"name": "Sarımsak", "amount": "2", "unit": "diş"},
+      {"name": "Tuz, kırmızı biber", "amount": "1", "unit": "çay kaşığı"}
+    ],
+    "steps": ["Cevizi, ekmek içini ve suyunu blenderda çekin.", "Sarımsak ve baharat ekleyin.", "Tavuğu sosla karıştırın.", "Servis tabağına alın.", "Üzerine kırmızı biberli tereyağı gezdirin."],
+    "tips": "Soğuk servis edilmeli."
+  },
+  {
+    "id": "r058", "title": "Aşure", "category": "tatli", "halal": true,
+    "difficulty": "orta", "prep_time": 720, "cook_time": 60, "servings": 20,
+    "tags": ["tatlı", "geleneksel", "muharrem"],
+    "ingredients": [
+      {"name": "Buğday (aşurelik)", "amount": "2", "unit": "su bardağı"},
+      {"name": "Nohut", "amount": "1/2", "unit": "su bardağı"},
+      {"name": "Fasulye (pişmiş)", "amount": "1/2", "unit": "su bardağı"},
+      {"name": "Şeker", "amount": "2", "unit": "su bardağı"},
+      {"name": "Kuru kayısı, kuru üzüm, kuru incir", "amount": "1/2", "unit": "su bardağı"},
+      {"name": "Çam fıstığı, ceviz", "amount": "3", "unit": "yemek kaşığı"},
+      {"name": "Gül suyu", "amount": "2", "unit": "yemek kaşığı"}
+    ],
+    "steps": ["Buğdayı bir gece ıslayın.", "Haşlayın, nohut ve fasulye ekleyin.", "Kuru meyveleri ekleyin.", "Şekeri ekleyin.", "Gül suyunu ekleyin.", "Kaplara dökün, kuruyemişlerle süsleyin."],
+    "tips": "Komşulara dağıtmak gelenektendir."
+  },
+  {
+    "id": "r059", "title": "Patlıcan Musakka", "category": "ana_yemek", "halal": true,
+    "difficulty": "orta", "prep_time": 30, "cook_time": 50, "servings": 5,
+    "tags": ["patlıcan", "kıyma", "fırın"],
+    "ingredients": [
+      {"name": "Patlıcan", "amount": "3", "unit": "büyük"},
+      {"name": "Kıyma", "amount": "300", "unit": "gr"},
+      {"name": "Soğan", "amount": "2", "unit": "adet"},
+      {"name": "Domates", "amount": "3", "unit": "adet"},
+      {"name": "Sarımsak", "amount": "3", "unit": "diş"},
+      {"name": "Zeytinyağı", "amount": "4", "unit": "yemek kaşığı"},
+      {"name": "Tuz, baharat", "amount": "1", "unit": "çay kaşığı"}
+    ],
+    "steps": ["Patlıcanları kızartın.", "Kıymalı iç harcı hazırlayın.", "Tepsiye patlıcan ve kıymayı kat kat dizin.", "Domates sosu ekleyin.", "180°C fırında 40-45 dk pişirin."],
+    "tips": "Üzerine kaşar peyniri eklenebilir."
+  },
+  {
+    "id": "r060", "title": "Simit", "category": "kahvalti", "halal": true,
+    "difficulty": "orta", "prep_time": 60, "cook_time": 25, "servings": 8,
+    "tags": ["simit", "pekmez", "İstanbul"],
+    "ingredients": [
+      {"name": "Un", "amount": "4", "unit": "su bardağı"},
+      {"name": "Maya", "amount": "1", "unit": "paket"},
+      {"name": "Tuz", "amount": "1", "unit": "çay kaşığı"},
+      {"name": "Su", "amount": "1.5", "unit": "su bardağı"},
+      {"name": "Pekmez", "amount": "3", "unit": "yemek kaşığı"},
+      {"name": "Susam", "amount": "2", "unit": "su bardağı"}
+    ],
+    "steps": ["Hamuru yoğurun, 1 saat mayalandırın.", "Halka şekli verin.", "Pekmezli suya batırın.", "Susama bulayın.", "200°C fırında 20-25 dk pişirin."],
+    "tips": "Sıcak simitin tadı efsanedir."
+  },
+  {
+    "id": "r061", "title": "Soğuk Köfte Çorbası (Yayla)", "category": "corba", "halal": true,
+    "difficulty": "kolay", "prep_time": 10, "cook_time": 20, "servings": 4,
+    "tags": ["çorba", "yoğurt", "nane"],
+    "ingredients": [
+      {"name": "Yoğurt", "amount": "2", "unit": "su bardağı"},
+      {"name": "Su veya et suyu", "amount": "3", "unit": "su bardağı"},
+      {"name": "Un", "amount": "1", "unit": "yemek kaşığı"},
+      {"name": "Yumurta", "amount": "1", "unit": "adet"},
+      {"name": "Küçük köfte (haşlanmış)", "amount": "15", "unit": "adet"},
+      {"name": "Tereyağı, kuru nane, pul biber", "amount": "1", "unit": "çay kaşığı"}
+    ],
+    "steps": ["Yoğurt, un ve yumurtayı karıştırın.", "Su ekleyerek kaynatın.", "Köfteleri ekleyin.", "Tereyağında nane ve pul biber kavurun.", "Üzerine gezdirin."],
+    "tips": "Yoğurt kesilmesin diye sürekli karıştırın."
+  },
+  {
+    "id": "r062", "title": "Etli Bamya", "category": "sebze_yemegi", "halal": true,
+    "difficulty": "orta", "prep_time": 20, "cook_time": 50, "servings": 4,
+    "tags": ["bamya", "et", "Güneydoğu"],
+    "ingredients": [
+      {"name": "Taze bamya", "amount": "400", "unit": "gr"},
+      {"name": "Dana kuşbaşı", "amount": "250", "unit": "gr"},
+      {"name": "Soğan", "amount": "1", "unit": "büyük"},
+      {"name": "Domates", "amount": "2", "unit": "adet"},
+      {"name": "Zeytinyağı", "amount": "3", "unit": "yemek kaşığı"},
+      {"name": "Limon suyu", "amount": "1", "unit": "adet"},
+      {"name": "Tuz", "amount": "1", "unit": "çay kaşığı"}
+    ],
+    "steps": ["Bamyaların sapını kırpın, sirkeli suda bekletin.", "Eti kavurun.", "Soğan ve domates ekleyin.", "Bamyaları ekleyin.", "Kısık ateşte 40-45 dk pişirin.", "Limon ile servis edin."],
+    "tips": "Saçma gelebilir ama limon çok önemli."
+  },
+  {
+    "id": "r063", "title": "Lokma Tatlısı", "category": "tatli", "halal": true,
+    "difficulty": "orta", "prep_time": 30, "cook_time": 20, "servings": 15,
+    "tags": ["tatlı", "kızarmış", "şerbetli"],
+    "ingredients": [
+      {"name": "Un", "amount": "2", "unit": "su bardağı"},
+      {"name": "Maya", "amount": "1", "unit": "paket"},
+      {"name": "Su", "amount": "1.5", "unit": "su bardağı"},
+      {"name": "Tuz", "amount": "1/2", "unit": "çay kaşığı"},
+      {"name": "Kızartma yağı", "amount": "1", "unit": "litre"},
+      {"name": "Şerbet: Şeker", "amount": "2", "unit": "su bardağı"},
+      {"name": "Şerbet: Su", "amount": "2", "unit": "su bardağı"}
+    ],
+    "steps": ["Hamuru hazırlayın, 20 dk mayalandırın.", "Şerbet hazırlayın.", "Kaşıkla yağa damlatın.", "Kızartın.", "Sıcakken şerbete atın, 10 dk bekletin."],
+    "tips": "Lokma genellikle hayır için dağıtılır."
+  },
+  {
+    "id": "r064", "title": "Tarhun Çorbası", "category": "corba", "halal": true,
+    "difficulty": "kolay", "prep_time": 10, "cook_time": 20, "servings": 4,
+    "tags": ["çorba", "tarhun", "aromatik"],
+    "ingredients": [
+      {"name": "Taze tarhun", "amount": "1/2", "unit": "demet"},
+      {"name": "Tavuk suyu", "amount": "4", "unit": "su bardağı"},
+      {"name": "Un", "amount": "2", "unit": "yemek kaşığı"},
+      {"name": "Tereyağı", "amount": "2", "unit": "yemek kaşığı"},
+      {"name": "Krema", "amount": "100", "unit": "ml"},
+      {"name": "Tuz, karabiber", "amount": "1", "unit": "çay kaşığı"}
+    ],
+    "steps": ["Tereyağında unu kavurun.", "Tavuk suyunu ekleyin, kaynatın.", "Tarhunu ekleyin.", "Blenderdan geçirin.", "Kremayla servis edin."],
+    "tips": "Taze tarhun olmadan olmaz."
+  },
+  {
+    "id": "r065", "title": "Tavuklu Mercimekli Pilav", "category": "pilav", "halal": true,
+    "difficulty": "kolay", "prep_time": 10, "cook_time": 30, "servings": 5,
+    "tags": ["pilav", "tavuk", "mercimek"],
+    "ingredients": [
+      {"name": "Pirinç", "amount": "2", "unit": "su bardağı"},
+      {"name": "Yeşil mercimek", "amount": "1/2", "unit": "su bardağı"},
+      {"name": "Tavuk göğsü (küçük küp)", "amount": "200", "unit": "gr"},
+      {"name": "Soğan", "amount": "1", "unit": "adet"},
+      {"name": "Tereyağı", "amount": "2", "unit": "yemek kaşığı"},
+      {"name": "Tavuk suyu", "amount": "4", "unit": "su bardağı"},
+      {"name": "Tuz", "amount": "1", "unit": "çay kaşığı"}
+    ],
+    "steps": ["Mercimeği haşlayın.", "Tavuğu ve soğanı kavurun.", "Pirinci ve mercimeği ekleyin.", "Suyunu dökün.", "Pişirin, demleyin."],
+    "tips": "Tek başına tam öğün."
+  },
+  {
+    "id": "r066", "title": "Circassian Pilaf (Kabuli)", "category": "pilav", "halal": true,
+    "difficulty": "orta", "prep_time": 15, "cook_time": 40, "servings": 6,
+    "tags": ["pilav", "havuç", "Orta Asya"],
+    "ingredients": [
+      {"name": "Pirinç (uzun taneli)", "amount": "3", "unit": "su bardağı"},
+      {"name": "Kuzu eti (küp)", "amount": "400", "unit": "gr"},
+      {"name": "Havuç", "amount": "3", "unit": "büyük (julien)"},
+      {"name": "Soğan", "amount": "2", "unit": "büyük"},
+      {"name": "Zeytinyağı veya kuyruk yağı", "amount": "4", "unit": "yemek kaşığı"},
+      {"name": "Kimyon, kişniş", "amount": "1", "unit": "çay kaşığı"},
+      {"name": "Tuz, karabiber", "amount": "1", "unit": "çay kaşığı"}
+    ],
+    "steps": ["Eti kavurun, soğanı ekleyin.", "Havucu ekleyin.", "Sıcak su dökün, 20 dk pişirin.", "Pirinci ekleyin.", "Kısık ateşte 20 dk pişirin, demleyin."],
+    "tips": "Türk mutfağında Orta Asya etkisi."
+  },
+  {
+    "id": "r067", "title": "Bülbül Yuvası", "category": "tatli", "halal": true,
+    "difficulty": "orta", "prep_time": 40, "cook_time": 30, "servings": 12,
+    "tags": ["tatlı", "fıstık", "özel gün"],
+    "ingredients": [
+      {"name": "Yufka", "amount": "400", "unit": "gr"},
+      {"name": "Antep fıstığı (öğütülmüş)", "amount": "250", "unit": "gr"},
+      {"name": "Tereyağı", "amount": "150", "unit": "gr"},
+      {"name": "Şerbet: Şeker", "amount": "2", "unit": "su bardağı"},
+      {"name": "Şerbet: Su", "amount": "1.5", "unit": "su bardağı"},
+      {"name": "Limon suyu", "amount": "1", "unit": "yemek kaşığı"}
+    ],
+    "steps": ["Yufkaları teker teker tereyağıyla yağlayın.", "Fıstık serpin.", "Rulo yapıp halka şekli verin.", "Tepsiye dizin.", "180°C fırında 25-30 dk pişirin.", "Soğuk şerbet dökün."],
+    "tips": "Gaziantep'in simgesi."
+  },
+  {
+    "id": "r068", "title": "Antep Ezmesi", "category": "meze", "halal": true,
+    "difficulty": "kolay", "prep_time": 15, "cook_time": 0, "servings": 6,
+    "tags": ["meze", "acı", "Gaziantep"],
+    "ingredients": [
+      {"name": "Domates", "amount": "3", "unit": "büyük"},
+      {"name": "Sivri biber", "amount": "2", "unit": "adet"},
+      {"name": "Soğan", "amount": "1", "unit": "orta"},
+      {"name": "Maydanoz", "amount": "1/2", "unit": "demet"},
+      {"name": "Zeytinyağı", "amount": "2", "unit": "yemek kaşığı"},
+      {"name": "Nar ekşisi", "amount": "1", "unit": "yemek kaşığı"},
+      {"name": "Tuz, pul biber, kimyon", "amount": "1", "unit": "çay kaşığı"}
+    ],
+    "steps": ["Tüm malzemeleri ince ince doğrayın.", "Baharat ve zeytinyağını ekleyin.", "Nar ekşisini katın.", "Karıştırın."],
+    "tips": "Ekmek ile enfes."
+  },
+  {
+    "id": "r069", "title": "Mercimekli Köfte", "category": "atistirmalik", "halal": true,
+    "difficulty": "kolay", "prep_time": 20, "cook_time": 20, "servings": 6,
+    "tags": ["mercimek", "vegan", "sağlıklı"],
+    "ingredients": [
+      {"name": "Kırmızı mercimek", "amount": "1", "unit": "su bardağı"},
+      {"name": "İnce bulgur", "amount": "1", "unit": "su bardağı"},
+      {"name": "Soğan", "amount": "1", "unit": "büyük"},
+      {"name": "Domates salçası", "amount": "2", "unit": "yemek kaşığı"},
+      {"name": "Zeytinyağı", "amount": "3", "unit": "yemek kaşığı"},
+      {"name": "Kimyon, pul biber", "amount": "1", "unit": "çay kaşığı"},
+      {"name": "Tuz, limon", "amount": "1", "unit": "çay kaşığı"}
+    ],
+    "steps": ["Mercimeği haşlayın.", "Sıcakken bulgur ekleyin, bekleyin.", "Kavurulmuş soğan ve salçayı ekleyin.", "Baharat ve zeytinyağını katın.", "Yoğurun, şekil verin."],
+    "tips": "Marul yaprağıyla servis edin."
+  },
+  {
+    "id": "r070", "title": "Fırında Et Kavurma", "category": "ana_yemek", "halal": true,
+    "difficulty": "kolay", "prep_time": 10, "cook_time": 90, "servings": 4,
+    "tags": ["et", "kavurma", "fırın"],
+    "ingredients": [
+      {"name": "Dana but eti", "amount": "600", "unit": "gr"},
+      {"name": "Soğan", "amount": "2", "unit": "büyük"},
+      {"name": "Sarımsak", "amount": "5", "unit": "diş"},
+      {"name": "Domates", "amount": "2", "unit": "adet"},
+      {"name": "Zeytinyağı", "amount": "3", "unit": "yemek kaşığı"},
+      {"name": "Tuz, karabiber, kekik", "amount": "1", "unit": "çay kaşığı"}
+    ],
+    "steps": ["Eti küp doğrayın.", "Soğan, sarımsak ve baharat ekleyin.", "Tepsiye alın.", "Domates ve zeytinyağı ekleyin.", "Folyo ile kapatın.", "180°C fırında 1.5 saat pişirin."],
+    "tips": "Kendi suyunda pişince çok lezzetli."
+  },
+  {
+    "id": "r071", "title": "Limonlu Şerbet", "category": "icecek", "halal": true,
+    "difficulty": "kolay", "prep_time": 10, "cook_time": 5, "servings": 8,
+    "tags": ["içecek", "limon", "serinletici"],
+    "ingredients": [
+      {"name": "Limon", "amount": "6", "unit": "adet"},
+      {"name": "Şeker", "amount": "1", "unit": "su bardağı"},
+      {"name": "Su", "amount": "1", "unit": "litre"},
+      {"name": "Gül suyu", "amount": "2", "unit": "yemek kaşığı"},
+      {"name": "Buz", "amount": "1", "unit": "kase"}
+    ],
+    "steps": ["Şeker ve suyla şurup yapın.", "Soğutun.", "Limon suyunu ekleyin.", "Gül suyunu katın.", "Buzlu servis edin."],
+    "tips": "Osmanlı sarayında içilirdi."
+  },
+  {
+    "id": "r072", "title": "Tavuklu Güveç", "category": "ana_yemek", "halal": true,
+    "difficulty": "kolay", "prep_time": 20, "cook_time": 60, "servings": 4,
+    "tags": ["tavuk", "güveç", "sebze"],
+    "ingredients": [
+      {"name": "Tavuk (parça)", "amount": "800", "unit": "gr"},
+      {"name": "Patates", "amount": "3", "unit": "orta"},
+      {"name": "Havuç", "amount": "2", "unit": "adet"},
+      {"name": "Soğan", "amount": "2", "unit": "adet"},
+      {"name": "Domates", "amount": "2", "unit": "adet"},
+      {"name": "Sarımsak", "amount": "4", "unit": "diş"},
+      {"name": "Zeytinyağı", "amount": "3", "unit": "yemek kaşığı"},
+      {"name": "Kekik, tuz, karabiber", "amount": "1", "unit": "çay kaşığı"}
+    ],
+    "steps": ["Sebzeleri doğrayın.", "Güveç kapına katlayın.", "Tavukları üzerine koyun.", "Zeytinyağı ve baharat serpin.", "Alüminyum folyo ile kapatın.", "180°C fırında 50-60 dk pişirin."],
+    "tips": "Tek kap yemek, az bulaşık."
+  },
+  {
+    "id": "r073", "title": "Kabak Mücveri", "category": "atistirmalik", "halal": true,
+    "difficulty": "kolay", "prep_time": 15, "cook_time": 15, "servings": 4,
+    "tags": ["kabak", "mücver", "yoğurt"],
+    "ingredients": [
+      {"name": "Kabak", "amount": "3", "unit": "orta (rendelenmiş)"},
+      {"name": "Yumurta", "amount": "2", "unit": "adet"},
+      {"name": "Un", "amount": "3", "unit": "yemek kaşığı"},
+      {"name": "Beyaz peynir", "amount": "100", "unit": "gr"},
+      {"name": "Dereotu, maydanoz", "amount": "1/4", "unit": "demet"},
+      {"name": "Tuz, karabiber", "amount": "1", "unit": "çay kaşığı"},
+      {"name": "Sıvıyağ (kızartma)", "amount": "1/2", "unit": "su bardağı"}
+    ],
+    "steps": ["Kabağı rendeleyip tuzlayın, sıkın.", "Diğer malzemeleri ekleyin.", "Karıştırın.", "Tavada yağda kızartın."],
+    "tips": "Yoğurt ile harika."
+  },
+  {
+    "id": "r074", "title": "Kaymakli Kayısı Tatlısı", "category": "tatli", "halal": true,
+    "difficulty": "kolay", "prep_time": 10, "cook_time": 20, "servings": 6,
+    "tags": ["tatlı", "kayısı", "kaymak"],
+    "ingredients": [
+      {"name": "Kuru kayısı", "amount": "300", "unit": "gr"},
+      {"name": "Şeker", "amount": "1", "unit": "su bardağı"},
+      {"name": "Su", "amount": "2", "unit": "su bardağı"},
+      {"name": "Kaymak", "amount": "200", "unit": "gr"},
+      {"name": "Antep fıstığı", "amount": "50", "unit": "gr"}
+    ],
+    "steps": ["Kayısıları yıkayın.", "Şekerli suda haşlayın.", "Soğutun.", "İçine kaymak doldurun.", "Fıstık ile süsleyin."],
+    "tips": "Ramazan sofralarının vazgeçilmezi."
+  },
+  {
+    "id": "r075", "title": "Güneydoğu Usulü Ciğer", "category": "ana_yemek", "halal": true,
+    "difficulty": "kolay", "prep_time": 15, "cook_time": 10, "servings": 3,
+    "tags": ["ciğer", "Urfa", "ızgara"],
+    "ingredients": [
+      {"name": "Kuzu ciğeri", "amount": "400", "unit": "gr"},
+      {"name": "Soğan", "amount": "2", "unit": "büyük"},
+      {"name": "Maydanoz", "amount": "1/2", "unit": "demet"},
+      {"name": "Pul biber, sumak", "amount": "1", "unit": "yemek kaşığı"},
+      {"name": "Tuz", "amount": "1", "unit": "çay kaşığı"},
+      {"name": "Zeytinyağı", "amount": "2", "unit": "yemek kaşığı"}
+    ],
+    "steps": ["Ciğerleri ince dilimlere kesin.", "Kızgın ızgarada 2-3 dk pişirin.", "Soğanı pul biberle karıştırın.", "Maydanoz ekleyin.", "Yanında servis edin."],
+    "tips": "Pide ile en iyisi."
   }
 ]
