@@ -67,7 +67,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final safeTop = MediaQuery.of(context).viewPadding.top;
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: AppColors.darkBackground,
       body: SafeArea(
         bottom: false,
         child: CustomScrollView(

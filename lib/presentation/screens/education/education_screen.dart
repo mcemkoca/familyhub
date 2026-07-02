@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../config/constants.dart';
+import '../../widgets/ds.dart';
 
 class EducationScreen extends StatefulWidget {
   const EducationScreen({super.key});
@@ -47,8 +48,7 @@ class _EducationScreenState extends State<EducationScreen>
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
-      backgroundColor:
-          isDark ? AppColors.darkBackground : AppColors.background,
+      backgroundColor: AppColors.darkBackground,
       body: SafeArea(
         child: Column(
           children: [
@@ -76,73 +76,63 @@ class _EducationScreenState extends State<EducationScreen>
   }
 
   Widget _buildHeader(bool isDark) {
+    const violet = Color(0xFF8B5CF6);
     return Container(
-      margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-      padding: const EdgeInsets.fromLTRB(18, 16, 18, 20),
+      margin: const EdgeInsets.fromLTRB(12, 10, 12, 0),
+      padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [Color(0xFFA18CD1), Color(0xFFFBC2EB)],
+          colors: [Color(0xFF150D2A), Color(0xFF1A0D30)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: violet.withAlpha(50), width: 0.5),
         boxShadow: [
-          BoxShadow(
-            color: const Color(0xFFA18CD1).withAlpha(100),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
-          ),
+          BoxShadow(color: violet.withAlpha(40), blurRadius: 20, offset: const Offset(0, 6)),
         ],
       ),
       child: Row(
         children: [
           Container(
-            width: 52,
-            height: 52,
+            width: 50, height: 50,
             decoration: BoxDecoration(
-              color: Colors.white.withAlpha(40),
+              gradient: const LinearGradient(
+                colors: [Color(0xFF8B5CF6), Color(0xFF7C3AED)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: Colors.white.withAlpha(60)),
+              boxShadow: [BoxShadow(color: violet.withAlpha(80), blurRadius: 10)],
             ),
-            child: const Center(child: Text('📚', style: TextStyle(fontSize: 26))),
+            child: const Icon(Icons.menu_book_outlined, color: Colors.white, size: 24),
           ),
           const SizedBox(width: 14),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Aile Eğitimi',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w900,
-                    fontSize: 20,
-                    color: Colors.white,
-                    letterSpacing: -0.5,
-                  ),
-                ),
-                Text(
-                  '${_activities.length} aktivite · ebeveyn rehberi · takip',
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.white70,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+                const Text('Aile Eğitimi',
+                    style: TextStyle(fontWeight: FontWeight.w900, fontSize: 19, color: Colors.white)),
+                Text('${_activities.length} aktivite · rehber · takip',
+                    style: TextStyle(fontSize: 11, color: Colors.white.withAlpha(120), fontWeight: FontWeight.w500)),
               ],
             ),
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
             decoration: BoxDecoration(
-              color: Colors.white.withAlpha(50),
+              color: violet.withAlpha(25),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.white.withAlpha(80)),
+              border: Border.all(color: violet.withAlpha(60)),
             ),
-            child: const Text('62% ⭐',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w900,
-                    fontSize: 13)),
+            child: Row(
+              children: [
+                Icon(Icons.star_rounded, size: 13, color: violet),
+                const SizedBox(width: 4),
+                Text('62%', style: TextStyle(color: violet, fontWeight: FontWeight.w900, fontSize: 13)),
+              ],
+            ),
           ),
         ],
       ),
@@ -150,17 +140,31 @@ class _EducationScreenState extends State<EducationScreen>
   }
 
   Widget _buildTabBar() {
-    return TabBar(
-      controller: _tabController,
-      labelColor: const Color(0xFF8B5CF6),
-      unselectedLabelColor: AppColors.slate,
-      indicatorColor: const Color(0xFF8B5CF6),
-      indicatorSize: TabBarIndicatorSize.label,
-      tabs: const [
-        Tab(icon: Icon(Icons.apps, size: 18), text: 'Aktiviteler'),
-        Tab(icon: Icon(Icons.menu_book, size: 18), text: 'Rehber'),
-        Tab(icon: Icon(Icons.bar_chart, size: 18), text: 'İlerleme'),
-      ],
+    const violet = Color(0xFF8B5CF6);
+    return Container(
+      margin: const EdgeInsets.fromLTRB(12, 8, 12, 0),
+      height: 44,
+      decoration: BoxDecoration(
+        color: Ds.glass,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: Ds.glassBorder, width: 0.5),
+      ),
+      child: TabBar(
+        controller: _tabController,
+        labelColor: violet,
+        unselectedLabelColor: Ds.textSub,
+        indicatorColor: violet,
+        indicatorSize: TabBarIndicatorSize.label,
+        indicatorWeight: 2,
+        dividerColor: Colors.transparent,
+        labelStyle: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700),
+        unselectedLabelStyle: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500),
+        tabs: const [
+          Tab(icon: Icon(Icons.apps, size: 16), text: 'Aktiviteler'),
+          Tab(icon: Icon(Icons.menu_book, size: 16), text: 'Rehber'),
+          Tab(icon: Icon(Icons.bar_chart, size: 16), text: 'İlerleme'),
+        ],
+      ),
     );
   }
 }

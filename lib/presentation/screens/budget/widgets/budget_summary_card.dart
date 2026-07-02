@@ -34,30 +34,20 @@ class _SummaryCard extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: color.withAlpha(12),
                   borderRadius: BorderRadius.circular(18),
-                  boxShadow: [
-                    BoxShadow(
-                      color: color.withAlpha(20),
-                      blurRadius: 12,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
+                  border: Border.all(color: color.withAlpha(40), width: 0.5),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                            color: color.withAlpha(20),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Icon(icon, size: 16, color: color),
-                        ),
-                      ],
+                    Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: color.withAlpha(25),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Icon(icon, size: 16, color: color),
                     ),
                     const SizedBox(height: 10),
                     Text(
@@ -65,14 +55,15 @@ class _SummaryCard extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
+                        color: Color(0xFFE5E7EB),
                       ),
                     ),
                     const SizedBox(height: 2),
                     Text(
                       label,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 11,
-                        color: Colors.grey.shade500,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                   ],
@@ -85,4 +76,3 @@ class _SummaryCard extends StatelessWidget {
     );
   }
 }
-

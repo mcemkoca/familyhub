@@ -36,7 +36,7 @@ class _SosMainScreenState extends State<SosMainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1A1A2E),
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,

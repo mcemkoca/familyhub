@@ -135,7 +135,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
 
     return Scaffold(
       backgroundColor:
-          isDark ? AppColors.darkBackground : AppColors.background,
+          AppColors.darkBackground,
       body: SafeArea(
         child: Column(
           children: [
@@ -155,7 +155,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _showAddSheet(context),
-        backgroundColor: AppColors.softMint,
+        backgroundColor: const Color(0xFF10B981),
         icon: const Icon(Icons.add, color: Colors.white),
         label: const Text('Ekle',
             style:
@@ -172,7 +172,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
 
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
-      color: isDark ? AppColors.darkCard : Colors.white,
+      color: const Color(0x1AFFFFFF),
       child: Column(
         children: [
           Row(
@@ -276,7 +276,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
               minChildSize: 0.5,
               builder: (_, scrollCtrl) => Container(
                 decoration: BoxDecoration(
-                  color: isDark ? AppColors.darkCard : Colors.white,
+                  color: const Color(0x1AFFFFFF),
                   borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
                 ),
                 child: Column(
@@ -307,7 +307,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                               hintText: 'Tarif ara...',
                               prefixIcon: const Icon(Icons.search, size: 20),
                               filled: true,
-                              fillColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+                              fillColor: AppColors.darkBackground,
                               border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
                               contentPadding: const EdgeInsets.symmetric(vertical: 10),
                             ),
@@ -341,7 +341,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                               icon: const Icon(Icons.add, size: 16),
                               label: const Text('Ekle'),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.softMint,
+                                backgroundColor: const Color(0xFF10B981),
                                 foregroundColor: Colors.white,
                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                                 minimumSize: Size.zero,
@@ -399,7 +399,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
       SnackBar(
         content: Text('✅ ${recipe['title']} için $added malzeme eklendi'),
         duration: const Duration(seconds: 2),
-        backgroundColor: AppColors.softMint,
+        backgroundColor: const Color(0xFF10B981),
       ),
     );
   }
@@ -444,7 +444,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 10, vertical: 6),
                   decoration: BoxDecoration(
-                    color: isDark ? AppColors.darkCard : Colors.white,
+                    color: const Color(0x1AFFFFFF),
                     borderRadius: BorderRadius.circular(12),
                     border:
                         Border.all(color: AppColors.softMint.withAlpha(80)),
@@ -551,7 +551,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
       child: Container(
         margin: const EdgeInsets.only(bottom: 8),
         decoration: BoxDecoration(
-          color: isDark ? AppColors.darkCard : Colors.white,
+          color: const Color(0x1AFFFFFF),
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
@@ -639,7 +639,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
               right: 20,
               top: 20),
           decoration: BoxDecoration(
-            color: isDark ? AppColors.darkCard : Colors.white,
+            color: const Color(0x1AFFFFFF),
             borderRadius:
                 const BorderRadius.vertical(top: Radius.circular(24)),
           ),
@@ -670,7 +670,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                   prefixIcon: const Icon(Icons.shopping_basket_outlined),
                   filled: true,
                   fillColor:
-                      isDark ? AppColors.darkBackground : AppColors.background,
+                      AppColors.darkBackground,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
                       borderSide: BorderSide.none),
@@ -752,7 +752,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                 child: ElevatedButton(
                   onPressed: _addItem,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.softMint,
+                    backgroundColor: const Color(0xFF10B981),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14)),

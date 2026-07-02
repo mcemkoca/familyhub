@@ -77,7 +77,7 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
     final budgetAsync = ref.watch(budgetProvider);
 
     return Scaffold(
-      backgroundColor: AppColors.cloudWhite,
+      backgroundColor: AppColors.darkBackground,
       body: transactionsAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(child: Text('Hata: $e')),
@@ -96,11 +96,13 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
               SliverAppBar(
                 expandedHeight: 160,
                 pinned: true,
+                backgroundColor: AppColors.darkBackground,
+                surfaceTintColor: Colors.transparent,
                 flexibleSpace: FlexibleSpaceBar(
                   background: Container(
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
-                        colors: AppColors.budgetGradient,
+                        colors: [Color(0xFF0D1F12), Color(0xFF0A2818)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
@@ -152,7 +154,7 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                     ),
                   ),
                 ),
-                backgroundColor: AppColors.green,
+                backgroundColor: AppColors.darkBackground,
               ),
 
               // Summary Cards

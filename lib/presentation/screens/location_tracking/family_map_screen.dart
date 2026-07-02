@@ -116,7 +116,7 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       backgroundColor:
-          isDark ? AppColors.darkBackground : AppColors.background,
+          AppColors.darkBackground,
       body: SafeArea(
         child: Column(
           children: [
@@ -843,7 +843,7 @@ class _DetailTile extends StatelessWidget {
         padding:
             const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
         decoration: BoxDecoration(
-          color: isDark ? AppColors.darkBackground : Colors.white,
+          color: AppColors.darkBackground,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(

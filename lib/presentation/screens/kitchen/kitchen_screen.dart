@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../config/constants.dart';
+import '../../widgets/ds.dart';
 
 class KitchenScreen extends StatefulWidget {
   const KitchenScreen({super.key});
@@ -100,8 +101,7 @@ class _KitchenScreenState extends State<KitchenScreen>
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor:
-          isDark ? AppColors.darkBackground : AppColors.background,
+      backgroundColor: AppColors.darkBackground,
       body: SafeArea(
         child: Column(
           children: [
@@ -149,77 +149,67 @@ class _KitchenScreenState extends State<KitchenScreen>
   }
 
   Widget _buildHeader(bool isDark) {
+    const amber = Color(0xFFF59E0B);
     return Container(
-      margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-      padding: const EdgeInsets.fromLTRB(18, 16, 18, 20),
+      margin: const EdgeInsets.fromLTRB(12, 10, 12, 0),
+      padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [Color(0xFFFDA085), Color(0xFFF6D365)],
+          colors: [Color(0xFF1A1200), Color(0xFF2D1A00)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: amber.withAlpha(50), width: 0.5),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFFFDA085).withAlpha(100),
+            color: amber.withAlpha(40),
             blurRadius: 20,
-            offset: const Offset(0, 8),
+            offset: const Offset(0, 6),
           ),
         ],
       ),
       child: Row(
         children: [
           Container(
-            width: 52,
-            height: 52,
+            width: 50, height: 50,
             decoration: BoxDecoration(
-              color: Colors.white.withAlpha(40),
+              gradient: const LinearGradient(
+                colors: [Color(0xFFF59E0B), Color(0xFFD97706)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: Colors.white.withAlpha(60)),
+              boxShadow: [
+                BoxShadow(color: amber.withAlpha(80), blurRadius: 10),
+              ],
             ),
-            child: const Center(child: Text('🍽️', style: TextStyle(fontSize: 26))),
+            child: const Icon(Icons.restaurant_outlined, color: Colors.white, size: 26),
           ),
           const SizedBox(width: 14),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Aile Mutfağı',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w900,
-                    fontSize: 20,
-                    color: Colors.white,
-                    letterSpacing: -0.5,
-                  ),
-                ),
-                Text(
-                  '${_recipes.length} tarif · haftalık plan · alışveriş',
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.white70,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+                const Text('Aile Mutfağı',
+                    style: TextStyle(fontWeight: FontWeight.w900, fontSize: 19, color: Colors.white)),
+                Text('${_recipes.length} tarif · haftalık plan',
+                    style: TextStyle(fontSize: 11, color: Colors.white.withAlpha(120), fontWeight: FontWeight.w500)),
               ],
             ),
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
             decoration: BoxDecoration(
-              color: Colors.white.withAlpha(50),
+              color: amber.withAlpha(25),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.white.withAlpha(80)),
+              border: Border.all(color: amber.withAlpha(60)),
             ),
             child: Row(
               children: [
-                const Text('⭐', style: TextStyle(fontSize: 14)),
+                Icon(Icons.star_rounded, size: 14, color: amber),
                 const SizedBox(width: 4),
-                const Text('12',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 14)),
+                Text('12', style: TextStyle(color: amber, fontWeight: FontWeight.w900, fontSize: 13)),
               ],
             ),
           ),
@@ -229,17 +219,31 @@ class _KitchenScreenState extends State<KitchenScreen>
   }
 
   Widget _buildTabBar(bool isDark) {
-    return TabBar(
-      controller: _tabController,
-      labelColor: const Color(0xFFF97316),
-      unselectedLabelColor: AppColors.slate,
-      indicatorColor: const Color(0xFFF97316),
-      indicatorSize: TabBarIndicatorSize.label,
-      tabs: const [
-        Tab(icon: Icon(Icons.restaurant_menu, size: 18), text: 'Tarifler'),
-        Tab(icon: Icon(Icons.calendar_view_week, size: 18), text: 'Haftalık'),
-        Tab(icon: Icon(Icons.shopping_cart_outlined, size: 18), text: 'Alışveriş'),
-      ],
+    const amber = Color(0xFFF59E0B);
+    return Container(
+      margin: const EdgeInsets.fromLTRB(12, 8, 12, 0),
+      height: 44,
+      decoration: BoxDecoration(
+        color: Ds.glass,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: Ds.glassBorder, width: 0.5),
+      ),
+      child: TabBar(
+        controller: _tabController,
+        labelColor: amber,
+        unselectedLabelColor: Ds.textSub,
+        indicatorColor: amber,
+        indicatorSize: TabBarIndicatorSize.label,
+        indicatorWeight: 2,
+        dividerColor: Colors.transparent,
+        labelStyle: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700),
+        unselectedLabelStyle: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500),
+        tabs: const [
+          Tab(icon: Icon(Icons.restaurant_menu, size: 16), text: 'Tarifler'),
+          Tab(icon: Icon(Icons.calendar_view_week, size: 16), text: 'Haftalık'),
+          Tab(icon: Icon(Icons.shopping_cart_outlined, size: 16), text: 'Alışveriş'),
+        ],
+      ),
     );
   }
 
@@ -252,24 +256,27 @@ class _KitchenScreenState extends State<KitchenScreen>
       builder: (_) => Container(
         height: MediaQuery.of(context).size.height * 0.7,
         decoration: BoxDecoration(
-          color: isDark ? AppColors.darkCard : Colors.white,
+          color: AppColors.darkCard,
           borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+          border: const Border(
+            top: BorderSide(color: Ds.glassBorder, width: 0.5),
+            left: BorderSide(color: Ds.glassBorder, width: 0.5),
+            right: BorderSide(color: Ds.glassBorder, width: 0.5),
+          ),
         ),
         child: Column(
           children: [
             Container(
               margin: const EdgeInsets.only(top: 12, bottom: 8),
-              width: 40,
-              height: 4,
+              width: 36, height: 4,
               decoration: BoxDecoration(
-                  color: AppColors.border,
+                  color: Ds.textMuted,
                   borderRadius: BorderRadius.circular(2)),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               child: Text('$day için yemek seç',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.w800)),
+                  style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 17, color: Ds.text)),
             ),
             Expanded(
               child: ListView.builder(
@@ -277,32 +284,33 @@ class _KitchenScreenState extends State<KitchenScreen>
                 itemCount: _recipes.length,
                 itemBuilder: (_, i) {
                   final r = _recipes[i];
-                  return ListTile(
-                    onTap: () {
-                      setState(() => _weeklyPlan[day] = r['title'] as String?);
-                      Navigator.pop(context);
-                    },
-                    leading: Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(colors: [
-                          Color(0xFFF97316),
-                          Color(0xFFEF4444)
-                        ]),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Icon(Icons.restaurant,
-                          color: Colors.white, size: 20),
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 8),
+                    decoration: BoxDecoration(
+                      color: Ds.glass,
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(color: Ds.glassBorder, width: 0.5),
                     ),
-                    title: Text(r['title'] ?? '',
-                        style: const TextStyle(fontWeight: FontWeight.w600)),
-                    subtitle: Text(
-                        '${(r['prep_time'] as int? ?? 0) + (r['cook_time'] as int? ?? 0)} dk • ${r['difficulty'] ?? ''}',
-                        style: const TextStyle(
-                            fontSize: 11, color: AppColors.slate)),
-                    trailing: Icon(Icons.add_circle_outline,
-                        color: const Color(0xFFF97316)),
+                    child: ListTile(
+                      onTap: () {
+                        setState(() => _weeklyPlan[day] = r['title'] as String?);
+                        Navigator.pop(context);
+                      },
+                      leading: Container(
+                        width: 40, height: 40,
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(colors: [Color(0xFFF59E0B), Color(0xFFD97706)]),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Icon(Icons.restaurant, color: Colors.white, size: 20),
+                      ),
+                      title: Text(r['title'] ?? '',
+                          style: const TextStyle(fontWeight: FontWeight.w600, color: Ds.text, fontSize: 13)),
+                      subtitle: Text(
+                          '${(r['prep_time'] as int? ?? 0) + (r['cook_time'] as int? ?? 0)} dk · ${r['difficulty'] ?? ''}',
+                          style: const TextStyle(fontSize: 10, color: Ds.textSub)),
+                      trailing: const Icon(Icons.add_circle_outline, color: Color(0xFFF59E0B), size: 20),
+                    ),
                   );
                 },
               ),
@@ -367,22 +375,11 @@ class _RecipesTab extends StatelessWidget {
 
   Widget _buildSearch(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-      child: TextField(
+      padding: const EdgeInsets.fromLTRB(12, 8, 12, 4),
+      child: DsInput(
+        hint: 'Tarif ara...',
+        prefixIcon: Icons.search,
         onChanged: onSearch,
-        style: TextStyle(
-            color: isDark ? AppColors.darkTextPrimary : AppColors.dark),
-        decoration: InputDecoration(
-          hintText: 'Tarif ara...',
-          prefixIcon: const Icon(Icons.search, size: 20),
-          filled: true,
-          fillColor: isDark ? AppColors.darkCard : Colors.white,
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(14),
-              borderSide: BorderSide.none),
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        ),
       ),
     );
   }
@@ -398,47 +395,12 @@ class _RecipesTab extends StatelessWidget {
         itemBuilder: (_, i) {
           final (id, label, icon) = categories[i];
           final active = selectedCategory == id;
-          return GestureDetector(
+          return DsChip(
+            label: label,
+            selected: active,
             onTap: () => onCategoryChanged(id),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 180),
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              decoration: BoxDecoration(
-                color: active
-                    ? const Color(0xFFF97316)
-                    : (isDark ? AppColors.darkCard : Colors.white),
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: active
-                      ? const Color(0xFFF97316)
-                      : (isDark ? AppColors.darkBorder : AppColors.border),
-                ),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(icon,
-                      size: 14,
-                      color: active
-                          ? Colors.white
-                          : (isDark
-                              ? AppColors.darkTextSecondary
-                              : AppColors.slate)),
-                  const SizedBox(width: 5),
-                  Text(label,
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontWeight:
-                              active ? FontWeight.w700 : FontWeight.w500,
-                          color: active
-                              ? Colors.white
-                              : (isDark
-                                  ? AppColors.darkTextSecondary
-                                  : AppColors.slate))),
-                ],
-              ),
-            ),
+            icon: icon,
+            accent: const Color(0xFFF59E0B),
           );
         },
       ),
@@ -553,22 +515,12 @@ class _WeeklyPlanTab extends StatelessWidget {
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
                   color: isToday
-                      ? const Color(0xFFF97316).withAlpha(20)
-                      : (isDark ? AppColors.darkCard : Colors.white),
+                      ? const Color(0xFFF59E0B).withAlpha(15)
+                      : Ds.glass,
                   borderRadius: BorderRadius.circular(16),
                   border: isToday
-                      ? Border.all(
-                          color: const Color(0xFFF97316), width: 1.5)
-                      : Border.all(
-                          color: isDark
-                              ? AppColors.darkBorder
-                              : AppColors.border),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.black.withAlpha(isDark ? 20 : 6),
-                        blurRadius: 8,
-                        offset: const Offset(0, 2))
-                  ],
+                      ? Border.all(color: const Color(0xFFF59E0B), width: 1.5)
+                      : Border.all(color: Ds.glassBorder, width: 0.5),
                 ),
                 child: Row(
                   children: [
@@ -866,15 +818,17 @@ class _RecipeCard extends StatelessWidget {
         (recipe['cook_time'] as int? ?? 0);
     final rating = (recipe['rating'] as num?)?.toDouble() ?? 4.0;
 
+    const amber = Color(0xFFF59E0B);
     return GestureDetector(
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: isDark ? AppColors.darkCard : Colors.white,
-          borderRadius: BorderRadius.circular(20),
+          color: Ds.glass,
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: Ds.glassBorder, width: 0.5),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withAlpha(isDark ? 30 : 8),
+              color: Colors.black.withAlpha(40),
               blurRadius: 12,
               offset: const Offset(0, 4),
             ),
@@ -884,40 +838,28 @@ class _RecipeCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: 110,
+              height: 100,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [
-                    const Color(0xFFF97316).withAlpha(60),
-                    const Color(0xFFEF4444).withAlpha(40),
-                  ],
+                  colors: [amber.withAlpha(30), amber.withAlpha(10)],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
-                borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(20)),
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
+                border: Border(bottom: BorderSide(color: amber.withAlpha(30), width: 0.5)),
               ),
               child: Stack(
                 children: [
-                  Center(
-                    child: Icon(Icons.restaurant,
-                        size: 44,
-                        color: const Color(0xFFF97316).withAlpha(180)),
-                  ),
+                  Center(child: Icon(Icons.restaurant_outlined, size: 40, color: amber.withAlpha(150))),
                   Positioned(
-                    top: 8,
-                    right: 8,
+                    top: 8, right: 8,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                       decoration: BoxDecoration(
-                          color: _difficultyColor.withAlpha(220),
+                          color: _difficultyColor.withAlpha(200),
                           borderRadius: BorderRadius.circular(8)),
                       child: Text(recipe['difficulty'] ?? '',
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w700)),
+                          style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w700)),
                     ),
                   ),
                 ],
@@ -929,32 +871,20 @@ class _RecipeCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(recipe['title'] ?? '',
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                          color: isDark
-                              ? AppColors.darkTextPrimary
-                              : AppColors.dark),
+                      style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Ds.text),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis),
                   const SizedBox(height: 6),
                   Row(
                     children: [
-                      const Icon(Icons.timer_outlined,
-                          size: 12, color: AppColors.slate),
+                      const Icon(Icons.timer_outlined, size: 12, color: Ds.textSub),
                       const SizedBox(width: 3),
-                      Text('$totalTime dk',
-                          style: const TextStyle(
-                              fontSize: 11, color: AppColors.slate)),
+                      Text('$totalTime dk', style: const TextStyle(fontSize: 10, color: Ds.textSub)),
                       const Spacer(),
-                      const Icon(Icons.star_rounded,
-                          size: 13, color: AppColors.warning),
+                      const Icon(Icons.star_rounded, size: 13, color: Color(0xFFFBBF24)),
                       const SizedBox(width: 2),
                       Text(rating.toStringAsFixed(1),
-                          style: const TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.slate)),
+                          style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: Ds.textSub)),
                     ],
                   ),
                 ],

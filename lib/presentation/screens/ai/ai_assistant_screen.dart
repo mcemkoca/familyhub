@@ -245,9 +245,9 @@ class _AIAssistantScreenState extends State<AIAssistantScreen> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: AppColors.darkBackground,
       appBar: AppBar(
-        backgroundColor: isDark ? AppColors.darkBackground : Colors.white,
+        backgroundColor: AppColors.darkBackground,
         elevation: 0,
         leading: IconButton(
           onPressed: () => context.pop(),

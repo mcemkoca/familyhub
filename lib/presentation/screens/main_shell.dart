@@ -134,23 +134,23 @@ class _MainShellState extends State<MainShell> {
           height: 84,
           decoration: BoxDecoration(
             color: isDark
-                ? AppColors.darkCard.withAlpha(245)
+                ? const Color(0xFF13131A).withAlpha(240)
                 : Colors.white.withAlpha(245),
             borderRadius: BorderRadius.circular(32),
             border: Border.all(
               color: isDark
-                  ? AppColors.darkBorder.withAlpha(120)
+                  ? Colors.white.withAlpha(18)
                   : Colors.white.withAlpha(200),
-              width: 1,
+              width: 0.5,
             ),
             boxShadow: [
               BoxShadow(
-                color: AppColors.cobalt.withAlpha(12),
+                color: const Color(0xFF6366F1).withAlpha(isDark ? 25 : 12),
                 blurRadius: 24,
                 offset: const Offset(0, 8),
               ),
               BoxShadow(
-                color: Colors.black.withAlpha(isDark ? 40 : 12),
+                color: Colors.black.withAlpha(isDark ? 60 : 12),
                 blurRadius: 20,
                 offset: const Offset(0, 4),
               ),
@@ -206,15 +206,23 @@ class _MainShellState extends State<MainShell> {
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: isActive
-                          ? AppColors.cobalt.withAlpha(isDark ? 30 : 20)
+                          ? const Color(0xFF6366F1).withAlpha(isDark ? 40 : 20)
                           : Colors.transparent,
                       shape: BoxShape.circle,
+                      boxShadow: isActive && isDark
+                          ? [
+                              BoxShadow(
+                                color: const Color(0xFF6366F1).withAlpha(60),
+                                blurRadius: 14,
+                              ),
+                            ]
+                          : null,
                     ),
                     child: Icon(
                       icon,
                       size: isActive ? 26 : 24,
                       color: isActive
-                          ? AppColors.cobalt
+                          ? const Color(0xFF6366F1)
                           : (isDark
                               ? AppColors.darkTextSecondary
                               : AppColors.slate),
@@ -252,7 +260,7 @@ class _MainShellState extends State<MainShell> {
                   fontSize: isActive ? 12 : 11,
                   fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
                   color: isActive
-                      ? AppColors.cobalt
+                      ? const Color(0xFF6366F1)
                       : (isDark
                           ? AppColors.darkTextSecondary
                           : AppColors.slate),
@@ -280,15 +288,15 @@ class _MainShellState extends State<MainShell> {
               height: 68,
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
-                  colors: AppColors.fabGradient,
+                  colors: [Color(0xFF6366F1), Color(0xFF4F46E5)],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.cobalt.withAlpha(50),
-                    blurRadius: 20,
+                    color: const Color(0xFF6366F1).withAlpha(80),
+                    blurRadius: 24,
                     spreadRadius: 2,
                     offset: const Offset(0, 8),
                   ),

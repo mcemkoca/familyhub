@@ -149,7 +149,7 @@ class AppTheme {
       brightness: Brightness.dark,
       scaffoldBackgroundColor: AppColors.darkBackground,
       colorScheme: ColorScheme.dark(
-        primary: accentColor,
+        primary: AppColors.indigo,
         secondary: AppColors.pink,
         surface: AppColors.darkCard,
         error: AppColors.error,
@@ -163,21 +163,23 @@ class AppTheme {
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppRadius.large),
+          side: const BorderSide(color: AppColors.darkGlassBorder, width: 0.5),
         ),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: AppColors.darkCard,
-        selectedItemColor: accentColor,
+        selectedItemColor: AppColors.indigo,
         unselectedItemColor: AppColors.darkTextSecondary,
         type: BottomNavigationBarType.fixed,
         elevation: 8,
       ),
       appBarTheme: AppBarTheme(
         elevation: 0,
-        centerTitle: true,
+        centerTitle: false,
         backgroundColor: AppColors.darkBackground,
         foregroundColor: AppColors.darkTextPrimary,
-        titleTextStyle: GoogleFonts.inter(fontSize: 18 * fontScale, fontWeight: FontWeight.w600, color: AppColors.darkTextPrimary),
+        surfaceTintColor: Colors.transparent,
+        titleTextStyle: GoogleFonts.inter(fontSize: 18 * fontScale, fontWeight: FontWeight.w700, color: AppColors.darkTextPrimary),
       ),
       dialogTheme: DialogThemeData(
         backgroundColor: AppColors.darkCard,
@@ -185,16 +187,16 @@ class AppTheme {
       ),
       dividerTheme: const DividerThemeData(
         color: AppColors.darkBorder,
-        thickness: 1,
+        thickness: 0.5,
         space: 1,
       ),
       listTileTheme: ListTileThemeData(
-        tileColor: AppColors.darkCard,
+        tileColor: Colors.transparent,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.medium)),
       ),
       switchTheme: SwitchThemeData(
-        thumbColor: WidgetStateProperty.resolveWith((states) => states.contains(WidgetState.selected) ? accentColor : AppColors.darkTextSecondary),
-        trackColor: WidgetStateProperty.resolveWith((states) => states.contains(WidgetState.selected) ? accentColor.withAlpha(80) : AppColors.darkBorder),
+        thumbColor: WidgetStateProperty.resolveWith((states) => states.contains(WidgetState.selected) ? AppColors.indigo : AppColors.darkTextSecondary),
+        trackColor: WidgetStateProperty.resolveWith((states) => states.contains(WidgetState.selected) ? AppColors.indigo.withAlpha(80) : AppColors.darkBorder),
       ),
       checkboxTheme: CheckboxThemeData(
         fillColor: WidgetStateProperty.resolveWith((states) => states.contains(WidgetState.selected) ? accentColor : Colors.transparent),

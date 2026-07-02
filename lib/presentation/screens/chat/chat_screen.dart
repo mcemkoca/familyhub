@@ -432,9 +432,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     final pinnedMessage = messages.where((m) => m.isPinned).firstOrNull;
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: AppColors.darkBackground,
       appBar: AppBar(
-        backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+        backgroundColor: AppColors.darkBackground,
         foregroundColor: isDark ? AppColors.darkTextPrimary : AppColors.dark,
         elevation: 0,
         titleSpacing: 0,

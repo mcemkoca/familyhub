@@ -426,35 +426,51 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
     final members = ref.watch(familyHealthProvider);
     final member = members.isEmpty ? null : members[_selectedMember.clamp(0, members.length - 1)];
 
+    const teal = Color(0xFF14B8A6);
     return Scaffold(
+      backgroundColor: const Color(0xFF0A0A0F),
       body: CustomScrollView(
         slivers: [
           // Header
           SliverAppBar(
             expandedHeight: 160,
             pinned: true,
+            backgroundColor: const Color(0xFF0A0A0F),
+            surfaceTintColor: Colors.transparent,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color(0xFF11998E), Color(0xFF38EF7D)],
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF071A18), Color(0xFF0A2420)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
+                  border: Border(bottom: BorderSide(color: teal.withAlpha(30), width: 0.5)),
                 ),
                 child: SafeArea(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const SizedBox(height: 8),
-                      const Text('🏥 Aile Hekimi',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontWeight: FontWeight.w900)),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 34, height: 34,
+                            decoration: BoxDecoration(
+                              gradient: const LinearGradient(colors: [Color(0xFF14B8A6), Color(0xFF0D9488)]),
+                              borderRadius: BorderRadius.circular(11),
+                            ),
+                            child: const Icon(Icons.monitor_heart_outlined, color: Colors.white, size: 18),
+                          ),
+                          const SizedBox(width: 10),
+                          const Text('Aile Hekimi',
+                              style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900)),
+                        ],
+                      ),
+                      const SizedBox(height: 4),
                       const Text('Sağlık takibi & ilaç yönetimi',
-                          style: TextStyle(
-                              color: Colors.white70, fontSize: 13)),
+                          style: TextStyle(color: Color(0xFF6B7280), fontSize: 12)),
                       const SizedBox(height: 12),
                       // Member selector
                       SizedBox(
@@ -524,9 +540,9 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
               controller: _tab,
               isScrollable: true,
               tabAlignment: TabAlignment.start,
-              indicatorColor: Colors.white,
-              labelColor: Colors.white,
-              unselectedLabelColor: Colors.white60,
+              indicatorColor: teal,
+              labelColor: teal,
+              unselectedLabelColor: const Color(0xFF6B7280),
               labelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
               tabs: _tabs.map((t) => Tab(text: t)).toList(),
             ),

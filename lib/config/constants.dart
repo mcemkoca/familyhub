@@ -35,18 +35,28 @@ class AppColors {
   static const Color error = Color(0xFFEF4444);
   static const Color info = Color(0xFF3B82F6);
 
-  // Dark mode
-  static const Color darkBackground = Color(0xFF0F172A);
-  static const Color darkCard = Color(0xFF1E293B);
-  static const Color darkTextPrimary = Color(0xFFF1F5F9);
-  static const Color darkTextSecondary = Color(0xFF94A3B8);
-  static const Color darkBorder = Color(0xFF334155);
+  // Dark mode — premium
+  static const Color darkBackground = Color(0xFF0A0A0F);
+  static const Color darkCard = Color(0xFF13131A);
+  static const Color darkCardAlt = Color(0xFF1A1A2E);
+  static const Color darkGlass = Color(0x1AFFFFFF);   // white 10%
+  static const Color darkGlassBorder = Color(0x1EFFFFFF); // white 12%
+  static const Color darkTextPrimary = Color(0xFFE5E7EB);
+  static const Color darkTextSecondary = Color(0xFF6B7280);
+  static const Color darkTextMuted = Color(0xFF374151);
+  static const Color darkBorder = Color(0xFF1F2937);
+
+  // Premium accent
+  static const Color indigo = Color(0xFF6366F1);
+  static const Color indigoLight = Color(0xFFA5B4FC);
+  static const Color indigoDark = Color(0xFF4F46E5);
 
   static const List<Color> taskGradient = [purple, pink];
   static const List<Color> streakGradient = [orange, red];
   static const List<Color> calendarGradient = [blue, cyan];
   static const List<Color> budgetGradient = [green, mint];
-  static const List<Color> fabGradient = [cobalt, cobaltLight, cobaltLighter];
+  static const List<Color> fabGradient = [indigo, indigoDark];
+  static const List<Color> brandGradient = [indigo, pink];
 }
 
 class AppSpacing {

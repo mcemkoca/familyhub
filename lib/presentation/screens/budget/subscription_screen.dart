@@ -182,21 +182,26 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
         activeSubs.fold<double>(0, (sum, s) => sum + s.monthlyAmount);
     final totalYearly = totalMonthly * 12;
 
+    const indigo = Color(0xFF6366F1);
     return Scaffold(
+      backgroundColor: const Color(0xFF0A0A0F),
       body: CustomScrollView(
         slivers: [
           // Header
           SliverAppBar(
             expandedHeight: 200,
             pinned: true,
+            backgroundColor: const Color(0xFF0A0A0F),
+            surfaceTintColor: Colors.transparent,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF0D0D1A), Color(0xFF1A1035)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
+                  border: Border(bottom: BorderSide(color: indigo.withAlpha(30), width: 0.5)),
                 ),
                 child: SafeArea(
                   child: Padding(
@@ -205,43 +210,41 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 40),
-                        const Text('📱 Abonelik Takibi',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 22,
-                                fontWeight: FontWeight.w900)),
-                        const Text('Tüm dijital abonelikleriniz',
-                            style: TextStyle(
-                                color: Colors.white70, fontSize: 13)),
+                        Row(
+                          children: [
+                            Container(
+                              width: 42, height: 42,
+                              decoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                  colors: [Color(0xFF6366F1), Color(0xFF4F46E5)],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                                borderRadius: BorderRadius.circular(13),
+                              ),
+                              child: const Icon(Icons.subscriptions_outlined, color: Colors.white, size: 20),
+                            ),
+                            const SizedBox(width: 12),
+                            const Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Abonelik Takibi',
+                                    style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900)),
+                                Text('Tüm dijital abonelikleriniz',
+                                    style: TextStyle(color: Color(0xFF6B7280), fontSize: 12)),
+                              ],
+                            ),
+                          ],
+                        ),
                         const SizedBox(height: 16),
                         // Summary cards
                         Row(
                           children: [
-                            Expanded(
-                              child: _SummaryCard(
-                                label: 'Aylık Toplam',
-                                value:
-                                    '₺${totalMonthly.toStringAsFixed(0)}',
-                                icon: '📅',
-                              ),
-                            ),
+                            Expanded(child: _SummaryCard(label: 'Aylık', value: '₺${totalMonthly.toStringAsFixed(0)}', icon: '📅')),
                             const SizedBox(width: 10),
-                            Expanded(
-                              child: _SummaryCard(
-                                label: 'Yıllık Toplam',
-                                value:
-                                    '₺${totalYearly.toStringAsFixed(0)}',
-                                icon: '📆',
-                              ),
-                            ),
+                            Expanded(child: _SummaryCard(label: 'Yıllık', value: '₺${totalYearly.toStringAsFixed(0)}', icon: '📆')),
                             const SizedBox(width: 10),
-                            Expanded(
-                              child: _SummaryCard(
-                                label: 'Aktif',
-                                value: '${activeSubs.length} adet',
-                                icon: '✅',
-                              ),
-                            ),
+                            Expanded(child: _SummaryCard(label: 'Aktif', value: '${activeSubs.length}', icon: '✅')),
                           ],
                         ),
                       ],
