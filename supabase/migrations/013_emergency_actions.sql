@@ -1,4 +1,4 @@
--- Migration: 013_emergency_actions.sql
+﻿-- Migration: 013_emergency_actions.sql
 -- Emergency auto-actions system tables
 
 -- ─────────────────────────────────────────────
@@ -7,7 +7,7 @@
 create table if not exists emergency_actions (
     id uuid primary key default gen_random_uuid(),
     family_id uuid references families(id) on delete cascade,
-    triggered_by uuid references family_members(id) on delete set null,
+    triggered_by uuid references public.profiles(id) on delete set null,
 
     trigger_type text not null default 'manual_sos',
     trigger_timestamp timestamptz not null default now(),
@@ -29,7 +29,7 @@ create table if not exists emergency_actions (
     started_at timestamptz not null default now(),
     last_action_at timestamptz,
     resolved_at timestamptz,
-    resolved_by uuid references family_members(id),
+    resolved_by uuid references public.profiles(id),
 
     response_log jsonb default '[]',
 

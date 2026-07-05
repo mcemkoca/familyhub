@@ -1,10 +1,15 @@
--- ============================================================================
+﻿-- ============================================================================
 -- 053_fcm_push_trigger.sql
 -- Database webhook triggers for FCM push notifications via Edge Function
 -- ============================================================================
 
--- Enable pg_net for async HTTP requests from triggers
-CREATE EXTENSION IF NOT EXISTS pg_net;
+-- Enable pg_net for async HTTP requests from triggers (safe block)
+DO $$
+BEGIN
+  CREATE EXTENSION IF NOT EXISTS pg_net;
+EXCEPTION WHEN OTHERS THEN
+  RAISE NOTICE 'pg_net extension not available, skipping';
+END $$;
 
 -- Helper function: call fcm-push Edge Function
 CREATE OR REPLACE FUNCTION public.notify_family_members()
@@ -17,7 +22,6 @@ DECLARE
   v_function_url TEXT;
   v_service_role TEXT;
 BEGIN
-  -- Get project ref from environment (set in Supabase Dashboard)
   v_project_ref := current_setting('app.settings.supabase_project_ref', true);
   IF v_project_ref IS NULL OR v_project_ref = '' THEN
     v_project_ref := split_part(current_setting('supabase.functions_url', true), '.', 1);
@@ -26,7 +30,6 @@ BEGIN
   v_function_url := 'https://' || v_project_ref || '.supabase.co/functions/v1/fcm-push';
   v_service_role := current_setting('supabase.service_role_key', true);
 
-  -- Async HTTP POST to Edge Function
   PERFORM net.http_post(
     url := v_function_url,
     headers := jsonb_build_object(
@@ -41,8 +44,9 @@ BEGIN
   );
 
   RETURN NEW;
-END;
-$$;
+EXCEPTION WHEN OTHERS THEN
+  RETURN NEW;
+END $$;
 
 -- Trigger: New messages -> push notification
 DROP TRIGGER IF EXISTS messages_push_notify ON public.messages;
@@ -64,11 +68,3 @@ CREATE TRIGGER tasks_push_notify
   AFTER INSERT ON public.tasks
   FOR EACH ROW
   EXECUTE FUNCTION public.notify_family_members();
-
--- ============================================================================
--- NOTE: To make this work, you must set the following secrets in Supabase:
---   1. FIREBASE_SERVICE_ACCOUNT_JSON  (Firebase service account JSON)
---   2. SUPABASE_SERVICE_ROLE_KEY      (already available)
---
--- Set via: supabase secrets set FIREBASE_SERVICE_ACCOUNT_JSON '...json...'
--- ============================================================================

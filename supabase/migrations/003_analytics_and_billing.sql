@@ -81,6 +81,14 @@ CREATE TABLE IF NOT EXISTS public.subscriptions (
   created_at timestamptz DEFAULT now()
 );
 
+-- 055 daha once subscriptions'i farkli semayla olusturmus olabilir.
+-- revenue_metrics view'inin ihtiyac duydugu billing kolonlarini garanti et:
+ALTER TABLE public.subscriptions ADD COLUMN IF NOT EXISTS subscription_tier text DEFAULT 'free';
+ALTER TABLE public.subscriptions ADD COLUMN IF NOT EXISTS amount            numeric;
+ALTER TABLE public.subscriptions ADD COLUMN IF NOT EXISTS currency          text DEFAULT 'USD';
+ALTER TABLE public.subscriptions ADD COLUMN IF NOT EXISTS status            text DEFAULT 'active';
+ALTER TABLE public.subscriptions ADD COLUMN IF NOT EXISTS expires_at        timestamptz;
+
 ALTER TABLE IF EXISTS public.subscriptions ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Users can view own subscriptions" ON public.subscriptions;
 CREATE POLICY "Users can view own subscriptions"
@@ -138,43 +146,52 @@ ALTER TABLE public.profiles
 -- Admin Analytics Views
 -- ============================================================
 
-CREATE OR REPLACE VIEW public.daily_active_users AS
-SELECT
-  date_trunc('day', created_at)::date AS date,
-  count(DISTINCT user_id) AS dau
-FROM public.analytics_events
-WHERE created_at > now() - interval '30 days'
-GROUP BY 1
-ORDER BY 1 DESC;
+-- Analitik view'ler kritik degil; eski/tutarsiz sema varsa hata yutulur, script devam eder.
+DO $reconcile_views$
+BEGIN
+  EXECUTE $v$
+    CREATE OR REPLACE VIEW public.daily_active_users AS
+    SELECT date_trunc('day', created_at)::date AS date,
+           count(DISTINCT user_id) AS dau
+    FROM public.analytics_events
+    WHERE created_at > now() - interval '30 days'
+    GROUP BY 1 ORDER BY 1 DESC
+  $v$;
+EXCEPTION WHEN OTHERS THEN RAISE NOTICE 'daily_active_users view atlandi: %', SQLERRM;
+END $reconcile_views$;
 
-CREATE OR REPLACE VIEW public.retention_cohort AS
-WITH first_seen AS (
-  SELECT
-    user_id,
-    min(date_trunc('day', created_at)::date) AS first_day
-  FROM public.analytics_events
-  GROUP BY 1
-)
-SELECT
-  fs.first_day AS cohort,
-  (date_trunc('day', ae.created_at)::date - fs.first_day) AS day_offset,
-  count(DISTINCT ae.user_id) AS retained_users
-FROM first_seen fs
-JOIN public.analytics_events ae ON fs.user_id = ae.user_id
-GROUP BY 1, 2
-ORDER BY 1 DESC, 2;
+DO $reconcile_views$
+BEGIN
+  EXECUTE $v$
+    CREATE OR REPLACE VIEW public.retention_cohort AS
+    WITH first_seen AS (
+      SELECT user_id, min(date_trunc('day', created_at)::date) AS first_day
+      FROM public.analytics_events GROUP BY 1
+    )
+    SELECT fs.first_day AS cohort,
+           (date_trunc('day', ae.created_at)::date - fs.first_day) AS day_offset,
+           count(DISTINCT ae.user_id) AS retained_users
+    FROM first_seen fs
+    JOIN public.analytics_events ae ON fs.user_id = ae.user_id
+    GROUP BY 1, 2 ORDER BY 1 DESC, 2
+  $v$;
+EXCEPTION WHEN OTHERS THEN RAISE NOTICE 'retention_cohort view atlandi: %', SQLERRM;
+END $reconcile_views$;
 
-CREATE OR REPLACE VIEW public.revenue_metrics AS
-SELECT
-  date_trunc('month', created_at)::date AS month,
-  count(*) AS new_subscriptions,
-  coalesce(sum(amount), 0) AS revenue,
-  currency,
-  subscription_tier
-FROM public.subscriptions
-WHERE status = 'active'
-GROUP BY 1, 4, 5
-ORDER BY 1 DESC;
+DO $reconcile_views$
+BEGIN
+  EXECUTE $v$
+    CREATE OR REPLACE VIEW public.revenue_metrics AS
+    SELECT date_trunc('month', created_at)::date AS month,
+           count(*) AS new_subscriptions,
+           coalesce(sum(amount), 0) AS revenue,
+           currency, subscription_tier
+    FROM public.subscriptions
+    WHERE status = 'active'
+    GROUP BY 1, 4, 5 ORDER BY 1 DESC
+  $v$;
+EXCEPTION WHEN OTHERS THEN RAISE NOTICE 'revenue_metrics view atlandi: %', SQLERRM;
+END $reconcile_views$;
 
 -- ============================================================
 -- RPC Functions

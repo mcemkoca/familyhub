@@ -95,9 +95,15 @@ BEGIN
     SELECT user_id INTO v_creator_id FROM public.family_members WHERE family_id = v_family_id AND role IN ('admin','parent') LIMIT 1;
   END IF;
   
+  -- Aile yoksa veya creator bulunamadiysa demo cocuk eklemeyi atla
+  IF v_creator_id IS NULL THEN
+    RAISE NOTICE 'Aile/olusturan bulunamadi, demo cocuk eklenmedi.';
+    RETURN;
+  END IF;
+
   -- Mevcut Mirac kaydi var mi kontrol et
   SELECT id INTO v_child_id FROM public.child_accounts WHERE family_id = v_family_id AND name = 'Mirac' LIMIT 1;
-  
+
   IF v_child_id IS NULL THEN
     INSERT INTO public.child_accounts (
       family_id, name, age, pin_hash, role, color, 
@@ -130,4 +136,3 @@ NOTIFY pgrst, 'reload schema';
 -- 3. Cocuk (Mirac, 6 yas) eklendi/guncellendi
 -- Uygulamayi kapatip acin.
 -- ============================================
-++++++++++2.01Q

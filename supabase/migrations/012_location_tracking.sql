@@ -1,4 +1,4 @@
--- Migration: 012_location_tracking.sql
+﻿-- Migration: 012_location_tracking.sql
 -- Battery-aware location tracking system tables
 
 -- ─────────────────────────────────────────────
@@ -6,7 +6,7 @@
 -- ─────────────────────────────────────────────
 create table if not exists location_tracking_settings (
     id uuid primary key default gen_random_uuid(),
-    member_id uuid references family_members(id) on delete cascade unique,
+    member_id uuid references public.profiles(id) on delete cascade unique,
     family_id uuid references families(id) on delete cascade,
 
     enabled boolean not null default true,
@@ -53,7 +53,7 @@ create table if not exists location_tracking_settings (
 create table if not exists location_history (
     id uuid primary key default gen_random_uuid(),
     batch_id text not null,
-    member_id uuid references family_members(id) on delete cascade,
+    member_id uuid references public.profiles(id) on delete cascade,
     family_id uuid references families(id) on delete cascade,
 
     recorded_at timestamptz not null,
@@ -78,7 +78,7 @@ create index if not exists idx_location_history_batch on location_history(batch_
 -- ─────────────────────────────────────────────
 create table if not exists battery_logs (
     id uuid primary key default gen_random_uuid(),
-    member_id uuid references family_members(id) on delete cascade,
+    member_id uuid references public.profiles(id) on delete cascade,
 
     timestamp timestamptz not null default now(),
     battery_level int not null,
@@ -106,7 +106,7 @@ create index if not exists idx_battery_logs_timestamp on battery_logs(timestamp 
 -- ─────────────────────────────────────────────
 create table if not exists tracking_analytics (
     id uuid primary key default gen_random_uuid(),
-    member_id uuid references family_members(id) on delete cascade,
+    member_id uuid references public.profiles(id) on delete cascade,
     date date not null,
 
     total_locations int not null default 0,
