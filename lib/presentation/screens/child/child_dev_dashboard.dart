@@ -10,6 +10,7 @@ import 'child_dev_store.dart';
 import 'child_dev_observation.dart';
 import 'child_dev_assessment.dart';
 import 'child_dev_plan_setup.dart';
+import 'child_dev_area_detail.dart';
 
 /// Ekran 1 — Çocuk Gelişim Dashboard.
 class ChildDevelopmentHome extends ConsumerStatefulWidget {
@@ -195,7 +196,13 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
       children: devAreas.map((a) {
         final score = DevStore.areaScore(child.id, a.key, group);
         return GestureDetector(
-          onTap: () => _openAssessment(child),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (_) => AreaDetailScreen(child: child, areaKey: a.key)),
+          ).then((_) {
+            if (mounted) setState(() {});
+          }),
           child: Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(

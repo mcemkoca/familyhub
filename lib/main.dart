@@ -19,6 +19,7 @@ import 'domain/entities.dart';
 import 'presentation/providers/app_providers.dart';
 import 'services/notification_service.dart';
 import 'services/hive_service.dart';
+import 'services/koca_seed.dart';
 import 'services/auth_service.dart';
 import 'services/billing/subscription_service.dart';
 import 'services/content/content_engine.dart';
@@ -101,6 +102,9 @@ Future<void> _initAndRunApp() async {
     );
     await _safeInit(Hive.initFlutter, 'Hive', ms: 2000);
     await _safeInit(HiveService.init, 'HiveService', ms: 2000);
+
+    // Koca Ailesi başlangıç verisini (bir kez) kur.
+    await _safeInit(KocaSeed.ensure, 'KocaSeed', ms: 2000);
 
     // Load settings immediately so app can open
     final savedTheme = HiveService.getSetting('themeMode') ?? 'system'; // default: follow system

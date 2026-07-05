@@ -177,6 +177,180 @@ List<(String, String)> assessmentFor(String devGroup) {
   return assessmentByGroup[devGroup] ?? assessmentByGroup['4-5 yaş']!;
 }
 
+/// Bir gelişim alanının detaylı içeriği (açıklama, etkinlik, ipucu, kaynak).
+class AreaContent {
+  final String description;
+  final List<String> activities;
+  final List<String> tips;
+  final List<(String, String)> links; // (etiket, url)
+  const AreaContent({
+    required this.description,
+    required this.activities,
+    required this.tips,
+    required this.links,
+  });
+}
+
+/// Her gelişim alanı için konuya özgü (tekrarsız) detaylı içerik.
+/// Etkinlikler yaşa göre `areaActivitiesFor` ile ince ayarlanır.
+const Map<String, AreaContent> areaContentByKey = {
+  'dil': AreaContent(
+    description:
+        'Dil gelişimi; sözcük dağarcığı, konuşma, dinleme ve anlama becerilerini '
+        'kapsar. Çocuğunuzla bol bol konuşmak, kitap okumak ve şarkı söylemek '
+        'bu alanı en çok besleyen etkinliklerdir.',
+    activities: [
+      'Her gün 10-15 dk resimli kitap okuyun; resimleri birlikte anlatın.',
+      'Gün içinde yaptıklarınızı sesli anlatın ("Şimdi elmayı yıkıyoruz").',
+      'Tekerleme ve parmak oyunları söyleyin (Portakalı soydum…).',
+      'Nesneleri gösterip adlarını ve seslerini söyletin.',
+      '"Neden / nasıl" sorularıyla cümle kurmaya teşvik edin.',
+    ],
+    tips: [
+      'Çocuğun cümlesini düzeltmek yerine doğrusunu tekrar ederek modelleyin.',
+      'Konuşurken göz teması kurun ve yanıt için zaman tanıyın.',
+      'Ekran süresini sınırlayın; karşılıklı konuşma en iyi öğreticidir.',
+    ],
+    links: [
+      ('YouTube: Çocuk dil gelişimi etkinlikleri',
+          'https://www.youtube.com/results?search_query=çocuk+dil+gelişimi+etkinlikleri'),
+      ('TEDMEM: Erken dil gelişimi',
+          'https://www.google.com/search?q=erken+çocuklukta+dil+gelişimi+etkinlikleri'),
+    ],
+  ),
+  'motor': AreaContent(
+    description:
+        'Motor gelişim; kaba motor (koşma, zıplama, denge) ve ince motor '
+        '(kalem tutma, makas, düğme) becerilerini içerir. Hareket ve el '
+        'çalışmaları bu alanı güçlendirir.',
+    activities: [
+      'Parkta koşma, tırmanma, tek ayak üzerinde durma oyunları.',
+      'Top yakalama ve atma ile el-göz koordinasyonu.',
+      'Hamur/oyun hamuru yoğurma, boncuk dizme (ince motor).',
+      'Makasla kâğıt kesme ve çizgi üzerinde ilerleme.',
+      'Düğme ilikleme, fermuar çekme gibi öz-bakım pratiği.',
+    ],
+    tips: [
+      'İnce motor için kalın kalemler ve büyük boncuklarla başlayın.',
+      'Günlük en az 1 saat aktif fiziksel oyun hedefleyin.',
+      'Başarısızlıkta cesaretlendirin; tekrar önemlidir.',
+    ],
+    links: [
+      ('YouTube: İnce motor etkinlikleri',
+          'https://www.youtube.com/results?search_query=ince+motor+beceri+etkinlikleri+çocuk'),
+      ('Kaba motor oyun fikirleri',
+          'https://www.google.com/search?q=çocuklar+için+kaba+motor+oyunları'),
+    ],
+  ),
+  'sosyal': AreaContent(
+    description:
+        'Sosyal-duygusal gelişim; duyguları tanıma, paylaşma, sıra bekleme, '
+        'empati ve arkadaşlık kurma becerilerini kapsar. Oyun ve model olma '
+        'en etkili yöntemdir.',
+    activities: [
+      'Duygu kartlarıyla "şimdi ne hissediyorsun?" oyunu.',
+      'Sıra bekleme gerektiren sıra oyunları (kutu oyunları).',
+      'Rol yapma: doktor, market, ev oyunları ile empati.',
+      'Birlikte paylaşma ve yardımlaşma görevleri verin.',
+      'Gün sonunda "bugün seni ne mutlu etti?" sohbeti.',
+    ],
+    tips: [
+      'Duyguları adlandırın ("Kızgın görünüyorsun, ne oldu?").',
+      'İstenen davranışı övün; olumlu pekiştirme kullanın.',
+      'Anlaşmazlıkta çözüm üretmesine rehberlik edin, çözmeyin.',
+    ],
+    links: [
+      ('YouTube: Duygu eğitimi etkinlikleri',
+          'https://www.youtube.com/results?search_query=çocukta+duygu+eğitimi+etkinlikleri'),
+      ('Sosyal beceri oyunları',
+          'https://www.google.com/search?q=okul+öncesi+sosyal+beceri+oyunları'),
+    ],
+  ),
+  'bilissel': AreaContent(
+    description:
+        'Bilişsel gelişim; dikkat, hafıza, problem çözme, sayı-şekil-renk '
+        'kavramları ve mantık yürütmeyi içerir. Merakı besleyen sorular ve '
+        'bulmacalar bu alanı geliştirir.',
+    activities: [
+      'Yapboz ve eşleştirme oyunları (renk, şekil, sayı).',
+      'Basit sıralama: küçükten büyüğe dizme.',
+      'Hafıza kartı (memory) oyunu.',
+      'Günlük sayma: basamak, elma, oyuncak sayma.',
+      '"Ne olurdu eğer…" ile mantık ve tahmin soruları.',
+    ],
+    tips: [
+      'Sorunu hemen çözmeyin; ipucu vererek düşünmesini bekleyin.',
+      'Zorluk seviyesini kademeli artırın.',
+      'Somut nesnelerle başlayıp soyuta geçin.',
+    ],
+    links: [
+      ('YouTube: Bilişsel gelişim etkinlikleri',
+          'https://www.youtube.com/results?search_query=bilişsel+gelişim+etkinlikleri+çocuk'),
+      ('Zeka ve dikkat oyunları',
+          'https://www.google.com/search?q=çocuklar+için+dikkat+ve+hafıza+oyunları'),
+    ],
+  ),
+  'ozbakim': AreaContent(
+    description:
+        'Öz bakım; yeme, giyinme, tuvalet, diş fırçalama ve temizlik gibi '
+        'günlük yaşam becerilerinin bağımsız yapılmasını kapsar. Rutin ve '
+        'sabır ile gelişir.',
+    activities: [
+      'Kendi başına giyinme/soyunma pratiği (bol zaman tanıyın).',
+      'Diş fırçalama rutini; birlikte fırçalayın.',
+      'Sofra kurmaya ve toplamaya katılım.',
+      'El yıkama adımlarını şarkıyla öğretin.',
+      'Oyuncaklarını toplama sorumluluğu.',
+    ],
+    tips: [
+      'Görsel rutin çizelgesi (kalk-giyin-kahvaltı) kullanın.',
+      'Küçük görevlerle başlayıp bağımsızlığı artırın.',
+      'Acele ettirmeyin; deneme-yanılmaya izin verin.',
+    ],
+    links: [
+      ('YouTube: Öz bakım becerileri',
+          'https://www.youtube.com/results?search_query=çocukta+öz+bakım+becerileri'),
+      ('Rutin çizelgesi fikirleri',
+          'https://www.google.com/search?q=çocuk+günlük+rutin+çizelgesi'),
+    ],
+  ),
+  'duyusal': AreaContent(
+    description:
+        'Duyusal gelişim; görme, işitme, dokunma, tatma ve koklama yoluyla '
+        'çevreyi algılama ve el-göz koordinasyonunu kapsar. Duyusal oyunlar '
+        'beyin gelişimini destekler.',
+    activities: [
+      'Farklı dokular kutusu (pamuk, kum, süngerle keşif).',
+      'Renk ve şekil boyama, çizgi içini boyama.',
+      'Su ve kum oyunları ile dökme-boşaltma.',
+      'Sesli oyuncaklarla ses ayırt etme.',
+      'Koku/tat tahmin oyunları (güvenli gıdalarla).',
+    ],
+    tips: [
+      'Duyusal oyunlarda gözetim altında güvenliği önceleyin.',
+      'Aşırı uyarandan kaçının; sakin ortam sağlayın.',
+      'Çocuğun tepkilerini gözlemleyip tercihleri not edin.',
+    ],
+    links: [
+      ('YouTube: Duyusal oyun etkinlikleri',
+          'https://www.youtube.com/results?search_query=duyusal+oyun+etkinlikleri+çocuk'),
+      ('Duyu bütünleme etkinlikleri',
+          'https://www.google.com/search?q=duyusal+bütünleme+etkinlikleri+ev'),
+    ],
+  ),
+};
+
+AreaContent areaContentFor(String key) =>
+    areaContentByKey[key] ?? areaContentByKey['dil']!;
+
+/// Bir alan için yaş grubuna uygun "bu yaşta ne beklenir" beceri listesi.
+List<String> areaExpectations(String areaKey, String devGroup) {
+  return assessmentFor(devGroup)
+      .where((it) => it.$1 == areaKey)
+      .map((it) => it.$2)
+      .toList();
+}
+
 /// Gelişim ekranları için ortak başlık (geri + başlık + alt başlık + sağ ikon).
 class DevHeader extends StatelessWidget {
   final String title;

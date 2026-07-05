@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../config/constants.dart';
 import '../../../domain/entities.dart';
+import '../../../services/koca_seed.dart';
 import '../../providers/app_providers.dart';
 import '../../widgets/location_permission_prompt.dart';
 
@@ -127,7 +128,7 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
   // Gerçek aile üyelerini haritaya eşler (konum boru hattı bağlanana kadar
   // konum metni dürüst, konumlar dağıtılmış olarak gösterilir).
   List<_FamilyMember> _mapReal(List<FamilyMember> real) {
-    if (real.isEmpty) return _demoMembers;
+    if (real.isEmpty) return _kocaOrDemo();
     const palette = [
       Color(0xFFEC4899), Color(0xFF3B82F6), Color(0xFF10B981),
       Color(0xFFF97316), Color(0xFF8B5CF6), Color(0xFF14B8A6),
@@ -156,6 +157,39 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
         y: y.toDouble(),
         speed: 0,
         activity: m.isOnline ? 'Çevrimiçi' : 'Çevrimdışı',
+      );
+    });
+  }
+
+  // Supabase üyeleri yokken yerel Koca Ailesi verisini haritaya yansıtır.
+  List<_FamilyMember> _kocaOrDemo() {
+    final koca = KocaSeed.localMembers();
+    if (koca.isEmpty) return _demoMembers;
+    const palette = [
+      Color(0xFF3B82F6), Color(0xFFEC4899), Color(0xFF10B981),
+      Color(0xFFF97316), Color(0xFF8B5CF6),
+    ];
+    final n = koca.length;
+    return List.generate(n, (i) {
+      final m = koca[i];
+      final name = (m['name'] ?? '').toString();
+      final online = m['online'] == true;
+      final angle = (i / n) * 2 * math.pi;
+      final x = (0.5 + 0.22 * math.cos(angle)).clamp(0.1, 0.9);
+      final y = (0.45 + 0.18 * math.sin(angle)).clamp(0.1, 0.85);
+      return _FamilyMember(
+        name: name,
+        role: (m['role'] ?? '').toString(),
+        avatar: name.isNotEmpty ? name.substring(0, 1).toUpperCase() : '?',
+        color: palette[i % palette.length],
+        location: 'Konum paylaşımı bekleniyor',
+        lastSeen: online ? 'Çevrimiçi' : 'Çevrimdışı',
+        battery: 0,
+        status: online ? LocationStatus.home : LocationStatus.unknown,
+        x: x.toDouble(),
+        y: y.toDouble(),
+        speed: 0,
+        activity: online ? 'Çevrimiçi' : 'Çevrimdışı',
       );
     });
   }
