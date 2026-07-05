@@ -15,6 +15,7 @@ import '../../../domain/entities.dart';
 import '../../../services/hive_service.dart';
 import '../../widgets/notification_prompt.dart';
 import '../../../components/hub/ai_suggestions_widget.dart';
+import '../../../components/hub/hub_ai_panel.dart';
 import '../../../components/hub/content_widgets/content_highlights_widget.dart';
 import '../../../services/location_tracking_service.dart';
 
@@ -366,6 +367,9 @@ class _HubScreenState extends ConsumerState<HubScreen>
 
               // ── Quick access grid (butonlar hemen gorunsun) ──────────────
               SliverToBoxAdapter(child: _QuickGrid(features: visibleFeatures)),
+
+              // ── Hub gömülü mini AI sohbet paneli ──────────────────────────
+              const SliverToBoxAdapter(child: HubAiPanel()),
 
               // ── Akıllı Kart / AI Öneriler (Ana Ekran Özelleştir'den gizlenebilir) ──
               if (HiveService.getBoolSetting('hub_show_smart_card',
@@ -1047,9 +1051,11 @@ class _QuickGrid extends StatelessWidget {
             itemCount: features.length + 1, // +1 for "more" slot
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              mainAxisSpacing: 10,
+              mainAxisSpacing: 8,
               crossAxisSpacing: 6,
-              childAspectRatio: 1.12,
+              // Sabit hücre yüksekliği — geniş/tablet ekranlarda aşırı boşluğu
+              // önler (childAspectRatio geniş ekranda hücreyi çok uzatıyordu).
+              mainAxisExtent: 118,
             ),
             itemBuilder: (context, i) {
               if (i == features.length) {
