@@ -4,6 +4,7 @@ import 'child_development_screen.dart' show ChildProfile;
 import 'child_dev_content.dart';
 import 'child_dev_store.dart';
 import 'child_dev_plan_setup.dart';
+import 'dev_sources.dart';
 
 /// Bir gelişim alanının (Dil/Motor/…) konuya özel detay ekranı.
 /// Her alan kendi açıklaması, beklentileri, etkinlikleri, ipuçları ve
@@ -34,6 +35,8 @@ class AreaDetailScreen extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(16, 4, 16, 28),
                 children: [
                   _hero(area, content, score),
+                  const SizedBox(height: 12),
+                  const DevDisclaimerBanner(),
                   const SizedBox(height: 18),
                   if (expectations.isNotEmpty) ...[
                     _sectionTitle('Bu Yaşta Ne Beklenir?', Icons.flag_outlined,
@@ -54,7 +57,13 @@ class AreaDetailScreen extends StatelessWidget {
                   _bullets(content.tips, area.gradient.first,
                       icon: Icons.tips_and_updates_outlined),
                   const SizedBox(height: 18),
-                  _sectionTitle('Faydalı Kaynaklar', Icons.link,
+                  _sectionTitle('Resmi Kaynaklar', Icons.verified_outlined,
+                      area.gradient.first),
+                  const SizedBox(height: 8),
+                  ...sourcesForArea(areaKey)
+                      .map((s) => DevSourceTile(source: s)),
+                  const SizedBox(height: 18),
+                  _sectionTitle('Aktivite İlhamı', Icons.link,
                       area.gradient.first),
                   const SizedBox(height: 8),
                   ...content.links.map((l) => _linkTile(l, area.gradient.first)),

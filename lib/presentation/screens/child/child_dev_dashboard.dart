@@ -11,6 +11,7 @@ import 'child_dev_observation.dart';
 import 'child_dev_assessment.dart';
 import 'child_dev_plan_setup.dart';
 import 'child_dev_area_detail.dart';
+import 'dev_sources.dart';
 
 /// Ekran 1 — Çocuk Gelişim Dashboard.
 class ChildDevelopmentHome extends ConsumerStatefulWidget {
@@ -90,6 +91,29 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
                   _aiInsight(child, group),
                   const SizedBox(height: 20),
                   _observations(child, obs),
+                  const SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const DevSourcesScreen()),
+                    ),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.verified_outlined,
+                            size: 16, color: Color(0xFF3B82F6)),
+                        SizedBox(width: 6),
+                        Text('İçeriklerimizin kaynakları',
+                            style: TextStyle(
+                                color: Color(0xFF3B82F6),
+                                fontSize: 13.5,
+                                fontWeight: FontWeight.w700)),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  const DevDisclaimerBanner(),
                 ],
               ),
             ),

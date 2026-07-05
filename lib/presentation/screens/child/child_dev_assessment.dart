@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'child_development_screen.dart' show ChildProfile;
 import 'child_dev_content.dart';
 import 'child_dev_store.dart';
+import 'dev_sources.dart';
 
 /// Ekran 3 — Yaşa Dayalı Beceri Değerlendirme.
 class SkillAssessmentScreen extends StatefulWidget {
@@ -84,10 +85,34 @@ class _SkillAssessmentScreenState extends State<SkillAssessmentScreen> {
                       fontWeight: FontWeight.w600)),
             ),
             Expanded(
-              child: ListView.builder(
+              child: ListView(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-                itemCount: _items.length,
-                itemBuilder: (context, i) => _skillCard(i),
+                children: [
+                  const DevDisclaimerBanner(),
+                  const SizedBox(height: 8),
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const DevSourcesScreen()),
+                    ),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Icon(Icons.verified_outlined,
+                            size: 15, color: Color(0xFF3B82F6)),
+                        SizedBox(width: 5),
+                        Text('Kaynakları gör',
+                            style: TextStyle(
+                                color: Color(0xFF3B82F6),
+                                fontSize: 13,
+                                fontWeight: FontWeight.w700)),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  ...List.generate(_items.length, (i) => _skillCard(i)),
+                ],
               ),
             ),
           ],
