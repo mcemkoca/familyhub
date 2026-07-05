@@ -73,18 +73,54 @@ class _WeeklyPlanSetupScreenState extends State<WeeklyPlanSetupScreen> {
     );
     if (!mounted) return;
     setState(() => _loading = false);
+    // Gemini başarısız olsa bile yerel içerikten plan üret — asla boş kalmasın.
+    final finalPlan = (plan != null && (plan['days'] as List?)?.isNotEmpty == true)
+        ? plan
+        : _localFallbackPlan(focusLabel);
     if (plan == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Plan üretilemedi (bağlantı/kota).')),
+        const SnackBar(
+            content: Text('Çevrimdışı plan hazırlandı (AI\'ya ulaşılamadı).')),
       );
-      return;
     }
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (_) => _PlanResultSheet(plan: plan, childName: widget.child.name),
+      builder: (_) =>
+          _PlanResultSheet(plan: finalPlan, childName: widget.child.name),
     );
+  }
+
+  // Odak alanlarının etkinliklerinden 7 günlük yerel plan üretir (fallback).
+  Map<String, dynamic> _localFallbackPlan(String focusLabel) {
+    const days = [
+      'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
+    ];
+    final focusKeys = _focus.toList();
+    final dayList = <Map<String, dynamic>>[];
+    for (var i = 0; i < 7; i++) {
+      final areaKey = focusKeys[i % focusKeys.length];
+      final content = areaContentFor(areaKey);
+      final acts = content.activities;
+      final act = acts[i % acts.length];
+      final label =
+          _focusOptions.firstWhere((o) => o.$1 == areaKey, orElse: () => _focusOptions.first).$2;
+      dayList.add({
+        'day': days[i],
+        'lesson': {'title': '$label çalışması', 'description': act},
+        'daily_task': {'title': act, 'description': ''},
+      });
+    }
+    return {
+      'week_theme': focusLabel.isEmpty
+          ? 'Bu Haftanın Gelişim Planı'
+          : '$focusLabel Odaklı Hafta',
+      'weekly_goal':
+          'Her gün $_minutes dakika, oyunlaştırılmış etkinliklerle seçili '
+              'alanları destekleyin.',
+      'days': dayList,
+    };
   }
 
   @override

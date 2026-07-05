@@ -12,6 +12,8 @@ import 'child_dev_assessment.dart';
 import 'child_dev_plan_setup.dart';
 import 'child_dev_area_detail.dart';
 import 'dev_sources.dart';
+import 'child_dev_story_time.dart';
+import 'child_dev_color_game.dart';
 
 /// Ekran 1 — Çocuk Gelişim Dashboard.
 class ChildDevelopmentHome extends ConsumerStatefulWidget {
@@ -40,6 +42,30 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
     } catch (_) {
       return ['tamamlandi', 'devam', 'bekliyor'];
     }
+  }
+
+  // Plan öğesine göre ilgili içerik ekranını açar ve durumu "devam" yapar.
+  Future<void> _openActivity(ChildProfile child, int i) async {
+    final states = _weekStates(child.id);
+    if (i < states.length && states[i] == 'bekliyor') {
+      states[i] = 'devam';
+      await HiveService.setSetting('dev_week_${child.id}', jsonEncode(states));
+      if (mounted) setState(() {});
+    }
+    if (!mounted) return;
+    Widget target;
+    switch (i) {
+      case 0:
+        target = const StoryTimeScreen();
+        break;
+      case 1:
+        target = const ColorGameScreen();
+        break;
+      default:
+        target = AreaDetailScreen(child: child, areaKey: 'duyusal');
+    }
+    await Navigator.push(context, MaterialPageRoute(builder: (_) => target));
+    if (mounted) setState(() {});
   }
 
   Future<void> _cycleWeek(String childId, int i) async {
@@ -85,6 +111,8 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
                   _profileCard(child, overall, children),
                   const SizedBox(height: 14),
                   _areaGrid(child, group),
+                  const SizedBox(height: 16),
+                  _dailySummary(child),
                   const SizedBox(height: 20),
                   _weeklyPlan(child),
                   const SizedBox(height: 20),
@@ -291,6 +319,72 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
     );
   }
 
+  // ── Bugünün görevleri özeti (alan kartlarının altında) ───────────────────
+  Widget _dailySummary(ChildProfile child) {
+    final states = _weekStates(child.id);
+    final total = _weekActs.length;
+    final done = states.where((s) => s == 'tamamlandi').length;
+    final ongoing = states.where((s) => s == 'devam').length;
+    final pct = total == 0 ? 0.0 : done / total;
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xFF16122B), Color(0xFF13131A)],
+        ),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: const Color(0x1F6366F1)),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 46,
+            height: 46,
+            decoration: BoxDecoration(
+              color: const Color(0xFF6366F1).withAlpha(35),
+              borderRadius: BorderRadius.circular(13),
+            ),
+            child: const Icon(Icons.today, color: Color(0xFF8B5CF6), size: 24),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Bugünün Görevleri',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w800)),
+                const SizedBox(height: 4),
+                Text('$total görev · $done tamamlandı · $ongoing devam ediyor',
+                    style: const TextStyle(
+                        color: Color(0xFF9CA3AF), fontSize: 12.5)),
+                const SizedBox(height: 8),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: LinearProgressIndicator(
+                    value: pct,
+                    minHeight: 6,
+                    backgroundColor: const Color(0xFF2A2A34),
+                    valueColor:
+                        const AlwaysStoppedAnimation(Color(0xFF8B5CF6)),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 12),
+          Text('${(pct * 100).round()}%',
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w900)),
+        ],
+      ),
+    );
+  }
+
   // ── Bu haftanın planı ────────────────────────────────────────────────────
   Widget _weeklyPlan(ChildProfile child) {
     final states = _weekStates(child.id);
@@ -312,7 +406,7 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
               final a = _weekActs[i];
               final st = states.length > i ? states[i] : 'bekliyor';
               return InkWell(
-                onTap: () => _cycleWeek(child.id, i),
+                onTap: () => _openActivity(child, i),
                 borderRadius: BorderRadius.circular(14),
                 child: Padding(
                   padding: const EdgeInsets.all(10),
@@ -329,13 +423,24 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
                       ),
                       const SizedBox(width: 12),
                       Expanded(
-                        child: Text(a.$1,
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(a.$1,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600)),
+                            const Text('Başlamak için dokun',
+                                style: TextStyle(
+                                    color: Color(0xFF6B7280), fontSize: 11.5)),
+                          ],
+                        ),
                       ),
-                      _statusChip(st),
+                      GestureDetector(
+                        onTap: () => _cycleWeek(child.id, i),
+                        child: _statusChip(st),
+                      ),
                     ],
                   ),
                 ),
