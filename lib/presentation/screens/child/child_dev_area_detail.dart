@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import '../../widgets/external_link.dart';
 import 'child_development_screen.dart' show ChildProfile;
 import 'child_dev_content.dart';
 import 'child_dev_store.dart';
@@ -66,7 +66,8 @@ class AreaDetailScreen extends StatelessWidget {
                   _sectionTitle('Aktivite İlhamı', Icons.link,
                       area.gradient.first),
                   const SizedBox(height: 8),
-                  ...content.links.map((l) => _linkTile(l, area.gradient.first)),
+                  ...content.links
+                      .map((l) => _linkTile(context, l, area.gradient.first)),
                   const SizedBox(height: 20),
                   SizedBox(
                     width: double.infinity,
@@ -239,14 +240,9 @@ class AreaDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _linkTile((String, String) link, Color c) {
+  Widget _linkTile(BuildContext context, (String, String) link, Color c) {
     return GestureDetector(
-      onTap: () async {
-        final uri = Uri.tryParse(link.$2);
-        if (uri != null) {
-          await launchUrl(uri, mode: LaunchMode.externalApplication);
-        }
-      },
+      onTap: () => openExternalLink(context, link.$2),
       child: Container(
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.all(14),

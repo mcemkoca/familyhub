@@ -35,7 +35,6 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
   bool get isDark => Theme.of(context).brightness == Brightness.dark;
 
   List<AISuggestion> _suggestions = [];
-  List<AISuggestion> _allDailySuggestions = [];
   bool _loading = false;
   String? _error;
   bool _expanded = false; // varsayılan kapalı — butonlar görünsün, tek tıkla açılır
@@ -146,7 +145,6 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
       if (mounted) {
         setState(() {
           _suggestions = all.take(8).toList();
-          _allDailySuggestions = all;
           _loading = false;
         });
       }
@@ -173,35 +171,35 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
     }
   }
 
-  void _loadMoreSuggestions() {
-    final today = DateTime.now();
-    final alreadyShown = _allDailySuggestions.map((s) => s.id).toList();
-    final shownIds = [...alreadyShown, ...HiveService.getShownSuggestionIds()];
+  int _refreshTick = 0;
 
-    final moreDaily = DailySuggestionsPool.pickMore(
-      date: today,
-      alreadyShownIds: shownIds,
-      count: 3,
+  // "Yenile": her dokunuşta farklı bir set üretir ve mevcut listeyi DEĞİŞTİRİR
+  // (havuz tükense bile boş kalmaz).
+  void _refreshSuggestions() {
+    _refreshTick++;
+    final seedDate = DateTime.now().add(Duration(days: _refreshTick * 11));
+    final daily = DailySuggestionsPool.pickMore(
+      date: seedDate,
+      alreadyShownIds: const [],
+      count: 6,
     );
-
-    List<AISuggestion> moreFamily = [];
+    List<AISuggestion> family = [];
     if (HiveService.getFamilySuggestionsEnabled()) {
       try {
-        final enabledCats = HiveService.getFamilySuggestionsCategories().toSet();
-        moreFamily = FamilySuggestionsPool.instance.pickMore(
-          date: today,
-          enabledCategories: enabledCats,
-          alreadyShownIds: shownIds,
-          count: 3,
+        final cats = HiveService.getFamilySuggestionsCategories().toSet();
+        family = FamilySuggestionsPool.instance.pickMore(
+          date: seedDate,
+          enabledCategories: cats,
+          alreadyShownIds: const [],
+          count: 4,
         );
-      } catch (e) { debugPrint('AI suggestions error: $e'); }
+      } catch (_) {}
     }
-
-    final more = [...moreDaily, ...moreFamily];
+    final all = [...daily, ...family]..shuffle();
+    if (all.isEmpty) return;
     setState(() {
-      _suggestions = [..._suggestions, ...more];
+      _suggestions = all.take(8).toList();
     });
-    HiveService.addShownSuggestionIds(more.map((s) => s.id).toList());
   }
 
   Future<void> _cacheSuggestions(
@@ -567,7 +565,7 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
         ),
         if (_expanded)
           GestureDetector(
-            onTap: _loadMoreSuggestions,
+            onTap: _refreshSuggestions,
             child: const Row(
               children: [
                 Icon(Icons.refresh, size: 16, color: Color(0xFF6366F1)),

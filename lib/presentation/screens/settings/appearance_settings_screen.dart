@@ -21,6 +21,14 @@ class _AppearanceSettingsScreenState extends ConsumerState<AppearanceSettingsScr
   bool _hasChanges = false;
 
   late final Color _originalAccent;
+  late double _fontScale;
+
+  static const _fontOptions = [
+    (0.9, 'Küçük'),
+    (1.0, 'Orta'),
+    (1.15, 'Büyük'),
+    (1.3, 'Çok Büyük'),
+  ];
 
   @override
   void initState() {
@@ -31,6 +39,15 @@ class _AppearanceSettingsScreenState extends ConsumerState<AppearanceSettingsScr
 
     final savedAccent = HiveService.getSetting('accentColor') ?? 'cobalt';
     _selectedAccentKey = savedAccent;
+    _fontScale = ref.read(fontScaleProvider);
+  }
+
+  // Yazı boyutu anında uygulanır (MaterialApp fontScaleProvider'ı izler).
+  Future<void> _setFont(double scale) async {
+    HapticFeedback.selectionClick();
+    setState(() => _fontScale = scale);
+    ref.read(fontScaleProvider.notifier).state = scale;
+    await HiveService.setDoubleSetting('fontScale', scale);
   }
 
   void _markChanged() {
@@ -146,7 +163,73 @@ class _AppearanceSettingsScreenState extends ConsumerState<AppearanceSettingsScr
               }).toList(),
             ),
           ),
-          const SizedBox(height: 32),
+          const SizedBox(height: 28),
+          const Text(
+            'Yazı Boyutu',
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFF6B7280),
+              letterSpacing: 0.5,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: const Color(0xFF13131A),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: const Color(0x1EFFFFFF)),
+            ),
+            child: Row(
+              children: _fontOptions.map((o) {
+                final sel = (_fontScale - o.$1).abs() < 0.01;
+                return Expanded(
+                  child: GestureDetector(
+                    onTap: () => _setFont(o.$1),
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 4),
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      decoration: BoxDecoration(
+                        color: sel
+                            ? _selectedAccent.withAlpha(35)
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: sel ? _selectedAccent : const Color(0x1EFFFFFF),
+                          width: sel ? 1.6 : 1,
+                        ),
+                      ),
+                      child: Column(
+                        children: [
+                          Text('Aa',
+                              style: TextStyle(
+                                  color: sel
+                                      ? _selectedAccent
+                                      : const Color(0xFFE5E7EB),
+                                  fontSize: 14 + (o.$1 - 1.0) * 14,
+                                  fontWeight: FontWeight.w800)),
+                          const SizedBox(height: 6),
+                          Text(o.$2,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: sel
+                                      ? _selectedAccent
+                                      : const Color(0xFF9CA3AF),
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w600)),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+          const SizedBox(height: 10),
+          const Text('Yazı boyutu tüm uygulamaya anında uygulanır.',
+              style: TextStyle(color: Color(0xFF6B7280), fontSize: 12)),
+          const SizedBox(height: 28),
           SizedBox(
             width: double.infinity,
             height: 56,

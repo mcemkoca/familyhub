@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import '../../widgets/external_link.dart';
 import 'child_dev_content.dart' show DevHeader;
 import 'child_dev_stories.dart';
 
@@ -266,12 +266,7 @@ class _StoryReaderScreenState extends State<StoryReaderScreen> {
           const SizedBox(height: 24),
           if (s.readMoreUrl != null)
             OutlinedButton.icon(
-              onPressed: () async {
-                final uri = Uri.tryParse(s.readMoreUrl!);
-                if (uri != null) {
-                  await launchUrl(uri, mode: LaunchMode.externalApplication);
-                }
-              },
+              onPressed: () => openExternalLink(context, s.readMoreUrl!),
               style: OutlinedButton.styleFrom(
                 foregroundColor: s.gradient.first,
                 side: BorderSide(color: s.gradient.first),

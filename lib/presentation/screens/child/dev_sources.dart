@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'child_dev_content.dart' show DevHeader, areaByKey;
+import '../../widgets/external_link.dart';
 
 /// Gelişim içeriği için güvenilir kaynak kaydı (Source Registry).
 /// Belçika yerel kurumları (Kind en Gezin, ONE) + uluslararası otoriter
@@ -176,12 +176,7 @@ class DevSourceTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async {
-        final uri = Uri.tryParse(source.url);
-        if (uri != null) {
-          await launchUrl(uri, mode: LaunchMode.externalApplication);
-        }
-      },
+      onTap: () => openExternalLink(context, source.url),
       child: Container(
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.all(14),

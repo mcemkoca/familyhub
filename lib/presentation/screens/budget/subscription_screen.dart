@@ -350,7 +350,7 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                               SizedBox(width: 5),
                               Text('Ülke şablonu',
                                   style: TextStyle(
-                                      fontSize: 11,
+                                      fontSize: 13,
                                       fontWeight: FontWeight.w700,
                                       color: Colors.white)),
                             ],
@@ -384,7 +384,7 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                             ),
                             child: Text(cat,
                                 style: TextStyle(
-                                    fontSize: 11,
+                                    fontSize: 13,
                                     fontWeight: FontWeight.w700,
                                     color: sel
                                         ? Colors.white
@@ -419,7 +419,7 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                       child: Text(
                         'Stripe ödeme sistemi yakında aktif olacak — aboneliklerinizi buradan yönetebileceksiniz.',
                         style: TextStyle(
-                            fontSize: 11,
+                            fontSize: 13,
                             color: Color(0xFF6772E5),
                             fontWeight: FontWeight.w600),
                       ),
@@ -654,7 +654,7 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                    fontSize: 9,
+                                    fontSize: 11.5,
                                     fontWeight: FontWeight.w700,
                                     color: sel
                                         ? const Color(0xFF667EEA)
@@ -863,7 +863,7 @@ class _SubCard extends StatelessWidget {
                           ),
                           child: Text(sub.category,
                               style: TextStyle(
-                                  fontSize: 9,
+                                  fontSize: 11.5,
                                   fontWeight: FontWeight.w700,
                                   color: sub.active
                                       ? _color
@@ -875,14 +875,14 @@ class _SubCard extends StatelessWidget {
                               ? 'Aylık'
                               : 'Yıllık',
                           style: const TextStyle(
-                              fontSize: 10,
+                              fontSize: 12.5,
                               color: Color(0xFF9CA3AF)),
                         ),
                       ],
                     ),
                     Text('📅 Yenileme: ${sub.nextBilling}',
                         style: const TextStyle(
-                            fontSize: 10,
+                            fontSize: 12.5,
                             color: Color(0xFF9CA3AF))),
                   ],
                 ),
@@ -903,14 +903,14 @@ class _SubCard extends StatelessWidget {
                         ? '/ay'
                         : '/yıl',
                     style: const TextStyle(
-                        fontSize: 10,
+                        fontSize: 12.5,
                         color: Color(0xFF9CA3AF)),
                   ),
                   if (sub.active)
                     Text(
                       '≈€${sub.monthlyAmount.toStringAsFixed(0)}/ay',
                       style: const TextStyle(
-                          fontSize: 9,
+                          fontSize: 11.5,
                           color: Color(0xFFB0B7C0)),
                     ),
                   const SizedBox(height: 4),
@@ -928,7 +928,7 @@ class _SubCard extends StatelessWidget {
                       child: Text(
                         sub.active ? '✓ Aktif' : 'Pasif',
                         style: TextStyle(
-                            fontSize: 9,
+                            fontSize: 11.5,
                             fontWeight: FontWeight.w700,
                             color: sub.active
                                 ? Colors.green
@@ -975,7 +975,7 @@ class _SummaryCard extends StatelessWidget {
           Text(label,
               style: const TextStyle(
                   color: Colors.white70,
-                  fontSize: 9,
+                  fontSize: 11.5,
                   fontWeight: FontWeight.w600)),
         ],
       ),
