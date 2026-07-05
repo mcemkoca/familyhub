@@ -48,8 +48,7 @@ class AppText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-    final defaultColor = color ?? (isDark ? Colors.white : Colors.black87);
+    final defaultColor = color ?? (const Color(0xFFE5E7EB));
 
     final textStyle = switch (style) {
       AppTextStyle.headline => theme.textTheme.headlineSmall?.copyWith(color: defaultColor),

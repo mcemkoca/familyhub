@@ -176,13 +176,13 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
 
   Color _roleColor(MemberRole role) {
     return switch (role) {
-      MemberRole.admin => AppColors.cobalt,
-      MemberRole.parent => AppColors.purple,
+      MemberRole.admin => const Color(0xFF6366F1),
+      MemberRole.parent => const Color(0xFF8B5CF6),
       MemberRole.teen => AppColors.blue,
       MemberRole.child => AppColors.orange,
-      MemberRole.elder => AppColors.slate,
-      MemberRole.guest => AppColors.gray,
-      MemberRole.baby => AppColors.pink,
+      MemberRole.elder => const Color(0xFF6B7280),
+      MemberRole.guest => const Color(0xFF6B7280),
+      MemberRole.baby => const Color(0xFFEC4899),
     };
   }
 
@@ -304,7 +304,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                   ),
                   title: Text(_roleLabel(role)),
                   trailing: member.role == role
-                      ? const Icon(Icons.check_circle, color: AppColors.cobalt)
+                      ? const Icon(Icons.check_circle, color: Color(0xFF6366F1))
                       : null,
                   onTap: () {
                     Navigator.pop(context);
@@ -336,7 +336,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: AppColors.border,
+                  color: const Color(0x1EFFFFFF),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -349,7 +349,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
               const Divider(),
               if (_isAdmin || isSelf)
                 ListTile(
-                  leading: const Icon(Icons.edit, color: AppColors.cobalt),
+                  leading: const Icon(Icons.edit, color: Color(0xFF6366F1)),
                   title: Text(AppLocalizations.of(context).roluDegistir),
                   onTap: () {
                     Navigator.pop(context);
@@ -357,7 +357,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                   },
                 ),
               ListTile(
-                leading: const Icon(Icons.location_on, color: AppColors.success),
+                leading: const Icon(Icons.location_on, color: Color(0xFF10B981)),
                 title: Text(AppLocalizations.of(context).konumunuGor),
                 onTap: () {
                   Navigator.pop(context);
@@ -365,7 +365,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.health_and_safety, color: AppColors.purple),
+                leading: const Icon(Icons.health_and_safety, color: Color(0xFF8B5CF6)),
                 title: Text(AppLocalizations.of(context).healthCard),
                 onTap: () {
                   Navigator.pop(context);
@@ -390,7 +390,6 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     final adults = _members.where((m) => m.role != MemberRole.child).toList()
       ..sort((a, b) {
@@ -405,7 +404,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
       ..sort((a, b) => a.name.compareTo(b.name));
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
         title: 'Aile Yönetimi',
         showBack: true,
@@ -424,20 +423,20 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                       children: [
                         Text(
                           '${_members.length} Üye',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
-                            color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                            color: Color(0xFF6B7280),
                           ),
                         ),
                         const SizedBox(height: 12),
                         if (adults.isNotEmpty) ...[
-                          Text(
+                          const Text(
                             'Ebeveynler ve Yetişkinler',
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
-                              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                              color: Color(0xFF6B7280),
                               letterSpacing: 0.5,
                             ),
                           ),
@@ -453,12 +452,12 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                         ],
                         if (children.isNotEmpty) ...[
                           const SizedBox(height: 16),
-                          Text(
+                          const Text(
                             'Çocuklar',
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
-                              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                              color: Color(0xFF6B7280),
                               letterSpacing: 0.5,
                             ),
                           ),
@@ -484,7 +483,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                               style: TextStyle(color: Colors.white, fontSize: 16),
                             ),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.cobalt,
+                              backgroundColor: const Color(0xFF6366F1),
                               elevation: 0,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(16),
@@ -504,7 +503,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                               style: TextStyle(color: Colors.white, fontSize: 16),
                             ),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.success,
+                              backgroundColor: const Color(0xFF10B981),
                               elevation: 0,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(16),
@@ -581,7 +580,6 @@ class _MemberTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     String roleLabel() {
       return switch (member.role) {
@@ -598,10 +596,10 @@ class _MemberTile extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkCard : Colors.white,
+        color: const Color(0xFF13131A),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isDark ? AppColors.darkBorder : AppColors.border,
+          color: const Color(0x1EFFFFFF),
         ),
       ),
       child: InkWell(
@@ -622,10 +620,10 @@ class _MemberTile extends StatelessWidget {
                         width: 14,
                         height: 14,
                         decoration: BoxDecoration(
-                          color: AppColors.success,
+                          color: const Color(0xFF10B981),
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: isDark ? AppColors.darkCard : Colors.white,
+                            color: const Color(0xFF13131A),
                             width: 2,
                           ),
                         ),
@@ -642,10 +640,10 @@ class _MemberTile extends StatelessWidget {
                       children: [
                         Text(
                           member.name,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                            color: Color(0xFFE5E7EB),
                           ),
                         ),
                         if (isMe)
@@ -653,14 +651,14 @@ class _MemberTile extends StatelessWidget {
                             margin: const EdgeInsets.only(left: 8),
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                             decoration: BoxDecoration(
-                              color: AppColors.cobalt.withAlpha(20),
+                              color: const Color(0xFF6366F1).withAlpha(20),
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: const Text(
                               'Sen',
                               style: TextStyle(
                                 fontSize: 11,
-                                color: AppColors.cobalt,
+                                color: Color(0xFF6366F1),
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -670,15 +668,15 @@ class _MemberTile extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       '${roleLabel()} · ${member.isOnline ? 'Çevrimiçi' : _formatLastSeen(member.lastSeen)}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 13,
-                        color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                   ],
                 ),
               ),
-              const Icon(Icons.chevron_right, color: AppColors.lightGray),
+              const Icon(Icons.chevron_right, color: Color(0xFF9CA3AF)),
             ],
           ),
         ),

@@ -149,7 +149,7 @@ class SafetyService {
             color: color,
             statusText: _statusTextFromLocation(isOnline, lastSeen, address),
             statusColor: isOnline
-                ? (battery < 20 ? AppColors.warning : AppColors.success)
+                ? (battery < 20 ? const Color(0xFFF59E0B) : const Color(0xFF10B981))
                 : AppColors.error,
             isOnline: isOnline,
             lastSeen: lastSeen,

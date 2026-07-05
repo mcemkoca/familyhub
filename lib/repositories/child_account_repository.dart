@@ -56,8 +56,9 @@ class ChildAccountRepository with RepositoryErrorHandler {
           .from('child_accounts')
           .select()
           .eq('id', childId)
-          .single();
+          .maybeSingle();
 
+      if (response == null) throw Exception('Çocuk hesabı bulunamadı: $childId');
       return ChildAccount.fromJson(response);
     }, 'getChildById');
   }

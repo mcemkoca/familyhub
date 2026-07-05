@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -36,14 +35,10 @@ class PermissionService {
   // ───────────────────────── GALLERY / PHOTOS ─────────────────────────
 
   static Future<bool> requestPhotos(BuildContext context) async {
-    final perm = Platform.isAndroid && await _isAndroid33OrHigher()
-        ? Permission.photos
-        : Permission.storage;
-
     if (!context.mounted) return false;
     return _requestPermission(
+      permission: Permission.photos,
       context: context,
-      permission: perm,
       title: 'Galeri Erişimi',
       message:
           'Fotoğraf ve videoları yüklemek için galeri erişimine ihtiyaç duyuyoruz.',
@@ -72,6 +67,69 @@ class PermissionService {
           'Dosyaları kaydetmek ve okumak için depolama erişimine ihtiyaç duyuyoruz.',
       settingsMessage:
           'Depolama erişimi kalıcı olarak reddedildi. Ayarlar > Uygulamalar > FamilyHub > İzinler menüsünden depolama iznini etkinleştirin.',
+    );
+  }
+
+  // ───────────────────────── MICROPHONE ─────────────────────────
+
+  static Future<bool> requestMicrophone(BuildContext context) async {
+    return _requestPermission(
+      context: context,
+      permission: Permission.microphone,
+      title: 'Mikrofon Erişimi',
+      message: 'Sesli mesaj göndermek ve acil durum kaydı için mikrofon erişimine ihtiyaç duyuyoruz.',
+      settingsMessage:
+          'Mikrofon erişimi kalıcı olarak reddedildi. Ayarlar > Uygulamalar > FamilyHub > İzinler menüsünden mikrofon iznini etkinleştirin.',
+    );
+  }
+
+  // ───────────────────────── NOTIFICATIONS ─────────────────────────
+
+  static Future<bool> requestNotifications(BuildContext context) async {
+    return _requestPermission(
+      context: context,
+      permission: Permission.notification,
+      title: 'Bildirim İzni',
+      message: 'Aile bildirimleri, acil durumlar ve hatırlatıcılar için bildirim izni gereklidir.',
+      settingsMessage:
+          'Bildirim izni kalıcı olarak reddedildi. Ayarlar > Uygulamalar > FamilyHub > İzinler menüsünden bildirim iznini etkinleştirin.',
+    );
+  }
+
+  // ───────────────────────── SENSORS ─────────────────────────
+
+  static Future<bool> requestActivityRecognition(BuildContext context) async {
+    return _requestPermission(
+      context: context,
+      permission: Permission.activityRecognition,
+      title: 'Hareket Algılama',
+      message: 'Sarsma hareketi ve acil durum algılama için sensör erişimine ihtiyaç duyuyoruz.',
+      settingsMessage:
+          'Hareket algılama izni kalıcı olarak reddedildi. Ayarlar > Uygulamalar > FamilyHub > İzinler menüsünden fiziksel aktivite iznini etkinleştirin.',
+    );
+  }
+
+  // ───────────────────────── LOCATION ─────────────────────────
+
+  static Future<bool> requestLocation(BuildContext context) async {
+    return _requestPermission(
+      context: context,
+      permission: Permission.location,
+      title: 'Konum Erişimi',
+      message: 'Aile konumlarını paylaşmak ve güvenli bölgeleri izlemek için konum erişimine ihtiyaç duyuyoruz.',
+      settingsMessage:
+          'Konum erişimi kalıcı olarak reddedildi. Ayarlar > Uygulamalar > FamilyHub > İzinler menüsünden konum iznini etkinleştirin.',
+    );
+  }
+
+  static Future<bool> requestLocationAlways(BuildContext context) async {
+    return _requestPermission(
+      context: context,
+      permission: Permission.locationAlways,
+      title: 'Arka Plan Konum',
+      message: 'Aile üyelerinin konumunu sürekli takip etmek ve acil durumda konum paylaşımı için arka plan konum iznine ihtiyaç duyuyoruz.',
+      settingsMessage:
+          'Arka plan konum izni kalıcı olarak reddedildi. Ayarlar > Uygulamalar > FamilyHub > İzinler > Konum > Her Zaman seçeneğini etkinleştirin.',
     );
   }
 
@@ -124,26 +182,32 @@ class PermissionService {
       context: context,
       barrierDismissible: false,
       builder: (_) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        backgroundColor: const Color(0xFF13131A),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: const BorderSide(color: Color(0x1EFFFFFF), width: 0.5),
+        ),
         title: Row(
           children: [
-            Icon(Icons.security, color: Theme.of(context).primaryColor),
+            const Icon(Icons.security, color: Color(0xFF6366F1)),
             const SizedBox(width: 12),
-            Expanded(child: Text(title)),
+            Expanded(
+              child: Text(title, style: const TextStyle(color: Color(0xFFE5E7EB))),
+            ),
           ],
         ),
-        content: Text(message),
+        content: Text(message, style: const TextStyle(color: Color(0xFF9CA3AF))),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Reddet'),
+            child: const Text('Reddet', style: TextStyle(color: Color(0xFF6B7280))),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
             style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
+              backgroundColor: const Color(0xFF6366F1),
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
             child: const Text('İzin Ver'),
           ),
@@ -162,19 +226,25 @@ class PermissionService {
       context: context,
       barrierDismissible: false,
       builder: (_) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        backgroundColor: const Color(0xFF13131A),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: const BorderSide(color: Color(0x1EFFFFFF), width: 0.5),
+        ),
         title: Row(
           children: [
-            const Icon(Icons.settings, color: Colors.orange),
+            const Icon(Icons.settings, color: Color(0xFFF59E0B)),
             const SizedBox(width: 12),
-            Expanded(child: Text(title)),
+            Expanded(
+              child: Text(title, style: const TextStyle(color: Color(0xFFE5E7EB))),
+            ),
           ],
         ),
-        content: Text(message),
+        content: Text(message, style: const TextStyle(color: Color(0xFF9CA3AF))),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Kapat'),
+            child: const Text('Kapat', style: TextStyle(color: Color(0xFF6B7280))),
           ),
           ElevatedButton.icon(
             onPressed: () {
@@ -184,9 +254,9 @@ class PermissionService {
             icon: const Icon(Icons.open_in_new, size: 18),
             label: const Text('Ayarları Aç'),
             style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
+              backgroundColor: const Color(0xFF6366F1),
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
           ),
         ],
@@ -194,9 +264,4 @@ class PermissionService {
     );
   }
 
-  static Future<bool> _isAndroid33OrHigher() async {
-    if (!Platform.isAndroid) return false;
-    // Best-effort; permission_handler already handles SDK checks internally
-    return true;
-  }
 }

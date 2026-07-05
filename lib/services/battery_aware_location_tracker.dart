@@ -7,6 +7,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
+import '../core/supabase_client.dart';
 import '../domain/models/location_tracking.dart';
 
 /// Callback when profile changes
@@ -261,11 +262,30 @@ class BatteryAwareLocationTracker {
     final batch = List<LocationPoint>.from(_locationBatch);
     _locationBatch.clear();
 
-    // Build segment summary
-    // ignore: unused_local_variable
     final segment = _buildSegment(batch);
+    await _uploadSegment(segment);
+  }
 
-    // TODO: Upload to Supabase via repository
+  Future<void> _uploadSegment(LocationSegment segment) async {
+    try {
+      final client = SupabaseConfig.safeClient;
+      final userId = client?.auth.currentUser?.id;
+      if (client == null || userId == null) return;
+
+      await client.from('location_segments').insert({
+        'user_id': userId,
+        'start_time': segment.startTime.toIso8601String(),
+        'end_time': segment.endTime.toIso8601String(),
+        'distance': segment.distance,
+        'duration_seconds': segment.duration.inSeconds,
+        'average_speed': segment.averageSpeed,
+        'max_speed': segment.maxSpeed,
+        'transport_mode': segment.transportMode,
+        'confidence': segment.confidence,
+      });
+    } catch (e) {
+      debugPrint('[LocationTracker] Segment upload failed: $e');
+    }
   }
 
   LocationSegment _buildSegment(List<LocationPoint> points) {

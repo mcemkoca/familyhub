@@ -26,13 +26,12 @@ class AppCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final defaultColor = color ?? (isDark ? Colors.grey.shade900 : Colors.white);
-    final defaultBorder = borderColor ?? (isDark ? Colors.grey.shade800 : Colors.grey.shade200);
+    final defaultColor = color ?? (const Color(0xFF374151));
+    final defaultBorder = borderColor ?? (const Color(0xFF1F2937));
 
     final card = Card(
       margin: margin ?? EdgeInsets.zero,
-      elevation: elevation ?? (isDark ? 2 : 1),
+      elevation: elevation ?? (2),
       color: defaultColor,
       shape: RoundedRectangleBorder(
         borderRadius: borderRadius ?? BorderRadius.circular(12),

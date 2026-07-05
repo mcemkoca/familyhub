@@ -1,25 +1,25 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/foundation.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../config/constants.dart';
+import '../../../config/market_catalog.dart';
 import '../../../domain/entities.dart';
+import '../../../services/hive_service.dart';
 import '../../providers/app_providers.dart';
-import 'package:familyhub/l10n/app_localizations.dart';
 
 // Quick AI-suggested common items (tokensiz)
 const _aiSuggestions = [
   ('🥛', 'Süt'),
-  ('🍞', 'Ekmek'),
+  (('🍞', 'Ekmek')),
   ('🥚', 'Yumurta'),
   ('🧀', 'Peynir'),
-  ('🍅', 'Domates'),
+  (('🍅', 'Domates')),
   ('🧅', 'Soğan'),
   ('🫒', 'Zeytinyağı'),
-  ('🍗', 'Tavuk'),
+  (('🍗', 'Tavuk')),
   ('🌿', 'Maydanoz'),
-  ('🍋', 'Limon'),
+  (('🍋', 'Limon')),
   ('🧴', 'Deterjan'),
   ('🧻', 'Tuvalet Kağıdı'),
 ];
@@ -33,6 +33,8 @@ class ShoppingListScreen extends ConsumerStatefulWidget {
 }
 
 class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   final _nameController = TextEditingController();
   final _quantityController = TextEditingController();
   ShoppingCategory _selectedCategory = ShoppingCategory.grocery;
@@ -105,9 +107,9 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
       case ShoppingCategory.pharmacy:
         return AppColors.error;
       case ShoppingCategory.stationery:
-        return AppColors.cobalt;
+        return const Color(0xFF6366F1);
       case ShoppingCategory.household:
-        return AppColors.softMint;
+        return const Color(0xFF10B981);
       default:
         return AppColors.orange;
     }
@@ -131,11 +133,10 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
   @override
   Widget build(BuildContext context) {
     final itemsAsync = ref.watch(shoppingItemsProvider);
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       backgroundColor:
-          AppColors.darkBackground,
+          const Color(0xFF0A0A0F),
       body: SafeArea(
         child: Column(
           children: [
@@ -181,7 +182,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
-                    colors: [AppColors.softMint, AppColors.cobalt],
+                    colors: [Color(0xFF10B981), Color(0xFF6366F1)],
                   ),
                   borderRadius: BorderRadius.circular(14),
                 ),
@@ -203,14 +204,18 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                     if (total > 0)
                       Text(
                         '$done / $total tamamlandı',
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 12,
-                            color: isDark
-                                ? AppColors.darkTextSecondary
-                                : AppColors.slate),
+                            color: Color(0xFF6B7280)),
                       ),
                   ],
                 ),
+              ),
+              IconButton(
+                onPressed: _showMarketCatalog,
+                icon: const Icon(Icons.storefront_outlined),
+                color: const Color(0xFF10B981),
+                tooltip: 'Market Kataloğu',
               ),
               IconButton(
                 onPressed: _showRecipePicker,
@@ -224,15 +229,15 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                 icon: Icon(
                   Icons.auto_awesome,
                   color: _showSuggestions
-                      ? AppColors.softMint
-                      : AppColors.slate,
+                      ? const Color(0xFF10B981)
+                      : const Color(0xFF6B7280),
                 ),
                 tooltip: 'Hızlı Ekle',
               ),
               IconButton(
                 onPressed: () =>
                     ref.read(shoppingItemsProvider.notifier).loadItems(),
-                icon: const Icon(Icons.refresh, color: AppColors.slate),
+                icon: const Icon(Icons.refresh, color: Color(0xFF6B7280)),
               ),
             ],
           ),
@@ -242,13 +247,28 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
               borderRadius: BorderRadius.circular(4),
               child: LinearProgressIndicator(
                 value: total == 0 ? 0 : done / total,
-                backgroundColor: AppColors.border,
-                valueColor: const AlwaysStoppedAnimation(AppColors.softMint),
+                backgroundColor: const Color(0x1EFFFFFF),
+                valueColor: const AlwaysStoppedAnimation(Color(0xFF10B981)),
                 minHeight: 6,
               ),
             ),
           ],
         ],
+      ),
+    );
+  }
+
+  void _showMarketCatalog() {
+    final country = HiveService.getSetting('country') ?? 'BE';
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => _MarketCatalogSheet(
+        country: country,
+        onAdd: (p) {
+          ref.read(shoppingItemsProvider.notifier).addItem(p.name);
+        },
       ),
     );
   }
@@ -259,7 +279,6 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (ctx) {
-        final isDark = Theme.of(ctx).brightness == Brightness.dark;
         final searchCtrl = TextEditingController();
         return StatefulBuilder(
           builder: (ctx, setLocal) {
@@ -275,9 +294,9 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
               maxChildSize: 0.95,
               minChildSize: 0.5,
               builder: (_, scrollCtrl) => Container(
-                decoration: BoxDecoration(
-                  color: const Color(0x1AFFFFFF),
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+                decoration: const BoxDecoration(
+                  color: Color(0x1AFFFFFF),
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
                 ),
                 child: Column(
                   children: [
@@ -285,7 +304,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                       margin: const EdgeInsets.only(top: 12, bottom: 4),
                       width: 40, height: 4,
                       decoration: BoxDecoration(
-                        color: isDark ? AppColors.darkBorder : AppColors.border,
+                        color: const Color(0x1EFFFFFF),
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -294,12 +313,12 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Tarife Göre Alışveriş',
+                          const Text('Tarife Göre Alışveriş',
                             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700,
-                              color: isDark ? AppColors.darkTextPrimary : AppColors.dark)),
+                              color: Color(0xFFE5E7EB))),
                           const SizedBox(height: 4),
                           Text('${_recipes.length} Türk tarifi',
-                            style: TextStyle(fontSize: 12, color: isDark ? AppColors.darkTextSecondary : AppColors.slate)),
+                            style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
                           const SizedBox(height: 12),
                           TextField(
                             controller: searchCtrl,
@@ -307,7 +326,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                               hintText: 'Tarif ara...',
                               prefixIcon: const Icon(Icons.search, size: 20),
                               filled: true,
-                              fillColor: AppColors.darkBackground,
+                              fillColor: const Color(0xFF0A0A0F),
                               border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
                               contentPadding: const EdgeInsets.symmetric(vertical: 10),
                             ),
@@ -321,7 +340,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                         controller: scrollCtrl,
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         itemCount: filtered.length,
-                        separatorBuilder: (_, __) => const Divider(height: 1),
+                        separatorBuilder: (_, _) => const Divider(height: 1),
                         itemBuilder: (_, i) {
                           final recipe = filtered[i];
                           final title = recipe['title'] as String? ?? '';
@@ -330,9 +349,9 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                           final cat = _categoryEmoji(recipe['category'] as String? ?? '');
                           return ListTile(
                             leading: Text(cat, style: const TextStyle(fontSize: 24)),
-                            title: Text(title, style: TextStyle(fontWeight: FontWeight.w600, color: isDark ? AppColors.darkTextPrimary : AppColors.dark)),
-                            subtitle: Text('$time dk • $ingredientCount malzeme',
-                              style: TextStyle(fontSize: 12, color: isDark ? AppColors.darkTextSecondary : AppColors.slate)),
+                            title: Text(title, style: const TextStyle(fontWeight: FontWeight.w600, color: Color(0xFFE5E7EB))),
+                            subtitle: Text('$time dk ”¢ $ingredientCount malzeme',
+                              style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
                             trailing: ElevatedButton.icon(
                               onPressed: () {
                                 Navigator.pop(ctx);
@@ -369,9 +388,9 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
       'ana_yemek' => '🍖',
       'tatli' => '🍮',
       'salata' => '🥗',
-      'meze' => '🫙',
+      'meze' => '🍫™',
       'pilav' => '🍚',
-      'hamur_isi' => '🥙',
+      'hamur_isi' => '🥐™',
       'dolma_sarma' => '🫑',
       'makarna' => '🍝',
       'balik' => '🐟',
@@ -386,7 +405,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
     final ingredients = (recipe['ingredients'] as List?) ?? [];
     int added = 0;
     for (final ing in ingredients) {
-      final name = ing['name'] as String? ?? '';
+      final name = (ing as Map?)?['name'] as String? ?? '';
       if (name.isNotEmpty) {
         ref.read(shoppingItemsProvider.notifier).addItem(
           name,
@@ -408,24 +427,22 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
       color: isDark
-          ? AppColors.darkCard.withAlpha(200)
-          : AppColors.softMint.withAlpha(15),
+          ? const Color(0xFF13131A).withAlpha(200)
+          : const Color(0xFF10B981).withAlpha(15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          const Row(
             children: [
-              const Icon(Icons.auto_awesome,
-                  size: 14, color: AppColors.softMint),
-              const SizedBox(width: 6),
+              Icon(Icons.auto_awesome,
+                  size: 14, color: Color(0xFF10B981)),
+              SizedBox(width: 6),
               Text(
                 'Hızlı Ekle',
                 style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
-                    color: isDark
-                        ? AppColors.darkTextSecondary
-                        : AppColors.slate),
+                    color: Color(0xFF6B7280)),
               ),
             ],
           ),
@@ -447,7 +464,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                     color: const Color(0x1AFFFFFF),
                     borderRadius: BorderRadius.circular(12),
                     border:
-                        Border.all(color: AppColors.softMint.withAlpha(80)),
+                        Border.all(color: const Color(0xFF10B981).withAlpha(80)),
                     boxShadow: [
                       BoxShadow(
                           color: Colors.black.withAlpha(6), blurRadius: 6)
@@ -459,12 +476,10 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                       Text(emoji, style: const TextStyle(fontSize: 14)),
                       const SizedBox(width: 5),
                       Text(name,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
-                              color: isDark
-                                  ? AppColors.darkTextPrimary
-                                  : AppColors.dark)),
+                              color: Color(0xFFE5E7EB))),
                     ],
                   ),
                 ),
@@ -483,14 +498,14 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.shopping_cart_outlined,
-                size: 72, color: AppColors.slate.withAlpha(100)),
+                size: 72, color: const Color(0xFF6B7280).withAlpha(100)),
             const SizedBox(height: 16),
             const Text('Liste boş',
                 style:
                     TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
             const SizedBox(height: 6),
             const Text('+ butonuna bas veya ✨ hızlı ekle',
-                style: TextStyle(fontSize: 13, color: AppColors.slate)),
+                style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
           ],
         ),
       );
@@ -510,7 +525,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
         if (done.isNotEmpty) ...[
           const SizedBox(height: 16),
           _sectionLabel('Tamamlanan', done.length, isDark,
-              color: AppColors.softMint),
+              color: const Color(0xFF10B981)),
           const SizedBox(height: 8),
           ...done.map((item) => _buildItemCard(item, isDark)),
         ],
@@ -519,16 +534,16 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
   }
 
   Widget _sectionLabel(String label, int count, bool isDark,
-      {Color color = AppColors.slate}) {
+      {Color color = const Color(0xFF6B7280)}) {
     return Row(
       children: [
         Text(
           '$label ($count)',
-          style: TextStyle(
+          style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w700,
               color:
-                  isDark ? AppColors.darkTextSecondary : AppColors.slate),
+                  Color(0xFF6B7280)),
         ),
       ],
     );
@@ -555,7 +570,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-                color: Colors.black.withAlpha(isDark ? 20 : 6),
+                color: Colors.black.withAlpha(20),
                 blurRadius: 8,
                 offset: const Offset(0, 2)),
           ],
@@ -570,12 +585,12 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
               width: 28,
               height: 28,
               decoration: BoxDecoration(
-                color: item.isCompleted ? AppColors.softMint : Colors.transparent,
+                color: item.isCompleted ? const Color(0xFF10B981) : Colors.transparent,
                 shape: BoxShape.circle,
                 border: Border.all(
                     color: item.isCompleted
-                        ? AppColors.softMint
-                        : AppColors.border,
+                        ? const Color(0xFF10B981)
+                        : const Color(0x1EFFFFFF),
                     width: 2),
               ),
               child: item.isCompleted
@@ -591,14 +606,14 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
               decoration:
                   item.isCompleted ? TextDecoration.lineThrough : null,
               color: item.isCompleted
-                  ? AppColors.slate
-                  : (isDark ? AppColors.darkTextPrimary : AppColors.dark),
+                  ? const Color(0xFF6B7280)
+                  : (const Color(0xFFE5E7EB)),
             ),
           ),
           subtitle: item.quantity != null
               ? Text('${item.quantity} adet',
                   style: const TextStyle(
-                      fontSize: 12, color: AppColors.slate))
+                      fontSize: 12, color: Color(0xFF6B7280)))
               : null,
           trailing: Container(
             padding:
@@ -626,7 +641,6 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
   }
 
   void _showAddSheet(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -638,10 +652,10 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
               left: 20,
               right: 20,
               top: 20),
-          decoration: BoxDecoration(
-            color: const Color(0x1AFFFFFF),
+          decoration: const BoxDecoration(
+            color: Color(0x1AFFFFFF),
             borderRadius:
-                const BorderRadius.vertical(top: Radius.circular(24)),
+                BorderRadius.vertical(top: Radius.circular(24)),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -653,7 +667,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                   height: 4,
                   margin: const EdgeInsets.only(bottom: 16),
                   decoration: BoxDecoration(
-                      color: AppColors.border,
+                      color: const Color(0x1EFFFFFF),
                       borderRadius: BorderRadius.circular(2)),
                 ),
               ),
@@ -670,7 +684,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                   prefixIcon: const Icon(Icons.shopping_basket_outlined),
                   filled: true,
                   fillColor:
-                      AppColors.darkBackground,
+                      const Color(0xFF0A0A0F),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
                       borderSide: BorderSide.none),
@@ -688,8 +702,8 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                         prefixIcon: const Icon(Icons.numbers),
                         filled: true,
                         fillColor: isDark
-                            ? AppColors.darkBackground
-                            : AppColors.background,
+                            ? const Color(0xFF0A0A0F)
+                            : const Color(0xFF0A0A0F),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(14),
                             borderSide: BorderSide.none),
@@ -700,13 +714,11 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
               ),
               const SizedBox(height: 12),
               // Category picker
-              Text('Kategori',
+              const Text('Kategori',
                   style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
-                      color: isDark
-                          ? AppColors.darkTextSecondary
-                          : AppColors.slate)),
+                      color: Color(0xFF6B7280))),
               const SizedBox(height: 8),
               Wrap(
                 spacing: 8,
@@ -769,5 +781,275 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
         ),
       ),
     );
+  }
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Market Kataloğu — ülkeye göre marketler + haftalık fırsatlar + ürünler
+// ═══════════════════════════════════════════════════════════════════════════
+class _MarketCatalogSheet extends StatefulWidget {
+  final String country;
+  final void Function(MarketProduct) onAdd;
+  const _MarketCatalogSheet({required this.country, required this.onAdd});
+
+  @override
+  State<_MarketCatalogSheet> createState() => _MarketCatalogSheetState();
+}
+
+class _MarketCatalogSheetState extends State<_MarketCatalogSheet> {
+  String _category = 'Tümü';
+
+  String get _cur =>
+      HiveService.getSetting('currencySymbol') ?? (widget.country == 'TR' ? '₺' : '€');
+
+  String _fmtDate(DateTime d) =>
+      '${d.day.toString().padLeft(2, '0')}.${d.month.toString().padLeft(2, '0')}.${d.year}';
+
+  @override
+  Widget build(BuildContext context) {
+    final markets = MarketCatalog.marketsFor(widget.country);
+    final deals = MarketCatalog.weeklyDeals(widget.country);
+    final cats = ['Tümü', ...MarketCatalog.categories];
+    final products = MarketCatalog.productsFor(widget.country,
+        category: _category == 'Tümü' ? null : _category);
+    final monday = MarketCatalog.weekMonday();
+
+    return DraggableScrollableSheet(
+      initialChildSize: 0.9,
+      maxChildSize: 0.95,
+      minChildSize: 0.5,
+      expand: false,
+      builder: (_, ctrl) => Container(
+        decoration: const BoxDecoration(
+          color: Color(0xFF13131A),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        ),
+        child: Column(
+          children: [
+            const SizedBox(height: 10),
+            Container(
+              width: 40, height: 4,
+              decoration: BoxDecoration(
+                  color: Colors.white.withAlpha(40),
+                  borderRadius: BorderRadius.circular(2)),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 14, 20, 8),
+              child: Row(
+                children: [
+                  const Icon(Icons.storefront, color: Color(0xFF10B981)),
+                  const SizedBox(width: 8),
+                  const Text('Market Kataloğu',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w800)),
+                  const Spacer(),
+                  Text('Güncellendi: ${_fmtDate(monday)}',
+                      style: const TextStyle(
+                          color: Color(0xFF6B7280), fontSize: 11)),
+                ],
+              ),
+            ),
+            // Market rozetleri
+            SizedBox(
+              height: 34,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                itemCount: markets.length,
+                separatorBuilder: (_, _) => const SizedBox(width: 8),
+                itemBuilder: (_, i) => Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1A1A24),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: const Color(0x22FFFFFF)),
+                  ),
+                  child: Text(markets[i],
+                      style: const TextStyle(
+                          color: Color(0xFFC7CBD4),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700)),
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            Expanded(
+              child: ListView(
+                controller: ctrl,
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                children: [
+                  // Bu haftanın fırsatları
+                  const Row(
+                    children: [
+                      Icon(Icons.local_fire_department,
+                          color: Color(0xFFF97316), size: 18),
+                      SizedBox(width: 6),
+                      Text('Bu Haftanın Fırsatları',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w800)),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  SizedBox(
+                    height: 96,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: deals.length,
+                      separatorBuilder: (_, _) => const SizedBox(width: 10),
+                      itemBuilder: (_, i) {
+                        final p = deals[i];
+                        return GestureDetector(
+                          onTap: () => _add(p),
+                          child: Container(
+                            width: 90,
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(colors: [
+                                const Color(0xFFF97316).withAlpha(30),
+                                const Color(0xFFF97316).withAlpha(12),
+                              ]),
+                              borderRadius: BorderRadius.circular(14),
+                              border: Border.all(
+                                  color: const Color(0xFFF97316).withAlpha(80)),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(p.emoji,
+                                    style: const TextStyle(fontSize: 22)),
+                                const Spacer(),
+                                Text(p.name,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w700)),
+                                Text('$_cur${p.price.toStringAsFixed(p.price >= 100 ? 0 : 2)}',
+                                    style: const TextStyle(
+                                        color: Color(0xFFF97316),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w800)),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  // Kategori filtresi
+                  SizedBox(
+                    height: 32,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: cats.length,
+                      separatorBuilder: (_, _) => const SizedBox(width: 8),
+                      itemBuilder: (_, i) {
+                        final c = cats[i];
+                        final sel = _category == c;
+                        return GestureDetector(
+                          onTap: () => setState(() => _category = c),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: sel
+                                  ? const Color(0xFF10B981)
+                                  : const Color(0xFF1A1A24),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Text(c,
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w700,
+                                    color: sel
+                                        ? Colors.white
+                                        : const Color(0xFF9CA3AF))),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  // Ürün ızgarası
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 3.2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                    ),
+                    itemCount: products.length,
+                    itemBuilder: (_, i) {
+                      final p = products[i];
+                      return GestureDetector(
+                        onTap: () => _add(p),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 8),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF1A1A24),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: const Color(0x18FFFFFF)),
+                          ),
+                          child: Row(
+                            children: [
+                              Text(p.emoji,
+                                  style: const TextStyle(fontSize: 20)),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(p.name,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12.5,
+                                            fontWeight: FontWeight.w600)),
+                                    Text('$_cur${p.price.toStringAsFixed(p.price >= 100 ? 0 : 2)}',
+                                        style: const TextStyle(
+                                            color: Color(0xFF10B981),
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.w700)),
+                                  ],
+                                ),
+                              ),
+                              const Icon(Icons.add_circle,
+                                  color: Color(0xFF10B981), size: 20),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _add(MarketProduct p) {
+    widget.onAdd(p);
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('${p.name} listeye eklendi'),
+        behavior: SnackBarBehavior.floating,
+        duration: const Duration(milliseconds: 900)));
   }
 }

@@ -13,6 +13,8 @@ class AmbientListeningScreen extends StatefulWidget {
 }
 
 class _AmbientListeningScreenState extends State<AmbientListeningScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   bool _recording = false;
   bool _shakeEnabled = true;
   double _currentDb = 40;
@@ -25,6 +27,11 @@ class _AmbientListeningScreenState extends State<AmbientListeningScreen> {
   @override
   void initState() {
     super.initState();
+    _initWithPermissions();
+  }
+
+  Future<void> _initWithPermissions() async {
+    await AmbientListeningService.requestSensorPermission();
     AmbientListeningService.initShakeDetection();
     _shakeSub = AmbientListeningService.shakeStream.listen((_) {
       if (_shakeEnabled && !_recording) {
@@ -85,23 +92,20 @@ class _AmbientListeningScreenState extends State<AmbientListeningScreen> {
 
   Color _dbColor(double db) {
     if (db > 90) return AppColors.error;
-    if (db > 70) return AppColors.warning;
-    return AppColors.success;
+    if (db > 70) return const Color(0xFFF59E0B);
+    return const Color(0xFF10B981);
   }
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: AppBar(
         title: const Text('Ortam Dinleme'),
         centerTitle: true,
-        backgroundColor: isDark
-            ? AppColors.darkBackground
-            : AppColors.cloudWhite,
-        foregroundColor: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+        backgroundColor: const Color(0xFF0A0A0F),
+        foregroundColor: const Color(0xFFE5E7EB),
         elevation: 0,
       ),
       body: Padding(
@@ -113,13 +117,11 @@ class _AmbientListeningScreenState extends State<AmbientListeningScreen> {
               width: double.infinity,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: isDark ? AppColors.darkCard : Colors.white,
+                color: const Color(0xFF13131A),
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: isDark
-                        ? Colors.black.withAlpha(20)
-                        : Colors.black.withAlpha(5),
+                    color: Colors.black.withAlpha(20),
                     blurRadius: 16,
                     offset: const Offset(0, 4),
                   ),
@@ -132,7 +134,7 @@ class _AmbientListeningScreenState extends State<AmbientListeningScreen> {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
-                      color: _recording ? AppColors.error : AppColors.success,
+                      color: _recording ? AppColors.error : const Color(0xFF10B981),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -141,7 +143,7 @@ class _AmbientListeningScreenState extends State<AmbientListeningScreen> {
                     height: 120,
                     decoration: BoxDecoration(
                       color: isDark
-                          ? AppColors.darkBackground
+                          ? const Color(0xFF0A0A0F)
                           : const Color(0xFFF8FAFC),
                       borderRadius: BorderRadius.circular(16),
                     ),
@@ -165,10 +167,8 @@ class _AmbientListeningScreenState extends State<AmbientListeningScreen> {
                     const SizedBox(height: 8),
                     Text(
                       '$_recordingSeconds / 60 sn',
-                      style: TextStyle(
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.slate,
+                      style: const TextStyle(
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                   ],
@@ -186,7 +186,7 @@ class _AmbientListeningScreenState extends State<AmbientListeningScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: _recording
                             ? AppColors.error
-                            : AppColors.cobalt,
+                            : const Color(0xFF6366F1),
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
@@ -202,20 +202,18 @@ class _AmbientListeningScreenState extends State<AmbientListeningScreen> {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: isDark ? AppColors.darkCard : Colors.white,
+                color: const Color(0xFF13131A),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Tetikleyiciler',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: isDark
-                          ? AppColors.darkTextPrimary
-                          : AppColors.dark,
+                      color: Color(0xFFE5E7EB),
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -241,12 +239,12 @@ class _AmbientListeningScreenState extends State<AmbientListeningScreen> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: AppColors.success.withAlpha(20),
+                  color: const Color(0xFF10B981).withAlpha(20),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.check_circle, color: AppColors.success),
+                    const Icon(Icons.check_circle, color: Color(0xFF10B981)),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
@@ -278,7 +276,7 @@ class _DbMeterPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final bgPaint = Paint()
-      ..color = isDark ? const Color(0xFF1E293B) : const Color(0xFFE2E8F0);
+      ..color = const Color(0xFF1E293B);
     canvas.drawRRect(
       RRect.fromRectAndRadius(
         Rect.fromLTWH(0, 0, size.width, size.height),
@@ -297,8 +295,8 @@ class _DbMeterPainter extends CustomPainter {
       final isActive = i < activeCount;
       final barPaint = Paint()
         ..color = isActive
-            ? Color.lerp(AppColors.success, AppColors.error, i / barCount)!
-            : (isDark ? const Color(0xFF334155) : const Color(0xFFCBD5E1));
+            ? Color.lerp(const Color(0xFF10B981), AppColors.error, i / barCount)!
+            : (const Color(0xFF334155));
       canvas.drawRRect(
         RRect.fromRectAndRadius(
           Rect.fromLTWH(x, 15, barWidth - 4, barHeight),

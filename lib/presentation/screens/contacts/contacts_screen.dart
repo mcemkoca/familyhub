@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_contacts/flutter_contacts.dart' as phone_contacts;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:permission_handler/permission_handler.dart';
 import '../../../config/constants.dart';
 import '../../../repositories/contacts_repository.dart';
 import '../../../services/auth_service.dart';
+import '../../../services/permission_service.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
 class ContactsScreen extends ConsumerStatefulWidget {
@@ -95,15 +95,8 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
   }
 
   Future<void> _importFromPhone() async {
-    final status = await Permission.contacts.request();
-    if (!status.isGranted) {
-      if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('Rehber izni gerekli')));
-      }
-      return;
-    }
+    final granted = await PermissionService.requestContactsRead(context);
+    if (!granted) return;
     setState(() => _isLoading = true);
     try {
       final phoneContacts = await phone_contacts.FlutterContacts.getContacts(
@@ -262,7 +255,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
                       Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.cobalt,
+                      backgroundColor: const Color(0xFF6366F1),
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
@@ -355,12 +348,12 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
                         Icon(
                           Icons.contacts,
                           size: 64,
-                          color: AppColors.lightGray,
+                          color: Color(0xFF9CA3AF),
                         ),
                         SizedBox(height: 16),
                         Text(
                           'Henüz kişi yok',
-                          style: TextStyle(fontSize: 18, color: AppColors.gray),
+                          style: TextStyle(fontSize: 18, color: Color(0xFF6B7280)),
                         ),
                       ],
                     ),
@@ -387,10 +380,10 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
                           ),
                           child: ListTile(
                             leading: CircleAvatar(
-                              backgroundColor: AppColors.cobalt.withAlpha(30),
+                              backgroundColor: const Color(0xFF6366F1).withAlpha(30),
                               child: Icon(
                                 _typeIcon(c.type),
-                                color: AppColors.cobalt,
+                                color: const Color(0xFF6366F1),
                               ),
                             ),
                             title: Text(
@@ -428,7 +421,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showAddSheet(),
-        backgroundColor: AppColors.cobalt,
+        backgroundColor: const Color(0xFF6366F1),
         child: const Icon(Icons.add, color: Colors.white),
       ),
     );

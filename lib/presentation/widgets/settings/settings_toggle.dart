@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../config/constants.dart';
 
 class SettingsToggle extends StatelessWidget {
   final IconData icon;
@@ -22,8 +21,6 @@ class SettingsToggle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Semantics(
       button: true,
       label: label,
@@ -36,7 +33,7 @@ class SettingsToggle extends StatelessWidget {
               width: 36,
               height: 36,
               decoration: BoxDecoration(
-                color: iconColor.withAlpha(isDark ? 35 : 30),
+                color: iconColor.withAlpha(30),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Icon(icon, color: iconColor, size: 20),
@@ -48,38 +45,33 @@ class SettingsToggle extends StatelessWidget {
                 children: [
                   Text(
                     label,
-                    style: TextStyle(
-                      fontSize: 16,
+                    style: const TextStyle(
+                      fontSize: 15,
                       fontWeight: FontWeight.w500,
-                      color: isDark
-                          ? AppColors.darkTextPrimary
-                          : AppColors.dark,
+                      color: Color(0xFFE5E7EB),
                     ),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     description,
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: isDark
-                          ? AppColors.darkTextSecondary
-                          : AppColors.slate,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFF6B7280),
                     ),
                   ),
                 ],
               ),
             ),
-            Switch.adaptive(
+            Switch(
               value: value,
               onChanged: (v) {
                 HapticFeedback.selectionClick();
                 onToggle(v);
               },
-              activeTrackColor: AppColors.cobalt,
+              activeTrackColor: const Color(0xFF6366F1),
               activeThumbColor: Colors.white,
-              inactiveTrackColor:
-                  isDark ? AppColors.darkBorder : const Color(0xFFE2E8F0),
-              inactiveThumbColor: Colors.white,
+              inactiveTrackColor: const Color(0xFF1F2937),
+              inactiveThumbColor: const Color(0xFF6B7280),
             ),
           ],
         ),

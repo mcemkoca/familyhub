@@ -42,9 +42,9 @@ class _SafeZonesScreenState extends State<SafeZonesScreen> {
 
   Color _colorForType(SafeZoneType type) {
     return switch (type) {
-      SafeZoneType.home => AppColors.cobalt,
-      SafeZoneType.work => AppColors.purple,
-      SafeZoneType.school => AppColors.success,
+      SafeZoneType.home => const Color(0xFF6366F1),
+      SafeZoneType.work => const Color(0xFF8B5CF6),
+      SafeZoneType.school => const Color(0xFF10B981),
       SafeZoneType.danger => AppColors.error,
       SafeZoneType.custom => AppColors.orange,
     };
@@ -52,15 +52,14 @@ class _SafeZonesScreenState extends State<SafeZonesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).guvenliBolgeler),
         centerTitle: true,
-        backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
-        foregroundColor: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+        backgroundColor: const Color(0xFF0A0A0F),
+        foregroundColor: const Color(0xFFE5E7EB),
         elevation: 0,
       ),
       body: RefreshIndicator(
@@ -68,11 +67,11 @@ class _SafeZonesScreenState extends State<SafeZonesScreen> {
         child: ListView(
           padding: const EdgeInsets.all(20),
           children: [
-            Text(
+            const Text(
               'Geofence aktif bölgelerinizi yönetin ve konum durumunu kontrol edin.',
               style: TextStyle(
                 fontSize: 14,
-                color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                color: Color(0xFF6B7280),
               ),
             ),
             const SizedBox(height: 20),
@@ -89,13 +88,11 @@ class _SafeZonesScreenState extends State<SafeZonesScreen> {
                   margin: const EdgeInsets.only(bottom: 12),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: isDark ? AppColors.darkCard : Colors.white,
+                    color: const Color(0xFF13131A),
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
-                        color: isDark
-                            ? Colors.black.withAlpha(20)
-                            : Colors.black.withAlpha(5),
+                        color: Colors.black.withAlpha(20),
                         blurRadius: 12,
                         offset: const Offset(0, 2),
                       ),
@@ -109,7 +106,7 @@ class _SafeZonesScreenState extends State<SafeZonesScreen> {
                           Container(
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
-                              color: color.withAlpha(isDark ? 40 : 25),
+                              color: color.withAlpha(40),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Icon(_iconForType(zone.type), color: color, size: 22),
@@ -129,11 +126,9 @@ class _SafeZonesScreenState extends State<SafeZonesScreen> {
                                 if (zone.address != null)
                                   Text(
                                     zone.address!,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 13,
-                                      color: isDark
-                                          ? AppColors.darkTextSecondary
-                                          : AppColors.slate,
+                                      color: Color(0xFF6B7280),
                                     ),
                                   ),
                               ],
@@ -143,8 +138,8 @@ class _SafeZonesScreenState extends State<SafeZonesScreen> {
                             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                             decoration: BoxDecoration(
                               color: inside
-                                  ? AppColors.success.withAlpha(30)
-                                  : AppColors.warning.withAlpha(30),
+                                  ? const Color(0xFF10B981).withAlpha(30)
+                                  : const Color(0xFFF59E0B).withAlpha(30),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Text(
@@ -152,7 +147,7 @@ class _SafeZonesScreenState extends State<SafeZonesScreen> {
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
-                                color: inside ? AppColors.success : AppColors.warning,
+                                color: inside ? const Color(0xFF10B981) : const Color(0xFFF59E0B),
                               ),
                             ),
                           ),
@@ -188,7 +183,7 @@ class _SafeZonesScreenState extends State<SafeZonesScreen> {
               icon: const Icon(Icons.add),
               label: Text(AppLocalizations.of(context).yeniBolgeEkle),
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.cobalt,
+                backgroundColor: const Color(0xFF6366F1),
                 foregroundColor: Colors.white,
                 minimumSize: const Size(double.infinity, 50),
                 shape: RoundedRectangleBorder(

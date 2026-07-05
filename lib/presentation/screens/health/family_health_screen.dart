@@ -1,18 +1,15 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
-import '../../../config/constants.dart';
-import '../../providers/app_providers.dart';
 
 // ── Hive models (lightweight, no codegen needed — stored as JSON strings) ──
 
 class FamilyHealthHive {
   static const _boxName = 'family_health';
 
-  static Future<Box> get box async =>
+  static Future<Box<dynamic>> get box async =>
       Hive.isBoxOpen(_boxName)
           ? Hive.box(_boxName)
           : await Hive.openBox(_boxName);
@@ -1000,7 +997,7 @@ class _MedicineTab extends ConsumerWidget {
         .firstWhere((m) => m.id == member.id, orElse: () => member);
 
     if (freshMember.medicines.isEmpty) {
-      return _EmptyState(
+      return const _EmptyState(
           emoji: '💊', text: 'Henüz ilaç eklenmedi\n+ butonuna dokun');
     }
 
@@ -1149,7 +1146,7 @@ class _VitaminTab extends ConsumerWidget {
         .firstWhere((m) => m.id == member.id, orElse: () => member);
 
     if (fresh.vitamins.isEmpty) {
-      return _EmptyState(
+      return const _EmptyState(
           emoji: '🌿', text: 'Henüz vitamin/takviye eklenmedi');
     }
 
@@ -1227,7 +1224,7 @@ class _ReportsTab extends ConsumerWidget {
         .firstWhere((m) => m.id == member.id, orElse: () => member);
 
     if (fresh.reports.isEmpty) {
-      return _EmptyState(
+      return const _EmptyState(
           emoji: '📋', text: 'Henüz rapor / belge eklenmedi');
     }
 
@@ -1320,7 +1317,7 @@ class _AppointmentsTab extends ConsumerWidget {
         fresh.appointments.where((a) => a.completed).toList();
 
     if (fresh.appointments.isEmpty) {
-      return _EmptyState(
+      return const _EmptyState(
           emoji: '📅', text: 'Henüz randevu eklenmedi');
     }
 

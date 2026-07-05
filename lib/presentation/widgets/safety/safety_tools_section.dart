@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../config/constants.dart';
 import '../../../core/ui_extensions.dart';
 import '../settings/settings_item.dart';
 
@@ -28,32 +27,28 @@ class SafetyToolsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = context.isDark;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(4, 8, 4, 8),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(4, 8, 4, 8),
           child: Text(
             'GÜVENLİK ARAÇLARI',
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w700,
-              color: isDark ? AppColors.slateLight : AppColors.slate,
+              color: Color(0xFF9CA3AF),
               letterSpacing: 0.5,
             ),
           ),
         ),
         Container(
           decoration: BoxDecoration(
-            color: isDark ? AppColors.darkCard : Colors.white,
+            color: const Color(0xFF13131A),
             borderRadius: 16.0.asRadius,
             boxShadow: [
               BoxShadow(
-                color: isDark
-                    ? Colors.black.withAlpha(20)
-                    : Colors.black.withAlpha(5),
+                color: Colors.black.withAlpha(20),
                 blurRadius: 12,
                 offset: const Offset(0, 2),
               ),

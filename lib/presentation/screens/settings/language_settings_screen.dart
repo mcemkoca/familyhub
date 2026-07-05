@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../services/hive_service.dart';
-import '../../../config/constants.dart';
 import '../../providers/app_providers.dart';
+import '../../../config/country_config.dart';
 import '../../widgets/settings/screen_header.dart';
 import 'package:go_router/go_router.dart';
 
@@ -16,19 +16,36 @@ class LanguageSettingsScreen extends ConsumerStatefulWidget {
 
 class _LanguageSettingsScreenState extends ConsumerState<LanguageSettingsScreen> {
   String _selectedLanguage = 'Türkçe';
-  String _selectedRegion = 'Türkiye';
+  String _selectedCountry = 'BE';
   String _dateFormat = 'DD/MM/YYYY';
 
-  final _languages = ['Türkçe', 'English', 'Deutsch', 'Nederlands'];
-  final _regions = ['Türkiye', 'United States', 'Germany', 'Netherlands'];
+  final _languages = ['Türkçe', 'English', 'Deutsch', 'Nederlands', 'Français'];
   final _dateFormats = ['DD/MM/YYYY', 'MM/DD/YYYY', 'YYYY-MM-DD'];
 
   @override
   void initState() {
     super.initState();
     _selectedLanguage = HiveService.getSetting('language') ?? 'Türkçe';
-    _selectedRegion = HiveService.getSetting('region') ?? 'Türkiye';
+    _selectedCountry = HiveService.getSetting('country') ?? 'BE';
     _dateFormat = HiveService.getSetting('dateFormat') ?? 'DD/MM/YYYY';
+  }
+
+  /// Ülke seçilince dil, para birimi, tarih formatı otomatik ayarlanır.
+  Future<void> _saveCountry(Country c) async {
+    setState(() {
+      _selectedCountry = c.code;
+      _selectedLanguage = c.languageLabel;
+      _dateFormat = c.dateFormat;
+    });
+    HapticFeedback.selectionClick();
+    await HiveService.setSetting('country', c.code);
+    await HiveService.setSetting('language', c.languageLabel);
+    await HiveService.setSetting('region', c.name);
+    await HiveService.setSetting('currency', c.currencyCode);
+    await HiveService.setSetting('currencySymbol', c.currencySymbol);
+    await HiveService.setSetting('dateFormat', c.dateFormat);
+    ref.read(countryProvider.notifier).state = c.code;
+    ref.read(localeProvider.notifier).state = c.locale;
   }
 
   Future<void> _saveLanguage(String lang) async {
@@ -55,12 +72,6 @@ class _LanguageSettingsScreenState extends ConsumerState<LanguageSettingsScreen>
     ref.read(localeProvider.notifier).state = newLocale;
   }
 
-  Future<void> _saveRegion(String region) async {
-    setState(() => _selectedRegion = region);
-    await HiveService.setSetting('region', region);
-    HapticFeedback.selectionClick();
-  }
-
   Future<void> _saveDateFormat(String fmt) async {
     setState(() => _dateFormat = fmt);
     await HiveService.setSetting('dateFormat', fmt);
@@ -69,9 +80,8 @@ class _LanguageSettingsScreenState extends ConsumerState<LanguageSettingsScreen>
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = isDark ? AppColors.darkBackground : AppColors.cloudWhite;
-    final cardBg = isDark ? AppColors.darkCard : Colors.white;
+    final bg = const Color(0xFF0A0A0F);
+    final cardBg = const Color(0xFF13131A);
 
     return Scaffold(
       backgroundColor: bg,
@@ -98,16 +108,23 @@ class _LanguageSettingsScreenState extends ConsumerState<LanguageSettingsScreen>
           ),
           const SizedBox(height: 16),
           _buildGroup(
-            title: 'BÖLGE',
-            children: _regions.map((region) {
-              final selected = _selectedRegion == region;
+            title: 'ÜLKE / BÖLGE',
+            children: CountryConfig.all.map((c) {
+              final selected = _selectedCountry == c.code;
               return _buildOptionTile(
-                label: region,
+                label: c.display,
                 selected: selected,
-                onTap: () => _saveRegion(region),
+                onTap: () => _saveCountry(c),
                 cardBg: cardBg,
               );
             }).toList(),
+          ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(6, 8, 6, 0),
+            child: Text(
+              'Ülke seçimi; dil, para birimi, ev gideri ve market içeriğini belirler.',
+              style: TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+            ),
           ),
           const SizedBox(height: 16),
           _buildGroup(
@@ -128,7 +145,6 @@ class _LanguageSettingsScreenState extends ConsumerState<LanguageSettingsScreen>
   }
 
   Widget _buildGroup({required String title, required List<Widget> children}) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -136,23 +152,21 @@ class _LanguageSettingsScreenState extends ConsumerState<LanguageSettingsScreen>
           padding: const EdgeInsets.only(left: 4, bottom: 8),
           child: Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w700,
-              color: isDark ? AppColors.slateLight : AppColors.slate,
+              color: Color(0xFF9CA3AF),
               letterSpacing: 0.5,
             ),
           ),
         ),
         Container(
           decoration: BoxDecoration(
-            color: isDark ? AppColors.darkCard : Colors.white,
+            color: const Color(0xFF13131A),
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: isDark
-                    ? Colors.black.withAlpha(20)
-                    : Colors.black.withAlpha(5),
+                color: Colors.black.withAlpha(20),
                 blurRadius: 12,
                 offset: const Offset(0, 2),
               ),
@@ -170,7 +184,6 @@ class _LanguageSettingsScreenState extends ConsumerState<LanguageSettingsScreen>
     required VoidCallback onTap,
     required Color cardBg,
   }) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(16),
@@ -184,14 +197,14 @@ class _LanguageSettingsScreenState extends ConsumerState<LanguageSettingsScreen>
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
-                  color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                  color: const Color(0xFFE5E7EB),
                 ),
               ),
             ),
             if (selected)
               const Icon(
                 Icons.check_circle,
-                color: AppColors.cobalt,
+                color: Color(0xFF6366F1),
                 size: 22,
               ),
           ],

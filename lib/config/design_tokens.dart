@@ -3,7 +3,7 @@
 /// renk, tipografi ve spacing tokenlarını tanımlar.
 ///
 /// Figma'dan değişiklik geldiğinde sadece bu dosyayı güncelleyin.
-library design_tokens;
+library;
 
 import 'package:flutter/material.dart';
 
@@ -284,10 +284,10 @@ abstract class DesignTokens {
 
   /// İkon gölgesi oluşturur
   static List<BoxShadow> cardShadow(bool isDark) => [
-        BoxShadow(
-          color: isDark ? cardShadowDark : cardShadowLight,
+        const BoxShadow(
+          color: cardShadowDark,
           blurRadius: elevation3,
-          offset: const Offset(0, 2),
+          offset: Offset(0, 2),
         ),
       ];
 
@@ -295,7 +295,7 @@ abstract class DesignTokens {
   static BoxDecoration featureCardDecoration(Color color,
       {bool isDark = false}) =>
       BoxDecoration(
-        color: color.withAlpha(isDark ? 40 : 25),
+        color: color.withAlpha(40),
         borderRadius: BorderRadius.circular(radius14),
         border: Border.all(color: color.withAlpha(60)),
       );

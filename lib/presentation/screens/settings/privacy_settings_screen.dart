@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
+import 'dart:io';
 
-import '../../../config/constants.dart';
 import '../../../core/supabase_client.dart';
 import '../../../services/auth_service.dart';
 import '../../widgets/settings/hive_settings_toggle.dart';
@@ -29,24 +32,56 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
           settingKey: value,
           'updated_at': DateTime.now().toIso8601String(),
         },
-      });
+      }, onConflict: 'user_id');
     } catch (e) {
       debugPrint('Supabase sync hatası: $e');
     }
   }
 
   Future<void> _exportUserData() async {
-    // TODO: GDPR veri indirme implementasyonu
+    final client = SupabaseConfig.safeClient;
+    final userId = AuthService.currentUserId;
+    if (client == null || userId == null) return;
+
+    if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(AppLocalizations.of(context).veriIndirmeHazirlaniyor)),
     );
+
+    try {
+      final profile = await client.from('profiles').select().eq('id', userId).maybeSingle();
+      final settings = await client.from('settings').select().eq('user_id', userId).maybeSingle();
+      final export = {
+        'export_date': DateTime.now().toIso8601String(),
+        'user_id': userId,
+        'profile': profile,
+        'settings': settings,
+      };
+
+      final dir = await getTemporaryDirectory();
+      final file = File('${dir.path}/familyhub_data_export.json');
+      await file.writeAsString(const JsonEncoder.withIndent('  ').convert(export));
+
+      await SharePlus.instance.share(
+        ShareParams(
+          files: [XFile(file.path)],
+          text: 'FamilyHub Veri Dışa Aktarımı',
+        ),
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Veri dışa aktarma başarısız: $e')),
+        );
+      }
+    }
   }
 
   Future<void> _showDeleteAccountDialog() async {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: const Text('Hesabı Sil', style: TextStyle(color: AppColors.error)),
+        title: const Text('Hesabı Sil', style: TextStyle(color: Color(0xFFEF4444))),
         content: Text(AppLocalizations.of(context).hesabiniziSilmekGeriAlinamazTumVerilerinizKaliciOlarakSilinecek),
         actions: [
           TextButton(
@@ -55,7 +90,7 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
           ),
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, true),
-            child: const Text('Sil', style: TextStyle(color: AppColors.error)),
+            child: const Text('Sil', style: TextStyle(color: Color(0xFFEF4444))),
           ),
         ],
       ),
@@ -95,8 +130,7 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = isDark ? AppColors.darkBackground : AppColors.cloudWhite;
+    final bg = const Color(0xFF0A0A0F);
 
     return Scaffold(
       backgroundColor: bg,
@@ -158,14 +192,14 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
               icon: Icons.verified_user_outlined,
               children: [
                 ListTile(
-                  leading: const Icon(Icons.download, color: AppColors.cobalt),
+                  leading: const Icon(Icons.download, color: Color(0xFF6366F1)),
                   title: Text(AppLocalizations.of(context).verilerimiIndir),
                   subtitle: Text(AppLocalizations.of(context).gdprKapsamindaTumVerileriniz),
                   onTap: _exportUserData,
                 ),
                 ListTile(
-                  leading: const Icon(Icons.delete_forever, color: AppColors.error),
-                  title: const Text('Hesabımı Sil', style: TextStyle(color: AppColors.error)),
+                  leading: const Icon(Icons.delete_forever, color: Color(0xFFEF4444)),
+                  title: const Text('Hesabımı Sil', style: TextStyle(color: Color(0xFFEF4444))),
                   subtitle: Text(AppLocalizations.of(context).tumVerilerinizKaliciOlarakSilinecek),
                   onTap: _showDeleteAccountDialog,
                 ),

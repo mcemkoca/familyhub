@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../../config/constants.dart';
 
 class ChildAchievementsTab extends StatefulWidget {
   final String childName;
@@ -12,6 +11,8 @@ class ChildAchievementsTab extends StatefulWidget {
 
 class _ChildAchievementsTabState extends State<ChildAchievementsTab>
     with SingleTickerProviderStateMixin {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   late AnimationController _starController;
   final int _level = 7;
   final int _totalPoints = 1340;
@@ -61,7 +62,6 @@ class _ChildAchievementsTabState extends State<ChildAchievementsTab>
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final earned = _badges.where((b) => b.earned).toList();
     final notEarned = _badges.where((b) => !b.earned).toList();
 
@@ -72,10 +72,10 @@ class _ChildAchievementsTabState extends State<ChildAchievementsTab>
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
             child: Text('Kazanılan Rozetler (${earned.length})',
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
-                    color: isDark ? AppColors.darkTextPrimary : AppColors.dark)),
+                    color: Color(0xFFE5E7EB))),
           ),
         ),
         SliverPadding(
@@ -97,10 +97,10 @@ class _ChildAchievementsTabState extends State<ChildAchievementsTab>
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
             child: Text('Kazanılmayı Bekleyen (${notEarned.length})',
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
-                    color: isDark ? AppColors.darkTextPrimary : AppColors.dark)),
+                    color: Color(0xFFE5E7EB))),
           ),
         ),
         SliverPadding(
@@ -261,11 +261,11 @@ class _BadgeTile extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: locked
-              ? (isDark ? AppColors.darkCard : Colors.white)
+              ? (const Color(0xFF13131A))
               : badge.color.withAlpha(20),
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-              color: locked ? AppColors.border : badge.color.withAlpha(60),
+              color: locked ? const Color(0x1EFFFFFF) : badge.color.withAlpha(60),
               width: locked ? 1 : 2),
         ),
         child: Column(
@@ -297,16 +297,14 @@ class _BadgeTile extends StatelessWidget {
                     fontSize: 10,
                     fontWeight: FontWeight.w700,
                     color: locked
-                        ? AppColors.slate
-                        : (isDark
-                            ? AppColors.darkTextPrimary
-                            : AppColors.dark))),
+                        ? const Color(0xFF6B7280)
+                        : (const Color(0xFFE5E7EB)))),
             const SizedBox(height: 3),
             Text('+${badge.points} XP',
                 style: TextStyle(
                     fontSize: 9,
                     fontWeight: FontWeight.w700,
-                    color: locked ? AppColors.slate : badge.color)),
+                    color: locked ? const Color(0xFF6B7280) : badge.color)),
           ],
         ),
       ),

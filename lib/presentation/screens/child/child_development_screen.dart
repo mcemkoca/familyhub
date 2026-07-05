@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
+import '../../widgets/growing_tree.dart';
+import '../../../services/ai/pedagogy_engine.dart';
+import '../../../services/hive_service.dart';
 
 // ── WHO Milestone Data ──
 
@@ -94,7 +96,7 @@ class _ChildDevHive {
   static const _box = 'child_development';
   static const _childrenKey = 'children';
 
-  static Future<Box> get box async => Hive.isBoxOpen(_box)
+  static Future<Box<dynamic>> get box async => Hive.isBoxOpen(_box)
       ? Hive.box(_box)
       : await Hive.openBox(_box);
 
@@ -463,7 +465,7 @@ class _ChildDevelopmentScreenState
               background: Container(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Color(0xFFFF6B6B), Color(0xFFFFD93D)],
+                    colors: [Color(0xFF071520), Color(0xFF0A2535)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -592,7 +594,7 @@ class _ChildDevelopmentScreenState
                             horizontal: 24, vertical: 12),
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
-                            colors: [Color(0xFFFF6B6B), Color(0xFFFFD93D)],
+                            colors: [Color(0xFF06B6D4), Color(0xFF0891B2)],
                           ),
                           borderRadius: BorderRadius.circular(14),
                         ),
@@ -625,7 +627,7 @@ class _ChildDevelopmentScreenState
           ? null
           : FloatingActionButton.extended(
               onPressed: () => _addItem(child),
-              backgroundColor: const Color(0xFFFF6B6B),
+              backgroundColor: const Color(0xFF06B6D4),
               icon: const Icon(Icons.add, color: Colors.white),
               label: Text(_fabLabel(),
                   style: const TextStyle(
@@ -679,12 +681,12 @@ class _ChildDevelopmentScreenState
                       height: 50,
                       decoration: BoxDecoration(
                         color: sel
-                            ? const Color(0xFFFF6B6B).withAlpha(25)
+                            ? const Color(0xFF06B6D4).withAlpha(25)
                             : Colors.grey.withAlpha(20),
                         shape: BoxShape.circle,
                         border: Border.all(
                           color: sel
-                              ? const Color(0xFFFF6B6B)
+                              ? const Color(0xFF06B6D4)
                               : Colors.transparent,
                           width: 2,
                         ),
@@ -715,13 +717,13 @@ class _ChildDevelopmentScreenState
                       horizontal: 14, vertical: 13),
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: const Color(0xFFFF6B6B), width: 1.5),
+                        color: const Color(0xFF06B6D4), width: 1.5),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
                     children: [
                       const Icon(Icons.cake,
-                          color: Color(0xFFFF6B6B), size: 18),
+                          color: Color(0xFF06B6D4), size: 18),
                       const SizedBox(width: 8),
                       Text(
                         'Doğum tarihi: ${DateFormat('dd MMMM yyyy', 'tr').format(birthDate)}',
@@ -805,12 +807,12 @@ class _ChildDevelopmentScreenState
                           horizontal: 10, vertical: 6),
                       decoration: BoxDecoration(
                         color: nameCtrl.text == name
-                            ? const Color(0xFFFF6B6B).withAlpha(20)
+                            ? const Color(0xFF06B6D4).withAlpha(20)
                             : Colors.grey.withAlpha(15),
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
                           color: nameCtrl.text == name
-                              ? const Color(0xFFFF6B6B)
+                              ? const Color(0xFF06B6D4)
                               : Colors.transparent,
                         ),
                       ),
@@ -888,13 +890,13 @@ class _ChildDevelopmentScreenState
                       horizontal: 14, vertical: 13),
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: const Color(0xFFFF6B6B), width: 1.5),
+                        color: const Color(0xFF06B6D4), width: 1.5),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
                     children: [
                       const Icon(Icons.event,
-                          color: Color(0xFFFF6B6B), size: 18),
+                          color: Color(0xFF06B6D4), size: 18),
                       const SizedBox(width: 8),
                       Text(
                         'Teslim: ${DateFormat('dd MMMM', 'tr').format(dueDate)}',
@@ -1005,7 +1007,7 @@ class _MilestoneTab extends ConsumerWidget {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             gradient: const LinearGradient(
-              colors: [Color(0xFFFF6B6B), Color(0xFFFFD93D)],
+              colors: [Color(0xFF06B6D4), Color(0xFF0891B2)],
             ),
             borderRadius: BorderRadius.circular(16),
           ),
@@ -1056,8 +1058,65 @@ class _MilestoneTab extends ConsumerWidget {
                 ? 0
                 : completed / milestones.length,
             backgroundColor: Colors.grey.withAlpha(30),
-            valueColor: const AlwaysStoppedAnimation(Color(0xFFFF6B6B)),
+            valueColor: const AlwaysStoppedAnimation(Color(0xFF06B6D4)),
             minHeight: 8,
+          ),
+        ),
+        const SizedBox(height: 16),
+
+        // Büyüyen gelişim ağacı — her basamak ağacı büyütür
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFF0E1F13), Color(0xFF13131A)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(color: const Color(0xFF2E7D32).withAlpha(60)),
+          ),
+          child: Column(
+            children: [
+              Text('${fresh.name}\'in Gelişim Ağacı',
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w800)),
+              const SizedBox(height: 2),
+              const Text('Her tamamlanan basamak ağacı büyütür',
+                  style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 11)),
+              const SizedBox(height: 8),
+              GrowingTree(
+                progress:
+                    milestones.isEmpty ? 0 : completed / milestones.length,
+                size: 190,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 12),
+
+        // AI ile kişisel haftalık plan üret
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton.icon(
+            onPressed: () => showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              builder: (_) => _AiPlanSheet(child: fresh),
+            ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF8B5CF6),
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14)),
+            ),
+            icon: const Icon(Icons.auto_awesome, color: Colors.white, size: 18),
+            label: Text('AI ile ${fresh.name}\'e Özel Haftalık Plan',
+                style: const TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.w700)),
           ),
         ),
         const SizedBox(height: 16),
@@ -1079,12 +1138,12 @@ class _MilestoneTab extends ConsumerWidget {
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: done
-                    ? const Color(0xFFFF6B6B).withAlpha(12)
+                    ? const Color(0xFF06B6D4).withAlpha(12)
                     : Colors.grey.withAlpha(8),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
                   color: done
-                      ? const Color(0xFFFF6B6B).withAlpha(50)
+                      ? const Color(0xFF06B6D4).withAlpha(50)
                       : Colors.grey.withAlpha(30),
                 ),
               ),
@@ -1100,13 +1159,13 @@ class _MilestoneTab extends ConsumerWidget {
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 color: done
-                                    ? const Color(0xFFFF6B6B)
+                                    ? const Color(0xFF06B6D4)
                                     : Colors.black87)),
                         Text(m.$1,
                             style: TextStyle(
                                 fontSize: 11,
                                 color: done
-                                    ? const Color(0xFFFF6B6B)
+                                    ? const Color(0xFF06B6D4)
                                         .withAlpha(160)
                                     : const Color(0xFF9CA3AF))),
                       ],
@@ -1118,12 +1177,12 @@ class _MilestoneTab extends ConsumerWidget {
                     height: 24,
                     decoration: BoxDecoration(
                       color: done
-                          ? const Color(0xFFFF6B6B)
+                          ? const Color(0xFF06B6D4)
                           : Colors.transparent,
                       shape: BoxShape.circle,
                       border: Border.all(
                         color: done
-                            ? const Color(0xFFFF6B6B)
+                            ? const Color(0xFF06B6D4)
                             : Colors.grey.withAlpha(80),
                         width: 1.5,
                       ),
@@ -1181,10 +1240,10 @@ class _SchoolTab extends ConsumerWidget {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: const Color(0xFFFF6B6B).withAlpha(10),
+              color: const Color(0xFF06B6D4).withAlpha(10),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                  color: const Color(0xFFFF6B6B).withAlpha(40)),
+                  color: const Color(0xFF06B6D4).withAlpha(40)),
             ),
             child: Row(
               children: [
@@ -1267,11 +1326,11 @@ class _SchoolTab extends ConsumerWidget {
                     width: 32,
                     height: 32,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFFF6B6B).withAlpha(20),
+                      color: const Color(0xFF06B6D4).withAlpha(20),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: const Icon(Icons.add,
-                        color: Color(0xFFFF6B6B), size: 18),
+                        color: Color(0xFF06B6D4), size: 18),
                   ),
                 ),
               ],
@@ -1313,7 +1372,7 @@ class _SchoolTab extends ConsumerWidget {
               Navigator.pop(context);
             },
             style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFFF6B6B)),
+                backgroundColor: const Color(0xFF06B6D4)),
             child: const Text('Kaydet',
                 style: TextStyle(color: Colors.white)),
           ),
@@ -1483,9 +1542,9 @@ class _GrowthTab extends ConsumerWidget {
     }
 
     final lastHeight =
-        log.firstWhere((g) => g.height != null, orElse: () => GrowthEntry(date: '')).height;
+        log.firstWhere((g) => g.height != null, orElse: () => const GrowthEntry(date: '')).height;
     final lastWeight =
-        log.firstWhere((g) => g.weight != null, orElse: () => GrowthEntry(date: '')).weight;
+        log.firstWhere((g) => g.weight != null, orElse: () => const GrowthEntry(date: '')).weight;
 
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -1500,7 +1559,7 @@ class _GrowthTab extends ConsumerWidget {
                 value: lastHeight != null
                     ? '${lastHeight.toStringAsFixed(1)} cm'
                     : '—',
-                color: const Color(0xFFFF6B6B),
+                color: const Color(0xFF06B6D4),
               ),
             ),
             const SizedBox(width: 10),
@@ -1511,13 +1570,13 @@ class _GrowthTab extends ConsumerWidget {
                 value: lastWeight != null
                     ? '${lastWeight.toStringAsFixed(1)} kg'
                     : '—',
-                color: const Color(0xFFFFD93D),
+                color: const Color(0xFF0891B2),
               ),
             ),
           ],
         ),
         const SizedBox(height: 16),
-        _Label('Ölçüm Geçmişi'),
+        const _Label('Ölçüm Geçmişi'),
         ...log.map((g) => Container(
               margin: const EdgeInsets.only(bottom: 8),
               padding: const EdgeInsets.all(12),
@@ -1602,7 +1661,7 @@ class _DevSheet extends StatelessWidget {
           bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Container(
         decoration: const BoxDecoration(
-          color: Colors.white,
+          color: Color(0xFF13131A),
           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
         padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
@@ -1614,7 +1673,7 @@ class _DevSheet extends StatelessWidget {
               child: Container(
                 width: 36, height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.grey.withAlpha(60),
+                  color: Colors.white.withAlpha(40),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -1622,7 +1681,8 @@ class _DevSheet extends StatelessWidget {
             const SizedBox(height: 14),
             Text(title,
                 style: const TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.w900)),
+                    fontSize: 16, fontWeight: FontWeight.w900,
+                    color: Colors.white)),
             const SizedBox(height: 16),
             child,
           ],
@@ -1650,20 +1710,22 @@ class _DevField extends StatelessWidget {
       controller: controller,
       maxLines: maxLines,
       keyboardType: keyboard,
+      style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
         labelText: label,
+        labelStyle: const TextStyle(color: Color(0xFF9CA3AF)),
         filled: true,
-        fillColor: const Color(0xFFF9FAFB),
+        fillColor: const Color(0xFF1A1A24),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Color(0xFFE5E7EB))),
+            borderSide: const BorderSide(color: Color(0x22FFFFFF))),
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Color(0xFFE5E7EB))),
+            borderSide: const BorderSide(color: Color(0x22FFFFFF))),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: const BorderSide(
-                color: Color(0xFFFF6B6B), width: 1.5)),
+                color: Color(0xFF06B6D4), width: 1.5)),
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       ),
@@ -1684,12 +1746,12 @@ class _DevBtn extends StatelessWidget {
         height: 50,
         decoration: BoxDecoration(
           gradient: const LinearGradient(
-            colors: [Color(0xFFFF6B6B), Color(0xFFFFD93D)],
+            colors: [Color(0xFF06B6D4), Color(0xFF0891B2)],
           ),
           borderRadius: BorderRadius.circular(14),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFFFF6B6B).withAlpha(60),
+              color: const Color(0xFF06B6D4).withAlpha(60),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -1720,6 +1782,350 @@ class _Label extends StatelessWidget {
               fontSize: 12,
               fontWeight: FontWeight.w800,
               color: Color(0xFF6B7280))),
+    );
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// AI Haftalık Plan — PedagogyEngine ile çocuğa özel plan üretir ve gösterir
+// ═══════════════════════════════════════════════════════════════════════════
+class _AiPlanSheet extends StatefulWidget {
+  final ChildProfile child;
+  const _AiPlanSheet({required this.child});
+
+  @override
+  State<_AiPlanSheet> createState() => _AiPlanSheetState();
+}
+
+class _AiPlanSheetState extends State<_AiPlanSheet> {
+  Map<String, dynamic>? _plan;
+  bool _loading = true;
+  bool _error = false;
+  String _focus = 'genel gelişim';
+  final _interestsCtrl = TextEditingController();
+
+  static const _focusOptions = [
+    'genel gelişim', 'dil gelişimi', 'matematik', 'sosyal-duygusal',
+    'motor beceriler', 'sorumluluk', 'okuma alışkanlığı', 'okul başarısı',
+  ];
+
+  String get _lang {
+    final l = HiveService.getSetting('language') ?? 'Türkçe';
+    switch (l) {
+      case 'English': return 'en';
+      case 'Français': return 'fr';
+      case 'Nederlands': return 'nl';
+      default: return 'tr';
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _generate();
+  }
+
+  @override
+  void dispose() {
+    _interestsCtrl.dispose();
+    super.dispose();
+  }
+
+  Future<void> _generate() async {
+    setState(() { _loading = true; _error = false; });
+    final ageYears = (widget.child.ageMonths ~/ 12).clamp(1, 18);
+    final plan = await PedagogyEngine.generateWeeklyPlan(
+      childName: widget.child.name,
+      age: ageYears,
+      language: _lang,
+      focus: _focus,
+      interests: _interestsCtrl.text.trim(),
+      minutesPerDay: 20,
+      difficulty: 'easy',
+    );
+    if (!mounted) return;
+    setState(() {
+      _plan = plan;
+      _loading = false;
+      _error = plan == null;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DraggableScrollableSheet(
+      initialChildSize: 0.92,
+      maxChildSize: 0.95,
+      minChildSize: 0.5,
+      expand: false,
+      builder: (_, ctrl) => Container(
+        decoration: const BoxDecoration(
+          color: Color(0xFF13131A),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        ),
+        child: Column(
+          children: [
+            const SizedBox(height: 10),
+            Container(
+              width: 40, height: 4,
+              decoration: BoxDecoration(
+                  color: Colors.white.withAlpha(40),
+                  borderRadius: BorderRadius.circular(2)),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 14, 20, 8),
+              child: Row(
+                children: [
+                  const Icon(Icons.auto_awesome, color: Color(0xFF8B5CF6)),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text('${widget.child.name} · AI Haftalık Plan',
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w800)),
+                  ),
+                  IconButton(
+                    onPressed: _loading ? null : _generate,
+                    icon: const Icon(Icons.refresh, color: Color(0xFF8B5CF6)),
+                    tooltip: 'Yeniden üret',
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: _loading
+                  ? _buildLoading()
+                  : _error
+                      ? _buildError()
+                      : _buildPlan(ctrl),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLoading() => const Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CircularProgressIndicator(color: Color(0xFF8B5CF6)),
+            SizedBox(height: 16),
+            Text('Gemini kişisel plan hazırlıyor...',
+                style: TextStyle(color: Color(0xFF9CA3AF))),
+          ],
+        ),
+      );
+
+  Widget _buildError() => Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.cloud_off, color: Color(0xFF6B7280), size: 48),
+            const SizedBox(height: 12),
+            const Text('Plan üretilemedi (bağlantı/kota).',
+                style: TextStyle(color: Color(0xFF9CA3AF))),
+            const SizedBox(height: 12),
+            ElevatedButton(
+              onPressed: _generate,
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF8B5CF6)),
+              child: const Text('Tekrar Dene',
+                  style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        ),
+      );
+
+  Widget _buildPlan(ScrollController ctrl) {
+    final p = _plan!;
+    final days = (p['days'] as List?) ?? [];
+    // parent_checklist bazen string dizisi, bazen {item/text}-nesne dizisi gelir.
+    final checklist = ((p['parent_checklist'] as List?) ?? [])
+        .map((e) => e is Map
+            ? (e['item'] ?? e['text'] ?? e['description'] ?? e.values.join(' '))
+                .toString()
+            : e.toString())
+        .toList();
+    return ListView(
+      controller: ctrl,
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+      children: [
+        // Odak seçimi + yeniden üret
+        Wrap(
+          spacing: 6,
+          runSpacing: 6,
+          children: _focusOptions.map((f) {
+            final sel = _focus == f;
+            return GestureDetector(
+              onTap: () {
+                setState(() => _focus = f);
+                _generate();
+              },
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                decoration: BoxDecoration(
+                  color: sel
+                      ? const Color(0xFF8B5CF6)
+                      : const Color(0xFF1A1A24),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(f,
+                    style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        color:
+                            sel ? Colors.white : const Color(0xFF9CA3AF))),
+              ),
+            );
+          }).toList(),
+        ),
+        const SizedBox(height: 14),
+        // Tema + hedef
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+                colors: [Color(0xFF8B5CF6), Color(0xFF6366F1)]),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text((p['week_theme'] ?? 'Haftalık Plan').toString(),
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w800)),
+              const SizedBox(height: 6),
+              Text((p['weekly_goal'] ?? '').toString(),
+                  style: const TextStyle(
+                      color: Colors.white70, fontSize: 13, height: 1.4)),
+            ],
+          ),
+        ),
+        const SizedBox(height: 14),
+        ...days.map((d) => _dayCard(d as Map<String, dynamic>)),
+        if (checklist.isNotEmpty) ...[
+          const SizedBox(height: 8),
+          const Text('Ebeveyn Kontrol Listesi',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w800)),
+          const SizedBox(height: 8),
+          ...checklist.map((c) => Padding(
+                padding: const EdgeInsets.only(bottom: 6),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Icon(Icons.check_box_outline_blank,
+                        size: 16, color: Color(0xFF8B5CF6)),
+                    const SizedBox(width: 8),
+                    Expanded(
+                        child: Text(c,
+                            style: const TextStyle(
+                                color: Color(0xFFD1D5DB), fontSize: 13))),
+                  ],
+                ),
+              )),
+        ],
+        if (p['end_of_week_review'] != null) ...[
+          const SizedBox(height: 12),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: const Color(0xFF1A1A24),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text('📋 ${p['end_of_week_review']}',
+                style: const TextStyle(
+                    color: Color(0xFF9CA3AF), fontSize: 12.5, height: 1.4)),
+          ),
+        ],
+      ],
+    );
+  }
+
+  static const _dayTr = {
+    'Monday': 'Pazartesi', 'Tuesday': 'Salı', 'Wednesday': 'Çarşamba',
+    'Thursday': 'Perşembe', 'Friday': 'Cuma', 'Saturday': 'Cumartesi',
+    'Sunday': 'Pazar',
+  };
+
+  Widget _dayCard(Map<String, dynamic> d) {
+    final day = (d['day'] ?? '').toString();
+    final lesson = d['lesson'] as Map<String, dynamic>?;
+    final homework = d['homework'] as Map<String, dynamic>?;
+    final task = d['daily_task'] as Map<String, dynamic>?;
+    final family = (d['family_activity'] ?? '').toString();
+    final reflection = (d['reflection_question'] ?? '').toString();
+
+    Widget row(IconData ic, Color c, String label, String? title, String? desc) {
+      if (title == null || title.isEmpty) return const SizedBox.shrink();
+      return Padding(
+        padding: const EdgeInsets.only(top: 8),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(ic, size: 15, color: c),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('$label: $title',
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600)),
+                  if (desc != null && desc.isNotEmpty)
+                    Text(desc,
+                        style: const TextStyle(
+                            color: Color(0xFF9CA3AF),
+                            fontSize: 12,
+                            height: 1.35)),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1A1A24),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: const Color(0x18FFFFFF)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(_dayTr[day] ?? day,
+              style: const TextStyle(
+                  color: Color(0xFF8B5CF6),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w800)),
+          row(Icons.school, const Color(0xFF06B6D4), 'Ders',
+              lesson?['title']?.toString(), lesson?['description']?.toString()),
+          row(Icons.edit_note, const Color(0xFFF59E0B), 'Ödev',
+              homework?['title']?.toString(),
+              homework?['description']?.toString()),
+          row(Icons.star, const Color(0xFF10B981), 'Görev',
+              task?['title']?.toString(), task?['description']?.toString()),
+          if (family.isNotEmpty)
+            row(Icons.family_restroom, const Color(0xFFEC4899),
+                'Aile', family, null),
+          if (reflection.isNotEmpty)
+            row(Icons.help_outline, const Color(0xFF9CA3AF), 'Soru',
+                reflection, null),
+        ],
+      ),
     );
   }
 }

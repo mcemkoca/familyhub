@@ -29,7 +29,6 @@ class SupabaseConfig {
 
   static const _storage = FlutterSecureStorage(
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
-    iOptions: IOSOptions(accountName: 'familyhub_secure'),
   );
 
   static Future<void> persistSession(String sessionString) async {

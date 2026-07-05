@@ -391,7 +391,7 @@ class HubRepository with RepositoryErrorHandler {
         'suggestions': suggestions,
         'provider': provider,
         'created_at': DateTime.now().toIso8601String(),
-      });
+      }, onConflict: 'family_id');
     } catch (_) {
       // Cache failure is non-critical
     }

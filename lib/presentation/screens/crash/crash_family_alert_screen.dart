@@ -144,7 +144,7 @@ class CrashFamilyAlertScreen extends StatelessWidget {
                           icon: const Icon(Icons.article),
                           label: Text(AppLocalizations.of(context).detayliRapor),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey.shade700,
+                            backgroundColor: const Color(0xFF6B7280),
                             foregroundColor: Colors.white,
                           ),
                         ),

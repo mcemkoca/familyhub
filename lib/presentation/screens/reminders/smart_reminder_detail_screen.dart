@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../config/constants.dart';
 import '../../../domain/models/smart_reminder.dart';
 import '../../../repositories/smart_reminder_repository.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
@@ -15,6 +14,8 @@ class SmartReminderDetailScreen extends StatefulWidget {
 }
 
 class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   SmartReminder? _reminder;
   bool _loading = true;
 
@@ -47,8 +48,7 @@ class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final textColor = isDark ? Colors.white : Colors.black87;
+    final textColor = const Color(0xFFE5E7EB);
 
     if (_loading) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
@@ -57,7 +57,7 @@ class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
     final r = _reminder!;
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.background,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: AppBar(
         title: Text(r.title),
         backgroundColor: isDark
@@ -206,7 +206,7 @@ class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
                           child: Container(
                             height: 20,
                             decoration: BoxDecoration(
-                              color: AppColors.cobalt,
+                              color: const Color(0xFF6366F1),
                               borderRadius: BorderRadius.circular(4),
                             ),
                           ),
@@ -363,7 +363,7 @@ class _Card extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF16213E) : Colors.white,
+        color: const Color(0xFFE5E7EB),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(

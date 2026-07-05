@@ -136,38 +136,70 @@ class _ChildManagementScreenState extends ConsumerState<ChildManagementScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).cocukHesaplari),
+        backgroundColor: const Color(0xFF0A0A0F),
+        foregroundColor: const Color(0xFFE5E7EB),
+        elevation: 0,
+        surfaceTintColor: Colors.transparent,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18),
           onPressed: () => context.pop(),
+        ),
+        title: Row(
+          children: [
+            Container(
+              width: 34, height: 34,
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF06B6D4), Color(0xFF0891B2)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(11),
+              ),
+              child: const Icon(Icons.child_care_outlined, color: Colors.white, size: 18),
+            ),
+            const SizedBox(width: 10),
+            Text(
+              AppLocalizations.of(context).cocukHesaplari,
+              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: Color(0xFFE5E7EB)),
+            ),
+          ],
         ),
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator(color: Color(0xFF6366F1)))
           : _children.isEmpty
               ? Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
-                        Icons.child_care_outlined,
-                        size: 64,
-                        color: isDark ? AppColors.darkTextSecondary : AppColors.gray,
-                      ),
-                      const SizedBox(height: AppSpacing.md),
-                      Text(
-                        'Henüz çocuk hesabı yok',
-                        style: TextStyle(
-                          color: isDark ? AppColors.darkTextSecondary : AppColors.gray,
+                      Container(
+                        width: 72, height: 72,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF06B6D4).withAlpha(20),
+                          shape: BoxShape.circle,
                         ),
+                        child: const Icon(Icons.child_care_outlined, size: 32, color: Color(0xFF06B6D4)),
                       ),
-                      const SizedBox(height: AppSpacing.lg),
+                      const SizedBox(height: 16),
+                      const Text('Henüz çocuk hesabı yok',
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFFE5E7EB))),
+                      const SizedBox(height: 8),
+                      const Text('Aile üyesi eklemek için aşağıya dokun',
+                          style: TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
+                      const SizedBox(height: 24),
                       ElevatedButton.icon(
                         onPressed: () => _showAddEditChild(),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF06B6D4),
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                        ),
                         icon: const Icon(Icons.add),
                         label: Text(AppLocalizations.of(context).cocukEkle),
                       ),
@@ -179,39 +211,43 @@ class _ChildManagementScreenState extends ConsumerState<ChildManagementScreen> {
                   itemCount: _children.length,
                   itemBuilder: (context, index) {
                     final child = _children[index];
-                    return Card(
-                      margin: const EdgeInsets.only(bottom: AppSpacing.md),
+                    return Container(
+                      margin: const EdgeInsets.only(bottom: 10),
+                      decoration: BoxDecoration(
+                        color: const Color(0x1AFFFFFF),
+                        borderRadius: BorderRadius.circular(18),
+                        border: Border.all(color: const Color(0x1EFFFFFF), width: 0.5),
+                      ),
                       child: ListTile(
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                         onTap: () => context.push('/child/${child.id}'),
-                        leading: CircleAvatar(
-                          backgroundColor: child.color,
-                          backgroundImage: child.avatarUrl != null
-                              ? NetworkImage(child.avatarUrl!)
-                              : null,
-                          child: child.avatarUrl == null
-                              ? Text(
-                                  child.initial,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )
-                              : null,
+                        leading: Container(
+                          width: 46, height: 46,
+                          decoration: BoxDecoration(
+                            color: child.color,
+                            shape: BoxShape.circle,
+                          ),
+                          child: child.avatarUrl != null
+                              ? ClipOval(child: Image.network(child.avatarUrl!, fit: BoxFit.cover))
+                              : Center(
+                                  child: Text(child.initial,
+                                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18))),
                         ),
-                        title: Text(child.name),
+                        title: Text(child.name,
+                            style: const TextStyle(color: Color(0xFFE5E7EB), fontWeight: FontWeight.w700)),
                         subtitle: Text(
-                          '${child.displayRole} • PIN: ${child.isActive ? 'Aktif' : 'Pasif'}',
+                          '${child.displayRole} · ${child.isActive ? 'Aktif' : 'Pasif'}',
+                          style: const TextStyle(color: Color(0xFF6B7280), fontSize: 11),
                         ),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
-                              icon: const Icon(Icons.edit_outlined),
+                              icon: const Icon(Icons.edit_outlined, size: 18, color: Color(0xFF6366F1)),
                               onPressed: () => _showAddEditChild(child: child),
                             ),
                             IconButton(
-                              icon: const Icon(Icons.delete_outline,
-                                  color: AppColors.error),
+                              icon: const Icon(Icons.delete_outline, size: 18, color: Color(0xFFEF4444)),
                               onPressed: () => _deleteChild(child),
                             ),
                           ],
@@ -223,7 +259,8 @@ class _ChildManagementScreenState extends ConsumerState<ChildManagementScreen> {
       floatingActionButton: _children.isNotEmpty
           ? FloatingActionButton(
               onPressed: () => _showAddEditChild(),
-              child: const Icon(Icons.add),
+              backgroundColor: const Color(0xFF6366F1),
+              child: const Icon(Icons.add, color: Colors.white),
             )
           : null,
     );
@@ -395,7 +432,7 @@ class _ChildFormSheetState extends State<_ChildFormSheet> {
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: Colors.grey.shade300,
+                color: const Color(0xFF9CA3AF),
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -448,7 +485,7 @@ class _ChildFormSheetState extends State<_ChildFormSheet> {
                   Container(
                     padding: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
-                      color: AppColors.cobalt,
+                      color: const Color(0xFF6366F1),
                       shape: BoxShape.circle,
                       border: Border.all(color: Colors.white, width: 2),
                     ),

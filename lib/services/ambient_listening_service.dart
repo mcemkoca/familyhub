@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:record/record.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 
@@ -62,6 +63,12 @@ class AmbientListeningService {
         await File(_currentPath!).delete();
       } catch (e) { debugPrint('Ambient listening error: $e'); }
     }
+  }
+
+  /// Request sensor permission required on Android 12+ for high-rate accelerometer.
+  static Future<bool> requestSensorPermission() async {
+    final status = await Permission.sensors.request();
+    return status.isGranted;
   }
 
   /// Initialize shake detection (3 strong shakes)

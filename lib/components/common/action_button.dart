@@ -84,7 +84,7 @@ class _ActionButtonState extends State<ActionButton> {
           scaffold.showSnackBar(
             const SnackBar(
               content: Text('✅ İşlem başarılı'),
-              backgroundColor: AppColors.success,
+              backgroundColor: Color(0xFF10B981),
               behavior: SnackBarBehavior.floating,
               duration: Duration(seconds: 2),
             ),
@@ -143,18 +143,17 @@ class _ActionButtonState extends State<ActionButton> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     if (widget.icon != null) {
       return ElevatedButton.icon(
         onPressed: _isLoading ? null : _handlePress,
         icon: _isLoading
-            ? SizedBox(
+            ? const SizedBox(
                 width: 18,
                 height: 18,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  color: isDark ? Colors.white70 : Colors.white,
+                  color: Colors.white70,
                 ),
               )
             : Icon(widget.icon),
@@ -167,12 +166,12 @@ class _ActionButtonState extends State<ActionButton> {
       onPressed: _isLoading ? null : _handlePress,
       style: widget.style,
       child: _isLoading
-          ? SizedBox(
+          ? const SizedBox(
               width: 18,
               height: 18,
               child: CircularProgressIndicator(
                 strokeWidth: 2,
-                color: isDark ? Colors.white70 : Colors.white,
+                color: Colors.white70,
               ),
             )
           : Text(widget.label),

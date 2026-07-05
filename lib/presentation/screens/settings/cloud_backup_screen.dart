@@ -19,6 +19,8 @@ class CloudBackupScreen extends StatefulWidget {
 }
 
 class _CloudBackupScreenState extends State<CloudBackupScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   bool _isSignedIn = false;
   bool _checkingAuth = true;
   bool _backingUp = false;
@@ -239,7 +241,7 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
             width: 80,
             height: 80,
             decoration: BoxDecoration(
-              color: const Color(0xFF4285F4).withAlpha(isDark ? 30 : 20),
+              color: const Color(0xFF4285F4).withAlpha(30),
               borderRadius: BorderRadius.circular(24),
             ),
             child: SvgPicture.asset(
@@ -249,21 +251,21 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
             ),
           ),
           const SizedBox(height: 24),
-          Text(
+          const Text(
             'Google Drive Yedekleme',
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
-              color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+              color: Color(0xFFE5E7EB),
             ),
           ),
           const SizedBox(height: 12),
-          Text(
+          const Text(
             'Verilerinizi güvenle Google Drive hesabınıza yedekleyin. Aileden ayrılsanız bile verilerinize erişebilirsiniz.',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 14,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: Color(0xFF6B7280),
             ),
           ),
           const SizedBox(height: 32),
@@ -292,12 +294,12 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
             ),
           ),
           const SizedBox(height: 16),
-          Text(
+          const Text(
             'Yedekleme işlemi sadece sizin erişebileceğiniz Google Drive hesabınıza yapılır. FamilyHub sunucularında tutulmaz.',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 12,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.lightGray,
+              color: Color(0xFF6B7280),
             ),
           ),
         ],
@@ -316,10 +318,10 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
             child: Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: isDark ? AppColors.darkCard : Colors.white,
+                color: const Color(0xFF13131A),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: isDark ? AppColors.darkBorder : AppColors.border,
+                  color: const Color(0x1EFFFFFF),
                 ),
               ),
               child: Column(
@@ -343,12 +345,10 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
                           children: [
                             Text(
                               _account?.displayName ?? 'Kullanıcı',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                color: isDark
-                                    ? AppColors.darkTextPrimary
-                                    : AppColors.dark,
+                                color: Color(0xFFE5E7EB),
                               ),
                             ),
                             const SizedBox(height: 4),
@@ -356,13 +356,13 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
                               _account?.email ?? '',
                               style: const TextStyle(
                                 fontSize: 13,
-                                color: AppColors.success,
+                                color: Color(0xFF10B981),
                               ),
                             ),
                           ],
                         ),
                       ),
-                      const Icon(Icons.verified, color: AppColors.success, size: 20),
+                      const Icon(Icons.verified, color: Color(0xFF10B981), size: 20),
                     ],
                   ),
                   const SizedBox(height: 12),
@@ -422,15 +422,15 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
-                color: isDark ? AppColors.darkCard : Colors.white,
+                color: const Color(0xFF13131A),
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
-                  color: isDark ? AppColors.darkBorder : AppColors.border,
+                  color: const Color(0x1EFFFFFF),
                 ),
               ),
               child: Row(
                 children: [
-                  Expanded(
+                  const Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -439,31 +439,27 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
-                            color: isDark
-                                ? AppColors.darkTextPrimary
-                                : AppColors.dark,
+                            color: Color(0xFFE5E7EB),
                           ),
                         ),
-                        const SizedBox(height: 2),
+                        SizedBox(height: 2),
                         Text(
                           'Her hafta otomatik olarak Google Drive\'a yedekle',
                           style: TextStyle(
                             fontSize: 13,
-                            color: isDark
-                                ? AppColors.darkTextSecondary
-                                : AppColors.slate,
+                            color: Color(0xFF6B7280),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  Switch.adaptive(
+                  Switch(
                     value: HiveService.getBoolSetting('gdrive_auto_backup', defaultValue: false),
                     onChanged: (v) async {
                       await HiveService.setBoolSetting('gdrive_auto_backup', v);
                       setState(() {});
                     },
-                    activeTrackColor: AppColors.cobalt,
+                    activeTrackColor: const Color(0xFF6366F1),
                     activeThumbColor: Colors.white,
                   ),
                 ],
@@ -473,15 +469,15 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
         ),
         const SliverToBoxAdapter(child: SizedBox(height: 24)),
         // Backup history
-        SliverToBoxAdapter(
+        const SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               'YEDEKLEME GEÇMİŞİ',
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
-                color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                color: Color(0xFF6B7280),
                 letterSpacing: 0.5,
               ),
             ),
@@ -528,10 +524,10 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
                 child: Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: isDark ? AppColors.darkCard : Colors.white,
+                    color: const Color(0xFF13131A),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
-                      color: isDark ? AppColors.darkBorder : AppColors.border,
+                      color: const Color(0x1EFFFFFF),
                     ),
                   ),
                   child: Row(
@@ -556,22 +552,18 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
                           children: [
                             Text(
                               b.formattedDate,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600,
-                                color: isDark
-                                    ? AppColors.darkTextPrimary
-                                    : AppColors.dark,
+                                color: Color(0xFFE5E7EB),
                               ),
                             ),
                             const SizedBox(height: 4),
                             Text(
                               '${b.formattedSize} · Google Drive',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 13,
-                                color: isDark
-                                    ? AppColors.darkTextSecondary
-                                    : AppColors.slate,
+                                color: Color(0xFF6B7280),
                               ),
                             ),
                           ],
@@ -608,10 +600,9 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
         title: 'Google Drive Yedekleme',
         showBack: true,

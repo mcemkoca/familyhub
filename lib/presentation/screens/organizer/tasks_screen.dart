@@ -191,7 +191,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                   contentPadding: EdgeInsets.zero,
                   leading: const Icon(
                     Icons.calendar_today,
-                    color: AppColors.cobalt,
+                    color: Color(0xFF6366F1),
                   ),
                   title: Text(
                     _editDueDate == null
@@ -262,7 +262,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.purple,
+                        backgroundColor: const Color(0xFF8B5CF6),
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
@@ -397,7 +397,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                   contentPadding: EdgeInsets.zero,
                   leading: const Icon(
                     Icons.calendar_today,
-                    color: AppColors.cobalt,
+                    color: Color(0xFF6366F1),
                   ),
                   title: Text(
                     _dueDate == null
@@ -437,7 +437,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                     child: ElevatedButton(
                       onPressed: _addTask,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.purple,
+                        backgroundColor: const Color(0xFF8B5CF6),
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
@@ -512,20 +512,20 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.task_alt, size: 64, color: AppColors.lightGray),
+                      Icon(Icons.task_alt, size: 64, color: Color(0xFF9CA3AF)),
                       SizedBox(height: 16),
                       Text(
                         'Henüz görev yok',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.gray,
+                          color: Color(0xFF6B7280),
                         ),
                       ),
                       SizedBox(height: 8),
                       Text(
                         'Yeni görev eklemek için + butonuna basın',
-                        style: TextStyle(fontSize: 14, color: AppColors.slate),
+                        style: TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
                       ),
                     ],
                   ),
@@ -567,7 +567,11 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                           decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.surface,
                             borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: const Color(0xFFF3F4F6)),
+                            border: Border.all(
+                              color: Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.white.withAlpha(20)
+                                  : const Color(0xFFF3F4F6),
+                            ),
                           ),
                           child: ListTile(
                             leading: GestureDetector(
@@ -584,7 +588,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                                   border: Border.all(
                                     color: isCompleted
                                         ? AppColors.green
-                                        : AppColors.border,
+                                        : Colors.white.withAlpha(80),
                                     width: 2,
                                   ),
                                 ),
@@ -605,7 +609,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                                 decoration: isCompleted
                                     ? TextDecoration.lineThrough
                                     : null,
-                                color: isCompleted ? AppColors.gray : null,
+                                color: isCompleted ? const Color(0xFF6B7280) : null,
                               ),
                             ),
                             subtitle: Row(
@@ -634,7 +638,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                                   icon: const Icon(
                                     Icons.edit,
                                     size: 20,
-                                    color: AppColors.cobalt,
+                                    color: Color(0xFF6366F1),
                                   ),
                                   onPressed: () => _editTask(task, members),
                                 ),
@@ -659,7 +663,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
             bottom: MediaQuery.of(context).padding.bottom + 100,
             child: FloatingActionButton(
               onPressed: () => _showAddSheet(members),
-              backgroundColor: AppColors.purple,
+              backgroundColor: const Color(0xFF8B5CF6),
               child: const Icon(Icons.add, color: Colors.white),
             ),
           ),

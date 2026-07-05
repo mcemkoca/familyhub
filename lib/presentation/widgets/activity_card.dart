@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../config/constants.dart';
 import '../../domain/entities.dart';
 
 class ActivityCard extends StatelessWidget {
@@ -22,7 +21,7 @@ class ActivityCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.border),
+        border: Border.all(color: const Color(0x1EFFFFFF)),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withAlpha(8),
@@ -78,7 +77,7 @@ class ActivityCard extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   _timeAgo(activity.createdAt),
-                  style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
+                  style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
                 ),
               ],
             ),

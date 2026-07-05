@@ -45,7 +45,7 @@ class SecurityService {
       await _supabase.from('settings').upsert({
         'user_id': userId,
         'security': {'biometric_enabled': enabled},
-      });
+      }, onConflict: 'user_id');
     }
   }
 

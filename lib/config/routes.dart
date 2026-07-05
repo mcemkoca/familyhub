@@ -19,7 +19,6 @@ import '../presentation/screens/routines/routines_screen.dart';
 import '../presentation/screens/routines/routine_detail_screen.dart';
 import '../presentation/screens/crash/crash_screens.dart';
 import '../presentation/screens/location_tracking/location_tracking_screens.dart';
-import '../presentation/screens/location_tracking/family_map_screen.dart';
 import '../presentation/screens/emergency/emergency_screens.dart';
 import '../presentation/screens/budget/budget_screen.dart';
 import '../presentation/screens/family/family_screen.dart';
@@ -28,6 +27,7 @@ import '../presentation/screens/chat/chat_screen.dart';
 import '../presentation/screens/chat/mood_screen.dart';
 import '../presentation/screens/settings/settings_screen.dart';
 import '../presentation/screens/settings/appearance_settings_screen.dart';
+import '../presentation/screens/settings/hub_customize_screen.dart';
 import '../presentation/screens/settings/cloud_backup_screen.dart';
 import '../presentation/screens/settings/weather_settings_screen.dart';
 import '../presentation/screens/safety/safety_screen.dart';
@@ -56,6 +56,7 @@ import '../presentation/screens/settings/backup_settings_screen.dart';
 import '../presentation/screens/settings/user_guide_screen.dart';
 import '../presentation/screens/settings/about_app_screen.dart';
 import '../presentation/screens/settings/invite_code_screen.dart';
+import '../presentation/screens/settings/join_family_screen.dart';
 import '../presentation/screens/settings/terms_of_service_screen.dart';
 import '../presentation/screens/settings/privacy_policy_screen.dart';
 import '../presentation/screens/settings/screen_time_settings_screen.dart';
@@ -74,7 +75,7 @@ import '../presentation/screens/streak/streak_screen.dart';
 import '../presentation/screens/main_shell.dart';
 import '../presentation/screens/health/family_health_screen.dart';
 import '../presentation/screens/budget/subscription_screen.dart';
-import '../presentation/screens/child/child_development_screen.dart';
+import '../presentation/screens/child/child_dev_dashboard.dart';
 import '../presentation/screens/ai/ai_assistant_screen.dart';
 import '../services/auth_service.dart';
 import '../services/child_auth_service.dart';
@@ -121,11 +122,13 @@ class AppRoutes {
   static const String languageSettings = '/language-settings';
   static const String backupSettings = '/backup-settings';
   static const String appearanceSettings = '/appearance-settings';
+  static const String hubCustomize = '/hub-customize';
   static const String googleDriveBackup = '/cloud-backup';
   static const String weatherSettings = '/weather-settings';
   static const String userGuide = '/user-guide';
   static const String aboutApp = '/about-app';
   static const String inviteCode = '/invite-code';
+  static const String joinFamily = '/join';
   static const String termsOfService = '/terms-of-service';
   static const String privacyPolicy = '/privacy-policy';
   static const String screenTimeSettings = '/settings/screen-time';
@@ -247,11 +250,18 @@ final router = GoRouter(
     GoRoute(path: AppRoutes.languageSettings, builder: (context, state) => const LanguageSettingsScreen()),
     GoRoute(path: AppRoutes.backupSettings, builder: (context, state) => const BackupSettingsScreen()),
     GoRoute(path: AppRoutes.appearanceSettings, builder: (context, state) => const AppearanceSettingsScreen()),
+    GoRoute(path: AppRoutes.hubCustomize, builder: (context, state) => const HubCustomizeScreen()),
     GoRoute(path: AppRoutes.googleDriveBackup, builder: (context, state) => const CloudBackupScreen()),
     GoRoute(path: AppRoutes.weatherSettings, builder: (context, state) => const WeatherSettingsScreen()),
     GoRoute(path: AppRoutes.userGuide, builder: (context, state) => const UserGuideScreen()),
     GoRoute(path: AppRoutes.aboutApp, builder: (context, state) => const AboutAppScreen()),
     GoRoute(path: AppRoutes.inviteCode, builder: (context, state) => const InviteCodeScreen()),
+    GoRoute(
+      path: AppRoutes.joinFamily,
+      builder: (context, state) => JoinFamilyScreen(
+        initialCode: state.uri.queryParameters['code'],
+      ),
+    ),
     GoRoute(path: AppRoutes.termsOfService, builder: (context, state) => const TermsOfServiceScreen()),
     GoRoute(path: AppRoutes.privacyPolicy, builder: (context, state) => const PrivacyPolicyScreen()),
     GoRoute(path: AppRoutes.screenTimeSettings, builder: (context, state) => const ScreenTimeSettingsScreen()),
@@ -338,7 +348,7 @@ final router = GoRouter(
     GoRoute(path: AppRoutes.documents, builder: (context, state) => const DocumentsScreen()),
     GoRoute(path: AppRoutes.familyHealth, builder: (context, state) => const FamilyHealthScreen()),
     GoRoute(path: AppRoutes.subscriptions, builder: (context, state) => const SubscriptionScreen()),
-    GoRoute(path: AppRoutes.childDevelopment, builder: (context, state) => const ChildDevelopmentScreen()),
+    GoRoute(path: AppRoutes.childDevelopment, builder: (context, state) => const ChildDevelopmentHome()),
     GoRoute(path: AppRoutes.aiAssistant, builder: (context, state) => const AIAssistantScreen()),
   ],
 );

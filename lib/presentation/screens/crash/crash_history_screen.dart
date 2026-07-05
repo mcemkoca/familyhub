@@ -102,7 +102,7 @@ class CrashHistoryScreen extends StatelessWidget {
             icon: const Icon(Icons.download),
             label: Text(AppLocalizations.of(context).tumRaporlariIndir),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.grey.shade700,
+              backgroundColor: const Color(0xFF6B7280),
               foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(vertical: 14),
             ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../config/constants.dart';
 import '../../core/analytics/analytics_service.dart';
 import '../../services/billing/subscription_service.dart';
 
@@ -36,7 +35,7 @@ class PremiumGate extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.lock, color: AppColors.warning, size: 32),
+                  const Icon(Icons.lock, color: Color(0xFFF59E0B), size: 32),
                   const SizedBox(height: 8),
                   const Text(
                     'Premium Gerekli',
@@ -86,7 +85,7 @@ class PremiumGate extends StatelessWidget {
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: AppColors.darkBackground,
+      backgroundColor: const Color(0xFF0A0A0F),
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -110,7 +109,7 @@ class _PremiumUpgradeSheet extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Icon(Icons.workspace_premium, color: AppColors.warning, size: 48),
+            const Icon(Icons.workspace_premium, color: Color(0xFFF59E0B), size: 48),
             const SizedBox(height: 16),
             Text(
               '$feature Özelliği',
@@ -130,7 +129,7 @@ class _PremiumUpgradeSheet extends StatelessWidget {
             ElevatedButton(
               onPressed: () => _handleUpgrade(context),
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.warning,
+                backgroundColor: const Color(0xFFF59E0B),
                 foregroundColor: Colors.black,
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),

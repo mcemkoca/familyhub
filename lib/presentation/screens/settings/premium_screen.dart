@@ -86,7 +86,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(AppLocalizations.of(context).adminHesabiPremiumAktif),
-              backgroundColor: AppColors.success,
+              backgroundColor: const Color(0xFF10B981),
             ),
           );
           ref.invalidate(isPremiumProvider);
@@ -135,7 +135,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(AppLocalizations.of(context).testModuPremiumAktiflestirildi),
-            backgroundColor: AppColors.success,
+            backgroundColor: const Color(0xFF10B981),
           ),
         );
         ref.invalidate(isPremiumProvider);
@@ -162,7 +162,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(AppLocalizations.of(context).premiumAktiflestirildi),
-          backgroundColor: AppColors.success,
+          backgroundColor: const Color(0xFF10B981),
         ),
       );
       ref.invalidate(isPremiumProvider);
@@ -177,7 +177,6 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final premiumAsync = ref.watch(isPremiumProvider);
     final plansAsync = ref.watch(_premiumPlansProvider);
 
@@ -196,7 +195,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                     padding: const EdgeInsets.only(right: 16),
                     child: Chip(
                       label: Text(AppLocalizations.of(context).premium),
-                      backgroundColor: AppColors.success,
+                      backgroundColor: const Color(0xFF10B981),
                       labelStyle: const TextStyle(color: Colors.white),
                     ),
                   )
@@ -215,12 +214,12 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
               margin: const EdgeInsets.only(bottom: 16),
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: isDark ? AppColors.darkCard : AppColors.card,
+                color: const Color(0xFF13131A),
                 borderRadius: BorderRadius.circular(20),
                 border: isPopular
-                    ? Border.all(color: AppColors.purple, width: 2)
+                    ? Border.all(color: const Color(0xFF8B5CF6), width: 2)
                     : Border.all(
-                        color: isDark ? AppColors.darkBorder : AppColors.border),
+                        color: const Color(0x1EFFFFFF)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -230,7 +229,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                       padding:
                           const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
-                        color: AppColors.purple,
+                        color: const Color(0xFF8B5CF6),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: const Text(
@@ -256,7 +255,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.purple,
+                      color: Color(0xFF8B5CF6),
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -265,7 +264,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                       padding: const EdgeInsets.only(bottom: 6),
                       child: Row(
                         children: [
-                          const Icon(Icons.check, size: 16, color: AppColors.success),
+                          const Icon(Icons.check, size: 16, color: Color(0xFF10B981)),
                           const SizedBox(width: 8),
                           Text(f),
                         ],
@@ -279,8 +278,8 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                     child: ElevatedButton(
                       onPressed: plan.id != 'free' && !_isLoading ? () => _upgrade(plan) : null,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: isPopular ? AppColors.purple : AppColors.border,
-                        foregroundColor: isPopular ? Colors.white : AppColors.dark,
+                        backgroundColor: isPopular ? const Color(0xFF8B5CF6) : const Color(0x1EFFFFFF),
+                        foregroundColor: isPopular ? Colors.white : const Color(0xFFE5E7EB),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),

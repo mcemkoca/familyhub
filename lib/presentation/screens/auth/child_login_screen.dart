@@ -149,7 +149,6 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final accentColor = ref.watch(accentColorProvider);
 
     return Scaffold(
@@ -200,9 +199,7 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
                 child: Text(
                   'İsmini seç ve PINini gir',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: isDark
-                        ? AppColors.darkTextSecondary
-                        : AppColors.gray,
+                    color: const Color(0xFF6B7280),
                   ),
                 ),
               ),
@@ -224,24 +221,20 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
                   ),
                 )
               else if (_children.isEmpty)
-                Center(
+                const Center(
                   child: Column(
                     children: [
                       Icon(
                         Icons.person_off_outlined,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.gray,
+                        color: Color(0xFF6B7280),
                         size: 48,
                       ),
-                      const SizedBox(height: AppSpacing.md),
+                      SizedBox(height: AppSpacing.md),
                       Text(
                         'Henüz çocuk hesabı eklenmemiş.\nEbeveyn girişi yaparak ekleyebilirsiniz.',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: isDark
-                              ? AppColors.darkTextSecondary
-                              : AppColors.gray,
+                          color: Color(0xFF6B7280),
                         ),
                       ),
                     ],
@@ -311,11 +304,9 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
                                 ),
                                 Text(
                                   child.displayRole,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 12,
-                                    color: isDark
-                                        ? AppColors.darkTextSecondary
-                                        : AppColors.gray,
+                                    color: Color(0xFF6B7280),
                                   ),
                                 ),
                               ],
@@ -341,17 +332,15 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
                   maxLength: 6,
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 24, letterSpacing: 16),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: '••••••',
                     hintStyle: TextStyle(
                       fontSize: 24,
                       letterSpacing: 16,
-                      color: isDark
-                          ? AppColors.darkTextSecondary
-                          : AppColors.gray,
+                      color: Color(0xFF6B7280),
                     ),
                     counterText: '',
-                    prefixIcon: const Icon(Icons.lock_outline),
+                    prefixIcon: Icon(Icons.lock_outline),
                   ),
                   onSubmitted: (_) => _signIn(),
                 ),

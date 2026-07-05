@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../config/constants.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
 class GrowthScreen extends StatelessWidget {
@@ -31,13 +30,13 @@ class GrowthScreen extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(16), border: Border.all(color: AppColors.border)),
+      decoration: BoxDecoration(color: const Color(0xFF13131A), borderRadius: BorderRadius.circular(16), border: Border.all(color: const Color(0x1EFFFFFF))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
           const SizedBox(height: 4),
-          Text(meta, style: const TextStyle(fontSize: 13, color: AppColors.gray)),
+          Text(meta, style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
         ],
       ),
     );

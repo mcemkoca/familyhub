@@ -111,7 +111,7 @@ class _ScreenTimeSettingsScreenState
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('$childName $lockMinutes dk boyunca kilitlendi'),
-            backgroundColor: AppColors.cobalt,
+            backgroundColor: const Color(0xFF6366F1),
           ),
         );
       }
@@ -237,10 +237,9 @@ class _ScreenTimeSettingsScreenState
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
         title: 'Ekran Süresi',
         showBack: true,
@@ -251,16 +250,14 @@ class _ScreenTimeSettingsScreenState
           : CustomScrollView(
               physics: const BouncingScrollPhysics(),
               slivers: [
-                SliverToBoxAdapter(
+                const SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: EdgeInsets.all(16),
                     child: Text(
                       'Çocuk üyeler için günlük ekran süresi limitleri belirleyin.',
                       style: TextStyle(
                         fontSize: 14,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.slate,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                   ),
@@ -299,7 +296,7 @@ class _ScreenTimeSettingsScreenState
                                   : 'Limit yok',
                             ),
                             value: isEnabled,
-                            activeThumbColor: AppColors.cobalt,
+                            activeThumbColor: const Color(0xFF6366F1),
                             onChanged: (v) {
                               _updateScreenTime(
                                 child['id'] as String,

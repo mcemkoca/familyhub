@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
+import '../../../services/hive_service.dart';
+
+String get _cur => HiveService.getSetting('currencySymbol') ?? '€';
 
 // ── Model ──
 
@@ -92,7 +94,7 @@ class SubscriptionNotifier extends StateNotifier<List<Subscription>> {
   static const _boxName = 'subscriptions';
   static const _key = 'list';
 
-  Future<Box> get _box async => Hive.isBoxOpen(_boxName)
+  Future<Box<dynamic>> get _box async => Hive.isBoxOpen(_boxName)
       ? Hive.box(_boxName)
       : await Hive.openBox(_boxName);
 
@@ -133,25 +135,78 @@ class SubscriptionNotifier extends StateNotifier<List<Subscription>> {
 // ── Predefined popular services ──
 
 const _popularServices = [
+  ('Kira', '🏠', 'Kira', '#6366F1'),
+  ('Elektrik', '⚡', 'Elektrik', '#F59E0B'),
+  ('Su', '💧', 'Su', '#06B6D4'),
+  ('Doğalgaz', '🔥', 'Doğalgaz', '#EF4444'),
+  ('İnternet', '🌐', 'İnternet', '#3B82F6'),
+  ('Telefon', '📱', 'Telefon', '#F97316'),
+  ('Sigorta', '🏥', 'Sigorta', '#10B981'),
+  ('Aidat', '🏢', 'Diğer', '#8B5CF6'),
   ('Netflix', '🎬', 'Eğlence', '#E50914'),
   ('Spotify', '🎵', 'Müzik', '#1DB954'),
-  ('YouTube Premium', '📺', 'Eğlence', '#FF0000'),
-  ('Apple TV+', '🍎', 'Eğlence', '#000000'),
-  ('Disney+', '🏰', 'Eğlence', '#113CCF'),
-  ('Amazon Prime', '📦', 'Alışveriş', '#FF9900'),
-  ('iCloud', '☁️', 'Depolama', '#007AFF'),
-  ('Google One', '🔵', 'Depolama', '#4285F4'),
-  ('Microsoft 365', '💼', 'Üretkenlik', '#0078D4'),
-  ('Canva Pro', '🎨', 'Tasarım', '#8B3DFF'),
-  ('ChatGPT Plus', '🤖', 'AI', '#10A37F'),
-  ('Duolingo Plus', '🦜', 'Eğitim', '#58CC02'),
-  ('Diğer', '📱', 'Diğer', '#6C63FF'),
+  ('Okul/Kreş', '🎒', 'Eğitim', '#EC4899'),
+  ('Diğer', '🧾', 'Diğer', '#6C63FF'),
 ];
 
 const _categories = [
-  'Tümü', 'Eğlence', 'Müzik', 'Depolama', 'Üretkenlik',
-  'Alışveriş', 'Eğitim', 'AI', 'Tasarım', 'Diğer'
+  'Tümü', 'Kira', 'Elektrik', 'Su', 'Doğalgaz', 'İnternet', 'Telefon',
+  'Sigorta', 'Eğlence', 'Müzik', 'Depolama', 'Eğitim', 'Diğer'
 ];
+
+// ── Ülke bazlı tipik hane giderleri (aylık ortalama, yerel para/EUR) ──
+// name, emoji, kategori, aylık tutar, renk
+const _countryExpenses = {
+  'BE': ( 'Belçika 🇧🇪', [
+    ('Kira', '🏠', 'Kira', 1100.0, '#6366F1'),
+    ('Elektrik (Engie)', '⚡', 'Elektrik', 95.0, '#F59E0B'),
+    ('Su (Vivaqua)', '💧', 'Su', 35.0, '#06B6D4'),
+    ('Doğalgaz', '🔥', 'Doğalgaz', 110.0, '#EF4444'),
+    ('İnternet (Proximus)', '🌐', 'İnternet', 55.0, '#3B82F6'),
+    ('Telefon (Orange)', '📱', 'Telefon', 20.0, '#F97316'),
+    ('Sağlık sigortası', '🏥', 'Sigorta', 130.0, '#10B981'),
+    ('Netflix', '🎬', 'Eğlence', 13.0, '#E50914'),
+  ]),
+  'TR': ( 'Türkiye 🇹🇷', [
+    ('Kira', '🏠', 'Kira', 15000.0, '#6366F1'),
+    ('Elektrik', '⚡', 'Elektrik', 900.0, '#F59E0B'),
+    ('Su', '💧', 'Su', 300.0, '#06B6D4'),
+    ('Doğalgaz', '🔥', 'Doğalgaz', 1200.0, '#EF4444'),
+    ('İnternet (Türk Telekom)', '🌐', 'İnternet', 450.0, '#3B82F6'),
+    ('Telefon', '📱', 'Telefon', 350.0, '#F97316'),
+    ('DASK/Sigorta', '🏥', 'Sigorta', 500.0, '#10B981'),
+    ('Netflix', '🎬', 'Eğlence', 200.0, '#E50914'),
+  ]),
+  'NL': ( 'Hollanda 🇳🇱', [
+    ('Kira (Huur)', '🏠', 'Kira', 1250.0, '#6366F1'),
+    ('Elektrik+Gaz (Vattenfall)', '⚡', 'Elektrik', 180.0, '#F59E0B'),
+    ('Su (Vitens)', '💧', 'Su', 30.0, '#06B6D4'),
+    ('İnternet (Ziggo)', '🌐', 'İnternet', 50.0, '#3B82F6'),
+    ('Telefon (KPN)', '📱', 'Telefon', 22.0, '#F97316'),
+    ('Zorgverzekering', '🏥', 'Sigorta', 140.0, '#10B981'),
+    ('Spotify', '🎵', 'Müzik', 11.0, '#1DB954'),
+  ]),
+  'FR': ( 'Fransa 🇫🇷', [
+    ('Kira (Loyer)', '🏠', 'Kira', 1000.0, '#6366F1'),
+    ('Elektrik (EDF)', '⚡', 'Elektrik', 90.0, '#F59E0B'),
+    ('Su', '💧', 'Su', 35.0, '#06B6D4'),
+    ('Doğalgaz (Engie)', '🔥', 'Doğalgaz', 100.0, '#EF4444'),
+    ('İnternet (Orange)', '🌐', 'İnternet', 40.0, '#3B82F6'),
+    ('Telefon (SFR)', '📱', 'Telefon', 20.0, '#F97316'),
+    ('Mutuelle santé', '🏥', 'Sigorta', 60.0, '#10B981'),
+    ('Netflix', '🎬', 'Eğlence', 14.0, '#E50914'),
+  ]),
+  'DE': ( 'Almanya 🇩🇪', [
+    ('Kira (Miete)', '🏠', 'Kira', 1050.0, '#6366F1'),
+    ('Elektrik (E.ON)', '⚡', 'Elektrik', 110.0, '#F59E0B'),
+    ('Su', '💧', 'Su', 40.0, '#06B6D4'),
+    ('Doğalgaz', '🔥', 'Doğalgaz', 95.0, '#EF4444'),
+    ('İnternet (Telekom)', '🌐', 'İnternet', 45.0, '#3B82F6'),
+    ('Telefon (Vodafone)', '📱', 'Telefon', 25.0, '#F97316'),
+    ('Krankenversicherung', '🏥', 'Sigorta', 200.0, '#10B981'),
+    ('Disney+', '🏰', 'Eğlence', 9.0, '#113CCF'),
+  ]),
+};
 
 // ── Screen ──
 
@@ -189,7 +244,7 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
         slivers: [
           // Header
           SliverAppBar(
-            expandedHeight: 200,
+            expandedHeight: 214,
             pinned: true,
             backgroundColor: const Color(0xFF0A0A0F),
             surfaceTintColor: Colors.transparent,
@@ -228,9 +283,9 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                             const Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Abonelik Takibi',
+                                Text('Ev Giderleri',
                                     style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900)),
-                                Text('Tüm dijital abonelikleriniz',
+                                Text('Kira, faturalar ve abonelikler',
                                     style: TextStyle(color: Color(0xFF6B7280), fontSize: 12)),
                               ],
                             ),
@@ -240,9 +295,9 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                         // Summary cards
                         Row(
                           children: [
-                            Expanded(child: _SummaryCard(label: 'Aylık', value: '₺${totalMonthly.toStringAsFixed(0)}', icon: '📅')),
+                            Expanded(child: _SummaryCard(label: 'Aylık', value: '$_cur${totalMonthly.toStringAsFixed(0)}', icon: '📅')),
                             const SizedBox(width: 10),
-                            Expanded(child: _SummaryCard(label: 'Yıllık', value: '₺${totalYearly.toStringAsFixed(0)}', icon: '📆')),
+                            Expanded(child: _SummaryCard(label: 'Yıllık', value: '$_cur${totalYearly.toStringAsFixed(0)}', icon: '📆')),
                             const SizedBox(width: 10),
                             Expanded(child: _SummaryCard(label: 'Aktif', value: '${activeSubs.length}', icon: '✅')),
                           ],
@@ -274,6 +329,33 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                         label: '⏸ Pasif (${allSubs.where((s) => !s.active).length})',
                         active: !_showActive,
                         onTap: () => setState(() => _showActive = false),
+                      ),
+                      const Spacer(),
+                      GestureDetector(
+                        onTap: _showCountryPresets,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 7),
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(colors: [
+                              Color(0xFF6366F1),
+                              Color(0xFF8B5CF6)
+                            ]),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: const Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(Icons.public, size: 14, color: Colors.white),
+                              SizedBox(width: 5),
+                              Text('Ülke şablonu',
+                                  style: TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.white)),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -386,9 +468,87 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
         onPressed: _showAddSheet,
         backgroundColor: const Color(0xFF667EEA),
         icon: const Icon(Icons.add, color: Colors.white),
-        label: const Text('Abonelik Ekle',
+        label: const Text('Gider Ekle',
             style:
                 TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
+      ),
+    );
+  }
+
+  void _showCountryPresets() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (_) => Container(
+        decoration: const BoxDecoration(
+          color: Color(0xFF13131A),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        ),
+        child: SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 12),
+              Container(
+                width: 40, height: 4,
+                decoration: BoxDecoration(
+                    color: Colors.white.withAlpha(40),
+                    borderRadius: BorderRadius.circular(2)),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(18),
+                child: Text('Ülke gider şablonu ekle',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w800)),
+              ),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(18, 0, 18, 12),
+                child: Text(
+                    'Seçtiğin ülkenin tipik hane giderleri listeye eklenir. Tutarları sonradan düzenleyebilirsin.',
+                    style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
+              ),
+              ..._countryExpenses.entries.map((e) {
+                final (label, items) = e.value;
+                final total = items.fold<double>(0, (s, x) => s + x.$4);
+                return ListTile(
+                  title: Text(label,
+                      style: const TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.w700)),
+                  subtitle: Text('${items.length} gider · ~${total.toStringAsFixed(0)} / ay',
+                      style: const TextStyle(color: Color(0xFF6B7280))),
+                  trailing: const Icon(Icons.add_circle,
+                      color: Color(0xFF8B5CF6)),
+                  onTap: () {
+                    final notifier =
+                        ref.read(subscriptionProvider.notifier);
+                    final now = DateTime.now();
+                    final next = DateFormat('yyyy-MM-dd')
+                        .format(DateTime(now.year, now.month + 1, 1));
+                    for (final x in items) {
+                      notifier.add(Subscription(
+                        id: 'exp_${DateTime.now().microsecondsSinceEpoch}_${x.$1.hashCode}',
+                        name: x.$1,
+                        emoji: x.$2,
+                        amount: x.$4,
+                        cycle: BillingCycle.monthly,
+                        nextBilling: next,
+                        category: x.$3,
+                        color: x.$5,
+                      ));
+                    }
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('$label giderleri eklendi'),
+                        behavior: SnackBarBehavior.floating));
+                  },
+                );
+              }),
+              const SizedBox(height: 12),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -412,7 +572,7 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
               bottom: MediaQuery.of(ctx).viewInsets.bottom),
           child: Container(
             decoration: const BoxDecoration(
-              color: Colors.white,
+              color: Color(0xFF13131A),
               borderRadius:
                   BorderRadius.vertical(top: Radius.circular(24)),
             ),
@@ -425,23 +585,24 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                   child: Container(
                     width: 36, height: 4,
                     decoration: BoxDecoration(
-                      color: Colors.grey.withAlpha(60),
+                      color: Colors.white.withAlpha(40),
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
                 ),
                 const SizedBox(height: 14),
-                const Text('📱 Abonelik Ekle',
+                const Text('🧾 Gider Ekle',
                     style: TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.w900)),
+                        fontSize: 17, fontWeight: FontWeight.w900,
+                        color: Colors.white)),
                 const SizedBox(height: 14),
 
-                // Popular services grid
-                const Text('Popüler Servisler',
+                // Popular presets grid
+                const Text('Sık Kullanılan Giderler',
                     style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 13,
                         fontWeight: FontWeight.w700,
-                        color: Color(0xFF6B7280))),
+                        color: Color(0xFF9CA3AF))),
                 const SizedBox(height: 8),
                 SizedBox(
                   height: 80,
@@ -520,7 +681,7 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                     Expanded(
                       child: _InputField(
                         controller: amountCtrl,
-                        label: 'Ücret (₺)',
+                        label: 'Tutar ($_cur)',
                         keyboard: TextInputType.number,
                       ),
                     ),
@@ -730,7 +891,7 @@ class _SubCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    '₺${sub.amount.toStringAsFixed(0)}',
+                    '$_cur${sub.amount.toStringAsFixed(0)}',
                     style: TextStyle(
                         fontWeight: FontWeight.w900,
                         fontSize: 16,
@@ -747,7 +908,7 @@ class _SubCard extends StatelessWidget {
                   ),
                   if (sub.active)
                     Text(
-                      '≈₺${sub.monthlyAmount.toStringAsFixed(0)}/ay',
+                      '≈€${sub.monthlyAmount.toStringAsFixed(0)}/ay',
                       style: const TextStyle(
                           fontSize: 9,
                           color: Color(0xFFB0B7C0)),
@@ -866,17 +1027,19 @@ class _InputField extends StatelessWidget {
     return TextField(
       controller: controller,
       keyboardType: keyboard,
+      style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
         labelText: label,
+        labelStyle: const TextStyle(color: Color(0xFF9CA3AF)),
         filled: true,
-        fillColor: const Color(0xFFF9FAFB),
+        fillColor: const Color(0xFF1A1A24),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Color(0xFFE5E7EB)),
+          borderSide: const BorderSide(color: Color(0x22FFFFFF)),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Color(0xFFE5E7EB)),
+          borderSide: const BorderSide(color: Color(0x22FFFFFF)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),

@@ -59,7 +59,6 @@ class _SOSButtonState extends State<SOSButton>
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Column(
       children: [
@@ -94,7 +93,7 @@ class _SOSButtonState extends State<SOSButton>
                   progress: widget.progress,
                   color: AppColors.error,
                   backgroundColor:
-                      AppColors.error.withAlpha(isDark ? 40 : 25),
+                      AppColors.error.withAlpha(40),
                   strokeWidth: 8,
                 ),
               ),
@@ -191,13 +190,11 @@ class _SOSButtonState extends State<SOSButton>
             ),
           )
         else
-          Text(
+          const Text(
             'Acil durumda 3 saniye basılı tutun',
             style: TextStyle(
               fontSize: 13,
-              color: isDark
-                  ? AppColors.darkTextSecondary
-                  : AppColors.slate,
+              color: Color(0xFF6B7280),
             ),
           ),
         const SizedBox(height: 24),

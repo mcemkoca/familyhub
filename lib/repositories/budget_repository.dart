@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+﻿import 'package:flutter/foundation.dart';
 import '../core/supabase_client.dart';
 import '../core/utils/repository_mixin.dart';
 import '../domain/entities.dart';
@@ -55,7 +55,7 @@ class BudgetRepository with RepositoryErrorHandler {
             'family_id': familyId,
             'created_by': userId,
             'amount': amount,
-            'currency': 'TRY',
+            'currency': 'EUR',
             'category': category,
             'description': description,
             'receipt_url': receiptUrl,
@@ -107,14 +107,14 @@ class BudgetRepository with RepositoryErrorHandler {
           .where((e) => ((e as Map<String, dynamic>)['amount'] as num) < 0)
           .fold<double>(0, (s, e) => s + ((e as Map<String, dynamic>)['amount'] as num).toDouble().abs());
 
-      // Default monthly budget: total income or 10000 TRY
+      // Default monthly budget: total income or 2500 EUR
       final budgetLimit = totalIncome > 0 ? totalIncome * 1.2 : 10000;
 
       return Budget(
         id: '${now.year}-${now.month}',
         totalAmount: budgetLimit.toDouble(),
         spentAmount: totalExpense.toDouble(),
-        currency: 'TRY',
+        currency: 'EUR',
         periodStart: startOfMonth,
         periodEnd: endOfMonth,
       );
@@ -138,7 +138,7 @@ class BudgetRepository with RepositoryErrorHandler {
     return Transaction(
       id: json['id'] as String,
       amount: amount.abs(),
-      currency: json['currency'] as String? ?? 'TRY',
+      currency: json['currency'] as String? ?? 'EUR',
       type: amount >= 0 ? TransactionType.income : TransactionType.expense,
       category: json['category'] as String? ?? 'Genel',
       description: json['description'] as String?,

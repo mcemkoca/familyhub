@@ -3,8 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../config/routes.dart';
+import '../../../config/country_config.dart';
 import '../../../core/validation/input_validator.dart';
 import '../../../services/auth_service.dart';
+import '../../../services/hive_service.dart';
 import '../../providers/app_providers.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
@@ -24,9 +26,11 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
 
   bool _hasFamilyCode = false;
   bool _isLoading = false;
+  bool _isGoogleLoading = false;
   bool _acceptedTerms = false;
   bool _obscurePassword = true;
   String _selectedRole = 'anne-baba';
+  String _selectedCountry = 'BE';
 
   late AnimationController _animController;
   late Animation<double> _slideAnim;
@@ -56,6 +60,17 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
 
   Future<void> _register() async {
     HapticFeedback.mediumImpact();
+
+    // Ülke seçimini kaydet — dil, para birimi ve ülkeye bağlı içeriği belirler
+    final country = CountryConfig.byCode(_selectedCountry);
+    await HiveService.setSetting('country', country.code);
+    await HiveService.setSetting('language', country.languageLabel);
+    await HiveService.setSetting('region', country.name);
+    await HiveService.setSetting('currency', country.currencyCode);
+    await HiveService.setSetting('currencySymbol', country.currencySymbol);
+    await HiveService.setSetting('dateFormat', country.dateFormat);
+    ref.read(countryProvider.notifier).state = country.code;
+    ref.read(localeProvider.notifier).state = country.locale;
 
     final name = _nameController.text.trim();
     final email = _emailController.text.trim();
@@ -116,6 +131,18 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
     );
   }
 
+  Future<void> _signInWithGoogle() async {
+    setState(() => _isGoogleLoading = true);
+    try {
+      await AuthService.signInWithGoogle();
+      if (mounted) context.go(AppRoutes.hub);
+    } catch (e) {
+      if (mounted) _showError(e.toString().replaceAll('Exception: ', ''));
+    } finally {
+      if (mounted) setState(() => _isGoogleLoading = false);
+    }
+  }
+
   void _showSuccess(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -149,7 +176,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
       if (next == true && mounted) context.go(AppRoutes.hub);
     });
 
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery.sizeOf(context);
+
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -171,7 +200,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
             left: 0,
             right: 0,
             height: size.height * 0.7,
-            child: Container(color: Colors.white),
+            child: Container(
+              color: isDark ? const Color(0xFF0A0A0F) : Colors.white,
+            ),
           ),
 
           SafeArea(
@@ -245,7 +276,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
                 Expanded(
                   child: AnimatedBuilder(
                     animation: _animController,
-                    builder: (_, __) => Opacity(
+                    builder: (_, _) => Opacity(
                       opacity: _fadeAnim.value,
                       child: Transform.translate(
                         offset: Offset(0, _slideAnim.value),
@@ -253,7 +284,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
                           padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: isDark ? const Color(0xFF13131A) : Colors.white,
                               borderRadius: BorderRadius.circular(28),
                               boxShadow: [
                                 BoxShadow(
@@ -262,7 +293,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
                                   offset: const Offset(0, -4),
                                 ),
                                 BoxShadow(
-                                  color: Colors.black.withAlpha(10),
+                                  color: Colors.black.withAlpha(isDark ? 40 : 10),
                                   blurRadius: 20,
                                   offset: const Offset(0, 8),
                                 ),
@@ -279,16 +310,27 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
 
                                   // Role selector
                                   if (!_hasFamilyCode) ...[
-                                    const Text(
+                                    Text(
                                       'Ailedeki Rolünüz',
                                       style: TextStyle(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w800,
-                                        color: Color(0xFF374151),
+                                        color: isDark ? const Color(0xFFE5E7EB) : const Color(0xFF374151),
                                       ),
                                     ),
                                     const SizedBox(height: 8),
                                     _buildRoleSelector(),
+                                    const SizedBox(height: 16),
+                                    Text(
+                                      'Ülke / Bölge',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w800,
+                                        color: isDark ? const Color(0xFFE5E7EB) : const Color(0xFF374151),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    _buildCountrySelector(isDark),
                                     const SizedBox(height: 16),
                                   ],
 
@@ -338,18 +380,33 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
 
                                   // Submit button
                                   _buildSubmitButton(),
+                                  const SizedBox(height: 12),
+
+                                  // Divider
+                                  Row(children: [
+                                    Expanded(child: Divider(color: isDark ? const Color(0x22FFFFFF) : const Color(0xFFE5E7EB))),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                                      child: Text('veya', style: TextStyle(color: isDark ? const Color(0xFF6B7280) : const Color(0xFF9CA3AF), fontSize: 13)),
+                                    ),
+                                    Expanded(child: Divider(color: isDark ? const Color(0x22FFFFFF) : const Color(0xFFE5E7EB))),
+                                  ]),
+                                  const SizedBox(height: 12),
+
+                                  // Google button
+                                  _buildGoogleButton(),
                                   const SizedBox(height: 16),
 
                                   // Back to login
                                   Center(
                                     child: GestureDetector(
                                       onTap: () => context.pop(),
-                                      child: const Text.rich(
+                                      child: Text.rich(
                                         TextSpan(
                                           style: TextStyle(
                                               fontSize: 14,
-                                              color: Color(0xFF6B7280)),
-                                          children: [
+                                              color: isDark ? const Color(0xFF9CA3AF) : const Color(0xFF6B7280)),
+                                          children: const [
                                             TextSpan(
                                                 text: 'Zaten hesabın var mı? '),
                                             TextSpan(
@@ -382,10 +439,11 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
   }
 
   Widget _buildModeToggle() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: const Color(0xFFF3F4F6),
+        color: isDark ? const Color(0xFF0A0A0F) : const Color(0xFFF3F4F6),
         borderRadius: BorderRadius.circular(14),
       ),
       child: Row(
@@ -439,6 +497,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
   }
 
   Widget _buildRoleSelector() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Row(
       children: _roles.map((role) {
         final (id, emoji, label, color) = role;
@@ -451,10 +510,14 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
               margin: const EdgeInsets.only(right: 6),
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
               decoration: BoxDecoration(
-                color: selected ? color.withAlpha(25) : const Color(0xFFF9FAFB),
+                color: selected
+                    ? color.withAlpha(25)
+                    : (isDark ? const Color(0xFF0A0A0F) : const Color(0xFFF9FAFB)),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: selected ? color : const Color(0xFFE5E7EB),
+                  color: selected
+                      ? color
+                      : (isDark ? const Color(0x1EFFFFFF) : const Color(0xFFE5E7EB)),
                   width: selected ? 2 : 1,
                 ),
               ),
@@ -480,6 +543,56 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
     );
   }
 
+  Widget _buildCountrySelector(bool isDark) {
+    return SizedBox(
+      height: 44,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: CountryConfig.all.length,
+        separatorBuilder: (_, _) => const SizedBox(width: 8),
+        itemBuilder: (_, i) {
+          final c = CountryConfig.all[i];
+          final selected = _selectedCountry == c.code;
+          return GestureDetector(
+            onTap: () => setState(() => _selectedCountry = c.code),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 180),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              decoration: BoxDecoration(
+                color: selected
+                    ? const Color(0xFF6366F1).withAlpha(30)
+                    : (isDark ? const Color(0xFF0A0A0F) : const Color(0xFFF9FAFB)),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: selected
+                      ? const Color(0xFF6366F1)
+                      : (isDark ? const Color(0x1EFFFFFF) : const Color(0xFFE5E7EB)),
+                  width: selected ? 2 : 1,
+                ),
+              ),
+              child: Row(
+                children: [
+                  Text(c.flag, style: const TextStyle(fontSize: 18)),
+                  const SizedBox(width: 6),
+                  Text(
+                    c.name,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      color: selected
+                          ? const Color(0xFF6366F1)
+                          : const Color(0xFF9CA3AF),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   Widget _buildField({
     required TextEditingController controller,
     required String label,
@@ -487,11 +600,14 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
     TextInputType keyboardType = TextInputType.text,
     TextInputAction action = TextInputAction.next,
   }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final fieldBg = isDark ? const Color(0xFF0A0A0F) : const Color(0xFFF9FAFB);
+    final borderColor = isDark ? const Color(0x1EFFFFFF) : const Color(0xFFE5E7EB);
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFFF9FAFB),
+        color: fieldBg,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE5E7EB)),
+        border: Border.all(color: borderColor),
       ),
       child: TextField(
         controller: controller,
@@ -515,11 +631,14 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
   }
 
   Widget _buildPasswordField() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final fieldBg = isDark ? const Color(0xFF0A0A0F) : const Color(0xFFF9FAFB);
+    final borderColor = isDark ? const Color(0x1EFFFFFF) : const Color(0xFFE5E7EB);
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFFF9FAFB),
+        color: fieldBg,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE5E7EB)),
+        border: Border.all(color: borderColor),
       ),
       child: TextField(
         controller: _passwordController,
@@ -551,6 +670,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
   }
 
   Widget _buildTermsRow() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return GestureDetector(
       onTap: () => setState(() => _acceptedTerms = !_acceptedTerms),
       child: Row(
@@ -566,7 +686,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
                       colors: [Color(0xFF4FACFE), Color(0xFFA18CD1)],
                     )
                   : null,
-              color: _acceptedTerms ? null : Colors.white,
+              color: _acceptedTerms
+                  ? null
+                  : (isDark ? const Color(0xFF1A1A2E) : Colors.white),
               borderRadius: BorderRadius.circular(6),
               border: Border.all(
                 color: _acceptedTerms
@@ -599,6 +721,39 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildGoogleButton() {
+    return OutlinedButton(
+      onPressed: _isGoogleLoading ? null : _signInWithGoogle,
+      style: OutlinedButton.styleFrom(
+        minimumSize: const Size(double.infinity, 54),
+        side: const BorderSide(color: Color(0x33FFFFFF)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        backgroundColor: const Color(0xFF13131A),
+      ),
+      child: _isGoogleLoading
+          ? const SizedBox(
+              width: 22, height: 22,
+              child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.network(
+                  'https://www.google.com/favicon.ico',
+                  width: 20, height: 20,
+                  errorBuilder: (_, _, _) =>
+                      const Icon(Icons.g_mobiledata, color: Colors.white, size: 24),
+                ),
+                const SizedBox(width: 12),
+                const Text(
+                  'Google ile Devam Et',
+                  style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600),
+                ),
+              ],
+            ),
     );
   }
 

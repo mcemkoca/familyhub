@@ -13,6 +13,8 @@ class SecurityQuestionsSetupScreen extends StatefulWidget {
 }
 
 class _SecurityQuestionsSetupScreenState extends State<SecurityQuestionsSetupScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   bool _isLoading = false;
   bool _hasExisting = false;
 
@@ -128,7 +130,7 @@ class _SecurityQuestionsSetupScreenState extends State<SecurityQuestionsSetupScr
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: AppColors.success,
+        backgroundColor: const Color(0xFF10B981),
         behavior: SnackBarBehavior.floating,
       ),
     );
@@ -145,11 +147,10 @@ class _SecurityQuestionsSetupScreenState extends State<SecurityQuestionsSetupScr
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final accentColor = Theme.of(context).colorScheme.primary;
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
         title: 'Güvenlik Soruları',
         showBack: true,
@@ -171,22 +172,22 @@ class _SecurityQuestionsSetupScreenState extends State<SecurityQuestionsSetupScr
                             Container(
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: AppColors.success.withAlpha(20),
+                                color: const Color(0xFF10B981).withAlpha(20),
                                 borderRadius: BorderRadius.circular(12),
                                 border: Border.all(
-                                  color: AppColors.success.withAlpha(60),
+                                  color: const Color(0xFF10B981).withAlpha(60),
                                 ),
                               ),
-                              child: Row(
+                              child: const Row(
                                 children: [
-                                  const Icon(Icons.verified, color: AppColors.success, size: 20),
-                                  const SizedBox(width: 8),
+                                  Icon(Icons.verified, color: Color(0xFF10B981), size: 20),
+                                  SizedBox(width: 8),
                                   Expanded(
                                     child: Text(
                                       'Güvenlik sorularınız ayarlı. Şifrenizi unuttuğunuzda bu sorularla hesabınızı doğrulayabilirsiniz.',
                                       style: TextStyle(
                                         fontSize: 13,
-                                        color: isDark ? Colors.white70 : Colors.black87,
+                                        color: Colors.white70,
                                       ),
                                     ),
                                   ),
@@ -195,12 +196,12 @@ class _SecurityQuestionsSetupScreenState extends State<SecurityQuestionsSetupScr
                             ),
                             const SizedBox(height: 20),
                           ],
-                          Text(
+                          const Text(
                             'Soru 1',
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
-                              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                              color: Color(0xFF6B7280),
                             ),
                           ),
                           const SizedBox(height: 8),
@@ -218,15 +219,15 @@ class _SecurityQuestionsSetupScreenState extends State<SecurityQuestionsSetupScr
                               labelText: 'Cevap 1',
                               hintText: 'Güvenlik sorusunun cevabı',
                               filled: true,
-                              fillColor: isDark ? AppColors.darkCard : Colors.grey.shade50,
+                              fillColor: const Color(0x1AFFFFFF),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                                 borderSide: BorderSide.none,
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(
-                                  color: isDark ? AppColors.darkBorder : AppColors.border,
+                                borderSide: const BorderSide(
+                                  color: Color(0x1EFFFFFF),
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
@@ -236,12 +237,12 @@ class _SecurityQuestionsSetupScreenState extends State<SecurityQuestionsSetupScr
                             ),
                           ),
                           const SizedBox(height: 24),
-                          Text(
+                          const Text(
                             'Soru 2',
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
-                              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                              color: Color(0xFF6B7280),
                             ),
                           ),
                           const SizedBox(height: 8),
@@ -259,15 +260,15 @@ class _SecurityQuestionsSetupScreenState extends State<SecurityQuestionsSetupScr
                               labelText: 'Cevap 2',
                               hintText: 'Güvenlik sorusunun cevabı',
                               filled: true,
-                              fillColor: isDark ? AppColors.darkCard : Colors.grey.shade50,
+                              fillColor: const Color(0x1AFFFFFF),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                                 borderSide: BorderSide.none,
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(
-                                  color: isDark ? AppColors.darkBorder : AppColors.border,
+                                borderSide: const BorderSide(
+                                  color: Color(0x1EFFFFFF),
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
@@ -308,13 +309,13 @@ class _SecurityQuestionsSetupScreenState extends State<SecurityQuestionsSetupScr
                             ),
                           ),
                           const SizedBox(height: 16),
-                          Center(
+                          const Center(
                             child: Text(
                               'Bu sorular şifrenizi unuttuğunuzda hesabınızı kurtarmanızı sağlar. Cevaplarınızı güvenli bir yerde saklayın.',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 12,
-                                color: isDark ? AppColors.darkTextSecondary : AppColors.lightGray,
+                                color: Color(0xFF6B7280),
                               ),
                             ),
                           ),
@@ -342,25 +343,25 @@ class _SecurityQuestionsSetupScreenState extends State<SecurityQuestionsSetupScr
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(
-            color: isDark ? AppColors.darkCard : Colors.grey.shade50,
+            color: const Color(0x1AFFFFFF),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: isDark ? AppColors.darkBorder : AppColors.border,
+              color: const Color(0x1EFFFFFF),
             ),
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
               isExpanded: true,
               value: value != null && items.contains(value) ? value : null,
-              hint: Text(
+              hint: const Text(
                 'Bir soru seçin',
                 style: TextStyle(
-                  color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                  color: Color(0xFF6B7280),
                 ),
               ),
-              dropdownColor: isDark ? AppColors.darkCard : Colors.white,
-              style: TextStyle(
-                color: isDark ? Colors.white : Colors.black87,
+              dropdownColor: const Color(0xFF13131A),
+              style: const TextStyle(
+                color: Color(0xFFE5E7EB),
                 fontSize: 14,
               ),
               icon: Icon(Icons.arrow_drop_down, color: accentColor),
@@ -381,15 +382,15 @@ class _SecurityQuestionsSetupScreenState extends State<SecurityQuestionsSetupScr
             decoration: InputDecoration(
               hintText: 'Kendi sorunuzu yazın',
               filled: true,
-              fillColor: isDark ? AppColors.darkCard : Colors.grey.shade50,
+              fillColor: const Color(0x1AFFFFFF),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(
-                  color: isDark ? AppColors.darkBorder : AppColors.border,
+                borderSide: const BorderSide(
+                  color: Color(0x1EFFFFFF),
                 ),
               ),
               focusedBorder: OutlineInputBorder(

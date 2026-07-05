@@ -71,7 +71,7 @@ class LocalAIService {
       suggestions.add(AISuggestion(
         icon: '🍽️',
         title: 'Bugünkü Tarif',
-        body: recipe['title'] ?? 'Lezzetli bir yemek',
+        body: (recipe['title'] ?? 'Lezzetli bir yemek').toString(),
         category: SuggestionCategory.kitchen,
         action: 'Tarife Bak',
         actionRoute: '/kitchen',
@@ -97,7 +97,7 @@ class LocalAIService {
   }
 
   List<AISuggestion> _morningRoutine(int childCount) => [
-        AISuggestion(
+        const AISuggestion(
           icon: '☀️',
           title: 'Günaydın Rutini',
           body: 'Kahvaltıyı birlikte hazırlayın, günün planını paylaşın.',
@@ -106,7 +106,7 @@ class LocalAIService {
           actionRoute: '/routines',
         ),
         if (childCount > 0)
-          AISuggestion(
+          const AISuggestion(
             icon: '🎒',
             title: 'Okul Hazırlığı',
             body: 'Çantaları kontrol edin, ödevleri hatırlatın.',
@@ -114,7 +114,7 @@ class LocalAIService {
             action: 'Görevler',
             actionRoute: '/tasks',
           ),
-        AISuggestion(
+        const AISuggestion(
           icon: '💸',
           title: 'Gün Bütçesi',
           body: 'Bugünkü harcama planını gözden geçirin.',
@@ -125,7 +125,7 @@ class LocalAIService {
       ];
 
   List<AISuggestion> _midDayIdeas() => [
-        AISuggestion(
+        const AISuggestion(
           icon: '🛒',
           title: 'Alışveriş Zamanı',
           body: 'Listenizde 3 ürün eksik. Markete uğrayın.',
@@ -133,7 +133,7 @@ class LocalAIService {
           action: 'Listeyi Aç',
           actionRoute: '/shopping',
         ),
-        AISuggestion(
+        const AISuggestion(
           icon: '📍',
           title: 'Aile Konumu',
           body: 'Aile üyelerinin konumunu kontrol edin.',
@@ -145,7 +145,7 @@ class LocalAIService {
 
   List<AISuggestion> _afternoonActivities(int childCount) => [
         if (childCount > 0)
-          AISuggestion(
+          const AISuggestion(
             icon: '🎨',
             title: 'Okul Sonrası',
             body: 'Çocuklarla birlikte yaratıcı bir aktivite yapın.',
@@ -153,7 +153,7 @@ class LocalAIService {
             action: 'Aktiviteler',
             actionRoute: '/education',
           ),
-        AISuggestion(
+        const AISuggestion(
           icon: '📸',
           title: 'An Paylaşımı',
           body: 'Bugünkü güzel anları galeriye ekleyin.',
@@ -164,7 +164,7 @@ class LocalAIService {
       ];
 
   List<AISuggestion> _eveningRoutine() => [
-        AISuggestion(
+        const AISuggestion(
           icon: '🍳',
           title: 'Akşam Yemeği',
           body: 'Haftalık yemek planınıza göre bugün ne pişiriyorsunuz?',
@@ -172,7 +172,7 @@ class LocalAIService {
           action: 'Mutfak',
           actionRoute: '/kitchen',
         ),
-        AISuggestion(
+        const AISuggestion(
           icon: '💬',
           title: 'Aile Sohbeti',
           body: 'Gün nasıl geçti? Herkesle paylaşın.',
@@ -180,7 +180,7 @@ class LocalAIService {
           action: 'Sohbet',
           actionRoute: '/chat',
         ),
-        AISuggestion(
+        const AISuggestion(
           icon: '📊',
           title: 'Günlük Özet',
           body: 'Bugünkü harcamaları kaydedin.',
@@ -191,7 +191,7 @@ class LocalAIService {
       ];
 
   List<AISuggestion> _nightWindDown() => [
-        AISuggestion(
+        const AISuggestion(
           icon: '🌙',
           title: 'Gece Rutini',
           body: 'Yarın için liste hazırlayın, çocukları uyutun.',
@@ -199,7 +199,7 @@ class LocalAIService {
           action: 'Rutinler',
           actionRoute: '/routines',
         ),
-        AISuggestion(
+        const AISuggestion(
           icon: '📅',
           title: 'Yarın Planı',
           body: 'Takvime göz atın, yarınki önemli etkinlikler.',
@@ -210,7 +210,7 @@ class LocalAIService {
       ];
 
   List<AISuggestion> _alwaysRelevant() => [
-        AISuggestion(
+        const AISuggestion(
           icon: '💊',
           title: 'İlaç Takibi',
           body: 'Aile üyelerinin günlük ilaç alımını kontrol edin.',
@@ -218,7 +218,7 @@ class LocalAIService {
           action: 'Sağlık',
           actionRoute: '/family-health',
         ),
-        AISuggestion(
+        const AISuggestion(
           icon: '📱',
           title: 'Abonelikler',
           body: 'Bu ay biten aboneliklerinizi gözden geçirin.',
@@ -243,7 +243,7 @@ class LocalAIService {
     if (recipe.isEmpty) return [];
 
     final ingredients = (recipe['ingredients'] as List?)
-            ?.map((i) => (i['name'] as String? ?? '').toLowerCase())
+            ?.map((i) => ((i as Map?)?['name'] as String? ?? '').toLowerCase())
             .toList() ??
         [];
     final available =
@@ -305,10 +305,10 @@ class LocalAIService {
           '$cat kategorisinde tasarruf etmeyi düşünün.';
     } else if (pct > 70) {
       return '📊 Bütçenizin %${pct.toStringAsFixed(0)}\'ini kullandınız. '
-          'Kalan ${(budgetLimit - totalExpense).toStringAsFixed(0)} ₺ ile hafta sonuna kadar idare edin.';
+          'Kalan ${(budgetLimit - totalExpense).toStringAsFixed(0)} € ile hafta sonuna kadar idare edin.';
     } else {
       return '✅ Bütçe kontrolü iyi! '
-          'Toplam harcama: ${totalExpense.toStringAsFixed(0)} ₺ (limit: ${budgetLimit.toStringAsFixed(0)} ₺)';
+          'Toplam harcama: ${totalExpense.toStringAsFixed(0)} € (limit: ${budgetLimit.toStringAsFixed(0)} €)';
     }
   }
 }

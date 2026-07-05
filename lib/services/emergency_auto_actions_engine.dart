@@ -2,14 +2,20 @@
 // Emergency auto-actions engine: triggers, messages, calls, escalation chain
 
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:record/record.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'package:supabase_flutter/supabase_flutter.dart';
+import '../core/supabase_client.dart';
 import '../domain/models/emergency_action.dart';
 import '../domain/models/emergency_template.dart';
+import '../repositories/emergency_action_repository.dart';
 
 /// High-level engine that orchestrates the entire emergency response pipeline.
 class EmergencyAutoActionsEngine {
@@ -19,6 +25,7 @@ class EmergencyAutoActionsEngine {
   EmergencyAutoActionsEngine._internal();
 
   final FlutterTts _tts = FlutterTts();
+  final AudioRecorder _recorder = AudioRecorder();
 
   // ── Active action ──
   EmergencyAction? _activeAction;
@@ -201,7 +208,7 @@ class EmergencyAutoActionsEngine {
         await _sendSms(_getRecipientTarget(config), messageText);
         break;
       case MessageChannel.push:
-        // TODO: Push via FCM
+        await _sendFcmPush(messageText);
         break;
       case MessageChannel.whatsapp:
         await _sendWhatsApp(_getRecipientTarget(config), messageText);
@@ -246,6 +253,35 @@ class EmergencyAutoActionsEngine {
     });
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
+    }
+  }
+
+  Future<void> _sendFcmPush(String message) async {
+    try {
+      final client = SupabaseConfig.safeClient;
+      if (client == null) return;
+
+      // Get FCM tokens of all family members via Supabase Edge Function
+      final userId = client.auth.currentUser?.id;
+      if (userId == null) return;
+
+      final profile = await client
+          .from('profiles')
+          .select('family_id')
+          .eq('id', userId)
+          .maybeSingle();
+      final familyId = profile?['family_id'] as String?;
+      if (familyId == null) return;
+
+      // Call Supabase Edge Function to send FCM to all family members
+      await client.functions.invoke('send-emergency-push', body: {
+        'family_id': familyId,
+        'sender_id': userId,
+        'message': message,
+        'title': '🆘 ACİL DURUM',
+      });
+    } catch (e) {
+      debugPrint('[Emergency] FCM push failed: $e');
     }
   }
 
@@ -302,9 +338,49 @@ class EmergencyAutoActionsEngine {
   // AUDIO RECORDING
   // ═══════════════════════════════════════════
   Future<void> _startAudioRecording(EmergencyAction action) async {
-    // ignore: unused_local_variable
-    final duration = action.autoActions.audioRecording.durationSeconds;
-    // TODO: Use record package for actual recording
+    final durationSeconds = action.autoActions.audioRecording.durationSeconds;
+    try {
+      final hasPermission = await _recorder.hasPermission();
+      if (!hasPermission) return;
+
+      final dir = await getTemporaryDirectory();
+      final path = '${dir.path}/emergency_recording_${DateTime.now().millisecondsSinceEpoch}.m4a';
+
+      await _recorder.start(
+        const RecordConfig(encoder: AudioEncoder.aacLc, bitRate: 64000),
+        path: path,
+      );
+
+      await Future.delayed(Duration(seconds: durationSeconds));
+
+      if (await _recorder.isRecording()) {
+        final recordedPath = await _recorder.stop();
+        if (recordedPath != null) {
+          await _uploadEmergencyRecording(recordedPath, action);
+        }
+      }
+    } catch (e) {
+      debugPrint('[Emergency] Audio recording failed: $e');
+    }
+  }
+
+  Future<void> _uploadEmergencyRecording(String filePath, EmergencyAction action) async {
+    try {
+      final client = SupabaseConfig.safeClient;
+      if (client == null) return;
+      final userId = client.auth.currentUser?.id;
+      if (userId == null) return;
+
+      final bytes = await File(filePath).readAsBytes();
+      final fileName = 'emergency_${userId}_${DateTime.now().millisecondsSinceEpoch}.m4a';
+      await client.storage.from('emergency-recordings').uploadBinary(
+        fileName,
+        bytes,
+        fileOptions: const FileOptions(contentType: 'audio/mp4'),
+      );
+    } catch (e) {
+      debugPrint('[Emergency] Recording upload failed: $e');
+    }
   }
 
   // ═══════════════════════════════════════════
@@ -435,18 +511,22 @@ class EmergencyAutoActionsEngine {
     return false;
   }
 
+  static const _defaultTemplate = EmergencyTemplate(
+    templateId: 'default',
+    name: 'Varsayılan',
+    smsContent: '🆘 ACİL: {name} yardım istiyor! Konum: {location} Saat: {time}',
+    pushContent: 'Yardım çağrısı! Konum: {location}',
+    voiceContent: 'Bu otomatik bir acil durum çağrısıdır. {name} yardım istiyor.',
+    emailContent: 'Acil durum yardım çağrısı. {name} konum: {location}',
+  );
+
   Future<EmergencyTemplate> _getTemplate(String templateId) async {
-    // TODO: Load from repository
-    return const EmergencyTemplate(
-      templateId: 'default',
-      name: 'Varsayılan',
-      smsContent:
-          '🆘 ACİL: {name} yardım istiyor! Konum: {location} Saat: {time}',
-      pushContent: 'Yardım çağrısı! Konum: {location}',
-      voiceContent:
-          'Bu otomatik bir acil durum çağrısıdır. {name} yardım istiyor.',
-      emailContent: 'Acil durum yardım çağrısı. {name} konum: {location}',
-    );
+    try {
+      final template = await EmergencyActionRepository().getTemplateById(templateId);
+      return template ?? _defaultTemplate;
+    } catch (_) {
+      return _defaultTemplate;
+    }
   }
 
   String _resolveTemplate(String template, Map<String, String> vars) {

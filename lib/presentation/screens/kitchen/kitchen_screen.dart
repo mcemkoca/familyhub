@@ -2,8 +2,72 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../config/constants.dart';
+import '../../../services/hive_service.dart';
+import '../../../services/content/meal_image_service.dart';
+import '../../providers/app_providers.dart';
 import '../../widgets/ds.dart';
+
+/// Tarife göre DOĞRU yemek fotoğrafı — TheMealDB'den adına göre çeker,
+/// bulunamazsa nötr gradient + ikon (yanlış görsel göstermez).
+class _RecipeThumb extends StatefulWidget {
+  final Map<String, dynamic> recipe;
+  final Color amber;
+  const _RecipeThumb({required this.recipe, required this.amber});
+
+  @override
+  State<_RecipeThumb> createState() => _RecipeThumbState();
+}
+
+class _RecipeThumbState extends State<_RecipeThumb> {
+  String? _url;
+  bool _loading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _load();
+  }
+
+  Future<void> _load() async {
+    final t = (widget.recipe['title'] ?? '').toString();
+    final c = (widget.recipe['category'] ?? '').toString();
+    final url = await MealImageService.fetchThumb(t, c);
+    if (mounted) setState(() { _url = url; _loading = false; });
+  }
+
+  Widget _fallback() => Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [widget.amber.withAlpha(35), widget.amber.withAlpha(12)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Center(
+          child: _loading
+              ? SizedBox(
+                  width: 22, height: 22,
+                  child: CircularProgressIndicator(
+                      strokeWidth: 2, color: widget.amber.withAlpha(150)))
+              : Icon(Icons.restaurant_outlined,
+                  size: 40, color: widget.amber.withAlpha(150)),
+        ),
+      );
+
+  @override
+  Widget build(BuildContext context) {
+    if (_url == null) return _fallback();
+    return Image.network(
+      _url!,
+      fit: BoxFit.cover,
+      loadingBuilder: (c, ch, p) => p == null ? ch : _fallback(),
+      errorBuilder: (c, e, s) => _fallback(),
+    );
+  }
+}
+
 
 class KitchenScreen extends StatefulWidget {
   const KitchenScreen({super.key});
@@ -14,6 +78,8 @@ class KitchenScreen extends StatefulWidget {
 
 class _KitchenScreenState extends State<KitchenScreen>
     with SingleTickerProviderStateMixin {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   late TabController _tabController;
   List<Map<String, dynamic>> _recipes = [];
   List<Map<String, dynamic>> _filtered = [];
@@ -59,14 +125,63 @@ class _KitchenScreenState extends State<KitchenScreen>
       final raw =
           await rootBundle.loadString('assets/data/content/recipes.json');
       final list = (jsonDecode(raw) as List).cast<Map<String, dynamic>>();
+      final custom = _loadCustom();
       setState(() {
-        _recipes = list;
-        _filtered = list;
+        _recipes = [...custom, ...list];
+        _filtered = _recipes;
         _loading = false;
       });
     } catch (_) {
       setState(() => _loading = false);
     }
+  }
+
+  List<Map<String, dynamic>> _loadCustom() {
+    try {
+      final raw = HiveService.getSetting('custom_recipes');
+      if (raw == null || raw.isEmpty) return [];
+      return (jsonDecode(raw) as List).cast<Map<String, dynamic>>();
+    } catch (_) {
+      return [];
+    }
+  }
+
+  Future<void> _saveCustom(Map<String, dynamic> recipe) async {
+    final list = _loadCustom();
+    list.insert(0, recipe);
+    await HiveService.setSetting('custom_recipes', jsonEncode(list));
+    setState(() {
+      _recipes = [recipe, ..._recipes];
+      _applyFilter();
+    });
+  }
+
+  // "Yeni Yemek Fikri" — kendi tarifin ya da web'den tarif.
+  void _showNewFoodIdea() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (_) => _NewFoodIdeaSheet(
+        onOwn: () {
+          Navigator.pop(context);
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            builder: (_) => _AddRecipeSheet(onSave: _saveCustom, fromWeb: false),
+          );
+        },
+        onWeb: () {
+          Navigator.pop(context);
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            builder: (_) => _AddRecipeSheet(onSave: _saveCustom, fromWeb: true),
+          );
+        },
+      ),
+    );
   }
 
   void _applyFilter() {
@@ -98,10 +213,9 @@ class _KitchenScreenState extends State<KitchenScreen>
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: AppColors.darkBackground,
+      backgroundColor: const Color(0xFF0A0A0F),
       body: SafeArea(
         child: Column(
           children: [
@@ -198,19 +312,29 @@ class _KitchenScreenState extends State<KitchenScreen>
               ],
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-            decoration: BoxDecoration(
-              color: amber.withAlpha(25),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: amber.withAlpha(60)),
-            ),
-            child: Row(
-              children: [
-                Icon(Icons.star_rounded, size: 14, color: amber),
-                const SizedBox(width: 4),
-                Text('12', style: TextStyle(color: amber, fontWeight: FontWeight.w900, fontSize: 13)),
-              ],
+          // Tarif ekle butonu (her zaman görünür — shell nav çubuğu FAB'ı örtüyor)
+          GestureDetector(
+            onTap: _showNewFoodIdea,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Color(0xFFF59E0B), Color(0xFFD97706)],
+                ),
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [BoxShadow(color: amber.withAlpha(70), blurRadius: 8)],
+              ),
+              child: const Row(
+                children: [
+                  Icon(Icons.add, size: 16, color: Colors.white),
+                  SizedBox(width: 4),
+                  Text('Tarif',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 13)),
+                ],
+              ),
             ),
           ),
         ],
@@ -248,17 +372,16 @@ class _KitchenScreenState extends State<KitchenScreen>
   }
 
   void _showPickForDay(String day) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (_) => Container(
-        height: MediaQuery.of(context).size.height * 0.7,
-        decoration: BoxDecoration(
-          color: AppColors.darkCard,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-          border: const Border(
+        height: MediaQuery.sizeOf(context).height * 0.7,
+        decoration: const BoxDecoration(
+          color: Color(0xFF13131A),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+          border: Border(
             top: BorderSide(color: Ds.glassBorder, width: 0.5),
             left: BorderSide(color: Ds.glassBorder, width: 0.5),
             right: BorderSide(color: Ds.glassBorder, width: 0.5),
@@ -304,7 +427,7 @@ class _KitchenScreenState extends State<KitchenScreen>
                         ),
                         child: const Icon(Icons.restaurant, color: Colors.white, size: 20),
                       ),
-                      title: Text(r['title'] ?? '',
+                      title: Text((r['title'] ?? '').toString(),
                           style: const TextStyle(fontWeight: FontWeight.w600, color: Ds.text, fontSize: 13)),
                       subtitle: Text(
                           '${(r['prep_time'] as int? ?? 0) + (r['cook_time'] as int? ?? 0)} dk · ${r['difficulty'] ?? ''}',
@@ -361,7 +484,7 @@ class _RecipesTab extends StatelessWidget {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.search_off, size: 64, color: AppColors.slate),
+                          Icon(Icons.search_off, size: 64, color: Color(0xFF6B7280)),
                           SizedBox(height: 12),
                           Text('Tarif bulunamadı'),
                         ],
@@ -412,7 +535,7 @@ class _RecipesTab extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.78,
+        childAspectRatio: 0.64,
         crossAxisSpacing: 12,
         mainAxisSpacing: 12,
       ),
@@ -470,10 +593,10 @@ class _WeeklyPlanTab extends StatelessWidget {
             children: [
               const Icon(Icons.auto_awesome, color: Colors.white, size: 28),
               const SizedBox(width: 12),
-              Expanded(
+              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text('Haftalık Plan Oluştur',
                         style: TextStyle(
                             color: Colors.white,
@@ -531,8 +654,8 @@ class _WeeklyPlanTab extends StatelessWidget {
                         color: isToday
                             ? const Color(0xFFF97316)
                             : (isDark
-                                ? AppColors.darkBackground
-                                : AppColors.background),
+                                ? const Color(0xFF0A0A0F)
+                                : const Color(0xFF0A0A0F)),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Center(
@@ -543,9 +666,7 @@ class _WeeklyPlanTab extends StatelessWidget {
                               fontWeight: FontWeight.w800,
                               color: isToday
                                   ? Colors.white
-                                  : (isDark
-                                      ? AppColors.darkTextSecondary
-                                      : AppColors.slate)),
+                                  : (const Color(0xFF6B7280))),
                         ),
                       ),
                     ),
@@ -556,31 +677,27 @@ class _WeeklyPlanTab extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(meal,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700,
-                                        color: isDark
-                                            ? AppColors.darkTextPrimary
-                                            : AppColors.dark)),
+                                        color: Color(0xFFE5E7EB))),
                                 const SizedBox(height: 2),
-                                Text('Değiştirmek için dokun',
-                                    style: const TextStyle(
+                                const Text('Değiştirmek için dokun',
+                                    style: TextStyle(
                                         fontSize: 11,
-                                        color: AppColors.slate)),
+                                        color: Color(0xFF6B7280))),
                               ],
                             )
-                          : Text('Yemek seç...',
+                          : const Text('Yemek seç...',
                               style: TextStyle(
                                   fontSize: 13,
-                                  color: isDark
-                                      ? AppColors.darkTextSecondary
-                                      : AppColors.slate)),
+                                  color: Color(0xFF6B7280))),
                     ),
                     if (meal != null)
                       IconButton(
                         onPressed: () => onClear(day),
                         icon: const Icon(Icons.close,
-                            size: 18, color: AppColors.slate),
+                            size: 18, color: Color(0xFF6B7280)),
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(),
                       )
@@ -659,14 +776,14 @@ class _MealShoppingTab extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.calendar_view_week,
-                size: 72, color: AppColors.slate.withAlpha(100)),
+                size: 72, color: const Color(0xFF6B7280).withAlpha(100)),
             const SizedBox(height: 16),
             const Text('Önce Haftalık Plan sekmesini doldur',
                 style:
                     TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
             const SizedBox(height: 6),
             const Text('Malzeme listesi otomatik oluşturulur',
-                style: TextStyle(fontSize: 13, color: AppColors.slate)),
+                style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
           ],
         ),
       );
@@ -698,6 +815,38 @@ class _MealShoppingTab extends StatelessWidget {
                     fontSize: 13),
               ),
             ],
+          ),
+        ),
+        const SizedBox(height: 12),
+        // Mutfak → Alışveriş senkron butonu
+        Consumer(
+          builder: (context, ref, _) => SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: () {
+                final notifier = ref.read(shoppingItemsProvider.notifier);
+                for (final ing in ingredients) {
+                  notifier.addItem(
+                    (ing['name'] ?? '').toString(),
+                    quantity: ing['count'] as int? ?? 1,
+                  );
+                }
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(
+                        '${ingredients.length} malzeme alışveriş listesine eklendi'),
+                    behavior: SnackBarBehavior.floating));
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF10B981),
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14)),
+              ),
+              icon: const Icon(Icons.add_shopping_cart, color: Colors.white),
+              label: const Text('Tümünü Alışveriş Listesine Ekle',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w700)),
+            ),
           ),
         ),
         const SizedBox(height: 12),
@@ -734,11 +883,11 @@ class _IngredientTileState extends State<_IngredientTile> {
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         decoration: BoxDecoration(
-          color: widget.isDark ? AppColors.darkCard : Colors.white,
+          color: const Color(0xFF13131A),
           borderRadius: BorderRadius.circular(14),
           boxShadow: [
             BoxShadow(
-                color: Colors.black.withAlpha(widget.isDark ? 20 : 6),
+                color: Colors.black.withAlpha(20),
                 blurRadius: 6,
                 offset: const Offset(0, 2))
           ],
@@ -751,12 +900,12 @@ class _IngredientTileState extends State<_IngredientTile> {
               height: 24,
               decoration: BoxDecoration(
                 color: _checked
-                    ? AppColors.softMint
+                    ? const Color(0xFF10B981)
                     : Colors.transparent,
                 shape: BoxShape.circle,
                 border: Border.all(
                     color:
-                        _checked ? AppColors.softMint : AppColors.border,
+                        _checked ? const Color(0xFF10B981) : const Color(0x1EFFFFFF),
                     width: 2),
               ),
               child: _checked
@@ -773,16 +922,14 @@ class _IngredientTileState extends State<_IngredientTile> {
                     decoration:
                         _checked ? TextDecoration.lineThrough : null,
                     color: _checked
-                        ? AppColors.slate
-                        : (widget.isDark
-                            ? AppColors.darkTextPrimary
-                            : AppColors.dark)),
+                        ? const Color(0xFF6B7280)
+                        : (const Color(0xFFE5E7EB))),
               ),
             ),
             Text(
               '${ing['amount']} ${ing['unit']}',
               style: const TextStyle(
-                  fontSize: 12, color: AppColors.slate),
+                  fontSize: 12, color: Color(0xFF6B7280)),
             ),
           ],
         ),
@@ -804,9 +951,9 @@ class _RecipeCard extends StatelessWidget {
   Color get _difficultyColor {
     switch (recipe['difficulty']) {
       case 'kolay':
-        return AppColors.success;
+        return const Color(0xFF10B981);
       case 'orta':
-        return AppColors.warning;
+        return const Color(0xFFF59E0B);
       default:
         return AppColors.error;
     }
@@ -849,16 +996,21 @@ class _RecipeCard extends StatelessWidget {
                 border: Border(bottom: BorderSide(color: amber.withAlpha(30), width: 0.5)),
               ),
               child: Stack(
+                fit: StackFit.expand,
                 children: [
-                  Center(child: Icon(Icons.restaurant_outlined, size: 40, color: amber.withAlpha(150))),
+                  ClipRRect(
+                    borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(18)),
+                    child: _RecipeThumb(recipe: recipe, amber: amber),
+                  ),
                   Positioned(
                     top: 8, right: 8,
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                       decoration: BoxDecoration(
-                          color: _difficultyColor.withAlpha(200),
+                          color: _difficultyColor.withAlpha(220),
                           borderRadius: BorderRadius.circular(8)),
-                      child: Text(recipe['difficulty'] ?? '',
+                      child: Text((recipe['difficulty'] ?? '').toString(),
                           style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w700)),
                     ),
                   ),
@@ -870,7 +1022,7 @@ class _RecipeCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(recipe['title'] ?? '',
+                  Text((recipe['title'] ?? '').toString(),
                       style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Ds.text),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis),
@@ -879,14 +1031,43 @@ class _RecipeCard extends StatelessWidget {
                     children: [
                       const Icon(Icons.timer_outlined, size: 12, color: Ds.textSub),
                       const SizedBox(width: 3),
-                      Text('$totalTime dk', style: const TextStyle(fontSize: 10, color: Ds.textSub)),
+                      Text('$totalTime dk', style: const TextStyle(fontSize: 11, color: Ds.textSub)),
                       const Spacer(),
-                      const Icon(Icons.star_rounded, size: 13, color: Color(0xFFFBBF24)),
+                      const Icon(Icons.star_rounded, size: 14, color: Color(0xFFFBBF24)),
                       const SizedBox(width: 2),
                       Text(rating.toStringAsFixed(1),
-                          style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: Ds.textSub)),
+                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Ds.textSub)),
                     ],
                   ),
+                  const SizedBox(height: 6),
+                  // Malzeme listesi önizlemesi
+                  Builder(builder: (_) {
+                    final ings = (recipe['ingredients'] as List?)
+                            ?.map((e) => (e is Map ? e['name'] : e).toString())
+                            .where((e) => e.isNotEmpty)
+                            .toList() ??
+                        [];
+                    if (ings.isEmpty) return const SizedBox.shrink();
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Icon(Icons.shopping_basket_outlined,
+                            size: 12, color: Color(0xFF10B981)),
+                        const SizedBox(width: 4),
+                        Expanded(
+                          child: Text(
+                            ings.take(4).join(', '),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                                fontSize: 10.5,
+                                height: 1.3,
+                                color: Color(0xFF9CA3AF)),
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
                 ],
               ),
             ),
@@ -923,13 +1104,21 @@ class _RecipeDetailSheetState extends State<RecipeDetailSheet>
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final recipe = widget.recipe;
     final ingredients =
         (recipe['ingredients'] as List?)?.cast<Map<String, dynamic>>() ?? [];
-    final instructions =
-        (recipe['instructions'] as List?)?.cast<String>() ?? [];
-    final tips = (recipe['tips'] as List?)?.cast<String>() ?? [];
+    // instructions bazı verilerde 'steps' altında; her ikisini de dene
+    final instructions = ((recipe['instructions'] ?? recipe['steps']) as List?)
+            ?.map((e) => e.toString())
+            .toList() ??
+        [];
+    // tips String de olabilir List de — ikisini de destekle
+    final rawTips = recipe['tips'];
+    final tips = rawTips is List
+        ? rawTips.map((e) => e.toString()).toList()
+        : (rawTips is String && rawTips.trim().isNotEmpty
+            ? [rawTips]
+            : <String>[]);
     final nutrition = recipe['nutrition'] as Map<String, dynamic>? ?? {};
     final totalTime = (recipe['prep_time'] as int? ?? 0) +
         (recipe['cook_time'] as int? ?? 0);
@@ -939,10 +1128,10 @@ class _RecipeDetailSheetState extends State<RecipeDetailSheet>
       maxChildSize: 0.95,
       minChildSize: 0.5,
       builder: (_, controller) => Container(
-        decoration: BoxDecoration(
-          color: isDark ? AppColors.darkCard : Colors.white,
+        decoration: const BoxDecoration(
+          color: Color(0xFF13131A),
           borderRadius:
-              const BorderRadius.vertical(top: Radius.circular(28)),
+              BorderRadius.vertical(top: Radius.circular(28)),
         ),
         child: Column(
           children: [
@@ -952,7 +1141,7 @@ class _RecipeDetailSheetState extends State<RecipeDetailSheet>
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                    color: AppColors.border,
+                    color: const Color(0x1EFFFFFF),
                     borderRadius: BorderRadius.circular(2)),
               ),
             ),
@@ -980,7 +1169,7 @@ class _RecipeDetailSheetState extends State<RecipeDetailSheet>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(recipe['title'] ?? '',
+                        Text((recipe['title'] ?? '').toString(),
                             style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -1011,7 +1200,7 @@ class _RecipeDetailSheetState extends State<RecipeDetailSheet>
             TabBar(
               controller: _tab,
               labelColor: const Color(0xFFF97316),
-              unselectedLabelColor: AppColors.slate,
+              unselectedLabelColor: const Color(0xFF6B7280),
               indicatorColor: const Color(0xFFF97316),
               tabs: const [
                 Tab(text: 'Malzemeler'),
@@ -1045,11 +1234,11 @@ class _RecipeDetailSheetState extends State<RecipeDetailSheet>
                                     fontSize: 12)),
                           ),
                         ),
-                        title: Text(ing['name'] ?? ''),
+                        title: Text((ing['name'] ?? '').toString()),
                         trailing: Text(
                             '${ing['amount']} ${ing['unit']}',
                             style: const TextStyle(
-                                color: AppColors.slate, fontSize: 13)),
+                                color: Color(0xFF6B7280), fontSize: 13)),
                       );
                     },
                   ),
@@ -1083,12 +1272,10 @@ class _RecipeDetailSheetState extends State<RecipeDetailSheet>
                           const SizedBox(width: 12),
                           Expanded(
                             child: Text(instructions[i],
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 14,
                                     height: 1.5,
-                                    color: isDark
-                                        ? AppColors.darkTextPrimary
-                                        : AppColors.dark)),
+                                    color: Color(0xFFE5E7EB))),
                           ),
                         ],
                       ),
@@ -1103,24 +1290,22 @@ class _RecipeDetailSheetState extends State<RecipeDetailSheet>
                       child: Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                            color: AppColors.warning.withAlpha(20),
+                            color: const Color(0xFFF59E0B).withAlpha(20),
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(
-                                color: AppColors.warning.withAlpha(60))),
+                                color: const Color(0xFFF59E0B).withAlpha(60))),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Icon(Icons.lightbulb_outline,
-                                size: 16, color: AppColors.warning),
+                                size: 16, color: Color(0xFFF59E0B)),
                             const SizedBox(width: 8),
                             Expanded(
                                 child: Text(tips[i],
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 13,
                                         height: 1.4,
-                                        color: isDark
-                                            ? AppColors.darkTextPrimary
-                                            : AppColors.dark))),
+                                        color: Color(0xFFE5E7EB)))),
                           ],
                         ),
                       ),
@@ -1160,6 +1345,352 @@ class _InfoChip extends StatelessWidget {
                   fontWeight: FontWeight.w600)),
         ],
       ),
+    );
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// "Yeni Yemek Fikri" seçim sheet'i (FamilyWall tarzı)
+// ═══════════════════════════════════════════════════════════════════════════
+class _NewFoodIdeaSheet extends StatelessWidget {
+  final VoidCallback onOwn;
+  final VoidCallback onWeb;
+  const _NewFoodIdeaSheet({required this.onOwn, required this.onWeb});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Color(0xFF13131A),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withAlpha(40),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 18),
+              const Text('Yeni Yemek Fikri',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800)),
+              const SizedBox(height: 16),
+              _IdeaCard(
+                color: const Color(0xFF4F7DF3),
+                icon: Icons.restaurant,
+                title: 'Kendi Tarifini Ekle',
+                subtitle:
+                    'Anneannenin elmalı turtası ya da kendi yaratımın olsun.',
+                onTap: onOwn,
+              ),
+              const SizedBox(height: 12),
+              _IdeaCard(
+                color: const Color(0xFFF07167),
+                icon: Icons.link,
+                title: 'Web Tarifi Ekle',
+                subtitle: 'Web\'de bulduğun güzel bir tarifin linkini yapıştır.',
+                onTap: onWeb,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _IdeaCard extends StatelessWidget {
+  final Color color;
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final VoidCallback onTap;
+  const _IdeaCard({
+    required this.color,
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800)),
+                  const SizedBox(height: 4),
+                  Text(subtitle,
+                      style: TextStyle(
+                          color: Colors.white.withAlpha(220),
+                          fontSize: 12.5,
+                          height: 1.3)),
+                ],
+              ),
+            ),
+            const SizedBox(width: 12),
+            Container(
+              width: 46,
+              height: 46,
+              decoration: BoxDecoration(
+                color: Colors.white.withAlpha(40),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(icon, color: Colors.white, size: 24),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Tarif ekleme formu — kendi tarifin veya web linki
+// ═══════════════════════════════════════════════════════════════════════════
+class _AddRecipeSheet extends StatefulWidget {
+  final Future<void> Function(Map<String, dynamic>) onSave;
+  final bool fromWeb;
+  const _AddRecipeSheet({required this.onSave, required this.fromWeb});
+
+  @override
+  State<_AddRecipeSheet> createState() => _AddRecipeSheetState();
+}
+
+class _AddRecipeSheetState extends State<_AddRecipeSheet> {
+  final _title = TextEditingController();
+  final _url = TextEditingController();
+  final _ingredients = TextEditingController();
+  final _steps = TextEditingController();
+  String _category = 'ana_yemek';
+
+  static const _cats = [
+    ('kahvalti', 'Kahvaltı'),
+    ('ana_yemek', 'Ana Yemek'),
+    ('corba', 'Çorba'),
+    ('tatli', 'Tatlı'),
+    ('salata', 'Salata'),
+  ];
+
+  @override
+  void dispose() {
+    _title.dispose();
+    _url.dispose();
+    _ingredients.dispose();
+    _steps.dispose();
+    super.dispose();
+  }
+
+  Future<void> _save() async {
+    final title = _title.text.trim();
+    if (title.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Lütfen bir tarif adı girin')),
+      );
+      return;
+    }
+    if (widget.fromWeb && _url.text.trim().isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Lütfen tarif linkini yapıştırın')),
+      );
+      return;
+    }
+
+    final ingredients = _ingredients.text
+        .split('\n')
+        .map((e) => e.trim())
+        .where((e) => e.isNotEmpty)
+        .map((e) => {'name': e, 'amount': '', 'unit': ''})
+        .toList();
+    final steps = _steps.text
+        .split('\n')
+        .map((e) => e.trim())
+        .where((e) => e.isNotEmpty)
+        .toList();
+
+    final recipe = <String, dynamic>{
+      'id': 'custom_${DateTime.now().millisecondsSinceEpoch}',
+      'title': title,
+      'category': _category,
+      'custom': true,
+      'ingredients': ingredients,
+      'steps': steps,
+      'tips': const <String>[],
+      if (widget.fromWeb) 'source_url': _url.text.trim(),
+    };
+
+    await widget.onSave(recipe);
+    if (!mounted) return;
+    Navigator.pop(context);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('"$title" tarif kutuna eklendi')),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final bottom = MediaQuery.of(context).viewInsets.bottom;
+    return Padding(
+      padding: EdgeInsets.only(bottom: bottom),
+      child: DraggableScrollableSheet(
+        initialChildSize: 0.85,
+        maxChildSize: 0.95,
+        minChildSize: 0.5,
+        expand: false,
+        builder: (_, ctrl) => Container(
+          decoration: const BoxDecoration(
+            color: Color(0xFF13131A),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+          ),
+          child: ListView(
+            controller: ctrl,
+            padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+            children: [
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                      color: Colors.white.withAlpha(40),
+                      borderRadius: BorderRadius.circular(2)),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(widget.fromWeb ? 'Web Tarifi Ekle' : 'Kendi Tarifini Ekle',
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w800)),
+              const SizedBox(height: 16),
+              _field('Tarif Adı', _title, hint: 'Örn: Mercimek Çorbası'),
+              if (widget.fromWeb) ...[
+                const SizedBox(height: 12),
+                _field('Tarif Linki (URL)', _url,
+                    hint: 'https://...', keyboard: TextInputType.url),
+              ],
+              const SizedBox(height: 12),
+              const Text('Kategori',
+                  style: TextStyle(
+                      color: Color(0xFFD1D5DB),
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600)),
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: _cats.map((c) {
+                  final sel = _category == c.$1;
+                  return GestureDetector(
+                    onTap: () => setState(() => _category = c.$1),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: sel
+                            ? const Color(0xFFF59E0B)
+                            : const Color(0xFF1A1A24),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text(c.$2,
+                          style: TextStyle(
+                              color: sel
+                                  ? Colors.white
+                                  : const Color(0xFF9CA3AF),
+                              fontSize: 12.5,
+                              fontWeight: FontWeight.w600)),
+                    ),
+                  );
+                }).toList(),
+              ),
+              const SizedBox(height: 12),
+              _field('Malzemeler (her satıra bir tane)', _ingredients,
+                  hint: '2 su bardağı un\n1 çay kaşığı tuz', lines: 4),
+              const SizedBox(height: 12),
+              _field('Hazırlanışı (her satıra bir adım)', _steps,
+                  hint: 'Malzemeleri karıştırın.\nFırında 20 dk pişirin.',
+                  lines: 5),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                height: 52,
+                child: ElevatedButton(
+                  onPressed: _save,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFFF59E0B),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14)),
+                  ),
+                  child: const Text('Kaydet',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700)),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _field(String label, TextEditingController ctrl,
+      {String? hint, int lines = 1, TextInputType? keyboard}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label,
+            style: const TextStyle(
+                color: Color(0xFFD1D5DB),
+                fontSize: 13,
+                fontWeight: FontWeight.w600)),
+        const SizedBox(height: 6),
+        TextField(
+          controller: ctrl,
+          keyboardType: keyboard,
+          maxLines: lines,
+          style: const TextStyle(color: Colors.white),
+          decoration: InputDecoration(
+            hintText: hint,
+            hintStyle: const TextStyle(color: Color(0xFF6B7280)),
+            filled: true,
+            fillColor: const Color(0xFF1A1A24),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

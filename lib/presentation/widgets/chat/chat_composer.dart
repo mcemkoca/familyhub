@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../config/constants.dart';
+import '../../../services/permission_service.dart';
 import '../../../services/voice_message_service.dart';
 
 class ChatComposer extends StatefulWidget {
@@ -72,6 +73,8 @@ class _ChatComposerState extends State<ChatComposer>
 
   Future<void> _startRecording() async {
     if (_hasText) return;
+    final granted = await PermissionService.requestMicrophone(context);
+    if (!granted) return;
     try {
       await VoiceMessageService.startRecording();
       setState(() {
@@ -138,17 +141,11 @@ class _ChatComposerState extends State<ChatComposer>
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Container(
-      decoration: BoxDecoration(
-        color: isDark ? AppColors.darkCard : Colors.white,
+      decoration: const BoxDecoration(
+        color: Color(0xFF13131A),
         border: Border(
-          top: BorderSide(
-            color: isDark
-                ? AppColors.darkBorder.withAlpha(80)
-                : const Color(0xFFF1F5F9),
-          ),
+          top: BorderSide(color: Color(0x1EFFFFFF), width: 0.5),
         ),
       ),
       child: SafeArea(
@@ -160,16 +157,14 @@ class _ChatComposerState extends State<ChatComposer>
               Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                color: isDark
-                    ? AppColors.darkBackground.withAlpha(60)
-                    : const Color(0xFFF8FAFC),
+                color: const Color(0x0DFFFFFF),
                 child: Row(
                   children: [
                     Container(
                       width: 3,
                       height: 36,
                       decoration: BoxDecoration(
-                        color: AppColors.cobalt,
+                        color: const Color(0xFF6366F1),
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -183,7 +178,7 @@ class _ChatComposerState extends State<ChatComposer>
                             style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
-                              color: AppColors.cobalt,
+                              color: Color(0xFF6366F1),
                             ),
                           ),
                           const SizedBox(height: 2),
@@ -191,11 +186,9 @@ class _ChatComposerState extends State<ChatComposer>
                             widget.replyToContent ?? '',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 13,
-                              color: isDark
-                                  ? AppColors.darkTextSecondary
-                                  : AppColors.slate,
+                              color: Color(0xFF6B7280),
                             ),
                           ),
                         ],
@@ -203,12 +196,10 @@ class _ChatComposerState extends State<ChatComposer>
                     ),
                     IconButton(
                       onPressed: widget.onCancelReply,
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.close,
                         size: 18,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.lightGray,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                   ],
@@ -270,7 +261,7 @@ class _ChatComposerState extends State<ChatComposer>
                       onPressed: widget.onAttachment,
                       icon: const Icon(
                         Icons.add_circle_outline,
-                        color: AppColors.cobalt,
+                        color: Color(0xFF6366F1),
                         size: 28,
                       ),
                     ),
@@ -279,9 +270,8 @@ class _ChatComposerState extends State<ChatComposer>
                       child: Container(
                         constraints: const BoxConstraints(maxHeight: 120),
                         decoration: BoxDecoration(
-                          color: isDark
-                              ? AppColors.darkBackground
-                              : const Color(0xFFF1F5F9),
+                          color: const Color(0x1AFFFFFF),
+                          border: Border.all(color: const Color(0x1EFFFFFF), width: 0.5),
                           borderRadius: BorderRadius.circular(24),
                         ),
                         child: Row(
@@ -292,23 +282,19 @@ class _ChatComposerState extends State<ChatComposer>
                                 maxLines: null,
                                 textCapitalization:
                                     TextCapitalization.sentences,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   hintText: 'Mesaj yaz...',
                                   hintStyle: TextStyle(
-                                    color: isDark
-                                        ? AppColors.darkTextSecondary
-                                        : AppColors.slate,
+                                    color: Color(0xFF6B7280),
                                   ),
                                   border: InputBorder.none,
-                                  contentPadding: const EdgeInsets.symmetric(
+                                  contentPadding: EdgeInsets.symmetric(
                                     horizontal: 16,
                                     vertical: 10,
                                   ),
                                 ),
-                                style: TextStyle(
-                                  color: isDark
-                                      ? AppColors.darkTextPrimary
-                                      : AppColors.dark,
+                                style: const TextStyle(
+                                  color: Color(0xFFE5E7EB),
                                 ),
                                 onSubmitted: (_) => _handleSend(),
                               ),
@@ -316,11 +302,9 @@ class _ChatComposerState extends State<ChatComposer>
                             // Emoji
                             IconButton(
                               onPressed: widget.onEmoji,
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.emoji_emotions_outlined,
-                                color: isDark
-                                    ? AppColors.darkTextSecondary
-                                    : AppColors.lightGray,
+                                color: Color(0xFF6B7280),
                                 size: 24,
                               ),
                             ),
@@ -344,15 +328,13 @@ class _ChatComposerState extends State<ChatComposer>
                               height: 44,
                               decoration: BoxDecoration(
                                 color: _hasText
-                                    ? AppColors.cobalt
-                                    : (isDark
-                                        ? AppColors.darkBorder.withAlpha(60)
-                                        : const Color(0xFFE2E8F0)),
+                                    ? const Color(0xFF6366F1)
+                                    : const Color(0x1AFFFFFF),
                                 shape: BoxShape.circle,
                               ),
                               child: Icon(
                                 _hasText ? Icons.send : Icons.mic_none,
-                                color: _hasText ? Colors.white : AppColors.slate,
+                                color: _hasText ? Colors.white : const Color(0xFF6B7280),
                                 size: 22,
                               ),
                             ),

@@ -33,6 +33,20 @@ class LocationService {
     return status == LocationPermissionStatus.granted;
   }
 
+  /// Returns true if granted, false if denied.
+  /// Calls [onDeniedForever] when permanently denied so the caller can show
+  /// an "Open Settings" dialog without duplicating Geolocator logic.
+  static Future<bool> requestPermissionsWithFallback({
+    required Future<void> Function() onDeniedForever,
+  }) async {
+    final status = await checkPermission();
+    if (status == LocationPermissionStatus.granted) return true;
+    if (status == LocationPermissionStatus.deniedForever) {
+      await onDeniedForever();
+    }
+    return false;
+  }
+
   static Future<LocationModel?> getCurrentAddress() async {
     final status = await checkPermission();
     if (status != LocationPermissionStatus.granted) {

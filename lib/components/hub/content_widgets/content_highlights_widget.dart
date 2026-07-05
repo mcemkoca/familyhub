@@ -13,6 +13,8 @@ class ContentHighlightsWidget extends StatefulWidget {
 }
 
 class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   void _cycleAll() {
     final engine = ContentEngine.instance;
     engine.nextRecipe();
@@ -24,7 +26,6 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final engine = ContentEngine.instance;
 
     final items = <Widget>[
@@ -49,10 +50,9 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Günlük Öneriler',
+                'Keşfet',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
                 ),
               ),
               TextButton.icon(
@@ -60,7 +60,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
                 icon: const Icon(Icons.shuffle, size: 18),
                 label: const Text('Başka Öneri'),
                 style: TextButton.styleFrom(
-                  foregroundColor: AppColors.cobalt,
+                  foregroundColor: const Color(0xFF6366F1),
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   minimumSize: Size.zero,
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -108,7 +108,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
 
     return _HighlightCard(
       icon: Icons.child_care,
-      iconColor: AppColors.purple,
+      iconColor: const Color(0xFF8B5CF6),
       title: 'Çocuk Gelişimi',
       subtitle: activity?.name ?? '—',
       detail: ageGroup != null ? '$ageGroup · ${activity?.durationMinutes ?? 15} dk' : null,
@@ -168,12 +168,11 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
 
   void _showRecipeDetail(BuildContext context, Recipe? recipe) {
     if (recipe == null) return;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: isDark ? AppColors.darkBackground : Colors.white,
+      backgroundColor: const Color(0xFF0A0A0F),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
@@ -194,7 +193,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
                     width: 40,
                     height: 4,
                     decoration: BoxDecoration(
-                      color: Colors.grey.shade400,
+                      color: const Color(0xFF9CA3AF),
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -205,7 +204,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: AppColors.orange.withAlpha(isDark ? 40 : 20),
+                        color: AppColors.orange.withAlpha(40),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: const Icon(Icons.restaurant_menu, color: AppColors.orange, size: 28),
@@ -219,15 +218,14 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
                             recipe.name,
                             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.bold,
-                              color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
                             ),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             '${recipe.prepTime} hazırlık · ${recipe.cookTime} pişirme · ${recipe.servings} kişilik · ${recipe.difficulty}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 13,
-                              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                              color: Color(0xFF6B7280),
                             ),
                           ),
                         ],
@@ -239,9 +237,9 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
                 if (recipe.description.isNotEmpty)
                   Text(
                     recipe.description,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
-                      color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                      color: Color(0xFF6B7280),
                       height: 1.5,
                     ),
                   ),
@@ -270,11 +268,10 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
 
   void _showHouseholdDetail(BuildContext context, String? task, String? tip) {
     if (task == null && tip == null) return;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: isDark ? AppColors.darkBackground : Colors.white,
+      backgroundColor: const Color(0xFF0A0A0F),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
@@ -289,7 +286,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade400,
+                  color: const Color(0xFF9CA3AF),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -300,7 +297,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: AppColors.cyan.withAlpha(isDark ? 40 : 20),
+                    color: AppColors.cyan.withAlpha(40),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: const Icon(Icons.cleaning_services, color: AppColors.cyan, size: 28),
@@ -310,7 +307,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
                   'Ev İşleri Detayı',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                    color: const Color(0xFFE5E7EB),
                   ),
                 ),
               ],
@@ -331,11 +328,10 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
 
   void _showBudgetDetail(BuildContext context, CostCuttingTip? tip) {
     if (tip == null) return;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: isDark ? AppColors.darkBackground : Colors.white,
+      backgroundColor: const Color(0xFF0A0A0F),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
@@ -350,7 +346,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade400,
+                  color: const Color(0xFF9CA3AF),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -361,7 +357,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: AppColors.green.withAlpha(isDark ? 40 : 20),
+                    color: AppColors.green.withAlpha(40),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: const Icon(Icons.savings, color: AppColors.green, size: 28),
@@ -371,7 +367,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
                   'Tasarruf Detayı',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                    color: const Color(0xFFE5E7EB),
                   ),
                 ),
               ],
@@ -391,11 +387,10 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
 
   void _showEmergencyDetail(BuildContext context, List<EmergencyContact> contacts) {
     if (contacts.isEmpty) return;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: isDark ? AppColors.darkBackground : Colors.white,
+      backgroundColor: const Color(0xFF0A0A0F),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
@@ -410,7 +405,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade400,
+                  color: const Color(0xFF9CA3AF),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -421,7 +416,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: AppColors.error.withAlpha(isDark ? 40 : 20),
+                    color: AppColors.error.withAlpha(40),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: const Icon(Icons.emergency, color: AppColors.error, size: 28),
@@ -431,7 +426,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
                   'Acil Durum Kişileri',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                    color: const Color(0xFFE5E7EB),
                   ),
                 ),
               ],
@@ -442,10 +437,10 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
               child: Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: isDark ? AppColors.darkCard : const Color(0xFFFFF5F5),
+                  color: const Color(0xFF13131A),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
-                    color: isDark ? AppColors.darkBorder : AppColors.error.withAlpha(30),
+                    color: const Color(0x1EFFFFFF).withAlpha(30),
                   ),
                 ),
                 child: Row(
@@ -458,17 +453,17 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
                         children: [
                           Text(
                             c.name,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.w700,
                               fontSize: 15,
-                              color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                              color: Color(0xFFE5E7EB),
                             ),
                           ),
                           Text(
                             c.role,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12,
-                              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                              color: Color(0xFF6B7280),
                             ),
                           ),
                         ],
@@ -495,11 +490,10 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
 
   void _showChildDevDetail(BuildContext context, Activity? activity) {
     if (activity == null) return;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: isDark ? AppColors.darkBackground : Colors.white,
+      backgroundColor: const Color(0xFF0A0A0F),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
@@ -514,7 +508,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade400,
+                  color: const Color(0xFF9CA3AF),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -525,10 +519,10 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: AppColors.purple.withAlpha(isDark ? 40 : 20),
+                    color: const Color(0xFF8B5CF6).withAlpha(40),
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  child: const Icon(Icons.child_care, color: AppColors.purple, size: 28),
+                  child: const Icon(Icons.child_care, color: Color(0xFF8B5CF6), size: 28),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -536,7 +530,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
                     activity.name,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                      color: const Color(0xFFE5E7EB),
                     ),
                   ),
                 ),
@@ -545,9 +539,9 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
             const SizedBox(height: 8),
             Text(
               activity.description,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
-                color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                color: Color(0xFF6B7280),
                 height: 1.5,
               ),
             ),
@@ -569,7 +563,6 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
   }
 
   Widget _buildDetailSection(BuildContext context, String title, List<String> items) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -578,7 +571,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w700,
-            color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 8),
@@ -586,9 +579,9 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
           padding: const EdgeInsets.only(bottom: 6),
           child: Text(
             item,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: Color(0xFF6B7280),
               height: 1.4,
             ),
           ),
@@ -627,10 +620,10 @@ class _HighlightCard extends StatelessWidget {
       width: 220,
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkCard : AppColors.card,
+        color: const Color(0xFF13131A),
         borderRadius: BorderRadius.circular(AppRadius.medium),
         border: Border.all(
-          color: isDark ? AppColors.darkBorder : AppColors.border,
+          color: const Color(0x1EFFFFFF),
         ),
       ),
       child: Column(
@@ -642,7 +635,7 @@ class _HighlightCard extends StatelessWidget {
                 width: 32,
                 height: 32,
                 decoration: BoxDecoration(
-                  color: iconColor.withAlpha(isDark ? 40 : 20),
+                  color: iconColor.withAlpha(40),
                   borderRadius: BorderRadius.circular(AppRadius.small - 4),
                 ),
                 child: Icon(icon, color: iconColor, size: 18),
@@ -652,9 +645,7 @@ class _HighlightCard extends StatelessWidget {
                 child: Text(
                   title,
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: isDark
-                        ? AppColors.darkTextSecondary
-                        : AppColors.gray,
+                    color: const Color(0xFF6B7280),
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -666,7 +657,7 @@ class _HighlightCard extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
-                      color: iconColor.withAlpha(isDark ? 30 : 15),
+                      color: iconColor.withAlpha(30),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Icon(
@@ -684,7 +675,7 @@ class _HighlightCard extends StatelessWidget {
               subtitle,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 fontWeight: FontWeight.w600,
-                color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                color: const Color(0xFFE5E7EB),
               ),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
@@ -695,8 +686,8 @@ class _HighlightCard extends StatelessWidget {
               detail!,
               style: Theme.of(context).textTheme.labelSmall?.copyWith(
                 color: isDark
-                    ? AppColors.darkTextSecondary
-                    : AppColors.lightGray,
+                    ? const Color(0xFF6B7280)
+                    : const Color(0xFF9CA3AF),
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

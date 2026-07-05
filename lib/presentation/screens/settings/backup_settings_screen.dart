@@ -193,8 +193,7 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = isDark ? AppColors.darkBackground : AppColors.cloudWhite;
+    final bg = const Color(0xFF0A0A0F);
 
     return Scaffold(
       backgroundColor: bg,
@@ -331,18 +330,18 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
                 child: ElevatedButton.icon(
                   onPressed: _backingUp || !_isSignedIn ? null : _triggerBackup,
                   icon: _backingUp
-                      ? SizedBox(
+                      ? const SizedBox(
                           width: 20,
                           height: 20,
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
-                            color: isDark ? AppColors.dark : Colors.white,
+                            color: Color(0xFFE5E7EB),
                           ),
                         )
                       : const Icon(Icons.cloud_upload),
                   label: Text(_backingUp ? 'Yedekleniyor...' : 'Şimdi Yedekle'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.cobalt,
+                    backgroundColor: const Color(0xFF6366F1),
                     foregroundColor: Colors.white,
                     elevation: 0,
                     shape: RoundedRectangleBorder(

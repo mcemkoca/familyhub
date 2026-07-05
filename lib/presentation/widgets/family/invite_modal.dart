@@ -2,7 +2,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
-import '../../../config/constants.dart';
 
 class InviteModal extends StatefulWidget {
   final VoidCallback onClose;
@@ -14,6 +13,8 @@ class InviteModal extends StatefulWidget {
 }
 
 class _InviteModalState extends State<InviteModal> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   String? _code;
   DateTime? _expiry;
 
@@ -49,7 +50,6 @@ class _InviteModalState extends State<InviteModal> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final daysLeft = _expiry != null
         ? _expiry!.difference(DateTime.now()).inDays
         : 7;
@@ -65,7 +65,7 @@ class _InviteModalState extends State<InviteModal> {
               margin: const EdgeInsets.all(32),
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: isDark ? AppColors.darkCard : Colors.white,
+                color: const Color(0xFF13131A),
                 borderRadius: BorderRadius.circular(24),
               ),
               child: Column(
@@ -76,7 +76,7 @@ class _InviteModalState extends State<InviteModal> {
                     height: 48,
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
-                        colors: [AppColors.purple, AppColors.pink],
+                        colors: [Color(0xFF8B5CF6), Color(0xFFEC4899)],
                       ),
                       borderRadius: BorderRadius.circular(14),
                     ),
@@ -87,24 +87,20 @@ class _InviteModalState extends State<InviteModal> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Text(
+                  const Text(
                     'Ailem\'ne Davet',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
-                      color: isDark
-                          ? AppColors.darkTextPrimary
-                          : AppColors.dark,
+                      color: Color(0xFFE5E7EB),
                     ),
                   ),
                   const SizedBox(height: 4),
-                  Text(
+                  const Text(
                     'Yeni üyeleri davet etmek için kod oluştur',
                     style: TextStyle(
                       fontSize: 13,
-                      color: isDark
-                          ? AppColors.darkTextSecondary
-                          : AppColors.slate,
+                      color: Color(0xFF6B7280),
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -116,47 +112,41 @@ class _InviteModalState extends State<InviteModal> {
                     ),
                     decoration: BoxDecoration(
                       color: isDark
-                          ? AppColors.darkBackground
+                          ? const Color(0xFF0A0A0F)
                           : const Color(0xFFF8FAFC),
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
                         color: isDark
-                            ? AppColors.darkBorder
-                            : AppColors.border,
+                            ? const Color(0x1EFFFFFF)
+                            : const Color(0x1EFFFFFF),
                       ),
                     ),
                     child: Column(
                       children: [
                         Text(
                           _code ?? '...',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.w800,
                             letterSpacing: 4,
-                            color: isDark
-                                ? AppColors.darkTextPrimary
-                                : AppColors.dark,
+                            color: Color(0xFFE5E7EB),
                           ),
                         ),
                         const SizedBox(height: 8),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.timer_outlined,
                               size: 14,
-                              color: isDark
-                                  ? AppColors.darkTextSecondary
-                                  : AppColors.slate,
+                              color: Color(0xFF6B7280),
                             ),
                             const SizedBox(width: 4),
                             Text(
                               '$daysLeft gün kaldı',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 12,
-                                color: isDark
-                                    ? AppColors.darkTextSecondary
-                                    : AppColors.slate,
+                                color: Color(0xFF6B7280),
                               ),
                             ),
                           ],
@@ -193,7 +183,7 @@ class _InviteModalState extends State<InviteModal> {
                       icon: const Icon(Icons.chat_bubble, size: 20),
                       label: const Text('Paylaş'),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.success,
+                        backgroundColor: const Color(0xFF10B981),
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(
@@ -205,12 +195,10 @@ class _InviteModalState extends State<InviteModal> {
                   const SizedBox(height: 16),
                   TextButton(
                     onPressed: widget.onClose,
-                    child: Text(
+                    child: const Text(
                       'Kapat',
                       style: TextStyle(
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.slate,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                   ),
@@ -245,7 +233,7 @@ class _ActionChip extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 12),
         decoration: BoxDecoration(
           color: isDark
-              ? AppColors.darkBackground
+              ? const Color(0xFF0A0A0F)
               : const Color(0xFFF1F5F9),
           borderRadius: BorderRadius.circular(10),
         ),
@@ -255,7 +243,7 @@ class _ActionChip extends StatelessWidget {
             Icon(
               icon,
               size: 18,
-              color: AppColors.cobalt,
+              color: const Color(0xFF6366F1),
             ),
             const SizedBox(width: 6),
             Text(
@@ -263,7 +251,7 @@ class _ActionChip extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
-                color: AppColors.cobalt,
+                color: Color(0xFF6366F1),
               ),
             ),
           ],

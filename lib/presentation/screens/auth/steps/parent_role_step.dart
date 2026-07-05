@@ -14,15 +14,15 @@ class ParentRoleStep extends StatefulWidget {
 class _ParentRoleStepState extends State<ParentRoleStep> {
   String _role = 'admin';
   final _displayNameController = TextEditingController();
-  Color _selectedColor = AppColors.cobalt;
+  Color _selectedColor = const Color(0xFF6366F1);
 
   final _colors = [
-    {'color': AppColors.cobalt, 'name': 'Mavi', 'hex': '2563EB'},
+    {'color': const Color(0xFF6366F1), 'name': 'Mavi', 'hex': '2563EB'},
     {'color': AppColors.green, 'name': 'Yeşil', 'hex': '10B981'},
     {'color': AppColors.orange, 'name': 'Turuncu', 'hex': 'F97316'},
-    {'color': AppColors.purple, 'name': 'Mor', 'hex': '8B5CF6'},
+    {'color': const Color(0xFF8B5CF6), 'name': 'Mor', 'hex': '8B5CF6'},
     {'color': AppColors.red, 'name': 'Kırmızı', 'hex': 'EF4444'},
-    {'color': AppColors.pink, 'name': 'Pembe', 'hex': 'EC4899'},
+    {'color': const Color(0xFFEC4899), 'name': 'Pembe', 'hex': 'EC4899'},
   ];
 
   void _save() {
@@ -42,36 +42,35 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Aile Rolü',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+              color: Color(0xFFE5E7EB),
             ),
           ),
           const SizedBox(height: 4),
-          Text(
+          const Text(
             'Ailedeki rolünüzü ve görünümünüzü seçin',
             style: TextStyle(
               fontSize: 14,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: Color(0xFF6B7280),
             ),
           ),
           const SizedBox(height: 24),
-          Text(
+          const Text(
             'Rolünüz',
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: Color(0xFF6B7280),
             ),
           ),
           const SizedBox(height: 12),
@@ -104,7 +103,7 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
               hintText: 'Örn: Anne, Baba, Mehmet',
               prefixIcon: const Icon(Icons.badge_outlined),
               filled: true,
-              fillColor: isDark ? AppColors.darkCard : const Color(0xFFF8FAFC),
+              fillColor: const Color(0xFF13131A),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
@@ -112,12 +111,12 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
             ),
           ),
           const SizedBox(height: 24),
-          Text(
+          const Text(
             'Renk Seçimi',
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: Color(0xFF6B7280),
             ),
           ),
           const SizedBox(height: 12),
@@ -153,9 +152,9 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
                     const SizedBox(height: 4),
                     Text(
                       c['name'] as String,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 11,
-                        color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                   ],
@@ -170,7 +169,7 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
             child: ElevatedButton(
               onPressed: _save,
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.cobalt,
+                backgroundColor: const Color(0xFF6366F1),
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
@@ -200,18 +199,17 @@ class _RoleChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 16),
         decoration: BoxDecoration(
           color: selected
-              ? AppColors.cobalt.withAlpha(isDark ? 30 : 15)
-              : (isDark ? AppColors.darkCard : const Color(0xFFF8FAFC)),
+              ? const Color(0xFF6366F1).withAlpha(30)
+              : (const Color(0xFF13131A)),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: selected ? AppColors.cobalt : Colors.transparent,
+            color: selected ? const Color(0xFF6366F1) : Colors.transparent,
             width: 1.5,
           ),
         ),
@@ -219,14 +217,14 @@ class _RoleChip extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: selected ? AppColors.cobalt : (isDark ? AppColors.darkTextSecondary : AppColors.slate),
+              color: selected ? const Color(0xFF6366F1) : (const Color(0xFF6B7280)),
             ),
             const SizedBox(height: 8),
             Text(
               label,
               style: TextStyle(
                 fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
-                color: selected ? AppColors.cobalt : (isDark ? AppColors.darkTextSecondary : AppColors.slate),
+                color: selected ? const Color(0xFF6366F1) : (const Color(0xFF6B7280)),
               ),
             ),
           ],

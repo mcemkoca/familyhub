@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../../config/constants.dart';
 import '../../../services/gamification_service.dart';
 import '../../widgets/settings/screen_header.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
@@ -13,6 +12,8 @@ class LeaderboardScreen extends StatefulWidget {
 }
 
 class _LeaderboardScreenState extends State<LeaderboardScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   List<Map<String, dynamic>> _leaderboard = [];
   bool _loading = true;
 
@@ -34,10 +35,9 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
         title: 'Lider Tablosu',
         showBack: true,
@@ -59,10 +59,10 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                       margin: const EdgeInsets.only(bottom: 10),
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: isDark ? AppColors.darkCard : Colors.white,
+                        color: const Color(0xFF13131A),
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(
-                          color: isDark ? AppColors.darkBorder : AppColors.border,
+                          color: const Color(0x1EFFFFFF),
                         ),
                       ),
                       child: Row(
@@ -78,8 +78,8 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                                       _ => const Color(0xFFCD7F32),
                                     }
                                   : isDark
-                                      ? AppColors.darkCard
-                                      : Colors.grey.shade200,
+                                      ? const Color(0xFF13131A)
+                                      : const Color(0xFF9CA3AF),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Center(
@@ -98,12 +98,12 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                             backgroundImage: user['avatar_url'] != null
                                 ? NetworkImage(user['avatar_url'] as String)
                                 : null,
-                            backgroundColor: AppColors.cobalt.withAlpha(30),
+                            backgroundColor: const Color(0xFF6366F1).withAlpha(30),
                             child: user['avatar_url'] == null
                                 ? Text(
                                     ((user['display_name'] as String?) ?? '?')[0].toUpperCase(),
                                     style: const TextStyle(
-                                      color: AppColors.cobalt,
+                                      color: Color(0xFF6366F1),
                                       fontWeight: FontWeight.bold,
                                     ),
                                   )
@@ -116,12 +116,10 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                               children: [
                                 Text(
                                   (user['display_name'] as String?) ?? 'Kullanıcı',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600,
-                                    color: isDark
-                                        ? AppColors.darkTextPrimary
-                                        : AppColors.dark,
+                                    color: Color(0xFFE5E7EB),
                                   ),
                                 ),
                                 if ((user['badges'] as List?)?.isNotEmpty == true)
@@ -132,7 +130,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                                         .map((b) => const Icon(
                                               Icons.emoji_events,
                                               size: 14,
-                                              color: AppColors.success,
+                                              color: Color(0xFF10B981),
                                             ))
                                         .toList(),
                                   ),
@@ -145,7 +143,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                               vertical: 6,
                             ),
                             decoration: BoxDecoration(
-                              color: AppColors.cobalt.withAlpha(15),
+                              color: const Color(0xFF6366F1).withAlpha(15),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(
@@ -153,7 +151,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                               style: const TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w700,
-                                color: AppColors.cobalt,
+                                color: Color(0xFF6366F1),
                               ),
                             ),
                           ),

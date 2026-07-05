@@ -78,7 +78,7 @@ class _CrashConfirmationScreenState extends State<CrashConfirmationScreen>
                       icon: const Icon(Icons.volume_off),
                       label: Text(AppLocalizations.of(context).alarmiKapat),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey.shade800,
+                        backgroundColor: const Color(0xFF374151),
                         foregroundColor: Colors.white,
                       ),
                     ),
@@ -149,7 +149,7 @@ class _CrashConfirmationScreenState extends State<CrashConfirmationScreen>
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.grey.shade900,
+        color: const Color(0xFF374151),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.red.shade800),
       ),
@@ -218,7 +218,7 @@ class _CrashConfirmationScreenState extends State<CrashConfirmationScreen>
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.grey.shade900,
+        color: const Color(0xFF374151),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -237,7 +237,7 @@ class _CrashConfirmationScreenState extends State<CrashConfirmationScreen>
             child: LinearProgressIndicator(
               value: progress,
               minHeight: 12,
-              backgroundColor: Colors.grey.shade800,
+              backgroundColor: const Color(0xFF374151),
               valueColor: AlwaysStoppedAnimation(
                 progress > 0.7 ? Colors.red : Colors.orange,
               ),

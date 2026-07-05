@@ -1,20 +1,19 @@
 /// FamilyHub Design System — shared dark-premium widgets
-library ds;
+library;
 
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../config/constants.dart';
 
 // ─── Colors / tokens ─────────────────────────────────────────────────────────
 abstract class Ds {
-  static const bg = AppColors.darkBackground;
+  static const bg = Color(0xFF0A0A0F);
   static const card = Color(0xFF13131A);
   static const glass = Color(0x1AFFFFFF);
   static const glassBorder = Color(0x1EFFFFFF);
-  static const indigo = AppColors.indigo;
-  static const indigoLight = AppColors.indigoLight;
-  static const pink = AppColors.pink;
-  static const text = AppColors.darkTextPrimary;
+  static const indigo = Color(0xFF6366F1);
+  static const indigoLight = Color(0xFF818CF8);
+  static const pink = Color(0xFFEC4899);
+  static const text = Color(0xFFE5E7EB);
   static const textSub = Color(0xFF9CA3AF);
   static const textMuted = Color(0xFF4B5563);
   static const divider = Color(0xFF1F2937);
@@ -204,7 +203,7 @@ class _BackBtn extends StatelessWidget {
           borderRadius: BorderRadius.circular(14),
           border: Border.all(color: Ds.glassBorder, width: 0.5),
         ),
-        child: Icon(Icons.arrow_back_ios_new_rounded,
+        child: const Icon(Icons.arrow_back_ios_new_rounded,
             size: 16, color: Ds.textSub),
       ),
     );

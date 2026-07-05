@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../../../../config/constants.dart';
 import '../../../../config/routes.dart';
 import '../../../../services/child_auth_service.dart';
@@ -138,15 +139,23 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
   Future<void> _shareLocation() async {
     setState(() => _locationLoading = true);
     try {
-      final granted = await LocationService.requestPermissions();
-      if (!granted) {
-        if (mounted) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(const SnackBar(content: Text('Konum izni gerekli')));
-        }
-        return;
-      }
+      final granted = await LocationService.requestPermissionsWithFallback(
+        onDeniedForever: () async {
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Konum izni kalıcı reddedildi.'),
+              backgroundColor: Color(0xFF13131A),
+              action: SnackBarAction(
+                label: 'Ayarlar',
+                textColor: Color(0xFF6366F1),
+                onPressed: openAppSettings,
+              ),
+            ),
+          );
+        },
+      );
+      if (!granted) return;
       final ok = await LocationTrackingService.shareCurrentLocation();
       setState(() => _sharingLocation = ok);
       if (mounted) {
@@ -224,7 +233,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.success,
+                backgroundColor: const Color(0xFF10B981),
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
@@ -255,9 +264,9 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
             ),
           ),
           const SizedBox(height: 4),
-          Text(
+          const Text(
             'Butona 3 saniye basılı tut',
-            style: TextStyle(fontSize: 13, color: Colors.grey.shade400),
+            style: TextStyle(fontSize: 13, color: Color(0xFF9CA3AF)),
           ),
           const SizedBox(height: 20),
           GestureDetector(
@@ -317,9 +326,9 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
             ),
           ),
           const SizedBox(height: 12),
-          Text(
+          const Text(
             'Basılı Tut',
-            style: TextStyle(fontSize: 13, color: Colors.grey.shade500),
+            style: TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
           ),
         ],
       ),
@@ -330,12 +339,12 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'HIZLI İŞLEMLER',
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w700,
-            color: Colors.grey.shade500,
+            color: Color(0xFF6B7280),
             letterSpacing: 1,
           ),
         ),
@@ -384,8 +393,8 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
                         _sharingLocation
                             ? 'Son konum paylaşıldı'
                             : 'Canlı konumun ailene gönder',
-                        style: TextStyle(
-                          color: Colors.grey.shade500,
+                        style: const TextStyle(
+                          color: Color(0xFF6B7280),
                           fontSize: 13,
                         ),
                       ),
@@ -519,12 +528,12 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
                 const SizedBox(height: 6),
                 Text(
                   (alert['message'] as String?) ?? 'Acil durum!',
-                  style: TextStyle(color: Colors.grey.shade300, fontSize: 13),
+                  style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13),
                 ),
                 if (alert['lat'] != null && alert['lng'] != null)
                   Text(
                     'Konum: ${(alert['lat'] as num).toStringAsFixed(4)}, ${(alert['lng'] as num).toStringAsFixed(4)}',
-                    style: TextStyle(color: Colors.grey.shade500, fontSize: 11),
+                    style: const TextStyle(color: Color(0xFF6B7280), fontSize: 11),
                   ),
               ],
             ),

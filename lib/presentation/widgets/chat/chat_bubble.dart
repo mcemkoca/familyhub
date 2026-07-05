@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
-import '../../../config/constants.dart';
 import '../../../domain/entities.dart';
 
 class ChatBubble extends StatelessWidget {
@@ -22,8 +21,6 @@ class ChatBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Column(
       crossAxisAlignment: isMe
           ? CrossAxisAlignment.end
@@ -69,14 +66,13 @@ class ChatBubble extends StatelessWidget {
                     vertical: 10,
                   ),
                   constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.72,
+                    maxWidth: MediaQuery.sizeOf(context).width * 0.72,
                   ),
                   decoration: BoxDecoration(
                     color: isMe
-                        ? AppColors.cobalt
-                        : (isDark
-                              ? AppColors.darkCard
-                              : const Color(0xFFF1F5F9)),
+                        ? const Color(0xFF6366F1)
+                        : const Color(0x1AFFFFFF),
+                    border: isMe ? null : Border.all(color: const Color(0x1EFFFFFF), width: 0.5),
                     borderRadius: BorderRadius.only(
                       topLeft: const Radius.circular(18),
                       topRight: const Radius.circular(18),
@@ -86,8 +82,8 @@ class ChatBubble extends StatelessWidget {
                     boxShadow: [
                       BoxShadow(
                         color: isMe
-                            ? AppColors.cobalt.withAlpha(30)
-                            : Colors.black.withAlpha(8),
+                            ? const Color(0xFF6366F1).withAlpha(50)
+                            : Colors.black.withAlpha(20),
                         blurRadius: 6,
                         offset: const Offset(0, 2),
                       ),
@@ -128,10 +124,8 @@ class ChatBubble extends StatelessWidget {
                             fontSize: 15,
                             height: 1.35,
                             color: isMe
-                                ? Colors.white
-                                : (isDark
-                                      ? AppColors.darkTextPrimary
-                                      : AppColors.dark),
+                                ? Colors.white.withAlpha(220)
+                                : Theme.of(context).colorScheme.onSurface,
                           ),
                         ),
                       const SizedBox(height: 4),
@@ -144,10 +138,8 @@ class ChatBubble extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 11,
                               color: isMe
-                                  ? Colors.white.withAlpha(180)
-                                  : (isDark
-                                        ? AppColors.darkTextSecondary
-                                        : AppColors.lightGray),
+                                  ? Colors.white.withAlpha(120)
+                                  : Theme.of(context).colorScheme.onSurface.withAlpha(120),
                             ),
                           ),
                           if (isMe) ...[
@@ -226,12 +218,12 @@ class _ReplyPreview extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
         color: isMe
-            ? AppColors.cobalt.withAlpha(40)
+            ? const Color(0xFF6366F1).withAlpha(40)
             : (isDark
-                  ? AppColors.darkBackground.withAlpha(80)
+                  ? const Color(0xFF0A0A0F).withAlpha(80)
                   : Colors.white.withAlpha(80)),
         borderRadius: BorderRadius.circular(10),
-        border: const Border(left: BorderSide(color: AppColors.cobalt, width: 3)),
+        border: const Border(left: BorderSide(color: Color(0xFF6366F1), width: 3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -241,7 +233,7 @@ class _ReplyPreview extends StatelessWidget {
             style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: AppColors.cobalt,
+              color: Color(0xFF6366F1),
             ),
           ),
           const SizedBox(height: 2),
@@ -253,7 +245,7 @@ class _ReplyPreview extends StatelessWidget {
               fontSize: 12,
               color: isMe
                   ? Colors.white.withAlpha(180)
-                  : (isDark ? AppColors.darkTextSecondary : AppColors.slate),
+                  : (const Color(0xFF6B7280)),
             ),
           ),
         ],
@@ -307,7 +299,6 @@ class _ReactionsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: EdgeInsets.only(
         left: isMe ? 0 : 44,
@@ -321,10 +312,10 @@ class _ReactionsRow extends StatelessWidget {
             margin: const EdgeInsets.only(right: 4),
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
             decoration: BoxDecoration(
-              color: isDark ? AppColors.darkCard : Colors.white,
+              color: const Color(0xFF13131A),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: isDark ? AppColors.darkBorder : const Color(0xFFE2E8F0),
+                color: const Color(0x1EFFFFFF),
               ),
               boxShadow: [
                 BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 4),
@@ -337,12 +328,10 @@ class _ReactionsRow extends StatelessWidget {
                 const SizedBox(width: 2),
                 Text(
                   '${r.count}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w600,
-                    color: isDark
-                        ? AppColors.darkTextSecondary
-                        : AppColors.slate,
+                    color: Color(0xFF6B7280),
                   ),
                 ),
               ],
@@ -370,6 +359,8 @@ class _AudioMessagePlayer extends StatefulWidget {
 }
 
 class _AudioMessagePlayerState extends State<_AudioMessagePlayer> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   final AudioPlayer _player = AudioPlayer();
   bool _isPlaying = false;
   int _currentPosition = 0;
@@ -417,7 +408,6 @@ class _AudioMessagePlayerState extends State<_AudioMessagePlayer> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final displayDuration = _isPlaying
         ? _currentPosition
         : widget.durationSeconds;
@@ -433,12 +423,12 @@ class _AudioMessagePlayerState extends State<_AudioMessagePlayer> {
             decoration: BoxDecoration(
               color: widget.isMe
                   ? Colors.white.withAlpha(30)
-                  : AppColors.cobalt.withAlpha(20),
+                  : const Color(0xFF6366F1).withAlpha(20),
               shape: BoxShape.circle,
             ),
             child: Icon(
               _isPlaying ? Icons.pause : Icons.play_arrow,
-              color: widget.isMe ? Colors.white : AppColors.cobalt,
+              color: widget.isMe ? Colors.white : const Color(0xFF6366F1),
               size: 20,
             ),
           ),
@@ -453,7 +443,7 @@ class _AudioMessagePlayerState extends State<_AudioMessagePlayer> {
               decoration: BoxDecoration(
                 color: widget.isMe
                     ? Colors.white.withAlpha(80)
-                    : AppColors.cobalt.withAlpha(30),
+                    : const Color(0xFF6366F1).withAlpha(30),
                 borderRadius: BorderRadius.circular(2),
               ),
               child: FractionallySizedBox(
@@ -463,7 +453,7 @@ class _AudioMessagePlayerState extends State<_AudioMessagePlayer> {
                     : 0,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: widget.isMe ? Colors.white : AppColors.cobalt,
+                    color: widget.isMe ? Colors.white : const Color(0xFF6366F1),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -477,8 +467,8 @@ class _AudioMessagePlayerState extends State<_AudioMessagePlayer> {
                 color: widget.isMe
                     ? Colors.white.withAlpha(180)
                     : (isDark
-                          ? AppColors.darkTextSecondary
-                          : AppColors.lightGray),
+                          ? const Color(0xFF6B7280)
+                          : const Color(0xFF9CA3AF)),
               ),
             ),
           ],
@@ -501,13 +491,13 @@ class _LocationPreview extends StatelessWidget {
         Container(
           height: 100,
           decoration: BoxDecoration(
-            color: const Color(0xFFE0F2FE),
+            color: const Color(0xFF6366F1).withAlpha(30),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Stack(
             alignment: Alignment.center,
             children: [
-              const Icon(Icons.map, size: 40, color: Color(0xFFBAE6FD)),
+              const Icon(Icons.map, size: 40, color: Color(0xFF6366F1)),
               Positioned(
                 bottom: 8,
                 child: Container(
@@ -516,7 +506,7 @@ class _LocationPreview extends StatelessWidget {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: AppColors.cobalt,
+                    color: const Color(0xFF6366F1),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: const Text(
@@ -555,9 +545,9 @@ class _ImagePreview extends StatelessWidget {
       borderRadius: BorderRadius.circular(8),
       child: isNetwork
           ? Image.network(imageUrl, width: 220, height: 160, fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => _placeholder('📷'))
+              errorBuilder: (_, _, _) => _placeholder('📷'))
           : Image.asset(imageUrl, width: 220, height: 160, fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => _placeholder('📷')),
+              errorBuilder: (_, _, _) => _placeholder('📷')),
     );
   }
 
@@ -581,7 +571,7 @@ class _GifPreview extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: Image.network(gifUrl, width: 220, height: 160, fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) => Container(
+            errorBuilder: (_, _, _) => Container(
               width: 220, height: 120, color: Colors.black26,
               child: const Center(child: Text('GIF', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold))),
             ),
@@ -659,20 +649,20 @@ class _FilePreview extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: isMe ? Colors.white24 : Colors.blueGrey.shade100,
+            color: isMe ? Colors.white24 : const Color(0xFF6366F1).withAlpha(30),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Icon(_fileIcon(fileName), size: 28, color: isMe ? Colors.white : Colors.blueGrey),
+          child: Icon(_fileIcon(fileName), size: 28, color: isMe ? Colors.white : const Color(0xFF6366F1)),
         ),
         const SizedBox(width: 10),
         Flexible(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(fileName, style: TextStyle(color: isMe ? Colors.white : Colors.black87, fontWeight: FontWeight.w600, fontSize: 13),
+              Text(fileName, style: TextStyle(color: isMe ? Colors.white : null, fontWeight: FontWeight.w600, fontSize: 13),
                 maxLines: 2, overflow: TextOverflow.ellipsis),
               if (fileSize != null)
-                Text(_formatSize(fileSize), style: TextStyle(color: isMe ? Colors.white70 : Colors.black45, fontSize: 11)),
+                Text(_formatSize(fileSize), style: TextStyle(color: isMe ? Colors.white70 : null, fontSize: 11)),
             ],
           ),
         ),

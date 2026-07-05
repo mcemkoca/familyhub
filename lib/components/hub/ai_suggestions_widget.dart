@@ -32,10 +32,13 @@ class AISuggestionsWidget extends ConsumerStatefulWidget {
 }
 
 class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   List<AISuggestion> _suggestions = [];
   List<AISuggestion> _allDailySuggestions = [];
   bool _loading = false;
   String? _error;
+  bool _expanded = false; // varsayılan kapalı — butonlar görünsün, tek tıkla açılır
 
 
   @override
@@ -52,13 +55,9 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
 
     try {
       final familyId = await ref.read(familyIdProvider.future);
-      if (familyId == null) {
-        setState(() {
-          _loading = false;
-          _error = 'Aile bilgisi bulunamadı';
-        });
-        return;
-      }
+
+      // familyId yoksa local pool'dan öneri göster (aile gerektirmiyor)
+      final String? resolvedFamilyId = familyId;
 
       final today = DateTime.now();
       final shownIds = HiveService.getShownSuggestionIds();
@@ -67,7 +66,7 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
       final daily = DailySuggestionsPool.pickDaily(
         date: today,
         excludedIds: shownIds,
-        count: 4,
+        count: 8,
       );
 
       // Pick family suggestions from new 1000+ pool
@@ -79,10 +78,12 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
           // Get child's age for age-filtered suggestions
           int? childAge;
           try {
-            final children = await ChildAccountRepository().getChildrenForFamily(familyId);
-            if (children.isNotEmpty) {
-              // Use the oldest active child's age, or first child's age
-              childAge = children.firstWhere((c) => c.isActive, orElse: () => children.first).age;
+            if (resolvedFamilyId != null) {
+              final children = await ChildAccountRepository().getChildrenForFamily(resolvedFamilyId);
+              if (children.isNotEmpty) {
+                final active = children.where((c) => c.isActive).toList();
+                childAge = (active.isNotEmpty ? active.first : children.first).age;
+              }
             }
           } catch (e) { debugPrint('AI suggestions error: $e'); }
           familySuggestions = FamilySuggestionsPool.instance.pickDaily(
@@ -103,7 +104,9 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
           TodaySummary hubData;
           try {
             final repo = HubRepository();
-            hubData = await repo.getTodaySummary(familyId);
+            hubData = resolvedFamilyId != null
+                ? await repo.getTodaySummary(resolvedFamilyId)
+                : const TodaySummary(eventCount: 0, taskCount: 0, unreadMessages: 0, onlineMembers: 0, totalMembers: 0);
           } catch (e) {
             hubData = const TodaySummary(
               eventCount: 0,
@@ -142,13 +145,13 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
 
       if (mounted) {
         setState(() {
-          _suggestions = all.take(1).toList();
+          _suggestions = all.take(8).toList();
           _allDailySuggestions = all;
           _loading = false;
         });
       }
 
-      await _cacheSuggestions(familyId, all, 'local_pool');
+      await _cacheSuggestions(resolvedFamilyId, all, 'local_pool');
 
       AnalyticsService.track(
         'ai_suggestions_loaded',
@@ -253,7 +256,7 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('${newItems.length} ürün alışveriş listesine eklendi'),
-        backgroundColor: AppColors.success,
+        backgroundColor: const Color(0xFF10B981),
         behavior: SnackBarBehavior.floating,
       ),
     );
@@ -338,12 +341,11 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
         maxChildSize: 0.8,
         expand: false,
         builder: (context, scrollController) {
-          final isDark = Theme.of(context).brightness == Brightness.dark;
           final color = _getColorForType(suggestion.type);
           return Container(
-            decoration: BoxDecoration(
-              color: isDark ? AppColors.darkBackground : AppColors.background,
-              borderRadius: const BorderRadius.vertical(
+            decoration: const BoxDecoration(
+              color: Color(0xFF0A0A0F),
+              borderRadius: BorderRadius.vertical(
                 top: Radius.circular(AppRadius.large),
               ),
             ),
@@ -354,7 +356,7 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
                   width: 40,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: isDark ? AppColors.darkBorder : AppColors.border,
+                    color: const Color(0x1EFFFFFF),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -377,15 +379,15 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
                       final alt = suggestion.alternativeOptions[index];
                       return Card(
                         margin: const EdgeInsets.only(bottom: AppSpacing.md),
-                        color: isDark ? AppColors.darkCard : AppColors.card,
+                        color: const Color(0xFF13131A),
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.circular(AppRadius.medium),
                           side: BorderSide(
                             color: isDark
-                                ? AppColors.darkBorder
-                                : AppColors.border,
+                                ? const Color(0x1EFFFFFF)
+                                : const Color(0x1EFFFFFF),
                           ),
                         ),
                         child: ListTile(
@@ -432,34 +434,74 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildHeader(isDark),
-          const SizedBox(height: 16),
-          if (_loading && _suggestions.isEmpty)
-            _buildSkeleton()
-          else if (_error != null)
-            _buildError(isDark)
-          else if (_suggestions.isEmpty)
-            _buildEmpty(isDark)
-          else
-            _buildGrid(isDark),
+          if (_expanded) ...[
+            const SizedBox(height: 16),
+            if (_loading && _suggestions.isEmpty)
+              _buildSkeleton()
+            else if (_error != null)
+              _buildError(isDark)
+            else if (_suggestions.isEmpty)
+              _buildEmpty(isDark)
+            else
+              _buildGrid(isDark),
+          ] else
+            _buildCollapsedHint(isDark),
         ],
       ),
     );
   }
 
+  Widget _buildCollapsedHint(bool isDark) {
+    final count = _suggestions.isEmpty ? 8 : _suggestions.length;
+    return GestureDetector(
+      onTap: () => setState(() => _expanded = true),
+      child: Container(
+        margin: const EdgeInsets.only(top: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [
+            const Color(0xFF6366F1).withAlpha(30),
+            const Color(0xFFEC4899).withAlpha(24),
+          ]),
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: const Color(0xFF6366F1).withAlpha(60)),
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.auto_awesome, size: 18, color: Color(0xFF8B5CF6)),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                '$count kişisel öneri hazır — göstermek için dokun',
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFFC7CBD4),
+                ),
+              ),
+            ),
+            const Icon(Icons.keyboard_arrow_down_rounded,
+                color: Color(0xFF8B5CF6)),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildGrid(bool isDark) {
-    final width = (MediaQuery.of(context).size.width - 52) / 2;
+    // hub padding(12*2) + widget margin(8*2) + spacing(12) = 56
+    final width = (MediaQuery.sizeOf(context).width - 56) / 2;
     return Wrap(
       spacing: 12,
       runSpacing: 12,
-      children: _suggestions.take(4).map((s) {
+      children: _suggestions.take(8).map((s) {
         return SizedBox(
           width: width,
           child: _buildSuggestionCard(s, isDark),
@@ -472,41 +514,75 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          'Günlük Öneriler',
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
-              ),
-        ),
-        GestureDetector(
-          onTap: _loadMoreSuggestions,
-          child: const Row(
-            children: [
-              Icon(
-                Icons.auto_fix_high,
-                size: 16,
-                color: AppColors.cobalt,
-              ),
-              SizedBox(width: 4),
-              Text(
-                'Başka Öneri',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.cobalt,
+        Expanded(
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => setState(() => _expanded = !_expanded),
+            child: Row(
+              children: [
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF6366F1), Color(0xFFEC4899)],
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.auto_awesome, size: 13, color: Colors.white),
+                      SizedBox(width: 4),
+                      Text(
+                        'AI',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(width: 2),
-              Icon(
-                Icons.chevron_right,
-                size: 18,
-                color: AppColors.cobalt,
-              ),
-            ],
+                const SizedBox(width: 10),
+                Text(
+                  'Günlük Öneriler',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                ),
+                const SizedBox(width: 4),
+                AnimatedRotation(
+                  turns: _expanded ? 0.5 : 0,
+                  duration: const Duration(milliseconds: 200),
+                  child: const Icon(Icons.keyboard_arrow_down_rounded,
+                      color: Color(0xFF8B5CF6)),
+                ),
+              ],
+            ),
           ),
         ),
+        if (_expanded)
+          GestureDetector(
+            onTap: _loadMoreSuggestions,
+            child: const Row(
+              children: [
+                Icon(Icons.refresh, size: 16, color: Color(0xFF6366F1)),
+                SizedBox(width: 4),
+                Text(
+                  'Yenile',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF6366F1),
+                  ),
+                ),
+              ],
+            ),
+          ),
       ],
     );
   }
@@ -518,10 +594,10 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
 
     return Container(
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkCard : Colors.white,
+        color: const Color(0xFF13131A),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isDark ? AppColors.darkBorder : const Color(0xFFE5E7EB),
+          color: const Color(0x1EFFFFFF),
         ),
       ),
       child: InkWell(
@@ -539,7 +615,7 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
                     width: 44,
                     height: 44,
                     decoration: BoxDecoration(
-                      color: color.withAlpha(isDark ? 50 : 20),
+                      color: color.withAlpha(50),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(icon, color: color, size: 22),
@@ -559,7 +635,7 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
                     width: 32,
                     height: 32,
                     decoration: BoxDecoration(
-                      color: color.withAlpha(isDark ? 40 : 15),
+                      color: color.withAlpha(40),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
@@ -578,7 +654,7 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
-                  color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                  color: isDark ? const Color(0xFFE5E7EB) : const Color(0xFF111827),
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -588,17 +664,16 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
               // Description
               Text(
                 s.description,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
-                  color: isDark ? AppColors.darkTextSecondary : AppColors.gray,
-                  height: 1.4,
+                  color: Color(0xFF9CA3AF),
+                  height: 1.35,
                 ),
-                maxLines: 3,
+                maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
 
-              const Spacer(),
-              const SizedBox(height: 12),
+              const SizedBox(height: 10),
 
               // Footer row
               Row(
@@ -608,11 +683,9 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
                     const SizedBox(width: 4),
                     Text(
                       '${s.durationMinutes} dk',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.gray,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                   ],
@@ -623,19 +696,17 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
                       width: 1,
                       height: 12,
                       color: isDark
-                          ? AppColors.darkBorder
-                          : const Color(0xFFE5E7EB),
+                          ? const Color(0x1EFFFFFF)
+                          : const Color(0xFFD1D5DB),
                     ),
                   if (s.minAge != null && s.maxAge != null) ...[
                     Icon(Icons.calendar_today, size: 14, color: color),
                     const SizedBox(width: 4),
                     Text(
                       '${s.minAge}-${s.maxAge} yaş',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.gray,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                   ] else if (s.difficulty != null) ...[
@@ -643,11 +714,9 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
                     const SizedBox(width: 4),
                     Text(
                       s.difficulty!,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.gray,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                   ],
@@ -684,15 +753,19 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
 
 
   Widget _buildSkeleton() {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final baseColor = isDark ? AppColors.darkCard : Colors.grey.shade300;
-    final highlightColor = isDark ? AppColors.darkBorder : Colors.grey.shade100;
+    final baseColor = const Color(0xFF13131A);
+    final highlightColor = const Color(0x1EFFFFFF);
 
     return Shimmer.fromColors(
       baseColor: baseColor,
       highlightColor: highlightColor,
-      child: Column(
-        children: List.generate(1, (index) => _buildSkeletonCard()),
+      child: Wrap(
+        spacing: 12,
+        runSpacing: 12,
+        children: List.generate(4, (index) {
+          final width = (MediaQuery.sizeOf(context).width - 56) / 2;
+          return SizedBox(width: width, child: _buildSkeletonCard());
+        }),
       ),
     );
   }
@@ -741,7 +814,7 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.error.withAlpha(isDark ? 30 : 10),
+        color: AppColors.error.withAlpha(30),
         borderRadius: BorderRadius.circular(AppRadius.medium),
       ),
       child: Row(
@@ -767,24 +840,24 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkCard : AppColors.card,
+        color: const Color(0xFF13131A),
         borderRadius: BorderRadius.circular(AppRadius.medium),
         border: Border.all(
-          color: isDark ? AppColors.darkBorder : AppColors.border,
+          color: const Color(0x1EFFFFFF),
         ),
       ),
-      child: Row(
+      child: const Row(
         children: [
           Icon(
             Icons.lightbulb_outline,
-            color: isDark ? AppColors.darkTextSecondary : AppColors.gray,
+            color: Color(0xFF6B7280),
             size: 20,
           ),
-          const SizedBox(width: AppSpacing.sm),
+          SizedBox(width: AppSpacing.sm),
           Text(
             'Henüz öneri yok. Yenilemeyi deneyin.',
             style: TextStyle(
-              color: isDark ? AppColors.darkTextSecondary : AppColors.gray,
+              color: Color(0xFF6B7280),
               fontSize: 13,
             ),
           ),
@@ -835,26 +908,26 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
       case 'recipe':
         return AppColors.orange;
       case 'chore':
-        return AppColors.cobalt;
+        return const Color(0xFF6366F1);
       case 'health':
         return AppColors.green;
       case 'social':
-        return AppColors.purple;
+        return const Color(0xFF8B5CF6);
       case 'finance':
-        return AppColors.success;
+        return const Color(0xFF10B981);
       case 'education':
         return Colors.teal;
       case 'event':
         return AppColors.blue;
       case 'task':
-        return AppColors.pink;
+        return const Color(0xFFEC4899);
       case 'budget':
         return AppColors.mint;
       case 'safety':
         return AppColors.red;
       case 'general':
       default:
-        return AppColors.cobalt;
+        return const Color(0xFF6366F1);
     }
   }
 
@@ -920,6 +993,8 @@ class _SuggestionDetailSheet extends StatefulWidget {
 }
 
 class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   late int _currentProgress;
   final _commentController = TextEditingController();
 
@@ -937,7 +1012,6 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final color = _sheetColorForType(widget.suggestion.type);
     final missing =
         widget.suggestion.ingredients.where((i) => !i.inStock).toList();
@@ -949,9 +1023,9 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
       expand: false,
       builder: (context, scrollController) {
         return Container(
-          decoration: BoxDecoration(
-            color: isDark ? AppColors.darkBackground : AppColors.background,
-            borderRadius: const BorderRadius.vertical(
+          decoration: const BoxDecoration(
+            color: Color(0xFF0A0A0F),
+            borderRadius: BorderRadius.vertical(
               top: Radius.circular(AppRadius.large),
             ),
           ),
@@ -963,7 +1037,7 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: isDark ? AppColors.darkBorder : AppColors.border,
+                  color: const Color(0x1EFFFFFF),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -979,7 +1053,7 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                           width: 56,
                           height: 56,
                           decoration: BoxDecoration(
-                            color: color.withAlpha(isDark ? 40 : 20),
+                            color: color.withAlpha(40),
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Icon(
@@ -1000,9 +1074,6 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                                     .titleLarge
                                     ?.copyWith(
                                       fontWeight: FontWeight.bold,
-                                      color: isDark
-                                          ? AppColors.darkTextPrimary
-                                          : AppColors.dark,
                                     ),
                               ),
                               const SizedBox(height: 4),
@@ -1038,9 +1109,7 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                     Text(
                       widget.suggestion.description,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: isDark
-                                ? AppColors.darkTextSecondary
-                                : AppColors.gray,
+                            color: const Color(0xFF6B7280),
                             height: 1.6,
                           ),
                     ),
@@ -1055,8 +1124,8 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                         padding: const EdgeInsets.all(AppSpacing.md),
                         decoration: BoxDecoration(
                           color: isDark
-                              ? AppColors.darkCard
-                              : AppColors.card,
+                              ? const Color(0xFF13131A)
+                              : const Color(0xFF13131A),
                           borderRadius:
                               BorderRadius.circular(AppRadius.medium),
                         ),
@@ -1079,13 +1148,13 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                               _buildNutrientColumn(
                                   'Yağ',
                                   '${widget.suggestion.nutritionInfo!.fat!.toStringAsFixed(0)}g',
-                                  AppColors.pink),
+                                  const Color(0xFFEC4899)),
                             if (widget.suggestion.nutritionInfo!.fiber !=
                                 null)
                               _buildNutrientColumn(
                                   'Lif',
                                   '${widget.suggestion.nutritionInfo!.fiber!.toStringAsFixed(0)}g',
-                                  AppColors.cobalt),
+                                  const Color(0xFF6366F1)),
                           ],
                         ),
                       ),
@@ -1102,7 +1171,7 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                           leading: Icon(
                             i.inStock ? Icons.check_circle : Icons.cancel,
                             color: i.inStock
-                                ? AppColors.success
+                                ? const Color(0xFF10B981)
                                 : AppColors.error,
                             size: 20,
                           ),
@@ -1177,8 +1246,8 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                                   step,
                                   style: TextStyle(
                                     color: isDark
-                                        ? AppColors.darkTextSecondary
-                                        : AppColors.dark,
+                                        ? const Color(0xFFE5E7EB)
+                                        : const Color(0xFF374151),
                                     height: 1.5,
                                   ),
                                 ),
@@ -1209,8 +1278,8 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                                   tip,
                                   style: TextStyle(
                                     color: isDark
-                                        ? AppColors.darkTextSecondary
-                                        : AppColors.dark,
+                                        ? const Color(0xFFE5E7EB)
+                                        : const Color(0xFF374151),
                                   ),
                                 ),
                               ),
@@ -1230,8 +1299,8 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                         padding: const EdgeInsets.all(AppSpacing.md),
                         decoration: BoxDecoration(
                           color: isDark
-                              ? AppColors.darkCard
-                              : AppColors.card,
+                              ? const Color(0xFF13131A)
+                              : const Color(0xFF13131A),
                           borderRadius:
                               BorderRadius.circular(AppRadius.medium),
                         ),
@@ -1360,11 +1429,9 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                         ),
                         child: Text(
                           widget.suggestion.userComment!,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontStyle: FontStyle.italic,
-                            color: isDark
-                                ? AppColors.darkTextSecondary
-                                : AppColors.gray,
+                            color: Color(0xFF6B7280),
                           ),
                         ),
                       ),
@@ -1485,11 +1552,10 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) {
-        final isDark = Theme.of(context).brightness == Brightness.dark;
         return Container(
-          decoration: BoxDecoration(
-            color: isDark ? AppColors.darkBackground : AppColors.background,
-            borderRadius: const BorderRadius.vertical(
+          decoration: const BoxDecoration(
+            color: Color(0xFF0A0A0F),
+            borderRadius: BorderRadius.vertical(
               top: Radius.circular(AppRadius.large),
             ),
           ),
@@ -1502,7 +1568,7 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                   width: 40,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: isDark ? AppColors.darkBorder : AppColors.border,
+                    color: const Color(0x1EFFFFFF),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -1548,17 +1614,17 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkCard : AppColors.card,
+        color: const Color(0xFF13131A),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: isDark ? AppColors.darkBorder : AppColors.border,
+          color: const Color(0x1EFFFFFF),
         ),
       ),
       child: Text(
         label,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 12,
-          color: isDark ? AppColors.darkTextSecondary : AppColors.gray,
+          color: Color(0xFF6B7280),
         ),
       ),
     );
@@ -1607,17 +1673,17 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
       case 'recipe':
         return AppColors.orange;
       case 'chore':
-        return AppColors.cobalt;
+        return const Color(0xFF6366F1);
       case 'health':
         return AppColors.green;
       case 'social':
-        return AppColors.purple;
+        return const Color(0xFF8B5CF6);
       case 'finance':
-        return AppColors.success;
+        return const Color(0xFF10B981);
       case 'education':
         return Colors.teal;
       default:
-        return AppColors.cobalt;
+        return const Color(0xFF6366F1);
     }
   }
 

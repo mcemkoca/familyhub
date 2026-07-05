@@ -9,7 +9,6 @@ import 'tabs/child_achievements_tab.dart';
 import 'tabs/child_chat_tab.dart';
 import 'tabs/child_home_tab.dart';
 import 'tabs/child_safety_tab.dart';
-import 'tabs/child_schedule_tab.dart';
 import 'tabs/child_tasks_tab.dart';
 
 class ChildDashboardScreen extends ConsumerStatefulWidget {
@@ -57,7 +56,7 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
+                  color: const Color(0xFF9CA3AF),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -182,10 +181,11 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
     ];
 
     return Scaffold(
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black87,
+        backgroundColor: const Color(0xFF13131A),
+        foregroundColor: Colors.white,
         title: Row(
           children: [
             CircleAvatar(
@@ -316,7 +316,7 @@ class _ChildBottomNav extends StatelessWidget {
     final isSelected = selectedIndex == index;
     final item = items[index];
     final activeColor = const Color(0xFF3B82F6);
-    final inactiveColor = Colors.grey.shade400;
+    final inactiveColor = const Color(0xFF9CA3AF);
 
     return GestureDetector(
       onTap: () => onTap(index),

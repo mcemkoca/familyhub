@@ -350,7 +350,8 @@ class CallService {
           .from('call_sessions')
           .select('caller_joined_at, callee_joined_at, started_at')
           .eq('id', sessionId)
-          .single();
+          .maybeSingle();
+      if (row == null) return;
 
       final callerJoined = row['caller_joined_at'] != null
           ? DateTime.parse(row['caller_joined_at'] as String)

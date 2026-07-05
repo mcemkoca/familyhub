@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../config/constants.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
 class MemoryCreateScreen extends StatelessWidget {
@@ -14,12 +13,12 @@ class MemoryCreateScreen extends StatelessWidget {
         child: Column(
           children: [
             TextField(
-              decoration: InputDecoration(labelText: 'Başlık', filled: true, fillColor: AppColors.card, border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none)),
+              decoration: InputDecoration(labelText: 'Başlık', filled: true, fillColor: const Color(0xFF13131A), border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none)),
             ),
             const SizedBox(height: 16),
             TextField(
               maxLines: 6,
-              decoration: InputDecoration(labelText: 'Bugün ailenle yaşadığın güzel bir anı yaz...', filled: true, fillColor: AppColors.card, border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none)),
+              decoration: InputDecoration(labelText: 'Bugün ailenle yaşadığın güzel bir anı yaz...', filled: true, fillColor: const Color(0xFF13131A), border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none)),
             ),
             const SizedBox(height: 24),
             SizedBox(
@@ -27,7 +26,7 @@ class MemoryCreateScreen extends StatelessWidget {
               height: 56,
               child: ElevatedButton(
                 onPressed: () => Navigator.pop(context),
-                style: ElevatedButton.styleFrom(backgroundColor: AppColors.purple, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
+                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF8B5CF6), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
                 child: const Text('Kaydet', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
               ),
             ),

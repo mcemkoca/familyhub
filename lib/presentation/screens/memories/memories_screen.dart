@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../../config/constants.dart';
 import '../../../config/routes.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
@@ -52,9 +51,9 @@ class _ActionChip extends StatelessWidget {
         onTap: onTap,
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 16),
-          decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(16), border: Border.all(color: AppColors.border)),
+          decoration: BoxDecoration(color: const Color(0xFF13131A), borderRadius: BorderRadius.circular(16), border: Border.all(color: const Color(0x1EFFFFFF))),
           child: Column(
-            children: [Icon(icon, color: AppColors.purple), const SizedBox(height: 8), Text(label, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600))],
+            children: [Icon(icon, color: const Color(0xFF8B5CF6)), const SizedBox(height: 8), Text(label, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600))],
           ),
         ),
       ),
@@ -72,14 +71,14 @@ class _AlbumCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(16), border: Border.all(color: AppColors.border)),
+      decoration: BoxDecoration(color: const Color(0xFF13131A), borderRadius: BorderRadius.circular(16), border: Border.all(color: const Color(0x1EFFFFFF))),
       child: Row(
         children: [
-          Container(width: 56, height: 56, decoration: BoxDecoration(color: AppColors.background, borderRadius: BorderRadius.circular(12)), child: const Icon(Icons.image, color: AppColors.lightGray)),
+          Container(width: 56, height: 56, decoration: BoxDecoration(color: const Color(0xFF0A0A0F), borderRadius: BorderRadius.circular(12)), child: const Icon(Icons.image, color: Color(0xFF9CA3AF))),
           const SizedBox(width: 16),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [Text(name, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600)), Text('$count fotoğraf', style: const TextStyle(fontSize: 12, color: AppColors.gray))],
+            children: [Text(name, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600)), Text('$count fotoğraf', style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)))],
           ),
         ],
       ),
@@ -98,15 +97,15 @@ class _MemoryCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(16), border: Border.all(color: AppColors.border)),
+      decoration: BoxDecoration(color: const Color(0xFF13131A), borderRadius: BorderRadius.circular(16), border: Border.all(color: const Color(0x1EFFFFFF))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
           const SizedBox(height: 4),
-          Text(date, style: const TextStyle(fontSize: 12, color: AppColors.gray)),
+          Text(date, style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
           const SizedBox(height: 8),
-          Text(excerpt, style: const TextStyle(fontSize: 14, color: AppColors.gray)),
+          Text(excerpt, style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
         ],
       ),
     );

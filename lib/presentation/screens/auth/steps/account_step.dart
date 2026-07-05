@@ -106,27 +106,26 @@ class _AccountStepState extends State<AccountStep> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Hesap ve Aile',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+              color: Color(0xFFE5E7EB),
             ),
           ),
           const SizedBox(height: 4),
-            Text(
+            const Text(
             'FamilyHub hesabınızı oluşturun',
             style: TextStyle(
               fontSize: 14,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: Color(0xFF6B7280),
             ),
           ),
           const SizedBox(height: 24),
@@ -134,7 +133,7 @@ class _AccountStepState extends State<AccountStep> {
           Container(
             padding: const EdgeInsets.all(4),
             decoration: BoxDecoration(
-              color: isDark ? AppColors.darkCard : const Color(0xFFF3F4F6),
+              color: const Color(0xFF13131A),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
@@ -146,7 +145,7 @@ class _AccountStepState extends State<AccountStep> {
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       decoration: BoxDecoration(
                         color: !_hasFamilyCode
-                            ? (isDark ? AppColors.darkBackground : Colors.white)
+                            ? (const Color(0xFF0A0A0F))
                             : Colors.transparent,
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -155,7 +154,7 @@ class _AccountStepState extends State<AccountStep> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          color: !_hasFamilyCode ? AppColors.cobalt : AppColors.gray,
+                          color: !_hasFamilyCode ? const Color(0xFF6366F1) : const Color(0xFF6B7280),
                         ),
                       ),
                     ),
@@ -168,7 +167,7 @@ class _AccountStepState extends State<AccountStep> {
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       decoration: BoxDecoration(
                         color: _hasFamilyCode
-                            ? (isDark ? AppColors.darkBackground : Colors.white)
+                            ? (const Color(0xFF0A0A0F))
                             : Colors.transparent,
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -177,7 +176,7 @@ class _AccountStepState extends State<AccountStep> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          color: _hasFamilyCode ? AppColors.cobalt : AppColors.gray,
+                          color: _hasFamilyCode ? const Color(0xFF6366F1) : const Color(0xFF6B7280),
                         ),
                       ),
                     ),
@@ -231,16 +230,16 @@ class _AccountStepState extends State<AccountStep> {
               Checkbox(
                 value: _acceptedTerms,
                 onChanged: (v) => setState(() => _acceptedTerms = v ?? false),
-                activeColor: AppColors.cobalt,
+                activeColor: const Color(0xFF6366F1),
               ),
               Expanded(
                 child: GestureDetector(
                   onTap: () => setState(() => _acceptedTerms = !_acceptedTerms),
-                  child: Text(
+                  child: const Text(
                     'Kullanım koşullarını ve gizlilik politikasını okudum ve kabul ediyorum.',
                     style: TextStyle(
                       fontSize: 13,
-                      color: isDark ? AppColors.darkTextSecondary : AppColors.gray,
+                      color: Color(0xFF6B7280),
                     ),
                   ),
                 ),
@@ -254,7 +253,7 @@ class _AccountStepState extends State<AccountStep> {
             child: ElevatedButton(
               onPressed: _isLoading ? null : _createAccount,
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.cobalt,
+                backgroundColor: const Color(0xFF6366F1),
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
@@ -284,7 +283,6 @@ class _AccountStepState extends State<AccountStep> {
     String? helperText,
     TextInputAction? textInputAction,
   }) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return TextField(
       controller: controller,
       keyboardType: keyboardType,
@@ -296,7 +294,7 @@ class _AccountStepState extends State<AccountStep> {
         helperText: helperText,
         prefixIcon: Icon(icon),
         filled: true,
-        fillColor: isDark ? AppColors.darkCard : const Color(0xFFF8FAFC),
+        fillColor: const Color(0xFF13131A),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,

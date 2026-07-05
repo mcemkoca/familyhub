@@ -1,16 +1,19 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../config/routes.dart';
-import '../../../repositories/hub_repository.dart';
+import '../../../core/supabase_client.dart';
 import '../../providers/app_providers.dart';
 import '../../../domain/entities.dart';
-import '../../../services/weather_service.dart';
 import '../../../services/hive_service.dart';
+import '../../widgets/notification_prompt.dart';
 import '../../../components/hub/ai_suggestions_widget.dart';
 import '../../../components/hub/content_widgets/content_highlights_widget.dart';
 import '../../../services/location_tracking_service.dart';
@@ -54,6 +57,8 @@ class _HubScreenState extends ConsumerState<HubScreen>
   // notification ticker
   int _notifIdx = 0;
   bool _notifExpanded = false;
+  // Gerçek verilerden üretilen canlı bildirimler (build'de doldurulur).
+  List<_HubNotif> _liveNotifs = _notifs;
   late Timer _tickerTimer;
   late AnimationController _tickerFade;
 
@@ -90,24 +95,29 @@ class _HubScreenState extends ConsumerState<HubScreen>
   ];
 
   static final _features = <_Feature>[
-    _Feature(Icons.shopping_cart_outlined,   'Alışveriş',   [Color(0xFF10B981), Color(0xFF059669)], Color(0xFF064E3B), AppRoutes.shopping),
-    _Feature(Icons.restaurant_outlined,      'Mutfak',      [Color(0xFFF59E0B), Color(0xFFD97706)], Color(0xFF78350F), AppRoutes.kitchen),
-    _Feature(Icons.child_care_outlined,      'Çocuk',       [Color(0xFF06B6D4), Color(0xFF0891B2)], Color(0xFF164E63), AppRoutes.childManagement),
-    _Feature(Icons.eco_outlined,             'Gelişim',     [Color(0xFFF43F5E), Color(0xFFE11D48)], Color(0xFF881337), AppRoutes.childDevelopment),
-    _Feature(Icons.monitor_heart_outlined,   'Sağlık',      [Color(0xFF14B8A6), Color(0xFF0D9488)], Color(0xFF134E4A), AppRoutes.familyHealth),
-    _Feature(Icons.map_outlined,             'Konum',       [Color(0xFF3B82F6), Color(0xFF2563EB)], Color(0xFF1E3A8A), AppRoutes.familyMap),
-    _Feature(Icons.emergency_outlined,       'Acil',        [Color(0xFFEF4444), Color(0xFFDC2626)], Color(0xFF7F1D1D), AppRoutes.emergency),
-    _Feature(Icons.account_balance_wallet_outlined, 'Bütçe',[Color(0xFFA855F7), Color(0xFF9333EA)], Color(0xFF581C87), AppRoutes.budget),
-    _Feature(Icons.subscriptions_outlined,   'Abonelik',    [Color(0xFF6366F1), Color(0xFF4F46E5)], Color(0xFF312E81), AppRoutes.subscriptions),
-    _Feature(Icons.photo_library_outlined,   'Galeri',      [Color(0xFFEC4899), Color(0xFFDB2777)], Color(0xFF831843), AppRoutes.gallery),
-    _Feature(Icons.menu_book_outlined,       'Eğitim',      [Color(0xFF8B5CF6), Color(0xFF7C3AED)], Color(0xFF4C1D95), AppRoutes.education),
-    _Feature(Icons.psychology_outlined,      'AI',          [Color(0xFF4776E6), Color(0xFF2D3A8C)], Color(0xFF1E1B4B), AppRoutes.aiAssistant),
+    const _Feature(Icons.shopping_cart_outlined,   'Alışveriş',   [Color(0xFF10B981), Color(0xFF059669)], Color(0xFF064E3B), AppRoutes.shopping),
+    const _Feature(Icons.restaurant_outlined,      'Mutfak',      [Color(0xFFF59E0B), Color(0xFFD97706)], Color(0xFF78350F), AppRoutes.kitchen),
+    const _Feature(Icons.child_care_outlined,      'Çocuk',       [Color(0xFF06B6D4), Color(0xFF0891B2)], Color(0xFF164E63), AppRoutes.childManagement),
+    const _Feature(Icons.eco_outlined,             'Gelişim',     [Color(0xFFF43F5E), Color(0xFFE11D48)], Color(0xFF881337), AppRoutes.childDevelopment),
+    const _Feature(Icons.monitor_heart_outlined,   'Sağlık',      [Color(0xFF14B8A6), Color(0xFF0D9488)], Color(0xFF134E4A), AppRoutes.familyHealth),
+    const _Feature(Icons.map_outlined,             'Konum',       [Color(0xFF3B82F6), Color(0xFF2563EB)], Color(0xFF1E3A8A), AppRoutes.familyMap),
+    const _Feature(Icons.emergency_outlined,       'Acil',        [Color(0xFFEF4444), Color(0xFFDC2626)], Color(0xFF7F1D1D), AppRoutes.emergency),
+    const _Feature(Icons.account_balance_wallet_outlined, 'Bütçe',[Color(0xFFA855F7), Color(0xFF9333EA)], Color(0xFF581C87), AppRoutes.budget),
+    const _Feature(Icons.receipt_long_outlined,   'Ev Giderleri',  [Color(0xFF6366F1), Color(0xFF4F46E5)], Color(0xFF312E81), AppRoutes.subscriptions),
+    const _Feature(Icons.photo_library_outlined,   'Galeri',      [Color(0xFFEC4899), Color(0xFFDB2777)], Color(0xFF831843), AppRoutes.gallery),
+    const _Feature(Icons.menu_book_outlined,       'Eğitim',      [Color(0xFF8B5CF6), Color(0xFF7C3AED)], Color(0xFF4C1D95), AppRoutes.education),
+    const _Feature(Icons.psychology_outlined,      'AI',          [Color(0xFF4776E6), Color(0xFF2D3A8C)], Color(0xFF1E1B4B), AppRoutes.aiAssistant),
   ];
 
   @override
   void initState() {
     super.initState();
     LocationTrackingService.startTracking();
+
+    // İlk açılışta bir kez bildirim izni promptunu göster.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) NotificationPrompt.maybeShow(context);
+    });
 
     _tickerFade = AnimationController(
       vsync: this,
@@ -123,7 +133,7 @@ class _HubScreenState extends ConsumerState<HubScreen>
   Future<void> _cycleNotif() async {
     await _tickerFade.reverse();
     if (!mounted) return;
-    setState(() => _notifIdx = (_notifIdx + 1) % _notifs.length);
+    setState(() => _notifIdx = (_notifIdx + 1) % _liveNotifs.length);
     await _tickerFade.forward();
   }
 
@@ -143,16 +153,199 @@ class _HubScreenState extends ConsumerState<HubScreen>
     await Future.delayed(const Duration(milliseconds: 500));
   }
 
+  // Ana Ekran Özelleştir'de kaydedilen kutucuk sırasını uygular.
+  List<_Feature> _applyOrder(List<_Feature> features) {
+    final raw = HiveService.getSetting('hub_tile_order');
+    if (raw == null || raw.isEmpty) return features;
+    final order = raw.split('|');
+    final ranked = [...features];
+    ranked.sort((a, b) {
+      final ia = order.indexOf(a.route);
+      final ib = order.indexOf(b.route);
+      return (ia < 0 ? 9999 : ia).compareTo(ib < 0 ? 9999 : ib);
+    });
+    return ranked;
+  }
+
+  /// Returns the subset of features visible to the given role.
+  List<_Feature> _featuresForRole(MemberRole role) {
+    switch (role) {
+      case MemberRole.child:
+      case MemberRole.baby:
+        // Kids see only tasks, education, and chat
+        return _features.where((f) =>
+          f.route == AppRoutes.childManagement ||
+          f.route == AppRoutes.childDevelopment ||
+          f.route == AppRoutes.education,
+        ).toList();
+      case MemberRole.elder:
+        // Elders: health-first ordering, no child management
+        final priority = [
+          AppRoutes.familyHealth,
+          AppRoutes.emergency,
+          AppRoutes.shopping,
+          AppRoutes.budget,
+          AppRoutes.gallery,
+          AppRoutes.aiAssistant,
+        ];
+        return [
+          ..._features.where((f) => priority.contains(f.route)),
+          ..._features.where((f) => !priority.contains(f.route) &&
+              f.route != AppRoutes.childManagement &&
+              f.route != AppRoutes.childDevelopment),
+        ];
+      case MemberRole.guest:
+        // Guests: shared shopping and gallery only
+        return _features.where((f) =>
+          f.route == AppRoutes.shopping ||
+          f.route == AppRoutes.gallery,
+        ).toList();
+      case MemberRole.teen:
+        // Teens: everything except child management tools
+        return _features.where((f) =>
+          f.route != AppRoutes.childManagement,
+        ).toList();
+      case MemberRole.admin:
+      case MemberRole.parent:
+        return _features;
+    }
+  }
+
+  // Gerçek verilerden (yaklaşan etkinlikler + görevler) bildirim şeridi üretir.
+  // Veri yoksa dostça bir varsayılan gösterir.
+  List<_HubNotif> _buildLiveNotifs() {
+    final events = ref.watch(upcomingEventsProvider).valueOrNull ?? [];
+    final tasks = ref.watch(myTasksProvider).valueOrNull ?? [];
+    String hhmm(DateTime d) =>
+        '${d.hour.toString().padLeft(2, '0')}:${d.minute.toString().padLeft(2, '0')}';
+    String rel(DateTime d) {
+      final diff = d.difference(DateTime.now());
+      if (diff.isNegative) return 'geçti';
+      if (diff.inMinutes < 60) return '${diff.inMinutes} dk sonra';
+      if (diff.inHours < 24) return '${diff.inHours} saat sonra';
+      return '${diff.inDays} gün sonra';
+    }
+
+    final list = <_HubNotif>[];
+    for (final e in events.take(4)) {
+      list.add(_HubNotif(
+        icon: Icons.calendar_today_outlined,
+        color: const Color(0xFF6366F1),
+        title: e.title,
+        source: 'Takvim · ${rel(e.start)}',
+        time: hhmm(e.start),
+      ));
+    }
+    for (final t in tasks.take(4)) {
+      list.add(_HubNotif(
+        icon: Icons.check_circle_outline,
+        color: const Color(0xFF10B981),
+        title: t.title,
+        source: t.dueDate != null ? 'Görev · ${rel(t.dueDate!)}' : 'Görev',
+        time: t.dueDate != null ? hhmm(t.dueDate!) : '',
+      ));
+    }
+    if (list.isEmpty) {
+      list.add(const _HubNotif(
+        icon: Icons.notifications_none_rounded,
+        color: Color(0xFF6B7280),
+        title: 'Şimdilik yeni bildirim yok',
+        source: 'Her şey güncel',
+        time: '',
+      ));
+    }
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
     final members = ref.watch(familyMembersProvider);
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final role = ref.watch(currentMemberRoleProvider);
+    final visibleFeatures = _applyOrder(_featuresForRole(role));
+    _liveNotifs = _buildLiveNotifs();
 
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.light,
+      value: isDark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark,
       child: Scaffold(
-        backgroundColor: const Color(0xFF0A0A0F),
-        body: RefreshIndicator(
+        backgroundColor: const Color(0xFF07060D),
+        body: Stack(
+          children: [
+            // ── Family Mode arka planı: sıcak + soğuk dengeli derinlik ──
+            const Positioned.fill(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color(0xFF2A1830), // üst: sıcak mor-bordo
+                      Color(0xFF1A1230),
+                      Color(0xFF0E0B18),
+                      Color(0xFF0A0810), // alt: sıcak-koyu
+                    ],
+                    stops: [0.0, 0.32, 0.68, 1.0],
+                  ),
+                ),
+              ),
+            ),
+            // ── Sıcak parıltı (mercan/şeftali) — aile sıcaklığı ──
+            Positioned(
+              top: -150,
+              right: -90,
+              child: Container(
+                width: 360,
+                height: 360,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      const Color(0xFFFF6B8B).withAlpha(70), // sıcak pembe-mercan
+                      const Color(0xFFFF6B8B).withAlpha(0),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            // ── Soğuk parıltı (indigo/teal) — denge ──
+            Positioned(
+              top: -70,
+              left: -120,
+              child: Container(
+                width: 320,
+                height: 320,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      const Color(0xFF5B8DEF).withAlpha(64), // soğuk mavi
+                      const Color(0xFF5B8DEF).withAlpha(0),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            // ── Alt sıcak amber tabanı (yuva hissi) ──
+            Positioned(
+              bottom: -160,
+              right: -60,
+              child: Container(
+                width: 300,
+                height: 300,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      const Color(0xFFFFB27A).withAlpha(38), // sıcak amber
+                      const Color(0xFFFFB27A).withAlpha(0),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SafeArea(
+              bottom: false,
+              child: RefreshIndicator(
           onRefresh: _refresh,
           color: const Color(0xFF6366F1),
           backgroundColor: const Color(0xFF1A1A2E),
@@ -160,8 +353,8 @@ class _HubScreenState extends ConsumerState<HubScreen>
             slivers: [
               // ── Ticker notification bar ──────────────────────────────────
               SliverToBoxAdapter(child: _NotifTicker(
-                notifs: _notifs,
-                currentIdx: _notifIdx,
+                notifs: _liveNotifs,
+                currentIdx: _notifIdx.clamp(0, _liveNotifs.length - 1),
                 expanded: _notifExpanded,
                 fade: _tickerFade,
                 onTap: () => setState(() => _notifExpanded = !_notifExpanded),
@@ -171,27 +364,34 @@ class _HubScreenState extends ConsumerState<HubScreen>
               // ── Cover + profiles ─────────────────────────────────────────
               SliverToBoxAdapter(child: _CoverSection(members: members)),
 
-              // ── 3×4 Quick access grid ────────────────────────────────────
-              SliverToBoxAdapter(child: _QuickGrid(features: _features)),
+              // ── Quick access grid (butonlar hemen gorunsun) ──────────────
+              SliverToBoxAdapter(child: _QuickGrid(features: visibleFeatures)),
+
+              // ── Akıllı Kart / AI Öneriler (Ana Ekran Özelleştir'den gizlenebilir) ──
+              if (HiveService.getBoolSetting('hub_show_smart_card',
+                  defaultValue: true))
+                const SliverToBoxAdapter(child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  child: AISuggestionsWidget(),
+                )),
 
               // ── Stat strip ───────────────────────────────────────────────
               const SliverToBoxAdapter(child: _StatStrip()),
 
-              // ── AI Suggestions ───────────────────────────────────────────
-              const SliverToBoxAdapter(child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12),
-                child: AISuggestionsWidget(),
-              )),
-
-              // ── Content highlights ───────────────────────────────────────
-              const SliverToBoxAdapter(child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12),
-                child: ContentHighlightsWidget(),
-              )),
+              // ── İpuçları / Keşfet (Ana Ekran Özelleştir'den gizlenebilir) ──
+              if (HiveService.getBoolSetting('hub_show_tips',
+                  defaultValue: true))
+                const SliverToBoxAdapter(child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  child: ContentHighlightsWidget(),
+                )),
 
               const SliverToBoxAdapter(child: SizedBox(height: 32)),
             ],
           ),
+        ),
+        ),
+          ],
         ),
       ),
     );
@@ -371,7 +571,7 @@ class _NotifTicker extends StatelessWidget {
                               Text(n.time,
                                   style: const TextStyle(
                                       fontSize: 9,
-                                      color: Color(0xFF4B5563),
+                                      color: Color(0xFF6B7280),
                                       fontWeight: FontWeight.w600)),
                             ],
                           ),
@@ -424,8 +624,8 @@ class _CoverSection extends ConsumerWidget {
                 ? CachedNetworkImage(
                     imageUrl: coverPhotoUrl,
                     fit: BoxFit.cover,
-                    placeholder: (_, __) => _CoverGradient(),
-                    errorWidget: (_, __, ___) => _CoverGradient(),
+                    placeholder: (_, _) => _CoverGradient(),
+                    errorWidget: (_, _, _) => _CoverGradient(),
                   )
                 : _CoverGradient(),
 
@@ -454,21 +654,22 @@ class _CoverSection extends ConsumerWidget {
                   Container(
                     width: 30, height: 30,
                     decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [Color(0xFF6366F1), Color(0xFFEC4899)],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(9),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF6366F1).withAlpha(120),
+                          color: Colors.black.withAlpha(40),
                           blurRadius: 10,
                         ),
                       ],
                     ),
-                    child: const Icon(Icons.home_outlined,
-                        size: 16, color: Colors.white),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(9),
+                      child: Image.asset(
+                        'assets/images/logo_icon.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                   const SizedBox(width: 8),
                   const Text(
@@ -485,7 +686,7 @@ class _CoverSection extends ConsumerWidget {
                     data: (w) => _WeatherPill(
                         temp: w.temperature.round()),
                     loading: () => const SizedBox.shrink(),
-                    error: (_, __) => const SizedBox.shrink(),
+                    error: (_, _) => const SizedBox.shrink(),
                   ),
                   const SizedBox(width: 6),
                   // edit cover
@@ -547,14 +748,42 @@ class _CoverSection extends ConsumerWidget {
     );
   }
 
-  void _pickCoverPhoto(BuildContext context) {
-    // TODO: image_picker → upload to Supabase storage → save URL
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Kapak fotoğrafı seçimi yakında'),
-        backgroundColor: Color(0xFF1F2937),
-      ),
-    );
+  Future<void> _pickCoverPhoto(BuildContext context) async {
+    final picker = ImagePicker();
+    final picked = await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
+    if (picked == null) return;
+
+    try {
+      final client = SupabaseConfig.safeClient;
+      final userId = client?.auth.currentUser?.id;
+      if (client == null || userId == null) return;
+
+      final bytes = await File(picked.path).readAsBytes();
+      final ext = picked.path.split('.').last;
+      final path = 'cover_photos/$userId/cover.$ext';
+      await client.storage.from('family-assets').uploadBinary(
+        path,
+        bytes,
+        fileOptions: FileOptions(contentType: 'image/$ext', upsert: true),
+      );
+      final url = client.storage.from('family-assets').getPublicUrl(path);
+      await client.from('profiles').update({'cover_photo_url': url}).eq('id', userId);
+
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Kapak fotoğrafı güncellendi'),
+            backgroundColor: Color(0xFF6366F1),
+          ),
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Yükleme başarısız: $e'), backgroundColor: const Color(0xFFEF4444)),
+        );
+      }
+    }
   }
 }
 
@@ -633,7 +862,7 @@ class _LocationRow extends ConsumerWidget {
         const SizedBox(width: 3),
         Text(
           country.isNotEmpty ? '$city, $country' : city,
-          style: const TextStyle(fontSize: 10, color: Color(0xFF6B7280)),
+          style: const TextStyle(fontSize: 10, color: Color(0xFFD1D5DB)),
         ),
       ],
     );
@@ -731,7 +960,7 @@ class _ProfileAvatar extends StatelessWidget {
                       child: CachedNetworkImage(
                         imageUrl: member.avatarUrl!,
                         fit: BoxFit.cover,
-                        errorWidget: (_, __, ___) => Center(
+                        errorWidget: (_, _, _) => Center(
                           child: Text(initial,
                               style: const TextStyle(
                                   fontSize: 16,
@@ -818,9 +1047,9 @@ class _QuickGrid extends StatelessWidget {
             itemCount: features.length + 1, // +1 for "more" slot
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              mainAxisSpacing: 14,
-              crossAxisSpacing: 8,
-              childAspectRatio: 0.85,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 6,
+              childAspectRatio: 1.12,
             ),
             itemBuilder: (context, i) {
               if (i == features.length) {
@@ -863,14 +1092,14 @@ class _FeatureTileState extends State<_FeatureTile> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              width: 62, height: 62,
+              width: 76, height: 76,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: f.gradient,
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
-                borderRadius: BorderRadius.circular(18),
+                borderRadius: BorderRadius.circular(22),
                 boxShadow: [
                   BoxShadow(
                     color: f.shadow.withAlpha(_pressed ? 60 : 100),
@@ -893,11 +1122,11 @@ class _FeatureTileState extends State<_FeatureTile> {
                   // gloss
                   Positioned(
                     top: 0, left: 0, right: 0,
-                    height: 31,
+                    height: 38,
                     child: DecoratedBox(
                       decoration: BoxDecoration(
                         borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(18)),
+                            top: Radius.circular(22)),
                         gradient: LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
@@ -910,7 +1139,7 @@ class _FeatureTileState extends State<_FeatureTile> {
                     ),
                   ),
                   Center(
-                    child: Icon(f.icon, size: 28, color: Colors.white,
+                    child: Icon(f.icon, size: 34, color: Colors.white,
                         shadows: [
                           Shadow(
                             color: Colors.black.withAlpha(100),
@@ -921,13 +1150,13 @@ class _FeatureTileState extends State<_FeatureTile> {
                 ],
               ),
             ),
-            const SizedBox(height: 6),
+            const SizedBox(height: 8),
             Text(
               f.label,
               style: const TextStyle(
-                fontSize: 10,
+                fontSize: 11.5,
                 fontWeight: FontWeight.w600,
-                color: Color(0xFF9CA3AF),
+                color: Color(0xFFC7CBD4),
               ),
               textAlign: TextAlign.center,
             ),
@@ -945,9 +1174,9 @@ class _MoreSlot extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          width: 62, height: 62,
+          width: 76, height: 76,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(22),
             border: Border.all(
                 color: Colors.white.withAlpha(30),
                 width: 1.5,
@@ -956,15 +1185,15 @@ class _MoreSlot extends StatelessWidget {
           ),
           child: const Center(
             child: Icon(Icons.more_horiz,
-                size: 22, color: Color(0xFF4B5563)),
+                size: 26, color: Color(0xFF6B7280)),
           ),
         ),
-        const SizedBox(height: 6),
+        const SizedBox(height: 8),
         const Text('More',
             style: TextStyle(
-                fontSize: 10,
+                fontSize: 11.5,
                 fontWeight: FontWeight.w600,
-                color: Color(0xFF374151))),
+                color: Color(0xFF9CA3AF))),
       ],
     );
   }
@@ -985,10 +1214,10 @@ class _StatStrip extends ConsumerWidget {
         children: [
           _StatCard(value: '$taskCount', label: 'TASKS TODAY'),
           const SizedBox(width: 8),
-          _StatCard(value: '🔥 7', label: 'DAY STREAK'),
+          const _StatCard(value: '🔥 7', label: 'DAY STREAK'),
           const SizedBox(width: 8),
-          _StatCard(value: '3', label: 'ONLINE NOW',
-              accent: const Color(0xFF22C55E)),
+          const _StatCard(value: '3', label: 'ONLINE NOW',
+              accent: Color(0xFF22C55E)),
         ],
       ),
     );
@@ -1025,7 +1254,7 @@ class _StatCard extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 8,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFF4B5563),
+                  color: Color(0xFF6B7280),
                   letterSpacing: 0.4,
                 )),
           ],

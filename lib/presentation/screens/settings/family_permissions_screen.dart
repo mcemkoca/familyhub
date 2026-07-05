@@ -243,11 +243,10 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     if (!_isAdmin) {
       return Scaffold(
-        backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+        backgroundColor: const Color(0xFF0A0A0F),
         appBar: ScreenHeader(
           title: 'İzinler ve Roller',
           showBack: true,
@@ -258,7 +257,7 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
     }
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
         title: 'İzinler ve Roller',
         showBack: true,
@@ -275,22 +274,22 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
                     child: Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: isDark ? AppColors.darkCard : const Color(0xFFFEF3C7),
+                        color: const Color(0xFF13131A),
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(
-                          color: isDark ? AppColors.darkBorder : const Color(0xFFFDE68A),
+                          color: const Color(0x1EFFFFFF),
                         ),
                       ),
-                      child: Row(
+                      child: const Row(
                         children: [
-                          const Icon(Icons.info_outline, color: Color(0xFFF59E0B)),
-                          const SizedBox(width: 12),
+                          Icon(Icons.info_outline, color: Color(0xFFF59E0B)),
+                          SizedBox(width: 12),
                           Expanded(
                             child: Text(
                               'Yönetici olarak üyelerin rollerini ve yetkilerini düzenleyebilirsiniz.',
                               style: TextStyle(
                                 fontSize: 13,
-                                color: isDark ? Colors.white70 : const Color(0xFF92400E),
+                                color: Colors.white70,
                               ),
                             ),
                           ),
@@ -307,10 +306,10 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
                       return Container(
                         margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
                         decoration: BoxDecoration(
-                          color: isDark ? AppColors.darkCard : Colors.white,
+                          color: const Color(0xFF13131A),
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
-                            color: isDark ? AppColors.darkBorder : AppColors.border,
+                            color: const Color(0x1EFFFFFF),
                           ),
                         ),
                         child: Theme(
@@ -327,17 +326,17 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
                             ),
                             title: Text(
                               member.name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
-                                color: isDark ? Colors.white : Colors.black87,
+                                color: Color(0xFFE5E7EB),
                               ),
                             ),
                             subtitle: Text(
                               _roleLabel(member.role),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 12,
-                                color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                                color: Color(0xFF6B7280),
                               ),
                             ),
                             children: [

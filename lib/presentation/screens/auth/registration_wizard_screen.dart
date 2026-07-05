@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../../config/constants.dart';
 import '../../../config/routes.dart';
 import '../../../services/auth_service.dart';
 import '../../../core/supabase_client.dart';
@@ -82,10 +81,9 @@ class _RegistrationWizardScreenState extends ConsumerState<RegistrationWizardScr
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -118,8 +116,8 @@ class _RegistrationWizardScreenState extends ConsumerState<RegistrationWizardScr
               child: LinearProgressIndicator(
                 value: (_currentStep + 1) / 6,
                 minHeight: 6,
-                backgroundColor: isDark ? AppColors.darkBorder : AppColors.border,
-                valueColor: const AlwaysStoppedAnimation<Color>(AppColors.cobalt),
+                backgroundColor: const Color(0x1EFFFFFF),
+                valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF6366F1)),
               ),
             ),
           ),

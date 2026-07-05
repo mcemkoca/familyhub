@@ -30,7 +30,6 @@ class QuickActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Semantics(
       button: true,
       label: label,
@@ -41,13 +40,13 @@ class QuickActionButton extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
           decoration: BoxDecoration(
-            color: isDark ? AppColors.darkCard : Colors.white,
+            color: const Color(0xFF13131A),
             borderRadius: BorderRadius.circular(16),
             border: isActive
                 ? Border.all(color: iconColor.withAlpha(80), width: 1.5)
                 : Border.all(
                     color: isDark
-                        ? AppColors.darkBorder.withAlpha(60)
+                        ? const Color(0x1EFFFFFF).withAlpha(60)
                         : const Color(0xFFF3F4F6),
                   ),
           ),
@@ -58,7 +57,7 @@ class QuickActionButton extends StatelessWidget {
                 height: 44,
                 decoration: BoxDecoration(
                   color: danger
-                      ? AppColors.error.withAlpha(isDark ? 25 : 15)
+                      ? AppColors.error.withAlpha(25)
                       : iconBg,
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -78,11 +77,11 @@ class QuickActionButton extends StatelessWidget {
                           width: 8,
                           height: 8,
                           decoration: BoxDecoration(
-                            color: AppColors.success,
+                            color: const Color(0xFF10B981),
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
-                                color: AppColors.success.withAlpha(100),
+                                color: const Color(0xFF10B981).withAlpha(100),
                                 blurRadius: 6,
                               ),
                             ],
@@ -104,19 +103,15 @@ class QuickActionButton extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                         color: danger
                             ? AppColors.error
-                            : (isDark
-                                ? AppColors.darkTextPrimary
-                                : AppColors.dark),
+                            : (const Color(0xFFE5E7EB)),
                       ),
                     ),
                     const SizedBox(height: 2),
                     Text(
                       description,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 13,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.slate,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                   ],
@@ -128,7 +123,7 @@ class QuickActionButton extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: AppColors.success.withAlpha(isDark ? 30 : 15),
+                    color: const Color(0xFF10B981).withAlpha(30),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
@@ -136,14 +131,14 @@ class QuickActionButton extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.success,
+                      color: Color(0xFF10B981),
                     ),
                   ),
                 ),
               Icon(
                 Icons.chevron_right,
                 size: 20,
-                color: isDark ? AppColors.darkBorder : AppColors.lightGray,
+                color: Colors.white.withAlpha(60),
               ),
             ],
           ),

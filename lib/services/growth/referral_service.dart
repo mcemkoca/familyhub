@@ -54,8 +54,9 @@ class ReferralService {
         })
         .eq('code', code)
         .select()
-        .single();
+        .maybeSingle();
 
+    if (referral == null) return;
     await _rewardInviter(referral['inviter_id'] as String);
 
     AnalyticsService.track(

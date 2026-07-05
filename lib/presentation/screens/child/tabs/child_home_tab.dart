@@ -71,9 +71,9 @@ class _GreetingHeader extends StatelessWidget {
           ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: AppSpacing.xs),
-        Text(
+        const Text(
           'Bugün neler yapacağına bir bakalım.',
-          style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+          style: TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
         ),
       ],
     );
@@ -252,7 +252,7 @@ class _StatCard extends StatelessWidget {
           Text(
             label,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280)),
           ),
         ],
       ),
@@ -290,16 +290,16 @@ class _TodaySchedulePreview extends StatelessWidget {
               return Container(
                 padding: const EdgeInsets.all(AppSpacing.md),
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade50,
+                  color: const Color(0x1AFFFFFF),
                   borderRadius: BorderRadius.circular(AppRadius.medium),
                 ),
-                child: Row(
+                child: const Row(
                   children: [
-                    Icon(Icons.beach_access, color: Colors.grey.shade400),
-                    const SizedBox(width: AppSpacing.sm),
+                    Icon(Icons.beach_access, color: Color(0xFF9CA3AF)),
+                    SizedBox(width: AppSpacing.sm),
                     Text(
                       'Bugün ders yok! Keyfini çıkar.',
-                      style: TextStyle(color: Colors.grey.shade500),
+                      style: TextStyle(color: Color(0xFF6B7280)),
                     ),
                   ],
                 ),
@@ -378,16 +378,16 @@ class _UpcomingHomeworksPreview extends StatelessWidget {
               return Container(
                 padding: const EdgeInsets.all(AppSpacing.md),
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade50,
+                  color: const Color(0x1AFFFFFF),
                   borderRadius: BorderRadius.circular(AppRadius.medium),
                 ),
-                child: Row(
+                child: const Row(
                   children: [
-                    Icon(Icons.celebration, color: Colors.grey.shade400),
-                    const SizedBox(width: AppSpacing.sm),
+                    Icon(Icons.celebration, color: Color(0xFF9CA3AF)),
+                    SizedBox(width: AppSpacing.sm),
                     Text(
                       'Tüm ödevler tamamlandı! 🎉',
-                      style: TextStyle(color: Colors.grey.shade500),
+                      style: TextStyle(color: Color(0xFF6B7280)),
                     ),
                   ],
                 ),
@@ -437,7 +437,7 @@ class _UpcomingHomeworksPreview extends StatelessWidget {
                                 fontSize: 11,
                                 color: h.isOverdue
                                     ? Colors.red
-                                    : Colors.grey.shade500,
+                                    : const Color(0xFF6B7280),
                               ),
                             ),
                         ],
@@ -513,7 +513,7 @@ class _AiSuggestionsSectionState extends State<_AiSuggestionsSection> {
             const Spacer(),
             GestureDetector(
               onTap: _refresh,
-              child: Icon(Icons.refresh, size: 18, color: Colors.grey.shade500),
+              child: const Icon(Icons.refresh, size: 18, color: Color(0xFF6B7280)),
             ),
           ],
         ),
@@ -544,25 +544,25 @@ class _AiSuggestionsSectionState extends State<_AiSuggestionsSection> {
                   color: const Color(0xFF1E293B),
                   borderRadius: BorderRadius.circular(AppRadius.large),
                 ),
-                child: Column(
+                child: const Column(
                   children: [
                     Icon(
                       Icons.lightbulb_outline,
-                      color: Colors.grey.shade500,
+                      color: Color(0xFF6B7280),
                       size: 32,
                     ),
-                    const SizedBox(height: AppSpacing.sm),
+                    SizedBox(height: AppSpacing.sm),
                     Text(
                       'Henüz AI önerisi yok',
-                      style: TextStyle(color: Colors.grey.shade400),
+                      style: TextStyle(color: Color(0xFF9CA3AF)),
                     ),
-                    const SizedBox(height: AppSpacing.xs),
+                    SizedBox(height: AppSpacing.xs),
                     Text(
                       'Daha fazla aktivite kaydı oluşunca öneriler gelecek.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 12,
-                        color: Colors.grey.shade600,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                   ],
@@ -639,14 +639,14 @@ class _AiSuggestionCard extends StatelessWidget {
                 const SizedBox(height: AppSpacing.xs),
                 Text(
                   suggestion.description,
-                  style: TextStyle(fontSize: 12, color: Colors.grey.shade400),
+                  style: const TextStyle(fontSize: 12, color: Color(0xFF9CA3AF)),
                 ),
                 const SizedBox(height: AppSpacing.xs),
                 Text(
                   suggestion.reason,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 11,
-                    color: Colors.grey.shade500,
+                    color: Color(0xFF6B7280),
                     fontStyle: FontStyle.italic,
                   ),
                 ),

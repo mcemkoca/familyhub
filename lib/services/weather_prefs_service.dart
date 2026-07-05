@@ -46,7 +46,7 @@ class WeatherPrefsService {
       'user_id': userId,
       'city': city,
       'updated_at': DateTime.now().toIso8601String(),
-    });
+    }, onConflict: 'user_id');
 
     await _weatherBox.put('weather_city', city);
   }
@@ -59,7 +59,7 @@ class WeatherPrefsService {
       'user_id': userId,
       'unit': useCelsius ? 'celsius' : 'fahrenheit',
       'updated_at': DateTime.now().toIso8601String(),
-    });
+    }, onConflict: 'user_id');
 
     await _weatherBox.put('weather_unit', useCelsius ? 'celsius' : 'fahrenheit');
   }

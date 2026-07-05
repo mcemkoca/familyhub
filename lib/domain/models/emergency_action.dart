@@ -630,29 +630,54 @@ class EmergencyAction {
 
   factory EmergencyAction.fromJson(
     Map<String, dynamic> json,
-  ) => EmergencyAction(
-    actionId: json['actionId'] as String?,
-    familyId: json['familyId'] as String? ?? '',
-    triggeredBy: json['triggeredBy'] as String? ?? '',
-    trigger: EmergencyTrigger.fromJson(json['trigger'] as Map<String, dynamic>),
-    emergency: EmergencyDetails.fromJson(
-      json['emergency'] as Map<String, dynamic>,
-    ),
-    autoActions: AutoActions.fromJson(
-      json['autoActions'] as Map<String, dynamic>,
-    ),
-    escalationChain: EscalationChain.fromJson(
-      json['escalationChain'] as Map<String, dynamic>,
-    ),
-    status: EmergencyStatus.fromJson(json['status'] as Map<String, dynamic>),
-    responseLog:
-        (json['responseLog'] as List<dynamic>?)
-            ?.map((e) => ResponseLogEntry.fromJson(e as Map<String, dynamic>))
-            .toList() ??
-        [],
-    createdAt: DateTime.tryParse(json['createdAt'] as String) ?? DateTime.now(),
-    updatedAt: DateTime.tryParse(json['updatedAt'] as String) ?? DateTime.now(),
-  );
+  ) {
+    // SQL flat kolonlar → nested model dönüşümü
+    final triggerMap = json['trigger'] as Map<String, dynamic>? ?? {
+      'type': json['trigger_type'] ?? 'manual_sos',
+      'timestamp': json['trigger_timestamp'] ?? json['created_at'],
+      'latitude': json['trigger_latitude'],
+      'longitude': json['trigger_longitude'],
+      'confidence': json['trigger_confidence'] ?? 1.0,
+    };
+    final emergencyMap = json['emergency'] as Map<String, dynamic>? ?? {
+      'severity': json['severity'] ?? 'high',
+      'category': json['category'] ?? 'other',
+      'description': json['description'],
+      'isConfirmed': json['is_confirmed'] ?? false,
+      'confirmationMethod': json['confirmation_method'],
+    };
+    final statusMap = json['status'] as Map<String, dynamic>? ?? {
+      'state': json['status_state'] ?? 'triggered',
+      'currentStep': json['current_step'] ?? 0,
+      'startedAt': json['started_at'] ?? json['created_at'],
+      'lastActionAt': json['last_action_at'],
+    };
+    final autoActionsMap = json['autoActions'] as Map<String, dynamic>?
+        ?? json['auto_actions'] as Map<String, dynamic>? ?? {};
+    final escalationMap = json['escalationChain'] as Map<String, dynamic>?
+        ?? json['escalation_chain'] as Map<String, dynamic>? ?? {'steps': []};
+
+    return EmergencyAction(
+      actionId: json['actionId'] as String? ?? json['id'] as String?,
+      familyId: json['familyId'] as String? ?? json['family_id'] as String? ?? '',
+      triggeredBy: json['triggeredBy'] as String? ?? json['triggered_by']?.toString() ?? '',
+      trigger: EmergencyTrigger.fromJson(triggerMap),
+      emergency: EmergencyDetails.fromJson(emergencyMap),
+      autoActions: AutoActions.fromJson(autoActionsMap),
+      escalationChain: EscalationChain.fromJson(escalationMap),
+      status: EmergencyStatus.fromJson(statusMap),
+      responseLog: (json['responseLog'] as List<dynamic>?
+              ?? json['response_log'] as List<dynamic>? ?? [])
+          .map((e) => ResponseLogEntry.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      createdAt: DateTime.tryParse(
+              json['createdAt'] as String? ?? json['created_at'] as String? ?? '') ??
+          DateTime.now(),
+      updatedAt: DateTime.tryParse(
+              json['updatedAt'] as String? ?? json['updated_at'] as String? ?? '') ??
+          DateTime.now(),
+    );
+  }
 
   Map<String, dynamic> toJson() => {
     'actionId': actionId,

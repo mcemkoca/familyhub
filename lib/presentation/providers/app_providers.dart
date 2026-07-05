@@ -14,6 +14,7 @@ import '../../services/weather_service.dart';
 import '../../services/location_weather_service.dart';
 import '../../services/hive_service.dart';
 import '../../repositories/mood_repository.dart';
+import '../../repositories/activity_repository.dart';
 import '../../domain/models/hub_state.dart';
 
 // Re-export auth providers from auth_service.dart
@@ -35,10 +36,18 @@ final localeProvider = StateProvider<Locale>((ref) {
       return const Locale('de', 'DE');
     case 'Nederlands':
       return const Locale('nl', 'NL');
+    case 'Français':
+      return const Locale('fr', 'FR');
     case 'Türkçe':
     default:
       return const Locale('tr', 'TR');
   }
+});
+
+/// Seçili ülke kodu (BE/TR/NL/FR/DE) — register'da belirlenir, ayarlardan değişir.
+/// Ülkeye bağlı içerik (dil, para birimi, gider şablonu, market) bunu kullanır.
+final countryProvider = StateProvider<String>((ref) {
+  return HiveService.getSetting('country') ?? 'BE';
 });
 
 final familyIdProvider = FutureProvider<String?>((ref) async {
@@ -147,6 +156,19 @@ final familyMembersProvider = StateProvider<List<FamilyMember>>((ref) {
   return asyncValue.valueOrNull ?? [];
 });
 
+/// Current authenticated user's role in the family.
+/// Falls back to [MemberRole.parent] if not found (e.g. during loading).
+final currentMemberRoleProvider = Provider<MemberRole>((ref) {
+  final members = ref.watch(familyMembersProvider);
+  final userId = AuthService.currentUserId;
+  if (userId == null || members.isEmpty) return MemberRole.parent;
+  try {
+    return members.firstWhere((m) => m.id == userId).role;
+  } catch (_) {
+    return MemberRole.parent;
+  }
+});
+
 final hubCardsProvider = Provider<List<HubCard>>((ref) {
   return [
     HubCard(
@@ -155,7 +177,7 @@ final hubCardsProvider = Provider<List<HubCard>>((ref) {
       title: 'Görevler',
       subtitle: 'Aile görevlerini yönet',
       progress: 0,
-      gradient: [AppColors.purple, AppColors.cobalt],
+      gradient: [const Color(0xFF8B5CF6), const Color(0xFF6366F1)],
       icon: Icons.task_alt,
       updatedAt: DateTime.now(),
     ),
@@ -175,7 +197,7 @@ final hubCardsProvider = Provider<List<HubCard>>((ref) {
       title: 'Bütçe',
       subtitle: 'Harcamaları takip et',
       progress: 0,
-      gradient: [AppColors.green, AppColors.cobalt],
+      gradient: [AppColors.green, const Color(0xFF6366F1)],
       icon: Icons.account_balance_wallet,
       updatedAt: DateTime.now(),
     ),
@@ -185,7 +207,7 @@ final hubCardsProvider = Provider<List<HubCard>>((ref) {
       title: 'Rehber',
       subtitle: 'Aile rehberi',
       progress: 0,
-      gradient: [AppColors.blue, AppColors.purple],
+      gradient: [AppColors.blue, const Color(0xFF8B5CF6)],
       icon: Icons.contacts,
       updatedAt: DateTime.now(),
     ),
@@ -195,7 +217,7 @@ final hubCardsProvider = Provider<List<HubCard>>((ref) {
       title: 'Galeri',
       subtitle: 'Fotoğraf ve videolar',
       progress: 0,
-      gradient: [AppColors.pink, AppColors.orange],
+      gradient: [const Color(0xFFEC4899), AppColors.orange],
       icon: Icons.photo_library,
       updatedAt: DateTime.now(),
     ),
@@ -205,7 +227,7 @@ final hubCardsProvider = Provider<List<HubCard>>((ref) {
       title: 'Belgeler',
       subtitle: 'OCR ve belge yönetimi',
       progress: 0,
-      gradient: [AppColors.slate, AppColors.dark],
+      gradient: [const Color(0xFF6B7280), const Color(0xFFE5E7EB)],
       icon: Icons.folder_open,
       updatedAt: DateTime.now(),
     ),
@@ -215,7 +237,7 @@ final hubCardsProvider = Provider<List<HubCard>>((ref) {
       title: 'Mutfak',
       subtitle: 'Tarif & yemek önerileri',
       progress: 0,
-      gradient: [Color(0xFFF97316), Color(0xFFEF4444)],
+      gradient: [const Color(0xFFF97316), const Color(0xFFEF4444)],
       icon: Icons.restaurant,
       updatedAt: DateTime.now(),
     ),
@@ -225,7 +247,7 @@ final hubCardsProvider = Provider<List<HubCard>>((ref) {
       title: 'Eğitim',
       subtitle: 'Aktivite & öğrenme',
       progress: 0,
-      gradient: [Color(0xFF8B5CF6), Color(0xFF6366F1)],
+      gradient: [const Color(0xFF8B5CF6), const Color(0xFF6366F1)],
       icon: Icons.school,
       updatedAt: DateTime.now(),
     ),
@@ -235,7 +257,7 @@ final hubCardsProvider = Provider<List<HubCard>>((ref) {
       title: 'Alışveriş',
       subtitle: 'Alışveriş listesi',
       progress: 0,
-      gradient: [AppColors.softMint, AppColors.cobalt],
+      gradient: [const Color(0xFF10B981), const Color(0xFF6366F1)],
       icon: Icons.shopping_cart_outlined,
       updatedAt: DateTime.now(),
     ),
@@ -245,7 +267,7 @@ final hubCardsProvider = Provider<List<HubCard>>((ref) {
       title: 'Çocuk',
       subtitle: 'Gelişim ve görevler',
       progress: 0,
-      gradient: [AppColors.pink, Color(0xFFEC4899)],
+      gradient: [const Color(0xFFEC4899), const Color(0xFFEC4899)],
       icon: Icons.child_care,
       updatedAt: DateTime.now(),
     ),
@@ -255,8 +277,7 @@ final hubCardsProvider = Provider<List<HubCard>>((ref) {
 final recentActivityProvider = FutureProvider<List<Activity>>((ref) async {
   final familyId = await ref.watch(familyIdProvider.future);
   if (familyId == null) return [];
-  // TODO: Replace with ActivityRepository when available
-  return [];
+  return ActivityRepository().getRecentActivities();
 });
 
 // ── Tasks ──
@@ -575,6 +596,6 @@ final weatherProvider = FutureProvider<WeatherData>((ref) async {
 
 // ── Theme & Appearance ──
 
-final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.light);
-final accentColorProvider = StateProvider<Color>((ref) => AppColors.cobalt);
+final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.system);
+final accentColorProvider = StateProvider<Color>((ref) => const Color(0xFF6366F1));
 final fontScaleProvider = StateProvider<double>((ref) => 1.0);

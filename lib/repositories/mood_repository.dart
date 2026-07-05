@@ -57,7 +57,8 @@ class MoodRepository with RepositoryErrorHandler {
           .insert({
             'family_id': familyId,
             'user_id': userId,
-            'emoji': emoji,
+            'mood': emoji,   // SQL kolonu 'mood', emoji değerini tutar
+            'emoji': emoji,  // ek kolon (migration 062 ile eklendi)
             'note': note,
           })
           .select()
@@ -83,7 +84,8 @@ class MoodRepository with RepositoryErrorHandler {
       id: json['id'] as String,
       userId: json['user_id'] as String,
       familyId: json['family_id'] as String,
-      emoji: json['emoji'] as String,
+      // 'emoji' kolonu varsa onu, yoksa 'mood' kolonunu kullan
+      emoji: (json['emoji'] ?? json['mood']) as String? ?? '😊',
       note: json['note'] as String?,
       createdAt: DateTime.parse(json['created_at'] as String),
     );

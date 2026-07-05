@@ -6,7 +6,6 @@ import 'package:encrypt/encrypt.dart' as enc;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:local_auth_android/local_auth_android.dart';
-import 'package:local_auth_darwin/local_auth_darwin.dart';
 
 /// AES-256 encryption service for sensitive local data.
 ///
@@ -20,10 +19,6 @@ class EncryptionService {
       encryptedSharedPreferences: true,
       keyCipherAlgorithm: KeyCipherAlgorithm.RSA_ECB_PKCS1Padding,
       storageCipherAlgorithm: StorageCipherAlgorithm.AES_GCM_NoPadding,
-    ),
-    iOptions: IOSOptions(
-      accountName: 'familyhub_secure_v1',
-      accessibility: KeychainAccessibility.unlocked_this_device,
     ),
   );
   static const _keyStorageKey = 'app_encryption_key_v2';
@@ -203,9 +198,6 @@ class EncryptionService {
           signInTitle: 'FamilyHub Güvenlik',
           cancelButton: 'İptal',
           signInHint: 'Biyometrik doğrulama',
-        ),
-        IOSAuthMessages(
-          cancelButton: 'İptal',
         ),
       ],
       biometricOnly: true,

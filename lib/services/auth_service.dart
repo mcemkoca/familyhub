@@ -7,7 +7,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../core/errors.dart';
 import '../core/supabase_client.dart';
-import '../firebase_options.dart';
 import '../domain/models/user_model.dart';
 import 'fcm_service.dart';
 
@@ -19,9 +18,10 @@ class AuthService {
 
   static SupabaseClient? get client => SupabaseConfig.safeClient;
 
-  /// True when Firebase/Google Sign-In has a real (non-dummy) configuration.
-  static bool get isGoogleSignInConfigured =>
-      DefaultFirebaseOptions.currentPlatform.apiKey != 'DUMMY-API-KEY';
+  static const _googleWebClientId =
+      '631270363894-2c8m0ea0ub83u01ne379cpvc5mp6221d.apps.googleusercontent.com';
+
+  static bool get isGoogleSignInConfigured => true;
 
   static User? get currentUser => client?.auth.currentUser;
 
@@ -116,7 +116,7 @@ class AuthService {
         'display_name': name.trim(),
         'email': email.trim(),
         'created_at': DateTime.now().toIso8601String(),
-      });
+      }, onConflict: 'id');
     } catch (e) {
       throw AppAuthException('Profil oluşturulamadı: $e');
     }
@@ -248,7 +248,10 @@ class AuthService {
         'Lütfen e-posta ve şifre ile giriş yapın.',
       );
     }
-    final googleSignIn = GoogleSignIn(scopes: ['email', 'profile']);
+    final googleSignIn = GoogleSignIn(
+      scopes: ['email', 'profile'],
+      serverClientId: _googleWebClientId,
+    );
     final account = await googleSignIn.signIn();
     if (account == null) {
       throw AppAuthException('Google girişi iptal edildi');
@@ -298,18 +301,16 @@ class AuthService {
         'email': email,
         'avatar_url': avatarUrl,
         'updated_at': DateTime.now().toIso8601String(),
-      });
+      }, onConflict: 'id');
     } catch (e) {
       debugPrint('syncUserPostLogin profile upsert error: $e');
     }
 
     // 2. Check for existing identities (account linking hint)
     try {
-      final identities = await supabase
-          .from('auth.identities')
-          .select('id, provider')
-          .eq('user_id', userId);
-      debugPrint('User identities: $identities');
+      final user = supabase.auth.currentUser;
+      final identities = user?.identities ?? [];
+      debugPrint('User identities: ${identities.map((i) => i.provider).toList()}');
     } catch (e) {
       debugPrint('Identity check error: $e');
     }

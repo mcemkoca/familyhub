@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import '../../../config/routes.dart';
 import '../../../core/supabase_client.dart';
 import '../../../services/auth_service.dart';
-import '../../../services/child_auth_service.dart';
 import '../../../services/hive_service.dart';
 import '../../providers/app_providers.dart';
 
@@ -162,7 +161,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery.sizeOf(context);
 
     return Scaffold(
       body: Container(
@@ -188,12 +187,12 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
               right: -60,
               child: AnimatedBuilder(
                 animation: _glowController,
-                builder: (_, __) => Opacity(
+                builder: (_, _) => Opacity(
                   opacity: 0.15 * _glowPulse.value,
                   child: Container(
                     width: 220,
                     height: 220,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.white,
                     ),
@@ -206,12 +205,12 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
               left: -40,
               child: AnimatedBuilder(
                 animation: _glowController,
-                builder: (_, __) => Opacity(
+                builder: (_, _) => Opacity(
                   opacity: 0.10 * _glowPulse.value,
                   child: Container(
                     width: 280,
                     height: 280,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.white,
                     ),
@@ -230,7 +229,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                   // Logo
                   AnimatedBuilder(
                     animation: _logoController,
-                    builder: (_, __) => Opacity(
+                    builder: (_, _) => Opacity(
                       opacity: _logoOpacity.value,
                       child: ScaleTransition(
                         scale: _logoScale,
@@ -244,7 +243,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                   // App name + tagline
                   AnimatedBuilder(
                     animation: _textController,
-                    builder: (_, __) => Opacity(
+                    builder: (_, _) => Opacity(
                       opacity: _textOpacity.value,
                       child: SlideTransition(
                         position: _textSlide,
@@ -279,7 +278,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                   // Feature pills
                   AnimatedBuilder(
                     animation: _featuresController,
-                    builder: (_, __) => Opacity(
+                    builder: (_, _) => Opacity(
                       opacity: _featuresOpacity.value,
                       child: _buildFeaturePills(),
                     ),
@@ -290,7 +289,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                   // Bottom family illustration row
                   AnimatedBuilder(
                     animation: _textController,
-                    builder: (_, __) => Opacity(
+                    builder: (_, _) => Opacity(
                       opacity: _textOpacity.value,
                       child: _buildFamilyRow(),
                     ),
@@ -313,7 +312,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
   Widget _buildLogo() {
     return AnimatedBuilder(
       animation: _glowController,
-      builder: (_, __) => Container(
+      builder: (_, _) => Container(
         width: 160,
         height: 160,
         decoration: BoxDecoration(
@@ -377,9 +376,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
   }
 
   Widget _buildFamilyRow() {
-    return Row(
+    return const Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
+      children: [
         _FloatingMember('👩', 'Anne', Color(0xFFF093FB)),
         SizedBox(width: 12),
         _FloatingMember('👨', 'Baba', Color(0xFF4FACFE)),
@@ -455,7 +454,7 @@ class _LoadingDotsState extends State<_LoadingDots>
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _controller,
-      builder: (_, __) {
+      builder: (_, _) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(3, (i) {

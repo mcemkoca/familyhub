@@ -17,6 +17,8 @@ class MainShell extends StatefulWidget {
 }
 
 class _MainShellState extends State<MainShell> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   int _currentIndex = 0;
   bool _menuOpen = false;
   StreamSubscription<dynamic>? _incomingCallSub;
@@ -109,7 +111,6 @@ class _MainShellState extends State<MainShell> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final safeBottom = MediaQuery.of(context).padding.bottom;
 
     return Scaffold(
@@ -145,12 +146,12 @@ class _MainShellState extends State<MainShell> {
             ),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFF6366F1).withAlpha(isDark ? 25 : 12),
+                color: const Color(0xFF6366F1).withAlpha(25),
                 blurRadius: 24,
                 offset: const Offset(0, 8),
               ),
               BoxShadow(
-                color: Colors.black.withAlpha(isDark ? 60 : 12),
+                color: Colors.black.withAlpha(60),
                 blurRadius: 20,
                 offset: const Offset(0, 4),
               ),
@@ -180,7 +181,6 @@ class _MainShellState extends State<MainShell> {
   }
 
   Widget _buildNavItem(int index) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final isActive = _currentIndex == index;
     final tab = _tabs[index];
     final icon = tab['icon'] as IconData;
@@ -206,7 +206,7 @@ class _MainShellState extends State<MainShell> {
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: isActive
-                          ? const Color(0xFF6366F1).withAlpha(isDark ? 40 : 20)
+                          ? const Color(0xFF6366F1).withAlpha(40)
                           : Colors.transparent,
                       shape: BoxShape.circle,
                       boxShadow: isActive && isDark
@@ -223,9 +223,7 @@ class _MainShellState extends State<MainShell> {
                       size: isActive ? 26 : 24,
                       color: isActive
                           ? const Color(0xFF6366F1)
-                          : (isDark
-                              ? AppColors.darkTextSecondary
-                              : AppColors.slate),
+                          : (const Color(0xFF6B7280)),
                     ),
                   ),
                   if (badge != null && badge > 0)
@@ -261,9 +259,7 @@ class _MainShellState extends State<MainShell> {
                   fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
                   color: isActive
                       ? const Color(0xFF6366F1)
-                      : (isDark
-                          ? AppColors.darkTextSecondary
-                          : AppColors.slate),
+                      : (const Color(0xFF6B7280)),
                 ),
               ),
             ],

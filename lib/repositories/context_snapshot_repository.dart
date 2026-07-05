@@ -41,7 +41,8 @@ class ContextSnapshotRepository with RepositoryErrorHandler {
           .eq('member_id', memberId)
           .order('created_at', ascending: false)
           .limit(1)
-          .single();
+          .maybeSingle();
+      if (response == null) throw Exception('Snapshot bulunamadı');
       return ContextSnapshot.fromJson(response);
     }, 'getLatestSnapshot');
   }

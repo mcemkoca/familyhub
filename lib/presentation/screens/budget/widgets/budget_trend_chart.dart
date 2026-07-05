@@ -28,11 +28,11 @@ class _TrendChart extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
-              color: Colors.grey.shade200,
+              color: Color(0xFF9CA3AF),
               blurRadius: 12,
-              offset: const Offset(0, 4),
+              offset: Offset(0, 4),
             ),
           ],
         ),
@@ -64,7 +64,7 @@ class _TrendChart extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 8),
                             child: Text(
                               DateFormat('E', 'tr_TR').format(days[idx]).substring(0, 2),
-                              style: TextStyle(fontSize: 11, color: Colors.grey.shade500),
+                              style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280)),
                             ),
                           );
                         },
@@ -80,21 +80,21 @@ class _TrendChart extends StatelessWidget {
                     LineChartBarData(
                       spots: spots,
                       isCurved: true,
-                      color: AppColors.cobalt,
+                      color: const Color(0xFF6366F1),
                       barWidth: 3,
                       dotData: FlDotData(
                         show: true,
                         getDotPainter: (spot, percent, bar, idx) =>
                             FlDotCirclePainter(
                           radius: 4,
-                          color: AppColors.cobalt,
+                          color: const Color(0xFF6366F1),
                           strokeWidth: 2,
                           strokeColor: Colors.white,
                         ),
                       ),
                       belowBarData: BarAreaData(
                         show: true,
-                        color: AppColors.cobalt.withAlpha(20),
+                        color: const Color(0xFF6366F1).withAlpha(20),
                       ),
                     ),
                   ],

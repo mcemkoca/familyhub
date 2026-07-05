@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../../config/constants.dart';
 import '../../../config/routes.dart';
 
 class AboutAppScreen extends StatelessWidget {
@@ -11,14 +10,14 @@ class AboutAppScreen extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       backgroundColor:
-          isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+          const Color(0xFF0A0A0F),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
             expandedHeight: 220,
             pinned: true,
             backgroundColor:
-                isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+                const Color(0xFF0A0A0F),
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () => context.pop(),
@@ -103,11 +102,11 @@ class AboutAppScreen extends StatelessWidget {
                   const SizedBox(height: 10),
                   _QuickLinks(isDark: isDark),
                   const SizedBox(height: 24),
-                  Center(
+                  const Center(
                     child: Text(
                       '© 2025 FamilyHub • Tüm hakları saklıdır',
-                      style: const TextStyle(
-                          fontSize: 12, color: AppColors.slate),
+                      style: TextStyle(
+                          fontSize: 12, color: Color(0xFF6B7280)),
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -128,11 +127,11 @@ class _SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Text(title,
-      style: TextStyle(
+      style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w800,
           color:
-              isDark ? AppColors.darkTextPrimary : AppColors.dark));
+              Color(0xFFE5E7EB)));
 }
 
 class _FeatureGrid extends StatelessWidget {
@@ -180,12 +179,12 @@ class _FeatureGrid extends StatelessWidget {
         return Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: isDark ? AppColors.darkCard : Colors.white,
+            color: const Color(0xFF13131A),
             borderRadius: BorderRadius.circular(14),
             border: Border.all(color: color.withAlpha(40)),
             boxShadow: [
               BoxShadow(
-                  color: Colors.black.withAlpha(isDark ? 20 : 6),
+                  color: Colors.black.withAlpha(20),
                   blurRadius: 6,
                   offset: const Offset(0, 2))
             ],
@@ -207,17 +206,15 @@ class _FeatureGrid extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(title,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w700,
-                            color: isDark
-                                ? AppColors.darkTextPrimary
-                                : AppColors.dark)),
+                            color: Color(0xFFE5E7EB))),
                     Text(desc,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                            fontSize: 9, color: AppColors.slate, height: 1.3)),
+                            fontSize: 9, color: Color(0xFF6B7280), height: 1.3)),
                   ],
                 ),
               ),
@@ -251,11 +248,11 @@ class _TechStack extends StatelessWidget {
           margin: const EdgeInsets.only(bottom: 8),
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
           decoration: BoxDecoration(
-            color: isDark ? AppColors.darkCard : Colors.white,
+            color: const Color(0xFF13131A),
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
-                  color: Colors.black.withAlpha(isDark ? 20 : 6),
+                  color: Colors.black.withAlpha(20),
                   blurRadius: 4)
             ],
           ),
@@ -268,15 +265,13 @@ class _TechStack extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(name,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w700,
-                            color: isDark
-                                ? AppColors.darkTextPrimary
-                                : AppColors.dark)),
+                            color: Color(0xFFE5E7EB))),
                     Text(desc,
                         style: const TextStyle(
-                            fontSize: 11, color: AppColors.slate)),
+                            fontSize: 11, color: Color(0xFF6B7280))),
                   ],
                 ),
               ),
@@ -333,7 +328,7 @@ class _StatCard extends StatelessWidget {
                       color: color)),
               Text(label,
                   style: const TextStyle(
-                      fontSize: 10, color: AppColors.slate)),
+                      fontSize: 10, color: Color(0xFF6B7280))),
             ],
           ),
         ),

@@ -16,9 +16,9 @@ class _AIStatRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(fontSize: 14, color: Colors.grey.shade600)),
+          Text(label, style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
           Text(
-            textValue ?? NumberFormat.currency(symbol: '₺').format(value ?? 0),
+            textValue ?? NumberFormat.currency(symbol: '€').format(value ?? 0),
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: color),
           ),
         ],

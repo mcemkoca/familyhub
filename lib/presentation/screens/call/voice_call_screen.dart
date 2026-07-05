@@ -212,7 +212,7 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.darkBackground,
+      backgroundColor: const Color(0xFF0A0A0F),
       body: SafeArea(
         child: Column(
           children: [
@@ -255,13 +255,13 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
       return CircleAvatar(
         radius: 60,
         backgroundImage: NetworkImage(_avatarUrl!),
-        backgroundColor: AppColors.darkCard,
+        backgroundColor: const Color(0xFF13131A),
       );
     }
     final initial = _displayName.isNotEmpty ? _displayName[0].toUpperCase() : '?';
     return CircleAvatar(
       radius: 60,
-      backgroundColor: AppColors.cobalt,
+      backgroundColor: const Color(0xFF6366F1),
       child: Text(
         initial,
         style: const TextStyle(
@@ -324,7 +324,7 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
         ),
         _roundButton(
           icon: _isSpeakerOn ? Icons.volume_up : Icons.volume_down,
-          color: _isSpeakerOn ? AppColors.cobalt : Colors.white24,
+          color: _isSpeakerOn ? const Color(0xFF6366F1) : Colors.white24,
           iconColor: _isSpeakerOn ? Colors.white : Colors.white,
           label: _isSpeakerOn ? 'Hoparlör' : 'Kulaklık',
           onTap: _toggleSpeaker,

@@ -21,6 +21,8 @@ class ProfileEditScreen extends ConsumerStatefulWidget {
 }
 
 class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
@@ -271,8 +273,7 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = isDark ? AppColors.darkBackground : AppColors.cloudWhite;
+    final bg = const Color(0xFF0A0A0F);
 
     if (_isLoading) {
       return Scaffold(
@@ -302,15 +303,15 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
                   height: 16,
                   child: CircularProgressIndicator(
                     strokeWidth: 2,
-                    color: AppColors.cobalt,
+                    color: Color(0xFF6366F1),
                   ),
                 )
               : Text(
                   'Kaydet',
                   style: TextStyle(
                     color: _nameController.text.trim().isEmpty
-                        ? AppColors.lightGray
-                        : AppColors.cobalt,
+                        ? const Color(0xFF9CA3AF)
+                        : const Color(0xFF6366F1),
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -333,10 +334,10 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
                           width: 100,
                           height: 100,
                           decoration: BoxDecoration(
-                            color: _avatarUrl == null ? AppColors.cobalt : null,
+                            color: _avatarUrl == null ? const Color(0xFF6366F1) : null,
                             borderRadius: BorderRadius.circular(32),
                             border: Border.all(
-                              color: isDark ? AppColors.darkCard : Colors.white,
+                              color: const Color(0xFF13131A),
                               width: 4,
                             ),
                             image: _avatarUrl != null
@@ -368,12 +369,10 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
                             width: 32,
                             height: 32,
                             decoration: BoxDecoration(
-                              color: AppColors.cobalt,
+                              color: const Color(0xFF6366F1),
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
-                                color: isDark
-                                    ? AppColors.darkCard
-                                    : Colors.white,
+                                color: const Color(0xFFE5E7EB),
                                 width: 2,
                               ),
                             ),
@@ -438,7 +437,6 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
     Widget? suffix,
     VoidCallback? onChanged,
   }) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
       child: Column(
@@ -446,10 +444,10 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
         children: [
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w500,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: Color(0xFF6B7280),
             ),
           ),
           const SizedBox(height: 8),
@@ -462,17 +460,17 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
               hintText: hint,
               hintStyle: TextStyle(
                 color: isDark
-                    ? AppColors.darkTextSecondary
-                    : AppColors.lightGray,
+                    ? const Color(0xFF6B7280)
+                    : const Color(0xFF9CA3AF),
               ),
               prefixIcon: Icon(
                 icon,
                 size: 20,
-                color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                color: const Color(0xFF6B7280),
               ),
               suffixIcon: suffix,
               filled: true,
-              fillColor: isDark ? AppColors.darkCard : const Color(0xFFF8FAFC),
+              fillColor: const Color(0xFF13131A),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
@@ -484,8 +482,8 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
             ),
             style: TextStyle(
               color: enabled
-                  ? (isDark ? AppColors.darkTextPrimary : AppColors.dark)
-                  : AppColors.lightGray,
+                  ? (const Color(0xFFE5E7EB))
+                  : const Color(0xFF9CA3AF),
             ),
           ),
         ],

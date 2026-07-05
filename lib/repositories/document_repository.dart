@@ -5,6 +5,47 @@ import '../core/supabase_client.dart';
 import '../core/errors.dart' as app_errors;
 import '../core/utils/repository_mixin.dart';
 
+/// Document categories matching Belgium family needs.
+enum DocumentCategory {
+  identity,
+  health,
+  insurance,
+  school,
+  residence,
+  vehicle,
+  tax,
+  mutualite,
+  other,
+}
+
+extension DocumentCategoryExt on DocumentCategory {
+  String get label => switch (this) {
+    DocumentCategory.identity  => 'Kimlik / Pasaport',
+    DocumentCategory.health    => 'Sağlık',
+    DocumentCategory.insurance => 'Sigorta',
+    DocumentCategory.school    => 'Okul',
+    DocumentCategory.residence => 'İkamet',
+    DocumentCategory.vehicle   => 'Araç',
+    DocumentCategory.tax       => 'Vergi',
+    DocumentCategory.mutualite => 'Mutualité',
+    DocumentCategory.other     => 'Diğer',
+  };
+
+  String get dbValue => name;
+
+  static DocumentCategory fromString(String? v) => switch (v) {
+    'identity'  => DocumentCategory.identity,
+    'health'    => DocumentCategory.health,
+    'insurance' => DocumentCategory.insurance,
+    'school'    => DocumentCategory.school,
+    'residence' => DocumentCategory.residence,
+    'vehicle'   => DocumentCategory.vehicle,
+    'tax'       => DocumentCategory.tax,
+    'mutualite' => DocumentCategory.mutualite,
+    _           => DocumentCategory.other,
+  };
+}
+
 class FamilyDocument {
   final String id;
   final String title;
@@ -16,6 +57,8 @@ class FamilyDocument {
   final String? relatedTaskId;
   final String? uploadedBy;
   final DateTime createdAt;
+  final DocumentCategory category;
+  final DateTime? expiryDate;
 
   FamilyDocument({
     required this.id,
@@ -28,6 +71,8 @@ class FamilyDocument {
     this.relatedTaskId,
     this.uploadedBy,
     required this.createdAt,
+    this.category = DocumentCategory.other,
+    this.expiryDate,
   });
 
   factory FamilyDocument.fromJson(Map<String, dynamic> json) => FamilyDocument(
@@ -43,7 +88,27 @@ class FamilyDocument {
     createdAt: DateTime.parse(
       (json['created_at'] as String?) ?? DateTime.now().toIso8601String(),
     ),
+    category: DocumentCategoryExt.fromString(json['category'] as String?),
+    expiryDate: json['expiry_date'] != null
+        ? DateTime.tryParse(json['expiry_date'] as String)
+        : null,
   );
+
+  /// Days until expiry. Negative = already expired.
+  int? get daysUntilExpiry {
+    if (expiryDate == null) return null;
+    return expiryDate!.difference(DateTime.now()).inDays;
+  }
+
+  bool get isExpiringSoon {
+    final d = daysUntilExpiry;
+    return d != null && d >= 0 && d <= 30;
+  }
+
+  bool get isExpired {
+    final d = daysUntilExpiry;
+    return d != null && d < 0;
+  }
 }
 
 class DocumentRepository with RepositoryErrorHandler {
@@ -99,6 +164,8 @@ class DocumentRepository with RepositoryErrorHandler {
     String fileType = 'pdf',
     String? ocrText,
     Map<String, dynamic>? extractedData,
+    DocumentCategory category = DocumentCategory.other,
+    DateTime? expiryDate,
   }) async {
     return handleRepositoryCall(() async {
       _checkAuth();
@@ -122,6 +189,8 @@ class DocumentRepository with RepositoryErrorHandler {
             'ocr_text': ocrText,
             'extracted_data': extractedData,
             'uploaded_by': _userId,
+            'category': category.dbValue,
+            'expiry_date': expiryDate?.toIso8601String(),
           })
           .select()
           .single();

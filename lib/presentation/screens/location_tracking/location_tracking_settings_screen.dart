@@ -69,7 +69,7 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
             const SizedBox(height: 8),
             Text(
               _priorityDescription(),
-              style: TextStyle(color: Colors.grey.shade400, fontSize: 13),
+              style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13),
             ),
           ]),
 
@@ -77,7 +77,7 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
             LinearProgressIndicator(
               value: 0.58,
               minHeight: 12,
-              backgroundColor: Colors.grey.shade800,
+              backgroundColor: const Color(0xFF374151),
               valueColor: AlwaysStoppedAnimation<Color>(Colors.green.shade400),
             ),
             const SizedBox(height: 8),
@@ -154,7 +154,7 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(color: Colors.grey.shade400, fontSize: 13)),
+          Text(label, style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
           Text(value, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
         ],
       ),
@@ -170,7 +170,7 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
         config != null
             ? '${config.updateIntervalSeconds}s | ${config.accuracy} | ${config.providers.join('+')}'
             : '',
-        style: TextStyle(color: Colors.grey.shade400, fontSize: 12),
+        style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 12),
       ),
       trailing: TextButton.icon(
         onPressed: () => _editProfile(key, label, icon, color),

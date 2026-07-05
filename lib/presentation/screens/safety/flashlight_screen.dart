@@ -59,15 +59,14 @@ class _FlashlightScreenState extends State<FlashlightScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: AppBar(
         title: const Text('Fener'),
         centerTitle: true,
-        backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
-        foregroundColor: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+        backgroundColor: const Color(0xFF0A0A0F),
+        foregroundColor: const Color(0xFFE5E7EB),
         elevation: 0,
       ),
       body: Padding(
@@ -85,11 +84,11 @@ class _FlashlightScreenState extends State<FlashlightScreen> {
                   shape: BoxShape.circle,
                   color: _isOn || _sosActive || _strobeActive
                       ? const Color(0xFFFFEB3B).withAlpha(40)
-                      : (isDark ? AppColors.darkCard : Colors.white),
+                      : (const Color(0xFF13131A)),
                   border: Border.all(
                     color: _isOn || _sosActive || _strobeActive
                         ? const Color(0xFFFFEB3B)
-                        : (isDark ? AppColors.darkBorder : AppColors.border),
+                        : (const Color(0x1EFFFFFF)),
                     width: 3,
                   ),
                   boxShadow: _isOn || _sosActive || _strobeActive
@@ -108,9 +107,7 @@ class _FlashlightScreenState extends State<FlashlightScreen> {
                     size: 80,
                     color: _isOn || _sosActive || _strobeActive
                         ? const Color(0xFFFFEB3B)
-                        : (isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.slate),
+                        : (const Color(0xFF6B7280)),
                   ),
                 ),
               ),
@@ -129,11 +126,11 @@ class _FlashlightScreenState extends State<FlashlightScreen> {
                   ),
             ),
             const SizedBox(height: 8),
-            Text(
+            const Text(
               'Dokun: Aç/Kapat  |  SOS butonu: Morse kodu',
               style: TextStyle(
                 fontSize: 13,
-                color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                color: Color(0xFF6B7280),
               ),
             ),
             const SizedBox(height: 32),
@@ -141,13 +138,11 @@ class _FlashlightScreenState extends State<FlashlightScreen> {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: isDark ? AppColors.darkCard : Colors.white,
+                color: const Color(0xFF13131A),
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: isDark
-                        ? Colors.black.withAlpha(20)
-                        : Colors.black.withAlpha(5),
+                    color: Colors.black.withAlpha(20),
                     blurRadius: 16,
                     offset: const Offset(0, 4),
                   ),
@@ -190,7 +185,7 @@ class _FlashlightScreenState extends State<FlashlightScreen> {
                           icon: Icons.bolt,
                           label: 'Strobe',
                           active: _strobeActive,
-                          color: AppColors.warning,
+                          color: const Color(0xFFF59E0B),
                           onTap: _toggleStrobe,
                         ),
                       ),
@@ -261,8 +256,7 @@ class _ModeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final activeColor = color ?? AppColors.cobalt;
+    final activeColor = color ?? const Color(0xFF6366F1);
 
     return InkWell(
       onTap: onTap,
@@ -271,8 +265,8 @@ class _ModeButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 14),
         decoration: BoxDecoration(
           color: active
-              ? activeColor.withAlpha(isDark ? 40 : 25)
-              : (isDark ? AppColors.darkBackground : const Color(0xFFF8FAFC)),
+              ? activeColor.withAlpha(40)
+              : (const Color(0xFF0A0A0F)),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: active ? activeColor.withAlpha(80) : Colors.transparent,
@@ -280,14 +274,14 @@ class _ModeButton extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Icon(icon, color: active ? activeColor : AppColors.slate),
+            Icon(icon, color: active ? activeColor : const Color(0xFF6B7280)),
             const SizedBox(height: 4),
             Text(
               label,
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: active ? FontWeight.w600 : FontWeight.w400,
-                color: active ? activeColor : AppColors.slate,
+                color: active ? activeColor : const Color(0xFF6B7280),
               ),
             ),
           ],

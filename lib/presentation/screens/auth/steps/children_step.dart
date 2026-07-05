@@ -62,7 +62,6 @@ class _ChildrenStepState extends State<ChildrenStep> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Column(
       children: [
@@ -72,22 +71,20 @@ class _ChildrenStepState extends State<ChildrenStep> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Çocuk Hesapları',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                    color: Color(0xFFE5E7EB),
                   ),
                 ),
                 const SizedBox(height: 4),
-                Text(
+                const Text(
                   'Çocuklarınızın hesaplarını ekleyin (isteğe bağlı)',
                   style: TextStyle(
                     fontSize: 14,
-                    color: isDark
-                        ? AppColors.darkTextSecondary
-                        : AppColors.slate,
+                    color: Color(0xFF6B7280),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -154,7 +151,7 @@ class _ChildrenStepState extends State<ChildrenStep> {
             child: ElevatedButton(
               onPressed: _save,
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.cobalt,
+                backgroundColor: const Color(0xFF6366F1),
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
@@ -195,15 +192,15 @@ class _AddChildDialogState extends State<_AddChildDialog> {
   final _pinController = TextEditingController();
   final _pinConfirmController = TextEditingController();
   String _role = 'child';
-  Color _color = AppColors.cobalt;
+  Color _color = const Color(0xFF6366F1);
 
   final _colors = [
-    AppColors.cobalt,
+    const Color(0xFF6366F1),
     AppColors.green,
     AppColors.orange,
-    AppColors.purple,
+    const Color(0xFF8B5CF6),
     AppColors.red,
-    AppColors.pink,
+    const Color(0xFFEC4899),
   ];
 
   void _add() {

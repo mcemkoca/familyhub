@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/supabase_client.dart';
-import '../../../config/constants.dart';
 import '../../../config/routes.dart';
 import '../../../domain/models/smart_reminder.dart';
 import '../../../repositories/smart_reminder_repository.dart';
@@ -20,6 +19,8 @@ class SmartRemindersScreen extends StatefulWidget {
 }
 
 class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   List<SmartReminder> _reminders = [];
   bool _loading = false;
 
@@ -108,9 +109,8 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bgColor = isDark ? AppColors.darkBackground : AppColors.background;
-    final textColor = isDark ? Colors.white : Colors.black87;
+    final bgColor = const Color(0xFF0A0A0F);
+    final textColor = const Color(0xFFE5E7EB);
 
     return Scaffold(
       backgroundColor: bgColor,
@@ -120,7 +120,7 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
             expandedHeight: 120,
             floating: true,
             pinned: true,
-            backgroundColor: isDark ? const Color(0xFF1A1A2E) : const Color(0xFFF8F9FA),
+            backgroundColor: const Color(0xFF1A1A2E),
             flexibleSpace: FlexibleSpaceBar(
               title: const Text(
                 '🧠 Akıllı Hatırlatıcılar',
@@ -193,7 +193,7 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
         onPressed: _navigateToCreate,
         icon: const Icon(Icons.add),
         label: Text(AppLocalizations.of(context).yeniHatirlatici),
-        backgroundColor: AppColors.cobalt,
+        backgroundColor: const Color(0xFF6366F1),
       ),
     );
   }
@@ -208,7 +208,7 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF16213E) : Colors.white,
+        color: const Color(0xFFE5E7EB),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -260,7 +260,7 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF16213E) : Colors.white,
+        color: const Color(0xFFE5E7EB),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -333,7 +333,7 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
       child: Card(
         elevation: 2,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        color: isDark ? const Color(0xFF16213E) : Colors.white,
+        color: const Color(0xFFE5E7EB),
         child: InkWell(
           onTap: () => _navigateToDetail(reminder),
           borderRadius: BorderRadius.circular(16),

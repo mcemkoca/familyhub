@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:http/http.dart' as http;
 import '../../core/analytics/analytics_service.dart';
 
@@ -48,7 +49,19 @@ class AIEngine {
   static const String _anthropicKey = String.fromEnvironment(
     'ANTHROPIC_API_KEY',
   );
-  static const String _geminiKey = String.fromEnvironment('GEMINI_API_KEY');
+  // Gemini anahtarı: PROD'da --dart-define=GEMINI_API_KEY=... ile verilmeli.
+  // ÖNERİLEN üretim mimarisi: istekleri anahtarı sunucuda tutan bir proxy'den
+  // (ör. Supabase Edge Function) geçirmek; böylece anahtar APK'ya hiç girmez.
+  static const String _geminiKeyEnv = String.fromEnvironment('GEMINI_API_KEY');
+  // Yalnızca GELİŞTİRME (debug) kolaylığı için gömülü anahtar.
+  // Release derlemelerde KULLANILMAZ (aşağıdaki kDebugMode koşulu) — böylece
+  // yayınlanan APK'da canlı olarak kullanılmaz; dart-define ya da proxy şarttır.
+  static const String _geminiKeyDevFallback =
+      'AQ.Ab8RN6LPYfXYg6UktuoFIiaAkrN_lBZ_VoPC15gnU0wS0Z5iwQ';
+  static String get _geminiKey {
+    if (_geminiKeyEnv.isNotEmpty) return _geminiKeyEnv;
+    return kDebugMode ? _geminiKeyDevFallback : '';
+  }
 
   static const Duration _timeout = Duration(seconds: 10);
 
@@ -295,13 +308,18 @@ class AIEngine {
       'generationConfig': {
         'maxOutputTokens': maxTokens,
         'temperature': temperature,
+        if (format == AIResponseFormat.json)
+          'responseMimeType': 'application/json',
+        // gemini-2.5-flash düşünen model; düşünmeyi kapatarak token bütçesini
+        // tamamen yanıta ayır (yoksa boş/eksik yanıt dönebilir).
+        'thinkingConfig': {'thinkingBudget': 0},
       },
     };
 
     final response = await http
         .post(
           Uri.parse(
-            'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=$_geminiKey',
+            'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=$_geminiKey',
           ),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode(body),

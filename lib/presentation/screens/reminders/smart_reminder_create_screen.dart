@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/supabase_client.dart';
 import 'package:uuid/uuid.dart';
-import '../../../config/constants.dart';
 import '../../../domain/models/smart_reminder.dart';
 import '../../../repositories/smart_reminder_repository.dart';
 import '../../../services/auth_service.dart';
@@ -20,15 +19,17 @@ class SmartReminderCreateScreen extends StatefulWidget {
 }
 
 class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   final _titleController = TextEditingController();
   final _descController = TextEditingController();
 
   // Trigger states
   bool _locationEnabled = false;
   LocationTriggerType _locationType = LocationTriggerType.nearby;
-  final _locationNameController = TextEditingController(text: 'A101 Market');
-  final _latController = TextEditingController(text: '41.0082');
-  final _lngController = TextEditingController(text: '28.9784');
+  final _locationNameController = TextEditingController();
+  final _latController = TextEditingController();
+  final _lngController = TextEditingController();
   double _radius = 200;
   double _proximity = 500;
 
@@ -224,13 +225,12 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final textColor = isDark ? Colors.white : Colors.black87;
+    final textColor = const Color(0xFFE5E7EB);
 
     return Scaffold(
       backgroundColor: isDark
-          ? AppColors.darkBackground
-          : AppColors.background,
+          ? const Color(0xFF0A0A0F)
+          : const Color(0xFF0A0A0F),
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).yeniAkilliHatirlatici),
         backgroundColor: isDark
@@ -711,7 +711,6 @@ class _TestPreviewSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     var displayTitle = title;
     var displayBody = description.isEmpty
         ? 'Hatırlatıcı açıklaması...'
@@ -727,9 +726,9 @@ class _TestPreviewSheet extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF1A1A2E) : Colors.white,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+      decoration: const BoxDecoration(
+        color: Color(0xFFE5E7EB),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -754,7 +753,7 @@ class _TestPreviewSheet extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: isDark ? const Color(0xFF16213E) : const Color(0xFFF5F5F5),
+              color: const Color(0xFF16213E),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(color: Colors.grey.withAlpha(51)),
             ),
@@ -810,7 +809,7 @@ class _Card extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF16213E) : Colors.white,
+        color: const Color(0xFFE5E7EB),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(

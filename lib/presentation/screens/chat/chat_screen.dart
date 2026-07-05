@@ -290,7 +290,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   }
 
   Future<void> _pickFile() async {
-    // File picker — shows snackbar if no file_picker package
+    // File picker ”” shows snackbar if no file_picker package
     setState(() => _showAttachmentMenu = false);
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
@@ -321,11 +321,11 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
       builder: (ctx) {
-        final isDark = Theme.of(ctx).brightness == Brightness.dark;
+        final sheetBg = Theme.of(ctx).colorScheme.surface;
         return Container(
           height: MediaQuery.of(ctx).size.height * 0.55,
           decoration: BoxDecoration(
-            color: isDark ? AppColors.darkCard : Colors.white,
+            color: sheetBg,
             borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
           ),
           child: Column(
@@ -334,7 +334,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                 margin: const EdgeInsets.only(top: 12, bottom: 8),
                 width: 40, height: 4,
                 decoration: BoxDecoration(
-                  color: isDark ? AppColors.darkBorder : AppColors.border,
+                  color: Theme.of(ctx).colorScheme.onSurface.withAlpha(40),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -365,8 +365,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                         loadingBuilder: (_, child, progress) => progress == null
                             ? child
                             : const Center(child: CircularProgressIndicator()),
-                        errorBuilder: (_, __, ___) => Container(
-                          color: Colors.grey.shade200,
+                        errorBuilder: (_, _, _) => Container(
+                          color: const Color(0xFF9CA3AF),
                           child: const Icon(Icons.gif, size: 32, color: Colors.grey),
                         ),
                       ),
@@ -422,7 +422,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     final messages = ref.watch(chatMessagesProvider);
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     ref.listen(chatMessagesProvider, (prev, next) {
       HiveService.saveChatMessages(next);
@@ -432,10 +431,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     final pinnedMessage = messages.where((m) => m.isPinned).firstOrNull;
 
     return Scaffold(
-      backgroundColor: AppColors.darkBackground,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: AppColors.darkBackground,
-        foregroundColor: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        foregroundColor: Theme.of(context).colorScheme.onSurface,
         elevation: 0,
         titleSpacing: 0,
         leading: IconButton(
@@ -449,7 +448,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               height: 40,
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
-                  colors: [AppColors.purple, AppColors.pink],
+                  colors: [Color(0xFF6366F1), Color(0xFFEC4899)],
                 ),
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -469,11 +468,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                   ),
                   Text(
                     '${ref.watch(familyMembersProvider).length} üye',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
-                      color: isDark
-                          ? AppColors.darkTextSecondary
-                          : AppColors.slate,
+                      color: Color(0xFF6B7280),
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -487,7 +484,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             onPressed: () => context.push(AppRoutes.mood),
             icon: const Icon(
               Icons.emoji_emotions_outlined,
-              color: AppColors.purple,
+              color: Color(0xFF6366F1),
             ),
           ),
           IconButton(
@@ -570,7 +567,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                                 ),
                                 child: const Icon(
                                   Icons.reply,
-                                  color: AppColors.cobalt,
+                                  color: Color(0xFF6366F1),
                                 ),
                               ),
                               child: ChatBubble(
@@ -623,35 +620,25 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                     onEmojiSelected: (category, emoji) {
                       // Not using this approach, we use the composer text field
                     },
-                    config: Config(
+                    config: const Config(
                       height: 280,
                       emojiViewConfig: EmojiViewConfig(
-                        backgroundColor: isDark
-                            ? AppColors.darkCard
-                            : Colors.white,
+                        backgroundColor: Color(0xFF13131A),
                         columns: 8,
                       ),
                       categoryViewConfig: CategoryViewConfig(
-                        backgroundColor: isDark
-                            ? AppColors.darkCard
-                            : Colors.white,
-                        iconColor: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.slate,
-                        iconColorSelected: AppColors.cobalt,
+                        backgroundColor: Color(0xFF13131A),
+                        iconColor: Color(0xFF6B7280),
+                        iconColorSelected: Color(0xFF6366F1),
                       ),
                       bottomActionBarConfig: BottomActionBarConfig(
-                        backgroundColor: isDark
-                            ? AppColors.darkCard
-                            : Colors.white,
-                        buttonColor: AppColors.cobalt,
+                        backgroundColor: Color(0xFF13131A),
+                        buttonColor: Color(0xFF6366F1),
                         buttonIconColor: Colors.white,
                         showBackspaceButton: true,
                       ),
                       searchViewConfig: SearchViewConfig(
-                        backgroundColor: isDark
-                            ? AppColors.darkCard
-                            : Colors.white,
+                        backgroundColor: Color(0xFF13131A),
                       ),
                     ),
                   ),
@@ -699,11 +686,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) {
-        final isDark = Theme.of(context).brightness == Brightness.dark;
         return Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: isDark ? AppColors.darkCard : Colors.white,
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: const BorderRadius.vertical(
               top: Radius.circular(24),
             ),
@@ -716,7 +702,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                   width: 40,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: isDark ? AppColors.darkBorder : AppColors.border,
+                    color: Theme.of(context).colorScheme.onSurface.withAlpha(40),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -758,15 +744,12 @@ class _DaySeparator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Center(
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 16),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
         decoration: BoxDecoration(
-          color: isDark
-              ? AppColors.darkCard.withAlpha(180)
-              : Colors.black.withAlpha(8),
+          color: Theme.of(context).colorScheme.surfaceContainerHighest.withAlpha(120),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Text(
@@ -774,7 +757,7 @@ class _DaySeparator extends StatelessWidget {
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+            color: Theme.of(context).colorScheme.onSurface.withAlpha(150),
           ),
         ),
       ),
@@ -790,22 +773,19 @@ class _PinnedMessageBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 8, 16, 4),
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
-        color: isDark
-            ? AppColors.cobalt.withAlpha(30)
-            : const Color(0xFFDBEAFE),
+        color: const Color(0xFF6366F1).withAlpha(30),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: AppColors.cobalt.withAlpha(isDark ? 50 : 40),
+          color: const Color(0xFF6366F1).withAlpha(50),
         ),
       ),
       child: Row(
         children: [
-          const Icon(Icons.push_pin, size: 16, color: AppColors.cobalt),
+          const Icon(Icons.push_pin, size: 16, color: Color(0xFF6366F1)),
           const SizedBox(width: 10),
           Expanded(
             child: Column(
@@ -816,7 +796,7 @@ class _PinnedMessageBar extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.cobalt,
+                    color: Color(0xFF6366F1),
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -826,9 +806,7 @@ class _PinnedMessageBar extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 13,
-                    color: isDark
-                        ? AppColors.darkTextPrimary
-                        : AppColors.dark,
+                    color: Theme.of(context).colorScheme.onSurface.withAlpha(200),
                   ),
                 ),
               ],
@@ -836,7 +814,7 @@ class _PinnedMessageBar extends StatelessWidget {
           ),
           IconButton(
             onPressed: onUnpin,
-            icon: const Icon(Icons.close, size: 18, color: AppColors.cobalt),
+            icon: const Icon(Icons.close, size: 18, color: Color(0xFF6366F1)),
           ),
         ],
       ),
@@ -865,7 +843,6 @@ class _AttachmentMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return GestureDetector(
       onTap: onClose,
       child: Container(
@@ -877,7 +854,7 @@ class _AttachmentMenu extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: isDark ? AppColors.darkCard : Colors.white,
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(24),
                 ),
@@ -890,8 +867,7 @@ class _AttachmentMenu extends StatelessWidget {
                       width: 40,
                       height: 4,
                       decoration: BoxDecoration(
-                        color:
-                            isDark ? AppColors.darkBorder : AppColors.border,
+                        color: Theme.of(context).colorScheme.onSurface.withAlpha(40),
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -910,31 +886,31 @@ class _AttachmentMenu extends StatelessWidget {
                         ),
                         _AttachmentItem(
                           icon: Icons.photo,
-                          color: AppColors.purple,
+                          color: const Color(0xFF6366F1),
                           label: 'Galeri',
                           onTap: onGallery,
                         ),
                         _AttachmentItem(
                           icon: Icons.location_on,
-                          color: AppColors.success,
+                          color: const Color(0xFF10B981),
                           label: 'Konum',
                           onTap: onLocation,
                         ),
                         _AttachmentItem(
                           icon: Icons.event,
-                          color: AppColors.warning,
+                          color: const Color(0xFFF59E0B),
                           label: 'Etkinlik',
                           onTap: () {},
                         ),
                         _AttachmentItem(
                           icon: Icons.poll,
-                          color: AppColors.cobalt,
+                          color: const Color(0xFF6366F1),
                           label: 'Anket',
                           onTap: () {},
                         ),
                         _AttachmentItem(
                           icon: Icons.contact_page,
-                          color: AppColors.pink,
+                          color: const Color(0xFFEC4899),
                           label: 'Kişi',
                           onTap: () {},
                         ),
@@ -952,7 +928,7 @@ class _AttachmentMenu extends StatelessWidget {
                         ),
                         _AttachmentItem(
                           icon: Icons.description,
-                          color: AppColors.slate,
+                          color: const Color(0xFF6B7280),
                           label: 'Dosya',
                           onTap: onFile ?? () {},
                         ),
@@ -1024,18 +1000,17 @@ class _MenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return ListTile(
       leading: Icon(
         icon,
-        color: isDanger ? AppColors.error : AppColors.cobalt,
+        color: isDanger ? AppColors.error : const Color(0xFF6366F1),
       ),
       title: Text(
         label,
         style: TextStyle(
           color: isDanger
               ? AppColors.error
-              : (isDark ? AppColors.darkTextPrimary : AppColors.dark),
+              : Theme.of(context).colorScheme.onSurface,
           fontWeight: FontWeight.w500,
         ),
       ),
@@ -1043,3 +1018,6 @@ class _MenuItem extends StatelessWidget {
     );
   }
 }
+
+
+

@@ -80,7 +80,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
               children: [
                 Text('Acil Durum Butonu', style: Theme.of(context).textTheme.displaySmall),
                 const SizedBox(height: 8),
-                Text('Butona 3 saniye basılı tutarak acil durum bildirimi gönderebilirsin.', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.gray)),
+                Text('Butona 3 saniye basılı tutarak acil durum bildirimi gönderebilirsin.', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: const Color(0xFF6B7280))),
               ],
             ),
           ),
@@ -117,7 +117,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
               onPressed: _call112,
               icon: const Icon(Icons.call, color: Colors.white),
               label: const Text('112 Ara', style: TextStyle(fontSize: 18, color: Colors.white)),
-              style: ElevatedButton.styleFrom(backgroundColor: AppColors.success, padding: const EdgeInsets.symmetric(vertical: 16), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
+              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), padding: const EdgeInsets.symmetric(vertical: 16), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
             ),
           ),
         ],

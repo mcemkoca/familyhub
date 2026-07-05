@@ -15,6 +15,8 @@ class SafeArrivalScreen extends StatefulWidget {
 }
 
 class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   List<ArrivalMonitor> _active = [];
   List<ArrivalMonitor> _history = [];
   List<Map<String, dynamic>> _familyMembers = [];
@@ -86,8 +88,6 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
       );
       return;
     }
-
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     String selectedMemberId = _familyMembers.first['id'] as String;
     String selectedMemberName = _familyMembers.first['name'] as String;
     final destCtrl = TextEditingController(text: 'İş');
@@ -97,7 +97,7 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
       context: context,
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, setSt) => AlertDialog(
-          backgroundColor: isDark ? AppColors.darkCard : Colors.white,
+          backgroundColor: const Color(0xFF13131A),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
@@ -167,7 +167,7 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.cobalt,
+                backgroundColor: const Color(0xFF6366F1),
                 foregroundColor: Colors.white,
               ),
               child: Text(AppLocalizations.of(context).baslat),
@@ -180,17 +180,14 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).guvenliVaris),
         centerTitle: true,
-        backgroundColor: isDark
-            ? AppColors.darkBackground
-            : AppColors.cloudWhite,
-        foregroundColor: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+        backgroundColor: const Color(0xFF0A0A0F),
+        foregroundColor: const Color(0xFFE5E7EB),
         elevation: 0,
         actions: [
           IconButton(
@@ -203,12 +200,12 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
         padding: const EdgeInsets.all(20),
         children: [
           if (_active.isNotEmpty) ...[
-            Text(
+            const Text(
               'AKTİF MONİTÖRLER',
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
-                color: isDark ? AppColors.slateLight : AppColors.slate,
+                color: Color(0xFF9CA3AF),
                 letterSpacing: 0.5,
               ),
             ),
@@ -221,13 +218,11 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
                 margin: const EdgeInsets.only(bottom: 12),
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: isDark ? AppColors.darkCard : Colors.white,
+                  color: const Color(0xFF13131A),
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
-                      color: isDark
-                          ? Colors.black.withAlpha(20)
-                          : Colors.black.withAlpha(5),
+                      color: Colors.black.withAlpha(20),
                       blurRadius: 12,
                       offset: const Offset(0, 2),
                     ),
@@ -238,7 +233,7 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.timer, color: AppColors.cobalt),
+                        const Icon(Icons.timer, color: Color(0xFF6366F1)),
                         const SizedBox(width: 10),
                         Expanded(
                           child: Text(
@@ -255,7 +250,7 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
                             fontWeight: FontWeight.bold,
                             color: m.status == 'delayed'
                                 ? AppColors.error
-                                : AppColors.success,
+                                : const Color(0xFF10B981),
                           ),
                         ),
                       ],
@@ -264,12 +259,12 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
                     LinearProgressIndicator(
                       value: m.progress.clamp(0.0, 1.0),
                       backgroundColor: isDark
-                          ? AppColors.darkBorder
-                          : AppColors.border,
+                          ? const Color(0x1EFFFFFF)
+                          : const Color(0x1EFFFFFF),
                       valueColor: AlwaysStoppedAnimation<Color>(
                         m.status == 'delayed'
                             ? AppColors.error
-                            : AppColors.cobalt,
+                            : const Color(0xFF6366F1),
                       ),
                       borderRadius: BorderRadius.circular(4),
                       minHeight: 8,
@@ -286,7 +281,7 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
                           style: TextStyle(
                             color: m.status == 'delayed'
                                 ? AppColors.error
-                                : AppColors.cobalt,
+                                : const Color(0xFF6366F1),
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -310,12 +305,12 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
             const SizedBox(height: 20),
           ],
           if (_history.isNotEmpty) ...[
-            Text(
+            const Text(
               'GEÇMİŞ',
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
-                color: isDark ? AppColors.slateLight : AppColors.slate,
+                color: Color(0xFF9CA3AF),
                 letterSpacing: 0.5,
               ),
             ),
@@ -327,7 +322,7 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
                     leading: Icon(
                       m.status == 'arrived' ? Icons.check_circle : Icons.cancel,
                       color: m.status == 'arrived'
-                          ? AppColors.success
+                          ? const Color(0xFF10B981)
                           : AppColors.error,
                     ),
                     title: Text('${m.memberName} → ${m.destination}'),
@@ -338,7 +333,7 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
                       m.status == 'arrived' ? 'Vardı' : 'İptal',
                       style: TextStyle(
                         color: m.status == 'arrived'
-                            ? AppColors.success
+                            ? const Color(0xFF10B981)
                             : AppColors.error,
                         fontWeight: FontWeight.w600,
                       ),
@@ -380,7 +375,7 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
             icon: const Icon(Icons.add),
             label: Text(AppLocalizations.of(context).yeniVarisPlanla),
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.cobalt,
+              backgroundColor: const Color(0xFF6366F1),
               foregroundColor: Colors.white,
               minimumSize: const Size(double.infinity, 50),
               shape: RoundedRectangleBorder(

@@ -62,7 +62,7 @@ class _HubFABState extends State<HubFAB> with SingleTickerProviderStateMixin {
                     height: 72,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(color: AppColors.cobalt.withAlpha(50), width: 2),
+                      border: Border.all(color: const Color(0xFF6366F1).withAlpha(50), width: 2),
                     ),
                   ),
                   // FAB
@@ -75,7 +75,7 @@ class _HubFABState extends State<HubFAB> with SingleTickerProviderStateMixin {
                       ),
                       shape: BoxShape.circle,
                       boxShadow: [
-                        BoxShadow(color: AppColors.cobalt, blurRadius: 16, offset: Offset(0, 6)),
+                        BoxShadow(color: Color(0xFF6366F1), blurRadius: 16, offset: Offset(0, 6)),
                       ],
                     ),
                     child: Center(

@@ -90,7 +90,7 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
                   icon: const Icon(Icons.download),
                   label: Text(AppLocalizations.of(context).raporIndir),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey.shade700,
+                    backgroundColor: const Color(0xFF6B7280),
                     foregroundColor: Colors.white,
                   ),
                 ),
@@ -146,7 +146,7 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
               child: LinearProgressIndicator(
                 value: value,
                 minHeight: 10,
-                backgroundColor: Colors.grey.shade800,
+                backgroundColor: const Color(0xFF374151),
                 valueColor: AlwaysStoppedAnimation<Color>(color),
               ),
             ),
@@ -180,7 +180,7 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
               child: LinearProgressIndicator(
                 value: value,
                 minHeight: 10,
-                backgroundColor: Colors.grey.shade800,
+                backgroundColor: const Color(0xFF374151),
                 valueColor: AlwaysStoppedAnimation<Color>(color),
               ),
             ),
@@ -203,7 +203,7 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
               children: [
                 Text(label, style: const TextStyle(color: Colors.white70)),
                 if (target != null)
-                  Text('Hedef: $target', style: TextStyle(color: Colors.grey.shade500, fontSize: 12)),
+                  Text('Hedef: $target', style: const TextStyle(color: Color(0xFF6B7280), fontSize: 12)),
               ],
             ),
           ),

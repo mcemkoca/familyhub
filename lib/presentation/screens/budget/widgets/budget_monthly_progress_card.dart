@@ -27,11 +27,11 @@ class _MonthlyProgressCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
-              color: Colors.grey.shade200,
+              color: Color(0xFF9CA3AF),
               blurRadius: 12,
-              offset: const Offset(0, 4),
+              offset: Offset(0, 4),
             ),
           ],
         ),
@@ -75,7 +75,7 @@ class _MonthlyProgressCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               child: LinearProgressIndicator(
                 value: percent,
-                backgroundColor: Colors.grey.shade100,
+                backgroundColor: const Color(0xFF9CA3AF),
                 valueColor: AlwaysStoppedAnimation(
                   percent > 0.9
                       ? AppColors.error
@@ -91,18 +91,18 @@ class _MonthlyProgressCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  NumberFormat.currency(symbol: '₺', decimalDigits: 0).format(totalExpense),
-                  style: TextStyle(
+                  NumberFormat.currency(symbol: '€', decimalDigits: 0).format(totalExpense),
+                  style: const TextStyle(
                     fontSize: 13,
-                    color: Colors.grey.shade600,
+                    color: Color(0xFF6B7280),
                   ),
                 ),
                 Text(
-                  'Kalan: ${NumberFormat.currency(symbol: '₺', decimalDigits: 0).format(remaining)}',
+                  'Kalan: ${NumberFormat.currency(symbol: '€', decimalDigits: 0).format(remaining)}',
                   style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.dark,
+                    color: Color(0xFFE5E7EB),
                   ),
                 ),
               ],

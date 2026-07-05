@@ -13,6 +13,8 @@ class FamilySafetyStatus extends StatefulWidget {
 }
 
 class _FamilySafetyStatusState extends State<FamilySafetyStatus> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   List<MemberSafetyStatus> _members = [];
   StreamSubscription<dynamic>? _sub;
 
@@ -34,22 +36,21 @@ class _FamilySafetyStatusState extends State<FamilySafetyStatus> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
-            Expanded(
+            const Expanded(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(4, 8, 4, 8),
+                padding: EdgeInsets.fromLTRB(4, 8, 4, 8),
                 child: Text(
                   'AİLE GÜVENLİK DURUMU',
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
-                    color: isDark ? AppColors.slateLight : AppColors.slate,
+                    color: Color(0xFF9CA3AF),
                     letterSpacing: 0.5,
                   ),
                 ),
@@ -64,18 +65,16 @@ class _FamilySafetyStatusState extends State<FamilySafetyStatus> {
                       width: 6,
                       height: 6,
                       decoration: const BoxDecoration(
-                        color: AppColors.success,
+                        color: Color(0xFF10B981),
                         shape: BoxShape.circle,
                       ),
                     ),
                     const SizedBox(width: 4),
-                    Text(
+                    const Text(
                       'Canlı',
                       style: TextStyle(
                         fontSize: 11,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.slate,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                   ],
@@ -85,13 +84,11 @@ class _FamilySafetyStatusState extends State<FamilySafetyStatus> {
         ),
         Container(
           decoration: BoxDecoration(
-            color: isDark ? AppColors.darkCard : Colors.white,
+            color: const Color(0xFF13131A),
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: isDark
-                    ? Colors.black.withAlpha(20)
-                    : Colors.black.withAlpha(5),
+                color: Colors.black.withAlpha(20),
                 blurRadius: 12,
                 offset: const Offset(0, 2),
               ),
@@ -106,8 +103,8 @@ class _FamilySafetyStatusState extends State<FamilySafetyStatus> {
                     height: 1,
                     indent: 68,
                     color: isDark
-                        ? AppColors.darkBorder.withAlpha(80)
-                        : AppColors.border.withAlpha(100),
+                        ? const Color(0x1EFFFFFF).withAlpha(80)
+                        : const Color(0x1EFFFFFF).withAlpha(100),
                   ),
               ],
             ],
@@ -125,8 +122,6 @@ class _MemberCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return InkWell(
       onTap: () => _showMemberDetail(context, member),
       borderRadius: BorderRadius.circular(16),
@@ -165,7 +160,7 @@ class _MemberCard extends StatelessWidget {
                       color: member.statusColor,
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: isDark ? AppColors.darkCard : Colors.white,
+                        color: const Color(0xFF13131A),
                         width: 2,
                       ),
                     ),
@@ -181,22 +176,18 @@ class _MemberCard extends StatelessWidget {
                 children: [
                   Text(
                     member.name,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
-                      color: isDark
-                          ? AppColors.darkTextPrimary
-                          : AppColors.dark,
+                      color: Color(0xFFE5E7EB),
                     ),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     member.statusText,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 13,
-                      color: isDark
-                          ? AppColors.darkTextSecondary
-                          : AppColors.slate,
+                      color: Color(0xFF6B7280),
                     ),
                   ),
                   // Battery / Signal chips
@@ -208,25 +199,21 @@ class _MemberCard extends StatelessWidget {
                         icon: _batteryIcon(member.batteryPercent),
                         label: '%${member.batteryPercent}',
                         color: member.batteryPercent < 20
-                            ? AppColors.warning
-                            : (isDark
-                                ? AppColors.darkTextSecondary
-                                : AppColors.slate),
+                            ? const Color(0xFFF59E0B)
+                            : (const Color(0xFF6B7280)),
                       ),
                       _buildChip(
                         icon: Icons.signal_cellular_alt,
                         label: member.signalStrength,
                         color: member.signalStrength == 'Zayıf'
-                            ? AppColors.warning
-                            : (isDark
-                                ? AppColors.darkTextSecondary
-                                : AppColors.slate),
+                            ? const Color(0xFFF59E0B)
+                            : (const Color(0xFF6B7280)),
                       ),
                       if (member.eta != null)
                         _buildChip(
                           icon: Icons.timer,
                           label: 'ETA: ${member.eta}',
-                          color: AppColors.cobalt,
+                          color: const Color(0xFF6366F1),
                         ),
                     ],
                   ),
@@ -282,7 +269,6 @@ class _MemberCard extends StatelessWidget {
   }
 
   void _showMemberDetail(BuildContext context, MemberSafetyStatus member) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     HapticFeedback.lightImpact();
 
     showModalBottomSheet(
@@ -295,10 +281,11 @@ class _MemberCard extends StatelessWidget {
         maxChildSize: 0.85,
         expand: false,
         builder: (ctx, scrollController) {
+          final isDark = Theme.of(ctx).brightness == Brightness.dark;
           return Container(
-            decoration: BoxDecoration(
-              color: isDark ? AppColors.darkBackground : AppColors.background,
-              borderRadius: const BorderRadius.vertical(
+            decoration: const BoxDecoration(
+              color: Color(0xFF0A0A0F),
+              borderRadius: BorderRadius.vertical(
                 top: Radius.circular(24),
               ),
             ),
@@ -312,7 +299,7 @@ class _MemberCard extends StatelessWidget {
                     width: 40,
                     height: 4,
                     decoration: BoxDecoration(
-                      color: isDark ? AppColors.darkBorder : AppColors.border,
+                      color: const Color(0x1EFFFFFF),
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -364,11 +351,9 @@ class _MemberCard extends StatelessWidget {
                               const SizedBox(width: 6),
                               Text(
                                 member.statusText,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 14,
-                                  color: isDark
-                                      ? AppColors.darkTextSecondary
-                                      : AppColors.slate,
+                                  color: Color(0xFF6B7280),
                                 ),
                               ),
                             ],
@@ -398,24 +383,24 @@ class _MemberCard extends StatelessWidget {
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: isDanger
-                            ? AppColors.error.withAlpha(isDark ? 30 : 15)
+                            ? AppColors.error.withAlpha(30)
                             : (isDark
-                                ? AppColors.darkCard
-                                : AppColors.card),
+                                ? const Color(0xFF13131A)
+                                : const Color(0xFF13131A)),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
                           color: isDanger
                               ? AppColors.error.withAlpha(60)
                               : (isDark
-                                  ? AppColors.darkBorder
-                                  : AppColors.border),
+                                  ? const Color(0x1EFFFFFF)
+                                  : const Color(0x1EFFFFFF)),
                         ),
                       ),
                       child: Row(
                         children: [
                           Icon(
                             isDanger ? Icons.warning : Icons.location_on,
-                            color: isDanger ? AppColors.error : AppColors.cobalt,
+                            color: isDanger ? AppColors.error : const Color(0xFF6366F1),
                             size: 20,
                           ),
                           const SizedBox(width: 12),
@@ -433,11 +418,9 @@ class _MemberCard extends StatelessWidget {
                                 if (zone.address != null)
                                   Text(
                                     zone.address!,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 12,
-                                      color: isDark
-                                          ? AppColors.darkTextSecondary
-                                          : AppColors.slate,
+                                      color: Color(0xFF6B7280),
                                     ),
                                   ),
                               ],
@@ -445,11 +428,9 @@ class _MemberCard extends StatelessWidget {
                           ),
                           Text(
                             '${zone.radiusMeters.toInt()}m',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12,
-                              color: isDark
-                                  ? AppColors.darkTextSecondary
-                                  : AppColors.gray,
+                              color: Color(0xFF6B7280),
                             ),
                           ),
                         ],
@@ -539,14 +520,14 @@ class _MemberCard extends StatelessWidget {
       icon: Icons.battery_full,
       label: 'Batarya',
       value: '%${member.batteryPercent}',
-      valueColor: member.batteryPercent < 20 ? AppColors.warning : null,
+      valueColor: member.batteryPercent < 20 ? const Color(0xFFF59E0B) : null,
     ));
 
     stats.add(_StatItem(
       icon: Icons.signal_cellular_alt,
       label: 'Sinyal',
       value: member.signalStrength,
-      valueColor: member.signalStrength == 'Zayıf' ? AppColors.warning : null,
+      valueColor: member.signalStrength == 'Zayıf' ? const Color(0xFFF59E0B) : null,
     ));
 
     if (member.currentPlace != null) {
@@ -572,7 +553,7 @@ class _MemberCard extends StatelessWidget {
         return Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: isDark ? AppColors.darkCard : AppColors.card,
+            color: const Color(0xFF13131A),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Column(
@@ -581,15 +562,13 @@ class _MemberCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Icon(s.icon, size: 14, color: AppColors.cobalt),
+                  Icon(s.icon, size: 14, color: const Color(0xFF6366F1)),
                   const SizedBox(width: 6),
                   Text(
                     s.label,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 11,
-                      color: isDark
-                          ? AppColors.darkTextSecondary
-                          : AppColors.slate,
+                      color: Color(0xFF6B7280),
                     ),
                   ),
                 ],
@@ -601,9 +580,7 @@ class _MemberCard extends StatelessWidget {
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                   color: s.valueColor ??
-                      (isDark
-                          ? AppColors.darkTextPrimary
-                          : AppColors.dark),
+                      (const Color(0xFFE5E7EB)),
                 ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,

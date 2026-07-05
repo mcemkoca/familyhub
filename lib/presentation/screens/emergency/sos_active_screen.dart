@@ -212,7 +212,7 @@ class _SosActiveScreenState extends State<SosActiveScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.grey.shade900,
+        color: const Color(0xFF374151),
         borderRadius: BorderRadius.circular(14),
       ),
       child: Column(

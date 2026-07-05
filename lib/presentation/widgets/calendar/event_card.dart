@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import '../../../config/constants.dart';
 import '../../../domain/entities.dart';
 import '../../providers/app_providers.dart';
 
@@ -25,13 +24,11 @@ class EventCard extends ConsumerWidget {
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: isDark ? AppColors.darkCard : Colors.white,
+            color: const Color(0xFF13131A),
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: isDark
-                    ? Colors.black.withAlpha(15)
-                    : Colors.black.withAlpha(5),
+                color: Colors.black.withAlpha(20),
                 blurRadius: 10,
                 offset: const Offset(0, 2),
               ),
@@ -52,12 +49,10 @@ class EventCard extends ConsumerWidget {
                         event.isAllDay
                             ? 'T.Gün'
                             : DateFormat('HH:mm').format(event.start),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w700,
-                          color: isDark
-                              ? AppColors.darkTextPrimary
-                              : AppColors.dark,
+                          color: Color(0xFFE5E7EB),
                         ),
                       ),
                       if (!event.isAllDay) ...[
@@ -67,8 +62,8 @@ class EventCard extends ConsumerWidget {
                           style: TextStyle(
                             fontSize: 11,
                             color: isDark
-                                ? AppColors.darkTextSecondary
-                                : AppColors.lightGray,
+                                ? const Color(0xFF6B7280)
+                                : const Color(0xFF9CA3AF),
                           ),
                         ),
                       ],
@@ -100,7 +95,7 @@ class EventCard extends ConsumerWidget {
                             ),
                             decoration: BoxDecoration(
                               color: event.color
-                                  .withAlpha(isDark ? 30 : 20),
+                                  .withAlpha(30),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Row(
@@ -132,7 +127,7 @@ class EventCard extends ConsumerWidget {
                               ),
                               decoration: BoxDecoration(
                                 color: isDark
-                                    ? AppColors.darkBackground
+                                    ? const Color(0xFF0A0A0F)
                                     : const Color(0xFFF1F5F9),
                                 borderRadius: BorderRadius.circular(8),
                               ),
@@ -143,8 +138,8 @@ class EventCard extends ConsumerWidget {
                                     Icons.repeat,
                                     size: 12,
                                     color: isDark
-                                        ? AppColors.darkTextSecondary
-                                        : AppColors.lightGray,
+                                        ? const Color(0xFF6B7280)
+                                        : const Color(0xFF9CA3AF),
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
@@ -152,8 +147,8 @@ class EventCard extends ConsumerWidget {
                                     style: TextStyle(
                                       fontSize: 11,
                                       color: isDark
-                                          ? AppColors.darkTextSecondary
-                                          : AppColors.lightGray,
+                                          ? const Color(0xFF6B7280)
+                                          : const Color(0xFF9CA3AF),
                                     ),
                                   ),
                                 ],
@@ -169,9 +164,7 @@ class EventCard extends ConsumerWidget {
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
-                          color: isDark
-                              ? AppColors.darkTextPrimary
-                              : AppColors.dark,
+                          color: const Color(0xFFE5E7EB),
                           decoration: isPast
                               ? TextDecoration.lineThrough
                               : null,
@@ -187,17 +180,15 @@ class EventCard extends ConsumerWidget {
                               Icons.location_on_outlined,
                               size: 14,
                               color: isDark
-                                  ? AppColors.darkTextSecondary
-                                  : AppColors.lightGray,
+                                  ? const Color(0xFF6B7280)
+                                  : const Color(0xFF9CA3AF),
                             ),
                             const SizedBox(width: 4),
                             Text(
                               event.location!,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 13,
-                                color: isDark
-                                    ? AppColors.darkTextSecondary
-                                    : AppColors.slate,
+                                color: Color(0xFF6B7280),
                               ),
                             ),
                           ],
@@ -214,8 +205,8 @@ class EventCard extends ConsumerWidget {
                           style: TextStyle(
                             fontSize: 13,
                             color: isDark
-                                ? AppColors.darkTextSecondary
-                                : AppColors.lightGray,
+                                ? const Color(0xFF6B7280)
+                                : const Color(0xFF9CA3AF),
                           ),
                         ),
                       ],
@@ -237,8 +228,8 @@ class EventCard extends ConsumerWidget {
                                 vertical: 4,
                               ),
                               decoration: BoxDecoration(
-                                color: AppColors.warning
-                                    .withAlpha(isDark ? 25 : 15),
+                                color: const Color(0xFFF59E0B)
+                                    .withAlpha(25),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Row(
@@ -247,7 +238,7 @@ class EventCard extends ConsumerWidget {
                                   const Icon(
                                     Icons.alarm,
                                     size: 12,
-                                    color: AppColors.warning,
+                                    color: Color(0xFFF59E0B),
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
@@ -256,7 +247,7 @@ class EventCard extends ConsumerWidget {
                                     style: const TextStyle(
                                       fontSize: 11,
                                       fontWeight: FontWeight.w600,
-                                      color: AppColors.warning,
+                                      color: Color(0xFFF59E0B),
                                     ),
                                   ),
                                 ],
@@ -340,9 +331,7 @@ class _AttendeeStack extends ConsumerWidget {
               color: displayed[i].color,
               shape: BoxShape.circle,
               border: Border.all(
-                color: Theme.of(context).brightness == Brightness.dark
-                    ? AppColors.darkCard
-                    : Colors.white,
+                color: const Color(0xFF13131A),
                 width: 2,
               ),
             ),
@@ -363,21 +352,17 @@ class _AttendeeStack extends ConsumerWidget {
           Container(
             width: 28,
             height: 28,
-            decoration: BoxDecoration(
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? AppColors.darkBackground
-                  : const Color(0xFFF1F5F9),
+            decoration: const BoxDecoration(
+              color: Color(0xFF0A0A0F),
               shape: BoxShape.circle,
             ),
             child: Center(
               child: Text(
                 '+${attendeeIds.length - 3}',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.w600,
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? AppColors.darkTextSecondary
-                      : AppColors.slate,
+                  color: Color(0xFF6B7280),
                 ),
               ),
             ),

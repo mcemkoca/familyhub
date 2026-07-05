@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../config/constants.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
 class AlbumScreen extends StatelessWidget {
@@ -15,8 +14,8 @@ class AlbumScreen extends StatelessWidget {
         itemCount: 12,
         itemBuilder: (context, index) {
           return Container(
-            decoration: BoxDecoration(color: AppColors.background, borderRadius: BorderRadius.circular(12)),
-            child: const Center(child: Icon(Icons.image, color: AppColors.lightGray)),
+            decoration: BoxDecoration(color: const Color(0xFF0A0A0F), borderRadius: BorderRadius.circular(12)),
+            child: const Center(child: Icon(Icons.image, color: Color(0xFF9CA3AF))),
           );
         },
       ),

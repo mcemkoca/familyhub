@@ -28,24 +28,24 @@ class StripeProduct {
 class StripeProducts {
   static const premiumMonthly = StripeProduct(
     id: 'premium_monthly',
-    name: 'FamilyHub Premium — Aylık',
-    amountCents: 4999, // ₺49.99/ay
+    name: 'FamilyHub Plus — Aylık',
+    amountCents: 899, // €8.99/ay
     isSubscription: true,
     priceId: 'price_PLACEHOLDER_monthly',
   );
 
   static const premiumYearly = StripeProduct(
     id: 'premium_yearly',
-    name: 'FamilyHub Premium — Yıllık',
-    amountCents: 39999, // ₺399.99/yıl (%33 indirim)
+    name: 'FamilyHub Plus — Yıllık',
+    amountCents: 7900, // €79.00/yıl (%27 indirim)
     isSubscription: true,
     priceId: 'price_PLACEHOLDER_yearly',
   );
 
   static const familyPack = StripeProduct(
     id: 'family_pack',
-    name: 'Aile Paketi — 6 Üye',
-    amountCents: 6999, // ₺69.99/ay
+    name: 'Aile Paketi — Sınırsız Üye',
+    amountCents: 1299, // €12.99/ay
     isSubscription: true,
     priceId: 'price_PLACEHOLDER_family',
   );
@@ -56,7 +56,6 @@ class StripePaymentService {
   static final instance = StripePaymentService._();
 
   bool _initialized = false;
-  static const _publishableKeyEnvKey = 'STRIPE_PUBLISHABLE_KEY';
 
   // Features gated behind premium
   static const premiumFeatures = [
@@ -72,7 +71,7 @@ class StripePaymentService {
   /// Currently a no-op until payment is activated.
   Future<void> init() async {
     // TODO (activate when ready):
-    // Stripe.publishableKey = const String.fromEnvironment(_publishableKeyEnvKey);
+    // Stripe.publishableKey = const String.fromEnvironment('STRIPE_PUBLISHABLE_KEY');
     // await Stripe.instance.applySettings();
     _initialized = false; // keep false until activated
     debugPrint('[Stripe] Payment system not yet activated');

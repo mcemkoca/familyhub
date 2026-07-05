@@ -286,36 +286,37 @@ class LocationTrackingSettings {
     }
 
     return LocationTrackingSettings(
-      memberId: json['memberId'] as String? ?? '',
-      familyId: json['familyId'] as String? ?? '',
+      memberId: json['member_id'] as String? ?? json['memberId'] as String? ?? '',
+      familyId: json['family_id'] as String? ?? json['familyId'] as String? ?? '',
       enabled: json['enabled'] as bool? ?? true,
       priority: TrackingPriority.values.firstWhere(
         (e) => e.name == json['priority'],
         orElse: () => TrackingPriority.balanced,
       ),
-      batteryThresholds: json['batteryThresholds'] != null
+      batteryThresholds: (json['battery_thresholds'] ?? json['batteryThresholds']) != null
           ? BatteryThresholds.fromJson(
-              json['batteryThresholds'] as Map<String, dynamic>)
+              (json['battery_thresholds'] ?? json['batteryThresholds']) as Map<String, dynamic>)
           : const BatteryThresholds(),
       motionProfiles: profiles,
-      transitionRules: (json['transitionRules'] as List<dynamic>?)
+      transitionRules: ((json['transition_rules'] ?? json['transitionRules']) as List<dynamic>?)
               ?.map((e) => TransitionRule.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      powerOptimization: json['powerOptimization'] != null
+      powerOptimization: (json['power_optimization'] ?? json['powerOptimization']) != null
           ? PowerOptimization.fromJson(
-              json['powerOptimization'] as Map<String, dynamic>)
+              (json['power_optimization'] ?? json['powerOptimization']) as Map<String, dynamic>)
           : const PowerOptimization(),
-      timeRules: (json['timeRules'] as List<dynamic>?)
+      timeRules: ((json['time_rules'] ?? json['timeRules']) as List<dynamic>?)
               ?.map((e) => TimeRule.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      locationRules: (json['locationRules'] as List<dynamic>?)
+      locationRules: ((json['location_rules'] ?? json['locationRules']) as List<dynamic>?)
               ?.map((e) => LocationRule.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      notifyProfileChanges: json['notifyProfileChanges'] as bool? ?? false,
-      updatedAt: DateTime.tryParse(json['updatedAt'] as String) ??
+      notifyProfileChanges: (json['notify_profile_changes'] ?? json['notifyProfileChanges']) as bool? ?? false,
+      updatedAt: DateTime.tryParse(
+              json['updated_at'] as String? ?? json['updatedAt'] as String? ?? '') ??
           DateTime.now(),
     );
   }
@@ -518,24 +519,24 @@ class LocationBatch {
   });
 
   factory LocationBatch.fromJson(Map<String, dynamic> json) => LocationBatch(
-        batchId: json['batchId'] as String?,
-        memberId: json['memberId'] as String? ?? '',
-        familyId: json['familyId'] as String? ?? '',
-        recordedAt: DateTime.tryParse(json['recordedAt'] as String) ??
+        batchId: json['batch_id'] as String? ?? json['batchId'] as String?,
+        memberId: json['member_id'] as String? ?? json['memberId'] as String? ?? '',
+        familyId: json['family_id'] as String? ?? json['familyId'] as String? ?? '',
+        recordedAt: DateTime.tryParse(
+                json['recorded_at'] as String? ?? json['recordedAt'] as String? ?? '') ??
             DateTime.now(),
-        uploadedAt: json['uploadedAt'] != null
-            ? DateTime.tryParse(json['uploadedAt'] as String)
+        uploadedAt: (json['uploaded_at'] ?? json['uploadedAt']) != null
+            ? DateTime.tryParse((json['uploaded_at'] ?? json['uploadedAt']) as String)
             : null,
-        batchSize: (json['batchSize'] as num?)?.toInt() ?? 0,
-        batteryAtStart: (json['batteryAtStart'] as num?)?.toInt(),
-        powerProfile: json['powerProfile'] as String? ?? 'balanced',
+        batchSize: ((json['batch_size'] ?? json['batchSize']) as num?)?.toInt() ?? 0,
+        batteryAtStart: ((json['battery_at_start'] ?? json['batteryAtStart']) as num?)?.toInt(),
+        powerProfile: json['power_profile'] as String? ?? json['powerProfile'] as String? ?? 'balanced',
         locations: (json['locations'] as List<dynamic>?)
                 ?.map((e) => LocationPoint.fromJson(e as Map<String, dynamic>))
                 .toList() ??
             [],
         segment: json['segment'] != null
-            ? LocationSegment.fromJson(
-                json['segment'] as Map<String, dynamic>)
+            ? LocationSegment.fromJson(json['segment'] as Map<String, dynamic>)
             : null,
       );
 

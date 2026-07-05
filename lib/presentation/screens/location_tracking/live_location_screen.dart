@@ -203,7 +203,7 @@ class _LiveLocationScreenState extends State<LiveLocationScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(color: Colors.grey.shade400)),
+          Text(label, style: const TextStyle(color: Color(0xFF9CA3AF))),
           Text(value, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
         ],
       ),

@@ -16,6 +16,8 @@ class StreakScreen extends ConsumerStatefulWidget {
 }
 
 class _StreakScreenState extends ConsumerState<StreakScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   final _titleController = TextEditingController();
   final _noteController = TextEditingController();
 
@@ -189,7 +191,6 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
   @override
   Widget build(BuildContext context) {
     final entries = ref.watch(streakEntriesProvider);
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final streakCount = _calculateCurrentStreak(entries);
     final bestStreak = _calculateBestStreak(entries);
 
@@ -208,7 +209,7 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
     });
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
         title: 'Streak',
         showBack: true,
@@ -234,7 +235,7 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
                       borderRadius: BorderRadius.circular(40),
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.orange.withAlpha(isDark ? 40 : 60),
+                          color: AppColors.orange.withAlpha(40),
                           blurRadius: 30,
                           offset: const Offset(0, 10),
                         ),
@@ -271,7 +272,7 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
                         'En İyi',
                         '$bestStreak',
                         Icons.emoji_events,
-                        AppColors.warning,
+                        const Color(0xFFF59E0B),
                         isDark,
                       ),
                       const SizedBox(width: 12),
@@ -279,7 +280,7 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
                         'Toplam',
                         '${entries.length}',
                         Icons.format_list_numbered,
-                        AppColors.success,
+                        const Color(0xFF10B981),
                         isDark,
                       ),
                     ],
@@ -288,13 +289,11 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
                   Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: isDark ? AppColors.darkCard : Colors.white,
+                      color: const Color(0xFF13131A),
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
-                          color: isDark
-                              ? Colors.black.withAlpha(20)
-                              : Colors.black.withAlpha(5),
+                          color: Colors.black.withAlpha(20),
                           blurRadius: 12,
                           offset: const Offset(0, 2),
                         ),
@@ -309,8 +308,8 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
                             fontSize: 13,
                             fontWeight: FontWeight.w700,
                             color: isDark
-                                ? AppColors.slateLight
-                                : AppColors.slate,
+                                ? const Color(0xFF9CA3AF)
+                                : const Color(0xFF6B7280),
                             letterSpacing: 0.5,
                           ),
                         ),
@@ -336,16 +335,14 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
                   ),
                   const SizedBox(height: 24),
                   if (entries.isNotEmpty) ...[
-                    Align(
+                    const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
                         'Tüm Girişler',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
-                          color: isDark
-                              ? AppColors.darkTextPrimary
-                              : AppColors.dark,
+                          color: Color(0xFFE5E7EB),
                         ),
                       ),
                     ),
@@ -397,13 +394,11 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: isDark ? AppColors.darkCard : Colors.white,
+          color: const Color(0xFF13131A),
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: isDark
-                  ? Colors.black.withAlpha(20)
-                  : Colors.black.withAlpha(5),
+              color: Colors.black.withAlpha(20),
               blurRadius: 12,
               offset: const Offset(0, 2),
             ),
@@ -415,17 +410,17 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
             const SizedBox(height: 8),
             Text(
               value,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
-                color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                color: Color(0xFFE5E7EB),
               ),
             ),
             Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 13,
-                color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                color: Color(0xFF6B7280),
               ),
             ),
           ],
@@ -442,8 +437,8 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
           height: 40,
           decoration: BoxDecoration(
             color: active
-                ? AppColors.orange.withAlpha(isDark ? 40 : 30)
-                : (isDark ? AppColors.darkBackground : const Color(0xFFF3F4F6)),
+                ? AppColors.orange.withAlpha(40)
+                : (const Color(0xFF0A0A0F)),
             shape: BoxShape.circle,
           ),
           child: active
@@ -452,9 +447,9 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
                   color: AppColors.orange,
                   size: 20,
                 )
-              : Icon(
+              : const Icon(
                   Icons.circle,
-                  color: isDark ? AppColors.darkBorder : AppColors.border,
+                  color: Color(0x1EFFFFFF),
                   size: 12,
                 ),
         ),
@@ -466,7 +461,7 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
             fontWeight: active ? FontWeight.w600 : FontWeight.w400,
             color: active
                 ? AppColors.orange
-                : (isDark ? AppColors.darkTextSecondary : AppColors.slate),
+                : (const Color(0xFF6B7280)),
           ),
         ),
       ],
@@ -507,10 +502,10 @@ class _StreakEntryTile extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: isDark ? AppColors.darkCard : Colors.white,
+            color: const Color(0xFF13131A),
             borderRadius: BorderRadius.circular(14),
             border: Border.all(
-              color: isDark ? AppColors.darkBorder : AppColors.border,
+              color: const Color(0x1EFFFFFF),
             ),
           ),
           child: Row(
@@ -528,7 +523,7 @@ class _StreakEntryTile extends StatelessWidget {
                     border: Border.all(
                       color: entry.completed
                           ? AppColors.orange
-                          : AppColors.border,
+                          : const Color(0x1EFFFFFF),
                       width: 2,
                     ),
                   ),
@@ -550,19 +545,15 @@ class _StreakEntryTile extends StatelessWidget {
                         decoration: entry.completed
                             ? TextDecoration.lineThrough
                             : null,
-                        color: isDark
-                            ? AppColors.darkTextPrimary
-                            : AppColors.dark,
+                        color: const Color(0xFFE5E7EB),
                       ),
                     ),
                     if (entry.note != null)
                       Text(
                         entry.note!,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
-                          color: isDark
-                              ? AppColors.darkTextSecondary
-                              : AppColors.slate,
+                          color: Color(0xFF6B7280),
                         ),
                       ),
                     Text(
@@ -573,8 +564,8 @@ class _StreakEntryTile extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 11,
                         color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.lightGray,
+                            ? const Color(0xFF6B7280)
+                            : const Color(0xFF9CA3AF),
                       ),
                     ),
                   ],

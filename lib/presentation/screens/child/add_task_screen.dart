@@ -160,10 +160,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Başlık
-            Text(
+            const Text(
               'Görev Başlığı',
               style: TextStyle(
-                color: Colors.grey.shade400,
+                color: Color(0xFF9CA3AF),
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
               ),
@@ -177,7 +177,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     style: const TextStyle(color: Colors.white, fontSize: 16),
                     decoration: InputDecoration(
                       hintText: 'Örn: Odayı topla',
-                      hintStyle: TextStyle(color: Colors.grey.shade600),
+                      hintStyle: const TextStyle(color: Color(0xFF6B7280)),
                       filled: true,
                       fillColor: const Color(0xFF1E293B),
                       border: OutlineInputBorder(
@@ -214,10 +214,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             const SizedBox(height: 24),
 
             // Açıklama
-            Text(
+            const Text(
               'Açıklama (isteğe bağlı)',
               style: TextStyle(
-                color: Colors.grey.shade400,
+                color: Color(0xFF9CA3AF),
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
               ),
@@ -229,7 +229,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               maxLines: 3,
               decoration: InputDecoration(
                 hintText: 'Görev hakkında detaylar...',
-                hintStyle: TextStyle(color: Colors.grey.shade600),
+                hintStyle: const TextStyle(color: Color(0xFF6B7280)),
                 filled: true,
                 fillColor: const Color(0xFF1E293B),
                 border: OutlineInputBorder(
@@ -246,10 +246,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             const SizedBox(height: 24),
 
             // Öncelik
-            Text(
+            const Text(
               'Öncelik',
               style: TextStyle(
-                color: Colors.grey.shade400,
+                color: Color(0xFF9CA3AF),
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
               ),
@@ -293,7 +293,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                   style: TextStyle(
                                     color: _priority == p.value
                                         ? p.color
-                                        : Colors.grey.shade400,
+                                        : const Color(0xFF9CA3AF),
                                     fontSize: 13,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -310,10 +310,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             const SizedBox(height: 24),
 
             // Son Tarih
-            Text(
+            const Text(
               'Son Tarih (isteğe bağlı)',
               style: TextStyle(
-                color: Colors.grey.shade400,
+                color: Color(0xFF9CA3AF),
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
               ),
@@ -345,9 +345,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 ),
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.calendar_today,
-                      color: Colors.grey.shade500,
+                      color: Color(0xFF6B7280),
                       size: 20,
                     ),
                     const SizedBox(width: 12),
@@ -357,7 +357,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           : '${_dueDate!.day}/${_dueDate!.month}/${_dueDate!.year}',
                       style: TextStyle(
                         color: _dueDate == null
-                            ? Colors.grey.shade500
+                            ? const Color(0xFF6B7280)
                             : Colors.white,
                         fontSize: 16,
                       ),
@@ -366,9 +366,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     if (_dueDate != null)
                       GestureDetector(
                         onTap: () => setState(() => _dueDate = null),
-                        child: Icon(
+                        child: const Icon(
                           Icons.close,
-                          color: Colors.grey.shade500,
+                          color: Color(0xFF6B7280),
                           size: 18,
                         ),
                       ),

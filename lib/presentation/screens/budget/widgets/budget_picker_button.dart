@@ -15,14 +15,14 @@ class _PickerButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
         decoration: BoxDecoration(
-          color: Colors.grey.shade50,
+          color: const Color(0x1AFFFFFF),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.grey.shade200),
+          border: Border.all(color: const Color(0xFF9CA3AF)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 18, color: AppColors.cobalt),
+            Icon(icon, size: 18, color: const Color(0xFF6366F1)),
             const SizedBox(width: 6),
             Text(
               label,

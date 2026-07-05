@@ -85,8 +85,8 @@ void main() async {
 }
 
 Future<void> _initAndRunApp() async {
-  ThemeMode themeMode = ThemeMode.light;
-  Color accentColor = AppColors.cobalt;
+  ThemeMode themeMode = ThemeMode.system;
+  Color accentColor = const Color(0xFF6366F1);
   double fontScale = 1.0;
   List<Task> savedTasks = [];
   List<ChatMessage> savedChatMessages = [];
@@ -103,7 +103,7 @@ Future<void> _initAndRunApp() async {
     await _safeInit(HiveService.init, 'HiveService', ms: 2000);
 
     // Load settings immediately so app can open
-    final savedTheme = HiveService.getSetting('themeMode') ?? 'system';
+    final savedTheme = HiveService.getSetting('themeMode') ?? 'system'; // default: follow system
     themeMode = switch (savedTheme) {
       'dark' => ThemeMode.dark,
       'system' => ThemeMode.system,
@@ -113,9 +113,9 @@ Future<void> _initAndRunApp() async {
     accentColor = switch (savedAccent) {
       'green' => AppColors.green,
       'orange' => AppColors.orange,
-      'purple' => AppColors.purple,
+      'purple' => const Color(0xFF8B5CF6),
       'red' => AppColors.red,
-      _ => AppColors.cobalt,
+      _ => const Color(0xFF6366F1),
     };
     fontScale = HiveService.getDoubleSetting('fontScale') ?? 1.0;
 
@@ -200,9 +200,9 @@ Future<void> _initAndRunApp() async {
               accentColor = switch (pAccent) {
                 'green' => AppColors.green,
                 'orange' => AppColors.orange,
-                'purple' => AppColors.purple,
+                'purple' => const Color(0xFF8B5CF6),
                 'red' => AppColors.red,
-                _ => AppColors.cobalt,
+                _ => const Color(0xFF6366F1),
               };
             }
           }
@@ -341,7 +341,6 @@ class _FamilyHubAppState extends ConsumerState<FamilyHubApp>
 
   @override
   Widget build(BuildContext context) {
-    final themeMode = ref.watch(themeModeProvider);
     final fontScale = ref.watch(fontScaleProvider);
     final accentColor = ref.watch(accentColorProvider);
     final brightness = Theme.of(context).brightness;
@@ -366,11 +365,18 @@ class _FamilyHubAppState extends ConsumerState<FamilyHubApp>
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: const [Locale('tr', 'TR'), Locale('en', 'US')],
+        supportedLocales: const [
+          Locale('tr', 'TR'),
+          Locale('en', 'US'),
+          Locale('fr', 'BE'),
+          Locale('nl', 'BE'),
+        ],
         locale: ref.watch(localeProvider),
-        theme: AppTheme.lightTheme(accentColor, fontScale: fontScale),
+        // ── TEK TEMA: "Family Mode" (light/dark ayrimi yok) ──
+        // Her iki slot da ayni aile temasina baglandi, mod sabit.
+        theme: AppTheme.darkTheme(accentColor, fontScale: fontScale),
         darkTheme: AppTheme.darkTheme(accentColor, fontScale: fontScale),
-        themeMode: themeMode,
+        themeMode: ThemeMode.dark,
         routerConfig: router,
         builder: (context, child) => AnimatedTheme(
           data: Theme.of(context),

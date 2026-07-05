@@ -52,7 +52,8 @@ class RoutineRepository with RepositoryErrorHandler {
           .from(_table)
           .select('*')
           .eq('id', id)
-          .single();
+          .maybeSingle();
+      if (response == null) throw Exception('Rutin bulunamadı: $id');
       return Routine.fromJson(response);
     }, 'getById');
   }

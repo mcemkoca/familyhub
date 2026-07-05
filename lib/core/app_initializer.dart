@@ -85,7 +85,7 @@ class AppInitializer {
   static Future<void> _initAndRunApp() async {
     var result = const AppInitResult(
       themeMode: ThemeMode.light,
-      accentColor: AppColors.cobalt,
+      accentColor: Color(0xFF6366F1),
       fontScale: 1.0,
       savedTasks: [],
       savedChatMessages: [],
@@ -104,7 +104,7 @@ class AppInitializer {
 
   static Future<AppInitResult> _loadCoreData() async {
     ThemeMode themeMode = ThemeMode.light;
-    Color accentColor = AppColors.cobalt;
+    Color accentColor = const Color(0xFF6366F1);
     double fontScale = 1.0;
     List<Task> savedTasks = [];
     List<ChatMessage> savedChatMessages = [];
@@ -130,9 +130,9 @@ class AppInitializer {
     accentColor = switch (savedAccent) {
       'green' => AppColors.green,
       'orange' => AppColors.orange,
-      'purple' => AppColors.purple,
+      'purple' => const Color(0xFF8B5CF6),
       'red' => AppColors.red,
-      _ => AppColors.cobalt,
+      _ => const Color(0xFF6366F1),
     };
     fontScale = HiveService.getDoubleSetting('fontScale') ?? 1.0;
 
@@ -214,9 +214,9 @@ class AppInitializer {
               accentColor = switch (pAccent) {
                 'green' => AppColors.green,
                 'orange' => AppColors.orange,
-                'purple' => AppColors.purple,
+                'purple' => const Color(0xFF8B5CF6),
                 'red' => AppColors.red,
-                _ => AppColors.cobalt,
+                _ => const Color(0xFF6366F1),
               };
             }
           }

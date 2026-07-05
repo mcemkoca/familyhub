@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/supabase_client.dart';
-import '../../../config/constants.dart';
 import '../../../config/routes.dart';
 import '../../../domain/models/routine.dart';
 import '../../../repositories/routine_repository.dart';
@@ -18,6 +17,8 @@ class RoutinesScreen extends StatefulWidget {
 }
 
 class _RoutinesScreenState extends State<RoutinesScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   List<Routine> _routines = [];
   List<Map<String, dynamic>> _aiSuggestions = [];
   bool _loading = false;
@@ -96,9 +97,8 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bgColor = isDark ? AppColors.darkBackground : AppColors.background;
-    final textColor = isDark ? Colors.white : Colors.black87;
+    final bgColor = const Color(0xFF0A0A0F);
+    final textColor = const Color(0xFFE5E7EB);
 
     return Scaffold(
       backgroundColor: bgColor,
@@ -108,7 +108,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
             expandedHeight: 120,
             floating: true,
             pinned: true,
-            backgroundColor: isDark ? const Color(0xFF1A1A2E) : const Color(0xFFF8F9FA),
+            backgroundColor: const Color(0xFF1A1A2E),
             flexibleSpace: FlexibleSpaceBar(
               title: const Text(
                 '🌅 Rutinler',
@@ -185,7 +185,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
         onPressed: _navigateToCreate,
         icon: const Icon(Icons.add),
         label: const Text('Yeni Rutin'),
-        backgroundColor: AppColors.cobalt,
+        backgroundColor: const Color(0xFF6366F1),
       ),
     );
   }
@@ -276,7 +276,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF16213E) : Colors.white,
+        color: const Color(0xFFE5E7EB),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [BoxShadow(color: Colors.black.withAlpha(13), blurRadius: 10, offset: const Offset(0, 4))],
       ),
@@ -324,7 +324,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
       child: Card(
         elevation: 2,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        color: isDark ? const Color(0xFF16213E) : Colors.white,
+        color: const Color(0xFFE5E7EB),
         child: InkWell(
           onTap: () => _navigateToDetail(routine),
           borderRadius: BorderRadius.circular(16),

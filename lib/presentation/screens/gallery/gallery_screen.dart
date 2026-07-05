@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:intl/intl.dart';
 import '../../../config/constants.dart';
 import '../../../repositories/gallery_repository.dart';
 import '../../../services/auth_service.dart';
+import '../../../services/gallery_sync_service.dart';
+import '../../../services/permission_service.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
 class GalleryScreen extends ConsumerStatefulWidget {
@@ -34,6 +35,49 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
     _subscribe();
+    _maybeAutoSync();
+  }
+
+  // Otomatik senkron açıksa, açılışta yeni cihaz fotoğraflarını sessizce yükle.
+  Future<void> _maybeAutoSync() async {
+    if (!GallerySyncService.autoSyncEnabled) return;
+    try {
+      final n = await GallerySyncService.syncRecentPhotos();
+      if (n > 0 && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('$n yeni fotoğraf otomatik senkronlandı')),
+        );
+      }
+    } catch (e) {
+      debugPrint('Otomatik senkron atlandı: $e');
+    }
+  }
+
+  // Kullanıcı manuel senkron tetikler + otomatik senkron ayarını değiştirir.
+  Future<void> _manualSync() async {
+    setState(() {
+      _isUploading = true;
+      _uploadProgress = 0;
+      _uploadTotal = 0;
+    });
+    try {
+      final n = await GallerySyncService.syncRecentPhotos();
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(n > 0
+              ? '$n yeni fotoğraf senkronlandı'
+              : 'Yeni fotoğraf yok — her şey güncel')),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Senkron hatası: $e')),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isUploading = false);
+    }
   }
 
   @override
@@ -66,15 +110,8 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
 
   // ── MULTI PICK FROM PHONE GALLERY ──
   Future<void> _pickMultipleFromGallery() async {
-    final status = await Permission.photos.request();
-    if (!status.isGranted) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Galeri izni gerekli')),
-        );
-      }
-      return;
-    }
+    final granted = await PermissionService.requestPhotos(context);
+    if (!granted) return;
 
     final files = await _picker.pickMultipleMedia(
       imageQuality: 85,
@@ -87,15 +124,8 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
   }
 
   Future<void> _pickFromCamera() async {
-    final status = await Permission.camera.request();
-    if (!status.isGranted) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Kamera izni gerekli')),
-        );
-      }
-      return;
-    }
+    final granted = await PermissionService.requestCamera(context);
+    if (!granted) return;
 
     final file = await _picker.pickImage(
       source: ImageSource.camera,
@@ -204,33 +234,88 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
   void _showUploadOptions() {
     showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (_) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                leading: const Icon(Icons.photo_library, color: AppColors.cobalt),
-                title: const Text('Telefon Galerisinden Seç (Çoklu)'),
-                subtitle: Text(AppLocalizations.of(context).birdenFazlaFotografVeyaVideo),
-                onTap: () {
-                  Navigator.pop(context);
-                  _pickMultipleFromGallery();
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.camera_alt, color: AppColors.cobalt),
-                title: Text(AppLocalizations.of(context).fotografCek),
-                onTap: () {
-                  Navigator.pop(context);
-                  _pickFromCamera();
-                },
-              ),
-            ],
+      backgroundColor: Colors.transparent,
+      builder: (_) => Container(
+        decoration: BoxDecoration(
+          color: const Color(0xFF13131A),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+          border: Border.all(color: Colors.white.withAlpha(18), width: 0.5),
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 36, height: 4,
+                  margin: const EdgeInsets.only(bottom: 16),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withAlpha(30),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+                _DarkListTile(
+                  icon: Icons.photo_library_outlined,
+                  color: const Color(0xFFEC4899),
+                  title: 'Galeriden Seç (Çoklu)',
+                  subtitle: AppLocalizations.of(context).birdenFazlaFotografVeyaVideo,
+                  onTap: () { Navigator.pop(context); _pickMultipleFromGallery(); },
+                ),
+                const SizedBox(height: 8),
+                _DarkListTile(
+                  icon: Icons.camera_alt_outlined,
+                  color: const Color(0xFF6366F1),
+                  title: AppLocalizations.of(context).fotografCek,
+                  onTap: () { Navigator.pop(context); _pickFromCamera(); },
+                ),
+                const SizedBox(height: 8),
+                _DarkListTile(
+                  icon: Icons.sync,
+                  color: const Color(0xFF10B981),
+                  title: 'Cihaz Galerisini Senkronla',
+                  subtitle: 'Son fotoğrafları aile galerisine aktar',
+                  onTap: () { Navigator.pop(context); _manualSync(); },
+                ),
+                const SizedBox(height: 8),
+                StatefulBuilder(
+                  builder: (context, setSheet) => Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withAlpha(10),
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(color: Colors.white.withAlpha(18), width: 0.5),
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 38, height: 38,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF10B981).withAlpha(20),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: const Icon(Icons.autorenew, size: 18, color: Color(0xFF10B981)),
+                        ),
+                        const SizedBox(width: 12),
+                        const Expanded(
+                          child: Text('Otomatik Senkron',
+                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFFE5E7EB))),
+                        ),
+                        Switch(
+                          value: GallerySyncService.autoSyncEnabled,
+                          activeThumbColor: const Color(0xFF10B981),
+                          onChanged: (v) async {
+                            await GallerySyncService.setAutoSync(v);
+                            setSheet(() {});
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+              ],
+            ),
           ),
         ),
       ),
@@ -249,7 +334,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
         title: 'Bugünün Anıları',
         subtitle: '${today.length} fotoğraf/video',
         icon: Icons.today,
-        color: AppColors.cobalt,
+        color: const Color(0xFF6366F1),
         media: today,
       ));
     }
@@ -262,7 +347,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
         title: '1 Yıl Önce Bugün',
         subtitle: DateFormat('dd MMMM yyyy', 'tr_TR').format(oneYearAgo),
         icon: Icons.history,
-        color: AppColors.purple,
+        color: const Color(0xFF8B5CF6),
         media: yearAgo,
       ));
     }
@@ -316,7 +401,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
         title: 'İlk Anılar',
         subtitle: DateFormat('MMMM yyyy', 'tr_TR').format(oldest.first.createdAt),
         icon: Icons.auto_awesome,
-        color: AppColors.pink,
+        color: const Color(0xFFEC4899),
         media: oldest,
       ));
     }
@@ -329,18 +414,50 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
 
   @override
   Widget build(BuildContext context) {
+    const pink = Color(0xFFEC4899);
     return Scaffold(
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: AppBar(
-        title: const Text('Aile Galerisi'),
-        centerTitle: true,
+        backgroundColor: const Color(0xFF0A0A0F),
+        foregroundColor: const Color(0xFFE5E7EB),
+        elevation: 0,
+        surfaceTintColor: Colors.transparent,
+        titleSpacing: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18, color: Color(0xFF6B7280)),
+          onPressed: () => Navigator.of(context).maybePop(),
+        ),
+        title: Row(
+          children: [
+            Container(
+              width: 34, height: 34,
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Color(0xFFEC4899), Color(0xFFDB2777)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(11),
+                boxShadow: [BoxShadow(color: pink.withAlpha(80), blurRadius: 10)],
+              ),
+              child: const Icon(Icons.photo_library_outlined, color: Colors.white, size: 17),
+            ),
+            const SizedBox(width: 10),
+            const Text('Aile Galerisi',
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: Color(0xFFE5E7EB))),
+          ],
+        ),
         bottom: TabBar(
           controller: _tabController,
-          indicatorColor: AppColors.cobalt,
-          labelColor: AppColors.cobalt,
-          unselectedLabelColor: Colors.grey,
+          indicatorColor: pink,
+          labelColor: pink,
+          unselectedLabelColor: const Color(0xFF6B7280),
+          dividerColor: Colors.white.withAlpha(12),
+          indicatorWeight: 2,
+          labelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
           tabs: const [
-            Tab(icon: Icon(Icons.grid_on), text: 'Galeri'),
-            Tab(icon: Icon(Icons.auto_awesome), text: 'Anılar'),
+            Tab(icon: Icon(Icons.grid_on_outlined, size: 16), text: 'Galeri'),
+            Tab(icon: Icon(Icons.auto_awesome_outlined, size: 16), text: 'Anılar'),
           ],
         ),
       ),
@@ -354,7 +471,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
       floatingActionButton: _isUploading
           ? FloatingActionButton.extended(
               onPressed: null,
-              backgroundColor: AppColors.cobalt,
+              backgroundColor: const Color(0xFF6366F1),
               label: Row(
                 children: [
                   const SizedBox(
@@ -369,7 +486,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
             )
           : FloatingActionButton.extended(
               onPressed: _showUploadOptions,
-              backgroundColor: AppColors.cobalt,
+              backgroundColor: const Color(0xFF6366F1),
               icon: const Icon(Icons.add, color: Colors.white),
               label: const Text('Ekle', style: TextStyle(color: Colors.white)),
             ),
@@ -382,11 +499,11 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.photo_library, size: 64, color: AppColors.lightGray),
+            Icon(Icons.photo_library, size: 64, color: Color(0xFF9CA3AF)),
             SizedBox(height: 16),
-            Text('Henüz fotoğraf yok', style: TextStyle(fontSize: 18, color: AppColors.gray)),
+            Text('Henüz fotoğraf yok', style: TextStyle(fontSize: 18, color: Color(0xFF6B7280))),
             SizedBox(height: 8),
-            Text('Telefon galerisinden seçmek için + butonuna basın', style: TextStyle(color: AppColors.slate)),
+            Text('Telefon galerisinden seçmek için + butonuna basın', style: TextStyle(color: Color(0xFF6B7280))),
           ],
         ),
       );
@@ -450,11 +567,11 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.auto_awesome, size: 64, color: AppColors.lightGray),
+            Icon(Icons.auto_awesome, size: 64, color: Color(0xFF9CA3AF)),
             SizedBox(height: 16),
-            Text('Henüz anı oluşmadı', style: TextStyle(fontSize: 18, color: AppColors.gray)),
+            Text('Henüz anı oluşmadı', style: TextStyle(fontSize: 18, color: Color(0xFF6B7280))),
             SizedBox(height: 8),
-            Text('Daha fazla fotoğraf ekledikçe anılar oluşacak', style: TextStyle(color: AppColors.slate)),
+            Text('Daha fazla fotoğraf ekledikçe anılar oluşacak', style: TextStyle(color: Color(0xFF6B7280))),
           ],
         ),
       );
@@ -694,4 +811,60 @@ class _MemoryGroup {
     required this.color,
     required this.media,
   });
+}
+
+class _DarkListTile extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  final String title;
+  final String? subtitle;
+  final VoidCallback onTap;
+  const _DarkListTile({
+    required this.icon,
+    required this.color,
+    required this.title,
+    this.subtitle,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        decoration: BoxDecoration(
+          color: Colors.white.withAlpha(10),
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: Colors.white.withAlpha(18), width: 0.5),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 38, height: 38,
+              decoration: BoxDecoration(
+                color: color.withAlpha(20),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(icon, size: 18, color: color),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title,
+                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFFE5E7EB))),
+                  if (subtitle != null)
+                    Text(subtitle!,
+                        style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                ],
+              ),
+            ),
+            const Icon(Icons.chevron_right, size: 16, color: Color(0xFF4B5563)),
+          ],
+        ),
+      ),
+    );
+  }
 }

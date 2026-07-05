@@ -1,28 +1,37 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../config/constants.dart';
+import '../../../domain/entities.dart';
+import '../../providers/app_providers.dart';
+import '../../widgets/location_permission_prompt.dart';
 
-class FamilyMapScreen extends StatefulWidget {
+class FamilyMapScreen extends ConsumerStatefulWidget {
   const FamilyMapScreen({super.key});
 
   @override
-  State<FamilyMapScreen> createState() => _FamilyMapScreenState();
+  ConsumerState<FamilyMapScreen> createState() => _FamilyMapScreenState();
 }
 
-class _FamilyMapScreenState extends State<FamilyMapScreen>
+class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
     with TickerProviderStateMixin {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   int _selectedMemberIndex = 0;
   late AnimationController _pulseController;
   late AnimationController _refreshController;
 
-  // Demo aile üyeleri — gerçek implementasyonda Supabase'den gelir
-  final _members = [
+  // Gerçek aile üyeleri build'de familyMembersProvider'dan doldurulur;
+  // üye yoksa aşağıdaki demo kullanılır.
+  List<_FamilyMember> _members = _demoMembers;
+
+  static const _demoMembers = <_FamilyMember>[
     _FamilyMember(
       name: 'Anne',
       role: 'Ebeveyn',
       avatar: '👩',
-      color: const Color(0xFFEC4899),
+      color: Color(0xFFEC4899),
       location: 'Kadıköy, İstanbul',
       lastSeen: 'Şimdi',
       battery: 72,
@@ -36,7 +45,7 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
       name: 'Baba',
       role: 'Ebeveyn',
       avatar: '👨',
-      color: const Color(0xFF3B82F6),
+      color: Color(0xFF3B82F6),
       location: 'Şişli, İstanbul',
       lastSeen: '3 dk önce',
       battery: 45,
@@ -48,9 +57,9 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
     ),
     _FamilyMember(
       name: 'Elif',
-      role: 'Çocuk • 12 yaş',
+      role: 'Çocuk ”¢ 12 yaş',
       avatar: '👧',
-      color: const Color(0xFF10B981),
+      color: Color(0xFF10B981),
       location: 'Beşiktaş İlkokulu',
       lastSeen: '1 dk önce',
       battery: 88,
@@ -62,9 +71,9 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
     ),
     _FamilyMember(
       name: 'Can',
-      role: 'Çocuk • 8 yaş',
+      role: 'Çocuk ”¢ 8 yaş',
       avatar: '👦',
-      color: const Color(0xFFF97316),
+      color: Color(0xFFF97316),
       location: 'Güvenli Bölge',
       lastSeen: '5 dk önce',
       battery: 30,
@@ -77,17 +86,21 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
   ];
 
   final _safeZones = [
-    _SafeZone(name: 'Ev', x: 0.48, y: 0.45, radius: 0.06,
-        color: const Color(0xFF10B981)),
-    _SafeZone(name: 'Okul', x: 0.62, y: 0.28, radius: 0.05,
-        color: const Color(0xFF3B82F6)),
-    _SafeZone(name: 'Park', x: 0.55, y: 0.6, radius: 0.04,
-        color: const Color(0xFFF97316)),
+    const _SafeZone(name: 'Ev', x: 0.48, y: 0.45, radius: 0.06,
+        color: Color(0xFF10B981)),
+    const _SafeZone(name: 'Okul', x: 0.62, y: 0.28, radius: 0.05,
+        color: Color(0xFF3B82F6)),
+    const _SafeZone(name: 'Park', x: 0.55, y: 0.6, radius: 0.04,
+        color: Color(0xFFF97316)),
   ];
 
   @override
   void initState() {
     super.initState();
+    // İlk kez aile haritasına girildiğinde konum izni promptunu göster.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) LocationPermissionPrompt.maybeShow(context);
+    });
     _pulseController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
@@ -111,12 +124,75 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
     // In real app: trigger location update
   }
 
+  // Gerçek aile üyelerini haritaya eşler (konum boru hattı bağlanana kadar
+  // konum metni dürüst, konumlar dağıtılmış olarak gösterilir).
+  List<_FamilyMember> _mapReal(List<FamilyMember> real) {
+    if (real.isEmpty) return _demoMembers;
+    const palette = [
+      Color(0xFFEC4899), Color(0xFF3B82F6), Color(0xFF10B981),
+      Color(0xFFF97316), Color(0xFF8B5CF6), Color(0xFF14B8A6),
+    ];
+    final n = real.length;
+    return List.generate(n, (i) {
+      final m = real[i];
+      // Üyeleri merkez etrafında dairesel dağıt.
+      final angle = (i / n) * 2 * math.pi;
+      final x = (0.5 + 0.22 * math.cos(angle)).clamp(0.1, 0.9);
+      final y = (0.45 + 0.18 * math.sin(angle)).clamp(0.1, 0.85);
+      return _FamilyMember(
+        name: m.name,
+        role: _roleLabel(m.role),
+        avatar: m.initial.isNotEmpty
+            ? m.initial
+            : (m.name.isNotEmpty ? m.name.substring(0, 1).toUpperCase() : '?'),
+        color: palette[i % palette.length],
+        location: 'Konum paylaşımı bekleniyor',
+        lastSeen: m.isOnline
+            ? 'Çevrimiçi'
+            : (m.lastSeen != null ? _relTime(m.lastSeen!) : 'Bilinmiyor'),
+        battery: 0,
+        status: m.isOnline ? LocationStatus.home : LocationStatus.unknown,
+        x: x.toDouble(),
+        y: y.toDouble(),
+        speed: 0,
+        activity: m.isOnline ? 'Çevrimiçi' : 'Çevrimdışı',
+      );
+    });
+  }
+
+  String _roleLabel(MemberRole r) {
+    switch (r) {
+      case MemberRole.admin:
+      case MemberRole.parent:
+        return 'Ebeveyn';
+      case MemberRole.teen:
+        return 'Genç';
+      case MemberRole.child:
+        return 'Çocuk';
+      case MemberRole.baby:
+        return 'Bebek';
+      case MemberRole.elder:
+        return 'Büyük';
+      case MemberRole.guest:
+        return 'Misafir';
+    }
+  }
+
+  String _relTime(DateTime t) {
+    final d = DateTime.now().difference(t);
+    if (d.inMinutes < 1) return 'Şimdi';
+    if (d.inMinutes < 60) return '${d.inMinutes} dk önce';
+    if (d.inHours < 24) return '${d.inHours} saat önce';
+    return '${d.inDays} gün önce';
+  }
+
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    _members = _mapReal(ref.watch(familyMembersProvider));
+    if (_selectedMemberIndex >= _members.length) _selectedMemberIndex = 0;
     return Scaffold(
       backgroundColor:
-          AppColors.darkBackground,
+          const Color(0xFF0A0A0F),
       body: SafeArea(
         child: Column(
           children: [
@@ -151,14 +227,15 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
       padding: const EdgeInsets.fromLTRB(18, 14, 14, 18),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [Color(0xFF43E97B), Color(0xFF38F9D7)],
+          colors: [Color(0xFF0A1F12), Color(0xFF0D2A1A)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
+        border: Border.all(color: const Color(0x1EFFFFFF), width: 0.5),
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF43E97B).withAlpha(100),
+            color: const Color(0xFF10B981).withAlpha(40),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),
@@ -174,7 +251,7 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
               borderRadius: BorderRadius.circular(16),
               border: Border.all(color: Colors.white.withAlpha(60)),
             ),
-            child: const Center(child: Text('🗺️', style: TextStyle(fontSize: 26))),
+            child: const Center(child: Text('🗺️', style: TextStyle(fontSize: 26))),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -189,7 +266,7 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
                       letterSpacing: -0.5,
                     )),
                 Text(
-                    '${_members.length} üye takipte · $homeCount evde',
+                    '${_members.length} üye takipte Â· $homeCount evde',
                     style: const TextStyle(
                         fontSize: 12,
                         color: Colors.white70,
@@ -234,7 +311,7 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
           ),
           boxShadow: [
             BoxShadow(
-                color: Colors.black.withAlpha(isDark ? 40 : 10),
+                color: Colors.black.withAlpha(40),
                 blurRadius: 16,
                 offset: const Offset(0, 4))
           ],
@@ -252,15 +329,15 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
             ..._members.asMap().entries.map((e) =>
                 _buildMemberMarker(e.value, e.key == _selectedMemberIndex)),
             // Map legend
-            Positioned(
+            const Positioned(
               right: 12,
               top: 12,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  _MapLegendItem('Ev', const Color(0xFF10B981)),
-                  _MapLegendItem('Okul', const Color(0xFF3B82F6)),
-                  _MapLegendItem('Park', const Color(0xFFF97316)),
+                  _MapLegendItem('Ev', Color(0xFF10B981)),
+                  _MapLegendItem('Okul', Color(0xFF3B82F6)),
+                  _MapLegendItem('Park', Color(0xFFF97316)),
                 ],
               ),
             ),
@@ -409,11 +486,11 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
               decoration: BoxDecoration(
                 color: selected
                     ? m.color.withAlpha(30)
-                    : (isDark ? AppColors.darkCard : Colors.white),
+                    : const Color(0x1AFFFFFF),
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
-                    color: selected ? m.color : AppColors.border,
-                    width: selected ? 2 : 1),
+                    color: selected ? m.color : const Color(0x1EFFFFFF),
+                    width: selected ? 2 : 0.5),
               ),
               child: Row(
                 children: [
@@ -430,12 +507,10 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
                               fontWeight: FontWeight.w700,
                               color: selected
                                   ? m.color
-                                  : (isDark
-                                      ? AppColors.darkTextPrimary
-                                      : AppColors.dark))),
+                                  : const Color(0xFFE5E7EB))),
                       Text(m.lastSeen,
                           style: const TextStyle(
-                              fontSize: 11, color: AppColors.slate)),
+                              fontSize: 11, color: Color(0xFF6B7280))),
                       const SizedBox(height: 3),
                       _BatteryBar(battery: m.battery, color: m.color),
                     ],
@@ -474,19 +549,17 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
                       Row(
                         children: [
                           Text(m.name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w800,
-                                  color: isDark
-                                      ? AppColors.darkTextPrimary
-                                      : AppColors.dark)),
+                                  color: Color(0xFFE5E7EB))),
                           const SizedBox(width: 8),
                           _StatusBadge(m.status),
                         ],
                       ),
                       Text(m.role,
                           style: const TextStyle(
-                              fontSize: 12, color: AppColors.slate)),
+                              fontSize: 12, color: Color(0xFF6B7280))),
                     ],
                   ),
                 ),
@@ -500,7 +573,7 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
                               color: m.color)),
                       const Text('km/h',
                           style: TextStyle(
-                              fontSize: 10, color: AppColors.slate)),
+                              fontSize: 10, color: Color(0xFF6B7280))),
                     ],
                   ),
               ],
@@ -576,13 +649,11 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
         children: [
           Row(
             children: [
-              Text('Güvenli Bölgeler',
+              const Text('Güvenli Bölgeler',
                   style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
-                      color: isDark
-                          ? AppColors.darkTextPrimary
-                          : AppColors.dark)),
+                      color: Color(0xFFE5E7EB))),
               const Spacer(),
               TextButton.icon(
                 onPressed: () {},
@@ -606,7 +677,7 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
                   child: Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: isDark ? AppColors.darkCard : Colors.white,
+                      color: const Color(0x1AFFFFFF),
                       borderRadius: BorderRadius.circular(14),
                       border: Border.all(
                           color: z.color.withAlpha(60)),
@@ -630,15 +701,13 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
                         ),
                         const SizedBox(height: 6),
                         Text(z.name,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w700,
-                                color: isDark
-                                    ? AppColors.darkTextPrimary
-                                    : AppColors.dark)),
+                                color: Color(0xFFE5E7EB))),
                         Text('$insideCount içeride',
                             style: const TextStyle(
-                                fontSize: 10, color: AppColors.slate)),
+                                fontSize: 10, color: Color(0xFF6B7280))),
                       ],
                     ),
                   ),
@@ -659,13 +728,13 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
 
   Widget _buildActivityFeed(bool isDark) {
     final events = [
-      _LocationEvent('Anne', '👩', const Color(0xFFEC4899),
+      const _LocationEvent('Anne', '👩', Color(0xFFEC4899),
           'Eve geldi', '14:32', Icons.home),
-      _LocationEvent('Baba', '👨', const Color(0xFF3B82F6),
+      const _LocationEvent('Baba', '👨', Color(0xFF3B82F6),
           'Evden çıktı', '08:15', Icons.directions_car),
-      _LocationEvent('Elif', '👧', const Color(0xFF10B981),
+      const _LocationEvent('Elif', '👧', Color(0xFF10B981),
           'Okula ulaştı', '08:42', Icons.school),
-      _LocationEvent('Can', '👦', const Color(0xFFF97316),
+      const _LocationEvent('Can', '👦', Color(0xFFF97316),
           'Güvenli bölgeye girdi', '15:10', Icons.check_circle),
     ];
 
@@ -674,22 +743,20 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Bugünkü Aktiviteler',
+          const Text('Bugünkü Aktiviteler',
               style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w700,
-                  color: isDark
-                      ? AppColors.darkTextPrimary
-                      : AppColors.dark)),
+                  color: Color(0xFFE5E7EB))),
           const SizedBox(height: 10),
           Container(
             decoration: BoxDecoration(
-              color: isDark ? AppColors.darkCard : Colors.white,
+              color: const Color(0x1AFFFFFF),
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
                     color:
-                        Colors.black.withAlpha(isDark ? 20 : 6),
+                        Colors.black.withAlpha(20),
                     blurRadius: 8,
                     offset: const Offset(0, 2))
               ],
@@ -716,25 +783,21 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
                           children: [
                             TextSpan(
                                 text: ev.memberName,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontWeight: FontWeight.w700,
-                                    color: isDark
-                                        ? AppColors.darkTextPrimary
-                                        : AppColors.dark,
+                                    color: Color(0xFFE5E7EB),
                                     fontSize: 13)),
                             TextSpan(
                                 text: ' ${ev.action}',
-                                style: TextStyle(
-                                    color: isDark
-                                        ? AppColors.darkTextSecondary
-                                        : AppColors.slate,
+                                style: const TextStyle(
+                                    color: Color(0xFF6B7280),
                                     fontSize: 13)),
                           ],
                         ),
                       ),
                       trailing: Text(ev.time,
                           style: const TextStyle(
-                              fontSize: 11, color: AppColors.slate)),
+                              fontSize: 11, color: Color(0xFF6B7280))),
                       dense: true,
                     ),
                     if (!isLast)
@@ -743,8 +806,8 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
                           indent: 16,
                           endIndent: 16,
                           color: isDark
-                              ? AppColors.darkBorder
-                              : AppColors.border),
+                              ? const Color(0x1EFFFFFF)
+                              : const Color(0x1EFFFFFF)),
                   ],
                 );
               }).toList(),
@@ -756,7 +819,7 @@ class _FamilyMapScreenState extends State<FamilyMapScreen>
   }
 }
 
-// ─── Data models ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ Data models â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 enum LocationStatus { home, school, transit, safeZone, unknown }
 
@@ -802,7 +865,7 @@ class _LocationEvent {
       this.action, this.time, this.icon);
 }
 
-// ─── Small widgets ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Small widgets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _StatusBadge extends StatelessWidget {
   final LocationStatus status;
@@ -815,7 +878,7 @@ class _StatusBadge extends StatelessWidget {
       LocationStatus.school => ('Okulda', const Color(0xFF3B82F6)),
       LocationStatus.transit => ('Yolda', const Color(0xFFF97316)),
       LocationStatus.safeZone => ('Güvenli', const Color(0xFF10B981)),
-      LocationStatus.unknown => ('Bilinmiyor', AppColors.slate),
+      LocationStatus.unknown => ('Bilinmiyor', const Color(0xFF6B7280)),
     };
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
@@ -837,13 +900,12 @@ class _DetailTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Expanded(
       child: Container(
         padding:
             const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
         decoration: BoxDecoration(
-          color: AppColors.darkBackground,
+          color: const Color(0xFF0A0A0F),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
@@ -857,15 +919,13 @@ class _DetailTile extends StatelessWidget {
                   Text(value,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w700,
-                          color: isDark
-                              ? AppColors.darkTextPrimary
-                              : AppColors.dark)),
+                          color: Color(0xFFE5E7EB))),
                   Text(label,
                       style: const TextStyle(
-                          fontSize: 10, color: AppColors.slate)),
+                          fontSize: 10, color: Color(0xFF6B7280))),
                 ],
               ),
             ),
@@ -886,7 +946,7 @@ class _BatteryBar extends StatelessWidget {
     final barColor = battery < 20
         ? AppColors.error
         : battery < 40
-            ? AppColors.warning
+            ? const Color(0xFFF59E0B)
             : color;
     return SizedBox(
       width: 60,
@@ -983,3 +1043,4 @@ class _MapGridPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
+

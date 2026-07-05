@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../config/constants.dart';
 import '../../providers/app_providers.dart';
 import '../../widgets/activity_card.dart';
 import '../../widgets/settings/screen_header.dart';
@@ -11,8 +10,7 @@ class ActivitiesScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final activitiesAsync = ref.watch(recentActivityProvider);
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = isDark ? AppColors.darkBackground : AppColors.cloudWhite;
+    final bg = const Color(0xFF0A0A0F);
 
     return Scaffold(
       backgroundColor: bg,

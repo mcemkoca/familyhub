@@ -84,7 +84,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
         await client.from('settings').upsert({
           'user_id': userId,
           'security': {'biometric_enabled': enabled},
-        });
+        }, onConflict: 'user_id');
       } catch (e) {
         debugPrint('Supabase sync hatası: $e');
       }
@@ -281,10 +281,9 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
         title: 'Güvenlik',
         showBack: true,
@@ -301,7 +300,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
                 ListTile(
                   leading: const Icon(
                     Icons.lock_reset,
-                    color: AppColors.cobalt,
+                    color: Color(0xFF6366F1),
                   ),
                   title: Text(AppLocalizations.of(context).sifreDegistir),
                   subtitle: Text(AppLocalizations.of(context).mevcutSifreniziGuncelleyin),
@@ -331,7 +330,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
                 SwitchListTile(
                   secondary: const Icon(
                     Icons.fingerprint,
-                    color: AppColors.success,
+                    color: Color(0xFF10B981),
                   ),
                   title: Text(AppLocalizations.of(context).biyometrikGiris),
                   subtitle: Text(
@@ -340,7 +339,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
                         : 'Cihazınız biyometriği desteklemiyor',
                   ),
                   value: _biometricEnabled,
-                  activeThumbColor: AppColors.cobalt,
+                  activeThumbColor: const Color(0xFF6366F1),
                   onChanged: _biometricAvailable ? _toggleBiometric : null,
                 ),
               ],
