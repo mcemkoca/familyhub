@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/foundation.dart' show kDebugMode;
+import 'package:flutter/foundation.dart' show debugPrint, kDebugMode;
 import 'package:http/http.dart' as http;
 import '../../core/analytics/analytics_service.dart';
 
@@ -150,6 +150,7 @@ class AIEngine {
           latency: stopwatch.elapsed,
         );
       } catch (e) {
+        if (kDebugMode) debugPrint('Gemini fallback: $e');
         AnalyticsService.track(
           'llm_fallback',
           properties: {'from': 'gemini', 'to': 'local', 'error': e.toString()},
@@ -316,18 +317,30 @@ class AIEngine {
       },
     };
 
-    final response = await http
-        .post(
-          Uri.parse(
-            'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=$_geminiKey',
-          ),
-          headers: {'Content-Type': 'application/json'},
-          body: jsonEncode(body),
-        )
-        .timeout(_timeout);
+    final uri = Uri.parse(
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=$_geminiKey',
+    );
 
-    if (response.statusCode != 200) {
-      throw _ProviderException('Gemini', response.statusCode, response.body);
+    // Ücretsiz katman 20 istek/dakika ile sınırlı → 429'da sunucunun önerdiği
+    // gecikmeyle 2 kez yeniden dene (rate-limit kendini toparlar).
+    http.Response? response;
+    for (var attempt = 0; attempt < 3; attempt++) {
+      response = await http
+          .post(uri,
+              headers: {'Content-Type': 'application/json'},
+              body: jsonEncode(body))
+          .timeout(_timeout);
+      if (response.statusCode == 429 && attempt < 2) {
+        final delay = _parseRetryDelay(response.body);
+        await Future.delayed(delay);
+        continue;
+      }
+      break;
+    }
+
+    if (response == null || response.statusCode != 200) {
+      throw _ProviderException(
+          'Gemini', response?.statusCode ?? 0, response?.body ?? 'no response');
     }
 
     final data = jsonDecode(response.body) as Map<String, dynamic>;
@@ -343,6 +356,19 @@ class AIEngine {
     if (text == null) throw _ProviderException('Gemini', 200, 'Null text');
 
     return text;
+  }
+
+  // 429 yanıt gövdesinden önerilen bekleme süresini çıkarır (varsayılan 6 sn,
+  // en çok 12 sn).
+  static Duration _parseRetryDelay(String body) {
+    try {
+      final m = RegExp(r'retry in ([0-9]+(?:\.[0-9]+)?)s').firstMatch(body);
+      if (m != null) {
+        final secs = double.parse(m.group(1)!).ceil() + 1;
+        return Duration(seconds: secs.clamp(2, 12));
+      }
+    } catch (_) {}
+    return const Duration(seconds: 6);
   }
 
   // ── Local rule-based fallback ─────────────────────────────────────────
