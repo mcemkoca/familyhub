@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'health_store.dart';
 import 'family_health_screen.dart';
+import '../../../services/notification_service.dart';
 
 /// İlaç Ekle — tam ilaç ekleme formu.
 class MedicineAddScreen extends ConsumerStatefulWidget {
@@ -21,6 +22,7 @@ class _MedicineAddScreenState extends ConsumerState<MedicineAddScreen> {
   DateTime _start = DateTime.now();
   DateTime? _end;
   bool _reminder = true;
+  TimeOfDay _reminderTime = const TimeOfDay(hour: 9, minute: 0);
   String _memberId = 'anne';
 
   static const _types = [
@@ -78,7 +80,7 @@ class _MedicineAddScreenState extends ConsumerState<MedicineAddScreen> {
     }
   }
 
-  void _save() {
+  Future<void> _save() async {
     final name = _name.text.trim();
     if (name.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -86,8 +88,9 @@ class _MedicineAddScreenState extends ConsumerState<MedicineAddScreen> {
       );
       return;
     }
+    final id = DateTime.now().millisecondsSinceEpoch;
     final med = Medicine(
-      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      id: id.toString(),
       name: name,
       dosage: _dosage.text.trim().isEmpty ? _type : '${_dosage.text.trim()} · $_type',
       frequency: _frequency,
@@ -96,11 +99,46 @@ class _MedicineAddScreenState extends ConsumerState<MedicineAddScreen> {
       notes: _notes.text.trim(),
     );
     ref.read(familyHealthProvider.notifier).addMedicine(_memberId, med);
+
+    var scheduled = false;
+    if (_reminder) {
+      scheduled = await _scheduleReminder(id, name);
+    }
+
+    if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('$name eklendi.')),
+      SnackBar(
+          content: Text(scheduled
+              ? '$name eklendi · hatırlatma ${_fmtTime(_reminderTime)} kuruldu'
+              : '$name eklendi.')),
     );
     Navigator.pop(context);
   }
+
+  /// İlk uygun tarihte (bugün geçtiyse yarın) günlük hatırlatma kurar.
+  Future<bool> _scheduleReminder(int id, String name) async {
+    try {
+      await NotificationService.requestPermission();
+      final now = DateTime.now();
+      var when = DateTime(now.year, now.month, now.day, _reminderTime.hour,
+          _reminderTime.minute);
+      if (when.isBefore(now)) when = when.add(const Duration(days: 1));
+      final doseLabel = _dosage.text.trim().isEmpty ? _type : _dosage.text.trim();
+      await NotificationService.scheduleNotification(
+        id: id % 2147483647,
+        title: 'İlaç Zamanı 💊',
+        body: '$name · $doseLabel zamanı!',
+        scheduledDate: when,
+        payload: 'medicine_reminder',
+      );
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  String _fmtTime(TimeOfDay t) =>
+      '${t.hour.toString().padLeft(2, '0')}:${t.minute.toString().padLeft(2, '0')}';
 
   @override
   Widget build(BuildContext context) {
@@ -232,6 +270,55 @@ class _MedicineAddScreenState extends ConsumerState<MedicineAddScreen> {
                       ],
                     ),
                   ),
+                  if (_reminder) ...[
+                    const SizedBox(height: 10),
+                    GestureDetector(
+                      onTap: () async {
+                        final picked = await showTimePicker(
+                          context: context,
+                          initialTime: _reminderTime,
+                          builder: (ctx, child) => Theme(
+                            data: Theme.of(ctx).copyWith(
+                              colorScheme: const ColorScheme.dark(
+                                primary: Color(0xFF14B8A6),
+                                surface: Color(0xFF13131A),
+                              ),
+                            ),
+                            child: child!,
+                          ),
+                        );
+                        if (picked != null) {
+                          setState(() => _reminderTime = picked);
+                        }
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 14),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF13131A),
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(color: const Color(0xFF262631)),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.schedule_rounded,
+                                color: Color(0xFF14B8A6), size: 20),
+                            const SizedBox(width: 12),
+                            const Expanded(
+                              child: Text('Hatırlatma Saati',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 15)),
+                            ),
+                            Text(_fmtTime(_reminderTime),
+                                style: const TextStyle(
+                                    color: Color(0xFF14B8A6),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700)),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                   const SizedBox(height: 18),
                   _label('Not'),
                   const SizedBox(height: 8),

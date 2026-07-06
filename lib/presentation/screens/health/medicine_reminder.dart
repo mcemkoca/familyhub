@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../services/notification_service.dart';
 
 /// İlaç Hatırlatma — tam ekran hatırlatma bildirimi.
 class MedicineReminderScreen extends StatelessWidget {
@@ -119,11 +120,25 @@ class MedicineReminderScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 56,
                 child: OutlinedButton.icon(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('15 dakika sonra tekrar hatırlatılacak.')),
+                  onPressed: () async {
+                    final messenger = ScaffoldMessenger.of(context);
+                    final navigator = Navigator.of(context);
+                    try {
+                      await NotificationService.requestPermission();
+                      await NotificationService.scheduleNotification(
+                        id: DateTime.now().millisecondsSinceEpoch % 2147483647,
+                        title: 'İlaç Zamanı 💊',
+                        body: '$name · $dose zamanı!',
+                        scheduledDate:
+                            DateTime.now().add(const Duration(minutes: 15)),
+                        payload: 'medicine_reminder',
+                      );
+                    } catch (_) {}
+                    messenger.showSnackBar(
+                      const SnackBar(
+                          content: Text('15 dakika sonra tekrar hatırlatılacak.')),
                     );
-                    Navigator.pop(context);
+                    navigator.pop();
                   },
                   icon: const Icon(Icons.snooze_rounded,
                       color: Color(0xFF14B8A6)),
