@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math' show max;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +9,7 @@ import 'package:intl/intl.dart';
 import '../../../config/constants.dart';
 import '../../../domain/entities.dart';
 import '../../providers/app_providers.dart';
+import '../../../services/ai/ai_engine.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
 part 'widgets/budget_summary_card.dart';
@@ -359,6 +361,20 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
       suggestions.add('💡 Daha fazla veri toplandıkça kişiselleştirilmiş öneriler sunacağız.');
     }
 
+    // Gemini için özet veri.
+    final catBreakdown = sortedCats
+        .take(6)
+        .map((e) =>
+            '${e.key}: ${NumberFormat.currency(symbol: '€', decimalDigits: 0).format(e.value)}')
+        .join(', ');
+    final aiFuture = _fetchBudgetInsights(
+      totalIncome: totalIncome,
+      totalExpense: totalExpense,
+      catBreakdown: catBreakdown,
+      txCount: expenseTxs.length,
+      localFallback: suggestions,
+    );
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -411,27 +427,141 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
             _AIStatRow('En Yüksek Kategori', null, const Color(0xFF8B5CF6),
                 textValue: '$topCategory (${NumberFormat.currency(symbol: '€', decimalDigits: 0).format(topAmount)})'),
             const Divider(height: 32),
-            const Text(
-              '💡 AI Önerileri',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            const Row(
+              children: [
+                Text(
+                  '💡 AI Önerileri',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                ),
+                SizedBox(width: 8),
+                Icon(Icons.auto_awesome, size: 15, color: Color(0xFF8B5CF6)),
+              ],
             ),
             const SizedBox(height: 12),
-            ...suggestions.map((s) => Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF6366F1).withAlpha(15),
-                      borderRadius: BorderRadius.circular(12),
+            FutureBuilder<List<String>>(
+              future: aiFuture,
+              builder: (context, snap) {
+                if (snap.connectionState == ConnectionState.waiting) {
+                  return const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 18,
+                          height: 18,
+                          child: CircularProgressIndicator(
+                              strokeWidth: 2, color: Color(0xFF8B5CF6)),
+                        ),
+                        SizedBox(width: 12),
+                        Text('Gemini analiz ediyor…',
+                            style: TextStyle(
+                                fontSize: 14, color: Color(0xFF9CA3AF))),
+                      ],
                     ),
-                    child: Text(s, style: const TextStyle(fontSize: 14, height: 1.4)),
-                  ),
-                )),
+                  );
+                }
+                final tips = (snap.data == null || snap.data!.isEmpty)
+                    ? suggestions
+                    : snap.data!;
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: tips
+                      .map((s) => Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF6366F1).withAlpha(15),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(s,
+                                  style: const TextStyle(
+                                      fontSize: 14, height: 1.4)),
+                            ),
+                          ))
+                      .toList(),
+                );
+              },
+            ),
             const SizedBox(height: 16),
           ],
         ),
       ),
     );
+  }
+
+  /// Gemini'den kişiselleştirilmiş bütçe önerileri çeker. Başarısız olursa
+  /// kural tabanlı [localFallback] listesi döner.
+  Future<List<String>> _fetchBudgetInsights({
+    required double totalIncome,
+    required double totalExpense,
+    required String catBreakdown,
+    required int txCount,
+    required List<String> localFallback,
+  }) async {
+    final net = totalIncome - totalExpense;
+    final prompt = '''
+Bir Belçika'da yaşayan ailenin aylık bütçesini analiz et. Para birimi Euro.
+Toplam gelir: €${totalIncome.toStringAsFixed(0)}
+Toplam gider: €${totalExpense.toStringAsFixed(0)}
+Net bakiye: €${net.toStringAsFixed(0)}
+İşlem sayısı: $txCount
+Kategori dağılımı: ${catBreakdown.isEmpty ? 'veri yok' : catBreakdown}
+
+Bu verilere göre 3-4 kısa, uygulanabilir tasarruf/bütçe önerisi ver.
+Sadece JSON döndür: {"suggestions": ["...", "..."]}. Her öneri tek cümle, Türkçe, başına uygun bir emoji koy.''';
+
+    try {
+      final res = await AIEngine.generate(
+        prompt: prompt,
+        format: AIResponseFormat.json,
+        maxTokens: 500,
+        temperature: 0.6,
+      );
+      final parsed = _parseSuggestions(res.content);
+      return parsed.isEmpty ? localFallback : parsed;
+    } catch (_) {
+      return localFallback;
+    }
+  }
+
+  List<String> _parseSuggestions(String raw) {
+    try {
+      var s = raw.trim();
+      final start = s.indexOf('{');
+      final end = s.lastIndexOf('}');
+      if (start >= 0 && end > start) s = s.substring(start, end + 1);
+      final obj = jsonDecode(s);
+      final list = obj is Map ? obj['suggestions'] : null;
+      if (list is List) {
+        return list
+            .map((e) => e.toString().trim())
+            .where((e) => e.isNotEmpty)
+            .toList();
+      }
+    } catch (_) {}
+    return const [];
+  }
+
+  /// Açıklama metninden Gemini ile en uygun kategoriyi seçer.
+  Future<String?> _suggestCategory(String desc, List<String> categories) async {
+    final prompt = '''
+Bir harcama açıklaması: "$desc"
+Aşağıdaki kategorilerden EN uygun olanı seç ve SADECE kategori adını yaz:
+${categories.join(', ')}''';
+    try {
+      final res = await AIEngine.generate(
+        prompt: prompt,
+        maxTokens: 30,
+        temperature: 0.2,
+      );
+      final answer = res.content.trim().toLowerCase();
+      for (final c in categories) {
+        if (answer.contains(c.toLowerCase())) return c;
+      }
+    } catch (_) {}
+    return null;
   }
 
   void _showLimitEditor(BuildContext context, _Cat category) {
@@ -730,7 +860,40 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                         border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 8),
+
+                    // AI kategori önerisi
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: TextButton.icon(
+                        onPressed: () async {
+                          final text = descController.text.trim();
+                          if (text.isEmpty) {
+                            ScaffoldMessenger.of(ctx).showSnackBar(
+                              const SnackBar(
+                                  content: Text(
+                                      'Önce açıklama yazın, AI kategoriyi bulsun.')),
+                            );
+                            return;
+                          }
+                          final cat = await _suggestCategory(
+                              text, _categories.map((c) => c.name).toList());
+                          if (cat != null) {
+                            setModalState(() => selectedCategory = cat);
+                            if (ctx.mounted) {
+                              ScaffoldMessenger.of(ctx).showSnackBar(
+                                SnackBar(content: Text('AI önerisi: $cat')),
+                              );
+                            }
+                          }
+                        },
+                        icon: const Icon(Icons.auto_awesome,
+                            size: 18, color: Color(0xFF8B5CF6)),
+                        label: const Text('AI ile kategori öner',
+                            style: TextStyle(color: Color(0xFF8B5CF6))),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
 
                     // Save Button
                     SizedBox(

@@ -8,6 +8,7 @@ import '../../../services/hive_service.dart';
 import '../../../services/content/meal_image_service.dart';
 import '../../providers/app_providers.dart';
 import '../../widgets/ds.dart';
+import '../../../services/ai/ai_engine.dart';
 
 /// Tarife göre DOĞRU yemek fotoğrafı — TheMealDB'den adına göre çeker,
 /// bulunamazsa nötr gradient + ikon (yanlış görsel göstermez).
@@ -1492,6 +1493,7 @@ class _AddRecipeSheetState extends State<_AddRecipeSheet> {
   final _ingredients = TextEditingController();
   final _steps = TextEditingController();
   String _category = 'ana_yemek';
+  bool _generating = false;
 
   static const _cats = [
     ('kahvalti', 'Kahvaltı'),
@@ -1508,6 +1510,57 @@ class _AddRecipeSheetState extends State<_AddRecipeSheet> {
     _ingredients.dispose();
     _steps.dispose();
     super.dispose();
+  }
+
+  Future<void> _generateWithAI() async {
+    final title = _title.text.trim();
+    if (title.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Önce tarif adını yazın, AI gerisini doldursun')),
+      );
+      return;
+    }
+    setState(() => _generating = true);
+    final catLabel = _cats.firstWhere((c) => c.$1 == _category).$2;
+    final prompt = '''
+"$title" ($catLabel) için bir aile tarifi oluştur.
+Sadece JSON döndür:
+{"ingredients": ["2 su bardağı un", "1 çay kaşığı tuz"], "steps": ["Malzemeleri karıştır.", "Fırında 20 dk pişir."]}
+Malzemeler miktarıyla, adımlar kısa ve net olsun. Türkçe.''';
+    try {
+      final res = await AIEngine.generate(
+        prompt: prompt,
+        format: AIResponseFormat.json,
+        maxTokens: 700,
+        temperature: 0.6,
+      );
+      var s = res.content.trim();
+      final start = s.indexOf('{');
+      final end = s.lastIndexOf('}');
+      if (start >= 0 && end > start) s = s.substring(start, end + 1);
+      final obj = jsonDecode(s);
+      final ings = (obj is Map ? obj['ingredients'] : null);
+      final steps = (obj is Map ? obj['steps'] : null);
+      if (ings is List && ings.isNotEmpty) {
+        _ingredients.text = ings.map((e) => e.toString()).join('\n');
+      }
+      if (steps is List && steps.isNotEmpty) {
+        _steps.text = steps.map((e) => e.toString()).join('\n');
+      }
+      if (mounted && (ings is! List || ings.isEmpty)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('AI şu an yanıt veremedi, elle doldurabilirsin')),
+        );
+      }
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('AI şu an yanıt veremedi, elle doldurabilirsin')),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _generating = false);
+    }
   }
 
   Future<void> _save() async {
@@ -1630,6 +1683,33 @@ class _AddRecipeSheetState extends State<_AddRecipeSheet> {
                     ),
                   );
                 }).toList(),
+              ),
+              const SizedBox(height: 12),
+              SizedBox(
+                width: double.infinity,
+                height: 46,
+                child: OutlinedButton.icon(
+                  onPressed: _generating ? null : _generateWithAI,
+                  icon: _generating
+                      ? const SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: CircularProgressIndicator(
+                              strokeWidth: 2, color: Color(0xFF8B5CF6)),
+                        )
+                      : const Icon(Icons.auto_awesome,
+                          size: 18, color: Color(0xFF8B5CF6)),
+                  label: Text(
+                      _generating
+                          ? 'AI hazırlıyor…'
+                          : 'AI ile malzeme & adımları doldur',
+                      style: const TextStyle(color: Color(0xFF8B5CF6))),
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: Color(0xFF8B5CF6)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                  ),
+                ),
               ),
               const SizedBox(height: 12),
               _field('Malzemeler (her satıra bir tane)', _ingredients,
