@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../../services/hive_service.dart';
 import '../../../services/ai/pedagogy_engine.dart';
 import '../../widgets/ds.dart';
 import '../../widgets/growing_tree.dart';
+import '../../widgets/external_link.dart';
 
 class EducationScreen extends StatefulWidget {
   const EducationScreen({super.key});
@@ -832,12 +832,11 @@ class _ParentGuideTab extends StatelessWidget {
                   if (videoQuery.isNotEmpty) ...[
                     const SizedBox(height: 16),
                     GestureDetector(
-                      onTap: () async {
-                        final uri = Uri.parse(
-                            'https://www.youtube.com/results?search_query=${Uri.encodeComponent(videoQuery)}');
-                        await launchUrl(uri,
-                            mode: LaunchMode.externalApplication);
-                      },
+                      onTap: () => openExternalLink(
+                        context,
+                        'https://www.youtube.com/results?search_query=${Uri.encodeComponent(videoQuery)}',
+                        label: 'YouTube video araması',
+                      ),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16, vertical: 14),
