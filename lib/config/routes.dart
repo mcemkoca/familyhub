@@ -73,7 +73,7 @@ import '../presentation/screens/child/child_management_screen.dart';
 import '../presentation/screens/activities/activities_screen.dart';
 import '../presentation/screens/streak/streak_screen.dart';
 import '../presentation/screens/main_shell.dart';
-import '../presentation/screens/health/family_health_screen.dart';
+import '../presentation/screens/health/health_dashboard.dart';
 import '../presentation/screens/budget/subscription_screen.dart';
 import '../presentation/screens/child/child_dev_dashboard.dart';
 import '../presentation/screens/ai/ai_assistant_screen.dart';
@@ -346,7 +346,7 @@ final router = GoRouter(
     GoRoute(path: AppRoutes.contacts, builder: (context, state) => const ContactsScreen()),
     GoRoute(path: AppRoutes.gallery, builder: (context, state) => const GalleryScreen()),
     GoRoute(path: AppRoutes.documents, builder: (context, state) => const DocumentsScreen()),
-    GoRoute(path: AppRoutes.familyHealth, builder: (context, state) => const FamilyHealthScreen()),
+    GoRoute(path: AppRoutes.familyHealth, builder: (context, state) => const HealthDashboard()),
     GoRoute(path: AppRoutes.subscriptions, builder: (context, state) => const SubscriptionScreen()),
     GoRoute(path: AppRoutes.childDevelopment, builder: (context, state) => const ChildDevelopmentHome()),
     GoRoute(path: AppRoutes.aiAssistant, builder: (context, state) => const AIAssistantScreen()),
