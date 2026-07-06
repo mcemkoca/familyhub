@@ -14,6 +14,7 @@ import 'child_dev_area_detail.dart';
 import 'dev_sources.dart';
 import 'child_dev_story_time.dart';
 import 'child_dev_color_game.dart';
+import 'child_dev_sensory_game.dart';
 
 /// Ekran 1 — Çocuk Gelişim Dashboard.
 class ChildDevelopmentHome extends ConsumerStatefulWidget {
@@ -62,7 +63,7 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
         target = const ColorGameScreen();
         break;
       default:
-        target = AreaDetailScreen(child: child, areaKey: 'duyusal');
+        target = const SensoryGameScreen();
     }
     await Navigator.push(context, MaterialPageRoute(builder: (_) => target));
     if (mounted) setState(() {});
