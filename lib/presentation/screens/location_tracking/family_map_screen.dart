@@ -1,10 +1,14 @@
+import 'dart:async';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 import '../../../config/constants.dart';
 import '../../../domain/entities.dart';
 import '../../../services/koca_seed.dart';
+import '../../../services/location_service.dart';
 import '../../providers/app_providers.dart';
 import '../../widgets/location_permission_prompt.dart';
 
@@ -22,6 +26,14 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
   int _selectedMemberIndex = 0;
   late AnimationController _pulseController;
   late AnimationController _refreshController;
+
+  // Gerçek harita + GPS.
+  final MapController _mapController = MapController();
+  LatLng? _myLocation;
+  Timer? _locTimer;
+  bool _locating = false;
+  // GPS alınamazsa varsayılan merkez: Brüksel (Belçika pazarı).
+  static const LatLng _defaultCenter = LatLng(50.8503, 4.3517);
 
   // Gerçek aile üyeleri build'de familyMembersProvider'dan doldurulur;
   // üye yoksa aşağıdaki demo kullanılır.
@@ -110,19 +122,58 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
       vsync: this,
       duration: const Duration(milliseconds: 800),
     );
+    // İlk konumu al, sonra 10 dakikada bir güncelle.
+    _updateLocation();
+    _locTimer = Timer.periodic(
+        const Duration(minutes: 10), (_) => _updateLocation());
   }
 
   @override
   void dispose() {
+    _locTimer?.cancel();
     _pulseController.dispose();
     _refreshController.dispose();
     super.dispose();
   }
 
+  Future<void> _updateLocation() async {
+    if (_locating) return;
+    _locating = true;
+    try {
+      final pos = await LocationService.getCurrentPosition();
+      if (pos != null && mounted) {
+        final ll = LatLng(pos.latitude, pos.longitude);
+        setState(() => _myLocation = ll);
+        try {
+          _mapController.move(ll, 14);
+        } catch (_) {}
+      }
+    } catch (_) {
+      // Konum alınamadı — varsayılan merkez kullanılır.
+    } finally {
+      _locating = false;
+    }
+  }
+
   void _refresh() {
     HapticFeedback.mediumImpact();
     _refreshController.forward(from: 0);
-    // In real app: trigger location update
+    _updateLocation();
+  }
+
+  /// Üyeleri gerçek koordinatlara eşler. Mevcut cihaz gerçek GPS'te; diğer
+  /// üyeler (canlı konum boru hattı bağlanana kadar) merkez çevresine
+  /// dağıtılır.
+  LatLng _memberLatLng(int index, int total) {
+    final base = _myLocation ?? _defaultCenter;
+    if (index == 0) return base;
+    // Merkez etrafında küçük, belirlenimci bir dağılım.
+    final angle = (index / math.max(total, 1)) * 2 * math.pi;
+    const r = 0.004; // ~400m
+    return LatLng(
+      base.latitude + r * math.cos(angle),
+      base.longitude + r * math.sin(angle),
+    );
   }
 
   // Gerçek aile üyelerini haritaya eşler (konum boru hattı bağlanana kadar
@@ -330,170 +381,121 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
   }
 
   Widget _buildMap(bool isDark) {
+    final center = _myLocation ?? _defaultCenter;
+    final total = _members.length;
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-      child: Container(
-        height: 260,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          gradient: LinearGradient(
-            colors: isDark
-                ? [const Color(0xFF0F2027), const Color(0xFF203A43)]
-                : [const Color(0xFFB7E8D0), const Color(0xFFD1EAF7)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          boxShadow: [
-            BoxShadow(
-                color: Colors.black.withAlpha(40),
-                blurRadius: 16,
-                offset: const Offset(0, 4))
-          ],
-        ),
-        child: Stack(
-          children: [
-            // Grid lines (map feel)
-            CustomPaint(
-              size: const Size(double.infinity, 260),
-              painter: _MapGridPainter(isDark: isDark),
-            ),
-            // Safe zones
-            ..._safeZones.map((z) => _buildSafeZoneCircle(z)),
-            // Member markers
-            ..._members.asMap().entries.map((e) =>
-                _buildMemberMarker(e.value, e.key == _selectedMemberIndex)),
-            // Map legend
-            const Positioned(
-              right: 12,
-              top: 12,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: SizedBox(
+          height: 260,
+          child: Stack(
+            children: [
+              FlutterMap(
+                mapController: _mapController,
+                options: MapOptions(
+                  initialCenter: center,
+                  initialZoom: 14,
+                  interactionOptions: const InteractionOptions(
+                    flags: InteractiveFlag.pinchZoom |
+                        InteractiveFlag.drag |
+                        InteractiveFlag.doubleTapZoom,
+                  ),
+                ),
                 children: [
-                  _MapLegendItem('Ev', Color(0xFF10B981)),
-                  _MapLegendItem('Okul', Color(0xFF3B82F6)),
-                  _MapLegendItem('Park', Color(0xFFF97316)),
+                  TileLayer(
+                    urlTemplate:
+                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    userAgentPackageName: 'com.familyhub.app',
+                    maxZoom: 19,
+                  ),
+                  MarkerLayer(
+                    markers: [
+                      for (var i = 0; i < total; i++)
+                        Marker(
+                          point: _memberLatLng(i, total),
+                          width: 46,
+                          height: 46,
+                          child: GestureDetector(
+                            onTap: () =>
+                                setState(() => _selectedMemberIndex = i),
+                            child: _mapPin(_members[i],
+                                i == _selectedMemberIndex),
+                          ),
+                        ),
+                    ],
+                  ),
                 ],
               ),
-            ),
-            // Scale indicator
-            Positioned(
-              left: 12,
-              bottom: 12,
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: Colors.black.withAlpha(100),
-                  borderRadius: BorderRadius.circular(6),
+              // OSM atıf (lisans gereği).
+              Positioned(
+                right: 6,
+                bottom: 4,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  color: Colors.black.withAlpha(120),
+                  child: const Text('© OpenStreetMap',
+                      style: TextStyle(color: Colors.white70, fontSize: 9)),
                 ),
-                child: const Text('İstanbul',
-                    style: TextStyle(
-                        color: Colors.white70, fontSize: 11)),
               ),
-            ),
-          ],
+              // Konumuma git.
+              Positioned(
+                right: 10,
+                top: 10,
+                child: GestureDetector(
+                  onTap: () {
+                    final loc = _myLocation;
+                    if (loc != null) {
+                      _mapController.move(loc, 15);
+                    } else {
+                      _updateLocation();
+                    }
+                  },
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF13131A),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: const Color(0xFF262631)),
+                    ),
+                    child: Icon(
+                        _locating
+                            ? Icons.hourglass_bottom
+                            : Icons.my_location,
+                        color: const Color(0xFF10B981),
+                        size: 20),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildSafeZoneCircle(_SafeZone zone) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final w = constraints.maxWidth;
-        final h = 260.0;
-        return Positioned(
-          left: zone.x * w - zone.radius * w,
-          top: zone.y * h - zone.radius * w,
-          child: Container(
-            width: zone.radius * w * 2,
-            height: zone.radius * w * 2,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: zone.color.withAlpha(30),
-              border: Border.all(
-                  color: zone.color.withAlpha(120), width: 1.5),
-            ),
+  Widget _mapPin(_FamilyMember m, bool selected) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: selected ? 40 : 34,
+          height: selected ? 40 : 34,
+          decoration: BoxDecoration(
+            color: m.color,
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.white, width: 2.5),
+            boxShadow: [
+              BoxShadow(color: m.color.withAlpha(140), blurRadius: 8),
+            ],
           ),
-        );
-      },
-    );
-  }
-
-  Widget _buildMemberMarker(_FamilyMember member, bool selected) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final w = constraints.maxWidth;
-        final h = 260.0;
-        return Positioned(
-          left: member.x * w - 18,
-          top: member.y * h - 18,
-          child: GestureDetector(
-            onTap: () {
-              HapticFeedback.selectionClick();
-              setState(() => _selectedMemberIndex =
-                  _members.indexOf(member));
-            },
-            child: AnimatedBuilder(
-              animation: _pulseController,
-              builder: (_, child) {
-                final pulse = selected
-                    ? math.sin(_pulseController.value * math.pi * 2) *
-                            0.3 +
-                        0.7
-                    : 1.0;
-                return Transform.scale(
-                  scale: selected ? (1.0 + pulse * 0.15) : 1.0,
-                  child: child,
-                );
-              },
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  if (selected)
-                    AnimatedBuilder(
-                      animation: _pulseController,
-                      builder: (_, _) {
-                        final r =
-                            _pulseController.value * 24 + 18;
-                        return Container(
-                          width: r,
-                          height: r,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: member.color.withAlpha(
-                                (60 * (1 - _pulseController.value))
-                                    .toInt()),
-                          ),
-                        );
-                      },
-                    ),
-                  Container(
-                    width: 36,
-                    height: 36,
-                    decoration: BoxDecoration(
-                      color: member.color,
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                          color: Colors.white,
-                          width: selected ? 3 : 2),
-                      boxShadow: [
-                        BoxShadow(
-                            color: member.color.withAlpha(100),
-                            blurRadius: selected ? 12 : 4)
-                      ],
-                    ),
-                    child: Center(
-                      child: Text(member.avatar,
-                          style: const TextStyle(fontSize: 16)),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
+          alignment: Alignment.center,
+          child: Text(m.avatar,
+              style: TextStyle(fontSize: selected ? 18 : 15)),
+        ),
+      ],
     );
   }
 
@@ -1007,74 +1009,3 @@ class _BatteryBar extends StatelessWidget {
     );
   }
 }
-
-class _MapLegendItem extends StatelessWidget {
-  final String label;
-  final Color color;
-  const _MapLegendItem(this.label, this.color);
-
-  @override
-  Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(bottom: 4),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-                width: 8,
-                height: 8,
-                decoration:
-                    BoxDecoration(color: color, shape: BoxShape.circle)),
-            const SizedBox(width: 4),
-            Text(label,
-                style: const TextStyle(
-                    color: Colors.white70, fontSize: 10)),
-          ],
-        ),
-      );
-}
-
-class _MapGridPainter extends CustomPainter {
-  final bool isDark;
-  const _MapGridPainter({required this.isDark});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = isDark
-          ? Colors.white.withAlpha(8)
-          : Colors.black.withAlpha(8)
-      ..strokeWidth = 1;
-
-    for (double x = 0; x < size.width; x += size.width / 8) {
-      canvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);
-    }
-    for (double y = 0; y < size.height; y += size.height / 5) {
-      canvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
-    }
-
-    // Draw some "road" lines
-    final roadPaint = Paint()
-      ..color = isDark
-          ? Colors.white.withAlpha(20)
-          : Colors.black.withAlpha(12)
-      ..strokeWidth = 2
-      ..strokeCap = StrokeCap.round;
-
-    canvas.drawLine(
-        Offset(0, size.height * 0.4),
-        Offset(size.width, size.height * 0.4),
-        roadPaint);
-    canvas.drawLine(
-        Offset(size.width * 0.5, 0),
-        Offset(size.width * 0.45, size.height),
-        roadPaint);
-    canvas.drawLine(
-        Offset(size.width * 0.2, 0),
-        Offset(size.width * 0.25, size.height),
-        roadPaint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-}
-
