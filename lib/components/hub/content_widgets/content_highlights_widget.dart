@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../config/constants.dart';
+import '../../../config/routes.dart';
 import '../../../services/content/content_engine.dart';
 import '../../../services/content/content_models.dart';
 
@@ -164,6 +166,33 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
     );
   }
 
+  /// Detay sayfasını kapatıp ilgili gerçek bölüme gider (Keşfet senkronu).
+  Widget _goToSectionButton(BuildContext ctx, String route, String label) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: SizedBox(
+        width: double.infinity,
+        height: 50,
+        child: ElevatedButton.icon(
+          onPressed: () {
+            Navigator.pop(ctx);
+            ctx.go(route);
+          },
+          icon: const Icon(Icons.arrow_forward_rounded, size: 20),
+          label: Text(label),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF6366F1),
+            foregroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14)),
+            textStyle:
+                const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+          ),
+        ),
+      ),
+    );
+  }
+
   // ── Detail Bottom Sheets ────────────────────────────────────────────────
 
   void _showRecipeDetail(BuildContext context, Recipe? recipe) {
@@ -257,7 +286,9 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
                   const SizedBox(height: 20),
                   _buildDetailSection(context, 'Besin Değerleri', recipe.nutritionalHighlights.map((s) => '• $s').toList()),
                 ],
-                const SizedBox(height: 32),
+                const SizedBox(height: 12),
+                _goToSectionButton(ctx, AppRoutes.kitchen, 'Mutfağa Git'),
+                const SizedBox(height: 20),
               ],
             ),
           );
@@ -319,7 +350,9 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
               const SizedBox(height: 16),
               _buildDetailSection(context, 'Ev İşi İpucu', ['• $tip']),
             ],
-            const SizedBox(height: 16),
+            const SizedBox(height: 12),
+            _goToSectionButton(ctx, AppRoutes.subscriptions, 'Ev Giderlerine Git'),
+            const SizedBox(height: 12),
           ],
         ),
       ),
@@ -378,7 +411,9 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
             _buildDetailSection(context, 'Kategori', ['• ${tip.category}']),
             const SizedBox(height: 16),
             _buildDetailSection(context, 'Tahmini Tasarruf', ['• ~${tip.monthlySavingsEur}€/ay']),
-            const SizedBox(height: 16),
+            const SizedBox(height: 12),
+            _goToSectionButton(ctx, AppRoutes.budget, 'Bütçeye Git'),
+            const SizedBox(height: 12),
           ],
         ),
       ),
@@ -481,7 +516,9 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
                 ),
               ),
             )),
-            const SizedBox(height: 16),
+            const SizedBox(height: 12),
+            _goToSectionButton(ctx, AppRoutes.emergency, 'Acil Duruma Git'),
+            const SizedBox(height: 12),
           ],
         ),
       ),
@@ -555,7 +592,9 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
             ],
             const SizedBox(height: 16),
             _buildDetailSection(context, 'Güvenlik', ['• ${activity.safetyNotes}']),
-            const SizedBox(height: 16),
+            const SizedBox(height: 12),
+            _goToSectionButton(ctx, AppRoutes.childDevelopment, 'Gelişime Git'),
+            const SizedBox(height: 12),
           ],
         ),
       ),
