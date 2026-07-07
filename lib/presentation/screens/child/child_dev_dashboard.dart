@@ -489,12 +489,15 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
     final scores = {
       for (final a in devAreas) a.label: DevStore.areaScore(child.id, a.key, group)
     };
+    final hasData = scores.values.any((v) => v > 0);
     final top = scores.entries.reduce((a, b) => a.value >= b.value ? a : b);
     final low = scores.entries.reduce((a, b) => a.value <= b.value ? a : b);
-    final text =
-        '${child.name}\'in ${top.key.toLowerCase()} gelişimi harika gidiyor! '
-        '${low.key} alanını destekleyici etkinliklere devam edin. '
-        'Sosyal etkileşimlerde belleği güçleniyor.';
+    final text = hasData
+        ? '${child.name}\'in ${top.key.toLowerCase()} gelişimi güçlü görünüyor. '
+            '${low.key} alanını destekleyici etkinliklere ağırlık verebilirsiniz.'
+        : '${child.name} için henüz beceri değerlendirmesi yapılmadı. '
+            'Değerlendirmeyi tamamladığınızda kişiselleştirilmiş gelişim '
+            'yorumları burada görünecek.';
     return GestureDetector(
       onTap: () => _openPlanSetup(child),
       child: Container(

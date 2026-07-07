@@ -89,7 +89,7 @@ class DevStore {
   // ── Alan skorları ────────────────────────────────────────────────────────
   /// Değerlendirmeden alan yüzdesi (0-100).
   /// yapiyor=1.0, bazen=0.5, henuz=0.0, emin=hariç.
-  /// Cevap yoksa yaşa uygun taban değeri döner.
+  /// Cevap yoksa 0 döner (boş ama çalışır — sahte taban değer YOK).
   static int areaScore(String childId, String areaKey, String devGroup) {
     final assess = assessment(childId);
     final items = assessmentFor(devGroup);
@@ -103,7 +103,7 @@ class DevStore {
       if (st == 'yapiyor') total += 1.0;
       if (st == 'bazen') total += 0.5;
     }
-    if (answered == 0) return _baseline(areaKey);
+    if (answered == 0) return 0;
     return (total / answered * 100).round();
   }
 
@@ -111,26 +111,6 @@ class DevStore {
     final scores =
         devAreas.map((a) => areaScore(childId, a.key, devGroup)).toList();
     return (scores.reduce((a, b) => a + b) / scores.length).round();
-  }
-
-  /// Değerlendirme yapılmadan önce gösterilecek makul taban değerler.
-  static int _baseline(String areaKey) {
-    switch (areaKey) {
-      case 'dil':
-        return 82;
-      case 'motor':
-        return 74;
-      case 'sosyal':
-        return 79;
-      case 'bilissel':
-        return 76;
-      case 'ozbakim':
-        return 70;
-      case 'duyusal':
-        return 65;
-      default:
-        return 72;
-    }
   }
 
   /// Değerlendirme tamamlanma oranı (0.0-1.0).
