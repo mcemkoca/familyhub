@@ -65,6 +65,15 @@ class AIEngine {
 
   static const Duration _timeout = Duration(seconds: 10);
 
+  /// Sırayla denenecek Gemini modelleri. Her modelin ücretsiz katmanda AYRI
+  /// kotası olduğundan, biri 429 (kota) verirse sıradakine geçilir.
+  static const List<String> _geminiModels = [
+    'gemini-2.5-flash',
+    'gemini-2.5-flash-lite',
+    'gemini-flash-latest',
+    'gemini-2.0-flash',
+  ];
+
   /// Primary entry-point: tries providers in fallback chain.
   static Future<AIResponse> generate({
     required String prompt,
@@ -317,25 +326,39 @@ class AIEngine {
       },
     };
 
-    final uri = Uri.parse(
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=$_geminiKey',
-    );
-
-    // Ücretsiz katman 20 istek/dakika ile sınırlı → 429'da sunucunun önerdiği
-    // gecikmeyle 2 kez yeniden dene (rate-limit kendini toparlar).
+    // Her modelin AYRI ücretsiz kotası var. Biri 429 (kota dolu) verirse
+    // sıradaki modele geç — böylece günlük limit bir modelde bitse bile
+    // asistan çalışmaya devam eder.
     http.Response? response;
-    for (var attempt = 0; attempt < 3; attempt++) {
-      response = await http
-          .post(uri,
-              headers: {'Content-Type': 'application/json'},
-              body: jsonEncode(body))
-          .timeout(_timeout);
-      if (response.statusCode == 429 && attempt < 2) {
-        final delay = _parseRetryDelay(response.body);
-        await Future.delayed(delay);
-        continue;
+    for (final model in _geminiModels) {
+      final uri = Uri.parse(
+        'https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent?key=$_geminiKey',
+      );
+      var quotaHit = false;
+      for (var attempt = 0; attempt < 2; attempt++) {
+        response = await http
+            .post(uri,
+                headers: {'Content-Type': 'application/json'},
+                body: jsonEncode(body))
+            .timeout(_timeout);
+        if (response.statusCode == 429) {
+          quotaHit = true;
+          // Kısa bir kez bekleyip aynı modeli tekrar dene; yine 429 ise
+          // sıradaki modele geç.
+          if (attempt == 0) {
+            final delay = _parseRetryDelay(response.body);
+            if (delay.inSeconds <= 8) {
+              await Future.delayed(delay);
+              continue;
+            }
+          }
+          break;
+        }
+        quotaHit = false;
+        break;
       }
-      break;
+      if (response != null && response.statusCode == 200) break;
+      if (!quotaHit) break; // 429 dışı hata → model değiştirmek fayda etmez
     }
 
     if (response == null || response.statusCode != 200) {
