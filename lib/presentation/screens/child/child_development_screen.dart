@@ -1263,16 +1263,9 @@ class _SchoolTab extends ConsumerWidget {
             margin: const EdgeInsets.only(bottom: 10),
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: const Color(0xFF13131A),
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: Colors.grey.withAlpha(30)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withAlpha(8),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
+              border: Border.all(color: const Color(0xFF262631)),
             ),
             child: Row(
               children: [

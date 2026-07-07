@@ -1484,7 +1484,9 @@ class _Sheet extends StatelessWidget {
             const SizedBox(height: 14),
             Text(title,
                 style: const TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.w900)),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w900,
+                    color: Color(0xFF111827))),
             const SizedBox(height: 16),
             child,
           ],
@@ -1508,8 +1510,10 @@ class _Field extends StatelessWidget {
     return TextField(
       controller: controller,
       maxLines: maxLines,
+      style: const TextStyle(color: Color(0xFF111827)),
       decoration: InputDecoration(
         labelText: label,
+        labelStyle: const TextStyle(color: Color(0xFF6B7280)),
         filled: true,
         fillColor: const Color(0xFFF9FAFB),
         border: OutlineInputBorder(

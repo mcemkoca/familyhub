@@ -773,15 +773,16 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
       margin: const EdgeInsets.only(bottom: AppSpacing.md),
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFF13131A),
         borderRadius: BorderRadius.circular(AppRadius.large),
+        border: Border.all(color: const Color(0xFF262631)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Container(width: 44, height: 44, color: Colors.white),
+              Container(width: 44, height: 44, color: const Color(0xFF262631)),
               const SizedBox(width: AppSpacing.md),
               Expanded(
                 child: Column(
