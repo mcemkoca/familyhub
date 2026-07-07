@@ -8,16 +8,23 @@ class AlbumScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context).album), centerTitle: true),
-      body: GridView.builder(
-        padding: const EdgeInsets.all(16),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, crossAxisSpacing: 8, mainAxisSpacing: 8),
-        itemCount: 12,
-        itemBuilder: (context, index) {
-          return Container(
-            decoration: BoxDecoration(color: const Color(0xFF0A0A0F), borderRadius: BorderRadius.circular(12)),
-            child: const Center(child: Icon(Icons.image, color: Color(0xFF9CA3AF))),
-          );
-        },
+      body: const Center(
+        child: Padding(
+          padding: EdgeInsets.all(32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.photo_library_outlined,
+                  color: Color(0xFF6B7280), size: 56),
+              SizedBox(height: 16),
+              Text(
+                'Bu albümde henüz fotoğraf yok.\nGaleriden fotoğraf ekleyerek başlayın.',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 14),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
