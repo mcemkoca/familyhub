@@ -69,14 +69,14 @@ class _CocukSaglikScreenState extends ConsumerState<CocukSaglikScreen> {
                   Row(
                     children: [
                       Expanded(
-                          child: _statCard('Aşı Durumu', 'Güncel',
+                          child: _statCard('Aşı Durumu', 'Takip et',
                               Icons.verified_user, const Color(0xFF3B82F6), null,
-                              valueColor: const Color(0xFF22C55E))),
+                              valueColor: const Color(0xFF9CA3AF))),
                       const SizedBox(width: 10),
                       Expanded(
-                          child: _statCard('Gelişim Takibi', 'Yaşına uygun',
+                          child: _statCard('Gelişim Takibi', 'Görüntüle',
                               Icons.star, const Color(0xFF8B5CF6), null,
-                              valueColor: const Color(0xFFA855F7))),
+                              valueColor: const Color(0xFF9CA3AF))),
                     ],
                   ),
                   const SizedBox(height: 18),
