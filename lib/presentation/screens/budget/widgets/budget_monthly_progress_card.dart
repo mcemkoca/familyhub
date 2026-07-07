@@ -25,15 +25,9 @@ class _MonthlyProgressCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: const Color(0xFF13131A),
           borderRadius: BorderRadius.circular(20),
-          boxShadow: const [
-            BoxShadow(
-              color: Color(0xFF9CA3AF),
-              blurRadius: 12,
-              offset: Offset(0, 4),
-            ),
-          ],
+          border: Border.all(color: const Color(0xFF262631)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,7 +37,10 @@ class _MonthlyProgressCard extends StatelessWidget {
               children: [
                 const Text(
                   'Aylık Harcama',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white),
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -75,7 +72,7 @@ class _MonthlyProgressCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               child: LinearProgressIndicator(
                 value: percent,
-                backgroundColor: const Color(0xFF9CA3AF),
+                backgroundColor: const Color(0xFF262631),
                 valueColor: AlwaysStoppedAnimation(
                   percent > 0.9
                       ? AppColors.error

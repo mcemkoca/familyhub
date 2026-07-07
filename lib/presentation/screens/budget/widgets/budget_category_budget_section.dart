@@ -26,15 +26,9 @@ class _CategoryBudgetSection extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: const Color(0xFF13131A),
           borderRadius: BorderRadius.circular(20),
-          boxShadow: const [
-            BoxShadow(
-              color: Color(0xFF9CA3AF),
-              blurRadius: 12,
-              offset: Offset(0, 4),
-            ),
-          ],
+          border: Border.all(color: const Color(0xFF262631)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +38,10 @@ class _CategoryBudgetSection extends StatelessWidget {
               children: [
                 const Text(
                   'Kategori Bütçeleri',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white),
                 ),
                 TextButton.icon(
                   onPressed: () {},
@@ -105,7 +102,7 @@ class _CategoryBudgetSection extends StatelessWidget {
                               borderRadius: BorderRadius.circular(4),
                               child: LinearProgressIndicator(
                                 value: pct,
-                                backgroundColor: const Color(0xFF9CA3AF),
+                                backgroundColor: const Color(0xFF262631),
                                 valueColor: AlwaysStoppedAnimation(
                                   isOver ? AppColors.error : cat.color,
                                 ),
