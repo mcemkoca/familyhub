@@ -9,6 +9,7 @@ import '../../../services/content/meal_image_service.dart';
 import '../../providers/app_providers.dart';
 import '../../widgets/ds.dart';
 import '../../../services/ai/ai_engine.dart';
+import '../../../services/ai/ai_content_service.dart';
 
 /// Tarife göre DOĞRU yemek fotoğrafı — TheMealDB'den adına göre çeker,
 /// bulunamazsa nötr gradient + ikon (yanlış görsel göstermez).
@@ -476,6 +477,7 @@ class _RecipesTab extends StatelessWidget {
         const SizedBox(height: 8),
         _buildSearch(context),
         _buildCategoryChips(context),
+        const _AiRecipeStrip(),
         const SizedBox(height: 8),
         Expanded(
           child: loading
@@ -1771,6 +1773,183 @@ Malzemeler miktarıyla, adımlar kısa ve net olsun. Türkçe.''';
           ),
         ),
       ],
+    );
+  }
+}
+
+/// Bu haftaya özel, AI (internet) tarif önerileri — yatay şerit.
+/// Karta dokununca tam tarif (malzeme + adımlar) alttan açılır.
+class _AiRecipeStrip extends StatelessWidget {
+  const _AiRecipeStrip();
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<Map<String, dynamic>>>(
+      future: AiContentService.weeklyList(
+        topic: 'recipe_ideas',
+        prompt:
+            'Belçika\'da yaşayan bir aile için bu haftaya özel, pratik ve '
+            'sağlıklı 6 yemek önerisi üret. Sadece JSON döndür: {"items":['
+            '{"title":"...","category":"...","time":"25 dk",'
+            '"ingredients":["..."],"steps":["..."]}]}. Türkçe.',
+        listKey: 'items',
+        fallback: const [],
+        maxTokens: 1500,
+      ),
+      builder: (context, snap) {
+        final items = snap.data ?? const [];
+        if (items.isEmpty) return const SizedBox.shrink();
+        return Container(
+          margin: const EdgeInsets.only(top: 4),
+          height: 96,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.fromLTRB(16, 0, 16, 6),
+                child: Row(
+                  children: [
+                    Icon(Icons.auto_awesome,
+                        size: 15, color: Color(0xFFF59E0B)),
+                    SizedBox(width: 6),
+                    Text('Bu Haftanın AI Önerileri',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w700)),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  itemCount: items.length,
+                  separatorBuilder: (_, _) => const SizedBox(width: 8),
+                  itemBuilder: (context, i) {
+                    final m = items[i];
+                    final title = m['title']?.toString() ?? 'Tarif';
+                    final time = m['time']?.toString() ?? '';
+                    return GestureDetector(
+                      onTap: () => _showDetail(context, m),
+                      child: Container(
+                        width: 150,
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF1A1A24),
+                          borderRadius: BorderRadius.circular(14),
+                          border:
+                              Border.all(color: const Color(0xFF262631)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(title,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w700)),
+                            const SizedBox(height: 4),
+                            Text(time,
+                                style: const TextStyle(
+                                    color: Color(0xFF9CA3AF), fontSize: 11.5)),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _showDetail(BuildContext context, Map<String, dynamic> m) {
+    final ings = (m['ingredients'] as List?)?.map((e) => e.toString()).toList() ??
+        const [];
+    final steps =
+        (m['steps'] as List?)?.map((e) => e.toString()).toList() ?? const [];
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => DraggableScrollableSheet(
+        initialChildSize: 0.7,
+        maxChildSize: 0.92,
+        minChildSize: 0.4,
+        expand: false,
+        builder: (_, ctrl) => Container(
+          decoration: const BoxDecoration(
+            color: Color(0xFF13131A),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+          ),
+          child: ListView(
+            controller: ctrl,
+            padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
+            children: [
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                      color: Colors.white.withAlpha(40),
+                      borderRadius: BorderRadius.circular(2)),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(m['title']?.toString() ?? 'Tarif',
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w900)),
+              const SizedBox(height: 4),
+              Text(
+                  '${m['category'] ?? ''}${m['time'] != null ? ' · ${m['time']}' : ''}',
+                  style: const TextStyle(color: Color(0xFF9CA3AF))),
+              if (ings.isNotEmpty) ...[
+                const SizedBox(height: 18),
+                const Text('Malzemeler',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w800)),
+                const SizedBox(height: 8),
+                for (final ing in ings)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 6),
+                    child: Text('• $ing',
+                        style: const TextStyle(
+                            color: Color(0xFFD1D5DB), fontSize: 14)),
+                  ),
+              ],
+              if (steps.isNotEmpty) ...[
+                const SizedBox(height: 14),
+                const Text('Hazırlanışı',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w800)),
+                const SizedBox(height: 8),
+                for (var i = 0; i < steps.length; i++)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Text('${i + 1}. ${steps[i]}',
+                        style: const TextStyle(
+                            color: Color(0xFFD1D5DB),
+                            fontSize: 14,
+                            height: 1.4)),
+                  ),
+              ],
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
