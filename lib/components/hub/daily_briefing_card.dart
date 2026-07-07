@@ -152,36 +152,35 @@ Türkçe, samimi bir dille. Havaya uygun bir öneri ekle (ör. yağmurluysa şem
                               height: 1.5)),
                     if (actions.isNotEmpty) ...[
                       const SizedBox(height: 12),
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: actions
-                            .map((a) => Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 12, vertical: 7),
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFF8B5CF6)
-                                        .withAlpha(28),
-                                    borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(
-                                        color: const Color(0x338B5CF6)),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      const Icon(Icons.bolt_rounded,
-                                          size: 14, color: Color(0xFFA5B4FC)),
-                                      const SizedBox(width: 5),
-                                      Text(a,
-                                          style: const TextStyle(
-                                              color: Color(0xFFD1D5DB),
-                                              fontSize: 12.5,
-                                              fontWeight: FontWeight.w600)),
-                                    ],
-                                  ),
-                                ))
-                            .toList(),
-                      ),
+                      for (final a in actions)
+                        Container(
+                          width: double.infinity,
+                          margin: const EdgeInsets.only(bottom: 8),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 10),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF8B5CF6).withAlpha(28),
+                            borderRadius: BorderRadius.circular(14),
+                            border:
+                                Border.all(color: const Color(0x338B5CF6)),
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Icon(Icons.bolt_rounded,
+                                  size: 15, color: Color(0xFFA5B4FC)),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: Text(a,
+                                    style: const TextStyle(
+                                        color: Color(0xFFD1D5DB),
+                                        fontSize: 12.5,
+                                        height: 1.35,
+                                        fontWeight: FontWeight.w600)),
+                              ),
+                            ],
+                          ),
+                        ),
                     ],
                   ],
                 );
