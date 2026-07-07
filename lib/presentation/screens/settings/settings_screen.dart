@@ -10,6 +10,7 @@ import '../../../core/supabase_client.dart';
 import '../../../repositories/backup_repository.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/hive_service.dart';
+import '../../providers/app_providers.dart' show localFamilyMembers;
 import '../../widgets/settings/profile_card.dart';
 import '../../widgets/settings/premium_card.dart';
 import '../../widgets/settings/settings_section.dart';
@@ -613,9 +614,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   // ── Async İşlemler ────────────────────────────────────────────────────────
 
   Future<int> _getMemberCount() async {
+    final local = localFamilyMembers().length;
     final client = SupabaseConfig.safeClient;
     final userId = AuthService.currentUserId;
-    if (client == null || userId == null) return 0;
+    if (client == null || userId == null) return local;
     try {
       final fm = await client
           .from('family_members')
@@ -623,7 +625,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           .eq('user_id', userId)
           .maybeSingle();
       final familyId = fm?['family_id'] as String?;
-      if (familyId == null) return 0;
+      if (familyId == null) return local;
       final adultCount = await client
           .from('family_members')
           .select('id')
@@ -636,9 +638,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           .eq('family_id', familyId)
           .eq('is_active', true)
           .count(CountOption.exact);
-      return adultCount.count + childCount.count;
+      final total = adultCount.count + childCount.count;
+      return total > 0 ? total : local;
     } catch (_) {
-      return 0;
+      return local;
     }
   }
 

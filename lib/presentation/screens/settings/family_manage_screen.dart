@@ -679,7 +679,7 @@ class _MemberTile extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '${roleLabel()} · ${member.isOnline ? 'Çevrimiçi' : _formatLastSeen(member.lastSeen)}',
+                      '${roleLabel()} · ${member.isOnline ? 'Çevrimiçi' : (_formatLastSeen(member.lastSeen) ?? 'Çevrimdışı')}',
                       style: const TextStyle(
                         fontSize: 13,
                         color: Color(0xFF6B7280),
