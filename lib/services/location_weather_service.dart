@@ -17,10 +17,23 @@ class LocationWeatherService {
       throw LocationException('Konum izni kalıcı olarak reddedildi. Ayarlardan etkinleştirin.');
     }
 
-    // 2. GPS konum al
-    final Position position = await Geolocator.getCurrentPosition(
-      locationSettings: const LocationSettings(accuracy: LocationAccuracy.high),
-    );
+    // 2. GPS konum al — timeout'lu (emülatör/kapalı GPS'te sonsuz beklemeyi önler).
+    //    Zaman aşımında son bilinen konuma düşer; o da yoksa hata fırlatır.
+    Position position;
+    try {
+      position = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.high,
+          timeLimit: Duration(seconds: 8),
+        ),
+      );
+    } catch (_) {
+      final last = await Geolocator.getLastKnownPosition();
+      if (last == null) {
+        throw LocationException('Konum alınamadı (GPS zaman aşımı)');
+      }
+      position = last;
+    }
 
     // 3. Reverse geocoding (şehir adı için)
     // ignore: unused_local_variable

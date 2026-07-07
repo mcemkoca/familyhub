@@ -121,9 +121,18 @@ class LocationService {
   static Future<Position?> getCurrentPosition() async {
     final status = await checkPermission();
     if (status != LocationPermissionStatus.granted) return null;
-    return Geolocator.getCurrentPosition(
-      locationSettings: const LocationSettings(accuracy: LocationAccuracy.best),
-    );
+    // Timeout'lu — GPS fix yoksa (emülatör) sonsuz bekleme yerine son bilinen
+    // konuma düşer.
+    try {
+      return await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.best,
+          timeLimit: Duration(seconds: 8),
+        ),
+      );
+    } catch (_) {
+      return Geolocator.getLastKnownPosition();
+    }
   }
 
   static Future<Position?> getCurrentLocation() async {

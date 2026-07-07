@@ -10,11 +10,25 @@ import '../../services/weather_service.dart';
 /// Hava durumu, aile üyeleri, bugünkü etkinlik/görev sayısı ve gün bilgisini
 /// birleştirip Gemini ile kişiselleştirilmiş, sıcak bir günlük brifing +
 /// önerilen aksiyonlar üretir. Günlük önbelleklidir (kota + çevrimdışı dostu).
-class DailyBriefingCard extends ConsumerWidget {
+class DailyBriefingCard extends ConsumerStatefulWidget {
   const DailyBriefingCard({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DailyBriefingCard> createState() => _DailyBriefingCardState();
+}
+
+class _DailyBriefingCardState extends ConsumerState<DailyBriefingCard> {
+  late bool _expanded =
+      HiveService.getBoolSetting('briefing_expanded', defaultValue: true);
+
+  void _toggle() {
+    setState(() => _expanded = !_expanded);
+    HiveService.setBoolSetting('briefing_expanded', _expanded);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final ref = this.ref;
     final familyName = HiveService.getSetting('family_name') ?? 'Ailem';
     final members = ref.watch(familyMembersProvider);
     final weather = ref.watch(weatherProvider).valueOrNull;
@@ -48,37 +62,48 @@ class DailyBriefingCard extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Container(
-                  width: 34,
-                  height: 34,
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                        colors: [Color(0xFF8B5CF6), Color(0xFF6366F1)]),
-                    borderRadius: BorderRadius.circular(11),
+            InkWell(
+              onTap: _toggle,
+              borderRadius: BorderRadius.circular(12),
+              child: Row(
+                children: [
+                  Container(
+                    width: 34,
+                    height: 34,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                          colors: [Color(0xFF8B5CF6), Color(0xFF6366F1)]),
+                      borderRadius: BorderRadius.circular(11),
+                    ),
+                    child: const Icon(Icons.auto_awesome_rounded,
+                        color: Colors.white, size: 19),
                   ),
-                  child: const Icon(Icons.auto_awesome_rounded,
-                      color: Colors.white, size: 19),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text('Günlük Zeka Özeti',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w800)),
-                      Text('$greeting · $dayName',
-                          style: const TextStyle(
-                              color: Color(0xFF9CA3AF), fontSize: 12)),
-                    ],
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Günlük Zeka Özeti',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w800)),
+                        Text('$greeting · $dayName',
+                            style: const TextStyle(
+                                color: Color(0xFF9CA3AF), fontSize: 12)),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                  AnimatedRotation(
+                    turns: _expanded ? 0.5 : 0,
+                    duration: const Duration(milliseconds: 200),
+                    child: const Icon(Icons.keyboard_arrow_down_rounded,
+                        color: Color(0xFF9CA3AF), size: 24),
+                  ),
+                ],
+              ),
             ),
+            if (!_expanded) const SizedBox.shrink() else ...[
             const SizedBox(height: 12),
             FutureBuilder<List<Map<String, dynamic>>>(
               future: AiContentService.dailyList(
@@ -186,6 +211,7 @@ Türkçe, samimi bir dille. Havaya uygun bir öneri ekle (ör. yağmurluysa şem
                 );
               },
             ),
+            ],
           ],
         ),
       ),
