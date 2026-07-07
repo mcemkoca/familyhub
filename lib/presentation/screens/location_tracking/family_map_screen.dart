@@ -501,7 +501,7 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
 
   Widget _buildMemberScroller(bool isDark) {
     return SizedBox(
-      height: 90,
+      height: 98,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
