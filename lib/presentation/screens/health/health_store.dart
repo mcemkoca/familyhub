@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../../../services/hive_service.dart';
+import '../../../services/ai/ai_content_service.dart';
 
 /// Sağlık bölümü için yerel veri deposu (ruh hali, günlük metrikler, döngü,
 /// semptomlar, çocuk büyüme) + günlük öneri havuzu.
@@ -101,6 +102,27 @@ class HealthStore {
     final n = DateTime.now();
     final idx = (n.year * 366 + n.month * 31 + n.day) % _tips.length;
     return _tips[idx];
+  }
+
+  /// Haftalık AI (internet) sağlık ipuçları havuzundan bugünün ipucunu döner.
+  /// Gemini/çevrimdışı başarısızsa yerel [dailyTip] havuzuna düşer.
+  static Future<String> aiDailyTip() async {
+    final list = await AiContentService.weeklyList(
+      topic: 'health_tips',
+      prompt:
+          'Belçika\'da yaşayan bir aile için bu haftaya özel 7 kısa, güncel ve '
+          'uygulanabilir sağlık ipucu üret. Beslenme, hareket, uyku, stres ve '
+          'mevsimsel sağlık konularını kapsasın. Sadece JSON döndür: '
+          '{"items":[{"tip":"..."}]}. Her ipucu tek cümle, Türkçe, başına uygun '
+          'bir emoji koy.',
+      listKey: 'items',
+      fallback: _tips.map((t) => {'tip': t}).toList(),
+    );
+    if (list.isEmpty) return dailyTip();
+    final n = DateTime.now();
+    final idx = (n.year * 366 + n.month * 31 + n.day) % list.length;
+    final tip = list[idx]['tip']?.toString();
+    return (tip == null || tip.isEmpty) ? dailyTip() : tip;
   }
 }
 

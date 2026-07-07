@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../widgets/external_link.dart';
+import '../../../services/ai/ai_content_service.dart';
 import 'child_development_screen.dart' show ChildProfile;
 import 'child_dev_content.dart';
 import 'child_dev_store.dart';
@@ -50,6 +51,17 @@ class AreaDetailScreen extends StatelessWidget {
                       area.gradient.first),
                   const SizedBox(height: 8),
                   _numbered(content.activities, area.gradient.first),
+                  const SizedBox(height: 18),
+                  _sectionTitle('AI Haftalık Öneriler', Icons.auto_awesome,
+                      area.gradient.first),
+                  const SizedBox(height: 8),
+                  _AiWeeklyIdeas(
+                    areaKey: areaKey,
+                    areaLabel: area.label,
+                    devGroup: child.devGroup,
+                    color: area.gradient.first,
+                    fallback: content.activities,
+                  ),
                   const SizedBox(height: 18),
                   _sectionTitle('İpuçları', Icons.lightbulb_outline,
                       area.gradient.first),
@@ -274,6 +286,82 @@ class AreaDetailScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+/// Bu alan + yaş grubuna özel, haftalık AI (internet) etkinlik önerileri.
+class _AiWeeklyIdeas extends StatelessWidget {
+  final String areaKey;
+  final String areaLabel;
+  final String devGroup;
+  final Color color;
+  final List<String> fallback;
+  const _AiWeeklyIdeas({
+    required this.areaKey,
+    required this.areaLabel,
+    required this.devGroup,
+    required this.color,
+    required this.fallback,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<Map<String, dynamic>>>(
+      future: AiContentService.weeklyList(
+        topic: 'dev_${areaKey}_$devGroup',
+        prompt:
+            '$devGroup yaş grubundaki bir çocuk için "$areaLabel" gelişim '
+            'alanına yönelik, bu haftaya özel, evde uygulanabilir 5 etkinlik '
+            'önerisi üret. Malzemeler basit ve güvenli olsun. Sadece JSON '
+            'döndür: {"items":[{"idea":"..."}]}. Her öneri tek cümle, Türkçe.',
+        listKey: 'items',
+        fallback: fallback.map((a) => {'idea': a}).toList(),
+      ),
+      builder: (context, snap) {
+        if (snap.connectionState == ConnectionState.waiting) {
+          return Row(
+            children: [
+              SizedBox(
+                width: 16,
+                height: 16,
+                child: CircularProgressIndicator(strokeWidth: 2, color: color),
+              ),
+              const SizedBox(width: 10),
+              const Text('AI öneriler hazırlanıyor…',
+                  style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
+            ],
+          );
+        }
+        final ideas = (snap.data ?? const [])
+            .map((e) => e['idea']?.toString() ?? '')
+            .where((e) => e.isNotEmpty)
+            .toList();
+        final list = ideas.isEmpty ? fallback : ideas;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            for (final idea in list)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(Icons.auto_awesome, size: 15, color: color),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(idea,
+                          style: const TextStyle(
+                              color: Color(0xFFD1D5DB),
+                              fontSize: 13.5,
+                              height: 1.4)),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        );
+      },
     );
   }
 }

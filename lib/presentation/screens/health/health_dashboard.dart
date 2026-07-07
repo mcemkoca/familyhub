@@ -347,17 +347,30 @@ class _HealthDashboardState extends ConsumerState<HealthDashboard> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Bugünün Önerisi',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w800)),
+                const Row(
+                  children: [
+                    Text('Bugünün Önerisi',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w800)),
+                    SizedBox(width: 6),
+                    Icon(Icons.auto_awesome,
+                        size: 13, color: Color(0xFF14B8A6)),
+                  ],
+                ),
                 const SizedBox(height: 6),
-                Text(HealthStore.dailyTip(),
+                FutureBuilder<String>(
+                  future: HealthStore.aiDailyTip(),
+                  initialData: HealthStore.dailyTip(),
+                  builder: (context, snap) => Text(
+                    snap.data ?? HealthStore.dailyTip(),
                     style: const TextStyle(
                         color: Color(0xFFD1D5DB),
                         fontSize: 13.5,
-                        height: 1.45)),
+                        height: 1.45),
+                  ),
+                ),
               ],
             ),
           ),
