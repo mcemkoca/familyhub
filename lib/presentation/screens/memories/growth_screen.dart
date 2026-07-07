@@ -13,30 +13,30 @@ class GrowthScreen extends StatelessWidget {
         children: [
           Text('Kilometre Taşları', style: Theme.of(context).textTheme.displaySmall),
           const SizedBox(height: 12),
-          _buildCard(title: 'İlk Adım', meta: '12 Mart 2024 • 11 ay'),
-          _buildCard(title: 'İlk Kelime', meta: '5 Ocak 2024 • 9 ay'),
-          _buildCard(title: 'İlk Diş', meta: '15 Ekim 2023 • 6 ay'),
+          _emptyCard('Henüz kilometre taşı eklenmedi. İlk adım, ilk kelime gibi '
+              'anları buraya ekleyebilirsiniz.'),
           const SizedBox(height: 24),
           Text('Boy / Kilo Takibi', style: Theme.of(context).textTheme.displaySmall),
           const SizedBox(height: 12),
-          _buildCard(title: 'Nisan 2026', meta: 'Boy: 85 cm • Kilo: 12.5 kg'),
-          _buildCard(title: 'Mart 2026', meta: 'Boy: 84 cm • Kilo: 12.2 kg'),
+          _emptyCard('Henüz ölçüm eklenmedi. Boy ve kilo kayıtları burada '
+              'listelenecek.'),
         ],
       ),
     );
   }
 
-  Widget _buildCard({required String title, required String meta}) {
+  Widget _emptyCard(String text) {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(color: const Color(0xFF13131A), borderRadius: BorderRadius.circular(16), border: Border.all(color: const Color(0x1EFFFFFF))),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
-          Text(title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
-          const SizedBox(height: 4),
-          Text(meta, style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+          const Icon(Icons.child_care_rounded, color: Color(0xFF6B7280), size: 20),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(text, style: const TextStyle(fontSize: 13.5, color: Color(0xFF9CA3AF))),
+          ),
         ],
       ),
     );

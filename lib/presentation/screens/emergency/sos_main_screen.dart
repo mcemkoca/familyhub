@@ -136,16 +136,18 @@ class _SosMainScreenState extends State<SosMainScreen> {
                   color: const Color(0xFF16213E),
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: Column(
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'SON SOS GEÇMİŞİ',
                       style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 12),
-                    _historyItem('15 Mart 2025 - 14:32', 'Çözüldü (Yanlış alarm)', Icons.check_circle, Colors.green),
-                    _historyItem('2 Şubat 2025 - 08:15', 'Gerçek acil durum', Icons.emergency, Colors.red),
+                    SizedBox(height: 12),
+                    Text(
+                      'Henüz SOS kaydı yok.',
+                      style: TextStyle(color: Colors.white70, fontSize: 13.5),
+                    ),
                   ],
                 ),
               ),
@@ -178,24 +180,4 @@ class _SosMainScreenState extends State<SosMainScreen> {
     );
   }
 
-  Widget _historyItem(String date, String status, IconData icon, Color color) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Row(
-        children: [
-          Icon(icon, color: color, size: 20),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(date, style: const TextStyle(color: Colors.white70, fontSize: 13)),
-                Text(status, style: TextStyle(color: color, fontSize: 12)),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
