@@ -14,20 +14,22 @@ class _ChildAchievementsTabState extends State<ChildAchievementsTab>
   bool get isDark => Theme.of(context).brightness == Brightness.dark;
 
   late AnimationController _starController;
-  final int _level = 7;
-  final int _totalPoints = 1340;
+  // Gerçek kazanılan rozetlerden hesaplanır (sahte sabit puan yok).
+  int get _totalPoints =>
+      _badges.where((b) => b.earned).fold<int>(0, (s, b) => s + b.points);
+  int get _level => (_totalPoints ~/ 200) + 1;
   final int _pointsToNext = 200;
 
   static const _badges = [
-    _Badge('Görev Ustası', '🏆', 50, true, Color(0xFFF59E0B),
+    _Badge('Görev Ustası', '🏆', 50, false, Color(0xFFF59E0B),
         'İlk görevini tamamladın!'),
-    _Badge('5 Gün Seri', '🔥', 100, true, Color(0xFFEF4444),
+    _Badge('5 Gün Seri', '🔥', 100, false, Color(0xFFEF4444),
         '5 gün boyunca görevleri eksik yapmadın.'),
-    _Badge('Süper Okuyucu', '📚', 75, true, Color(0xFF3B82F6),
+    _Badge('Süper Okuyucu', '📚', 75, false, Color(0xFF3B82F6),
         '10 kitap okudun!'),
     _Badge('Matematik Dâhi', '🔢', 120, false, Color(0xFF8B5CF6),
         '20 matematik aktivitesi tamamla.'),
-    _Badge('Sporcu', '⚽', 80, true, Color(0xFF10B981),
+    _Badge('Sporcu', '⚽', 80, false, Color(0xFF10B981),
         'Bir haftada her gün spor yaptın.'),
     _Badge('Sanatkâr', '🎨', 60, false, Color(0xFFEC4899),
         '5 sanat aktivitesi tamamla.'),
@@ -37,7 +39,7 @@ class _ChildAchievementsTabState extends State<ChildAchievementsTab>
         '5 STEM aktivitesi tamamla.'),
     _Badge('Dil Ustası', '🌍', 110, false, Color(0xFF6366F1),
         '7 gün boyunca dil öğrenimi yap.'),
-    _Badge('Mutfak Şefi', '👨‍🍳', 85, true, Color(0xFFF97316),
+    _Badge('Mutfak Şefi', '👨‍🍳', 85, false, Color(0xFFF97316),
         'Bir yemek tarifini tamamladın!'),
     _Badge('Ekip Oyuncusu', '🤝', 70, false, Color(0xFF10B981),
         'Ailece 3 aktivite tamamla.'),
