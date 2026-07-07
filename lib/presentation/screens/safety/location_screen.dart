@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../../../config/constants.dart';
 import '../../../services/location_service.dart';
+import '../../providers/app_providers.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
 class LocationScreen extends StatefulWidget {
@@ -211,16 +213,6 @@ class _LocationScreenState extends State<LocationScreen> {
                       ),
                     ],
                   ),
-                  const Positioned(
-                    top: 60,
-                    right: 50,
-                    child: _MemberPin(name: 'Üye 2', color: Color(0xFFEC4899)),
-                  ),
-                  const Positioned(
-                    bottom: 80,
-                    left: 60,
-                    child: _MemberPin(name: 'Üye 3', color: AppColors.orange),
-                  ),
                 ],
               ),
             ),
@@ -331,39 +323,43 @@ class _LocationScreenState extends State<LocationScreen> {
                   ),
                 ],
               ),
-              child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Aile Üyeleri',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFFE5E7EB),
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  _LocationRow(
-                    name: 'Üye 1',
-                    status: 'Evde',
-                    color: AppColors.blue,
-                    isOnline: true,
-                  ),
-                  Divider(height: 24),
-                  _LocationRow(
-                    name: 'Üye 2',
-                    status: 'İşte',
-                    color: Color(0xFFEC4899),
-                    isOnline: true,
-                  ),
-                  Divider(height: 24),
-                  _LocationRow(
-                    name: 'Üye 3',
-                    status: 'Okulda',
-                    color: AppColors.orange,
-                    isOnline: false,
-                  ),
-                ],
+              child: Consumer(
+                builder: (context, ref, _) {
+                  final members = ref.watch(familyMembersProvider);
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Aile Üyeleri',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xFFE5E7EB),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      if (members.isEmpty)
+                        const Text(
+                          'Henüz aile üyesi yok. Üye ekleyip konum paylaşımını '
+                          'açtığınızda burada görünürler.',
+                          style: TextStyle(
+                              color: Color(0xFF9CA3AF), fontSize: 13.5),
+                        )
+                      else
+                        for (var i = 0; i < members.length; i++) ...[
+                          if (i > 0) const Divider(height: 24),
+                          _LocationRow(
+                            name: members[i].name,
+                            status: members[i].isOnline
+                                ? 'Çevrimiçi'
+                                : 'Çevrimdışı',
+                            color: members[i].color,
+                            isOnline: members[i].isOnline,
+                          ),
+                        ],
+                    ],
+                  );
+                },
               ),
             ),
             const SizedBox(height: 24),
@@ -427,37 +423,6 @@ class _MapGridPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-}
-
-class _MemberPin extends StatelessWidget {
-  final String name;
-  final Color color;
-
-  const _MemberPin({required this.name, required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Icon(Icons.location_on, size: 32, color: color),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(6),
-          ),
-          child: Text(
-            name,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 11,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
 }
 
 class _CoordRow extends StatelessWidget {
