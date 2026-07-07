@@ -27,26 +27,31 @@ class _MainShellState extends State<MainShell> {
     {
       'route': AppRoutes.hub,
       'icon': Icons.home_rounded,
+      'asset': 'assets/icons/nav/merkez.png',
       'label': 'Merkez',
     },
     {
       'route': AppRoutes.chat,
       'icon': Icons.forum_rounded,
+      'asset': 'assets/icons/nav/sohbet.png',
       'label': 'Sohbet',
     },
     {
       'route': AppRoutes.kitchen,
       'icon': Icons.ramen_dining_rounded,
+      'asset': 'assets/icons/nav/mutfak.png',
       'label': 'Mutfak',
     },
     {
       'route': AppRoutes.education,
       'icon': Icons.school_rounded,
+      'asset': 'assets/icons/nav/egitim.png',
       'label': 'Eğitim',
     },
     {
       'route': AppRoutes.settings,
       'icon': Icons.settings_rounded,
+      'asset': 'assets/icons/nav/ayarlar.png',
       'label': 'Ayarlar',
     },
   ];
@@ -205,6 +210,7 @@ class _MainShellState extends State<MainShell> {
     final isActive = _currentIndex == index;
     final tab = _tabs[index];
     final icon = tab['icon'] as IconData;
+    final asset = tab['asset'] as String?;
     final label = tab['label'] as String;
     final badge = tab['badge'] as int?;
 
@@ -239,13 +245,22 @@ class _MainShellState extends State<MainShell> {
                             ]
                           : null,
                     ),
-                    child: Icon(
-                      icon,
-                      size: isActive ? 26 : 24,
-                      color: isActive
-                          ? const Color(0xFF6366F1)
-                          : (const Color(0xFF6B7280)),
-                    ),
+                    child: asset != null
+                        ? SizedBox(
+                            width: isActive ? 28 : 25,
+                            height: isActive ? 28 : 25,
+                            child: Opacity(
+                              opacity: isActive ? 1.0 : 0.55,
+                              child: Image.asset(asset, fit: BoxFit.contain),
+                            ),
+                          )
+                        : Icon(
+                            icon,
+                            size: isActive ? 26 : 24,
+                            color: isActive
+                                ? const Color(0xFF6366F1)
+                                : (const Color(0xFF6B7280)),
+                          ),
                   ),
                   if (badge != null && badge > 0)
                     Positioned(
@@ -315,19 +330,13 @@ class _MainShellState extends State<MainShell> {
       behavior: HitTestBehavior.opaque,
       onTap: _toggleMenu,
       child: Container(
-        width: 66,
-        height: 66,
+        width: 72,
+        height: 72,
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [Color(0xFF4D8DFF), Color(0xFF8B5CF6)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
           shape: BoxShape.circle,
-          border: Border.all(color: Colors.white.withAlpha(45), width: 1.5),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF6C63FF).withAlpha(130),
+              color: const Color(0xFF6C63FF).withAlpha(140),
               blurRadius: 30,
               spreadRadius: 2,
               offset: const Offset(0, 8),
@@ -343,10 +352,9 @@ class _MainShellState extends State<MainShell> {
           turns: _menuOpen ? 0.125 : 0,
           duration: const Duration(milliseconds: 250),
           curve: Curves.easeOutBack,
-          child: const Icon(
-            Icons.add_rounded,
-            color: Colors.white,
-            size: 34,
+          child: Image.asset(
+            'assets/icons/nav/fab.png',
+            fit: BoxFit.contain,
           ),
         ),
       ),

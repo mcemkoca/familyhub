@@ -102,6 +102,8 @@ flutter:
     - assets/images/app_icon.png
     # Hub tile icons (premium PNG)
     - assets/icons/tiles/
+    # Bottom nav icons (premium neon PNG)
+    - assets/icons/nav/
     # Onboarding
     - assets/images/onboarding/
     # Data
