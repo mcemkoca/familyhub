@@ -1,8 +1,10 @@
 ﻿import 'package:flutter/foundation.dart';
+import 'package:uuid/uuid.dart';
 import '../core/supabase_client.dart';
 import '../core/utils/repository_mixin.dart';
 import '../domain/entities.dart';
 import '../services/auth_service.dart';
+import '../services/hive_service.dart';
 
 class BudgetRepository with RepositoryErrorHandler {
   static final BudgetRepository _instance = BudgetRepository._internal();
@@ -24,31 +26,71 @@ class BudgetRepository with RepositoryErrorHandler {
   }
 
   Future<List<Transaction>> getTransactions() async {
-    return handleRepositoryCall(() async {
-      final familyId = await _getFamilyId();
-      if (familyId == null) return [];
+    String? familyId;
+    try {
+      familyId = await _getFamilyId();
+    } catch (_) {
+      familyId = null;
+    }
+    // Aile/oturum yoksa yerel (Hive) kayıtları döndür — çevrimdışı çalışsın.
+    if (familyId == null) return HiveService.getTransactions();
 
+    try {
       final response = await _client
           .from('budget_entries')
           .select('*')
           .eq('family_id', familyId)
           .order('date', ascending: false);
-
-      return (response as List).map((e) => _transactionFromJson(e as Map<String, dynamic>)).toList();
-    }, 'getTransactions');
+      final cloud = (response as List)
+          .map((e) => _transactionFromJson(e as Map<String, dynamic>))
+          .toList();
+      // Yerel-only (senkronlanmamış) kayıtları da koru.
+      final locals = HiveService.getTransactions()
+          .where((t) => t.id.startsWith('local_'))
+          .toList();
+      final merged = [...locals, ...cloud];
+      await HiveService.saveTransactions(merged);
+      return merged;
+    } catch (e) {
+      debugPrint('getTransactions cloud failed, using local: $e');
+      return HiveService.getTransactions();
+    }
   }
 
   Future<Transaction> createTransaction({
-    required double amount,
+    required double amount, // gelir + , gider -
     required String category,
     String? description,
     String? receiptUrl,
   }) async {
-    return handleRepositoryCall(() async {
-      final familyId = await _getFamilyId();
-      final userId = AuthService.currentUserId;
-      if (familyId == null) throw Exception('Aile bilgisi bulunamadı');
+    final userId = AuthService.currentUserId;
+    String? familyId;
+    try {
+      familyId = await _getFamilyId();
+    } catch (_) {
+      familyId = null;
+    }
 
+    Future<Transaction> saveLocal() async {
+      final tx = Transaction(
+        id: 'local_${const Uuid().v4()}',
+        amount: amount.abs(),
+        currency: 'EUR',
+        type: amount >= 0 ? TransactionType.income : TransactionType.expense,
+        category: category,
+        description: description,
+        createdBy: userId ?? '',
+        createdAt: DateTime.now(),
+        attachments: receiptUrl != null ? [receiptUrl] : const [],
+      );
+      final all = HiveService.getTransactions();
+      await HiveService.saveTransactions([tx, ...all]);
+      return tx;
+    }
+
+    if (familyId == null) return saveLocal();
+
+    try {
       final response = await _client
           .from('budget_entries')
           .insert({
@@ -65,14 +107,34 @@ class BudgetRepository with RepositoryErrorHandler {
           .select()
           .single();
 
-      return _transactionFromJson(response);
-    }, 'createTransaction');
+      final created = _transactionFromJson(response);
+      final all = HiveService.getTransactions();
+      await HiveService.saveTransactions([created, ...all]);
+      return created;
+    } catch (e) {
+      debugPrint('createTransaction cloud failed, saving local: $e');
+      return saveLocal();
+    }
   }
 
   Future<void> deleteTransaction(String id) async {
-    return handleRepositoryCall(() async {
+    // Her durumda yerel kayıttan da düş.
+    Future<void> removeLocal() async {
+      final all = HiveService.getTransactions();
+      await HiveService.saveTransactions(
+          all.where((t) => t.id != id).toList());
+    }
+
+    if (id.startsWith('local_')) {
+      await removeLocal();
+      return;
+    }
+    try {
       await _client.from('budget_entries').delete().eq('id', id);
-    }, 'deleteTransaction');
+    } catch (e) {
+      debugPrint('deleteTransaction cloud failed: $e');
+    }
+    await removeLocal();
   }
 
   Future<Budget> getCurrentBudget() async {

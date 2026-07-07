@@ -919,7 +919,14 @@ ${categories.join(', ')}''';
                           final amount = double.tryParse(
                                   amountController.text.replaceAll(',', '.')) ??
                               0;
-                          if (amount <= 0) return;
+                          if (amount <= 0) {
+                            ScaffoldMessenger.of(ctx).showSnackBar(
+                              const SnackBar(
+                                  content:
+                                      Text('Geçerli bir tutar girin')),
+                            );
+                            return;
+                          }
                           final tx = Transaction(
                             id: isEdit
                                 ? existing.id
