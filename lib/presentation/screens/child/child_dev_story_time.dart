@@ -9,7 +9,6 @@ class StoryTimeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final stories = dailyStories();
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
       body: SafeArea(
@@ -20,10 +19,18 @@ class StoryTimeScreen extends StatelessWidget {
               subtitle: 'Bugünün 4 görselli hikayesi',
             ),
             Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
-                itemCount: stories.length,
-                itemBuilder: (context, i) => _storyCard(context, stories[i], i),
+              child: FutureBuilder<List<KidStory>>(
+                future: aiDailyStories(),
+                initialData: dailyStories(),
+                builder: (context, snap) {
+                  final stories = snap.data ?? dailyStories();
+                  return ListView.builder(
+                    padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
+                    itemCount: stories.length,
+                    itemBuilder: (context, i) =>
+                        _storyCard(context, stories[i], i),
+                  );
+                },
               ),
             ),
           ],

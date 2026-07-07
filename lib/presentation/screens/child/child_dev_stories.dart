@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../services/ai/ai_content_service.dart';
 
 /// Görselli çocuk hikayeleri havuzu + günlük 4 hikaye rotasyonu.
 /// Hikayeler klasik/halk masalları ve öğretici kısa hikayelerdir (aile dostu).
@@ -251,4 +252,54 @@ List<KidStory> dailyStories({int count = 4}) {
     k++;
   }
   return unique.take(count).toList();
+}
+
+/// İnternetten (AI) günlük taze 4 hikaye üretir; başarısız/çevrimdışıysa
+/// yerel [dailyStories] havuzuna düşer. Günlük önbelleklidir.
+Future<List<KidStory>> aiDailyStories({int count = 4}) async {
+  const palette = [
+    [Color(0xFFF59E0B), Color(0xFFD97706)],
+    [Color(0xFF10B981), Color(0xFF059669)],
+    [Color(0xFF3B82F6), Color(0xFF2563EB)],
+    [Color(0xFF8B5CF6), Color(0xFF6D28D9)],
+    [Color(0xFFEC4899), Color(0xFFDB2777)],
+  ];
+  const emojis = ['🦊', '🐻', '🐰', '🦉', '🐢', '🐸', '🦁', '🐼'];
+
+  final items = await AiContentService.dailyList(
+    topic: 'kid_stories',
+    prompt:
+        'Bugün için 3-7 yaş çocuklara uygun, öğretici, güvenli 4 kısa masal '
+        'üret. Her masal 3-4 kısa paragraf olsun. Sadece JSON döndür: '
+        '{"items":[{"title":"...","moral":"...","pages":["...","..."]}]}. '
+        'Türkçe, sıcak ve sade bir dille.',
+    listKey: 'items',
+    fallback: const [],
+    maxTokens: 1600,
+  );
+
+  if (items.isEmpty) return dailyStories(count: count);
+
+  final stories = <KidStory>[];
+  for (var i = 0; i < items.length && stories.length < count; i++) {
+    final m = items[i];
+    final title = m['title']?.toString() ?? '';
+    final pagesRaw = m['pages'];
+    final pages = pagesRaw is List
+        ? pagesRaw.map((e) => e.toString()).where((e) => e.isNotEmpty).toList()
+        : <String>[];
+    if (title.isEmpty || pages.isEmpty) continue;
+    stories.add(KidStory(
+      id: 'ai_${DateTime.now().day}_$i',
+      title: title,
+      emoji: emojis[i % emojis.length],
+      gradient: palette[i % palette.length],
+      moral: m['moral']?.toString() ?? '',
+      pages: pages,
+      readMoreUrl:
+          'https://www.google.com/search?q=${Uri.encodeComponent('$title çocuk masalı')}',
+      minAge: 3,
+    ));
+  }
+  return stories.isEmpty ? dailyStories(count: count) : stories;
 }
