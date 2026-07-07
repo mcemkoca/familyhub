@@ -34,6 +34,7 @@ import '../presentation/screens/safety/safety_screen.dart';
 import '../presentation/screens/safety/location_screen.dart';
 
 import '../presentation/screens/safety/health_card_screen.dart';
+import '../presentation/screens/safety/health_card_edit_screen.dart';
 import '../presentation/screens/safety/safe_zones_screen.dart';
 import '../presentation/screens/safety/safe_arrival_screen.dart';
 import '../presentation/screens/safety/ambient_listening_screen.dart';
@@ -235,6 +236,7 @@ final router = GoRouter(
     GoRoute(path: AppRoutes.location, builder: (context, state) => const LocationScreen()),
     GoRoute(path: AppRoutes.emergency, builder: (context, state) => const SosMainScreen()),
     GoRoute(path: AppRoutes.healthCard, builder: (context, state) => const HealthCardScreen()),
+    GoRoute(path: AppRoutes.healthCardEdit, builder: (context, state) => const HealthCardEditScreen()),
     GoRoute(path: AppRoutes.safeZones, builder: (context, state) => const SafeZonesScreen()),
     GoRoute(path: AppRoutes.safeArrival, builder: (context, state) => const SafeArrivalScreen()),
     GoRoute(path: AppRoutes.ambientListening, builder: (context, state) => const AmbientListeningScreen()),
