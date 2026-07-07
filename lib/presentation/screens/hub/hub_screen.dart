@@ -17,6 +17,7 @@ import '../../../services/hive_service.dart';
 import '../../widgets/notification_prompt.dart';
 import '../../../components/hub/ai_suggestions_widget.dart';
 import '../../../components/hub/hub_ai_panel.dart';
+import '../../../components/hub/daily_briefing_card.dart';
 import '../../../components/hub/content_widgets/content_highlights_widget.dart';
 import '../../../services/location_tracking_service.dart';
 
@@ -336,6 +337,9 @@ class _HubScreenState extends ConsumerState<HubScreen>
 
               // ── Cover + profiles ─────────────────────────────────────────
               SliverToBoxAdapter(child: _CoverSection(members: members)),
+
+              // ── Günlük Zeka Özeti (hub'ın beyni) ─────────────────────────
+              const SliverToBoxAdapter(child: DailyBriefingCard()),
 
               // ── Quick access grid (butonlar hemen gorunsun) ──────────────
               SliverToBoxAdapter(child: _QuickGrid(features: visibleFeatures)),
