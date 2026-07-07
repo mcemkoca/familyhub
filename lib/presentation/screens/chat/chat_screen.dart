@@ -289,6 +289,188 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
   }
 
+  void _votePoll(ChatMessage msg, int optionIndex) {
+    final poll = msg.poll;
+    if (poll == null) return;
+    final updated = poll.toggleVote(optionIndex, 'm1');
+    final list = ref.read(chatMessagesProvider);
+    ref.read(chatMessagesProvider.notifier).state = [
+      for (final m in list)
+        if (m.id == msg.id) m.copyWith(poll: updated) else m,
+    ];
+  }
+
+  void _createPoll() {
+    setState(() => _showAttachmentMenu = false);
+    final questionCtrl = TextEditingController();
+    final optionCtrls = <TextEditingController>[
+      TextEditingController(),
+      TextEditingController(),
+    ];
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) {
+        final surface = Theme.of(ctx).colorScheme.surface;
+        final onSurface = Theme.of(ctx).colorScheme.onSurface;
+        return StatefulBuilder(
+          builder: (ctx, setSheet) {
+            InputDecoration deco(String hint) => InputDecoration(
+                  hintText: hint,
+                  hintStyle: TextStyle(color: onSurface.withAlpha(90)),
+                  filled: true,
+                  fillColor: onSurface.withAlpha(12),
+                  contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 14, vertical: 12),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                );
+            return Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(ctx).viewInsets.bottom),
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
+                decoration: BoxDecoration(
+                  color: surface,
+                  borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(24)),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Container(
+                        width: 40,
+                        height: 4,
+                        margin: const EdgeInsets.only(bottom: 16),
+                        decoration: BoxDecoration(
+                          color: onSurface.withAlpha(40),
+                          borderRadius: BorderRadius.circular(2),
+                        ),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        const Icon(Icons.poll_rounded,
+                            color: Color(0xFF8B5CF6), size: 22),
+                        const SizedBox(width: 8),
+                        Text('Anket Oluştur',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w800,
+                                color: onSurface)),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    TextField(
+                      controller: questionCtrl,
+                      style: TextStyle(color: onSurface),
+                      textCapitalization: TextCapitalization.sentences,
+                      decoration: deco('Soru (ör. Akşam ne yiyelim?)'),
+                    ),
+                    const SizedBox(height: 12),
+                    for (int i = 0; i < optionCtrls.length; i++)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                controller: optionCtrls[i],
+                                style: TextStyle(color: onSurface),
+                                textCapitalization:
+                                    TextCapitalization.sentences,
+                                decoration: deco('Seçenek ${i + 1}'),
+                              ),
+                            ),
+                            if (optionCtrls.length > 2)
+                              IconButton(
+                                icon: Icon(Icons.close_rounded,
+                                    color: onSurface.withAlpha(120)),
+                                onPressed: () => setSheet(
+                                    () => optionCtrls.removeAt(i)),
+                              ),
+                          ],
+                        ),
+                      ),
+                    if (optionCtrls.length < 6)
+                      TextButton.icon(
+                        onPressed: () => setSheet(() =>
+                            optionCtrls.add(TextEditingController())),
+                        icon: const Icon(Icons.add_rounded,
+                            size: 18, color: Color(0xFF8B5CF6)),
+                        label: const Text('Seçenek ekle',
+                            style: TextStyle(color: Color(0xFF8B5CF6))),
+                      ),
+                    const SizedBox(height: 8),
+                    SizedBox(
+                      width: double.infinity,
+                      child: FilledButton(
+                        style: FilledButton.styleFrom(
+                          backgroundColor: const Color(0xFF8B5CF6),
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(14)),
+                        ),
+                        onPressed: () {
+                          final q = questionCtrl.text.trim();
+                          final opts = optionCtrls
+                              .map((c) => c.text.trim())
+                              .where((t) => t.isNotEmpty)
+                              .toList();
+                          if (q.isEmpty || opts.length < 2) {
+                            ScaffoldMessenger.of(ctx).showSnackBar(
+                              const SnackBar(
+                                  content: Text(
+                                      'Soru ve en az 2 seçenek girin')),
+                            );
+                            return;
+                          }
+                          Navigator.pop(ctx);
+                          _sendPoll(q, opts);
+                        },
+                        child: const Text('Anketi Gönder',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 15)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void _sendPoll(String question, List<String> options) {
+    final current = ref.read(chatMessagesProvider);
+    ref.read(chatMessagesProvider.notifier).state = [
+      ...current,
+      ChatMessage(
+        id: 'msg${current.length + 1}',
+        senderId: 'm1',
+        senderName: 'Ben',
+        senderColor: AppColors.blue,
+        content: question,
+        createdAt: DateTime.now(),
+        type: MessageType.poll,
+        poll: PollData(
+          question: question,
+          options: options,
+          votes: List.generate(options.length, (_) => <String>[]),
+        ),
+      ),
+    ];
+    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+  }
+
   Future<void> _pickFile() async {
     // File picker ”” shows snackbar if no file_picker package
     setState(() => _showAttachmentMenu = false);
@@ -580,6 +762,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                                 onReact: () => setState(
                                   () => _reactingToMessage = msg,
                                 ),
+                                onVote: msg.type == MessageType.poll
+                                    ? (i) => _votePoll(msg, i)
+                                    : null,
                               ),
                             ),
                           ),
@@ -657,6 +842,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               onGif: _showGifPicker,
               onVideo: _pickVideo,
               onFile: _pickFile,
+              onPoll: _createPoll,
             ),
           // Reaction picker overlay
           if (_reactingToMessage != null)
@@ -830,6 +1016,7 @@ class _AttachmentMenu extends StatelessWidget {
   final VoidCallback? onGif;
   final VoidCallback? onVideo;
   final VoidCallback? onFile;
+  final VoidCallback? onPoll;
 
   const _AttachmentMenu({
     required this.onCamera,
@@ -839,6 +1026,7 @@ class _AttachmentMenu extends StatelessWidget {
     this.onGif,
     this.onVideo,
     this.onFile,
+    this.onPoll,
   });
 
   @override
@@ -906,10 +1094,7 @@ class _AttachmentMenu extends StatelessWidget {
                           icon: Icons.poll,
                           color: const Color(0xFF6366F1),
                           label: 'Anket',
-                          onTap: () => ScaffoldMessenger.of(context)
-                              .showSnackBar(const SnackBar(
-                                  content: Text(
-                                      'Anket özelliği hazırlanıyor'))),
+                          onTap: onPoll ?? () {},
                         ),
                         _AttachmentItem(
                           icon: Icons.contact_page,

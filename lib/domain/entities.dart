@@ -11,7 +11,70 @@ enum MemberRole { admin, parent, teen, child, elder, guest, baby }
 enum EventCategory { appointment, birthday, school, activity, work, family, travel, other }
 enum TransactionType { income, expense }
 enum ShoppingCategory { grocery, pharmacy, stationery, household, other }
-enum MessageType { text, image, audio, location, event, system, gif, video, file }
+enum MessageType { text, image, audio, location, event, system, gif, video, file, poll }
+
+/// Sohbet anketi. [votes] her seçenek için oy veren üye id'lerini tutar.
+class PollData {
+  final String question;
+  final List<String> options;
+  final List<List<String>> votes; // options ile aynı sıra
+  final bool multiple;
+
+  const PollData({
+    required this.question,
+    required this.options,
+    required this.votes,
+    this.multiple = false,
+  });
+
+  int get totalVotes => votes.fold(0, (s, v) => s + v.length);
+
+  bool hasVoted(String userId) => votes.any((v) => v.contains(userId));
+
+  /// [userId]'nin [index] seçeneğindeki oyunu değiştirir (aç/kapa).
+  PollData toggleVote(int index, String userId) {
+    final next = votes.map((v) => List<String>.from(v)).toList();
+    final already = next[index].contains(userId);
+    if (!multiple) {
+      for (final v in next) {
+        v.remove(userId);
+      }
+    }
+    if (already) {
+      next[index].remove(userId);
+    } else {
+      next[index].add(userId);
+    }
+    return PollData(
+      question: question,
+      options: options,
+      votes: next,
+      multiple: multiple,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'question': question,
+        'options': options,
+        'votes': votes,
+        'multiple': multiple,
+      };
+
+  factory PollData.fromJson(Map<String, dynamic> json) => PollData(
+        question: json['question']?.toString() ?? '',
+        options: (json['options'] as List?)
+                ?.map((e) => e.toString())
+                .toList() ??
+            const [],
+        votes: (json['votes'] as List?)
+                ?.map((v) =>
+                    (v as List?)?.map((e) => e.toString()).toList() ??
+                    <String>[])
+                .toList() ??
+            const [],
+        multiple: json['multiple'] == true,
+      );
+}
 
 class FamilyMember {
   final String id;
@@ -376,6 +439,7 @@ class ChatMessage {
   final String? replyToSender;
   final bool isPinned;
   final int readCount;
+  final PollData? poll;
 
   const ChatMessage({
     required this.id,
@@ -398,6 +462,7 @@ class ChatMessage {
     this.replyToSender,
     this.isPinned = false,
     this.readCount = 0,
+    this.poll,
   });
 
   ChatMessage copyWith({
@@ -408,6 +473,7 @@ class ChatMessage {
     List<MessageReaction>? reactions,
     bool? isPinned,
     int? readCount,
+    PollData? poll,
   }) {
     return ChatMessage(
       id: id ?? this.id,
@@ -430,6 +496,7 @@ class ChatMessage {
       replyToSender: replyToSender,
       isPinned: isPinned ?? this.isPinned,
       readCount: readCount ?? this.readCount,
+      poll: poll ?? this.poll,
     );
   }
 }

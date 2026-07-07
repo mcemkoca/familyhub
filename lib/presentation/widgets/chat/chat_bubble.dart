@@ -9,6 +9,7 @@ class ChatBubble extends StatelessWidget {
   final bool showSender;
   final VoidCallback? onReply;
   final VoidCallback? onReact;
+  final void Function(int optionIndex)? onVote;
 
   const ChatBubble({
     super.key,
@@ -17,6 +18,7 @@ class ChatBubble extends StatelessWidget {
     this.showSender = true,
     this.onReply,
     this.onReact,
+    this.onVote,
   });
 
   @override
@@ -116,6 +118,14 @@ class ChatBubble extends StatelessWidget {
                           fileName: message.fileName ?? 'Dosya',
                           fileSize: message.fileSize,
                           isMe: isMe,
+                        )
+                      else if (message.type == MessageType.poll &&
+                          message.poll != null)
+                        _PollCard(
+                          poll: message.poll!,
+                          isMe: isMe,
+                          currentUserId: 'm1',
+                          onVote: onVote,
                         )
                       else
                         Text(
@@ -628,7 +638,6 @@ class _FilePreview extends StatelessWidget {
     if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(1)}KB';
     return '${(bytes / (1024 * 1024)).toStringAsFixed(1)}MB';
   }
-
   IconData _fileIcon(String name) {
     final ext = name.split('.').last.toLowerCase();
     if (ext == 'pdf') return Icons.picture_as_pdf;
@@ -667,6 +676,135 @@ class _FilePreview extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+/// Sohbet içi anket kartı — dokununca oy verir, yüzde çubuklarını gösterir.
+class _PollCard extends StatelessWidget {
+  final PollData poll;
+  final bool isMe;
+  final String currentUserId;
+  final void Function(int optionIndex)? onVote;
+
+  const _PollCard({
+    required this.poll,
+    required this.isMe,
+    required this.currentUserId,
+    this.onVote,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final total = poll.totalVotes;
+    final voted = poll.hasVoted(currentUserId);
+    final onColor = isMe ? Colors.white : Theme.of(context).colorScheme.onSurface;
+    final accent = isMe ? Colors.white : const Color(0xFF8B5CF6);
+
+    return SizedBox(
+      width: MediaQuery.sizeOf(context).width * 0.66,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.poll_rounded, size: 16, color: accent),
+              const SizedBox(width: 6),
+              Text('Anket',
+                  style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.3,
+                      color: accent)),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Text(poll.question,
+              style: TextStyle(
+                  fontSize: 15,
+                  height: 1.3,
+                  fontWeight: FontWeight.w700,
+                  color: onColor)),
+          const SizedBox(height: 10),
+          for (int i = 0; i < poll.options.length; i++)
+            _option(context, i, total, voted, onColor, accent),
+          const SizedBox(height: 2),
+          Text(
+            total == 0 ? 'Henüz oy yok' : '$total oy',
+            style: TextStyle(
+                fontSize: 11,
+                color: onColor.withAlpha(150),
+                fontWeight: FontWeight.w500),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _option(BuildContext context, int i, int total, bool voted,
+      Color onColor, Color accent) {
+    final count = poll.votes[i].length;
+    final pct = total == 0 ? 0.0 : count / total;
+    final mine = poll.votes[i].contains(currentUserId);
+    final fill = isMe ? Colors.white.withAlpha(40) : accent.withAlpha(38);
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: GestureDetector(
+        onTap: onVote == null ? null : () => onVote!(i),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: FractionallySizedBox(
+                  alignment: Alignment.centerLeft,
+                  widthFactor: voted ? pct.clamp(0.0, 1.0) : 0.0,
+                  child: Container(color: fill),
+                ),
+              ),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: mine ? accent : onColor.withAlpha(45),
+                    width: mine ? 1.5 : 1,
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      mine
+                          ? Icons.check_circle_rounded
+                          : Icons.radio_button_unchecked_rounded,
+                      size: 18,
+                      color: mine ? accent : onColor.withAlpha(120),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(poll.options[i],
+                          style: TextStyle(
+                              fontSize: 13.5,
+                              fontWeight:
+                                  mine ? FontWeight.w700 : FontWeight.w500,
+                              color: onColor)),
+                    ),
+                    if (voted) ...[
+                      const SizedBox(width: 8),
+                      Text('${(pct * 100).round()}%',
+                          style: TextStyle(
+                              fontSize: 12.5,
+                              fontWeight: FontWeight.w700,
+                              color: onColor.withAlpha(200))),
+                    ],
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
