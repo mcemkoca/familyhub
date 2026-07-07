@@ -6,6 +6,7 @@ import '../../../config/constants.dart';
 import '../../../config/market_catalog.dart';
 import '../../../domain/entities.dart';
 import '../../../services/hive_service.dart';
+import '../../../services/ai/ai_content_service.dart';
 import '../../providers/app_providers.dart';
 
 // Quick AI-suggested common items (tokensiz)
@@ -218,6 +219,12 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                 tooltip: 'Market Kataloğu',
               ),
               IconButton(
+                onPressed: _showAiMarketList,
+                icon: const Icon(Icons.auto_awesome_motion_outlined),
+                color: const Color(0xFF8B5CF6),
+                tooltip: 'AI Market Listesi',
+              ),
+              IconButton(
                 onPressed: _showRecipePicker,
                 icon: const Icon(Icons.restaurant_menu_outlined),
                 color: AppColors.orange,
@@ -269,6 +276,204 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
         onAdd: (p) {
           ref.read(shoppingItemsProvider.notifier).addItem(p.name);
         },
+      ),
+    );
+  }
+
+  void _showAiMarketList() {
+    final country = HiveService.getSetting('country') ?? 'BE';
+    final markets = AiContentService.marketsForCountry(country);
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => DraggableScrollableSheet(
+        initialChildSize: 0.75,
+        maxChildSize: 0.95,
+        minChildSize: 0.4,
+        expand: false,
+        builder: (_, ctrl) => Container(
+          decoration: const BoxDecoration(
+            color: Color(0xFF13131A),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+          ),
+          child: FutureBuilder<List<Map<String, dynamic>>>(
+            future: AiContentService.weeklyList(
+              topic: 'market_list_$country',
+              prompt:
+                  'Bir aile için bu haftaya özel akıllı alışveriş listesi '
+                  'oluştur. Bölge marketleri: ${markets.join(", ")}. '
+                  'Ürünleri hangi markette daha uygun/bulunur ise o markete '
+                  'ata. Sadece JSON döndür: {"items":[{"market":"${markets.first}",'
+                  '"name":"...","note":"~2,50€"}]}. 12-16 temel ürün, Türkçe.',
+              listKey: 'items',
+              fallback: const [],
+              maxTokens: 1200,
+            ),
+            builder: (context, snap) {
+              if (snap.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(32),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CircularProgressIndicator(color: Color(0xFF8B5CF6)),
+                        SizedBox(height: 16),
+                        Text('AI market listesi hazırlanıyor…',
+                            style: TextStyle(color: Color(0xFF9CA3AF))),
+                      ],
+                    ),
+                  ),
+                );
+              }
+              final items = snap.data ?? const [];
+              if (items.isEmpty) {
+                return const Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(32),
+                    child: Text(
+                        'Liste oluşturulamadı. İnternet bağlantısını kontrol edin.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Color(0xFF9CA3AF))),
+                  ),
+                );
+              }
+              // Markete göre grupla.
+              final byMarket = <String, List<Map<String, dynamic>>>{};
+              for (final it in items) {
+                final m = (it['market']?.toString() ?? markets.first);
+                byMarket.putIfAbsent(m, () => []).add(it);
+              }
+              return ListView(
+                controller: ctrl,
+                padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
+                children: [
+                  Center(
+                    child: Container(
+                      width: 40,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          color: Colors.white.withAlpha(40),
+                          borderRadius: BorderRadius.circular(2)),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  const Row(
+                    children: [
+                      Icon(Icons.auto_awesome_motion,
+                          color: Color(0xFF8B5CF6)),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: Text('AI Market Listesi',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w900)),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  const Text('Ürüne dokunarak listene ekle.',
+                      style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
+                  const SizedBox(height: 16),
+                  for (final entry in byMarket.entries) ...[
+                    Row(
+                      children: [
+                        const Icon(Icons.storefront,
+                            size: 18, color: Color(0xFF10B981)),
+                        const SizedBox(width: 8),
+                        Text(entry.key,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w800)),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    for (final it in entry.value)
+                      GestureDetector(
+                        onTap: () {
+                          final name = it['name']?.toString() ?? '';
+                          if (name.isEmpty) return;
+                          ref
+                              .read(shoppingItemsProvider.notifier)
+                              .addItem(name);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                content: Text('$name listeye eklendi'),
+                                behavior: SnackBarBehavior.floating),
+                          );
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.only(bottom: 8),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 14, vertical: 12),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF1A1A24),
+                            borderRadius: BorderRadius.circular(12),
+                            border:
+                                Border.all(color: const Color(0xFF262631)),
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(it['name']?.toString() ?? '',
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 14.5)),
+                              ),
+                              if (it['note'] != null)
+                                Text(it['note'].toString(),
+                                    style: const TextStyle(
+                                        color: Color(0xFF9CA3AF),
+                                        fontSize: 12.5)),
+                              const SizedBox(width: 8),
+                              const Icon(Icons.add_circle_outline,
+                                  color: Color(0xFF10B981), size: 20),
+                            ],
+                          ),
+                        ),
+                      ),
+                    const SizedBox(height: 8),
+                  ],
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        for (final it in items) {
+                          final name = it['name']?.toString() ?? '';
+                          if (name.isNotEmpty) {
+                            ref
+                                .read(shoppingItemsProvider.notifier)
+                                .addItem(name);
+                          }
+                        }
+                        Navigator.pop(context);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text('Tüm ürünler listeye eklendi'),
+                              behavior: SnackBarBehavior.floating),
+                        );
+                      },
+                      icon: const Icon(Icons.playlist_add_check,
+                          color: Colors.white),
+                      label: const Text('Tümünü Ekle',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w800)),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF8B5CF6),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14)),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
       ),
     );
   }
