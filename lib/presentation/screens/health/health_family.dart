@@ -1,21 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../domain/entities.dart';
+import '../../providers/app_providers.dart';
 import 'health_store.dart';
+import 'family_health_screen.dart' show familyHealthProvider;
 
-/// Ekran 2 — Aile Sağlığı (anne + baba).
-class FamilySaglikScreen extends StatefulWidget {
+/// Ekran 2 — Aile Sağlığı (ebeveynler).
+class FamilySaglikScreen extends ConsumerStatefulWidget {
   const FamilySaglikScreen({super.key});
 
   @override
-  State<FamilySaglikScreen> createState() => _FamilySaglikScreenState();
+  ConsumerState<FamilySaglikScreen> createState() => _FamilySaglikScreenState();
 }
 
-class _FamilySaglikScreenState extends State<FamilySaglikScreen> {
+class _FamilySaglikScreenState extends ConsumerState<FamilySaglikScreen> {
   @override
   Widget build(BuildContext context) {
-    final steps = HealthStore.metric('steps', 6245);
-    final water = HealthStore.metric('water', 1.7);
-    final sleep = HealthStore.metric('sleep', 6.75);
-    final stress = HealthStore.metric('stress', 2); // 0-3
+    final steps = HealthStore.metric('steps', 0);
+    final water = HealthStore.metric('water', 0);
+    final sleep = HealthStore.metric('sleep', 0);
+    final stress = HealthStore.metric('stress', 0); // 0-3
+
+    // Gerçek ebeveynler (yoksa boş görünür ama ekran çalışır).
+    final members = ref.watch(familyMembersProvider);
+    final parents = members
+        .where((m) =>
+            m.role == MemberRole.parent ||
+            m.role == MemberRole.admin ||
+            m.role == MemberRole.elder)
+        .toList();
+
+    // Gerçek yaklaşan randevular (familyHealthProvider'dan).
+    final appointments = _upcomingAppointments(ref);
 
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
@@ -33,17 +49,23 @@ class _FamilySaglikScreenState extends State<FamilySaglikScreen> {
               child: ListView(
                 padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
                 children: [
-                  Row(
-                    children: [
-                      Expanded(
-                          child: _memberCard('Elif', 'Anne',
-                              const Color(0xFFEC4899), Icons.face_3)),
-                      const SizedBox(width: 12),
-                      Expanded(
-                          child: _memberCard('Mehmet', 'Baba',
-                              const Color(0xFF3B82F6), Icons.face_6)),
-                    ],
-                  ),
+                  if (parents.isEmpty)
+                    _emptyMembersCard()
+                  else
+                    Row(
+                      children: [
+                        for (var i = 0; i < parents.length && i < 2; i++) ...[
+                          if (i > 0) const SizedBox(width: 12),
+                          Expanded(
+                            child: _memberCard(
+                                parents[i].name,
+                                _roleLabel(parents[i].role),
+                                parents[i].color,
+                                Icons.person_rounded),
+                          ),
+                        ],
+                      ],
+                    ),
                   const SizedBox(height: 18),
                   _sectionCard(
                     'Sağlık Özeti',
@@ -75,13 +97,20 @@ class _FamilySaglikScreenState extends State<FamilySaglikScreen> {
                   _sectionCard(
                     'Yaklaşan Randevular',
                     Icons.calendar_month,
-                    Column(
-                      children: [
-                        _apptRow('16', 'Mayıs', 'Diş Hekimi Randevusu', '14:30'),
-                        const SizedBox(height: 10),
-                        _apptRow('20', 'Mayıs', 'Genel Kontrol', '11:00'),
-                      ],
-                    ),
+                    appointments.isEmpty
+                        ? _emptyRow('Yaklaşan randevu yok')
+                        : Column(
+                            children: [
+                              for (var i = 0; i < appointments.length; i++) ...[
+                                if (i > 0) const SizedBox(height: 10),
+                                _apptRow(
+                                    appointments[i].$1,
+                                    appointments[i].$2,
+                                    appointments[i].$3,
+                                    appointments[i].$4),
+                              ],
+                            ],
+                          ),
                   ),
                   const SizedBox(height: 16),
                   _tipCard(
@@ -111,6 +140,78 @@ class _FamilySaglikScreenState extends State<FamilySaglikScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  String _roleLabel(MemberRole role) {
+    switch (role) {
+      case MemberRole.admin:
+      case MemberRole.parent:
+        return 'Ebeveyn';
+      case MemberRole.elder:
+        return 'Büyük';
+      default:
+        return 'Üye';
+    }
+  }
+
+  /// familyHealthProvider'daki tamamlanmamış randevuları toplar, tarihe göre
+  /// sıralar ve (gün, ay, başlık, saat) tuple listesi döndürür.
+  List<(String, String, String, String)> _upcomingAppointments(WidgetRef ref) {
+    const months = [
+      '', 'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
+      'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
+    ];
+    final result = <(DateTime, String, String, String, String)>[];
+    final today = DateTime.now();
+    final start = DateTime(today.year, today.month, today.day);
+    for (final m in ref.watch(familyHealthProvider)) {
+      for (final a in m.appointments) {
+        if (a.completed) continue;
+        final parts = a.dateTime.split('.');
+        if (parts.length != 3) continue;
+        final d = DateTime.tryParse(
+            '${parts[2]}-${parts[1].padLeft(2, '0')}-${parts[0].padLeft(2, '0')}');
+        if (d == null || d.isBefore(start)) continue;
+        final title = a.specialty.isNotEmpty
+            ? '${a.doctorName} · ${a.specialty}'
+            : a.doctorName;
+        result.add((d, d.day.toString(), months[d.month], title, '—'));
+      }
+    }
+    result.sort((x, y) => x.$1.compareTo(y.$1));
+    return result
+        .take(4)
+        .map((e) => (e.$2, e.$3, e.$4, e.$5))
+        .toList();
+  }
+
+  Widget _emptyMembersCard() {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: const Color(0xFF13131A),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFF262631)),
+      ),
+      child: const Row(
+        children: [
+          Icon(Icons.group_add_rounded, color: Color(0xFF9CA3AF), size: 22),
+          SizedBox(width: 12),
+          Expanded(
+            child: Text('Henüz ebeveyn eklenmedi. Aile üyelerini ekleyin.',
+                style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 14)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _emptyRow(String text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Text(text,
+          style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 14)),
     );
   }
 

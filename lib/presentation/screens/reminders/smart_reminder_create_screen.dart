@@ -717,7 +717,7 @@ class _TestPreviewSheet extends StatelessWidget {
         : description;
 
     if (includeContext) {
-      displayBody += '\n(Şu an Kadıköy\'dasın)';
+      displayBody += '\n(Bulunduğun konuma göre uyarlanır)';
     }
 
     if (tone == ReminderTone.urgent) {

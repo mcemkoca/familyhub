@@ -331,7 +331,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     showValueWidget: FutureBuilder<String?>(
                       future: Future.value(HiveService.getSetting('weatherCity')),
                       builder: (context, snapshot) {
-                        return Text(snapshot.data ?? 'İstanbul');
+                        return Text(snapshot.data ?? 'Brüksel');
                       },
                     ),
                     onTap: () => context.push(AppRoutes.weatherSettings),

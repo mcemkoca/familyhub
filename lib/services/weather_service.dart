@@ -84,6 +84,15 @@ class WeatherService {
   }
 
   static final List<Map<String, dynamic>> cities = [
+    // Belçika (varsayılan pazar)
+    {'name': 'Brüksel', 'lat': 50.8503, 'lon': 4.3517},
+    {'name': 'Antwerp', 'lat': 51.2194, 'lon': 4.4025},
+    {'name': 'Gent', 'lat': 51.0543, 'lon': 3.7174},
+    {'name': 'Charleroi', 'lat': 50.4108, 'lon': 4.4446},
+    {'name': 'Liège', 'lat': 50.6326, 'lon': 5.5797},
+    {'name': 'Brugge', 'lat': 51.2093, 'lon': 3.2247},
+    {'name': 'Namur', 'lat': 50.4674, 'lon': 4.8720},
+    {'name': 'Leuven', 'lat': 50.8798, 'lon': 4.7005},
     // Türkiye
     {'name': 'İstanbul', 'lat': 41.0082, 'lon': 28.9784},
     {'name': 'Ankara', 'lat': 39.9334, 'lon': 32.8597},

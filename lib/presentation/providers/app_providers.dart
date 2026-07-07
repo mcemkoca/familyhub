@@ -604,7 +604,7 @@ final weatherProvider = FutureProvider<WeatherData>((ref) async {
     'weatherUseLocation',
     defaultValue: true,
   );
-  final cityName = HiveService.getSetting('weatherCity') ?? 'İstanbul';
+  final cityName = HiveService.getSetting('weatherCity') ?? 'Brüksel';
   final celsius = HiveService.getBoolSetting(
     'weatherCelsius',
     defaultValue: true,

@@ -37,66 +37,7 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
 
   // Gerçek aile üyeleri build'de familyMembersProvider'dan doldurulur;
   // üye yoksa aşağıdaki demo kullanılır.
-  List<_FamilyMember> _members = _demoMembers;
-
-  static const _demoMembers = <_FamilyMember>[
-    _FamilyMember(
-      name: 'Anne',
-      role: 'Ebeveyn',
-      avatar: '👩',
-      color: Color(0xFFEC4899),
-      location: 'Kadıköy, İstanbul',
-      lastSeen: 'Şimdi',
-      battery: 72,
-      status: LocationStatus.home,
-      x: 0.48,
-      y: 0.45,
-      speed: 0,
-      activity: 'Evde',
-    ),
-    _FamilyMember(
-      name: 'Baba',
-      role: 'Ebeveyn',
-      avatar: '👨',
-      color: Color(0xFF3B82F6),
-      location: 'Şişli, İstanbul',
-      lastSeen: '3 dk önce',
-      battery: 45,
-      status: LocationStatus.transit,
-      x: 0.3,
-      y: 0.3,
-      speed: 42,
-      activity: 'Araçta gidiyor',
-    ),
-    _FamilyMember(
-      name: 'Elif',
-      role: 'Çocuk ”¢ 12 yaş',
-      avatar: '👧',
-      color: Color(0xFF10B981),
-      location: 'Beşiktaş İlkokulu',
-      lastSeen: '1 dk önce',
-      battery: 88,
-      status: LocationStatus.school,
-      x: 0.62,
-      y: 0.28,
-      speed: 0,
-      activity: 'Okulda',
-    ),
-    _FamilyMember(
-      name: 'Can',
-      role: 'Çocuk ”¢ 8 yaş',
-      avatar: '👦',
-      color: Color(0xFFF97316),
-      location: 'Güvenli Bölge',
-      lastSeen: '5 dk önce',
-      battery: 30,
-      status: LocationStatus.safeZone,
-      x: 0.55,
-      y: 0.6,
-      speed: 3,
-      activity: 'Parkta yürüyor',
-    ),
-  ];
+  List<_FamilyMember> _members = const [];
 
   final _safeZones = [
     const _SafeZone(name: 'Ev', x: 0.48, y: 0.45, radius: 0.06,
@@ -215,7 +156,7 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
   // Supabase üyeleri yokken yerel Koca Ailesi verisini haritaya yansıtır.
   List<_FamilyMember> _kocaOrDemo() {
     final koca = KocaSeed.localMembers();
-    if (koca.isEmpty) return _demoMembers;
+    if (koca.isEmpty) return const [];
     const palette = [
       Color(0xFF3B82F6), Color(0xFFEC4899), Color(0xFF10B981),
       Color(0xFFF97316), Color(0xFF8B5CF6),
@@ -561,7 +502,18 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
   }
 
   Widget _buildSelectedDetail(bool isDark) {
-    final m = _members[_selectedMemberIndex];
+    if (_members.isEmpty) {
+      return const Padding(
+        padding: EdgeInsets.fromLTRB(16, 12, 16, 0),
+        child: Text(
+          'Henüz takip edilen aile üyesi yok. Aile üyelerini ekleyip konum '
+          'paylaşımını açtığınızda burada görünecekler.',
+          style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13.5),
+        ),
+      );
+    }
+    final idx = _selectedMemberIndex.clamp(0, _members.length - 1);
+    final m = _members[idx];
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
       child: Container(

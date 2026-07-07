@@ -22,7 +22,7 @@ class WeatherSettingsScreen extends ConsumerStatefulWidget {
 class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
   bool get isDark => Theme.of(context).brightness == Brightness.dark;
 
-  String _selectedCity = 'İstanbul';
+  String _selectedCity = 'Brüksel';
   bool _useCelsius = true;
   bool _useCurrentLocation = true;
   bool _isRequestingPermission = false;
@@ -31,7 +31,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
   @override
   void initState() {
     super.initState();
-    _selectedCity = HiveService.getSetting('weatherCity') ?? 'İstanbul';
+    _selectedCity = HiveService.getSetting('weatherCity') ?? 'Brüksel';
     _useCelsius = HiveService.getBoolSetting('weatherCelsius', defaultValue: true);
     _useCurrentLocation = HiveService.getBoolSetting('weatherUseLocation', defaultValue: true);
     _savedLocation = HiveService.getLocation();

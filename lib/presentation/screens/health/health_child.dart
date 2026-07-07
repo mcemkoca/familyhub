@@ -80,14 +80,11 @@ class _CocukSaglikScreenState extends ConsumerState<CocukSaglikScreen> {
                   const SizedBox(height: 18),
                   _sectionCard(
                     'Yaklaşanlar',
-                    Column(
-                      children: [
-                        _apptRow('15 Mayıs 2025', '$ageLabel Kontrolü', '14:00',
-                            const Color(0xFF8B5CF6), Icons.event_available),
-                        const SizedBox(height: 10),
-                        _apptRow('20 Mayıs 2025', 'Diş Kontrolü', '10:30',
-                            const Color(0xFF3B82F6), Icons.medical_services),
-                      ],
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 6),
+                      child: Text('Yaklaşan randevu yok',
+                          style: TextStyle(
+                              color: Color(0xFF9CA3AF), fontSize: 14)),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -294,57 +291,6 @@ class _CocukSaglikScreenState extends ConsumerState<CocukSaglikScreen> {
           child,
         ],
       ),
-    );
-  }
-
-  Widget _apptRow(
-      String date, String title, String time, Color color, IconData icon) {
-    return Row(
-      children: [
-        Container(
-          width: 46,
-          height: 46,
-          decoration: BoxDecoration(
-            color: color.withAlpha(30),
-            borderRadius: BorderRadius.circular(13),
-          ),
-          child: Icon(icon, color: color, size: 22),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(date,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 14.5,
-                      fontWeight: FontWeight.w800)),
-              Text(title,
-                  style: const TextStyle(
-                      color: Color(0xFF9CA3AF), fontSize: 12.5)),
-            ],
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-          decoration: BoxDecoration(
-            color: color.withAlpha(25),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Row(
-            children: [
-              Icon(Icons.schedule, size: 13, color: color),
-              const SizedBox(width: 4),
-              Text(time,
-                  style: TextStyle(
-                      color: color,
-                      fontSize: 12.5,
-                      fontWeight: FontWeight.w700)),
-            ],
-          ),
-        ),
-      ],
     );
   }
 
