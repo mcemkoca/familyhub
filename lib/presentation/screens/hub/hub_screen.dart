@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../config/routes.dart';
@@ -595,6 +596,12 @@ class _NotifTicker extends StatelessWidget {
 }
 
 // ─── Cover Section ────────────────────────────────────────────────────────────
+/// Aile kapak fotoğrafı: yerel dosya yolu veya uzak URL. Yerel kopya
+/// öncelikli — Supabase yüklemesi başarısız olsa (403) bile fotoğraf görünür.
+final coverPhotoProvider = StateProvider<String?>((ref) =>
+    HiveService.getSetting('cover_photo_local') ??
+    HiveService.getSetting('cover_photo_url'));
+
 class _CoverSection extends ConsumerWidget {
   final List<FamilyMember> members;
   const _CoverSection({required this.members});
@@ -603,7 +610,7 @@ class _CoverSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final weatherAsync = ref.watch(weatherProvider);
     final familyName = HiveService.getSetting('family_name') ?? 'Ailem';
-    final coverPhotoUrl = HiveService.getSetting('cover_photo_url');
+    final coverPhoto = ref.watch(coverPhotoProvider);
 
     return Container(
       margin: const EdgeInsets.fromLTRB(12, 10, 12, 0),
@@ -623,15 +630,22 @@ class _CoverSection extends ConsumerWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            // cover photo or gradient
-            coverPhotoUrl != null
-                ? CachedNetworkImage(
-                    imageUrl: coverPhotoUrl,
-                    fit: BoxFit.cover,
-                    placeholder: (_, _) => _CoverGradient(),
-                    errorWidget: (_, _, _) => _CoverGradient(),
-                  )
-                : _CoverGradient(),
+            // cover photo (yerel dosya veya URL) ya da gradyan
+            if (coverPhoto == null)
+              _CoverGradient()
+            else if (coverPhoto.startsWith('http'))
+              CachedNetworkImage(
+                imageUrl: coverPhoto,
+                fit: BoxFit.cover,
+                placeholder: (_, _) => _CoverGradient(),
+                errorWidget: (_, _, _) => _CoverGradient(),
+              )
+            else
+              Image.file(
+                File(coverPhoto),
+                fit: BoxFit.cover,
+                errorBuilder: (_, _, _) => _CoverGradient(),
+              ),
 
             // gradient overlay
             DecoratedBox(
@@ -695,7 +709,7 @@ class _CoverSection extends ConsumerWidget {
                   const SizedBox(width: 6),
                   // edit cover
                   GestureDetector(
-                    onTap: () => _pickCoverPhoto(context),
+                    onTap: () => _pickCoverPhoto(context, ref),
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8, vertical: 5),
@@ -752,11 +766,41 @@ class _CoverSection extends ConsumerWidget {
     );
   }
 
-  Future<void> _pickCoverPhoto(BuildContext context) async {
+  Future<void> _pickCoverPhoto(BuildContext context, WidgetRef ref) async {
+    final messenger = ScaffoldMessenger.of(context);
     final picker = ImagePicker();
-    final picked = await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
+    final picked =
+        await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
     if (picked == null) return;
 
+    // 1) Önce yerel kopyayı kaydet → fotoğraf anında görünür (403 olsa bile).
+    String? localPath;
+    try {
+      final dir = await getApplicationDocumentsDirectory();
+      final ext = picked.path.split('.').last;
+      final dest = File('${dir.path}/cover_photo.$ext');
+      await dest.writeAsBytes(await File(picked.path).readAsBytes());
+      localPath = dest.path;
+      await HiveService.setSetting('cover_photo_local', localPath);
+      ref.read(coverPhotoProvider.notifier).state = localPath;
+      messenger.showSnackBar(
+        const SnackBar(
+          content: Text('Kapak fotoğrafı güncellendi'),
+          backgroundColor: Color(0xFF6366F1),
+        ),
+      );
+    } catch (_) {
+      // Yerel kopya bile başarısızsa devam etme.
+      messenger.showSnackBar(
+        const SnackBar(
+          content: Text('Fotoğraf kaydedilemedi'),
+          backgroundColor: Color(0xFFEF4444),
+        ),
+      );
+      return;
+    }
+
+    // 2) Buluta yükle (opsiyonel senkron). Başarısız olursa yerel görsel kalır.
     try {
       final client = SupabaseConfig.safeClient;
       final userId = client?.auth.currentUser?.id;
@@ -766,27 +810,17 @@ class _CoverSection extends ConsumerWidget {
       final ext = picked.path.split('.').last;
       final path = 'cover_photos/$userId/cover.$ext';
       await client.storage.from('family-assets').uploadBinary(
-        path,
-        bytes,
-        fileOptions: FileOptions(contentType: 'image/$ext', upsert: true),
-      );
+            path,
+            bytes,
+            fileOptions: FileOptions(contentType: 'image/$ext', upsert: true),
+          );
       final url = client.storage.from('family-assets').getPublicUrl(path);
-      await client.from('profiles').update({'cover_photo_url': url}).eq('id', userId);
-
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Kapak fotoğrafı güncellendi'),
-            backgroundColor: Color(0xFF6366F1),
-          ),
-        );
-      }
-    } catch (e) {
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Yükleme başarısız: $e'), backgroundColor: const Color(0xFFEF4444)),
-        );
-      }
+      await client
+          .from('profiles')
+          .update({'cover_photo_url': url}).eq('id', userId);
+      await HiveService.setSetting('cover_photo_url', url);
+    } catch (_) {
+      // Bulut senkronu başarısız (ör. 403 / bucket yok) — yerel görsel geçerli.
     }
   }
 }
