@@ -715,16 +715,8 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
   }
 
   Widget _buildActivityFeed(bool isDark) {
-    final events = [
-      const _LocationEvent('Anne', '👩', Color(0xFFEC4899),
-          'Eve geldi', '14:32', Icons.home),
-      const _LocationEvent('Baba', '👨', Color(0xFF3B82F6),
-          'Evden çıktı', '08:15', Icons.directions_car),
-      const _LocationEvent('Elif', '👧', Color(0xFF10B981),
-          'Okula ulaştı', '08:42', Icons.school),
-      const _LocationEvent('Can', '👦', Color(0xFFF97316),
-          'Güvenli bölgeye girdi', '15:10', Icons.check_circle),
-    ];
+    // Gerçek konum-olay akışı bağlanana kadar boş görünür (demo yok).
+    final events = <_LocationEvent>[];
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
@@ -737,6 +729,18 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
                   fontWeight: FontWeight.w700,
                   color: Color(0xFFE5E7EB))),
           const SizedBox(height: 10),
+          if (events.isEmpty)
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: const Color(0x1AFFFFFF),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: const Text('Bugün için konum aktivitesi yok.',
+                  style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13.5)),
+            )
+          else
           Container(
             decoration: BoxDecoration(
               color: const Color(0x1AFFFFFF),

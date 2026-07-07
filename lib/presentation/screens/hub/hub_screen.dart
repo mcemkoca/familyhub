@@ -60,41 +60,12 @@ class _HubScreenState extends ConsumerState<HubScreen>
   int _notifIdx = 0;
   bool _notifExpanded = false;
   // Gerçek verilerden üretilen canlı bildirimler (build'de doldurulur).
-  List<_HubNotif> _liveNotifs = _notifs;
+  List<_HubNotif> _liveNotifs = const [];
   late Timer _tickerTimer;
   late AnimationController _tickerFade;
 
   // sample notifications (will come from Supabase / FCM in production)
-  static const _notifs = [
-    _HubNotif(
-      icon: Icons.medication_outlined,
-      color: Color(0xFFEF4444),
-      title: "Elif'in vitamini alınmadı",
-      source: 'Sağlık · hatırlatıcı',
-      time: '09:41',
-    ),
-    _HubNotif(
-      icon: Icons.calendar_today_outlined,
-      color: Color(0xFF6366F1),
-      title: 'Diş hekimi randevusu — 14:00',
-      source: 'Takvim · 2 saat sonra',
-      time: '09:38',
-    ),
-    _HubNotif(
-      icon: Icons.location_on_outlined,
-      color: Color(0xFF10B981),
-      title: 'Kerem okula ulaştı',
-      source: 'Konum · otomatik',
-      time: '08:21',
-    ),
-    _HubNotif(
-      icon: Icons.credit_card_outlined,
-      color: Color(0xFFF59E0B),
-      title: 'Netflix yenileniyor — 3 gün',
-      source: 'Abonelik · hatırlatıcı',
-      time: '08:00',
-    ),
-  ];
+
 
   static final _features = <_Feature>[
     const _Feature(Icons.shopping_cart_outlined,   'Alışveriş',   [Color(0xFF10B981), Color(0xFF059669)], Color(0xFF064E3B), AppRoutes.shopping),
