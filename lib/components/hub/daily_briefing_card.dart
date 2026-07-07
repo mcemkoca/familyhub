@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import '../../config/routes.dart';
 import '../../presentation/providers/app_providers.dart';
 import '../../services/ai/ai_content_service.dart';
 import '../../services/hive_service.dart';
@@ -24,6 +26,45 @@ class _DailyBriefingCardState extends ConsumerState<DailyBriefingCard> {
   void _toggle() {
     setState(() => _expanded = !_expanded);
     HiveService.setBoolSetting('briefing_expanded', _expanded);
+  }
+
+  /// Öneri metnindeki anahtar kelimeye göre ilgili bölüme yönlendirir.
+  void _openAction(String action) {
+    final a = action.toLowerCase();
+    String route;
+    if (a.contains('alışver') || a.contains('market') || a.contains('malzeme')) {
+      route = AppRoutes.shopping;
+    } else if (a.contains('görev') || a.contains('yapılacak')) {
+      route = AppRoutes.tasks;
+    } else if (a.contains('etkinlik') ||
+        a.contains('takvim') ||
+        a.contains('plan') ||
+        a.contains('randevu')) {
+      route = AppRoutes.calendar;
+    } else if (a.contains('bütçe') ||
+        a.contains('harca') ||
+        a.contains('gider') ||
+        a.contains('para')) {
+      route = AppRoutes.budget;
+    } else if (a.contains('yemek') ||
+        a.contains('tarif') ||
+        a.contains('mutfak') ||
+        a.contains('kahvaltı') ||
+        a.contains('akşam')) {
+      route = AppRoutes.kitchen;
+    } else if (a.contains('sağlık') ||
+        a.contains('ilaç') ||
+        a.contains('doktor')) {
+      route = AppRoutes.familyHealth;
+    } else if (a.contains('çocuk') ||
+        a.contains('gelişim') ||
+        a.contains('eğitim') ||
+        a.contains('ödev')) {
+      route = AppRoutes.education;
+    } else {
+      route = AppRoutes.calendar;
+    }
+    context.push(route);
   }
 
   @override
@@ -196,32 +237,44 @@ Türkçe, samimi bir dille. Havaya uygun bir öneri ekle (ör. yağmurluysa şem
                     if (actions.isNotEmpty) ...[
                       const SizedBox(height: 12),
                       for (final a in actions)
-                        Container(
-                          width: double.infinity,
-                          margin: const EdgeInsets.only(bottom: 8),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 10),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF8B5CF6).withAlpha(28),
-                            borderRadius: BorderRadius.circular(14),
-                            border:
-                                Border.all(color: const Color(0x338B5CF6)),
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Icon(Icons.bolt_rounded,
-                                  size: 15, color: Color(0xFFA5B4FC)),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: Text(a,
-                                    style: const TextStyle(
-                                        color: Color(0xFFD1D5DB),
-                                        fontSize: 12.5,
-                                        height: 1.35,
-                                        fontWeight: FontWeight.w600)),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: () => _openAction(a),
+                              borderRadius: BorderRadius.circular(14),
+                              child: Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 10),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF8B5CF6).withAlpha(28),
+                                  borderRadius: BorderRadius.circular(14),
+                                  border: Border.all(
+                                      color: const Color(0x338B5CF6)),
+                                ),
+                                child: Row(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.center,
+                                  children: [
+                                    const Icon(Icons.bolt_rounded,
+                                        size: 15, color: Color(0xFFA5B4FC)),
+                                    const SizedBox(width: 8),
+                                    Expanded(
+                                      child: Text(a,
+                                          style: const TextStyle(
+                                              color: Color(0xFFD1D5DB),
+                                              fontSize: 12.5,
+                                              height: 1.35,
+                                              fontWeight: FontWeight.w600)),
+                                    ),
+                                    const Icon(Icons.chevron_right_rounded,
+                                        size: 18, color: Color(0xFF8B8FA3)),
+                                  ],
+                                ),
                               ),
-                            ],
+                            ),
                           ),
                         ),
                     ],

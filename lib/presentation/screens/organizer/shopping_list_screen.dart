@@ -1004,12 +1004,69 @@ class _MarketCatalogSheet extends StatefulWidget {
 
 class _MarketCatalogSheetState extends State<_MarketCatalogSheet> {
   String _category = 'Tümü';
+  bool _refreshing = false;
+
+  @override
+  void initState() {
+    super.initState();
+    MarketCatalog.loadOverrides();
+  }
 
   String get _cur =>
       HiveService.getSetting('currencySymbol') ?? (widget.country == 'TR' ? '₺' : '€');
 
   String _fmtDate(DateTime d) =>
       '${d.day.toString().padLeft(2, '0')}.${d.month.toString().padLeft(2, '0')}.${d.year}';
+
+  /// AI ile güncel (Belçika) ortalama market fiyatlarını çeker, Hive'a kaydeder.
+  Future<void> _refreshPrices() async {
+    if (_refreshing) return;
+    setState(() => _refreshing = true);
+    final names = MarketCatalog.productNames;
+    try {
+      final items = await AiContentService.weeklyList(
+        topic: 'market_prices_${widget.country}',
+        forceRefresh: true,
+        maxTokens: 1100,
+        prompt:
+            'Aşağıdaki market ürünleri için ${widget.country == 'TR' ? 'Türkiye' : 'Belçika'} '
+            'süpermarketlerindeki (Aldi, Lidl, Colruyt) GÜNCEL ortalama birim '
+            'fiyatını EUR cinsinden tahmin et. Sadece JSON döndür: '
+            '{"items":[{"name":"<ürün adı aynen>","price":<sayı>}]}. '
+            'Ürünler: ${names.join(", ")}.',
+        fallback: const [],
+      );
+      final prices = <String, double>{};
+      for (final it in items) {
+        final n = it['name']?.toString();
+        final p = it['price'];
+        if (n != null && p is num) prices[n] = p.toDouble();
+      }
+      if (prices.isNotEmpty) {
+        await MarketCatalog.saveOverrides(prices);
+      }
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(prices.isEmpty
+                ? 'Fiyat güncellenemedi (AI kotası dolu olabilir)'
+                : '✅ ${prices.length} ürün fiyatı güncellendi'),
+            backgroundColor: prices.isEmpty
+                ? const Color(0xFFEF4444)
+                : const Color(0xFF10B981),
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Fiyat güncelleme başarısız')),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _refreshing = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1051,9 +1108,24 @@ class _MarketCatalogSheetState extends State<_MarketCatalogSheet> {
                           fontSize: 18,
                           fontWeight: FontWeight.w800)),
                   const Spacer(),
-                  Text('Güncellendi: ${_fmtDate(monday)}',
+                  Text(
+                      'Güncellendi: ${_fmtDate(MarketCatalog.lastPriceUpdate ?? monday)}',
                       style: const TextStyle(
                           color: Color(0xFF6B7280), fontSize: 11)),
+                  const SizedBox(width: 6),
+                  _refreshing
+                      ? const SizedBox(
+                          width: 18,
+                          height: 18,
+                          child: CircularProgressIndicator(
+                              strokeWidth: 2, color: Color(0xFF10B981)))
+                      : IconButton(
+                          onPressed: _refreshPrices,
+                          visualDensity: VisualDensity.compact,
+                          tooltip: 'Fiyatları Güncelle (AI)',
+                          icon: const Icon(Icons.refresh_rounded,
+                              color: Color(0xFF10B981), size: 20),
+                        ),
                 ],
               ),
             ),

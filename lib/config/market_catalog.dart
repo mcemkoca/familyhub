@@ -1,6 +1,9 @@
+import 'dart:convert';
+import '../services/hive_service.dart';
+
 /// Market kataloğu — ülkeye göre marketler + kategorili ürünler.
-/// Gerçek fiyat API'si olmadığından fiyatlar ortalama; katalog HAFTALIK olarak
-/// deterministik biçimde döner ("bu haftanın fırsatları").
+/// Temel fiyatlar ortalamadır; kullanıcı "Fiyatları Güncelle" ile AI üzerinden
+/// güncel (Belçika) ortalama fiyatları çekip Hive'a önbellekler.
 class MarketProduct {
   final String emoji;
   final String name;
@@ -80,12 +83,46 @@ class MarketCatalog {
   static List<String> get categories =>
       _base.map((p) => p.category).toSet().toList();
 
+  /// Ürün adı → AI ile çekilmiş güncel EUR fiyatı (Hive'dan yüklenir).
+  static Map<String, double> _overrides = {};
+
+  /// AI fiyat güncellemesinin yapıldığı tarih (etiket için).
+  static DateTime? lastPriceUpdate;
+
+  /// Uygulama açılışında/ekran girişinde Hive'daki override'ları yükler.
+  static void loadOverrides() {
+    final raw = HiveService.getSetting('market_price_overrides');
+    if (raw == null || raw.isEmpty) return;
+    try {
+      final map = jsonDecode(raw) as Map<String, dynamic>;
+      _overrides = map.map((k, v) => MapEntry(k, (v as num).toDouble()));
+      final ts = HiveService.getSetting('market_price_updated_at');
+      if (ts != null) lastPriceUpdate = DateTime.tryParse(ts);
+    } catch (_) {}
+  }
+
+  /// AI'dan gelen {ürünAdı: eurFiyat} eşlemesini kaydeder.
+  static Future<void> saveOverrides(Map<String, double> prices) async {
+    _overrides = {..._overrides, ...prices};
+    lastPriceUpdate = DateTime.now();
+    await HiveService.setSetting(
+        'market_price_overrides', jsonEncode(_overrides));
+    await HiveService.setSetting(
+        'market_price_updated_at', lastPriceUpdate!.toIso8601String());
+  }
+
+  /// Bilinen ürün adlarının listesi (AI prompt'u için).
+  static List<String> get productNames =>
+      _base.map((p) => p.name).toList();
+
   static List<MarketProduct> productsFor(String country, {String? category}) {
     return _base
         .where((p) => category == null || p.category == category)
-        .map((p) => MarketProduct(
-            p.emoji, p.name, _priceFor(country, p.price), p.category))
-        .toList();
+        .map((p) {
+      final baseEur = _overrides[p.name] ?? p.price;
+      return MarketProduct(
+          p.emoji, p.name, _priceFor(country, baseEur), p.category);
+    }).toList();
   }
 
   /// ISO hafta numarası — haftalık deterministik rotasyon için.

@@ -94,13 +94,17 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
       if (client == null) return;
 
       final fileExt = picked.path.split('.').last;
-      final fileName = '$userId.$fileExt';
+      // RLS politikası ilk klasörün kullanıcı id'sine eşit olmasını ister
+      // (storage.foldername(name)[1] = auth.uid). Bu yüzden "<userId>/avatar.ext".
+      final fileName = '$userId/avatar.$fileExt';
 
       await client.storage
           .from('avatars')
           .upload(fileName, file, fileOptions: const FileOptions(upsert: true));
 
-      final publicUrl = client.storage.from('avatars').getPublicUrl(fileName);
+      // Cache-bust için sürüm parametresi ekle (aynı yol upsert edildiğinden).
+      final publicUrl =
+          '${client.storage.from('avatars').getPublicUrl(fileName)}?v=${DateTime.now().millisecondsSinceEpoch}';
       setState(() => _avatarUrl = publicUrl);
 
       await AuthService.updateProfile(avatarUrl: publicUrl);

@@ -202,11 +202,23 @@ class MealImageService {
     return null;
   }
 
+  /// Son çare — her tarife MUTLAKA bir yemek fotoğrafı garantiler.
+  /// LoremFlickr, anahtar kelimeye göre gerçek Flickr yemek görseli döndürür.
+  static String _guaranteedFallback(String title, String category) {
+    final q = _buildQuery(title, category);
+    final tag = Uri.encodeComponent(q.replaceAll(' ', ','));
+    // Başlığa göre sabit seed → aynı tarif hep aynı görseli alır.
+    final seed = title.hashCode.abs() % 100000;
+    return 'https://loremflickr.com/400/300/$tag,food?lock=$seed';
+  }
+
   static Future<String?> fetchThumb(String title, String category) async {
     if (_cache.containsKey(title)) return _cache[title];
     // Otantik Türk yemekleri için önce Wikipedia (daha doğru), sonra TheMealDB
     String? url = await _fetchWikipedia(title);
     url ??= await _fetchMealDb(title, category);
+    // Hiçbiri bulamadıysa garanti fallback — kart asla ikonsuz/boş kalmasın.
+    url ??= _guaranteedFallback(title, category);
     _cache[title] = url;
     return url;
   }

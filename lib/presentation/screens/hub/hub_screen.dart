@@ -869,10 +869,12 @@ class _WeatherPill extends StatelessWidget {
 class _LocationRow extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final locationModel = HiveService.getLocation();
+    // Provider konumu GPS'ten çözüp Hive'a önbellekler; beklerken cache'i göster.
+    final resolved = ref.watch(currentLocationProvider).valueOrNull;
+    final locationModel = resolved ?? HiveService.getLocation();
     final city = locationModel != null && locationModel.city.isNotEmpty
         ? locationModel.city
-        : 'Konum ayarlanmadı';
+        : 'Konum alınıyor…';
     final country = locationModel?.country ?? '';
     return Row(
       children: [

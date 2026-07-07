@@ -13,6 +13,7 @@ import '../../repositories/family_members_repository.dart';
 import '../../services/auth_service.dart';
 import '../../services/weather_service.dart';
 import '../../services/location_weather_service.dart';
+import '../../services/location_service.dart';
 import '../../services/hive_service.dart';
 import '../../services/notification_service.dart';
 import '../../services/koca_seed.dart';
@@ -678,6 +679,30 @@ final weatherProvider = FutureProvider<WeatherData>((ref) async {
     city['lon'] as double,
     celsius: celsius,
   );
+});
+
+/// Mevcut konumu (şehir/ülke) çözer ve Hive'a önbellekler.
+/// Kayıtlı konum varsa onu döndürür; yoksa GPS'ten çekip kaydeder — böylece
+/// hub'daki konum satırı gerçek cihazda "Konum ayarlanmadı"da takılı kalmaz.
+final currentLocationProvider = FutureProvider<LocationModel?>((ref) async {
+  final cached = HiveService.getLocation();
+  if (cached != null && cached.city.isNotEmpty) return cached;
+
+  try {
+    final pos = await LocationService.getCurrentPosition();
+    if (pos == null) return cached;
+    final model = await LocationService.getAddressFromCoords(
+      pos.latitude,
+      pos.longitude,
+    );
+    if (model != null && model.city.isNotEmpty) {
+      await HiveService.saveLocation(model);
+      return model;
+    }
+  } catch (_) {
+    // Sessizce önbelleğe/varsayılana düş.
+  }
+  return cached;
 });
 
 // ── Theme & Appearance ──

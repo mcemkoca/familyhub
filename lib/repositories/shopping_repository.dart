@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:uuid/uuid.dart';
 
 import '../core/supabase_client.dart';
 import '../core/utils/repository_mixin.dart';
@@ -50,11 +51,35 @@ class ShoppingRepository with RepositoryErrorHandler {
     ShoppingCategory category = ShoppingCategory.grocery,
     int quantity = 1,
   }) async {
-    return handleRepositoryCall(() async {
-      final familyId = await _getFamilyId();
-      final userId = AuthService.currentUserId;
-      if (familyId == null) throw Exception('Aile bilgisi bulunamadı');
+    final userId = AuthService.currentUserId;
+    String? familyId;
+    try {
+      familyId = await _getFamilyId();
+    } catch (_) {
+      familyId = null;
+    }
 
+    // Aile/oturum yoksa ya da bulut yazma başarısızsa yerel (Hive) öğe üret —
+    // özellik çevrimdışı da çalışsın, kullanıcıya hata gösterme.
+    ShoppingItem localItem() => ShoppingItem(
+          id: 'local_${const Uuid().v4()}',
+          name: name,
+          quantity: quantity.toString(),
+          category: category,
+          requestedBy: userId ?? '',
+          isCompleted: false,
+        );
+
+    Future<ShoppingItem> saveLocal() async {
+      final item = localItem();
+      final all = HiveService.getShoppingItems();
+      await HiveService.saveShoppingItems([...all, item]);
+      return item;
+    }
+
+    if (familyId == null) return saveLocal();
+
+    try {
       final response = await _client
           .from('shopping_items')
           .insert({
@@ -68,15 +93,30 @@ class ShoppingRepository with RepositoryErrorHandler {
           .single();
 
       final created = _fromJson(response);
-      final all = await getItems();
+      final all = HiveService.getShoppingItems();
       await HiveService.saveShoppingItems([...all, created]);
       return created;
-    }, 'createItem');
+    } catch (e) {
+      debugPrint('createItem cloud failed, saving local: $e');
+      return saveLocal();
+    }
   }
 
   Future<void> toggleItem(String itemId, bool isCompleted) async {
+    final userId = AuthService.currentUserId;
+    // Yerel öğe — sadece Hive güncelle.
+    if (itemId.startsWith('local_')) {
+      final all = HiveService.getShoppingItems();
+      await HiveService.saveShoppingItems(all
+          .map((i) => i.id == itemId
+              ? i.copyWith(
+                  isCompleted: isCompleted,
+                  completedBy: isCompleted ? userId : null)
+              : i)
+          .toList());
+      return;
+    }
     return handleRepositoryCall(() async {
-      final userId = AuthService.currentUserId;
       await _client
           .from('shopping_items')
           .update({
@@ -102,6 +142,12 @@ class ShoppingRepository with RepositoryErrorHandler {
   }
 
   Future<void> deleteItem(String itemId) async {
+    if (itemId.startsWith('local_')) {
+      final all = HiveService.getShoppingItems();
+      await HiveService.saveShoppingItems(
+          all.where((i) => i.id != itemId).toList());
+      return;
+    }
     return handleRepositoryCall(() async {
       await _client.from('shopping_items').delete().eq('id', itemId);
       final all = await getItems();
