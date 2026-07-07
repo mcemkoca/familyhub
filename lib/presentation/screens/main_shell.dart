@@ -133,15 +133,16 @@ class _MainShellState extends State<MainShell> {
         child: Container(
           height: 84,
           decoration: BoxDecoration(
+            // Koyu cam efekti (rgba(10,12,28,0.72)) + ince neon mor kenar.
             color: isDark
-                ? const Color(0xFF13131A).withAlpha(240)
+                ? const Color(0xB80A0C1C)
                 : Colors.white.withAlpha(245),
             borderRadius: BorderRadius.circular(32),
             border: Border.all(
               color: isDark
-                  ? Colors.white.withAlpha(18)
+                  ? const Color(0xFF8B5CF6).withAlpha(60)
                   : Colors.white.withAlpha(200),
-              width: 0.5,
+              width: 1,
             ),
             boxShadow: [
               BoxShadow(
@@ -257,8 +258,28 @@ class _MainShellState extends State<MainShell> {
                   fontSize: isActive ? 12 : 11,
                   fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
                   color: isActive
-                      ? const Color(0xFF6366F1)
-                      : (const Color(0xFF6B7280)),
+                      ? const Color(0xFF6C63FF)
+                      : (const Color(0xFF8B8FA3)),
+                ),
+              ),
+              const SizedBox(height: 3),
+              // Aktif sekme altı neon gösterge çizgisi.
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 220),
+                curve: Curves.easeOut,
+                height: 3,
+                width: isActive ? 20 : 0,
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                      colors: [Color(0xFF4D8DFF), Color(0xFF8B5CF6)]),
+                  borderRadius: BorderRadius.circular(2),
+                  boxShadow: isActive
+                      ? [
+                          BoxShadow(
+                              color: const Color(0xFF6C63FF).withAlpha(120),
+                              blurRadius: 8),
+                        ]
+                      : null,
                 ),
               ),
             ],
@@ -283,17 +304,23 @@ class _MainShellState extends State<MainShell> {
               height: 68,
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
-                  colors: [Color(0xFF6366F1), Color(0xFF4F46E5)],
+                  colors: [Color(0xFF4D8DFF), Color(0xFF8B5CF6)],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
                 shape: BoxShape.circle,
+                border: Border.all(color: Colors.white.withAlpha(38), width: 1),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFF6366F1).withAlpha(80),
-                    blurRadius: 24,
+                    color: const Color(0xFF6C63FF).withAlpha(120),
+                    blurRadius: 28,
                     spreadRadius: 2,
                     offset: const Offset(0, 8),
+                  ),
+                  BoxShadow(
+                    color: const Color(0xFF4D8DFF).withAlpha(70),
+                    blurRadius: 14,
+                    offset: const Offset(0, 2),
                   ),
                 ],
               ),
@@ -302,9 +329,9 @@ class _MainShellState extends State<MainShell> {
                 duration: const Duration(milliseconds: 250),
                 curve: Curves.easeOutBack,
                 child: const Icon(
-                  Icons.add,
+                  Icons.add_rounded,
                   color: Colors.white,
-                  size: 32,
+                  size: 34,
                 ),
               ),
             ),
