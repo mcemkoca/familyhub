@@ -31,7 +31,11 @@ class _DailyBriefingCardState extends ConsumerState<DailyBriefingCard> {
     final ref = this.ref;
     final familyName = HiveService.getSetting('family_name') ?? 'Ailem';
     final members = ref.watch(familyMembersProvider);
-    final weather = ref.watch(weatherProvider).valueOrNull;
+    final weatherAsync = ref.watch(weatherProvider);
+    final weather = weatherAsync.valueOrNull;
+    // Hava durumu hâlâ yükleniyorsa brifingi üretmeyi beklet — böylece hava
+    // bilgisi (ör. Brüksel) brifinge dahil olur (yalnızca genişletilmişken önemli).
+    final weatherSettled = !weatherAsync.isLoading;
     final events = ref.watch(upcomingEventsProvider).valueOrNull ?? const [];
     final tasks = ref.watch(myTasksProvider).valueOrNull ?? const [];
 
@@ -103,11 +107,25 @@ class _DailyBriefingCardState extends ConsumerState<DailyBriefingCard> {
                 ],
               ),
             ),
-            if (!_expanded) const SizedBox.shrink() else ...[
+            if (!_expanded)
+              const SizedBox.shrink()
+            else if (!weatherSettled) ...[
+              const SizedBox(height: 12),
+              const Row(children: [
+                SizedBox(
+                    width: 16,
+                    height: 16,
+                    child: CircularProgressIndicator(
+                        strokeWidth: 2, color: Color(0xFF8B5CF6))),
+                SizedBox(width: 10),
+                Text('Bugünü senin için hazırlıyorum…',
+                    style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
+              ]),
+            ] else ...[
             const SizedBox(height: 12),
             FutureBuilder<List<Map<String, dynamic>>>(
               future: AiContentService.dailyList(
-                topic: 'daily_briefing',
+                topic: 'daily_briefing_v2',
                 prompt: '''
 Bir aile uygulaması için bugünün kişiselleştirilmiş sabah brifingini üret.
 Aile: $familyName (${members.length} üye).
