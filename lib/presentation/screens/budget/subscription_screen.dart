@@ -719,9 +719,17 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                 GestureDetector(
                   onTap: () {
                     final name = nameCtrl.text.trim();
-                    final amount =
-                        double.tryParse(amountCtrl.text) ?? 0;
-                    if (name.isEmpty || amount <= 0) return;
+                    final amount = double.tryParse(
+                            amountCtrl.text.trim().replaceAll(',', '.')) ??
+                        0;
+                    if (name.isEmpty || amount <= 0) {
+                      ScaffoldMessenger.of(ctx).showSnackBar(
+                        const SnackBar(
+                            content: Text(
+                                'Lütfen servis adı ve geçerli bir tutar girin')),
+                      );
+                      return;
+                    }
 
                     final nextBilling = DateFormat('dd.MM.yyyy').format(
                         DateTime.now().add(cycle == BillingCycle.monthly
@@ -848,10 +856,11 @@ class _SubCard extends StatelessWidget {
                   children: [
                     Text(sub.name,
                         style: TextStyle(
+                            fontSize: 15.5,
                             fontWeight: FontWeight.w800,
                             color: sub.active
-                                ? Colors.black87
-                                : Colors.grey)),
+                                ? Colors.white
+                                : const Color(0xFF9CA3AF))),
                     Row(
                       children: [
                         Container(
