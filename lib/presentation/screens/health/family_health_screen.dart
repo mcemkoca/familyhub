@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
+import '../../../services/notification_service.dart';
 
 // ── Hive models (lightweight, no codegen needed — stored as JSON strings) ──
 
@@ -372,6 +373,26 @@ class FamilyHealthNotifier extends StateNotifier<List<FamilyMemberHealth>> {
           appointments: [...m.appointments, appointment]);
     }).toList();
     await _persist();
+    await _scheduleAppointmentReminder(appointment);
+  }
+
+  /// Randevu gününde 09:00'da hatırlatma bildirimi kurar (dd.MM.yyyy).
+  Future<void> _scheduleAppointmentReminder(DoctorAppointment a) async {
+    try {
+      final d = DateFormat('dd.MM.yyyy').parseStrict(a.dateTime);
+      final when = DateTime(d.year, d.month, d.day, 9, 0);
+      if (when.isBefore(DateTime.now())) return;
+      await NotificationService.requestPermission();
+      await NotificationService.scheduleNotification(
+        id: a.id.hashCode & 0x7fffff,
+        title: '🩺 Doktor Randevusu',
+        body:
+            '${a.doctorName}${a.specialty.isNotEmpty ? ' · ${a.specialty}' : ''} bugün'
+            '${a.location.isNotEmpty ? ' · ${a.location}' : ''}',
+        scheduledDate: when,
+        payload: 'appointment:${a.id}',
+      );
+    } catch (_) {}
   }
 
   Future<void> completeAppointment(

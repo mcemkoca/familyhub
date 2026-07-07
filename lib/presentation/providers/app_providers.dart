@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../core/supabase_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,6 +14,7 @@ import '../../services/auth_service.dart';
 import '../../services/weather_service.dart';
 import '../../services/location_weather_service.dart';
 import '../../services/hive_service.dart';
+import '../../services/notification_service.dart';
 import '../../repositories/mood_repository.dart';
 import '../../repositories/activity_repository.dart';
 import '../../domain/models/hub_state.dart';
@@ -307,8 +309,37 @@ class CalendarNotifier extends StateNotifier<AsyncValue<List<CalendarEvent>>> {
       final created = await CalendarRepository().createEvent(event);
       final current = state.valueOrNull ?? [];
       state = AsyncValue.data([...current, created]);
+      unawaited(_scheduleEventReminders(created));
     } catch (e, st) {
       state = AsyncValue.error(e, st);
+    }
+  }
+
+  /// Etkinliğin hatırlatıcıları için gerçek yerel bildirim zamanlar.
+  /// reminders boşsa varsayılan olarak 30 dk önce hatırlatır.
+  Future<void> _scheduleEventReminders(CalendarEvent event) async {
+    try {
+      final now = DateTime.now();
+      if (event.start.isBefore(now)) return;
+      await NotificationService.requestPermission();
+      final mins = event.reminders.isNotEmpty ? event.reminders : const [30];
+      for (final m in mins) {
+        final when = event.start.subtract(Duration(minutes: m));
+        if (when.isBefore(now)) continue;
+        final base = event.id.hashCode & 0x7fffff;
+        await NotificationService.scheduleNotification(
+          id: (base + m) % 2147483647,
+          title: '📅 ${event.title}',
+          body: m == 0
+              ? 'Şimdi başlıyor'
+              : '$m dakika içinde başlıyor'
+                  '${event.location != null && event.location!.isNotEmpty ? ' · ${event.location}' : ''}',
+          scheduledDate: when,
+          payload: 'event:${event.id}',
+        );
+      }
+    } catch (_) {
+      // Bildirim kurulamazsa etkinlik yine de eklenmiş olur.
     }
   }
 
@@ -326,12 +357,30 @@ class CalendarNotifier extends StateNotifier<AsyncValue<List<CalendarEvent>>> {
 
   Future<void> deleteEvent(String id) async {
     try {
-      await CalendarRepository().deleteEvent(id);
       final current = state.valueOrNull ?? [];
+      CalendarEvent? removed;
+      for (final e in current) {
+        if (e.id == id) {
+          removed = e;
+          break;
+        }
+      }
+      await CalendarRepository().deleteEvent(id);
       state = AsyncValue.data(current.where((e) => e.id != id).toList());
+      if (removed != null) unawaited(_cancelEventReminders(removed));
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }
+  }
+
+  Future<void> _cancelEventReminders(CalendarEvent event) async {
+    try {
+      final mins = event.reminders.isNotEmpty ? event.reminders : const [30];
+      final base = event.id.hashCode & 0x7fffff;
+      for (final m in mins) {
+        await NotificationService.cancelNotification((base + m) % 2147483647);
+      }
+    } catch (_) {}
   }
 }
 
