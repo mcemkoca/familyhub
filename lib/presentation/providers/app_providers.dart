@@ -15,6 +15,7 @@ import '../../services/weather_service.dart';
 import '../../services/location_weather_service.dart';
 import '../../services/hive_service.dart';
 import '../../services/notification_service.dart';
+import '../../services/koca_seed.dart';
 import '../../repositories/mood_repository.dart';
 import '../../repositories/activity_repository.dart';
 import '../../domain/models/hub_state.dart';
@@ -155,8 +156,44 @@ final _familyMembersStreamProvider = StreamProvider<List<FamilyMember>>((ref) {
 
 final familyMembersProvider = StateProvider<List<FamilyMember>>((ref) {
   final asyncValue = ref.watch(_familyMembersStreamProvider);
-  return asyncValue.valueOrNull ?? [];
+  final remote = asyncValue.valueOrNull ?? [];
+  // Supabase erişilemez/boşsa (ör. RLS/çevrimdışı) yerel aile üyelerine düş —
+  // böylece üyeler tüm bölümlerde tutarlı görünür ve kullanılabilir.
+  if (remote.isNotEmpty) return remote;
+  return localFamilyMembers();
 });
+
+/// Yerel (Hive) aile üyelerini FamilyMember listesine çevirir.
+/// Aile Yönetimi ekranından düzenlenir; Supabase boşken tüm bölümler bunu
+/// kullanır (harita, sağlık, konum, davet vb.).
+List<FamilyMember> localFamilyMembers() {
+  const palette = [
+    Color(0xFF3B82F6), Color(0xFFEC4899), Color(0xFF10B981),
+    Color(0xFFF97316), Color(0xFF8B5CF6), Color(0xFF14B8A6),
+  ];
+  final raw = KocaSeed.localMembers();
+  return List.generate(raw.length, (i) {
+    final m = raw[i];
+    final name = (m['name'] ?? '').toString();
+    final roleStr = (m['role'] ?? '').toString().toLowerCase();
+    MemberRole role;
+    if (roleStr.contains('çocuk') || roleStr.contains('cocuk')) {
+      role = MemberRole.child;
+    } else if (roleStr.contains('bebek')) {
+      role = MemberRole.baby;
+    } else {
+      role = MemberRole.parent;
+    }
+    return FamilyMember(
+      id: 'local_$i',
+      name: name,
+      initial: name.isNotEmpty ? name.substring(0, 1).toUpperCase() : '?',
+      color: palette[i % palette.length],
+      role: role,
+      isOnline: m['online'] == true,
+    );
+  });
+}
 
 /// Current authenticated user's role in the family.
 /// Falls back to [MemberRole.parent] if not found (e.g. during loading).

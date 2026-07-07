@@ -111,22 +111,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 icon: Icons.palette_outlined,
                 children: [
                   SettingsItem(
-                    icon: Icons.family_restroom,
-                    iconColor: const Color(0xFF6366F1),
-                    label: 'Family Mode',
-                    description: 'Aileye özel tek tema — her zaman aktif',
-                    showValue: 'Aktif',
-                    onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                              'FamilyHub tek bir aile temasıyla çalışır. Rengi ve yazı boyutunu aşağıdan kişiselleştirebilirsin.'),
-                          behavior: SnackBarBehavior.floating,
-                        ),
-                      );
-                    },
-                  ),
-                  SettingsItem(
                     icon: Icons.color_lens_outlined,
                     iconColor: const Color(0xFFEC4899),
                     label: 'Aksan Rengi',
@@ -161,43 +145,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 icon: Icons.notifications_outlined,
                 children: [
                   SettingsItem(
-                    icon: Icons.calendar_today,
+                    icon: Icons.notifications_active_outlined,
                     iconColor: const Color(0xFF6366F1),
-                    label: 'Etkinlik Hatırlatmaları',
-                    description: 'Yaklaşan etkinlikler için bildirimler',
-                    showValue: HiveService.getSetting('notifyEvents') ?? 'Açık',
-                    onTap: () => context.push(AppRoutes.notificationSettings),
-                  ),
-                  SettingsItem(
-                    icon: Icons.check_circle_outline,
-                    iconColor: const Color(0xFF10B981),
-                    label: 'Görev Bildirimleri',
-                    description: 'Atanan ve yaklaşan görevler',
-                    showValue: HiveService.getSetting('notifyTasks') ?? 'Açık',
-                    onTap: () => context.push(AppRoutes.notificationSettings),
-                  ),
-                  SettingsItem(
-                    icon: Icons.warning_amber_rounded,
-                    iconColor: const Color(0xFFEF4444),
-                    label: 'Acil Durum Uyarıları',
-                    description: 'Panik butonu ve güvenlik bildirimleri',
-                    showValue: HiveService.getSetting('notifyEmergency') ?? 'Yüksek Öncelik',
-                    onTap: () => context.push(AppRoutes.notificationSettings),
-                  ),
-                  SettingsItem(
-                    icon: Icons.chat_bubble_outline,
-                    iconColor: const Color(0xFF8B5CF6),
-                    label: 'Sohbet Bildirimleri',
-                    description: 'Mesajlar, duyurular ve etiketlemeler',
-                    showValue: HiveService.getSetting('notifyChat') ?? 'Açık',
-                    onTap: () => context.push(AppRoutes.notificationSettings),
-                  ),
-                  SettingsItem(
-                    icon: Icons.location_on_outlined,
-                    iconColor: const Color(0xFFF59E0B),
-                    label: 'Konum Bildirimleri',
-                    description: 'Güvenli bölge giriş/çıkış uyarıları',
-                    showValue: HiveService.getSetting('notifyLocation') ?? 'Açık',
+                    label: 'Bildirim Ayarları',
+                    description:
+                        'Etkinlik, görev, acil durum, sohbet ve konum bildirimleri',
                     onTap: () => context.push(AppRoutes.notificationSettings),
                     isLast: true,
                   ),
@@ -350,21 +302,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   SettingsItem(
                     icon: Icons.backup_outlined,
                     iconColor: const Color(0xFF6366F1),
-                    label: 'Yedekleme',
-                    description: 'Verilerinizi buluta yedekleyin',
+                    label: 'Yedekleme ve Geri Yükleme',
+                    description: 'Verilerinizi buluta yedekleyin veya kurtarın',
                     showValueWidget: FutureBuilder<String>(
                       future: _getLastBackupTime(),
                       builder: (context, snapshot) {
                         return Text(snapshot.data ?? '...');
                       },
                     ),
-                    onTap: () => context.push(AppRoutes.backupSettings),
-                  ),
-                  SettingsItem(
-                    icon: Icons.restore,
-                    iconColor: const Color(0xFF10B981),
-                    label: 'Geri Yükle',
-                    description: 'Önceki yedekten veri kurtar',
                     onTap: () => context.push(AppRoutes.backupSettings),
                   ),
                   SettingsItem(

@@ -8,6 +8,7 @@ import '../../../config/routes.dart';
 import '../../../core/supabase_client.dart';
 import '../../../domain/entities.dart';
 import '../../../services/auth_service.dart';
+import '../../providers/app_providers.dart' show localFamilyMembers;
 
 import '../../widgets/settings/screen_header.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
@@ -38,7 +39,10 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
       final client = SupabaseConfig.safeClient;
       final userId = AuthService.currentUserId;
       if (client == null || userId == null) {
-        setState(() => _isLoading = false);
+        setState(() {
+          _members = localFamilyMembers();
+          _isLoading = false;
+        });
         return;
       }
 
@@ -52,7 +56,10 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
       _familyId = familyId;
 
       if (familyId == null) {
-        setState(() => _isLoading = false);
+        setState(() {
+          _members = localFamilyMembers();
+          _isLoading = false;
+        });
         return;
       }
 
@@ -126,13 +133,18 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
         );
       }).toList();
 
+      final combined = [...adults, ...children];
       setState(() {
-        _members = [...adults, ...children];
+        // Supabase boş dönerse (RLS/çevrimdışı) yerel aile üyelerine düş.
+        _members = combined.isEmpty ? localFamilyMembers() : combined;
         _isLoading = false;
       });
     } catch (e) {
       debugPrint('FamilyManageScreen error: $e');
-      setState(() => _isLoading = false);
+      setState(() {
+        _members = localFamilyMembers();
+        _isLoading = false;
+      });
     }
   }
 
