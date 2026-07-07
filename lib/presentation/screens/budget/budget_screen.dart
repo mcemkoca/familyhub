@@ -424,6 +424,9 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
             _AIStatRow('Toplam Gider', totalExpense, AppColors.error),
             _AIStatRow('Net Bakiye', totalIncome - totalExpense, const Color(0xFF6366F1)),
             const SizedBox(height: 8),
+            _AIStatRow('Ay Sonu Gider Tahmini', _projectMonthEndExpense(expenseTxs),
+                const Color(0xFFF59E0B)),
+            const SizedBox(height: 8),
             _AIStatRow('En Yüksek Kategori', null, const Color(0xFF8B5CF6),
                 textValue: '$topCategory (${NumberFormat.currency(symbol: '€', decimalDigits: 0).format(topAmount)})'),
             const Divider(height: 32),
@@ -489,6 +492,18 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
         ),
       ),
     );
+  }
+
+  /// Bu ayki harcama hızından ay sonu toplam gider tahminini hesaplar.
+  double _projectMonthEndExpense(List<Transaction> expenseTxs) {
+    final now = DateTime.now();
+    final monthExpense = expenseTxs
+        .where((t) => t.createdAt.year == now.year && t.createdAt.month == now.month)
+        .fold<double>(0, (s, t) => s + t.amount);
+    final daysInMonth = DateTime(now.year, now.month + 1, 0).day;
+    final dayOfMonth = now.day;
+    if (dayOfMonth == 0 || monthExpense == 0) return monthExpense;
+    return (monthExpense / dayOfMonth) * daysInMonth;
   }
 
   /// Gemini'den kişiselleştirilmiş bütçe önerileri çeker. Başarısız olursa
