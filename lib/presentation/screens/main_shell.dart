@@ -31,23 +31,22 @@ class _MainShellState extends State<MainShell> {
     },
     {
       'route': AppRoutes.chat,
-      'icon': Icons.chat_bubble_outline,
+      'icon': Icons.forum_rounded,
       'label': 'Sohbet',
-      'badge': 3,
     },
     {
       'route': AppRoutes.kitchen,
-      'icon': Icons.restaurant,
+      'icon': Icons.ramen_dining_rounded,
       'label': 'Mutfak',
     },
     {
       'route': AppRoutes.education,
-      'icon': Icons.school_outlined,
+      'icon': Icons.school_rounded,
       'label': 'Eğitim',
     },
     {
       'route': AppRoutes.settings,
-      'icon': Icons.settings_outlined,
+      'icon': Icons.settings_rounded,
       'label': 'Ayarlar',
     },
   ];

@@ -68,18 +68,18 @@ class _HubScreenState extends ConsumerState<HubScreen>
 
 
   static final _features = <_Feature>[
-    const _Feature(Icons.shopping_cart_outlined,   'Alışveriş',   [Color(0xFF10B981), Color(0xFF059669)], Color(0xFF064E3B), AppRoutes.shopping),
-    const _Feature(Icons.restaurant_outlined,      'Mutfak',      [Color(0xFFF59E0B), Color(0xFFD97706)], Color(0xFF78350F), AppRoutes.kitchen),
-    const _Feature(Icons.child_care_outlined,      'Çocuk',       [Color(0xFF06B6D4), Color(0xFF0891B2)], Color(0xFF164E63), AppRoutes.childManagement),
-    const _Feature(Icons.eco_outlined,             'Gelişim',     [Color(0xFFF43F5E), Color(0xFFE11D48)], Color(0xFF881337), AppRoutes.childDevelopment),
-    const _Feature(Icons.monitor_heart_outlined,   'Sağlık',      [Color(0xFF14B8A6), Color(0xFF0D9488)], Color(0xFF134E4A), AppRoutes.familyHealth),
-    const _Feature(Icons.map_outlined,             'Konum',       [Color(0xFF3B82F6), Color(0xFF2563EB)], Color(0xFF1E3A8A), AppRoutes.familyMap),
-    const _Feature(Icons.emergency_outlined,       'Acil',        [Color(0xFFEF4444), Color(0xFFDC2626)], Color(0xFF7F1D1D), AppRoutes.emergency),
-    const _Feature(Icons.account_balance_wallet_outlined, 'Bütçe',[Color(0xFFA855F7), Color(0xFF9333EA)], Color(0xFF581C87), AppRoutes.budget),
-    const _Feature(Icons.receipt_long_outlined,   'Ev Giderleri',  [Color(0xFF6366F1), Color(0xFF4F46E5)], Color(0xFF312E81), AppRoutes.subscriptions),
-    const _Feature(Icons.photo_library_outlined,   'Galeri',      [Color(0xFFEC4899), Color(0xFFDB2777)], Color(0xFF831843), AppRoutes.gallery),
-    const _Feature(Icons.menu_book_outlined,       'Eğitim',      [Color(0xFF8B5CF6), Color(0xFF7C3AED)], Color(0xFF4C1D95), AppRoutes.education),
-    const _Feature(Icons.psychology_outlined,      'AI',          [Color(0xFF4776E6), Color(0xFF2D3A8C)], Color(0xFF1E1B4B), AppRoutes.aiAssistant),
+    const _Feature(Icons.shopping_bag_rounded,     'Alışveriş',   [Color(0xFF10B981), Color(0xFF059669)], Color(0xFF064E3B), AppRoutes.shopping),
+    const _Feature(Icons.ramen_dining_rounded,     'Mutfak',      [Color(0xFFF59E0B), Color(0xFFD97706)], Color(0xFF78350F), AppRoutes.kitchen),
+    const _Feature(Icons.child_care_rounded,       'Çocuk',       [Color(0xFF06B6D4), Color(0xFF0891B2)], Color(0xFF164E63), AppRoutes.childManagement),
+    const _Feature(Icons.emoji_nature_rounded,     'Gelişim',     [Color(0xFFF43F5E), Color(0xFFE11D48)], Color(0xFF881337), AppRoutes.childDevelopment),
+    const _Feature(Icons.favorite_rounded,         'Sağlık',      [Color(0xFF14B8A6), Color(0xFF0D9488)], Color(0xFF134E4A), AppRoutes.familyHealth),
+    const _Feature(Icons.location_on_rounded,      'Konum',       [Color(0xFF3B82F6), Color(0xFF2563EB)], Color(0xFF1E3A8A), AppRoutes.familyMap),
+    const _Feature(Icons.emergency_rounded,        'Acil',        [Color(0xFFEF4444), Color(0xFFDC2626)], Color(0xFF7F1D1D), AppRoutes.emergency),
+    const _Feature(Icons.savings_rounded,          'Bütçe',       [Color(0xFFA855F7), Color(0xFF9333EA)], Color(0xFF581C87), AppRoutes.budget),
+    const _Feature(Icons.receipt_long_rounded,     'Ev Giderleri',[Color(0xFF6366F1), Color(0xFF4F46E5)], Color(0xFF312E81), AppRoutes.subscriptions),
+    const _Feature(Icons.collections_rounded,      'Galeri',      [Color(0xFFEC4899), Color(0xFFDB2777)], Color(0xFF831843), AppRoutes.gallery),
+    const _Feature(Icons.school_rounded,           'Eğitim',      [Color(0xFF8B5CF6), Color(0xFF7C3AED)], Color(0xFF4C1D95), AppRoutes.education),
+    const _Feature(Icons.auto_awesome_rounded,     'AI',          [Color(0xFF4776E6), Color(0xFF2D3A8C)], Color(0xFF1E1B4B), AppRoutes.aiAssistant),
   ];
 
   @override

@@ -22,6 +22,7 @@ import '../presentation/screens/location_tracking/location_tracking_screens.dart
 import '../presentation/screens/emergency/emergency_screens.dart';
 import '../presentation/screens/budget/budget_screen.dart';
 import '../presentation/screens/family/family_screen.dart';
+import '../presentation/screens/family/family_detail_screen.dart';
 import '../presentation/screens/call/call_contact_list_screen.dart';
 import '../presentation/screens/chat/chat_screen.dart';
 import '../presentation/screens/chat/mood_screen.dart';
@@ -246,6 +247,7 @@ final router = GoRouter(
     GoRoute(path: AppRoutes.growth, builder: (context, state) => const GrowthScreen()),
     GoRoute(path: AppRoutes.premium, builder: (context, state) => const PremiumScreen()),
     GoRoute(path: AppRoutes.familyManage, builder: (context, state) => const FamilyManageScreen()),
+    GoRoute(path: AppRoutes.familyDetail, builder: (context, state) => FamilyDetailScreen(familyId: state.extra as String?)),
     GoRoute(path: AppRoutes.profileEdit, builder: (context, state) => const ProfileEditScreen()),
     GoRoute(path: AppRoutes.notificationSettings, builder: (context, state) => const NotificationSettingsScreen()),
     GoRoute(path: AppRoutes.privacySettings, builder: (context, state) => const PrivacySettingsScreen()),
