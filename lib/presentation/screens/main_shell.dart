@@ -127,53 +127,74 @@ class _MainShellState extends State<MainShell> {
       bottomNavigationBar: Container(
         padding: EdgeInsets.only(
           bottom: safeBottom > 0 ? 8 : 12,
-          left: 16,
-          right: 16,
+          left: 14,
+          right: 14,
         ),
-        child: Container(
-          height: 84,
-          decoration: BoxDecoration(
-            // Koyu cam efekti (rgba(10,12,28,0.72)) + ince neon mor kenar.
-            color: isDark
-                ? const Color(0xB80A0C1C)
-                : Colors.white.withAlpha(245),
-            borderRadius: BorderRadius.circular(32),
-            border: Border.all(
-              color: isDark
-                  ? const Color(0xFF8B5CF6).withAlpha(60)
-                  : Colors.white.withAlpha(200),
-              width: 1,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: const Color(0xFF6366F1).withAlpha(25),
-                blurRadius: 24,
-                offset: const Offset(0, 8),
+        child: SizedBox(
+          height: 88,
+          child: Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.bottomCenter,
+            children: [
+              // İki cam pill yarısı + ortada FAB için boşluk.
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: Row(
+                  children: [
+                    Expanded(child: _pill([0, 1])),
+                    const SizedBox(width: 84), // FAB çentiği
+                    Expanded(child: _pill([2, 3, 4])),
+                  ],
+                ),
               ),
-              BoxShadow(
-                color: Colors.black.withAlpha(60),
-                blurRadius: 20,
-                offset: const Offset(0, 4),
+              // Yükseltilmiş merkez FAB.
+              Positioned(
+                bottom: 16,
+                child: _buildFab(),
               ),
             ],
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(32),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _buildNavItem(0),
-                  _buildNavItem(1),
-                  _buildFabSlot(),
-                  _buildNavItem(2),
-                  _buildNavItem(3),
-                  _buildNavItem(4),
-                ],
-              ),
-            ),
+        ),
+      ),
+    );
+  }
+
+  /// Tek bir cam pill yarısı — verilen sekme indeksleriyle.
+  Widget _pill(List<int> indices) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return Container(
+      height: 72,
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xB80A0C1C) : Colors.white.withAlpha(245),
+        borderRadius: BorderRadius.circular(28),
+        border: Border.all(
+          color: isDark
+              ? const Color(0xFF8B5CF6).withAlpha(55)
+              : Colors.white.withAlpha(200),
+          width: 1,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF6366F1).withAlpha(22),
+            blurRadius: 22,
+            offset: const Offset(0, 8),
+          ),
+          BoxShadow(
+            color: Colors.black.withAlpha(55),
+            blurRadius: 18,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(28),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [for (final i in indices) _buildNavItem(i)],
           ),
         ),
       ),
@@ -289,52 +310,43 @@ class _MainShellState extends State<MainShell> {
     );
   }
 
-  Widget _buildFabSlot() {
-    return Expanded(
-      child: Transform.translate(
-        offset: const Offset(0, -16),
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: _toggleMenu,
-          child: Container(
-            height: double.infinity,
-            alignment: Alignment.topCenter,
-            child: Container(
-              width: 68,
-              height: 68,
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF4D8DFF), Color(0xFF8B5CF6)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.white.withAlpha(38), width: 1),
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color(0xFF6C63FF).withAlpha(120),
-                    blurRadius: 28,
-                    spreadRadius: 2,
-                    offset: const Offset(0, 8),
-                  ),
-                  BoxShadow(
-                    color: const Color(0xFF4D8DFF).withAlpha(70),
-                    blurRadius: 14,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: AnimatedRotation(
-                turns: _menuOpen ? 0.125 : 0,
-                duration: const Duration(milliseconds: 250),
-                curve: Curves.easeOutBack,
-                child: const Icon(
-                  Icons.add_rounded,
-                  color: Colors.white,
-                  size: 34,
-                ),
-              ),
+  Widget _buildFab() {
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: _toggleMenu,
+      child: Container(
+        width: 66,
+        height: 66,
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [Color(0xFF4D8DFF), Color(0xFF8B5CF6)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          shape: BoxShape.circle,
+          border: Border.all(color: Colors.white.withAlpha(45), width: 1.5),
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xFF6C63FF).withAlpha(130),
+              blurRadius: 30,
+              spreadRadius: 2,
+              offset: const Offset(0, 8),
             ),
+            BoxShadow(
+              color: const Color(0xFF4D8DFF).withAlpha(80),
+              blurRadius: 16,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: AnimatedRotation(
+          turns: _menuOpen ? 0.125 : 0,
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.easeOutBack,
+          child: const Icon(
+            Icons.add_rounded,
+            color: Colors.white,
+            size: 34,
           ),
         ),
       ),
