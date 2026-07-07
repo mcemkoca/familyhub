@@ -900,19 +900,22 @@ class _AttachmentMenu extends StatelessWidget {
                           icon: Icons.event,
                           color: const Color(0xFFF59E0B),
                           label: 'Etkinlik',
-                          onTap: () {},
+                          onTap: () => context.push(AppRoutes.calendar),
                         ),
                         _AttachmentItem(
                           icon: Icons.poll,
                           color: const Color(0xFF6366F1),
                           label: 'Anket',
-                          onTap: () {},
+                          onTap: () => ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                                  content: Text(
+                                      'Anket özelliği hazırlanıyor'))),
                         ),
                         _AttachmentItem(
                           icon: Icons.contact_page,
                           color: const Color(0xFFEC4899),
                           label: 'Kişi',
-                          onTap: () {},
+                          onTap: () => context.push(AppRoutes.family),
                         ),
                         _AttachmentItem(
                           icon: Icons.gif_box_outlined,
