@@ -43,11 +43,9 @@ class _CategoryBudgetSection extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                       color: Colors.white),
                 ),
-                TextButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.edit, size: 16),
-                  label: const Text('Düzenle', style: TextStyle(fontSize: 12)),
-                ),
+                Text('Düzenlemek için dokun',
+                    style: TextStyle(
+                        fontSize: 11.5, color: Colors.white.withAlpha(120))),
               ],
             ),
             const SizedBox(height: 12),
