@@ -49,7 +49,7 @@ class _CocukSaglikScreenState extends ConsumerState<CocukSaglikScreen> {
                       Expanded(
                           child: _statCard(
                               'Boy',
-                              '${g.height.round()} cm',
+                              g.height > 0 ? '${g.height.round()} cm' : '— ekle',
                               Icons.straighten,
                               const Color(0xFF22C55E),
                               () => _editGrowth(childId, g))),
@@ -57,7 +57,9 @@ class _CocukSaglikScreenState extends ConsumerState<CocukSaglikScreen> {
                       Expanded(
                           child: _statCard(
                               'Kilo',
-                              '${g.weight.toStringAsFixed(1)} kg',
+                              g.weight > 0
+                                  ? '${g.weight.toStringAsFixed(1)} kg'
+                                  : '— ekle',
                               Icons.monitor_weight,
                               const Color(0xFFF59E0B),
                               () => _editGrowth(childId, g))),
@@ -102,7 +104,8 @@ class _CocukSaglikScreenState extends ConsumerState<CocukSaglikScreen> {
 
   Future<void> _editGrowth(
       String childId, ({double height, double weight}) g) async {
-    double h = g.height, w = g.weight;
+    // Boşsa düzenlemeye makul bir başlangıçtan başla.
+    double h = g.height > 0 ? g.height : 100, w = g.weight > 0 ? g.weight : 16;
     await showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,

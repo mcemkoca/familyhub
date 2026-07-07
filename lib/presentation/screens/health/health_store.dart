@@ -74,8 +74,9 @@ class HealthStore {
 
   // ── Çocuk büyüme (boy/kilo) ──────────────────────────────────────────────
   static ({double height, double weight}) childGrowth(String childId) {
-    final h = HiveService.getDoubleSetting('health_h_$childId') ?? 102;
-    final w = HiveService.getDoubleSetting('health_w_$childId') ?? 16.2;
+    // Girilmediyse 0 (boş ama çalışır) — ekranlar "— ekle" gösterir.
+    final h = HiveService.getDoubleSetting('health_h_$childId') ?? 0;
+    final w = HiveService.getDoubleSetting('health_w_$childId') ?? 0;
     return (height: h, weight: w);
   }
 
