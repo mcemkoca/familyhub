@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../config/routes.dart';
 import '../../presentation/providers/insights_provider.dart';
 
 /// Hub'da gerçek verilerden üretilen akıllı uyarılar/öneriler.
@@ -26,16 +27,31 @@ class SmartInsightsCard extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(
+            Row(
               children: [
-                Icon(Icons.insights_rounded,
+                const Icon(Icons.insights_rounded,
                     size: 18, color: Color(0xFF8B5CF6)),
-                SizedBox(width: 8),
-                Text('Akıllı Uyarılar',
+                const SizedBox(width: 8),
+                const Text('Akıllı Uyarılar',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 15,
                         fontWeight: FontWeight.w800)),
+                const Spacer(),
+                GestureDetector(
+                  onTap: () => context.push(AppRoutes.familyReport),
+                  child: const Row(
+                    children: [
+                      Text('Aile Karnesi',
+                          style: TextStyle(
+                              color: Color(0xFF8B5CF6),
+                              fontSize: 12.5,
+                              fontWeight: FontWeight.w700)),
+                      Icon(Icons.chevron_right_rounded,
+                          color: Color(0xFF8B5CF6), size: 18),
+                    ],
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 10),
