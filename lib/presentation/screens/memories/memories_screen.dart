@@ -25,13 +25,17 @@ class MemoriesScreen extends StatelessWidget {
           const SizedBox(height: 24),
           Text('Albümler', style: Theme.of(context).textTheme.displaySmall),
           const SizedBox(height: 12),
-          const _AlbumCard(name: 'Aile Tatili 2025', count: 24),
-          const _AlbumCard(name: 'Mirac\'ın Doğum Günü', count: 18),
+          const _EmptyCard(
+              icon: Icons.photo_album_outlined,
+              text: 'Henüz albüm yok. "Albümler"den yeni bir albüm '
+                  'oluşturabilirsiniz.'),
           const SizedBox(height: 24),
           Text('Son Anılar', style: Theme.of(context).textTheme.displaySmall),
           const SizedBox(height: 12),
-          const _MemoryCard(title: 'İlk Adım', date: '12 Mart 2024', excerpt: 'Mirac bugün ilk adımını attı...'),
-          const _MemoryCard(title: 'Yılbaşı 2026', date: '1 Ocak 2026', excerpt: 'Tüm aile bir aradaydık...'),
+          const _EmptyCard(
+              icon: Icons.auto_stories_outlined,
+              text: 'Henüz anı yazılmadı. "Anı Yaz" ile ilk anınızı '
+                  'ekleyebilirsiniz.'),
         ],
       ),
     );
@@ -61,10 +65,10 @@ class _ActionChip extends StatelessWidget {
   }
 }
 
-class _AlbumCard extends StatelessWidget {
-  final String name;
-  final int count;
-  const _AlbumCard({required this.name, required this.count});
+class _EmptyCard extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  const _EmptyCard({required this.icon, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -74,38 +78,11 @@ class _AlbumCard extends StatelessWidget {
       decoration: BoxDecoration(color: const Color(0xFF13131A), borderRadius: BorderRadius.circular(16), border: Border.all(color: const Color(0x1EFFFFFF))),
       child: Row(
         children: [
-          Container(width: 56, height: 56, decoration: BoxDecoration(color: const Color(0xFF0A0A0F), borderRadius: BorderRadius.circular(12)), child: const Icon(Icons.image, color: Color(0xFF9CA3AF))),
-          const SizedBox(width: 16),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [Text(name, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600)), Text('$count fotoğraf', style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)))],
+          Icon(icon, color: const Color(0xFF6B7280), size: 22),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(text, style: const TextStyle(fontSize: 13.5, color: Color(0xFF9CA3AF))),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class _MemoryCard extends StatelessWidget {
-  final String title;
-  final String date;
-  final String excerpt;
-  const _MemoryCard({required this.title, required this.date, required this.excerpt});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(color: const Color(0xFF13131A), borderRadius: BorderRadius.circular(16), border: Border.all(color: const Color(0x1EFFFFFF))),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-          const SizedBox(height: 4),
-          Text(date, style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
-          const SizedBox(height: 8),
-          Text(excerpt, style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
         ],
       ),
     );
