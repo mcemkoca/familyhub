@@ -41,4 +41,50 @@ class KocaSeed {
       return members;
     }
   }
+
+  /// Yerel üye listesini tümüyle günceller (Hive'a yazar).
+  static Future<void> setMembers(List<Map<String, dynamic>> list) =>
+      HiveService.setSetting('koca_members', jsonEncode(list));
+
+  /// Yeni bir üye ekler (ad/rol/yaş). Aile Yönetimi'nden ebeveyn/çocuk girişi.
+  static Future<void> addMember({
+    required String name,
+    required String role,
+    int? age,
+    bool online = false,
+  }) async {
+    final list = List<Map<String, dynamic>>.from(localMembers());
+    list.add({
+      'name': name,
+      'role': role,
+      'age': ?age,
+      'online': online,
+    });
+    await setMembers(list);
+  }
+
+  /// [index] konumundaki üyeyi günceller.
+  static Future<void> updateMemberAt(
+    int index, {
+    String? name,
+    String? role,
+    int? age,
+  }) async {
+    final list = List<Map<String, dynamic>>.from(localMembers());
+    if (index < 0 || index >= list.length) return;
+    final m = Map<String, dynamic>.from(list[index]);
+    if (name != null) m['name'] = name;
+    if (role != null) m['role'] = role;
+    if (age != null) m['age'] = age;
+    list[index] = m;
+    await setMembers(list);
+  }
+
+  /// [index] konumundaki üyeyi siler.
+  static Future<void> removeMemberAt(int index) async {
+    final list = List<Map<String, dynamic>>.from(localMembers());
+    if (index < 0 || index >= list.length) return;
+    list.removeAt(index);
+    await setMembers(list);
+  }
 }

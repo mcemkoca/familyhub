@@ -8,7 +8,9 @@ import '../../../config/routes.dart';
 import '../../../core/supabase_client.dart';
 import '../../../domain/entities.dart';
 import '../../../services/auth_service.dart';
-import '../../providers/app_providers.dart' show localFamilyMembers;
+import '../../../services/koca_seed.dart';
+import '../../providers/app_providers.dart'
+    show familyMembersProvider, localFamilyMembers;
 
 import '../../widgets/settings/screen_header.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
@@ -157,6 +159,208 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
     );
     return me.role == MemberRole.admin || me.role == MemberRole.parent;
   }
+
+  static bool _isLocalMember(FamilyMember m) => m.id.startsWith('local_');
+
+  static int? _localIndexOf(FamilyMember m) =>
+      _isLocalMember(m) ? int.tryParse(m.id.substring(6)) : null;
+
+  static const _roleOptions = <(String, MemberRole)>[
+    ('Ebeveyn', MemberRole.parent),
+    ('Büyük', MemberRole.elder),
+    ('Genç', MemberRole.teen),
+    ('Çocuk', MemberRole.child),
+  ];
+
+  String _roleStringFor(MemberRole role) {
+    return switch (role) {
+      MemberRole.child => 'Çocuk',
+      MemberRole.teen => 'Genç',
+      MemberRole.elder => 'Büyük',
+      MemberRole.baby => 'Bebek',
+      _ => 'Ebeveyn',
+    };
+  }
+
+  Future<void> _showMemberForm({FamilyMember? existing}) async {
+    final nameCtrl = TextEditingController(text: existing?.name ?? '');
+    final ageCtrl = TextEditingController();
+    MemberRole role = existing?.role ?? MemberRole.parent;
+
+    final saved = await showModalBottomSheet<bool>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setSheet) => Padding(
+          padding: EdgeInsets.only(bottom: MediaQuery.of(ctx).viewInsets.bottom),
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Color(0xFF13131A),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+            ),
+            padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Center(
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                        color: Colors.white.withAlpha(40),
+                        borderRadius: BorderRadius.circular(2)),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(existing == null ? 'Üye Ekle' : 'Üyeyi Düzenle',
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w800)),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: nameCtrl,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: _fieldDeco('Ad Soyad', 'Örn: Ayşe Koca'),
+                ),
+                const SizedBox(height: 12),
+                const Text('Rol',
+                    style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
+                const SizedBox(height: 8),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: _roleOptions.map((r) {
+                    final sel = role == r.$2;
+                    return GestureDetector(
+                      onTap: () => setSheet(() => role = r.$2),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 14, vertical: 9),
+                        decoration: BoxDecoration(
+                          color: sel
+                              ? const Color(0xFF6366F1)
+                              : const Color(0xFF1A1A24),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                              color: sel
+                                  ? const Color(0xFF6366F1)
+                                  : const Color(0xFF262631)),
+                        ),
+                        child: Text(r.$1,
+                            style: TextStyle(
+                                color: sel
+                                    ? Colors.white
+                                    : const Color(0xFFD1D5DB),
+                                fontWeight: FontWeight.w600)),
+                      ),
+                    );
+                  }).toList(),
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: ageCtrl,
+                  keyboardType: TextInputType.number,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: _fieldDeco('Yaş (opsiyonel)', 'Örn: 38'),
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  height: 52,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (nameCtrl.text.trim().isEmpty) {
+                        ScaffoldMessenger.of(ctx).showSnackBar(
+                          const SnackBar(content: Text('Lütfen ad girin')),
+                        );
+                        return;
+                      }
+                      Navigator.pop(ctx, true);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF6366F1),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14)),
+                    ),
+                    child: const Text('Kaydet',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700)),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+    if (saved != true) return;
+    final name = nameCtrl.text.trim();
+    final age = int.tryParse(ageCtrl.text.trim());
+    final roleStr = _roleStringFor(role);
+
+    if (existing == null) {
+      await KocaSeed.addMember(name: name, role: roleStr, age: age);
+    } else {
+      final idx = _localIndexOf(existing);
+      if (idx != null) {
+        await KocaSeed.updateMemberAt(idx,
+            name: name, role: roleStr, age: age);
+      }
+    }
+    ref.invalidate(familyMembersProvider);
+    await _loadFamilyAndMembers();
+  }
+
+  Future<void> _removeLocalMember(FamilyMember member) async {
+    final idx = _localIndexOf(member);
+    if (idx == null) return;
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: const Color(0xFF13131A),
+        title: const Text('Üyeyi Çıkar',
+            style: TextStyle(color: Colors.white)),
+        content: Text('${member.name} aileden çıkarılacak. Emin misiniz?',
+            style: const TextStyle(color: Color(0xFF9CA3AF))),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: const Text('Vazgeç')),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
+            child: const Text('Çıkar', style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+    );
+    if (ok != true) return;
+    await KocaSeed.removeMemberAt(idx);
+    ref.invalidate(familyMembersProvider);
+    await _loadFamilyAndMembers();
+  }
+
+  InputDecoration _fieldDeco(String label, String hint) => InputDecoration(
+        labelText: label,
+        hintText: hint,
+        labelStyle: const TextStyle(color: Color(0xFF9CA3AF)),
+        hintStyle: const TextStyle(color: Color(0xFF6B7280)),
+        filled: true,
+        fillColor: const Color(0xFF1A1A24),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Color(0xFF262631)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Color(0xFF6366F1)),
+        ),
+      );
 
   static Color _parseColor(String? hex) {
     if (hex == null || hex.isEmpty) return Colors.blue;
@@ -359,7 +563,16 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                 subtitle: Text(_roleLabel(member.role)),
               ),
               const Divider(),
-              if (_isAdmin || isSelf)
+              if (_isLocalMember(member))
+                ListTile(
+                  leading: const Icon(Icons.edit, color: Color(0xFF6366F1)),
+                  title: const Text('Düzenle'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _showMemberForm(existing: member);
+                  },
+                )
+              else if (_isAdmin || isSelf)
                 ListTile(
                   leading: const Icon(Icons.edit, color: Color(0xFF6366F1)),
                   title: Text(AppLocalizations.of(context).roluDegistir),
@@ -384,7 +597,16 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                   context.push(AppRoutes.healthCard);
                 },
               ),
-              if (_isAdmin || isSelf)
+              if (_isLocalMember(member))
+                ListTile(
+                  leading: const Icon(Icons.person_remove, color: AppColors.error),
+                  title: const Text('Üyeyi Çıkar'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _removeLocalMember(member);
+                  },
+                )
+              else if (_isAdmin || isSelf)
                 ListTile(
                   leading: const Icon(Icons.exit_to_app, color: AppColors.error),
                   title: Text(isSelf ? 'Aileden Ayrıl' : 'Üyeyi Çıkar'),
@@ -488,10 +710,31 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                           width: double.infinity,
                           height: 56,
                           child: ElevatedButton.icon(
-                            onPressed: () => context.push(AppRoutes.inviteCode),
-                            icon: const Icon(Icons.person_add, color: Colors.white),
+                            onPressed: () => _showMemberForm(),
+                            icon: const Icon(Icons.person_add_alt_1,
+                                color: Colors.white),
                             label: const Text(
-                              'Yeni Üye Davet Et',
+                              'Üye Ekle',
+                              style: TextStyle(color: Colors.white, fontSize: 16),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF8B5CF6),
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 56,
+                          child: ElevatedButton.icon(
+                            onPressed: () => context.push(AppRoutes.inviteCode),
+                            icon: const Icon(Icons.qr_code, color: Colors.white),
+                            label: const Text(
+                              'Davet Kodu ile Ekle',
                               style: TextStyle(color: Colors.white, fontSize: 16),
                             ),
                             style: ElevatedButton.styleFrom(
