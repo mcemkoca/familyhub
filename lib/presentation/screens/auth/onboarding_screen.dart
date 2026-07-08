@@ -37,14 +37,40 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     },
   ];
 
-  // Total pages: language (0) + slides + family setup (last)
-  int get _totalPages => 1 + _slides.length + 1;
+  // Total pages: slides + family setup (last). Dil sayfası kaldırıldı
+  // (cihaz dilinden otomatik seçilir).
+  int get _totalPages => _slides.length + 1;
   int get _familyPageIndex => _totalPages - 1;
 
   @override
   void initState() {
     super.initState();
+    _autoDetectLanguage();
     _maybeLoadRemoteSlides();
+  }
+
+  /// Dil artık ayrı bir onboarding sayfası DEĞİL — cihazın diline göre otomatik
+  /// seçilir (desteklenen: tr/en/fr/nl, aksi halde tr). Kullanıcı istediğinde
+  /// Ayarlar > Dil'den değiştirebilir. Daha önce seçim yapılmışsa korunur.
+  void _autoDetectLanguage() {
+    final saved = HiveService.getSetting('language');
+    if (saved != null && saved.isNotEmpty) {
+      _selectedLanguage = _langMap.entries
+          .firstWhere((e) => e.value.label == saved,
+              orElse: () => const MapEntry(
+                  'tr', (label: 'Türkçe', locale: Locale('tr', 'TR'))))
+          .key;
+      return;
+    }
+    final deviceCode =
+        WidgetsBinding.instance.platformDispatcher.locale.languageCode;
+    final code = _langMap.containsKey(deviceCode) ? deviceCode : 'tr';
+    _selectedLanguage = code;
+    final entry = _langMap[code]!;
+    HiveService.setSetting('language', entry.label);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(localeProvider.notifier).state = entry.locale;
+    });
   }
 
   Future<void> _maybeLoadRemoteSlides() async {
@@ -81,15 +107,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     'nl': (label: 'Nederlands', locale: Locale('nl', 'NL')),
     'en': (label: 'English', locale: Locale('en', 'US')),
   };
-
-  void _selectLanguage(String code) {
-    setState(() => _selectedLanguage = code);
-    final entry = _langMap[code] ?? _langMap['tr']!;
-    // Seçimi kalıcılaştır — yeniden açılışta ve içerik özelliklerinde korunur.
-    HiveService.setSetting('language', entry.label);
-    ref.read(localeProvider.notifier).state = entry.locale;
-  }
-
   String get _nextLabel {
     if (_currentPage == 0) return _localizedNext;
     if (_currentPage == _familyPageIndex - 1) return _localizedLetsGo;
@@ -123,16 +140,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       default: return 'Atla';
     }
   }
-
-  String get _chooseLanguageLabel {
-    switch (_selectedLanguage) {
-      case 'fr': return 'Choisissez votre langue';
-      case 'nl': return 'Kies uw taal';
-      case 'en': return 'Choose your language';
-      default: return 'Dilinizi Seçin';
-    }
-  }
-
   String get _familySetupTitle {
     switch (_selectedLanguage) {
       case 'fr': return 'Commencer avec votre famille';
@@ -203,9 +210,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 onPageChanged: (index) => setState(() => _currentPage = index),
                 itemCount: _totalPages,
                 itemBuilder: (context, index) {
-                  if (index == 0) return _buildLanguagePage();
                   if (index == _familyPageIndex) return _buildFamilySetupPage();
-                  return _buildFeaturePage(_slides[index - 1]);
+                  return _buildFeaturePage(_slides[index]);
                 },
               ),
             ),
@@ -266,95 +272,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       ),
     );
   }
-
-  Widget _buildLanguagePage() {
-    const languages = [
-      {'code': 'tr', 'flag': '🇹🇷', 'name': 'Türkçe'},
-      {'code': 'fr', 'flag': '🇫🇷', 'name': 'Français'},
-      {'code': 'nl', 'flag': '🇳🇱', 'name': 'Nederlands'},
-      {'code': 'en', 'flag': '🇬🇧', 'name': 'English'},
-    ];
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 32),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 80,
-            height: 80,
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [Color(0xFF6366F1), Color(0xFFEC4899)],
-              ),
-              borderRadius: BorderRadius.circular(24),
-            ),
-            child: const Icon(Icons.language, color: Colors.white, size: 40),
-          ),
-          const SizedBox(height: 32),
-          Text(
-            _chooseLanguageLabel,
-            style: const TextStyle(
-              fontSize: 26,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFFE5E7EB),
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 32),
-          ...languages.map((lang) {
-            final isSelected = _selectedLanguage == lang['code'];
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: GestureDetector(
-                onTap: () => _selectLanguage(lang['code']!),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(
-                    color: isSelected
-                        ? const Color(0xFF6366F1).withAlpha(30)
-                        : const Color(0xFF13131A),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: isSelected
-                          ? const Color(0xFF6366F1)
-                          : const Color(0x1EFFFFFF),
-                      width: isSelected ? 2 : 1,
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      Text(lang['flag']!, style: const TextStyle(fontSize: 28)),
-                      const SizedBox(width: 16),
-                      Text(
-                        lang['name']!,
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600,
-                          color: isSelected
-                              ? const Color(0xFF6366F1)
-                              : const Color(0xFFE5E7EB),
-                        ),
-                      ),
-                      const Spacer(),
-                      if (isSelected)
-                        const Icon(
-                          Icons.check_circle,
-                          color: Color(0xFF6366F1),
-                          size: 22,
-                        ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          }),
-        ],
-      ),
-    );
-  }
-
   Widget _buildFeaturePage(Map<String, String> slide) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32),

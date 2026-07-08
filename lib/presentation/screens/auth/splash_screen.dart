@@ -110,13 +110,14 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
   }
 
   Future<void> _navigateAfterDelay() async {
-    // 5 second intro
-    await Future.delayed(const Duration(seconds: 5));
+    // Kısa açılış tanıtımı (animasyon için yeterli). Önceden 5 sn sabit
+    // beklerdi → gereksiz uzun açılış.
+    await Future.delayed(const Duration(milliseconds: 1600));
     if (!mounted) return;
 
-    // Wait for Supabase init
+    // Supabase init'i bekle (genelde hızlı; en çok ~3 sn).
     var attempts = 0;
-    while (SupabaseConfig.safeClient == null && attempts < 50) {
+    while (SupabaseConfig.safeClient == null && attempts < 30) {
       await Future.delayed(const Duration(milliseconds: 100));
       attempts++;
       if (!mounted) return;
