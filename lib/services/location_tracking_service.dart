@@ -18,8 +18,23 @@ class LocationTrackingService {
   // START / STOP
   // ═══════════════════════════════════════════════════════════════════════════
 
-  static void startTracking({Duration interval = const Duration(seconds: 30)}) {
+  static Future<void> startTracking(
+      {Duration interval = const Duration(seconds: 30)}) async {
     if (isTracking) return;
+
+    // Konum izni YOKSA izleme başlatma — yoksa getPositionStream + timer
+    // sürekli hata fırlatır (log spam, gereksiz pil, gizlilik). İzin
+    // istemeden yalnızca mevcut durumu kontrol et.
+    try {
+      if (!await Geolocator.isLocationServiceEnabled()) return;
+      final perm = await Geolocator.checkPermission();
+      if (perm != LocationPermission.always &&
+          perm != LocationPermission.whileInUse) {
+        return;
+      }
+    } catch (_) {
+      return;
+    }
 
     // Use position stream for real-time updates when moving,
     // fallback to timer for periodic uploads when stationary.

@@ -5,6 +5,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../../../config/constants.dart';
 import '../../../services/location_service.dart';
+import '../../../services/location_tracking_service.dart';
 import '../../providers/app_providers.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
@@ -113,6 +114,9 @@ class _LocationScreenState extends State<LocationScreen> {
   void _startSharing() {
     try {
       LocationService.startLiveSharing();
+      // Konumu aileyle GERÇEKTEN paylaş — geolocations tablosuna yükle
+      // (yoksa harita/aile üyeleri konumu göremez).
+      LocationTrackingService.startTracking();
       _positionStream = LocationService.locationStream.listen(
         (pos) {
           if (mounted) setState(() => _currentPosition = pos);
@@ -134,6 +138,7 @@ class _LocationScreenState extends State<LocationScreen> {
 
   void _stopSharing() {
     LocationService.stopLiveSharing();
+    LocationTrackingService.stopTracking();
     _positionStream?.cancel();
     setState(() => _isSharing = false);
   }

@@ -1,9 +1,13 @@
+import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import '../core/supabase_client.dart';
 import '../domain/models/safety_models.dart';
+import 'auth_service.dart';
+import 'hive_service.dart';
 
 /// Safe zone (geofence) management with distance-based checks.
-/// Syncs from Supabase; falls back to empty list if not logged in.
+/// Buluttan senkronlanır; oturum/aile yoksa yerel (Hive) olarak saklanır.
 class SafeZoneService {
   static List<SafeZone> _zones = [];
   static bool _initialized = false;
@@ -12,8 +16,45 @@ class SafeZoneService {
 
   static Future<void> initialize() async {
     if (_initialized) return;
+    _loadLocal();
     await _loadFromSupabase();
     _initialized = true;
+  }
+
+  // ── Yerel (Hive) kalıcılık ──
+  static void _loadLocal() {
+    final raw = HiveService.getSetting('safe_zones_local');
+    if (raw == null || raw.isEmpty) return;
+    try {
+      final list = jsonDecode(raw) as List;
+      _zones = list.map((e) {
+        final r = e as Map<String, dynamic>;
+        return SafeZone(
+          id: r['id'] as String? ?? '',
+          name: r['name'] as String? ?? 'Bölge',
+          type: _parseType(r['type'] as String?),
+          latitude: (r['latitude'] as num?)?.toDouble() ?? 0.0,
+          longitude: (r['longitude'] as num?)?.toDouble() ?? 0.0,
+          radiusMeters: (r['radius_meters'] as num?)?.toDouble() ?? 100.0,
+          address: r['address'] as String?,
+        );
+      }).toList();
+    } catch (_) {}
+  }
+
+  static Future<void> _saveLocal() async {
+    final list = _zones
+        .map((z) => {
+              'id': z.id,
+              'name': z.name,
+              'type': z.type.name,
+              'latitude': z.latitude,
+              'longitude': z.longitude,
+              'radius_meters': z.radiusMeters,
+              'address': z.address,
+            })
+        .toList();
+    await HiveService.setSetting('safe_zones_local', jsonEncode(list));
   }
 
   static Future<void> _loadFromSupabase() async {
@@ -26,7 +67,7 @@ class SafeZoneService {
           .select('id, name, type, latitude, longitude, radius_meters, address')
           .order('created_at', ascending: true);
 
-      _zones = (data as List<dynamic>).map((row) {
+      final cloud = (data as List<dynamic>).map((row) {
         final r = row as Map<String, dynamic>;
         return SafeZone(
           id: r['id'] as String? ?? '',
@@ -38,8 +79,14 @@ class SafeZoneService {
           address: r['address'] as String?,
         );
       }).toList();
+      // Yerel-only (senkronlanmamış) bölgeleri koru.
+      final cloudIds = cloud.map((z) => z.id).toSet();
+      final localOnly =
+          _zones.where((z) => !cloudIds.contains(z.id)).toList();
+      _zones = [...cloud, ...localOnly];
+      await _saveLocal();
     } catch (_) {
-      _zones = [];
+      // Bulut başarısız — yerel liste korunur.
     }
   }
 
@@ -110,26 +157,51 @@ class SafeZoneService {
   }
 
   static Future<void> addZone(SafeZone zone) async {
-    final client = SupabaseConfig.safeClient;
-    if (client == null) return;
+    // Önce yerel listeye ekle (kullanıcı hemen görsün, asla patlamasın).
+    _zones = [..._zones, zone];
+    await _saveLocal();
 
-    await client.from('safe_zones').insert({
-      'name': zone.name,
-      'type': zone.type.name,
-      'latitude': zone.latitude,
-      'longitude': zone.longitude,
-      'radius_meters': zone.radiusMeters,
-      'address': zone.address,
-    });
-    await _loadFromSupabase();
+    final client = SupabaseConfig.safeClient;
+    final userId = AuthService.currentUserId;
+    if (client == null || userId == null) return;
+
+    try {
+      String? familyId;
+      final profile = await client
+          .from('profiles')
+          .select('family_id')
+          .eq('id', userId)
+          .maybeSingle();
+      familyId = profile?['family_id'] as String?;
+      if (familyId == null) return; // yerel kalır
+
+      await client.from('safe_zones').insert({
+        'family_id': familyId,
+        'created_by': userId,
+        'name': zone.name,
+        'type': zone.type.name,
+        'latitude': zone.latitude,
+        'longitude': zone.longitude,
+        'radius_meters': zone.radiusMeters,
+        'address': zone.address,
+      });
+      await _loadFromSupabase();
+    } catch (e) {
+      debugPrint('addZone cloud failed, kept local: $e');
+    }
   }
 
   static Future<void> removeZone(String id) async {
+    _zones = _zones.where((z) => z.id != id).toList();
+    await _saveLocal();
+
     final client = SupabaseConfig.safeClient;
     if (client == null) return;
-
-    await client.from('safe_zones').delete().eq('id', id);
-    await _loadFromSupabase();
+    try {
+      await client.from('safe_zones').delete().eq('id', id);
+    } catch (e) {
+      debugPrint('removeZone cloud failed: $e');
+    }
   }
 
   static Future<List<Map<String, dynamic>>> checkAllZones() async {
