@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import '../../core/supabase_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:hive_flutter/hive_flutter.dart';
@@ -86,6 +87,18 @@ final familyIdProvider = FutureProvider<String?>((ref) async {
 });
 
 final onboardingCompletedProvider = StateProvider<bool>((ref) => false);
+
+/// Cihazın internet bağlantısı var mı — çevrimdışı rozeti için canlı akış.
+final connectivityProvider = StreamProvider<bool>((ref) async* {
+  bool has(List<ConnectivityResult> r) =>
+      r.isNotEmpty && !r.contains(ConnectivityResult.none);
+  try {
+    yield has(await Connectivity().checkConnectivity());
+    yield* Connectivity().onConnectivityChanged.map(has);
+  } catch (_) {
+    yield true; // tespit edilemezse çevrimiçi varsay
+  }
+});
 
 // ── Hub (Real Data) ──
 

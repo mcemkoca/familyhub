@@ -328,6 +328,10 @@ class _HubScreenState extends ConsumerState<HubScreen>
           backgroundColor: const Color(0xFF1A1A2E),
           child: CustomScrollView(
             slivers: [
+              // ── Çevrimdışı rozeti ────────────────────────────────────────
+              if (ref.watch(connectivityProvider).valueOrNull == false)
+                const SliverToBoxAdapter(child: _OfflineBanner()),
+
               // ── Ticker notification bar ──────────────────────────────────
               SliverToBoxAdapter(child: _NotifTicker(
                 notifs: _liveNotifs,
@@ -860,6 +864,33 @@ class _WeatherPill extends StatelessWidget {
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
                   color: Colors.white)),
+        ],
+      ),
+    );
+  }
+}
+
+class _OfflineBanner extends StatelessWidget {
+  const _OfflineBanner();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      color: const Color(0xFFF59E0B).withAlpha(38),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: const Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.cloud_off_rounded, size: 15, color: Color(0xFFF59E0B)),
+          SizedBox(width: 8),
+          Text(
+            'Çevrimdışısın — değişiklikler bağlanınca senkronlanacak',
+            style: TextStyle(
+                color: Color(0xFFF59E0B),
+                fontSize: 12,
+                fontWeight: FontWeight.w600),
+          ),
         ],
       ),
     );
