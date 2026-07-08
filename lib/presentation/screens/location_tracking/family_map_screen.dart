@@ -5,12 +5,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../config/constants.dart';
+import '../../../config/routes.dart';
 import '../../../domain/entities.dart';
 import '../../../services/koca_seed.dart';
 import '../../../services/location_service.dart';
 import '../../providers/app_providers.dart';
 import '../../widgets/location_permission_prompt.dart';
+import '../call/call_contact_list_screen.dart';
 
 class FamilyMapScreen extends ConsumerStatefulWidget {
   const FamilyMapScreen({super.key});
@@ -100,6 +104,19 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
     HapticFeedback.mediumImpact();
     _refreshController.forward(from: 0);
     _updateLocation();
+  }
+
+  /// Seçili üyenin konumuna harita/navigasyon açar.
+  Future<void> _openDirectionsTo(_FamilyMember m) async {
+    LatLng? dest = m.liveLoc;
+    if (dest == null) {
+      final idx = _members.indexOf(m);
+      if (idx >= 0) dest = _memberLatLng(idx, _members.length);
+    }
+    dest ??= _myLocation ?? _defaultCenter;
+    final uri = Uri.parse(
+        'https://www.google.com/maps/dir/?api=1&destination=${dest.latitude},${dest.longitude}');
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
   }
 
   /// Üyeleri gerçek koordinatlara eşler. Mevcut cihaz gerçek GPS'te; diğer
@@ -609,7 +626,10 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
               children: [
                 Expanded(
                   child: OutlinedButton.icon(
-                    onPressed: () {},
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (_) => const CallContactListScreen()),
+                    ),
                     icon: const Icon(Icons.call, size: 16),
                     label: const Text('Ara'),
                     style: OutlinedButton.styleFrom(
@@ -620,7 +640,7 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
                 const SizedBox(width: 8),
                 Expanded(
                   child: OutlinedButton.icon(
-                    onPressed: () {},
+                    onPressed: () => context.push(AppRoutes.chat),
                     icon: const Icon(Icons.message, size: 16),
                     label: const Text('Mesaj'),
                     style: OutlinedButton.styleFrom(
@@ -631,7 +651,7 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
                 const SizedBox(width: 8),
                 Expanded(
                   child: OutlinedButton.icon(
-                    onPressed: () {},
+                    onPressed: () => _openDirectionsTo(m),
                     icon: const Icon(Icons.navigation, size: 16),
                     label: const Text('Yol'),
                     style: OutlinedButton.styleFrom(
@@ -662,7 +682,7 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
                       color: Color(0xFFE5E7EB))),
               const Spacer(),
               TextButton.icon(
-                onPressed: () {},
+                onPressed: () => context.push(AppRoutes.safeZones),
                 icon: const Icon(Icons.add, size: 14),
                 label: const Text('Ekle', style: TextStyle(fontSize: 12)),
                 style: TextButton.styleFrom(
