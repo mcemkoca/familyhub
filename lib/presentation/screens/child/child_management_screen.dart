@@ -290,6 +290,11 @@ class _ChildFormSheetState extends State<_ChildFormSheet> {
   bool _isLoading = false;
   File? _avatarFile;
   String? _avatarUrl;
+  // İzinler
+  bool _canApproveTasks = false;
+  bool _canSendMessages = true;
+  bool _canViewBudget = false;
+  int _dailyScreenTime = 120;
 
   final List<Color> _colors = [
     Colors.blue,
@@ -310,6 +315,10 @@ class _ChildFormSheetState extends State<_ChildFormSheet> {
       _role = widget.child!.role;
       _selectedColor = widget.child!.color;
       _avatarUrl = widget.child!.avatarUrl;
+      _canApproveTasks = widget.child!.canApproveTasks;
+      _canSendMessages = widget.child!.canSendMessages;
+      _canViewBudget = widget.child!.canViewBudget;
+      _dailyScreenTime = widget.child!.dailyScreenTimeMinutes;
     }
   }
 
@@ -359,10 +368,19 @@ class _ChildFormSheetState extends State<_ChildFormSheet> {
       final repo = ChildAccountRepository();
       String? finalAvatarUrl = _avatarUrl;
 
-      if (widget.child != null) {
-        if (_avatarFile != null) {
-          finalAvatarUrl = await repo.uploadAvatar(widget.child!.id, _avatarFile!.path);
+      // Yerel çocukta bulut yükleme yerine dosya yolunu kullan (tek cihaz).
+      Future<String?> resolveAvatar(String childId) async {
+        if (_avatarFile == null) return finalAvatarUrl;
+        if (childId.startsWith('local_')) return _avatarFile!.path;
+        try {
+          return await repo.uploadAvatar(childId, _avatarFile!.path);
+        } catch (_) {
+          return _avatarFile!.path; // yükleme başarısızsa yerel yol
         }
+      }
+
+      if (widget.child != null) {
+        finalAvatarUrl = await resolveAvatar(widget.child!.id);
         await repo.updateChild(
           widget.child!.id,
           name: name,
@@ -370,6 +388,10 @@ class _ChildFormSheetState extends State<_ChildFormSheet> {
           color: _selectedColor,
           avatarUrl: finalAvatarUrl,
           pin: pin.isNotEmpty ? pin : null,
+          canApproveTasks: _canApproveTasks,
+          canSendMessages: _canSendMessages,
+          canViewBudget: _canViewBudget,
+          dailyScreenTimeMinutes: _dailyScreenTime,
         );
       } else {
         final newChild = await repo.createChild(
@@ -379,10 +401,14 @@ class _ChildFormSheetState extends State<_ChildFormSheet> {
           role: _role,
           color: _selectedColor,
           avatarUrl: finalAvatarUrl,
+          canApproveTasks: _canApproveTasks,
+          canSendMessages: _canSendMessages,
+          canViewBudget: _canViewBudget,
+          dailyScreenTimeMinutes: _dailyScreenTime,
         );
-        if (_avatarFile != null) {
-          finalAvatarUrl = await repo.uploadAvatar(newChild.id, _avatarFile!.path);
-          await repo.updateChild(newChild.id, avatarUrl: finalAvatarUrl);
+        final resolved = await resolveAvatar(newChild.id);
+        if (resolved != null && resolved != finalAvatarUrl) {
+          await repo.updateChild(newChild.id, avatarUrl: resolved);
         }
       }
 
@@ -529,6 +555,46 @@ class _ChildFormSheetState extends State<_ChildFormSheet> {
             ],
             selected: {_role},
             onSelectionChanged: (set) => setState(() => _role = set.first),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          Text('İzinler', style: Theme.of(context).textTheme.titleSmall),
+          const SizedBox(height: AppSpacing.sm),
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            title: const Text('Mesaj gönderebilir'),
+            value: _canSendMessages,
+            onChanged: (v) => setState(() => _canSendMessages = v),
+          ),
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            title: const Text('Görev onaylayabilir'),
+            value: _canApproveTasks,
+            onChanged: (v) => setState(() => _canApproveTasks = v),
+          ),
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            title: const Text('Bütçeyi görebilir'),
+            value: _canViewBudget,
+            onChanged: (v) => setState(() => _canViewBudget = v),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Row(
+            children: [
+              const Icon(Icons.timer_outlined, size: 18, color: Color(0xFF8B5CF6)),
+              const SizedBox(width: 8),
+              const Text('Günlük ekran süresi'),
+              const Spacer(),
+              Text('$_dailyScreenTime dk',
+                  style: const TextStyle(fontWeight: FontWeight.w700)),
+            ],
+          ),
+          Slider(
+            value: _dailyScreenTime.toDouble().clamp(0, 480),
+            min: 0,
+            max: 480,
+            divisions: 16,
+            label: '$_dailyScreenTime dk',
+            onChanged: (v) => setState(() => _dailyScreenTime = v.round()),
           ),
           const SizedBox(height: AppSpacing.md),
           Text(
