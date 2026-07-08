@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../domain/entities.dart';
 
 class ChatBubble extends StatelessWidget {
@@ -96,7 +97,10 @@ class ChatBubble extends StatelessWidget {
                     children: [
                       // Location message
                       if (message.type == MessageType.location)
-                        _LocationPreview(content: message.content)
+                        _LocationPreview(
+                            content: message.content,
+                            latitude: message.latitude,
+                            longitude: message.longitude)
                       else if (message.type == MessageType.audio)
                         _AudioMessagePlayer(
                           audioUrl: message.audioUrl,
@@ -490,46 +494,68 @@ class _AudioMessagePlayerState extends State<_AudioMessagePlayer> {
 
 class _LocationPreview extends StatelessWidget {
   final String content;
+  final double? latitude;
+  final double? longitude;
 
-  const _LocationPreview({required this.content});
+  const _LocationPreview(
+      {required this.content, this.latitude, this.longitude});
+
+  Future<void> _openMap() async {
+    if (latitude == null || longitude == null) return;
+    final geo = Uri.parse('geo:$latitude,$longitude?q=$latitude,$longitude');
+    final web = Uri.parse(
+        'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude');
+    if (await canLaunchUrl(geo)) {
+      await launchUrl(geo, mode: LaunchMode.externalApplication);
+    } else {
+      await launchUrl(web, mode: LaunchMode.externalApplication);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final hasCoords = latitude != null && longitude != null;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          height: 100,
-          decoration: BoxDecoration(
-            color: const Color(0xFF6366F1).withAlpha(30),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              const Icon(Icons.map, size: 40, color: Color(0xFF6366F1)),
-              Positioned(
-                bottom: 8,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF6366F1),
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: const Text(
-                    'Haritada Göster',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w600,
+        GestureDetector(
+          onTap: hasCoords ? _openMap : null,
+          child: Container(
+            height: 100,
+            width: 220,
+            decoration: BoxDecoration(
+              color: const Color(0xFF6366F1).withAlpha(30),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                const Icon(Icons.location_on, size: 40, color: Color(0xFF6366F1)),
+                Positioned(
+                  bottom: 8,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: hasCoords
+                          ? const Color(0xFF6366F1)
+                          : const Color(0xFF6366F1).withAlpha(120),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Text(
+                      hasCoords ? 'Haritada Göster' : 'Konum',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         const SizedBox(height: 8),

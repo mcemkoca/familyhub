@@ -15,6 +15,7 @@ import '../../providers/app_providers.dart';
 import '../../../repositories/chat_repository.dart';
 import '../../../services/hive_service.dart';
 import '../../../services/auth_service.dart';
+import '../../../services/location_service.dart';
 import '../../widgets/chat/chat_bubble.dart';
 import '../../widgets/chat/chat_composer.dart';
 import '../../widgets/chat/reaction_picker.dart';
@@ -225,20 +226,48 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     setState(() => _showAttachmentMenu = false);
   }
 
-  void _shareLocation() {
+  Future<void> _shareLocation() async {
+    setState(() => _showAttachmentMenu = false);
+    final messenger = ScaffoldMessenger.of(context);
+    messenger.showSnackBar(const SnackBar(
+        content: Text('Konum alınıyor…'), duration: Duration(seconds: 1)));
+
+    final pos = await LocationService.getCurrentPosition();
+    if (pos == null) {
+      messenger.showSnackBar(const SnackBar(
+          content: Text('Konum alınamadı. GPS açık olduğundan emin olun.')));
+      return;
+    }
+    // Gerçek adresi çöz (başarısızsa koordinat metnini kullan).
+    String label;
+    try {
+      final addr =
+          await LocationService.getAddressFromCoords(pos.latitude, pos.longitude);
+      label = (addr != null && addr.fullAddress.isNotEmpty)
+          ? addr.fullAddress
+          : (addr?.city.isNotEmpty == true
+              ? addr!.city
+              : '${pos.latitude.toStringAsFixed(5)}, ${pos.longitude.toStringAsFixed(5)}');
+    } catch (_) {
+      label =
+          '${pos.latitude.toStringAsFixed(5)}, ${pos.longitude.toStringAsFixed(5)}';
+    }
+
     final current = ref.read(chatMessagesProvider);
     final newMsg = ChatMessage(
       id: 'msg${current.length + 1}',
-      senderId: '',
+      senderId: 'm1',
       senderName: 'Ben',
       senderColor: AppColors.blue,
-      content: 'Yoldayım, eve 10 dakika.',
+      content: '📍 $label',
       createdAt: DateTime.now(),
       type: MessageType.location,
+      latitude: pos.latitude,
+      longitude: pos.longitude,
     );
 
     ref.read(chatMessagesProvider.notifier).state = [...current, newMsg];
-    setState(() => _showAttachmentMenu = false);
+    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
   }
 
   Future<void> _sendVoiceMessage(File file, int durationMs) async {

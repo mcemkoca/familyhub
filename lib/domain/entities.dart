@@ -433,6 +433,8 @@ class ChatMessage {
   final String? videoUrl;
   final String? fileName;
   final int? fileSize;
+  final double? latitude; // konum mesajı için
+  final double? longitude;
   final List<MessageReaction> reactions;
   final String? replyToId;
   final String? replyToContent;
@@ -456,6 +458,8 @@ class ChatMessage {
     this.videoUrl,
     this.fileName,
     this.fileSize,
+    this.latitude,
+    this.longitude,
     this.reactions = const [],
     this.replyToId,
     this.replyToContent,
@@ -490,6 +494,8 @@ class ChatMessage {
       videoUrl: videoUrl,
       fileName: fileName,
       fileSize: fileSize,
+      latitude: latitude,
+      longitude: longitude,
       reactions: reactions ?? this.reactions,
       replyToId: replyToId,
       replyToContent: replyToContent,
