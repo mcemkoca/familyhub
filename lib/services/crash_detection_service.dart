@@ -2,6 +2,7 @@
 // High-level crash detection service: orchestrates engine, notifications, SOS
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,6 +13,7 @@ import '../core/supabase_client.dart';
 import '../domain/models/crash_event.dart';
 import '../domain/models/crash_settings.dart';
 import '../services/health_card_service.dart';
+import '../services/hive_service.dart';
 import 'crash_detection_engine.dart';
 
 /// High-level service that wires the [CrashDetectionEngine] to
@@ -285,10 +287,27 @@ class CrashDetectionService {
     }
   }
 
+  /// Ayarlardaki (bulut) + yerel (Hive) acil kişi telefonlarını birleştirir.
+  static List<String> _allContactPhones(CrashDetectionSettings? settings) {
+    final phones = <String>{};
+    for (final EmergencyContact c
+        in settings?.emergencyContacts ?? const <EmergencyContact>[]) {
+      if (c.phone.isNotEmpty) phones.add(c.phone);
+    }
+    final raw = HiveService.getSetting('emergency_contacts');
+    if (raw != null && raw.isNotEmpty) {
+      try {
+        for (final e in jsonDecode(raw) as List) {
+          final p = (e as Map)['phone']?.toString() ?? '';
+          if (p.isNotEmpty) phones.add(p);
+        }
+      } catch (_) {}
+    }
+    return phones.toList();
+  }
+
   Future<void> _notifyEmergencyContacts(CrashEvent event) async {
-    final contacts = _settings?.emergencyContacts ?? [];
-    for (final contact in contacts) {
-      final phone = contact.phone;
+    for (final phone in _allContactPhones(_settings)) {
       if (phone.isEmpty) continue;
 
       final message = 'ACIL DURUM: Kaza tespit edildi. '
@@ -352,10 +371,8 @@ class CrashDetectionService {
           'Acil Durum Kişisi: ${healthData.emergencyContactName} (${healthData.emergencyContactPhone})\n'
           'Doktor: ${healthData.doctorName} (${healthData.doctorPhone})';
 
-      // Share via SMS to emergency contacts
-      final contacts = _settings?.emergencyContacts ?? [];
-      for (final contact in contacts) {
-        final phone = contact.phone;
+      // Share via SMS to emergency contacts (bulut + yerel)
+      for (final phone in _allContactPhones(_settings)) {
         if (phone.isEmpty) continue;
         final smsUri = Uri(scheme: 'sms', path: phone, queryParameters: {'body': info});
         if (await canLaunchUrl(smsUri)) {

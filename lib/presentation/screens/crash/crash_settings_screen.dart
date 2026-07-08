@@ -1,7 +1,9 @@
 // lib/presentation/screens/crash/crash_settings_screen.dart
 // Crash detection settings, thresholds, SOS config, test mode
 
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import '../../../services/hive_service.dart';
 
 import '../../../domain/models/crash_settings.dart';
 import '../../../services/crash_detection_service.dart';
@@ -36,6 +38,30 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
   bool _screenFlash = true;
   bool _maxVolume = true;
   bool _bypassDnd = false;
+
+  // Acil kişiler (yerel, Hive) — crash/SOS akışı bunları arar/mesaj atar.
+  List<Map<String, String>> _emergencyContacts = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadContacts();
+  }
+
+  void _loadContacts() {
+    final raw = HiveService.getSetting('emergency_contacts');
+    if (raw == null || raw.isEmpty) return;
+    try {
+      _emergencyContacts = (jsonDecode(raw) as List)
+          .map((e) => (e as Map).map((k, v) => MapEntry('$k', '$v')))
+          .toList();
+    } catch (_) {}
+  }
+
+  Future<void> _saveContacts() async {
+    await HiveService.setSetting(
+        'emergency_contacts', jsonEncode(_emergencyContacts));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -349,8 +375,105 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
   }
 
   void _editContacts() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Acil kişiler yakında düzenlenebilecek')),
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setSheet) {
+          final onS = Theme.of(ctx).colorScheme.onSurface;
+          Future<void> addOne() async {
+            final nameC = TextEditingController();
+            final phoneC = TextEditingController();
+            final ok = await showDialog<bool>(
+              context: ctx,
+              builder: (d) => AlertDialog(
+                title: const Text('Acil Kişi Ekle'),
+                content: Column(mainAxisSize: MainAxisSize.min, children: [
+                  TextField(
+                      controller: nameC,
+                      decoration: const InputDecoration(labelText: 'İsim')),
+                  TextField(
+                      controller: phoneC,
+                      keyboardType: TextInputType.phone,
+                      decoration: const InputDecoration(labelText: 'Telefon')),
+                ]),
+                actions: [
+                  TextButton(
+                      onPressed: () => Navigator.pop(d, false),
+                      child: const Text('İptal')),
+                  FilledButton(
+                      onPressed: () => Navigator.pop(d, true),
+                      child: const Text('Ekle')),
+                ],
+              ),
+            );
+            if (ok == true &&
+                nameC.text.trim().isNotEmpty &&
+                phoneC.text.trim().isNotEmpty) {
+              setSheet(() => _emergencyContacts.add(
+                  {'name': nameC.text.trim(), 'phone': phoneC.text.trim()}));
+              await _saveContacts();
+              setState(() {});
+            }
+          }
+
+          return Padding(
+            padding: EdgeInsets.only(
+                left: 20,
+                right: 20,
+                top: 16,
+                bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(children: [
+                  const Icon(Icons.contacts, color: Color(0xFFEF4444)),
+                  const SizedBox(width: 8),
+                  Text('Acil Kişiler',
+                      style: TextStyle(
+                          color: onS,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w800)),
+                  const Spacer(),
+                  IconButton(
+                      onPressed: addOne,
+                      icon: const Icon(Icons.add_circle,
+                          color: Color(0xFF10B981))),
+                ]),
+                const SizedBox(height: 8),
+                if (_emergencyContacts.isEmpty)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: Text('Henüz acil kişi yok. + ile ekleyin.',
+                        style: TextStyle(color: onS.withAlpha(150))),
+                  )
+                else
+                  ..._emergencyContacts.asMap().entries.map((e) => ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        leading: const Icon(Icons.person, color: Color(0xFF6366F1)),
+                        title: Text(e.value['name'] ?? '',
+                            style: TextStyle(color: onS)),
+                        subtitle: Text(e.value['phone'] ?? '',
+                            style: TextStyle(color: onS.withAlpha(160))),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.delete_outline,
+                              color: Color(0xFFEF4444)),
+                          onPressed: () async {
+                            setSheet(() => _emergencyContacts.removeAt(e.key));
+                            await _saveContacts();
+                            setState(() {});
+                          },
+                        ),
+                      )),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 
