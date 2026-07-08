@@ -19,7 +19,9 @@ class _LanguageSettingsScreenState extends ConsumerState<LanguageSettingsScreen>
   String _selectedCountry = 'BE';
   String _dateFormat = 'DD/MM/YYYY';
 
-  final _languages = ['Türkçe', 'English', 'Deutsch', 'Nederlands', 'Français'];
+  // Yalnızca çevirisi (ARB) olan diller listelenir. Deutsch için çeviri
+  // olmadığından listeden çıkarıldı (seçilse de uygulanamıyordu).
+  final _languages = ['Türkçe', 'English', 'Nederlands', 'Français'];
   final _dateFormats = ['DD/MM/YYYY', 'MM/DD/YYYY', 'YYYY-MM-DD'];
 
   @override
@@ -58,11 +60,11 @@ class _LanguageSettingsScreenState extends ConsumerState<LanguageSettingsScreen>
       case 'English':
         newLocale = const Locale('en', 'US');
         break;
-      case 'Deutsch':
-        newLocale = const Locale('de', 'DE');
-        break;
       case 'Nederlands':
         newLocale = const Locale('nl', 'NL');
+        break;
+      case 'Français':
+        newLocale = const Locale('fr', 'FR');
         break;
       case 'Türkçe':
       default:

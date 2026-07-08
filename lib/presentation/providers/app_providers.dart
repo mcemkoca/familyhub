@@ -36,8 +36,6 @@ final localeProvider = StateProvider<Locale>((ref) {
   switch (lang) {
     case 'English':
       return const Locale('en', 'US');
-    case 'Deutsch':
-      return const Locale('de', 'DE');
     case 'Nederlands':
       return const Locale('nl', 'NL');
     case 'Français':
