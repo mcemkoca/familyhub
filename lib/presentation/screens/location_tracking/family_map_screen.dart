@@ -106,6 +106,11 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
   /// üyeler (canlı konum boru hattı bağlanana kadar) merkez çevresine
   /// dağıtılır.
   LatLng _memberLatLng(int index, int total) {
+    // Gerçek canlı konum varsa onu kullan.
+    if (index >= 0 && index < _members.length) {
+      final live = _members[index].liveLoc;
+      if (live != null) return live;
+    }
     final base = _myLocation ?? _defaultCenter;
     if (index == 0) return base;
     // Merkez etrafında küçük, belirlenimci bir dağılım.
@@ -119,7 +124,8 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
 
   // Gerçek aile üyelerini haritaya eşler (konum boru hattı bağlanana kadar
   // konum metni dürüst, konumlar dağıtılmış olarak gösterilir).
-  List<_FamilyMember> _mapReal(List<FamilyMember> real) {
+  List<_FamilyMember> _mapReal(List<FamilyMember> real,
+      [Map<String, LivePosition> live = const {}]) {
     if (real.isEmpty) return _kocaOrDemo();
     const palette = [
       Color(0xFFEC4899), Color(0xFF3B82F6), Color(0xFF10B981),
@@ -128,27 +134,37 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
     final n = real.length;
     return List.generate(n, (i) {
       final m = real[i];
-      // Üyeleri merkez etrafında dairesel dağıt.
+      final lp = live[m.id];
+      // Üyeleri merkez etrafında dairesel dağıt (canlı konum yoksa).
       final angle = (i / n) * 2 * math.pi;
       final x = (0.5 + 0.22 * math.cos(angle)).clamp(0.1, 0.9);
       final y = (0.45 + 0.18 * math.sin(angle)).clamp(0.1, 0.85);
+      final hasLive = lp != null;
       return _FamilyMember(
+        id: m.id,
+        liveLoc: hasLive ? LatLng(lp.lat, lp.lng) : null,
         name: m.name,
         role: _roleLabel(m.role),
         avatar: m.initial.isNotEmpty
             ? m.initial
             : (m.name.isNotEmpty ? m.name.substring(0, 1).toUpperCase() : '?'),
         color: palette[i % palette.length],
-        location: 'Konum paylaşımı bekleniyor',
-        lastSeen: m.isOnline
-            ? 'Çevrimiçi'
-            : (m.lastSeen != null ? _relTime(m.lastSeen!) : 'Bilinmiyor'),
-        battery: 0,
-        status: m.isOnline ? LocationStatus.home : LocationStatus.unknown,
+        location: hasLive ? 'Canlı konum' : 'Konum paylaşımı bekleniyor',
+        lastSeen: hasLive
+            ? _relTime(lp.at)
+            : (m.isOnline
+                ? 'Çevrimiçi'
+                : (m.lastSeen != null ? _relTime(m.lastSeen!) : 'Bilinmiyor')),
+        battery: lp?.battery ?? 0,
+        status: hasLive
+            ? LocationStatus.transit
+            : (m.isOnline ? LocationStatus.home : LocationStatus.unknown),
         x: x.toDouble(),
         y: y.toDouble(),
-        speed: 0,
-        activity: m.isOnline ? 'Çevrimiçi' : 'Çevrimdışı',
+        speed: (lp?.speed ?? 0).round(),
+        activity: hasLive
+            ? 'Canlı'
+            : (m.isOnline ? 'Çevrimiçi' : 'Çevrimdışı'),
       );
     });
   }
@@ -214,7 +230,9 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
 
   @override
   Widget build(BuildContext context) {
-    _members = _mapReal(ref.watch(familyMembersProvider));
+    final live =
+        ref.watch(familyLiveLocationsProvider).valueOrNull ?? const {};
+    _members = _mapReal(ref.watch(familyMembersProvider), live);
     if (_selectedMemberIndex >= _members.length) _selectedMemberIndex = 0;
     return Scaffold(
       backgroundColor:
@@ -821,6 +839,8 @@ class _FamilyMember {
   final int battery, speed;
   final LocationStatus status;
   final double x, y;
+  final String? id;
+  final LatLng? liveLoc; // gerçek canlı konum (varsa)
   const _FamilyMember({
     required this.name,
     required this.role,
@@ -834,6 +854,8 @@ class _FamilyMember {
     required this.y,
     required this.speed,
     required this.activity,
+    this.id,
+    this.liveLoc,
   });
 }
 

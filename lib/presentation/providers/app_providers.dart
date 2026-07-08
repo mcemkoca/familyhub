@@ -705,6 +705,51 @@ final currentLocationProvider = FutureProvider<LocationModel?>((ref) async {
   return cached;
 });
 
+/// Bir aile üyesinin canlı (gerçek) konumu — geolocations tablosundan.
+class LivePosition {
+  final double lat;
+  final double lng;
+  final DateTime at;
+  final num? speed;
+  final int? battery;
+  const LivePosition(this.lat, this.lng, this.at, {this.speed, this.battery});
+}
+
+/// Ebeveynin ailesindeki tüm üyelerin EN GÜNCEL canlı konumu.
+/// Anahtar = user_id veya child_id. geolocations tablosunu family_id ile
+/// süzüp gerçek zamanlı yayınlar (aile haritası bunu kullanır).
+final familyLiveLocationsProvider =
+    StreamProvider<Map<String, LivePosition>>((ref) async* {
+  final familyId = await ref.watch(familyIdProvider.future);
+  final client = SupabaseConfig.safeClient;
+  if (familyId == null || client == null) {
+    yield <String, LivePosition>{};
+    return;
+  }
+  yield* client
+      .from('geolocations')
+      .stream(primaryKey: ['id'])
+      .eq('family_id', familyId)
+      .order('created_at')
+      .map((rows) {
+    final latest = <String, LivePosition>{};
+    for (final r in rows) {
+      final key = (r['user_id'] ?? r['child_id'])?.toString();
+      final lat = (r['lat'] as num?)?.toDouble();
+      final lng = (r['lng'] as num?)?.toDouble();
+      if (key == null || lat == null || lng == null) continue;
+      final at = DateTime.tryParse(r['created_at']?.toString() ?? '') ??
+          DateTime.now();
+      final existing = latest[key];
+      if (existing == null || at.isAfter(existing.at)) {
+        latest[key] = LivePosition(lat, lng, at,
+            speed: r['speed'] as num?, battery: r['battery_level'] as int?);
+      }
+    }
+    return latest;
+  });
+});
+
 // ── Theme & Appearance ──
 
 final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.system);
