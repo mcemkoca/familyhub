@@ -688,6 +688,24 @@ final chatMessagesProvider = StateProvider<List<ChatMessage>>((ref) => []);
 class MoodNotifier extends StateNotifier<List<MoodEntry>> {
   MoodNotifier() : super([]) {
     _load();
+    _subscribeRealtime();
+  }
+
+  StreamSubscription<dynamic>? _rt;
+
+  void _subscribeRealtime() {
+    try {
+      _rt = MoodRepository().watchEntries().listen(
+            (_) => _load(),
+            onError: (_) {},
+          );
+    } catch (_) {}
+  }
+
+  @override
+  void dispose() {
+    _rt?.cancel();
+    super.dispose();
   }
 
   Future<void> _load() async {

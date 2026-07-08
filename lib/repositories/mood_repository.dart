@@ -134,4 +134,18 @@ class MoodRepository with RepositoryErrorHandler {
       createdAt: DateTime.parse(json['created_at'] as String),
     );
   }
+
+  /// Aile ruh hali değişikliklerini realtime dinler (değişiklik sinyali).
+  Stream<List<MoodEntry>> watchEntries() {
+    try {
+      return _client
+          .from('mood_entries')
+          .stream(primaryKey: ['id'])
+          .order('created_at')
+          .map((data) => data.map((e) => _fromJson(e)).toList());
+    } catch (e) {
+      debugPrint('MoodRepository.watchEntries error: $e');
+      return const Stream.empty();
+    }
+  }
 }
