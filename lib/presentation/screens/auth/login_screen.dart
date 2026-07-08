@@ -56,6 +56,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
     setState(() => _isLoading = true);
     try {
       await AuthService.signIn(email: email, password: password);
+      await AuthService.ensureFamily();
       if (mounted) context.go(AppRoutes.hub);
     } catch (e) {
       if (mounted) _showError(e.toString().replaceAll('Exception: ', ''));
@@ -68,6 +69,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
     setState(() => _isLoading = true);
     try {
       await AuthService.signInWithGoogle();
+      await AuthService.ensureFamily();
       if (mounted) context.go(AppRoutes.hub);
     } catch (e) {
       if (mounted) _showError(e.toString().replaceAll('Exception: ', ''));

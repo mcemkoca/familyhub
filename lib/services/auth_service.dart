@@ -160,6 +160,49 @@ class AuthService {
     return (response: response, familyId: familyId);
   }
 
+  /// Giriş yapan kullanıcının MUTLAKA bir ailesi olmasını garanti eder.
+  /// family_id yoksa otomatik bir aile oluşturup kullanıcıyı admin yapar.
+  /// Böylece migration sonrası tüm bulut aile özellikleri (çocuk hesabı,
+  /// davet, izinler) her kullanıcı için çalışır. family_id döndürür.
+  static Future<String?> ensureFamily() async {
+    final supabase = client;
+    final userId = currentUserId;
+    if (supabase == null || userId == null) return null;
+    try {
+      final profile = await supabase
+          .from('profiles')
+          .select('family_id, display_name')
+          .eq('id', userId)
+          .maybeSingle();
+      final existing = profile?['family_id'] as String?;
+      if (existing != null && existing.isNotEmpty) return existing;
+
+      final name = (profile?['display_name'] as String?)?.trim();
+      final familyName =
+          (name != null && name.isNotEmpty) ? '$name Ailesi' : 'Ailem';
+
+      final fam = await supabase
+          .from('families')
+          .insert({'name': familyName, 'created_by': userId})
+          .select('id')
+          .single();
+      final familyId = fam['id'] as String;
+
+      await supabase.from('family_members').insert({
+        'family_id': familyId,
+        'user_id': userId,
+        'role': 'admin',
+        'display_name': name ?? 'Ben',
+      });
+      await supabase
+          .from('profiles')
+          .update({'family_id': familyId}).eq('id', userId);
+      return familyId;
+    } catch (e) {
+      return null;
+    }
+  }
+
   static Future<AuthResponse> signIn({
     required String email,
     required String password,

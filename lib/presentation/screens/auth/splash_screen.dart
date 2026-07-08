@@ -134,6 +134,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
       final isAuth = AuthService.currentUser != null;
       if (isAuth) {
+        // Giriş yapan kullanıcının ailesi yoksa otomatik oluştur — bulut
+        // özellikleri (çocuk hesabı, davet, izinler) için family_id şart.
+        await AuthService.ensureFamily();
         if (mounted) context.go(AppRoutes.hub);
         return;
       }
