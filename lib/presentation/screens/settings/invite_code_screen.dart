@@ -30,7 +30,10 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
       final client = SupabaseConfig.safeClient;
       final userId = AuthService.currentUserId;
       if (client == null || userId == null) {
-        throw Exception('Oturum açık değil');
+        // Davet kodu gerçek cross-device özelliği — hesap + bulut aile gerekir.
+        throw Exception(
+            'Davet kodu için önce hesabınızla giriş yapıp bir aile oluşturun. '
+            '(Çevrimdışı modda davet kodu paylaşılamaz.)');
       }
 
       final fm = await client
@@ -40,7 +43,9 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
           .maybeSingle();
       final familyId = fm?['family_id'] as String?;
       if (familyId == null) {
-        throw Exception('Aile bulunamadı');
+        throw Exception(
+            'Aile bulunamadı. Ayarlar > Aile Yönetimi\'nden bir aile '
+            'oluşturduktan sonra davet kodu üretebilirsiniz.');
       }
 
       final code = await client.rpc(

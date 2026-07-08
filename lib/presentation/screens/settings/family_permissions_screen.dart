@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -6,6 +7,9 @@ import '../../../config/constants.dart';
 import '../../../core/supabase_client.dart';
 import '../../../domain/entities.dart';
 import '../../../services/auth_service.dart';
+import '../../../services/hive_service.dart';
+import '../../../services/koca_seed.dart';
+import '../../providers/app_providers.dart' show localFamilyMembers;
 import '../../widgets/settings/screen_header.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
@@ -30,34 +34,58 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
     _checkAdminAndLoad();
   }
 
+  static const _localFamilyId = 'local_family';
+
   Future<void> _checkAdminAndLoad() async {
     final client = SupabaseConfig.safeClient;
     final userId = _myUserId;
-    if (client == null || userId == null) {
-      setState(() => _isLoading = false);
-      return;
-    }
 
-    try {
-      final fm = await client
-          .from('family_members')
-          .select('family_id, role')
-          .eq('user_id', userId)
-          .maybeSingle();
+    if (client != null && userId != null) {
+      try {
+        final fm = await client
+            .from('family_members')
+            .select('family_id, role')
+            .eq('user_id', userId)
+            .maybeSingle();
 
-      final familyId = fm?['family_id'] as String?;
-      final role = fm?['role'] as String?;
-      _familyId = familyId;
-      _isAdmin = role == 'admin';
-
-      if (familyId != null && _isAdmin) {
-        await _loadMembers(client, familyId);
+        final familyId = fm?['family_id'] as String?;
+        final role = fm?['role'] as String?;
+        if (familyId != null) {
+          _familyId = familyId;
+          _isAdmin = role == 'admin';
+          if (_isAdmin) await _loadMembers(client, familyId);
+          setState(() => _isLoading = false);
+          return;
+        }
+      } catch (e) {
+        debugPrint('FamilyPermissions cloud error: $e');
       }
-    } catch (e) {
-      debugPrint('FamilyPermissions error: $e');
-    } finally {
-      setState(() => _isLoading = false);
     }
+
+    // Yerel mod — bulut ailesi yoksa yerel üyeleri yönet (cihaz sahibi admin).
+    _loadLocal();
+    setState(() => _isLoading = false);
+  }
+
+  void _loadLocal() {
+    _familyId = _localFamilyId;
+    _isAdmin = true;
+    _members = localFamilyMembers();
+    final raw = HiveService.getSetting('local_member_perms');
+    if (raw != null && raw.isNotEmpty) {
+      try {
+        final map = jsonDecode(raw) as Map<String, dynamic>;
+        map.forEach((k, v) {
+          _memberPermissions[k] =
+              (v as Map<String, dynamic>).cast<String, bool>();
+        });
+      } catch (_) {}
+    }
+  }
+
+  Future<void> _saveLocalPerms() async {
+    await HiveService.setSetting(
+        'local_member_perms', jsonEncode(_memberPermissions));
   }
 
   Future<void> _loadMembers(SupabaseClient client, String familyId) async {
@@ -142,6 +170,27 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
 
   Future<void> _changeRole(String userId, MemberRole newRole) async {
     if (_familyId == null) return;
+
+    // Yerel mod — KocaSeed üyesinin rolünü Hive'da güncelle.
+    if (_familyId == _localFamilyId) {
+      final idx = int.tryParse(userId.replaceFirst('local_', ''));
+      final list = List<Map<String, dynamic>>.from(KocaSeed.localMembers());
+      if (idx != null && idx >= 0 && idx < list.length) {
+        list[idx] = {...list[idx], 'role': _roleLabel(newRole)};
+        await KocaSeed.setMembers(list);
+      }
+      HapticFeedback.mediumImpact();
+      setState(() {
+        _members = localFamilyMembers();
+      });
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Rol güncellendi: ${_roleLabel(newRole)}')),
+        );
+      }
+      return;
+    }
+
     final client = SupabaseConfig.safeClient;
     if (client == null) return;
 
@@ -172,13 +221,21 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
 
   Future<void> _updatePermission(String userId, String key, bool value) async {
     if (_familyId == null) return;
-    final client = SupabaseConfig.safeClient;
-    if (client == null) return;
 
     setState(() {
       _memberPermissions.putIfAbsent(userId, () => {});
       _memberPermissions[userId]![key] = value;
     });
+
+    // Yerel mod — Hive'a kaydet.
+    if (_familyId == _localFamilyId) {
+      await _saveLocalPerms();
+      HapticFeedback.mediumImpact();
+      return;
+    }
+
+    final client = SupabaseConfig.safeClient;
+    if (client == null) return;
 
     try {
       await client
