@@ -54,8 +54,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
   StreamSubscription<List<Task>>? _tasksSub;
 
   Future<void> _loadTasks() async {
-    final familyId = await _getFamilyId();
-    if (familyId == null) return;
+    final familyId = await _getFamilyId() ?? 'local_family';
     final tasks = await TaskRepository().getTasks(familyId);
     ref.read(tasksProvider.notifier).state = tasks;
     await HiveService.saveTasks(tasks);
@@ -63,7 +62,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
 
   void _subscribeToTasks() async {
     final familyId = await _getFamilyId();
-    if (familyId == null) return;
+    if (familyId == null) return; // yerel modda realtime yok, cache yeterli
     _tasksSub?.cancel();
     _tasksSub = TaskRepository().watchTasks(familyId).listen((tasks) {
       ref.read(tasksProvider.notifier).state = tasks;
@@ -94,11 +93,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
       return;
     }
     try {
-      final familyId = await _getFamilyId();
-      if (familyId == null) {
-        _showSnack('Aile bilgisi bulunamadı, lütfen tekrar giriş yapın');
-        return;
-      }
+      final familyId = await _getFamilyId() ?? 'local_family';
       final userId = AuthService.currentUserId ?? '';
       final newTask = Task(
         id: const Uuid().v4(),
