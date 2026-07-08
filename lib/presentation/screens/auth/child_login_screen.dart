@@ -44,21 +44,17 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
         return;
       }
 
-      // Get current user's family
-      final response = await _repo.client
-          .from('family_members')
-          .select('family_id')
-          .eq('user_id', userId)
-          .maybeSingle();
-
-      final familyId = response?['family_id'] as String?;
-      if (familyId == null) {
-        setState(() {
-          _isLoadingChildren = false;
-          _error = 'Aile bilgisi bulunamadı. Lütfen önce aile oluşturun.';
-        });
-        return;
-      }
+      // Aile id'sini bul; bulunamazsa yerel aileye düş (yerel çocuklar Hive'da).
+      String? familyId;
+      try {
+        final response = await _repo.client
+            .from('family_members')
+            .select('family_id')
+            .eq('user_id', userId)
+            .maybeSingle();
+        familyId = response?['family_id'] as String?;
+      } catch (_) {}
+      familyId ??= ChildAccountRepository.localFamilyId;
 
       final children = await _repo.getChildrenForFamily(familyId);
       setState(() {
@@ -111,7 +107,17 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
     setState(() => _isLoading = true);
 
     try {
-      await ChildAuthService.signIn(childId: child.id, pin: pin);
+      if (child.id.startsWith('local_')) {
+        await ChildAuthService.signInLocal(
+          childId: child.id,
+          pin: pin,
+          childName: child.name,
+          childRole: child.role.name,
+          familyId: child.familyId,
+        );
+      } else {
+        await ChildAuthService.signIn(childId: child.id, pin: pin);
+      }
 
       if (mounted) {
         context.go(AppRoutes.childDashboard);

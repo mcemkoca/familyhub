@@ -4,6 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../core/supabase_client.dart';
 import '../core/errors.dart';
 import '../domain/models/child_session.dart';
+import '../repositories/child_account_repository.dart';
 
 class ChildAuthService {
   static const _secureStorage = FlutterSecureStorage();
@@ -58,6 +59,31 @@ class ChildAuthService {
     return session;
   }
 
+  /// Yerel (Hive) çocuk hesabıyla oturum aç — tek cihaz, sunucusuz. PIN
+  /// ChildAccountRepository.verifyLocalPin ile doğrulanır.
+  static Future<ChildSession> signInLocal({
+    required String childId,
+    required String pin,
+    required String childName,
+    required String childRole,
+    required String familyId,
+  }) async {
+    if (!ChildAccountRepository().verifyLocalPin(childId, pin)) {
+      throw AppAuthException('PIN hatalı veya hesap bulunamadı');
+    }
+    final session = ChildSession(
+      token: 'local_$childId',
+      expiresAt: DateTime.now().add(const Duration(days: 3650)),
+      childName: childName,
+      childRole: childRole,
+      familyId: familyId,
+      childId: childId,
+    );
+    await _persistSession(session);
+    _currentSession = session;
+    return session;
+  }
+
   /// Restore child session from secure storage
   static Future<bool> restoreSession() async {
     final jsonStr = await _secureStorage.read(key: _childSessionKey);
@@ -71,6 +97,12 @@ class ChildAuthService {
       if (session.isExpired) {
         await signOut();
         return false;
+      }
+
+      // Yerel oturum (sunucusuz) → sunucu doğrulamasını atla.
+      if (session.token.startsWith('local_')) {
+        _currentSession = session;
+        return true;
       }
 
       // Validate with server

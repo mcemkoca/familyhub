@@ -55,16 +55,15 @@ class _ChildManagementScreenState extends ConsumerState<ChildManagementScreen> {
         } catch (e) { debugPrint('Child management error: $e'); }
       }
 
+      // Gerçek aile yoksa (giriş/migration eksik) yerel aileye düş — çocuk
+      // hesapları tek cihazda Hive'da gerçek olarak çalışır.
+      familyId ??= ChildAccountRepository.localFamilyId;
       _familyId = familyId;
-      if (familyId != null) {
-        final children = await _repo.getChildrenForFamily(familyId);
-        setState(() {
-          _children = children;
-          _isLoading = false;
-        });
-      } else {
-        setState(() => _isLoading = false);
-      }
+      final children = await _repo.getChildrenForFamily(familyId);
+      setState(() {
+        _children = children;
+        _isLoading = false;
+      });
     } catch (e) {
       debugPrint('ChildManagementScreen._loadFamilyAndChildren error: $e');
       setState(() => _isLoading = false);

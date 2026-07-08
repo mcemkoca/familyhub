@@ -30,33 +30,28 @@ class _ScreenTimeSettingsScreenState
 
   Future<void> _loadChildren() async {
     try {
+      // Aile id'sini profilden çöz; yoksa yerel aileye düş (çocuklar Hive'da).
+      String? familyId;
       final userId = AuthService.currentUserId;
-      if (userId == null) return;
-
       final client = SupabaseConfig.safeClient;
-      if (client == null) return;
-
-      // Get family_id from profile
-      final profile = await client
-          .from('profiles')
-          .select('family_id')
-          .eq('id', userId)
-          .maybeSingle();
-
-      final familyId = profile?['family_id'] as String?;
-      if (familyId == null) {
-        setState(() => _isLoading = false);
-        return;
+      if (userId != null && client != null) {
+        try {
+          final profile = await client
+              .from('profiles')
+              .select('family_id')
+              .eq('id', userId)
+              .maybeSingle();
+          familyId = profile?['family_id'] as String?;
+        } catch (_) {}
       }
+      familyId ??= ChildAccountRepository.localFamilyId;
 
-      final response = await client
-          .from('child_accounts')
-          .select('*')
-          .eq('family_id', familyId)
-          .order('name');
+      // Repository yerel + bulut çocukları birleştirir.
+      final list =
+          await ChildAccountRepository().getChildrenForFamily(familyId);
 
       setState(() {
-        _children = (response as List).cast<Map<String, dynamic>>();
+        _children = list.map((c) => c.toJson()).toList();
         _isLoading = false;
       });
     } catch (e) {
@@ -66,13 +61,9 @@ class _ScreenTimeSettingsScreenState
 
   Future<void> _updateScreenTime(String childId, int? minutes) async {
     try {
-      final client = SupabaseConfig.safeClient;
-      if (client == null) return;
-
-      await client
-          .from('child_accounts')
-          .update({'daily_screen_time_minutes': minutes})
-          .eq('id', childId);
+      // Repo yerel (Hive) ve bulut çocukları destekler.
+      await ChildAccountRepository()
+          .updateChild(childId, dailyScreenTimeMinutes: minutes ?? 120);
 
       setState(() {
         final index = _children.indexWhere((c) => c['id'] == childId);
