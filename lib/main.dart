@@ -378,16 +378,30 @@ class _FamilyHubAppState extends ConsumerState<FamilyHubApp>
         locale: ref.watch(localeProvider),
         // ── TEK TEMA: "Family Mode" (light/dark ayrimi yok) ──
         // Her iki slot da ayni aile temasina baglandi, mod sabit.
-        theme: AppTheme.darkTheme(accentColor, fontScale: fontScale),
-        darkTheme: AppTheme.darkTheme(accentColor, fontScale: fontScale),
+        // Yazı ölçekleme yalnızca MediaQuery.textScaler ile yapılır (aşağıda),
+        // çift ölçeklemeyi önlemek için temaya 1.0 verilir.
+        theme: AppTheme.darkTheme(accentColor),
+        darkTheme: AppTheme.darkTheme(accentColor),
         themeMode: ThemeMode.dark,
         routerConfig: router,
-        builder: (context, child) => AnimatedTheme(
-          data: Theme.of(context),
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-          child: child!,
-        ),
+        builder: (context, child) {
+          // Yazı boyutu ayarını TÜM uygulamaya uygula. Ekranlarda sabit
+          // fontSize kullanıldığından tema fontScale'i tek başına yetmez;
+          // MediaQuery.textScaler her Text'i ölçekler. Cihazın kendi yazı
+          // boyutuyla çarpışmayı önlemek için sabitlenir (0.85–1.35 aralığı).
+          final mq = MediaQuery.of(context);
+          return MediaQuery(
+            data: mq.copyWith(
+              textScaler: TextScaler.linear(fontScale.clamp(0.85, 1.35)),
+            ),
+            child: AnimatedTheme(
+              data: Theme.of(context),
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+              child: child!,
+            ),
+          );
+        },
       ),
     );
   }

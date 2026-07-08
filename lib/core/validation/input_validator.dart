@@ -4,8 +4,11 @@ class InputValidator {
     r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
   );
 
+  // Uluslararası (+ ve 8-15 hane) veya ulusal (0 + 8-12 hane) formatı kabul
+  // eder. Belçika (0470123456 = 10 hane) ve Türkiye (05321234567 = 11 hane)
+  // dahil AB numaralarını kapsar. Boşluk/tire girişte temizlenir.
   static final _phoneRegex = RegExp(
-    r'^(\+[0-9]{10,15}|0[0-9]{10})$',
+    r'^(\+[0-9]{8,15}|0[0-9]{7,12})$',
   );
 
   static final _nameRegex = RegExp(
@@ -32,8 +35,10 @@ class InputValidator {
 
   static String? validatePhone(String? value) {
     if (value == null || value.isEmpty) return 'Telefon zorunlu';
-    if (!_phoneRegex.hasMatch(value)) {
-      return 'Geçerli telefon girin (örn: 05321234567 veya +905321234567)';
+    // Boşluk, tire ve parantezleri temizle (ör. "0470 12 34 56", "+32 470-12").
+    final cleaned = value.replaceAll(RegExp(r'[\s\-().]'), '');
+    if (!_phoneRegex.hasMatch(cleaned)) {
+      return 'Geçerli telefon girin (ör: 0470123456 veya +32470123456)';
     }
     return null;
   }

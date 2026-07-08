@@ -105,40 +105,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 8)),
 
-            // ── GÖRÜNÜM ─────────────────────────────────────────────
-            SliverToBoxAdapter(
-              child: SettingsSection(
-                title: 'GÖRÜNÜM',
-                icon: Icons.palette_outlined,
-                children: [
-                  SettingsItem(
-                    icon: Icons.color_lens_outlined,
-                    iconColor: const Color(0xFFEC4899),
-                    label: 'Aksan Rengi',
-                    description: 'Uygulama vurgu rengini değiştir',
-                    showValue: _accentLabel,
-                    onTap: () => context.push(AppRoutes.appearanceSettings),
-                  ),
-                  SettingsItem(
-                    icon: Icons.text_fields,
-                    iconColor: const Color(0xFF8B5CF6),
-                    label: 'Yazı Boyutu',
-                    description: 'Metin boyutunu ayarla',
-                    showValue: _fontLabel,
-                    onTap: () => context.push(AppRoutes.appearanceSettings),
-                  ),
-                  SettingsItem(
-                    icon: Icons.dashboard_customize_outlined,
-                    iconColor: const Color(0xFF06B6D4),
-                    label: 'Ana Ekranı Özelleştir',
-                    description: 'Akıllı kart, ipuçları ve kutucuk sırası',
-                    onTap: () => context.push(AppRoutes.hubCustomize),
-                    isLast: true,
-                  ),
-                ],
-              ),
-            ),
-
             // ── BİLDİRİMLER ─────────────────────────────────────────
             SliverToBoxAdapter(
               child: SettingsSection(
@@ -452,6 +418,40 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     description: 'Sürüm 2.1.0 · FamilyHub Inc.',
                     showValue: 'Güncel',
                     onTap: () => context.push(AppRoutes.aboutApp),
+                    isLast: true,
+                  ),
+                ],
+              ),
+            ),
+
+            // ── GÖRÜNÜM ─────────────────────────────────────────────
+            SliverToBoxAdapter(
+              child: SettingsSection(
+                title: 'GÖRÜNÜM',
+                icon: Icons.palette_outlined,
+                children: [
+                  SettingsItem(
+                    icon: Icons.color_lens_outlined,
+                    iconColor: const Color(0xFFEC4899),
+                    label: 'Aksan Rengi',
+                    description: 'Uygulama vurgu rengini değiştir',
+                    showValue: _accentLabel,
+                    onTap: () => context.push(AppRoutes.appearanceSettings),
+                  ),
+                  SettingsItem(
+                    icon: Icons.text_fields,
+                    iconColor: const Color(0xFF8B5CF6),
+                    label: 'Yazı Boyutu',
+                    description: 'Metin boyutunu ayarla',
+                    showValue: _fontLabel,
+                    onTap: () => context.push(AppRoutes.appearanceSettings),
+                  ),
+                  SettingsItem(
+                    icon: Icons.dashboard_customize_outlined,
+                    iconColor: const Color(0xFF06B6D4),
+                    label: 'Ana Ekranı Özelleştir',
+                    description: 'Akıllı kart, ipuçları ve kutucuk sırası',
+                    onTap: () => context.push(AppRoutes.hubCustomize),
                     isLast: true,
                   ),
                 ],
