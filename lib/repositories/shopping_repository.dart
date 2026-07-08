@@ -27,23 +27,36 @@ class ShoppingRepository with RepositoryErrorHandler {
   }
 
   Future<List<ShoppingItem>> getItems() async {
-    return handleRepositoryCall(() async {
-      final cached = HiveService.getShoppingItems();
-      if (cached.isNotEmpty) return cached;
+    String? familyId;
+    try {
+      familyId = await _getFamilyId();
+    } catch (_) {
+      familyId = null;
+    }
+    // Aile/oturum yoksa yerel (Hive) — çevrimdışı.
+    if (familyId == null) return HiveService.getShoppingItems();
 
-      final familyId = await _getFamilyId();
-      if (familyId == null) return [];
-
+    // Bulut-öncelikli: başka üyelerin değişiklikleri senkron olsun. Buluttan
+    // çek, yerel-only (senkronlanmamış) öğeleri koru, cache'i tazele.
+    try {
       final response = await _client
           .from('shopping_items')
           .select('*')
           .eq('family_id', familyId)
           .order('created_at', ascending: false);
-
-      final items = (response as List).map((e) => _fromJson(e as Map<String, dynamic>)).toList();
-      await HiveService.saveShoppingItems(items);
-      return items;
-    }, 'getItems');
+      final cloud = (response as List)
+          .map((e) => _fromJson(e as Map<String, dynamic>))
+          .toList();
+      final locals = HiveService.getShoppingItems()
+          .where((i) => i.id.startsWith('local_'))
+          .toList();
+      final merged = [...locals, ...cloud];
+      await HiveService.saveShoppingItems(merged);
+      return merged;
+    } catch (e) {
+      debugPrint('getItems cloud failed, using cache: $e');
+      return HiveService.getShoppingItems();
+    }
   }
 
   Future<ShoppingItem> createItem(

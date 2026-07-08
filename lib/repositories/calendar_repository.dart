@@ -26,26 +26,37 @@ class CalendarRepository with RepositoryErrorHandler {
   }
 
   Future<List<CalendarEvent>> getEvents() async {
-    return handleRepositoryCall(() async {
-      // 1. Try Hive cache first
-      final cached = HiveService.getCalendarEvents();
-      if (cached.isNotEmpty) return cached;
+    String? familyId;
+    try {
+      familyId = await _getFamilyId();
+    } catch (_) {
+      familyId = null;
+    }
+    // Aile/oturum yoksa yerel (Hive).
+    if (familyId == null) return HiveService.getCalendarEvents();
 
-      // 2. Fall back to Supabase
-      final familyId = await _getFamilyId();
-      if (familyId == null) return [];
-
+    // Bulut-öncelikli: aile üyelerinin etkinlikleri senkron olsun; yerel-only
+    // (senkronlanmamış) etkinlikleri koru; cache'i tazele.
+    try {
       final response = await _client
           .from('events')
           .select('*')
           .eq('family_id', familyId)
           .eq('status', 'active')
           .order('start_time', ascending: true);
-
-      final events = (response as List).map((e) => _fromJson(e as Map<String, dynamic>)).toList();
-      await HiveService.saveCalendarEvents(events);
-      return events;
-    }, 'getEvents');
+      final cloud = (response as List)
+          .map((e) => _fromJson(e as Map<String, dynamic>))
+          .toList();
+      final locals = HiveService.getCalendarEvents()
+          .where((e) => e.id.startsWith('local_'))
+          .toList();
+      final merged = [...cloud, ...locals];
+      await HiveService.saveCalendarEvents(merged);
+      return merged;
+    } catch (e) {
+      debugPrint('getEvents cloud failed, using cache: $e');
+      return HiveService.getCalendarEvents();
+    }
   }
 
   Future<CalendarEvent> createEvent(CalendarEvent event) async {

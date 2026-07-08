@@ -26,26 +26,35 @@ class MoodRepository with RepositoryErrorHandler {
   }
 
   Future<List<MoodEntry>> getEntries() async {
-    return handleRepositoryCall(() async {
-      final cached = HiveService.getMoodEntries();
-      if (cached.isNotEmpty) return cached;
+    String? familyId;
+    try {
+      familyId = await _getFamilyId();
+    } catch (_) {
+      familyId = null;
+    }
+    if (familyId == null) return HiveService.getMoodEntries();
 
-      final familyId = await _getFamilyId();
-      if (familyId == null) return [];
-
+    // Bulut-öncelikli: aile üyelerinin ruh halleri senkron olsun; yerel-only
+    // kayıtları koru.
+    try {
       final response = await _client
           .from('mood_entries')
           .select('*')
           .eq('family_id', familyId)
           .order('created_at', ascending: false)
           .limit(50);
-
-      final entries = (response as List)
+      final cloud = (response as List)
           .map((e) => _fromJson(e as Map<String, dynamic>))
           .toList();
-      await HiveService.saveMoodEntries(entries);
-      return entries;
-    }, 'getEntries');
+      final locals = HiveService.getMoodEntries()
+          .where((e) => e.id.startsWith('local_'))
+          .toList();
+      final merged = [...locals, ...cloud];
+      await HiveService.saveMoodEntries(merged);
+      return merged;
+    } catch (e) {
+      return HiveService.getMoodEntries();
+    }
   }
 
   Future<MoodEntry> createEntry(String emoji, {String? note}) async {

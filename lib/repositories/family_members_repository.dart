@@ -35,15 +35,28 @@ class FamilyMembersRepository with RepositoryErrorHandler {
   }
 
   Future<List<FamilyMember>> getMembers() async {
-    final cached = HiveService.getFamilyMembers();
-    if (cached.isNotEmpty) return cached;
-
-    final familyId = await _getFamilyId();
-    if (familyId == null) return [];
-
+    String? familyId;
+    try {
+      familyId = await _getFamilyId();
+    } catch (_) {
+      familyId = null;
+    }
     final client = _client;
-    if (client == null) return [];
+    // Aile/oturum/bağlantı yoksa önbelleği kullan (çevrimdışı).
+    if (familyId == null || client == null) {
+      return HiveService.getFamilyMembers();
+    }
 
+    try {
+      return await _fetchMembersFromCloud(client, familyId);
+    } catch (e) {
+      debugPrint('getMembers cloud failed, using cache: $e');
+      return HiveService.getFamilyMembers();
+    }
+  }
+
+  Future<List<FamilyMember>> _fetchMembersFromCloud(
+      SupabaseClient client, String familyId) async {
     return handleRepositoryCall(() async {
       // Load family_members to get roles
       final fmResponse = await client
