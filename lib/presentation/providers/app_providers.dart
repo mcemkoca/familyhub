@@ -328,6 +328,31 @@ final taskFilterProvider = StateProvider<String>((ref) => 'all');
 class CalendarNotifier extends StateNotifier<AsyncValue<List<CalendarEvent>>> {
   CalendarNotifier() : super(const AsyncValue.loading()) {
     loadEvents();
+    _subscribeRealtime();
+  }
+
+  StreamSubscription<dynamic>? _rt;
+
+  void _subscribeRealtime() {
+    try {
+      _rt = CalendarRepository().watchEvents().listen(
+            (_) => _reloadSilent(),
+            onError: (_) {},
+          );
+    } catch (_) {}
+  }
+
+  Future<void> _reloadSilent() async {
+    try {
+      final events = await CalendarRepository().getEvents();
+      if (mounted) state = AsyncValue.data(events);
+    } catch (_) {}
+  }
+
+  @override
+  void dispose() {
+    _rt?.cancel();
+    super.dispose();
   }
 
   Future<void> loadEvents() async {
