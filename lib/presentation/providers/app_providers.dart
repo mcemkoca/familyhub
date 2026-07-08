@@ -430,6 +430,33 @@ final eventsProvider =
 class ShoppingNotifier extends StateNotifier<AsyncValue<List<ShoppingItem>>> {
   ShoppingNotifier() : super(const AsyncValue.loading()) {
     loadItems();
+    _subscribeRealtime();
+  }
+
+  StreamSubscription<dynamic>? _rt;
+
+  // Başka bir aile üyesi değişiklik yaptığında anında güncelle (realtime).
+  // Realtime kapalıysa/başarısızsa sessizce yok sayılır.
+  void _subscribeRealtime() {
+    try {
+      _rt = ShoppingRepository().watchItems().listen(
+            (_) => _reloadSilent(),
+            onError: (_) {},
+          );
+    } catch (_) {}
+  }
+
+  Future<void> _reloadSilent() async {
+    try {
+      final items = await ShoppingRepository().getItems();
+      if (mounted) state = AsyncValue.data(items);
+    } catch (_) {}
+  }
+
+  @override
+  void dispose() {
+    _rt?.cancel();
+    super.dispose();
   }
 
   Future<void> loadItems() async {
@@ -507,6 +534,31 @@ final shoppingItemsProvider =
 class BudgetNotifier extends StateNotifier<AsyncValue<List<Transaction>>> {
   BudgetNotifier() : super(const AsyncValue.loading()) {
     loadTransactions();
+    _subscribeRealtime();
+  }
+
+  StreamSubscription<dynamic>? _rt;
+
+  void _subscribeRealtime() {
+    try {
+      _rt = BudgetRepository().watchTransactions().listen(
+            (_) => _reloadSilent(),
+            onError: (_) {},
+          );
+    } catch (_) {}
+  }
+
+  Future<void> _reloadSilent() async {
+    try {
+      final txs = await BudgetRepository().getTransactions();
+      if (mounted) state = AsyncValue.data(txs);
+    } catch (_) {}
+  }
+
+  @override
+  void dispose() {
+    _rt?.cancel();
+    super.dispose();
   }
 
   Future<void> loadTransactions() async {
