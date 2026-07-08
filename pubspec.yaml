@@ -37,6 +37,7 @@ dependencies:
   torch_light: ^1.1.0
   emoji_picker_flutter: ^4.3.0
   image_picker: ^1.1.2
+  file_selector: ^1.0.3
   record: ^6.0.0
   permission_handler: ^11.4.0
   crypto: ^3.0.3

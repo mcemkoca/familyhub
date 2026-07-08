@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:file_selector/file_selector.dart';
 import 'package:intl/intl.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import '../../../config/constants.dart';
@@ -501,15 +502,38 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   }
 
   Future<void> _pickFile() async {
-    // File picker ”” shows snackbar if no file_picker package
     setState(() => _showAttachmentMenu = false);
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Dosya paylaşımı yakında aktif olacak'),
-        duration: Duration(seconds: 2),
-      ),
-    );
+    try {
+      final XFile? picked = await openFile();
+      if (picked == null) return;
+      final path = picked.path;
+      final name = picked.name;
+      final size = await picked.length();
+
+      final current = ref.read(chatMessagesProvider);
+      ref.read(chatMessagesProvider.notifier).state = [
+        ...current,
+        ChatMessage(
+          id: 'msg${current.length + 1}',
+          senderId: 'm1',
+          senderName: 'Ben',
+          senderColor: AppColors.blue,
+          content: '📄 $name',
+          createdAt: DateTime.now(),
+          type: MessageType.file,
+          videoUrl: path, // yerel dosya yolu (ileride Storage'a yüklenebilir)
+          fileName: name,
+          fileSize: size,
+        ),
+      ];
+      WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Dosya seçilemedi')),
+        );
+      }
+    }
   }
 
   void _showGifPicker() {
