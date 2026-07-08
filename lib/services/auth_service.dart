@@ -380,6 +380,21 @@ class AuthService {
     } catch (e) {
       throw AppAuthException('Profil güncellenemedi: $e');
     }
+
+    // Auth kullanıcı metadata'sını da güncelle — uygulamanın çoğu yeri avatarı/
+    // ismi currentUser.userMetadata'dan okuyor; yoksa kendi fotoğrafın/adın
+    // güncellenmiş görünmez (senkron sorunu).
+    try {
+      final meta = <String, dynamic>{};
+      if (displayName != null) meta['display_name'] = displayName;
+      if (avatarUrl != null) meta['avatar_url'] = avatarUrl;
+      if (phone != null) meta['phone'] = phone;
+      if (meta.isNotEmpty) {
+        await supabase.auth.updateUser(UserAttributes(data: meta));
+      }
+    } catch (e) {
+      // Metadata güncellenemese de profiles yazıldı — kritik değil.
+    }
   }
 
   static Future<void> updatePassword(String currentPassword, String newPassword) async {
