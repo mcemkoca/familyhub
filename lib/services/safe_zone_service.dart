@@ -53,14 +53,24 @@ class SafeZoneService {
   }
 
   static Future<bool> isInsideZone(SafeZone zone, {Position? position}) async {
-    final pos = position ?? await Geolocator.getCurrentPosition();
-    final distance = Geolocator.distanceBetween(
-      pos.latitude,
-      pos.longitude,
-      zone.latitude,
-      zone.longitude,
-    );
-    return distance <= zone.radiusMeters;
+    try {
+      final pos = position ??
+          await Geolocator.getCurrentPosition(
+            locationSettings: const LocationSettings(
+                accuracy: LocationAccuracy.high,
+                timeLimit: Duration(seconds: 8)),
+          );
+      final distance = Geolocator.distanceBetween(
+        pos.latitude,
+        pos.longitude,
+        zone.latitude,
+        zone.longitude,
+      );
+      return distance <= zone.radiusMeters;
+    } catch (_) {
+      // GPS fix yoksa/zaman aşımında bölge içinde sayma.
+      return false;
+    }
   }
 
   static Future<List<SafeZone>> getActiveZones({Position? position}) async {
@@ -78,7 +88,12 @@ class SafeZoneService {
     Position? position,
   }) async {
     try {
-      final pos = position ?? await Geolocator.getCurrentPosition();
+      final pos = position ??
+          await Geolocator.getCurrentPosition(
+            locationSettings: const LocationSettings(
+                accuracy: LocationAccuracy.high,
+                timeLimit: Duration(seconds: 8)),
+          );
       final distance = Geolocator.distanceBetween(
         pos.latitude,
         pos.longitude,
@@ -120,7 +135,10 @@ class SafeZoneService {
   static Future<List<Map<String, dynamic>>> checkAllZones() async {
     await initialize();
     try {
-      final pos = await Geolocator.getCurrentPosition();
+      final pos = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+            accuracy: LocationAccuracy.high, timeLimit: Duration(seconds: 8)),
+      );
       return _zones.map((zone) {
         final distance = Geolocator.distanceBetween(
           pos.latitude,

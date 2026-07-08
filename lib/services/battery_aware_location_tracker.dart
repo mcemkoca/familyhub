@@ -231,7 +231,8 @@ class BatteryAwareLocationTracker {
     try {
       final accuracy = _accuracyFromString(config.accuracy);
       final pos = await Geolocator.getCurrentPosition(
-        locationSettings: LocationSettings(accuracy: accuracy),
+        locationSettings: LocationSettings(
+            accuracy: accuracy, timeLimit: const Duration(seconds: 10)),
       );
       _processLocation(pos, profileName, config);
     } catch (e) {

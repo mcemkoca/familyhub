@@ -57,7 +57,8 @@ class EmergencyAutoActionsEngine {
     Position? position;
     try {
       position = await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(accuracy: LocationAccuracy.best),
+        locationSettings: const LocationSettings(
+            accuracy: LocationAccuracy.best, timeLimit: Duration(seconds: 8)),
       );
     } catch (e) {
       // ignore: empty_catches
@@ -177,7 +178,9 @@ class EmergencyAutoActionsEngine {
     try {
       // ignore: unused_local_variable
       final pos = await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(accuracy: LocationAccuracy.bestForNavigation),
+        locationSettings: const LocationSettings(
+            accuracy: LocationAccuracy.bestForNavigation,
+            timeLimit: Duration(seconds: 8)),
       );
     } catch (e) {
       // ignore: empty_catches

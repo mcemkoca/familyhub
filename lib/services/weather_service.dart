@@ -27,7 +27,8 @@ class WeatherService {
   static Future<WeatherData> fetchWeatherForLocation({bool celsius = true}) async {
     try {
       final pos = await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(accuracy: LocationAccuracy.best),
+        locationSettings: const LocationSettings(
+            accuracy: LocationAccuracy.best, timeLimit: Duration(seconds: 8)),
       );
       return fetchWeather(pos.latitude, pos.longitude, celsius: celsius);
     } catch (e) {

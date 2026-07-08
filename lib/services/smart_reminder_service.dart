@@ -81,7 +81,10 @@ class SmartReminderService {
   ) async {
     Position? position;
     try {
-      position = await Geolocator.getCurrentPosition();
+      position = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+            accuracy: LocationAccuracy.medium, timeLimit: Duration(seconds: 8)),
+      );
     } catch (e) { debugPrint('Smart reminder error: $e'); }
 
     final now = DateTime.now();

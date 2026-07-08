@@ -52,7 +52,10 @@ class LocationTrackingService {
     // Backup timer: ensure upload even when not moving
     _uploadTimer = Timer.periodic(interval, (_) async {
       try {
-        final pos = await Geolocator.getCurrentPosition();
+        final pos = await Geolocator.getCurrentPosition(
+          locationSettings: const LocationSettings(
+              accuracy: LocationAccuracy.high, timeLimit: Duration(seconds: 10)),
+        );
         await _uploadPosition(pos);
       } catch (e) { debugPrint('Location tracking error: $e'); }
     });
@@ -122,7 +125,10 @@ class LocationTrackingService {
 
   static Future<bool> shareCurrentLocation() async {
     try {
-      final position = await Geolocator.getCurrentPosition();
+      final position = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+            accuracy: LocationAccuracy.high, timeLimit: Duration(seconds: 10)),
+      );
       await _uploadPosition(position);
       return true;
     } catch (_) {
