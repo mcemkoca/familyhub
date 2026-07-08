@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:uuid/uuid.dart';
 import '../core/supabase_client.dart';
 import '../core/utils/repository_mixin.dart';
 import '../domain/entities.dart';
@@ -48,11 +49,38 @@ class CalendarRepository with RepositoryErrorHandler {
   }
 
   Future<CalendarEvent> createEvent(CalendarEvent event) async {
-    return handleRepositoryCall(() async {
-      final familyId = await _getFamilyId();
-      final userId = AuthService.currentUserId;
-      if (familyId == null) throw Exception('Aile bilgisi bulunamadı');
+    final userId = AuthService.currentUserId;
+    String? familyId;
+    try {
+      familyId = await _getFamilyId();
+    } catch (_) {
+      familyId = null;
+    }
 
+    // Aile/oturum yoksa ya da bulut yazma başarısızsa yerel (Hive) etkinlik üret.
+    Future<CalendarEvent> saveLocal() async {
+      final local = event.id.isEmpty
+          ? CalendarEvent(
+              id: 'local_${const Uuid().v4()}',
+              title: event.title,
+              start: event.start,
+              end: event.end,
+              location: event.location,
+              description: event.description,
+              category: event.category,
+              recurrenceRule: event.recurrenceRule,
+              isAllDay: event.isAllDay,
+              reminders: event.reminders,
+            )
+          : event;
+      final all = HiveService.getCalendarEvents();
+      await HiveService.saveCalendarEvents([...all, local]);
+      return local;
+    }
+
+    if (familyId == null) return saveLocal();
+
+    try {
       final response = await _client
           .from('events')
           .insert({
@@ -72,13 +100,22 @@ class CalendarRepository with RepositoryErrorHandler {
           .single();
 
       final created = _fromJson(response);
-      final all = await getEvents();
+      final all = HiveService.getCalendarEvents();
       await HiveService.saveCalendarEvents([...all, created]);
       return created;
-    }, 'createEvent');
+    } catch (e) {
+      debugPrint('createEvent cloud failed, saving local: $e');
+      return saveLocal();
+    }
   }
 
   Future<void> updateEvent(CalendarEvent event) async {
+    if (event.id.startsWith('local_')) {
+      final all = HiveService.getCalendarEvents();
+      await HiveService.saveCalendarEvents(
+          all.map((e) => e.id == event.id ? event : e).toList());
+      return;
+    }
     return handleRepositoryCall(() async {
       await _client
           .from('events')
@@ -103,13 +140,22 @@ class CalendarRepository with RepositoryErrorHandler {
   }
 
   Future<void> deleteEvent(String id) async {
-    return handleRepositoryCall(() async {
-      await _client.from('events').delete().eq('id', id);
-      final all = await getEvents();
+    Future<void> removeLocal() async {
+      final all = HiveService.getCalendarEvents();
       await HiveService.saveCalendarEvents(
-        all.where((e) => e.id != id).toList(),
-      );
-    }, 'deleteEvent');
+          all.where((e) => e.id != id).toList());
+    }
+
+    if (id.startsWith('local_')) {
+      await removeLocal();
+      return;
+    }
+    try {
+      await _client.from('events').delete().eq('id', id);
+    } catch (e) {
+      debugPrint('deleteEvent cloud failed: $e');
+    }
+    await removeLocal();
   }
 
   Stream<List<CalendarEvent>> watchEvents() async* {

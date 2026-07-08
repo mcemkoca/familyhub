@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:uuid/uuid.dart';
 import '../core/supabase_client.dart';
 import '../core/utils/repository_mixin.dart';
 import '../domain/entities.dart';
@@ -47,11 +49,31 @@ class MoodRepository with RepositoryErrorHandler {
   }
 
   Future<MoodEntry> createEntry(String emoji, {String? note}) async {
-    return handleRepositoryCall(() async {
-      final familyId = await _getFamilyId();
-      final userId = AuthService.currentUserId;
-      if (familyId == null) throw Exception('Aile bilgisi bulunamadı');
+    final userId = AuthService.currentUserId;
+    String? familyId;
+    try {
+      familyId = await _getFamilyId();
+    } catch (_) {
+      familyId = null;
+    }
 
+    Future<MoodEntry> saveLocal() async {
+      final entry = MoodEntry(
+        id: 'local_${const Uuid().v4()}',
+        userId: userId ?? '',
+        familyId: familyId ?? '',
+        emoji: emoji,
+        note: note,
+        createdAt: DateTime.now(),
+      );
+      final all = HiveService.getMoodEntries();
+      await HiveService.saveMoodEntries([entry, ...all]);
+      return entry;
+    }
+
+    if (familyId == null) return saveLocal();
+
+    try {
       final response = await _client
           .from('mood_entries')
           .insert({
@@ -65,18 +87,31 @@ class MoodRepository with RepositoryErrorHandler {
           .single();
 
       final created = _fromJson(response);
-      final all = await getEntries();
+      final all = HiveService.getMoodEntries();
       await HiveService.saveMoodEntries([created, ...all]);
       return created;
-    }, 'createEntry');
+    } catch (e) {
+      debugPrint('createEntry cloud failed, saving local: $e');
+      return saveLocal();
+    }
   }
 
   Future<void> deleteEntry(String id) async {
-    return handleRepositoryCall(() async {
-      await _client.from('mood_entries').delete().eq('id', id);
-      final all = await getEntries();
+    Future<void> removeLocal() async {
+      final all = HiveService.getMoodEntries();
       await HiveService.saveMoodEntries(all.where((e) => e.id != id).toList());
-    }, 'deleteEntry');
+    }
+
+    if (id.startsWith('local_')) {
+      await removeLocal();
+      return;
+    }
+    try {
+      await _client.from('mood_entries').delete().eq('id', id);
+    } catch (e) {
+      debugPrint('deleteEntry cloud failed: $e');
+    }
+    await removeLocal();
   }
 
   MoodEntry _fromJson(Map<String, dynamic> json) {
