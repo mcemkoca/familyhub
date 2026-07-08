@@ -114,6 +114,9 @@ class CrashDetectionService {
     _countdownTimer?.cancel();
   }
 
+  /// Yalnızca sesli/ışıklı alarmı susturur (geri sayım/izleme devam eder).
+  void silenceAlarm() => _stopAlarm();
+
   // ═══════════════════════════════════════════
   // ALARM
   // ═══════════════════════════════════════════
