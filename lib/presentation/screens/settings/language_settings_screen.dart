@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../services/hive_service.dart';
+import '../../../services/notification_service.dart';
 import '../../providers/app_providers.dart';
 import '../../../config/country_config.dart';
 import '../../widgets/settings/screen_header.dart';
@@ -48,6 +49,8 @@ class _LanguageSettingsScreenState extends ConsumerState<LanguageSettingsScreen>
     await HiveService.setSetting('dateFormat', c.dateFormat);
     ref.read(countryProvider.notifier).state = c.code;
     ref.read(localeProvider.notifier).state = c.locale;
+    // Ülke değişti → zamanlanmış bildirimler için yerel saat dilimini güncelle.
+    NotificationService.refreshTimezone();
   }
 
   Future<void> _saveLanguage(String lang) async {

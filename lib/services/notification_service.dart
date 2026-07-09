@@ -1,6 +1,7 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz_data;
+import 'hive_service.dart';
 
 typedef NotificationTapCallback = void Function(String? payload);
 
@@ -17,6 +18,10 @@ class NotificationService {
     if (_initialized) return;
     _onTap = onTap;
     tz_data.initializeTimeZones();
+    // KRİTİK: tz.local varsayılan olarak UTC'dir → zonedSchedule yerel saati
+    // UTC sanar ve bildirim yanlış saatte gelir. Ülke ayarına göre yerel
+    // saat dilimini kur (BE/NL/TR — uygulamanın hedef pazarları).
+    _setLocalTimezone();
 
     const androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
     const iosSettings = DarwinInitializationSettings(
@@ -53,6 +58,26 @@ class NotificationService {
     _initialized = true;
   }
 
+  /// Ülke ayarına göre IANA saat dilimini seçer (varsayılan Europe/Brussels).
+  static void _setLocalTimezone() {
+    try {
+      final country = (HiveService.getSetting('country') ?? 'BE').toUpperCase();
+      final name = switch (country) {
+        'TR' => 'Europe/Istanbul',
+        'NL' => 'Europe/Amsterdam',
+        'DE' => 'Europe/Berlin',
+        'FR' => 'Europe/Paris',
+        _ => 'Europe/Brussels',
+      };
+      tz.setLocalLocation(tz.getLocation(name));
+    } catch (_) {
+      // Konum bulunamazsa timezone paketi UTC'de kalır — yine de çalışır.
+    }
+  }
+
+  /// Ülke değişince (ayarlardan) saat dilimini yeniden uygula.
+  static void refreshTimezone() => _setLocalTimezone();
+
   static Future<bool> requestPermission() async {
     final androidPlugin = _notifications
         .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>();
@@ -69,7 +94,8 @@ class NotificationService {
     String? payload,
   }) async {
     await _notifications.show(
-      DateTime.now().millisecond,
+      // millisecond (0-999) çakışıp bildirimleri ezerdi → benzersiz 32-bit id.
+      DateTime.now().microsecondsSinceEpoch.remainder(2147483647),
       title,
       body,
       const NotificationDetails(

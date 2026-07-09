@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../config/constants.dart';
 import '../../../config/market_catalog.dart';
 import '../../../domain/entities.dart';
@@ -221,6 +223,12 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                 ),
               ),
               IconButton(
+                onPressed: _openNearbyMarketsMap,
+                icon: const Icon(Icons.location_on_outlined),
+                color: const Color(0xFF3B82F6),
+                tooltip: 'Yakındaki Marketler (Harita)',
+              ),
+              IconButton(
                 onPressed: _showMarketCatalog,
                 icon: const Icon(Icons.storefront_outlined),
                 color: const Color(0xFF10B981),
@@ -271,6 +279,60 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
         ],
       ),
     );
+  }
+
+  /// Anlık konumu alır ve OpenStreetMap tabanlı harita uygulamasında yakındaki
+  /// marketleri açar (geo: URI → cihaz harita uygulaması; olmazsa OSM web).
+  Future<void> _openNearbyMarketsMap() async {
+    final messenger = ScaffoldMessenger.of(context);
+    messenger.showSnackBar(const SnackBar(
+      content: Text('Konum alınıyor…'),
+      duration: Duration(seconds: 1),
+    ));
+    try {
+      // İzin kontrolü + iste.
+      var perm = await Geolocator.checkPermission();
+      if (perm == LocationPermission.denied) {
+        perm = await Geolocator.requestPermission();
+      }
+      if (perm == LocationPermission.denied ||
+          perm == LocationPermission.deniedForever) {
+        messenger.showSnackBar(const SnackBar(
+          content: Text('Konum izni verilmedi. Ayarlardan izin verin.'),
+          backgroundColor: Color(0xFFEF4444),
+        ));
+        return;
+      }
+      final pos = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+            accuracy: LocationAccuracy.high, timeLimit: Duration(seconds: 10)),
+      );
+      final lat = pos.latitude;
+      final lon = pos.longitude;
+
+      // Anlık konumu kullanıcıya yaz.
+      messenger.showSnackBar(SnackBar(
+        content: Text(
+            'Konumun: ${lat.toStringAsFixed(5)}, ${lon.toStringAsFixed(5)} — harita açılıyor'),
+        duration: const Duration(seconds: 2),
+      ));
+
+      // Önce cihazın harita uygulaması (yakındaki süpermarketleri arar).
+      final geoUri = Uri.parse('geo:$lat,$lon?q=supermarket');
+      if (await canLaunchUrl(geoUri)) {
+        await launchUrl(geoUri, mode: LaunchMode.externalApplication);
+        return;
+      }
+      // Yedek: OpenStreetMap web (anlık konum işaretli).
+      final osmUri = Uri.parse(
+          'https://www.openstreetmap.org/?mlat=$lat&mlon=$lon#map=16/$lat/$lon');
+      await launchUrl(osmUri, mode: LaunchMode.externalApplication);
+    } catch (e) {
+      messenger.showSnackBar(SnackBar(
+        content: Text('Konum alınamadı: $e'),
+        backgroundColor: const Color(0xFFEF4444),
+      ));
+    }
   }
 
   void _showMarketCatalog() {

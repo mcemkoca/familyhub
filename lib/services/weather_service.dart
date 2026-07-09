@@ -84,6 +84,22 @@ class WeatherService {
     return 'Bilinmiyor';
   }
 
+  /// Anlık hava koşullarına göre aile için pratik uyarı (yoksa null).
+  /// WMO kodu + sıcaklık + rüzgâr esas alınır. Emoji ile döner.
+  static String? weatherWarning(WeatherData w) {
+    final c = w.weatherCode;
+    if (c >= 95) return '⛈️ Gök gürültülü fırtına — dışarı çıkmadan önce dikkat.';
+    if (c >= 85) return '🌨️ Kar fırtınası — yollar kapanabilir, erken çıkın.';
+    if (c >= 80) return '🌧️ Sağanak yağış — şemsiye ve su geçirmez montu alın.';
+    if (c >= 71) return '❄️ Kar yağışı — çocukları sıcak giydirin, yol kaygan olabilir.';
+    if (c >= 51) return '☔ Yağmur bekleniyor — şemsiyeyi unutmayın.';
+    if (c >= 45) return '🌫️ Sisli hava — trafikte görüş mesafesi düşük, dikkatli olun.';
+    if (w.windSpeed >= 45) return '💨 Kuvvetli rüzgâr — gevşek nesnelere dikkat.';
+    if (w.temperature <= 0) return '🥶 Donma riski — sıcak giyinin, buzlanmaya dikkat.';
+    if (w.temperature >= 32) return '🥵 Aşırı sıcak — bol su için, güneşten korunun.';
+    return null;
+  }
+
   static final List<Map<String, dynamic>> cities = [
     // Belçika (varsayılan pazar)
     {'name': 'Brüksel', 'lat': 50.8503, 'lon': 4.3517},

@@ -160,6 +160,37 @@ class _DailyBriefingCardState extends ConsumerState<DailyBriefingCard> {
                 ],
               ),
             ),
+            // ── Canlı hava uyarısı (önbelleksiz — weatherProvider'dan anlık) ──
+            if (_expanded && weather != null &&
+                WeatherService.weatherWarning(weather) != null) ...[
+              const SizedBox(height: 12),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF59E0B).withAlpha(28),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: const Color(0x55F59E0B)),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.warning_amber_rounded,
+                        size: 18, color: Color(0xFFFBBF24)),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        WeatherService.weatherWarning(weather)!,
+                        style: const TextStyle(
+                            color: Color(0xFFFDE68A),
+                            fontSize: 12.5,
+                            height: 1.35,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
             if (!_expanded)
               const SizedBox.shrink()
             else if (!weatherSettled) ...[
