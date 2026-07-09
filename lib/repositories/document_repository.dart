@@ -1,9 +1,12 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:uuid/uuid.dart';
 import '../core/supabase_client.dart';
 import '../core/errors.dart' as app_errors;
 import '../core/utils/repository_mixin.dart';
+import '../services/hive_service.dart';
 
 /// Document categories matching Belgium family needs.
 enum DocumentCategory {
@@ -122,6 +125,50 @@ class DocumentRepository with RepositoryErrorHandler {
     if (_userId == null) {
       throw app_errors.AppAuthException('Giriş yapmalısınız');
     }
+  }
+
+  /// Gerçek aile yoksa kullanılan yerel evrak kasası (Hive'da dosya yolları).
+  static const String localFamilyId = 'local_family';
+
+  List<Map<String, dynamic>> _localRaw() {
+    final raw = HiveService.getSetting('documents_local');
+    if (raw == null || raw.isEmpty) return [];
+    try {
+      return (jsonDecode(raw) as List).cast<Map<String, dynamic>>();
+    } catch (_) {
+      return [];
+    }
+  }
+
+  List<FamilyDocument> getLocalDocuments() =>
+      _localRaw().map((e) => FamilyDocument.fromJson(e)).toList()
+        ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
+
+  Future<FamilyDocument> addLocalDocument({
+    required File file,
+    required String title,
+    String fileType = 'pdf',
+    DocumentCategory category = DocumentCategory.other,
+    DateTime? expiryDate,
+  }) async {
+    final map = {
+      'id': 'local_${const Uuid().v4()}',
+      'title': title,
+      'file_url': file.path,
+      'file_type': fileType,
+      'uploaded_by': _userId,
+      'category': category.dbValue,
+      'expiry_date': expiryDate?.toIso8601String(),
+      'created_at': DateTime.now().toIso8601String(),
+    };
+    final all = _localRaw()..insert(0, map);
+    await HiveService.setSetting('documents_local', jsonEncode(all));
+    return FamilyDocument.fromJson(map);
+  }
+
+  Future<void> deleteLocalDocument(String id) async {
+    final all = _localRaw()..removeWhere((e) => e['id'] == id);
+    await HiveService.setSetting('documents_local', jsonEncode(all));
   }
 
   Future<List<FamilyDocument>> getDocuments(String familyId) async {

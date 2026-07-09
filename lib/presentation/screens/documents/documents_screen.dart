@@ -30,21 +30,32 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
 
   Future<String?> _getFamilyId() async {
     final userId = AuthService.currentUserId;
-    if (userId == null) return null;
-    final profile = await AuthService.safeClient
-        ?.from('profiles')
-        .select('family_id')
-        .eq('id', userId)
-        .maybeSingle();
-    return profile?['family_id'] as String?;
+    if (userId == null) return DocumentRepository.localFamilyId;
+    try {
+      final profile = await AuthService.safeClient
+          ?.from('profiles')
+          .select('family_id')
+          .eq('id', userId)
+          .maybeSingle();
+      return (profile?['family_id'] as String?) ??
+          DocumentRepository.localFamilyId;
+    } catch (_) {
+      return DocumentRepository.localFamilyId;
+    }
   }
 
   void _subscribe() async {
     final familyId = await _getFamilyId();
-    if (familyId == null) return;
+    // Yerel mod — Hive'daki belgeleri yükle (realtime yok).
+    if (familyId == DocumentRepository.localFamilyId) {
+      if (mounted) {
+        setState(() => _documents = DocumentRepository().getLocalDocuments());
+      }
+      return;
+    }
     _sub?.cancel();
     _sub = DocumentRepository()
-        .watchDocuments(familyId)
+        .watchDocuments(familyId!)
         .listen(
           (docs) => setState(() => _documents = docs),
           onError: (e) => debugPrint('Documents stream error: $e'),
@@ -272,7 +283,7 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
     setState(() => _isUploading = true);
     try {
       final familyId = await _getFamilyId();
-      if (familyId == null) return;
+      final isLocal = familyId == DocumentRepository.localFamilyId;
 
       String? ocrText;
       final ext = file.path.toLowerCase();
@@ -293,16 +304,30 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
         fileType = 'doc';
       }
 
-      await DocumentRepository().uploadDocument(
-        familyId: familyId,
-        file: file,
-        title: fileName,
-        fileType: fileType,
-        ocrText: ocrText,
-        extractedData: ocrText != null ? {'raw_text': ocrText} : null,
-        category: category,
-        expiryDate: expiryDate,
-      );
+      if (isLocal) {
+        await DocumentRepository().addLocalDocument(
+          file: file,
+          title: fileName,
+          fileType: fileType,
+          category: category,
+          expiryDate: expiryDate,
+        );
+        if (mounted) {
+          setState(() =>
+              _documents = DocumentRepository().getLocalDocuments());
+        }
+      } else {
+        await DocumentRepository().uploadDocument(
+          familyId: familyId!,
+          file: file,
+          title: fileName,
+          fileType: fileType,
+          ocrText: ocrText,
+          extractedData: ocrText != null ? {'raw_text': ocrText} : null,
+          category: category,
+          expiryDate: expiryDate,
+        );
+      }
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -349,7 +374,15 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
       ),
     );
     if (ok == true) {
-      await DocumentRepository().deleteDocument(doc.id, doc.fileUrl);
+      if (doc.id.startsWith('local_')) {
+        await DocumentRepository().deleteLocalDocument(doc.id);
+        if (mounted) {
+          setState(() =>
+              _documents = DocumentRepository().getLocalDocuments());
+        }
+      } else {
+        await DocumentRepository().deleteDocument(doc.id, doc.fileUrl);
+      }
       HapticFeedback.mediumImpact();
     }
   }
