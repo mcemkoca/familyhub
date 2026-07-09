@@ -155,13 +155,18 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _showAddSheet(context),
-        backgroundColor: const Color(0xFF10B981),
-        icon: const Icon(Icons.add, color: Colors.white),
-        label: const Text('Ekle',
-            style:
-                TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
+      // FAB'ı alt nav çubuğunun (MainShell iki-pill) üstüne kaldır — yoksa
+      // arkasında kalıp görünmez.
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 78),
+        child: FloatingActionButton.extended(
+          onPressed: () => _showAddSheet(context),
+          backgroundColor: const Color(0xFF10B981),
+          icon: const Icon(Icons.add, color: Colors.white),
+          label: const Text('Ekle',
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
+        ),
       ),
     );
   }
@@ -699,19 +704,77 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
   Widget _buildList(List<ShoppingItem> items, bool isDark) {
     if (items.isEmpty) {
       return Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(Icons.shopping_cart_outlined,
-                size: 72, color: const Color(0xFF6B7280).withAlpha(100)),
-            const SizedBox(height: 16),
-            const Text('Liste boş',
-                style:
-                    TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
-            const SizedBox(height: 6),
-            const Text('+ butonuna bas veya ✨ hızlı ekle',
-                style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
-          ],
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 110,
+                height: 110,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: const Color(0xFF10B981).withAlpha(24),
+                ),
+                child: Icon(Icons.shopping_cart_outlined,
+                    size: 56, color: const Color(0xFF10B981).withAlpha(200)),
+              ),
+              const SizedBox(height: 20),
+              const Text('Alışveriş listen boş',
+                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800)),
+              const SizedBox(height: 8),
+              const Text(
+                'Ürün ekle, tarife göre otomatik doldur ya da\nAI ile hızlı liste oluştur.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 13.5, color: Color(0xFF9CA3AF), height: 1.4),
+              ),
+              const SizedBox(height: 24),
+              // Belirgin ana eylem — FAB nav'ın arkasında kalsa da buradan eklenir.
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton.icon(
+                  onPressed: () => _showAddSheet(context),
+                  style: FilledButton.styleFrom(
+                    backgroundColor: const Color(0xFF10B981),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14)),
+                  ),
+                  icon: const Icon(Icons.add, color: Colors.white),
+                  label: const Text('Ürün Ekle',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 15)),
+                ),
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: _showRecipePicker,
+                      icon: const Icon(Icons.restaurant_menu,
+                          size: 18, color: Color(0xFFF97316)),
+                      label: const Text('Tariften',
+                          style: TextStyle(color: Color(0xFFF97316))),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: _showAiMarketList,
+                      icon: const Icon(Icons.auto_awesome,
+                          size: 18, color: Color(0xFF8B5CF6)),
+                      label: const Text('AI Liste',
+                          style: TextStyle(color: Color(0xFF8B5CF6))),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       );
     }
