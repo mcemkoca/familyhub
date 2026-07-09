@@ -89,20 +89,31 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
 
   Future<String?> _getFamilyId() async {
     final userId = AuthService.currentUserId;
-    if (userId == null) return null;
-    final profile = await AuthService.safeClient
-        ?.from('profiles')
-        .select('family_id')
-        .eq('id', userId)
-        .maybeSingle();
-    return profile?['family_id'] as String?;
+    if (userId == null) return GalleryRepository.localFamilyId;
+    try {
+      final profile = await AuthService.safeClient
+          ?.from('profiles')
+          .select('family_id')
+          .eq('id', userId)
+          .maybeSingle();
+      return (profile?['family_id'] as String?) ??
+          GalleryRepository.localFamilyId;
+    } catch (_) {
+      return GalleryRepository.localFamilyId;
+    }
   }
 
   void _subscribe() async {
     final familyId = await _getFamilyId();
-    if (familyId == null) return;
+    // Yerel mod — Hive'daki yerel medyayı yükle (realtime yok).
+    if (familyId == GalleryRepository.localFamilyId) {
+      if (mounted) {
+        setState(() => _media = GalleryRepository().getLocalMedia());
+      }
+      return;
+    }
     _sub?.cancel();
-    _sub = GalleryRepository().watchMedia(familyId).listen(
+    _sub = GalleryRepository().watchMedia(familyId!).listen(
           (media) => setState(() => _media = media),
           onError: (e) => debugPrint('Gallery stream error: $e'),
         );
@@ -144,28 +155,37 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
     });
 
     final familyId = await _getFamilyId();
-    if (familyId == null) return;
+    final isLocal = familyId == GalleryRepository.localFamilyId;
 
     for (int i = 0; i < files.length; i++) {
       final f = files[i];
       final ext = f.path.split('.').last.toLowerCase();
       final isVideo = ['mp4', 'mov', 'avi', 'mkv'].contains(ext);
       try {
-        await GalleryRepository().uploadMedia(
-          familyId: familyId,
-          file: File(f.path),
-          type: isVideo ? 'video' : 'image',
-        );
+        if (isLocal) {
+          await GalleryRepository().addLocalMedia(
+              File(f.path), isVideo ? 'video' : 'image');
+        } else {
+          await GalleryRepository().uploadMedia(
+            familyId: familyId!,
+            file: File(f.path),
+            type: isVideo ? 'video' : 'image',
+          );
+        }
       } catch (e) {
         debugPrint('Upload error for ${f.name}: $e');
       }
       if (mounted) setState(() => _uploadProgress = i + 1);
     }
 
+    // Yerel modda realtime yok — listeyi Hive'dan yeniden yükle.
+    if (isLocal && mounted) {
+      setState(() => _media = GalleryRepository().getLocalMedia());
+    }
     if (mounted) {
       setState(() => _isUploading = false);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('$files.length fotoğraf/video yüklendi')),
+        SnackBar(content: Text('${files.length} fotoğraf/video yüklendi')),
       );
     }
   }
@@ -186,10 +206,18 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
       ),
     );
     if (ok == true) {
-      await GalleryRepository().deleteMedia(media.id, media.url);
+      if (media.id.startsWith('local_')) {
+        await GalleryRepository().deleteLocalMedia(media.id);
+        if (mounted) {
+          setState(() => _media = GalleryRepository().getLocalMedia());
+        }
+      } else {
+        await GalleryRepository().deleteMedia(media.id, media.url);
+      }
       HapticFeedback.mediumImpact();
     }
   }
+
 
   void _showImageDialog(FamilyMedia media) {
     showDialog(
@@ -201,7 +229,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
           fit: StackFit.expand,
           children: [
             InteractiveViewer(
-              child: Image.network(media.url, fit: BoxFit.contain),
+              child: galleryImage(media.url, fit: BoxFit.contain),
             ),
             Positioned(
               top: 16,
@@ -527,12 +555,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
             child: Stack(
               fit: StackFit.expand,
               children: [
-                Image.network(
-                  m.thumbnailUrl ?? m.url,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (_, child, progress) =>
-                      progress == null ? child : const Center(child: CircularProgressIndicator(strokeWidth: 2)),
-                ),
+                galleryImage(m.thumbnailUrl ?? m.url, fit: BoxFit.cover),
                 if (m.type == 'video')
                   const Center(
                     child: Icon(Icons.play_circle_fill, color: Colors.white, size: 40),
@@ -603,10 +626,9 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
                 fit: StackFit.expand,
                 children: [
                   // Background image (first media)
-                  Image.network(
-                    mem.media.first.thumbnailUrl ?? mem.media.first.url,
-                    fit: BoxFit.cover,
-                  ),
+                  galleryImage(
+                      mem.media.first.thumbnailUrl ?? mem.media.first.url,
+                      fit: BoxFit.cover),
                   // Dark gradient overlay
                   Container(
                     decoration: BoxDecoration(
@@ -677,7 +699,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
                                   borderRadius: BorderRadius.circular(8),
                                   border: Border.all(color: Colors.white54),
                                   image: DecorationImage(
-                                    image: NetworkImage(m.thumbnailUrl ?? m.url),
+                                    image: galleryImageProvider(m.thumbnailUrl ?? m.url),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -738,10 +760,7 @@ class _MemoryDetailScreen extends StatelessWidget {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.network(
-                    m.thumbnailUrl ?? m.url,
-                    fit: BoxFit.cover,
-                  ),
+                  galleryImage(m.thumbnailUrl ?? m.url, fit: BoxFit.cover),
                   if (m.type == 'video')
                     const Center(
                       child: Icon(Icons.play_circle_fill, color: Colors.white, size: 48),
@@ -780,7 +799,7 @@ class _MemoryDetailScreen extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             InteractiveViewer(
-              child: Image.network(media.url, fit: BoxFit.contain),
+              child: galleryImage(media.url, fit: BoxFit.contain),
             ),
             Positioned(
               top: 16,
@@ -868,3 +887,21 @@ class _DarkListTile extends StatelessWidget {
     );
   }
 }
+
+
+// ── Galeri medya görüntüleyici: yerel dosya yolu mu network URL mü ayırır ──
+Widget galleryImage(String url, {BoxFit fit = BoxFit.cover}) {
+  if (url.startsWith('http')) {
+    return Image.network(url,
+        fit: fit,
+        loadingBuilder: (_, child, p) =>
+            p == null ? child : const Center(child: CircularProgressIndicator(strokeWidth: 2)),
+        errorBuilder: (_, _, _) => const Icon(Icons.broken_image, color: Colors.white30));
+  }
+  return Image.file(File(url),
+      fit: fit,
+      errorBuilder: (_, _, _) => const Icon(Icons.broken_image, color: Colors.white30));
+}
+
+ImageProvider galleryImageProvider(String url) =>
+    url.startsWith('http') ? NetworkImage(url) : FileImage(File(url)) as ImageProvider;

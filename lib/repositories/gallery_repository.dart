@@ -1,8 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:uuid/uuid.dart';
 import '../core/supabase_client.dart';
 import '../core/errors.dart' as app_errors;
 import '../core/utils/repository_mixin.dart';
+import '../services/hive_service.dart';
 
 class FamilyMedia {
   final String id;
@@ -47,6 +50,63 @@ class GalleryRepository with RepositoryErrorHandler {
     if (_userId == null) {
       throw app_errors.AppAuthException('Giriş yapmalısınız');
     }
+  }
+
+  /// Gerçek aile yoksa kullanılan yerel galeri (tek cihaz, Hive'da dosya yolları).
+  static const String localFamilyId = 'local_family';
+
+  List<FamilyMedia> getLocalMedia() {
+    final raw = HiveService.getSetting('gallery_local');
+    if (raw == null || raw.isEmpty) return [];
+    try {
+      return (jsonDecode(raw) as List)
+          .map((e) => FamilyMedia.fromJson(e as Map<String, dynamic>))
+          .toList()
+        ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
+    } catch (_) {
+      return [];
+    }
+  }
+
+  Future<FamilyMedia> addLocalMedia(File file, String type,
+      {String? caption}) async {
+    final map = {
+      'id': 'local_${const Uuid().v4()}',
+      'url': file.path, // yerel dosya yolu
+      'thumbnail_url': file.path,
+      'type': type,
+      'caption': caption,
+      'uploaded_by': _userId,
+      'created_at': DateTime.now().toIso8601String(),
+    };
+    final all = getLocalMedia().map((m) => {
+          'id': m.id,
+          'url': m.url,
+          'thumbnail_url': m.thumbnailUrl,
+          'type': m.type,
+          'caption': m.caption,
+          'uploaded_by': m.uploadedBy,
+          'created_at': m.createdAt.toIso8601String(),
+        }).toList();
+    all.insert(0, map);
+    await HiveService.setSetting('gallery_local', jsonEncode(all));
+    return FamilyMedia.fromJson(map);
+  }
+
+  Future<void> deleteLocalMedia(String id) async {
+    final all = getLocalMedia()
+        .where((m) => m.id != id)
+        .map((m) => {
+              'id': m.id,
+              'url': m.url,
+              'thumbnail_url': m.thumbnailUrl,
+              'type': m.type,
+              'caption': m.caption,
+              'uploaded_by': m.uploadedBy,
+              'created_at': m.createdAt.toIso8601String(),
+            })
+        .toList();
+    await HiveService.setSetting('gallery_local', jsonEncode(all));
   }
 
   Future<List<FamilyMedia>> getMedia(String familyId) async {
