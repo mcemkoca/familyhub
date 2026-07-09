@@ -128,11 +128,6 @@ final myTasksProvider = FutureProvider<List<HubTask>>((ref) async {
   return HubRepository().getMyTasks(familyId);
 });
 
-final familyMoodsProvider = FutureProvider<List<FamilyMood>>((ref) async {
-  final familyId = await ref.watch(familyIdProvider.future);
-  if (familyId == null) return [];
-  return HubRepository().getRecentMoods(familyId);
-});
 
 /// Hub realtime senkronu — events + family_moods tablolarındaki değişimleri
 /// dinleyip ilgili FutureProvider'ları invalidate eder. Böylece BAŞKA bir aile

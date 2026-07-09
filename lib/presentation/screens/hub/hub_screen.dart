@@ -126,7 +126,6 @@ class _HubScreenState extends ConsumerState<HubScreen>
     ref.invalidate(todaySummaryProvider);
     ref.invalidate(upcomingEventsProvider);
     ref.invalidate(myTasksProvider);
-    ref.invalidate(familyMoodsProvider);
     ref.invalidate(weatherProvider);
     await Future.delayed(const Duration(milliseconds: 500));
   }
