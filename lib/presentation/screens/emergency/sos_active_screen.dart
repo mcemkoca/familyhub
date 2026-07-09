@@ -4,6 +4,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../services/emergency_auto_actions_engine.dart';
 
@@ -187,12 +188,12 @@ class _SosActiveScreenState extends State<SosActiveScreen> {
               ),
               const SizedBox(height: 8),
               ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () => launchUrl(Uri.parse('tel:112')),
                 icon: const Icon(Icons.emergency, size: 28),
                 label: const Padding(
                   padding: EdgeInsets.symmetric(vertical: 12),
                   child: Text(
-                    'YARDIM LAZIM - HIZLANDIR',
+                    'YARDIM LAZIM - 112 ARA',
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
