@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,11 +22,31 @@ class _ChildManagementScreenState extends ConsumerState<ChildManagementScreen> {
   List<ChildAccount> _children = [];
   bool _isLoading = true;
   String? _familyId;
+  StreamSubscription<List<ChildAccount>>? _childrenSub;
 
   @override
   void initState() {
     super.initState();
     _loadFamilyAndChildren();
+  }
+
+  @override
+  void dispose() {
+    _childrenSub?.cancel();
+    super.dispose();
+  }
+
+  /// Cloud aile için realtime abonelik — başka cihazda/üyede çocuk eklenince
+  /// bu ekran anında güncellenir.
+  void _subscribeRealtime(String familyId) {
+    if (familyId == ChildAccountRepository.localFamilyId) return;
+    _childrenSub?.cancel();
+    _childrenSub = _repo.watchChildren(familyId).listen(
+      (children) {
+        if (mounted) setState(() => _children = children);
+      },
+      onError: (_) {},
+    );
   }
 
   Future<void> _loadFamilyAndChildren() async {
@@ -65,6 +86,7 @@ class _ChildManagementScreenState extends ConsumerState<ChildManagementScreen> {
         _children = children;
         _isLoading = false;
       });
+      _subscribeRealtime(familyId);
     } catch (e) {
       debugPrint('ChildManagementScreen._loadFamilyAndChildren error: $e');
       setState(() => _isLoading = false);

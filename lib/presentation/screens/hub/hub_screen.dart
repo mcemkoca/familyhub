@@ -239,6 +239,8 @@ class _HubScreenState extends ConsumerState<HubScreen>
     final members = ref.watch(familyMembersProvider);
     final role = ref.watch(currentMemberRoleProvider);
     final visibleFeatures = _applyOrder(_featuresForRole(role));
+    // Hub realtime senkronu canlı tutulsun (events/moods/tasks → anlık tazeleme).
+    ref.watch(hubRealtimeSyncProvider);
     _liveNotifs = _buildLiveNotifs();
 
     final isDark = Theme.of(context).brightness == Brightness.dark;

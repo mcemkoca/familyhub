@@ -134,6 +134,44 @@ final familyMoodsProvider = FutureProvider<List<FamilyMood>>((ref) async {
   return HubRepository().getRecentMoods(familyId);
 });
 
+/// Hub realtime senkronu — events + family_moods tablolarındaki değişimleri
+/// dinleyip ilgili FutureProvider'ları invalidate eder. Böylece BAŞKA bir aile
+/// üyesi/cihaz etkinlik veya ruh hali eklediğinde hub anında güncellenir.
+/// Ekran build'inde watch edilerek canlı tutulur.
+final hubRealtimeSyncProvider = Provider.autoDispose<void>((ref) {
+  final familyId = ref.watch(familyIdProvider).valueOrNull;
+  final client = SupabaseConfig.safeClient;
+  if (familyId == null || client == null) return;
+
+  final subs = <StreamSubscription<dynamic>>[];
+  try {
+    subs.add(client
+        .from('events')
+        .stream(primaryKey: ['id'])
+        .listen((_) {
+          ref.invalidate(upcomingEventsProvider);
+          ref.invalidate(todaySummaryProvider);
+        }, onError: (_) {}));
+    subs.add(client
+        .from('family_moods')
+        .stream(primaryKey: ['id'])
+        .listen((_) => ref.invalidate(familyMoodsProvider), onError: (_) {}));
+    subs.add(client
+        .from('tasks')
+        .stream(primaryKey: ['id'])
+        .listen((_) {
+          ref.invalidate(myTasksProvider);
+          ref.invalidate(todaySummaryProvider);
+        }, onError: (_) {}));
+  } catch (_) {}
+
+  ref.onDispose(() {
+    for (final s in subs) {
+      s.cancel();
+    }
+  });
+});
+
 /// Combined hub data provider — fetches all hub data in parallel via Future.wait.
 /// Use this when you need the entire hub state at once (e.g. HubScreen).
 final hubDataProvider = FutureProvider.autoDispose<HubState>((ref) async {
