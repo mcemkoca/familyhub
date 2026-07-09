@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:file_selector/file_selector.dart';
 import '../../../services/notification_service.dart';
 
 // ── Hive models (lightweight, no codegen needed — stored as JSON strings) ──
@@ -810,6 +811,7 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
     final doctorCtrl = TextEditingController();
     final notesCtrl = TextEditingController();
     String type = 'Muayene';
+    String? docName; // seçilen belge dosya adı
     final types = ['Muayene', 'Kan Tahlili', 'Röntgen', 'MR/BT', 'Reçete', 'Diğer'];
     showModalBottomSheet(
       context: context,
@@ -859,16 +861,11 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
                   label: 'Notlar / Bulgular',
                   maxLines: 3),
               const SizedBox(height: 8),
-              // Document upload placeholder
+              // Belge / fotoğraf ekle (file_selector ile gerçek seçim).
               GestureDetector(
-                onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                          '📎 Belge yükleme yakında aktif olacak (Firebase Storage)'),
-                      behavior: SnackBarBehavior.floating,
-                    ),
-                  );
+                onTap: () async {
+                  final f = await openFile();
+                  if (f != null) setSt(() => docName = f.name);
                 },
                 child: Container(
                   height: 52,
@@ -879,15 +876,20 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
                     borderRadius: BorderRadius.circular(12),
                     color: const Color(0xFF11998E).withAlpha(10),
                   ),
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.attach_file, color: Color(0xFF11998E)),
-                      SizedBox(width: 8),
-                      Text('Belge / Fotoğraf Ekle (PDF, JPG)',
-                          style: TextStyle(
-                              color: Color(0xFF11998E),
-                              fontWeight: FontWeight.w700)),
+                      Icon(docName == null ? Icons.attach_file : Icons.check_circle,
+                          color: const Color(0xFF11998E)),
+                      const SizedBox(width: 8),
+                      Flexible(
+                        child: Text(
+                            docName ?? 'Belge / Fotoğraf Ekle (PDF, JPG)',
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                                color: Color(0xFF11998E),
+                                fontWeight: FontWeight.w700)),
+                      ),
                     ],
                   ),
                 ),
@@ -906,7 +908,9 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
                           title: titleCtrl.text.trim(),
                           doctor: doctorCtrl.text.trim(),
                           date: DateFormat('dd.MM.yyyy').format(DateTime.now()),
-                          notes: notesCtrl.text.trim(),
+                          notes: docName != null
+                              ? '${notesCtrl.text.trim()}\n📎 $docName'.trim()
+                              : notesCtrl.text.trim(),
                           reportType: type,
                         ),
                       );
