@@ -230,7 +230,7 @@ class _MainShellState extends State<MainShell> {
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
                     curve: Curves.easeOut,
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
                       color: isActive
                           ? const Color(0xFF6366F1).withAlpha(40)
@@ -247,8 +247,8 @@ class _MainShellState extends State<MainShell> {
                     ),
                     child: asset != null
                         ? SizedBox(
-                            width: isActive ? 28 : 25,
-                            height: isActive ? 28 : 25,
+                            width: isActive ? 25 : 22,
+                            height: isActive ? 25 : 22,
                             child: Opacity(
                               opacity: isActive ? 1.0 : 0.55,
                               child: Image.asset(asset, fit: BoxFit.contain),
@@ -290,15 +290,18 @@ class _MainShellState extends State<MainShell> {
               const SizedBox(height: 2),
               Text(
                 label,
+                // Alt nav etiketi global yazı-boyutu ayarından etkilenmesin
+                // (yoksa pill'i taşırır — RenderFlex overflow).
+                textScaler: TextScaler.noScaling,
                 style: TextStyle(
-                  fontSize: isActive ? 12 : 11,
+                  fontSize: isActive ? 11.5 : 11,
                   fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
                   color: isActive
                       ? const Color(0xFF6C63FF)
                       : (const Color(0xFF8B8FA3)),
                 ),
               ),
-              const SizedBox(height: 3),
+              const SizedBox(height: 2),
               // Aktif sekme altı neon gösterge çizgisi.
               AnimatedContainer(
                 duration: const Duration(milliseconds: 220),
