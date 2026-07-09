@@ -145,6 +145,7 @@ final hubRealtimeSyncProvider = Provider.autoDispose<void>((ref) {
 
   final subs = <StreamSubscription<dynamic>>[];
   try {
+    // Not: family_moods hub'da gösterilmiyor (ölü kod) → abone olmuyoruz.
     subs.add(client
         .from('events')
         .stream(primaryKey: ['id'])
@@ -152,10 +153,6 @@ final hubRealtimeSyncProvider = Provider.autoDispose<void>((ref) {
           ref.invalidate(upcomingEventsProvider);
           ref.invalidate(todaySummaryProvider);
         }, onError: (_) {}));
-    subs.add(client
-        .from('family_moods')
-        .stream(primaryKey: ['id'])
-        .listen((_) => ref.invalidate(familyMoodsProvider), onError: (_) {}));
     subs.add(client
         .from('tasks')
         .stream(primaryKey: ['id'])

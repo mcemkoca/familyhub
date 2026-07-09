@@ -42,6 +42,11 @@ class CrashHistoryScreen extends StatelessWidget {
             // Realtime: aile kaza olayları anında yansır.
             stream: CrashEventRepository().watchFamilyEvents(familyId),
             builder: (context, snapshot) {
+              // Hata durumunda sonsuz spinner yerine boş listeyle devam et.
+              if (snapshot.hasError) {
+                return Center(
+                    child: Text(AppLocalizations.of(context).aileBilgisiBulunamadi));
+              }
               if (!snapshot.hasData) {
                 return const Center(child: CircularProgressIndicator());
               }
