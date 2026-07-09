@@ -28,6 +28,40 @@ class _LegalBenefitsCardState extends ConsumerState<LegalBenefitsCard> {
     'FR': 'Fransa',
   };
 
+  /// AI erişilemezse (anahtar/kota) gösterilecek ülkeye özel GERÇEK statik
+  /// yasal hak/avantaj içeriği — böylece kart her zaman faydalı olur, yanıltıcı
+  /// "internet gerekli" mesajı gösterilmez.
+  static const Map<String, List<Map<String, String>>> _staticByCountry = {
+    'BE': [
+      {'title': 'Groeipakket (Çocuk Yardımı)', 'type': 'hak', 'description': 'Belçika’da her çocuk için aylık büyüme paketi ödemesi; bölgeye göre (Flaman/Valon/Brüksel) tutar değişir.'},
+      {'title': 'Ebeveyn İzni (Ouderschapsverlof)', 'type': 'hak', 'description': 'Her ebeveyn çocuk başına aylarca tam/yarı zamanlı ücretli ebeveyn izni kullanabilir.'},
+      {'title': 'Çocuk Bakım Desteği', 'type': 'hak', 'description': 'Kreş (kinderopvang) masrafları gelire göre sübvanse edilir; ayrıca vergi indirimi sağlar.'},
+      {'title': 'Verhoogde Tegemoetkoming', 'type': 'hak', 'description': 'Düşük gelirli aileler için sağlık ve ilaç masraflarında artırılmış geri ödeme.'},
+    ],
+    'NL': [
+      {'title': 'Kinderbijslag (SVB)', 'type': 'hak', 'description': 'Hollanda’da 18 yaş altı her çocuk için üç ayda bir devlet çocuk yardımı ödenir.'},
+      {'title': 'Kindgebonden Budget', 'type': 'hak', 'description': 'Gelire bağlı ek çocuk bütçesi; Belastingdienst üzerinden başvurulur.'},
+      {'title': 'Kinderopvangtoeslag', 'type': 'hak', 'description': 'Çalışan ebeveynler için kreş masraflarının büyük kısmı geri ödenir.'},
+      {'title': 'Ücretli Ebeveyn İzni', 'type': 'hak', 'description': 'İlk yıl 9 hafta kısmen ücretli ebeveyn izni (UWV) hakkı vardır.'},
+    ],
+    'TR': [
+      {'title': 'Doğum Yardımı', 'type': 'hak', 'description': 'Devlet, birinci çocukta 300₺, ikincide 400₺, üçüncü ve sonrası 600₺ tek seferlik doğum yardımı öder.'},
+      {'title': 'Doğum (Analık) İzni', 'type': 'hak', 'description': 'Çalışan anneye doğumdan önce 8, sonra 8 hafta olmak üzere 16 hafta ücretli izin.'},
+      {'title': 'Süt İzni', 'type': 'hak', 'description': 'Anne, çocuk 1 yaşına gelene kadar günde 1,5 saat süt izni kullanır.'},
+      {'title': 'Çocuk için Gelir Vergisi İndirimi', 'type': 'hak', 'description': 'Çalışanların bordrosunda eş ve çocuk sayısına göre asgari geçim/vergi avantajı uygulanır.'},
+    ],
+    'DE': [
+      {'title': 'Kindergeld', 'type': 'hak', 'description': 'Almanya’da her çocuk için aylık düzenli çocuk parası (Familienkasse) ödenir.'},
+      {'title': 'Elterngeld', 'type': 'hak', 'description': 'Doğum sonrası gelire bağlı ebeveyn parası; 12-14 aya kadar alınabilir.'},
+      {'title': 'Elternzeit', 'type': 'hak', 'description': 'Çocuk 3 yaşına gelene kadar iş garantili ebeveyn izni hakkı.'},
+    ],
+    'FR': [
+      {'title': 'Allocations Familiales (CAF)', 'type': 'hak', 'description': 'İki ve daha fazla çocuklu aileler için aylık aile yardımı ödenir.'},
+      {'title': 'Congé Parental', 'type': 'hak', 'description': 'Doğum sonrası ebeveyn izni; süre ve ödeme çocuk sayısına göre değişir.'},
+      {'title': 'PAJE', 'type': 'hak', 'description': 'Küçük çocuk için karşılama primi ve bakım desteği (garde d’enfant).'},
+    ],
+  };
+
   void _toggle() {
     setState(() => _expanded = !_expanded);
     HiveService.setBoolSetting('legal_benefits_expanded', _expanded);
@@ -122,15 +156,11 @@ Sadece JSON döndür: {"items":[{"title":"Kısa başlık","description":"1-2 cü
 Türkçe yaz.''',
                   listKey: 'items',
                   maxTokens: 900,
-                  fallback: [
-                    {
-                      'title': 'İnternet bağlantısı gerekli',
-                      'description':
-                          'Ülkeye özel güncel yasal bilgiler için internete '
-                              'bağlanın ve "Yenile"ye dokunun.',
-                      'type': 'düzenleme',
-                    },
-                  ],
+                  // AI erişilemezse ülkeye özel gerçek statik içerik göster.
+                  fallback: (_staticByCountry[country] ??
+                          _staticByCountry['BE']!)
+                      .map((e) => Map<String, dynamic>.from(e))
+                      .toList(),
                 ),
                 builder: (context, snap) {
                   if (snap.connectionState == ConnectionState.waiting) {
