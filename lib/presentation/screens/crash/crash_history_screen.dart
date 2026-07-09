@@ -38,8 +38,9 @@ class CrashHistoryScreen extends StatelessWidget {
           if (familyId == null) {
             return Center(child: Text(AppLocalizations.of(context).aileBilgisiBulunamadi));
           }
-          return FutureBuilder<List<CrashEvent>>(
-            future: CrashEventRepository().getFamilyEvents(familyId),
+          return StreamBuilder<List<CrashEvent>>(
+            // Realtime: aile kaza olayları anında yansır.
+            stream: CrashEventRepository().watchFamilyEvents(familyId),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return const Center(child: CircularProgressIndicator());

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -22,11 +23,32 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
   List<Routine> _routines = [];
   List<Map<String, dynamic>> _aiSuggestions = [];
   bool _loading = false;
+  StreamSubscription<List<Routine>>? _sub;
 
   @override
   void initState() {
     super.initState();
     _loadRealData();
+  }
+
+  @override
+  void dispose() {
+    _sub?.cancel();
+    super.dispose();
+  }
+
+  /// Realtime abonelik — başka üye/cihaz rutin ekleyince ekran anında güncellenir.
+  void _subscribeRealtime(String familyId) {
+    _sub?.cancel();
+    _sub = RoutineRepository().watchRoutines(familyId).listen((routines) {
+      if (!mounted) return;
+      setState(() {
+        _routines = routines;
+        _aiSuggestions = routines.isNotEmpty
+            ? RoutineService.generateSuggestions(routines.first)
+            : [];
+      });
+    }, onError: (_) {});
   }
 
   Future<String?> _getFamilyId() async {
@@ -52,6 +74,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
             : [];
         _loading = false;
       });
+      _subscribeRealtime(familyId);
     } else {
       setState(() => _loading = false);
     }

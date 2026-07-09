@@ -23,6 +23,7 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
 
   List<SmartReminder> _reminders = [];
   bool _loading = false;
+  StreamSubscription<List<SmartReminder>>? _sub;
 
   @override
   void initState() {
@@ -41,8 +42,17 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
 
   @override
   void dispose() {
+    _sub?.cancel();
     SmartReminderService.stopAll();
     super.dispose();
+  }
+
+  /// Realtime abonelik — hatırlatıcı eklenince/değişince ekran anında güncellenir.
+  void _subscribeRealtime(String familyId) {
+    _sub?.cancel();
+    _sub = SmartReminderRepository().watchReminders(familyId).listen((rems) {
+      if (mounted) setState(() => _reminders = rems);
+    }, onError: (_) {});
   }
 
   Future<String?> _getFamilyId() async {
@@ -65,6 +75,7 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
         _reminders = reminders;
         _loading = false;
       });
+      _subscribeRealtime(familyId);
     } else {
       setState(() => _loading = false);
     }
