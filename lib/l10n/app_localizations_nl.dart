@@ -1370,8 +1370,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get dogrulamaSuresi => 'Verificatietijd';
 
   @override
-  String get aileUyeleriniOtomatikBilgilendir =>
-      'Familieleden automatisch informeren';
+  String get aileUyeleriniOtomatikBilgilendir => 'Gezinsleden auto-informeren';
 
   @override
   String get acilKontaklaraSmsGonder => 'Sms naar noodcontacten';
@@ -1444,15 +1443,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get sosAktif => 'SOS ACTIEF';
 
   @override
-  String get otomatikYardimCagrisiDevamEdiyor =>
-      'Automatische hulpoproep bezig';
+  String get otomatikYardimCagrisiDevamEdiyor => 'Auto-hulpoproep bezig';
 
   @override
   String get acilDurumDetaylari => 'NOODDETAILS';
 
   @override
-  String get yuksekSiddetliCarpmaTespitEdildi =>
-      'Hoge intensiteit botsing gedetecteerd';
+  String get yuksekSiddetliCarpmaTespitEdildi => 'Zware botsing gedetecteerd';
 
   @override
   String get baslangic143215 => '⏰ Start: 14:32:15';
@@ -1853,8 +1850,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get fotograftanEtkinlik => 'Evenement uit foto';
 
   @override
-  String get buGunIcinPlanlanmisEtkinlikYok =>
-      'Geen evenementen gepland voor vandaag';
+  String get buGunIcinPlanlanmisEtkinlikYok => 'Geen evenementen voor deze dag';
 
   @override
   String get takvimErisimIzniGerekli => 'Agendatoegang vereist';
@@ -2282,7 +2278,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get tumAdimlariBasariylaTamamladiniz =>
-      'U heeft alle stappen succesvol voltooid.';
+      'Je hebt alle stappen voltooid.';
 
   @override
   String get suAnkiAdim => 'HUIDIGE STAP';
@@ -2338,8 +2334,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get ornARh => 'bijv. A Rh+';
 
   @override
-  String get virgulleAyirinFindikPolen =>
-      'Scheiden met komma: hazelnoot, pollen, ...';
+  String get virgulleAyirinFindikPolen => 'Scheid met komma: noten, pollen';
 
   @override
   String get virgulleAyirinAstimSeker => 'Scheid met komma: astma, diabetes';
@@ -2603,7 +2598,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get gunluk => 'Dagelijks';
 
   @override
-  String get aileBulunamadi => 'Familie niet gevonden';
+  String get aileBulunamadi => 'Gezin niet gevonden';
 
   @override
   String get kodKopyalandi => 'Code gekopieerd';
@@ -2613,13 +2608,13 @@ class AppLocalizationsNl extends AppLocalizations {
       'Maak een code aan om nieuwe leden uit te nodigen. De code is 24 uur geldig.';
 
   @override
-  String get kodOlustur => 'Code aanmaken';
+  String get kodOlustur => 'Code genereren';
 
   @override
-  String get yeniKodOlustur => 'Nieuwe code aanmaken';
+  String get yeniKodOlustur => 'Nieuwe code genereren';
 
   @override
-  String get uygulamaDili => 'APPLICATIETAAL';
+  String get uygulamaDili => 'APP-TAAL';
 
   @override
   String get bolge => 'REGIO';
@@ -2628,7 +2623,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get tarihFormati => 'DATUMNOTATIE';
 
   @override
-  String get henuzVeriYok => 'Geen gegevens';
+  String get henuzVeriYok => 'Nog geen gegevens';
 
   @override
   String get konumAlinamadiIzinleriKontrolEdin =>
@@ -2651,18 +2646,17 @@ class AppLocalizationsNl extends AppLocalizations {
   String get gorevBildirimleri => 'Taakmeldingen';
 
   @override
-  String get atananVeYaklasanGorevler => 'Toegewezen en komende taken';
+  String get atananVeYaklasanGorevler => 'Toegewezen en aankomende taken';
 
   @override
-  String get acilDurumUyarilari => 'Noodwaarschuwingen';
+  String get acilDurumUyarilari => 'Noodmeldingen';
 
   @override
   String get panikButonuVeGuvenlikBildirimleri =>
       'Paniekknop en veiligheidsmeldingen';
 
   @override
-  String get guvenliBolgeGiriscikisUyarilari =>
-      'Waarschuwingen bij betreden/verlaten veilige zone';
+  String get guvenliBolgeGiriscikisUyarilari => 'Zone in/uit-meldingen';
 
   @override
   String get yuksekOncelik => 'Hoge prioriteit';
@@ -2689,13 +2683,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get apiErisimi => 'API-toegang';
 
   @override
-  String get adminHesabiPremiumAktif => 'Beheerdersaccount — Premium actief!';
+  String get adminHesabiPremiumAktif => 'Adminaccount - Premium actief!';
 
   @override
   String get testModuPremiumAktiflestirildi => 'Testmodus: Premium geactiveerd';
 
   @override
-  String get odemeBilgisiAlinamadi => 'Betalingsinformatie niet beschikbaar';
+  String get odemeBilgisiAlinamadi => 'Betaalinfo niet beschikbaar';
 
   @override
   String get premiumAktiflestirildi => 'Premium geactiveerd!';
@@ -2707,7 +2701,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get yukselt => 'Upgraden';
 
   @override
-  String get planlarYuklenemedi => 'Plannen kunnen niet worden geladen';
+  String get planlarYuklenemedi => 'Plannen laden mislukt';
 
   @override
   String get veriKullanimi => '2. Gegevensgebruik';
@@ -2729,36 +2723,34 @@ class AppLocalizationsNl extends AppLocalizations {
   String get veriPaylasimi => 'GEGEVENS DELEN';
 
   @override
-  String get konumPaylasimi1 => 'Locatiedeling';
+  String get konumPaylasimi1 => 'Locatie delen';
 
   @override
-  String get aileUyeleriKonumunuzuGorebilsin =>
-      'Familieleden kunnen uw locatie zien';
+  String get aileUyeleriKonumunuzuGorebilsin => 'Gezin ziet je locatie';
 
   @override
   String get profilGorunurlugu => 'Profielzichtbaarheid';
 
   @override
-  String get profilinizDigerUyelereGorunur =>
-      'Uw profiel is zichtbaar voor andere leden';
+  String get profilinizDigerUyelereGorunur => 'Profiel zichtbaar voor anderen';
 
   @override
-  String get cevrimiciDurumunuzuGoster => 'Uw online status weergeven';
+  String get cevrimiciDurumunuzuGoster => 'Je online status tonen';
 
   @override
-  String get analitik => 'ANALYTIEK';
+  String get analitik => 'ANALYSES';
 
   @override
   String get kullanimAnalitigi => 'Gebruiksanalyse';
 
   @override
-  String get anonimKullanimVerisiGonder => 'Anonieme gebruiksgegevens sturen';
+  String get anonimKullanimVerisiGonder => 'Anonieme gebruiksdata verzenden';
 
   @override
   String get verilerimiIndir => 'Mijn gegevens downloaden';
 
   @override
-  String get gdprKapsamindaTumVerileriniz => 'Al uw gegevens onder de AVG';
+  String get gdprKapsamindaTumVerileriniz => 'Al je gegevens onder AVG';
 
   @override
   String get hesabimiSil => 'Mijn account verwijderen';
@@ -2781,10 +2773,10 @@ class AppLocalizationsNl extends AppLocalizations {
       'Bevestigingslink verstuurd naar uw nieuwe e-mail';
 
   @override
-  String get kisiselBilgiler => 'PERSOONLIJKE INFORMATIE';
+  String get kisiselBilgiler => 'PERSOONLIJKE INFO';
 
   @override
-  String get adiniziGirin => 'Voer uw naam in';
+  String get adiniziGirin => 'Voer je naam in';
 
   @override
   String get telefonNumarasi => 'Telefoonnummer';
@@ -2804,7 +2796,7 @@ class AppLocalizationsNl extends AppLocalizations {
       'Vergrendel dit apparaat onmiddellijk. Het kind kan niet inloggen.';
 
   @override
-  String get ornOdevZamani => 'Bijv.: Huiswerktijd';
+  String get ornOdevZamani => 'bijv. Huiswerktijd';
 
   @override
   String get gunlukEkranSuresi => 'Dagelijkse schermtijd';
@@ -2822,38 +2814,35 @@ class AppLocalizationsNl extends AppLocalizations {
   String get ekranSuresiLimiti => 'Schermtijdlimiet';
 
   @override
-  String get sureyiAyarla => 'Tijd instellen';
+  String get sureyiAyarla => 'Duur instellen';
 
   @override
   String get cihaziUzaktanKilitle => 'Apparaat op afstand vergrendelen';
 
   @override
-  String get ilkEvcilHayvaninizinAdiNedir =>
-      'Wat is de naam van uw eerste huisdier?';
+  String get ilkEvcilHayvaninizinAdiNedir => 'Naam van je eerste huisdier?';
 
   @override
-  String get anneKizlikSoyadiNedir => 'Wat is de meisjesnaam van uw moeder?';
+  String get anneKizlikSoyadiNedir => 'Meisjesnaam van je moeder?';
 
   @override
   String get enSevdiginizCocuklukArkadasinizinAdiNedir =>
       'Wat is de naam van uw beste jeugdvriend?';
 
   @override
-  String get ilkokulOgretmeninizinAdiNedir =>
-      'Wat is de naam van uw basisschoolleraar?';
+  String get ilkokulOgretmeninizinAdiNedir => 'Naam van je basisschoolleraar?';
 
   @override
-  String get enSevdiginizKitabinAdiNedir =>
-      'Wat is de titel van uw favoriete boek?';
+  String get enSevdiginizKitabinAdiNedir => 'Titel van je favoriete boek?';
 
   @override
-  String get dogdugunuzSehirNedir => 'In welke stad bent u geboren?';
+  String get dogdugunuzSehirNedir => 'Geboortestad?';
 
   @override
-  String get enSevdiginizYemekNedir => 'Wat is uw favoriete gerecht?';
+  String get enSevdiginizYemekNedir => 'Je favoriete eten?';
 
   @override
-  String get babanizinOrtaAdiNedir => 'Wat is de tweede naam van uw vader?';
+  String get babanizinOrtaAdiNedir => 'Tweede naam van je vader?';
 
   @override
   String get lutfenHerIkiGuvenlikSorusunuDaSecin =>
@@ -2861,23 +2850,22 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get ikiGuvenlikSorusuFarkliOlmalidir =>
-      'De twee beveiligingsvragen moeten verschillend zijn';
+      'De twee vragen moeten verschillen';
 
   @override
   String get lutfenHerIkiCevabiDaGirin => 'Voer beide antwoorden in';
 
   @override
-  String get cevaplarEnAz2KarakterOlmalidir =>
-      'Antwoorden moeten minimaal 2 tekens hebben';
+  String get cevaplarEnAz2KarakterOlmalidir => 'Antwoorden minstens 2 tekens';
 
   @override
   String get guvenlikSorularinizKaydedildi => 'Beveiligingsvragen opgeslagen';
 
   @override
-  String get birSoruSecin => 'Vraag selecteren';
+  String get birSoruSecin => 'Kies een vraag';
 
   @override
-  String get kendiSorunuzuYazin => 'Schrijf uw eigen vraag';
+  String get kendiSorunuzuYazin => 'Schrijf je eigen vraag';
 
   @override
   String get buCihazBiyometrikKimlikDogrulamayiDesteklemiyor =>
@@ -2891,8 +2879,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get kimlikDogrulamaBasarisiz => 'Verificatie mislukt';
 
   @override
-  String get biyometrikGirisEtkinlestirildi =>
-      'Biometrisch aanmelden ingeschakeld';
+  String get biyometrikGirisEtkinlestirildi => 'Biometrische aanmelding aan';
 
   @override
   String get biyometrikGirisDevreDisiBirakildi =>
@@ -2908,7 +2895,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get sifreYonetimi => 'WACHTWOORDBEHEER';
 
   @override
-  String get mevcutSifreniziGuncelleyin => 'Uw huidige wachtwoord bijwerken';
+  String get mevcutSifreniziGuncelleyin => 'Werk je wachtwoord bij';
 
   @override
   String get sifreUnutmaDurumundaKullanilacak2Soru =>
@@ -2918,15 +2905,15 @@ class AppLocalizationsNl extends AppLocalizations {
   String get girisSecenekleri => 'AANMELDOPTIES';
 
   @override
-  String get biyometrikGiris => 'Biometrisch aanmelden';
+  String get biyometrikGiris => 'Biometrische aanmelding';
 
   @override
   String get parmakIziVeyaYuzTanimaIleGiris =>
-      'Aanmelden met vingerafdruk of gezichtsherkenning';
+      'Aanmelden met vinger of gezicht';
 
   @override
   String get cihazinizBiyometrigiDesteklemiyor =>
-      'Uw apparaat ondersteunt biometrie niet';
+      'Apparaat ondersteunt geen biometrie';
 
   @override
   String get tehlikeBolgesi => 'GEVARENZONE';
@@ -2949,7 +2936,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get degerlendirmeSayfasiAciliyor => 'Beoordelingspagina openen...';
 
   @override
-  String get ailedenAyrildiniz => 'U heeft de familie verlaten';
+  String get ailedenAyrildiniz => 'Je hebt het gezin verlaten';
 
   @override
   String get tumVerilerSilindi => 'Alle gegevens verwijderd';
@@ -2958,13 +2945,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get onbellekTemizlendi => 'Cache gewist';
 
   @override
-  String get familyhubiniziYonetin => 'Beheer uw FamilyHub';
+  String get familyhubiniziYonetin => 'Beheer je FamilyHub';
 
   @override
   String get gorunum1 => 'WEERGAVE';
 
   @override
-  String get uygulamaGorunumunuAyarla => 'Weergave van de applicatie aanpassen';
+  String get uygulamaGorunumunuAyarla => 'App-weergave aanpassen';
 
   @override
   String get temaSecin => 'Thema kiezen';
@@ -2977,18 +2964,17 @@ class AppLocalizationsNl extends AppLocalizations {
       'Evenementen, taken, noodgevallen en meer';
 
   @override
-  String get aile => 'FAMILIE';
+  String get aile => 'GEZIN';
 
   @override
   String get uyeleriGoruntuleRolleriDuzenle =>
       'Leden bekijken, rollen bewerken';
 
   @override
-  String get davetKoduOlustur => 'Uitnodigingscode aanmaken';
+  String get davetKoduOlustur => 'Uitnodigingscode genereren';
 
   @override
-  String get yeniUyeleriAileyeDavetEt =>
-      'Nieuwe leden uitnodigen voor de familie';
+  String get yeniUyeleriAileyeDavetEt => 'Nieuwe leden uitnodigen';
 
   @override
   String get herUyeIcinYetkiAyarlari => 'Machtigingsinstellingen voor elk lid';

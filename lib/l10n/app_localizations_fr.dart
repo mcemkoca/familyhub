@@ -1376,8 +1376,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dogrulamaSuresi => 'Temps de verification';
 
   @override
-  String get aileUyeleriniOtomatikBilgilendir =>
-      'Notifier automatiquement les membres de la famille';
+  String get aileUyeleriniOtomatikBilgilendir => 'Avertir auto les membres';
 
   @override
   String get acilKontaklaraSmsGonder => 'Envoyer SMS aux contacts d\'urgence';
@@ -1449,15 +1448,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sosAktif => 'SOS ACTIF';
 
   @override
-  String get otomatikYardimCagrisiDevamEdiyor =>
-      'Appel d\'urgence automatique en cours';
+  String get otomatikYardimCagrisiDevamEdiyor => 'Appel d\'aide auto en cours';
 
   @override
   String get acilDurumDetaylari => 'DETAILS D\'URGENCE';
 
   @override
-  String get yuksekSiddetliCarpmaTespitEdildi =>
-      'Impact de haute intensité détecté';
+  String get yuksekSiddetliCarpmaTespitEdildi => 'Impact violent detecte';
 
   @override
   String get baslangic143215 => '⏰ Début : 14:32:15';
@@ -1858,8 +1855,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get fotograftanEtkinlik => 'Evenement depuis photo';
 
   @override
-  String get buGunIcinPlanlanmisEtkinlikYok =>
-      'Aucun événement prévu pour aujourd\'hui';
+  String get buGunIcinPlanlanmisEtkinlikYok => 'Aucun evenement ce jour';
 
   @override
   String get takvimErisimIzniGerekli => 'Acces au calendrier requis';
@@ -2288,7 +2284,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get tumAdimlariBasariylaTamamladiniz =>
-      'Vous avez terminé toutes les étapes avec succès.';
+      'Vous avez termine toutes les etapes.';
 
   @override
   String get suAnkiAdim => 'ETAPE ACTUELLE';
@@ -2345,8 +2341,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ornARh => 'ex. A Rh+';
 
   @override
-  String get virgulleAyirinFindikPolen =>
-      'Séparer par virgule : noisette, pollen, ...';
+  String get virgulleAyirinFindikPolen => 'Separez par virgule : noix, pollen';
 
   @override
   String get virgulleAyirinAstimSeker =>
@@ -2614,52 +2609,52 @@ class AppLocalizationsFr extends AppLocalizations {
   String get aileBulunamadi => 'Famille introuvable';
 
   @override
-  String get kodKopyalandi => 'Code copié';
+  String get kodKopyalandi => 'Code copie';
 
   @override
   String get yeniUyeleriDavetEtmekIcinBirKodOlusturunKod24SaatGecerlidir =>
       'Créez un code pour inviter de nouveaux membres. Le code est valable 24 heures.';
 
   @override
-  String get kodOlustur => 'Créer un code';
+  String get kodOlustur => 'Generer un code';
 
   @override
-  String get yeniKodOlustur => 'Créer un nouveau code';
+  String get yeniKodOlustur => 'Generer un nouveau code';
 
   @override
-  String get uygulamaDili => 'LANGUE DE L\'APPLICATION';
+  String get uygulamaDili => 'LANGUE DE L\'APP';
 
   @override
-  String get bolge => 'RÉGION';
+  String get bolge => 'REGION';
 
   @override
   String get tarihFormati => 'FORMAT DE DATE';
 
   @override
-  String get henuzVeriYok => 'Aucune donnée';
+  String get henuzVeriYok => 'Aucune donnee';
 
   @override
   String get konumAlinamadiIzinleriKontrolEdin =>
       'Position indisponible. Vérifiez les permissions.';
 
   @override
-  String get konumSec => 'Sélectionner une position';
+  String get konumSec => 'Choisir un lieu';
 
   @override
   String get adresAraniyor => 'Recherche d\'adresse...';
 
   @override
-  String get etkinlikHatirlatmalari => 'Rappels d\'événements';
+  String get etkinlikHatirlatmalari => 'Rappels d\'evenements';
 
   @override
   String get yaklasanEtkinliklerIcinBildirimler =>
       'Notifications pour les événements à venir';
 
   @override
-  String get gorevBildirimleri => 'Notifications de tâches';
+  String get gorevBildirimleri => 'Notifications de taches';
 
   @override
-  String get atananVeYaklasanGorevler => 'Tâches assignées et à venir';
+  String get atananVeYaklasanGorevler => 'Taches assignees et a venir';
 
   @override
   String get acilDurumUyarilari => 'Alertes d\'urgence';
@@ -2669,53 +2664,52 @@ class AppLocalizationsFr extends AppLocalizations {
       'Bouton panique et notifications de sécurité';
 
   @override
-  String get guvenliBolgeGiriscikisUyarilari =>
-      'Alertes d\'entrée/sortie de zone sécurisée';
+  String get guvenliBolgeGiriscikisUyarilari => 'Alertes entree/sortie de zone';
 
   @override
-  String get yuksekOncelik => 'Haute priorité';
+  String get yuksekOncelik => 'Haute priorite';
 
   @override
-  String get temelGorevler => 'Tâches essentielles';
+  String get temelGorevler => 'Taches de base';
 
   @override
-  String get gelismisButce => 'Budget avancé';
+  String get gelismisButce => 'Budget avance';
 
   @override
-  String get ozelTemalar => 'Thèmes personnalisés';
+  String get ozelTemalar => 'Themes personnalises';
 
   @override
   String get aileUyesi3 => '20 membres de la famille';
 
   @override
-  String get sinirsizDepolama => 'Stockage illimité';
+  String get sinirsizDepolama => 'Stockage illimite';
 
   @override
-  String get oncelikliDestek => 'Assistance prioritaire';
+  String get oncelikliDestek => 'Support prioritaire';
 
   @override
-  String get apiErisimi => 'Accès API';
+  String get apiErisimi => 'Acces API';
 
   @override
-  String get adminHesabiPremiumAktif => 'Compte admin — Premium actif !';
+  String get adminHesabiPremiumAktif => 'Compte admin - Premium actif !';
 
   @override
-  String get testModuPremiumAktiflestirildi => 'Mode test : Premium activé';
+  String get testModuPremiumAktiflestirildi => 'Mode test : Premium active';
 
   @override
-  String get odemeBilgisiAlinamadi => 'Informations de paiement indisponibles';
+  String get odemeBilgisiAlinamadi => 'Info de paiement indisponible';
 
   @override
-  String get premiumAktiflestirildi => 'Premium activé !';
+  String get premiumAktiflestirildi => 'Premium active !';
 
   @override
   String get enPopuler => 'Le plus populaire';
 
   @override
-  String get yukselt => 'Mettre à niveau';
+  String get yukselt => 'Ameliorer';
 
   @override
-  String get planlarYuklenemedi => 'Impossible de charger les plans';
+  String get planlarYuklenemedi => 'Echec du chargement des plans';
 
   @override
   String get veriKullanimi => '2. Utilisation des données';
@@ -2735,47 +2729,45 @@ class AppLocalizationsFr extends AppLocalizations {
       'Votre compte a été supprimé. L\'application va se fermer.';
 
   @override
-  String get veriPaylasimi => 'PARTAGE DE DONNÉES';
+  String get veriPaylasimi => 'PARTAGE DE DONNEES';
 
   @override
   String get konumPaylasimi1 => 'Partage de position';
 
   @override
   String get aileUyeleriKonumunuzuGorebilsin =>
-      'Les membres de la famille peuvent voir votre position';
+      'Vos proches voient votre position';
 
   @override
-  String get profilGorunurlugu => 'Visibilité du profil';
+  String get profilGorunurlugu => 'Visibilite du profil';
 
   @override
   String get profilinizDigerUyelereGorunur =>
-      'Votre profil est visible par les autres membres';
+      'Profil visible aux autres membres';
 
   @override
   String get cevrimiciDurumunuzuGoster => 'Afficher votre statut en ligne';
 
   @override
-  String get analitik => 'ANALYTIQUE';
+  String get analitik => 'ANALYSES';
 
   @override
-  String get kullanimAnalitigi => 'Analytique d\'utilisation';
+  String get kullanimAnalitigi => 'Analyse d\'utilisation';
 
   @override
-  String get anonimKullanimVerisiGonder =>
-      'Envoyer des données d\'utilisation anonymes';
+  String get anonimKullanimVerisiGonder => 'Envoyer des donnees anonymes';
 
   @override
-  String get verilerimiIndir => 'Télécharger mes données';
+  String get verilerimiIndir => 'Telecharger mes donnees';
 
   @override
-  String get gdprKapsamindaTumVerileriniz =>
-      'Toutes vos données dans le cadre du RGPD';
+  String get gdprKapsamindaTumVerileriniz => 'Toutes vos donnees (RGPD)';
 
   @override
   String get hesabimiSil => 'Supprimer mon compte';
 
   @override
-  String get profilFotografiGuncellendi => 'Photo de profil mise à jour';
+  String get profilFotografiGuncellendi => 'Photo de profil mise a jour';
 
   @override
   String get epostaDegistir => 'Changer l\'e-mail';
@@ -2792,19 +2784,19 @@ class AppLocalizationsFr extends AppLocalizations {
       'Lien de confirmation envoyé à votre nouvel e-mail';
 
   @override
-  String get kisiselBilgiler => 'INFORMATIONS PERSONNELLES';
+  String get kisiselBilgiler => 'INFOS PERSONNELLES';
 
   @override
-  String get adiniziGirin => 'Entrez votre nom';
+  String get adiniziGirin => 'Saisissez votre nom';
 
   @override
-  String get telefonNumarasi => 'Numéro de téléphone';
+  String get telefonNumarasi => 'Numero de telephone';
 
   @override
-  String get degistir => 'Modifier';
+  String get degistir => 'Changer';
 
   @override
-  String get ekranSuresiGuncellendi => 'Temps d\'écran mis à jour';
+  String get ekranSuresiGuncellendi => 'Temps d\'ecran mis a jour';
 
   @override
   String get ebeveynTarafindanUzaktanKilitlendi =>
@@ -2815,10 +2807,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Verrouillez immédiatement cet appareil. L\'enfant ne pourra pas se connecter.';
 
   @override
-  String get ornOdevZamani => 'Ex : Heure des devoirs';
+  String get ornOdevZamani => 'ex. Heure des devoirs';
 
   @override
-  String get gunlukEkranSuresi => 'Temps d\'écran quotidien';
+  String get gunlukEkranSuresi => 'Temps d\'ecran quotidien';
 
   @override
   String get cocukUyelerIcinGunlukEkranSuresiLimitleriBelirleyin =>
@@ -2830,43 +2822,38 @@ class AppLocalizationsFr extends AppLocalizations {
       'Aucun compte enfant ajouté.\nVous pouvez en ajouter dans la section Comptes enfants.';
 
   @override
-  String get ekranSuresiLimiti => 'Limite de temps d\'écran';
+  String get ekranSuresiLimiti => 'Limite de temps d\'ecran';
 
   @override
-  String get sureyiAyarla => 'Définir la durée';
+  String get sureyiAyarla => 'Definir la duree';
 
   @override
-  String get cihaziUzaktanKilitle => 'Verrouiller l\'appareil à distance';
+  String get cihaziUzaktanKilitle => 'Verrouiller a distance';
 
   @override
-  String get ilkEvcilHayvaninizinAdiNedir =>
-      'Quel est le nom de votre premier animal de compagnie ?';
+  String get ilkEvcilHayvaninizinAdiNedir => 'Nom de votre premier animal ?';
 
   @override
-  String get anneKizlikSoyadiNedir =>
-      'Quel est le nom de jeune fille de votre mère ?';
+  String get anneKizlikSoyadiNedir => 'Nom de jeune fille de votre mere ?';
 
   @override
   String get enSevdiginizCocuklukArkadasinizinAdiNedir =>
       'Quel est le nom de votre meilleur ami d\'enfance ?';
 
   @override
-  String get ilkokulOgretmeninizinAdiNedir =>
-      'Quel est le nom de votre instituteur de primaire ?';
+  String get ilkokulOgretmeninizinAdiNedir => 'Nom de votre instituteur ?';
 
   @override
-  String get enSevdiginizKitabinAdiNedir =>
-      'Quel est le titre de votre livre préféré ?';
+  String get enSevdiginizKitabinAdiNedir => 'Titre de votre livre prefere ?';
 
   @override
-  String get dogdugunuzSehirNedir => 'Dans quelle ville êtes-vous né(e) ?';
+  String get dogdugunuzSehirNedir => 'Ville de naissance ?';
 
   @override
-  String get enSevdiginizYemekNedir => 'Quel est votre plat préféré ?';
+  String get enSevdiginizYemekNedir => 'Votre plat prefere ?';
 
   @override
-  String get babanizinOrtaAdiNedir =>
-      'Quel est le deuxième prénom de votre père ?';
+  String get babanizinOrtaAdiNedir => 'Deuxieme prenom de votre pere ?';
 
   @override
   String get lutfenHerIkiGuvenlikSorusunuDaSecin =>
@@ -2874,24 +2861,23 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ikiGuvenlikSorusuFarkliOlmalidir =>
-      'Les deux questions de sécurité doivent être différentes';
+      'Les deux questions doivent differer';
 
   @override
-  String get lutfenHerIkiCevabiDaGirin => 'Veuillez saisir les deux réponses';
+  String get lutfenHerIkiCevabiDaGirin => 'Saisissez les deux reponses';
 
   @override
-  String get cevaplarEnAz2KarakterOlmalidir =>
-      'Les réponses doivent avoir au moins 2 caractères';
+  String get cevaplarEnAz2KarakterOlmalidir => 'Reponses de 2 caracteres min';
 
   @override
   String get guvenlikSorularinizKaydedildi =>
-      'Questions de sécurité enregistrées';
+      'Questions de securite enregistrees';
 
   @override
-  String get birSoruSecin => 'Sélectionner une question';
+  String get birSoruSecin => 'Choisir une question';
 
   @override
-  String get kendiSorunuzuYazin => 'Écrivez votre propre question';
+  String get kendiSorunuzuYazin => 'Ecrivez votre question';
 
   @override
   String get buCihazBiyometrikKimlikDogrulamayiDesteklemiyor =>
@@ -2902,10 +2888,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Vérifiez votre identité pour vous connecter';
 
   @override
-  String get kimlikDogrulamaBasarisiz => 'Échec de l\'authentification';
+  String get kimlikDogrulamaBasarisiz => 'Echec de l\'authentification';
 
   @override
-  String get biyometrikGirisEtkinlestirildi => 'Connexion biométrique activée';
+  String get biyometrikGirisEtkinlestirildi => 'Connexion biometrique activee';
 
   @override
   String get biyometrikGirisDevreDisiBirakildi =>
@@ -2915,14 +2901,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mevcutSifre => 'Mot de passe actuel';
 
   @override
-  String get sifrenizguncellendi1 => 'Mot de passe mis à jour';
+  String get sifrenizguncellendi1 => 'Mot de passe mis a jour';
 
   @override
   String get sifreYonetimi => 'GESTION DU MOT DE PASSE';
 
   @override
-  String get mevcutSifreniziGuncelleyin =>
-      'Mettez à jour votre mot de passe actuel';
+  String get mevcutSifreniziGuncelleyin => 'Mettez a jour votre mot de passe';
 
   @override
   String get sifreUnutmaDurumundaKullanilacak2Soru =>
@@ -2932,18 +2917,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get girisSecenekleri => 'OPTIONS DE CONNEXION';
 
   @override
-  String get biyometrikGiris => 'Connexion biométrique';
+  String get biyometrikGiris => 'Connexion biometrique';
 
   @override
-  String get parmakIziVeyaYuzTanimaIleGiris =>
-      'Connexion par empreinte ou reconnaissance faciale';
+  String get parmakIziVeyaYuzTanimaIleGiris => 'Connexion empreinte ou visage';
 
   @override
-  String get cihazinizBiyometrigiDesteklemiyor =>
-      'Votre appareil ne prend pas en charge la biométrie';
+  String get cihazinizBiyometrigiDesteklemiyor => 'Appareil sans biometrie';
 
   @override
-  String get tehlikeBolgesi => 'ZONE DANGEREUSE';
+  String get tehlikeBolgesi => 'ZONE DE DANGER';
 
   @override
   String get tumVerilerinizKaliciOlarakSilinecekBuIslemGeriAlinamaz =>
@@ -2954,40 +2937,37 @@ class AppLocalizationsFr extends AppLocalizations {
       'Les fichiers temporaires seront supprimés. L\'application peut démarrer un peu plus lentement.';
 
   @override
-  String get canliDestek => 'Assistance en direct';
+  String get canliDestek => 'Support en direct';
 
   @override
-  String get baglan => 'Connecter';
+  String get baglan => 'Se connecter';
 
   @override
-  String get degerlendirmeSayfasiAciliyor =>
-      'Ouverture de la page d\'évaluation...';
+  String get degerlendirmeSayfasiAciliyor => 'Ouverture de la page d\'avis...';
 
   @override
-  String get ailedenAyrildiniz => 'Vous avez quitté la famille';
+  String get ailedenAyrildiniz => 'Vous avez quitte la famille';
 
   @override
-  String get tumVerilerSilindi => 'Toutes les données supprimées';
+  String get tumVerilerSilindi => 'Toutes les donnees supprimees';
 
   @override
-  String get onbellekTemizlendi => 'Cache vidé';
+  String get onbellekTemizlendi => 'Cache vide';
 
   @override
-  String get familyhubiniziYonetin => 'Gérez votre FamilyHub';
+  String get familyhubiniziYonetin => 'Gerez votre FamilyHub';
 
   @override
   String get gorunum1 => 'APPARENCE';
 
   @override
-  String get uygulamaGorunumunuAyarla =>
-      'Personnaliser l\'apparence de l\'application';
+  String get uygulamaGorunumunuAyarla => 'Ajuster l\'apparence';
 
   @override
-  String get temaSecin => 'Choisir un thème';
+  String get temaSecin => 'Choisir un theme';
 
   @override
-  String get uygulamaVurguRenginiDegistir =>
-      'Changer la couleur d\'accentuation';
+  String get uygulamaVurguRenginiDegistir => 'Changer la couleur d\'accent';
 
   @override
   String get etkinlikGorevAcilDurumVeDahaFazlasi =>
@@ -2998,14 +2978,13 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get uyeleriGoruntuleRolleriDuzenle =>
-      'Afficher les membres, modifier les rôles';
+      'Voir les membres, modifier les roles';
 
   @override
-  String get davetKoduOlustur => 'Créer un code d\'invitation';
+  String get davetKoduOlustur => 'Generer un code d\'invitation';
 
   @override
-  String get yeniUyeleriAileyeDavetEt =>
-      'Inviter de nouveaux membres dans la famille';
+  String get yeniUyeleriAileyeDavetEt => 'Inviter de nouveaux membres';
 
   @override
   String get herUyeIcinYetkiAyarlari =>
