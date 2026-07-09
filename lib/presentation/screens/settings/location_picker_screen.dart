@@ -115,7 +115,7 @@ class _LocationPickerScreenState extends ConsumerState<LocationPickerScreen> {
             children: [
               TileLayer(
                 urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                userAgentPackageName: 'com.familyhub.app',
+                userAgentPackageName: 'com.miro.familyhub',
               ),
               if (_selectedLatLng != null)
                 MarkerLayer(
