@@ -20,6 +20,7 @@ import '../../../components/hub/hub_ai_panel.dart';
 import '../../../components/hub/daily_briefing_card.dart';
 import '../../../components/hub/smart_insights_card.dart';
 import '../../../components/hub/legal_benefits_card.dart';
+import '../../../components/hub/family_mood_strip.dart';
 import '../../../services/location_tracking_service.dart';
 
 // ─── Notification model ───────────────────────────────────────────────────────
@@ -360,6 +361,9 @@ class _HubScreenState extends ConsumerState<HubScreen>
                   padding: EdgeInsets.symmetric(horizontal: 12),
                   child: AISuggestionsWidget(),
                 )),
+
+              // ── Ailenin ruh hali (mood_entries — gerçek, realtime) ──────
+              const SliverToBoxAdapter(child: FamilyMoodStrip()),
 
               // ── Yasal Haklar & Avantajlar (ülkeye göre, AI/realtime) ─────
               const SliverToBoxAdapter(child: LegalBenefitsCard()),
