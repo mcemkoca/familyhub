@@ -166,15 +166,17 @@ class _DailyBriefingCardState extends ConsumerState<DailyBriefingCard> {
             const SizedBox(height: 12),
             FutureBuilder<List<Map<String, dynamic>>>(
               future: AiContentService.dailyList(
-                topic: 'daily_briefing_v2',
+                topic: 'daily_briefing_v3',
                 prompt: '''
 Bir aile uygulaması için bugünün kişiselleştirilmiş sabah brifingini üret.
 Aile: $familyName (${members.length} üye).
-Gün: $dayName. Hava: $weatherStr.
+Gün: $dayName. Hava (referans, sadece öneri için): $weatherStr.
 Bugün planlı etkinlik: ${events.length}, bekleyen görev: ${tasks.length}.
 Sıcak, kısa bir günlük özet (2 cümle) ve 3 uygulanabilir öneri yaz.
 Sadece JSON döndür: {"items":[{"summary":"...","actions":["...","...","..."]}]}
-Türkçe, samimi bir dille. Havaya uygun bir öneri ekle (ör. yağmurluysa şemsiye).''',
+Türkçe, samimi bir dille. Havaya UYGUN öneri ekle (ör. yağmurluysa şemsiye) ama
+metinde KESİN SICAKLIK DERECESİ (ör. "23°C") YAZMA — kullanıcı gerçek sıcaklığı
+zaten üstteki hava rozetinde görüyor; sayı yazarsan tutarsız görünür.''',
                 listKey: 'items',
                 fallback: [
                   {
