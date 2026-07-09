@@ -1094,7 +1094,7 @@ class AppLocalizationsNl extends AppLocalizations {
       'Houd de microfoon in het berichtenvak ingedrukt om op te nemen';
 
   @override
-  String get dosyaPaylasimiYakindaGeliyor => 'Bestanden delen komt binnenkort';
+  String get dosyaPaylasimiYakindaGeliyor => 'Bestandsdeling binnenkort';
 
   @override
   String get sohbetiArsivle => 'Chat archiveren';
@@ -1426,8 +1426,7 @@ class AppLocalizationsNl extends AppLocalizations {
       'Schud de telefoon om de ongeluksimulatie te starten.';
 
   @override
-  String get belgeYuklendiVeOcrTamamlandi =>
-      'Document geüpload en OCR voltooid';
+  String get belgeYuklendiVeOcrTamamlandi => 'Document geuploadt en OCR klaar';
 
   @override
   String get belgeFotografiCek => 'Documentfoto maken';
@@ -1723,8 +1722,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get konumTakipAyarlari => 'Locatievolg-instellingen';
 
   @override
-  String get aiOptimizasyonuYakindaGeliyor =>
-      'AI-optimalisatie komt binnenkort';
+  String get aiOptimizasyonuYakindaGeliyor => 'AI-optimalisatie binnenkort';
 
   @override
   String get oncelik1 => 'Prioriteit:';
@@ -1792,7 +1790,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get gucYonetimi => 'ENERGIEBEHEER';
 
   @override
-  String get gpsAcikKalmaSuresiniSinirla => 'GPS-activatietijd beperken';
+  String get gpsAcikKalmaSuresiniSinirla => 'GPS-actieduur beperken';
 
   @override
   String get hareketAlgilayiciIleTetikle => 'Activeren met bewegingssensor';
@@ -1832,7 +1830,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get ilkDis => 'Eerste tand';
 
   @override
-  String get inDogumGunu => 'Verjaardag van';
+  String get inDogumGunu => '\'s verjaardag';
 
   @override
   String get sonAnilar => 'Recente herinneringen';
@@ -1855,14 +1853,14 @@ class AppLocalizationsNl extends AppLocalizations {
   String get tumEtkinlikler => 'Alle evenementen';
 
   @override
-  String get fotograftanEtkinlik => 'Evenement van foto';
+  String get fotograftanEtkinlik => 'Evenement uit foto';
 
   @override
   String get buGunIcinPlanlanmisEtkinlikYok =>
       'Geen evenementen gepland voor vandaag';
 
   @override
-  String get takvimErisimIzniGerekli => 'Agendatoestemming vereist';
+  String get takvimErisimIzniGerekli => 'Agendatoegang vereist';
 
   @override
   String get takvimErisimIzniGerekliAyarlardanIzinVerin =>
@@ -1880,13 +1878,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get izinVer => 'Toestemming geven';
 
   @override
-  String get bagliTakvimler => 'Gekoppelde agenda\'s';
+  String get bagliTakvimler => 'Verbonden agenda\'s';
 
   @override
-  String get henuzTakvimBaglantisiYok => 'Geen agenda\'s gekoppeld';
+  String get henuzTakvimBaglantisiYok => 'Nog geen agenda gekoppeld';
 
   @override
-  String get henuzSenkronizeEdilmedi => '🔄 Nog niet gesynchroniseerd';
+  String get henuzSenkronizeEdilmedi => 'Nog niet gesynchroniseerd';
 
   @override
   String get simdiSenkronize => 'Nu synchroniseren';
@@ -1895,7 +1893,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get senkronizasyonIstatistikleri => 'Synchronisatiestatistieken';
 
   @override
-  String get guncellenen => '🔄 Bijgewerkt';
+  String get guncellenen => 'Bijgewerkt';
 
   @override
   String get senkronizasyonSikligi => 'Synchronisatiefrequentie';
@@ -1913,10 +1911,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get cakismacozumu1 => 'Conflictoplossing';
 
   @override
-  String get familyhubDisari => 'FamilyHub → Extern';
+  String get familyhubDisari => 'FamilyHub -> Extern';
 
   @override
-  String get disariFamilyhub => 'Extern → FamilyHub';
+  String get disariFamilyhub => 'Extern -> FamilyHub';
 
   @override
   String get birlestir => 'Samenvoegen';
@@ -1928,20 +1926,20 @@ class AppLocalizationsNl extends AppLocalizations {
   String get alisverisListesi => 'Boodschappenlijst';
 
   @override
-  String get listeBos => 'Lijst leeg';
+  String get listeBos => 'Lijst is leeg';
 
   @override
   String get yeniUrunEklemekIcinButonunaBas =>
       'Druk op + om een artikel toe te voegen';
 
   @override
-  String get urunEkle => 'Artikel toevoegen';
+  String get urunEkle => 'Item toevoegen';
 
   @override
-  String get urunAdi => 'Artikelnaam';
+  String get urunAdi => 'Itemnaam';
 
   @override
-  String get akilliGorevRotasyonu => '🤖 Slimme taakrotatie';
+  String get akilliGorevRotasyonu => 'Slimme taakrotatie';
 
   @override
   String get adaletKurallari => 'Eerlijkheidsregels';
@@ -1959,7 +1957,7 @@ class AppLocalizationsNl extends AppLocalizations {
       'Probleem bij het laden van gegevens. Probeer opnieuw.';
 
   @override
-  String get verilerYuklenemedi => 'Gegevens kunnen niet worden geladen';
+  String get verilerYuklenemedi => 'Gegevens laden mislukt';
 
   @override
   String get akilligorevrotasyonu1 => 'Slimme taakrotatie';
@@ -1972,7 +1970,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get aiOptimizasyonuCalisiyor => 'AI-optimalisatie bezig...';
 
   @override
-  String get yenidenDagit => '🔄 HERVERDELEN';
+  String get yenidenDagit => 'HERVERDELEN';
 
   @override
   String get adaletAlgoritmasiGorevleriDagitiyor =>
@@ -1983,7 +1981,7 @@ class AppLocalizationsNl extends AppLocalizations {
       'Genetische optimalisatie + Gelijke taakverdeling';
 
   @override
-  String get henuzDagitimYapilmadi => 'Nog geen verdeling gemaakt';
+  String get henuzDagitimYapilmadi => 'Nog geen verdeling';
 
   @override
   String get yenidenDagitButonunaBasarakAi => 'Druk op Herverdelen om AI\\';
@@ -1995,28 +1993,28 @@ class AppLocalizationsNl extends AppLocalizations {
   String get atandi => 'Toegewezen';
 
   @override
-  String get adaletKurallariAgirliklar => 'Eerlijkheidsregels & Gewichten';
+  String get adaletKurallariAgirliklar => 'Eerlijkheidsregels & gewichten';
 
   @override
-  String get esitZamanDagilimi => 'Gelijke tijdsverdeling';
+  String get esitZamanDagilimi => 'Gelijke tijdverdeling';
 
   @override
   String get herkesEsitSureCalissin => 'Iedereen werkt evenveel';
 
   @override
-  String get beceriEslestirmesi => 'Vaardigheidsmatch';
+  String get beceriEslestirmesi => 'Vaardigheden matchen';
 
   @override
-  String get dogruKisiDogruIs => 'De juiste persoon voor de juiste taak';
+  String get dogruKisiDogruIs => 'Juiste persoon, juiste taak';
 
   @override
-  String get yorgunKisiyeAzGorev => 'Minder taken voor de vermoeide persoon';
+  String get yorgunKisiyeAzGorev => 'Minder taken voor vermoeiden';
 
   @override
   String get kisiselTercihler => 'Persoonlijke voorkeuren';
 
   @override
-  String get sevdigiIsleriYapsin => 'Laat hem doen wat hij leuk vindt';
+  String get sevdigiIsleriYapsin => 'Laat ze doen wat ze leuk vinden';
 
   @override
   String get ozelKurallar => 'Aangepaste regels';
@@ -2061,22 +2059,22 @@ class AppLocalizationsNl extends AppLocalizations {
   String get goreviDuzenle => 'Taak bewerken';
 
   @override
-  String get bitisTarihiSec => 'Einddatum selecteren';
+  String get bitisTarihiSec => 'Kies einddatum';
 
   @override
   String get gorevGuncellendi => 'Taak bijgewerkt';
 
   @override
-  String get gorevleriniziOrganizeEdin => 'Organiseer uw taken';
+  String get gorevleriniziOrganizeEdin => 'Organiseer je taken';
 
   @override
-  String get aileIlerlemesi => 'Familievoortgang';
+  String get aileIlerlemesi => 'Gezinsvoortgang';
 
   @override
   String get tumu => 'Alles';
 
   @override
-  String get henuzGorevYok => 'Geen taken';
+  String get henuzGorevYok => 'Nog geen taken';
 
   @override
   String get buFiltreyeUygunGorevYok => 'Geen taken voor dit filter';
@@ -2093,13 +2091,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get ilkGoreviOlustur => 'Eerste taak aanmaken';
 
   @override
-  String get akilliDagitimYap => 'Slimme verdeling';
+  String get akilliDagitimYap => 'Slimme verdeling uitvoeren';
 
   @override
   String get bilesik => '🔗 Samengesteld';
 
   @override
-  String get akilliHatirlaticilar => '🧠 Slimme herinneringen';
+  String get akilliHatirlaticilar => 'Slimme herinneringen';
 
   @override
   String get yeniHatirlatici => 'Nieuwe herinnering';
@@ -2108,11 +2106,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get basari => 'Succes';
 
   @override
-  String get cocukOkuldanGelinceSuIcir =>
-      'Als het kind thuiskomt van school, water drinken';
+  String get cocukOkuldanGelinceSuIcir => 'Water geven na school';
 
   @override
-  String get lokasyonOkulCikisiPattern => 'Locatie: Patroon vertrek school';
+  String get lokasyonOkulCikisiPattern => 'Locatie: schooluitgang';
 
   @override
   String get aksamYemegindenOnce1SaatHazirlik =>
@@ -2125,28 +2122,28 @@ class AppLocalizationsNl extends AppLocalizations {
   String get hatirlaticiyiSil => 'Herinnering verwijderen';
 
   @override
-  String get baslikGirilmeli => 'Titel is vereist';
+  String get baslikGirilmeli => 'Titel vereist';
 
   @override
-  String get girisYapmalisiniz => 'U moet ingelogd zijn';
+  String get girisYapmalisiniz => 'Je moet aanmelden';
 
   @override
   String get hatirlaticiOlusturuldu => 'Herinnering aangemaakt!';
 
   @override
-  String get testHatirlatici => 'Testherinnering';
+  String get testHatirlatici => 'Test-herinnering';
 
   @override
   String get yeniAkilliHatirlatici => 'Nieuwe slimme herinnering';
 
   @override
-  String get marketAlisverisi => 'Supermarktboodschappen';
+  String get marketAlisverisi => 'Boodschappen doen';
 
   @override
   String get sutVeEkmekAl => 'Melk en brood kopen...';
 
   @override
-  String get yerAdi => 'Locatienaam';
+  String get yerAdi => 'Plaatsnaam';
 
   @override
   String get davranisTuru => 'Gedragstype';
@@ -2155,25 +2152,25 @@ class AppLocalizationsNl extends AppLocalizations {
   String get bilesikMantik => 'Samengestelde logica';
 
   @override
-  String get baglamHassasiyeti => '🧠 Contextgevoeligheid';
+  String get baglamHassasiyeti => 'Contextgevoeligheid';
 
   @override
   String get sessizSaatlereSaygiGoster => 'Stille uren respecteren';
 
   @override
-  String get arasiSessiz => 'Stil van 22:00 tot 08:00';
+  String get arasiSessiz => 'Stil 22:00-08:00';
 
   @override
-  String get rahatsizEtmeModunaSaygi => 'Niet-storen-modus respecteren';
+  String get rahatsizEtmeModunaSaygi => 'Niet storen respecteren';
 
   @override
-  String get kisisellestirme => '🎨 Personalisatie';
+  String get kisisellestirme => 'Personalisatie';
 
   @override
   String get baglamEkle => 'Context toevoegen';
 
   @override
-  String get hedefKisiler => '👥 Doelpersonen';
+  String get hedefKisiler => 'Doelpersonen';
 
   @override
   String get enYakinMusaitUygunYetkinlik => 'Dichtstbij, beschikbaar, bekwaam';
@@ -2188,10 +2185,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get yaklasinca => 'Bij nadering';
 
   @override
-  String get evdenCikinca => 'Bij vertrek uit huis';
+  String get evdenCikinca => 'Bij verlaten huis';
 
   @override
-  String get iseVarinca => 'Bij aankomst op werk';
+  String get iseVarinca => 'Bij aankomst werk';
 
   @override
   String get goreliZaman => 'Relatieve tijd';
@@ -2200,16 +2197,16 @@ class AppLocalizationsNl extends AppLocalizations {
   String get akilliPencere => 'Slim venster';
 
   @override
-  String get appAcilinca => 'Bij openen van app';
+  String get appAcilinca => 'Bij openen app';
 
   @override
-  String get gorevTamamlaninca => 'Bij voltooien van taak';
+  String get gorevTamamlaninca => 'Bij taakvoltooiing';
 
   @override
   String get sosyalBaglam => 'Sociale context';
 
   @override
-  String get havaDegisimi => 'Weerverandering';
+  String get havaDegisimi => 'Weersverandering';
 
   @override
   String get alisverisNiyeti => 'Boodschappentintentie';
