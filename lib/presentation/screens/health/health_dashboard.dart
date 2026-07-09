@@ -218,8 +218,8 @@ class _HealthDashboardState extends ConsumerState<HealthDashboard> {
           () => _go(const CocukSaglikScreen())),
       ('Sağlık Kayıtlarım', Icons.description_rounded, const Color(0xFF3B82F6),
           () => _go(const FamilyHealthScreen())),
-      ('Belirtiler Kontrolü', Icons.thermostat_rounded, const Color(0xFFEC4899),
-          () => _go(const KadinSaglikScreen())),
+      // "Belirtiler Kontrolü" yalnızca Kadın Sağlığı bölümünde (semptom takibi
+      // döngüyle birlikte orada) — genel hızlı erişimden kaldırıldı.
     ];
     return GridView.count(
       crossAxisCount: 3,

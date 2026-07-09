@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 import '../../widgets/growing_tree.dart';
 import '../../../services/ai/pedagogy_engine.dart';
 import '../../../services/hive_service.dart';
+import '../../../core/supabase_client.dart';
+import '../../../repositories/child_account_repository.dart';
 
 // ── WHO Milestone Data ──
 
@@ -324,10 +326,51 @@ class ChildDevNotifier extends StateNotifier<List<ChildProfile>> {
 
   Future<void> _load() async {
     final data = await _ChildDevHive.load(_ChildDevHive._childrenKey);
+    final list = <ChildProfile>[];
     if (data != null) {
-      state = (data as List)
-          .map((e) => ChildProfile.fromJson(e as Map<String, dynamic>))
-          .toList();
+      list.addAll((data as List)
+          .map((e) => ChildProfile.fromJson(e as Map<String, dynamic>)));
+    }
+    // Köprü: "Çocuk Hesapları"nda (ChildAccountRepository) eklenmiş ama gelişim
+    // listesinde olmayan çocukları içe aktar — böylece hesap ekliyken "çocuk
+    // yok" uyarısı çıkmaz.
+    await _mergeChildAccounts(list);
+    state = list;
+  }
+
+  Future<void> _mergeChildAccounts(List<ChildProfile> list) async {
+    try {
+      var familyId = ChildAccountRepository.localFamilyId;
+      final client = SupabaseConfig.safeClient;
+      final uid = client?.auth.currentUser?.id;
+      if (client != null && uid != null) {
+        final p = await client
+            .from('profiles')
+            .select('family_id')
+            .eq('id', uid)
+            .maybeSingle();
+        final fid = p?['family_id'] as String?;
+        if (fid != null && fid.isNotEmpty) familyId = fid;
+      }
+      final accounts =
+          await ChildAccountRepository().getChildrenForFamily(familyId);
+      final now = DateTime.now();
+      for (final a in accounts) {
+        final exists = list.any((c) =>
+            c.id == a.id ||
+            c.name.toLowerCase().trim() == a.name.toLowerCase().trim());
+        if (!exists) {
+          final age = a.age ?? 6;
+          list.add(ChildProfile(
+            id: a.id,
+            name: a.name,
+            emoji: '🧒',
+            birthDate: DateTime(now.year - age, now.month, now.day),
+          ));
+        }
+      }
+    } catch (_) {
+      // Bulut/aile yoksa sessiz geç — yerel gelişim profilleri yine gösterilir.
     }
   }
 

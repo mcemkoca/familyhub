@@ -986,11 +986,12 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
               right: 20,
               top: 20),
           decoration: const BoxDecoration(
-            color: Color(0x1AFFFFFF),
+            color: Color(0xFF13131A),
             borderRadius:
                 BorderRadius.vertical(top: Radius.circular(24)),
           ),
-          child: Column(
+          child: SingleChildScrollView(
+            child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -1110,6 +1111,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
               ),
               const SizedBox(height: 20),
             ],
+          ),
           ),
         ),
       ),
