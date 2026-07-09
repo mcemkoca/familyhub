@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import '../../../services/battery_aware_location_tracker.dart';
+import '../../../services/location_tracking_service.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
 class LiveLocationScreen extends StatefulWidget {
@@ -24,6 +25,18 @@ class _LiveLocationScreenState extends State<LiveLocationScreen> {
 
   void _onLocationUpdate() {
     if (mounted) setState(() {});
+  }
+
+  Future<void> _shareNow() async {
+    final ok = await LocationTrackingService.shareCurrentLocation();
+    if (mounted) {
+      setState(() {});
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content:
+                Text(ok ? 'Konum aileyle paylaşıldı' : 'Konum alınamadı')),
+      );
+    }
   }
 
   void _onProfileUpdate() {
@@ -48,7 +61,7 @@ class _LiveLocationScreenState extends State<LiveLocationScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
-            onPressed: () {},
+            onPressed: _shareNow,
           ),
         ],
       ),
@@ -148,7 +161,7 @@ class _LiveLocationScreenState extends State<LiveLocationScreen> {
             children: [
               Expanded(
                 child: ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: _shareNow,
                   icon: const Icon(Icons.refresh),
                   label: const Text('Yenile'),
                   style: ElevatedButton.styleFrom(
@@ -160,7 +173,7 @@ class _LiveLocationScreenState extends State<LiveLocationScreen> {
               const SizedBox(width: 12),
               Expanded(
                 child: ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: _shareNow,
                   icon: const Icon(Icons.share_location),
                   label: Text(AppLocalizations.of(context).konumPaylas),
                   style: ElevatedButton.styleFrom(

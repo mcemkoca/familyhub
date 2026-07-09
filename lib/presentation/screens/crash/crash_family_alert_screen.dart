@@ -149,7 +149,9 @@ class CrashFamilyAlertScreen extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton.icon(
-                          onPressed: () {},
+                          onPressed: () => _openMap(
+                              event.sensorData.gps.latitude,
+                              event.sensorData.gps.longitude),
                           icon: const Icon(Icons.article),
                           label: Text(AppLocalizations.of(context).detayliRapor),
                           style: ElevatedButton.styleFrom(
@@ -170,7 +172,7 @@ class CrashFamilyAlertScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () => launchUrl(Uri.parse('tel:112')),
                       icon: const Icon(Icons.emergency),
                       label: Text(AppLocalizations.of(context).yardimCagir),
                       style: ElevatedButton.styleFrom(
@@ -183,7 +185,9 @@ class CrashFamilyAlertScreen extends StatelessWidget {
                   const SizedBox(width: 12),
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () => _openDirections(
+                          event.sensorData.gps.latitude,
+                          event.sensorData.gps.longitude),
                       icon: const Icon(Icons.phone_forwarded),
                       label: Text(AppLocalizations.of(context).aileyiBilgilendir),
                       style: ElevatedButton.styleFrom(
