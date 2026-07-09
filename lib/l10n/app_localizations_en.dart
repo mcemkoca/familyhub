@@ -528,7 +528,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get acik => 'Open';
 
   @override
-  String get fotograf => '📷 Fotoğraf';
+  String get fotograf => 'Photo';
 
   @override
   String get guvenliVaris => 'Safe Arrival';
@@ -758,7 +758,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get atananKisi => 'Assigned To';
 
   @override
-  String get davranis => '🧠 Davranış';
+  String get davranis => 'Behavior';
 
   @override
   String get yakinlikDerecesi => 'Relationship';
@@ -993,7 +993,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get simdiGec => 'Skip for now';
 
   @override
-  String get ailenizinKalbiBuradaAtiyor => 'Ailenizin kalbi burada atıyor';
+  String get ailenizinKalbiBuradaAtiyor => 'Your family\'s heart beats here';
 
   @override
   String get aileButcesi => 'Family Budget';
@@ -1012,7 +1012,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enYuksekKategori => 'Top Category';
 
   @override
-  String get aionerileri1 => '💡 AI Önerileri';
+  String get aionerileri1 => 'AI Suggestions';
 
   @override
   String get islemiDuzenle => 'Edit Transaction';
@@ -1086,7 +1086,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get yoldayimEve10Dakika => 'On my way, 10 min to home.';
 
   @override
-  String get anketOzelligiYakindaGeliyor => 'Anket özelliği yakında geliyor';
+  String get anketOzelligiYakindaGeliyor => 'Poll feature coming soon';
 
   @override
   String get sesKaydiBaslatmakIcinMesajAlanindakiMikrofonaBasiliTutun =>
@@ -1175,7 +1175,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get odevSil => 'Delete Homework';
 
   @override
-  String get buOdeviSilmekIstiyorMusun => 'Bu ödevi silmek istiyor musun?';
+  String get buOdeviSilmekIstiyorMusun => 'Delete this homework?';
 
   @override
   String get henuzOdevEklenmemis => 'No homework added yet';
@@ -1207,7 +1207,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get kayitSil => 'Delete Record';
 
   @override
-  String get buKaydiSilmekIstiyorMusun => 'Bu kaydı silmek istiyor musun?';
+  String get buKaydiSilmekIstiyorMusun => 'Delete this record?';
 
   @override
   String get kazanim => 'Achievement';
@@ -1220,7 +1220,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Yeni kayıt eklemek için + butonuna bas';
 
   @override
-  String get cocukHenuzKonumPaylasmamis => 'Çocuk henüz konum paylaşmamış';
+  String get cocukHenuzKonumPaylasmamis => 'Child hasn\'t shared location yet';
 
   @override
   String get cocugunaYeniBirGorevAta => 'Assign a new task to your child';
@@ -1246,7 +1246,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get isimEnAz2KarakterOlmali => 'Name must be at least 2 characters';
 
   @override
-  String get lerEslesmiyor => 'ler eşleşmiyor';
+  String get lerEslesmiyor => 'do not match';
 
   @override
   String get cocukHesabiniDuzenle => 'Edit Child Account';
@@ -1349,7 +1349,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get arandi => '112 called';
 
   @override
-  String get kullaniciIyiyimDedi => 'Kullanıcı \"İyiyim\" dedi';
+  String get kullaniciIyiyimDedi => 'User said I\'m OK';
 
   @override
   String get kazaTespitiAyarlari => 'Crash Detection Settings';
@@ -1435,20 +1435,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get henuzBelgeYok => 'No documents yet';
 
   @override
-  String get yuklemekIcinButonunaBasin => 'Yüklemek için + butonuna basın';
+  String get yuklemekIcinButonunaBasin => 'Tap + to upload';
 
   @override
-  String get gorevOlustur => 'Görev Oluştur';
+  String get gorevOlustur => 'Create Task';
 
   @override
-  String get sosAktif => 'SOS AKTİF';
+  String get sosAktif => 'SOS ACTIVE';
 
   @override
   String get otomatikYardimCagrisiDevamEdiyor =>
       'Otomatik yardım çağrısı devam ediyor';
 
   @override
-  String get acilDurumDetaylari => 'ACİL DURUM DETAYLARI';
+  String get acilDurumDetaylari => 'EMERGENCY DETAILS';
 
   @override
   String get yuksekSiddetliCarpmaTespitEdildi =>
@@ -1461,220 +1461,220 @@ class AppLocalizationsEn extends AppLocalizations {
   String get seviyeYuksek => '🎯 Seviye: YÜKSEK 🔴';
 
   @override
-  String get otomatikYanitDurumu => 'OTOMATİK YANIT DURUMU';
+  String get otomatikYanitDurumu => 'AUTO RESPONSE STATUS';
 
   @override
-  String get sesKaydiBasladi => 'Ses kaydı başladı';
+  String get sesKaydiBasladi => 'Audio recording started';
 
   @override
   String get sure3Dk12Sn => 'Süre: 3 dk 12 sn';
 
   @override
-  String get iyiyimSistemiDurdur => 'İYİYİM - SİSTEMİ DURDUR';
+  String get iyiyimSistemiDurdur => 'I\'M OK - STOP SYSTEM';
 
   @override
-  String get yardimTalebiHizlandirildi => 'Yardım talebi hızlandırıldı';
+  String get yardimTalebiHizlandirildi => 'Help request escalated';
 
   @override
-  String get acilDurumSos => '🆘 ACİL DURUM SOS';
+  String get acilDurumSos => 'EMERGENCY SOS';
 
   @override
-  String get hizliSosKategorileri => 'HIZLI SOS KATEGORİLERİ';
+  String get hizliSosKategorileri => 'QUICK SOS CATEGORIES';
 
   @override
-  String get saglik1 => 'SAĞLIK';
+  String get saglik1 => 'HEALTH';
 
   @override
-  String get guvenlik => 'GÜVENLİK';
+  String get guvenlik => 'SECURITY';
 
   @override
-  String get dogalAfet => 'DOĞAL AFET';
+  String get dogalAfet => 'NATURAL DISASTER';
 
   @override
-  String get diger1 => 'DİĞER';
+  String get diger1 => 'OTHER';
 
   @override
-  String get sonSosGecmisi => 'SON SOS GEÇMİŞİ';
+  String get sonSosGecmisi => 'RECENT SOS HISTORY';
 
   @override
   String get subat20250815 => '2 Şubat 2025 - 08:15';
 
   @override
-  String get gercekAcilDurum => 'Gerçek acil durum';
+  String get gercekAcilDurum => 'Real emergency';
 
   @override
-  String get testModuYakinda => 'Test modu yakında';
+  String get testModuYakinda => 'Test mode coming soon';
 
   @override
-  String get tetikleyiciler => 'TETİKLEYİCİLER';
+  String get tetikleyiciler => 'TRIGGERS';
 
   @override
-  String get uzunSureHareketsizlik => 'Uzun süre hareketsizlik';
+  String get uzunSureHareketsizlik => 'Prolonged inactivity';
 
   @override
-  String get saglikAciliyeti => 'Sağlık aciliyeti';
+  String get saglikAciliyeti => 'Health emergency';
 
   @override
-  String get akilliSaatEntegrasyonu => 'Akıllı saat entegrasyonu';
+  String get akilliSaatEntegrasyonu => 'Smartwatch integration';
 
   @override
-  String get yanlisAlarmOnleme => 'Yanlış alarm önleme';
+  String get yanlisAlarmOnleme => 'False alarm prevention';
 
   @override
-  String get otomatikMesajlar => 'OTOMATİK MESAJLAR';
+  String get otomatikMesajlar => 'AUTO MESSAGES';
 
   @override
-  String get smsGonder => 'SMS gönder';
+  String get smsGonder => 'Send SMS';
 
   @override
-  String get otomatikAramalar => 'OTOMATİK ARAMALAR';
+  String get otomatikAramalar => 'AUTO CALLS';
 
   @override
   String get yasalUyariYanlisAramaCezasiKullaniciSorumlulugundadir =>
       '⚠️ Yasal uyarı: Yanlış arama cezası kullanıcı sorumluluğundadır.';
 
   @override
-  String get aileUyeleriniAra => 'Aile üyelerini ara';
+  String get aileUyeleriniAra => 'Call family members';
 
   @override
-  String get konumPaylasimi => 'KONUM PAYLAŞIMI';
+  String get konumPaylasimi => 'LOCATION SHARING';
 
   @override
-  String get anlikKonumPaylas => 'Anlık konum paylaş';
+  String get anlikKonumPaylas => 'Share live location';
 
   @override
-  String get rotaGecmisiniEkle => 'Rota geçmişini ekle';
+  String get rotaGecmisiniEkle => 'Include route history';
 
   @override
-  String get otomatikSesKaydi => 'Otomatik ses kaydı';
+  String get otomatikSesKaydi => 'Auto audio recording';
 
   @override
-  String get bulutaYukle => 'Buluta yükle';
+  String get bulutaYukle => 'Upload to cloud';
 
   @override
-  String get adimEklemeYakindaGeliyor => 'Adım ekleme yakında geliyor';
+  String get adimEklemeYakindaGeliyor => 'Adding steps coming soon';
 
   @override
-  String get adimEkle => 'Adım Ekle';
+  String get adimEkle => 'Add Step';
 
   @override
-  String get duzenlemeYakinda => 'Düzenleme yakında';
+  String get duzenlemeYakinda => 'Editing coming soon';
 
   @override
-  String get silmeYakinda => 'Silme yakında';
+  String get silmeYakinda => 'Deleting coming soon';
 
   @override
-  String get sosAyarlariKaydedildi => 'SOS ayarları kaydedildi';
+  String get sosAyarlariKaydedildi => 'SOS settings saved';
 
   @override
-  String get acilDurumMesajSablonu => 'Acil Durum Mesaj Şablonu';
+  String get acilDurumMesajSablonu => 'Emergency Message Template';
 
   @override
-  String get smsSablonu => 'SMS ŞABLONU';
+  String get smsSablonu => 'SMS TEMPLATE';
 
   @override
-  String get smsMesaji => 'SMS mesajı...';
+  String get smsMesaji => 'SMS message...';
 
   @override
-  String get pushBildirimSablonu => 'PUSH BİLDİRİM ŞABLONU';
+  String get pushBildirimSablonu => 'PUSH NOTIFICATION TEMPLATE';
 
   @override
-  String get icerik => 'İçerik';
+  String get icerik => 'Content';
 
   @override
-  String get sesliMesajSablonu => 'SESLİ MESAJ ŞABLONU';
+  String get sesliMesajSablonu => 'VOICE MESSAGE TEMPLATE';
 
   @override
-  String get onizleme => 'Önizleme';
+  String get onizleme => 'Preview';
 
   @override
-  String get kullanilabilirDegiskenler => 'KULLANILABİLİR DEĞİŞKENLER';
+  String get kullanilabilirDegiskenler => 'AVAILABLE VARIABLES';
 
   @override
-  String get sablonKaydedildi => 'Şablon kaydedildi';
+  String get sablonKaydedildi => 'Template saved';
 
   @override
   String get birdenFazlaFotografVeyaVideo => 'Birden fazla fotoğraf veya video';
 
   @override
-  String get fotografCek => 'Fotoğraf Çek';
+  String get fotografCek => 'Take Photo';
 
   @override
-  String get bugununAnilari => 'Bugünün Anıları';
+  String get bugununAnilari => 'Today\'s Memories';
 
   @override
-  String get yilOnceBugun => '1 Yıl Önce Bugün';
+  String get yilOnceBugun => '1 Year Ago Today';
 
   @override
-  String get gecenHaftaSonu => 'Geçen Hafta Sonu';
+  String get gecenHaftaSonu => 'Last Weekend';
 
   @override
-  String get son30Gun => 'Son 30 Gün';
+  String get son30Gun => 'Last 30 Days';
 
   @override
-  String get videolarimiz => 'Videolarımız';
+  String get videolarimiz => 'Our Videos';
 
   @override
-  String get ilkAnilar => 'İlk Anılar';
+  String get ilkAnilar => 'First Memories';
 
   @override
-  String get henuzFotografYok => 'Henüz fotoğraf yok';
+  String get henuzFotografYok => 'No photos yet';
 
   @override
   String get telefonGalerisindenSecmekIcinButonunaBasin =>
       'Telefon galerisinden seçmek için + butonuna basın';
 
   @override
-  String get henuzAniOlusmadi => 'Henüz anı oluşmadı';
+  String get henuzAniOlusmadi => 'No memories yet';
 
   @override
   String get dahaFazlaFotografEkledikceAnilarOlusacak =>
       'Daha fazla fotoğraf ekledikçe anılar oluşacak';
 
   @override
-  String get yaklasanEtkinlikler => 'Yaklaşan Etkinlikler';
+  String get yaklasanEtkinlikler => 'Upcoming Events';
 
   @override
-  String get yaklasanEtkinlikYok => 'Yaklaşan etkinlik yok';
+  String get yaklasanEtkinlikYok => 'No upcoming events';
 
   @override
-  String get bekleyenGorevYok => 'Bekleyen görev yok';
+  String get bekleyenGorevYok => 'No pending tasks';
 
   @override
-  String get henuzRuhHaliPaylasilmamis => 'Henüz ruh hali paylaşılmamış';
+  String get henuzRuhHaliPaylasilmamis => 'No mood shared yet';
 
   @override
-  String get ruhHaliniPaylas => 'Ruh Halini Paylaş';
+  String get ruhHaliniPaylas => 'Share Mood';
 
   @override
-  String get bataryaAnalitigi => 'Batarya Analitiği';
+  String get bataryaAnalitigi => 'Battery Analytics';
 
   @override
   String get gunlukOrtalama18 => 'Günlük ortalama: %18';
 
   @override
-  String get sali => 'Salı';
+  String get sali => 'Tue';
 
   @override
-  String get carsamba => 'Çarşamba';
+  String get carsamba => 'Wed';
 
   @override
-  String get persembe => 'Perşembe';
+  String get persembe => 'Thu';
 
   @override
-  String get profilKullanimi => 'PROFİL KULLANIMI';
+  String get profilKullanimi => 'PROFILE USAGE';
 
   @override
-  String get kosu => 'Koşu';
+  String get kosu => 'Running';
 
   @override
-  String get verimlilikMetrikleri => 'VERİMLİLİK METRİKLERİ';
+  String get verimlilikMetrikleri => 'EFFICIENCY METRICS';
 
   @override
-  String get optimalProfilOrani => 'Optimal profil oranı';
+  String get optimalProfilOrani => 'Optimal profile ratio';
 
   @override
-  String get yanlisProfilGecisi => 'Yanlış profil geçişi';
+  String get yanlisProfilGecisi => 'Wrong profile switch';
 
   @override
   String get gun1 => '12/gün';
@@ -1683,71 +1683,71 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gun2 => '<5/gün';
 
   @override
-  String get aiOptimizasyonOnerileri => '🤖 AI OPTİMİZASYON ÖNERİLERİ';
+  String get aiOptimizasyonOnerileri => 'AI OPTIMIZATION TIPS';
 
   @override
-  String get canliKonumTakibi => 'Canlı Konum Takibi';
+  String get canliKonumTakibi => 'Live Location Tracking';
 
   @override
-  String get guncelleme => 'Güncelleme';
+  String get guncelleme => 'Update';
 
   @override
-  String get saglayici => 'Sağlayıcı';
+  String get saglayici => 'Provider';
 
   @override
-  String get iyi => 'İyi';
+  String get iyi => 'Good';
 
   @override
-  String get gunIciOzet => 'GÜN İÇİ ÖZET';
+  String get gunIciOzet => 'DAILY SUMMARY';
 
   @override
-  String get aktifSure => 'Aktif süre';
+  String get aktifSure => 'Active time';
 
   @override
-  String get duraganSure => 'Durağan süre';
+  String get duraganSure => 'Stationary time';
 
   @override
-  String get konumKaydi => 'Konum kaydı';
+  String get konumKaydi => 'Location log';
 
   @override
-  String get bataryaKullanimi => 'Batarya kullanımı';
+  String get bataryaKullanimi => 'Battery usage';
 
   @override
-  String get konumPaylas => 'Konum Paylaş';
+  String get konumPaylas => 'Share Location';
 
   @override
-  String get konumTakipAyarlari => 'Konum Takip Ayarları';
+  String get konumTakipAyarlari => 'Location Tracking Settings';
 
   @override
   String get aiOptimizasyonuYakindaGeliyor =>
       'AI optimizasyonu yakında geliyor';
 
   @override
-  String get oncelik1 => 'Öncelik:';
+  String get oncelik1 => 'Priority:';
 
   @override
   String get tahminiKalanSure => '58% - Tahmini kalan süre:';
 
   @override
-  String get detayliAnaliz => 'Detaylı Analiz';
+  String get detayliAnaliz => 'Detailed Analysis';
 
   @override
-  String get hareketProfilleri => 'HAREKET PROFİLLERİ';
+  String get hareketProfilleri => 'MOTION PROFILES';
 
   @override
-  String get gelismisAyarlar => 'GELİŞMİŞ AYARLAR';
+  String get gelismisAyarlar => 'ADVANCED SETTINGS';
 
   @override
-  String get adaptifEkranParlakligi => 'Adaptif ekran parlaklığı';
+  String get adaptifEkranParlakligi => 'Adaptive screen brightness';
 
   @override
-  String get agIstekleriniToplama => 'Ağ isteklerini toplama';
+  String get agIstekleriniToplama => 'Batch network requests';
 
   @override
-  String get konumOnbellekleme => 'Konum önbellekleme';
+  String get konumOnbellekleme => 'Location caching';
 
   @override
-  String get yardimciIslemciKullanimi => 'Yardımcı işlemci kullanımı';
+  String get yardimciIslemciKullanimi => 'Coprocessor usage';
 
   @override
   String get oncelikMaksimumPilOmruTahmini23GunKonumTakibi =>
@@ -1762,7 +1762,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Öncelik: En doğru konum. Tahmini: 8-12 saat konum takibi.';
 
   @override
-  String get guncellemeAyarlari => 'GÜNCELLEME AYARLARI';
+  String get guncellemeAyarlari => 'UPDATE SETTINGS';
 
   @override
   String get snArasi => '5-60 sn arası';
@@ -1771,66 +1771,66 @@ class AppLocalizationsEn extends AppLocalizations {
   String get konumDegismedenGuncellemeYok => 'Konum değişmeden güncelleme yok';
 
   @override
-  String get zamanlayiciYedek => 'Zamanlayıcı yedek';
+  String get zamanlayiciYedek => 'Scheduler fallback';
 
   @override
   String get konumDegismeseBileZorunluGuncelleme =>
       'Konum değişmese bile zorunlu güncelleme';
 
   @override
-  String get hassasiyet => 'HASSASİYET';
+  String get hassasiyet => 'SENSITIVITY';
 
   @override
-  String get gpsKalitesiDusukse => 'GPS kalitesi düşükse:';
+  String get gpsKalitesiDusukse => 'If GPS quality is low:';
 
   @override
-  String get gucYonetimi => 'GÜÇ YÖNETİMİ';
+  String get gucYonetimi => 'POWER MANAGEMENT';
 
   @override
   String get gpsAcikKalmaSuresiniSinirla => 'GPS açık kalma süresini sınırla';
 
   @override
-  String get hareketAlgilayiciIleTetikle => 'Hareket algılayıcı ile tetikle';
+  String get hareketAlgilayiciIleTetikle => 'Trigger with motion sensor';
 
   @override
-  String get telefonSallanincaAktifOl => 'Telefon sallanınca aktif ol';
+  String get telefonSallanincaAktifOl => 'Activate on phone shake';
 
   @override
-  String get gecisKurallari => 'GEÇİŞ KURALLARI';
+  String get gecisKurallari => 'SWITCHING RULES';
 
   @override
-  String get buProfileGecis => 'Bu profile geçiş:';
+  String get buProfileGecis => 'Switch to this profile:';
 
   @override
-  String get hizEsigi => 'Hız eşiği';
+  String get hizEsigi => 'Speed threshold';
 
   @override
-  String get buProfildenCikis => 'Bu profilden çıkış:';
+  String get buProfildenCikis => 'Exit this profile:';
 
   @override
   String get buSureBoyuncaHareketsizKalincaDusukProfil =>
       'Bu süre boyunca hareketsiz kalınca düşük profil';
 
   @override
-  String get album => 'Albüm';
+  String get album => 'Album';
 
   @override
-  String get cocukGelisimi => 'Çocuk Gelişimi';
+  String get cocukGelisimi => 'Child Development';
 
   @override
-  String get kilometreTaslari => 'Kilometre Taşları';
+  String get kilometreTaslari => 'Milestones';
 
   @override
-  String get ilkKelime => 'İlk Kelime';
+  String get ilkKelime => 'First Word';
 
   @override
-  String get ilkDis => 'İlk Diş';
+  String get ilkDis => 'First Tooth';
 
   @override
   String get inDogumGunu => 'ın Doğum Günü';
 
   @override
-  String get sonAnilar => 'Son Anılar';
+  String get sonAnilar => 'Recent Memories';
 
   @override
   String get miracBugunIlkAdiminiAtti => 'Mirac bugün ilk adımını attı...';
@@ -1839,7 +1839,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get yilbasi2026 => 'Yılbaşı 2026';
 
   @override
-  String get tumAileBirAradaydik => 'Tüm aile bir aradaydık...';
+  String get tumAileBirAradaydik => 'The whole family together...';
 
   @override
   String get bugunAilenleYasadiginGuzelBirAniYaz =>

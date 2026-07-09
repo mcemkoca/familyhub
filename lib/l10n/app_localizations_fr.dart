@@ -532,7 +532,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get acik => 'Ouvert';
 
   @override
-  String get fotograf => '📷 Photo';
+  String get fotograf => 'Photo';
 
   @override
   String get guvenliVaris => 'Arrivée en sécurité';
@@ -764,7 +764,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get atananKisi => 'Assigne a';
 
   @override
-  String get davranis => '🧠 Comportement';
+  String get davranis => 'Comportement';
 
   @override
   String get yakinlikDerecesi => 'Lien de parente';
@@ -999,7 +999,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get simdiGec => 'Passer';
 
   @override
-  String get ailenizinKalbiBuradaAtiyor => 'Le cœur de votre famille bat ici';
+  String get ailenizinKalbiBuradaAtiyor => 'Le coeur de votre famille bat ici';
 
   @override
   String get aileButcesi => 'Budget familial';
@@ -1018,7 +1018,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get enYuksekKategori => 'Categorie principale';
 
   @override
-  String get aionerileri1 => '💡 Suggestions IA';
+  String get aionerileri1 => 'Suggestions IA';
 
   @override
   String get islemiDuzenle => 'Modifier la transaction';
@@ -1092,7 +1092,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get yoldayimEve10Dakika => 'En route, 10 min de la maison.';
 
   @override
-  String get anketOzelligiYakindaGeliyor => 'Les sondages arrivent bientôt';
+  String get anketOzelligiYakindaGeliyor => 'Sondage bientot disponible';
 
   @override
   String get sesKaydiBaslatmakIcinMesajAlanindakiMikrofonaBasiliTutun =>
@@ -1182,7 +1182,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get odevSil => 'Supprimer le devoir';
 
   @override
-  String get buOdeviSilmekIstiyorMusun => 'Voulez-vous supprimer ce devoir ?';
+  String get buOdeviSilmekIstiyorMusun => 'Supprimer ce devoir ?';
 
   @override
   String get henuzOdevEklenmemis => 'Aucun devoir ajoute';
@@ -1214,8 +1214,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get kayitSil => 'Supprimer l\'entree';
 
   @override
-  String get buKaydiSilmekIstiyorMusun =>
-      'Voulez-vous supprimer cet enregistrement ?';
+  String get buKaydiSilmekIstiyorMusun => 'Supprimer cette entree ?';
 
   @override
   String get kazanim => 'Acquis';
@@ -1229,7 +1228,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get cocukHenuzKonumPaylasmamis =>
-      'L\'enfant n\'a pas encore partagé sa position';
+      'L\'enfant n\'a pas partage sa position';
 
   @override
   String get cocugunaYeniBirGorevAta => 'Assigne une tache a ton enfant';
@@ -1358,7 +1357,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get arandi => '112 appele';
 
   @override
-  String get kullaniciIyiyimDedi => 'L\'utilisateur a dit \"Je vais bien\"';
+  String get kullaniciIyiyimDedi => 'L\'utilisateur a dit Ca va';
 
   @override
   String get kazaTespitiAyarlari => 'Parametres de detection';
@@ -1445,10 +1444,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get henuzBelgeYok => 'Aucun document';
 
   @override
-  String get yuklemekIcinButonunaBasin => 'Appuyez sur + pour télécharger';
+  String get yuklemekIcinButonunaBasin => 'Appuyez sur + pour ajouter';
 
   @override
-  String get gorevOlustur => 'Créer une tâche';
+  String get gorevOlustur => 'Creer une tache';
 
   @override
   String get sosAktif => 'SOS ACTIF';
@@ -1458,7 +1457,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Appel d\'urgence automatique en cours';
 
   @override
-  String get acilDurumDetaylari => 'DÉTAILS D\'URGENCE';
+  String get acilDurumDetaylari => 'DETAILS D\'URGENCE';
 
   @override
   String get yuksekSiddetliCarpmaTespitEdildi =>
@@ -1471,31 +1470,31 @@ class AppLocalizationsFr extends AppLocalizations {
   String get seviyeYuksek => '🎯 Niveau : ÉLEVÉ 🔴';
 
   @override
-  String get otomatikYanitDurumu => 'ÉTAT DE RÉPONSE AUTOMATIQUE';
+  String get otomatikYanitDurumu => 'STATUT REPONSE AUTO';
 
   @override
-  String get sesKaydiBasladi => 'Enregistrement audio démarré';
+  String get sesKaydiBasladi => 'Enregistrement audio demarre';
 
   @override
   String get sure3Dk12Sn => 'Durée : 3 min 12 sec';
 
   @override
-  String get iyiyimSistemiDurdur => 'JE VAIS BIEN - ARRÊTER LE SYSTÈME';
+  String get iyiyimSistemiDurdur => 'JE VAIS BIEN - ARRETER';
 
   @override
-  String get yardimTalebiHizlandirildi => 'Demande d\'aide accélérée';
+  String get yardimTalebiHizlandirildi => 'Demande d\'aide acceleree';
 
   @override
-  String get acilDurumSos => '🆘 URGENCE SOS';
+  String get acilDurumSos => 'SOS D\'URGENCE';
 
   @override
-  String get hizliSosKategorileri => 'CATÉGORIES SOS RAPIDES';
+  String get hizliSosKategorileri => 'CATEGORIES SOS RAPIDES';
 
   @override
-  String get saglik1 => 'SANTÉ';
+  String get saglik1 => 'SANTE';
 
   @override
-  String get guvenlik => 'SÉCURITÉ';
+  String get guvenlik => 'SECURITE';
 
   @override
   String get dogalAfet => 'CATASTROPHE NATURELLE';
@@ -1504,104 +1503,104 @@ class AppLocalizationsFr extends AppLocalizations {
   String get diger1 => 'AUTRE';
 
   @override
-  String get sonSosGecmisi => 'HISTORIQUE SOS RÉCENT';
+  String get sonSosGecmisi => 'HISTORIQUE SOS RECENT';
 
   @override
   String get subat20250815 => '2 février 2025 - 08:15';
 
   @override
-  String get gercekAcilDurum => 'Vraie urgence';
+  String get gercekAcilDurum => 'Urgence reelle';
 
   @override
-  String get testModuYakinda => 'Mode test bientôt disponible';
+  String get testModuYakinda => 'Mode test bientot';
 
   @override
-  String get tetikleyiciler => 'DÉCLENCHEURS';
+  String get tetikleyiciler => 'DECLENCHEURS';
 
   @override
-  String get uzunSureHareketsizlik => 'Immobilité prolongée';
+  String get uzunSureHareketsizlik => 'Inactivite prolongee';
 
   @override
-  String get saglikAciliyeti => 'Urgence médicale';
+  String get saglikAciliyeti => 'Urgence medicale';
 
   @override
-  String get akilliSaatEntegrasyonu => 'Intégration montre connectée';
+  String get akilliSaatEntegrasyonu => 'Integration montre connectee';
 
   @override
-  String get yanlisAlarmOnleme => 'Prévention des fausses alertes';
+  String get yanlisAlarmOnleme => 'Prevention des fausses alertes';
 
   @override
-  String get otomatikMesajlar => 'MESSAGES AUTOMATIQUES';
+  String get otomatikMesajlar => 'MESSAGES AUTO';
 
   @override
   String get smsGonder => 'Envoyer SMS';
 
   @override
-  String get otomatikAramalar => 'APPELS AUTOMATIQUES';
+  String get otomatikAramalar => 'APPELS AUTO';
 
   @override
   String get yasalUyariYanlisAramaCezasiKullaniciSorumlulugundadir =>
       '⚠️ Avertissement légal : Pénalités pour fausse alerte à la charge de l\'utilisateur.';
 
   @override
-  String get aileUyeleriniAra => 'Appeler les membres de la famille';
+  String get aileUyeleriniAra => 'Appeler les membres';
 
   @override
   String get konumPaylasimi => 'PARTAGE DE POSITION';
 
   @override
-  String get anlikKonumPaylas => 'Partager la position instantanée';
+  String get anlikKonumPaylas => 'Partager la position en direct';
 
   @override
-  String get rotaGecmisiniEkle => 'Ajouter l\'historique du trajet';
+  String get rotaGecmisiniEkle => 'Inclure l\'historique du trajet';
 
   @override
-  String get otomatikSesKaydi => 'Enregistrement audio automatique';
+  String get otomatikSesKaydi => 'Enregistrement audio auto';
 
   @override
-  String get bulutaYukle => 'Télécharger vers le cloud';
+  String get bulutaYukle => 'Envoyer vers le cloud';
 
   @override
-  String get adimEklemeYakindaGeliyor => 'Ajout d\'étapes bientôt disponible';
+  String get adimEklemeYakindaGeliyor => 'Ajout d\'etapes bientot';
 
   @override
-  String get adimEkle => 'Ajouter une étape';
+  String get adimEkle => 'Ajouter une etape';
 
   @override
-  String get duzenlemeYakinda => 'Modification bientôt disponible';
+  String get duzenlemeYakinda => 'Modification bientot';
 
   @override
-  String get silmeYakinda => 'Suppression bientôt disponible';
+  String get silmeYakinda => 'Suppression bientot';
 
   @override
-  String get sosAyarlariKaydedildi => 'Paramètres SOS enregistrés';
+  String get sosAyarlariKaydedildi => 'Parametres SOS enregistres';
 
   @override
-  String get acilDurumMesajSablonu => 'Modèle de message d\'urgence';
+  String get acilDurumMesajSablonu => 'Modele de message d\'urgence';
 
   @override
-  String get smsSablonu => 'MODÈLE SMS';
+  String get smsSablonu => 'MODELE SMS';
 
   @override
   String get smsMesaji => 'Message SMS...';
 
   @override
-  String get pushBildirimSablonu => 'MODÈLE NOTIFICATION PUSH';
+  String get pushBildirimSablonu => 'MODELE DE NOTIFICATION';
 
   @override
   String get icerik => 'Contenu';
 
   @override
-  String get sesliMesajSablonu => 'MODÈLE MESSAGE VOCAL';
+  String get sesliMesajSablonu => 'MODELE DE MESSAGE VOCAL';
 
   @override
-  String get onizleme => 'Aperçu';
+  String get onizleme => 'Apercu';
 
   @override
   String get kullanilabilirDegiskenler => 'VARIABLES DISPONIBLES';
 
   @override
-  String get sablonKaydedildi => 'Modèle enregistré';
+  String get sablonKaydedildi => 'Modele enregistre';
 
   @override
   String get birdenFazlaFotografVeyaVideo => 'Plusieurs photos ou vidéos';
@@ -1610,19 +1609,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get fotografCek => 'Prendre une photo';
 
   @override
-  String get bugununAnilari => 'Souvenirs d\'aujourd\'hui';
+  String get bugununAnilari => 'Souvenirs du jour';
 
   @override
-  String get yilOnceBugun => 'Il y a 1 an aujourd\'hui';
+  String get yilOnceBugun => 'Il y a 1 an';
 
   @override
-  String get gecenHaftaSonu => 'Week-end dernier';
+  String get gecenHaftaSonu => 'Le week-end dernier';
 
   @override
   String get son30Gun => '30 derniers jours';
 
   @override
-  String get videolarimiz => 'Nos vidéos';
+  String get videolarimiz => 'Nos videos';
 
   @override
   String get ilkAnilar => 'Premiers souvenirs';
@@ -1635,41 +1634,41 @@ class AppLocalizationsFr extends AppLocalizations {
       'Appuyez sur + pour sélectionner dans la galerie';
 
   @override
-  String get henuzAniOlusmadi => 'Aucun souvenir créé';
+  String get henuzAniOlusmadi => 'Aucun souvenir';
 
   @override
   String get dahaFazlaFotografEkledikceAnilarOlusacak =>
       'Des souvenirs se créeront avec plus de photos';
 
   @override
-  String get yaklasanEtkinlikler => 'Événements à venir';
+  String get yaklasanEtkinlikler => 'Evenements a venir';
 
   @override
-  String get yaklasanEtkinlikYok => 'Aucun événement à venir';
+  String get yaklasanEtkinlikYok => 'Aucun evenement a venir';
 
   @override
-  String get bekleyenGorevYok => 'Aucune tâche en attente';
+  String get bekleyenGorevYok => 'Aucune tache en attente';
 
   @override
-  String get henuzRuhHaliPaylasilmamis => 'Aucune humeur partagée';
+  String get henuzRuhHaliPaylasilmamis => 'Aucune humeur partagee';
 
   @override
-  String get ruhHaliniPaylas => 'Partager mon humeur';
+  String get ruhHaliniPaylas => 'Partager l\'humeur';
 
   @override
-  String get bataryaAnalitigi => 'Analytique batterie';
+  String get bataryaAnalitigi => 'Analyse batterie';
 
   @override
   String get gunlukOrtalama18 => 'Moyenne quotidienne : 18%';
 
   @override
-  String get sali => 'Mardi';
+  String get sali => 'Mar';
 
   @override
-  String get carsamba => 'Mercredi';
+  String get carsamba => 'Mer';
 
   @override
-  String get persembe => 'Jeudi';
+  String get persembe => 'Jeu';
 
   @override
   String get profilKullanimi => 'UTILISATION DU PROFIL';
@@ -1678,13 +1677,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get kosu => 'Course';
 
   @override
-  String get verimlilikMetrikleri => 'MÉTRIQUES D\'EFFICACITÉ';
+  String get verimlilikMetrikleri => 'METRIQUES D\'EFFICACITE';
 
   @override
-  String get optimalProfilOrani => 'Taux de profil optimal';
+  String get optimalProfilOrani => 'Ratio de profil optimal';
 
   @override
-  String get yanlisProfilGecisi => 'Transition de profil incorrecte';
+  String get yanlisProfilGecisi => 'Mauvais changement de profil';
 
   @override
   String get gun1 => '12/jour';
@@ -1693,31 +1692,31 @@ class AppLocalizationsFr extends AppLocalizations {
   String get gun2 => '<5/jour';
 
   @override
-  String get aiOptimizasyonOnerileri => '🤖 SUGGESTIONS D\'OPTIMISATION IA';
+  String get aiOptimizasyonOnerileri => 'CONSEILS D\'OPTIMISATION IA';
 
   @override
   String get canliKonumTakibi => 'Suivi de position en direct';
 
   @override
-  String get guncelleme => 'Mise à jour';
+  String get guncelleme => 'Mise a jour';
 
   @override
   String get saglayici => 'Fournisseur';
 
   @override
-  String get iyi => 'Bien';
+  String get iyi => 'Bon';
 
   @override
-  String get gunIciOzet => 'RÉSUMÉ DE LA JOURNÉE';
+  String get gunIciOzet => 'RESUME DU JOUR';
 
   @override
-  String get aktifSure => 'Durée active';
+  String get aktifSure => 'Temps actif';
 
   @override
-  String get duraganSure => 'Durée stationnaire';
+  String get duraganSure => 'Temps immobile';
 
   @override
-  String get konumKaydi => 'Enregistrement de position';
+  String get konumKaydi => 'Journal de position';
 
   @override
   String get bataryaKullanimi => 'Utilisation de la batterie';
@@ -1726,35 +1725,35 @@ class AppLocalizationsFr extends AppLocalizations {
   String get konumPaylas => 'Partager la position';
 
   @override
-  String get konumTakipAyarlari => 'Paramètres de suivi de position';
+  String get konumTakipAyarlari => 'Parametres de suivi';
 
   @override
   String get aiOptimizasyonuYakindaGeliyor =>
       'Optimisation IA bientôt disponible';
 
   @override
-  String get oncelik1 => 'Priorité :';
+  String get oncelik1 => 'Priorite :';
 
   @override
   String get tahminiKalanSure => '58% - Durée restante estimée :';
 
   @override
-  String get detayliAnaliz => 'Analyse détaillée';
+  String get detayliAnaliz => 'Analyse detaillee';
 
   @override
   String get hareketProfilleri => 'PROFILS DE MOUVEMENT';
 
   @override
-  String get gelismisAyarlar => 'PARAMÈTRES AVANCÉS';
+  String get gelismisAyarlar => 'PARAMETRES AVANCES';
 
   @override
-  String get adaptifEkranParlakligi => 'Luminosité adaptative';
+  String get adaptifEkranParlakligi => 'Luminosite adaptative';
 
   @override
-  String get agIstekleriniToplama => 'Regroupement des requêtes réseau';
+  String get agIstekleriniToplama => 'Regrouper les requetes reseau';
 
   @override
-  String get konumOnbellekleme => 'Cache de position';
+  String get konumOnbellekleme => 'Mise en cache de position';
 
   @override
   String get yardimciIslemciKullanimi => 'Utilisation du coprocesseur';
@@ -1772,7 +1771,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Priorité : Position la plus précise. Estimation : 8-12 heures.';
 
   @override
-  String get guncellemeAyarlari => 'PARAMÈTRES DE MISE À JOUR';
+  String get guncellemeAyarlari => 'PARAMETRES DE MISE A JOUR';
 
   @override
   String get snArasi => 'Entre 5 et 60 sec';
@@ -1782,20 +1781,20 @@ class AppLocalizationsFr extends AppLocalizations {
       'Pas de mise à jour sans changement de position';
 
   @override
-  String get zamanlayiciYedek => 'Minuterie de secours';
+  String get zamanlayiciYedek => 'Repli du planificateur';
 
   @override
   String get konumDegismeseBileZorunluGuncelleme =>
       'Mise à jour obligatoire même sans changement';
 
   @override
-  String get hassasiyet => 'PRÉCISION';
+  String get hassasiyet => 'SENSIBILITE';
 
   @override
-  String get gpsKalitesiDusukse => 'Si qualité GPS faible :';
+  String get gpsKalitesiDusukse => 'Si la qualite GPS est faible :';
 
   @override
-  String get gucYonetimi => 'GESTION DE L\'ÉNERGIE';
+  String get gucYonetimi => 'GESTION DE L\'ENERGIE';
 
   @override
   String get gpsAcikKalmaSuresiniSinirla =>
@@ -1803,22 +1802,22 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get hareketAlgilayiciIleTetikle =>
-      'Déclencher par le capteur de mouvement';
+      'Declencher avec capteur de mouvement';
 
   @override
-  String get telefonSallanincaAktifOl => 'Activer en secouant le téléphone';
+  String get telefonSallanincaAktifOl => 'Activer en secouant';
 
   @override
-  String get gecisKurallari => 'RÈGLES DE TRANSITION';
+  String get gecisKurallari => 'REGLES DE TRANSITION';
 
   @override
-  String get buProfileGecis => 'Transition vers ce profil :';
+  String get buProfileGecis => 'Passer a ce profil :';
 
   @override
   String get hizEsigi => 'Seuil de vitesse';
 
   @override
-  String get buProfildenCikis => 'Sortie de ce profil :';
+  String get buProfildenCikis => 'Quitter ce profil :';
 
   @override
   String get buSureBoyuncaHareketsizKalincaDusukProfil =>
@@ -1828,22 +1827,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get album => 'Album';
 
   @override
-  String get cocukGelisimi => 'Développement de l\'enfant';
+  String get cocukGelisimi => 'Developpement de l\'enfant';
 
   @override
-  String get kilometreTaslari => 'Étapes clés';
+  String get kilometreTaslari => 'Etapes cles';
 
   @override
   String get ilkKelime => 'Premier mot';
 
   @override
-  String get ilkDis => 'Première dent';
+  String get ilkDis => 'Premiere dent';
 
   @override
   String get inDogumGunu => 'Anniversaire de';
 
   @override
-  String get sonAnilar => 'Derniers souvenirs';
+  String get sonAnilar => 'Souvenirs recents';
 
   @override
   String get miracBugunIlkAdiminiAtti =>
@@ -1853,7 +1852,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get yilbasi2026 => 'Nouvel An 2026';
 
   @override
-  String get tumAileBirAradaydik => 'Toute la famille était réunie...';
+  String get tumAileBirAradaydik => 'Toute la famille reunie...';
 
   @override
   String get bugunAilenleYasadiginGuzelBirAniYaz =>

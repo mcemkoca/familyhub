@@ -529,7 +529,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get acik => 'Open';
 
   @override
-  String get fotograf => '📷 Foto';
+  String get fotograf => 'Foto';
 
   @override
   String get guvenliVaris => 'Veilige aankomst';
@@ -759,7 +759,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get atananKisi => 'Toegewezen aan';
 
   @override
-  String get davranis => '🧠 Gedrag';
+  String get davranis => 'Gedrag';
 
   @override
   String get yakinlikDerecesi => 'Relatie';
@@ -994,7 +994,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get simdiGec => 'Nu overslaan';
 
   @override
-  String get ailenizinKalbiBuradaAtiyor => 'Het hart van uw familie klopt hier';
+  String get ailenizinKalbiBuradaAtiyor => 'Het hart van je gezin klopt hier';
 
   @override
   String get aileButcesi => 'Gezinsbudget';
@@ -1013,7 +1013,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get enYuksekKategori => 'Topcategorie';
 
   @override
-  String get aionerileri1 => '💡 AI-suggesties';
+  String get aionerileri1 => 'AI-suggesties';
 
   @override
   String get islemiDuzenle => 'Transactie bewerken';
@@ -1087,7 +1087,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get yoldayimEve10Dakika => 'Onderweg, 10 min naar huis.';
 
   @override
-  String get anketOzelligiYakindaGeliyor => 'Enquêtefunctie komt binnenkort';
+  String get anketOzelligiYakindaGeliyor => 'Peiling binnenkort';
 
   @override
   String get sesKaydiBaslatmakIcinMesajAlanindakiMikrofonaBasiliTutun =>
@@ -1176,7 +1176,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get odevSil => 'Huiswerk verwijderen';
 
   @override
-  String get buOdeviSilmekIstiyorMusun => 'Wilt u dit huiswerk verwijderen?';
+  String get buOdeviSilmekIstiyorMusun => 'Dit huiswerk verwijderen?';
 
   @override
   String get henuzOdevEklenmemis => 'Nog geen huiswerk toegevoegd';
@@ -1208,8 +1208,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get kayitSil => 'Record verwijderen';
 
   @override
-  String get buKaydiSilmekIstiyorMusun =>
-      'Wilt u deze registratie verwijderen?';
+  String get buKaydiSilmekIstiyorMusun => 'Dit record verwijderen?';
 
   @override
   String get kazanim => 'Verworvenheid';
@@ -1223,7 +1222,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get cocukHenuzKonumPaylasmamis =>
-      'Kind heeft nog geen locatie gedeeld';
+      'Kind heeft locatie nog niet gedeeld';
 
   @override
   String get cocugunaYeniBirGorevAta => 'Wijs je kind een nieuwe taak toe';
@@ -1352,7 +1351,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get arandi => '112 gebeld';
 
   @override
-  String get kullaniciIyiyimDedi => 'Gebruiker zei \"Ik ben in orde\"';
+  String get kullaniciIyiyimDedi => 'Gebruiker zei Ik ben OK';
 
   @override
   String get kazaTespitiAyarlari => 'Ongevaldetectie-instellingen';
@@ -1440,7 +1439,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get henuzBelgeYok => 'Nog geen documenten';
 
   @override
-  String get yuklemekIcinButonunaBasin => 'Druk op + om te uploaden';
+  String get yuklemekIcinButonunaBasin => 'Tik op + om te uploaden';
 
   @override
   String get gorevOlustur => 'Taak aanmaken';
@@ -1466,7 +1465,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get seviyeYuksek => '🎯 Niveau: HOOG 🔴';
 
   @override
-  String get otomatikYanitDurumu => 'STATUS AUTOMATISCH ANTWOORD';
+  String get otomatikYanitDurumu => 'AUTO-RESPONSSTATUS';
 
   @override
   String get sesKaydiBasladi => 'Audio-opname gestart';
@@ -1475,22 +1474,22 @@ class AppLocalizationsNl extends AppLocalizations {
   String get sure3Dk12Sn => 'Duur: 3 min 12 sec';
 
   @override
-  String get iyiyimSistemiDurdur => 'IK BEN IN ORDE - SYSTEEM STOPPEN';
+  String get iyiyimSistemiDurdur => 'IK BEN OK - STOP';
 
   @override
   String get yardimTalebiHizlandirildi => 'Hulpverzoek versneld';
 
   @override
-  String get acilDurumSos => '🆘 NOOD SOS';
+  String get acilDurumSos => 'NOOD-SOS';
 
   @override
-  String get hizliSosKategorileri => 'SNELLE SOS-CATEGORIEËN';
+  String get hizliSosKategorileri => 'SNELLE SOS-CATEGORIEEN';
 
   @override
   String get saglik1 => 'GEZONDHEID';
 
   @override
-  String get guvenlik => 'VEILIGHEID';
+  String get guvenlik => 'BEVEILIGING';
 
   @override
   String get dogalAfet => 'NATUURRAMP';
@@ -1508,44 +1507,44 @@ class AppLocalizationsNl extends AppLocalizations {
   String get gercekAcilDurum => 'Echte noodsituatie';
 
   @override
-  String get testModuYakinda => 'Testmodus binnenkort beschikbaar';
+  String get testModuYakinda => 'Testmodus binnenkort';
 
   @override
   String get tetikleyiciler => 'TRIGGERS';
 
   @override
-  String get uzunSureHareketsizlik => 'Langdurige onbeweeglijkheid';
+  String get uzunSureHareketsizlik => 'Langdurige inactiviteit';
 
   @override
-  String get saglikAciliyeti => 'Medische urgentie';
+  String get saglikAciliyeti => 'Medisch noodgeval';
 
   @override
   String get akilliSaatEntegrasyonu => 'Smartwatch-integratie';
 
   @override
-  String get yanlisAlarmOnleme => 'Valse alarmen voorkomen';
+  String get yanlisAlarmOnleme => 'Vals alarm voorkomen';
 
   @override
-  String get otomatikMesajlar => 'AUTOMATISCHE BERICHTEN';
+  String get otomatikMesajlar => 'AUTO-BERICHTEN';
 
   @override
-  String get smsGonder => 'SMS sturen';
+  String get smsGonder => 'Sms verzenden';
 
   @override
-  String get otomatikAramalar => 'AUTOMATISCHE OPROEPEN';
+  String get otomatikAramalar => 'AUTO-OPROEPEN';
 
   @override
   String get yasalUyariYanlisAramaCezasiKullaniciSorumlulugundadir =>
       '⚠️ Juridische waarschuwing: Boetes voor vals alarm zijn voor rekening van de gebruiker.';
 
   @override
-  String get aileUyeleriniAra => 'Familieleden bellen';
+  String get aileUyeleriniAra => 'Gezinsleden bellen';
 
   @override
-  String get konumPaylasimi => 'LOCATIEDELING';
+  String get konumPaylasimi => 'LOCATIE DELEN';
 
   @override
-  String get anlikKonumPaylas => 'Huidige locatie delen';
+  String get anlikKonumPaylas => 'Live locatie delen';
 
   @override
   String get rotaGecmisiniEkle => 'Routegeschiedenis toevoegen';
@@ -1554,19 +1553,19 @@ class AppLocalizationsNl extends AppLocalizations {
   String get otomatikSesKaydi => 'Automatische audio-opname';
 
   @override
-  String get bulutaYukle => 'Uploaden naar cloud';
+  String get bulutaYukle => 'Naar cloud uploaden';
 
   @override
-  String get adimEklemeYakindaGeliyor => 'Stappen toevoegen komt binnenkort';
+  String get adimEklemeYakindaGeliyor => 'Stappen toevoegen binnenkort';
 
   @override
   String get adimEkle => 'Stap toevoegen';
 
   @override
-  String get duzenlemeYakinda => 'Bewerken komt binnenkort';
+  String get duzenlemeYakinda => 'Bewerken binnenkort';
 
   @override
-  String get silmeYakinda => 'Verwijderen komt binnenkort';
+  String get silmeYakinda => 'Verwijderen binnenkort';
 
   @override
   String get sosAyarlariKaydedildi => 'SOS-instellingen opgeslagen';
@@ -1578,10 +1577,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get smsSablonu => 'SMS-SJABLOON';
 
   @override
-  String get smsMesaji => 'SMS-bericht...';
+  String get smsMesaji => 'Sms-bericht...';
 
   @override
-  String get pushBildirimSablonu => 'PUSH-MELDINGSJABLOON';
+  String get pushBildirimSablonu => 'PUSHMELDINGSJABLOON';
 
   @override
   String get icerik => 'Inhoud';
@@ -1602,7 +1601,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get birdenFazlaFotografVeyaVideo => 'Meerdere foto\'s of video\'s';
 
   @override
-  String get fotografCek => 'Foto nemen';
+  String get fotografCek => 'Foto maken';
 
   @override
   String get bugununAnilari => 'Herinneringen van vandaag';
@@ -1611,10 +1610,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get yilOnceBugun => '1 jaar geleden vandaag';
 
   @override
-  String get gecenHaftaSonu => 'Vorig weekend';
+  String get gecenHaftaSonu => 'Afgelopen weekend';
 
   @override
-  String get son30Gun => 'Afgelopen 30 dagen';
+  String get son30Gun => 'Laatste 30 dagen';
 
   @override
   String get videolarimiz => 'Onze video\'s';
@@ -1623,48 +1622,48 @@ class AppLocalizationsNl extends AppLocalizations {
   String get ilkAnilar => 'Eerste herinneringen';
 
   @override
-  String get henuzFotografYok => 'Geen foto\'s';
+  String get henuzFotografYok => 'Nog geen foto\'s';
 
   @override
   String get telefonGalerisindenSecmekIcinButonunaBasin =>
       'Druk op + om te selecteren uit de galerij';
 
   @override
-  String get henuzAniOlusmadi => 'Nog geen herinneringen aangemaakt';
+  String get henuzAniOlusmadi => 'Nog geen herinneringen';
 
   @override
   String get dahaFazlaFotografEkledikceAnilarOlusacak =>
       'Herinneringen worden aangemaakt naarmate u meer foto\'s toevoegt';
 
   @override
-  String get yaklasanEtkinlikler => 'Komende evenementen';
+  String get yaklasanEtkinlikler => 'Aankomende evenementen';
 
   @override
-  String get yaklasanEtkinlikYok => 'Geen komende evenementen';
+  String get yaklasanEtkinlikYok => 'Geen aankomende evenementen';
 
   @override
-  String get bekleyenGorevYok => 'Geen taken in afwachting';
+  String get bekleyenGorevYok => 'Geen openstaande taken';
 
   @override
   String get henuzRuhHaliPaylasilmamis => 'Nog geen stemming gedeeld';
 
   @override
-  String get ruhHaliniPaylas => 'Mijn stemming delen';
+  String get ruhHaliniPaylas => 'Stemming delen';
 
   @override
-  String get bataryaAnalitigi => 'Batterijanalyse';
+  String get bataryaAnalitigi => 'Batterij-analyse';
 
   @override
   String get gunlukOrtalama18 => 'Dagelijks gemiddelde: 18%';
 
   @override
-  String get sali => 'Dinsdag';
+  String get sali => 'Di';
 
   @override
-  String get carsamba => 'Woensdag';
+  String get carsamba => 'Woe';
 
   @override
-  String get persembe => 'Donderdag';
+  String get persembe => 'Do';
 
   @override
   String get profilKullanimi => 'PROFIELGEBRUIK';
@@ -1673,13 +1672,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get kosu => 'Hardlopen';
 
   @override
-  String get verimlilikMetrikleri => 'EFFICIËNTIEMETRIEKEN';
+  String get verimlilikMetrikleri => 'EFFICIENTIEMETRIEKEN';
 
   @override
-  String get optimalProfilOrani => 'Optimaal profielpercentage';
+  String get optimalProfilOrani => 'Optimale profielverhouding';
 
   @override
-  String get yanlisProfilGecisi => 'Onjuiste profielovergang';
+  String get yanlisProfilGecisi => 'Verkeerde profielwissel';
 
   @override
   String get gun1 => '12/dag';
@@ -1688,22 +1687,22 @@ class AppLocalizationsNl extends AppLocalizations {
   String get gun2 => '<5/dag';
 
   @override
-  String get aiOptimizasyonOnerileri => '🤖 AI-OPTIMALISATIESUGGESTIES';
+  String get aiOptimizasyonOnerileri => 'AI-OPTIMALISATIETIPS';
 
   @override
-  String get canliKonumTakibi => 'Live locatietracking';
+  String get canliKonumTakibi => 'Live locatievolging';
 
   @override
   String get guncelleme => 'Update';
 
   @override
-  String get saglayici => 'Aanbieder';
+  String get saglayici => 'Provider';
 
   @override
   String get iyi => 'Goed';
 
   @override
-  String get gunIciOzet => 'SAMENVATTING VAN DE DAG';
+  String get gunIciOzet => 'DAGOVERZICHT';
 
   @override
   String get aktifSure => 'Actieve tijd';
@@ -1712,7 +1711,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get duraganSure => 'Stilstaande tijd';
 
   @override
-  String get konumKaydi => 'Locatieregistratie';
+  String get konumKaydi => 'Locatielog';
 
   @override
   String get bataryaKullanimi => 'Batterijgebruik';
@@ -1721,7 +1720,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get konumPaylas => 'Locatie delen';
 
   @override
-  String get konumTakipAyarlari => 'Locatietracking instellingen';
+  String get konumTakipAyarlari => 'Locatievolg-instellingen';
 
   @override
   String get aiOptimizasyonuYakindaGeliyor =>
@@ -1749,10 +1748,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get agIstekleriniToplama => 'Netwerkverzoeken bundelen';
 
   @override
-  String get konumOnbellekleme => 'Locatiecaching';
+  String get konumOnbellekleme => 'Locatie cachen';
 
   @override
-  String get yardimciIslemciKullanimi => 'Gebruik van coprocessor';
+  String get yardimciIslemciKullanimi => 'Coprocessorgebruik';
 
   @override
   String get oncelikMaksimumPilOmruTahmini23GunKonumTakibi =>
@@ -1777,14 +1776,14 @@ class AppLocalizationsNl extends AppLocalizations {
       'Geen update zonder locatiewijziging';
 
   @override
-  String get zamanlayiciYedek => 'Back-uptimer';
+  String get zamanlayiciYedek => 'Planner-fallback';
 
   @override
   String get konumDegismeseBileZorunluGuncelleme =>
       'Verplichte update zelfs zonder locatiewijziging';
 
   @override
-  String get hassasiyet => 'NAUWKEURIGHEID';
+  String get hassasiyet => 'GEVOELIGHEID';
 
   @override
   String get gpsKalitesiDusukse => 'Als GPS-kwaliteit laag is:';
@@ -1796,22 +1795,22 @@ class AppLocalizationsNl extends AppLocalizations {
   String get gpsAcikKalmaSuresiniSinirla => 'GPS-activatietijd beperken';
 
   @override
-  String get hareketAlgilayiciIleTetikle => 'Activeren via bewegingssensor';
+  String get hareketAlgilayiciIleTetikle => 'Activeren met bewegingssensor';
 
   @override
-  String get telefonSallanincaAktifOl => 'Activeren bij schudden van telefoon';
+  String get telefonSallanincaAktifOl => 'Activeren bij schudden';
 
   @override
   String get gecisKurallari => 'OVERGANGSREGELS';
 
   @override
-  String get buProfileGecis => 'Overgang naar dit profiel:';
+  String get buProfileGecis => 'Overschakelen naar dit profiel:';
 
   @override
   String get hizEsigi => 'Snelheidsdrempel';
 
   @override
-  String get buProfildenCikis => 'Verlaten van dit profiel:';
+  String get buProfildenCikis => 'Dit profiel verlaten:';
 
   @override
   String get buSureBoyuncaHareketsizKalincaDusukProfil =>
@@ -1846,7 +1845,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get yilbasi2026 => 'Nieuwjaar 2026';
 
   @override
-  String get tumAileBirAradaydik => 'De hele familie was samen...';
+  String get tumAileBirAradaydik => 'De hele familie samen...';
 
   @override
   String get bugunAilenleYasadiginGuzelBirAniYaz =>
