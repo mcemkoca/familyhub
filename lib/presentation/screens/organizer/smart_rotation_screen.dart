@@ -4,7 +4,10 @@ import 'package:flutter/services.dart';
 import '../../../core/supabase_client.dart';
 import '../../../config/constants.dart';
 import '../../../domain/models/smart_rotation.dart';
+import '../../../domain/entities.dart' show TaskStatus;
 import '../../../services/smart_rotation_service.dart';
+import '../../../services/koca_seed.dart';
+import '../../../services/hive_service.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
 class SmartRotationScreen extends StatefulWidget {
@@ -39,18 +42,56 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
   Future<void> _loadRealData() async {
     setState(() => _pageLoading = true);
     try {
-      // familyId'yi bul
-      String familyId;
+      // familyId'yi bul; yoksa YEREL moda düş (KocaSeed üyeleri + Hive görevleri).
+      String? familyId;
       if (widget.familyId != null && widget.familyId!.isNotEmpty) {
         familyId = widget.familyId!;
       } else {
         final user = _client.auth.currentUser;
-        if (user == null) throw Exception('Oturum yok');
-        final profile = await _client.from('profiles').select('family_id').eq('id', user.id).maybeSingle();
-        if (profile == null || profile['family_id'] == null) {
-          throw Exception('Aile bilgisi bulunamadı');
+        if (user != null) {
+          try {
+            final profile = await _client
+                .from('profiles')
+                .select('family_id')
+                .eq('id', user.id)
+                .maybeSingle();
+            familyId = profile?['family_id'] as String?;
+          } catch (_) {}
         }
-        familyId = profile['family_id'] as String;
+      }
+
+      // ── YEREL MOD: aile yoksa KocaSeed üyeleri + Hive görevleriyle çalış ──
+      if (familyId == null) {
+        final localMembers = KocaSeed.localMembers();
+        _members = List.generate(localMembers.length, (i) {
+          final m = localMembers[i];
+          return RotationMember(
+            id: 'local_$i',
+            name: (m['name'] ?? 'Üye').toString(),
+            age: 0,
+            workload: const MemberWorkload(),
+            energyProfile: const EnergyProfile(),
+            notifications: const NotificationPrefs(),
+          );
+        });
+        _tasks = HiveService.getTasks()
+            .where((t) => t.status != TaskStatus.completed)
+            .map((t) => RotationTask(
+                  id: t.id,
+                  title: t.title,
+                  category: _priorityToCategory(t.priority),
+                  estimatedDuration: switch (t.priority) {
+                    'high' => 60,
+                    'low' => 15,
+                    _ => 30,
+                  },
+                  assignedTo: t.assignedTo,
+                  createdBy: '',
+                  createdAt: t.dueDate ?? DateTime.now(),
+                ))
+            .toList();
+        setState(() => _pageLoading = false);
+        return;
       }
 
       // Aile üyelerini çek (profiles + child_accounts)
