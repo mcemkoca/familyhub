@@ -64,10 +64,13 @@ class EmergencyAutoActionsEngine {
       // ignore: empty_catches
     }
 
+    // 1b. Resolve family_id (aileye realtime ulaşması için gerekli)
+    final familyId = await _resolveFamilyId();
+
     // 2. Build action
     final now = DateTime.now();
     final action = EmergencyAction(
-      familyId: '', // Filled by service layer
+      familyId: familyId ?? '',
       triggeredBy: triggeredBy,
       trigger: EmergencyTrigger(
         type: EmergencyTriggerType.values.firstWhere(
@@ -93,6 +96,12 @@ class EmergencyAutoActionsEngine {
     _activeAction = action;
     _statusController.add(action);
     onSOSStarted?.call();
+
+    // 2b. Buluta yaz + aileye anlık push — best-effort (çevrimdışıysa akış sürer).
+    //     Aile üyeleri emergency_actions'a realtime abone olduğunda anında görür.
+    if (familyId != null && familyId.isNotEmpty) {
+      unawaited(_broadcastToFamily(action, description ?? 'Acil durum yardım çağrısı'));
+    }
 
     // 3. Execute auto actions
     await _executeAutoActions(action);
@@ -257,6 +266,35 @@ class EmergencyAutoActionsEngine {
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
     }
+  }
+
+  /// Giriş yapan kullanıcının family_id'sini profiles'tan çözer.
+  Future<String?> _resolveFamilyId() async {
+    try {
+      final client = SupabaseConfig.safeClient;
+      final userId = client?.auth.currentUser?.id;
+      if (client == null || userId == null) return null;
+      final profile = await client
+          .from('profiles')
+          .select('family_id')
+          .eq('id', userId)
+          .maybeSingle();
+      return profile?['family_id'] as String?;
+    } catch (e) {
+      debugPrint('[Emergency] family_id çözülemedi: $e');
+      return null;
+    }
+  }
+
+  /// SOS'u emergency_actions tablosuna yazar (aile realtime görür) + FCM push.
+  Future<void> _broadcastToFamily(EmergencyAction action, String message) async {
+    try {
+      final id = await EmergencyActionRepository().createAction(action);
+      action.actionId = id;
+    } catch (e) {
+      debugPrint('[Emergency] bulut kaydı başarısız: $e');
+    }
+    await _sendFcmPush(message);
   }
 
   Future<void> _sendFcmPush(String message) async {

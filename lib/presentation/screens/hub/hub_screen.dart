@@ -19,7 +19,6 @@ import '../../../components/hub/ai_suggestions_widget.dart';
 import '../../../components/hub/hub_ai_panel.dart';
 import '../../../components/hub/daily_briefing_card.dart';
 import '../../../components/hub/smart_insights_card.dart';
-import '../../../components/hub/content_widgets/content_highlights_widget.dart';
 import '../../../services/location_tracking_service.dart';
 
 // ─── Notification model ───────────────────────────────────────────────────────
@@ -351,12 +350,12 @@ class _HubScreenState extends ConsumerState<HubScreen>
               // ── Akıllı Uyarılar (gerçek veriden içgörüler) ───────────────
               const SliverToBoxAdapter(child: SmartInsightsCard()),
 
-              // ── İpuçları / Keşfet (Akıllı Uyarılar'ın hemen altında, collapse) ──
-              if (HiveService.getBoolSetting('hub_show_tips',
+              // ── Günlük Öneriler (eski Keşfet'in yerinde, collapse) ────────
+              if (HiveService.getBoolSetting('hub_show_smart_card',
                   defaultValue: true))
                 const SliverToBoxAdapter(child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12),
-                  child: ContentHighlightsWidget(),
+                  child: AISuggestionsWidget(),
                 )),
 
               // ── Quick access grid (butonlar hemen gorunsun) ──────────────
@@ -364,14 +363,6 @@ class _HubScreenState extends ConsumerState<HubScreen>
 
               // ── Hub gömülü mini AI sohbet paneli ──────────────────────────
               const SliverToBoxAdapter(child: HubAiPanel()),
-
-              // ── Akıllı Kart / AI Öneriler (Ana Ekran Özelleştir'den gizlenebilir) ──
-              if (HiveService.getBoolSetting('hub_show_smart_card',
-                  defaultValue: true))
-                const SliverToBoxAdapter(child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12),
-                  child: AISuggestionsWidget(),
-                )),
 
               // ── Stat strip ───────────────────────────────────────────────
               const SliverToBoxAdapter(child: _StatStrip()),
@@ -1082,7 +1073,7 @@ class _QuickGrid extends StatelessWidget {
               ),
               const SizedBox(width: 6),
               const Text(
-                'QUICK ACCESS',
+                'HIZLI ERİŞİM',
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
@@ -1096,19 +1087,15 @@ class _QuickGrid extends StatelessWidget {
           GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: features.length + 1, // +1 for "more" slot
+            itemCount: features.length, // 12 özellik → 3x4, "more" kaldırıldı
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              mainAxisSpacing: 8,
-              crossAxisSpacing: 6,
-              // Sabit hücre yüksekliği — geniş/tablet ekranlarda aşırı boşluğu
-              // önler (childAspectRatio geniş ekranda hücreyi çok uzatıyordu).
-              mainAxisExtent: 118,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 8,
+              // Daha büyük butonlar için artırılmış hücre yüksekliği.
+              mainAxisExtent: 138,
             ),
             itemBuilder: (context, i) {
-              if (i == features.length) {
-                return _MoreSlot();
-              }
               final f = features[i];
               return _FeatureTile(feature: f);
             },
@@ -1148,8 +1135,8 @@ class _FeatureTileState extends State<_FeatureTile> {
             if (f.asset != null)
               // Premium PNG tile — kendi renkli zemini + parıltısı ile.
               SizedBox(
-                width: 76,
-                height: 76,
+                width: 92,
+                height: 92,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     boxShadow: [
@@ -1165,7 +1152,7 @@ class _FeatureTileState extends State<_FeatureTile> {
               )
             else
             Container(
-              width: 76, height: 76,
+              width: 92, height: 92,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: f.gradient,
@@ -1212,7 +1199,7 @@ class _FeatureTileState extends State<_FeatureTile> {
                     ),
                   ),
                   Center(
-                    child: Icon(f.icon, size: 34, color: Colors.white,
+                    child: Icon(f.icon, size: 42, color: Colors.white,
                         shadows: [
                           Shadow(
                             color: Colors.black.withAlpha(100),
@@ -1227,8 +1214,8 @@ class _FeatureTileState extends State<_FeatureTile> {
             Text(
               f.label,
               style: const TextStyle(
-                fontSize: 11.5,
-                fontWeight: FontWeight.w600,
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
                 color: Color(0xFFC7CBD4),
               ),
               textAlign: TextAlign.center,
@@ -1236,28 +1223,6 @@ class _FeatureTileState extends State<_FeatureTile> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _MoreSlot extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        SizedBox(
-          width: 76,
-          height: 76,
-          child: Image.asset('assets/icons/tiles/more.png', fit: BoxFit.contain),
-        ),
-        const SizedBox(height: 8),
-        const Text('More',
-            style: TextStyle(
-                fontSize: 11.5,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF9CA3AF))),
-      ],
     );
   }
 }
@@ -1275,11 +1240,11 @@ class _StatStrip extends ConsumerWidget {
       padding: const EdgeInsets.fromLTRB(12, 10, 12, 0),
       child: Row(
         children: [
-          _StatCard(value: '$taskCount', label: 'TASKS TODAY'),
+          _StatCard(value: '$taskCount', label: 'BUGÜN GÖREV'),
           const SizedBox(width: 8),
-          const _StatCard(value: '🔥 7', label: 'DAY STREAK'),
+          const _StatCard(value: '🔥 7', label: 'GÜN SERİSİ'),
           const SizedBox(width: 8),
-          const _StatCard(value: '3', label: 'ONLINE NOW',
+          const _StatCard(value: '3', label: 'ÇEVRİMİÇİ',
               accent: Color(0xFF22C55E)),
         ],
       ),
