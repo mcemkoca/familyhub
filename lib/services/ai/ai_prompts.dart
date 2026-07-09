@@ -31,7 +31,7 @@ class AIPrompts {
   // ── Hub Context Builder ────────────────────────────────────────────────
 
   /// Builds a rich context prompt from [TodaySummary] data.
-  static String buildHubPrompt(TodaySummary data) {
+  static String buildHubPrompt(TodaySummary data, {Map<String, int>? reportScores}) {
     final buffer = StringBuffer();
     buffer.writeln('Bugün: ${_formatDate(DateTime.now())}');
     buffer.writeln('Yaklaşan etkinlik sayısı: ${data.eventCount}');
@@ -41,6 +41,20 @@ class AIPrompts {
 
     if (data.nextEventTitle != null && data.nextEventTime != null) {
       buffer.writeln('Sonraki etkinlik: ${data.nextEventTitle} (${_formatTime(data.nextEventTime!)})');
+    }
+
+    // Aile Karnesi istatistikleri — öneriler en zayıf alanları hedeflemeli.
+    if (reportScores != null && reportScores.isNotEmpty) {
+      buffer.writeln('\nAİLE KARNESİ (0-100 puan, düşük = geliştirilmeli):');
+      final sorted = reportScores.entries.toList()
+        ..sort((a, b) => a.value.compareTo(b.value));
+      for (final e in sorted) {
+        buffer.writeln('- ${e.key}: %${e.value}');
+      }
+      final weakest = sorted.first;
+      buffer.writeln(
+          'ÖNCELİK: En düşük puanlı alanı ("${weakest.key}", %${weakest.value}) '
+          'iyileştirecek somut öneriler ver. Yüksek puanlı alanları tekrar etme.');
     }
 
     buffer.writeln('\nBu bağlama göre 2-4 akıllı günlük öneri üret.');

@@ -8,6 +8,50 @@ import '../child/child_development_screen.dart' show childDevProvider;
 import '../child/child_dev_store.dart';
 import '../health/health_store.dart';
 
+/// Aile Karnesi skorları (yalnızca verisi olan kategoriler) — Günlük Öneriler
+/// AI'ı bu skorlara göre en zayıf alanı hedefler.
+final familyReportScoresProvider = Provider<Map<String, int>>((ref) {
+  final now = DateTime.now();
+  final scores = <String, int>{};
+
+  final txs = ref.watch(transactionsProvider).valueOrNull ?? const [];
+  final monthTxs = txs.where(
+      (t) => t.createdAt.year == now.year && t.createdAt.month == now.month);
+  final income = monthTxs
+      .where((t) => t.type == TransactionType.income)
+      .fold<double>(0, (s, t) => s + t.amount);
+  final expense = monthTxs
+      .where((t) => t.type == TransactionType.expense)
+      .fold<double>(0, (s, t) => s + t.amount);
+  if (income > 0 || expense > 0) {
+    scores['Bütçe'] = income > 0
+        ? (((income - expense) / income) * 100).clamp(0, 100).round()
+        : 0;
+  }
+
+  final children = ref.watch(childDevProvider);
+  if (children.isNotEmpty) {
+    var sum = 0;
+    var hasData = false;
+    for (final c in children) {
+      final s = DevStore.overallScore(c.id, c.devGroup);
+      sum += s;
+      if (s > 0) hasData = true;
+    }
+    if (hasData) scores['Gelişim'] = (sum / children.length).round();
+  }
+
+  final mood = HealthStore.todayMood();
+  if (mood != null) scores['Sağlık'] = ((mood / 4) * 100).round();
+
+  final tasks = ref.watch(myTasksProvider).valueOrNull ?? const [];
+  final events = ref.watch(upcomingEventsProvider).valueOrNull ?? const [];
+  final planCount = tasks.length + events.length;
+  if (planCount > 0) scores['Aktivite'] = (planCount * 15).clamp(0, 100);
+
+  return scores;
+});
+
 /// Haftalık Aile Karnesi — bütçe, gelişim, sağlık ve aktiviteyi tek ekranda
 /// birleştiren aile içgörü panosu. Skorlar gerçek yerel veriden hesaplanır;
 /// veri yoksa dürüstçe boş/0 gösterir. AI yorumu haftalık önbelleklidir.

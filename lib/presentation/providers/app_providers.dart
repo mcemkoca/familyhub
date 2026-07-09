@@ -351,12 +351,19 @@ final taskFilterProvider = StateProvider<String>((ref) => 'all');
 // ── Calendar ──
 
 class CalendarNotifier extends StateNotifier<AsyncValue<List<CalendarEvent>>> {
-  CalendarNotifier() : super(const AsyncValue.loading()) {
+  CalendarNotifier(this._ref) : super(const AsyncValue.loading()) {
     loadEvents();
     _subscribeRealtime();
   }
 
+  final Ref _ref;
   StreamSubscription<dynamic>? _rt;
+
+  /// Hub/Plan da aynı 'events' tablosunu okur (upcomingEventsProvider) — takvim
+  /// değişince onu da tazele ki plan anında güncellensin.
+  void _refreshDependents() {
+    _ref.invalidate(upcomingEventsProvider);
+  }
 
   void _subscribeRealtime() {
     try {
@@ -371,6 +378,7 @@ class CalendarNotifier extends StateNotifier<AsyncValue<List<CalendarEvent>>> {
     try {
       final events = await CalendarRepository().getEvents();
       if (mounted) state = AsyncValue.data(events);
+      _refreshDependents();
     } catch (_) {}
   }
 
@@ -395,6 +403,7 @@ class CalendarNotifier extends StateNotifier<AsyncValue<List<CalendarEvent>>> {
       final created = await CalendarRepository().createEvent(event);
       final current = state.valueOrNull ?? [];
       state = AsyncValue.data([...current, created]);
+      _refreshDependents();
       unawaited(_scheduleEventReminders(created));
     } catch (e, st) {
       state = AsyncValue.error(e, st);
@@ -436,6 +445,7 @@ class CalendarNotifier extends StateNotifier<AsyncValue<List<CalendarEvent>>> {
       state = AsyncValue.data(
         current.map((e) => e.id == event.id ? event : e).toList(),
       );
+      _refreshDependents();
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }
@@ -453,6 +463,7 @@ class CalendarNotifier extends StateNotifier<AsyncValue<List<CalendarEvent>>> {
       }
       await CalendarRepository().deleteEvent(id);
       state = AsyncValue.data(current.where((e) => e.id != id).toList());
+      _refreshDependents();
       if (removed != null) unawaited(_cancelEventReminders(removed));
     } catch (e, st) {
       state = AsyncValue.error(e, st);
@@ -472,7 +483,7 @@ class CalendarNotifier extends StateNotifier<AsyncValue<List<CalendarEvent>>> {
 
 final eventsProvider =
     StateNotifierProvider<CalendarNotifier, AsyncValue<List<CalendarEvent>>>(
-      (ref) => CalendarNotifier(),
+      (ref) => CalendarNotifier(ref),
     );
 
 // ── Shopping ──

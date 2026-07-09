@@ -18,6 +18,8 @@ import '../../services/content/daily_suggestions_pool.dart';
 import '../../repositories/child_account_repository.dart';
 import '../../services/content/family_suggestions_pool.dart';
 import '../../services/hive_service.dart';
+import '../../presentation/screens/insights/family_report_screen.dart'
+    show familyReportScoresProvider;
 
 
 /// AI-powered smart suggestions widget for the Hub screen.
@@ -115,7 +117,10 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
               totalMembers: 0,
             );
           }
-          final prompt = AIPrompts.buildHubPrompt(hubData);
+          // Aile Karnesi skorlarını prompt'a besle — öneriler en zayıf alanı hedefler.
+          final reportScores = ref.read(familyReportScoresProvider);
+          final prompt = AIPrompts.buildHubPrompt(hubData,
+              reportScores: reportScores.isEmpty ? null : reportScores);
           final response = await AIEngine.generate(
             prompt: prompt,
             systemPrompt: AIPrompts.hubSystemPrompt,
@@ -135,8 +140,9 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
         } catch (e) { debugPrint('AI suggestions error: $e'); }
       }
 
-      // Merge: pool suggestions first, family pool, then AI bonus
-      final all = <AISuggestion>[...daily, ...familySuggestions, ...aiSuggestions];
+      // Merge: Karne-bazlı AI önerileri önce (en zayıf alanı hedefler),
+      // ardından günlük havuz ve aile havuzu.
+      final all = <AISuggestion>[...aiSuggestions, ...daily, ...familySuggestions];
       final newIds = all.map((s) => s.id).toList();
 
       // Save shown IDs
