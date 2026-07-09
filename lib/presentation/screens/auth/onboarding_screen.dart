@@ -331,17 +331,21 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            width: 80,
-            height: 80,
+            width: 84,
+            height: 84,
             decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [Color(0xFF6366F1), Color(0xFFEC4899)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
+              color: Colors.white,
               borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xFF6366F1).withAlpha(90),
+                  blurRadius: 22,
+                  spreadRadius: 2,
+                ),
+              ],
             ),
-            child: const Icon(Icons.family_restroom, color: Colors.white, size: 40),
+            clipBehavior: Clip.antiAlias,
+            child: Image.asset('assets/images/logo_full.png', fit: BoxFit.cover),
           ),
           const SizedBox(height: 32),
           Text(

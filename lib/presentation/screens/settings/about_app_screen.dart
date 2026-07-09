@@ -36,21 +36,24 @@ class AboutAppScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        width: 80,
-                        height: 80,
+                        width: 84,
+                        height: 84,
                         decoration: BoxDecoration(
-                          color: Colors.white.withAlpha(30),
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(24),
                           border: Border.all(
                               color: Colors.white.withAlpha(60), width: 2),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withAlpha(40),
+                              blurRadius: 16,
+                              offset: const Offset(0, 6),
+                            ),
+                          ],
                         ),
-                        child: const Center(
-                          child: Text('FH',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.w900)),
-                        ),
+                        clipBehavior: Clip.antiAlias,
+                        child: Image.asset('assets/images/logo_full.png',
+                            fit: BoxFit.cover),
                       ),
                       const SizedBox(height: 12),
                       const Text('FamilyHub',
