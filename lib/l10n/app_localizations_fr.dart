@@ -2232,8 +2232,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Succes 95% 17h-19h, reduire la fenetre';
 
   @override
-  String get a101DisindaBasariDusukSadeceA101 =>
-      'Succès faible hors A101, réserver à A101\\';
+  String get a101DisindaBasariDusukSadeceA101 => 'Succes faible hors A101\\';
 
   @override
   String get ertelemeOraniYuksekNazikTonDeneyin =>
@@ -3089,7 +3088,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Activites, meteo et acces rapide.';
 
   @override
-  String get sagUsttekiHavaDurumuChip => 'Météo en haut à droite\\';
+  String get sagUsttekiHavaDurumuChip => 'le widget meteo en haut a droite\\';
 
   @override
   String get etkinlikOlusturma => 'Creer des evenements';
@@ -3099,7 +3098,8 @@ class AppLocalizationsFr extends AppLocalizations {
       'Ajoutez des evenements, definissez des rappels.';
 
   @override
-  String get altMenudenPlanSekmesineVeyaHub => 'Menu du bas \"Plan\" ou Hub\\';
+  String get altMenudenPlanSekmesineVeyaHub =>
+      'Depuis le menu bas, l\'onglet \"Plan\" ou Hub\\';
 
   @override
   String get sagAlttakiButonunaBasarakYeniEtkinlikEkleyin =>
@@ -3126,7 +3126,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get dakiGorevlerKartinaVeyaMerkezMenudenGorevler =>
-      'Carte \"Tâches\" ou menu central \"Tâches\"\\';
+      'la carte \"Taches\" ou \"Taches\"\\';
 
   @override
   String get yeniGorevOlusturmakIcinButonunaBasin =>
@@ -3195,7 +3195,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get altMenudenAnilarSekmesineVeyaHubMenusundenAlbumler =>
-      'Onglet \"Souvenirs\" ou \"Albums\" dans le menu Hub\\';
+      'l\'onglet \"Souvenirs\" ou \"Albums\"\\';
 
   @override
   String get fotografaDokunarakBuyutunKaydedinVeyaPaylasin =>

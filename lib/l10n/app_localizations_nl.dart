@@ -2226,8 +2226,7 @@ class AppLocalizationsNl extends AppLocalizations {
       '95% succes 17:00-19:00, versmal het venster';
 
   @override
-  String get a101DisindaBasariDusukSadeceA101 =>
-      'Succes laag buiten A101, beperken tot A101\\';
+  String get a101DisindaBasariDusukSadeceA101 => 'Succes laag buiten A101\\';
 
   @override
   String get ertelemeOraniYuksekNazikTonDeneyin =>
@@ -3077,7 +3076,7 @@ class AppLocalizationsNl extends AppLocalizations {
       'Activiteiten, weer en snelle toegang.';
 
   @override
-  String get sagUsttekiHavaDurumuChip => 'Weerswidget rechtsboven\\';
+  String get sagUsttekiHavaDurumuChip => 'de weer-chip rechtsboven\\';
 
   @override
   String get etkinlikOlusturma => 'Evenementen maken';
@@ -3087,7 +3086,8 @@ class AppLocalizationsNl extends AppLocalizations {
       'Voeg agenda-items toe, stel herinneringen in.';
 
   @override
-  String get altMenudenPlanSekmesineVeyaHub => 'Ondermenu \"Plan\" of Hub\\';
+  String get altMenudenPlanSekmesineVeyaHub =>
+      'Via het ondermenu, tabblad \"Plan\" of Hub\\';
 
   @override
   String get sagAlttakiButonunaBasarakYeniEtkinlikEkleyin =>
@@ -3114,7 +3114,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get dakiGorevlerKartinaVeyaMerkezMenudenGorevler =>
-      '\"Taken\"-kaart of centraal menu \"Taken\"\\';
+      'de kaart \"Taken\" of \"Taken\"\\';
 
   @override
   String get yeniGorevOlusturmakIcinButonunaBasin =>
@@ -3183,7 +3183,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get altMenudenAnilarSekmesineVeyaHubMenusundenAlbumler =>
-      'Tabblad \"Herinneringen\" of \"Albums\" in het Hub-menu\\';
+      'tabblad \"Herinneringen\" of \"Albums\"\\';
 
   @override
   String get fotografaDokunarakBuyutunKaydedinVeyaPaylasin =>

@@ -2226,7 +2226,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get a101DisindaBasariDusukSadeceA101 =>
-      'A101 dışında başarı düşük, sadece A101\\';
+      'Success low outside A101, only A101\\';
 
   @override
   String get ertelemeOraniYuksekNazikTonDeneyin =>
@@ -3080,7 +3080,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Family activities, weather and quick access cards.';
 
   @override
-  String get sagUsttekiHavaDurumuChip => 'Sağ üstteki hava durumu chip\\';
+  String get sagUsttekiHavaDurumuChip => 'the weather chip at top right\\';
 
   @override
   String get etkinlikOlusturma => 'Creating Events';
@@ -3091,7 +3091,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get altMenudenPlanSekmesineVeyaHub =>
-      'Alt menüden \"Plan\" sekmesine veya Hub\\';
+      'From the bottom menu, the \"Plan\" tab or Hub\\';
 
   @override
   String get sagAlttakiButonunaBasarakYeniEtkinlikEkleyin =>
@@ -3118,7 +3118,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dakiGorevlerKartinaVeyaMerkezMenudenGorevler =>
-      'daki \"Görevler\" kartına veya merkez menüden \"Görevler\"\\';
+      'the \"Tasks\" card or \"Tasks\" from the center menu\\';
 
   @override
   String get yeniGorevOlusturmakIcinButonunaBasin =>
@@ -3187,7 +3187,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get altMenudenAnilarSekmesineVeyaHubMenusundenAlbumler =>
-      'Alt menüden \"Anılar\" sekmesine veya Hub menüsünden \"Albümler\"\\';
+      'From the bottom menu, the \"Memories\" tab or \"Albums\" in the Hub menu\\';
 
   @override
   String get fotografaDokunarakBuyutunKaydedinVeyaPaylasin =>
