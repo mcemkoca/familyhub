@@ -327,7 +327,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get language => 'Taal';
 
   @override
-  String get turkish => 'Türkçe';
+  String get turkish => 'Turks';
 
   @override
   String get english => 'English';
@@ -599,14 +599,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get gorev => 'Taak';
 
   @override
-  String get baglantiyiKes => 'Verbreken';
+  String get baglantiyiKes => 'Verbinding verbreken';
 
   @override
-  String get telefonUygulamasiAcilamiyor =>
-      'Telefoonapp kan niet worden geopend';
+  String get telefonUygulamasiAcilamiyor => 'Kan telefoon-app niet openen';
 
   @override
-  String get guncel => 'Bijgewerkt';
+  String get guncel => 'Actueel';
 
   @override
   String get guvenliBolgeler => 'Veilige zones';
@@ -618,7 +617,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get kirmizi => 'Rood';
 
   @override
-  String get izinlerVeRoller => 'Machtigingen en rollen';
+  String get izinlerVeRoller => 'Rechten & rollen';
 
   @override
   String get turkiye => 'Turkije';
@@ -627,7 +626,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get hesabiSil => 'Account verwijderen';
 
   @override
-  String get pinEnAz4HaneliOlmali => 'PIN moet minimaal 4 cijfers hebben';
+  String get pinEnAz4HaneliOlmali => 'Pincode moet minstens 4 cijfers zijn';
 
   @override
   String get tumAlanlariDoldurun => 'Vul alle velden in';
@@ -636,7 +635,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get sifrelerEslesmiyor => 'Wachtwoorden komen niet overeen';
 
   @override
-  String get cevabiniziYazin => 'Schrijf uw antwoord';
+  String get cevabiniziYazin => 'Typ je antwoord';
 
   @override
   String get yeniSifre => 'Nieuw wachtwoord';
@@ -648,7 +647,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get saglik => 'Gezondheid';
 
   @override
-  String get eglence => 'Vrije tijd';
+  String get eglence => 'Vermaak';
 
   @override
   String get islemiSil => 'Transactie verwijderen';
@@ -657,7 +656,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get guncelle => 'Bijwerken';
 
   @override
-  String get aileUyesi => 'Familielid';
+  String get aileUyesi => 'Gezinslid';
 
   @override
   String get yeniGorev => 'Nieuwe taak';
@@ -669,7 +668,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get gelisim => 'Ontwikkeling';
 
   @override
-  String get yeniGorevEkle => 'Taak toevoegen';
+  String get yeniGorevEkle => 'Nieuwe taak toevoegen';
 
   @override
   String get gunlukSeri => 'dagelijkse reeks';
@@ -681,16 +680,16 @@ class AppLocalizationsNl extends AppLocalizations {
   String get olustur => 'Aanmaken';
 
   @override
-  String get aileUyelerineBildirildi => 'Familieleden op de hoogte gesteld';
+  String get aileUyelerineBildirildi => 'Gezinsleden op de hoogte gebracht';
 
   @override
-  String get acilKontaklaraSmsGonderildi => 'SMS verstuurd naar noodcontacten';
+  String get acilKontaklaraSmsGonderildi => 'Sms verzonden naar noodcontacten';
 
   @override
-  String get araniyor => '112 Bellen...';
+  String get araniyor => '112 bellen...';
 
   @override
-  String get konumPaylasimiAktif => 'Locatiedeling actief';
+  String get konumPaylasimiAktif => 'Locatie delen actief';
 
   @override
   String get detayliRapor => 'Gedetailleerd rapport';
@@ -708,11 +707,11 @@ class AppLocalizationsNl extends AppLocalizations {
   String get sosAyarlari => 'SOS-instellingen';
 
   @override
-  String get varsayilanaSifirlandi => 'Teruggezet naar standaard';
+  String get varsayilanaSifirlandi => 'Standaard hersteld';
 
   @override
   String get buAiledenAyrilmakIstediginizeEminMisiniz =>
-      'Weet u zeker dat u deze familie wilt verlaten?';
+      'Weet je zeker dat je dit gezin wilt verlaten?';
 
   @override
   String get cikar => 'Verwijderen';
@@ -730,7 +729,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get duragan => 'Stilstaand';
 
   @override
-  String get yuruyus => 'Lopen';
+  String get yuruyus => 'Wandelen';
 
   @override
   String get arac => 'Voertuig';
@@ -754,16 +753,16 @@ class AppLocalizationsNl extends AppLocalizations {
   String get azOnce => 'Zojuist';
 
   @override
-  String get gorevBasligiBosOlamaz => 'Taaknaam mag niet leeg zijn';
+  String get gorevBasligiBosOlamaz => 'Taaktitel mag niet leeg zijn';
 
   @override
-  String get atananKisi => 'Toegewezen persoon';
+  String get atananKisi => 'Toegewezen aan';
 
   @override
   String get davranis => '🧠 Gedrag';
 
   @override
-  String get yakinlikDerecesi => 'Verwantschapsgraad';
+  String get yakinlikDerecesi => 'Relatie';
 
   @override
   String get konumAliniyor => 'Locatie ophalen...';
@@ -775,7 +774,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get saglikKartim => 'Mijn gezondheidskaart';
 
   @override
-  String get yeniVarisPlanla => 'Aankomst plannen';
+  String get yeniVarisPlanla => 'Nieuwe aankomst plannen';
 
   @override
   String get hakkinda => 'Over';
@@ -784,7 +783,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get cokBuyuk => 'Te groot';
 
   @override
-  String get verilerGeriYuklendi => '✅ Gegevens hersteld';
+  String get verilerGeriYuklendi => 'Gegevens hersteld';
 
   @override
   String get googleHesabiBagla => 'Google-account koppelen';
@@ -796,22 +795,22 @@ class AppLocalizationsNl extends AppLocalizations {
   String get isimsiz => 'Naamloos';
 
   @override
-  String get aileYonetimi => 'Familiebeheer';
+  String get aileYonetimi => 'Gezinsbeheer';
 
   @override
-  String get yeniAileOlustur => 'Nieuwe familie aanmaken';
+  String get yeniAileOlustur => 'Nieuw gezin aanmaken';
 
   @override
-  String get davetKoduIleKatil => 'Deelnemen met uitnodigingscode';
+  String get davetKoduIleKatil => 'Deelnemen met code';
 
   @override
-  String get oturumAcikDegil => 'Sessie niet actief';
+  String get oturumAcikDegil => 'Niet aangemeld';
 
   @override
   String get dilVeBolge => 'Taal en regio';
 
   @override
-  String get kapali => 'Gesloten';
+  String get kapali => 'Uit';
 
   @override
   String get bildirimler => 'MELDINGEN';
@@ -846,7 +845,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get guvenlikSorulari => 'Beveiligingsvragen';
 
   @override
-  String get guvenlikSorusununCevabi => 'Antwoord op beveiligingsvraag';
+  String get guvenlikSorusununCevabi => 'Antwoord beveiligingsvraag';
 
   @override
   String get sifreDegistir => 'Wachtwoord wijzigen';
@@ -855,13 +854,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get onbellegiTemizle => 'Cache wissen';
 
   @override
-  String get henuzYok => 'Nog niet';
+  String get henuzYok => 'Nog geen';
 
   @override
-  String get sistemVarsayilani => 'Systeeminstelling';
+  String get sistemVarsayilani => 'Systeemstandaard';
 
   @override
-  String get kullanimKilavuzu => 'Gebruikershandleiding';
+  String get kullanimKilavuzu => 'Handleiding';
 
   @override
   String get kullanimKosullari => 'Gebruiksvoorwaarden';
@@ -926,7 +925,7 @@ class AppLocalizationsNl extends AppLocalizations {
       'Beantwoord uw beveiligingsvragen om uw account te beschermen.';
 
   @override
-  String get dogrulaVeDevamEt => 'Verifiëren en doorgaan';
+  String get dogrulaVeDevamEt => 'Verifieren en doorgaan';
 
   @override
   String get yeniSifreBelirle => 'Nieuw wachtwoord instellen';
@@ -967,7 +966,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get parmakIziIleGiris => 'Aanmelden met vingerafdruk';
 
   @override
-  String get hesabinYokMu => 'Geen account? ';
+  String get hesabinYokMu => 'Nog geen account?';
 
   @override
   String get kayitOl => 'Registreren';
@@ -2075,7 +2074,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get aileIlerlemesi => 'Familievoortgang';
 
   @override
-  String get tumu => 'Alle';
+  String get tumu => 'Alles';
 
   @override
   String get henuzGorevYok => 'Geen taken';
