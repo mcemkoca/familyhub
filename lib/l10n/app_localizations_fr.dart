@@ -102,6 +102,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get hub => 'Accueil';
 
   @override
+  String get mutfak => 'Cuisine';
+
+  @override
+  String get navMerkez => 'Accueil';
+
+  @override
   String get notifications => 'Notifications';
 
   @override

@@ -102,6 +102,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get hub => 'Ana Sayfa';
 
   @override
+  String get mutfak => 'Mutfak';
+
+  @override
+  String get navMerkez => 'Merkez';
+
+  @override
   String get notifications => 'Bildirimler';
 
   @override

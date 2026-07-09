@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../config/constants.dart';
 import '../../config/routes.dart';
 import '../../services/call_service.dart';
@@ -206,12 +207,29 @@ class _MainShellState extends State<MainShell> {
     );
   }
 
+  /// Seçili dile göre nav etiketi (sabit Türkçe yerine — dil değişince güncellenir).
+  String _navLabel(int index) {
+    final l = AppLocalizations.of(context);
+    switch (index) {
+      case 0:
+        return l.navMerkez;
+      case 1:
+        return l.chat;
+      case 2:
+        return l.mutfak;
+      case 3:
+        return l.egitim;
+      default:
+        return l.settings;
+    }
+  }
+
   Widget _buildNavItem(int index) {
     final isActive = _currentIndex == index;
     final tab = _tabs[index];
     final icon = tab['icon'] as IconData;
     final asset = tab['asset'] as String?;
-    final label = tab['label'] as String;
+    final label = _navLabel(index);
     final badge = tab['badge'] as int?;
 
     return Expanded(

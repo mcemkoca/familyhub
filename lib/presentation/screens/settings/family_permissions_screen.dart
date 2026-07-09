@@ -156,6 +156,21 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
     );
   }
 
+  /// Dropdown seçenekleri — standart rol seti + üyenin mevcut rolü (garanti
+  /// eşleşme, aksi halde DropdownButton "exactly one item" assertion'ı atar).
+  static List<MemberRole> _roleOptions(MemberRole current) {
+    final base = <MemberRole>[
+      MemberRole.admin,
+      MemberRole.parent,
+      MemberRole.teen,
+      MemberRole.child,
+      MemberRole.elder,
+      MemberRole.guest,
+    ];
+    if (!base.contains(current)) base.add(current);
+    return base;
+  }
+
   String _roleLabel(MemberRole role) {
     return switch (role) {
       MemberRole.admin => 'Yönetici',
@@ -359,7 +374,9 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
                       final member = _members[index];
-                      final permissions = _memberPermissions[member.id] ?? _defaultPermissions[member.role.name] ?? {};
+                      final permissions = _memberPermissions[member.id] ??
+                          _defaultPermissions[member.role.name] ??
+                          _defaultPermissions['child']!;
                       return Container(
                         margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
                         decoration: BoxDecoration(
@@ -402,10 +419,10 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
                                   title: Text(AppLocalizations.of(context).role),
                                   trailing: DropdownButton<String>(
                                     value: member.role.name,
-                                    items: ['admin', 'parent', 'member', 'child'].map((role) {
+                                    items: _roleOptions(member.role).map((role) {
                                       return DropdownMenuItem(
-                                        value: role,
-                                        child: Text(_roleLabel(_parseRole(role))),
+                                        value: role.name,
+                                        child: Text(_roleLabel(role)),
                                       );
                                     }).toList(),
                                     onChanged: (newRole) {

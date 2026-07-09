@@ -193,6 +193,18 @@ List<FamilyMember> localFamilyMembers() {
       role = MemberRole.child;
     } else if (roleStr.contains('bebek')) {
       role = MemberRole.baby;
+    } else if (roleStr.contains('yönetici') || roleStr.contains('yonetici') ||
+        roleStr.contains('admin')) {
+      role = MemberRole.admin;
+    } else if (roleStr.contains('genç') || roleStr.contains('genc') ||
+        roleStr.contains('teen')) {
+      role = MemberRole.teen;
+    } else if (roleStr.contains('büyük') || roleStr.contains('buyuk') ||
+        roleStr.contains('elder') || roleStr.contains('dede') ||
+        roleStr.contains('nine')) {
+      role = MemberRole.elder;
+    } else if (roleStr.contains('misafir') || roleStr.contains('guest')) {
+      role = MemberRole.guest;
     } else {
       role = MemberRole.parent;
     }

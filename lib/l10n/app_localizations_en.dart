@@ -102,6 +102,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get hub => 'Home';
 
   @override
+  String get mutfak => 'Kitchen';
+
+  @override
+  String get navMerkez => 'Home';
+
+  @override
   String get notifications => 'Notifications';
 
   @override
@@ -547,10 +553,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'En az 8 karakter, büyük/küçük harf, rakam ve özel karakter';
 
   @override
-  String get egitim => 'Eğitim';
+  String get egitim => 'Education';
 
   @override
-  String get diger => 'Diğer';
+  String get diger => 'Other';
 
   @override
   String get bildirimAyarlari => 'Bildirim Ayarları';

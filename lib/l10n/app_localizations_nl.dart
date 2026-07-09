@@ -102,6 +102,12 @@ class AppLocalizationsNl extends AppLocalizations {
   String get hub => 'Startpagina';
 
   @override
+  String get mutfak => 'Keuken';
+
+  @override
+  String get navMerkez => 'Start';
+
+  @override
   String get notifications => 'Meldingen';
 
   @override

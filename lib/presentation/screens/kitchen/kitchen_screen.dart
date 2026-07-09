@@ -536,9 +536,11 @@ class _RecipesTab extends StatelessWidget {
   Widget _buildGrid(BuildContext context) {
     return GridView.builder(
       padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
+      // İçeriğe uygun sabit kart yüksekliği — childAspectRatio ile kartlar
+      // çok uzun oluyor ve altta boşluk kalıyordu.
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.64,
+        mainAxisExtent: 218,
         crossAxisSpacing: 12,
         mainAxisSpacing: 12,
       ),
@@ -1151,6 +1153,7 @@ class _RecipeDetailSheetState extends State<RecipeDetailSheet>
             Container(
               margin: const EdgeInsets.all(16),
               height: 160,
+              clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
                     colors: [Color(0xFFF97316), Color(0xFFEF4444)],
@@ -1159,11 +1162,19 @@ class _RecipeDetailSheetState extends State<RecipeDetailSheet>
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Stack(
+                fit: StackFit.expand,
                 children: [
-                  Center(
-                    child: Icon(Icons.restaurant,
-                        size: 72,
-                        color: Colors.white.withAlpha(80)),
+                  // Tarife özel gerçek yemek görseli (bulunamazsa gradient kalır).
+                  _RecipeThumb(recipe: recipe, amber: const Color(0xFFF97316)),
+                  // Başlığın okunması için alt karartma katmanı.
+                  const DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.transparent, Color(0xCC000000)],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                      ),
+                    ),
                   ),
                   Positioned(
                     bottom: 16,

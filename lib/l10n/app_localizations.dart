@@ -288,6 +288,18 @@ abstract class AppLocalizations {
   /// **'Ana Sayfa'**
   String get hub;
 
+  /// No description provided for @mutfak.
+  ///
+  /// In tr, this message translates to:
+  /// **'Mutfak'**
+  String get mutfak;
+
+  /// No description provided for @navMerkez.
+  ///
+  /// In tr, this message translates to:
+  /// **'Merkez'**
+  String get navMerkez;
+
   /// No description provided for @notifications.
   ///
   /// In tr, this message translates to:

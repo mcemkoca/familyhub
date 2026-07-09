@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../child/child_development_screen.dart' show childDevProvider;
+import '../../../services/auth_service.dart';
 import 'health_store.dart';
 import 'health_family.dart';
 import 'health_women.dart';
@@ -29,8 +29,12 @@ class _HealthDashboardState extends ConsumerState<HealthDashboard> {
 
   @override
   Widget build(BuildContext context) {
-    final children = ref.watch(childDevProvider);
-    final name = children.isNotEmpty ? children.first.name : 'Aile';
+    // Hesap sahibinin (giriş yapan kullanıcı) kendi adı — çocuğun adı DEĞİL.
+    final meta = AuthService.currentUser?.userMetadata;
+    final rawName = (meta?['display_name'] ?? meta?['full_name'] ?? '')
+        .toString()
+        .trim();
+    final name = rawName.isNotEmpty ? rawName.split(' ').first : 'Aile';
     final mood = HealthStore.todayMood();
 
     return Scaffold(

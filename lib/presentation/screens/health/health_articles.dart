@@ -372,7 +372,9 @@ class _HealthArticlesScreenState extends State<HealthArticlesScreen> {
       );
 
   Widget _seeAll() {
-    return Container(
+    return GestureDetector(
+      onTap: () => setState(() => _cat = 'senin'),
+      child: Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: const Color(0xFF13131A),
@@ -408,6 +410,7 @@ class _HealthArticlesScreenState extends State<HealthArticlesScreen> {
           const Icon(Icons.arrow_forward, color: Color(0xFF6B7280)),
         ],
       ),
+    ),
     );
   }
 }
