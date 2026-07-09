@@ -79,6 +79,8 @@ create policy "fm_delete"
   using (family_id in (select public.my_family_ids()));
 
 -- 5) families — TEMİZ politikalar (my_family_ids ile, family_members'a bakmaz).
+-- Not: bazı kurulumlarda families.created_by kolonu yok → önce güvenle ekle.
+alter table public.families add column if not exists created_by uuid;
 alter table public.families enable row level security;
 
 create policy "fam_select"
@@ -90,7 +92,7 @@ create policy "fam_select"
 
 create policy "fam_insert"
   on public.families for insert to authenticated
-  with check (created_by = auth.uid());
+  with check (created_by = auth.uid() or created_by is null);
 
 create policy "fam_update"
   on public.families for update to authenticated
