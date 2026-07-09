@@ -508,7 +508,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get optional => 'Facultatif';
 
   @override
-  String get genc => 'Jeune';
+  String get genc => 'Ado';
 
   @override
   String get kullanici => 'Utilisateur';
@@ -520,7 +520,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ozelSoru => 'Question personnalisée...';
 
   @override
-  String get aileBilgisiBulunamadi => 'Informations famille introuvables';
+  String get aileBilgisiBulunamadi => 'Infos famille introuvables';
 
   @override
   String get ailedenAyril => 'Quitter la famille';
@@ -535,7 +535,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get fotograf => '📷 Photo';
 
   @override
-  String get guvenliVaris => 'Arrivée sécurisée';
+  String get guvenliVaris => 'Arrivée en sécurité';
 
   @override
   String get isLabel => 'Travail';
@@ -581,7 +581,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get cocukEkle => 'Ajouter un enfant';
 
   @override
-  String get isim => 'Prénom';
+  String get isim => 'Nom';
 
   @override
   String get tur => 'Type';

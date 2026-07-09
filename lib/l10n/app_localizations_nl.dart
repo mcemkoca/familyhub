@@ -505,7 +505,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get optional => 'Optioneel';
 
   @override
-  String get genc => 'Jongere';
+  String get genc => 'Tiener';
 
   @override
   String get kullanici => 'Gebruiker';
@@ -517,7 +517,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get ozelSoru => 'Aangepaste vraag...';
 
   @override
-  String get aileBilgisiBulunamadi => 'Familie-informatie niet gevonden';
+  String get aileBilgisiBulunamadi => 'Familie-info niet gevonden';
 
   @override
   String get ailedenAyril => 'Familie verlaten';
@@ -547,7 +547,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get aileOnerileri => 'Familiesuggesties';
 
   @override
-  String get cocukGirisi => 'Kinderaanmelding';
+  String get cocukGirisi => 'Kind aanmelden';
 
   @override
   String get enAz8KarakterBuyukkucukHarfRakamVeOzelKarakter =>
@@ -578,7 +578,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get cocukEkle => 'Kind toevoegen';
 
   @override
-  String get isim => 'Voornaam';
+  String get isim => 'Naam';
 
   @override
   String get tur => 'Type';

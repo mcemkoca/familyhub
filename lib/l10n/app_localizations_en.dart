@@ -504,49 +504,49 @@ class AppLocalizationsEn extends AppLocalizations {
   String get optional => 'Optional';
 
   @override
-  String get genc => 'Genç';
+  String get genc => 'Teen';
 
   @override
-  String get kullanici => 'Kullanıcı';
+  String get kullanici => 'User';
 
   @override
-  String get geriYukle => 'Geri Yükle';
+  String get geriYukle => 'Restore';
 
   @override
   String get ozelSoru => 'Özel soru...';
 
   @override
-  String get aileBilgisiBulunamadi => 'Aile bilgisi bulunamadı';
+  String get aileBilgisiBulunamadi => 'Family info not found';
 
   @override
-  String get ailedenAyril => 'Aileden Ayrıl';
+  String get ailedenAyril => 'Leave Family';
 
   @override
-  String get uye => 'Üye';
+  String get uye => 'Member';
 
   @override
-  String get acik => 'Açık';
+  String get acik => 'Open';
 
   @override
   String get fotograf => '📷 Fotoğraf';
 
   @override
-  String get guvenliVaris => 'Güvenli Varış';
+  String get guvenliVaris => 'Safe Arrival';
 
   @override
-  String get isLabel => 'İş';
+  String get isLabel => 'Work';
 
   @override
-  String get ozel => 'Özel';
+  String get ozel => 'Private';
 
   @override
-  String get aiOnerileri => 'AI Önerileri';
+  String get aiOnerileri => 'AI Suggestions';
 
   @override
-  String get aileOnerileri => 'Aile Önerileri';
+  String get aileOnerileri => 'Family Suggestions';
 
   @override
-  String get cocukGirisi => 'Çocuk Girişi';
+  String get cocukGirisi => 'Child Login';
 
   @override
   String get enAz8KarakterBuyukkucukHarfRakamVeOzelKarakter =>
@@ -559,43 +559,43 @@ class AppLocalizationsEn extends AppLocalizations {
   String get diger => 'Other';
 
   @override
-  String get bildirimAyarlari => 'Bildirim Ayarları';
+  String get bildirimAyarlari => 'Notification Settings';
 
   @override
-  String get konumumuPaylas => 'Konumumu Paylaş';
+  String get konumumuPaylas => 'Share My Location';
 
   @override
-  String get gorevlerim => 'Görevlerim';
+  String get gorevlerim => 'My Tasks';
 
   @override
   String get car => 'Çar';
 
   @override
-  String get cocukHesaplari => 'Çocuk Hesapları';
+  String get cocukHesaplari => 'Child Accounts';
 
   @override
-  String get cocukEkle => 'Çocuk Ekle';
+  String get cocukEkle => 'Add Child';
 
   @override
-  String get isim => 'İsim';
+  String get isim => 'Name';
 
   @override
-  String get tur => 'Tür';
+  String get tur => 'Type';
 
   @override
-  String get canliKonum => 'Canlı Konum';
+  String get canliKonum => 'Live Location';
 
   @override
-  String get baslat => 'Başlat';
+  String get baslat => 'Start';
 
   @override
-  String get baslik => 'Başlık';
+  String get baslik => 'Title';
 
   @override
-  String get ayril => 'Ayrıl';
+  String get ayril => 'Leave';
 
   @override
-  String get gorev => 'Görev';
+  String get gorev => 'Task';
 
   @override
   String get baglantiyiKes => 'Bağlantıyı Kes';
@@ -652,7 +652,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get islemiSil => 'İşlemi Sil';
 
   @override
-  String get guncelle => 'Güncelle';
+  String get guncelle => 'Update';
 
   @override
   String get aileUyesi => 'Aile Üyesi';
@@ -676,7 +676,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get haftalikGorunum => 'HAFTALIK GÖRÜNÜM';
 
   @override
-  String get olustur => 'Oluştur';
+  String get olustur => 'Create';
 
   @override
   String get aileUyelerineBildirildi => 'Aile üyelerine bildirildi';
@@ -868,7 +868,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tumOdevlerTamamlandi => 'Tüm ödevler tamamlandı! 🎉';
 
   @override
-  String get yarin => 'Yarın';
+  String get yarin => 'Tomorrow';
 
   @override
   String get cocukGirisiIcinOnceEbeveynHesabiylaGirisYapmalisiniz =>
@@ -1188,7 +1188,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dersAdi => 'Ders Adı';
 
   @override
-  String get gun => 'Gün';
+  String get gun => 'Day';
 
   @override
   String get henuzDersEklenmemis => 'Henüz ders eklenmemiş';
