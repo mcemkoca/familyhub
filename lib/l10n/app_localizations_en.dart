@@ -832,7 +832,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tumVerilerinizKaliciOlarakSilinecek =>
-      'Tüm verileriniz kalıcı olarak silinecek';
+      'All your data will be permanently deleted';
 
   @override
   String get profiliDuzenle => 'Edit Profile';
@@ -897,11 +897,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get herIkiGuvenlikSorusunuDaCevaplayin =>
-      'Her iki güvenlik sorusunu da cevaplayın';
+      'Answer both security questions';
 
   @override
   String get guvenlikSorularininCevaplariHatali =>
-      'Güvenlik sorularının cevapları hatalı';
+      'Security answers are incorrect';
 
   @override
   String get sifreSifirlamaBaglantisiEpostaAdresinizeGonderildi =>
@@ -952,11 +952,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get googleSigninSuAnKullanilamiyor =>
-      'Google Sign-In şu an kullanılamıyor. ';
+      'Google Sign-In is unavailable now.';
 
   @override
   String get lutfenEpostaVeSifreIleGirisYapin =>
-      'Lütfen e-posta ve şifre ile giriş yapın.';
+      'Please sign in with email and password.';
 
   @override
   String get googleIleGirisYap => 'Sign in with Google';
@@ -1179,8 +1179,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get henuzOdevEklenmemis => 'No homework added yet';
 
   @override
-  String get yeniOdevEklemekIcinButonunaBas =>
-      'Yeni ödev eklemek için + butonuna bas';
+  String get yeniOdevEklemekIcinButonunaBas => 'Tap + to add homework';
 
   @override
   String get dersAdi => 'Subject Name';
@@ -1192,8 +1191,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get henuzDersEklenmemis => 'No subject added yet';
 
   @override
-  String get yeniDersEklemekIcinButonunaBas =>
-      'Yeni ders eklemek için + butonuna bas';
+  String get yeniDersEklemekIcinButonunaBas => 'Tap + to add a subject';
 
   @override
   String get yeniGelisimKaydi => 'New Development Log';
@@ -1214,8 +1212,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get henuzGelisimKaydiYok => 'No development logs yet';
 
   @override
-  String get yeniKayitEklemekIcinButonunaBas =>
-      'Yeni kayıt eklemek için + butonuna bas';
+  String get yeniKayitEklemekIcinButonunaBas => 'Tap + to add a record';
 
   @override
   String get cocukHenuzKonumPaylasmamis => 'Child hasn\'t shared location yet';
@@ -1770,7 +1767,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get konumDegismeseBileZorunluGuncelleme =>
-      'Konum değişmese bile zorunlu güncelleme';
+      'Force update even if location is same';
 
   @override
   String get hassasiyet => 'SENSITIVITY';
@@ -1919,8 +1916,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get listeBos => 'List is empty';
 
   @override
-  String get yeniUrunEklemekIcinButonunaBas =>
-      'Yeni ürün eklemek için + butonuna bas';
+  String get yeniUrunEklemekIcinButonunaBas => 'Tap + to add an item';
 
   @override
   String get urunEkle => 'Add Item';
@@ -1954,7 +1950,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get otomatikDagitimAdaletAlgoritmasi =>
-      'Otomatik dağıtım + Adalet algoritması';
+      'Auto distribution + fairness algorithm';
 
   @override
   String get aiOptimizasyonuCalisiyor => 'AI optimization running...';
@@ -2102,8 +2098,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get lokasyonOkulCikisiPattern => 'Location: school exit pattern';
 
   @override
-  String get aksamYemegindenOnce1SaatHazirlik =>
-      'Akşam yemeğinden önce 1 saat hazırlık';
+  String get aksamYemegindenOnce1SaatHazirlik => '1 hour prep before dinner';
 
   @override
   String get zaman1700GorevYemek => 'Time: 17:00, Task: Dinner';
@@ -2235,7 +2230,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ertelemeOraniYuksekNazikTonDeneyin =>
-      'Erteleme oranı yüksek, nazik ton deneyin';
+      'High snooze rate, try a gentle tone';
 
   @override
   String get aiOgrenmeOnerileri => 'AI Learning Suggestions';
@@ -2284,7 +2279,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get telefonu3KezSallayincaKayitBaslar =>
-      'Telefonu 3 kez sallayınca kayıt başlar';
+      'Shake phone 3x to start recording';
 
   @override
   String get ekrandakiButonaBasarakBaslat => 'Start with the on-screen button';
@@ -2364,7 +2359,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get acilDurumlardaKullanilabilirBilgiler =>
-      'Acil durumlarda kullanılabilir bilgiler';
+      'Info usable in emergencies';
 
   @override
   String get saglikKarti => 'HEALTH CARD';
@@ -2444,8 +2439,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get henuzVarisPlaniYok => 'No arrival plan yet';
 
   @override
-  String get yeniBirVarisPlanlamakIcinButonaBas =>
-      'Yeni bir varış planlamak için butona bas';
+  String get yeniBirVarisPlanlamakIcinButonaBas => 'Tap to plan a new arrival';
 
   @override
   String get geofenceAktifBolgeleriniziYonetinVeKonumDurumunuKontrolEdin =>
@@ -2481,7 +2475,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onceGoogleDriveHesabiniziBaglayin =>
-      'Önce Google Drive hesabınızı bağlayın';
+      'Link your Google Drive account first';
 
   @override
   String get geriYuklenecekYedekBulunamadi => 'No backup to restore found';
@@ -2624,7 +2618,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get konumAlinamadiIzinleriKontrolEdin =>
-      'Konum alınamadı. İzinleri kontrol edin.';
+      'Couldn\'t get location. Check permissions.';
 
   @override
   String get konumSec => 'Select Location';
@@ -2637,7 +2631,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get yaklasanEtkinliklerIcinBildirimler =>
-      'Yaklaşan etkinlikler için bildirimler';
+      'Notifications for upcoming events';
 
   @override
   String get gorevBildirimleri => 'Task Notifications';
@@ -2650,7 +2644,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get panikButonuVeGuvenlikBildirimleri =>
-      'Panik butonu ve güvenlik bildirimleri';
+      'Panic button and safety alerts';
 
   @override
   String get guvenliBolgeGiriscikisUyarilari => 'Safe zone entry/exit alerts';
@@ -2701,20 +2695,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get planlarYuklenemedi => 'Failed to load plans';
 
   @override
-  String get veriKullanimi => '2. Veri Kullanımı';
+  String get veriKullanimi => '2. Data Usage';
 
   @override
-  String get cocuklarinGizliligi => '4. Çocukların Gizliliği';
+  String get cocuklarinGizliligi => '4. Children\'s Privacy';
 
   @override
-  String get haklariniz => '5. Haklarınız';
+  String get haklariniz => '5. Your Rights';
 
   @override
-  String get veriIndirmeHazirlaniyor => 'Veri indirme hazırlanıyor...';
+  String get veriIndirmeHazirlaniyor => 'Preparing data download...';
 
   @override
   String get hesabinizSilindiUygulamaKapatilacak =>
-      'Hesabınız silindi. Uygulama kapatılacak.';
+      'Account deleted. App will close.';
 
   @override
   String get veriPaylasimi => 'DATA SHARING';
@@ -2786,8 +2780,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ekranSuresiGuncellendi => 'Screen time updated';
 
   @override
-  String get ebeveynTarafindanUzaktanKilitlendi =>
-      'Ebeveyn tarafından uzaktan kilitlendi';
+  String get ebeveynTarafindanUzaktanKilitlendi => 'Locked remotely by parent';
 
   @override
   String get buCihaziHemenKilitleyinCocukGirisYapamayacak =>
@@ -2881,8 +2874,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get biyometrikGirisEtkinlestirildi => 'Biometric login enabled';
 
   @override
-  String get biyometrikGirisDevreDisiBirakildi =>
-      'Biyometrik giriş devre dışı bırakıldı';
+  String get biyometrikGirisDevreDisiBirakildi => 'Biometric login disabled';
 
   @override
   String get mevcutSifre => 'Current Password';
@@ -2974,111 +2966,111 @@ class AppLocalizationsEn extends AppLocalizations {
   String get yeniUyeleriAileyeDavetEt => 'Invite new members to family';
 
   @override
-  String get herUyeIcinYetkiAyarlari => 'Her üye için yetki ayarları';
+  String get herUyeIcinYetkiAyarlari => 'Permission settings per member';
 
   @override
-  String get pinIleCocukGirisleriYonetin => 'PIN ile çocuk girişleri yönetin';
+  String get pinIleCocukGirisleriYonetin => 'Manage child logins with PIN';
 
   @override
   String get cocukUyelerIcinKullanimLimitleri =>
-      'Çocuk üyeler için kullanım limitleri';
+      'Usage limits for child members';
 
   @override
   String get gunlukAktiviteSaglikVeEgitimOnerileri =>
       'Günlük aktivite, sağlık ve eğitim önerileri';
 
   @override
-  String get buAiledenCikisYap => 'Bu aileden çıkış yap';
+  String get buAiledenCikisYap => 'Leave this family';
 
   @override
-  String get adFotografTelefonNumarasi => 'Ad, fotoğraf, telefon numarası';
+  String get adFotografTelefonNumarasi => 'Name, photo, phone number';
 
   @override
-  String get sifreIkiFaktorBiyometrikGiris =>
-      'Şifre, iki faktör, biyometrik giriş';
+  String get sifreIkiFaktorBiyometrikGiris => 'Password, 2FA, biometric login';
 
   @override
-  String get guvenli => 'Güvenli';
+  String get guvenli => 'Secure';
 
   @override
-  String get veriPaylasimiKonumIzinleri => 'Veri paylaşımı, konum izinleri';
+  String get veriPaylasimiKonumIzinleri => 'Data sharing, location permissions';
 
   @override
-  String get uygulamaDiliVeTarihFormati => 'Uygulama dili ve tarih formatı';
+  String get uygulamaDiliVeTarihFormati => 'App language and date format';
 
   @override
   String get acilDurumBilgileriAlerjilerIlaclar =>
-      'Acil durum bilgileri, alerjiler, ilaçlar';
+      'Emergency info, allergies, meds';
 
   @override
-  String get havaDurumuAyarlari => 'Hava Durumu Ayarları';
+  String get havaDurumuAyarlari => 'Weather Settings';
 
   @override
-  String get sehirBirimVeKonumTercihleri => 'Şehir, birim ve konum tercihleri';
+  String get sehirBirimVeKonumTercihleri =>
+      'City, unit and location preferences';
 
   @override
-  String get veriVeDepolama => 'VERİ VE DEPOLAMA';
+  String get veriVeDepolama => 'DATA AND STORAGE';
 
   @override
-  String get oncekiYedektenVeriKurtarin => 'Önceki yedekten veri kurtarın';
+  String get oncekiYedektenVeriKurtarin =>
+      'Recover data from a previous backup';
 
   @override
   String get tumVerileriniziKaliciOlarakSilin =>
-      'Tüm verilerinizi kalıcı olarak silin';
+      'Permanently delete all your data';
 
   @override
-  String get geciciDosyalariTemizleyin => 'Geçici dosyaları temizleyin';
+  String get geciciDosyalariTemizleyin => 'Clear temporary files';
 
   @override
-  String get temelOzellikler => 'Temel özellikler';
+  String get temelOzellikler => 'Basic features';
 
   @override
-  String get sinirsizFotografDepolama => 'Sınırsız fotoğraf depolama';
+  String get sinirsizFotografDepolama => 'Unlimited photo storage';
 
   @override
-  String get gelismisGuvenlik => 'Gelişmiş güvenlik';
+  String get gelismisGuvenlik => 'Advanced security';
 
   @override
-  String get yonet => 'Yönet';
+  String get yonet => 'Manage';
 
   @override
   String get iNasilKullanacaginiziOgrenin => 'ı nasıl kullanacağınızı öğrenin';
 
   @override
-  String get destekIleIletisim => 'Destek ile İletişim';
+  String get destekIleIletisim => 'Contact Support';
 
   @override
   String get sorulariniziVeOnerileriniziPaylasin =>
-      'Sorularınızı ve önerilerinizi paylaşın';
+      'Share your questions and suggestions';
 
   @override
-  String get karsilastiginizSorunuRaporlayin =>
-      'Karşılaştığınız sorunu raporlayın';
+  String get karsilastiginizSorunuRaporlayin => 'Report the issue you faced';
 
   @override
-  String get biziDegerlendirin => 'Bizi Değerlendirin';
+  String get biziDegerlendirin => 'Rate Us';
 
   @override
-  String get verilerinizNasilKorunuyor => 'Verileriniz nasıl korunuyor';
+  String get verilerinizNasilKorunuyor => 'How your data is protected';
 
   @override
   String get hizmetSartlariVeSorumluluklar =>
-      'Hizmet şartları ve sorumluluklar';
+      'Terms of service and responsibilities';
 
   @override
-  String get surum210FamilyhubInc => 'Sürüm 2.1.0 · FamilyHub Inc.';
+  String get surum210FamilyhubInc => 'Version 2.1.0 - FamilyHub Inc.';
 
   @override
-  String get hizmetKapsami => '1. Hizmet Kapsamı';
+  String get hizmetKapsami => '1. Scope of Service';
 
   @override
-  String get kullanimKosullari1 => '2. Kullanım Koşulları';
+  String get kullanimKosullari1 => '2. Terms of Use';
 
   @override
-  String get hesapVeGuvenlik => '3. Hesap ve Güvenlik';
+  String get hesapVeGuvenlik => '3. Account and Security';
 
   @override
-  String get degisiklikler => '5. Değişiklikler';
+  String get degisiklikler => '5. Changes';
 
   @override
   String get iKesfedin => 'ı Keşfedin';
@@ -3091,7 +3083,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sagUsttekiHavaDurumuChip => 'Sağ üstteki hava durumu chip\\';
 
   @override
-  String get etkinlikOlusturma => 'Etkinlik Oluşturma';
+  String get etkinlikOlusturma => 'Creating Events';
 
   @override
   String get takvimdeEtkinlikEkleyinHatirlaticilarAyarlayin =>
@@ -3118,7 +3110,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Katılımcıları ekleyerek etkinliği aile üyelerine atayın.';
 
   @override
-  String get gorevAtama => 'Görev Atama';
+  String get gorevAtama => 'Assigning Tasks';
 
   @override
   String get aileUyelerineGorevAtayinVeIlerlemeyiTakipEdin =>
@@ -3155,7 +3147,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get altMenudenSohbetSekmesineDokunun =>
-      'Alt menüden \"Sohbet\" sekmesine dokunun.';
+      'Tap the Chat tab in the bottom menu.';
 
   @override
   String
@@ -3172,7 +3164,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Duyurular tüm aile üyelerine yüksek öncelikli bildirim olarak gider.';
 
   @override
-  String get guvenlikOzellikleri => 'Güvenlik Özellikleri';
+  String get guvenlikOzellikleri => 'Safety Features';
 
   @override
   String get sosButonuKonumPaylasimiVeAcilDurumKarti =>
@@ -3187,11 +3179,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'Canlı konum paylaşımı: Aile üyelerinizin anlık konumunu haritada görün.';
 
   @override
-  String get anilarVeAlbumler => 'Anılar ve Albümler';
+  String get anilarVeAlbumler => 'Memories and Albums';
 
   @override
   String get fotografYukleyinBuyumeTakibiYapin =>
-      'Fotoğraf yükleyin, büyüme takibi yapın.';
+      'Upload photos, track growth.';
 
   @override
   String get altMenudenAnilarSekmesineVeyaHubMenusundenAlbumler =>
@@ -3211,132 +3203,132 @@ class AppLocalizationsEn extends AppLocalizations {
       'Konum izni verilmedi. Şehir seçimi veya haritadan konum seçimi kullanılabilir.';
 
   @override
-  String get konumIzniGerekli => 'Konum İzni Gerekli';
+  String get konumIzniGerekli => 'Location Permission Required';
 
   @override
-  String get havaDurumuAyarlariKaydedildi => 'Hava durumu ayarları kaydedildi';
+  String get havaDurumuAyarlariKaydedildi => 'Weather settings saved';
 
   @override
-  String get haritadanKonumSec => 'Haritadan Konum Seç';
+  String get haritadanKonumSec => 'Pick Location from Map';
 
   @override
   String get openstreetmapHaritasindanIstediginizNoktayiSecin =>
       'OpenStreetMap haritasından istediğiniz noktayı seçin';
 
   @override
-  String get haritayiAc => 'Haritayı Aç';
+  String get haritayiAc => 'Open Map';
 
   @override
   String get konumSecilmezseSehirListesindenKullanilir =>
       'Konum seçilmezse şehir listesinden kullanılır';
 
   @override
-  String get sicaklikBirimi => 'Sıcaklık Birimi';
+  String get sicaklikBirimi => 'Temperature Unit';
 
   @override
-  String get havaDurumuAlinamadi => 'Hava durumu alınamadı';
+  String get havaDurumuAlinamadi => 'Couldn\'t get weather';
 
   @override
-  String get gunlukTahmin => '7 Günlük Tahmin';
+  String get gunlukTahmin => '7-Day Forecast';
 
   @override
-  String get ruzgar => 'Rüzgar';
+  String get ruzgar => 'Wind';
 
   @override
-  String get basinc => 'Basınç';
+  String get basinc => 'Pressure';
 
   @override
-  String get enIyi => 'En İyi';
+  String get enIyi => 'Best';
 
   @override
-  String get tumGirisler => 'Tüm Girişler';
+  String get tumGirisler => 'All Entries';
 
   @override
   String get devamEtmekIcinKullanimKosullariniKabulEtmelisiniz =>
       'Devam etmek için kullanım koşullarını kabul etmelisiniz';
 
   @override
-  String get lutfenAileKodunuGirin => 'Lütfen aile kodunu girin';
+  String get lutfenAileKodunuGirin => 'Please enter the family code';
 
   @override
-  String get lutfenAileAdiniGirin => 'Lütfen aile adını girin';
+  String get lutfenAileAdiniGirin => 'Please enter the family name';
 
   @override
-  String get familyhubHesabiniziOlusturun => 'FamilyHub hesabınızı oluşturun';
+  String get familyhubHesabiniziOlusturun => 'Create your FamilyHub account';
 
   @override
-  String get aileyeKatil => 'Aileye Katıl';
+  String get aileyeKatil => 'Join Family';
 
   @override
   String get ornFh123456 => 'Örn: FH-123456';
 
   @override
-  String get aileAdi => 'Aile Adı';
+  String get aileAdi => 'Family Name';
 
   @override
-  String get ornYilmazAilesi => 'Örn: Yılmaz Ailesi';
+  String get ornYilmazAilesi => 'e.g. The Smith Family';
 
   @override
   String get kullanimKosullariniVeGizlilikPolitikasiniOkudumVeKabulEdiyorum =>
       'Kullanım koşullarını ve gizlilik politikasını okudum ve kabul ediyorum.';
 
   @override
-  String get hesapOlustur => 'Hesap Oluştur';
+  String get hesapOlustur => 'Create Account';
 
   @override
-  String get isimGirin => 'İsim girin';
+  String get isimGirin => 'Enter name';
 
   @override
-  String get pinEnAz4HaneOlmali => 'PIN en az 4 hane olmalı';
+  String get pinEnAz4HaneOlmali => 'PIN must be at least 4 digits';
 
   @override
-  String get pinlerEslesmiyor => 'PINler eşleşmiyor';
+  String get pinlerEslesmiyor => 'PINs do not match';
 
   @override
-  String get acilDurumdaAranacakKisi => 'Acil Durumda Aranacak Kişi';
+  String get acilDurumdaAranacakKisi => 'Emergency Contact';
 
   @override
-  String get ornEsAnneBaba => 'Örn: Eş, Anne, Baba';
+  String get ornEsAnneBaba => 'e.g. Spouse, Mother, Father';
 
   @override
-  String get aileRolu => 'Aile Rolü';
+  String get aileRolu => 'Family Role';
 
   @override
   String get ailedekiRolunuzuVeGorunumunuzuSecin =>
-      'Ailedeki rolünüzü ve görünümünüzü seçin';
+      'Choose your family role and look';
 
   @override
-  String get rolunuz => 'Rolünüz';
+  String get rolunuz => 'Your Role';
 
   @override
-  String get ailedeGorunenAdiniz => 'Ailede Görünen Adınız';
+  String get ailedeGorunenAdiniz => 'Your name shown in the family';
 
   @override
-  String get ornAnneBabaMehmet => 'Örn: Anne, Baba, Mehmet';
+  String get ornAnneBabaMehmet => 'e.g. Mom, Dad, John';
 
   @override
-  String get renkSecimi => 'Renk Seçimi';
+  String get renkSecimi => 'Color Selection';
 
   @override
-  String get telefonnumarasi1 => 'Telefon Numarası';
+  String get telefonnumarasi1 => 'Phone Number';
 
   @override
-  String get dogumTarihi => 'Doğum Tarihi';
+  String get dogumTarihi => 'Date of Birth';
 
   @override
-  String get secilmedi => 'Seçilmedi';
+  String get secilmedi => 'Not selected';
 
   @override
-  String get bolgeEkle => 'Bölge Ekle';
+  String get bolgeEkle => 'Add Zone';
 
   @override
-  String get guvenliBolgeEkle => 'Güvenli Bölge Ekle';
+  String get guvenliBolgeEkle => 'Add Safe Zone';
 
   @override
-  String get bolgeAdi => 'Bölge Adı';
+  String get bolgeAdi => 'Zone Name';
 
   @override
-  String get bolgeTipi => 'Bölge Tipi';
+  String get bolgeTipi => 'Zone Type';
 
   @override
   String get aileSohbetineIlkMesajiSenGonder =>
