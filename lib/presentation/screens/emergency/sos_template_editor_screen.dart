@@ -2,6 +2,7 @@
 // Emergency message template editor with variable support
 
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
 class SosTemplateEditorScreen extends StatefulWidget {
@@ -20,6 +21,24 @@ class _SosTemplateEditorScreenState extends State<SosTemplateEditorScreen> {
   final _voiceCtrl = TextEditingController(
     text: 'Bu otomatik bir acil durum çağrısıdır. {name} yardım istiyor. Konum: Enlem {lat}, Boylam {lng}. Lütfen yardım için hemen harekete geçin.',
   );
+  final FlutterTts _tts = FlutterTts();
+
+  /// Sesli mesaj şablonunu örnek değerlerle seslendirir (önizleme).
+  Future<void> _previewVoice() async {
+    final sample = _voiceCtrl.text
+        .replaceAll('{name}', 'Ahmet')
+        .replaceAll('{lat}', '50.85')
+        .replaceAll('{lng}', '4.35')
+        .replaceAll(RegExp(r'\{[^}]*\}'), '');
+    await _tts.setLanguage('tr-TR');
+    await _tts.stop();
+    await _tts.speak(sample);
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('🔊 Sesli mesaj önizleniyor')),
+      );
+    }
+  }
 
   final List<String> _variables = [
     '{name}',
@@ -83,7 +102,7 @@ class _SosTemplateEditorScreenState extends State<SosTemplateEditorScreen> {
             ),
             const SizedBox(height: 12),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: _previewVoice,
               icon: const Icon(Icons.volume_up),
               label: Text(AppLocalizations.of(context).onizleme),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.blue.shade800, foregroundColor: Colors.white),
