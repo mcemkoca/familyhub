@@ -351,6 +351,14 @@ class _HubScreenState extends ConsumerState<HubScreen>
               // ── Akıllı Uyarılar (gerçek veriden içgörüler) ───────────────
               const SliverToBoxAdapter(child: SmartInsightsCard()),
 
+              // ── İpuçları / Keşfet (Akıllı Uyarılar'ın hemen altında, collapse) ──
+              if (HiveService.getBoolSetting('hub_show_tips',
+                  defaultValue: true))
+                const SliverToBoxAdapter(child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  child: ContentHighlightsWidget(),
+                )),
+
               // ── Quick access grid (butonlar hemen gorunsun) ──────────────
               SliverToBoxAdapter(child: _QuickGrid(features: visibleFeatures)),
 
@@ -367,14 +375,6 @@ class _HubScreenState extends ConsumerState<HubScreen>
 
               // ── Stat strip ───────────────────────────────────────────────
               const SliverToBoxAdapter(child: _StatStrip()),
-
-              // ── İpuçları / Keşfet (Ana Ekran Özelleştir'den gizlenebilir) ──
-              if (HiveService.getBoolSetting('hub_show_tips',
-                  defaultValue: true))
-                const SliverToBoxAdapter(child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12),
-                  child: ContentHighlightsWidget(),
-                )),
 
               const SliverToBoxAdapter(child: SizedBox(height: 32)),
             ],

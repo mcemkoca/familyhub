@@ -4,6 +4,7 @@ import '../../../config/constants.dart';
 import '../../../config/routes.dart';
 import '../../../services/content/content_engine.dart';
 import '../../../services/content/content_models.dart';
+import '../../../services/hive_service.dart';
 
 /// Horizontal scrollable content highlights for the Hub screen.
 /// Shows: daily meal, household tip, budget tip, emergency contacts.
@@ -16,6 +17,14 @@ class ContentHighlightsWidget extends StatefulWidget {
 
 class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
   bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
+  late bool _expanded =
+      HiveService.getBoolSetting('kesfet_expanded', defaultValue: true);
+
+  void _toggle() {
+    setState(() => _expanded = !_expanded);
+    HiveService.setBoolSetting('kesfet_expanded', _expanded);
+  }
 
   void _cycleAll() {
     final engine = ContentEngine.instance;
@@ -51,37 +60,56 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Keşfet',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
+              Expanded(
+                child: InkWell(
+                  onTap: _toggle,
+                  borderRadius: BorderRadius.circular(8),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Keşfet',
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      AnimatedRotation(
+                        turns: _expanded ? 0.5 : 0,
+                        duration: const Duration(milliseconds: 200),
+                        child: const Icon(Icons.keyboard_arrow_down_rounded,
+                            size: 22, color: Color(0xFF9CA3AF)),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              TextButton.icon(
-                onPressed: _cycleAll,
-                icon: const Icon(Icons.shuffle, size: 18),
-                label: const Text('Başka Öneri'),
-                style: TextButton.styleFrom(
-                  foregroundColor: const Color(0xFF6366F1),
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  minimumSize: Size.zero,
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+              if (_expanded)
+                TextButton.icon(
+                  onPressed: _cycleAll,
+                  icon: const Icon(Icons.shuffle, size: 18),
+                  label: const Text('Başka Öneri'),
+                  style: TextButton.styleFrom(
+                    foregroundColor: const Color(0xFF6366F1),
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    minimumSize: Size.zero,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                  ),
                 ),
-              ),
             ],
           ),
         ),
-        SizedBox(
-          height: 140,
-          child: ListView.separated(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-            scrollDirection: Axis.horizontal,
-            itemCount: items.length,
-            separatorBuilder: (_, _) => const SizedBox(width: AppSpacing.sm),
-            itemBuilder: (context, index) => items[index],
+        if (_expanded)
+          SizedBox(
+            height: 140,
+            child: ListView.separated(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+              scrollDirection: Axis.horizontal,
+              itemCount: items.length,
+              separatorBuilder: (_, _) => const SizedBox(width: AppSpacing.sm),
+              itemBuilder: (context, index) => items[index],
+            ),
           ),
-        ),
       ],
     );
   }

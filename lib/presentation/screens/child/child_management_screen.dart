@@ -7,6 +7,7 @@ import '../../../config/constants.dart';
 import '../../../domain/models/child_account.dart';
 import '../../../repositories/child_account_repository.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../widgets/screen_background.dart';
 
 class ChildManagementScreen extends ConsumerStatefulWidget {
   const ChildManagementScreen({super.key});
@@ -137,9 +138,9 @@ class _ChildManagementScreenState extends ConsumerState<ChildManagementScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0A0A0F),
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF0A0A0F),
+        backgroundColor: Colors.transparent,
         foregroundColor: const Color(0xFFE5E7EB),
         elevation: 0,
         surfaceTintColor: Colors.transparent,
@@ -169,7 +170,10 @@ class _ChildManagementScreenState extends ConsumerState<ChildManagementScreen> {
           ],
         ),
       ),
-      body: _isLoading
+      extendBodyBehindAppBar: true,
+      body: ScreenBackground(
+        asset: 'assets/images/backgrounds/child_bg.png',
+        child: _isLoading
           ? const Center(child: CircularProgressIndicator(color: Color(0xFF6366F1)))
           : _children.isEmpty
               ? Center(
@@ -255,6 +259,7 @@ class _ChildManagementScreenState extends ConsumerState<ChildManagementScreen> {
                     );
                   },
                 ),
+      ),
       floatingActionButton: _children.isNotEmpty
           ? FloatingActionButton(
               onPressed: () => _showAddEditChild(),

@@ -82,11 +82,23 @@ class _DailyBriefingCardState extends ConsumerState<DailyBriefingCard> {
 
     final now = DateTime.now();
     final dayName = DateFormat('EEEE', 'tr').format(now);
-    final greeting = now.hour < 11
-        ? 'Günaydın'
-        : now.hour < 18
-            ? 'İyi günler'
-            : 'İyi akşamlar';
+    final h = now.hour;
+    final greeting = h < 6
+        ? 'İyi geceler'
+        : h < 11
+            ? 'Günaydın'
+            : h < 18
+                ? 'İyi günler'
+                : h < 22
+                    ? 'İyi akşamlar'
+                    : 'İyi geceler';
+    // Günün dilimi — hem prompt tonunu hem de önbellek anahtarını ayırır ki
+    // sabah/öğle/akşam brifingleri farklı olsun (ve yanlış selamla kalmasın).
+    final partOfDay = h < 11
+        ? 'sabah'
+        : h < 18
+            ? 'öğleden sonra'
+            : 'akşam';
     final weatherStr = weather != null
         ? '${weather.temperature.round()}°C, ${WeatherService.weatherDescription(weather.weatherCode)}'
         : 'bilinmiyor';
@@ -166,9 +178,10 @@ class _DailyBriefingCardState extends ConsumerState<DailyBriefingCard> {
             const SizedBox(height: 12),
             FutureBuilder<List<Map<String, dynamic>>>(
               future: AiContentService.dailyList(
-                topic: 'daily_briefing_v3',
+                topic: 'daily_briefing_v3_$partOfDay',
                 prompt: '''
-Bir aile uygulaması için bugünün kişiselleştirilmiş sabah brifingini üret.
+Bir aile uygulaması için bugünün ($partOfDay) kişiselleştirilmiş brifingini üret.
+Selamlama tam olarak "$greeting" tonunda olsun (günün saatine uygun).
 Aile: $familyName (${members.length} üye).
 Gün: $dayName. Hava (referans, sadece öneri için): $weatherStr.
 Bugün planlı etkinlik: ${events.length}, bekleyen görev: ${tasks.length}.

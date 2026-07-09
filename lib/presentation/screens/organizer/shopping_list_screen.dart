@@ -8,6 +8,7 @@ import '../../../domain/entities.dart';
 import '../../../services/hive_service.dart';
 import '../../../services/ai/ai_content_service.dart';
 import '../../providers/app_providers.dart';
+import '../../widgets/screen_background.dart';
 
 // Quick AI-suggested common items (tokensiz)
 const _aiSuggestions = [
@@ -136,9 +137,10 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
     final itemsAsync = ref.watch(shoppingItemsProvider);
 
     return Scaffold(
-      backgroundColor:
-          const Color(0xFF0A0A0F),
-      body: SafeArea(
+      backgroundColor: Colors.transparent,
+      body: ScreenBackground(
+        asset: 'assets/images/backgrounds/shopping_bg.png',
+        child: SafeArea(
         child: Column(
           children: [
             _buildHeader(context, isDark, itemsAsync),
@@ -153,6 +155,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
               ),
             ),
           ],
+        ),
         ),
       ),
       // FAB'ı alt nav çubuğunun (MainShell iki-pill) üstüne kaldır — yoksa
