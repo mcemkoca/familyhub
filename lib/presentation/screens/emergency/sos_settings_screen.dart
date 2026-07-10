@@ -55,7 +55,7 @@ class _SosSettingsScreenState extends State<SosSettingsScreen> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          _section('TETİKLEYİCİLER', [
+          _section(AppLocalizations.of(context).tetikleyiciler, [
             _switch(
               'Panik butonu (3 sn basılı tut)',
               _panicButton,
@@ -111,7 +111,7 @@ class _SosSettingsScreenState extends State<SosSettingsScreen> {
               ),
           ]),
 
-          _section('OTOMATİK MESAJLAR', [
+          _section(AppLocalizations.of(context).otomatikMesajlar, [
             _switch(
               'SMS gönder',
               _smsEnabled,
@@ -139,7 +139,7 @@ class _SosSettingsScreenState extends State<SosSettingsScreen> {
             ),
           ]),
 
-          _section('OTOMATİK ARAMALAR', [
+          _section(AppLocalizations.of(context).otomatikAramalar, [
             _switch(
               '112\'yi otomatik ara',
               _autoCall112,
@@ -164,7 +164,7 @@ class _SosSettingsScreenState extends State<SosSettingsScreen> {
             ),
           ]),
 
-          _section('KONUM PAYLAŞIMI', [
+          _section(AppLocalizations.of(context).konumPaylasimi, [
             _switch(
               'Anlık konum paylaş',
               _locationShare,
@@ -217,7 +217,7 @@ class _SosSettingsScreenState extends State<SosSettingsScreen> {
             ],
           ]),
 
-          _section('YÜKSELTME ZİNCİRİ', [
+          _section(AppLocalizations.of(context).yukseltmeZinciri, [
             _escalationStep('1. [0 dk] Aile bildirimi', true),
             _escalationStep('2. [3 dk] Acil kontaklar', true),
             _escalationStep('3. [5 dk] 112 arama', false),

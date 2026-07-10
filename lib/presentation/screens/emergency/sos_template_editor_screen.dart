@@ -64,7 +64,7 @@ class _SosTemplateEditorScreenState extends State<SosTemplateEditorScreen> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          _section('SMS ŞABLONU', [
+          _section(AppLocalizations.of(context).smsSablonu, [
             TextField(
               controller: _smsCtrl,
               maxLines: 6,
@@ -75,7 +75,7 @@ class _SosTemplateEditorScreenState extends State<SosTemplateEditorScreen> {
             ),
           ]),
 
-          _section('PUSH BİLDİRİM ŞABLONU', [
+          _section(AppLocalizations.of(context).pushBildirimSablonu, [
             TextField(
               controller: _pushTitleCtrl,
               decoration: InputDecoration(labelText: AppLocalizations.of(context).baslik, border: const OutlineInputBorder()),
@@ -91,7 +91,7 @@ class _SosTemplateEditorScreenState extends State<SosTemplateEditorScreen> {
             ),
           ]),
 
-          _section('SESLİ MESAJ ŞABLONU', [
+          _section(AppLocalizations.of(context).sesliMesajSablonu, [
             TextField(
               controller: _voiceCtrl,
               maxLines: 5,
@@ -109,7 +109,7 @@ class _SosTemplateEditorScreenState extends State<SosTemplateEditorScreen> {
             ),
           ]),
 
-          _section('KULLANILABİLİR DEĞİŞKENLER', [
+          _section(AppLocalizations.of(context).kullanilabilirDegiskenler, [
             Wrap(
               spacing: 8,
               runSpacing: 8,

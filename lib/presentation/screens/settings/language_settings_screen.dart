@@ -186,7 +186,7 @@ class _LanguageSettingsScreenState
           ),
           const SizedBox(height: 22),
 
-          _sectionTitle('UYGULAMA DİLİ'),
+          _sectionTitle(AppLocalizations.of(context).uygulamaDili),
           const SizedBox(height: 10),
           GridView.count(
             crossAxisCount: 2,
@@ -227,7 +227,7 @@ class _LanguageSettingsScreenState
           ),
           const SizedBox(height: 22),
 
-          _sectionTitle('TARİH FORMATI'),
+          _sectionTitle(AppLocalizations.of(context).tarihFormati),
           const SizedBox(height: 10),
           Row(
             children: _dateFormats.map((fmt) {

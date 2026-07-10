@@ -73,8 +73,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
           ),
 
           // Update settings
-          _section(
-            'GÜNCELLEME AYARLARI',
+          _section(AppLocalizations.of(context).guncellemeAyarlari,
             children: [
               _numberField(
                 'Sıklık (saniye)',
@@ -106,8 +105,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
           ),
 
           // Accuracy
-          _section(
-            'HASSASİYET',
+          _section(AppLocalizations.of(context).hassasiyet,
             children: [
               SegmentedButton<String>(
                 segments: const [
@@ -138,8 +136,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
           ),
 
           // Power management
-          _section(
-            'GÜÇ YÖNETİMİ',
+          _section(AppLocalizations.of(context).gucYonetimi,
             children: [
               SwitchListTile(
                 value: _limitGpsTime,
@@ -172,8 +169,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
           ),
 
           // Transition rules
-          _section(
-            'GEÇİŞ KURALLARI',
+          _section(AppLocalizations.of(context).gecisKurallari,
             children: [
               Text(AppLocalizations.of(context).buProfileGecis,
                 style: const TextStyle(fontWeight: FontWeight.w600),

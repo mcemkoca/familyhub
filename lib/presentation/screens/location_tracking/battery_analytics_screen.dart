@@ -49,7 +49,7 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
           ]),
 
           // Profile usage
-          _section('PROFİL KULLANIMI', children: [
+          _section(AppLocalizations.of(context).profilKullanimi, children: [
             _profileBar('Durağan', 0.45, Colors.grey),
             _profileBar('Yürüyüş', 0.25, Colors.blue),
             _profileBar('Araç', 0.15, Colors.orange),
@@ -69,7 +69,7 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
           ]),
 
           // Efficiency metrics
-          _section('VERİMLİLİK METRİKLERİ', children: [
+          _section(AppLocalizations.of(context).verimlilikMetrikleri, children: [
             _metricRow('Konum/Batarya', '2.5 nokta/%', target: '3.0+'),
             _metricRow('Ortalama hassasiyet', '35m', target: '<50m'),
             _metricRow('Optimal profil oranı', '%68', target: '%80+'),
@@ -77,7 +77,7 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
           ]),
 
           // AI suggestions
-          _section('🤖 AI OPTİMİZASYON ÖNERİLERİ', children: [
+          _section(AppLocalizations.of(context).aiOptimizasyonOnerileri, children: [
             ...suggestions.map((s) => _suggestionCard(s)),
           ]),
 

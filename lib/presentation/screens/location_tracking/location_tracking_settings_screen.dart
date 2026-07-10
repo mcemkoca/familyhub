@@ -97,14 +97,14 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
             ),
           ]),
 
-          _section('HAREKET PROFİLLERİ', children: [
+          _section(AppLocalizations.of(context).hareketProfilleri, children: [
             _profileTile('stationary', 'Durağan', Icons.stop_circle, Colors.grey),
             _profileTile('walking', 'Yürüyüş', Icons.directions_walk, Colors.blue),
             _profileTile('driving', 'Araç', Icons.directions_car, Colors.orange),
             _profileTile('emergency', 'Acil Durum', Icons.emergency, Colors.red),
           ]),
 
-          _section('GELİŞMİŞ AYARLAR', children: [
+          _section(AppLocalizations.of(context).gelismisAyarlar, children: [
             _switchTile('Adaptif ekran parlaklığı', _adaptiveBrightness, (v) => setState(() => _adaptiveBrightness = v)),
             _switchTile('Arka plan yenileme optimizasyonu', _backgroundRefresh, (v) => setState(() => _backgroundRefresh = v)),
             _switchTile('Ağ isteklerini toplama', _networkBatching, (v) => setState(() => _networkBatching = v)),
