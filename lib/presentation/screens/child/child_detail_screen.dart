@@ -284,7 +284,7 @@ class _HomeworksTabState extends State<_HomeworksTab> {
             right: 20,
             top: 20,
           ),
-          child: Column(
+          child: SingleChildScrollView(child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -397,7 +397,7 @@ class _HomeworksTabState extends State<_HomeworksTab> {
               ),
               const SizedBox(height: 12),
             ],
-          ),
+          )),
         ),
       ),
     );
@@ -571,7 +571,7 @@ class _ScheduleTabState extends State<_ScheduleTab> {
             right: 20,
             top: 20,
           ),
-          child: Column(
+          child: SingleChildScrollView(child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -767,7 +767,7 @@ class _ScheduleTabState extends State<_ScheduleTab> {
               ),
               const SizedBox(height: 12),
             ],
-          ),
+          )),
         ),
       ),
     );
@@ -939,7 +939,7 @@ class _DevelopmentTabState extends State<_DevelopmentTab> {
             right: 20,
             top: 20,
           ),
-          child: Column(
+          child: SingleChildScrollView(child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -1034,7 +1034,7 @@ class _DevelopmentTabState extends State<_DevelopmentTab> {
               ),
               const SizedBox(height: 12),
             ],
-          ),
+          )),
         ),
       ),
     );
