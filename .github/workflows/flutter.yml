@@ -32,6 +32,9 @@ jobs:
       - name: Generate code (env.g.dart, freezed, etc.)
         run: dart run build_runner build --delete-conflicting-outputs
 
+      - name: Localization audit (ARB tutarlılığı)
+        run: dart run tool/localization_audit.dart
+
       - name: Analyze
         run: flutter analyze --fatal-warnings 2>&1 | tee analyze.log
 
