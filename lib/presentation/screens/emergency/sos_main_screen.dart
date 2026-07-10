@@ -175,8 +175,7 @@ class _SosMainScreenState extends State<SosMainScreen>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'HIZLI SOS KATEGORİLERİ',
+                    Text(AppLocalizations.of(context).hizliSosKategorileri,
                       style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 12),
@@ -205,11 +204,10 @@ class _SosMainScreenState extends State<SosMainScreen>
                   color: const Color(0xFF16213E),
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: const Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'SON SOS GEÇMİŞİ',
+                    Text(AppLocalizations.of(context).sonSosGecmisi,
                       style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 12),
@@ -228,7 +226,7 @@ class _SosMainScreenState extends State<SosMainScreen>
                     child: OutlinedButton.icon(
                       onPressed: () => context.push(AppRoutes.sosSettings),
                       icon: const Icon(Icons.settings, color: Colors.white70),
-                      label: const Text('SOS Ayarları', style: TextStyle(color: Colors.white70)),
+                      label: Text(AppLocalizations.of(context).sosAyarlari, style: TextStyle(color: Colors.white70)),
                     ),
                   ),
                 ],

@@ -191,7 +191,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
                   decoration: const InputDecoration(labelText: 'Notlar'),
                 ),
                 const SizedBox(height: 12),
-                Text('Tür', style: Theme.of(context).textTheme.bodySmall),
+                Text(AppLocalizations.of(context).tur, style: Theme.of(context).textTheme.bodySmall),
                 const SizedBox(height: 8),
                 Wrap(
                   spacing: 8,
@@ -320,7 +320,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.download),
-            tooltip: 'Telefondan İçe Aktar',
+            tooltip: AppLocalizations.of(context).telefondanIceAktar,
             onPressed: _isLoading ? null : _importFromPhone,
           ),
         ],
@@ -343,7 +343,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
           if (_isLoading) const LinearProgressIndicator(),
           Expanded(
             child: _filtered.isEmpty
-                ? const Center(
+                ? Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -353,8 +353,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
                           color: Color(0xFF9CA3AF),
                         ),
                         SizedBox(height: 16),
-                        Text(
-                          'Henüz kişi yok',
+                        Text(AppLocalizations.of(context).henuzKisiYok,
                           style: TextStyle(fontSize: 18, color: Color(0xFF6B7280)),
                         ),
                       ],

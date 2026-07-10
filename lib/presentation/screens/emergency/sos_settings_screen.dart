@@ -146,10 +146,9 @@ class _SosSettingsScreenState extends State<SosSettingsScreen> {
               (v) => setState(() => _autoCall112 = v),
             ),
             if (_autoCall112)
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(left: 16, bottom: 8),
-                child: Text(
-                  '⚠️ Yasal uyarı: Yanlış arama cezası kullanıcı sorumluluğundadır.',
+                child: Text(AppLocalizations.of(context).yasalUyariYanlisAramaCezasiKullaniciSorumlulugundadir,
                   style: TextStyle(color: Colors.orange, fontSize: 12),
                 ),
               ),

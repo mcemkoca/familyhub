@@ -15,22 +15,22 @@ class MemoriesScreen extends StatelessWidget {
         children: [
           Row(
             children: [
-              _ActionChip(icon: Icons.photo_album, label: 'Albümler', onTap: () => context.push(AppRoutes.album)),
+              _ActionChip(icon: Icons.photo_album, label: AppLocalizations.of(context).albumler, onTap: () => context.push(AppRoutes.album)),
               const SizedBox(width: 12),
-              _ActionChip(icon: Icons.edit, label: 'Anı Yaz', onTap: () => context.push(AppRoutes.memoryCreate)),
+              _ActionChip(icon: Icons.edit, label: AppLocalizations.of(context).aniYaz, onTap: () => context.push(AppRoutes.memoryCreate)),
               const SizedBox(width: 12),
-              _ActionChip(icon: Icons.trending_up, label: 'Gelişim', onTap: () => context.push(AppRoutes.growth)),
+              _ActionChip(icon: Icons.trending_up, label: AppLocalizations.of(context).gelisim, onTap: () => context.push(AppRoutes.growth)),
             ],
           ),
           const SizedBox(height: 24),
-          Text('Albümler', style: Theme.of(context).textTheme.displaySmall),
+          Text(AppLocalizations.of(context).albumler, style: Theme.of(context).textTheme.displaySmall),
           const SizedBox(height: 12),
           const _EmptyCard(
               icon: Icons.photo_album_outlined,
               text: 'Henüz albüm yok. "Albümler"den yeni bir albüm '
                   'oluşturabilirsiniz.'),
           const SizedBox(height: 24),
-          Text('Son Anılar', style: Theme.of(context).textTheme.displaySmall),
+          Text(AppLocalizations.of(context).sonAnilar, style: Theme.of(context).textTheme.displaySmall),
           const SizedBox(height: 12),
           const _EmptyCard(
               icon: Icons.auto_stories_outlined,

@@ -76,7 +76,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.edit_outlined),
-            tooltip: 'Düzenle',
+            tooltip: AppLocalizations.of(context).edit,
             onPressed: () => context.push(AppRoutes.healthCardEdit),
           ),
         ],
@@ -89,8 +89,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
-                  'Acil durumlarda kullanılabilir bilgiler',
+                Text(AppLocalizations.of(context).acilDurumlardaKullanilabilirBilgiler,
                   style: TextStyle(
                     fontSize: 14,
                     color: Color(0xFF6B7280),
@@ -145,8 +144,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'SAĞLIK KARTI',
+                              Text(AppLocalizations.of(context).saglikKarti,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
@@ -183,7 +181,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                   ),
                   const Divider(height: 1, indent: 20, endIndent: 20),
                   _InfoRow(
-                    label: 'İlaçlar',
+                    label: AppLocalizations.of(context).medications,
                     value: _data?.medications.isNotEmpty == true
                         ? _data!.medications
                             .map((m) => '${m.name} ${m.dosage}')
@@ -192,14 +190,14 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                   ),
                   const Divider(height: 1, indent: 20, endIndent: 20),
                   _InfoRow(
-                    label: 'Kronik Hastalıklar',
+                    label: AppLocalizations.of(context).chronicConditions,
                     value: _data?.chronicConditions.isNotEmpty == true
                         ? _data!.chronicConditions.join(', ')
                         : 'Yok',
                   ),
                   const Divider(height: 1, indent: 20, endIndent: 20),
                   _InfoRow(
-                    label: 'Organ Bağışı',
+                    label: AppLocalizations.of(context).organDonor,
                     value: (_data?.organDonor ?? false) ? 'Evet ✓' : 'Hayır',
                   ),
                   const SizedBox(height: 16),
@@ -360,8 +358,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text(
-                        'Sağlık Kartı QR',
+                      Text(AppLocalizations.of(context).qrShare,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,

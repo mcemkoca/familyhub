@@ -108,7 +108,7 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
               // Üye seçimi
               DropdownButtonFormField<String>(
                 initialValue: selectedMemberId,
-                decoration: const InputDecoration(labelText: 'Üye'),
+                decoration: InputDecoration(labelText: AppLocalizations.of(context).uye),
                 items: _familyMembers.map((m) {
                   return DropdownMenuItem(
                     value: m['id'] as String,
@@ -200,8 +200,7 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
         padding: const EdgeInsets.all(20),
         children: [
           if (_active.isNotEmpty) ...[
-            const Text(
-              'AKTİF MONİTÖRLER',
+            Text(AppLocalizations.of(context).aktifMonitorler,
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
@@ -305,8 +304,7 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
             const SizedBox(height: 20),
           ],
           if (_history.isNotEmpty) ...[
-            const Text(
-              'GEÇMİŞ',
+            Text(AppLocalizations.of(context).gecmis,
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
@@ -343,15 +341,14 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
             const SizedBox(height: 20),
           ],
           if (_active.isEmpty && _history.isEmpty)
-            const Center(
+            Center(
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 60),
                 child: Column(
                   children: [
                     Icon(Icons.timer_outlined, size: 64, color: Colors.grey),
                     SizedBox(height: 16),
-                    Text(
-                      'Henüz varış planı yok',
+                    Text(AppLocalizations.of(context).henuzVarisPlaniYok,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -359,8 +356,7 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
                       ),
                     ),
                     SizedBox(height: 8),
-                    Text(
-                      'Yeni bir varış planlamak için butona bas',
+                    Text(AppLocalizations.of(context).yeniBirVarisPlanlamakIcinButonaBas,
                       style: TextStyle(fontSize: 14, color: Colors.grey),
                     ),
                   ],

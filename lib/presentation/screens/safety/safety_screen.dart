@@ -310,16 +310,14 @@ class _SafetyScreenState extends State<SafetyScreen>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Güvenlik',
+                    Text(AppLocalizations.of(context).safety,
                       style: Theme.of(context)
                           .textTheme
                           .displayLarge
                           ?.copyWith(fontSize: 32),
                     ),
                     const SizedBox(height: 4),
-                    Text(
-                      'Ailenizin koruma kalkanı',
+                    Text(AppLocalizations.of(context).ailenizinKorumaKalkani,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: const Color(0xFF6B7280),
                           ),
@@ -409,8 +407,7 @@ class _SafetyScreenState extends State<SafetyScreen>
                           size: 18,
                         ),
                         const SizedBox(width: 8),
-                        Text(
-                          'Canlı Konum',
+                        Text(AppLocalizations.of(context).canliKonum,
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
@@ -467,8 +464,7 @@ class _SafetyScreenState extends State<SafetyScreen>
                         ],
                       )
                     else
-                      const Text(
-                        'Konum alınıyor...',
+                      Text(AppLocalizations.of(context).konumAliniyor,
                         style: TextStyle(
                           fontSize: 13,
                           color: Color(0xFF6B7280),
@@ -482,11 +478,10 @@ class _SafetyScreenState extends State<SafetyScreen>
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 24)),
             // Quick Actions
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.fromLTRB(20, 8, 20, 8),
-                child: Text(
-                  'HIZLI İŞLEMLER',
+                child: Text(AppLocalizations.of(context).hizliIslemler,
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
@@ -505,7 +500,7 @@ class _SafetyScreenState extends State<SafetyScreen>
                       icon: Icons.location_on_outlined,
                       iconBg: const Color(0xFF6366F1).withAlpha(30),
                       iconColor: const Color(0xFF6366F1),
-                      label: 'Konumumu Paylaş',
+                      label: AppLocalizations.of(context).konumumuPaylas,
                       description: _locationSharing
                           ? 'Canlı konum aktif'
                           : 'Canlı konum gönder',
@@ -528,7 +523,7 @@ class _SafetyScreenState extends State<SafetyScreen>
                       icon: Icons.health_and_safety_outlined,
                       iconBg: const Color(0xFF8B5CF6).withAlpha(30),
                       iconColor: const Color(0xFF7C3AED),
-                      label: 'Sağlık Kartım',
+                      label: AppLocalizations.of(context).saglikKartim,
                       description: 'Alerji ve ilaç bilgileri',
                       badge: 'Güncel',
                       onPress: () => context.push(AppRoutes.healthCard),
@@ -555,14 +550,14 @@ class _SafetyScreenState extends State<SafetyScreen>
                     SafetyTool(
                       icon: Icons.shield_outlined,
                       iconColor: const Color(0xFF6366F1),
-                      label: 'Güvenli Bölgeler',
+                      label: AppLocalizations.of(context).guvenliBolgeler,
                       description: 'Ev, okul, iş için geofence',
                       onTap: () => context.push(AppRoutes.safeZones),
                     ),
                     SafetyTool(
                       icon: Icons.timer_outlined,
                       iconColor: const Color(0xFF10B981),
-                      label: 'Güvenli Varış',
+                      label: AppLocalizations.of(context).guvenliVaris,
                       description: 'Belirli sürede varış kontrolü',
                       onTap: () => context.push(AppRoutes.safeArrival),
                     ),

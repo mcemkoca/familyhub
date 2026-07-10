@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import '../../../config/constants.dart';
 import '../../../services/health_card_service.dart';
@@ -176,7 +177,7 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
       return Scaffold(
         backgroundColor: bg,
         appBar: ScreenHeader(
-          title: 'Sağlık Kartını Düzenle',
+          title: AppLocalizations.of(context).saglikKartiniDuzenle,
           showBack: true,
           onBack: () => context.pop(),
         ),
@@ -187,7 +188,7 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
     return Scaffold(
       backgroundColor: bg,
       appBar: ScreenHeader(
-        title: 'Sağlık Kartını Düzenle',
+        title: AppLocalizations.of(context).saglikKartiniDuzenle,
         showBack: true,
         onBack: () => context.pop(),
         rightAction: TextButton(
@@ -267,13 +268,13 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
                         icon: Icons.healing_outlined,
                       ),
                       _buildInput(
-                        label: 'Kronik Hastalıklar',
+                        label: AppLocalizations.of(context).chronicConditions,
                         controller: _conditionsController,
                         hint: 'Örn: astım, diyabet, hipertansiyon',
                         icon: Icons.medical_services_outlined,
                       ),
                       _buildInput(
-                        label: 'İlaçlar',
+                        label: AppLocalizations.of(context).medications,
                         controller: _medicationsController,
                         hint: 'Örn: Aspirin (100mg), Metformin (500mg)',
                         icon: Icons.medication_outlined,
@@ -303,7 +304,7 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
                         keyboardType: TextInputType.phone,
                       ),
                       _buildInput(
-                        label: 'Yakınlık Derecesi',
+                        label: AppLocalizations.of(context).yakinlikDerecesi,
                         controller: _emergencyRelationController,
                         hint: 'Örn: Eş, Anne, Baba, Kardeş',
                         icon: Icons.people_outline,
@@ -317,7 +318,7 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
                     icon: Icons.local_hospital_outlined,
                     children: [
                       _buildInput(
-                        label: 'Doktor Adı',
+                        label: AppLocalizations.of(context).doktorAdi,
                         controller: _doctorNameController,
                         icon: Icons.person_outline,
                       ),

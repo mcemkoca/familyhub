@@ -171,8 +171,7 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
               color: AppColors.error.withAlpha(80),
             ),
             const SizedBox(height: 16),
-            const Text(
-              'Takvim Erişim İzni Gerekli',
+            Text(AppLocalizations.of(context).takvimErisimIzniGerekli,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
@@ -320,8 +319,7 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Bağlı Takvimler',
+          Text(AppLocalizations.of(context).bagliTakvimler,
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w700,
@@ -342,7 +340,7 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
     return Container(
       padding: const EdgeInsets.all(24),
       alignment: Alignment.center,
-      child: const Column(
+      child: Column(
         children: [
           Icon(
             Icons.link_off,
@@ -350,8 +348,7 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
             color: Color(0xFF6B7280),
           ),
           SizedBox(height: 10),
-          Text(
-            'Henüz takvim bağlantısı yok',
+          Text(AppLocalizations.of(context).henuzTakvimBaglantisiYok,
             style: TextStyle(
               fontSize: 14,
               color: Color(0xFF6B7280),
@@ -492,7 +489,7 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
                     _buildActionButton(
                       icon: _loading ? Icons.hourglass_top : Icons.sync,
                       onTap: _loading ? null : () => _syncConnection(conn),
-                      tooltip: 'Şimdi Senkronize',
+                      tooltip: AppLocalizations.of(context).simdiSenkronize,
                       color: const Color(0xFF10B981),
                     ),
                   ],
@@ -556,8 +553,7 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Senkronizasyon İstatistikleri',
+          Text(AppLocalizations.of(context).senkronizasyonIstatistikleri,
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w700,
@@ -654,20 +650,20 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
           const SizedBox(height: 14),
           _buildSettingTile(
             icon: Icons.schedule,
-            title: 'Senkronizasyon sıklığı',
+            title: AppLocalizations.of(context).senkronizasyonSikligi,
             subtitle: '15 dakikada bir',
             isDark: isDark,
           ),
           _buildSettingTile(
             icon: Icons.merge_type,
-            title: 'Çakışma çözümü',
-            subtitle: 'Son yazan kazanır',
+            title: AppLocalizations.of(context).cakismaCozumu,
+            subtitle: AppLocalizations.of(context).sonYazanKazanir,
             isDark: isDark,
           ),
           _buildSettingTile(
             icon: Icons.swap_horiz,
-            title: 'Senkronizasyon yönü',
-            subtitle: 'Çift yönlü',
+            title: AppLocalizations.of(context).senkronizasyonYonu,
+            subtitle: AppLocalizations.of(context).ciftYonlu,
             isDark: isDark,
           ),
         ],
@@ -882,8 +878,7 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
           const SizedBox(height: 10),
 
           // Senkronizasyon yönü
-          const Text(
-            'Senkronizasyon Yönü',
+          Text(AppLocalizations.of(context).senkronizasyonyonu1,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w700,
@@ -910,8 +905,7 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
           const SizedBox(height: 10),
 
           // Çakışma stratejisi
-          const Text(
-            'Çakışma Çözümü',
+          Text(AppLocalizations.of(context).cakismacozumu1,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w700,
@@ -959,8 +953,7 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
               Navigator.pop(context);
             },
             icon: const Icon(Icons.link_off, color: AppColors.error),
-            label: const Text(
-              'Bağlantıyı Kes',
+            label: Text(AppLocalizations.of(context).baglantiyiKes,
               style: TextStyle(color: AppColors.error),
             ),
           ),

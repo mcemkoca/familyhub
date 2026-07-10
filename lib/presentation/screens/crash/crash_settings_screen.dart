@@ -125,8 +125,7 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
               if (_sensitivity == CrashSensitivity.high)
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
-                  child: Text(
-                    'Yüksek: Daha hassas, daha fazla yanlış alarm olabilir',
+                  child: Text(AppLocalizations.of(context).yuksekDahaHassasDahaFazlaYanlisAlarmOlabilir,
                     style: TextStyle(
                       color: Colors.orange.shade700,
                       fontSize: 12,
@@ -182,10 +181,9 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
                 (v) => setState(() => _autoCallEmergency = v),
               ),
               if (_autoCallEmergency)
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(left: 16, bottom: 8),
-                  child: Text(
-                    '⚠️ Yasal sorumluluk bildirimi: Yanlış arama cezası kullanıcı sorumluluğundadır.',
+                  child: Text(AppLocalizations.of(context).yasalSorumlulukBildirimiYanlisAramaCezasiKullaniciSorumlulugundadir,
                     style: TextStyle(color: Colors.orange, fontSize: 12),
                   ),
                 ),
@@ -282,8 +280,7 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
           _buildSection(
             'TEST MODU',
             children: [
-              const Text(
-                'Son test: 15 Mart 2025 - BAŞARILI',
+              Text(AppLocalizations.of(context).sonTest15Mart2025Basarili,
                 style: TextStyle(color: Colors.white70),
               ),
               const SizedBox(height: 12),
@@ -394,7 +391,7 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
                 content: Column(mainAxisSize: MainAxisSize.min, children: [
                   TextField(
                       controller: nameC,
-                      decoration: const InputDecoration(labelText: 'İsim')),
+                      decoration: InputDecoration(labelText: AppLocalizations.of(context).isim)),
                   TextField(
                       controller: phoneC,
                       keyboardType: TextInputType.phone,
@@ -403,7 +400,7 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
                 actions: [
                   TextButton(
                       onPressed: () => Navigator.pop(d, false),
-                      child: const Text('İptal')),
+                      child: Text(AppLocalizations.of(context).cancel)),
                   FilledButton(
                       onPressed: () => Navigator.pop(d, true),
                       child: const Text('Ekle')),

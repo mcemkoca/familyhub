@@ -359,7 +359,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
     final today = _media.where((m) => _isSameDay(m.createdAt, now)).toList();
     if (today.length >= 2) {
       memories.add(_MemoryGroup(
-        title: 'Bugünün Anıları',
+        title: AppLocalizations.of(context).bugununAnilari,
         subtitle: '${today.length} fotoğraf/video',
         icon: Icons.today,
         color: const Color(0xFF6366F1),
@@ -372,7 +372,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
     final yearAgo = _media.where((m) => _isSameDay(m.createdAt, oneYearAgo)).toList();
     if (yearAgo.isNotEmpty) {
       memories.add(_MemoryGroup(
-        title: '1 Yıl Önce Bugün',
+        title: AppLocalizations.of(context).yilOnceBugun,
         subtitle: DateFormat('dd MMMM yyyy', 'tr_TR').format(oneYearAgo),
         icon: Icons.history,
         color: const Color(0xFF8B5CF6),
@@ -389,7 +389,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
     }).toList();
     if (weekend.length >= 2) {
       memories.add(_MemoryGroup(
-        title: 'Geçen Hafta Sonu',
+        title: AppLocalizations.of(context).gecenHaftaSonu,
         subtitle: '${DateFormat('dd MMM', 'tr_TR').format(lastSat)} - ${DateFormat('dd MMM', 'tr_TR').format(lastSun)}',
         icon: Icons.weekend,
         color: AppColors.orange,
@@ -401,7 +401,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
     final last30 = _media.where((m) => m.createdAt.isAfter(now.subtract(const Duration(days: 30)))).toList();
     if (last30.length >= 3) {
       memories.add(_MemoryGroup(
-        title: 'Son 30 Gün',
+        title: AppLocalizations.of(context).son30Gun,
         subtitle: '${last30.length} anı',
         icon: Icons.calendar_month,
         color: AppColors.green,
@@ -413,7 +413,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
     final videos = _media.where((m) => m.type == 'video').toList();
     if (videos.length >= 2) {
       memories.add(_MemoryGroup(
-        title: 'Videolarımız',
+        title: AppLocalizations.of(context).videolarimiz,
         subtitle: '${videos.length} video',
         icon: Icons.videocam,
         color: AppColors.error,
@@ -426,7 +426,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
     final oldest = sortedByDate.take(5).toList();
     if (oldest.length >= 3) {
       memories.add(_MemoryGroup(
-        title: 'İlk Anılar',
+        title: AppLocalizations.of(context).ilkAnilar,
         subtitle: DateFormat('MMMM yyyy', 'tr_TR').format(oldest.first.createdAt),
         icon: Icons.auto_awesome,
         color: const Color(0xFFEC4899),
@@ -523,15 +523,15 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
 
   Widget _buildGalleryTab() {
     if (_media.isEmpty) {
-      return const Center(
+      return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.photo_library, size: 64, color: Color(0xFF9CA3AF)),
             SizedBox(height: 16),
-            Text('Henüz fotoğraf yok', style: TextStyle(fontSize: 18, color: Color(0xFF6B7280))),
+            Text(AppLocalizations.of(context).henuzFotografYok, style: TextStyle(fontSize: 18, color: Color(0xFF6B7280))),
             SizedBox(height: 8),
-            Text('Telefon galerisinden seçmek için + butonuna basın', style: TextStyle(color: Color(0xFF6B7280))),
+            Text(AppLocalizations.of(context).telefonGalerisindenSecmekIcinButonunaBasin, style: TextStyle(color: Color(0xFF6B7280))),
           ],
         ),
       );
@@ -586,15 +586,15 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
   Widget _buildMemoriesTab() {
     final memories = _buildMemories();
     if (memories.isEmpty) {
-      return const Center(
+      return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.auto_awesome, size: 64, color: Color(0xFF9CA3AF)),
             SizedBox(height: 16),
-            Text('Henüz anı oluşmadı', style: TextStyle(fontSize: 18, color: Color(0xFF6B7280))),
+            Text(AppLocalizations.of(context).henuzAniOlusmadi, style: TextStyle(fontSize: 18, color: Color(0xFF6B7280))),
             SizedBox(height: 8),
-            Text('Daha fazla fotoğraf ekledikçe anılar oluşacak', style: TextStyle(color: Color(0xFF6B7280))),
+            Text(AppLocalizations.of(context).dahaFazlaFotografEkledikceAnilarOlusacak, style: TextStyle(color: Color(0xFF6B7280))),
           ],
         ),
       );

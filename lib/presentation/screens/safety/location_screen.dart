@@ -52,10 +52,10 @@ class _LocationScreenState extends State<LocationScreen> {
               borderRadius: BorderRadius.circular(20),
               side: const BorderSide(color: Color(0x1EFFFFFF), width: 0.5),
             ),
-            title: const Row(children: [
+            title: Row(children: [
               Icon(Icons.location_off, color: Color(0xFFF59E0B)),
               SizedBox(width: 12),
-              Text('Konum İzni Gerekli', style: TextStyle(color: Color(0xFFE5E7EB))),
+              Text(AppLocalizations.of(context).konumIzniGerekli, style: TextStyle(color: Color(0xFFE5E7EB))),
             ]),
             content: const Text(
               'Konum izni kalıcı olarak reddedildi. Ayarlar > Uygulamalar > FamilyHub > İzinler > Konum menüsünden izni etkinleştirin.',
@@ -69,7 +69,7 @@ class _LocationScreenState extends State<LocationScreen> {
               ElevatedButton.icon(
                 onPressed: () { Navigator.pop(context); openAppSettings(); },
                 icon: const Icon(Icons.open_in_new, size: 18),
-                label: const Text('Ayarları Aç'),
+                label: Text(AppLocalizations.of(context).ayarlariAc),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF6366F1),
                   foregroundColor: Colors.white,
@@ -303,7 +303,7 @@ class _LocationScreenState extends State<LocationScreen> {
                     ),
                     const SizedBox(height: 12),
                     _CoordRow(
-                      label: 'Doğruluk',
+                      label: AppLocalizations.of(context).dogruluk,
                       value: _currentPosition?.accuracy != null
                           ? '${_currentPosition!.accuracy.toStringAsFixed(1)} m'
                           : '-',
@@ -334,8 +334,7 @@ class _LocationScreenState extends State<LocationScreen> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Aile Üyeleri',
+                      Text(AppLocalizations.of(context).aileUyeleri,
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w700,

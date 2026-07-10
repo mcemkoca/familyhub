@@ -73,7 +73,7 @@ class _SafeZonesScreenState extends State<SafeZonesScreen> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text('Güvenli Bölge Ekle',
+                Text(AppLocalizations.of(context).guvenliBolgeEkle,
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -103,7 +103,7 @@ class _SafeZonesScreenState extends State<SafeZonesScreen> {
                   ),
                 ),
                 const SizedBox(height: 14),
-                const Text('Tür',
+                Text(AppLocalizations.of(context).tur,
                     style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
                 const SizedBox(height: 8),
                 Wrap(
@@ -235,8 +235,7 @@ class _SafeZonesScreenState extends State<SafeZonesScreen> {
         child: ListView(
           padding: const EdgeInsets.all(20),
           children: [
-            const Text(
-              'Geofence aktif bölgelerinizi yönetin ve konum durumunu kontrol edin.',
+            Text(AppLocalizations.of(context).geofenceAktifBolgeleriniziYonetinVeKonumDurumunuKontrolEdin,
               style: TextStyle(
                 fontSize: 14,
                 color: Color(0xFF6B7280),

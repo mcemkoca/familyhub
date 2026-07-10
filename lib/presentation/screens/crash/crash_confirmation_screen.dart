@@ -144,8 +144,7 @@ class _CrashConfirmationScreenState extends State<CrashConfirmationScreen>
             ),
           ),
           const SizedBox(height: 8),
-          const Text(
-            'KAZA TESPİT EDİLDİ',
+          Text(AppLocalizations.of(context).kazaTespitEdildi,
             style: TextStyle(
               color: Colors.white,
               fontSize: 26,
@@ -241,8 +240,7 @@ class _CrashConfirmationScreenState extends State<CrashConfirmationScreen>
       ),
       child: Column(
         children: [
-          const Text(
-            'GERİ SAYIM',
+          Text(AppLocalizations.of(context).geriSayim,
             style: TextStyle(
               color: Colors.white70,
               fontSize: 13,
@@ -270,8 +268,7 @@ class _CrashConfirmationScreenState extends State<CrashConfirmationScreen>
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text(
-            'SOS otomatik başlayacak...',
+          Text(AppLocalizations.of(context).sosOtomatikBaslayacak,
             style: TextStyle(
               color: Colors.white.withAlpha(153),
               fontSize: 13,
