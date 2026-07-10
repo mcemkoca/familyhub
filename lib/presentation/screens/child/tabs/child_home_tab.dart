@@ -73,7 +73,7 @@ class _GreetingHeader extends StatelessWidget {
         ),
         const SizedBox(height: AppSpacing.xs),
         Text(AppLocalizations.of(context).bugunNelerYapacaginaBirBakalim,
-          style: TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
+          style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
         ),
       ],
     );
@@ -112,7 +112,7 @@ class _TasksProgressCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(AppLocalizations.of(context).gunlukGorevler,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -293,10 +293,10 @@ class _TodaySchedulePreview extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.beach_access, color: Color(0xFF9CA3AF)),
-                    SizedBox(width: AppSpacing.sm),
+                    const Icon(Icons.beach_access, color: Color(0xFF9CA3AF)),
+                    const SizedBox(width: AppSpacing.sm),
                     Text(AppLocalizations.of(context).bugunDersYokKeyfiniCikar,
-                      style: TextStyle(color: Color(0xFF6B7280)),
+                      style: const TextStyle(color: Color(0xFF6B7280)),
                     ),
                   ],
                 ),
@@ -379,10 +379,10 @@ class _UpcomingHomeworksPreview extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.celebration, color: Color(0xFF9CA3AF)),
-                    SizedBox(width: AppSpacing.sm),
+                    const Icon(Icons.celebration, color: Color(0xFF9CA3AF)),
+                    const SizedBox(width: AppSpacing.sm),
                     Text(AppLocalizations.of(context).tumOdevlerTamamlandi,
-                      style: TextStyle(color: Color(0xFF6B7280)),
+                      style: const TextStyle(color: Color(0xFF6B7280)),
                     ),
                   ],
                 ),
@@ -540,19 +540,19 @@ class _AiSuggestionsSectionState extends State<_AiSuggestionsSection> {
                 ),
                 child: Column(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.lightbulb_outline,
                       color: Color(0xFF6B7280),
                       size: 32,
                     ),
-                    SizedBox(height: AppSpacing.sm),
+                    const SizedBox(height: AppSpacing.sm),
                     Text(AppLocalizations.of(context).henuzAiOnerisiYok,
-                      style: TextStyle(color: Color(0xFF9CA3AF)),
+                      style: const TextStyle(color: Color(0xFF9CA3AF)),
                     ),
-                    SizedBox(height: AppSpacing.xs),
+                    const SizedBox(height: AppSpacing.xs),
                     Text(AppLocalizations.of(context).dahaFazlaAktiviteKaydiOlusuncaOnerilerGelecek,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         color: Color(0xFF6B7280),
                       ),

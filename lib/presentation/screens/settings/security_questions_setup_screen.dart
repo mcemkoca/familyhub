@@ -355,7 +355,7 @@ class _SecurityQuestionsSetupScreenState extends State<SecurityQuestionsSetupScr
               isExpanded: true,
               value: value != null && items.contains(value) ? value : null,
               hint: Text(AppLocalizations.of(context).birSoruSecin,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Color(0xFF6B7280),
                 ),
               ),

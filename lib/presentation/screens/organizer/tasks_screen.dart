@@ -505,17 +505,17 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.task_alt, size: 64, color: Color(0xFF9CA3AF)),
-                      SizedBox(height: 16),
+                      const Icon(Icons.task_alt, size: 64, color: Color(0xFF9CA3AF)),
+                      const SizedBox(height: 16),
                       Text(AppLocalizations.of(context).henuzGorevYok,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
                           color: Color(0xFF6B7280),
                         ),
                       ),
-                      SizedBox(height: 8),
-                      Text(
+                      const SizedBox(height: 8),
+                      const Text(
                         'Yeni görev eklemek için + butonuna basın',
                         style: TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
                       ),

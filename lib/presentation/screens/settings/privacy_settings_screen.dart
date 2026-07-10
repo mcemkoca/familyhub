@@ -81,7 +81,7 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: Text(AppLocalizations.of(context).hesabiSil, style: TextStyle(color: Color(0xFFEF4444))),
+        title: Text(AppLocalizations.of(context).hesabiSil, style: const TextStyle(color: Color(0xFFEF4444))),
         content: Text(AppLocalizations.of(context).hesabiniziSilmekGeriAlinamazTumVerilerinizKaliciOlarakSilinecek),
         actions: [
           TextButton(
@@ -199,7 +199,7 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
                 ),
                 ListTile(
                   leading: const Icon(Icons.delete_forever, color: Color(0xFFEF4444)),
-                  title: Text(AppLocalizations.of(context).hesabimiSil, style: TextStyle(color: Color(0xFFEF4444))),
+                  title: Text(AppLocalizations.of(context).hesabimiSil, style: const TextStyle(color: Color(0xFFEF4444))),
                   subtitle: Text(AppLocalizations.of(context).tumVerilerinizKaliciOlarakSilinecek),
                   onTap: _showDeleteAccountDialog,
                 ),

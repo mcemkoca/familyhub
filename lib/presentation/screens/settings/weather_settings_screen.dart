@@ -64,7 +64,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
           SnackBar(
             content: Text(AppLocalizations.of(context).konumIzniVerilmediSehirSecimiVeyaHaritadanKonumSecimiKullanilabilir,
             ),
-            duration: Duration(seconds: 4),
+            duration: const Duration(seconds: 4),
           ),
         );
       }
@@ -248,7 +248,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(AppLocalizations.of(context).haritadanKonumSec,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: Color(0xFFE5E7EB),
@@ -256,7 +256,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
                 ),
                 const SizedBox(height: 4),
                 Text(AppLocalizations.of(context).openstreetmapHaritasindanIstediginizNoktayiSecin,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 13,
                     color: Color(0xFF6B7280),
                   ),
@@ -311,7 +311,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
                     onPressed: _openLocationPicker,
                     icon: const Icon(Icons.map, color: Color(0xFF6366F1)),
                     label: Text(AppLocalizations.of(context).haritayiAc,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFF6366F1),
                         fontWeight: FontWeight.w600,
                       ),
@@ -358,7 +358,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(AppLocalizations.of(context).sicaklikBirimi,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: Color(0xFFE5E7EB),
@@ -483,7 +483,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(AppLocalizations.of(context).gunlukTahmin,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w700,
             color: Color(0xFFE5E7EB),

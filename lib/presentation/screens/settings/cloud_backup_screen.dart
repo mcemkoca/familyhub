@@ -282,7 +282,7 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
                     )
                   : const Icon(Icons.login),
               label: Text(AppLocalizations.of(context).googleHesabiBagla,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF4285F4),
@@ -470,9 +470,9 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
         // Backup history
         SliverToBoxAdapter(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(AppLocalizations.of(context).yedeklemeGecmisi,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
                 color: Color(0xFF6B7280),
@@ -492,18 +492,18 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
         else if (_backups.isEmpty)
           SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 40),
+              padding: const EdgeInsets.symmetric(vertical: 40),
               child: Center(
                 child: Column(
                   children: [
-                    Icon(Icons.cloud_off, size: 48, color: Colors.grey),
-                    SizedBox(height: 12),
+                    const Icon(Icons.cloud_off, size: 48, color: Colors.grey),
+                    const SizedBox(height: 12),
                     Text(AppLocalizations.of(context).henuzYedeklemeYok,
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                      style: const TextStyle(fontSize: 16, color: Colors.grey),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(AppLocalizations.of(context).simdiYedekleButonunaBasarakBaslayabilirsiniz,
-                      style: TextStyle(fontSize: 13, color: Colors.grey),
+                      style: const TextStyle(fontSize: 13, color: Colors.grey),
                     ),
                   ],
                 ),

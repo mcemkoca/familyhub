@@ -128,7 +128,7 @@ class _FlashlightScreenState extends State<FlashlightScreen> {
             ),
             const SizedBox(height: 8),
             Text(AppLocalizations.of(context).dokunAckapatSosButonuMorseKodu,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 13,
                 color: Color(0xFF6B7280),
               ),

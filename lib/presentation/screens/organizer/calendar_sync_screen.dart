@@ -172,7 +172,7 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
             ),
             const SizedBox(height: 16),
             Text(AppLocalizations.of(context).takvimErisimIzniGerekli,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
                 color: Color(0xFFE5E7EB),
@@ -320,7 +320,7 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(AppLocalizations.of(context).bagliTakvimler,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w700,
               color: Color(0xFFE5E7EB),
@@ -342,14 +342,14 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
       alignment: Alignment.center,
       child: Column(
         children: [
-          Icon(
+          const Icon(
             Icons.link_off,
             size: 40,
             color: Color(0xFF6B7280),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(AppLocalizations.of(context).henuzTakvimBaglantisiYok,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               color: Color(0xFF6B7280),
             ),
@@ -554,7 +554,7 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(AppLocalizations.of(context).senkronizasyonIstatistikleri,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w700,
               color: Color(0xFFE5E7EB),
@@ -879,7 +879,7 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
 
           // Senkronizasyon yönü
           Text(AppLocalizations.of(context).senkronizasyonyonu1,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w700,
               color: Color(0xFFE5E7EB),
@@ -906,7 +906,7 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
 
           // Çakışma stratejisi
           Text(AppLocalizations.of(context).cakismacozumu1,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w700,
               color: Color(0xFFE5E7EB),
@@ -954,7 +954,7 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
             },
             icon: const Icon(Icons.link_off, color: AppColors.error),
             label: Text(AppLocalizations.of(context).baglantiyiKes,
-              style: TextStyle(color: AppColors.error),
+              style: const TextStyle(color: AppColors.error),
             ),
           ),
         ],

@@ -129,7 +129,7 @@ class _ProfileStepState extends State<ProfileStep> {
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
-              child: Text(AppLocalizations.of(context).next, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+              child: Text(AppLocalizations.of(context).next, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             ),
           ),
         ],
@@ -156,7 +156,7 @@ class _ProfileStepState extends State<ProfileStep> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(AppLocalizations.of(context).dogumTarihi,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Color(0xFF6B7280),
                     ),

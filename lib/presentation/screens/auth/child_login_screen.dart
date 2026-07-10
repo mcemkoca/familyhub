@@ -372,7 +372,7 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
                             ),
                           )
                         : Text(AppLocalizations.of(context).login,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
                             ),

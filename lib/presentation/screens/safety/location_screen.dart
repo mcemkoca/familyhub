@@ -53,9 +53,9 @@ class _LocationScreenState extends State<LocationScreen> {
               side: const BorderSide(color: Color(0x1EFFFFFF), width: 0.5),
             ),
             title: Row(children: [
-              Icon(Icons.location_off, color: Color(0xFFF59E0B)),
-              SizedBox(width: 12),
-              Text(AppLocalizations.of(context).konumIzniGerekli, style: TextStyle(color: Color(0xFFE5E7EB))),
+              const Icon(Icons.location_off, color: Color(0xFFF59E0B)),
+              const SizedBox(width: 12),
+              Text(AppLocalizations.of(context).konumIzniGerekli, style: const TextStyle(color: Color(0xFFE5E7EB))),
             ]),
             content: const Text(
               'Konum izni kalıcı olarak reddedildi. Ayarlar > Uygulamalar > FamilyHub > İzinler > Konum menüsünden izni etkinleştirin.',
@@ -335,7 +335,7 @@ class _LocationScreenState extends State<LocationScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(AppLocalizations.of(context).aileUyeleri,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w700,
                           color: Color(0xFFE5E7EB),

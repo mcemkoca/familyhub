@@ -312,7 +312,7 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
                 ? TextButton(
                     onPressed: () => setState(() => _isEditing = true),
                     child: Text(AppLocalizations.of(context).edit,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFF6366F1),
                         fontWeight: FontWeight.w600,
                       ),
@@ -438,10 +438,10 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.camera_alt, color: Colors.white, size: 16),
-                    SizedBox(width: 6),
+                    const Icon(Icons.camera_alt, color: Colors.white, size: 16),
+                    const SizedBox(width: 6),
                     Text(AppLocalizations.of(context).degistir,
-                      style: TextStyle(color: Colors.white, fontSize: 13),
+                      style: const TextStyle(color: Colors.white, fontSize: 13),
                     ),
                   ],
                 ),

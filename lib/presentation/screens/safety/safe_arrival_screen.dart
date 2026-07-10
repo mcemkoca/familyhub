@@ -201,7 +201,7 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
         children: [
           if (_active.isNotEmpty) ...[
             Text(AppLocalizations.of(context).aktifMonitorler,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
                 color: Color(0xFF9CA3AF),
@@ -305,7 +305,7 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
           ],
           if (_history.isNotEmpty) ...[
             Text(AppLocalizations.of(context).gecmis,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
                 color: Color(0xFF9CA3AF),
@@ -343,21 +343,21 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
           if (_active.isEmpty && _history.isEmpty)
             Center(
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 60),
+                padding: const EdgeInsets.symmetric(vertical: 60),
                 child: Column(
                   children: [
-                    Icon(Icons.timer_outlined, size: 64, color: Colors.grey),
-                    SizedBox(height: 16),
+                    const Icon(Icons.timer_outlined, size: 64, color: Colors.grey),
+                    const SizedBox(height: 16),
                     Text(AppLocalizations.of(context).henuzVarisPlaniYok,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
                         color: Colors.grey,
                       ),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(AppLocalizations.of(context).yeniBirVarisPlanlamakIcinButonaBas,
-                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                      style: const TextStyle(fontSize: 14, color: Colors.grey),
                     ),
                   ],
                 ),

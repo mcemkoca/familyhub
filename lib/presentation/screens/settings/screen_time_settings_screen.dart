@@ -243,9 +243,9 @@ class _ScreenTimeSettingsScreenState
               slivers: [
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     child: Text(AppLocalizations.of(context).cocukUyelerIcinGunlukEkranSuresiLimitleriBelirleyin,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         color: Color(0xFF6B7280),
                       ),

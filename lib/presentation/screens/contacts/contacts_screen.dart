@@ -347,14 +347,14 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.contacts,
                           size: 64,
                           color: Color(0xFF9CA3AF),
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         Text(AppLocalizations.of(context).henuzKisiYok,
-                          style: TextStyle(fontSize: 18, color: Color(0xFF6B7280)),
+                          style: const TextStyle(fontSize: 18, color: Color(0xFF6B7280)),
                         ),
                       ],
                     ),

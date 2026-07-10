@@ -677,7 +677,7 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
           Row(
             children: [
               Text(AppLocalizations.of(context).guvenliBolgeler,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
                       color: Color(0xFFE5E7EB))),

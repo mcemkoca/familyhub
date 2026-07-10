@@ -59,7 +59,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       _selectedLanguage = _langMap.entries
           .firstWhere((e) => e.value.label == saved,
               orElse: () => MapEntry(
-                  'tr', (label: AppLocalizations.of(context).turkish, locale: Locale('tr', 'TR'))))
+                  'tr', (label: AppLocalizations.of(context).turkish, locale: const Locale('tr', 'TR'))))
           .key;
       return;
     }

@@ -65,7 +65,7 @@ class AboutAppScreen extends StatelessWidget {
                       const SizedBox(height: 4),
                       Text(AppLocalizations.of(context).ailenizinKalbiBuradaAtiyor,
                           style:
-                              TextStyle(color: Colors.white70, fontSize: 14)),
+                              const TextStyle(color: Colors.white70, fontSize: 14)),
                       const SizedBox(height: 8),
                       Container(
                         padding: const EdgeInsets.symmetric(

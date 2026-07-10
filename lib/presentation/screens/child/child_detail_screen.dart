@@ -159,7 +159,7 @@ class _TasksTabState extends State<_TasksTab> {
       context: context,
       builder: (c) => AlertDialog(
         backgroundColor: const Color(0xFF1E293B),
-        title: Text(AppLocalizations.of(context).gorevSil, style: TextStyle(color: Colors.white)),
+        title: Text(AppLocalizations.of(context).gorevSil, style: const TextStyle(color: Colors.white)),
         content: Text(
           '"${task.title}" görevini silmek istiyor musun?',
           style: const TextStyle(color: Color(0xFF9CA3AF)),
@@ -300,7 +300,7 @@ class _HomeworksTabState extends State<_HomeworksTab> {
               ),
               const SizedBox(height: 20),
               Text(AppLocalizations.of(context).yeniOdevEkle,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -389,7 +389,7 @@ class _HomeworksTabState extends State<_HomeworksTab> {
                   ),
                   onPressed: () => _createHomework(),
                   child: Text(AppLocalizations.of(context).odevEkle,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
@@ -441,9 +441,9 @@ class _HomeworksTabState extends State<_HomeworksTab> {
       context: context,
       builder: (c) => AlertDialog(
         backgroundColor: const Color(0xFF1E293B),
-        title: Text(AppLocalizations.of(context).odevSil, style: TextStyle(color: Colors.white)),
+        title: Text(AppLocalizations.of(context).odevSil, style: const TextStyle(color: Colors.white)),
         content: Text(AppLocalizations.of(context).buOdeviSilmekIstiyorMusun,
-          style: TextStyle(color: Colors.white70),
+          style: const TextStyle(color: Colors.white70),
         ),
         actions: [
           TextButton(
@@ -617,7 +617,7 @@ class _ScheduleTabState extends State<_ScheduleTab> {
               ),
               const SizedBox(height: 12),
               Text(AppLocalizations.of(context).gun,
-                style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 14),
+                style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 14),
               ),
               const SizedBox(height: 8),
               Wrap(
@@ -951,7 +951,7 @@ class _DevelopmentTabState extends State<_DevelopmentTab> {
               ),
               const SizedBox(height: 20),
               Text(AppLocalizations.of(context).yeniGelisimKaydi,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -1072,9 +1072,9 @@ class _DevelopmentTabState extends State<_DevelopmentTab> {
       context: context,
       builder: (c) => AlertDialog(
         backgroundColor: const Color(0xFF1E293B),
-        title: Text(AppLocalizations.of(context).kayitSil, style: TextStyle(color: Colors.white)),
+        title: Text(AppLocalizations.of(context).kayitSil, style: const TextStyle(color: Colors.white)),
         content: Text(AppLocalizations.of(context).buKaydiSilmekIstiyorMusun,
-          style: TextStyle(color: Colors.white70),
+          style: const TextStyle(color: Colors.white70),
         ),
         actions: [
           TextButton(
@@ -1421,7 +1421,7 @@ class _StreakWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(AppLocalizations.of(context).haftalikGorunum,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xFF6B7280),
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
@@ -1643,15 +1643,15 @@ class _AddTaskButton extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(AppLocalizations.of(context).yeniGorevEkle,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                SizedBox(height: 2),
+                const SizedBox(height: 2),
                 Text(AppLocalizations.of(context).cocugunaYeniBirGorevAta,
-                  style: TextStyle(color: Colors.grey, fontSize: 13),
+                  style: const TextStyle(color: Colors.grey, fontSize: 13),
                 ),
               ],
             ),

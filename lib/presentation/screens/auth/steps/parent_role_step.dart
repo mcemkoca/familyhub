@@ -50,7 +50,7 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(AppLocalizations.of(context).aileRolu,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
               color: Color(0xFFE5E7EB),
@@ -58,14 +58,14 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
           ),
           const SizedBox(height: 4),
           Text(AppLocalizations.of(context).ailedekiRolunuzuVeGorunumunuzuSecin,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               color: Color(0xFF6B7280),
             ),
           ),
           const SizedBox(height: 24),
           Text(AppLocalizations.of(context).rolunuz,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
               color: Color(0xFF6B7280),
@@ -110,7 +110,7 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
           ),
           const SizedBox(height: 24),
           Text(AppLocalizations.of(context).renkSecimi,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
               color: Color(0xFF6B7280),
@@ -172,7 +172,7 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
-              child: Text(AppLocalizations.of(context).next, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+              child: Text(AppLocalizations.of(context).next, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             ),
           ),
         ],

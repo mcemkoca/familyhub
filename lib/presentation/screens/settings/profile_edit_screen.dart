@@ -193,7 +193,7 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(AppLocalizations.of(context).epostaDegisikligiIcinOnayBaglantisiGonderilecektir,
-                style: TextStyle(fontSize: 13),
+                style: const TextStyle(fontSize: 13),
               ),
               const SizedBox(height: 12),
               TextField(

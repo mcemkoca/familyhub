@@ -326,7 +326,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
       builder: (ctx) => AlertDialog(
         backgroundColor: const Color(0xFF13131A),
         title: Text(AppLocalizations.of(context).removeMember,
-            style: TextStyle(color: Colors.white)),
+            style: const TextStyle(color: Colors.white)),
         content: Text('${member.name} aileden çıkarılacak. Emin misiniz?',
             style: const TextStyle(color: Color(0xFF9CA3AF))),
         actions: [
@@ -336,7 +336,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
           ElevatedButton(
             onPressed: () => Navigator.pop(ctx, true),
             style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
-            child: Text(AppLocalizations.of(context).cikar, style: TextStyle(color: Colors.white)),
+            child: Text(AppLocalizations.of(context).cikar, style: const TextStyle(color: Colors.white)),
           ),
         ],
       ),
@@ -668,7 +668,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                         const SizedBox(height: 12),
                         if (adults.isNotEmpty) ...[
                           Text(AppLocalizations.of(context).ebeveynlerVeYetiskinler,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
                               color: Color(0xFF6B7280),
@@ -688,7 +688,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                         if (children.isNotEmpty) ...[
                           const SizedBox(height: 16),
                           Text(AppLocalizations.of(context).cocuklar,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
                               color: Color(0xFF6B7280),
@@ -754,7 +754,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                             onPressed: () => context.push(AppRoutes.childManagement),
                             icon: const Icon(Icons.child_care, color: Colors.white),
                             label: Text(AppLocalizations.of(context).cocukHesabiEkle,
-                              style: TextStyle(color: Colors.white, fontSize: 16),
+                              style: const TextStyle(color: Colors.white, fontSize: 16),
                             ),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF10B981),

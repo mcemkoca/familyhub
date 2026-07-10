@@ -123,7 +123,7 @@ class _AccountStepState extends State<AccountStep> {
           ),
           const SizedBox(height: 4),
             Text(AppLocalizations.of(context).familyhubHesabiniziOlusturun,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               color: Color(0xFF6B7280),
             ),
@@ -235,7 +235,7 @@ class _AccountStepState extends State<AccountStep> {
                 child: GestureDetector(
                   onTap: () => setState(() => _acceptedTerms = !_acceptedTerms),
                   child: Text(AppLocalizations.of(context).kullanimKosullariniVeGizlilikPolitikasiniOkudumVeKabulEdiyorum,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 13,
                       color: Color(0xFF6B7280),
                     ),
@@ -263,7 +263,7 @@ class _AccountStepState extends State<AccountStep> {
                       height: 24,
                       child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
                     )
-                  : Text(AppLocalizations.of(context).hesapOlustur, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                  : Text(AppLocalizations.of(context).hesapOlustur, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             ),
           ),
         ],

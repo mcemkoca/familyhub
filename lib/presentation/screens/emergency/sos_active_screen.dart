@@ -63,7 +63,7 @@ class _SosActiveScreenState extends State<SosActiveScreen> {
                     const Icon(Icons.emergency, color: Colors.white, size: 48),
                     const SizedBox(height: 8),
                     Text(AppLocalizations.of(context).sosAktif,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
@@ -174,9 +174,9 @@ class _SosActiveScreenState extends State<SosActiveScreen> {
                 },
                 icon: const Icon(Icons.check_circle, size: 28),
                 label: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 12),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
                   child: Text(AppLocalizations.of(context).iyiyimSistemiDurdur,
-                    style: TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ),
                 style: ElevatedButton.styleFrom(

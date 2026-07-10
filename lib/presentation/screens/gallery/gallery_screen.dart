@@ -527,11 +527,11 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.photo_library, size: 64, color: Color(0xFF9CA3AF)),
-            SizedBox(height: 16),
-            Text(AppLocalizations.of(context).henuzFotografYok, style: TextStyle(fontSize: 18, color: Color(0xFF6B7280))),
-            SizedBox(height: 8),
-            Text(AppLocalizations.of(context).telefonGalerisindenSecmekIcinButonunaBasin, style: TextStyle(color: Color(0xFF6B7280))),
+            const Icon(Icons.photo_library, size: 64, color: Color(0xFF9CA3AF)),
+            const SizedBox(height: 16),
+            Text(AppLocalizations.of(context).henuzFotografYok, style: const TextStyle(fontSize: 18, color: Color(0xFF6B7280))),
+            const SizedBox(height: 8),
+            Text(AppLocalizations.of(context).telefonGalerisindenSecmekIcinButonunaBasin, style: const TextStyle(color: Color(0xFF6B7280))),
           ],
         ),
       );
@@ -590,11 +590,11 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.auto_awesome, size: 64, color: Color(0xFF9CA3AF)),
-            SizedBox(height: 16),
-            Text(AppLocalizations.of(context).henuzAniOlusmadi, style: TextStyle(fontSize: 18, color: Color(0xFF6B7280))),
-            SizedBox(height: 8),
-            Text(AppLocalizations.of(context).dahaFazlaFotografEkledikceAnilarOlusacak, style: TextStyle(color: Color(0xFF6B7280))),
+            const Icon(Icons.auto_awesome, size: 64, color: Color(0xFF9CA3AF)),
+            const SizedBox(height: 16),
+            Text(AppLocalizations.of(context).henuzAniOlusmadi, style: const TextStyle(fontSize: 18, color: Color(0xFF6B7280))),
+            const SizedBox(height: 8),
+            Text(AppLocalizations.of(context).dahaFazlaFotografEkledikceAnilarOlusacak, style: const TextStyle(color: Color(0xFF6B7280))),
           ],
         ),
       );

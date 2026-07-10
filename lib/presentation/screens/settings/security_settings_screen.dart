@@ -123,7 +123,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
                   obscureText: true,
                   decoration: InputDecoration(
                     labelText: AppLocalizations.of(context).mevcutSifre,
-                    prefixIcon: Icon(Icons.lock_outline),
+                    prefixIcon: const Icon(Icons.lock_outline),
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -132,7 +132,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
                   obscureText: true,
                   decoration: InputDecoration(
                     labelText: AppLocalizations.of(context).yeniSifre,
-                    prefixIcon: Icon(Icons.lock_outline),
+                    prefixIcon: const Icon(Icons.lock_outline),
                     helperText: AppLocalizations.of(context).enAz8KarakterBuyukkucukHarfRakamVeOzelKarakter,
                   ),
                 ),
@@ -232,7 +232,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
       context: context,
       builder: (dialogContext) => AlertDialog(
         title: Text(AppLocalizations.of(context).hesabiSil,
-          style: TextStyle(color: AppColors.error),
+          style: const TextStyle(color: AppColors.error),
         ),
         content: Text(AppLocalizations.of(context).hesabiniziSilmekGeriAlinamazTumVerilerinizKaliciOlarakSilinecek,
         ),
@@ -352,7 +352,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
                     color: AppColors.error,
                   ),
                   title: Text(AppLocalizations.of(context).hesabiSil,
-                    style: TextStyle(color: AppColors.error),
+                    style: const TextStyle(color: AppColors.error),
                   ),
                   subtitle: Text(AppLocalizations.of(context).tumVerilerinizKaliciOlarakSilinecek,
                   ),

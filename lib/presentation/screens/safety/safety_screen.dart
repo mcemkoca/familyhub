@@ -465,7 +465,7 @@ class _SafetyScreenState extends State<SafetyScreen>
                       )
                     else
                       Text(AppLocalizations.of(context).konumAliniyor,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 13,
                           color: Color(0xFF6B7280),
                         ),
@@ -480,9 +480,9 @@ class _SafetyScreenState extends State<SafetyScreen>
             // Quick Actions
             SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(20, 8, 20, 8),
+                padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
                 child: Text(AppLocalizations.of(context).hizliIslemler,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
                     color: Color(0xFF9CA3AF),

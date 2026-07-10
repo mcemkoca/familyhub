@@ -637,7 +637,7 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
           GestureDetector(
             onTap: onSeeAll,
             child: Text(AppLocalizations.of(context).tumunuGor,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Color(0xFF8B5CF6),
                     fontSize: 14,
                     fontWeight: FontWeight.w700)),
@@ -648,12 +648,12 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
 
   Widget _emptyState() {
     return Scaffold(
-      backgroundColor: Color(0xFF0A0A0F),
+      backgroundColor: const Color(0xFF0A0A0F),
       body: SafeArea(
         child: Column(
           children: [
             DevHeader(title: AppLocalizations.of(context).gelisim, subtitle: 'Çocuk gelişim merkezi'),
-            Expanded(
+            const Expanded(
               child: Center(
                 child: Padding(
                   padding: EdgeInsets.all(32),

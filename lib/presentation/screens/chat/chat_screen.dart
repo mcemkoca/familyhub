@@ -231,13 +231,14 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   Future<void> _shareLocation() async {
     setState(() => _showAttachmentMenu = false);
     final messenger = ScaffoldMessenger.of(context);
+    final locationUnavailable =
+        AppLocalizations.of(context).locationUnavailable;
     messenger.showSnackBar(const SnackBar(
         content: Text('Konum alınıyor…'), duration: Duration(seconds: 1)));
 
     final pos = await LocationService.getCurrentPosition();
     if (pos == null) {
-      messenger.showSnackBar(SnackBar(
-          content: Text(AppLocalizations.of(context).locationUnavailable)));
+      messenger.showSnackBar(SnackBar(content: Text(locationUnavailable)));
       return;
     }
     // Gerçek adresi çöz (başarısızsa koordinat metnini kullan).

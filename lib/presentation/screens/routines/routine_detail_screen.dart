@@ -290,7 +290,7 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
               const Icon(Icons.celebration, size: 48, color: Colors.amber),
               const SizedBox(height: 12),
               Text(AppLocalizations.of(context).rutinTamamlandi,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               Text(AppLocalizations.of(context).tumAdimlariBasariylaTamamladiniz),
             ],

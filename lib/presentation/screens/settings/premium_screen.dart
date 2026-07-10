@@ -233,7 +233,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(AppLocalizations.of(context).enPopuler,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 11,
                           fontWeight: FontWeight.bold,

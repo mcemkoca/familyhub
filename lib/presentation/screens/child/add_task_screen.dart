@@ -161,7 +161,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           children: [
             // Başlık
             Text(AppLocalizations.of(context).taskTitle,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Color(0xFF9CA3AF),
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
@@ -246,7 +246,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
             // Öncelik
             Text(AppLocalizations.of(context).priority,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Color(0xFF9CA3AF),
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
@@ -393,7 +393,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 child: _isLoading
                     ? const CircularProgressIndicator(color: Colors.white)
                     : Text(AppLocalizations.of(context).gorevEkle,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.w700,
                         ),

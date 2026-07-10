@@ -226,7 +226,7 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx),
-              child: Text(AppLocalizations.of(context).cancel, style: TextStyle(color: Color(0xFF6B7280))),
+              child: Text(AppLocalizations.of(context).cancel, style: const TextStyle(color: Color(0xFF6B7280))),
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -512,7 +512,7 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
                         ),
                         const SizedBox(height: 8),
                         Text(AppLocalizations.of(context).yuklemekIcinButonunaBasin,
-                          style: TextStyle(color: Color(0xFF6B7280)),
+                          style: const TextStyle(color: Color(0xFF6B7280)),
                         ),
                       ],
                     ),

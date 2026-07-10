@@ -264,7 +264,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
           ),
           const SizedBox(height: 4),
           Text(AppLocalizations.of(context).butona3SaniyeBasiliTut,
-            style: TextStyle(fontSize: 13, color: Color(0xFF9CA3AF)),
+            style: const TextStyle(fontSize: 13, color: Color(0xFF9CA3AF)),
           ),
           const SizedBox(height: 20),
           GestureDetector(
@@ -325,7 +325,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
           ),
           const SizedBox(height: 12),
           Text(AppLocalizations.of(context).basiliTut,
-            style: TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
+            style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
           ),
         ],
       ),
@@ -337,7 +337,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(AppLocalizations.of(context).hizliIslemler,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w700,
             color: Color(0xFF6B7280),
@@ -378,7 +378,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(AppLocalizations.of(context).konumumuPaylas,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
@@ -431,14 +431,14 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(AppLocalizations.of(context).guvenliVaris,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       Text(AppLocalizations.of(context).aileVarisPlanlariniGor,
-                        style: TextStyle(color: Colors.grey, fontSize: 13),
+                        style: const TextStyle(color: Colors.grey, fontSize: 13),
                       ),
                     ],
                   ),
@@ -507,7 +507,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(AppLocalizations.of(context).aktif,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.red,
                           fontSize: 10,
                           fontWeight: FontWeight.w700,
@@ -562,14 +562,14 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(AppLocalizations.of(context).saglikKartim,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   Text(AppLocalizations.of(context).alerjiVeSaglikBilgilerin,
-                    style: TextStyle(color: Colors.grey, fontSize: 13),
+                    style: const TextStyle(color: Colors.grey, fontSize: 13),
                   ),
                 ],
               ),

@@ -82,7 +82,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
                 (v) => _updateInterval = int.tryParse(v) ?? 10,
               ),
               Text(AppLocalizations.of(context).snArasi,
-                style: TextStyle(color: Colors.white54, fontSize: 12),
+                style: const TextStyle(color: Colors.white54, fontSize: 12),
               ),
               const SizedBox(height: 12),
               _numberField(
@@ -91,7 +91,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
                 (v) => _distanceFilter = int.tryParse(v) ?? 10,
               ),
               Text(AppLocalizations.of(context).konumDegismedenGuncellemeYok,
-                style: TextStyle(color: Colors.white54, fontSize: 12),
+                style: const TextStyle(color: Colors.white54, fontSize: 12),
               ),
               const SizedBox(height: 12),
               CheckboxListTile(
@@ -99,7 +99,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
                 onChanged: (_) {},
                 title: Text(AppLocalizations.of(context).zamanlayiciYedek),
                 subtitle: Text(AppLocalizations.of(context).konumDegismeseBileZorunluGuncelleme,
-                  style: TextStyle(fontSize: 12),
+                  style: const TextStyle(fontSize: 12),
                 ),
               ),
             ],
@@ -120,7 +120,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
               ),
               const SizedBox(height: 12),
               Text(AppLocalizations.of(context).gpsKalitesiDusukse,
-                style: TextStyle(fontWeight: FontWeight.w600),
+                style: const TextStyle(fontWeight: FontWeight.w600),
               ),
               RadioListTile(
                 title: const Text('WiFi + Cellular dene'),
@@ -165,7 +165,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
                 onChanged: (v) => setState(() => _motionTrigger = v),
                 title: Text(AppLocalizations.of(context).hareketAlgilayiciIleTetikle),
                 subtitle: Text(AppLocalizations.of(context).telefonSallanincaAktifOl,
-                  style: TextStyle(fontSize: 12),
+                  style: const TextStyle(fontSize: 12),
                 ),
               ),
             ],
@@ -176,7 +176,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
             'GEÇİŞ KURALLARI',
             children: [
               Text(AppLocalizations.of(context).buProfileGecis,
-                style: TextStyle(fontWeight: FontWeight.w600),
+                style: const TextStyle(fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 8),
               SegmentedButton<String>(
@@ -204,7 +204,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
               ],
               const SizedBox(height: 16),
               Text(AppLocalizations.of(context).buProfildenCikis,
-                style: TextStyle(fontWeight: FontWeight.w600),
+                style: const TextStyle(fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 8),
               _numberField(
@@ -213,7 +213,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
                 (v) => _exitDuration = int.tryParse(v) ?? 60,
               ),
               Text(AppLocalizations.of(context).buSureBoyuncaHareketsizKalincaDusukProfil,
-                style: TextStyle(color: Colors.white54, fontSize: 12),
+                style: const TextStyle(color: Colors.white54, fontSize: 12),
               ),
             ],
           ),

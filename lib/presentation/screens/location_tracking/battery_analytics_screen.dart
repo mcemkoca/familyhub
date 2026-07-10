@@ -29,7 +29,7 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
         children: [
           // Battery consumption
           _section('BATARYA TÜKETİMİ (7 Gün)', children: [
-            Text(AppLocalizations.of(context).gunlukOrtalama18, style: TextStyle(fontWeight: FontWeight.w600)),
+            Text(AppLocalizations.of(context).gunlukOrtalama18, style: const TextStyle(fontWeight: FontWeight.w600)),
             const SizedBox(height: 12),
             _dayBar('Pazartesi', 0.16),
             _dayBar('Salı', 0.20, highlight: true),

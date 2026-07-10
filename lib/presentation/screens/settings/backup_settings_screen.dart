@@ -271,7 +271,7 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
                           onPressed: _signIn,
                           icon: const Icon(Icons.login, color: Color(0xFF4285F4)),
                           label: Text(AppLocalizations.of(context).googleHesabiBagla,
-                            style: TextStyle(color: Color(0xFF4285F4)),
+                            style: const TextStyle(color: Color(0xFF4285F4)),
                           ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
@@ -290,7 +290,7 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
                           onPressed: _signOut,
                           icon: const Icon(Icons.logout, color: Colors.white),
                           label: Text(AppLocalizations.of(context).baglantiyiKes,
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                           ),
                           style: OutlinedButton.styleFrom(
                             side: const BorderSide(color: Colors.white70),

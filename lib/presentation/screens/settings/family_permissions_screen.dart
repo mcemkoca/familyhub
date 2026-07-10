@@ -354,11 +354,11 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
                       ),
                       child: Row(
                         children: [
-                          Icon(Icons.info_outline, color: Color(0xFFF59E0B)),
-                          SizedBox(width: 12),
+                          const Icon(Icons.info_outline, color: Color(0xFFF59E0B)),
+                          const SizedBox(width: 12),
                           Expanded(
                             child: Text(AppLocalizations.of(context).yoneticiOlarakUyelerinRolleriniVeYetkileriniDuzenleyebilirsiniz,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 13,
                                 color: Colors.white70,
                               ),

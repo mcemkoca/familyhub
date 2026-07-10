@@ -68,7 +68,7 @@ class _HealthStepState extends State<HealthStep> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(AppLocalizations.of(context).healthInfo,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
               color: Color(0xFFE5E7EB),
@@ -124,7 +124,7 @@ class _HealthStepState extends State<HealthStep> {
           ),
           const SizedBox(height: 24),
           Text(AppLocalizations.of(context).acilDurumdaAranacakKisi,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
               color: Color(0xFF6B7280),

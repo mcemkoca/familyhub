@@ -157,7 +157,7 @@ class _MedicineAddScreenState extends ConsumerState<MedicineAddScreen> {
               title: AppLocalizations.of(context).ilacEkle,
               subtitle: 'Yeni ilaç kaydı oluştur',
               icon: Icons.medication_rounded,
-              gradient: [Color(0xFF14B8A6), Color(0xFF0D9488)],
+              gradient: const [Color(0xFF14B8A6), Color(0xFF0D9488)],
               showBack: true,
             ),
             Expanded(

@@ -182,9 +182,9 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
               ),
               if (_autoCallEmergency)
                 Padding(
-                  padding: EdgeInsets.only(left: 16, bottom: 8),
+                  padding: const EdgeInsets.only(left: 16, bottom: 8),
                   child: Text(AppLocalizations.of(context).yasalSorumlulukBildirimiYanlisAramaCezasiKullaniciSorumlulugundadir,
-                    style: TextStyle(color: Colors.orange, fontSize: 12),
+                    style: const TextStyle(color: Colors.orange, fontSize: 12),
                   ),
                 ),
               _buildSwitch(
@@ -281,7 +281,7 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
             'TEST MODU',
             children: [
               Text(AppLocalizations.of(context).sonTest15Mart2025Basarili,
-                style: TextStyle(color: Colors.white70),
+                style: const TextStyle(color: Colors.white70),
               ),
               const SizedBox(height: 12),
               ElevatedButton.icon(

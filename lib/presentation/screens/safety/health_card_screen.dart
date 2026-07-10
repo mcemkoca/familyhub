@@ -90,7 +90,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(AppLocalizations.of(context).acilDurumlardaKullanilabilirBilgiler,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     color: Color(0xFF6B7280),
                   ),
@@ -145,7 +145,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(AppLocalizations.of(context).saglikKarti,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w800,
@@ -359,7 +359,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(AppLocalizations.of(context).qrShare,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
                           color: Color(0xFFE5E7EB),

@@ -488,7 +488,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           ),
                         ),
                         child: Text(AppLocalizations.of(context).logout,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                           ),
@@ -534,7 +534,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               Navigator.of(dialogContext).pop();
               await _leaveFamily();
             },
-            child: Text(AppLocalizations.of(context).ayril, style: TextStyle(color: Color(0xFFEF4444))),
+            child: Text(AppLocalizations.of(context).ayril, style: const TextStyle(color: Color(0xFFEF4444))),
           ),
         ],
       ),

@@ -221,14 +221,14 @@ class _CallContactListScreenState extends State<CallContactListScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.people_outline,
             size: 64,
             color: Color(0xFF6B7280),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Text(AppLocalizations.of(context).henuzAranabilecekAileUyesiYok,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color(0xFF6B7280),
             ),
           ),

@@ -644,7 +644,7 @@ class _CoverSection extends ConsumerWidget {
                     Colors.black.withAlpha(120),
                     Colors.black.withAlpha(210),
                   ],
-                  stops: [0.0, 0.5, 1.0],
+                  stops: const [0.0, 0.5, 1.0],
                 ),
               ),
             ),
@@ -707,11 +707,11 @@ class _CoverSection extends ConsumerWidget {
                       ),
                       child: Row(
                         children: [
-                          Icon(Icons.camera_alt_outlined,
+                          const Icon(Icons.camera_alt_outlined,
                               size: 11, color: Color(0xFF9CA3AF)),
-                          SizedBox(width: 3),
+                          const SizedBox(width: 3),
                           Text(AppLocalizations.of(context).image,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 9,
                                   fontWeight: FontWeight.w600,
                                   color: Color(0xFF9CA3AF))),

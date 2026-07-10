@@ -145,7 +145,7 @@ class _CrashConfirmationScreenState extends State<CrashConfirmationScreen>
           ),
           const SizedBox(height: 8),
           Text(AppLocalizations.of(context).kazaTespitEdildi,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 26,
               fontWeight: FontWeight.bold,
@@ -241,7 +241,7 @@ class _CrashConfirmationScreenState extends State<CrashConfirmationScreen>
       child: Column(
         children: [
           Text(AppLocalizations.of(context).geriSayim,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white70,
               fontSize: 13,
               fontWeight: FontWeight.w600,

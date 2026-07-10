@@ -262,7 +262,7 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
                           ),
                         ),
                         Text(AppLocalizations.of(context).gunlukSeri,
-                          style: TextStyle(color: Colors.white70, fontSize: 14),
+                          style: const TextStyle(color: Colors.white70, fontSize: 14),
                         ),
                       ],
                     ),
@@ -339,7 +339,7 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(AppLocalizations.of(context).tumGirisler,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
                           color: Color(0xFFE5E7EB),

@@ -120,7 +120,7 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(AppLocalizations.of(context).aileButcesi,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 24,
                                       fontWeight: FontWeight.bold,
@@ -237,7 +237,7 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(AppLocalizations.of(context).islemler,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
@@ -411,7 +411,7 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(AppLocalizations.of(context).aiButceAnalizi,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
@@ -430,10 +430,10 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
             Row(
               children: [
                 Text(AppLocalizations.of(context).aionerileri1,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
-                SizedBox(width: 8),
-                Icon(Icons.auto_awesome, size: 15, color: Color(0xFF8B5CF6)),
+                const SizedBox(width: 8),
+                const Icon(Icons.auto_awesome, size: 15, color: Color(0xFF8B5CF6)),
               ],
             ),
             const SizedBox(height: 12),

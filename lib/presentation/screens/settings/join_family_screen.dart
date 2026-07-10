@@ -202,7 +202,7 @@ class _JoinFamilyScreenState extends State<JoinFamilyScreen> {
                             ),
                           )
                         : Text(AppLocalizations.of(context).aileyeKatil,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w700,
                               color: Colors.white,

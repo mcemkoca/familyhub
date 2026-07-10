@@ -139,7 +139,7 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
               const SizedBox(height: 8),
               Text(AppLocalizations.of(context).yeniUyeleriDavetEtmekIcinBirKodOlusturunKod24SaatGecerlidir,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   color: Color(0xFF6B7280),
                 ),

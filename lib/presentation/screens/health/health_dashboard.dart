@@ -204,7 +204,7 @@ class _HealthDashboardState extends ConsumerState<HealthDashboard> {
   }
 
   Widget _quickAccessTitle() => Text(AppLocalizations.of(context).hizliErisim,
-      style: TextStyle(
+      style: const TextStyle(
           color: Colors.white, fontSize: 19, fontWeight: FontWeight.w800));
 
   Widget _quickAccess() {

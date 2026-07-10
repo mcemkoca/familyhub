@@ -311,7 +311,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
             const Icon(Icons.error_outline, size: 56, color: Color(0xFF6B7280)),
             const SizedBox(height: 16),
             Text(AppLocalizations.of(context).verilerYuklenemedi,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Color(0xFFE5E7EB)),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Color(0xFFE5E7EB)),
             ),
             const SizedBox(height: 8),
             Text(
@@ -558,7 +558,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(AppLocalizations.of(context).akilligorevrotasyonu1,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
@@ -781,7 +781,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
       alignment: Alignment.center,
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             width: 48,
             height: 48,
             child: CircularProgressIndicator(
@@ -789,16 +789,16 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
               valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF6366F1)),
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Text(AppLocalizations.of(context).adaletAlgoritmasiGorevleriDagitiyor,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color(0xFF6B7280),
               fontSize: 14,
             ),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Text(AppLocalizations.of(context).genetikOptimizasyonEsitYukDengelemesi,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color(0xFF6B7280),
               fontSize: 12,
             ),
@@ -814,21 +814,21 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
       alignment: Alignment.center,
       child: Column(
         children: [
-          Icon(
+          const Icon(
             Icons.auto_awesome_outlined,
             size: 56,
             color: Color(0xFF6B7280),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Text(AppLocalizations.of(context).henuzDagitimYapilmadi,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
               color: Color(0xFFE5E7EB),
             ),
           ),
-          SizedBox(height: 6),
-          Text(
+          const SizedBox(height: 6),
+          const Text(
             'Yeniden Dağıt butonuna basarak AI\'nın adil görev dağıtımını görebilirsiniz.',
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -1006,7 +1006,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(AppLocalizations.of(context).high,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
                       color: AppColors.error,
@@ -1099,7 +1099,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text(AppLocalizations.of(context).atandi,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
                   color: Color(0xFF10B981),
@@ -1126,10 +1126,10 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
         children: [
           Row(
             children: [
-              Icon(Icons.lightbulb, size: 18, color: AppColors.orange),
-              SizedBox(width: 8),
+              const Icon(Icons.lightbulb, size: 18, color: AppColors.orange),
+              const SizedBox(width: 8),
               Text(AppLocalizations.of(context).aiOnerileri,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w700,
                   color: AppColors.orange,
@@ -1168,7 +1168,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
               ),
               const SizedBox(width: 8),
               Text(AppLocalizations.of(context).adaletKurallariAgirliklar,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
                   color: Color(0xFFE5E7EB),
@@ -1276,7 +1276,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(AppLocalizations.of(context).ozelKurallar,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
                     color: Color(0xFFE5E7EB),
@@ -1308,7 +1308,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(AppLocalizations.of(context).odulSistemi,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
                     color: Color(0xFFE5E7EB),

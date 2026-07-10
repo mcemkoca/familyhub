@@ -212,7 +212,7 @@ class _ChildManagementScreenState extends ConsumerState<ChildManagementScreen> {
                       ),
                       const SizedBox(height: 16),
                       Text(AppLocalizations.of(context).henuzCocukHesabiYok,
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFFE5E7EB))),
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFFE5E7EB))),
                       const SizedBox(height: 8),
                       const Text('Aile üyesi eklemek için aşağıya dokun',
                           style: TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
@@ -569,7 +569,7 @@ class _ChildFormSheetState extends State<_ChildFormSheet> {
             onChanged: (_) => setState(() {}),
             decoration: InputDecoration(
               labelText: AppLocalizations.of(context).isim,
-              prefixIcon: Icon(Icons.person_outline),
+              prefixIcon: const Icon(Icons.person_outline),
             ),
           ),
           const SizedBox(height: AppSpacing.md),

@@ -313,7 +313,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                   minimumSize: const Size(0, 32),
                 ),
                 child: Text(AppLocalizations.of(context).sifremiunuttum1,
-                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
+                    style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
               ),
             ),
             const SizedBox(height: 16),

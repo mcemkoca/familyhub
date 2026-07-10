@@ -163,7 +163,7 @@ class MedicineReminderScreen extends StatelessWidget {
                 child: TextButton(
                   onPressed: () => Navigator.pop(context),
                   child: Text(AppLocalizations.of(context).cancel,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Color(0xFF9CA3AF),
                           fontSize: 15,
                           fontWeight: FontWeight.w600)),

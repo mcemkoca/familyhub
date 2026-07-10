@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:familyhub/l10n/app_localizations.dart';
 import '../../config/constants.dart';
 import '../../core/navigation/action_registry.dart';
 

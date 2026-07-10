@@ -176,7 +176,7 @@ class _SosMainScreenState extends State<SosMainScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(AppLocalizations.of(context).hizliSosKategorileri,
-                      style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                      style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 12),
                     Wrap(
@@ -208,10 +208,10 @@ class _SosMainScreenState extends State<SosMainScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(AppLocalizations.of(context).sonSosGecmisi,
-                      style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                      style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 12),
-                    Text(
+                    const SizedBox(height: 12),
+                    const Text(
                       'Henüz SOS kaydı yok.',
                       style: TextStyle(color: Colors.white70, fontSize: 13.5),
                     ),
@@ -226,7 +226,7 @@ class _SosMainScreenState extends State<SosMainScreen>
                     child: OutlinedButton.icon(
                       onPressed: () => context.push(AppRoutes.sosSettings),
                       icon: const Icon(Icons.settings, color: Colors.white70),
-                      label: Text(AppLocalizations.of(context).sosAyarlari, style: TextStyle(color: Colors.white70)),
+                      label: Text(AppLocalizations.of(context).sosAyarlari, style: const TextStyle(color: Colors.white70)),
                     ),
                   ),
                 ],

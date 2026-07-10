@@ -134,7 +134,7 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
             backgroundColor: const Color(0xFF1A1A2E),
             flexibleSpace: FlexibleSpaceBar(
               title: Text(AppLocalizations.of(context).akilliHatirlaticilar,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               background: Container(
                 decoration: BoxDecoration(

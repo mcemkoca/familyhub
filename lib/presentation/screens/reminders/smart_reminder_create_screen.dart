@@ -302,7 +302,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
             decoration: InputDecoration(
               labelText: AppLocalizations.of(context).baslik,
               hintText: AppLocalizations.of(context).marketAlisverisi,
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
             ),
           ),
           const SizedBox(height: 12),
@@ -311,7 +311,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
             decoration: InputDecoration(
               labelText: AppLocalizations.of(context).description,
               hintText: AppLocalizations.of(context).sutVeEkmekAl,
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
             ),
             maxLines: 2,
           ),

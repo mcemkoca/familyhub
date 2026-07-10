@@ -808,7 +808,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                   ),
                   icon: const Icon(Icons.add, color: Colors.white),
                   label: Text(AppLocalizations.of(context).urunEkle,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w700,
                           fontSize: 15)),

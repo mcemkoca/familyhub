@@ -268,18 +268,18 @@ class _EmptyChatView extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.chat_bubble_outline, size: 64, color: Color(0xFF9CA3AF)),
-          SizedBox(height: AppSpacing.md),
+          const Icon(Icons.chat_bubble_outline, size: 64, color: Color(0xFF9CA3AF)),
+          const SizedBox(height: AppSpacing.md),
           Text(AppLocalizations.of(context).aileSohbetineIlkMesajiSenGonder,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
               color: Color(0xFF6B7280),
             ),
           ),
-          SizedBox(height: AppSpacing.sm),
+          const SizedBox(height: AppSpacing.sm),
           Text(AppLocalizations.of(context).mesajlarinBuradaGorunecek,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               color: Color(0xFF6B7280),
             ),

@@ -147,9 +147,9 @@ class _SosSettingsScreenState extends State<SosSettingsScreen> {
             ),
             if (_autoCall112)
               Padding(
-                padding: EdgeInsets.only(left: 16, bottom: 8),
+                padding: const EdgeInsets.only(left: 16, bottom: 8),
                 child: Text(AppLocalizations.of(context).yasalUyariYanlisAramaCezasiKullaniciSorumlulugundadir,
-                  style: TextStyle(color: Colors.orange, fontSize: 12),
+                  style: const TextStyle(color: Colors.orange, fontSize: 12),
                 ),
               ),
             _switch(

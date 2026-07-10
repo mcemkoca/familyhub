@@ -69,7 +69,7 @@ class _SosTemplateEditorScreenState extends State<SosTemplateEditorScreen> {
               controller: _smsCtrl,
               maxLines: 6,
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
                 hintText: AppLocalizations.of(context).smsMesaji,
               ),
             ),
@@ -78,7 +78,7 @@ class _SosTemplateEditorScreenState extends State<SosTemplateEditorScreen> {
           _section('PUSH BİLDİRİM ŞABLONU', [
             TextField(
               controller: _pushTitleCtrl,
-              decoration: InputDecoration(labelText: AppLocalizations.of(context).baslik, border: OutlineInputBorder()),
+              decoration: InputDecoration(labelText: AppLocalizations.of(context).baslik, border: const OutlineInputBorder()),
             ),
             const SizedBox(height: 12),
             TextField(
@@ -86,7 +86,7 @@ class _SosTemplateEditorScreenState extends State<SosTemplateEditorScreen> {
               maxLines: 3,
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context).icerik,
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
               ),
             ),
           ]),

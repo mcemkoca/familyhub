@@ -74,7 +74,7 @@ class _SafeZonesScreenState extends State<SafeZonesScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(AppLocalizations.of(context).guvenliBolgeEkle,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
                         fontWeight: FontWeight.w800)),
@@ -104,7 +104,7 @@ class _SafeZonesScreenState extends State<SafeZonesScreen> {
                 ),
                 const SizedBox(height: 14),
                 Text(AppLocalizations.of(context).tur,
-                    style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
+                    style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
                 const SizedBox(height: 8),
                 Wrap(
                   spacing: 8,
@@ -236,7 +236,7 @@ class _SafeZonesScreenState extends State<SafeZonesScreen> {
           padding: const EdgeInsets.all(20),
           children: [
             Text(AppLocalizations.of(context).geofenceAktifBolgeleriniziYonetinVeKonumDurumunuKontrolEdin,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 color: Color(0xFF6B7280),
               ),

@@ -1887,7 +1887,7 @@ class _AddActivitySheetState extends State<_AddActivitySheet> {
                 style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
             const SizedBox(height: 18),
             Text(AppLocalizations.of(context).baslik,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Color(0xFFC7CBD4), fontWeight: FontWeight.w600)),
             const SizedBox(height: 6),
             TextField(

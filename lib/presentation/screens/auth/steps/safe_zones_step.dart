@@ -72,7 +72,7 @@ class _SafeZonesStepState extends State<SafeZonesStep> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(AppLocalizations.of(context).guvenliBolgeler,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFFE5E7EB),
@@ -147,7 +147,7 @@ class _SafeZonesStepState extends State<SafeZonesStep> {
                 ),
               ),
               child: Text(AppLocalizations.of(context).next,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
             ),
           ),

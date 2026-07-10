@@ -165,7 +165,7 @@ class _AppearanceSettingsScreenState extends ConsumerState<AppearanceSettingsScr
           ),
           const SizedBox(height: 28),
           Text(AppLocalizations.of(context).fontSize,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w700,
               color: Color(0xFF6B7280),
