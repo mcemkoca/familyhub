@@ -475,7 +475,8 @@ class _ChildFormSheetState extends State<_ChildFormSheet> {
         right: AppSpacing.lg,
         top: AppSpacing.lg,
       ),
-      child: Column(
+      child: SingleChildScrollView(
+        child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -702,6 +703,7 @@ class _ChildFormSheetState extends State<_ChildFormSheet> {
           ),
           const SizedBox(height: AppSpacing.lg),
         ],
+      ),
       ),
     );
   }

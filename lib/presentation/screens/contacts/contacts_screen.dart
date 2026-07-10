@@ -159,7 +159,8 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
               right: 24,
               top: 24,
             ),
-            child: Column(
+            child: SingleChildScrollView(
+              child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -266,6 +267,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
                 ),
                 const SizedBox(height: 24),
               ],
+            ),
             ),
           );
         },
