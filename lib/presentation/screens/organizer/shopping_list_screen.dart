@@ -83,7 +83,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
       final parsed = int.tryParse(_quantityController.text.trim());
       if (parsed == null || parsed <= 0) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Geçerli bir miktar girin (1 veya üzeri)')),
+          SnackBar(content: Text(AppLocalizations.of(context).shoppingGecerliMiktar)),
         );
         return;
       }
@@ -97,7 +97,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
     final dup = existing.any((i) => !i.isCompleted && i.name.trim().toLowerCase() == norm);
     if (dup) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('"$name" zaten listede')),
+        SnackBar(content: Text(AppLocalizations.of(context).shoppingZatenListede(name))),
       );
       if (quickName == null) {
         _nameController.clear();
@@ -124,10 +124,10 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
     messenger.clearSnackBars();
     messenger.showSnackBar(
       SnackBar(
-        content: Text('"${item.name}" silindi'),
+        content: Text(AppLocalizations.of(context).shoppingSilindi(item.name)),
         behavior: SnackBarBehavior.floating,
         action: SnackBarAction(
-          label: 'Geri al',
+          label: AppLocalizations.of(context).shoppingGeriAl,
           onPressed: () {
             ref.read(shoppingItemsProvider.notifier).addItem(
                   item.name,
@@ -169,17 +169,18 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
   }
 
   String _categoryLabel(ShoppingCategory cat) {
+    final t = AppLocalizations.of(context);
     switch (cat) {
       case ShoppingCategory.pharmacy:
-        return 'Eczane';
+        return t.shoppingKatEczane;
       case ShoppingCategory.stationery:
-        return 'Kırtasiye';
+        return t.shoppingKatKirtasiye;
       case ShoppingCategory.household:
-        return 'Ev';
+        return t.shoppingKatEv;
       case ShoppingCategory.grocery:
-        return 'Market';
+        return t.shoppingKatMarket;
       default:
-        return 'Diğer';
+        return t.shoppingKatDiger;
     }
   }
 
@@ -217,9 +218,9 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
           onPressed: () => _showAddSheet(context),
           backgroundColor: const Color(0xFF10B981),
           icon: const Icon(Icons.add, color: Colors.white),
-          label: const Text('Ekle',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
+          label: Text(AppLocalizations.of(context).shoppingEkle,
+              style: const TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.w700)),
         ),
       ),
     );
@@ -262,7 +263,8 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                     ),
                     if (total > 0)
                       Text(
-                        '$done / $total tamamlandı',
+                        AppLocalizations.of(context)
+                            .shoppingTamamlandiOran(done, total),
                         style: const TextStyle(
                             fontSize: 12,
                             color: Color(0xFF6B7280)),
@@ -274,25 +276,25 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                 onPressed: _openNearbyMarketsMap,
                 icon: const Icon(Icons.location_on_outlined),
                 color: const Color(0xFF3B82F6),
-                tooltip: 'Yakındaki Marketler (Harita)',
+                tooltip: AppLocalizations.of(context).shoppingTipYakinMarket,
               ),
               IconButton(
                 onPressed: _showMarketCatalog,
                 icon: const Icon(Icons.storefront_outlined),
                 color: const Color(0xFF10B981),
-                tooltip: 'Market Kataloğu',
+                tooltip: AppLocalizations.of(context).shoppingTipMarketKatalogu,
               ),
               IconButton(
                 onPressed: _showAiMarketList,
                 icon: const Icon(Icons.auto_awesome_motion_outlined),
                 color: const Color(0xFF8B5CF6),
-                tooltip: 'AI Market Listesi',
+                tooltip: AppLocalizations.of(context).shoppingTipAiMarket,
               ),
               IconButton(
                 onPressed: _showRecipePicker,
                 icon: const Icon(Icons.restaurant_menu_outlined),
                 color: AppColors.orange,
-                tooltip: 'Tarife Göre Ekle',
+                tooltip: AppLocalizations.of(context).shoppingTipTarifeGore,
               ),
               IconButton(
                 onPressed: () =>
@@ -303,7 +305,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                       ? const Color(0xFF10B981)
                       : const Color(0xFF6B7280),
                 ),
-                tooltip: 'Hızlı Ekle',
+                tooltip: AppLocalizations.of(context).shoppingHizliEkle,
               ),
               IconButton(
                 onPressed: () =>
@@ -519,7 +521,8 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                               .addItem(name);
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                                content: Text('$name listeye eklendi'),
+                                content: Text(AppLocalizations.of(context)
+                                    .shoppingListeyeEklendi(name)),
                                 behavior: SnackBarBehavior.floating),
                           );
                         },
@@ -569,8 +572,9 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                         }
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text('Tüm ürünler listeye eklendi'),
+                          SnackBar(
+                              content: Text(AppLocalizations.of(context)
+                                  .shoppingTumUrunlerEklendi),
                               behavior: SnackBarBehavior.floating),
                         );
                       },
@@ -739,7 +743,8 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
     }
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('✅ ${recipe['title']} için $added malzeme eklendi'),
+        content: Text(AppLocalizations.of(context)
+            .shoppingMalzemeEklendi(recipe['title']?.toString() ?? '', added)),
         duration: const Duration(seconds: 2),
         backgroundColor: const Color(0xFF10B981),
       ),
@@ -755,14 +760,14 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
-              Icon(Icons.auto_awesome,
+              const Icon(Icons.auto_awesome,
                   size: 14, color: Color(0xFF10B981)),
-              SizedBox(width: 6),
+              const SizedBox(width: 6),
               Text(
-                'Hızlı Ekle',
-                style: TextStyle(
+                AppLocalizations.of(context).shoppingHizliEkle,
+                style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
                     color: Color(0xFF6B7280)),
@@ -824,17 +829,17 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
             const Icon(Icons.error_outline,
                 size: 48, color: Color(0xFFEF4444)),
             const SizedBox(height: 12),
-            const Text(
-              'Alışveriş listeniz şu anda yüklenemedi.\nLütfen tekrar deneyin.',
+            Text(
+              AppLocalizations.of(context).shoppingYuklenemedi,
               textAlign: TextAlign.center,
-              style: TextStyle(color: Color(0xFF9CA3AF), height: 1.4),
+              style: const TextStyle(color: Color(0xFF9CA3AF), height: 1.4),
             ),
             const SizedBox(height: 16),
             OutlinedButton.icon(
               onPressed: () =>
                   ref.read(shoppingItemsProvider.notifier).loadItems(),
               icon: const Icon(Icons.refresh, size: 18),
-              label: const Text('Tekrar Dene'),
+              label: Text(AppLocalizations.of(context).shoppingTekrarDene),
             ),
           ],
         ),
@@ -861,13 +866,13 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                     size: 56, color: const Color(0xFF10B981).withAlpha(200)),
               ),
               const SizedBox(height: 20),
-              const Text('Alışveriş listen boş',
-                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.w800)),
+              Text(AppLocalizations.of(context).shoppingListenBos,
+                  style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w800)),
               const SizedBox(height: 8),
-              const Text(
-                'Ürün ekle, tarife göre otomatik doldur ya da\nAI ile hızlı liste oluştur.',
+              Text(
+                AppLocalizations.of(context).shoppingBosAciklama,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 13.5, color: Color(0xFF9CA3AF), height: 1.4),
               ),
               const SizedBox(height: 24),
@@ -898,8 +903,8 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                       onPressed: _showRecipePicker,
                       icon: const Icon(Icons.restaurant_menu,
                           size: 18, color: Color(0xFFF97316)),
-                      label: const Text('Tariften',
-                          style: TextStyle(color: Color(0xFFF97316))),
+                      label: Text(AppLocalizations.of(context).shoppingTariften,
+                          style: const TextStyle(color: Color(0xFFF97316))),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -908,8 +913,8 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                       onPressed: _showAiMarketList,
                       icon: const Icon(Icons.auto_awesome,
                           size: 18, color: Color(0xFF8B5CF6)),
-                      label: const Text('AI Liste',
-                          style: TextStyle(color: Color(0xFF8B5CF6))),
+                      label: Text(AppLocalizations.of(context).shoppingAiListe,
+                          style: const TextStyle(color: Color(0xFF8B5CF6))),
                     ),
                   ),
                 ],
@@ -927,13 +932,15 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 100),
       children: [
         if (pending.isNotEmpty) ...[
-          _sectionLabel('Bekleyen', pending.length, isDark),
+          _sectionLabel(
+              AppLocalizations.of(context).shoppingBekleyen, pending.length, isDark),
           const SizedBox(height: 8),
           ...pending.map((item) => _buildItemCard(item, isDark)),
         ],
         if (done.isNotEmpty) ...[
           const SizedBox(height: 16),
-          _sectionLabel('Tamamlanan', done.length, isDark,
+          _sectionLabel(
+              AppLocalizations.of(context).shoppingTamamlanan, done.length, isDark,
               color: const Color(0xFF10B981)),
           const SizedBox(height: 8),
           ...done.map((item) => _buildItemCard(item, isDark)),
@@ -1020,7 +1027,9 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
             ),
           ),
           subtitle: item.quantity != null
-              ? Text('${item.quantity} adet',
+              ? Text(
+                  AppLocalizations.of(context)
+                      .shoppingAdet(int.tryParse(item.quantity ?? '') ?? 1),
                   style: const TextStyle(
                       fontSize: 12, color: Color(0xFF6B7280)))
               : null,
@@ -1090,7 +1099,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                 autofocus: true,
                 textCapitalization: TextCapitalization.sentences,
                 decoration: InputDecoration(
-                  hintText: 'Ürün adı',
+                  hintText: AppLocalizations.of(context).shoppingUrunAdi,
                   prefixIcon: const Icon(Icons.shopping_basket_outlined),
                   filled: true,
                   fillColor:
@@ -1108,7 +1117,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                       controller: _quantityController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        hintText: 'Adet (isteğe bağlı)',
+                        hintText: AppLocalizations.of(context).shoppingAdetOpsiyonel,
                         prefixIcon: const Icon(Icons.numbers),
                         filled: true,
                         fillColor: isDark
@@ -1124,8 +1133,8 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
               ),
               const SizedBox(height: 12),
               // Category picker
-              const Text('Kategori',
-                  style: TextStyle(
+              Text(AppLocalizations.of(context).shoppingKategori,
+                  style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
                       color: Color(0xFF6B7280))),
@@ -1180,8 +1189,8 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                         borderRadius: BorderRadius.circular(14)),
                     elevation: 0,
                   ),
-                  child: const Text('Listeye Ekle',
-                      style: TextStyle(
+                  child: Text(AppLocalizations.of(context).shoppingListeyeEkle,
+                      style: const TextStyle(
                           fontSize: 16, fontWeight: FontWeight.w700)),
                 ),
               ),
@@ -1531,7 +1540,7 @@ class _MarketCatalogSheetState extends State<_MarketCatalogSheet> {
   void _add(MarketProduct p) {
     widget.onAdd(p);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('${p.name} listeye eklendi'),
+        content: Text(AppLocalizations.of(context).shoppingListeyeEklendi(p.name)),
         behavior: SnackBarBehavior.floating,
         duration: const Duration(milliseconds: 900)));
   }

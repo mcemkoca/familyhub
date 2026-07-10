@@ -2720,6 +2720,123 @@ class AppLocalizationsFr extends AppLocalizations {
       'Le choix du pays détermine la devise, les dépenses du ménage et le contenu des courses.';
 
   @override
+  String get shoppingEkle => 'Ajouter';
+
+  @override
+  String get shoppingListeyeEkle => 'Ajouter à la liste';
+
+  @override
+  String get shoppingUrunAdi => 'Nom de l\'article';
+
+  @override
+  String get shoppingAdetOpsiyonel => 'Quantité (facultatif)';
+
+  @override
+  String get shoppingKategori => 'Catégorie';
+
+  @override
+  String get shoppingBekleyen => 'En attente';
+
+  @override
+  String get shoppingTamamlanan => 'Terminé';
+
+  @override
+  String get shoppingHizliEkle => 'Ajout rapide';
+
+  @override
+  String get shoppingListenBos => 'Votre liste de courses est vide';
+
+  @override
+  String get shoppingBosAciklama =>
+      'Ajoutez un article, remplissez-la depuis une recette ou créez une liste rapide avec l\'IA.';
+
+  @override
+  String get shoppingTariften => 'Depuis une recette';
+
+  @override
+  String get shoppingAiListe => 'Liste IA';
+
+  @override
+  String get shoppingKatMarket => 'Épicerie';
+
+  @override
+  String get shoppingKatEczane => 'Pharmacie';
+
+  @override
+  String get shoppingKatKirtasiye => 'Papeterie';
+
+  @override
+  String get shoppingKatEv => 'Maison';
+
+  @override
+  String get shoppingKatDiger => 'Autre';
+
+  @override
+  String shoppingAdet(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pces',
+      one: '$count pce',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String shoppingTamamlandiOran(Object done, Object total) {
+    return '$done / $total terminé';
+  }
+
+  @override
+  String get shoppingGeriAl => 'Annuler';
+
+  @override
+  String shoppingSilindi(Object name) {
+    return '\"$name\" supprimé';
+  }
+
+  @override
+  String shoppingZatenListede(Object name) {
+    return '\"$name\" est déjà sur la liste';
+  }
+
+  @override
+  String get shoppingGecerliMiktar => 'Entrez une quantité valide (1 ou plus)';
+
+  @override
+  String get shoppingYuklenemedi =>
+      'Votre liste de courses n\'a pas pu être chargée. Veuillez réessayer.';
+
+  @override
+  String get shoppingTekrarDene => 'Réessayer';
+
+  @override
+  String get shoppingTipYakinMarket => 'Magasins à proximité (carte)';
+
+  @override
+  String get shoppingTipMarketKatalogu => 'Catalogue des magasins';
+
+  @override
+  String get shoppingTipAiMarket => 'Liste de magasin IA';
+
+  @override
+  String get shoppingTipTarifeGore => 'Ajouter depuis une recette';
+
+  @override
+  String shoppingMalzemeEklendi(Object title, Object count) {
+    return '$count ingrédients ajoutés pour $title';
+  }
+
+  @override
+  String shoppingListeyeEklendi(Object name) {
+    return '$name ajouté à la liste';
+  }
+
+  @override
+  String get shoppingTumUrunlerEklendi =>
+      'Tous les articles ajoutés à la liste';
+
+  @override
   String get henuzVeriYok => 'Aucune donnee';
 
   @override

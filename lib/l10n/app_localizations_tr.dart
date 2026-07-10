@@ -2728,6 +2728,122 @@ class AppLocalizationsTr extends AppLocalizations {
       'Ülke seçimi; para birimi, ev gideri ve market içeriğini belirler.';
 
   @override
+  String get shoppingEkle => 'Ekle';
+
+  @override
+  String get shoppingListeyeEkle => 'Listeye Ekle';
+
+  @override
+  String get shoppingUrunAdi => 'Ürün adı';
+
+  @override
+  String get shoppingAdetOpsiyonel => 'Adet (isteğe bağlı)';
+
+  @override
+  String get shoppingKategori => 'Kategori';
+
+  @override
+  String get shoppingBekleyen => 'Bekleyen';
+
+  @override
+  String get shoppingTamamlanan => 'Tamamlanan';
+
+  @override
+  String get shoppingHizliEkle => 'Hızlı Ekle';
+
+  @override
+  String get shoppingListenBos => 'Alışveriş listen boş';
+
+  @override
+  String get shoppingBosAciklama =>
+      'Ürün ekle, tarife göre otomatik doldur ya da AI ile hızlı liste oluştur.';
+
+  @override
+  String get shoppingTariften => 'Tariften';
+
+  @override
+  String get shoppingAiListe => 'AI Liste';
+
+  @override
+  String get shoppingKatMarket => 'Market';
+
+  @override
+  String get shoppingKatEczane => 'Eczane';
+
+  @override
+  String get shoppingKatKirtasiye => 'Kırtasiye';
+
+  @override
+  String get shoppingKatEv => 'Ev';
+
+  @override
+  String get shoppingKatDiger => 'Diğer';
+
+  @override
+  String shoppingAdet(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count adet',
+      one: '$count adet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String shoppingTamamlandiOran(Object done, Object total) {
+    return '$done / $total tamamlandı';
+  }
+
+  @override
+  String get shoppingGeriAl => 'Geri al';
+
+  @override
+  String shoppingSilindi(Object name) {
+    return '\"$name\" silindi';
+  }
+
+  @override
+  String shoppingZatenListede(Object name) {
+    return '\"$name\" zaten listede';
+  }
+
+  @override
+  String get shoppingGecerliMiktar => 'Geçerli bir miktar girin (1 veya üzeri)';
+
+  @override
+  String get shoppingYuklenemedi =>
+      'Alışveriş listeniz şu anda yüklenemedi. Lütfen tekrar deneyin.';
+
+  @override
+  String get shoppingTekrarDene => 'Tekrar Dene';
+
+  @override
+  String get shoppingTipYakinMarket => 'Yakındaki Marketler (Harita)';
+
+  @override
+  String get shoppingTipMarketKatalogu => 'Market Kataloğu';
+
+  @override
+  String get shoppingTipAiMarket => 'AI Market Listesi';
+
+  @override
+  String get shoppingTipTarifeGore => 'Tarife Göre Ekle';
+
+  @override
+  String shoppingMalzemeEklendi(Object title, Object count) {
+    return '$title için $count malzeme eklendi';
+  }
+
+  @override
+  String shoppingListeyeEklendi(Object name) {
+    return '$name listeye eklendi';
+  }
+
+  @override
+  String get shoppingTumUrunlerEklendi => 'Tüm ürünler listeye eklendi';
+
+  @override
   String get henuzVeriYok => 'Henüz veri yok';
 
   @override

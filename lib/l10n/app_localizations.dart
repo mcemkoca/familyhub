@@ -5318,6 +5318,198 @@ abstract class AppLocalizations {
   /// **'Ülke seçimi; para birimi, ev gideri ve market içeriğini belirler.'**
   String get ulkeSecimiBilgi;
 
+  /// No description provided for @shoppingEkle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ekle'**
+  String get shoppingEkle;
+
+  /// No description provided for @shoppingListeyeEkle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Listeye Ekle'**
+  String get shoppingListeyeEkle;
+
+  /// No description provided for @shoppingUrunAdi.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ürün adı'**
+  String get shoppingUrunAdi;
+
+  /// No description provided for @shoppingAdetOpsiyonel.
+  ///
+  /// In tr, this message translates to:
+  /// **'Adet (isteğe bağlı)'**
+  String get shoppingAdetOpsiyonel;
+
+  /// No description provided for @shoppingKategori.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kategori'**
+  String get shoppingKategori;
+
+  /// No description provided for @shoppingBekleyen.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bekleyen'**
+  String get shoppingBekleyen;
+
+  /// No description provided for @shoppingTamamlanan.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tamamlanan'**
+  String get shoppingTamamlanan;
+
+  /// No description provided for @shoppingHizliEkle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hızlı Ekle'**
+  String get shoppingHizliEkle;
+
+  /// No description provided for @shoppingListenBos.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alışveriş listen boş'**
+  String get shoppingListenBos;
+
+  /// No description provided for @shoppingBosAciklama.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ürün ekle, tarife göre otomatik doldur ya da AI ile hızlı liste oluştur.'**
+  String get shoppingBosAciklama;
+
+  /// No description provided for @shoppingTariften.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tariften'**
+  String get shoppingTariften;
+
+  /// No description provided for @shoppingAiListe.
+  ///
+  /// In tr, this message translates to:
+  /// **'AI Liste'**
+  String get shoppingAiListe;
+
+  /// No description provided for @shoppingKatMarket.
+  ///
+  /// In tr, this message translates to:
+  /// **'Market'**
+  String get shoppingKatMarket;
+
+  /// No description provided for @shoppingKatEczane.
+  ///
+  /// In tr, this message translates to:
+  /// **'Eczane'**
+  String get shoppingKatEczane;
+
+  /// No description provided for @shoppingKatKirtasiye.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kırtasiye'**
+  String get shoppingKatKirtasiye;
+
+  /// No description provided for @shoppingKatEv.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ev'**
+  String get shoppingKatEv;
+
+  /// No description provided for @shoppingKatDiger.
+  ///
+  /// In tr, this message translates to:
+  /// **'Diğer'**
+  String get shoppingKatDiger;
+
+  /// No description provided for @shoppingAdet.
+  ///
+  /// In tr, this message translates to:
+  /// **'{count, plural, =1{{count} adet} other{{count} adet}}'**
+  String shoppingAdet(int count);
+
+  /// No description provided for @shoppingTamamlandiOran.
+  ///
+  /// In tr, this message translates to:
+  /// **'{done} / {total} tamamlandı'**
+  String shoppingTamamlandiOran(Object done, Object total);
+
+  /// No description provided for @shoppingGeriAl.
+  ///
+  /// In tr, this message translates to:
+  /// **'Geri al'**
+  String get shoppingGeriAl;
+
+  /// No description provided for @shoppingSilindi.
+  ///
+  /// In tr, this message translates to:
+  /// **'\"{name}\" silindi'**
+  String shoppingSilindi(Object name);
+
+  /// No description provided for @shoppingZatenListede.
+  ///
+  /// In tr, this message translates to:
+  /// **'\"{name}\" zaten listede'**
+  String shoppingZatenListede(Object name);
+
+  /// No description provided for @shoppingGecerliMiktar.
+  ///
+  /// In tr, this message translates to:
+  /// **'Geçerli bir miktar girin (1 veya üzeri)'**
+  String get shoppingGecerliMiktar;
+
+  /// No description provided for @shoppingYuklenemedi.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alışveriş listeniz şu anda yüklenemedi. Lütfen tekrar deneyin.'**
+  String get shoppingYuklenemedi;
+
+  /// No description provided for @shoppingTekrarDene.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tekrar Dene'**
+  String get shoppingTekrarDene;
+
+  /// No description provided for @shoppingTipYakinMarket.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yakındaki Marketler (Harita)'**
+  String get shoppingTipYakinMarket;
+
+  /// No description provided for @shoppingTipMarketKatalogu.
+  ///
+  /// In tr, this message translates to:
+  /// **'Market Kataloğu'**
+  String get shoppingTipMarketKatalogu;
+
+  /// No description provided for @shoppingTipAiMarket.
+  ///
+  /// In tr, this message translates to:
+  /// **'AI Market Listesi'**
+  String get shoppingTipAiMarket;
+
+  /// No description provided for @shoppingTipTarifeGore.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tarife Göre Ekle'**
+  String get shoppingTipTarifeGore;
+
+  /// No description provided for @shoppingMalzemeEklendi.
+  ///
+  /// In tr, this message translates to:
+  /// **'{title} için {count} malzeme eklendi'**
+  String shoppingMalzemeEklendi(Object title, Object count);
+
+  /// No description provided for @shoppingListeyeEklendi.
+  ///
+  /// In tr, this message translates to:
+  /// **'{name} listeye eklendi'**
+  String shoppingListeyeEklendi(Object name);
+
+  /// No description provided for @shoppingTumUrunlerEklendi.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tüm ürünler listeye eklendi'**
+  String get shoppingTumUrunlerEklendi;
+
   /// No description provided for @henuzVeriYok.
   ///
   /// In tr, this message translates to:

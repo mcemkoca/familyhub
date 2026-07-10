@@ -2711,6 +2711,122 @@ class AppLocalizationsEn extends AppLocalizations {
       'Country selection determines currency, household expenses and grocery content.';
 
   @override
+  String get shoppingEkle => 'Add';
+
+  @override
+  String get shoppingListeyeEkle => 'Add to List';
+
+  @override
+  String get shoppingUrunAdi => 'Item name';
+
+  @override
+  String get shoppingAdetOpsiyonel => 'Quantity (optional)';
+
+  @override
+  String get shoppingKategori => 'Category';
+
+  @override
+  String get shoppingBekleyen => 'Pending';
+
+  @override
+  String get shoppingTamamlanan => 'Completed';
+
+  @override
+  String get shoppingHizliEkle => 'Quick Add';
+
+  @override
+  String get shoppingListenBos => 'Your shopping list is empty';
+
+  @override
+  String get shoppingBosAciklama =>
+      'Add an item, fill it from a recipe, or create a quick list with AI.';
+
+  @override
+  String get shoppingTariften => 'From Recipe';
+
+  @override
+  String get shoppingAiListe => 'AI List';
+
+  @override
+  String get shoppingKatMarket => 'Grocery';
+
+  @override
+  String get shoppingKatEczane => 'Pharmacy';
+
+  @override
+  String get shoppingKatKirtasiye => 'Stationery';
+
+  @override
+  String get shoppingKatEv => 'Household';
+
+  @override
+  String get shoppingKatDiger => 'Other';
+
+  @override
+  String shoppingAdet(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pcs',
+      one: '$count pc',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String shoppingTamamlandiOran(Object done, Object total) {
+    return '$done / $total completed';
+  }
+
+  @override
+  String get shoppingGeriAl => 'Undo';
+
+  @override
+  String shoppingSilindi(Object name) {
+    return '\"$name\" deleted';
+  }
+
+  @override
+  String shoppingZatenListede(Object name) {
+    return '\"$name\" is already on the list';
+  }
+
+  @override
+  String get shoppingGecerliMiktar => 'Enter a valid quantity (1 or more)';
+
+  @override
+  String get shoppingYuklenemedi =>
+      'Your shopping list could not be loaded right now. Please try again.';
+
+  @override
+  String get shoppingTekrarDene => 'Try Again';
+
+  @override
+  String get shoppingTipYakinMarket => 'Nearby Stores (Map)';
+
+  @override
+  String get shoppingTipMarketKatalogu => 'Store Catalog';
+
+  @override
+  String get shoppingTipAiMarket => 'AI Store List';
+
+  @override
+  String get shoppingTipTarifeGore => 'Add from Recipe';
+
+  @override
+  String shoppingMalzemeEklendi(Object title, Object count) {
+    return '$count ingredients added for $title';
+  }
+
+  @override
+  String shoppingListeyeEklendi(Object name) {
+    return '$name added to the list';
+  }
+
+  @override
+  String get shoppingTumUrunlerEklendi => 'All items added to the list';
+
+  @override
   String get henuzVeriYok => 'No data yet';
 
   @override

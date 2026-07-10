@@ -2709,6 +2709,123 @@ class AppLocalizationsNl extends AppLocalizations {
       'Landkeuze bepaalt valuta, huishoudelijke uitgaven en boodschappeninhoud.';
 
   @override
+  String get shoppingEkle => 'Toevoegen';
+
+  @override
+  String get shoppingListeyeEkle => 'Aan lijst toevoegen';
+
+  @override
+  String get shoppingUrunAdi => 'Artikelnaam';
+
+  @override
+  String get shoppingAdetOpsiyonel => 'Aantal (optioneel)';
+
+  @override
+  String get shoppingKategori => 'Categorie';
+
+  @override
+  String get shoppingBekleyen => 'In afwachting';
+
+  @override
+  String get shoppingTamamlanan => 'Voltooid';
+
+  @override
+  String get shoppingHizliEkle => 'Snel toevoegen';
+
+  @override
+  String get shoppingListenBos => 'Je boodschappenlijst is leeg';
+
+  @override
+  String get shoppingBosAciklama =>
+      'Voeg een artikel toe, vul aan vanuit een recept of maak een snelle lijst met AI.';
+
+  @override
+  String get shoppingTariften => 'Uit recept';
+
+  @override
+  String get shoppingAiListe => 'AI-lijst';
+
+  @override
+  String get shoppingKatMarket => 'Boodschappen';
+
+  @override
+  String get shoppingKatEczane => 'Apotheek';
+
+  @override
+  String get shoppingKatKirtasiye => 'Kantoorartikelen';
+
+  @override
+  String get shoppingKatEv => 'Huishouden';
+
+  @override
+  String get shoppingKatDiger => 'Overig';
+
+  @override
+  String shoppingAdet(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count st',
+      one: '$count st',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String shoppingTamamlandiOran(Object done, Object total) {
+    return '$done / $total voltooid';
+  }
+
+  @override
+  String get shoppingGeriAl => 'Ongedaan maken';
+
+  @override
+  String shoppingSilindi(Object name) {
+    return '\"$name\" verwijderd';
+  }
+
+  @override
+  String shoppingZatenListede(Object name) {
+    return '\"$name\" staat al op de lijst';
+  }
+
+  @override
+  String get shoppingGecerliMiktar => 'Voer een geldig aantal in (1 of meer)';
+
+  @override
+  String get shoppingYuklenemedi =>
+      'Je boodschappenlijst kon nu niet worden geladen. Probeer het opnieuw.';
+
+  @override
+  String get shoppingTekrarDene => 'Opnieuw proberen';
+
+  @override
+  String get shoppingTipYakinMarket => 'Winkels in de buurt (kaart)';
+
+  @override
+  String get shoppingTipMarketKatalogu => 'Winkelcatalogus';
+
+  @override
+  String get shoppingTipAiMarket => 'AI-winkellijst';
+
+  @override
+  String get shoppingTipTarifeGore => 'Toevoegen uit recept';
+
+  @override
+  String shoppingMalzemeEklendi(Object title, Object count) {
+    return '$count ingrediënten toegevoegd voor $title';
+  }
+
+  @override
+  String shoppingListeyeEklendi(Object name) {
+    return '$name toegevoegd aan de lijst';
+  }
+
+  @override
+  String get shoppingTumUrunlerEklendi =>
+      'Alle artikelen toegevoegd aan de lijst';
+
+  @override
   String get henuzVeriYok => 'Nog geen gegevens';
 
   @override
