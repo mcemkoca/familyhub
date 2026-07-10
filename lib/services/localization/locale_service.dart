@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import '../hive_service.dart';
+import '../auth_service.dart';
 
 /// Kullanıcının dil kararı durumu — dil önerisi dialogunun tekrar tekrar
 /// gösterilmesini engeller ve kaynağı (manuel/cihaz) izler.
@@ -30,6 +31,13 @@ class LocaleService {
         'nl' => 'Nederlands',
         'fr' => 'Français',
         _ => 'Türkçe',
+      };
+
+  static String codeForLabel(String label) => switch (label) {
+        'English' => 'en',
+        'Nederlands' => 'nl',
+        'Français' => 'fr',
+        _ => 'tr',
       };
 
   static Locale localeForLabel(String label) => switch (label) {
@@ -101,12 +109,43 @@ class LocaleService {
     await HiveService.setBoolSetting(_kUseDevice, false);
     await HiveService.setSetting(_kLanguage, label);
     await _setDecision(LocaleDecision.selectedManually);
+    await _pushToBackend(label);
   }
 
   static Future<void> acceptDeviceLocale() async {
+    final label = deviceLanguageLabel();
     await HiveService.setBoolSetting(_kUseDevice, true);
-    await HiveService.setSetting(_kLanguage, deviceLanguageLabel());
+    await HiveService.setSetting(_kLanguage, label);
     await _setDecision(LocaleDecision.acceptedDeviceLocale);
+    await _pushToBackend(label);
+  }
+
+  /// Dil tercihini backend'e yansıt — best-effort. Giriş yoksa / hata olursa
+  /// SESSİZCE atlar; yerel tercih hiçbir zaman backend'e bağımlı değildir.
+  static Future<void> _pushToBackend(String label) async {
+    try {
+      if (AuthService.currentUserId == null) return;
+      await AuthService.updateProfile(preferredLanguage: codeForLabel(label));
+    } catch (_) {
+      // Dil yerelde zaten kayıtlı; backend senkronu kritik değil.
+    }
+  }
+
+  /// Girişte backend'deki tercihi yerelde HENÜZ karar yoksa uygula.
+  /// Kullanıcının açık yerel seçimini ASLA ezmez (yalnızca notAsked durumunda).
+  static Future<Locale?> syncFromBackend() async {
+    try {
+      if (decision() != LocaleDecision.notAsked) return null;
+      final code = await AuthService.fetchPreferredLanguage();
+      if (code == null || !supportedCodes.contains(code)) return null;
+      final label = labelForCode(code);
+      await HiveService.setBoolSetting(_kUseDevice, false);
+      await HiveService.setSetting(_kLanguage, label);
+      await _setDecision(LocaleDecision.migratedFromLegacy);
+      return localeForLabel(label);
+    } catch (_) {
+      return null;
+    }
   }
 
   /// "Şimdilik mevcut dille devam" — gösterilen dili sabitler, tekrar sormaz.

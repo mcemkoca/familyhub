@@ -6,6 +6,8 @@ import '../../../config/routes.dart';
 import '../../../core/validation/input_validator.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/biometric_service.dart';
+import '../../../services/localization/locale_service.dart';
+import '../../providers/app_providers.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -43,6 +45,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
     _animController.forward();
   }
 
+  /// Girişte backend'deki dil tercihini uygula — yalnızca kullanıcı henüz
+  /// yerel bir dil kararı vermediyse (açık seçimi ASLA ezmez). Best-effort.
+  Future<void> _applyBackendLocale() async {
+    final loc = await LocaleService.syncFromBackend();
+    if (loc != null && mounted) {
+      ref.read(localeProvider.notifier).state = loc;
+    }
+  }
+
   Future<void> _login() async {
     HapticFeedback.mediumImpact();
     final email = _emailController.text.trim();
@@ -57,6 +68,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
     try {
       await AuthService.signIn(email: email, password: password);
       await AuthService.ensureFamily();
+      await _applyBackendLocale();
       if (mounted) context.go(AppRoutes.hub);
     } catch (e) {
       if (mounted) _showError(e.toString().replaceAll('Exception: ', ''));
@@ -70,6 +82,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
     try {
       await AuthService.signInWithGoogle();
       await AuthService.ensureFamily();
+      await _applyBackendLocale();
       if (mounted) context.go(AppRoutes.hub);
     } catch (e) {
       if (mounted) _showError(e.toString().replaceAll('Exception: ', ''));

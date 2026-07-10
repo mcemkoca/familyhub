@@ -440,6 +440,25 @@ class AuthService {
     }
   }
 
+  /// Kullanıcının backend'deki dil tercihi kodu (tr/en/nl/fr) — yoksa null.
+  /// Best-effort: giriş yoksa veya hata olursa null döner.
+  static Future<String?> fetchPreferredLanguage() async {
+    final supabase = client;
+    final userId = currentUserId;
+    if (supabase == null || userId == null) return null;
+    try {
+      final row = await supabase
+          .from('profiles')
+          .select('preferred_language')
+          .eq('id', userId)
+          .maybeSingle();
+      final v = row?['preferred_language'];
+      return (v is String && v.isNotEmpty) ? v : null;
+    } catch (_) {
+      return null;
+    }
+  }
+
   static Future<void> updatePassword(String currentPassword, String newPassword) async {
     final supabase = client;
     final user = currentUser;
