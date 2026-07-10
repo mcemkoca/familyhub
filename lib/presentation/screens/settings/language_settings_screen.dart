@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import '../../../services/hive_service.dart';
 import '../../../services/notification_service.dart';
 import '../../../services/localization/locale_service.dart';
@@ -31,6 +32,16 @@ class _LanguageSettingsScreenState
   late String _draftLanguage;
   late String _draftCountry;
   late String _draftDateFormat;
+
+  // FAZ 3 — ek bölge tercihleri (dilden ayrı).
+  late String _savedTimeFormat; // '24h' | '12h'
+  late String _savedFirstDay; // 'mon' | 'sun'
+  late String _savedUnits; // 'metric' | 'imperial'
+  late String _savedTemp; // 'C' | 'F'
+  late String _draftTimeFormat;
+  late String _draftFirstDay;
+  late String _draftUnits;
+  late String _draftTemp;
 
   bool _saving = false;
 
@@ -69,17 +80,78 @@ class _LanguageSettingsScreenState
         _savedDevice ? _deviceLanguageLabel : (HiveService.getSetting('language') ?? 'Türkçe');
     _savedCountry = HiveService.getSetting('country') ?? 'BE';
     _savedDateFormat = HiveService.getSetting('dateFormat') ?? 'DD/MM/YYYY';
+    _savedTimeFormat = HiveService.getSetting('timeFormat') ?? '24h';
+    _savedFirstDay = HiveService.getSetting('firstDayOfWeek') ?? 'mon';
+    _savedUnits = HiveService.getSetting('measurementSystem') ?? 'metric';
+    _savedTemp = HiveService.getSetting('tempUnit') ?? 'C';
     _draftDevice = _savedDevice;
     _draftLanguage = _savedLanguage;
     _draftCountry = _savedCountry;
     _draftDateFormat = _savedDateFormat;
+    _draftTimeFormat = _savedTimeFormat;
+    _draftFirstDay = _savedFirstDay;
+    _draftUnits = _savedUnits;
+    _draftTemp = _savedTemp;
   }
 
   bool get _dirty =>
       _draftDevice != _savedDevice ||
       _draftLanguage != _savedLanguage ||
       _draftCountry != _savedCountry ||
-      _draftDateFormat != _savedDateFormat;
+      _draftDateFormat != _savedDateFormat ||
+      _draftTimeFormat != _savedTimeFormat ||
+      _draftFirstDay != _savedFirstDay ||
+      _draftUnits != _savedUnits ||
+      _draftTemp != _savedTemp;
+
+  // ── Canlı önizleme yardımcıları (taslak seçime göre, intl ile) ──
+  String get _draftLocaleCode {
+    final loc = _localeFor(_draftDevice ? _deviceLanguageLabel : _draftLanguage);
+    return loc.countryCode == null
+        ? loc.languageCode
+        : '${loc.languageCode}_${loc.countryCode}';
+  }
+
+  String get _datePattern => switch (_draftDateFormat) {
+        'MM/DD/YYYY' => 'MM/dd/yyyy',
+        'YYYY-MM-DD' => 'yyyy-MM-dd',
+        _ => 'dd/MM/yyyy',
+      };
+
+  String _previewDate() {
+    try {
+      return DateFormat(_datePattern, _draftLocaleCode).format(DateTime.now());
+    } catch (_) {
+      return DateFormat(_datePattern).format(DateTime.now());
+    }
+  }
+
+  String _previewTime() {
+    final pattern = _draftTimeFormat == '12h' ? 'h:mm a' : 'HH:mm';
+    try {
+      return DateFormat(pattern, _draftLocaleCode).format(DateTime.now());
+    } catch (_) {
+      return DateFormat(pattern).format(DateTime.now());
+    }
+  }
+
+  String _previewCurrency() {
+    final c = CountryConfig.all.firstWhere(
+      (c) => c.code == _draftCountry,
+      orElse: () => CountryConfig.all.first,
+    );
+    try {
+      return NumberFormat.currency(
+        locale: _draftLocaleCode,
+        symbol: c.currencySymbol,
+        decimalDigits: 2,
+      ).format(1234.5);
+    } catch (_) {
+      return '${c.currencySymbol}1234.50';
+    }
+  }
+
+  String _previewTemp() => _draftTemp == 'F' ? '72°F' : '22°C';
 
   Locale _localeFor(String lang) => switch (lang) {
         'English' => const Locale('en', 'US'),
@@ -143,6 +215,10 @@ class _LanguageSettingsScreenState
     await HiveService.setSetting('currency', country.currencyCode);
     await HiveService.setSetting('currencySymbol', country.currencySymbol);
     await HiveService.setSetting('dateFormat', _draftDateFormat);
+    await HiveService.setSetting('timeFormat', _draftTimeFormat);
+    await HiveService.setSetting('firstDayOfWeek', _draftFirstDay);
+    await HiveService.setSetting('measurementSystem', _draftUnits);
+    await HiveService.setSetting('tempUnit', _draftTemp);
 
     // Sağlayıcıları güncelle → uygulama anında yeni dile/bölgeye geçer.
     ref.read(countryProvider.notifier).state = country.code;
@@ -155,6 +231,10 @@ class _LanguageSettingsScreenState
       _draftLanguage = effectiveLang;
       _savedCountry = _draftCountry;
       _savedDateFormat = _draftDateFormat;
+      _savedTimeFormat = _draftTimeFormat;
+      _savedFirstDay = _draftFirstDay;
+      _savedUnits = _draftUnits;
+      _savedTemp = _draftTemp;
       _saving = false;
     });
 
@@ -204,28 +284,45 @@ class _LanguageSettingsScreenState
               borderRadius: BorderRadius.circular(20),
               border: Border.all(color: const Color(0x2A8B5CF6)),
             ),
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(selectedCountry.flag,
-                    style: const TextStyle(fontSize: 40)),
-                const SizedBox(width: 14),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(_draftLanguage,
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w800)),
-                      const SizedBox(height: 2),
-                      Text(
-                        '${selectedCountry.name} · ${selectedCountry.currencySymbol} · $_draftDateFormat',
-                        style: const TextStyle(
-                            color: Color(0xFF9CA3AF), fontSize: 12.5),
+                Row(
+                  children: [
+                    Text(selectedCountry.flag,
+                        style: const TextStyle(fontSize: 40)),
+                    const SizedBox(width: 14),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(_draftLanguage,
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w800)),
+                          const SizedBox(height: 2),
+                          Text(
+                            '${selectedCountry.name} · ${selectedCountry.currencySymbol}',
+                            style: const TextStyle(
+                                color: Color(0xFF9CA3AF), fontSize: 12.5),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 14),
+                // Canlı örnek — taslak seçime göre anlık biçim.
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    _sampleChip(Icons.event_outlined, _previewDate()),
+                    _sampleChip(Icons.schedule_outlined, _previewTime()),
+                    _sampleChip(Icons.payments_outlined, _previewCurrency()),
+                    _sampleChip(Icons.thermostat_outlined, _previewTemp()),
+                  ],
                 ),
               ],
             ),
@@ -355,6 +452,76 @@ class _LanguageSettingsScreenState
               );
             }).toList(),
           ),
+          const SizedBox(height: 22),
+
+          // ── Saat formatı ──
+          _sectionTitle('SAAT FORMATI'),
+          const SizedBox(height: 10),
+          _segment(
+            options: const [('24h', '24 saat'), ('12h', '12 saat (AM/PM)')],
+            value: _draftTimeFormat,
+            onSelect: (v) {
+              HapticFeedback.selectionClick();
+              setState(() => _draftTimeFormat = v);
+            },
+          ),
+          const SizedBox(height: 22),
+
+          // ── Haftanın ilk günü ──
+          _sectionTitle('HAFTANIN İLK GÜNÜ'),
+          const SizedBox(height: 10),
+          _segment(
+            options: const [('mon', 'Pazartesi'), ('sun', 'Pazar')],
+            value: _draftFirstDay,
+            onSelect: (v) {
+              HapticFeedback.selectionClick();
+              setState(() => _draftFirstDay = v);
+            },
+          ),
+          const SizedBox(height: 22),
+
+          // ── Ölçü birimi ──
+          _sectionTitle('ÖLÇÜ BİRİMİ'),
+          const SizedBox(height: 10),
+          _segment(
+            options: const [('metric', 'Metrik (kg, cm)'), ('imperial', 'İmperyal (lb, in)')],
+            value: _draftUnits,
+            onSelect: (v) {
+              HapticFeedback.selectionClick();
+              setState(() => _draftUnits = v);
+            },
+          ),
+          const SizedBox(height: 22),
+
+          // ── Sıcaklık birimi ──
+          _sectionTitle('SICAKLIK BİRİMİ'),
+          const SizedBox(height: 10),
+          _segment(
+            options: const [('C', 'Celsius (°C)'), ('F', 'Fahrenheit (°F)')],
+            value: _draftTemp,
+            onSelect: (v) {
+              HapticFeedback.selectionClick();
+              setState(() => _draftTemp = v);
+            },
+          ),
+          const SizedBox(height: 28),
+
+          // ── Sıfırlama (onaylı) — kullanıcı VERİSİNİ SİLMEZ ──
+          _sectionTitle('SIFIRLAMA'),
+          const SizedBox(height: 10),
+          _resetTile(
+            icon: Icons.translate_rounded,
+            title: 'Dil tercihini sıfırla',
+            subtitle: 'Dil seçimini temizler, cihaz diline döner. Verileriniz silinmez.',
+            onTap: _confirmResetLanguage,
+          ),
+          const SizedBox(height: 8),
+          _resetTile(
+            icon: Icons.public_off_rounded,
+            title: 'Bölge ayarlarını varsayılana döndür',
+            subtitle: 'Tarih/saat/birim biçimlerini varsayılana alır. Verileriniz silinmez.',
+            onTap: _confirmResetRegion,
+          ),
         ],
       ),
       // ── Sticky Kaydet butonu ──
@@ -405,6 +572,191 @@ class _LanguageSettingsScreenState
                 color: Color(0xFF9CA3AF),
                 letterSpacing: 0.5)),
       );
+
+  Widget _sampleChip(IconData icon, String text) => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        decoration: BoxDecoration(
+          color: const Color(0x14FFFFFF),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 13, color: const Color(0xFF8B5CF6)),
+            const SizedBox(width: 6),
+            Text(text,
+                style: const TextStyle(
+                    color: Color(0xFFE5E7EB),
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w600)),
+          ],
+        ),
+      );
+
+  Widget _segment({
+    required List<(String, String)> options,
+    required String value,
+    required ValueChanged<String> onSelect,
+  }) =>
+      Row(
+        children: options.map((o) {
+          final sel = value == o.$1;
+          return Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: GestureDetector(
+                onTap: () => onSelect(o.$1),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 150),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: sel
+                        ? const Color(0xFF6366F1)
+                        : const Color(0xFF13131A),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                        color: sel
+                            ? const Color(0xFF6366F1)
+                            : const Color(0x14FFFFFF)),
+                  ),
+                  child: Text(o.$2,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color:
+                              sel ? Colors.white : const Color(0xFF9CA3AF),
+                          fontSize: 12.5,
+                          fontWeight: FontWeight.w700)),
+                ),
+              ),
+            ),
+          );
+        }).toList(),
+      );
+
+  Widget _resetTile({
+    required IconData icon,
+    required String title,
+    required String subtitle,
+    required VoidCallback onTap,
+  }) =>
+      GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          decoration: BoxDecoration(
+            color: const Color(0xFF13131A),
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: const Color(0x22EF4444)),
+          ),
+          child: Row(
+            children: [
+              Icon(icon, color: const Color(0xFFF87171), size: 22),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(title,
+                        style: const TextStyle(
+                            color: Color(0xFFF3F4F6),
+                            fontSize: 14.5,
+                            fontWeight: FontWeight.w700)),
+                    const SizedBox(height: 2),
+                    Text(subtitle,
+                        style: const TextStyle(
+                            color: Color(0xFF6B7280), fontSize: 12, height: 1.3)),
+                  ],
+                ),
+              ),
+              const Icon(Icons.chevron_right_rounded,
+                  color: Color(0xFF6B7280), size: 20),
+            ],
+          ),
+        ),
+      );
+
+  Future<bool> _confirmDialog(String title, String message) async {
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: const Color(0xFF13131A),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+        title: Text(title,
+            style: const TextStyle(
+                color: Colors.white, fontWeight: FontWeight.w800)),
+        content: Text(message,
+            style: const TextStyle(color: Color(0xFFD1D5DB), height: 1.4)),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Vazgeç',
+                style: TextStyle(color: Color(0xFF9CA3AF))),
+          ),
+          FilledButton(
+            style: FilledButton.styleFrom(
+                backgroundColor: const Color(0xFFEF4444)),
+            onPressed: () => Navigator.pop(ctx, true),
+            child: const Text('Sıfırla'),
+          ),
+        ],
+      ),
+    );
+    return ok ?? false;
+  }
+
+  Future<void> _confirmResetLanguage() async {
+    final ok = await _confirmDialog(
+      'Dil tercihini sıfırla',
+      'Dil seçiminiz temizlenecek ve uygulama cihazınızın sistem diline dönecek. '
+          'Aile, sağlık, bütçe gibi verileriniz SİLİNMEZ.',
+    );
+    if (!ok) return;
+    await LocaleService.resetLanguagePreference();
+    if (!mounted) return;
+    final deviceLoc = _localeFor(_deviceLanguageLabel);
+    ref.read(localeProvider.notifier).state = deviceLoc;
+    setState(() {
+      _savedDevice = false;
+      _draftDevice = false;
+      _savedLanguage = _deviceLanguageLabel;
+      _draftLanguage = _deviceLanguageLabel;
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Dil tercihi sıfırlandı'),
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
+
+  Future<void> _confirmResetRegion() async {
+    final ok = await _confirmDialog(
+      'Bölge ayarlarını sıfırla',
+      'Tarih, saat, ölçü ve sıcaklık biçimleri varsayılana dönecek. '
+          'Verileriniz SİLİNMEZ.',
+    );
+    if (!ok) return;
+    await HiveService.setSetting('dateFormat', 'DD/MM/YYYY');
+    await HiveService.setSetting('timeFormat', '24h');
+    await HiveService.setSetting('firstDayOfWeek', 'mon');
+    await HiveService.setSetting('measurementSystem', 'metric');
+    await HiveService.setSetting('tempUnit', 'C');
+    if (!mounted) return;
+    setState(() {
+      _savedDateFormat = _draftDateFormat = 'DD/MM/YYYY';
+      _savedTimeFormat = _draftTimeFormat = '24h';
+      _savedFirstDay = _draftFirstDay = 'mon';
+      _savedUnits = _draftUnits = 'metric';
+      _savedTemp = _draftTemp = 'C';
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Bölge ayarları varsayılana döndürüldü'),
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
 }
 
 class _LangCard extends StatelessWidget {
