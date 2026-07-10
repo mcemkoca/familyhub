@@ -2916,6 +2916,45 @@ class AppLocalizationsTr extends AppLocalizations {
   String get shoppingTumu => 'Tümü';
 
   @override
+  String get unitPiece => 'adet';
+
+  @override
+  String get unitPack => 'paket';
+
+  @override
+  String get unitBox => 'kutu';
+
+  @override
+  String get unitBottle => 'şişe';
+
+  @override
+  String get unitJar => 'kavanoz';
+
+  @override
+  String get unitLiter => 'L';
+
+  @override
+  String get unitMilliliter => 'mL';
+
+  @override
+  String get unitKilogram => 'kg';
+
+  @override
+  String get unitGram => 'g';
+
+  @override
+  String get unitBunch => 'demet';
+
+  @override
+  String get unitDozen => 'düzine';
+
+  @override
+  String get unitPortion => 'porsiyon';
+
+  @override
+  String get shoppingBirim => 'Birim';
+
+  @override
   String get henuzVeriYok => 'Henüz veri yok';
 
   @override

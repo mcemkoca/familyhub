@@ -11,6 +11,21 @@ enum MemberRole { admin, parent, teen, child, elder, guest, baby }
 enum EventCategory { appointment, birthday, school, activity, work, family, travel, other }
 enum TransactionType { income, expense }
 enum ShoppingCategory { grocery, pharmacy, stationery, household, other }
+
+/// Ölçü birimi — STABLE KEY olarak saklanır (çeviri değil). UI'da lokalize gösterilir.
+enum ShoppingUnit {
+  piece, pack, box, bottle, jar,
+  liter, milliliter, kilogram, gram,
+  bunch, dozen, portion,
+}
+
+/// Enum ↔ stable string (storage/JSON). Bilinmeyen değer → piece.
+ShoppingUnit shoppingUnitFromKey(String? key) {
+  for (final u in ShoppingUnit.values) {
+    if (u.name == key) return u;
+  }
+  return ShoppingUnit.piece;
+}
 enum MessageType { text, image, audio, location, event, system, gif, video, file, poll }
 
 /// Sohbet anketi. [votes] her seçenek için oy veren üye id'lerini tutar.
@@ -352,6 +367,7 @@ class ShoppingItem {
   final String id;
   final String name;
   final String? quantity;
+  final ShoppingUnit unit;
   final ShoppingCategory category;
   final String requestedBy;
   final bool isCompleted;
@@ -361,6 +377,7 @@ class ShoppingItem {
     required this.id,
     required this.name,
     this.quantity,
+    this.unit = ShoppingUnit.piece,
     this.category = ShoppingCategory.grocery,
     required this.requestedBy,
     this.isCompleted = false,
@@ -372,6 +389,7 @@ class ShoppingItem {
       id: id,
       name: name,
       quantity: quantity,
+      unit: unit,
       category: category,
       requestedBy: requestedBy,
       isCompleted: isCompleted ?? this.isCompleted,
@@ -379,10 +397,23 @@ class ShoppingItem {
     );
   }
 
+  /// Bulut kaydı 'unit' döndürmediğinde yerel seçimi korumak için.
+  ShoppingItem copyWithUnit(ShoppingUnit u) => ShoppingItem(
+        id: id,
+        name: name,
+        quantity: quantity,
+        unit: u,
+        category: category,
+        requestedBy: requestedBy,
+        isCompleted: isCompleted,
+        completedBy: completedBy,
+      );
+
   Map<String, dynamic> toJson() => {
     'id': id,
     'name': name,
     'quantity': quantity,
+    'unit': unit.name,
     'category': category.index,
     'requestedBy': requestedBy,
     'isCompleted': isCompleted,
@@ -393,6 +424,7 @@ class ShoppingItem {
     id: json['id'] as String,
     name: json['name'] as String,
     quantity: json['quantity'] as String?,
+    unit: shoppingUnitFromKey(json['unit'] as String?),
     category: ShoppingCategory.values[json['category'] as int],
     requestedBy: json['requestedBy'] as String,
     isCompleted: json['isCompleted'] as bool? ?? false,

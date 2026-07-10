@@ -63,6 +63,7 @@ class ShoppingRepository with RepositoryErrorHandler {
     String name, {
     ShoppingCategory category = ShoppingCategory.grocery,
     int quantity = 1,
+    ShoppingUnit unit = ShoppingUnit.piece,
   }) async {
     final userId = AuthService.currentUserId;
     String? familyId;
@@ -78,6 +79,7 @@ class ShoppingRepository with RepositoryErrorHandler {
           id: 'local_${const Uuid().v4()}',
           name: name,
           quantity: quantity.toString(),
+          unit: unit,
           category: category,
           requestedBy: userId ?? '',
           isCompleted: false,
@@ -92,26 +94,39 @@ class ShoppingRepository with RepositoryErrorHandler {
 
     if (familyId == null) return saveLocal();
 
-    try {
+    // Temel payload — 'unit' kolonu migration uygulanmamış DB'lerde olmayabilir.
+    // Önce unit ile dene; kolon yoksa unit'siz tekrar dene (bulut akışını bozma).
+    final base = <String, dynamic>{
+      'family_id': familyId,
+      'name': name,
+      'category': _categoryToString(category),
+      'quantity': quantity,
+      'requested_by': userId,
+    };
+
+    Future<ShoppingItem> insert(Map<String, dynamic> payload) async {
       final response = await _client
           .from('shopping_items')
-          .insert({
-            'family_id': familyId,
-            'name': name,
-            'category': _categoryToString(category),
-            'quantity': quantity,
-            'requested_by': userId,
-          })
+          .insert(payload)
           .select()
           .single();
-
-      final created = _fromJson(response);
+      // Bulut 'unit' döndürmezse yerel seçimi koru.
+      final created = _fromJson(response).copyWithUnit(unit);
       final all = HiveService.getShoppingItems();
       await HiveService.saveShoppingItems([...all, created]);
       return created;
-    } catch (e) {
-      debugPrint('createItem cloud failed, saving local: $e');
-      return saveLocal();
+    }
+
+    try {
+      return await insert({...base, 'unit': unit.name});
+    } catch (_) {
+      // 'unit' kolonu yok olabilir — unit'siz tekrar dene.
+      try {
+        return await insert(base);
+      } catch (e) {
+        debugPrint('createItem cloud failed, saving local: $e');
+        return saveLocal();
+      }
     }
   }
 
@@ -189,6 +204,7 @@ class ShoppingRepository with RepositoryErrorHandler {
       id: json['id'] as String,
       name: json['name'] as String,
       quantity: json['quantity']?.toString(),
+      unit: shoppingUnitFromKey(json['unit'] as String?),
       category: _categoryFromString(json['category'] as String?),
       requestedBy: json['requested_by'] as String? ?? '',
       isCompleted: json['is_completed'] as bool? ?? false,

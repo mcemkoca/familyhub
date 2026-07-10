@@ -43,6 +43,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
   final _nameController = TextEditingController();
   final _quantityController = TextEditingController();
   ShoppingCategory _selectedCategory = ShoppingCategory.grocery;
+  ShoppingUnit _selectedUnit = ShoppingUnit.piece;
   bool _showSuggestions = false;
   List<Map<String, dynamic>> _recipes = [];
 
@@ -111,6 +112,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
           name,
           quantity: quantity,
           category: _selectedCategory,
+          unit: _selectedUnit,
         );
     _nameController.clear();
     _quantityController.clear();
@@ -133,6 +135,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                   item.name,
                   quantity: int.tryParse(item.quantity ?? ''),
                   category: item.category,
+                  unit: item.unit,
                 );
           },
         ),
@@ -166,6 +169,24 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
       default:
         return AppColors.orange;
     }
+  }
+
+  String _unitLabel(ShoppingUnit u) {
+    final t = AppLocalizations.of(context);
+    return switch (u) {
+      ShoppingUnit.piece => t.unitPiece,
+      ShoppingUnit.pack => t.unitPack,
+      ShoppingUnit.box => t.unitBox,
+      ShoppingUnit.bottle => t.unitBottle,
+      ShoppingUnit.jar => t.unitJar,
+      ShoppingUnit.liter => t.unitLiter,
+      ShoppingUnit.milliliter => t.unitMilliliter,
+      ShoppingUnit.kilogram => t.unitKilogram,
+      ShoppingUnit.gram => t.unitGram,
+      ShoppingUnit.bunch => t.unitBunch,
+      ShoppingUnit.dozen => t.unitDozen,
+      ShoppingUnit.portion => t.unitPortion,
+    };
   }
 
   String _categoryLabel(ShoppingCategory cat) {
@@ -1000,8 +1021,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
             label: item.name,
             value: [
               if (item.quantity != null)
-                AppLocalizations.of(context)
-                    .shoppingAdet(int.tryParse(item.quantity ?? '') ?? 1),
+                '${item.quantity} ${_unitLabel(item.unit)}',
               _categoryLabel(item.category),
             ].join(', '),
             child: GestureDetector(
@@ -1039,8 +1059,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
           ),
           subtitle: item.quantity != null
               ? Text(
-                  AppLocalizations.of(context)
-                      .shoppingAdet(int.tryParse(item.quantity ?? '') ?? 1),
+                  '${item.quantity} ${_unitLabel(item.unit)}',
                   style: const TextStyle(
                       fontSize: 12, color: Color(0xFF6B7280)))
               : null,
@@ -1141,6 +1160,43 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(height: 12),
+              // Unit picker
+              Text(AppLocalizations.of(context).shoppingBirim,
+                  style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFF6B7280))),
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: ShoppingUnit.values.map((u) {
+                  final active = _selectedUnit == u;
+                  return GestureDetector(
+                    onTap: () => setModal(
+                        () => setState(() => _selectedUnit = u)),
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 150),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: active
+                            ? const Color(0xFF6366F1)
+                            : const Color(0x1AFFFFFF),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text(_unitLabel(u),
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                              color: active
+                                  ? Colors.white
+                                  : const Color(0xFF9CA3AF))),
+                    ),
+                  );
+                }).toList(),
               ),
               const SizedBox(height: 12),
               // Category picker

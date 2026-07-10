@@ -2899,6 +2899,45 @@ class AppLocalizationsNl extends AppLocalizations {
   String get shoppingTumu => 'Alles';
 
   @override
+  String get unitPiece => 'st';
+
+  @override
+  String get unitPack => 'pak';
+
+  @override
+  String get unitBox => 'doos';
+
+  @override
+  String get unitBottle => 'fles';
+
+  @override
+  String get unitJar => 'pot';
+
+  @override
+  String get unitLiter => 'L';
+
+  @override
+  String get unitMilliliter => 'mL';
+
+  @override
+  String get unitKilogram => 'kg';
+
+  @override
+  String get unitGram => 'g';
+
+  @override
+  String get unitBunch => 'bos';
+
+  @override
+  String get unitDozen => 'dozijn';
+
+  @override
+  String get unitPortion => 'portie';
+
+  @override
+  String get shoppingBirim => 'Eenheid';
+
+  @override
   String get henuzVeriYok => 'Nog geen gegevens';
 
   @override

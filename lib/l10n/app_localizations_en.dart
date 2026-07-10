@@ -2899,6 +2899,45 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shoppingTumu => 'All';
 
   @override
+  String get unitPiece => 'pc';
+
+  @override
+  String get unitPack => 'pack';
+
+  @override
+  String get unitBox => 'box';
+
+  @override
+  String get unitBottle => 'bottle';
+
+  @override
+  String get unitJar => 'jar';
+
+  @override
+  String get unitLiter => 'L';
+
+  @override
+  String get unitMilliliter => 'mL';
+
+  @override
+  String get unitKilogram => 'kg';
+
+  @override
+  String get unitGram => 'g';
+
+  @override
+  String get unitBunch => 'bunch';
+
+  @override
+  String get unitDozen => 'dozen';
+
+  @override
+  String get unitPortion => 'portion';
+
+  @override
+  String get shoppingBirim => 'Unit';
+
+  @override
   String get henuzVeriYok => 'No data yet';
 
   @override

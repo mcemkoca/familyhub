@@ -556,12 +556,14 @@ class ShoppingNotifier extends StateNotifier<AsyncValue<List<ShoppingItem>>> {
     String name, {
     ShoppingCategory category = ShoppingCategory.grocery,
     int? quantity,
+    ShoppingUnit unit = ShoppingUnit.piece,
   }) async {
     try {
       final item = await ShoppingRepository().createItem(
         name,
         category: category,
         quantity: quantity ?? 1,
+        unit: unit,
       );
       final current = state.valueOrNull ?? [];
       state = AsyncValue.data([item, ...current]);

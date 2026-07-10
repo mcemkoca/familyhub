@@ -5630,6 +5630,84 @@ abstract class AppLocalizations {
   /// **'Tümü'**
   String get shoppingTumu;
 
+  /// No description provided for @unitPiece.
+  ///
+  /// In tr, this message translates to:
+  /// **'adet'**
+  String get unitPiece;
+
+  /// No description provided for @unitPack.
+  ///
+  /// In tr, this message translates to:
+  /// **'paket'**
+  String get unitPack;
+
+  /// No description provided for @unitBox.
+  ///
+  /// In tr, this message translates to:
+  /// **'kutu'**
+  String get unitBox;
+
+  /// No description provided for @unitBottle.
+  ///
+  /// In tr, this message translates to:
+  /// **'şişe'**
+  String get unitBottle;
+
+  /// No description provided for @unitJar.
+  ///
+  /// In tr, this message translates to:
+  /// **'kavanoz'**
+  String get unitJar;
+
+  /// No description provided for @unitLiter.
+  ///
+  /// In tr, this message translates to:
+  /// **'L'**
+  String get unitLiter;
+
+  /// No description provided for @unitMilliliter.
+  ///
+  /// In tr, this message translates to:
+  /// **'mL'**
+  String get unitMilliliter;
+
+  /// No description provided for @unitKilogram.
+  ///
+  /// In tr, this message translates to:
+  /// **'kg'**
+  String get unitKilogram;
+
+  /// No description provided for @unitGram.
+  ///
+  /// In tr, this message translates to:
+  /// **'g'**
+  String get unitGram;
+
+  /// No description provided for @unitBunch.
+  ///
+  /// In tr, this message translates to:
+  /// **'demet'**
+  String get unitBunch;
+
+  /// No description provided for @unitDozen.
+  ///
+  /// In tr, this message translates to:
+  /// **'düzine'**
+  String get unitDozen;
+
+  /// No description provided for @unitPortion.
+  ///
+  /// In tr, this message translates to:
+  /// **'porsiyon'**
+  String get unitPortion;
+
+  /// No description provided for @shoppingBirim.
+  ///
+  /// In tr, this message translates to:
+  /// **'Birim'**
+  String get shoppingBirim;
+
   /// No description provided for @henuzVeriYok.
   ///
   /// In tr, this message translates to:
