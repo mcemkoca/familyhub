@@ -2949,6 +2949,114 @@ class AppLocalizationsFr extends AppLocalizations {
   String get shoppingBirim => 'Unité';
 
   @override
+  String get legalBenefitsTitle => 'Droits et avantages';
+
+  @override
+  String legalBenefitsSubtitle(Object country) {
+    return '$country · droits et aides pour votre famille';
+  }
+
+  @override
+  String get legalSearchHint => 'Rechercher un droit ou une aide...';
+
+  @override
+  String get legalSavedOnly => 'Enregistrés';
+
+  @override
+  String get legalAll => 'Tout';
+
+  @override
+  String get legalOfficialSource => 'Source officielle';
+
+  @override
+  String get legalOpenSource => 'Ouvrir la source officielle';
+
+  @override
+  String get legalSave => 'Enregistrer';
+
+  @override
+  String get legalSaved => 'Enregistré';
+
+  @override
+  String get legalExpired => 'Expiré';
+
+  @override
+  String get legalStale => 'Vérification obsolète';
+
+  @override
+  String legalLastVerified(Object date) {
+    return 'Dernière vérification : $date';
+  }
+
+  @override
+  String get legalPossibleEligibility =>
+      'Vous pourriez être éligible selon votre profil. Vérifiez les conditions à la source officielle.';
+
+  @override
+  String get legalDisclaimer =>
+      'Ces informations sont fournies à titre indicatif et ne constituent pas un conseil juridique. Les règles peuvent changer ; l\'éligibilité finale est déterminée par l\'institution concernée.';
+
+  @override
+  String get legalEmptyTitle => 'Aucun résultat';
+
+  @override
+  String get legalEmptyDesc => 'Essayez de modifier la recherche ou le filtre.';
+
+  @override
+  String get legalCatFamilySupport => 'Aides à la famille';
+
+  @override
+  String get legalCatChildBenefits => 'Allocations enfants';
+
+  @override
+  String get legalCatHealthRights => 'Droits de santé';
+
+  @override
+  String get legalCatEducationSupport => 'Aides à l\'éducation';
+
+  @override
+  String get legalCatTaxBenefits => 'Avantages fiscaux';
+
+  @override
+  String get legalCatHousingSupport => 'Aides au logement';
+
+  @override
+  String get legalCatEmployeeRights => 'Droits des salariés';
+
+  @override
+  String get legalCatParentalLeave => 'Congé de naissance et parental';
+
+  @override
+  String get legalCatResidencyRights => 'Droits de séjour';
+
+  @override
+  String get legalCatDisabilitySupport => 'Aides au handicap';
+
+  @override
+  String get legalCatSocialAid => 'Aides sociales';
+
+  @override
+  String get legalCatOther => 'Autre';
+
+  @override
+  String get legalRegionFederal => 'Fédéral';
+
+  @override
+  String get legalRegionFlanders => 'Région flamande';
+
+  @override
+  String get legalRegionWallonia => 'Région wallonne';
+
+  @override
+  String get legalRegionBrussels => 'Bruxelles-Capitale';
+
+  @override
+  String get legalRegionMunicipality => 'Commune';
+
+  @override
+  String get legalRegionOther => 'Autre';
+
+  @override
   String get henuzVeriYok => 'Aucune donnee';
 
   @override

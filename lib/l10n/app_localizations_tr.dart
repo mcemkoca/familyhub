@@ -2955,6 +2955,114 @@ class AppLocalizationsTr extends AppLocalizations {
   String get shoppingBirim => 'Birim';
 
   @override
+  String get legalBenefitsTitle => 'Yasal Haklar ve Avantajlar';
+
+  @override
+  String legalBenefitsSubtitle(Object country) {
+    return '$country · ailenizi ilgilendiren haklar ve destekler';
+  }
+
+  @override
+  String get legalSearchHint => 'Hak veya avantaj ara...';
+
+  @override
+  String get legalSavedOnly => 'Kaydedilenler';
+
+  @override
+  String get legalAll => 'Tümü';
+
+  @override
+  String get legalOfficialSource => 'Resmî kaynak';
+
+  @override
+  String get legalOpenSource => 'Resmî kaynağı aç';
+
+  @override
+  String get legalSave => 'Kaydet';
+
+  @override
+  String get legalSaved => 'Kaydedildi';
+
+  @override
+  String get legalExpired => 'Süresi geçmiş';
+
+  @override
+  String get legalStale => 'Doğrulama tarihi eski';
+
+  @override
+  String legalLastVerified(Object date) {
+    return 'Son doğrulama: $date';
+  }
+
+  @override
+  String get legalPossibleEligibility =>
+      'Profilinize göre uygun olabilirsiniz. Şartları resmî kaynaktan doğrulayın.';
+
+  @override
+  String get legalDisclaimer =>
+      'Bu bilgiler genel bilgilendirme amaçlıdır, hukuki danışmanlık değildir. Kurallar değişebilir; nihai uygunluk ilgili kurum tarafından belirlenir.';
+
+  @override
+  String get legalEmptyTitle => 'Sonuç bulunamadı';
+
+  @override
+  String get legalEmptyDesc => 'Arama veya filtreyi değiştirmeyi deneyin.';
+
+  @override
+  String get legalCatFamilySupport => 'Aile destekleri';
+
+  @override
+  String get legalCatChildBenefits => 'Çocuk yardımları';
+
+  @override
+  String get legalCatHealthRights => 'Sağlık hakları';
+
+  @override
+  String get legalCatEducationSupport => 'Eğitim destekleri';
+
+  @override
+  String get legalCatTaxBenefits => 'Vergi avantajları';
+
+  @override
+  String get legalCatHousingSupport => 'Konut destekleri';
+
+  @override
+  String get legalCatEmployeeRights => 'Çalışan hakları';
+
+  @override
+  String get legalCatParentalLeave => 'Doğum ve ebeveyn izni';
+
+  @override
+  String get legalCatResidencyRights => 'Oturum hakları';
+
+  @override
+  String get legalCatDisabilitySupport => 'Engellilik destekleri';
+
+  @override
+  String get legalCatSocialAid => 'Sosyal yardımlar';
+
+  @override
+  String get legalCatOther => 'Diğer';
+
+  @override
+  String get legalRegionFederal => 'Federal';
+
+  @override
+  String get legalRegionFlanders => 'Flaman Bölgesi';
+
+  @override
+  String get legalRegionWallonia => 'Valon Bölgesi';
+
+  @override
+  String get legalRegionBrussels => 'Brüksel-Başkent';
+
+  @override
+  String get legalRegionMunicipality => 'Belediye';
+
+  @override
+  String get legalRegionOther => 'Diğer';
+
+  @override
   String get henuzVeriYok => 'Henüz veri yok';
 
   @override

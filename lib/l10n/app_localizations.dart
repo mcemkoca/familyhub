@@ -5708,6 +5708,210 @@ abstract class AppLocalizations {
   /// **'Birim'**
   String get shoppingBirim;
 
+  /// No description provided for @legalBenefitsTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yasal Haklar ve Avantajlar'**
+  String get legalBenefitsTitle;
+
+  /// No description provided for @legalBenefitsSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'{country} · ailenizi ilgilendiren haklar ve destekler'**
+  String legalBenefitsSubtitle(Object country);
+
+  /// No description provided for @legalSearchHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hak veya avantaj ara...'**
+  String get legalSearchHint;
+
+  /// No description provided for @legalSavedOnly.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kaydedilenler'**
+  String get legalSavedOnly;
+
+  /// No description provided for @legalAll.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tümü'**
+  String get legalAll;
+
+  /// No description provided for @legalOfficialSource.
+  ///
+  /// In tr, this message translates to:
+  /// **'Resmî kaynak'**
+  String get legalOfficialSource;
+
+  /// No description provided for @legalOpenSource.
+  ///
+  /// In tr, this message translates to:
+  /// **'Resmî kaynağı aç'**
+  String get legalOpenSource;
+
+  /// No description provided for @legalSave.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kaydet'**
+  String get legalSave;
+
+  /// No description provided for @legalSaved.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kaydedildi'**
+  String get legalSaved;
+
+  /// No description provided for @legalExpired.
+  ///
+  /// In tr, this message translates to:
+  /// **'Süresi geçmiş'**
+  String get legalExpired;
+
+  /// No description provided for @legalStale.
+  ///
+  /// In tr, this message translates to:
+  /// **'Doğrulama tarihi eski'**
+  String get legalStale;
+
+  /// No description provided for @legalLastVerified.
+  ///
+  /// In tr, this message translates to:
+  /// **'Son doğrulama: {date}'**
+  String legalLastVerified(Object date);
+
+  /// No description provided for @legalPossibleEligibility.
+  ///
+  /// In tr, this message translates to:
+  /// **'Profilinize göre uygun olabilirsiniz. Şartları resmî kaynaktan doğrulayın.'**
+  String get legalPossibleEligibility;
+
+  /// No description provided for @legalDisclaimer.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu bilgiler genel bilgilendirme amaçlıdır, hukuki danışmanlık değildir. Kurallar değişebilir; nihai uygunluk ilgili kurum tarafından belirlenir.'**
+  String get legalDisclaimer;
+
+  /// No description provided for @legalEmptyTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sonuç bulunamadı'**
+  String get legalEmptyTitle;
+
+  /// No description provided for @legalEmptyDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Arama veya filtreyi değiştirmeyi deneyin.'**
+  String get legalEmptyDesc;
+
+  /// No description provided for @legalCatFamilySupport.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile destekleri'**
+  String get legalCatFamilySupport;
+
+  /// No description provided for @legalCatChildBenefits.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çocuk yardımları'**
+  String get legalCatChildBenefits;
+
+  /// No description provided for @legalCatHealthRights.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sağlık hakları'**
+  String get legalCatHealthRights;
+
+  /// No description provided for @legalCatEducationSupport.
+  ///
+  /// In tr, this message translates to:
+  /// **'Eğitim destekleri'**
+  String get legalCatEducationSupport;
+
+  /// No description provided for @legalCatTaxBenefits.
+  ///
+  /// In tr, this message translates to:
+  /// **'Vergi avantajları'**
+  String get legalCatTaxBenefits;
+
+  /// No description provided for @legalCatHousingSupport.
+  ///
+  /// In tr, this message translates to:
+  /// **'Konut destekleri'**
+  String get legalCatHousingSupport;
+
+  /// No description provided for @legalCatEmployeeRights.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çalışan hakları'**
+  String get legalCatEmployeeRights;
+
+  /// No description provided for @legalCatParentalLeave.
+  ///
+  /// In tr, this message translates to:
+  /// **'Doğum ve ebeveyn izni'**
+  String get legalCatParentalLeave;
+
+  /// No description provided for @legalCatResidencyRights.
+  ///
+  /// In tr, this message translates to:
+  /// **'Oturum hakları'**
+  String get legalCatResidencyRights;
+
+  /// No description provided for @legalCatDisabilitySupport.
+  ///
+  /// In tr, this message translates to:
+  /// **'Engellilik destekleri'**
+  String get legalCatDisabilitySupport;
+
+  /// No description provided for @legalCatSocialAid.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sosyal yardımlar'**
+  String get legalCatSocialAid;
+
+  /// No description provided for @legalCatOther.
+  ///
+  /// In tr, this message translates to:
+  /// **'Diğer'**
+  String get legalCatOther;
+
+  /// No description provided for @legalRegionFederal.
+  ///
+  /// In tr, this message translates to:
+  /// **'Federal'**
+  String get legalRegionFederal;
+
+  /// No description provided for @legalRegionFlanders.
+  ///
+  /// In tr, this message translates to:
+  /// **'Flaman Bölgesi'**
+  String get legalRegionFlanders;
+
+  /// No description provided for @legalRegionWallonia.
+  ///
+  /// In tr, this message translates to:
+  /// **'Valon Bölgesi'**
+  String get legalRegionWallonia;
+
+  /// No description provided for @legalRegionBrussels.
+  ///
+  /// In tr, this message translates to:
+  /// **'Brüksel-Başkent'**
+  String get legalRegionBrussels;
+
+  /// No description provided for @legalRegionMunicipality.
+  ///
+  /// In tr, this message translates to:
+  /// **'Belediye'**
+  String get legalRegionMunicipality;
+
+  /// No description provided for @legalRegionOther.
+  ///
+  /// In tr, this message translates to:
+  /// **'Diğer'**
+  String get legalRegionOther;
+
   /// No description provided for @henuzVeriYok.
   ///
   /// In tr, this message translates to:

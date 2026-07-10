@@ -1,241 +1,81 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
+import '../../config/routes.dart';
 import '../../presentation/providers/app_providers.dart';
-import '../../services/ai/ai_content_service.dart';
-import '../../services/hive_service.dart';
 
-/// Yaşanılan ülkeye göre aileyi ilgilendiren güncel yasal düzenlemeler ve
-/// aileye katkı sağlayacak yasal avantajlar/haklar (Belçika, Hollanda, Türkiye).
-/// İçerik FamilyHub AI'dan gelir (haftalık önbellekli + "Yenile" ile anlık),
-/// ülke ayarına göre otomatik değişir.
-class LegalBenefitsCard extends ConsumerStatefulWidget {
+/// Hub'daki Yasal Haklar girişi — yalnızca NAVIGATION entry.
+/// Feature logic ve içerik bağımsız modüle taşındı
+/// (lib/features/legal_benefits). Karta dokununca /legal-benefits açılır.
+class LegalBenefitsCard extends ConsumerWidget {
   const LegalBenefitsCard({super.key});
 
-  @override
-  ConsumerState<LegalBenefitsCard> createState() => _LegalBenefitsCardState();
-}
-
-class _LegalBenefitsCardState extends ConsumerState<LegalBenefitsCard> {
-  late bool _expanded =
-      HiveService.getBoolSetting('legal_benefits_expanded', defaultValue: true);
-  int _refreshTick = 0;
-
-  static const _countryNames = {
-    'BE': 'Belçika',
-    'NL': 'Hollanda',
-    'TR': 'Türkiye',
-    'DE': 'Almanya',
-    'FR': 'Fransa',
-  };
-
-  /// AI erişilemezse (anahtar/kota) gösterilecek ülkeye özel GERÇEK statik
-  /// yasal hak/avantaj içeriği — böylece kart her zaman faydalı olur, yanıltıcı
-  /// "internet gerekli" mesajı gösterilmez.
-  static const Map<String, List<Map<String, String>>> _staticByCountry = {
-    'BE': [
-      {'title': 'Groeipakket (Çocuk Yardımı)', 'type': 'hak', 'description': 'Belçika’da her çocuk için aylık büyüme paketi ödemesi; bölgeye göre (Flaman/Valon/Brüksel) tutar değişir.'},
-      {'title': 'Ebeveyn İzni (Ouderschapsverlof)', 'type': 'hak', 'description': 'Her ebeveyn çocuk başına aylarca tam/yarı zamanlı ücretli ebeveyn izni kullanabilir.'},
-      {'title': 'Çocuk Bakım Desteği', 'type': 'hak', 'description': 'Kreş (kinderopvang) masrafları gelire göre sübvanse edilir; ayrıca vergi indirimi sağlar.'},
-      {'title': 'Verhoogde Tegemoetkoming', 'type': 'hak', 'description': 'Düşük gelirli aileler için sağlık ve ilaç masraflarında artırılmış geri ödeme.'},
-    ],
-    'NL': [
-      {'title': 'Kinderbijslag (SVB)', 'type': 'hak', 'description': 'Hollanda’da 18 yaş altı her çocuk için üç ayda bir devlet çocuk yardımı ödenir.'},
-      {'title': 'Kindgebonden Budget', 'type': 'hak', 'description': 'Gelire bağlı ek çocuk bütçesi; Belastingdienst üzerinden başvurulur.'},
-      {'title': 'Kinderopvangtoeslag', 'type': 'hak', 'description': 'Çalışan ebeveynler için kreş masraflarının büyük kısmı geri ödenir.'},
-      {'title': 'Ücretli Ebeveyn İzni', 'type': 'hak', 'description': 'İlk yıl 9 hafta kısmen ücretli ebeveyn izni (UWV) hakkı vardır.'},
-    ],
-    'TR': [
-      {'title': 'Doğum Yardımı', 'type': 'hak', 'description': 'Devlet, birinci çocukta 300₺, ikincide 400₺, üçüncü ve sonrası 600₺ tek seferlik doğum yardımı öder.'},
-      {'title': 'Doğum (Analık) İzni', 'type': 'hak', 'description': 'Çalışan anneye doğumdan önce 8, sonra 8 hafta olmak üzere 16 hafta ücretli izin.'},
-      {'title': 'Süt İzni', 'type': 'hak', 'description': 'Anne, çocuk 1 yaşına gelene kadar günde 1,5 saat süt izni kullanır.'},
-      {'title': 'Çocuk için Gelir Vergisi İndirimi', 'type': 'hak', 'description': 'Çalışanların bordrosunda eş ve çocuk sayısına göre asgari geçim/vergi avantajı uygulanır.'},
-    ],
-    'DE': [
-      {'title': 'Kindergeld', 'type': 'hak', 'description': 'Almanya’da her çocuk için aylık düzenli çocuk parası (Familienkasse) ödenir.'},
-      {'title': 'Elterngeld', 'type': 'hak', 'description': 'Doğum sonrası gelire bağlı ebeveyn parası; 12-14 aya kadar alınabilir.'},
-      {'title': 'Elternzeit', 'type': 'hak', 'description': 'Çocuk 3 yaşına gelene kadar iş garantili ebeveyn izni hakkı.'},
-    ],
-    'FR': [
-      {'title': 'Allocations Familiales (CAF)', 'type': 'hak', 'description': 'İki ve daha fazla çocuklu aileler için aylık aile yardımı ödenir.'},
-      {'title': 'Congé Parental', 'type': 'hak', 'description': 'Doğum sonrası ebeveyn izni; süre ve ödeme çocuk sayısına göre değişir.'},
-      {'title': 'PAJE', 'type': 'hak', 'description': 'Küçük çocuk için karşılama primi ve bakım desteği (garde d’enfant).'},
-    ],
-  };
-
-  void _toggle() {
-    setState(() => _expanded = !_expanded);
-    HiveService.setBoolSetting('legal_benefits_expanded', _expanded);
-  }
+  static String _countryLabel(String code) => switch (code) {
+        'NL' => 'Nederland',
+        'TR' => 'Türkiye',
+        'DE' => 'Deutschland',
+        'FR' => 'France',
+        _ => 'België',
+      };
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final t = AppLocalizations.of(context);
     final country = ref.watch(countryProvider);
-    final countryName = _countryNames[country] ?? 'Belçika';
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 4, 12, 4),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [Color(0xFF102A1E), Color(0xFF0E2233)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: const Color(0x2A10B981)),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            InkWell(
-              onTap: _toggle,
-              borderRadius: BorderRadius.circular(12),
-              child: Row(
-                children: [
-                  Container(
-                    width: 34,
-                    height: 34,
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                          colors: [Color(0xFF10B981), Color(0xFF059669)]),
-                      borderRadius: BorderRadius.circular(11),
-                    ),
-                    child: const Icon(Icons.gavel_rounded,
-                        color: Colors.white, size: 18),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Yasal Haklar & Avantajlar',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w800)),
-                        Text('$countryName · aileni ilgilendiren güncel bilgiler',
-                            style: const TextStyle(
-                                color: Color(0xFF9CA3AF), fontSize: 12)),
-                      ],
-                    ),
-                  ),
-                  if (_expanded)
-                    IconButton(
-                      onPressed: () => setState(() => _refreshTick++),
-                      icon: const Icon(Icons.refresh_rounded,
-                          color: Color(0xFF10B981), size: 20),
-                      tooltip: 'Yenile',
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(),
-                    ),
-                  const SizedBox(width: 6),
-                  AnimatedRotation(
-                    turns: _expanded ? 0.5 : 0,
-                    duration: const Duration(milliseconds: 200),
-                    child: const Icon(Icons.keyboard_arrow_down_rounded,
-                        color: Color(0xFF9CA3AF), size: 24),
-                  ),
-                ],
-              ),
+      child: InkWell(
+        onTap: () => context.push(AppRoutes.legalBenefits),
+        borderRadius: BorderRadius.circular(20),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFF102A1E), Color(0xFF0E2233)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
-            if (_expanded) ...[
-              const SizedBox(height: 12),
-              FutureBuilder<List<Map<String, dynamic>>>(
-                future: AiContentService.weeklyList(
-                  topic: 'legal_benefits_${country}_$_refreshTick',
-                  forceRefresh: _refreshTick > 0,
-                  prompt: '''
-$countryName'da yaşayan bir aile için GÜNCEL ve pratik yasal bilgileri üret.
-İki tür içerik ver: (1) aileyi ilgilendiren yasal düzenleme/yükümlülükler,
-(2) aileye maddi/hukuki katkı sağlayacak yasal HAK, destek ve avantajlar
-(çocuk yardımı, vergi indirimi, doğum/ebeveyn izni, eğitim/sağlık destekleri vb.).
-Yalnızca $countryName için geçerli, gerçek ve güncel bilgiler ver.
-4-5 madde. Her madde kısa ve uygulanabilir olsun.
-Sadece JSON döndür: {"items":[{"title":"Kısa başlık","description":"1-2 cümle açıklama","type":"hak|düzenleme"}]}
-Türkçe yaz.''',
-                  listKey: 'items',
-                  maxTokens: 900,
-                  // AI erişilemezse ülkeye özel gerçek statik içerik göster.
-                  fallback: (_staticByCountry[country] ??
-                          _staticByCountry['BE']!)
-                      .map((e) => Map<String, dynamic>.from(e))
-                      .toList(),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: const Color(0x2A10B981)),
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 34,
+                height: 34,
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                      colors: [Color(0xFF10B981), Color(0xFF059669)]),
+                  borderRadius: BorderRadius.circular(11),
                 ),
-                builder: (context, snap) {
-                  if (snap.connectionState == ConnectionState.waiting) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Row(children: [
-                        const SizedBox(
-                            width: 16,
-                            height: 16,
-                            child: CircularProgressIndicator(
-                                strokeWidth: 2, color: Color(0xFF10B981))),
-                        const SizedBox(width: 10),
-                        Text('$countryName için güncel bilgiler alınıyor…',
-                            style: const TextStyle(
-                                color: Color(0xFF9CA3AF), fontSize: 13)),
-                      ]),
-                    );
-                  }
-                  final items = snap.data ?? const [];
-                  if (items.isEmpty) {
-                    return const Text('Şu an bilgi alınamadı.',
-                        style:
-                            TextStyle(color: Color(0xFF9CA3AF), fontSize: 13));
-                  }
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      for (final it in items) _item(it),
-                    ],
-                  );
-                },
+                child: const Icon(Icons.gavel_rounded,
+                    color: Colors.white, size: 18),
               ),
-            ],
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _item(Map<String, dynamic> it) {
-    final title = (it['title'] ?? '').toString();
-    final desc = (it['description'] ?? '').toString();
-    final isRight = (it['type'] ?? '').toString().toLowerCase().contains('hak');
-    final color = isRight ? const Color(0xFF34D399) : const Color(0xFF60A5FA);
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(isRight ? Icons.verified_rounded : Icons.info_outline_rounded,
-              size: 16, color: color),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (title.isNotEmpty)
-                  Text(title,
-                      style: TextStyle(
-                          color: color,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w700)),
-                if (desc.isNotEmpty)
-                  Padding(
-                    padding: const EdgeInsets.only(top: 2),
-                    child: Text(desc,
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(t.legalBenefitsTitle,
                         style: const TextStyle(
-                            color: Color(0xFFD1D5DB),
-                            fontSize: 12.5,
-                            height: 1.4)),
-                  ),
-              ],
-            ),
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w800)),
+                    Text(t.legalBenefitsSubtitle(_countryLabel(country)),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                            color: Color(0xFF9CA3AF), fontSize: 12)),
+                  ],
+                ),
+              ),
+              const Icon(Icons.chevron_right_rounded,
+                  color: Color(0xFF9CA3AF), size: 24),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
