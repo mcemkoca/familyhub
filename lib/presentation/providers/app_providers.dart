@@ -12,6 +12,7 @@ import '../../repositories/calendar_repository.dart';
 import '../../repositories/budget_repository.dart';
 import '../../repositories/family_members_repository.dart';
 import '../../services/auth_service.dart';
+import '../../services/localization/locale_service.dart';
 import '../../services/weather_service.dart';
 import '../../services/location_weather_service.dart';
 import '../../services/location_service.dart';
@@ -32,49 +33,10 @@ export '../../services/child_auth_service.dart' show ChildAuthService;
 // ── Auth (exported from auth_service.dart) ──
 // authStateProvider, authUserProvider, currentUserProvider
 
-Locale _localeForLanguageLabel(String lang) {
-  switch (lang) {
-    case 'English':
-      return const Locale('en', 'US');
-    case 'Nederlands':
-      return const Locale('nl', 'NL');
-    case 'Français':
-      return const Locale('fr', 'FR');
-    case 'Türkçe':
-    default:
-      return const Locale('tr', 'TR');
-  }
-}
-
-/// Dil etiketi ↔ dil kodu eşlemesi (desteklenen: tr/en/nl/fr).
-String _languageLabelForCode(String code) {
-  switch (code) {
-    case 'en':
-      return 'English';
-    case 'nl':
-      return 'Nederlands';
-    case 'fr':
-      return 'Français';
-    default:
-      return 'Türkçe';
-  }
-}
-
+/// Uygulama dili. Başlangıç değeri LocaleService ile YAN-ETKİSİZ çözülür
+/// (sağlayıcı içinde Hive'a yazılmaz; kalıcılık açık kullanıcı eylemlerinde).
 final localeProvider = StateProvider<Locale>((ref) {
-  final saved = HiveService.getSetting('language');
-  if (saved != null && saved.isNotEmpty) {
-    return _localeForLanguageLabel(saved);
-  }
-
-  // İLK AÇILIŞ: kullanıcı henüz dil seçmedi → CİHAZ sistem dilini algıla.
-  // Desteklenen dillerden biriyse onu kullan, değilse Türkçe'ye düş.
-  final deviceCode = WidgetsBinding.instance.platformDispatcher.locale.languageCode;
-  const supported = {'tr', 'en', 'nl', 'fr'};
-  final code = supported.contains(deviceCode) ? deviceCode : 'tr';
-
-  // Algılanan dili kaydet → ayarlar ekranı doğru gösterir, sonraki açılışlarda tutarlı.
-  HiveService.setSetting('language', _languageLabelForCode(code));
-  return _localeForLanguageLabel(_languageLabelForCode(code));
+  return LocaleService.resolveInitialLocale();
 });
 
 /// Seçili ülke kodu (BE/TR/NL/FR/DE) — register'da belirlenir, ayarlardan değişir.

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../services/hive_service.dart';
 import '../../../services/notification_service.dart';
+import '../../../services/localization/locale_service.dart';
 import '../../providers/app_providers.dart';
 import '../../../config/country_config.dart';
 import '../../widgets/settings/screen_header.dart';
@@ -130,8 +131,13 @@ class _LanguageSettingsScreenState
     final effectiveLang =
         _draftDevice ? _deviceLanguageLabel : _draftLanguage;
 
-    await HiveService.setBoolSetting('useDeviceLanguage', _draftDevice);
-    await HiveService.setSetting('language', effectiveLang);
+    // Dil kararı LocaleService üzerinden (karar-state + kalıcılık tek yerde).
+    if (_draftDevice) {
+      await LocaleService.acceptDeviceLocale();
+    } else {
+      await LocaleService.selectManually(_draftLanguage);
+    }
+    // Bölge tercihleri (dilden ayrı — dil≠bölge).
     await HiveService.setSetting('country', country.code);
     await HiveService.setSetting('region', country.name);
     await HiveService.setSetting('currency', country.currencyCode);
