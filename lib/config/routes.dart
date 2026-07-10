@@ -12,6 +12,7 @@ import '../presentation/screens/organizer/calendar_screen.dart';
 import '../presentation/screens/organizer/shopping_list_screen.dart';
 import '../features/legal_benefits/presentation/legal_benefits_screen.dart';
 import '../features/family_intelligence/presentation/family_intelligence_screen.dart';
+import '../features/familyhub_ai/presentation/familyhub_ai_screen.dart';
 import '../presentation/screens/organizer/smart_rotation_screen.dart';
 import '../presentation/screens/organizer/calendar_sync_screen.dart';
 import '../presentation/screens/reminders/smart_reminders_screen.dart';
@@ -103,6 +104,7 @@ class AppRoutes {
   static const String legalBenefits = '/legal-benefits';
   static const String familyIntelligence = '/family-intelligence';
   static const String dailyIntelligence = '/daily-intelligence'; // legacy → redirect
+  static const String familyHubAI = '/familyhub-ai';
   static const String budget = '/budget';
   static const String family = '/family';
   static const String familyDetail = '/family/detail';
@@ -233,6 +235,7 @@ final router = GoRouter(
         GoRoute(path: AppRoutes.familyIntelligence, builder: (context, state) => const FamilyIntelligenceScreen()),
         // Legacy: eski "Günlük Zeka Özeti" route → Aile Zekası'na yönlendir.
         GoRoute(path: AppRoutes.dailyIntelligence, redirect: (context, state) => AppRoutes.familyIntelligence),
+        GoRoute(path: AppRoutes.familyHubAI, builder: (context, state) => const FamilyHubAIScreen()),
         GoRoute(path: AppRoutes.budget, builder: (context, state) => const BudgetScreen()),
         GoRoute(path: AppRoutes.family, builder: (context, state) => const FamilyScreen()),
         GoRoute(path: AppRoutes.chat, builder: (context, state) => const ChatScreen()),

@@ -3162,6 +3162,45 @@ class AppLocalizationsTr extends AppLocalizations {
       'Geciken görev, bekleyen görev ve alışveriş öğesi bulunmadı.';
 
   @override
+  String get familyHubAITitle => 'FamilyHub AI';
+
+  @override
+  String get familyHubAISubtitle => 'Ailen için akıllı asistan';
+
+  @override
+  String get fhaSummaryTitle => 'Bugünün bağlamı';
+
+  @override
+  String get fhaQuickActionsTitle => 'Hızlı aksiyonlar';
+
+  @override
+  String get fhaQuickReviewTasks => 'Görevleri gözden geçir';
+
+  @override
+  String get fhaQuickShopping => 'Alışveriş listesini aç';
+
+  @override
+  String get fhaQuickPlanDay => 'Bugünü planla';
+
+  @override
+  String get fhaQuickBudget => 'Bütçeyi özetle';
+
+  @override
+  String get fhaQuickLegal => 'Yasal hakları göster';
+
+  @override
+  String get fhaContextInfo =>
+      'Öneriler yalnızca sayısal aile özetinden üretilir; isim, sağlık ve finans detayları AI\'ya gönderilmez.';
+
+  @override
+  String get fhaDisclaimer =>
+      'FamilyHub AI önerileri bilgilendirme amaçlıdır; sağlık, hukuk veya finans konusunda kesin tavsiye değildir. Kritik işlemler onayınızla yapılır.';
+
+  @override
+  String get fhaChatComingSoon =>
+      'Doğal dil sohbeti yakında. Şimdilik bağlamsal hızlı aksiyonları kullanabilirsin.';
+
+  @override
   String get henuzVeriYok => 'Henüz veri yok';
 
   @override

@@ -3148,6 +3148,45 @@ class AppLocalizationsEn extends AppLocalizations {
       'No overdue tasks, pending tasks or shopping items were found.';
 
   @override
+  String get familyHubAITitle => 'FamilyHub AI';
+
+  @override
+  String get familyHubAISubtitle => 'Smart assistant for your family';
+
+  @override
+  String get fhaSummaryTitle => 'Today\'s context';
+
+  @override
+  String get fhaQuickActionsTitle => 'Quick actions';
+
+  @override
+  String get fhaQuickReviewTasks => 'Review tasks';
+
+  @override
+  String get fhaQuickShopping => 'Open shopping list';
+
+  @override
+  String get fhaQuickPlanDay => 'Plan today';
+
+  @override
+  String get fhaQuickBudget => 'Summarize budget';
+
+  @override
+  String get fhaQuickLegal => 'Show legal rights';
+
+  @override
+  String get fhaContextInfo =>
+      'Suggestions are generated only from a numeric family summary; names, health and finance details are not sent to the AI.';
+
+  @override
+  String get fhaDisclaimer =>
+      'FamilyHub AI suggestions are for information only; they are not definitive health, legal or financial advice. Critical actions require your confirmation.';
+
+  @override
+  String get fhaChatComingSoon =>
+      'Natural-language chat is coming soon. For now, use the contextual quick actions.';
+
+  @override
   String get henuzVeriYok => 'No data yet';
 
   @override

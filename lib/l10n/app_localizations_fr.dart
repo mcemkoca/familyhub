@@ -3161,6 +3161,45 @@ class AppLocalizationsFr extends AppLocalizations {
       'Aucune tâche en retard, tâche en attente ou article de courses trouvé.';
 
   @override
+  String get familyHubAITitle => 'FamilyHub AI';
+
+  @override
+  String get familyHubAISubtitle => 'Assistant intelligent pour votre famille';
+
+  @override
+  String get fhaSummaryTitle => 'Contexte du jour';
+
+  @override
+  String get fhaQuickActionsTitle => 'Actions rapides';
+
+  @override
+  String get fhaQuickReviewTasks => 'Revoir les tâches';
+
+  @override
+  String get fhaQuickShopping => 'Ouvrir la liste de courses';
+
+  @override
+  String get fhaQuickPlanDay => 'Planifier la journée';
+
+  @override
+  String get fhaQuickBudget => 'Résumer le budget';
+
+  @override
+  String get fhaQuickLegal => 'Afficher les droits';
+
+  @override
+  String get fhaContextInfo =>
+      'Les suggestions sont générées uniquement à partir d\'un résumé familial numérique ; les noms, données de santé et finances ne sont pas envoyés à l\'IA.';
+
+  @override
+  String get fhaDisclaimer =>
+      'Les suggestions de FamilyHub AI sont uniquement informatives ; elles ne constituent pas un conseil médical, juridique ou financier définitif. Les actions critiques nécessitent votre confirmation.';
+
+  @override
+  String get fhaChatComingSoon =>
+      'Le chat en langage naturel arrive bientôt. Pour l\'instant, utilisez les actions rapides contextuelles.';
+
+  @override
   String get henuzVeriYok => 'Aucune donnee';
 
   @override

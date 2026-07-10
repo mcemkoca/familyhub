@@ -3149,6 +3149,45 @@ class AppLocalizationsNl extends AppLocalizations {
       'Geen achterstallige taken, openstaande taken of boodschappen gevonden.';
 
   @override
+  String get familyHubAITitle => 'FamilyHub AI';
+
+  @override
+  String get familyHubAISubtitle => 'Slimme assistent voor je gezin';
+
+  @override
+  String get fhaSummaryTitle => 'Context van vandaag';
+
+  @override
+  String get fhaQuickActionsTitle => 'Snelle acties';
+
+  @override
+  String get fhaQuickReviewTasks => 'Taken bekijken';
+
+  @override
+  String get fhaQuickShopping => 'Boodschappenlijst openen';
+
+  @override
+  String get fhaQuickPlanDay => 'Vandaag plannen';
+
+  @override
+  String get fhaQuickBudget => 'Budget samenvatten';
+
+  @override
+  String get fhaQuickLegal => 'Rechten tonen';
+
+  @override
+  String get fhaContextInfo =>
+      'Suggesties worden alleen gegenereerd uit een numerieke gezinssamenvatting; namen, gezondheids- en financiële gegevens worden niet naar de AI gestuurd.';
+
+  @override
+  String get fhaDisclaimer =>
+      'Suggesties van FamilyHub AI zijn alleen ter informatie; het is geen definitief medisch, juridisch of financieel advies. Kritieke acties vereisen je bevestiging.';
+
+  @override
+  String get fhaChatComingSoon =>
+      'Chat in natuurlijke taal komt binnenkort. Gebruik voorlopig de contextuele snelle acties.';
+
+  @override
   String get henuzVeriYok => 'Nog geen gegevens';
 
   @override

@@ -6080,6 +6080,78 @@ abstract class AppLocalizations {
   /// **'Geciken görev, bekleyen görev ve alışveriş öğesi bulunmadı.'**
   String get fiReasonAllClear;
 
+  /// No description provided for @familyHubAITitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'FamilyHub AI'**
+  String get familyHubAITitle;
+
+  /// No description provided for @familyHubAISubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ailen için akıllı asistan'**
+  String get familyHubAISubtitle;
+
+  /// No description provided for @fhaSummaryTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugünün bağlamı'**
+  String get fhaSummaryTitle;
+
+  /// No description provided for @fhaQuickActionsTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hızlı aksiyonlar'**
+  String get fhaQuickActionsTitle;
+
+  /// No description provided for @fhaQuickReviewTasks.
+  ///
+  /// In tr, this message translates to:
+  /// **'Görevleri gözden geçir'**
+  String get fhaQuickReviewTasks;
+
+  /// No description provided for @fhaQuickShopping.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alışveriş listesini aç'**
+  String get fhaQuickShopping;
+
+  /// No description provided for @fhaQuickPlanDay.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugünü planla'**
+  String get fhaQuickPlanDay;
+
+  /// No description provided for @fhaQuickBudget.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bütçeyi özetle'**
+  String get fhaQuickBudget;
+
+  /// No description provided for @fhaQuickLegal.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yasal hakları göster'**
+  String get fhaQuickLegal;
+
+  /// No description provided for @fhaContextInfo.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öneriler yalnızca sayısal aile özetinden üretilir; isim, sağlık ve finans detayları AI\'ya gönderilmez.'**
+  String get fhaContextInfo;
+
+  /// No description provided for @fhaDisclaimer.
+  ///
+  /// In tr, this message translates to:
+  /// **'FamilyHub AI önerileri bilgilendirme amaçlıdır; sağlık, hukuk veya finans konusunda kesin tavsiye değildir. Kritik işlemler onayınızla yapılır.'**
+  String get fhaDisclaimer;
+
+  /// No description provided for @fhaChatComingSoon.
+  ///
+  /// In tr, this message translates to:
+  /// **'Doğal dil sohbeti yakında. Şimdilik bağlamsal hızlı aksiyonları kullanabilirsin.'**
+  String get fhaChatComingSoon;
+
   /// No description provided for @henuzVeriYok.
   ///
   /// In tr, this message translates to:
