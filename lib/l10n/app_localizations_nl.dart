@@ -2826,6 +2826,79 @@ class AppLocalizationsNl extends AppLocalizations {
       'Alle artikelen toegevoegd aan de lijst';
 
   @override
+  String get shoppingKonumAliniyor => 'Locatie ophalen…';
+
+  @override
+  String get shoppingKonumIzniYok =>
+      'Locatietoestemming geweigerd. Sta het toe in Instellingen.';
+
+  @override
+  String shoppingKonumBulundu(Object coords) {
+    return 'Je locatie: $coords — kaart openen';
+  }
+
+  @override
+  String get shoppingKonumAlinamadi =>
+      'Kon locatie niet ophalen. Probeer het opnieuw.';
+
+  @override
+  String get shoppingAiHazirlaniyor => 'AI-winkellijst voorbereiden…';
+
+  @override
+  String get shoppingListeOlusturulamadi =>
+      'Lijst kon niet worden gemaakt. Controleer je internetverbinding.';
+
+  @override
+  String get shoppingAiMarketBaslik => 'AI-winkellijst';
+
+  @override
+  String get shoppingDokunEkle =>
+      'Tik op een artikel om het aan je lijst toe te voegen.';
+
+  @override
+  String get shoppingTumunuEkle => 'Alles toevoegen';
+
+  @override
+  String get shoppingTarifeGoreBaslik => 'Boodschappen per recept';
+
+  @override
+  String shoppingTarifSayisi(Object count) {
+    return '$count recepten';
+  }
+
+  @override
+  String get shoppingTarifAra => 'Recepten zoeken...';
+
+  @override
+  String shoppingTarifMeta(Object time, Object count) {
+    return '$time min · $count ingrediënten';
+  }
+
+  @override
+  String get shoppingFiyatGuncellenemedi =>
+      'Prijzen konden niet worden bijgewerkt (AI-quotum mogelijk vol)';
+
+  @override
+  String get shoppingFiyatBasarisiz => 'Prijsupdate mislukt';
+
+  @override
+  String get shoppingFiyatlariGuncelle => 'Prijzen bijwerken (AI)';
+
+  @override
+  String shoppingGuncellendi(Object date) {
+    return 'Bijgewerkt: $date';
+  }
+
+  @override
+  String get shoppingMarketKatalogu => 'Winkelcatalogus';
+
+  @override
+  String get shoppingHaftaninFirsatlari => 'Aanbiedingen van deze week';
+
+  @override
+  String get shoppingTumu => 'Alles';
+
+  @override
   String get henuzVeriYok => 'Nog geen gegevens';
 
   @override

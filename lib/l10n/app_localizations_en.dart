@@ -2827,6 +2827,78 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shoppingTumUrunlerEklendi => 'All items added to the list';
 
   @override
+  String get shoppingKonumAliniyor => 'Getting location…';
+
+  @override
+  String get shoppingKonumIzniYok =>
+      'Location permission denied. Please allow it in Settings.';
+
+  @override
+  String shoppingKonumBulundu(Object coords) {
+    return 'Your location: $coords — opening map';
+  }
+
+  @override
+  String get shoppingKonumAlinamadi =>
+      'Could not get location. Please try again.';
+
+  @override
+  String get shoppingAiHazirlaniyor => 'Preparing AI store list…';
+
+  @override
+  String get shoppingListeOlusturulamadi =>
+      'List could not be created. Check your internet connection.';
+
+  @override
+  String get shoppingAiMarketBaslik => 'AI Store List';
+
+  @override
+  String get shoppingDokunEkle => 'Tap an item to add it to your list.';
+
+  @override
+  String get shoppingTumunuEkle => 'Add All';
+
+  @override
+  String get shoppingTarifeGoreBaslik => 'Shopping by Recipe';
+
+  @override
+  String shoppingTarifSayisi(Object count) {
+    return '$count recipes';
+  }
+
+  @override
+  String get shoppingTarifAra => 'Search recipes...';
+
+  @override
+  String shoppingTarifMeta(Object time, Object count) {
+    return '$time min · $count ingredients';
+  }
+
+  @override
+  String get shoppingFiyatGuncellenemedi =>
+      'Prices could not be updated (AI quota may be full)';
+
+  @override
+  String get shoppingFiyatBasarisiz => 'Price update failed';
+
+  @override
+  String get shoppingFiyatlariGuncelle => 'Update Prices (AI)';
+
+  @override
+  String shoppingGuncellendi(Object date) {
+    return 'Updated: $date';
+  }
+
+  @override
+  String get shoppingMarketKatalogu => 'Store Catalog';
+
+  @override
+  String get shoppingHaftaninFirsatlari => 'This Week\'s Deals';
+
+  @override
+  String get shoppingTumu => 'All';
+
+  @override
   String get henuzVeriYok => 'No data yet';
 
   @override

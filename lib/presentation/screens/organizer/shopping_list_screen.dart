@@ -335,9 +335,10 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
   /// marketleri açar (geo: URI → cihaz harita uygulaması; olmazsa OSM web).
   Future<void> _openNearbyMarketsMap() async {
     final messenger = ScaffoldMessenger.of(context);
-    messenger.showSnackBar(const SnackBar(
-      content: Text('Konum alınıyor…'),
-      duration: Duration(seconds: 1),
+    final t = AppLocalizations.of(context);
+    messenger.showSnackBar(SnackBar(
+      content: Text(t.shoppingKonumAliniyor),
+      duration: const Duration(seconds: 1),
     ));
     try {
       // İzin kontrolü + iste.
@@ -347,9 +348,9 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
       }
       if (perm == LocationPermission.denied ||
           perm == LocationPermission.deniedForever) {
-        messenger.showSnackBar(const SnackBar(
-          content: Text('Konum izni verilmedi. Ayarlardan izin verin.'),
-          backgroundColor: Color(0xFFEF4444),
+        messenger.showSnackBar(SnackBar(
+          content: Text(t.shoppingKonumIzniYok),
+          backgroundColor: const Color(0xFFEF4444),
         ));
         return;
       }
@@ -362,8 +363,8 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
 
       // Anlık konumu kullanıcıya yaz.
       messenger.showSnackBar(SnackBar(
-        content: Text(
-            'Konumun: ${lat.toStringAsFixed(5)}, ${lon.toStringAsFixed(5)} — harita açılıyor'),
+        content: Text(t.shoppingKonumBulundu(
+            '${lat.toStringAsFixed(5)}, ${lon.toStringAsFixed(5)}')),
         duration: const Duration(seconds: 2),
       ));
 
@@ -379,7 +380,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
       await launchUrl(osmUri, mode: LaunchMode.externalApplication);
     } catch (e) {
       messenger.showSnackBar(SnackBar(
-        content: Text('Konum alınamadı: $e'),
+        content: Text(t.shoppingKonumAlinamadi),
         backgroundColor: const Color(0xFFEF4444),
       ));
     }
@@ -432,16 +433,16 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
             ),
             builder: (context, snap) {
               if (snap.connectionState == ConnectionState.waiting) {
-                return const Center(
+                return Center(
                   child: Padding(
-                    padding: EdgeInsets.all(32),
+                    padding: const EdgeInsets.all(32),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        CircularProgressIndicator(color: Color(0xFF8B5CF6)),
-                        SizedBox(height: 16),
-                        Text('AI market listesi hazırlanıyor…',
-                            style: TextStyle(color: Color(0xFF9CA3AF))),
+                        const CircularProgressIndicator(color: Color(0xFF8B5CF6)),
+                        const SizedBox(height: 16),
+                        Text(AppLocalizations.of(context).shoppingAiHazirlaniyor,
+                            style: const TextStyle(color: Color(0xFF9CA3AF))),
                       ],
                     ),
                   ),
@@ -449,13 +450,13 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
               }
               final items = snap.data ?? const [];
               if (items.isEmpty) {
-                return const Center(
+                return Center(
                   child: Padding(
-                    padding: EdgeInsets.all(32),
+                    padding: const EdgeInsets.all(32),
                     child: Text(
-                        'Liste oluşturulamadı. İnternet bağlantısını kontrol edin.',
+                        AppLocalizations.of(context).shoppingListeOlusturulamadi,
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: Color(0xFF9CA3AF))),
+                        style: const TextStyle(color: Color(0xFF9CA3AF))),
                   ),
                 );
               }
@@ -479,14 +480,14 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  const Row(
+                  Row(
                     children: [
-                      Icon(Icons.auto_awesome_motion,
+                      const Icon(Icons.auto_awesome_motion,
                           color: Color(0xFF8B5CF6)),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
-                        child: Text('AI Market Listesi',
-                            style: TextStyle(
+                        child: Text(AppLocalizations.of(context).shoppingAiMarketBaslik,
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
                                 fontWeight: FontWeight.w900)),
@@ -494,8 +495,8 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                     ],
                   ),
                   const SizedBox(height: 4),
-                  const Text('Ürüne dokunarak listene ekle.',
-                      style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
+                  Text(AppLocalizations.of(context).shoppingDokunEkle,
+                      style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
                   const SizedBox(height: 16),
                   for (final entry in byMarket.entries) ...[
                     Row(
@@ -580,8 +581,8 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                       },
                       icon: const Icon(Icons.playlist_add_check,
                           color: Colors.white),
-                      label: const Text('Tümünü Ekle',
-                          style: TextStyle(
+                      label: Text(AppLocalizations.of(context).shoppingTumunuEkle,
+                          style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w800)),
                       style: ElevatedButton.styleFrom(
@@ -640,17 +641,17 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Tarife Göre Alışveriş',
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700,
+                          Text(AppLocalizations.of(context).shoppingTarifeGoreBaslik,
+                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700,
                               color: Color(0xFFE5E7EB))),
                           const SizedBox(height: 4),
-                          Text('${_recipes.length} Türk tarifi',
+                          Text(AppLocalizations.of(context).shoppingTarifSayisi('${_recipes.length}'),
                             style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
                           const SizedBox(height: 12),
                           TextField(
                             controller: searchCtrl,
                             decoration: InputDecoration(
-                              hintText: 'Tarif ara...',
+                              hintText: AppLocalizations.of(context).shoppingTarifAra,
                               prefixIcon: const Icon(Icons.search, size: 20),
                               filled: true,
                               fillColor: const Color(0xFF0A0A0F),
@@ -677,7 +678,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                           return ListTile(
                             leading: Text(cat, style: const TextStyle(fontSize: 24)),
                             title: Text(title, style: const TextStyle(fontWeight: FontWeight.w600, color: Color(0xFFE5E7EB))),
-                            subtitle: Text('$time dk ”¢ $ingredientCount malzeme',
+                            subtitle: Text(AppLocalizations.of(context).shoppingTarifMeta(time, '$ingredientCount'),
                               style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
                             trailing: ElevatedButton.icon(
                               onPressed: () {
@@ -1274,8 +1275,8 @@ class _MarketCatalogSheetState extends State<_MarketCatalogSheet> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(prices.isEmpty
-                ? 'Fiyat güncellenemedi (AI kotası dolu olabilir)'
-                : '✅ ${prices.length} ürün fiyatı güncellendi'),
+                ? AppLocalizations.of(context).shoppingFiyatGuncellenemedi
+                : AppLocalizations.of(context).shoppingMalzemeEklendi('', prices.length)),
             backgroundColor: prices.isEmpty
                 ? const Color(0xFFEF4444)
                 : const Color(0xFF10B981),
@@ -1285,7 +1286,7 @@ class _MarketCatalogSheetState extends State<_MarketCatalogSheet> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Fiyat güncelleme başarısız')),
+          SnackBar(content: Text(AppLocalizations.of(context).shoppingFiyatBasarisiz)),
         );
       }
     } finally {
@@ -1327,14 +1328,15 @@ class _MarketCatalogSheetState extends State<_MarketCatalogSheet> {
                 children: [
                   const Icon(Icons.storefront, color: Color(0xFF10B981)),
                   const SizedBox(width: 8),
-                  const Text('Market Kataloğu',
-                      style: TextStyle(
+                  Text(AppLocalizations.of(context).shoppingMarketKatalogu,
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                           fontWeight: FontWeight.w800)),
                   const Spacer(),
                   Text(
-                      'Güncellendi: ${_fmtDate(MarketCatalog.lastPriceUpdate ?? monday)}',
+                      AppLocalizations.of(context).shoppingGuncellendi(
+                          _fmtDate(MarketCatalog.lastPriceUpdate ?? monday)),
                       style: const TextStyle(
                           color: Color(0xFF6B7280), fontSize: 11)),
                   const SizedBox(width: 6),
@@ -1347,7 +1349,7 @@ class _MarketCatalogSheetState extends State<_MarketCatalogSheet> {
                       : IconButton(
                           onPressed: _refreshPrices,
                           visualDensity: VisualDensity.compact,
-                          tooltip: 'Fiyatları Güncelle (AI)',
+                          tooltip: AppLocalizations.of(context).shoppingFiyatlariGuncelle,
                           icon: const Icon(Icons.refresh_rounded,
                               color: Color(0xFF10B981), size: 20),
                         ),
@@ -1385,13 +1387,13 @@ class _MarketCatalogSheetState extends State<_MarketCatalogSheet> {
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                 children: [
                   // Bu haftanın fırsatları
-                  const Row(
+                  Row(
                     children: [
-                      Icon(Icons.local_fire_department,
+                      const Icon(Icons.local_fire_department,
                           color: Color(0xFFF97316), size: 18),
-                      SizedBox(width: 6),
-                      Text('Bu Haftanın Fırsatları',
-                          style: TextStyle(
+                      const SizedBox(width: 6),
+                      Text(AppLocalizations.of(context).shoppingHaftaninFirsatlari,
+                          style: const TextStyle(
                               color: Colors.white,
                               fontSize: 15,
                               fontWeight: FontWeight.w800)),
@@ -1467,7 +1469,10 @@ class _MarketCatalogSheetState extends State<_MarketCatalogSheet> {
                                   : const Color(0xFF1A1A24),
                               borderRadius: BorderRadius.circular(16),
                             ),
-                            child: Text(c,
+                            child: Text(
+                                c == 'Tümü'
+                                    ? AppLocalizations.of(context).shoppingTumu
+                                    : c,
                                 style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w700,

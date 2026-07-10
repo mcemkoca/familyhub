@@ -2844,6 +2844,78 @@ class AppLocalizationsTr extends AppLocalizations {
   String get shoppingTumUrunlerEklendi => 'Tüm ürünler listeye eklendi';
 
   @override
+  String get shoppingKonumAliniyor => 'Konum alınıyor…';
+
+  @override
+  String get shoppingKonumIzniYok =>
+      'Konum izni verilmedi. Ayarlardan izin verin.';
+
+  @override
+  String shoppingKonumBulundu(Object coords) {
+    return 'Konumun: $coords — harita açılıyor';
+  }
+
+  @override
+  String get shoppingKonumAlinamadi =>
+      'Konum alınamadı. Lütfen tekrar deneyin.';
+
+  @override
+  String get shoppingAiHazirlaniyor => 'AI market listesi hazırlanıyor…';
+
+  @override
+  String get shoppingListeOlusturulamadi =>
+      'Liste oluşturulamadı. İnternet bağlantısını kontrol edin.';
+
+  @override
+  String get shoppingAiMarketBaslik => 'AI Market Listesi';
+
+  @override
+  String get shoppingDokunEkle => 'Ürüne dokunarak listene ekle.';
+
+  @override
+  String get shoppingTumunuEkle => 'Tümünü Ekle';
+
+  @override
+  String get shoppingTarifeGoreBaslik => 'Tarife Göre Alışveriş';
+
+  @override
+  String shoppingTarifSayisi(Object count) {
+    return '$count tarif';
+  }
+
+  @override
+  String get shoppingTarifAra => 'Tarif ara...';
+
+  @override
+  String shoppingTarifMeta(Object time, Object count) {
+    return '$time dk · $count malzeme';
+  }
+
+  @override
+  String get shoppingFiyatGuncellenemedi =>
+      'Fiyat güncellenemedi (AI kotası dolu olabilir)';
+
+  @override
+  String get shoppingFiyatBasarisiz => 'Fiyat güncelleme başarısız';
+
+  @override
+  String get shoppingFiyatlariGuncelle => 'Fiyatları Güncelle (AI)';
+
+  @override
+  String shoppingGuncellendi(Object date) {
+    return 'Güncellendi: $date';
+  }
+
+  @override
+  String get shoppingMarketKatalogu => 'Market Kataloğu';
+
+  @override
+  String get shoppingHaftaninFirsatlari => 'Bu Haftanın Fırsatları';
+
+  @override
+  String get shoppingTumu => 'Tümü';
+
+  @override
   String get henuzVeriYok => 'Henüz veri yok';
 
   @override

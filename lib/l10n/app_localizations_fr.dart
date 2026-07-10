@@ -2837,6 +2837,79 @@ class AppLocalizationsFr extends AppLocalizations {
       'Tous les articles ajoutés à la liste';
 
   @override
+  String get shoppingKonumAliniyor => 'Obtention de la position…';
+
+  @override
+  String get shoppingKonumIzniYok =>
+      'Autorisation de localisation refusée. Autorisez-la dans les Réglages.';
+
+  @override
+  String shoppingKonumBulundu(Object coords) {
+    return 'Votre position : $coords — ouverture de la carte';
+  }
+
+  @override
+  String get shoppingKonumAlinamadi =>
+      'Impossible d\'obtenir la position. Veuillez réessayer.';
+
+  @override
+  String get shoppingAiHazirlaniyor => 'Préparation de la liste de magasin IA…';
+
+  @override
+  String get shoppingListeOlusturulamadi =>
+      'Impossible de créer la liste. Vérifiez votre connexion Internet.';
+
+  @override
+  String get shoppingAiMarketBaslik => 'Liste de magasin IA';
+
+  @override
+  String get shoppingDokunEkle =>
+      'Touchez un article pour l\'ajouter à votre liste.';
+
+  @override
+  String get shoppingTumunuEkle => 'Tout ajouter';
+
+  @override
+  String get shoppingTarifeGoreBaslik => 'Courses par recette';
+
+  @override
+  String shoppingTarifSayisi(Object count) {
+    return '$count recettes';
+  }
+
+  @override
+  String get shoppingTarifAra => 'Rechercher des recettes...';
+
+  @override
+  String shoppingTarifMeta(Object time, Object count) {
+    return '$time min · $count ingrédients';
+  }
+
+  @override
+  String get shoppingFiyatGuncellenemedi =>
+      'Impossible de mettre à jour les prix (quota IA peut-être atteint)';
+
+  @override
+  String get shoppingFiyatBasarisiz => 'Échec de la mise à jour des prix';
+
+  @override
+  String get shoppingFiyatlariGuncelle => 'Mettre à jour les prix (IA)';
+
+  @override
+  String shoppingGuncellendi(Object date) {
+    return 'Mis à jour : $date';
+  }
+
+  @override
+  String get shoppingMarketKatalogu => 'Catalogue des magasins';
+
+  @override
+  String get shoppingHaftaninFirsatlari => 'Offres de la semaine';
+
+  @override
+  String get shoppingTumu => 'Tout';
+
+  @override
   String get henuzVeriYok => 'Aucune donnee';
 
   @override

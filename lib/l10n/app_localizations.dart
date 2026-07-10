@@ -5510,6 +5510,126 @@ abstract class AppLocalizations {
   /// **'Tüm ürünler listeye eklendi'**
   String get shoppingTumUrunlerEklendi;
 
+  /// No description provided for @shoppingKonumAliniyor.
+  ///
+  /// In tr, this message translates to:
+  /// **'Konum alınıyor…'**
+  String get shoppingKonumAliniyor;
+
+  /// No description provided for @shoppingKonumIzniYok.
+  ///
+  /// In tr, this message translates to:
+  /// **'Konum izni verilmedi. Ayarlardan izin verin.'**
+  String get shoppingKonumIzniYok;
+
+  /// No description provided for @shoppingKonumBulundu.
+  ///
+  /// In tr, this message translates to:
+  /// **'Konumun: {coords} — harita açılıyor'**
+  String shoppingKonumBulundu(Object coords);
+
+  /// No description provided for @shoppingKonumAlinamadi.
+  ///
+  /// In tr, this message translates to:
+  /// **'Konum alınamadı. Lütfen tekrar deneyin.'**
+  String get shoppingKonumAlinamadi;
+
+  /// No description provided for @shoppingAiHazirlaniyor.
+  ///
+  /// In tr, this message translates to:
+  /// **'AI market listesi hazırlanıyor…'**
+  String get shoppingAiHazirlaniyor;
+
+  /// No description provided for @shoppingListeOlusturulamadi.
+  ///
+  /// In tr, this message translates to:
+  /// **'Liste oluşturulamadı. İnternet bağlantısını kontrol edin.'**
+  String get shoppingListeOlusturulamadi;
+
+  /// No description provided for @shoppingAiMarketBaslik.
+  ///
+  /// In tr, this message translates to:
+  /// **'AI Market Listesi'**
+  String get shoppingAiMarketBaslik;
+
+  /// No description provided for @shoppingDokunEkle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ürüne dokunarak listene ekle.'**
+  String get shoppingDokunEkle;
+
+  /// No description provided for @shoppingTumunuEkle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tümünü Ekle'**
+  String get shoppingTumunuEkle;
+
+  /// No description provided for @shoppingTarifeGoreBaslik.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tarife Göre Alışveriş'**
+  String get shoppingTarifeGoreBaslik;
+
+  /// No description provided for @shoppingTarifSayisi.
+  ///
+  /// In tr, this message translates to:
+  /// **'{count} tarif'**
+  String shoppingTarifSayisi(Object count);
+
+  /// No description provided for @shoppingTarifAra.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tarif ara...'**
+  String get shoppingTarifAra;
+
+  /// No description provided for @shoppingTarifMeta.
+  ///
+  /// In tr, this message translates to:
+  /// **'{time} dk · {count} malzeme'**
+  String shoppingTarifMeta(Object time, Object count);
+
+  /// No description provided for @shoppingFiyatGuncellenemedi.
+  ///
+  /// In tr, this message translates to:
+  /// **'Fiyat güncellenemedi (AI kotası dolu olabilir)'**
+  String get shoppingFiyatGuncellenemedi;
+
+  /// No description provided for @shoppingFiyatBasarisiz.
+  ///
+  /// In tr, this message translates to:
+  /// **'Fiyat güncelleme başarısız'**
+  String get shoppingFiyatBasarisiz;
+
+  /// No description provided for @shoppingFiyatlariGuncelle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Fiyatları Güncelle (AI)'**
+  String get shoppingFiyatlariGuncelle;
+
+  /// No description provided for @shoppingGuncellendi.
+  ///
+  /// In tr, this message translates to:
+  /// **'Güncellendi: {date}'**
+  String shoppingGuncellendi(Object date);
+
+  /// No description provided for @shoppingMarketKatalogu.
+  ///
+  /// In tr, this message translates to:
+  /// **'Market Kataloğu'**
+  String get shoppingMarketKatalogu;
+
+  /// No description provided for @shoppingHaftaninFirsatlari.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu Haftanın Fırsatları'**
+  String get shoppingHaftaninFirsatlari;
+
+  /// No description provided for @shoppingTumu.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tümü'**
+  String get shoppingTumu;
+
   /// No description provided for @henuzVeriYok.
   ///
   /// In tr, this message translates to:
