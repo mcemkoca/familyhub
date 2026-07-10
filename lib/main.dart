@@ -94,11 +94,12 @@ Future<void> _initAndRunApp() async {
   List<StreakEntry> savedStreaks = [];
 
   try {
-    // Fast local init first
+    // Fast local init first — desteklenen tüm diller için tarih/sayı biçimi verisi
+    // (aksi halde en/fr/nl tarihleri DateFormat'ta hata verir).
     await _safeInit(
-      () => initializeDateFormatting('tr_TR', null),
+      () => initializeDateFormatting(),
       'dateFormatting',
-      ms: 2000,
+      ms: 3000,
     );
     await _safeInit(Hive.initFlutter, 'Hive', ms: 2000);
     await _safeInit(HiveService.init, 'HiveService', ms: 2000);
