@@ -159,7 +159,7 @@ class _TasksTabState extends State<_TasksTab> {
       context: context,
       builder: (c) => AlertDialog(
         backgroundColor: const Color(0xFF1E293B),
-        title: const Text('Görev Sil', style: TextStyle(color: Colors.white)),
+        title: Text(AppLocalizations.of(context).gorevSil, style: TextStyle(color: Colors.white)),
         content: Text(
           '"${task.title}" görevini silmek istiyor musun?',
           style: const TextStyle(color: Color(0xFF9CA3AF)),
@@ -299,8 +299,7 @@ class _HomeworksTabState extends State<_HomeworksTab> {
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
-                'Yeni Ödev Ekle',
+              Text(AppLocalizations.of(context).yeniOdevEkle,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -389,8 +388,7 @@ class _HomeworksTabState extends State<_HomeworksTab> {
                     ),
                   ),
                   onPressed: () => _createHomework(),
-                  child: const Text(
-                    'Ödev Ekle',
+                  child: Text(AppLocalizations.of(context).odevEkle,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -443,9 +441,8 @@ class _HomeworksTabState extends State<_HomeworksTab> {
       context: context,
       builder: (c) => AlertDialog(
         backgroundColor: const Color(0xFF1E293B),
-        title: const Text('Ödev Sil', style: TextStyle(color: Colors.white)),
-        content: const Text(
-          'Bu ödevi silmek istiyor musun?',
+        title: Text(AppLocalizations.of(context).odevSil, style: TextStyle(color: Colors.white)),
+        content: Text(AppLocalizations.of(context).buOdeviSilmekIstiyorMusun,
           style: TextStyle(color: Colors.white70),
         ),
         actions: [
@@ -619,8 +616,7 @@ class _ScheduleTabState extends State<_ScheduleTab> {
                 ),
               ),
               const SizedBox(height: 12),
-              const Text(
-                'Gün',
+              Text(AppLocalizations.of(context).gun,
                 style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 14),
               ),
               const SizedBox(height: 8),
@@ -954,8 +950,7 @@ class _DevelopmentTabState extends State<_DevelopmentTab> {
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
-                'Yeni Gelişim Kaydı',
+              Text(AppLocalizations.of(context).yeniGelisimKaydi,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -1077,9 +1072,8 @@ class _DevelopmentTabState extends State<_DevelopmentTab> {
       context: context,
       builder: (c) => AlertDialog(
         backgroundColor: const Color(0xFF1E293B),
-        title: const Text('Kayıt Sil', style: TextStyle(color: Colors.white)),
-        content: const Text(
-          'Bu kaydı silmek istiyor musun?',
+        title: Text(AppLocalizations.of(context).kayitSil, style: TextStyle(color: Colors.white)),
+        content: Text(AppLocalizations.of(context).buKaydiSilmekIstiyorMusun,
           style: TextStyle(color: Colors.white70),
         ),
         actions: [
@@ -1330,8 +1324,7 @@ class _StreakWidget extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
-                    'günlük seri',
+                  Text(AppLocalizations.of(context).gunlukSeri,
                     style: TextStyle(
                       color: Colors.white.withAlpha(200),
                       fontSize: 14,
@@ -1427,8 +1420,7 @@ class _StreakWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'HAFTALIK GÖRÜNÜM',
+                  Text(AppLocalizations.of(context).haftalikGorunum,
                     style: TextStyle(
                       color: Color(0xFF6B7280),
                       fontSize: 11,
@@ -1646,12 +1638,11 @@ class _AddTaskButton extends StatelessWidget {
             child: const Icon(Icons.add, color: Color(0xFF3B82F6), size: 22),
           ),
           const SizedBox(width: 14),
-          const Expanded(
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Yeni Görev Ekle',
+                Text(AppLocalizations.of(context).yeniGorevEkle,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 15,
@@ -1659,8 +1650,7 @@ class _AddTaskButton extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 2),
-                Text(
-                  'Çocuğuna yeni bir görev ata',
+                Text(AppLocalizations.of(context).cocugunaYeniBirGorevAta,
                   style: TextStyle(color: Colors.grey, fontSize: 13),
                 ),
               ],

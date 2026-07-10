@@ -150,20 +150,19 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Görevi Düzenle',
+                  Text(AppLocalizations.of(context).goreviDuzenle,
                     style: Theme.of(context).textTheme.displaySmall,
                   ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: _editController,
                   autofocus: true,
-                  decoration: const InputDecoration(labelText: 'Görev Başlığı'),
+                  decoration: InputDecoration(labelText: AppLocalizations.of(context).taskTitle),
                 ),
                 const SizedBox(height: 12),
                 TextField(
                   controller: _editDescController,
-                  decoration: const InputDecoration(labelText: 'Açıklama'),
+                  decoration: InputDecoration(labelText: AppLocalizations.of(context).description),
                 ),
                 const SizedBox(height: 12),
                 Wrap(
@@ -217,7 +216,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                     initialValue: _editAssignedTo.isEmpty
                         ? null
                         : _editAssignedTo,
-                    decoration: const InputDecoration(labelText: 'Atanan Kişi'),
+                    decoration: InputDecoration(labelText: AppLocalizations.of(context).atananKisi),
                     items: members.map((m) {
                       return DropdownMenuItem(value: m.id, child: Text(m.name));
                     }).toList(),
@@ -354,15 +353,14 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Yeni Görev',
+                  Text(AppLocalizations.of(context).yeniGorev,
                     style: Theme.of(context).textTheme.displaySmall,
                   ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: _titleController,
                   autofocus: true,
-                  decoration: const InputDecoration(labelText: 'Görev Başlığı'),
+                  decoration: InputDecoration(labelText: AppLocalizations.of(context).taskTitle),
                 ),
                 const SizedBox(height: 12),
                 TextField(
@@ -418,7 +416,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                 if (members.isNotEmpty)
                   DropdownButtonFormField<String>(
                     initialValue: _assignedTo.isEmpty ? null : _assignedTo,
-                    decoration: const InputDecoration(labelText: 'Atanan Kişi'),
+                    decoration: InputDecoration(labelText: AppLocalizations.of(context).atananKisi),
                     items: members.map((m) {
                       return DropdownMenuItem(value: m.id, child: Text(m.name));
                     }).toList(),
@@ -495,7 +493,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.auto_awesome),
-            tooltip: 'Akıllı Rotasyon',
+            tooltip: AppLocalizations.of(context).akilliRotasyon,
             onPressed: () => context.push(AppRoutes.smartRotation),
           ),
         ],
@@ -503,14 +501,13 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
       body: Stack(
         children: [
           tasks.isEmpty
-              ? const Center(
+              ? Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.task_alt, size: 64, color: Color(0xFF9CA3AF)),
                       SizedBox(height: 16),
-                      Text(
-                        'Henüz görev yok',
+                      Text(AppLocalizations.of(context).henuzGorevYok,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,

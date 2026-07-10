@@ -287,7 +287,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
           IconButton(
             icon: const Icon(Icons.rule_folder_outlined),
             onPressed: _toggleRules,
-            tooltip: 'Adalet Kuralları',
+            tooltip: AppLocalizations.of(context).adaletKurallari,
           ),
         ],
       ),
@@ -310,8 +310,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
           children: [
             const Icon(Icons.error_outline, size: 56, color: Color(0xFF6B7280)),
             const SizedBox(height: 16),
-            const Text(
-              'Veriler yüklenemedi',
+            Text(AppLocalizations.of(context).verilerYuklenemedi,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Color(0xFFE5E7EB)),
             ),
             const SizedBox(height: 8),
@@ -558,8 +557,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Akıllı Görev Rotasyonu',
+                    Text(AppLocalizations.of(context).akilligorevrotasyonu1,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -567,8 +565,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
                       ),
                     ),
                     const SizedBox(height: 2),
-                    Text(
-                      'Otomatik dağıtım + Adalet algoritması',
+                    Text(AppLocalizations.of(context).otomatikDagitimAdaletAlgoritmasi,
                       style: TextStyle(
                         color: Colors.white.withAlpha(200),
                         fontSize: 13,
@@ -782,7 +779,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
     return Container(
       padding: const EdgeInsets.all(40),
       alignment: Alignment.center,
-      child: const Column(
+      child: Column(
         children: [
           SizedBox(
             width: 48,
@@ -793,16 +790,14 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
             ),
           ),
           SizedBox(height: 16),
-          Text(
-            'Adalet algoritması görevleri dağıtıyor...',
+          Text(AppLocalizations.of(context).adaletAlgoritmasiGorevleriDagitiyor,
             style: TextStyle(
               color: Color(0xFF6B7280),
               fontSize: 14,
             ),
           ),
           SizedBox(height: 4),
-          Text(
-            'Genetik optimizasyon + Eşit yük dengelemesi',
+          Text(AppLocalizations.of(context).genetikOptimizasyonEsitYukDengelemesi,
             style: TextStyle(
               color: Color(0xFF6B7280),
               fontSize: 12,
@@ -817,7 +812,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
     return Container(
       padding: const EdgeInsets.all(40),
       alignment: Alignment.center,
-      child: const Column(
+      child: Column(
         children: [
           Icon(
             Icons.auto_awesome_outlined,
@@ -825,8 +820,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
             color: Color(0xFF6B7280),
           ),
           SizedBox(height: 16),
-          Text(
-            'Henüz dağıtım yapılmadı',
+          Text(AppLocalizations.of(context).henuzDagitimYapilmadi,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -1011,8 +1005,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
                     color: AppColors.error.withAlpha(20),
                     borderRadius: BorderRadius.circular(6),
                   ),
-                  child: const Text(
-                    'Yüksek',
+                  child: Text(AppLocalizations.of(context).high,
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
@@ -1105,8 +1098,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
                 color: const Color(0xFF10B981).withAlpha(20),
                 borderRadius: BorderRadius.circular(6),
               ),
-              child: const Text(
-                'Atandı',
+              child: Text(AppLocalizations.of(context).atandi,
                 style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
@@ -1132,12 +1124,11 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
               Icon(Icons.lightbulb, size: 18, color: AppColors.orange),
               SizedBox(width: 8),
-              Text(
-                'AI Önerileri',
+              Text(AppLocalizations.of(context).aiOnerileri,
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w700,
@@ -1176,8 +1167,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
                 onPressed: _toggleRules,
               ),
               const SizedBox(width: 8),
-              const Text(
-                'Adalet Kuralları & Ağırlıklar',
+              Text(AppLocalizations.of(context).adaletKurallariAgirliklar,
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
@@ -1285,8 +1275,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Özel Kurallar',
+                Text(AppLocalizations.of(context).ozelKurallar,
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
@@ -1318,8 +1307,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Ödül Sistemi',
+                Text(AppLocalizations.of(context).odulSistemi,
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w700,

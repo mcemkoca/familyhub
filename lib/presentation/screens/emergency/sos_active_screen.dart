@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../services/emergency_auto_actions_engine.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 
 class SosActiveScreen extends StatefulWidget {
   const SosActiveScreen({super.key});
@@ -61,16 +62,14 @@ class _SosActiveScreenState extends State<SosActiveScreen> {
                   children: [
                     const Icon(Icons.emergency, color: Colors.white, size: 48),
                     const SizedBox(height: 8),
-                    const Text(
-                      'SOS AKTİF',
+                    Text(AppLocalizations.of(context).sosAktif,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      'Otomatik yardım çağrısı devam ediyor',
+                    Text(AppLocalizations.of(context).otomatikYardimCagrisiDevamEdiyor,
                       style: TextStyle(
                         color: Colors.red.shade100,
                         fontSize: 14,
@@ -139,7 +138,7 @@ class _SosActiveScreenState extends State<SosActiveScreen> {
                         _checkRow(
                           true,
                           'Ses kaydı başladı',
-                          subtitle: 'Süre: 3 dk 12 sn',
+                          subtitle: AppLocalizations.of(context).sure3Dk12Sn,
                         ),
                       ]),
 
@@ -174,10 +173,9 @@ class _SosActiveScreenState extends State<SosActiveScreen> {
                   Navigator.pop(context);
                 },
                 icon: const Icon(Icons.check_circle, size: 28),
-                label: const Padding(
+                label: Padding(
                   padding: EdgeInsets.symmetric(vertical: 12),
-                  child: Text(
-                    'İYİYİM - SİSTEMİ DURDUR',
+                  child: Text(AppLocalizations.of(context).iyiyimSistemiDurdur,
                     style: TextStyle(fontSize: 16),
                   ),
                 ),

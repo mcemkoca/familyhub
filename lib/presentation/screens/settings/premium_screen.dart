@@ -232,8 +232,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                         color: const Color(0xFF8B5CF6),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: const Text(
-                        'En Popüler',
+                      child: Text(AppLocalizations.of(context).enPopuler,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 11,

@@ -15,6 +15,7 @@ import '../../widgets/settings/profile_card.dart';
 import '../../widgets/settings/premium_card.dart';
 import '../../widgets/settings/settings_section.dart';
 import '../../widgets/settings/settings_item.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -108,13 +109,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             // ── BİLDİRİMLER ─────────────────────────────────────────
             SliverToBoxAdapter(
               child: SettingsSection(
-                title: 'BİLDİRİMLER',
+                title: AppLocalizations.of(context).bildirimler,
                 icon: Icons.notifications_outlined,
                 children: [
                   SettingsItem(
                     icon: Icons.notifications_active_outlined,
                     iconColor: const Color(0xFF6366F1),
-                    label: 'Bildirim Ayarları',
+                    label: AppLocalizations.of(context).bildirimAyarlari,
                     description:
                         'Etkinlik, görev, acil durum, sohbet ve konum bildirimleri',
                     onTap: () => context.push(AppRoutes.notificationSettings),
@@ -127,13 +128,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             // ── AİLE ────────────────────────────────────────────────
             SliverToBoxAdapter(
               child: SettingsSection(
-                title: 'AİLE',
+                title: AppLocalizations.of(context).aile,
                 icon: Icons.people_outline,
                 children: [
                   SettingsItem(
                     icon: Icons.people_outline,
                     iconColor: const Color(0xFF6366F1),
-                    label: 'Aile Yönetimi',
+                    label: AppLocalizations.of(context).aileYonetimi,
                     description: 'Üyeleri görüntüle, rolleri düzenle',
                     showValueWidget: FutureBuilder<int>(
                       future: _memberCountFuture,
@@ -156,28 +157,28 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   SettingsItem(
                     icon: Icons.person_add_alt,
                     iconColor: const Color(0xFF10B981),
-                    label: 'Davet Kodu Oluştur',
+                    label: AppLocalizations.of(context).davetKoduOlustur,
                     description: 'Yeni üyeleri aileye davet et',
                     onTap: () => context.push(AppRoutes.inviteCode),
                   ),
                   SettingsItem(
                     icon: Icons.admin_panel_settings_outlined,
                     iconColor: const Color(0xFFF59E0B),
-                    label: 'İzinler ve Roller',
+                    label: AppLocalizations.of(context).izinlerVeRoller,
                     description: 'Her üye için yetki ayarları',
                     onTap: () => context.push(AppRoutes.familyPermissions),
                   ),
                   SettingsItem(
                     icon: Icons.child_care,
                     iconColor: const Color(0xFF06B6D4),
-                    label: 'Çocuk Hesapları',
+                    label: AppLocalizations.of(context).cocukHesaplari,
                     description: 'PIN ile çocuk girişleri yönetin',
                     onTap: () => context.push(AppRoutes.childManagement),
                   ),
                   SettingsItem(
                     icon: Icons.timer_outlined,
                     iconColor: const Color(0xFFEC4899),
-                    label: 'Ekran Süresi',
+                    label: AppLocalizations.of(context).ekranSuresi,
                     description: 'Çocuk üyeler için kullanım limitleri',
                     showValue: 'Aktif',
                     onTap: () => context.push(AppRoutes.screenTimeSettings),
@@ -185,7 +186,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   SettingsItem(
                     icon: Icons.exit_to_app,
                     iconColor: const Color(0xFFEF4444),
-                    label: 'Aileden Ayrıl',
+                    label: AppLocalizations.of(context).ailedenAyril,
                     description: 'Bu aileden çıkış yap',
                     onTap: () => _showLeaveDialog(context),
                     isDanger: true,
@@ -211,7 +212,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   SettingsItem(
                     icon: Icons.key_outlined,
                     iconColor: const Color(0xFFF59E0B),
-                    label: 'Güvenlik',
+                    label: AppLocalizations.of(context).safety,
                     description: 'Şifre, iki faktör, biyometrik giriş',
                     showValue: 'Güvenli',
                     onTap: () => context.push(AppRoutes.securitySettings),
@@ -226,7 +227,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   SettingsItem(
                     icon: Icons.language,
                     iconColor: const Color(0xFF8B5CF6),
-                    label: 'Dil ve Bölge',
+                    label: AppLocalizations.of(context).dilVeBolge,
                     description: 'Uygulama dili ve tarih formatı',
                     showValue: _languageLabel,
                     onTap: () => context.push(AppRoutes.languageSettings),
@@ -245,7 +246,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   SettingsItem(
                     icon: Icons.wb_sunny,
                     iconColor: const Color(0xFFF59E0B),
-                    label: 'Hava Durumu Ayarları',
+                    label: AppLocalizations.of(context).havaDurumuAyarlari,
                     description: 'Şehir, birim ve konum tercihleri',
                     showValueWidget: FutureBuilder<String?>(
                       future: Future.value(HiveService.getSetting('weatherCity')),
@@ -263,7 +264,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             // ── VERİ VE DEPOLAMA ─────────────────────────────────────
             SliverToBoxAdapter(
               child: SettingsSection(
-                title: 'VERİ VE DEPOLAMA',
+                title: AppLocalizations.of(context).veriVeDepolama,
                 icon: Icons.storage_outlined,
                 children: [
                   SettingsItem(
@@ -282,7 +283,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   SettingsItem(
                     icon: Icons.cleaning_services_outlined,
                     iconColor: const Color(0xFF6B7280),
-                    label: 'Önbelleği Temizle',
+                    label: AppLocalizations.of(context).onbellegiTemizle,
                     description: 'Geçici dosyaları temizleyin',
                     showValueWidget: FutureBuilder<String>(
                       future: _getCacheSize(),
@@ -361,14 +362,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   SettingsItem(
                     icon: Icons.menu_book_outlined,
                     iconColor: const Color(0xFF6366F1),
-                    label: 'Kullanım Kılavuzu',
+                    label: AppLocalizations.of(context).kullanimKilavuzu,
                     description: 'FamilyHub\'ı nasıl kullanacağınızı öğrenin',
                     onTap: () => context.push(AppRoutes.userGuide),
                   ),
                   SettingsItem(
                     icon: Icons.support_agent_outlined,
                     iconColor: const Color(0xFF10B981),
-                    label: 'Destek ile İletişim',
+                    label: AppLocalizations.of(context).destekIleIletisim,
                     description: 'Sorularınızı ve önerilerinizi paylaşın',
                     onTap: () => _openSupport(context),
                   ),
@@ -382,7 +383,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   SettingsItem(
                     icon: Icons.star_outline,
                     iconColor: const Color(0xFFEC4899),
-                    label: 'Bizi Değerlendirin',
+                    label: AppLocalizations.of(context).biziDegerlendirin,
                     description: 'App Store\'da puan verin',
                     onTap: () => _openAppStore(context),
                     isLast: true,
@@ -400,21 +401,21 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   SettingsItem(
                     icon: Icons.privacy_tip_outlined,
                     iconColor: const Color(0xFF6B7280),
-                    label: 'Gizlilik Politikası',
+                    label: AppLocalizations.of(context).gizlilikPolitikasi,
                     description: 'Verileriniz nasıl korunuyor',
                     onTap: () => context.push(AppRoutes.privacyPolicy),
                   ),
                   SettingsItem(
                     icon: Icons.description_outlined,
                     iconColor: const Color(0xFF6B7280),
-                    label: 'Kullanım Koşulları',
+                    label: AppLocalizations.of(context).kullanimKosullari,
                     description: 'Hizmet şartları ve sorumluluklar',
                     onTap: () => context.push(AppRoutes.termsOfService),
                   ),
                   SettingsItem(
                     icon: Icons.info_outline,
                     iconColor: const Color(0xFF6B7280),
-                    label: 'Hakkında',
+                    label: AppLocalizations.of(context).hakkinda,
                     description: 'Sürüm 2.1.0 · FamilyHub Inc.',
                     showValue: 'Güncel',
                     onTap: () => context.push(AppRoutes.aboutApp),
@@ -427,7 +428,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             // ── GÖRÜNÜM ─────────────────────────────────────────────
             SliverToBoxAdapter(
               child: SettingsSection(
-                title: 'GÖRÜNÜM',
+                title: AppLocalizations.of(context).gorunum1,
                 icon: Icons.palette_outlined,
                 children: [
                   SettingsItem(
@@ -441,7 +442,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   SettingsItem(
                     icon: Icons.text_fields,
                     iconColor: const Color(0xFF8B5CF6),
-                    label: 'Yazı Boyutu',
+                    label: AppLocalizations.of(context).fontSize,
                     description: 'Metin boyutunu ayarla',
                     showValue: _fontLabel,
                     onTap: () => context.push(AppRoutes.appearanceSettings),
@@ -486,8 +487,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             ),
                           ),
                         ),
-                        child: const Text(
-                          'Çıkış Yap',
+                        child: Text(AppLocalizations.of(context).logout,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -520,21 +520,21 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     showDialog(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: const Text('Aileden Ayrıl'),
+        title: Text(AppLocalizations.of(context).ailedenAyril),
         content: const Text(
           'Aileden ayrıldığınızda tüm verileriniz bu aileden silinecek. Bu işlem geri alınamaz.',
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
-            child: const Text('İptal'),
+            child: Text(AppLocalizations.of(context).cancel),
           ),
           TextButton(
             onPressed: () async {
               Navigator.of(dialogContext).pop();
               await _leaveFamily();
             },
-            child: const Text('Ayrıl', style: TextStyle(color: Color(0xFFEF4444))),
+            child: Text(AppLocalizations.of(context).ayril, style: TextStyle(color: Color(0xFFEF4444))),
           ),
         ],
       ),
@@ -546,13 +546,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       context: context,
       builder: (dialogContext) => AlertDialog(
         title: const Text('Verileri Sil'),
-        content: const Text(
-          'Tüm verileriniz kalıcı olarak silinecek. Bu işlem geri alınamaz.',
+        content: Text(AppLocalizations.of(context).tumVerilerinizKaliciOlarakSilinecekBuIslemGeriAlinamaz,
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
-            child: const Text('İptal'),
+            child: Text(AppLocalizations.of(context).cancel),
           ),
           TextButton(
             onPressed: () async {
@@ -570,14 +569,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     showDialog(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: const Text('Önbelleği Temizle'),
-        content: const Text(
-          'Geçici dosyalar silinecek. Uygulama biraz daha yavaş başlayabilir.',
+        title: Text(AppLocalizations.of(context).onbellegiTemizle),
+        content: Text(AppLocalizations.of(context).geciciDosyalarSilinecekUygulamaBirazDahaYavasBaslayabilir,
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
-            child: const Text('İptal'),
+            child: Text(AppLocalizations.of(context).cancel),
           ),
           TextButton(
             onPressed: () async {
@@ -607,7 +605,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   void _openAppStore(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Değerlendirme sayfası açılıyor...')),
+      SnackBar(content: Text(AppLocalizations.of(context).degerlendirmeSayfasiAciliyor)),
     );
   }
 

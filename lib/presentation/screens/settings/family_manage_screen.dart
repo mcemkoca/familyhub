@@ -325,7 +325,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: const Color(0xFF13131A),
-        title: const Text('Üyeyi Çıkar',
+        title: Text(AppLocalizations.of(context).removeMember,
             style: TextStyle(color: Colors.white)),
         content: Text('${member.name} aileden çıkarılacak. Emin misiniz?',
             style: const TextStyle(color: Color(0xFF9CA3AF))),
@@ -336,7 +336,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
           ElevatedButton(
             onPressed: () => Navigator.pop(ctx, true),
             style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
-            child: const Text('Çıkar', style: TextStyle(color: Colors.white)),
+            child: Text(AppLocalizations.of(context).cikar, style: TextStyle(color: Colors.white)),
           ),
         ],
       ),
@@ -568,7 +568,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
               if (_isLocalMember(member))
                 ListTile(
                   leading: const Icon(Icons.edit, color: Color(0xFF6366F1)),
-                  title: const Text('Düzenle'),
+                  title: Text(AppLocalizations.of(context).edit),
                   onTap: () {
                     Navigator.pop(context);
                     _showMemberForm(existing: member);
@@ -602,7 +602,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
               if (_isLocalMember(member))
                 ListTile(
                   leading: const Icon(Icons.person_remove, color: AppColors.error),
-                  title: const Text('Üyeyi Çıkar'),
+                  title: Text(AppLocalizations.of(context).removeMember),
                   onTap: () {
                     Navigator.pop(context);
                     _removeLocalMember(member);
@@ -642,7 +642,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
-        title: 'Aile Yönetimi',
+        title: AppLocalizations.of(context).aileYonetimi,
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -667,8 +667,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                         ),
                         const SizedBox(height: 12),
                         if (adults.isNotEmpty) ...[
-                          const Text(
-                            'Ebeveynler ve Yetişkinler',
+                          Text(AppLocalizations.of(context).ebeveynlerVeYetiskinler,
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
@@ -688,8 +687,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                         ],
                         if (children.isNotEmpty) ...[
                           const SizedBox(height: 16),
-                          const Text(
-                            'Çocuklar',
+                          Text(AppLocalizations.of(context).cocuklar,
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
@@ -755,8 +753,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                           child: ElevatedButton.icon(
                             onPressed: () => context.push(AppRoutes.childManagement),
                             icon: const Icon(Icons.child_care, color: Colors.white),
-                            label: const Text(
-                              'Çocuk Hesabı Ekle',
+                            label: Text(AppLocalizations.of(context).cocukHesabiEkle,
                               style: TextStyle(color: Colors.white, fontSize: 16),
                             ),
                             style: ElevatedButton.styleFrom(

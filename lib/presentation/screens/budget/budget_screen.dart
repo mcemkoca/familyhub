@@ -119,8 +119,7 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
-                                    'Aile Bütçesi',
+                                  Text(AppLocalizations.of(context).aileButcesi,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 24,
@@ -237,8 +236,7 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        'İşlemler',
+                      Text(AppLocalizations.of(context).islemler,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -411,9 +409,8 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                   child: const Icon(Icons.auto_awesome, color: Color(0xFF8B5CF6)),
                 ),
                 const SizedBox(width: 12),
-                const Expanded(
-                  child: Text(
-                    'AI Bütçe Analizi',
+                Expanded(
+                  child: Text(AppLocalizations.of(context).aiButceAnalizi,
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -430,10 +427,9 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
             _AIStatRow('En Yüksek Kategori', null, const Color(0xFF8B5CF6),
                 textValue: '$topCategory (${NumberFormat.currency(symbol: '€', decimalDigits: 0).format(topAmount)})'),
             const Divider(height: 32),
-            const Row(
+            Row(
               children: [
-                Text(
-                  '💡 AI Önerileri',
+                Text(AppLocalizations.of(context).aionerileri1,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
                 SizedBox(width: 8),

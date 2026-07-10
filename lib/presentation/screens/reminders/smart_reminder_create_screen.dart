@@ -299,18 +299,18 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
           const SizedBox(height: 12),
           TextField(
             controller: _titleController,
-            decoration: const InputDecoration(
-              labelText: 'Başlık',
-              hintText: 'Market alışverişi',
+            decoration: InputDecoration(
+              labelText: AppLocalizations.of(context).baslik,
+              hintText: AppLocalizations.of(context).marketAlisverisi,
               border: OutlineInputBorder(),
             ),
           ),
           const SizedBox(height: 12),
           TextField(
             controller: _descController,
-            decoration: const InputDecoration(
-              labelText: 'Açıklama',
-              hintText: 'Süt ve ekmek al...',
+            decoration: InputDecoration(
+              labelText: AppLocalizations.of(context).description,
+              hintText: AppLocalizations.of(context).sutVeEkmekAl,
               border: OutlineInputBorder(),
             ),
             maxLines: 2,
@@ -343,7 +343,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
                 children: [
                   DropdownButtonFormField<LocationTriggerType>(
                     initialValue: _locationType,
-                    decoration: const InputDecoration(labelText: 'Tür'),
+                    decoration: InputDecoration(labelText: AppLocalizations.of(context).tur),
                     items: LocationTriggerType.values.map((t) {
                       return DropdownMenuItem(
                         value: t,
@@ -355,7 +355,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
                   const SizedBox(height: 8),
                   TextField(
                     controller: _locationNameController,
-                    decoration: const InputDecoration(labelText: 'Yer Adı'),
+                    decoration: InputDecoration(labelText: AppLocalizations.of(context).yerAdi),
                   ),
                   const SizedBox(height: 8),
                   Row(
@@ -417,7 +417,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
                 children: [
                   DropdownButtonFormField<TimeTriggerType>(
                     initialValue: _timeType,
-                    decoration: const InputDecoration(labelText: 'Tür'),
+                    decoration: InputDecoration(labelText: AppLocalizations.of(context).tur),
                     items: TimeTriggerType.values.map((t) {
                       return DropdownMenuItem(
                         value: t,
@@ -480,7 +480,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
               padding: const EdgeInsets.only(left: 16, right: 16, bottom: 12),
               child: DropdownButtonFormField<BehaviorTriggerType>(
                 initialValue: _behaviorType,
-                decoration: const InputDecoration(labelText: 'Davranış Türü'),
+                decoration: InputDecoration(labelText: AppLocalizations.of(context).davranisTuru),
                 items: BehaviorTriggerType.values.map((t) {
                   return DropdownMenuItem(
                     value: t,
@@ -532,7 +532,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('🧠 Bağlam Hassasiyeti', style: _sectionStyle(textColor)),
+          Text(AppLocalizations.of(context).baglamHassasiyeti, style: _sectionStyle(textColor)),
           const SizedBox(height: 12),
           SwitchListTile(
             title: Text(AppLocalizations.of(context).sessizSaatlereSaygiGoster),
@@ -572,7 +572,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('🎨 Kişiselleştirme', style: _sectionStyle(textColor)),
+          Text(AppLocalizations.of(context).kisisellestirme, style: _sectionStyle(textColor)),
           const SizedBox(height: 12),
           const Text('Ton'),
           Wrap(
@@ -603,7 +603,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('👥 Hedef Kişiler', style: _sectionStyle(textColor)),
+          Text(AppLocalizations.of(context).hedefKisiler, style: _sectionStyle(textColor)),
           const SizedBox(height: 12),
           RadioListTile<TargetAudienceType>(
             title: const Text('Akıllı seçim (AI önerir)'),
@@ -745,8 +745,7 @@ class _TestPreviewSheet extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          Text(
-            '📱 Bildirim Önizleme',
+          Text(AppLocalizations.of(context).bildirimOnizleme,
             style: Theme.of(context).textTheme.titleLarge,
           ),
           const SizedBox(height: 16),
