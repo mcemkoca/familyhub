@@ -217,7 +217,7 @@ class _HealthDashboardState extends ConsumerState<HealthDashboard> {
       ('Aşı Takvimi', Icons.vaccines_rounded, const Color(0xFF14B8A6),
           () => _go(const CocukSaglikScreen())),
       ('Sağlık Kayıtlarım', Icons.description_rounded, const Color(0xFF3B82F6),
-          () => _go(const FamilyHealthScreen())),
+          () => _go(const FamilyHealthScreen(initialTab: 2))),
       // "Belirtiler Kontrolü" yalnızca Kadın Sağlığı bölümünde (semptom takibi
       // döngüyle birlikte orada) — genel hızlı erişimden kaldırıldı.
     ];

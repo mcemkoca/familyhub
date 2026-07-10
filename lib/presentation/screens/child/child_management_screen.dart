@@ -253,7 +253,22 @@ class _ChildManagementScreenState extends ConsumerState<ChildManagementScreen> {
                             shape: BoxShape.circle,
                           ),
                           child: child.avatarUrl != null
-                              ? ClipOval(child: Image.network(child.avatarUrl!, fit: BoxFit.cover))
+                              ? ClipOval(
+                                  child: Image.network(
+                                    child.avatarUrl!,
+                                    fit: BoxFit.cover,
+                                    width: 46,
+                                    height: 46,
+                                    // Kırık/erişilemeyen görselde baş harfe düş.
+                                    errorBuilder: (_, _, _) => Center(
+                                      child: Text(child.initial,
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18)),
+                                    ),
+                                  ),
+                                )
                               : Center(
                                   child: Text(child.initial,
                                       style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18))),

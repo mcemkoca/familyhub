@@ -415,7 +415,9 @@ class FamilyHealthNotifier extends StateNotifier<List<FamilyMemberHealth>> {
 // ── Main Screen ──
 
 class FamilyHealthScreen extends ConsumerStatefulWidget {
-  const FamilyHealthScreen({super.key});
+  /// Açılışta seçili sekme (0=İlaçlar, 1=Vitaminler, 2=Raporlar, 3=Randevular).
+  final int initialTab;
+  const FamilyHealthScreen({super.key, this.initialTab = 0});
 
   @override
   ConsumerState<FamilyHealthScreen> createState() => _FamilyHealthScreenState();
@@ -431,7 +433,8 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
   @override
   void initState() {
     super.initState();
-    _tab = TabController(length: 4, vsync: this);
+    _tab = TabController(
+        length: 4, vsync: this, initialIndex: widget.initialTab.clamp(0, 3));
   }
 
   @override
