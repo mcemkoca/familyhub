@@ -240,15 +240,15 @@ class _LanguageSettingsScreenState
 
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
+      SnackBar(
         content: Row(children: [
-          Icon(Icons.check_circle_rounded, color: Colors.white, size: 20),
-          SizedBox(width: 10),
-          Text('Dil ve bölge ayarları kaydedildi'),
+          const Icon(Icons.check_circle_rounded, color: Colors.white, size: 20),
+          const SizedBox(width: 10),
+          Text(AppLocalizations.of(context).dilBolgeKaydedildi),
         ]),
-        backgroundColor: Color(0xFF10B981),
+        backgroundColor: const Color(0xFF10B981),
         behavior: SnackBarBehavior.floating,
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
       ),
     );
   }
@@ -359,12 +359,14 @@ class _LanguageSettingsScreenState
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Cihaz Dili (Otomatik)',
-                            style: TextStyle(
+                        Text(AppLocalizations.of(context).cihazDiliOtomatik,
+                            style: const TextStyle(
                                 color: Color(0xFFE5E7EB),
                                 fontSize: 15,
                                 fontWeight: FontWeight.w700)),
-                        Text('Sistem dili: $_deviceLanguageLabel',
+                        Text(
+                            AppLocalizations.of(context)
+                                .sistemDili(_deviceLanguageLabel),
                             style: const TextStyle(
                                 color: Color(0xFF6B7280), fontSize: 12)),
                       ],
@@ -397,7 +399,7 @@ class _LanguageSettingsScreenState
           ),
           const SizedBox(height: 22),
 
-          _sectionTitle('ÜLKE / BÖLGE'),
+          _sectionTitle(AppLocalizations.of(context).ulkeBolge),
           const SizedBox(height: 10),
           ...CountryConfig.all.map((c) {
             final sel = _draftCountry == c.code;
@@ -407,11 +409,11 @@ class _LanguageSettingsScreenState
               onTap: () => _pickCountry(c),
             );
           }),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(4, 8, 4, 0),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(4, 8, 4, 0),
             child: Text(
-              'Ülke seçimi; para birimi, ev gideri ve market içeriğini belirler.',
-              style: TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+              AppLocalizations.of(context).ulkeSecimiBilgi,
+              style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
             ),
           ),
           const SizedBox(height: 22),
@@ -455,10 +457,10 @@ class _LanguageSettingsScreenState
           const SizedBox(height: 22),
 
           // ── Saat formatı ──
-          _sectionTitle('SAAT FORMATI'),
+          _sectionTitle(AppLocalizations.of(context).saatFormati),
           const SizedBox(height: 10),
           _segment(
-            options: const [('24h', '24 saat'), ('12h', '12 saat (AM/PM)')],
+            options: [('24h', AppLocalizations.of(context).saat24), ('12h', AppLocalizations.of(context).saat12)],
             value: _draftTimeFormat,
             onSelect: (v) {
               HapticFeedback.selectionClick();
@@ -468,10 +470,10 @@ class _LanguageSettingsScreenState
           const SizedBox(height: 22),
 
           // ── Haftanın ilk günü ──
-          _sectionTitle('HAFTANIN İLK GÜNÜ'),
+          _sectionTitle(AppLocalizations.of(context).haftaninIlkGunu),
           const SizedBox(height: 10),
           _segment(
-            options: const [('mon', 'Pazartesi'), ('sun', 'Pazar')],
+            options: [('mon', AppLocalizations.of(context).pazartesi), ('sun', AppLocalizations.of(context).pazar)],
             value: _draftFirstDay,
             onSelect: (v) {
               HapticFeedback.selectionClick();
@@ -481,10 +483,10 @@ class _LanguageSettingsScreenState
           const SizedBox(height: 22),
 
           // ── Ölçü birimi ──
-          _sectionTitle('ÖLÇÜ BİRİMİ'),
+          _sectionTitle(AppLocalizations.of(context).olcuBirimi),
           const SizedBox(height: 10),
           _segment(
-            options: const [('metric', 'Metrik (kg, cm)'), ('imperial', 'İmperyal (lb, in)')],
+            options: [('metric', AppLocalizations.of(context).metrik), ('imperial', AppLocalizations.of(context).imperyal)],
             value: _draftUnits,
             onSelect: (v) {
               HapticFeedback.selectionClick();
@@ -494,10 +496,10 @@ class _LanguageSettingsScreenState
           const SizedBox(height: 22),
 
           // ── Sıcaklık birimi ──
-          _sectionTitle('SICAKLIK BİRİMİ'),
+          _sectionTitle(AppLocalizations.of(context).sicaklikBirimi),
           const SizedBox(height: 10),
           _segment(
-            options: const [('C', 'Celsius (°C)'), ('F', 'Fahrenheit (°F)')],
+            options: [('C', AppLocalizations.of(context).celsius), ('F', AppLocalizations.of(context).fahrenheit)],
             value: _draftTemp,
             onSelect: (v) {
               HapticFeedback.selectionClick();
@@ -507,19 +509,19 @@ class _LanguageSettingsScreenState
           const SizedBox(height: 28),
 
           // ── Sıfırlama (onaylı) — kullanıcı VERİSİNİ SİLMEZ ──
-          _sectionTitle('SIFIRLAMA'),
+          _sectionTitle(AppLocalizations.of(context).sifirlama),
           const SizedBox(height: 10),
           _resetTile(
             icon: Icons.translate_rounded,
-            title: 'Dil tercihini sıfırla',
-            subtitle: 'Dil seçimini temizler, cihaz diline döner. Verileriniz silinmez.',
+            title: AppLocalizations.of(context).dilTercihiniSifirla,
+            subtitle: AppLocalizations.of(context).dilTercihiniSifirlaAcik,
             onTap: _confirmResetLanguage,
           ),
           const SizedBox(height: 8),
           _resetTile(
             icon: Icons.public_off_rounded,
-            title: 'Bölge ayarlarını varsayılana döndür',
-            subtitle: 'Tarih/saat/birim biçimlerini varsayılana alır. Verileriniz silinmez.',
+            title: AppLocalizations.of(context).bolgeAyarlariniSifirla,
+            subtitle: AppLocalizations.of(context).bolgeAyarlariniSifirlaAcik,
             onTap: _confirmResetRegion,
           ),
         ],
@@ -549,7 +551,9 @@ class _LanguageSettingsScreenState
                     child: CircularProgressIndicator(
                         strokeWidth: 2, color: Colors.white))
                 : Text(
-                    _dirty ? 'Kaydet' : 'Kaydedildi',
+                    _dirty
+                        ? AppLocalizations.of(context).kaydet
+                        : AppLocalizations.of(context).kaydedildi,
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w800,
@@ -690,14 +694,14 @@ class _LanguageSettingsScreenState
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
-            child: const Text('Vazgeç',
-                style: TextStyle(color: Color(0xFF9CA3AF))),
+            child: Text(AppLocalizations.of(context).vazgec,
+                style: const TextStyle(color: Color(0xFF9CA3AF))),
           ),
           FilledButton(
             style: FilledButton.styleFrom(
                 backgroundColor: const Color(0xFFEF4444)),
             onPressed: () => Navigator.pop(ctx, true),
-            child: const Text('Sıfırla'),
+            child: Text(AppLocalizations.of(context).sifirla),
           ),
         ],
       ),
@@ -706,10 +710,10 @@ class _LanguageSettingsScreenState
   }
 
   Future<void> _confirmResetLanguage() async {
+    final t = AppLocalizations.of(context);
     final ok = await _confirmDialog(
-      'Dil tercihini sıfırla',
-      'Dil seçiminiz temizlenecek ve uygulama cihazınızın sistem diline dönecek. '
-          'Aile, sağlık, bütçe gibi verileriniz SİLİNMEZ.',
+      t.dilTercihiniSifirla,
+      t.dilTercihiniSifirlaOnay,
     );
     if (!ok) return;
     await LocaleService.resetLanguagePreference();
@@ -723,18 +727,18 @@ class _LanguageSettingsScreenState
       _draftLanguage = _deviceLanguageLabel;
     });
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Dil tercihi sıfırlandı'),
+      SnackBar(
+        content: Text(AppLocalizations.of(context).dilTercihiSifirlandi),
         behavior: SnackBarBehavior.floating,
       ),
     );
   }
 
   Future<void> _confirmResetRegion() async {
+    final t = AppLocalizations.of(context);
     final ok = await _confirmDialog(
-      'Bölge ayarlarını sıfırla',
-      'Tarih, saat, ölçü ve sıcaklık biçimleri varsayılana dönecek. '
-          'Verileriniz SİLİNMEZ.',
+      t.bolgeAyarlariniSifirla,
+      t.bolgeAyarlariniSifirlaOnay,
     );
     if (!ok) return;
     await HiveService.setSetting('dateFormat', 'DD/MM/YYYY');
@@ -751,8 +755,8 @@ class _LanguageSettingsScreenState
       _savedTemp = _draftTemp = 'C';
     });
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Bölge ayarları varsayılana döndürüldü'),
+      SnackBar(
+        content: Text(AppLocalizations.of(context).bolgeAyarlariSifirlandi),
         behavior: SnackBarBehavior.floating,
       ),
     );

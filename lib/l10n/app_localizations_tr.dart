@@ -2631,6 +2631,103 @@ class AppLocalizationsTr extends AppLocalizations {
   String get tarihFormati => 'TARİH FORMATI';
 
   @override
+  String get saatFormati => 'SAAT FORMATI';
+
+  @override
+  String get haftaninIlkGunu => 'HAFTANIN İLK GÜNÜ';
+
+  @override
+  String get olcuBirimi => 'ÖLÇÜ BİRİMİ';
+
+  @override
+  String get sicaklikBirimi => 'Sıcaklık Birimi';
+
+  @override
+  String get sifirlama => 'SIFIRLAMA';
+
+  @override
+  String get ulkeBolge => 'ÜLKE / BÖLGE';
+
+  @override
+  String get cihazDiliOtomatik => 'Cihaz Dili (Otomatik)';
+
+  @override
+  String sistemDili(Object lang) {
+    return 'Sistem dili: $lang';
+  }
+
+  @override
+  String get kaydet => 'Kaydet';
+
+  @override
+  String get kaydedildi => 'Kaydedildi';
+
+  @override
+  String get saat24 => '24 saat';
+
+  @override
+  String get saat12 => '12 saat (AM/PM)';
+
+  @override
+  String get pazartesi => 'Pazartesi';
+
+  @override
+  String get pazar => 'Pazar';
+
+  @override
+  String get metrik => 'Metrik (kg, cm)';
+
+  @override
+  String get imperyal => 'İmperyal (lb, in)';
+
+  @override
+  String get celsius => 'Celsius (°C)';
+
+  @override
+  String get fahrenheit => 'Fahrenheit (°F)';
+
+  @override
+  String get vazgec => 'Vazgeç';
+
+  @override
+  String get sifirla => 'Sıfırla';
+
+  @override
+  String get dilTercihiniSifirla => 'Dil tercihini sıfırla';
+
+  @override
+  String get dilTercihiniSifirlaAcik =>
+      'Dil seçimini temizler, cihaz diline döner. Verileriniz silinmez.';
+
+  @override
+  String get bolgeAyarlariniSifirla => 'Bölge ayarlarını varsayılana döndür';
+
+  @override
+  String get bolgeAyarlariniSifirlaAcik =>
+      'Tarih/saat/birim biçimlerini varsayılana alır. Verileriniz silinmez.';
+
+  @override
+  String get dilTercihiniSifirlaOnay =>
+      'Dil seçiminiz temizlenecek ve uygulama cihazınızın sistem diline dönecek. Aile, sağlık, bütçe gibi verileriniz SİLİNMEZ.';
+
+  @override
+  String get bolgeAyarlariniSifirlaOnay =>
+      'Tarih, saat, ölçü ve sıcaklık biçimleri varsayılana dönecek. Verileriniz SİLİNMEZ.';
+
+  @override
+  String get dilBolgeKaydedildi => 'Dil ve bölge ayarları kaydedildi';
+
+  @override
+  String get dilTercihiSifirlandi => 'Dil tercihi sıfırlandı';
+
+  @override
+  String get bolgeAyarlariSifirlandi => 'Bölge ayarları varsayılana döndürüldü';
+
+  @override
+  String get ulkeSecimiBilgi =>
+      'Ülke seçimi; para birimi, ev gideri ve market içeriğini belirler.';
+
+  @override
   String get henuzVeriYok => 'Henüz veri yok';
 
   @override
@@ -3249,9 +3346,6 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get konumSecilmezseSehirListesindenKullanilir =>
       'Konum seçilmezse şehir listesinden kullanılır';
-
-  @override
-  String get sicaklikBirimi => 'Sıcaklık Birimi';
 
   @override
   String get havaDurumuAlinamadi => 'Hava durumu alınamadı';

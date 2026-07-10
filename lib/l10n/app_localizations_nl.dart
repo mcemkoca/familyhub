@@ -2610,6 +2610,105 @@ class AppLocalizationsNl extends AppLocalizations {
   String get tarihFormati => 'DATUMNOTATIE';
 
   @override
+  String get saatFormati => 'TIJDNOTATIE';
+
+  @override
+  String get haftaninIlkGunu => 'EERSTE DAG VAN DE WEEK';
+
+  @override
+  String get olcuBirimi => 'MEETEENHEID';
+
+  @override
+  String get sicaklikBirimi => 'Temperatuureenheid';
+
+  @override
+  String get sifirlama => 'RESETTEN';
+
+  @override
+  String get ulkeBolge => 'LAND / REGIO';
+
+  @override
+  String get cihazDiliOtomatik => 'Apparaattaal (automatisch)';
+
+  @override
+  String sistemDili(Object lang) {
+    return 'Systeemtaal: $lang';
+  }
+
+  @override
+  String get kaydet => 'Opslaan';
+
+  @override
+  String get kaydedildi => 'Opgeslagen';
+
+  @override
+  String get saat24 => '24-uurs';
+
+  @override
+  String get saat12 => '12-uurs (AM/PM)';
+
+  @override
+  String get pazartesi => 'Maandag';
+
+  @override
+  String get pazar => 'Zondag';
+
+  @override
+  String get metrik => 'Metrisch (kg, cm)';
+
+  @override
+  String get imperyal => 'Imperiaal (lb, in)';
+
+  @override
+  String get celsius => 'Celsius (°C)';
+
+  @override
+  String get fahrenheit => 'Fahrenheit (°F)';
+
+  @override
+  String get vazgec => 'Annuleren';
+
+  @override
+  String get sifirla => 'Resetten';
+
+  @override
+  String get dilTercihiniSifirla => 'Taalvoorkeur resetten';
+
+  @override
+  String get dilTercihiniSifirlaAcik =>
+      'Wist je taalkeuze en keert terug naar de apparaattaal. Je gegevens worden niet verwijderd.';
+
+  @override
+  String get bolgeAyarlariniSifirla =>
+      'Regio-instellingen terugzetten naar standaard';
+
+  @override
+  String get bolgeAyarlariniSifirlaAcik =>
+      'Zet datum-/tijd-/eenheidnotaties terug naar standaard. Je gegevens worden niet verwijderd.';
+
+  @override
+  String get dilTercihiniSifirlaOnay =>
+      'Je taalkeuze wordt gewist en de app keert terug naar de systeemtaal van je apparaat. Je gegevens zoals gezin, gezondheid en budget worden NIET verwijderd.';
+
+  @override
+  String get bolgeAyarlariniSifirlaOnay =>
+      'Datum-, tijd-, meet- en temperatuurnotaties keren terug naar standaard. Je gegevens worden NIET verwijderd.';
+
+  @override
+  String get dilBolgeKaydedildi => 'Taal- en regio-instellingen opgeslagen';
+
+  @override
+  String get dilTercihiSifirlandi => 'Taalvoorkeur gereset';
+
+  @override
+  String get bolgeAyarlariSifirlandi =>
+      'Regio-instellingen teruggezet naar standaard';
+
+  @override
+  String get ulkeSecimiBilgi =>
+      'Landkeuze bepaalt valuta, huishoudelijke uitgaven en boodschappeninhoud.';
+
+  @override
   String get henuzVeriYok => 'Nog geen gegevens';
 
   @override
@@ -3217,9 +3316,6 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get konumSecilmezseSehirListesindenKullanilir =>
       'Zonder keuze wordt de stedenlijst gebruikt';
-
-  @override
-  String get sicaklikBirimi => 'Temperatuureenheid';
 
   @override
   String get havaDurumuAlinamadi => 'Weer niet beschikbaar';

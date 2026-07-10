@@ -2621,6 +2621,105 @@ class AppLocalizationsFr extends AppLocalizations {
   String get tarihFormati => 'FORMAT DE DATE';
 
   @override
+  String get saatFormati => 'FORMAT DE L\'HEURE';
+
+  @override
+  String get haftaninIlkGunu => 'PREMIER JOUR DE LA SEMAINE';
+
+  @override
+  String get olcuBirimi => 'UNITÉ DE MESURE';
+
+  @override
+  String get sicaklikBirimi => 'Unite de temperature';
+
+  @override
+  String get sifirlama => 'RÉINITIALISER';
+
+  @override
+  String get ulkeBolge => 'PAYS / RÉGION';
+
+  @override
+  String get cihazDiliOtomatik => 'Langue de l\'appareil (automatique)';
+
+  @override
+  String sistemDili(Object lang) {
+    return 'Langue du système : $lang';
+  }
+
+  @override
+  String get kaydet => 'Enregistrer';
+
+  @override
+  String get kaydedildi => 'Enregistré';
+
+  @override
+  String get saat24 => '24 heures';
+
+  @override
+  String get saat12 => '12 heures (AM/PM)';
+
+  @override
+  String get pazartesi => 'Lundi';
+
+  @override
+  String get pazar => 'Dimanche';
+
+  @override
+  String get metrik => 'Métrique (kg, cm)';
+
+  @override
+  String get imperyal => 'Impérial (lb, in)';
+
+  @override
+  String get celsius => 'Celsius (°C)';
+
+  @override
+  String get fahrenheit => 'Fahrenheit (°F)';
+
+  @override
+  String get vazgec => 'Annuler';
+
+  @override
+  String get sifirla => 'Réinitialiser';
+
+  @override
+  String get dilTercihiniSifirla => 'Réinitialiser la préférence de langue';
+
+  @override
+  String get dilTercihiniSifirlaAcik =>
+      'Efface votre choix de langue et revient à la langue de l\'appareil. Vos données ne sont pas supprimées.';
+
+  @override
+  String get bolgeAyarlariniSifirla => 'Réinitialiser les paramètres régionaux';
+
+  @override
+  String get bolgeAyarlariniSifirlaAcik =>
+      'Rétablit les formats de date/heure/unité par défaut. Vos données ne sont pas supprimées.';
+
+  @override
+  String get dilTercihiniSifirlaOnay =>
+      'Votre choix de langue sera effacé et l\'application reviendra à la langue du système de votre appareil. Vos données telles que la famille, la santé et le budget ne seront PAS supprimées.';
+
+  @override
+  String get bolgeAyarlariniSifirlaOnay =>
+      'Les formats de date, d\'heure, de mesure et de température reviendront par défaut. Vos données ne seront PAS supprimées.';
+
+  @override
+  String get dilBolgeKaydedildi =>
+      'Paramètres de langue et de région enregistrés';
+
+  @override
+  String get dilTercihiSifirlandi => 'Préférence de langue réinitialisée';
+
+  @override
+  String get bolgeAyarlariSifirlandi =>
+      'Paramètres régionaux rétablis par défaut';
+
+  @override
+  String get ulkeSecimiBilgi =>
+      'Le choix du pays détermine la devise, les dépenses du ménage et le contenu des courses.';
+
+  @override
   String get henuzVeriYok => 'Aucune donnee';
 
   @override
@@ -3229,9 +3328,6 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get konumSecilmezseSehirListesindenKullanilir =>
       'Sans choix, la liste des villes est utilisee';
-
-  @override
-  String get sicaklikBirimi => 'Unite de temperature';
 
   @override
   String get havaDurumuAlinamadi => 'Meteo indisponible';

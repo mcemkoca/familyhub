@@ -5138,6 +5138,186 @@ abstract class AppLocalizations {
   /// **'TARİH FORMATI'**
   String get tarihFormati;
 
+  /// No description provided for @saatFormati.
+  ///
+  /// In tr, this message translates to:
+  /// **'SAAT FORMATI'**
+  String get saatFormati;
+
+  /// No description provided for @haftaninIlkGunu.
+  ///
+  /// In tr, this message translates to:
+  /// **'HAFTANIN İLK GÜNÜ'**
+  String get haftaninIlkGunu;
+
+  /// No description provided for @olcuBirimi.
+  ///
+  /// In tr, this message translates to:
+  /// **'ÖLÇÜ BİRİMİ'**
+  String get olcuBirimi;
+
+  /// No description provided for @sicaklikBirimi.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sıcaklık Birimi'**
+  String get sicaklikBirimi;
+
+  /// No description provided for @sifirlama.
+  ///
+  /// In tr, this message translates to:
+  /// **'SIFIRLAMA'**
+  String get sifirlama;
+
+  /// No description provided for @ulkeBolge.
+  ///
+  /// In tr, this message translates to:
+  /// **'ÜLKE / BÖLGE'**
+  String get ulkeBolge;
+
+  /// No description provided for @cihazDiliOtomatik.
+  ///
+  /// In tr, this message translates to:
+  /// **'Cihaz Dili (Otomatik)'**
+  String get cihazDiliOtomatik;
+
+  /// No description provided for @sistemDili.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sistem dili: {lang}'**
+  String sistemDili(Object lang);
+
+  /// No description provided for @kaydet.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kaydet'**
+  String get kaydet;
+
+  /// No description provided for @kaydedildi.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kaydedildi'**
+  String get kaydedildi;
+
+  /// No description provided for @saat24.
+  ///
+  /// In tr, this message translates to:
+  /// **'24 saat'**
+  String get saat24;
+
+  /// No description provided for @saat12.
+  ///
+  /// In tr, this message translates to:
+  /// **'12 saat (AM/PM)'**
+  String get saat12;
+
+  /// No description provided for @pazartesi.
+  ///
+  /// In tr, this message translates to:
+  /// **'Pazartesi'**
+  String get pazartesi;
+
+  /// No description provided for @pazar.
+  ///
+  /// In tr, this message translates to:
+  /// **'Pazar'**
+  String get pazar;
+
+  /// No description provided for @metrik.
+  ///
+  /// In tr, this message translates to:
+  /// **'Metrik (kg, cm)'**
+  String get metrik;
+
+  /// No description provided for @imperyal.
+  ///
+  /// In tr, this message translates to:
+  /// **'İmperyal (lb, in)'**
+  String get imperyal;
+
+  /// No description provided for @celsius.
+  ///
+  /// In tr, this message translates to:
+  /// **'Celsius (°C)'**
+  String get celsius;
+
+  /// No description provided for @fahrenheit.
+  ///
+  /// In tr, this message translates to:
+  /// **'Fahrenheit (°F)'**
+  String get fahrenheit;
+
+  /// No description provided for @vazgec.
+  ///
+  /// In tr, this message translates to:
+  /// **'Vazgeç'**
+  String get vazgec;
+
+  /// No description provided for @sifirla.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sıfırla'**
+  String get sifirla;
+
+  /// No description provided for @dilTercihiniSifirla.
+  ///
+  /// In tr, this message translates to:
+  /// **'Dil tercihini sıfırla'**
+  String get dilTercihiniSifirla;
+
+  /// No description provided for @dilTercihiniSifirlaAcik.
+  ///
+  /// In tr, this message translates to:
+  /// **'Dil seçimini temizler, cihaz diline döner. Verileriniz silinmez.'**
+  String get dilTercihiniSifirlaAcik;
+
+  /// No description provided for @bolgeAyarlariniSifirla.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bölge ayarlarını varsayılana döndür'**
+  String get bolgeAyarlariniSifirla;
+
+  /// No description provided for @bolgeAyarlariniSifirlaAcik.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tarih/saat/birim biçimlerini varsayılana alır. Verileriniz silinmez.'**
+  String get bolgeAyarlariniSifirlaAcik;
+
+  /// No description provided for @dilTercihiniSifirlaOnay.
+  ///
+  /// In tr, this message translates to:
+  /// **'Dil seçiminiz temizlenecek ve uygulama cihazınızın sistem diline dönecek. Aile, sağlık, bütçe gibi verileriniz SİLİNMEZ.'**
+  String get dilTercihiniSifirlaOnay;
+
+  /// No description provided for @bolgeAyarlariniSifirlaOnay.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tarih, saat, ölçü ve sıcaklık biçimleri varsayılana dönecek. Verileriniz SİLİNMEZ.'**
+  String get bolgeAyarlariniSifirlaOnay;
+
+  /// No description provided for @dilBolgeKaydedildi.
+  ///
+  /// In tr, this message translates to:
+  /// **'Dil ve bölge ayarları kaydedildi'**
+  String get dilBolgeKaydedildi;
+
+  /// No description provided for @dilTercihiSifirlandi.
+  ///
+  /// In tr, this message translates to:
+  /// **'Dil tercihi sıfırlandı'**
+  String get dilTercihiSifirlandi;
+
+  /// No description provided for @bolgeAyarlariSifirlandi.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bölge ayarları varsayılana döndürüldü'**
+  String get bolgeAyarlariSifirlandi;
+
+  /// No description provided for @ulkeSecimiBilgi.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ülke seçimi; para birimi, ev gideri ve market içeriğini belirler.'**
+  String get ulkeSecimiBilgi;
+
   /// No description provided for @henuzVeriYok.
   ///
   /// In tr, this message translates to:
@@ -6233,12 +6413,6 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Konum seçilmezse şehir listesinden kullanılır'**
   String get konumSecilmezseSehirListesindenKullanilir;
-
-  /// No description provided for @sicaklikBirimi.
-  ///
-  /// In tr, this message translates to:
-  /// **'Sıcaklık Birimi'**
-  String get sicaklikBirimi;
 
   /// No description provided for @havaDurumuAlinamadi.
   ///

@@ -2614,6 +2614,103 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tarihFormati => 'DATE FORMAT';
 
   @override
+  String get saatFormati => 'TIME FORMAT';
+
+  @override
+  String get haftaninIlkGunu => 'FIRST DAY OF WEEK';
+
+  @override
+  String get olcuBirimi => 'MEASUREMENT UNIT';
+
+  @override
+  String get sicaklikBirimi => 'Temperature Unit';
+
+  @override
+  String get sifirlama => 'RESET';
+
+  @override
+  String get ulkeBolge => 'COUNTRY / REGION';
+
+  @override
+  String get cihazDiliOtomatik => 'Device Language (Automatic)';
+
+  @override
+  String sistemDili(Object lang) {
+    return 'System language: $lang';
+  }
+
+  @override
+  String get kaydet => 'Save';
+
+  @override
+  String get kaydedildi => 'Saved';
+
+  @override
+  String get saat24 => '24-hour';
+
+  @override
+  String get saat12 => '12-hour (AM/PM)';
+
+  @override
+  String get pazartesi => 'Monday';
+
+  @override
+  String get pazar => 'Sunday';
+
+  @override
+  String get metrik => 'Metric (kg, cm)';
+
+  @override
+  String get imperyal => 'Imperial (lb, in)';
+
+  @override
+  String get celsius => 'Celsius (°C)';
+
+  @override
+  String get fahrenheit => 'Fahrenheit (°F)';
+
+  @override
+  String get vazgec => 'Cancel';
+
+  @override
+  String get sifirla => 'Reset';
+
+  @override
+  String get dilTercihiniSifirla => 'Reset language preference';
+
+  @override
+  String get dilTercihiniSifirlaAcik =>
+      'Clears your language choice and returns to the device language. Your data is not deleted.';
+
+  @override
+  String get bolgeAyarlariniSifirla => 'Reset region settings to default';
+
+  @override
+  String get bolgeAyarlariniSifirlaAcik =>
+      'Resets date/time/unit formats to default. Your data is not deleted.';
+
+  @override
+  String get dilTercihiniSifirlaOnay =>
+      'Your language choice will be cleared and the app will return to your device\'s system language. Your data such as family, health and budget will NOT be deleted.';
+
+  @override
+  String get bolgeAyarlariniSifirlaOnay =>
+      'Date, time, measurement and temperature formats will return to default. Your data will NOT be deleted.';
+
+  @override
+  String get dilBolgeKaydedildi => 'Language and region settings saved';
+
+  @override
+  String get dilTercihiSifirlandi => 'Language preference reset';
+
+  @override
+  String get bolgeAyarlariSifirlandi => 'Region settings restored to default';
+
+  @override
+  String get ulkeSecimiBilgi =>
+      'Country selection determines currency, household expenses and grocery content.';
+
+  @override
   String get henuzVeriYok => 'No data yet';
 
   @override
@@ -3221,9 +3318,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get konumSecilmezseSehirListesindenKullanilir =>
       'If no location is picked, the city list is used';
-
-  @override
-  String get sicaklikBirimi => 'Temperature Unit';
 
   @override
   String get havaDurumuAlinamadi => 'Couldn\'t get weather';
