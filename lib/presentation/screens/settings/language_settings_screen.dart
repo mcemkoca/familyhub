@@ -33,6 +33,22 @@ class _LanguageSettingsScreenState
 
   bool _saving = false;
 
+  // Cihaz dili (otomatik) modu — açılışta kayıtlı dil yoksa cihaz dili kullanılır.
+  late bool _savedDevice;
+  late bool _draftDevice;
+
+  /// Cihazın sistem dili (tr/en/nl/fr'den biri, değilse Türkçe).
+  String get _deviceLanguageLabel {
+    final code =
+        WidgetsBinding.instance.platformDispatcher.locale.languageCode;
+    return switch (code) {
+      'en' => 'English',
+      'nl' => 'Nederlands',
+      'fr' => 'Français',
+      _ => 'Türkçe',
+    };
+  }
+
   // Dil kartları: (etiket, bayrak, yerel ad, İngilizce ad)
   static const _languages = <(String, String, String, String)>[
     ('Türkçe', '🇹🇷', 'Türkçe', 'Turkish'),
@@ -45,15 +61,21 @@ class _LanguageSettingsScreenState
   @override
   void initState() {
     super.initState();
-    _savedLanguage = HiveService.getSetting('language') ?? 'Türkçe';
+    // 'deviceLang' bayrağı: kullanıcı cihaz dilini takip etmeyi seçtiyse.
+    _savedDevice = HiveService.getBoolSetting('useDeviceLanguage',
+        defaultValue: false);
+    _savedLanguage =
+        _savedDevice ? _deviceLanguageLabel : (HiveService.getSetting('language') ?? 'Türkçe');
     _savedCountry = HiveService.getSetting('country') ?? 'BE';
     _savedDateFormat = HiveService.getSetting('dateFormat') ?? 'DD/MM/YYYY';
+    _draftDevice = _savedDevice;
     _draftLanguage = _savedLanguage;
     _draftCountry = _savedCountry;
     _draftDateFormat = _savedDateFormat;
   }
 
   bool get _dirty =>
+      _draftDevice != _savedDevice ||
       _draftLanguage != _savedLanguage ||
       _draftCountry != _savedCountry ||
       _draftDateFormat != _savedDateFormat;
@@ -67,7 +89,18 @@ class _LanguageSettingsScreenState
 
   void _pickLanguage(String lang) {
     HapticFeedback.selectionClick();
-    setState(() => _draftLanguage = lang);
+    setState(() {
+      _draftLanguage = lang;
+      _draftDevice = false;
+    });
+  }
+
+  void _pickDeviceLanguage() {
+    HapticFeedback.selectionClick();
+    setState(() {
+      _draftDevice = true;
+      _draftLanguage = _deviceLanguageLabel;
+    });
   }
 
   void _pickCountry(Country c) {
@@ -93,7 +126,12 @@ class _LanguageSettingsScreenState
       orElse: () => CountryConfig.all.first,
     );
 
-    await HiveService.setSetting('language', _draftLanguage);
+    // Cihaz dili modu: sabit dil yerine cihazın sistem dili takip edilir.
+    final effectiveLang =
+        _draftDevice ? _deviceLanguageLabel : _draftLanguage;
+
+    await HiveService.setBoolSetting('useDeviceLanguage', _draftDevice);
+    await HiveService.setSetting('language', effectiveLang);
     await HiveService.setSetting('country', country.code);
     await HiveService.setSetting('region', country.name);
     await HiveService.setSetting('currency', country.currencyCode);
@@ -102,11 +140,13 @@ class _LanguageSettingsScreenState
 
     // Sağlayıcıları güncelle → uygulama anında yeni dile/bölgeye geçer.
     ref.read(countryProvider.notifier).state = country.code;
-    ref.read(localeProvider.notifier).state = _localeFor(_draftLanguage);
+    ref.read(localeProvider.notifier).state = _localeFor(effectiveLang);
     NotificationService.refreshTimezone();
 
     setState(() {
-      _savedLanguage = _draftLanguage;
+      _savedDevice = _draftDevice;
+      _savedLanguage = effectiveLang;
+      _draftLanguage = effectiveLang;
       _savedCountry = _draftCountry;
       _savedDateFormat = _draftDateFormat;
       _saving = false;
@@ -188,6 +228,52 @@ class _LanguageSettingsScreenState
 
           _sectionTitle(AppLocalizations.of(context).uygulamaDili),
           const SizedBox(height: 10),
+          // Cihaz dili (otomatik) — seçilirse uygulama cihazın sistem dilini takip eder.
+          GestureDetector(
+            onTap: _pickDeviceLanguage,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 160),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              margin: const EdgeInsets.only(bottom: 10),
+              decoration: BoxDecoration(
+                color: _draftDevice
+                    ? const Color(0xFF6366F1).withAlpha(28)
+                    : const Color(0xFF13131A),
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(
+                  color: _draftDevice
+                      ? const Color(0xFF6366F1)
+                      : const Color(0x14FFFFFF),
+                  width: _draftDevice ? 1.5 : 1,
+                ),
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.smartphone_rounded,
+                      color: Color(0xFF9CA3AF), size: 22),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Cihaz Dili (Otomatik)',
+                            style: TextStyle(
+                                color: Color(0xFFE5E7EB),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700)),
+                        Text('Sistem dili: $_deviceLanguageLabel',
+                            style: const TextStyle(
+                                color: Color(0xFF6B7280), fontSize: 12)),
+                      ],
+                    ),
+                  ),
+                  if (_draftDevice)
+                    const Icon(Icons.check_circle_rounded,
+                        color: Color(0xFF6366F1), size: 20),
+                ],
+              ),
+            ),
+          ),
           GridView.count(
             crossAxisCount: 2,
             shrinkWrap: true,
@@ -196,7 +282,7 @@ class _LanguageSettingsScreenState
             crossAxisSpacing: 10,
             childAspectRatio: 2.6,
             children: _languages.map((l) {
-              final sel = _draftLanguage == l.$1;
+              final sel = !_draftDevice && _draftLanguage == l.$1;
               return _LangCard(
                 flag: l.$2,
                 native: l.$3,
