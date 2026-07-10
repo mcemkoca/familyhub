@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'health_store.dart';
+import '../../../services/ai/ai_content_service.dart';
 
 /// Sağlık Makaleleri — kategorili, görselli sağlık içerikleri.
 /// Görsel: ağdan (Unsplash) yüklenir, başarısızsa degrade+emoji fallback.
@@ -183,16 +184,88 @@ class HealthArticlesScreen extends StatefulWidget {
 
 class _HealthArticlesScreenState extends State<HealthArticlesScreen> {
   String _cat = 'senin';
+  List<HealthArticle> _aiArticles = [];
+  bool _loadingAi = false;
+  int _tick = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAi();
+  }
+
+  /// AI'dan taze sağlık makaleleri çeker (haftalık önbellek + Yenile ile anlık).
+  Future<void> _loadAi({bool force = false}) async {
+    setState(() => _loadingAi = true);
+    try {
+      final items = await AiContentService.weeklyList(
+        topic: 'health_articles_$_tick',
+        forceRefresh: force,
+        maxTokens: 1100,
+        prompt: '''
+Bir aile sağlığı uygulaması için 4 kısa, güncel ve güvenilir sağlık makalesi üret.
+Konular çeşitli olsun (beslenme, çocuk sağlığı, bağışıklık, uyku, hareket, mevsimsel).
+Teşhis koyma; bilgilendirici ve pratik ol. Sadece JSON döndür:
+{"items":[{"title":"Başlık","summary":"1 cümle özet","emoji":"🥗","body":["paragraf 1","paragraf 2","paragraf 3"]}]}
+Türkçe yaz.''',
+        listKey: 'items',
+        fallback: const [],
+      );
+      final parsed = items
+          .map((e) => HealthArticle(
+                id: 'ai_${e['title'].hashCode}',
+                category: 'yeni',
+                categoryLabel: 'Güncel',
+                categoryColor: const Color(0xFF14B8A6),
+                title: (e['title'] ?? '').toString(),
+                summary: (e['summary'] ?? '').toString(),
+                emoji: (e['emoji'] ?? '🩺').toString(),
+                imageUrl: '',
+                dateLabel: 'Bugün',
+                body: (e['body'] as List?)
+                        ?.map((x) => x.toString())
+                        .where((x) => x.isNotEmpty)
+                        .toList() ??
+                    const [],
+              ))
+          .where((a) => a.title.isNotEmpty)
+          .toList();
+      if (mounted) setState(() => _aiArticles = parsed);
+    } catch (_) {
+      // AI erişilemezse statik makaleler yine gösterilir.
+    } finally {
+      if (mounted) setState(() => _loadingAi = false);
+    }
+  }
 
   List<HealthArticle> get _filtered {
-    if (_cat == 'senin' || _cat == 'populer') return _articles;
-    return _articles.where((a) => a.category == _cat).toList();
+    final base = [..._aiArticles, ..._articles];
+    if (_cat == 'senin' || _cat == 'populer') return base;
+    return base.where((a) => a.category == _cat).toList();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: _loadingAi
+            ? null
+            : () {
+                setState(() => _tick++);
+                _loadAi(force: true);
+              },
+        backgroundColor: const Color(0xFF14B8A6),
+        icon: _loadingAi
+            ? const SizedBox(
+                width: 18,
+                height: 18,
+                child: CircularProgressIndicator(
+                    strokeWidth: 2, color: Colors.white))
+            : const Icon(Icons.refresh_rounded, color: Colors.white),
+        label: Text(_loadingAi ? 'Yenileniyor…' : 'Yenile',
+            style: const TextStyle(color: Colors.white)),
+      ),
       body: SafeArea(
         child: Column(
           children: [
