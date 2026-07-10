@@ -670,7 +670,8 @@ ${categories.join(', ')}''';
                   borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
                 ),
                 padding: const EdgeInsets.all(24),
-                child: Column(
+                child: SingleChildScrollView(
+                  child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -962,6 +963,7 @@ ${categories.join(', ')}''';
                       ),
                     ),
                   ],
+                ),
                 ),
               ),
             );

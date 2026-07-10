@@ -895,7 +895,8 @@ class _AddHistorySheetState extends State<_AddHistorySheet> {
       child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
-          child: Column(
+          child: SingleChildScrollView(
+            child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -1031,6 +1032,7 @@ class _AddHistorySheetState extends State<_AddHistorySheet> {
                 ),
               ),
             ],
+          ),
           ),
         ),
       ),

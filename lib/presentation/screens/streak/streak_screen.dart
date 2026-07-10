@@ -80,7 +80,8 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
           right: 24,
           top: 24,
         ),
-        child: Column(
+        child: SingleChildScrollView(
+          child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
@@ -123,6 +124,7 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
             ),
             const SizedBox(height: 24),
           ],
+        ),
         ),
       ),
     );

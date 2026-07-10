@@ -200,7 +200,8 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
               borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
             ),
             padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
-            child: Column(
+            child: SingleChildScrollView(
+              child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -292,6 +293,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                   ),
                 ),
               ],
+            ),
             ),
           ),
         ),
