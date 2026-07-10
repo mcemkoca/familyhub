@@ -61,9 +61,8 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
       setState(() => _useCurrentLocation = false);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              'Konum izni verilmedi. Şehir seçimi veya haritadan konum seçimi kullanılabilir.',
+          SnackBar(
+            content: Text(AppLocalizations.of(context).konumIzniVerilmediSehirSecimiVeyaHaritadanKonumSecimiKullanilabilir,
             ),
             duration: Duration(seconds: 4),
           ),
@@ -248,8 +247,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Haritadan Konum Seç',
+                Text(AppLocalizations.of(context).haritadanKonumSec,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -257,8 +255,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
                   ),
                 ),
                 const SizedBox(height: 4),
-                const Text(
-                  'OpenStreetMap haritasından istediğiniz noktayı seçin',
+                Text(AppLocalizations.of(context).openstreetmapHaritasindanIstediginizNoktayiSecin,
                   style: TextStyle(
                     fontSize: 13,
                     color: Color(0xFF6B7280),
@@ -313,8 +310,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
                   child: OutlinedButton.icon(
                     onPressed: _openLocationPicker,
                     icon: const Icon(Icons.map, color: Color(0xFF6366F1)),
-                    label: const Text(
-                      'Haritayı Aç',
+                    label: Text(AppLocalizations.of(context).haritayiAc,
                       style: TextStyle(
                         color: Color(0xFF6366F1),
                         fontWeight: FontWeight.w600,
@@ -361,8 +357,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Sıcaklık Birimi',
+                Text(AppLocalizations.of(context).sicaklikBirimi,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -487,8 +482,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          '7 Günlük Tahmin',
+        Text(AppLocalizations.of(context).gunlukTahmin,
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w700,
@@ -674,12 +668,12 @@ class _WeatherPreviewCard extends StatelessWidget {
                 ),
                 _MetricItem(
                   icon: Icons.air,
-                  label: 'Rüzgar',
+                  label: AppLocalizations.of(context).ruzgar,
                   value: '${weather.windSpeed.round()} km/s',
                 ),
                 _MetricItem(
                   icon: Icons.speed,
-                  label: 'Basınç',
+                  label: AppLocalizations.of(context).basinc,
                   value: '${weather.pressure.round()} hPa',
                 ),
               ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../../../config/constants.dart';
 import '../../../../domain/entities.dart';
 import '../../../../repositories/child_chat_repository.dart';
@@ -263,14 +264,13 @@ class _EmptyChatView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(Icons.chat_bubble_outline, size: 64, color: Color(0xFF9CA3AF)),
           SizedBox(height: AppSpacing.md),
-          Text(
-            'Aile sohbetine ilk mesajı sen gönder! 💬',
+          Text(AppLocalizations.of(context).aileSohbetineIlkMesajiSenGonder,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
@@ -278,8 +278,7 @@ class _EmptyChatView extends StatelessWidget {
             ),
           ),
           SizedBox(height: AppSpacing.sm),
-          Text(
-            'Mesajların burada görünecek.',
+          Text(AppLocalizations.of(context).mesajlarinBuradaGorunecek,
             style: TextStyle(
               fontSize: 14,
               color: Color(0xFF6B7280),

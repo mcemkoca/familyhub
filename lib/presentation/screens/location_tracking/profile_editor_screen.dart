@@ -50,7 +50,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
             'GENEL',
             children: [
               TextField(
-                decoration: const InputDecoration(labelText: 'İsim'),
+                decoration: InputDecoration(labelText: AppLocalizations.of(context).isim),
                 controller: TextEditingController(text: label),
               ),
               const SizedBox(height: 12),
@@ -81,8 +81,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
                 _updateInterval.toString(),
                 (v) => _updateInterval = int.tryParse(v) ?? 10,
               ),
-              const Text(
-                '5-60 sn arası',
+              Text(AppLocalizations.of(context).snArasi,
                 style: TextStyle(color: Colors.white54, fontSize: 12),
               ),
               const SizedBox(height: 12),
@@ -91,8 +90,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
                 _distanceFilter.toString(),
                 (v) => _distanceFilter = int.tryParse(v) ?? 10,
               ),
-              const Text(
-                'Konum değişmeden güncelleme yok',
+              Text(AppLocalizations.of(context).konumDegismedenGuncellemeYok,
                 style: TextStyle(color: Colors.white54, fontSize: 12),
               ),
               const SizedBox(height: 12),
@@ -100,8 +98,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
                 value: true,
                 onChanged: (_) {},
                 title: Text(AppLocalizations.of(context).zamanlayiciYedek),
-                subtitle: const Text(
-                  'Konum değişmese bile zorunlu güncelleme',
+                subtitle: Text(AppLocalizations.of(context).konumDegismeseBileZorunluGuncelleme,
                   style: TextStyle(fontSize: 12),
                 ),
               ),
@@ -122,8 +119,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
                 onSelectionChanged: (s) => setState(() => _accuracy = s.first),
               ),
               const SizedBox(height: 12),
-              const Text(
-                'GPS kalitesi düşükse:',
+              Text(AppLocalizations.of(context).gpsKalitesiDusukse,
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
               RadioListTile(
@@ -168,8 +164,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
                 value: _motionTrigger,
                 onChanged: (v) => setState(() => _motionTrigger = v),
                 title: Text(AppLocalizations.of(context).hareketAlgilayiciIleTetikle),
-                subtitle: const Text(
-                  'Telefon sallanınca aktif ol',
+                subtitle: Text(AppLocalizations.of(context).telefonSallanincaAktifOl,
                   style: TextStyle(fontSize: 12),
                 ),
               ),
@@ -180,8 +175,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
           _section(
             'GEÇİŞ KURALLARI',
             children: [
-              const Text(
-                'Bu profile geçiş:',
+              Text(AppLocalizations.of(context).buProfileGecis,
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 8),
@@ -209,8 +203,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
                 ),
               ],
               const SizedBox(height: 16),
-              const Text(
-                'Bu profilden çıkış:',
+              Text(AppLocalizations.of(context).buProfildenCikis,
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 8),
@@ -219,8 +212,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
                 _exitDuration.toString(),
                 (v) => _exitDuration = int.tryParse(v) ?? 60,
               ),
-              const Text(
-                'Bu süre boyunca hareketsiz kalınca düşük profil',
+              Text(AppLocalizations.of(context).buSureBoyuncaHareketsizKalincaDusukProfil,
                 style: TextStyle(color: Colors.white54, fontSize: 12),
               ),
             ],

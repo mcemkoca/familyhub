@@ -277,14 +277,13 @@ class _EmptyTasksView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(Icons.task_alt, size: 64, color: Color(0xFF9CA3AF)),
           SizedBox(height: AppSpacing.md),
-          Text(
-            'Henüz görevin yok! 🌟',
+          Text(AppLocalizations.of(context).henuzGorevinYok,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
@@ -292,8 +291,7 @@ class _EmptyTasksView extends StatelessWidget {
             ),
           ),
           SizedBox(height: AppSpacing.sm),
-          Text(
-            'Görevlerin eklendiğinde burada görünecek.',
+          Text(AppLocalizations.of(context).gorevlerinEklendigindeBuradaGorunecek,
             style: TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
           ),
         ],

@@ -149,9 +149,9 @@ class _ScreenTimeSettingsScreenState
                 ),
                 TextField(
                   controller: reasonController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Neden (isteğe bağlı)',
-                    hintText: 'Örn: Ödev zamanı',
+                    hintText: AppLocalizations.of(context).ornOdevZamani,
                   ),
                 ),
               ],
@@ -232,7 +232,7 @@ class _ScreenTimeSettingsScreenState
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
-        title: 'Ekran Süresi',
+        title: AppLocalizations.of(context).ekranSuresi,
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -241,11 +241,10 @@ class _ScreenTimeSettingsScreenState
           : CustomScrollView(
               physics: const BouncingScrollPhysics(),
               slivers: [
-                const SliverToBoxAdapter(
+                SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.all(16),
-                    child: Text(
-                      'Çocuk üyeler için günlük ekran süresi limitleri belirleyin.',
+                    child: Text(AppLocalizations.of(context).cocukUyelerIcinGunlukEkranSuresiLimitleriBelirleyin,
                       style: TextStyle(
                         fontSize: 14,
                         color: Color(0xFF6B7280),

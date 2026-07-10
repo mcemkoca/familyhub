@@ -111,7 +111,7 @@ class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('📊 Başarı Metrikleri', style: _sectionStyle(textColor)),
+          Text(AppLocalizations.of(context).basariMetrikleri, style: _sectionStyle(textColor)),
           const SizedBox(height: 16),
           _buildMetricRow(
             'Tetiklenme',
@@ -185,7 +185,7 @@ class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('📈 Zaman Dağılımı', style: _sectionStyle(textColor)),
+          Text(AppLocalizations.of(context).zamanDagilimi, style: _sectionStyle(textColor)),
           const SizedBox(height: 16),
           ..._timeDistribution.entries.map((e) {
             final pct = e.value / maxVal;
@@ -242,7 +242,7 @@ class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('🗺️ Lokasyon Dağılımı', style: _sectionStyle(textColor)),
+          Text(AppLocalizations.of(context).lokasyonDagilimi, style: _sectionStyle(textColor)),
           const SizedBox(height: 16),
           ..._locationDistribution.entries.map((e) {
             final pct = e.value / maxVal;
@@ -312,7 +312,7 @@ class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('🤖 AI Öğrenme Önerileri', style: _sectionStyle(textColor)),
+          Text(AppLocalizations.of(context).aiOgrenmeOnerileri, style: _sectionStyle(textColor)),
           const SizedBox(height: 16),
           ...suggestions.map(
             (s) => Padding(

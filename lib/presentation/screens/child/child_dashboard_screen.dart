@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../config/routes.dart';
@@ -61,14 +62,13 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
                 ),
               ),
               const SizedBox(height: 16),
-              const Text(
-                'Hızlı Aksiyon',
+              Text(AppLocalizations.of(context).hizliAksiyon,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
               _QuickActionTile(
                 icon: Icons.chat_bubble_outline,
-                label: 'Mesaj Gönder',
+                label: AppLocalizations.of(context).mesajGonder,
                 color: Colors.blue,
                 onTap: () {
                   Navigator.pop(context);
@@ -77,7 +77,7 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
               ),
               _QuickActionTile(
                 icon: Icons.check_circle_outline,
-                label: 'Görevlerime Git',
+                label: AppLocalizations.of(context).gorevlerimeGit,
                 color: Colors.green,
                 onTap: () {
                   Navigator.pop(context);
@@ -86,7 +86,7 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
               ),
               _QuickActionTile(
                 icon: Icons.calendar_today_outlined,
-                label: 'Ders Programım',
+                label: AppLocalizations.of(context).dersProgramim,
                 color: Colors.orange,
                 onTap: () {
                   Navigator.pop(context);
@@ -95,7 +95,7 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
               ),
               _QuickActionTile(
                 icon: Icons.location_on_outlined,
-                label: 'Konumumu Paylaş',
+                label: AppLocalizations.of(context).konumumuPaylas,
                 color: Colors.purple,
                 onTap: () {
                   Navigator.pop(context);
@@ -104,7 +104,7 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
               ),
               _QuickActionTile(
                 icon: Icons.auto_awesome,
-                label: 'Akıllı Rotasyon',
+                label: AppLocalizations.of(context).akilliRotasyon,
                 color: const Color(0xFF8B5CF6),
                 onTap: () {
                   Navigator.pop(context);
@@ -119,7 +119,7 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
               ),
               _QuickActionTile(
                 icon: Icons.timer,
-                label: 'Güvenli Varış',
+                label: AppLocalizations.of(context).guvenliVaris,
                 color: Colors.orange,
                 onTap: () {
                   Navigator.pop(context);
@@ -158,10 +158,10 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
         activeIcon: Icons.home,
         label: 'Ana Sayfa',
       ),
-      const _NavItem(
+      _NavItem(
         icon: Icons.check_circle_outline,
         activeIcon: Icons.check_circle,
-        label: 'Görevlerim',
+        label: AppLocalizations.of(context).gorevlerim,
       ),
       const _NavItem(
         icon: Icons.chat_bubble_outline,
@@ -173,10 +173,10 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
         activeIcon: Icons.emoji_events,
         label: 'Rozetler',
       ),
-      const _NavItem(
+      _NavItem(
         icon: Icons.shield_outlined,
         activeIcon: Icons.shield,
-        label: 'Güvenlik',
+        label: AppLocalizations.of(context).safety,
       ),
     ];
 
@@ -208,7 +208,7 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.logout_outlined, size: 22),
-            tooltip: 'Çıkış Yap',
+            tooltip: AppLocalizations.of(context).logout,
             onPressed: _signOut,
           ),
         ],

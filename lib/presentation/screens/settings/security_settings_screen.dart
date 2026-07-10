@@ -121,8 +121,8 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
                 TextField(
                   controller: currentController,
                   obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Mevcut Şifre',
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context).mevcutSifre,
                     prefixIcon: Icon(Icons.lock_outline),
                   ),
                 ),
@@ -130,11 +130,10 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
                 TextField(
                   controller: newController,
                   obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Yeni Şifre',
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context).yeniSifre,
                     prefixIcon: Icon(Icons.lock_outline),
-                    helperText:
-                        'En az 8 karakter, büyük/küçük harf, rakam ve özel karakter',
+                    helperText: AppLocalizations.of(context).enAz8KarakterBuyukkucukHarfRakamVeOzelKarakter,
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -232,12 +231,10 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: const Text(
-          'Hesabı Sil',
+        title: Text(AppLocalizations.of(context).hesabiSil,
           style: TextStyle(color: AppColors.error),
         ),
-        content: const Text(
-          'Hesabınızı silmek geri alınamaz. Tüm verileriniz kalıcı olarak silinecek.',
+        content: Text(AppLocalizations.of(context).hesabiniziSilmekGeriAlinamazTumVerilerinizKaliciOlarakSilinecek,
         ),
         actions: [
           TextButton(
@@ -285,7 +282,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
-        title: 'Güvenlik',
+        title: AppLocalizations.of(context).safety,
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -294,7 +291,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
         slivers: [
           SliverToBoxAdapter(
             child: SettingsSection(
-              title: 'ŞİFRE YÖNETİMİ',
+              title: AppLocalizations.of(context).sifreYonetimi,
               icon: Icons.password_outlined,
               children: [
                 ListTile(
@@ -313,8 +310,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
                     color: Color(0xFF10B981),
                   ),
                   title: Text(AppLocalizations.of(context).guvenlikSorulari),
-                  subtitle: const Text(
-                    'Şifre unutma durumunda kullanılacak 2 soru',
+                  subtitle: Text(AppLocalizations.of(context).sifreUnutmaDurumundaKullanilacak2Soru,
                   ),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () => context.push(AppRoutes.securityQuestionsSetup),
@@ -324,7 +320,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
           ),
           SliverToBoxAdapter(
             child: SettingsSection(
-              title: 'GİRİŞ SEÇENEKLERİ',
+              title: AppLocalizations.of(context).girisSecenekleri,
               icon: Icons.fingerprint,
               children: [
                 SwitchListTile(
@@ -347,7 +343,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
           ),
           SliverToBoxAdapter(
             child: SettingsSection(
-              title: 'TEHLİKE BÖLGESİ',
+              title: AppLocalizations.of(context).tehlikeBolgesi,
               icon: Icons.warning_amber_rounded,
               children: [
                 ListTile(
@@ -355,12 +351,10 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
                     Icons.delete_forever,
                     color: AppColors.error,
                   ),
-                  title: const Text(
-                    'Hesabı Sil',
+                  title: Text(AppLocalizations.of(context).hesabiSil,
                     style: TextStyle(color: AppColors.error),
                   ),
-                  subtitle: const Text(
-                    'Tüm verileriniz kalıcı olarak silinecek',
+                  subtitle: Text(AppLocalizations.of(context).tumVerilerinizKaliciOlarakSilinecek,
                   ),
                   onTap: _showDeleteAccountDialog,
                 ),

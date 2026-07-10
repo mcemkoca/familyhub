@@ -133,8 +133,7 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
             pinned: true,
             backgroundColor: const Color(0xFF1A1A2E),
             flexibleSpace: FlexibleSpaceBar(
-              title: const Text(
-                '🧠 Akıllı Hatırlatıcılar',
+              title: Text(AppLocalizations.of(context).akilliHatirlaticilar,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               background: Container(
@@ -258,13 +257,13 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
     final suggestions = [
       _AiSuggestion(
         icon: '💡',
-        title: 'Çocuk okuldan gelince su içir',
-        subtitle: 'Lokasyon: Okul çıkışı pattern',
+        title: AppLocalizations.of(context).cocukOkuldanGelinceSuIcir,
+        subtitle: AppLocalizations.of(context).lokasyonOkulCikisiPattern,
       ),
       _AiSuggestion(
         icon: '💡',
-        title: 'Akşam yemeğinden önce 1 saat hazırlık',
-        subtitle: 'Zaman: 17:00, Görev: Yemek',
+        title: AppLocalizations.of(context).aksamYemegindenOnce1SaatHazirlik,
+        subtitle: AppLocalizations.of(context).zaman1700GorevYemek,
       ),
     ];
 
@@ -288,8 +287,7 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
             children: [
               Icon(Icons.auto_awesome, color: Colors.purple[400]),
               const SizedBox(width: 8),
-              Text(
-                'AI Önerileri',
+              Text(AppLocalizations.of(context).aiOnerileri,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

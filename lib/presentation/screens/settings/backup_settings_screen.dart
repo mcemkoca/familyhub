@@ -198,7 +198,7 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
     return Scaffold(
       backgroundColor: bg,
       appBar: ScreenHeader(
-        title: 'Yedekleme Ayarları',
+        title: AppLocalizations.of(context).yedeklemeAyarlari,
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -270,8 +270,7 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
                         child: ElevatedButton.icon(
                           onPressed: _signIn,
                           icon: const Icon(Icons.login, color: Color(0xFF4285F4)),
-                          label: const Text(
-                            'Google Hesabı Bağla',
+                          label: Text(AppLocalizations.of(context).googleHesabiBagla,
                             style: TextStyle(color: Color(0xFF4285F4)),
                           ),
                           style: ElevatedButton.styleFrom(
@@ -290,8 +289,7 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
                         child: OutlinedButton.icon(
                           onPressed: _signOut,
                           icon: const Icon(Icons.logout, color: Colors.white),
-                          label: const Text(
-                            'Bağlantıyı Kes',
+                          label: Text(AppLocalizations.of(context).baglantiyiKes,
                             style: TextStyle(color: Colors.white),
                           ),
                           style: OutlinedButton.styleFrom(

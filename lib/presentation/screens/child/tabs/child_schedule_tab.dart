@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../../../config/constants.dart';
 import '../../../../domain/models/child_homework.dart';
 import '../../../../domain/models/child_schedule.dart';
@@ -110,7 +111,7 @@ class _DayView extends StatelessWidget {
                   children: [
                     _SectionHeader(
                       icon: Icons.schedule,
-                      title: 'Ders Programı',
+                      title: AppLocalizations.of(context).dersProgrami,
                       count: daySchedules.length,
                     ),
                     const SizedBox(height: AppSpacing.md),
@@ -138,7 +139,7 @@ class _DayView extends StatelessWidget {
                   children: [
                     _SectionHeader(
                       icon: Icons.assignment,
-                      title: 'Ödevlerim',
+                      title: AppLocalizations.of(context).odevlerim,
                       count: pendingHomeworks.length,
                     ),
                     const SizedBox(height: AppSpacing.md),

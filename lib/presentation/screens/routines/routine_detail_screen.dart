@@ -145,8 +145,7 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                'Tüm Adımlar',
+              child: Text(AppLocalizations.of(context).tumAdimlar,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -196,8 +195,7 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'İlerleme',
+              Text(AppLocalizations.of(context).ilerleme,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -291,8 +289,7 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
             children: [
               const Icon(Icons.celebration, size: 48, color: Colors.amber),
               const SizedBox(height: 12),
-              const Text(
-                '🎉 Rutin Tamamlandı!',
+              Text(AppLocalizations.of(context).rutinTamamlandi,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               Text(AppLocalizations.of(context).tumAdimlariBasariylaTamamladiniz),
@@ -320,8 +317,7 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'ŞU ANKİ ADIM',
+          Text(AppLocalizations.of(context).suAnkiAdim,
             style: TextStyle(
               fontSize: 11,
               color: Colors.white.withAlpha(204),

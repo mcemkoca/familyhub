@@ -122,8 +122,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
               Text(AppLocalizations.of(context).emergency),
             ],
           ),
-          content: const Text(
-            'Acil durum bildirimi ailene gönderildi ve konumun paylaşıldı.',
+          content: Text(AppLocalizations.of(context).emergencySent,
           ),
           actions: [
             TextButton(
@@ -264,8 +263,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
             ),
           ),
           const SizedBox(height: 4),
-          const Text(
-            'Butona 3 saniye basılı tut',
+          Text(AppLocalizations.of(context).butona3SaniyeBasiliTut,
             style: TextStyle(fontSize: 13, color: Color(0xFF9CA3AF)),
           ),
           const SizedBox(height: 20),
@@ -326,8 +324,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
             ),
           ),
           const SizedBox(height: 12),
-          const Text(
-            'Basılı Tut',
+          Text(AppLocalizations.of(context).basiliTut,
             style: TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
           ),
         ],
@@ -339,8 +336,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'HIZLI İŞLEMLER',
+        Text(AppLocalizations.of(context).hizliIslemler,
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w700,
@@ -381,8 +377,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Konumumu Paylaş',
+                      Text(AppLocalizations.of(context).konumumuPaylas,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
@@ -431,20 +426,18 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
                   child: const Icon(Icons.timer, color: Colors.orange),
                 ),
                 const SizedBox(width: 14),
-                const Expanded(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Güvenli Varış',
+                      Text(AppLocalizations.of(context).guvenliVaris,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Text(
-                        'Aile varış planlarını gör',
+                      Text(AppLocalizations.of(context).aileVarisPlanlariniGor,
                         style: TextStyle(color: Colors.grey, fontSize: 13),
                       ),
                     ],
@@ -467,8 +460,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'AKTİF UYARILAR',
+        Text(AppLocalizations.of(context).aktifUyarilar,
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w700,
@@ -514,8 +506,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
                         color: Colors.red.withAlpha(30),
                         borderRadius: BorderRadius.circular(6),
                       ),
-                      child: const Text(
-                        'AKTİF',
+                      child: Text(AppLocalizations.of(context).aktif,
                         style: TextStyle(
                           color: Colors.red,
                           fontSize: 10,
@@ -566,20 +557,18 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
               child: const Icon(Icons.favorite, color: Colors.teal),
             ),
             const SizedBox(width: 14),
-            const Expanded(
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Sağlık Kartım',
+                  Text(AppLocalizations.of(context).saglikKartim,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  Text(
-                    'Alerji ve sağlık bilgilerin',
+                  Text(AppLocalizations.of(context).alerjiVeSaglikBilgilerin,
                     style: TextStyle(color: Colors.grey, fontSize: 13),
                   ),
                 ],

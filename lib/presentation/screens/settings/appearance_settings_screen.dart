@@ -87,7 +87,7 @@ class _AppearanceSettingsScreenState extends ConsumerState<AppearanceSettingsScr
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
-        title: 'Görünüm',
+        title: AppLocalizations.of(context).gorunum,
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -164,8 +164,7 @@ class _AppearanceSettingsScreenState extends ConsumerState<AppearanceSettingsScr
             ),
           ),
           const SizedBox(height: 28),
-          const Text(
-            'Yazı Boyutu',
+          Text(AppLocalizations.of(context).fontSize,
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w700,

@@ -181,8 +181,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                'Günlük Rutinler',
+              child: Text(AppLocalizations.of(context).gunlukRutinler,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: textColor),
               ),
             ),
@@ -246,7 +245,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('AKTİF RUTİN', style: TextStyle(fontSize: 11, color: Colors.white.withAlpha(204), fontWeight: FontWeight.w600)),
+                    Text(AppLocalizations.of(context).aktifRutin, style: TextStyle(fontSize: 11, color: Colors.white.withAlpha(204), fontWeight: FontWeight.w600)),
                     Text(routine.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
                   ],
                 ),
@@ -310,7 +309,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
             children: [
               Icon(Icons.auto_awesome, color: Colors.purple[400]),
               const SizedBox(width: 8),
-              Text('AI Önerileri', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: textColor)),
+              Text(AppLocalizations.of(context).aiOnerileri, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: textColor)),
             ],
           ),
           const SizedBox(height: 12),

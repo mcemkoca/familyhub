@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../config/constants.dart';
 import '../../../../config/routes.dart';
@@ -71,8 +72,7 @@ class _GreetingHeader extends StatelessWidget {
           ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: AppSpacing.xs),
-        const Text(
-          'Bugün neler yapacağına bir bakalım.',
+        Text(AppLocalizations.of(context).bugunNelerYapacaginaBirBakalim,
           style: TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
         ),
       ],
@@ -111,8 +111,7 @@ class _TasksProgressCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Günlük Görevler',
+              Text(AppLocalizations.of(context).gunlukGorevler,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 18,
@@ -168,7 +167,7 @@ class _QuickStatsRow extends StatelessWidget {
                   .length;
               return _StatCard(
                 icon: Icons.check_circle_outline,
-                label: 'Bekleyen Görev',
+                label: AppLocalizations.of(context).bekleyenGorev,
                 value: pending.toString(),
                 color: Colors.green,
               );
@@ -185,7 +184,7 @@ class _QuickStatsRow extends StatelessWidget {
                   .length;
               return _StatCard(
                 icon: Icons.assignment_outlined,
-                label: 'Bekleyen Ödev',
+                label: AppLocalizations.of(context).bekleyenOdev,
                 value: pending.toString(),
                 color: Colors.blue,
               );
@@ -202,7 +201,7 @@ class _QuickStatsRow extends StatelessWidget {
               final streak = snapshot.data?.currentStreak ?? 0;
               return _StatCard(
                 icon: Icons.local_fire_department,
-                label: 'Gün Streak',
+                label: AppLocalizations.of(context).gunStreak,
                 value: streak.toString(),
                 color: Colors.orange,
               );
@@ -270,8 +269,7 @@ class _TodaySchedulePreview extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Bugünkü Derslerim',
+        Text(AppLocalizations.of(context).bugunkuDerslerim,
           style: Theme.of(
             context,
           ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
@@ -293,12 +291,11 @@ class _TodaySchedulePreview extends StatelessWidget {
                   color: const Color(0x1AFFFFFF),
                   borderRadius: BorderRadius.circular(AppRadius.medium),
                 ),
-                child: const Row(
+                child: Row(
                   children: [
                     Icon(Icons.beach_access, color: Color(0xFF9CA3AF)),
                     SizedBox(width: AppSpacing.sm),
-                    Text(
-                      'Bugün ders yok! Keyfini çıkar.',
+                    Text(AppLocalizations.of(context).bugunDersYokKeyfiniCikar,
                       style: TextStyle(color: Color(0xFF6B7280)),
                     ),
                   ],
@@ -359,8 +356,7 @@ class _UpcomingHomeworksPreview extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Yaklaşan Ödevler',
+        Text(AppLocalizations.of(context).yaklasanOdevler,
           style: Theme.of(
             context,
           ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
@@ -381,12 +377,11 @@ class _UpcomingHomeworksPreview extends StatelessWidget {
                   color: const Color(0x1AFFFFFF),
                   borderRadius: BorderRadius.circular(AppRadius.medium),
                 ),
-                child: const Row(
+                child: Row(
                   children: [
                     Icon(Icons.celebration, color: Color(0xFF9CA3AF)),
                     SizedBox(width: AppSpacing.sm),
-                    Text(
-                      'Tüm ödevler tamamlandı! 🎉',
+                    Text(AppLocalizations.of(context).tumOdevlerTamamlandi,
                       style: TextStyle(color: Color(0xFF6B7280)),
                     ),
                   ],
@@ -504,8 +499,7 @@ class _AiSuggestionsSectionState extends State<_AiSuggestionsSection> {
           children: [
             const Icon(Icons.auto_awesome, color: Color(0xFFA855F7), size: 20),
             const SizedBox(width: AppSpacing.sm),
-            Text(
-              'AI Önerileri',
+            Text(AppLocalizations.of(context).aiOnerileri,
               style: Theme.of(
                 context,
               ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
@@ -544,7 +538,7 @@ class _AiSuggestionsSectionState extends State<_AiSuggestionsSection> {
                   color: const Color(0xFF1E293B),
                   borderRadius: BorderRadius.circular(AppRadius.large),
                 ),
-                child: const Column(
+                child: Column(
                   children: [
                     Icon(
                       Icons.lightbulb_outline,
@@ -552,13 +546,11 @@ class _AiSuggestionsSectionState extends State<_AiSuggestionsSection> {
                       size: 32,
                     ),
                     SizedBox(height: AppSpacing.sm),
-                    Text(
-                      'Henüz AI önerisi yok',
+                    Text(AppLocalizations.of(context).henuzAiOnerisiYok,
                       style: TextStyle(color: Color(0xFF9CA3AF)),
                     ),
                     SizedBox(height: AppSpacing.xs),
-                    Text(
-                      'Daha fazla aktivite kaydı oluşunca öneriler gelecek.',
+                    Text(AppLocalizations.of(context).dahaFazlaAktiviteKaydiOlusuncaOnerilerGelecek,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 12,
@@ -681,8 +673,7 @@ class _QuickAccessGrid extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Hızlı Erişim',
+        Text(AppLocalizations.of(context).hizliErisim,
           style: Theme.of(
             context,
           ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
@@ -692,7 +683,7 @@ class _QuickAccessGrid extends StatelessWidget {
           children: [
             _QuickAccessCard(
               icon: Icons.check_circle,
-              label: 'Görevlerim',
+              label: AppLocalizations.of(context).gorevlerim,
               color: Colors.green,
               onTap: () => context.push(AppRoutes.tasks),
             ),

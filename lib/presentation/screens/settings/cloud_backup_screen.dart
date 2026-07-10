@@ -281,8 +281,7 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
                       child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
                     )
                   : const Icon(Icons.login),
-              label: const Text(
-                'Google Hesabı Bağla',
+              label: Text(AppLocalizations.of(context).googleHesabiBagla,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
               style: ElevatedButton.styleFrom(
@@ -469,11 +468,10 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
         ),
         const SliverToBoxAdapter(child: SizedBox(height: 24)),
         // Backup history
-        const SliverToBoxAdapter(
+        SliverToBoxAdapter(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              'YEDEKLEME GEÇMİŞİ',
+            child: Text(AppLocalizations.of(context).yedeklemeGecmisi,
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
@@ -492,7 +490,7 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
             ),
           )
         else if (_backups.isEmpty)
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 40),
               child: Center(
@@ -500,13 +498,11 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
                   children: [
                     Icon(Icons.cloud_off, size: 48, color: Colors.grey),
                     SizedBox(height: 12),
-                    Text(
-                      'Henüz yedekleme yok',
+                    Text(AppLocalizations.of(context).henuzYedeklemeYok,
                       style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),
                     SizedBox(height: 8),
-                    Text(
-                      'Şimdi Yedekle butonuna basarak başlayabilirsiniz',
+                    Text(AppLocalizations.of(context).simdiYedekleButonunaBasarakBaslayabilirsiniz,
                       style: TextStyle(fontSize: 13, color: Colors.grey),
                     ),
                   ],
