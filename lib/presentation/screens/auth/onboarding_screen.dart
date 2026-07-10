@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../config/routes.dart';
@@ -57,8 +58,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     if (saved != null && saved.isNotEmpty) {
       _selectedLanguage = _langMap.entries
           .firstWhere((e) => e.value.label == saved,
-              orElse: () => const MapEntry(
-                  'tr', (label: 'Türkçe', locale: Locale('tr', 'TR'))))
+              orElse: () => MapEntry(
+                  'tr', (label: AppLocalizations.of(context).turkish, locale: Locale('tr', 'TR'))))
           .key;
       return;
     }

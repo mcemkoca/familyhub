@@ -160,8 +160,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Başlık
-            const Text(
-              'Görev Başlığı',
+            Text(AppLocalizations.of(context).taskTitle,
               style: TextStyle(
                 color: Color(0xFF9CA3AF),
                 fontSize: 14,
@@ -176,7 +175,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     controller: _titleCtrl,
                     style: const TextStyle(color: Colors.white, fontSize: 16),
                     decoration: InputDecoration(
-                      hintText: 'Örn: Odayı topla',
+                      hintText: AppLocalizations.of(context).ornOdayiTopla,
                       hintStyle: const TextStyle(color: Color(0xFF6B7280)),
                       filled: true,
                       fillColor: const Color(0xFF1E293B),
@@ -228,7 +227,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               style: const TextStyle(color: Colors.white, fontSize: 16),
               maxLines: 3,
               decoration: InputDecoration(
-                hintText: 'Görev hakkında detaylar...',
+                hintText: AppLocalizations.of(context).gorevHakkindaDetaylar,
                 hintStyle: const TextStyle(color: Color(0xFF6B7280)),
                 filled: true,
                 fillColor: const Color(0xFF1E293B),
@@ -246,8 +245,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             const SizedBox(height: 24),
 
             // Öncelik
-            const Text(
-              'Öncelik',
+            Text(AppLocalizations.of(context).priority,
               style: TextStyle(
                 color: Color(0xFF9CA3AF),
                 fontSize: 14,
@@ -394,8 +392,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 onPressed: _isLoading ? null : _save,
                 child: _isLoading
                     ? const CircularProgressIndicator(color: Colors.white)
-                    : const Text(
-                        'Görev Ekle',
+                    : Text(AppLocalizations.of(context).gorevEkle,
                         style: TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.w700,
