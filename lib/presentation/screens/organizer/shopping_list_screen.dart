@@ -76,11 +76,40 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
   void _addItem([String? quickName]) {
     final name = quickName ?? _nameController.text.trim();
     if (name.isEmpty) return;
+
+    // Miktar doğrulama — negatif/0/aşırı büyük değerleri engelle (1..999).
+    int? quantity;
+    if (_quantityController.text.trim().isNotEmpty) {
+      final parsed = int.tryParse(_quantityController.text.trim());
+      if (parsed == null || parsed <= 0) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Geçerli bir miktar girin (1 veya üzeri)')),
+        );
+        return;
+      }
+      quantity = parsed.clamp(1, 999);
+    }
+
+    // Duplicate koruması — aynı ada sahip bekleyen ürün varsa sessizce ikinci
+    // satır oluşturma; kullanıcıyı bilgilendir.
+    final existing = ref.read(shoppingItemsProvider).valueOrNull ?? [];
+    final norm = name.trim().toLowerCase();
+    final dup = existing.any((i) => !i.isCompleted && i.name.trim().toLowerCase() == norm);
+    if (dup) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('"$name" zaten listede')),
+      );
+      if (quickName == null) {
+        _nameController.clear();
+        _quantityController.clear();
+        Navigator.pop(context);
+      }
+      return;
+    }
+
     ref.read(shoppingItemsProvider.notifier).addItem(
           name,
-          quantity: _quantityController.text.isNotEmpty
-              ? int.tryParse(_quantityController.text)
-              : null,
+          quantity: quantity,
           category: _selectedCategory,
         );
     _nameController.clear();
@@ -88,8 +117,27 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
     if (quickName == null) Navigator.pop(context);
   }
 
-  void _deleteItem(String id) {
-    ref.read(shoppingItemsProvider.notifier).deleteItem(id);
+  /// Ürünü siler; kullanıcıya "Geri al" seçeneği sunar (yanlış silmeyi önler).
+  void _deleteItem(ShoppingItem item) {
+    ref.read(shoppingItemsProvider.notifier).deleteItem(item.id);
+    final messenger = ScaffoldMessenger.of(context);
+    messenger.clearSnackBars();
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text('"${item.name}" silindi'),
+        behavior: SnackBarBehavior.floating,
+        action: SnackBarAction(
+          label: 'Geri al',
+          onPressed: () {
+            ref.read(shoppingItemsProvider.notifier).addItem(
+                  item.name,
+                  quantity: int.tryParse(item.quantity ?? ''),
+                  category: item.category,
+                );
+          },
+        ),
+      ),
+    );
   }
 
   IconData _categoryIcon(ShoppingCategory cat) {
@@ -154,7 +202,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                 data: (items) => _buildList(items, isDark),
                 loading: () =>
                     const Center(child: CircularProgressIndicator()),
-                error: (e, _) => Center(child: Text('Hata: $e')),
+                error: (e, _) => _buildError(),
               ),
             ),
           ],
@@ -766,6 +814,34 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
     );
   }
 
+  Widget _buildError() {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.error_outline,
+                size: 48, color: Color(0xFFEF4444)),
+            const SizedBox(height: 12),
+            const Text(
+              'Alışveriş listeniz şu anda yüklenemedi.\nLütfen tekrar deneyin.',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Color(0xFF9CA3AF), height: 1.4),
+            ),
+            const SizedBox(height: 16),
+            OutlinedButton.icon(
+              onPressed: () =>
+                  ref.read(shoppingItemsProvider.notifier).loadItems(),
+              icon: const Icon(Icons.refresh, size: 18),
+              label: const Text('Tekrar Dene'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildList(List<ShoppingItem> items, bool isDark) {
     if (items.isEmpty) {
       return Center(
@@ -895,7 +971,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
             color: AppColors.error, borderRadius: BorderRadius.circular(16)),
         child: const Icon(Icons.delete_outline, color: Colors.white),
       ),
-      onDismissed: (_) => _deleteItem(item.id),
+      onDismissed: (_) => _deleteItem(item),
       child: Container(
         margin: const EdgeInsets.only(bottom: 8),
         decoration: BoxDecoration(

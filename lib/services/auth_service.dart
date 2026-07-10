@@ -9,6 +9,7 @@ import '../core/errors.dart';
 import '../core/supabase_client.dart';
 import '../domain/models/user_model.dart';
 import 'fcm_service.dart';
+import 'hive_service.dart';
 
 class AuthService {
   static const _secureStorage = FlutterSecureStorage();
@@ -281,6 +282,13 @@ class AuthService {
       debugPrint('Supabase signOut error: $e');
     }
     await _secureStorage.delete(key: _sessionKey);
+    // Hesaba özel yerel önbellekleri temizle — sonraki kullanıcı önceki
+    // kullanıcının verisini görmesin. Buluttaki veri korunur.
+    try {
+      await HiveService.clearShoppingItems();
+    } catch (e) {
+      debugPrint('signOut cache clear error: $e');
+    }
     SupabaseConfig.disposeListener();
   }
 

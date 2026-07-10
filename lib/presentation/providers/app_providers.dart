@@ -574,13 +574,14 @@ class ShoppingNotifier extends StateNotifier<AsyncValue<List<ShoppingItem>>> {
     try {
       final newValue = !item.isCompleted;
       await ShoppingRepository().toggleItem(item.id, newValue);
+      final userId = AuthService.currentUserId;
       final current = state.valueOrNull ?? [];
       state = AsyncValue.data(
         current.map((i) {
           if (i.id == item.id) {
             return i.copyWith(
               isCompleted: newValue,
-              completedBy: newValue ? '' : null,
+              completedBy: newValue ? userId : null,
             );
           }
           return i;
