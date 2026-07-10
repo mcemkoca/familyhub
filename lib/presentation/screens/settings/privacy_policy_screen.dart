@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../widgets/settings/screen_header.dart';
 import 'package:go_router/go_router.dart';
 
@@ -40,7 +41,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: bg,
       appBar: ScreenHeader(
-        title: 'Gizlilik Politikası',
+        title: AppLocalizations.of(context).gizlilikPolitikasi,
         showBack: true,
         onBack: () => context.pop(),
       ),

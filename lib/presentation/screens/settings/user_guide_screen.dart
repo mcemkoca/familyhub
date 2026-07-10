@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../widgets/settings/screen_header.dart';
 import 'package:go_router/go_router.dart';
 
@@ -123,7 +124,7 @@ class _UserGuideScreenState extends State<UserGuideScreen> {
     return Scaffold(
       backgroundColor: bg,
       appBar: ScreenHeader(
-        title: 'Kullanım Kılavuzu',
+        title: AppLocalizations.of(context).kullanimKilavuzu,
         showBack: true,
         onBack: () => context.pop(),
       ),

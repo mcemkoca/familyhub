@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import '../../../config/constants.dart';
 import '../../../services/auth_service.dart';
@@ -152,7 +153,7 @@ class _SecurityQuestionsSetupScreenState extends State<SecurityQuestionsSetupScr
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
-        title: 'Güvenlik Soruları',
+        title: AppLocalizations.of(context).guvenlikSorulari,
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -217,7 +218,7 @@ class _SecurityQuestionsSetupScreenState extends State<SecurityQuestionsSetupScr
                             controller: _answer1Controller,
                             decoration: InputDecoration(
                               labelText: 'Cevap 1',
-                              hintText: 'Güvenlik sorusunun cevabı',
+                              hintText: AppLocalizations.of(context).guvenlikSorusununCevabi,
                               filled: true,
                               fillColor: const Color(0x1AFFFFFF),
                               border: OutlineInputBorder(
@@ -258,7 +259,7 @@ class _SecurityQuestionsSetupScreenState extends State<SecurityQuestionsSetupScr
                             controller: _answer2Controller,
                             decoration: InputDecoration(
                               labelText: 'Cevap 2',
-                              hintText: 'Güvenlik sorusunun cevabı',
+                              hintText: AppLocalizations.of(context).guvenlikSorusununCevabi,
                               filled: true,
                               fillColor: const Color(0x1AFFFFFF),
                               border: OutlineInputBorder(
@@ -353,8 +354,7 @@ class _SecurityQuestionsSetupScreenState extends State<SecurityQuestionsSetupScr
             child: DropdownButton<String>(
               isExpanded: true,
               value: value != null && items.contains(value) ? value : null,
-              hint: const Text(
-                'Bir soru seçin',
+              hint: Text(AppLocalizations.of(context).birSoruSecin,
                 style: TextStyle(
                   color: Color(0xFF6B7280),
                 ),
@@ -380,7 +380,7 @@ class _SecurityQuestionsSetupScreenState extends State<SecurityQuestionsSetupScr
           TextField(
             controller: customController,
             decoration: InputDecoration(
-              hintText: 'Kendi sorunuzu yazın',
+              hintText: AppLocalizations.of(context).kendiSorunuzuYazin,
               filled: true,
               fillColor: const Color(0x1AFFFFFF),
               border: OutlineInputBorder(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 
 class HealthStep extends StatefulWidget {
@@ -66,8 +67,7 @@ class _HealthStepState extends State<HealthStep> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Sağlık Bilgileri',
+          Text(AppLocalizations.of(context).healthInfo,
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -118,13 +118,12 @@ class _HealthStepState extends State<HealthStep> {
           const SizedBox(height: 16),
           _buildTextField(
             controller: _conditionsController,
-            label: 'Kronik Hastalıklar',
+            label: AppLocalizations.of(context).chronicConditions,
             icon: Icons.medical_services_outlined,
             hintText: 'Örn: astım, diyabet (virgülle ayırın)',
           ),
           const SizedBox(height: 24),
-          const Text(
-            'Acil Durumda Aranacak Kişi',
+          Text(AppLocalizations.of(context).acilDurumdaAranacakKisi,
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
@@ -147,9 +146,9 @@ class _HealthStepState extends State<HealthStep> {
           const SizedBox(height: 12),
           _buildTextField(
             controller: _emergencyRelationController,
-            label: 'Yakınlık Derecesi',
+            label: AppLocalizations.of(context).yakinlikDerecesi,
             icon: Icons.people_outline,
-            hintText: 'Örn: Eş, Anne, Baba',
+            hintText: AppLocalizations.of(context).ornEsAnneBaba,
           ),
           const SizedBox(height: 32),
           SizedBox(

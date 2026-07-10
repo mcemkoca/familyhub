@@ -226,7 +226,7 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx),
-              child: const Text('İptal', style: TextStyle(color: Color(0xFF6B7280))),
+              child: Text(AppLocalizations.of(context).cancel, style: TextStyle(color: Color(0xFF6B7280))),
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -511,8 +511,7 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
                               fontSize: 18, color: Color(0xFF6B7280)),
                         ),
                         const SizedBox(height: 8),
-                        const Text(
-                          'Yüklemek için + butonuna basın',
+                        Text(AppLocalizations.of(context).yuklemekIcinButonunaBasin,
                           style: TextStyle(color: Color(0xFF6B7280)),
                         ),
                       ],

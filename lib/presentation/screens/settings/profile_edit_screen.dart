@@ -192,8 +192,7 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                'E-posta değişikliği için onay bağlantısı gönderilecektir.',
+              Text(AppLocalizations.of(context).epostaDegisikligiIcinOnayBaglantisiGonderilecektir,
                 style: TextStyle(fontSize: 13),
               ),
               const SizedBox(height: 12),
@@ -236,9 +235,8 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
                         Navigator.pop(dialogContext);
                         if (!mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text(
-                              'Onay bağlantısı yeni e-posta adresinize gönderildi',
+                          SnackBar(
+                            content: Text(AppLocalizations.of(context).onayBaglantisiYeniEpostaAdresinizeGonderildi,
                             ),
                           ),
                         );
@@ -283,7 +281,7 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
       return Scaffold(
         backgroundColor: bg,
         appBar: ScreenHeader(
-          title: 'Profili Düzenle',
+          title: AppLocalizations.of(context).profiliDuzenle,
           showBack: true,
           onBack: () => context.pop(),
         ),
@@ -294,7 +292,7 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
     return Scaffold(
       backgroundColor: bg,
       appBar: ScreenHeader(
-        title: 'Profili Düzenle',
+        title: AppLocalizations.of(context).profiliDuzenle,
         showBack: true,
         onBack: () => context.pop(),
         rightAction: TextButton(
@@ -394,7 +392,7 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
                 const SizedBox(height: 24),
                 // Form
                 SettingsSection(
-                  title: 'KİŞİSEL BİLGİLER',
+                  title: AppLocalizations.of(context).kisiselBilgiler,
                   icon: Icons.person_outline,
                   children: [
                     _buildInput(

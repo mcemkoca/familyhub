@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import '../../../config/constants.dart';
 import '../../../services/flashlight_service.dart';
@@ -126,8 +127,7 @@ class _FlashlightScreenState extends State<FlashlightScreen> {
                   ),
             ),
             const SizedBox(height: 8),
-            const Text(
-              'Dokun: Aç/Kapat  |  SOS butonu: Morse kodu',
+            Text(AppLocalizations.of(context).dokunAckapatSosButonuMorseKodu,
               style: TextStyle(
                 fontSize: 13,
                 color: Color(0xFF6B7280),

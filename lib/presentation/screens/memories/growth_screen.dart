@@ -11,7 +11,7 @@ class GrowthScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          Text('Kilometre Taşları', style: Theme.of(context).textTheme.displaySmall),
+          Text(AppLocalizations.of(context).kilometreTaslari, style: Theme.of(context).textTheme.displaySmall),
           const SizedBox(height: 12),
           _emptyCard('Henüz kilometre taşı eklenmedi. İlk adım, ilk kelime gibi '
               'anları buraya ekleyebilirsiniz.'),

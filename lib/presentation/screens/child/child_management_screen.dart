@@ -211,7 +211,7 @@ class _ChildManagementScreenState extends ConsumerState<ChildManagementScreen> {
                         child: const Icon(Icons.child_care_outlined, size: 32, color: Color(0xFF06B6D4)),
                       ),
                       const SizedBox(height: 16),
-                      const Text('Henüz çocuk hesabı yok',
+                      Text(AppLocalizations.of(context).henuzCocukHesabiYok,
                           style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFFE5E7EB))),
                       const SizedBox(height: 8),
                       const Text('Aile üyesi eklemek için aşağıya dokun',
@@ -567,8 +567,8 @@ class _ChildFormSheetState extends State<_ChildFormSheet> {
           TextField(
             controller: _nameController,
             onChanged: (_) => setState(() {}),
-            decoration: const InputDecoration(
-              labelText: 'İsim',
+            decoration: InputDecoration(
+              labelText: AppLocalizations.of(context).isim,
               prefixIcon: Icon(Icons.person_outline),
             ),
           ),

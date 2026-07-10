@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import '../../../config/constants.dart';
 import '../../../domain/models/call_session_model.dart';
@@ -298,7 +299,7 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
       return _roundButton(
         icon: Icons.call_end,
         color: AppColors.error,
-        label: 'İptal Et',
+        label: AppLocalizations.of(context).iptalEt,
         size: 72,
         onTap: _endCall,
       );

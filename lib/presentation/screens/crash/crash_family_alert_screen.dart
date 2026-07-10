@@ -100,8 +100,7 @@ class CrashFamilyAlertScreen extends StatelessWidget {
                             children: [
                               const Icon(Icons.location_searching, color: Colors.greenAccent, size: 18),
                               const SizedBox(width: 8),
-                              Text(
-                                'Canlı Konum',
+                              Text(AppLocalizations.of(context).canliKonum,
                                 style: TextStyle(color: Colors.greenAccent.shade100, fontWeight: FontWeight.w600),
                               ),
                             ],

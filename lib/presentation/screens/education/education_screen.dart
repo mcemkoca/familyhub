@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import '../../../services/hive_service.dart';
 import '../../../services/ai/pedagogy_engine.dart';
@@ -445,7 +446,7 @@ class _AgeFilterButton extends StatelessWidget {
                 onChanged(null);
                 Navigator.pop(context);
               },
-              child: const Text('Tümü'),
+              child: Text(AppLocalizations.of(context).tumu),
             ),
             ...[3, 5, 7, 9, 11, 13, 15, 17].map((a) => SimpleDialogOption(
                   onPressed: () {
@@ -1885,7 +1886,7 @@ class _AddActivitySheetState extends State<_AddActivitySheet> {
             const Text('Kendi eğitim içeriğinizi oluşturun',
                 style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
             const SizedBox(height: 18),
-            const Text('Başlık',
+            Text(AppLocalizations.of(context).baslik,
                 style: TextStyle(
                     color: Color(0xFFC7CBD4), fontWeight: FontWeight.w600)),
             const SizedBox(height: 6),

@@ -192,8 +192,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             }
           },
         ),
-        title: const Text(
-          'Şifremi Unuttum',
+        title: Text(AppLocalizations.of(context).sifremiUnuttum,
           style: TextStyle(
             color: Color(0xFFE5E7EB),
             fontSize: 18,
@@ -247,8 +246,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         ),
         const SizedBox(height: 24),
         Center(
-          child: Text(
-            'Şifrenizi mi unuttunuz?',
+          child: Text(AppLocalizations.of(context).sifreniziMiUnuttunuz,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.w700,
               color: const Color(0xFFE5E7EB),
@@ -350,8 +348,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         ),
         const SizedBox(height: 24),
         Center(
-          child: Text(
-            'Güvenlik Doğrulaması',
+          child: Text(AppLocalizations.of(context).guvenlikDogrulamasi,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.w700,
               color: const Color(0xFFE5E7EB),
@@ -360,8 +357,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         ),
         const SizedBox(height: 8),
         Center(
-          child: Text(
-            'Hesabınızı korumak için lütfen kayıtlı güvenlik sorularınızı cevaplayın.',
+          child: Text(AppLocalizations.of(context).hesabiniziKorumakIcinLutfenKayitliGuvenlikSorulariniziCevaplayin,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: const Color(0xFF6B7280),
@@ -401,7 +397,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 controller: _answer1Controller,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
-                  hintText: 'Cevabınızı yazın',
+                  hintText: AppLocalizations.of(context).cevabiniziYazin,
                   filled: true,
                   fillColor: const Color(0xFF0A0A0F),
                   border: OutlineInputBorder(
@@ -458,7 +454,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 textInputAction: TextInputAction.done,
                 onSubmitted: (_) => _verifyAnswers(),
                 decoration: InputDecoration(
-                  hintText: 'Cevabınızı yazın',
+                  hintText: AppLocalizations.of(context).cevabiniziYazin,
                   filled: true,
                   fillColor: const Color(0xFF0A0A0F),
                   border: OutlineInputBorder(
@@ -503,8 +499,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       strokeWidth: 2,
                     ),
                   )
-                : const Text(
-                    'Doğrula ve Devam Et',
+                : Text(AppLocalizations.of(context).dogrulaVeDevamEt,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
           ),
@@ -532,8 +527,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         ),
         const SizedBox(height: 24),
         Center(
-          child: Text(
-            'Yeni Şifre Belirle',
+          child: Text(AppLocalizations.of(context).yeniSifreBelirle,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.w700,
               color: const Color(0xFFE5E7EB),
@@ -542,8 +536,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         ),
         const SizedBox(height: 8),
         Center(
-          child: Text(
-            'Güvenlik doğrulamanız başarılı. Lütfen yeni şifrenizi belirleyin.',
+          child: Text(AppLocalizations.of(context).guvenlikDogrulamanizBasariliLutfenYeniSifreniziBelirleyin,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: const Color(0xFF6B7280),
@@ -556,9 +549,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           obscureText: true,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
-            labelText: 'Yeni Şifre',
+            labelText: AppLocalizations.of(context).yeniSifre,
             prefixIcon: const Icon(Icons.lock_outline),
-            helperText: 'En az 8 karakter, büyük/küçük harf, rakam ve özel karakter',
+            helperText: AppLocalizations.of(context).enAz8KarakterBuyukkucukHarfRakamVeOzelKarakter,
             filled: true,
             fillColor: const Color(0x1AFFFFFF),
             border: OutlineInputBorder(
@@ -626,8 +619,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       strokeWidth: 2,
                     ),
                   )
-                : const Text(
-                    'Şifremi Değiştir',
+                : Text(AppLocalizations.of(context).sifremiDegistir,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
           ),
@@ -652,8 +644,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           child: const Icon(Icons.check_circle, color: Color(0xFF10B981), size: 48),
         ),
         const SizedBox(height: 32),
-        Text(
-          'Şifreniz Güncellendi!',
+        Text(AppLocalizations.of(context).sifrenizGuncellendi,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
             fontWeight: FontWeight.w700,
@@ -681,8 +672,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 borderRadius: BorderRadius.circular(AppRadius.medium),
               ),
             ),
-            child: const Text(
-              'Giriş Yap',
+            child: Text(AppLocalizations.of(context).login,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
           ),

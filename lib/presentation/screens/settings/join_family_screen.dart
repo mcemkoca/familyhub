@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
@@ -91,7 +92,7 @@ class _JoinFamilyScreenState extends State<JoinFamilyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
-      appBar: ScreenHeader(title: 'Aileye Katıl', showBack: true, onBack: () => context.pop()),
+      appBar: ScreenHeader(title: AppLocalizations.of(context).aileyeKatil, showBack: true, onBack: () => context.pop()),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -200,8 +201,7 @@ class _JoinFamilyScreenState extends State<JoinFamilyScreen> {
                               valueColor: AlwaysStoppedAnimation(Colors.white),
                             ),
                           )
-                        : const Text(
-                            'Aileye Katıl',
+                        : Text(AppLocalizations.of(context).aileyeKatil,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w700,

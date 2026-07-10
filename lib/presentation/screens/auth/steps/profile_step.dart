@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import '../../../../config/constants.dart';
 import '../../../../core/validation/input_validator.dart';
@@ -87,7 +88,7 @@ class _ProfileStepState extends State<ProfileStep> {
           const SizedBox(height: 24),
           _buildTextField(
             controller: _phoneController,
-            label: 'Telefon Numarası',
+            label: AppLocalizations.of(context).telefonnumarasi1,
             icon: Icons.phone_outlined,
             keyboardType: TextInputType.phone,
             hintText: '+90 5xx xxx xx xx',
@@ -128,7 +129,7 @@ class _ProfileStepState extends State<ProfileStep> {
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
-              child: const Text('İleri', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+              child: Text(AppLocalizations.of(context).next, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             ),
           ),
         ],
@@ -154,8 +155,7 @@ class _ProfileStepState extends State<ProfileStep> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Doğum Tarihi',
+                  Text(AppLocalizations.of(context).dogumTarihi,
                     style: TextStyle(
                       fontSize: 12,
                       color: Color(0xFF6B7280),

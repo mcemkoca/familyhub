@@ -69,8 +69,7 @@ class _CallContactListScreenState extends State<CallContactListScreen> {
           context: context,
           builder: (_) => AlertDialog(
             title: Text(AppLocalizations.of(context).aramaHazirlaniyor),
-            content: const Text(
-              'Sesli arama özelliği şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin.',
+            content: Text(AppLocalizations.of(context).sesliAramaOzelligiSuAndaKullanilamiyorLutfenDahaSonraTekrarDeneyin,
             ),
             actions: [
               TextButton(
@@ -147,7 +146,7 @@ class _CallContactListScreenState extends State<CallContactListScreen> {
               controller: _searchController,
               onChanged: _onSearch,
               decoration: InputDecoration(
-                hintText: 'Aile üyesi ara...',
+                hintText: AppLocalizations.of(context).aileUyesiAra,
                 prefixIcon: const Icon(Icons.search),
                 filled: true,
                 fillColor: const Color(0xFF13131A),
@@ -218,7 +217,7 @@ class _CallContactListScreenState extends State<CallContactListScreen> {
   }
 
   Widget _buildEmpty() {
-    return const Center(
+    return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -228,8 +227,7 @@ class _CallContactListScreenState extends State<CallContactListScreen> {
             color: Color(0xFF6B7280),
           ),
           SizedBox(height: 16),
-          Text(
-            'Henüz aranabilecek aile üyesi yok',
+          Text(AppLocalizations.of(context).henuzAranabilecekAileUyesiYok,
             style: TextStyle(
               color: Color(0xFF6B7280),
             ),

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -675,7 +676,7 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
         children: [
           Row(
             children: [
-              const Text('Güvenli Bölgeler',
+              Text(AppLocalizations.of(context).guvenliBolgeler,
                   style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w700,

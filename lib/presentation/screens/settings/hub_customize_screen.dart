@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import '../../../config/routes.dart';
 import '../../../services/hive_service.dart';
@@ -155,7 +156,7 @@ class _HubCustomizeScreenState extends State<HubCustomizeScreen> {
                                 height: 1.35),
                           ),
                           const SizedBox(height: 10),
-                          Text('Düzenle',
+                          Text(AppLocalizations.of(context).edit,
                               style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w700,

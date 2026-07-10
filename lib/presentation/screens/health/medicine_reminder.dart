@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../../services/notification_service.dart';
 
 /// İlaç Hatırlatma — tam ekran hatırlatma bildirimi.
@@ -161,7 +162,7 @@ class MedicineReminderScreen extends StatelessWidget {
                 height: 52,
                 child: TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('İptal',
+                  child: Text(AppLocalizations.of(context).cancel,
                       style: TextStyle(
                           color: Color(0xFF9CA3AF),
                           fontSize: 15,

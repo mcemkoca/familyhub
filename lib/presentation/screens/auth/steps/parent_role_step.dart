@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import '../../../../config/constants.dart';
 
@@ -48,8 +49,7 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Aile Rolü',
+          Text(AppLocalizations.of(context).aileRolu,
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -57,16 +57,14 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
             ),
           ),
           const SizedBox(height: 4),
-          const Text(
-            'Ailedeki rolünüzü ve görünümünüzü seçin',
+          Text(AppLocalizations.of(context).ailedekiRolunuzuVeGorunumunuzuSecin,
             style: TextStyle(
               fontSize: 14,
               color: Color(0xFF6B7280),
             ),
           ),
           const SizedBox(height: 24),
-          const Text(
-            'Rolünüz',
+          Text(AppLocalizations.of(context).rolunuz,
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
@@ -78,7 +76,7 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
             children: [
               Expanded(
                 child: _RoleChip(
-                  label: 'Yönetici',
+                  label: AppLocalizations.of(context).admin,
                   icon: Icons.admin_panel_settings,
                   selected: _role == 'admin',
                   onTap: () => setState(() => _role = 'admin'),
@@ -99,8 +97,8 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
           TextField(
             controller: _displayNameController,
             decoration: InputDecoration(
-              labelText: 'Ailede Görünen Adınız',
-              hintText: 'Örn: Anne, Baba, Mehmet',
+              labelText: AppLocalizations.of(context).ailedeGorunenAdiniz,
+              hintText: AppLocalizations.of(context).ornAnneBabaMehmet,
               prefixIcon: const Icon(Icons.badge_outlined),
               filled: true,
               fillColor: const Color(0xFF13131A),
@@ -111,8 +109,7 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
             ),
           ),
           const SizedBox(height: 24),
-          const Text(
-            'Renk Seçimi',
+          Text(AppLocalizations.of(context).renkSecimi,
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
@@ -175,7 +172,7 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
-              child: const Text('İleri', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+              child: Text(AppLocalizations.of(context).next, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             ),
           ),
         ],

@@ -13,12 +13,12 @@ class MemoryCreateScreen extends StatelessWidget {
         child: Column(
           children: [
             TextField(
-              decoration: InputDecoration(labelText: 'Başlık', filled: true, fillColor: const Color(0xFF13131A), border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none)),
+              decoration: InputDecoration(labelText: AppLocalizations.of(context).baslik, filled: true, fillColor: const Color(0xFF13131A), border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none)),
             ),
             const SizedBox(height: 16),
             TextField(
               maxLines: 6,
-              decoration: InputDecoration(labelText: 'Bugün ailenle yaşadığın güzel bir anı yaz...', filled: true, fillColor: const Color(0xFF13131A), border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none)),
+              decoration: InputDecoration(labelText: AppLocalizations.of(context).bugunAilenleYasadiginGuzelBirAniYaz, filled: true, fillColor: const Color(0xFF13131A), border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none)),
             ),
             const SizedBox(height: 24),
             SizedBox(

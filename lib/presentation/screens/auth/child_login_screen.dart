@@ -192,8 +192,7 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
               ),
               const SizedBox(height: AppSpacing.lg),
               Center(
-                child: Text(
-                  'Çocuk Girişi',
+                child: Text(AppLocalizations.of(context).cocukGirisi,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     color: accentColor,
                     fontWeight: FontWeight.bold,
@@ -202,8 +201,7 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
               ),
               const SizedBox(height: AppSpacing.sm),
               Center(
-                child: Text(
-                  'İsmini seç ve PINini gir',
+                child: Text(AppLocalizations.of(context).isminiSecVePininiGir,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: const Color(0xFF6B7280),
                   ),
@@ -247,8 +245,7 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
                   ),
                 )
               else ...[
-                Text(
-                  'Çocuk Seç',
+                Text(AppLocalizations.of(context).cocukSec,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -374,8 +371,7 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
                               strokeWidth: 2,
                             ),
                           )
-                        : const Text(
-                            'Giriş Yap',
+                        : Text(AppLocalizations.of(context).login,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,

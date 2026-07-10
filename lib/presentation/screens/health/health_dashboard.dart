@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../services/auth_service.dart';
 import 'health_store.dart';
@@ -42,8 +43,8 @@ class _HealthDashboardState extends ConsumerState<HealthDashboard> {
       body: SafeArea(
         child: Column(
           children: [
-            const HealthHeader(
-                title: 'Sağlık', subtitle: 'Ailenizin sağlık merkezi'),
+            HealthHeader(
+                title: AppLocalizations.of(context).saglik, subtitle: 'Ailenizin sağlık merkezi'),
             Expanded(
               child: ListView(
                 padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
@@ -202,7 +203,7 @@ class _HealthDashboardState extends ConsumerState<HealthDashboard> {
     );
   }
 
-  Widget _quickAccessTitle() => const Text('Hızlı Erişim',
+  Widget _quickAccessTitle() => Text(AppLocalizations.of(context).hizliErisim,
       style: TextStyle(
           color: Colors.white, fontSize: 19, fontWeight: FontWeight.w800));
 

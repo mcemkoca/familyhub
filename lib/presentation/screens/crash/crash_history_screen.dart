@@ -77,7 +77,7 @@ class CrashHistoryScreen extends StatelessWidget {
                         _statRow('Yanlış alarm', '$falseAlarms (%${total > 0 ? (falseAlarms / total * 100).round() : 0})'),
                         _statRow('Gerçek kaza', '$realCrashes'),
                         const Divider(color: Colors.white24, height: 20),
-                        const Text('Son 30 gün: 0 olay', style: TextStyle(color: Colors.white70)),
+                        Text(AppLocalizations.of(context).son30Gun0Olay, style: TextStyle(color: Colors.white70)),
                         const SizedBox(height: 8),
                         ElevatedButton.icon(
                           onPressed: () {},
@@ -94,8 +94,7 @@ class CrashHistoryScreen extends StatelessWidget {
 
                   const SizedBox(height: 20),
 
-          const Text(
-            'OLAY LİSTESİ',
+          Text(AppLocalizations.of(context).olayListesi,
             style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 12),

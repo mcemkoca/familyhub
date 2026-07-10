@@ -35,8 +35,7 @@ class _MonthlyProgressCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'Aylık Harcama',
+                Text(AppLocalizations.of(context).aylikHarcama,
                   style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,

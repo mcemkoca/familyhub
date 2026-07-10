@@ -402,7 +402,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
             heroTag: 'ocr',
             onPressed: _scanPhoto,
             backgroundColor: const Color(0xFF6366F1),
-            tooltip: 'Fotoğraftan Etkinlik',
+            tooltip: AppLocalizations.of(context).fotograftanEtkinlik,
             child: const Icon(Icons.document_scanner, color: Colors.white),
           ),
           const SizedBox(height: 8),
@@ -444,8 +444,7 @@ class _EmptyState extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 4),
-          Text(
-            'Bu gün için planlanmış etkinlik yok',
+          Text(AppLocalizations.of(context).buGunIcinPlanlanmisEtkinlikYok,
             style: TextStyle(
               fontSize: 14,
               color: Theme.of(context).colorScheme.onSurface.withAlpha(150),

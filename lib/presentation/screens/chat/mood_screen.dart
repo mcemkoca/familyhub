@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/app_providers.dart';
 
@@ -15,7 +16,7 @@ class MoodScreen extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          Text('Bugün nasıl hissediyorsun?', style: Theme.of(context).textTheme.displaySmall),
+          Text(AppLocalizations.of(context).bugunNasilHissediyorsun, style: Theme.of(context).textTheme.displaySmall),
           const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

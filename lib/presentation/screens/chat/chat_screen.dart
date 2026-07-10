@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -235,8 +236,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
 
     final pos = await LocationService.getCurrentPosition();
     if (pos == null) {
-      messenger.showSnackBar(const SnackBar(
-          content: Text('Konum alınamadı. GPS açık olduğundan emin olun.')));
+      messenger.showSnackBar(SnackBar(
+          content: Text(AppLocalizations.of(context).locationUnavailable)));
       return;
     }
     // Gerçek adresi çöz (başarısızsa koordinat metnini kullan).
@@ -953,12 +954,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                 ),
                 _MenuItem(
                   icon: Icons.notifications_outlined,
-                  label: 'Bildirim Ayarları',
+                  label: AppLocalizations.of(context).bildirimAyarlari,
                   onTap: () => Navigator.pop(context),
                 ),
                 _MenuItem(
                   icon: Icons.archive_outlined,
-                  label: 'Sohbeti Arşivle',
+                  label: AppLocalizations.of(context).sohbetiArsivle,
                   onTap: () => Navigator.pop(context),
                 ),
                 _MenuItem(
@@ -1152,7 +1153,7 @@ class _AttachmentMenu extends StatelessWidget {
                         _AttachmentItem(
                           icon: Icons.contact_page,
                           color: const Color(0xFFEC4899),
-                          label: 'Kişi',
+                          label: AppLocalizations.of(context).kisi,
                           onTap: () => context.push(AppRoutes.family),
                         ),
                         _AttachmentItem(

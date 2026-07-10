@@ -36,8 +36,7 @@ class _CategoryBudgetSection extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'Kategori Bütçeleri',
+                Text(AppLocalizations.of(context).kategoriButceleri,
                   style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,

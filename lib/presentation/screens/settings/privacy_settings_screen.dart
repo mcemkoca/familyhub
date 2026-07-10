@@ -81,7 +81,7 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: const Text('Hesabı Sil', style: TextStyle(color: Color(0xFFEF4444))),
+        title: Text(AppLocalizations.of(context).hesabiSil, style: TextStyle(color: Color(0xFFEF4444))),
         content: Text(AppLocalizations.of(context).hesabiniziSilmekGeriAlinamazTumVerilerinizKaliciOlarakSilinecek),
         actions: [
           TextButton(
@@ -144,27 +144,27 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
         slivers: [
           SliverToBoxAdapter(
             child: SettingsSection(
-              title: 'VERİ PAYLAŞIMI',
+              title: AppLocalizations.of(context).veriPaylasimi,
               icon: Icons.share_outlined,
               children: [
                 HiveSettingsToggle(
                   settingsKey: 'privacy_location_share',
-                  title: 'Konum Paylaşımı',
-                  subtitle: 'Aile üyeleri konumunuzu görebilsin',
+                  title: AppLocalizations.of(context).konumPaylasimi1,
+                  subtitle: AppLocalizations.of(context).aileUyeleriKonumunuzuGorebilsin,
                   defaultValue: true,
                   onSupabaseSync: (v) => _syncToSupabase('location_share', v),
                 ),
                 HiveSettingsToggle(
                   settingsKey: 'privacy_profile_visible',
-                  title: 'Profil Görünürlüğü',
-                  subtitle: 'Profiliniz diğer üyelere görünür',
+                  title: AppLocalizations.of(context).profilGorunurlugu,
+                  subtitle: AppLocalizations.of(context).profilinizDigerUyelereGorunur,
                   defaultValue: true,
                   onSupabaseSync: (v) => _syncToSupabase('profile_visible', v),
                 ),
                 HiveSettingsToggle(
                   settingsKey: 'privacy_activity_status',
                   title: 'Aktivite Durumu',
-                  subtitle: 'Çevrimiçi durumunuzu göster',
+                  subtitle: AppLocalizations.of(context).cevrimiciDurumunuzuGoster,
                   defaultValue: true,
                   onSupabaseSync: (v) => _syncToSupabase('activity_status', v),
                 ),
@@ -173,13 +173,13 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
           ),
           SliverToBoxAdapter(
             child: SettingsSection(
-              title: 'ANALİTİK',
+              title: AppLocalizations.of(context).analitik,
               icon: Icons.analytics_outlined,
               children: [
                 HiveSettingsToggle(
                   settingsKey: 'privacy_analytics',
-                  title: 'Kullanım Analitiği',
-                  subtitle: 'Anonim kullanım verisi gönder',
+                  title: AppLocalizations.of(context).kullanimAnalitigi,
+                  subtitle: AppLocalizations.of(context).anonimKullanimVerisiGonder,
                   defaultValue: false,
                   onSupabaseSync: (v) => _syncToSupabase('analytics', v),
                 ),
@@ -199,7 +199,7 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
                 ),
                 ListTile(
                   leading: const Icon(Icons.delete_forever, color: Color(0xFFEF4444)),
-                  title: const Text('Hesabımı Sil', style: TextStyle(color: Color(0xFFEF4444))),
+                  title: Text(AppLocalizations.of(context).hesabimiSil, style: TextStyle(color: Color(0xFFEF4444))),
                   subtitle: Text(AppLocalizations.of(context).tumVerilerinizKaliciOlarakSilinecek),
                   onTap: _showDeleteAccountDialog,
                 ),

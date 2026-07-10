@@ -71,8 +71,7 @@ class _SafeZonesStepState extends State<SafeZonesStep> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Güvenli Bölgeler',
+                Text(AppLocalizations.of(context).guvenliBolgeler,
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -147,8 +146,7 @@ class _SafeZonesStepState extends State<SafeZonesStep> {
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
-              child: const Text(
-                'İleri',
+              child: Text(AppLocalizations.of(context).next,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
             ),
@@ -211,12 +209,12 @@ class _AddZoneDialogState extends State<_AddZoneDialog> {
           children: [
             TextField(
               controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Bölge Adı'),
+              decoration: InputDecoration(labelText: AppLocalizations.of(context).bolgeAdi),
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<String>(
               initialValue: _type,
-              decoration: const InputDecoration(labelText: 'Bölge Tipi'),
+              decoration: InputDecoration(labelText: AppLocalizations.of(context).bolgeTipi),
               items: [
                 const DropdownMenuItem(value: 'home', child: Text('Ev')),
                 DropdownMenuItem(value: 'work', child: Text(AppLocalizations.of(context).isLabel)),

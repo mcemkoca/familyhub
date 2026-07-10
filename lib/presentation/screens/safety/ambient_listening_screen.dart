@@ -221,8 +221,7 @@ class _AmbientListeningScreenState extends State<AmbientListeningScreen> {
                     value: _shakeEnabled,
                     onChanged: (v) => setState(() => _shakeEnabled = v),
                     title: const Text('3x Sallama'),
-                    subtitle: const Text(
-                      'Telefonu 3 kez sallayınca kayıt başlar',
+                    subtitle: Text(AppLocalizations.of(context).telefonu3KezSallayincaKayitBaslar,
                     ),
                     secondary: const Icon(Icons.vibration),
                   ),

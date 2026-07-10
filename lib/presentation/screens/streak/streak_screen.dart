@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
@@ -260,8 +261,7 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const Text(
-                          'günlük seri',
+                        Text(AppLocalizations.of(context).gunlukSeri,
                           style: TextStyle(color: Colors.white70, fontSize: 14),
                         ),
                       ],
@@ -304,8 +304,7 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'HAFTALIK GÖRÜNÜM',
+                        Text(AppLocalizations.of(context).haftalikGorunum,
                           style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w700,
@@ -337,10 +336,9 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
                   ),
                   const SizedBox(height: 24),
                   if (entries.isNotEmpty) ...[
-                    const Align(
+                    Align(
                       alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Tüm Girişler',
+                      child: Text(AppLocalizations.of(context).tumGirisler,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,

@@ -80,7 +80,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
               children: [
                 Text('Acil Durum Butonu', style: Theme.of(context).textTheme.displaySmall),
                 const SizedBox(height: 8),
-                Text('Butona 3 saniye basılı tutarak acil durum bildirimi gönderebilirsin.', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: const Color(0xFF6B7280))),
+                Text(AppLocalizations.of(context).emergencyInfo, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: const Color(0xFF6B7280))),
               ],
             ),
           ),

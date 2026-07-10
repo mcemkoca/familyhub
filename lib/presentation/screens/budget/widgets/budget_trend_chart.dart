@@ -33,8 +33,7 @@ class _TrendChart extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Son 7 Gün Trendi',
+            Text(AppLocalizations.of(context).son7GunTrendi,
               style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w600,

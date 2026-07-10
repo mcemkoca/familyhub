@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import '../../../config/constants.dart';
 import '../../../config/routes.dart';
@@ -139,7 +140,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
     return _HighlightCard(
       icon: Icons.child_care,
       iconColor: const Color(0xFF8B5CF6),
-      title: 'Çocuk Gelişimi',
+      title: AppLocalizations.of(context).cocukGelisimi,
       subtitle: activity?.name ?? '—',
       detail: ageGroup != null ? '$ageGroup · ${activity?.durationMinutes ?? 15} dk' : null,
       isDark: isDark,

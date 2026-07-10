@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../config/constants.dart';
 import '../../core/navigation/action_registry.dart';
 
@@ -10,7 +11,7 @@ import '../../core/navigation/action_registry.dart';
 /// ActionButton(
 ///   action: 'login',
 ///   params: {'email': 'a@b.com', 'password': '...'},
-///   label: 'Giriş Yap',
+///   label: AppLocalizations.of(context).login,
 ///   icon: Icons.login,
 /// )
 /// ```

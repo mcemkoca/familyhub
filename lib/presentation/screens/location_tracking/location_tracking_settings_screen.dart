@@ -54,7 +54,7 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
               secondary: const Icon(Icons.location_on, color: Colors.green),
             ),
             const SizedBox(height: 8),
-            const Text('Öncelik:', style: TextStyle(fontWeight: FontWeight.w600)),
+            Text(AppLocalizations.of(context).oncelik1, style: TextStyle(fontWeight: FontWeight.w600)),
             const SizedBox(height: 8),
             SegmentedButton<TrackingPriority>(
               segments: [
@@ -81,7 +81,7 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
               valueColor: AlwaysStoppedAnimation<Color>(Colors.green.shade400),
             ),
             const SizedBox(height: 8),
-            const Text('58% - Tahmini kalan süre:', style: TextStyle(fontWeight: FontWeight.w600)),
+            Text(AppLocalizations.of(context).tahminiKalanSure, style: TextStyle(fontWeight: FontWeight.w600)),
             _estimateRow('Mevcut modda', '18 saat'),
             _estimateRow('Batarya dostu', '36 saat'),
             _estimateRow('Hassas modda', '8 saat'),

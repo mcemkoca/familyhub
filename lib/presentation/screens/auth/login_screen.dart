@@ -260,8 +260,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Giriş Yap',
+                Text(AppLocalizations.of(context).login,
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.w900,
@@ -313,7 +312,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                   padding: EdgeInsets.zero,
                   minimumSize: const Size(0, 32),
                 ),
-                child: const Text('Şifremi unuttum',
+                child: Text(AppLocalizations.of(context).sifremiunuttum1,
                     style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
               ),
             ),
@@ -349,7 +348,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
 
             // Google sign in
             _buildSocialButton(
-              label: 'Google ile Giriş Yap',
+              label: AppLocalizations.of(context).googleIleGirisYap,
               icon: const Text('G',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: Color(0xFF4285F4))),
               onTap: _isLoading

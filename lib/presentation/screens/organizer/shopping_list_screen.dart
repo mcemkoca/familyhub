@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
@@ -205,8 +206,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Alışveriş Listesi',
+                    Text(AppLocalizations.of(context).alisverisListesi,
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge
@@ -807,7 +807,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                         borderRadius: BorderRadius.circular(14)),
                   ),
                   icon: const Icon(Icons.add, color: Colors.white),
-                  label: const Text('Ürün Ekle',
+                  label: Text(AppLocalizations.of(context).urunEkle,
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w700,
@@ -1005,7 +1005,7 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                       borderRadius: BorderRadius.circular(2)),
                 ),
               ),
-              Text('Ürün Ekle',
+              Text(AppLocalizations.of(context).urunEkle,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.w800)),
               const SizedBox(height: 16),

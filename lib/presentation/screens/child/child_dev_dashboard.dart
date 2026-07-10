@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../services/hive_service.dart';
@@ -100,7 +101,7 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
         child: Column(
           children: [
             DevHeader(
-              title: 'Gelişim',
+              title: AppLocalizations.of(context).gelisim,
               subtitle: '${child.name}\'in gelişim merkezi',
               trailing: const Icon(Icons.info_outline, color: Color(0xFF9CA3AF)),
               onTrailing: () => _openAssessment(child),
@@ -635,7 +636,7 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
         if (onSeeAll != null)
           GestureDetector(
             onTap: onSeeAll,
-            child: const Text('Tümünü Gör',
+            child: Text(AppLocalizations.of(context).tumunuGor,
                 style: TextStyle(
                     color: Color(0xFF8B5CF6),
                     fontSize: 14,
@@ -646,12 +647,12 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
   }
 
   Widget _emptyState() {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: Color(0xFF0A0A0F),
       body: SafeArea(
         child: Column(
           children: [
-            DevHeader(title: 'Gelişim', subtitle: 'Çocuk gelişim merkezi'),
+            DevHeader(title: AppLocalizations.of(context).gelisim, subtitle: 'Çocuk gelişim merkezi'),
             Expanded(
               child: Center(
                 child: Padding(

@@ -320,7 +320,7 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
       return Scaffold(
         backgroundColor: const Color(0xFF0A0A0F),
         appBar: ScreenHeader(
-          title: 'İzinler ve Roller',
+          title: AppLocalizations.of(context).izinlerVeRoller,
           showBack: true,
           onBack: () => context.pop(),
         ),
@@ -331,7 +331,7 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
-        title: 'İzinler ve Roller',
+        title: AppLocalizations.of(context).izinlerVeRoller,
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -352,13 +352,12 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
                           color: const Color(0x1EFFFFFF),
                         ),
                       ),
-                      child: const Row(
+                      child: Row(
                         children: [
                           Icon(Icons.info_outline, color: Color(0xFFF59E0B)),
                           SizedBox(width: 12),
                           Expanded(
-                            child: Text(
-                              'Yönetici olarak üyelerin rollerini ve yetkilerini düzenleyebilirsiniz.',
+                            child: Text(AppLocalizations.of(context).yoneticiOlarakUyelerinRolleriniVeYetkileriniDuzenleyebilirsiniz,
                               style: TextStyle(
                                 fontSize: 13,
                                 color: Colors.white70,

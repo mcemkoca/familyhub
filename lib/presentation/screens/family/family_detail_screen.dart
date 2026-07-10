@@ -311,8 +311,7 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
             : (_isAdminOrParent
                 ? TextButton(
                     onPressed: () => setState(() => _isEditing = true),
-                    child: const Text(
-                      'Düzenle',
+                    child: Text(AppLocalizations.of(context).edit,
                       style: TextStyle(
                         color: Color(0xFF6366F1),
                         fontWeight: FontWeight.w600,
@@ -436,13 +435,12 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
                   color: Colors.black.withAlpha(160),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const Row(
+                child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(Icons.camera_alt, color: Colors.white, size: 16),
                     SizedBox(width: 6),
-                    Text(
-                      'Değiştir',
+                    Text(AppLocalizations.of(context).degistir,
                       style: TextStyle(color: Colors.white, fontSize: 13),
                     ),
                   ],
@@ -472,13 +470,13 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
         child: Column(
           children: [
             _buildTextField(
-              label: 'Aile Adı',
+              label: AppLocalizations.of(context).aileAdi,
               controller: _nameController,
               icon: Icons.family_restroom_outlined,
             ),
             const SizedBox(height: 12),
             _buildTextField(
-              label: 'Açıklama',
+              label: AppLocalizations.of(context).description,
               controller: _descriptionController,
               icon: Icons.notes_outlined,
               maxLines: 3,
@@ -923,7 +921,7 @@ class _AddHistorySheetState extends State<_AddHistorySheet> {
               TextField(
                 controller: _titleController,
                 decoration: InputDecoration(
-                  labelText: 'Başlık',
+                  labelText: AppLocalizations.of(context).baslik,
                   filled: true,
                   fillColor: const Color(0xFF13131A),
                   border: OutlineInputBorder(

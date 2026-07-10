@@ -98,7 +98,7 @@ class _LocationPickerScreenState extends ConsumerState<LocationPickerScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
-        title: 'Konum Seç',
+        title: AppLocalizations.of(context).konumSec,
         showBack: true,
         onBack: () => context.pop(),
       ),

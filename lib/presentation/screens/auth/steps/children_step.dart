@@ -71,8 +71,7 @@ class _ChildrenStepState extends State<ChildrenStep> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Çocuk Hesapları',
+                Text(AppLocalizations.of(context).cocukHesaplari,
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -157,8 +156,7 @@ class _ChildrenStepState extends State<ChildrenStep> {
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
-              child: const Text(
-                'İleri',
+              child: Text(AppLocalizations.of(context).next,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
             ),
@@ -250,7 +248,7 @@ class _AddChildDialogState extends State<_AddChildDialog> {
           children: [
             TextField(
               controller: _nameController,
-              decoration: const InputDecoration(labelText: 'İsim'),
+              decoration: InputDecoration(labelText: AppLocalizations.of(context).isim),
             ),
             const SizedBox(height: 12),
             DropdownButtonFormField<String>(

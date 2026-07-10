@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import '../../../../config/constants.dart';
 import '../../../../core/validation/input_validator.dart';
@@ -121,8 +122,7 @@ class _AccountStepState extends State<AccountStep> {
             ),
           ),
           const SizedBox(height: 4),
-            const Text(
-            'FamilyHub hesabınızı oluşturun',
+            Text(AppLocalizations.of(context).familyhubHesabiniziOlusturun,
             style: TextStyle(
               fontSize: 14,
               color: Color(0xFF6B7280),
@@ -171,8 +171,7 @@ class _AccountStepState extends State<AccountStep> {
                             : Colors.transparent,
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Text(
-                        'Aileye Katıl',
+                      child: Text(AppLocalizations.of(context).aileyeKatil,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
@@ -203,11 +202,11 @@ class _AccountStepState extends State<AccountStep> {
           const SizedBox(height: 16),
           _buildTextField(
             controller: _passwordController,
-            label: 'Şifre',
+            label: AppLocalizations.of(context).password,
             icon: Icons.lock_outline,
             obscureText: true,
             textInputAction: TextInputAction.done,
-            helperText: 'En az 8 karakter, büyük/küçük harf, rakam ve özel karakter',
+            helperText: AppLocalizations.of(context).enAz8KarakterBuyukkucukHarfRakamVeOzelKarakter,
           ),
           const SizedBox(height: 16),
           if (_hasFamilyCode)
@@ -215,14 +214,14 @@ class _AccountStepState extends State<AccountStep> {
               controller: _familyCodeController,
               label: 'Aile Kodu',
               icon: Icons.key_outlined,
-              hintText: 'Örn: FH-123456',
+              hintText: AppLocalizations.of(context).ornFh123456,
             )
           else
             _buildTextField(
               controller: _familyNameController,
-              label: 'Aile Adı',
+              label: AppLocalizations.of(context).aileAdi,
               icon: Icons.home_outlined,
-              hintText: 'Örn: Yılmaz Ailesi',
+              hintText: AppLocalizations.of(context).ornYilmazAilesi,
             ),
           const SizedBox(height: 16),
           Row(
@@ -235,8 +234,7 @@ class _AccountStepState extends State<AccountStep> {
               Expanded(
                 child: GestureDetector(
                   onTap: () => setState(() => _acceptedTerms = !_acceptedTerms),
-                  child: const Text(
-                    'Kullanım koşullarını ve gizlilik politikasını okudum ve kabul ediyorum.',
+                  child: Text(AppLocalizations.of(context).kullanimKosullariniVeGizlilikPolitikasiniOkudumVeKabulEdiyorum,
                     style: TextStyle(
                       fontSize: 13,
                       color: Color(0xFF6B7280),
@@ -265,7 +263,7 @@ class _AccountStepState extends State<AccountStep> {
                       height: 24,
                       child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
                     )
-                  : const Text('Hesap Oluştur', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                  : Text(AppLocalizations.of(context).hesapOlustur, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             ),
           ),
         ],

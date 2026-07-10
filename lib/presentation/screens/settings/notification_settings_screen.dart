@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 
 import '../../../config/constants.dart';
@@ -232,7 +233,7 @@ class _NotificationSettingsScreenState
     return Scaffold(
       backgroundColor: bg,
       appBar: ScreenHeader(
-        title: 'Bildirim Ayarları',
+        title: AppLocalizations.of(context).bildirimAyarlari,
         showBack: true,
         onBack: () => context.pop(),
       ),

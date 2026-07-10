@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import '../../../config/routes.dart';
 
@@ -62,7 +63,7 @@ class AboutAppScreen extends StatelessWidget {
                               fontSize: 24,
                               fontWeight: FontWeight.w800)),
                       const SizedBox(height: 4),
-                      const Text('Ailenizin kalbi burada atıyor',
+                      Text(AppLocalizations.of(context).ailenizinKalbiBuradaAtiyor,
                           style:
                               TextStyle(color: Colors.white70, fontSize: 14)),
                       const SizedBox(height: 8),

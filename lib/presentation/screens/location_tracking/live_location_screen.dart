@@ -132,8 +132,7 @@ class _LiveLocationScreenState extends State<LiveLocationScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'GÜN İÇİ ÖZET',
+                Text(AppLocalizations.of(context).gunIciOzet,
                   style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 12),

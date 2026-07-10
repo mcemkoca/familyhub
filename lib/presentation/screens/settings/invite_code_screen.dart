@@ -137,8 +137,7 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
                 ),
               ),
               const SizedBox(height: 8),
-              const Text(
-                'Yeni üyeleri davet etmek için bir kod oluşturun. Kod 24 saat geçerlidir.',
+              Text(AppLocalizations.of(context).yeniUyeleriDavetEtmekIcinBirKodOlusturunKod24SaatGecerlidir,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14,
@@ -215,8 +214,7 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
                                 color: _role == 'child' ? const Color(0xFFEC4899) : const Color(0xFF6B7280),
                               ),
                               const SizedBox(width: 6),
-                              Text(
-                                'Çocuk',
+                              Text(AppLocalizations.of(context).child,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   color: _role == 'child'

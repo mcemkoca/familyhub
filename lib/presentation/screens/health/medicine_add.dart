@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'health_store.dart';
 import 'family_health_screen.dart';
@@ -152,8 +153,8 @@ class _MedicineAddScreenState extends ConsumerState<MedicineAddScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            const HealthHeader(
-              title: 'İlaç Ekle',
+            HealthHeader(
+              title: AppLocalizations.of(context).ilacEkle,
               subtitle: 'Yeni ilaç kaydı oluştur',
               icon: Icons.medication_rounded,
               gradient: [Color(0xFF14B8A6), Color(0xFF0D9488)],

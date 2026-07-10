@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
@@ -1481,7 +1482,7 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                               Navigator.pop(context);
                             },
                             icon: const Icon(Icons.share),
-                            label: const Text('Paylaş'),
+                            label: Text(AppLocalizations.of(context).share),
                           ),
                         ),
                       ],
@@ -1522,7 +1523,7 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                                 widget.onShowAlternatives!();
                               },
                               icon: const Icon(Icons.swap_horiz),
-                              label: const Text('Değiştir'),
+                              label: Text(AppLocalizations.of(context).degistir),
                             ),
                           )
                         else
