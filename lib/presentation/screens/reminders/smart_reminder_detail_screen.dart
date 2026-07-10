@@ -175,7 +175,10 @@ class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
   }
 
   Widget _buildTimeDistributionCard(bool isDark, Color textColor) {
-    final maxVal = _timeDistribution.values.reduce((a, b) => a > b ? a : b);
+    // Boş map'te reduce StateError atar → güvenli varsayılan.
+    final maxVal = _timeDistribution.isEmpty
+        ? 1
+        : _timeDistribution.values.reduce((a, b) => a > b ? a : b);
 
     return _Card(
       isDark: isDark,
@@ -229,7 +232,10 @@ class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
   }
 
   Widget _buildLocationDistributionCard(bool isDark, Color textColor) {
-    final maxVal = _locationDistribution.values.reduce((a, b) => a > b ? a : b);
+    // Boş map'te reduce StateError atar → güvenli varsayılan.
+    final maxVal = _locationDistribution.isEmpty
+        ? 1
+        : _locationDistribution.values.reduce((a, b) => a > b ? a : b);
 
     return _Card(
       isDark: isDark,
