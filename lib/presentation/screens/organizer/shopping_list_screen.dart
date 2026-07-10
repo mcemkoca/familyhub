@@ -994,24 +994,34 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
         child: ListTile(
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
-          leading: GestureDetector(
-            onTap: () => _toggleItem(item),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              width: 28,
-              height: 28,
-              decoration: BoxDecoration(
-                color: item.isCompleted ? const Color(0xFF10B981) : Colors.transparent,
-                shape: BoxShape.circle,
-                border: Border.all(
-                    color: item.isCompleted
-                        ? const Color(0xFF10B981)
-                        : const Color(0x1EFFFFFF),
-                    width: 2),
+          leading: Semantics(
+            checked: item.isCompleted,
+            label: item.name,
+            value: [
+              if (item.quantity != null)
+                AppLocalizations.of(context)
+                    .shoppingAdet(int.tryParse(item.quantity ?? '') ?? 1),
+              _categoryLabel(item.category),
+            ].join(', '),
+            child: GestureDetector(
+              onTap: () => _toggleItem(item),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                width: 28,
+                height: 28,
+                decoration: BoxDecoration(
+                  color: item.isCompleted ? const Color(0xFF10B981) : Colors.transparent,
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                      color: item.isCompleted
+                          ? const Color(0xFF10B981)
+                          : const Color(0x1EFFFFFF),
+                      width: 2),
+                ),
+                child: item.isCompleted
+                    ? const Icon(Icons.check, size: 16, color: Colors.white)
+                    : null,
               ),
-              child: item.isCompleted
-                  ? const Icon(Icons.check, size: 16, color: Colors.white)
-                  : null,
             ),
           ),
           title: Text(
