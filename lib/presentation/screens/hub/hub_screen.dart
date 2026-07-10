@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
+import '../../widgets/language_suggestion_dialog.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -93,8 +94,10 @@ class _HubScreenState extends ConsumerState<HubScreen>
     super.initState();
     LocationTrackingService.startTracking();
 
-    // İlk açılışta bir kez bildirim izni promptunu göster.
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    // İlk açılışta önce dil önerisi (gerekliyse), sonra bildirim izni promptu.
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (!mounted) return;
+      await LanguageSuggestionDialog.maybeShow(context, ref);
       if (mounted) NotificationPrompt.maybeShow(context);
     });
 
