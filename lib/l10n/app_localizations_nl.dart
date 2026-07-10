@@ -3046,6 +3046,109 @@ class AppLocalizationsNl extends AppLocalizations {
   String get legalRegionOther => 'Overig';
 
   @override
+  String get familyIntelligenceTitle => 'Gezinsintelligentie';
+
+  @override
+  String get familyIntelligenceSubtitle =>
+      'De prioriteiten van vandaag voor je gezin';
+
+  @override
+  String get fiPriorityCritical => 'Kritiek';
+
+  @override
+  String get fiPriorityHigh => 'Hoog';
+
+  @override
+  String get fiPriorityNormal => 'Normaal';
+
+  @override
+  String get fiPriorityInfo => 'Info';
+
+  @override
+  String get fiWhyShown => 'Waarom wordt dit getoond?';
+
+  @override
+  String get fiRuleBasedNote =>
+      'Deze samenvatting is regelgebaseerd gegenereerd uit je gezinsgegevens.';
+
+  @override
+  String get fiEmptyTitle => 'Er springt nu niets uit';
+
+  @override
+  String get fiEmptyDesc =>
+      'Je gezinsgegevens zijn actueel. Nieuwe prioriteiten verschijnen hier.';
+
+  @override
+  String get fiInsightOverdueTitle => 'Achterstallige taken';
+
+  @override
+  String fiInsightOverdueBody(Object count) {
+    return '$count taken zijn achterstallig. Bekijk ze.';
+  }
+
+  @override
+  String get fiReasonOverdue =>
+      'Er zijn taken die hun einddatum voorbij zijn en niet voltooid.';
+
+  @override
+  String get fiInsightPaymentTitle => 'Aankomende betaling';
+
+  @override
+  String fiInsightPaymentBody(Object days) {
+    return 'Een betaling is over $days dagen verschuldigd.';
+  }
+
+  @override
+  String get fiReasonPayment =>
+      'Er is een aankomende betaaldatum in je budget gevonden.';
+
+  @override
+  String get fiInsightTodayEventsTitle => 'Evenementen vandaag';
+
+  @override
+  String fiInsightTodayEventsBody(Object count) {
+    return 'Je hebt vandaag $count geplande evenementen.';
+  }
+
+  @override
+  String get fiReasonTodayEvents => 'Je agenda heeft evenementen voor vandaag.';
+
+  @override
+  String get fiInsightShoppingTitle => 'Boodschappenlijst';
+
+  @override
+  String fiInsightShoppingBody(Object count) {
+    return 'Je hebt $count openstaande items op je lijst.';
+  }
+
+  @override
+  String get fiReasonShopping =>
+      'Er zijn onvoltooide boodschappen opgestapeld.';
+
+  @override
+  String get fiInsightPendingTasksTitle => 'Openstaande taken';
+
+  @override
+  String fiInsightPendingTasksBody(Object count) {
+    return '$count taken wachten op je.';
+  }
+
+  @override
+  String get fiReasonPendingTasks =>
+      'Je hebt taken die nog niet voltooid zijn.';
+
+  @override
+  String get fiInsightAllClearTitle => 'Alles in orde';
+
+  @override
+  String get fiInsightAllClearBody =>
+      'Geen openstaande taken of boodschappen. Goed bezig!';
+
+  @override
+  String get fiReasonAllClear =>
+      'Geen achterstallige taken, openstaande taken of boodschappen gevonden.';
+
+  @override
   String get henuzVeriYok => 'Nog geen gegevens';
 
   @override

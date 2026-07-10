@@ -5912,6 +5912,174 @@ abstract class AppLocalizations {
   /// **'Diğer'**
   String get legalRegionOther;
 
+  /// No description provided for @familyIntelligenceTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile Zekası'**
+  String get familyIntelligenceTitle;
+
+  /// No description provided for @familyIntelligenceSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ailen için bugünün öncelikleri'**
+  String get familyIntelligenceSubtitle;
+
+  /// No description provided for @fiPriorityCritical.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kritik'**
+  String get fiPriorityCritical;
+
+  /// No description provided for @fiPriorityHigh.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yüksek'**
+  String get fiPriorityHigh;
+
+  /// No description provided for @fiPriorityNormal.
+  ///
+  /// In tr, this message translates to:
+  /// **'Normal'**
+  String get fiPriorityNormal;
+
+  /// No description provided for @fiPriorityInfo.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bilgi'**
+  String get fiPriorityInfo;
+
+  /// No description provided for @fiWhyShown.
+  ///
+  /// In tr, this message translates to:
+  /// **'Neden gösterildi?'**
+  String get fiWhyShown;
+
+  /// No description provided for @fiRuleBasedNote.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu özet, aile verilerinden kural tabanlı olarak üretildi.'**
+  String get fiRuleBasedNote;
+
+  /// No description provided for @fiEmptyTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şu an öne çıkan bir şey yok'**
+  String get fiEmptyTitle;
+
+  /// No description provided for @fiEmptyDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile verilerin güncel. Yeni öncelikler burada görünecek.'**
+  String get fiEmptyDesc;
+
+  /// No description provided for @fiInsightOverdueTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Geciken görevler'**
+  String get fiInsightOverdueTitle;
+
+  /// No description provided for @fiInsightOverdueBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'{count} görevin süresi geçmiş. Gözden geçir.'**
+  String fiInsightOverdueBody(Object count);
+
+  /// No description provided for @fiReasonOverdue.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bitiş tarihi geçmiş ve tamamlanmamış görevler var.'**
+  String get fiReasonOverdue;
+
+  /// No description provided for @fiInsightPaymentTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yaklaşan ödeme'**
+  String get fiInsightPaymentTitle;
+
+  /// No description provided for @fiInsightPaymentBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'{days} gün içinde bir ödeme var.'**
+  String fiInsightPaymentBody(Object days);
+
+  /// No description provided for @fiReasonPayment.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bütçende yaklaşan bir ödeme tarihi bulundu.'**
+  String get fiReasonPayment;
+
+  /// No description provided for @fiInsightTodayEventsTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugünkü etkinlikler'**
+  String get fiInsightTodayEventsTitle;
+
+  /// No description provided for @fiInsightTodayEventsBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugün {count} planlı etkinliğin var.'**
+  String fiInsightTodayEventsBody(Object count);
+
+  /// No description provided for @fiReasonTodayEvents.
+  ///
+  /// In tr, this message translates to:
+  /// **'Takviminde bugüne ait etkinlikler var.'**
+  String get fiReasonTodayEvents;
+
+  /// No description provided for @fiInsightShoppingTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alışveriş listesi'**
+  String get fiInsightShoppingTitle;
+
+  /// No description provided for @fiInsightShoppingBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'Listende {count} bekleyen ürün var.'**
+  String fiInsightShoppingBody(Object count);
+
+  /// No description provided for @fiReasonShopping.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tamamlanmamış alışveriş öğeleri birikmiş.'**
+  String get fiReasonShopping;
+
+  /// No description provided for @fiInsightPendingTasksTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bekleyen görevler'**
+  String get fiInsightPendingTasksTitle;
+
+  /// No description provided for @fiInsightPendingTasksBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'{count} görevin seni bekliyor.'**
+  String fiInsightPendingTasksBody(Object count);
+
+  /// No description provided for @fiReasonPendingTasks.
+  ///
+  /// In tr, this message translates to:
+  /// **'Henüz tamamlanmamış görevlerin var.'**
+  String get fiReasonPendingTasks;
+
+  /// No description provided for @fiInsightAllClearTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Her şey yolunda'**
+  String get fiInsightAllClearTitle;
+
+  /// No description provided for @fiInsightAllClearBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bekleyen görev veya alışveriş yok. Harika!'**
+  String get fiInsightAllClearBody;
+
+  /// No description provided for @fiReasonAllClear.
+  ///
+  /// In tr, this message translates to:
+  /// **'Geciken görev, bekleyen görev ve alışveriş öğesi bulunmadı.'**
+  String get fiReasonAllClear;
+
   /// No description provided for @henuzVeriYok.
   ///
   /// In tr, this message translates to:

@@ -3046,6 +3046,108 @@ class AppLocalizationsEn extends AppLocalizations {
   String get legalRegionOther => 'Other';
 
   @override
+  String get familyIntelligenceTitle => 'Family Intelligence';
+
+  @override
+  String get familyIntelligenceSubtitle =>
+      'Today\'s priorities for your family';
+
+  @override
+  String get fiPriorityCritical => 'Critical';
+
+  @override
+  String get fiPriorityHigh => 'High';
+
+  @override
+  String get fiPriorityNormal => 'Normal';
+
+  @override
+  String get fiPriorityInfo => 'Info';
+
+  @override
+  String get fiWhyShown => 'Why is this shown?';
+
+  @override
+  String get fiRuleBasedNote =>
+      'This summary was generated rule-based from your family data.';
+
+  @override
+  String get fiEmptyTitle => 'Nothing stands out right now';
+
+  @override
+  String get fiEmptyDesc =>
+      'Your family data is up to date. New priorities will appear here.';
+
+  @override
+  String get fiInsightOverdueTitle => 'Overdue tasks';
+
+  @override
+  String fiInsightOverdueBody(Object count) {
+    return '$count tasks are overdue. Review them.';
+  }
+
+  @override
+  String get fiReasonOverdue =>
+      'There are tasks past their due date and not completed.';
+
+  @override
+  String get fiInsightPaymentTitle => 'Upcoming payment';
+
+  @override
+  String fiInsightPaymentBody(Object days) {
+    return 'A payment is due in $days days.';
+  }
+
+  @override
+  String get fiReasonPayment =>
+      'An upcoming payment date was found in your budget.';
+
+  @override
+  String get fiInsightTodayEventsTitle => 'Today\'s events';
+
+  @override
+  String fiInsightTodayEventsBody(Object count) {
+    return 'You have $count events planned today.';
+  }
+
+  @override
+  String get fiReasonTodayEvents => 'Your calendar has events for today.';
+
+  @override
+  String get fiInsightShoppingTitle => 'Shopping list';
+
+  @override
+  String fiInsightShoppingBody(Object count) {
+    return 'You have $count pending items on your list.';
+  }
+
+  @override
+  String get fiReasonShopping => 'Uncompleted shopping items have accumulated.';
+
+  @override
+  String get fiInsightPendingTasksTitle => 'Pending tasks';
+
+  @override
+  String fiInsightPendingTasksBody(Object count) {
+    return '$count tasks are waiting for you.';
+  }
+
+  @override
+  String get fiReasonPendingTasks =>
+      'You have tasks that are not completed yet.';
+
+  @override
+  String get fiInsightAllClearTitle => 'All clear';
+
+  @override
+  String get fiInsightAllClearBody =>
+      'No pending tasks or shopping. Great job!';
+
+  @override
+  String get fiReasonAllClear =>
+      'No overdue tasks, pending tasks or shopping items were found.';
+
+  @override
   String get henuzVeriYok => 'No data yet';
 
   @override

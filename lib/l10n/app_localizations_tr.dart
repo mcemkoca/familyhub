@@ -3063,6 +3063,105 @@ class AppLocalizationsTr extends AppLocalizations {
   String get legalRegionOther => 'Diğer';
 
   @override
+  String get familyIntelligenceTitle => 'Aile Zekası';
+
+  @override
+  String get familyIntelligenceSubtitle => 'Ailen için bugünün öncelikleri';
+
+  @override
+  String get fiPriorityCritical => 'Kritik';
+
+  @override
+  String get fiPriorityHigh => 'Yüksek';
+
+  @override
+  String get fiPriorityNormal => 'Normal';
+
+  @override
+  String get fiPriorityInfo => 'Bilgi';
+
+  @override
+  String get fiWhyShown => 'Neden gösterildi?';
+
+  @override
+  String get fiRuleBasedNote =>
+      'Bu özet, aile verilerinden kural tabanlı olarak üretildi.';
+
+  @override
+  String get fiEmptyTitle => 'Şu an öne çıkan bir şey yok';
+
+  @override
+  String get fiEmptyDesc =>
+      'Aile verilerin güncel. Yeni öncelikler burada görünecek.';
+
+  @override
+  String get fiInsightOverdueTitle => 'Geciken görevler';
+
+  @override
+  String fiInsightOverdueBody(Object count) {
+    return '$count görevin süresi geçmiş. Gözden geçir.';
+  }
+
+  @override
+  String get fiReasonOverdue =>
+      'Bitiş tarihi geçmiş ve tamamlanmamış görevler var.';
+
+  @override
+  String get fiInsightPaymentTitle => 'Yaklaşan ödeme';
+
+  @override
+  String fiInsightPaymentBody(Object days) {
+    return '$days gün içinde bir ödeme var.';
+  }
+
+  @override
+  String get fiReasonPayment => 'Bütçende yaklaşan bir ödeme tarihi bulundu.';
+
+  @override
+  String get fiInsightTodayEventsTitle => 'Bugünkü etkinlikler';
+
+  @override
+  String fiInsightTodayEventsBody(Object count) {
+    return 'Bugün $count planlı etkinliğin var.';
+  }
+
+  @override
+  String get fiReasonTodayEvents => 'Takviminde bugüne ait etkinlikler var.';
+
+  @override
+  String get fiInsightShoppingTitle => 'Alışveriş listesi';
+
+  @override
+  String fiInsightShoppingBody(Object count) {
+    return 'Listende $count bekleyen ürün var.';
+  }
+
+  @override
+  String get fiReasonShopping => 'Tamamlanmamış alışveriş öğeleri birikmiş.';
+
+  @override
+  String get fiInsightPendingTasksTitle => 'Bekleyen görevler';
+
+  @override
+  String fiInsightPendingTasksBody(Object count) {
+    return '$count görevin seni bekliyor.';
+  }
+
+  @override
+  String get fiReasonPendingTasks => 'Henüz tamamlanmamış görevlerin var.';
+
+  @override
+  String get fiInsightAllClearTitle => 'Her şey yolunda';
+
+  @override
+  String get fiInsightAllClearBody =>
+      'Bekleyen görev veya alışveriş yok. Harika!';
+
+  @override
+  String get fiReasonAllClear =>
+      'Geciken görev, bekleyen görev ve alışveriş öğesi bulunmadı.';
+
+  @override
   String get henuzVeriYok => 'Henüz veri yok';
 
   @override

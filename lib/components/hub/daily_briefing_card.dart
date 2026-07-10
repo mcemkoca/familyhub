@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../config/routes.dart';
 import '../../presentation/providers/app_providers.dart';
 import '../../services/ai/ai_content_service.dart';
@@ -140,8 +141,8 @@ class _DailyBriefingCardState extends ConsumerState<DailyBriefingCard> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Günlük Zeka Özeti',
-                            style: TextStyle(
+                        Text(AppLocalizations.of(context).familyIntelligenceTitle,
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 15,
                                 fontWeight: FontWeight.w800)),
@@ -150,6 +151,15 @@ class _DailyBriefingCardState extends ConsumerState<DailyBriefingCard> {
                                 color: Color(0xFF9CA3AF), fontSize: 12)),
                       ],
                     ),
+                  ),
+                  IconButton(
+                    onPressed: () =>
+                        context.push(AppRoutes.familyIntelligence),
+                    icon: const Icon(Icons.open_in_full_rounded,
+                        color: Color(0xFF8B5CF6), size: 18),
+                    tooltip: 'Aile Zekası',
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
                   ),
                   AnimatedRotation(
                     turns: _expanded ? 0.5 : 0,

@@ -3057,6 +3057,110 @@ class AppLocalizationsFr extends AppLocalizations {
   String get legalRegionOther => 'Autre';
 
   @override
+  String get familyIntelligenceTitle => 'Intelligence familiale';
+
+  @override
+  String get familyIntelligenceSubtitle =>
+      'Les priorités du jour pour votre famille';
+
+  @override
+  String get fiPriorityCritical => 'Critique';
+
+  @override
+  String get fiPriorityHigh => 'Élevé';
+
+  @override
+  String get fiPriorityNormal => 'Normal';
+
+  @override
+  String get fiPriorityInfo => 'Info';
+
+  @override
+  String get fiWhyShown => 'Pourquoi est-ce affiché ?';
+
+  @override
+  String get fiRuleBasedNote =>
+      'Ce résumé a été généré à partir de vos données familiales selon des règles.';
+
+  @override
+  String get fiEmptyTitle => 'Rien à signaler pour le moment';
+
+  @override
+  String get fiEmptyDesc =>
+      'Vos données familiales sont à jour. Les nouvelles priorités apparaîtront ici.';
+
+  @override
+  String get fiInsightOverdueTitle => 'Tâches en retard';
+
+  @override
+  String fiInsightOverdueBody(Object count) {
+    return '$count tâches sont en retard. À revoir.';
+  }
+
+  @override
+  String get fiReasonOverdue =>
+      'Des tâches ont dépassé leur échéance sans être terminées.';
+
+  @override
+  String get fiInsightPaymentTitle => 'Paiement à venir';
+
+  @override
+  String fiInsightPaymentBody(Object days) {
+    return 'Un paiement est dû dans $days jours.';
+  }
+
+  @override
+  String get fiReasonPayment =>
+      'Une échéance de paiement à venir a été trouvée dans votre budget.';
+
+  @override
+  String get fiInsightTodayEventsTitle => 'Événements du jour';
+
+  @override
+  String fiInsightTodayEventsBody(Object count) {
+    return 'Vous avez $count événements prévus aujourd\'hui.';
+  }
+
+  @override
+  String get fiReasonTodayEvents =>
+      'Votre calendrier comporte des événements pour aujourd\'hui.';
+
+  @override
+  String get fiInsightShoppingTitle => 'Liste de courses';
+
+  @override
+  String fiInsightShoppingBody(Object count) {
+    return 'Vous avez $count articles en attente sur votre liste.';
+  }
+
+  @override
+  String get fiReasonShopping =>
+      'Des articles de courses non terminés se sont accumulés.';
+
+  @override
+  String get fiInsightPendingTasksTitle => 'Tâches en attente';
+
+  @override
+  String fiInsightPendingTasksBody(Object count) {
+    return '$count tâches vous attendent.';
+  }
+
+  @override
+  String get fiReasonPendingTasks =>
+      'Vous avez des tâches non encore terminées.';
+
+  @override
+  String get fiInsightAllClearTitle => 'Tout est en ordre';
+
+  @override
+  String get fiInsightAllClearBody =>
+      'Aucune tâche ni course en attente. Bravo !';
+
+  @override
+  String get fiReasonAllClear =>
+      'Aucune tâche en retard, tâche en attente ou article de courses trouvé.';
+
+  @override
   String get henuzVeriYok => 'Aucune donnee';
 
   @override
