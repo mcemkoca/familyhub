@@ -1,0 +1,51 @@
+name: Localization Audit
+
+on:
+  push:
+    branches:
+      - feat/i18n-tr-nl-fr-en
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Generate localizations
+        run: flutter gen-l10n
+
+      - name: Audit ARB files
+        run: dart run tool/i18n_audit.dart
+
+      - name: Audit hard-coded Dart strings
+        run: dart run tool/hardcoded_string_audit.dart
+
+      - name: Audit content and suggestion assets
+        run: dart run tool/content_locale_audit.dart
+
+      - name: Upload localization reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: localization-audit-reports
+          path: |
+            build/i18n_audit.json
+            build/hardcoded_string_audit.json
+            build/content_locale_audit.json
+            build/untranslated_messages.json
+          if-no-files-found: warn

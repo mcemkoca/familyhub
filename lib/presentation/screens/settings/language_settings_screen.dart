@@ -1,82 +1,110 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../services/hive_service.dart';
+import 'package:go_router/go_router.dart';
+
 import '../../../config/constants.dart';
+import '../../../core/localization/app_locale.dart';
+import '../../../core/localization/app_strings.dart';
+import '../../../services/hive_service.dart';
 import '../../providers/app_providers.dart';
 import '../../widgets/settings/screen_header.dart';
-import 'package:go_router/go_router.dart';
 
 class LanguageSettingsScreen extends ConsumerStatefulWidget {
   const LanguageSettingsScreen({super.key});
 
   @override
-  ConsumerState<LanguageSettingsScreen> createState() => _LanguageSettingsScreenState();
+  ConsumerState<LanguageSettingsScreen> createState() =>
+      _LanguageSettingsScreenState();
 }
 
-class _LanguageSettingsScreenState extends ConsumerState<LanguageSettingsScreen> {
-  String _selectedLanguage = 'Türkçe';
-  String _selectedRegion = 'Türkiye';
+class _LanguageSettingsScreenState
+    extends ConsumerState<LanguageSettingsScreen> {
+  AppLanguage _selectedLanguage = AppLanguage.defaultLanguage;
+  String _selectedRegionCode = 'BE';
   String _dateFormat = 'DD/MM/YYYY';
 
-  final _languages = ['Türkçe', 'English', 'Deutsch', 'Nederlands'];
-  final _regions = ['Türkiye', 'United States', 'Germany', 'Netherlands'];
-  final _dateFormats = ['DD/MM/YYYY', 'MM/DD/YYYY', 'YYYY-MM-DD'];
+  static const _regions = <_RegionOption>[
+    _RegionOption(code: 'BE', labelKey: 'region.be'),
+    _RegionOption(code: 'NL', labelKey: 'region.nl'),
+    _RegionOption(code: 'FR', labelKey: 'region.fr'),
+    _RegionOption(code: 'TR', labelKey: 'region.tr'),
+    _RegionOption(code: 'GB', labelKey: 'region.gb'),
+  ];
+
+  static const _dateFormats = <String>[
+    'DD/MM/YYYY',
+    'MM/DD/YYYY',
+    'YYYY-MM-DD',
+  ];
 
   @override
   void initState() {
     super.initState();
-    _selectedLanguage = HiveService.getSetting('language') ?? 'Türkçe';
-    _selectedRegion = HiveService.getSetting('region') ?? 'Türkiye';
+
+    final storedLanguage =
+        HiveService.getSetting('languageCode') ??
+        HiveService.getSetting('language');
+    _selectedLanguage = AppLanguage.fromStoredValue(storedLanguage);
+
+    final storedRegion =
+        HiveService.getSetting('regionCode') ??
+        HiveService.getSetting('region');
+    _selectedRegionCode = _normalizeRegion(storedRegion);
+
     _dateFormat = HiveService.getSetting('dateFormat') ?? 'DD/MM/YYYY';
   }
 
-  Future<void> _saveLanguage(String lang) async {
-    setState(() => _selectedLanguage = lang);
-    await HiveService.setSetting('language', lang);
-    HapticFeedback.selectionClick();
+  Future<void> _saveLanguage(AppLanguage language) async {
+    setState(() => _selectedLanguage = language);
 
-    Locale newLocale;
-    switch (lang) {
-      case 'English':
-        newLocale = const Locale('en', 'US');
-        break;
-      case 'Deutsch':
-        newLocale = const Locale('de', 'DE');
-        break;
-      case 'Nederlands':
-        newLocale = const Locale('nl', 'NL');
-        break;
-      case 'Türkçe':
-      default:
-        newLocale = const Locale('tr', 'TR');
-        break;
-    }
-    ref.read(localeProvider.notifier).state = newLocale;
-  }
+    await HiveService.setSetting('languageCode', language.code);
+    await HiveService.setSetting('language', language.nativeName);
 
-  Future<void> _saveRegion(String region) async {
-    setState(() => _selectedRegion = region);
-    await HiveService.setSetting('region', region);
+    ref.read(localeProvider.notifier).state = language.locale;
     HapticFeedback.selectionClick();
   }
 
-  Future<void> _saveDateFormat(String fmt) async {
-    setState(() => _dateFormat = fmt);
-    await HiveService.setSetting('dateFormat', fmt);
+  Future<void> _saveRegion(_RegionOption region) async {
+    setState(() => _selectedRegionCode = region.code);
+    await HiveService.setSetting('regionCode', region.code);
+    await HiveService.setSetting('region', region.code);
     HapticFeedback.selectionClick();
+  }
+
+  Future<void> _saveDateFormat(String format) async {
+    setState(() => _dateFormat = format);
+    await HiveService.setSetting('dateFormat', format);
+    HapticFeedback.selectionClick();
+  }
+
+  String _normalizeRegion(String? storedValue) {
+    final normalized = storedValue?.trim().toLowerCase();
+    return switch (normalized) {
+      'be' || 'belgië' || 'belgique' || 'belgium' ||
+      'belgië / belgique' => 'BE',
+      'nl' || 'nederland' || 'netherlands' => 'NL',
+      'fr' || 'france' => 'FR',
+      'tr' || 'türkiye' || 'turkiye' || 'turkey' => 'TR',
+      'gb' || 'uk' || 'united kingdom' => 'GB',
+      'us' || 'united states' => 'GB',
+      'de' || 'germany' || 'deutschland' => 'BE',
+      _ => 'BE',
+    };
   }
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppStrings.of(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = isDark ? AppColors.darkBackground : AppColors.cloudWhite;
-    final cardBg = isDark ? AppColors.darkCard : Colors.white;
+    final background =
+        isDark ? AppColors.darkBackground : AppColors.cloudWhite;
+    final cardBackground = isDark ? AppColors.darkCard : Colors.white;
 
     return Scaffold(
-      backgroundColor: bg,
+      backgroundColor: background,
       appBar: ScreenHeader(
-        title: 'Dil ve Bölge',
+        title: strings.text('language.title'),
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -85,40 +113,40 @@ class _LanguageSettingsScreenState extends ConsumerState<LanguageSettingsScreen>
         padding: const EdgeInsets.all(16),
         children: [
           _buildGroup(
-            title: 'UYGULAMA DİLİ',
-            children: _languages.map((lang) {
-              final selected = _selectedLanguage == lang;
+            title: strings.text('language.application'),
+            children: AppLanguage.values.map((language) {
+              final selected = _selectedLanguage == language;
               return _buildOptionTile(
-                label: lang,
+                label: language.nativeName,
                 selected: selected,
-                onTap: () => _saveLanguage(lang),
-                cardBg: cardBg,
+                onTap: () => _saveLanguage(language),
+                cardBackground: cardBackground,
               );
             }).toList(),
           ),
           const SizedBox(height: 16),
           _buildGroup(
-            title: 'BÖLGE',
+            title: strings.text('language.region'),
             children: _regions.map((region) {
-              final selected = _selectedRegion == region;
+              final selected = _selectedRegionCode == region.code;
               return _buildOptionTile(
-                label: region,
+                label: strings.text(region.labelKey),
                 selected: selected,
                 onTap: () => _saveRegion(region),
-                cardBg: cardBg,
+                cardBackground: cardBackground,
               );
             }).toList(),
           ),
           const SizedBox(height: 16),
           _buildGroup(
-            title: 'TARİH FORMATI',
-            children: _dateFormats.map((fmt) {
-              final selected = _dateFormat == fmt;
+            title: strings.text('language.dateFormat'),
+            children: _dateFormats.map((format) {
+              final selected = _dateFormat == format;
               return _buildOptionTile(
-                label: fmt,
+                label: format,
                 selected: selected,
-                onTap: () => _saveDateFormat(fmt),
-                cardBg: cardBg,
+                onTap: () => _saveDateFormat(format),
+                cardBackground: cardBackground,
               );
             }).toList(),
           ),
@@ -127,7 +155,10 @@ class _LanguageSettingsScreenState extends ConsumerState<LanguageSettingsScreen>
     );
   }
 
-  Widget _buildGroup({required String title, required List<Widget> children}) {
+  Widget _buildGroup({
+    required String title,
+    required List<Widget> children,
+  }) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -168,7 +199,7 @@ class _LanguageSettingsScreenState extends ConsumerState<LanguageSettingsScreen>
     required String label,
     required bool selected,
     required VoidCallback onTap,
-    required Color cardBg,
+    required Color cardBackground,
   }) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return InkWell(
@@ -199,4 +230,11 @@ class _LanguageSettingsScreenState extends ConsumerState<LanguageSettingsScreen>
       ),
     );
   }
+}
+
+class _RegionOption {
+  const _RegionOption({required this.code, required this.labelKey});
+
+  final String code;
+  final String labelKey;
 }

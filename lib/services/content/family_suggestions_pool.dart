@@ -1,112 +1,175 @@
 import 'dart:convert';
 import 'dart:math';
+
 import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import '../../domain/models/ai_suggestion.dart';
 
-/// 10 kategoride toplam 1000+ aile önerisi havuzu.
-/// Asset JSON'larını yükler, Hive cache'ler, kategorilere göre filtreler.
+import '../../domain/models/ai_suggestion.dart';
+import '../../core/localization/app_locale.dart';
+import '../hive_service.dart';
+
+/// Locale-aware family suggestion pool.
+///
+/// The pool keeps a separate cache for every supported language and reloads
+/// when the user changes language. Until localized asset files are completed,
+/// Turkish assets are used only as an explicit fallback.
 class FamilySuggestionsPool {
   FamilySuggestionsPool._();
+
   static final FamilySuggestionsPool _instance = FamilySuggestionsPool._();
   static FamilySuggestionsPool get instance => _instance;
 
   static const String _boxName = 'family_suggestions_cache';
-  static const String _cacheKey = 'familyhub_suggestions_v2';
+  static const String _cacheVersion = 'v3';
 
   final List<AISuggestion> _all = [];
-  bool _initialized = false;
+  String? _loadedLocale;
 
-  /// Kategoriler ve display isimleri
-  static const Map<String, String> categoryLabels = {
-    'communication': 'Aile İletişimi',
-    'health': 'Sağlıklı Yaşam',
-    'education': 'Çocuk Gelişimi',
-    'chore': 'Ev Düzeni',
-    'finance': 'Bütçe Yönetimi',
-    'safety': 'Güvenlik',
-    'recipe': 'Yemek & Beslenme',
-    'social': 'Sosyal Aktiviteler',
-    'digital': 'Dijital Denge',
+  static const Map<String, Map<String, String>> categoryLabels = {
+    'tr': {
+      'communication': 'Aile İletişimi',
+      'health': 'Sağlıklı Yaşam',
+      'education': 'Çocuk Gelişimi',
+      'chore': 'Ev Düzeni',
+      'finance': 'Bütçe Yönetimi',
+      'safety': 'Güvenlik',
+      'recipe': 'Yemek & Beslenme',
+      'social': 'Sosyal Aktiviteler',
+      'digital': 'Dijital Denge',
+    },
+    'nl': {
+      'communication': 'Gezinscommunicatie',
+      'health': 'Gezond leven',
+      'education': 'Kinderontwikkeling',
+      'chore': 'Huishouding',
+      'finance': 'Budgetbeheer',
+      'safety': 'Veiligheid',
+      'recipe': 'Voeding en recepten',
+      'social': 'Sociale activiteiten',
+      'digital': 'Digitale balans',
+    },
+    'fr': {
+      'communication': 'Communication familiale',
+      'health': 'Vie saine',
+      'education': 'Développement de l’enfant',
+      'chore': 'Organisation du foyer',
+      'finance': 'Gestion du budget',
+      'safety': 'Sécurité',
+      'recipe': 'Repas et nutrition',
+      'social': 'Activités sociales',
+      'digital': 'Équilibre numérique',
+    },
+    'en': {
+      'communication': 'Family Communication',
+      'health': 'Healthy Living',
+      'education': 'Child Development',
+      'chore': 'Home Organisation',
+      'finance': 'Budget Management',
+      'safety': 'Safety',
+      'recipe': 'Food & Nutrition',
+      'social': 'Social Activities',
+      'digital': 'Digital Balance',
+    },
   };
 
-  static const List<String> _assetPaths = [
-    'assets/data/suggestions/family_communication.json',
-    'assets/data/suggestions/healthy_living.json',
-    'assets/data/suggestions/child_development.json',
-    'assets/data/suggestions/home_organization.json',
-    'assets/data/suggestions/budget_management.json',
-    'assets/data/suggestions/safety_measures.json',
-    'assets/data/suggestions/education_support.json',
-    'assets/data/suggestions/meal_nutrition.json',
-    'assets/data/suggestions/social_activities.json',
-    'assets/data/suggestions/digital_balance.json',
+  static const List<String> _assetFileNames = [
+    'family_communication.json',
+    'healthy_living.json',
+    'child_development.json',
+    'home_organization.json',
+    'budget_management.json',
+    'safety_measures.json',
+    'education_support.json',
+    'meal_nutrition.json',
+    'social_activities.json',
+    'digital_balance.json',
   ];
 
-  /// Initialize: load from cache or assets
   static Future<void> initialize() async {
-    await _instance._load();
+    final locale = _currentLocaleCode();
+    await _instance._load(locale);
   }
 
-  Future<void> _load() async {
-    if (_initialized) return;
+  static Future<void> reloadForLocale(String localeCode) async {
+    final normalized = AppLanguage.fromStoredValue(localeCode).code;
+    await _instance._load(normalized, force: true);
+  }
+
+  static String categoryLabel(String category, {String? localeCode}) {
+    final locale = AppLanguage.fromStoredValue(
+      localeCode ?? HiveService.getSetting('languageCode'),
+    ).code;
+    return categoryLabels[locale]?[category] ??
+        categoryLabels['en']?[category] ??
+        category;
+  }
+
+  Future<void> _load(String locale, {bool force = false}) async {
+    if (!force && _loadedLocale == locale && _all.isNotEmpty) return;
+
+    _all.clear();
+    _loadedLocale = locale;
 
     final box = Hive.isBoxOpen(_boxName)
         ? Hive.box<String>(_boxName)
         : await Hive.openBox<String>(_boxName);
+    final cacheKey = _cacheKey(locale);
 
-    // Try cache first
-    final cached = box.get(_cacheKey);
-    if (cached != null && cached.isNotEmpty) {
+    final cached = box.get(cacheKey);
+    if (!force && cached != null && cached.isNotEmpty) {
       try {
-        // ignore: unnecessary_cast
-        final list = List<Map<String, dynamic>>.from(jsonDecode(cached as String) as List<dynamic>);
-        _all.addAll(list.map((e) => _fromJson(e)));
-        _initialized = true;
+        final list = List<Map<String, dynamic>>.from(
+          jsonDecode(cached) as List<dynamic>,
+        );
+        _all.addAll(list.map(_fromJson));
         return;
       } catch (_) {
-        // Cache corrupted, fall through
+        await box.delete(cacheKey);
       }
     }
 
-    // Load from assets
-    for (final path in _assetPaths) {
+    for (final fileName in _assetFileNames) {
+      final localizedPath = 'assets/data/suggestions/$locale/$fileName';
+      final fallbackPath = 'assets/data/suggestions/$fileName';
+
+      Map<String, dynamic>? data;
       try {
-        final raw = await rootBundle.loadString(path);
-        final data = jsonDecode(raw) as Map<String, dynamic>;
-        final suggestions = data['suggestions'] as List<dynamic>;
-        for (final s in suggestions) {
-          _all.add(_fromJson(s as Map<String, dynamic>));
+        final raw = await rootBundle.loadString(localizedPath);
+        data = jsonDecode(raw) as Map<String, dynamic>;
+      } catch (_) {
+        if (locale == 'tr') {
+          try {
+            final raw = await rootBundle.loadString(fallbackPath);
+            data = jsonDecode(raw) as Map<String, dynamic>;
+          } catch (error) {
+            debugPrint('FamilySuggestionsPool: $fallbackPath: $error');
+          }
         }
-      } catch (e) {
-        debugPrint('FamilySuggestionsPool: Error loading $path: $e');
+      }
+
+      if (data == null) continue;
+      final suggestions = data['suggestions'] as List<dynamic>? ?? const [];
+      for (final suggestion in suggestions) {
+        _all.add(_fromJson(suggestion as Map<String, dynamic>));
       }
     }
 
-    // Save to cache
     try {
-      final encoded = jsonEncode(_all.map((s) => s.toJson()).toList());
-      await box.put(_cacheKey, encoded);
-    } catch (e) { debugPrint('Suggestions pool error: $e'); }
-
-    _initialized = true;
+      final encoded = jsonEncode(_all.map((item) => item.toJson()).toList());
+      await box.put(cacheKey, encoded);
+    } catch (error) {
+      debugPrint('FamilySuggestionsPool cache error: $error');
+    }
   }
 
-  /// Get all suggestions
   List<AISuggestion> get all => List.unmodifiable(_all);
 
-  /// Get suggestions by category
-  List<AISuggestion> byCategory(String category) {
-    return _all.where((s) => s.type == category).toList();
-  }
+  List<AISuggestion> byCategory(String category) =>
+      _all.where((item) => item.type == category).toList();
 
-  /// Get available categories from loaded data
-  Set<String> get categories {
-    return _all.map((s) => s.type).toSet();
-  }
+  Set<String> get categories => _all.map((item) => item.type).toSet();
 
-  /// Pick daily suggestions based on settings
   List<AISuggestion> pickDaily({
     required DateTime date,
     required Set<String> enabledCategories,
@@ -115,21 +178,18 @@ class FamilySuggestionsPool {
     int? childAge,
   }) {
     final available = _all
-        .where((s) => enabledCategories.contains(s.type))
-        .where((s) => !excludedIds.contains(s.id))
-        .where((s) => childAge == null || _matchesAge(s, childAge))
+        .where((item) => enabledCategories.contains(item.type))
+        .where((item) => !excludedIds.contains(item.id))
+        .where((item) => childAge == null || _matchesAge(item, childAge))
         .toList();
 
     if (available.isEmpty) return [];
 
     final seed = date.year * 10000 + date.month * 100 + date.day;
-    final dailyRandom = Random(seed);
-    available.shuffle(dailyRandom);
-
+    available.shuffle(Random(seed));
     return available.take(count).toList();
   }
 
-  /// Pick more suggestions (when user wants to see more)
   List<AISuggestion> pickMore({
     required DateTime date,
     required Set<String> enabledCategories,
@@ -138,43 +198,50 @@ class FamilySuggestionsPool {
     int? childAge,
   }) {
     final available = _all
-        .where((s) => enabledCategories.contains(s.type))
-        .where((s) => !alreadyShownIds.contains(s.id))
-        .where((s) => childAge == null || _matchesAge(s, childAge))
+        .where((item) => enabledCategories.contains(item.type))
+        .where((item) => !alreadyShownIds.contains(item.id))
+        .where((item) => childAge == null || _matchesAge(item, childAge))
         .toList();
 
     if (available.isEmpty) return [];
 
     final seed = date.year * 10000 + date.month * 100 + date.day + 9999;
-    final random = Random(seed);
-    available.shuffle(random);
-
+    available.shuffle(Random(seed));
     return available.take(count).toList();
   }
 
-  /// Search suggestions by keyword
   List<AISuggestion> search(String query) {
-    final q = query.toLowerCase();
-    return _all.where((s) {
-      return s.title.toLowerCase().contains(q) ||
-          s.description.toLowerCase().contains(q) ||
-          s.tags.any((t) => t.toLowerCase().contains(q));
+    final normalized = query.toLowerCase();
+    return _all.where((item) {
+      return item.title.toLowerCase().contains(normalized) ||
+          item.description.toLowerCase().contains(normalized) ||
+          item.tags.any((tag) => tag.toLowerCase().contains(normalized));
     }).toList();
   }
 
-  /// Clear cache to force reload from assets
-  static Future<void> clearCache() async {
+  static Future<void> clearCache({String? localeCode}) async {
     if (!Hive.isBoxOpen(_boxName)) return;
     final box = Hive.box<String>(_boxName);
-    await box.delete(_cacheKey);
+    if (localeCode == null) {
+      await box.clear();
+      return;
+    }
+    await box.delete(_cacheKey(AppLanguage.fromStoredValue(localeCode).code));
   }
 
-  // ── Helpers ───────────────────────────────────────────────────────────────
+  static String _cacheKey(String locale) =>
+      'familyhub_suggestions_${_cacheVersion}_$locale';
 
-  static bool _matchesAge(AISuggestion s, int childAge) {
-    if (s.minAge == null && s.maxAge == null) return true;
-    if (s.minAge != null && childAge < s.minAge!) return false;
-    if (s.maxAge != null && childAge > s.maxAge!) return false;
+  static String _currentLocaleCode() {
+    final stored = HiveService.getSetting('languageCode') ??
+        HiveService.getSetting('language');
+    return AppLanguage.fromStoredValue(stored).code;
+  }
+
+  static bool _matchesAge(AISuggestion suggestion, int childAge) {
+    if (suggestion.minAge == null && suggestion.maxAge == null) return true;
+    if (suggestion.minAge != null && childAge < suggestion.minAge!) return false;
+    if (suggestion.maxAge != null && childAge > suggestion.maxAge!) return false;
     return true;
   }
 
@@ -185,7 +252,7 @@ class FamilySuggestionsPool {
       title: json['title'] as String,
       description: json['description'] as String,
       action: json['action_type'] as String? ?? 'show_detail',
-      difficulty: json['difficulty'] as String? ?? 'Kolay',
+      difficulty: json['difficulty'] as String? ?? '',
       durationMinutes: json['duration_minutes'] as int? ?? 15,
       servings: json['participants'] as int? ?? 4,
       calories: null,
@@ -208,5 +275,3 @@ class FamilySuggestionsPool {
     );
   }
 }
-
-
