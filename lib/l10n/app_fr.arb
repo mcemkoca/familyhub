@@ -1034,6 +1034,7 @@
   "fiReasonShareShopping": "La liste de courses est pleine et il y a plus d'un membre dans la famille.",
   "fiNotifyTop": "Notifier la priorité",
   "fiNotified": "Notification envoyée",
+  "fiQuietHours": "Vous êtes en heures silencieuses — aucune notification envoyée",
   "familyHubAITitle": "FamilyHub AI",
   "familyHubAISubtitle": "Assistant intelligent pour votre famille",
   "fhaSummaryTitle": "Contexte du jour",

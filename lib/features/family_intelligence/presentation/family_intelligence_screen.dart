@@ -5,6 +5,7 @@ import 'package:familyhub/l10n/app_localizations.dart';
 import '../../../presentation/widgets/settings/screen_header.dart';
 import '../../../services/notification_service.dart';
 import '../application/family_intelligence_providers.dart';
+import '../application/quiet_hours.dart';
 import '../domain/family_insight.dart';
 
 /// Aile Zekası — bağımsız bölüm. Kural tabanlı içgörüler (AI gerektirmez),
@@ -59,6 +60,13 @@ class FamilyIntelligenceScreen extends ConsumerWidget {
 
   Future<void> _notifyTop(
       BuildContext context, AppLocalizations t, FamilyInsight top) async {
+    // Sessiz saatlere saygı — bu aralıkta bildirim gönderme.
+    if (QuietHours.enabled && QuietHours.fromSettings().isQuietNow()) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(t.fiQuietHours),
+          behavior: SnackBarBehavior.floating));
+      return;
+    }
     final title = FamilyIntelligenceStrings.resolve(t, top.titleKey, top.args);
     final body = FamilyIntelligenceStrings.resolve(t, top.bodyKey, top.args);
     await NotificationService.showInstantNotification(

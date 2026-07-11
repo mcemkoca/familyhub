@@ -6182,6 +6182,12 @@ abstract class AppLocalizations {
   /// **'Bildirim gönderildi'**
   String get fiNotified;
 
+  /// No description provided for @fiQuietHours.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sessiz saatlerdesin — bildirim gönderilmedi'**
+  String get fiQuietHours;
+
   /// No description provided for @familyHubAITitle.
   ///
   /// In tr, this message translates to:

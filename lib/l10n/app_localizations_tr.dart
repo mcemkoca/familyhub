@@ -3221,6 +3221,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get fiNotified => 'Bildirim gönderildi';
 
   @override
+  String get fiQuietHours => 'Sessiz saatlerdesin — bildirim gönderilmedi';
+
+  @override
   String get familyHubAITitle => 'FamilyHub AI';
 
   @override

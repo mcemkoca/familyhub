@@ -3220,6 +3220,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get fiNotified => 'Notification envoyée';
 
   @override
+  String get fiQuietHours =>
+      'Vous êtes en heures silencieuses — aucune notification envoyée';
+
+  @override
   String get familyHubAITitle => 'FamilyHub AI';
 
   @override
