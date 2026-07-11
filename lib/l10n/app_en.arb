@@ -1776,5 +1776,18 @@
   "bsAutoBackup": "Automatic Backup",
   "bsAutoBackupSub": "Back up automatically every week",
   "pfSaved": "Profile info saved",
-  "pfNewEmail": "New Email"
+  "pfNewEmail": "New Email",
+  "sgWellDone": "You used your senses wonderfully! A new discovery awaits tomorrow.",
+  "sgPlayAgain": "Play Again",
+  "sgFinish": "Finish",
+  "sgTitle": "Sensory Exploration",
+  "sgTodayGame": "Today's game: {game}",
+  "sgRound": "Round {r}/{total}",
+  "sgFindThis": "Find this:",
+  "wtTitle": "Weather",
+  "wtCelsius": "Celsius (°C)",
+  "wtFahrenheit": "Fahrenheit (°F)",
+  "wtFeelsLike": "Feels like",
+  "wtHumidity": "Humidity",
+  "dsAuthSources": "Official and authoritative sources"
 }

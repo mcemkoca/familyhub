@@ -1776,5 +1776,18 @@
   "bsAutoBackup": "Sauvegarde automatique",
   "bsAutoBackupSub": "Sauvegarder automatiquement chaque semaine",
   "pfSaved": "Infos du profil enregistrees",
-  "pfNewEmail": "Nouvel e-mail"
+  "pfNewEmail": "Nouvel e-mail",
+  "sgWellDone": "Tu as super bien utilise tes sens ! Une nouvelle decouverte t'attend demain.",
+  "sgPlayAgain": "Rejouer",
+  "sgFinish": "Terminer",
+  "sgTitle": "Exploration sensorielle",
+  "sgTodayGame": "Jeu du jour : {game}",
+  "sgRound": "Manche {r}/{total}",
+  "sgFindThis": "Trouve ceci :",
+  "wtTitle": "Meteo",
+  "wtCelsius": "Celsius (°C)",
+  "wtFahrenheit": "Fahrenheit (°F)",
+  "wtFeelsLike": "Ressenti",
+  "wtHumidity": "Humidite",
+  "dsAuthSources": "Sources officielles et fiables"
 }

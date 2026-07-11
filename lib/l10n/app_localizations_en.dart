@@ -5599,4 +5599,48 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pfNewEmail => 'New Email';
+
+  @override
+  String get sgWellDone =>
+      'You used your senses wonderfully! A new discovery awaits tomorrow.';
+
+  @override
+  String get sgPlayAgain => 'Play Again';
+
+  @override
+  String get sgFinish => 'Finish';
+
+  @override
+  String get sgTitle => 'Sensory Exploration';
+
+  @override
+  String sgTodayGame(Object game) {
+    return 'Today\'s game: $game';
+  }
+
+  @override
+  String sgRound(Object r, Object total) {
+    return 'Round $r/$total';
+  }
+
+  @override
+  String get sgFindThis => 'Find this:';
+
+  @override
+  String get wtTitle => 'Weather';
+
+  @override
+  String get wtCelsius => 'Celsius (°C)';
+
+  @override
+  String get wtFahrenheit => 'Fahrenheit (°F)';
+
+  @override
+  String get wtFeelsLike => 'Feels like';
+
+  @override
+  String get wtHumidity => 'Humidity';
+
+  @override
+  String get dsAuthSources => 'Official and authoritative sources';
 }

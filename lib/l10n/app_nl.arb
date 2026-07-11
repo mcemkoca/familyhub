@@ -1776,5 +1776,18 @@
   "bsAutoBackup": "Automatische back-up",
   "bsAutoBackupSub": "Elke week automatisch back-uppen",
   "pfSaved": "Profielinfo opgeslagen",
-  "pfNewEmail": "Nieuw e-mailadres"
+  "pfNewEmail": "Nieuw e-mailadres",
+  "sgWellDone": "Je hebt je zintuigen geweldig gebruikt! Morgen wacht een nieuwe ontdekking.",
+  "sgPlayAgain": "Opnieuw spelen",
+  "sgFinish": "Afronden",
+  "sgTitle": "Zintuiglijke verkenning",
+  "sgTodayGame": "Spel van vandaag: {game}",
+  "sgRound": "Ronde {r}/{total}",
+  "sgFindThis": "Vind dit:",
+  "wtTitle": "Weer",
+  "wtCelsius": "Celsius (°C)",
+  "wtFahrenheit": "Fahrenheit (°F)",
+  "wtFeelsLike": "Gevoelstemperatuur",
+  "wtHumidity": "Vochtigheid",
+  "dsAuthSources": "Officiele en gezaghebbende bronnen"
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'child_dev_content.dart' show DevHeader, areaByKey;
 import '../../widgets/external_link.dart';
 
@@ -261,7 +262,7 @@ class DevSourcesScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            DevHeader(title: title, subtitle: 'Resmi ve otoriter kaynaklar'),
+            DevHeader(title: title, subtitle: AppLocalizations.of(context).dsAuthSources),
             Expanded(
               child: ListView(
                 padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),

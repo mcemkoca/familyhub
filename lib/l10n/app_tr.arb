@@ -1815,5 +1815,20 @@
   "bsAutoBackup": "Otomatik Yedekleme",
   "bsAutoBackupSub": "Her hafta otomatik yedekle",
   "pfSaved": "Profil bilgileri kaydedildi",
-  "pfNewEmail": "Yeni E-posta"
+  "pfNewEmail": "Yeni E-posta",
+  "sgWellDone": "Duyularını harika kullandın! Yarın yeni bir keşif seni bekliyor.",
+  "sgPlayAgain": "Tekrar Oyna",
+  "sgFinish": "Bitir",
+  "sgTitle": "Duyusal Keşif",
+  "sgTodayGame": "Bugünün oyunu: {game}",
+  "@sgTodayGame": { "placeholders": { "game": {} } },
+  "sgRound": "Tur {r}/{total}",
+  "@sgRound": { "placeholders": { "r": {}, "total": {} } },
+  "sgFindThis": "Bunu bul:",
+  "wtTitle": "Hava Durumu",
+  "wtCelsius": "Celsius (°C)",
+  "wtFahrenheit": "Fahrenheit (°F)",
+  "wtFeelsLike": "Hissedilen",
+  "wtHumidity": "Nem",
+  "dsAuthSources": "Resmi ve otoriter kaynaklar"
 }

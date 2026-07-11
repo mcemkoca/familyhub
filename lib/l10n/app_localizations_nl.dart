@@ -5603,4 +5603,48 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get pfNewEmail => 'Nieuw e-mailadres';
+
+  @override
+  String get sgWellDone =>
+      'Je hebt je zintuigen geweldig gebruikt! Morgen wacht een nieuwe ontdekking.';
+
+  @override
+  String get sgPlayAgain => 'Opnieuw spelen';
+
+  @override
+  String get sgFinish => 'Afronden';
+
+  @override
+  String get sgTitle => 'Zintuiglijke verkenning';
+
+  @override
+  String sgTodayGame(Object game) {
+    return 'Spel van vandaag: $game';
+  }
+
+  @override
+  String sgRound(Object r, Object total) {
+    return 'Ronde $r/$total';
+  }
+
+  @override
+  String get sgFindThis => 'Vind dit:';
+
+  @override
+  String get wtTitle => 'Weer';
+
+  @override
+  String get wtCelsius => 'Celsius (°C)';
+
+  @override
+  String get wtFahrenheit => 'Fahrenheit (°F)';
+
+  @override
+  String get wtFeelsLike => 'Gevoelstemperatuur';
+
+  @override
+  String get wtHumidity => 'Vochtigheid';
+
+  @override
+  String get dsAuthSources => 'Officiele en gezaghebbende bronnen';
 }

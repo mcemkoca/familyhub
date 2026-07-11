@@ -130,7 +130,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
-        title: 'Hava Durumu',
+        title: AppLocalizations.of(context).wtTitle,
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -369,7 +369,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
                   children: [
                     Expanded(
                       child: _UnitOption(
-                        label: 'Celsius (°C)',
+                        label: AppLocalizations.of(context).wtCelsius,
                         selected: _useCelsius,
                         onTap: () => setState(() => _useCelsius = true),
                       ),
@@ -377,7 +377,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
                     const SizedBox(width: 12),
                     Expanded(
                       child: _UnitOption(
-                        label: 'Fahrenheit (°F)',
+                        label: AppLocalizations.of(context).wtFahrenheit,
                         selected: !_useCelsius,
                         onTap: () => setState(() => _useCelsius = false),
                       ),
@@ -658,12 +658,12 @@ class _WeatherPreviewCard extends StatelessWidget {
               children: [
                 _MetricItem(
                   icon: Icons.thermostat,
-                  label: 'Hissedilen',
+                  label: AppLocalizations.of(context).wtFeelsLike,
                   value: '${weather.feelsLike.round()}$unit',
                 ),
                 _MetricItem(
                   icon: Icons.water_drop,
-                  label: 'Nem',
+                  label: AppLocalizations.of(context).wtHumidity,
                   value: '${weather.humidity}%',
                 ),
                 _MetricItem(

@@ -5618,4 +5618,48 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get pfNewEmail => 'Yeni E-posta';
+
+  @override
+  String get sgWellDone =>
+      'Duyularını harika kullandın! Yarın yeni bir keşif seni bekliyor.';
+
+  @override
+  String get sgPlayAgain => 'Tekrar Oyna';
+
+  @override
+  String get sgFinish => 'Bitir';
+
+  @override
+  String get sgTitle => 'Duyusal Keşif';
+
+  @override
+  String sgTodayGame(Object game) {
+    return 'Bugünün oyunu: $game';
+  }
+
+  @override
+  String sgRound(Object r, Object total) {
+    return 'Tur $r/$total';
+  }
+
+  @override
+  String get sgFindThis => 'Bunu bul:';
+
+  @override
+  String get wtTitle => 'Hava Durumu';
+
+  @override
+  String get wtCelsius => 'Celsius (°C)';
+
+  @override
+  String get wtFahrenheit => 'Fahrenheit (°F)';
+
+  @override
+  String get wtFeelsLike => 'Hissedilen';
+
+  @override
+  String get wtHumidity => 'Nem';
+
+  @override
+  String get dsAuthSources => 'Resmi ve otoriter kaynaklar';
 }

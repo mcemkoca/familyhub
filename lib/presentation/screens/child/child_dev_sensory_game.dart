@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'child_dev_content.dart' show DevHeader;
 
@@ -179,9 +180,9 @@ class _SensoryGameScreenState extends State<SensoryGameScreen> {
                     fontSize: 24,
                     fontWeight: FontWeight.w800)),
             const SizedBox(height: 8),
-            const Text('Duyularını harika kullandın! Yarın yeni bir keşif seni bekliyor.',
+            Text(AppLocalizations.of(context).sgWellDone,
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 14)),
+                style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 14)),
             const SizedBox(height: 20),
             Row(
               children: [
@@ -200,7 +201,7 @@ class _SensoryGameScreenState extends State<SensoryGameScreen> {
                       side: const BorderSide(color: Color(0xFF6366F1)),
                       padding: const EdgeInsets.symmetric(vertical: 14),
                     ),
-                    child: const Text('Tekrar Oyna'),
+                    child: Text(AppLocalizations.of(context).sgPlayAgain),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -214,8 +215,8 @@ class _SensoryGameScreenState extends State<SensoryGameScreen> {
                       backgroundColor: const Color(0xFF6366F1),
                       padding: const EdgeInsets.symmetric(vertical: 14),
                     ),
-                    child: const Text('Bitir',
-                        style: TextStyle(color: Colors.white)),
+                    child: Text(AppLocalizations.of(context).sgFinish,
+                        style: const TextStyle(color: Colors.white)),
                   ),
                 ),
               ],
@@ -234,14 +235,14 @@ class _SensoryGameScreenState extends State<SensoryGameScreen> {
         child: Column(
           children: [
             DevHeader(
-              title: 'Duyusal Keşif',
-              subtitle: 'Bugünün oyunu: ${_theme.$1}',
+              title: AppLocalizations.of(context).sgTitle,
+              subtitle: AppLocalizations.of(context).sgTodayGame(_theme.$1),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
-                  Text('Tur ${_round + 1}/$_totalRounds',
+                  Text(AppLocalizations.of(context).sgRound(_round + 1, _totalRounds),
                       style: const TextStyle(
                           color: Color(0xFF9CA3AF),
                           fontWeight: FontWeight.w600)),
@@ -273,7 +274,7 @@ class _SensoryGameScreenState extends State<SensoryGameScreen> {
               ),
             ),
             const SizedBox(height: 24),
-            Text('Bunu bul:',
+            Text(AppLocalizations.of(context).sgFindThis,
                 style: TextStyle(color: Colors.white.withAlpha(200), fontSize: 15)),
             const SizedBox(height: 12),
             Container(

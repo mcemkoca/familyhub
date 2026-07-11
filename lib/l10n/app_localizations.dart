@@ -10619,6 +10619,84 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Yeni E-posta'**
   String get pfNewEmail;
+
+  /// No description provided for @sgWellDone.
+  ///
+  /// In tr, this message translates to:
+  /// **'Duyularını harika kullandın! Yarın yeni bir keşif seni bekliyor.'**
+  String get sgWellDone;
+
+  /// No description provided for @sgPlayAgain.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tekrar Oyna'**
+  String get sgPlayAgain;
+
+  /// No description provided for @sgFinish.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bitir'**
+  String get sgFinish;
+
+  /// No description provided for @sgTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Duyusal Keşif'**
+  String get sgTitle;
+
+  /// No description provided for @sgTodayGame.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugünün oyunu: {game}'**
+  String sgTodayGame(Object game);
+
+  /// No description provided for @sgRound.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tur {r}/{total}'**
+  String sgRound(Object r, Object total);
+
+  /// No description provided for @sgFindThis.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bunu bul:'**
+  String get sgFindThis;
+
+  /// No description provided for @wtTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hava Durumu'**
+  String get wtTitle;
+
+  /// No description provided for @wtCelsius.
+  ///
+  /// In tr, this message translates to:
+  /// **'Celsius (°C)'**
+  String get wtCelsius;
+
+  /// No description provided for @wtFahrenheit.
+  ///
+  /// In tr, this message translates to:
+  /// **'Fahrenheit (°F)'**
+  String get wtFahrenheit;
+
+  /// No description provided for @wtFeelsLike.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hissedilen'**
+  String get wtFeelsLike;
+
+  /// No description provided for @wtHumidity.
+  ///
+  /// In tr, this message translates to:
+  /// **'Nem'**
+  String get wtHumidity;
+
+  /// No description provided for @dsAuthSources.
+  ///
+  /// In tr, this message translates to:
+  /// **'Resmi ve otoriter kaynaklar'**
+  String get dsAuthSources;
 }
 
 class _AppLocalizationsDelegate
