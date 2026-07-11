@@ -3251,6 +3251,22 @@ class AppLocalizationsNl extends AppLocalizations {
       'Gebruik de betreffende module voor deze actie';
 
   @override
+  String get fhaQuickRemindTasks => 'Herinner me morgen aan taken';
+
+  @override
+  String get fhaRemindTasksNotifTitle => 'Taakherinnering';
+
+  @override
+  String get fhaRemindTasksNotifBody => 'Bekijk je achterstallige taken.';
+
+  @override
+  String get fhaReminderPreview =>
+      'Er wordt een herinnering voor morgen ingesteld:';
+
+  @override
+  String get fhaReminderSet => 'Herinnering ingesteld';
+
+  @override
   String get henuzVeriYok => 'Nog geen gegevens';
 
   @override

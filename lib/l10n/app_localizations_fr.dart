@@ -3263,6 +3263,21 @@ class AppLocalizationsFr extends AppLocalizations {
       'Utilisez le module concerné pour cette action';
 
   @override
+  String get fhaQuickRemindTasks => 'Me rappeler les tâches demain';
+
+  @override
+  String get fhaRemindTasksNotifTitle => 'Rappel de tâches';
+
+  @override
+  String get fhaRemindTasksNotifBody => 'Revoyez vos tâches en retard.';
+
+  @override
+  String get fhaReminderPreview => 'Un rappel sera programmé pour demain :';
+
+  @override
+  String get fhaReminderSet => 'Rappel programmé';
+
+  @override
   String get henuzVeriYok => 'Aucune donnee';
 
   @override

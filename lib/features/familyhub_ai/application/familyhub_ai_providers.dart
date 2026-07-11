@@ -22,6 +22,16 @@ final aiQuickActionsProvider = Provider<List<AIQuickAction>>((ref) {
       action: AIAction(type: AIActionType.openModule, route: AppRoutes.tasks),
     ));
   }
+  // Geciken görev varsa yarına hatırlatma (HIGH-risk → onay gerektirir).
+  if (s.overdueTasks > 0) {
+    actions.add(const AIQuickAction(
+      labelKey: 'fhaQuickRemindTasks',
+      action: AIAction(
+        type: AIActionType.createReminder,
+        payload: {'title': 'FamilyHub', 'days': 1},
+      ),
+    ));
+  }
   if (s.pendingShoppingItems > 0) {
     actions.add(const AIQuickAction(
       labelKey: 'fhaQuickShopping',

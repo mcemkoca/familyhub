@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../presentation/providers/app_providers.dart';
+import '../../../services/notification_service.dart';
 import '../domain/ai_action.dart';
 
 /// Aksiyon yürütme sonucu.
@@ -51,10 +52,25 @@ class AIActionExecutor {
         }
         return AIExecResult.done;
 
+      case AIActionType.createReminder:
+        // Güvenli write: yerel bildirim planla. Geçmiş-tarih guard.
+        final title = (action.payload['title'] as String).trim();
+        final days = (action.payload['days'] as int?) ?? 1;
+        if (days <= 0) return AIExecResult.invalid;
+        final when = DateTime.now().add(Duration(days: days));
+        if (!when.isAfter(DateTime.now())) return AIExecResult.invalid;
+        await NotificationService.scheduleNotification(
+          id: ('fha_reminder_$title').hashCode & 0x7fffffff,
+          title: title,
+          body: (action.payload['body'] as String?) ?? title,
+          scheduledDate: when,
+          payload: 'fha_reminder',
+        );
+        return AIExecResult.done;
+
       // Bu aksiyonlar için henüz güvenli write yolu bağlanmadı —
       // sahte yürütme YAPMA; ilgili modüle yönlendir (kullanıcı kendi yapar).
       case AIActionType.createTask:
-      case AIActionType.createReminder:
       case AIActionType.createCalendarEvent:
         return AIExecResult.unsupported;
     }

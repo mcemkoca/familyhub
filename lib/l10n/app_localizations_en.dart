@@ -3249,6 +3249,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get fhaActionUnsupported => 'Use the related module for this action';
 
   @override
+  String get fhaQuickRemindTasks => 'Remind me about tasks tomorrow';
+
+  @override
+  String get fhaRemindTasksNotifTitle => 'Task reminder';
+
+  @override
+  String get fhaRemindTasksNotifBody => 'Review your overdue tasks.';
+
+  @override
+  String get fhaReminderPreview => 'A reminder will be set for tomorrow:';
+
+  @override
+  String get fhaReminderSet => 'Reminder set';
+
+  @override
   String get henuzVeriYok => 'No data yet';
 
   @override

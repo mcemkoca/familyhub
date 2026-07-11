@@ -3262,6 +3262,21 @@ class AppLocalizationsTr extends AppLocalizations {
   String get fhaActionUnsupported => 'Bu işlem için ilgili modülü kullan';
 
   @override
+  String get fhaQuickRemindTasks => 'Yarın görevleri hatırlat';
+
+  @override
+  String get fhaRemindTasksNotifTitle => 'Görev hatırlatması';
+
+  @override
+  String get fhaRemindTasksNotifBody => 'Geciken görevlerini gözden geçir.';
+
+  @override
+  String get fhaReminderPreview => 'Yarın için bir hatırlatma kurulacak:';
+
+  @override
+  String get fhaReminderSet => 'Hatırlatma kuruldu';
+
+  @override
   String get henuzVeriYok => 'Henüz veri yok';
 
   @override

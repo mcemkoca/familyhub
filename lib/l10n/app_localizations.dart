@@ -6266,6 +6266,36 @@ abstract class AppLocalizations {
   /// **'Bu işlem için ilgili modülü kullan'**
   String get fhaActionUnsupported;
 
+  /// No description provided for @fhaQuickRemindTasks.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yarın görevleri hatırlat'**
+  String get fhaQuickRemindTasks;
+
+  /// No description provided for @fhaRemindTasksNotifTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Görev hatırlatması'**
+  String get fhaRemindTasksNotifTitle;
+
+  /// No description provided for @fhaRemindTasksNotifBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'Geciken görevlerini gözden geçir.'**
+  String get fhaRemindTasksNotifBody;
+
+  /// No description provided for @fhaReminderPreview.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yarın için bir hatırlatma kurulacak:'**
+  String get fhaReminderPreview;
+
+  /// No description provided for @fhaReminderSet.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hatırlatma kuruldu'**
+  String get fhaReminderSet;
+
   /// No description provided for @henuzVeriYok.
   ///
   /// In tr, this message translates to:

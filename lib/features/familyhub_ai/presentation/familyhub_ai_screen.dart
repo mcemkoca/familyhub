@@ -16,6 +16,7 @@ class FamilyHubAIScreen extends ConsumerWidget {
 
   String _label(AppLocalizations t, String key) => switch (key) {
         'fhaQuickReviewTasks' => t.fhaQuickReviewTasks,
+        'fhaQuickRemindTasks' => t.fhaQuickRemindTasks,
         'fhaQuickShopping' => t.fhaQuickShopping,
         'fhaQuickPlanDay' => t.fhaQuickPlanDay,
         'fhaQuickBudget' => t.fhaQuickBudget,
@@ -101,7 +102,16 @@ class FamilyHubAIScreen extends ConsumerWidget {
   /// Aksiyonu ele alır: onay gerekiyorsa önce preview dialogu gösterir,
   /// sonra güvenli executor ile yürütür. AI doğrudan kritik işlem yapamaz.
   Future<void> _onAction(BuildContext context, WidgetRef ref,
-      AppLocalizations t, AIAction a) async {
+      AppLocalizations t, AIAction rawAction) async {
+    // createReminder metnini aktif dile göre enjekte et (provider'da context yok).
+    final a = rawAction.type == AIActionType.createReminder
+        ? AIAction(type: AIActionType.createReminder, payload: {
+            ...rawAction.payload,
+            'title': t.fhaRemindTasksNotifTitle,
+            'body': t.fhaRemindTasksNotifBody,
+          })
+        : rawAction;
+
     if (!AIActionPolicy.isValid(a)) {
       _snack(context, t.fhaActionFailed);
       return;
@@ -121,6 +131,8 @@ class FamilyHubAIScreen extends ConsumerWidget {
         if (a.type == AIActionType.addShoppingItems) {
           final n = (a.payload['items'] as List).length;
           _snack(context, t.fhaAddedItems(n));
+        } else if (a.type == AIActionType.createReminder) {
+          _snack(context, t.fhaReminderSet);
         }
         break;
       case AIExecResult.invalid:
@@ -150,6 +162,20 @@ class FamilyHubAIScreen extends ConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (a.type == AIActionType.createReminder) ...[
+              Text(t.fhaReminderPreview,
+                  style: const TextStyle(color: Color(0xFFD1D5DB))),
+              const SizedBox(height: 8),
+              Row(children: [
+                const Icon(Icons.notifications_active,
+                    size: 14, color: Color(0xFFF59E0B)),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text('${a.payload['title']}',
+                      style: const TextStyle(color: Colors.white)),
+                ),
+              ]),
+            ],
             if (items.isNotEmpty) ...[
               Text(t.fhaPreviewAddItems,
                   style: const TextStyle(color: Color(0xFFD1D5DB))),
