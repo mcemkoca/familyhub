@@ -24,17 +24,23 @@ class AIGuardrails {
 
   /// AI'ya gönderilecek bağlamı minimize eder — yalnızca sayısal özet,
   /// hassas ham veri (isim/sağlık/finans detayı) GÖNDERİLMEZ.
+  ///
+  /// [allowTasks]/[allowCalendar]/[allowShopping] gizlilik tercihlerinden gelir;
+  /// kapalıysa ilgili sayı context'e EKLENMEZ (privacy → AI context builder).
   static Map<String, Object?> minimizedContext({
     required int pendingTasks,
     required int todayEvents,
     required int pendingShopping,
     required int memberCount,
+    bool allowTasks = true,
+    bool allowCalendar = true,
+    bool allowShopping = true,
   }) {
     return {
-      'pendingTasks': pendingTasks,
-      'todayEvents': todayEvents,
-      'pendingShopping': pendingShopping,
-      'memberCount': memberCount,
+      if (allowTasks) 'pendingTasks': pendingTasks,
+      if (allowCalendar) 'todayEvents': todayEvents,
+      if (allowShopping) 'pendingShopping': pendingShopping,
+      'memberCount': memberCount, // aile geneli — hassas değil
       // İsim, sağlık, finans detayı, konum KASITLI olarak yok.
     };
   }
