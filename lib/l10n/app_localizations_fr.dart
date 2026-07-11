@@ -3190,6 +3190,30 @@ class AppLocalizationsFr extends AppLocalizations {
       'Aucune tâche en retard, tâche en attente ou article de courses trouvé.';
 
   @override
+  String get fiInsightBusyDayTitle => 'Une journée chargée';
+
+  @override
+  String fiInsightBusyDayBody(Object events, Object tasks) {
+    return 'Aujourd\'hui vous avez $events événements et $tasks tâches. Pensez à partager les tâches.';
+  }
+
+  @override
+  String get fiReasonBusyDay =>
+      'Le nombre d\'événements du jour et les tâches en attente sont tous deux élevés.';
+
+  @override
+  String get fiInsightShareShoppingTitle => 'Partager les courses';
+
+  @override
+  String fiInsightShareShoppingBody(Object count) {
+    return 'Vous avez $count articles sur votre liste. Vous pouvez la partager avec un membre de la famille.';
+  }
+
+  @override
+  String get fiReasonShareShopping =>
+      'La liste de courses est pleine et il y a plus d\'un membre dans la famille.';
+
+  @override
   String get fiNotifyTop => 'Notifier la priorité';
 
   @override

@@ -105,6 +105,36 @@ class FamilyIntelligenceEngine {
       ));
     }
 
+    // ── Çapraz modül içgörüleri (iki modülün sinyalini birleştirir) ──
+    // Takvim × Görevler: yoğun gün + bekleyen görev → dağıtım öner.
+    if (s.todayEvents >= 2 && s.pendingTasks >= 3) {
+      out.add(FamilyInsight(
+        id: 'cross_busy_day',
+        type: InsightType.planning,
+        module: InsightModule.calendar,
+        priority: InsightPriority.high,
+        titleKey: 'fiInsightBusyDayTitle',
+        bodyKey: 'fiInsightBusyDayBody',
+        args: {'events': '${s.todayEvents}', 'tasks': '${s.pendingTasks}'},
+        reasonKey: 'fiReasonBusyDay',
+        actionRoute: AppRoutes.tasks,
+      ));
+    }
+    // Alışveriş × Aile: liste dolu + birden fazla üye → paylaşım öner.
+    if (s.pendingShoppingItems >= 3 && s.memberCount >= 2) {
+      out.add(FamilyInsight(
+        id: 'cross_shopping_share',
+        type: InsightType.recommendation,
+        module: InsightModule.shopping,
+        priority: InsightPriority.normal,
+        titleKey: 'fiInsightShareShoppingTitle',
+        bodyKey: 'fiInsightShareShoppingBody',
+        args: {'count': '${s.pendingShoppingItems}'},
+        reasonKey: 'fiReasonShareShopping',
+        actionRoute: AppRoutes.shopping,
+      ));
+    }
+
     // Her şey temizse → başarı (pozitif içgörü)
     if (s.overdueTasks == 0 &&
         s.pendingTasks == 0 &&

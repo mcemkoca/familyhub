@@ -68,6 +68,37 @@ void main() {
       }
     });
 
+    test('çapraz modül: yoğun gün (takvim×görev) → cross_busy_day', () {
+      final r = engine
+          .generate(const FamilySnapshot(todayEvents: 2, pendingTasks: 3));
+      final ins = r.firstWhere((i) => i.id == 'cross_busy_day');
+      expect(ins.priority, InsightPriority.high);
+      expect(ins.args['events'], '2');
+      expect(ins.args['tasks'], '3');
+      // Eşik altında üretilmez
+      expect(
+          engine
+              .generate(const FamilySnapshot(todayEvents: 1, pendingTasks: 3))
+              .any((i) => i.id == 'cross_busy_day'),
+          false);
+    });
+
+    test('çapraz modül: alışveriş paylaşımı (alışveriş×aile) eşiği', () {
+      expect(
+          engine
+              .generate(const FamilySnapshot(
+                  pendingShoppingItems: 3, memberCount: 2))
+              .any((i) => i.id == 'cross_shopping_share'),
+          true);
+      // Tek üyeyle üretilmez
+      expect(
+          engine
+              .generate(const FamilySnapshot(
+                  pendingShoppingItems: 3, memberCount: 1))
+              .any((i) => i.id == 'cross_shopping_share'),
+          false);
+    });
+
     test('deduplicate — aynı id iki kez gelmez', () {
       final r = engine.generate(const FamilySnapshot(overdueTasks: 2));
       final ids = r.map((i) => i.id).toList();

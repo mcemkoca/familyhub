@@ -3191,6 +3191,30 @@ class AppLocalizationsTr extends AppLocalizations {
       'Geciken görev, bekleyen görev ve alışveriş öğesi bulunmadı.';
 
   @override
+  String get fiInsightBusyDayTitle => 'Yoğun bir gün';
+
+  @override
+  String fiInsightBusyDayBody(Object events, Object tasks) {
+    return 'Bugün $events etkinlik ve $tasks görev var. Görevleri paylaşmayı düşün.';
+  }
+
+  @override
+  String get fiReasonBusyDay =>
+      'Bugünkü etkinlik sayısı ve bekleyen görevler birlikte yüksek.';
+
+  @override
+  String get fiInsightShareShoppingTitle => 'Alışverişi paylaş';
+
+  @override
+  String fiInsightShareShoppingBody(Object count) {
+    return 'Listende $count ürün var. Bir aile üyesiyle paylaşabilirsin.';
+  }
+
+  @override
+  String get fiReasonShareShopping =>
+      'Alışveriş listesi dolu ve ailede birden fazla üye var.';
+
+  @override
   String get fiNotifyTop => 'Öne çıkanı bildir';
 
   @override

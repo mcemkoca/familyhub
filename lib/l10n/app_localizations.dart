@@ -6134,6 +6134,42 @@ abstract class AppLocalizations {
   /// **'Geciken görev, bekleyen görev ve alışveriş öğesi bulunmadı.'**
   String get fiReasonAllClear;
 
+  /// No description provided for @fiInsightBusyDayTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yoğun bir gün'**
+  String get fiInsightBusyDayTitle;
+
+  /// No description provided for @fiInsightBusyDayBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugün {events} etkinlik ve {tasks} görev var. Görevleri paylaşmayı düşün.'**
+  String fiInsightBusyDayBody(Object events, Object tasks);
+
+  /// No description provided for @fiReasonBusyDay.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugünkü etkinlik sayısı ve bekleyen görevler birlikte yüksek.'**
+  String get fiReasonBusyDay;
+
+  /// No description provided for @fiInsightShareShoppingTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alışverişi paylaş'**
+  String get fiInsightShareShoppingTitle;
+
+  /// No description provided for @fiInsightShareShoppingBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'Listende {count} ürün var. Bir aile üyesiyle paylaşabilirsin.'**
+  String fiInsightShareShoppingBody(Object count);
+
+  /// No description provided for @fiReasonShareShopping.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alışveriş listesi dolu ve ailede birden fazla üye var.'**
+  String get fiReasonShareShopping;
+
   /// No description provided for @fiNotifyTop.
   ///
   /// In tr, this message translates to:

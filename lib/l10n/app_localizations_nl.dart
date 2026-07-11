@@ -3178,6 +3178,30 @@ class AppLocalizationsNl extends AppLocalizations {
       'Geen achterstallige taken, openstaande taken of boodschappen gevonden.';
 
   @override
+  String get fiInsightBusyDayTitle => 'Een drukke dag';
+
+  @override
+  String fiInsightBusyDayBody(Object events, Object tasks) {
+    return 'Vandaag heb je $events evenementen en $tasks taken. Overweeg taken te delen.';
+  }
+
+  @override
+  String get fiReasonBusyDay =>
+      'Het aantal evenementen van vandaag en openstaande taken zijn beide hoog.';
+
+  @override
+  String get fiInsightShareShoppingTitle => 'Boodschappen delen';
+
+  @override
+  String fiInsightShareShoppingBody(Object count) {
+    return 'Je hebt $count items op je lijst. Je kunt die met een gezinslid delen.';
+  }
+
+  @override
+  String get fiReasonShareShopping =>
+      'De boodschappenlijst is vol en er is meer dan één gezinslid.';
+
+  @override
   String get fiNotifyTop => 'Topprioriteit melden';
 
   @override

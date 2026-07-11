@@ -3177,6 +3177,30 @@ class AppLocalizationsEn extends AppLocalizations {
       'No overdue tasks, pending tasks or shopping items were found.';
 
   @override
+  String get fiInsightBusyDayTitle => 'A busy day';
+
+  @override
+  String fiInsightBusyDayBody(Object events, Object tasks) {
+    return 'Today you have $events events and $tasks tasks. Consider sharing tasks.';
+  }
+
+  @override
+  String get fiReasonBusyDay =>
+      'Today\'s event count and pending tasks are both high.';
+
+  @override
+  String get fiInsightShareShoppingTitle => 'Share shopping';
+
+  @override
+  String fiInsightShareShoppingBody(Object count) {
+    return 'You have $count items on your list. You can share it with a family member.';
+  }
+
+  @override
+  String get fiReasonShareShopping =>
+      'The shopping list is full and there is more than one family member.';
+
+  @override
   String get fiNotifyTop => 'Notify top priority';
 
   @override

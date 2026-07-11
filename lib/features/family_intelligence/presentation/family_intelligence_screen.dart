@@ -258,6 +258,14 @@ class FamilyIntelligenceStrings {
       'fiInsightAllClearTitle' => t.fiInsightAllClearTitle,
       'fiInsightAllClearBody' => t.fiInsightAllClearBody,
       'fiReasonAllClear' => t.fiReasonAllClear,
+      'fiInsightBusyDayTitle' => t.fiInsightBusyDayTitle,
+      'fiInsightBusyDayBody' =>
+        t.fiInsightBusyDayBody(args['events'] ?? '', args['tasks'] ?? ''),
+      'fiReasonBusyDay' => t.fiReasonBusyDay,
+      'fiInsightShareShoppingTitle' => t.fiInsightShareShoppingTitle,
+      'fiInsightShareShoppingBody' =>
+        t.fiInsightShareShoppingBody(args['count'] ?? ''),
+      'fiReasonShareShopping' => t.fiReasonShareShopping,
       _ => key,
     };
   }
