@@ -4918,4 +4918,48 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get subAddSubscription => 'Abonelik Ekle';
+
+  @override
+  String srError(Object msg) {
+    return 'Hata: $msg';
+  }
+
+  @override
+  String get srBasicInfo => 'Temel Bilgiler';
+
+  @override
+  String get srLatitude => 'Enlem';
+
+  @override
+  String get srLongitude => 'Boylam';
+
+  @override
+  String srGeofenceRadius(Object m) {
+    return 'Geofence Yarıçapı: ${m}m';
+  }
+
+  @override
+  String srProximity(Object m) {
+    return 'Yaklaşma Mesafesi: ${m}m';
+  }
+
+  @override
+  String get srTime => 'Saat';
+
+  @override
+  String get srAnd => 'AND';
+
+  @override
+  String get srOr => 'OR';
+
+  @override
+  String srInterruptibility(Object pct) {
+    return 'Rahatsız Edilebilirlik: $pct%';
+  }
+
+  @override
+  String get srTone => 'Ton';
+
+  @override
+  String get srSmartChoice => 'Akıllı seçim (AI önerir)';
 }

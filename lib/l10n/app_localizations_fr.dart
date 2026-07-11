@@ -4919,4 +4919,48 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get subAddSubscription => 'Ajouter un abonnement';
+
+  @override
+  String srError(Object msg) {
+    return 'Erreur : $msg';
+  }
+
+  @override
+  String get srBasicInfo => 'Informations de base';
+
+  @override
+  String get srLatitude => 'Latitude';
+
+  @override
+  String get srLongitude => 'Longitude';
+
+  @override
+  String srGeofenceRadius(Object m) {
+    return 'Rayon geofence : ${m}m';
+  }
+
+  @override
+  String srProximity(Object m) {
+    return 'Distance de proximite : ${m}m';
+  }
+
+  @override
+  String get srTime => 'Heure';
+
+  @override
+  String get srAnd => 'ET';
+
+  @override
+  String get srOr => 'OU';
+
+  @override
+  String srInterruptibility(Object pct) {
+    return 'Interruptibilite : $pct%';
+  }
+
+  @override
+  String get srTone => 'Ton';
+
+  @override
+  String get srSmartChoice => 'Choix intelligent (suggere par l\'IA)';
 }

@@ -200,7 +200,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Hata: $e')));
+        ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).srError('$e'))));
       }
     }
   }
@@ -295,7 +295,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Temel Bilgiler', style: _sectionStyle(textColor)),
+          Text(AppLocalizations.of(context).srBasicInfo, style: _sectionStyle(textColor)),
           const SizedBox(height: 12),
           TextField(
             controller: _titleController,
@@ -363,7 +363,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
                       Expanded(
                         child: TextField(
                           controller: _latController,
-                          decoration: const InputDecoration(labelText: 'Enlem'),
+                          decoration: InputDecoration(labelText: AppLocalizations.of(context).srLatitude),
                           keyboardType: TextInputType.number,
                         ),
                       ),
@@ -371,8 +371,8 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
                       Expanded(
                         child: TextField(
                           controller: _lngController,
-                          decoration: const InputDecoration(
-                            labelText: 'Boylam',
+                          decoration: InputDecoration(
+                            labelText: AppLocalizations.of(context).srLongitude,
                           ),
                           keyboardType: TextInputType.number,
                         ),
@@ -380,7 +380,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
                     ],
                   ),
                   const SizedBox(height: 8),
-                  Text('Geofence Yarıçapı: ${_radius.toInt()}m'),
+                  Text(AppLocalizations.of(context).srGeofenceRadius(_radius.toInt())),
                   Slider(
                     value: _radius,
                     min: 50,
@@ -388,7 +388,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
                     divisions: 19,
                     onChanged: (v) => setState(() => _radius = v),
                   ),
-                  Text('Yaklaşma Mesafesi: ${_proximity.toInt()}m'),
+                  Text(AppLocalizations.of(context).srProximity(_proximity.toInt())),
                   Slider(
                     value: _proximity,
                     min: 100,
@@ -429,7 +429,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
                   const SizedBox(height: 12),
                   if (_timeType == TimeTriggerType.absolute)
                     ListTile(
-                      title: const Text('Saat'),
+                      title: Text(AppLocalizations.of(context).srTime),
                       trailing: Text(_absoluteTime.format(context)),
                       onTap: () => _pickTime(
                         _absoluteTime,
@@ -503,14 +503,14 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
                   Text(AppLocalizations.of(context).bilesikMantik),
                   const SizedBox(height: 8),
                   SegmentedButton<CompositeLogic>(
-                    segments: const [
+                    segments: [
                       ButtonSegment(
                         value: CompositeLogic.and_,
-                        label: Text('AND'),
+                        label: Text(AppLocalizations.of(context).srAnd),
                       ),
                       ButtonSegment(
                         value: CompositeLogic.or_,
-                        label: Text('OR'),
+                        label: Text(AppLocalizations.of(context).srOr),
                       ),
                     ],
                     selected: {_compositeLogic},
@@ -550,7 +550,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Rahatsız Edilebilirlik: ${_interruptibility.toInt()}%'),
+                Text(AppLocalizations.of(context).srInterruptibility(_interruptibility.toInt())),
                 Slider(
                   value: _interruptibility,
                   min: 0,
@@ -574,7 +574,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
         children: [
           Text(AppLocalizations.of(context).kisisellestirme, style: _sectionStyle(textColor)),
           const SizedBox(height: 12),
-          const Text('Ton'),
+          Text(AppLocalizations.of(context).srTone),
           Wrap(
             spacing: 8,
             children: ReminderTone.values.map((tone) {
@@ -606,7 +606,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
           Text(AppLocalizations.of(context).hedefKisiler, style: _sectionStyle(textColor)),
           const SizedBox(height: 12),
           RadioListTile<TargetAudienceType>(
-            title: const Text('Akıllı seçim (AI önerir)'),
+            title: Text(AppLocalizations.of(context).srSmartChoice),
             subtitle: Text(AppLocalizations.of(context).enYakinMusaitUygunYetkinlik),
             value: TargetAudienceType.smartSelect,
             groupValue: _targetType,

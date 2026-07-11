@@ -1563,5 +1563,17 @@
   "subCommonExpenses": "Depenses courantes",
   "subServiceName": "Nom du service",
   "subAmount": "Montant ({cur})",
-  "subAddSubscription": "Ajouter un abonnement"
+  "subAddSubscription": "Ajouter un abonnement",
+  "srError": "Erreur : {msg}",
+  "srBasicInfo": "Informations de base",
+  "srLatitude": "Latitude",
+  "srLongitude": "Longitude",
+  "srGeofenceRadius": "Rayon geofence : {m}m",
+  "srProximity": "Distance de proximite : {m}m",
+  "srTime": "Heure",
+  "srAnd": "ET",
+  "srOr": "OU",
+  "srInterruptibility": "Interruptibilite : {pct}%",
+  "srTone": "Ton",
+  "srSmartChoice": "Choix intelligent (suggere par l'IA)"
 }

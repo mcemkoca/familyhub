@@ -4899,4 +4899,48 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get subAddSubscription => 'Abonnement toevoegen';
+
+  @override
+  String srError(Object msg) {
+    return 'Fout: $msg';
+  }
+
+  @override
+  String get srBasicInfo => 'Basisinformatie';
+
+  @override
+  String get srLatitude => 'Breedtegraad';
+
+  @override
+  String get srLongitude => 'Lengtegraad';
+
+  @override
+  String srGeofenceRadius(Object m) {
+    return 'Geofence-straal: ${m}m';
+  }
+
+  @override
+  String srProximity(Object m) {
+    return 'Nabijheidsafstand: ${m}m';
+  }
+
+  @override
+  String get srTime => 'Tijd';
+
+  @override
+  String get srAnd => 'EN';
+
+  @override
+  String get srOr => 'OF';
+
+  @override
+  String srInterruptibility(Object pct) {
+    return 'Onderbreekbaarheid: $pct%';
+  }
+
+  @override
+  String get srTone => 'Toon';
+
+  @override
+  String get srSmartChoice => 'Slimme keuze (AI stelt voor)';
 }

@@ -1563,5 +1563,17 @@
   "subCommonExpenses": "Common Expenses",
   "subServiceName": "Service name",
   "subAmount": "Amount ({cur})",
-  "subAddSubscription": "Add Subscription"
+  "subAddSubscription": "Add Subscription",
+  "srError": "Error: {msg}",
+  "srBasicInfo": "Basic Information",
+  "srLatitude": "Latitude",
+  "srLongitude": "Longitude",
+  "srGeofenceRadius": "Geofence radius: {m}m",
+  "srProximity": "Proximity distance: {m}m",
+  "srTime": "Time",
+  "srAnd": "AND",
+  "srOr": "OR",
+  "srInterruptibility": "Interruptibility: {pct}%",
+  "srTone": "Tone",
+  "srSmartChoice": "Smart choice (AI suggests)"
 }

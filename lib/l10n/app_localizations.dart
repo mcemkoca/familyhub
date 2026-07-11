@@ -9341,6 +9341,78 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Abonelik Ekle'**
   String get subAddSubscription;
+
+  /// No description provided for @srError.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hata: {msg}'**
+  String srError(Object msg);
+
+  /// No description provided for @srBasicInfo.
+  ///
+  /// In tr, this message translates to:
+  /// **'Temel Bilgiler'**
+  String get srBasicInfo;
+
+  /// No description provided for @srLatitude.
+  ///
+  /// In tr, this message translates to:
+  /// **'Enlem'**
+  String get srLatitude;
+
+  /// No description provided for @srLongitude.
+  ///
+  /// In tr, this message translates to:
+  /// **'Boylam'**
+  String get srLongitude;
+
+  /// No description provided for @srGeofenceRadius.
+  ///
+  /// In tr, this message translates to:
+  /// **'Geofence Yarıçapı: {m}m'**
+  String srGeofenceRadius(Object m);
+
+  /// No description provided for @srProximity.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yaklaşma Mesafesi: {m}m'**
+  String srProximity(Object m);
+
+  /// No description provided for @srTime.
+  ///
+  /// In tr, this message translates to:
+  /// **'Saat'**
+  String get srTime;
+
+  /// No description provided for @srAnd.
+  ///
+  /// In tr, this message translates to:
+  /// **'AND'**
+  String get srAnd;
+
+  /// No description provided for @srOr.
+  ///
+  /// In tr, this message translates to:
+  /// **'OR'**
+  String get srOr;
+
+  /// No description provided for @srInterruptibility.
+  ///
+  /// In tr, this message translates to:
+  /// **'Rahatsız Edilebilirlik: {pct}%'**
+  String srInterruptibility(Object pct);
+
+  /// No description provided for @srTone.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ton'**
+  String get srTone;
+
+  /// No description provided for @srSmartChoice.
+  ///
+  /// In tr, this message translates to:
+  /// **'Akıllı seçim (AI önerir)'**
+  String get srSmartChoice;
 }
 
 class _AppLocalizationsDelegate

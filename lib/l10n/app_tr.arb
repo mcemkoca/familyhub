@@ -1573,5 +1573,21 @@
   "subServiceName": "Servis adı",
   "subAmount": "Tutar ({cur})",
   "@subAmount": { "placeholders": { "cur": {} } },
-  "subAddSubscription": "Abonelik Ekle"
+  "subAddSubscription": "Abonelik Ekle",
+  "srError": "Hata: {msg}",
+  "@srError": { "placeholders": { "msg": {} } },
+  "srBasicInfo": "Temel Bilgiler",
+  "srLatitude": "Enlem",
+  "srLongitude": "Boylam",
+  "srGeofenceRadius": "Geofence Yarıçapı: {m}m",
+  "@srGeofenceRadius": { "placeholders": { "m": {} } },
+  "srProximity": "Yaklaşma Mesafesi: {m}m",
+  "@srProximity": { "placeholders": { "m": {} } },
+  "srTime": "Saat",
+  "srAnd": "AND",
+  "srOr": "OR",
+  "srInterruptibility": "Rahatsız Edilebilirlik: {pct}%",
+  "@srInterruptibility": { "placeholders": { "pct": {} } },
+  "srTone": "Ton",
+  "srSmartChoice": "Akıllı seçim (AI önerir)"
 }

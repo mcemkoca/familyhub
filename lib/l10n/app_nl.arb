@@ -1563,5 +1563,17 @@
   "subCommonExpenses": "Veelvoorkomende uitgaven",
   "subServiceName": "Servicenaam",
   "subAmount": "Bedrag ({cur})",
-  "subAddSubscription": "Abonnement toevoegen"
+  "subAddSubscription": "Abonnement toevoegen",
+  "srError": "Fout: {msg}",
+  "srBasicInfo": "Basisinformatie",
+  "srLatitude": "Breedtegraad",
+  "srLongitude": "Lengtegraad",
+  "srGeofenceRadius": "Geofence-straal: {m}m",
+  "srProximity": "Nabijheidsafstand: {m}m",
+  "srTime": "Tijd",
+  "srAnd": "EN",
+  "srOr": "OF",
+  "srInterruptibility": "Onderbreekbaarheid: {pct}%",
+  "srTone": "Toon",
+  "srSmartChoice": "Slimme keuze (AI stelt voor)"
 }
