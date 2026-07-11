@@ -1550,5 +1550,18 @@
   "chatPoll": "Poll",
   "chatGif": "GIF",
   "chatVideo": "Video",
-  "chatFile": "Bestand"
+  "chatFile": "Bestand",
+  "subHomeExpenses": "Huishoudkosten",
+  "subHomeExpensesSub": "Huur, rekeningen en abonnementen",
+  "subMonthly": "Maandelijks",
+  "subYearly": "Jaarlijks",
+  "subActive": "Actief",
+  "subCountryTemplate": "Landsjabloon",
+  "subNoSubscription": "Geen abonnementen gevonden\nTik op de +-knop",
+  "subAddExpense": "Uitgave toevoegen",
+  "subAddCountryTemplate": "Landsjabloon voor uitgaven toevoegen",
+  "subCommonExpenses": "Veelvoorkomende uitgaven",
+  "subServiceName": "Servicenaam",
+  "subAmount": "Bedrag ({cur})",
+  "subAddSubscription": "Abonnement toevoegen"
 }

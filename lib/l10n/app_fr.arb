@@ -1550,5 +1550,18 @@
   "chatPoll": "Sondage",
   "chatGif": "GIF",
   "chatVideo": "Video",
-  "chatFile": "Fichier"
+  "chatFile": "Fichier",
+  "subHomeExpenses": "Depenses du foyer",
+  "subHomeExpensesSub": "Loyer, factures et abonnements",
+  "subMonthly": "Mensuel",
+  "subYearly": "Annuel",
+  "subActive": "Actif",
+  "subCountryTemplate": "Modele par pays",
+  "subNoSubscription": "Aucun abonnement trouve\nAppuyez sur le bouton +",
+  "subAddExpense": "Ajouter une depense",
+  "subAddCountryTemplate": "Ajouter un modele de depenses par pays",
+  "subCommonExpenses": "Depenses courantes",
+  "subServiceName": "Nom du service",
+  "subAmount": "Montant ({cur})",
+  "subAddSubscription": "Ajouter un abonnement"
 }

@@ -9263,6 +9263,84 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Dosya'**
   String get chatFile;
+
+  /// No description provided for @subHomeExpenses.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ev Giderleri'**
+  String get subHomeExpenses;
+
+  /// No description provided for @subHomeExpensesSub.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kira, faturalar ve abonelikler'**
+  String get subHomeExpensesSub;
+
+  /// No description provided for @subMonthly.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aylık'**
+  String get subMonthly;
+
+  /// No description provided for @subYearly.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yıllık'**
+  String get subYearly;
+
+  /// No description provided for @subActive.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aktif'**
+  String get subActive;
+
+  /// No description provided for @subCountryTemplate.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ülke şablonu'**
+  String get subCountryTemplate;
+
+  /// No description provided for @subNoSubscription.
+  ///
+  /// In tr, this message translates to:
+  /// **'Abonelik bulunamadı\n+ butonuna dokun'**
+  String get subNoSubscription;
+
+  /// No description provided for @subAddExpense.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gider Ekle'**
+  String get subAddExpense;
+
+  /// No description provided for @subAddCountryTemplate.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ülke gider şablonu ekle'**
+  String get subAddCountryTemplate;
+
+  /// No description provided for @subCommonExpenses.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sık Kullanılan Giderler'**
+  String get subCommonExpenses;
+
+  /// No description provided for @subServiceName.
+  ///
+  /// In tr, this message translates to:
+  /// **'Servis adı'**
+  String get subServiceName;
+
+  /// No description provided for @subAmount.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tutar ({cur})'**
+  String subAmount(Object cur);
+
+  /// No description provided for @subAddSubscription.
+  ///
+  /// In tr, this message translates to:
+  /// **'Abonelik Ekle'**
+  String get subAddSubscription;
 }
 
 class _AppLocalizationsDelegate

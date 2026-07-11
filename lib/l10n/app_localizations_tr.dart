@@ -4877,4 +4877,45 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get chatFile => 'Dosya';
+
+  @override
+  String get subHomeExpenses => 'Ev Giderleri';
+
+  @override
+  String get subHomeExpensesSub => 'Kira, faturalar ve abonelikler';
+
+  @override
+  String get subMonthly => 'Aylık';
+
+  @override
+  String get subYearly => 'Yıllık';
+
+  @override
+  String get subActive => 'Aktif';
+
+  @override
+  String get subCountryTemplate => 'Ülke şablonu';
+
+  @override
+  String get subNoSubscription => 'Abonelik bulunamadı\n+ butonuna dokun';
+
+  @override
+  String get subAddExpense => 'Gider Ekle';
+
+  @override
+  String get subAddCountryTemplate => 'Ülke gider şablonu ekle';
+
+  @override
+  String get subCommonExpenses => 'Sık Kullanılan Giderler';
+
+  @override
+  String get subServiceName => 'Servis adı';
+
+  @override
+  String subAmount(Object cur) {
+    return 'Tutar ($cur)';
+  }
+
+  @override
+  String get subAddSubscription => 'Abonelik Ekle';
 }

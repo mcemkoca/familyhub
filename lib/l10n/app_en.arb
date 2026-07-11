@@ -1550,5 +1550,18 @@
   "chatPoll": "Poll",
   "chatGif": "GIF",
   "chatVideo": "Video",
-  "chatFile": "File"
+  "chatFile": "File",
+  "subHomeExpenses": "Home Expenses",
+  "subHomeExpensesSub": "Rent, bills and subscriptions",
+  "subMonthly": "Monthly",
+  "subYearly": "Yearly",
+  "subActive": "Active",
+  "subCountryTemplate": "Country template",
+  "subNoSubscription": "No subscriptions found\nTap the + button",
+  "subAddExpense": "Add Expense",
+  "subAddCountryTemplate": "Add country expense template",
+  "subCommonExpenses": "Common Expenses",
+  "subServiceName": "Service name",
+  "subAmount": "Amount ({cur})",
+  "subAddSubscription": "Add Subscription"
 }

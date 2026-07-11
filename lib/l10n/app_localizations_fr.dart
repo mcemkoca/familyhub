@@ -4877,4 +4877,46 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatFile => 'Fichier';
+
+  @override
+  String get subHomeExpenses => 'Depenses du foyer';
+
+  @override
+  String get subHomeExpensesSub => 'Loyer, factures et abonnements';
+
+  @override
+  String get subMonthly => 'Mensuel';
+
+  @override
+  String get subYearly => 'Annuel';
+
+  @override
+  String get subActive => 'Actif';
+
+  @override
+  String get subCountryTemplate => 'Modele par pays';
+
+  @override
+  String get subNoSubscription =>
+      'Aucun abonnement trouve\nAppuyez sur le bouton +';
+
+  @override
+  String get subAddExpense => 'Ajouter une depense';
+
+  @override
+  String get subAddCountryTemplate => 'Ajouter un modele de depenses par pays';
+
+  @override
+  String get subCommonExpenses => 'Depenses courantes';
+
+  @override
+  String get subServiceName => 'Nom du service';
+
+  @override
+  String subAmount(Object cur) {
+    return 'Montant ($cur)';
+  }
+
+  @override
+  String get subAddSubscription => 'Ajouter un abonnement';
 }

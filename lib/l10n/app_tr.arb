@@ -1559,5 +1559,19 @@
   "chatPoll": "Anket",
   "chatGif": "GIF",
   "chatVideo": "Video",
-  "chatFile": "Dosya"
+  "chatFile": "Dosya",
+  "subHomeExpenses": "Ev Giderleri",
+  "subHomeExpensesSub": "Kira, faturalar ve abonelikler",
+  "subMonthly": "Aylık",
+  "subYearly": "Yıllık",
+  "subActive": "Aktif",
+  "subCountryTemplate": "Ülke şablonu",
+  "subNoSubscription": "Abonelik bulunamadı\n+ butonuna dokun",
+  "subAddExpense": "Gider Ekle",
+  "subAddCountryTemplate": "Ülke gider şablonu ekle",
+  "subCommonExpenses": "Sık Kullanılan Giderler",
+  "subServiceName": "Servis adı",
+  "subAmount": "Tutar ({cur})",
+  "@subAmount": { "placeholders": { "cur": {} } },
+  "subAddSubscription": "Abonelik Ekle"
 }

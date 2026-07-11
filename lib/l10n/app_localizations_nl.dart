@@ -4857,4 +4857,46 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get chatFile => 'Bestand';
+
+  @override
+  String get subHomeExpenses => 'Huishoudkosten';
+
+  @override
+  String get subHomeExpensesSub => 'Huur, rekeningen en abonnementen';
+
+  @override
+  String get subMonthly => 'Maandelijks';
+
+  @override
+  String get subYearly => 'Jaarlijks';
+
+  @override
+  String get subActive => 'Actief';
+
+  @override
+  String get subCountryTemplate => 'Landsjabloon';
+
+  @override
+  String get subNoSubscription =>
+      'Geen abonnementen gevonden\nTik op de +-knop';
+
+  @override
+  String get subAddExpense => 'Uitgave toevoegen';
+
+  @override
+  String get subAddCountryTemplate => 'Landsjabloon voor uitgaven toevoegen';
+
+  @override
+  String get subCommonExpenses => 'Veelvoorkomende uitgaven';
+
+  @override
+  String get subServiceName => 'Servicenaam';
+
+  @override
+  String subAmount(Object cur) {
+    return 'Bedrag ($cur)';
+  }
+
+  @override
+  String get subAddSubscription => 'Abonnement toevoegen';
 }

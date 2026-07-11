@@ -4857,4 +4857,45 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatFile => 'File';
+
+  @override
+  String get subHomeExpenses => 'Home Expenses';
+
+  @override
+  String get subHomeExpensesSub => 'Rent, bills and subscriptions';
+
+  @override
+  String get subMonthly => 'Monthly';
+
+  @override
+  String get subYearly => 'Yearly';
+
+  @override
+  String get subActive => 'Active';
+
+  @override
+  String get subCountryTemplate => 'Country template';
+
+  @override
+  String get subNoSubscription => 'No subscriptions found\nTap the + button';
+
+  @override
+  String get subAddExpense => 'Add Expense';
+
+  @override
+  String get subAddCountryTemplate => 'Add country expense template';
+
+  @override
+  String get subCommonExpenses => 'Common Expenses';
+
+  @override
+  String get subServiceName => 'Service name';
+
+  @override
+  String subAmount(Object cur) {
+    return 'Amount ($cur)';
+  }
+
+  @override
+  String get subAddSubscription => 'Add Subscription';
 }

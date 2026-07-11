@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
@@ -280,13 +281,13 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                               child: const Icon(Icons.subscriptions_outlined, color: Colors.white, size: 20),
                             ),
                             const SizedBox(width: 12),
-                            const Column(
+                            Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Ev Giderleri',
-                                    style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900)),
-                                Text('Kira, faturalar ve abonelikler',
-                                    style: TextStyle(color: Color(0xFF6B7280), fontSize: 12)),
+                                Text(AppLocalizations.of(context).subHomeExpenses,
+                                    style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900)),
+                                Text(AppLocalizations.of(context).subHomeExpensesSub,
+                                    style: const TextStyle(color: Color(0xFF6B7280), fontSize: 12)),
                               ],
                             ),
                           ],
@@ -295,11 +296,11 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                         // Summary cards
                         Row(
                           children: [
-                            Expanded(child: _SummaryCard(label: 'Aylık', value: '$_cur${totalMonthly.toStringAsFixed(0)}', icon: '📅')),
+                            Expanded(child: _SummaryCard(label: AppLocalizations.of(context).subMonthly, value: '$_cur${totalMonthly.toStringAsFixed(0)}', icon: '📅')),
                             const SizedBox(width: 10),
-                            Expanded(child: _SummaryCard(label: 'Yıllık', value: '$_cur${totalYearly.toStringAsFixed(0)}', icon: '📆')),
+                            Expanded(child: _SummaryCard(label: AppLocalizations.of(context).subYearly, value: '$_cur${totalYearly.toStringAsFixed(0)}', icon: '📆')),
                             const SizedBox(width: 10),
-                            Expanded(child: _SummaryCard(label: 'Aktif', value: '${activeSubs.length}', icon: '✅')),
+                            Expanded(child: _SummaryCard(label: AppLocalizations.of(context).subActive, value: '${activeSubs.length}', icon: '✅')),
                           ],
                         ),
                       ],
@@ -343,13 +344,13 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                             ]),
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          child: const Row(
+                          child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(Icons.public, size: 14, color: Colors.white),
-                              SizedBox(width: 5),
-                              Text('Ülke şablonu',
-                                  style: TextStyle(
+                              const Icon(Icons.public, size: 14, color: Colors.white),
+                              const SizedBox(width: 5),
+                              Text(AppLocalizations.of(context).subCountryTemplate,
+                                  style: const TextStyle(
                                       fontSize: 13,
                                       fontWeight: FontWeight.w700,
                                       color: Colors.white)),
@@ -432,16 +433,16 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
 
           // Subscription list
           filtered.isEmpty
-              ? const SliverFillRemaining(
+              ? SliverFillRemaining(
                   child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('📱', style: TextStyle(fontSize: 48)),
-                        SizedBox(height: 12),
-                        Text('Abonelik bulunamadı\n+ butonuna dokun',
+                        const Text('📱', style: TextStyle(fontSize: 48)),
+                        const SizedBox(height: 12),
+                        Text(AppLocalizations.of(context).subNoSubscription,
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: Color(0xFF9CA3AF))),
+                            style: const TextStyle(color: Color(0xFF9CA3AF))),
                       ],
                     ),
                   ),
@@ -468,9 +469,9 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
         onPressed: _showAddSheet,
         backgroundColor: const Color(0xFF667EEA),
         icon: const Icon(Icons.add, color: Colors.white),
-        label: const Text('Gider Ekle',
+        label: Text(AppLocalizations.of(context).subAddExpense,
             style:
-                TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
+                const TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
       ),
     );
   }
@@ -495,10 +496,10 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                     color: Colors.white.withAlpha(40),
                     borderRadius: BorderRadius.circular(2)),
               ),
-              const Padding(
-                padding: EdgeInsets.all(18),
-                child: Text('Ülke gider şablonu ekle',
-                    style: TextStyle(
+              Padding(
+                padding: const EdgeInsets.all(18),
+                child: Text(AppLocalizations.of(context).subAddCountryTemplate,
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 17,
                         fontWeight: FontWeight.w800)),
@@ -598,8 +599,8 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                 const SizedBox(height: 14),
 
                 // Popular presets grid
-                const Text('Sık Kullanılan Giderler',
-                    style: TextStyle(
+                Text(AppLocalizations.of(context).subCommonExpenses,
+                    style: const TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w700,
                         color: Color(0xFF9CA3AF))),
@@ -672,7 +673,7 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
 
                 // Name field
                 _InputField(
-                    controller: nameCtrl, label: 'Servis adı'),
+                    controller: nameCtrl, label: AppLocalizations.of(context).subServiceName),
                 const SizedBox(height: 10),
 
                 // Amount + cycle row
@@ -681,7 +682,7 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                     Expanded(
                       child: _InputField(
                         controller: amountCtrl,
-                        label: 'Tutar ($_cur)',
+                        label: AppLocalizations.of(context).subAmount(_cur),
                         keyboard: TextInputType.number,
                       ),
                     ),
@@ -696,13 +697,13 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           _CycleBtn(
-                            label: 'Aylık',
+                            label: AppLocalizations.of(context).subMonthly,
                             active: cycle == BillingCycle.monthly,
                             onTap: () => setSt(
                                 () => cycle = BillingCycle.monthly),
                           ),
                           _CycleBtn(
-                            label: 'Yıllık',
+                            label: AppLocalizations.of(context).subYearly,
                             active: cycle == BillingCycle.yearly,
                             onTap: () => setSt(
                                 () => cycle = BillingCycle.yearly),
@@ -768,9 +769,9 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                         ),
                       ],
                     ),
-                    child: const Center(
-                      child: Text('Abonelik Ekle',
-                          style: TextStyle(
+                    child: Center(
+                      child: Text(AppLocalizations.of(context).subAddSubscription,
+                          style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w800,
                               fontSize: 15)),
