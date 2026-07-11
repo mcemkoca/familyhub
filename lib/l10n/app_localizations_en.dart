@@ -5485,4 +5485,65 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cbTitle => 'Google Drive Backup';
+
+  @override
+  String get hMoodQuestion => 'How are you feeling today?';
+
+  @override
+  String get hTodaySuggestion => 'Today\'s Suggestion';
+
+  @override
+  String hdWelcome(Object name) {
+    return 'Welcome $name';
+  }
+
+  @override
+  String get hdJourneyStart => 'Your health journey starts here.';
+
+  @override
+  String get hdDailySummary => 'Daily Health Summary';
+
+  @override
+  String get hdArticles => 'Health Articles';
+
+  @override
+  String get hdArticlesSub => 'Current, reliable health content.';
+
+  @override
+  String get hfTitle => 'Family Health';
+
+  @override
+  String get hfSubtitle => 'Health center for mom and dad';
+
+  @override
+  String get hfFamilyContent => 'Family Content';
+
+  @override
+  String get hfNoParent => 'No parents added yet. Add family members.';
+
+  @override
+  String get hfSetValue => 'Set value';
+
+  @override
+  String get hfDailySuggestion => 'Daily Suggestion';
+
+  @override
+  String get hwTitle => 'Women\'s Health';
+
+  @override
+  String get hwSubtitle => 'Personal health space for mom';
+
+  @override
+  String get hwCycleTracking => 'Cycle Tracking';
+
+  @override
+  String hwCycleDay(Object day) {
+    return 'You are on day $day of your period.';
+  }
+
+  @override
+  String get hwTapToChangeStart => 'Tap to change the start date';
+
+  @override
+  String get hwSymptomTracking => 'Symptom Tracking';
 }

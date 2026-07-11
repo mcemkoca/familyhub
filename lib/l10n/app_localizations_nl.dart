@@ -5489,4 +5489,65 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get cbTitle => 'Google Drive-back-up';
+
+  @override
+  String get hMoodQuestion => 'Hoe voel je je vandaag?';
+
+  @override
+  String get hTodaySuggestion => 'Suggestie van vandaag';
+
+  @override
+  String hdWelcome(Object name) {
+    return 'Welkom $name';
+  }
+
+  @override
+  String get hdJourneyStart => 'Je gezondheidsreis begint hier.';
+
+  @override
+  String get hdDailySummary => 'Dagelijks gezondheidsoverzicht';
+
+  @override
+  String get hdArticles => 'Gezondheidsartikelen';
+
+  @override
+  String get hdArticlesSub => 'Actuele, betrouwbare gezondheidsinhoud.';
+
+  @override
+  String get hfTitle => 'Gezinsgezondheid';
+
+  @override
+  String get hfSubtitle => 'Gezondheidscentrum voor mama en papa';
+
+  @override
+  String get hfFamilyContent => 'Gezinsinhoud';
+
+  @override
+  String get hfNoParent => 'Nog geen ouders toegevoegd. Voeg gezinsleden toe.';
+
+  @override
+  String get hfSetValue => 'Waarde instellen';
+
+  @override
+  String get hfDailySuggestion => 'Dagelijkse suggestie';
+
+  @override
+  String get hwTitle => 'Vrouwengezondheid';
+
+  @override
+  String get hwSubtitle => 'Persoonlijke gezondheidsruimte voor mama';
+
+  @override
+  String get hwCycleTracking => 'Cyclusopvolging';
+
+  @override
+  String hwCycleDay(Object day) {
+    return 'Je bent op dag $day van je menstruatie.';
+  }
+
+  @override
+  String get hwTapToChangeStart => 'Tik om de startdatum te wijzigen';
+
+  @override
+  String get hwSymptomTracking => 'Symptoomopvolging';
 }

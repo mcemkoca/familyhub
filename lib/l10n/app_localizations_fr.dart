@@ -5508,4 +5508,66 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get cbTitle => 'Sauvegarde Google Drive';
+
+  @override
+  String get hMoodQuestion => 'Comment vous sentez-vous aujourd\'hui ?';
+
+  @override
+  String get hTodaySuggestion => 'Suggestion du jour';
+
+  @override
+  String hdWelcome(Object name) {
+    return 'Bienvenue $name';
+  }
+
+  @override
+  String get hdJourneyStart => 'Votre parcours sante commence ici.';
+
+  @override
+  String get hdDailySummary => 'Resume sante quotidien';
+
+  @override
+  String get hdArticles => 'Articles sante';
+
+  @override
+  String get hdArticlesSub => 'Contenu sante actuel et fiable.';
+
+  @override
+  String get hfTitle => 'Sante familiale';
+
+  @override
+  String get hfSubtitle => 'Centre sante pour maman et papa';
+
+  @override
+  String get hfFamilyContent => 'Contenu familial';
+
+  @override
+  String get hfNoParent =>
+      'Aucun parent ajoute. Ajoutez des membres de la famille.';
+
+  @override
+  String get hfSetValue => 'Definir la valeur';
+
+  @override
+  String get hfDailySuggestion => 'Suggestion quotidienne';
+
+  @override
+  String get hwTitle => 'Sante des femmes';
+
+  @override
+  String get hwSubtitle => 'Espace sante personnel pour maman';
+
+  @override
+  String get hwCycleTracking => 'Suivi du cycle';
+
+  @override
+  String hwCycleDay(Object day) {
+    return 'Vous etes au jour $day de vos regles.';
+  }
+
+  @override
+  String get hwTapToChangeStart => 'Appuyez pour modifier la date de debut';
+
+  @override
+  String get hwSymptomTracking => 'Suivi des symptomes';
 }

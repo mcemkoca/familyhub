@@ -5505,4 +5505,65 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get cbTitle => 'Google Drive Yedekleme';
+
+  @override
+  String get hMoodQuestion => 'Bugün kendini nasıl hissediyorsun?';
+
+  @override
+  String get hTodaySuggestion => 'Bugünün Önerisi';
+
+  @override
+  String hdWelcome(Object name) {
+    return 'Hoş geldin $name';
+  }
+
+  @override
+  String get hdJourneyStart => 'Sağlık yolculuğun burada başlıyor.';
+
+  @override
+  String get hdDailySummary => 'Günlük Sağlık Özeti';
+
+  @override
+  String get hdArticles => 'Sağlık Makaleleri';
+
+  @override
+  String get hdArticlesSub => 'Güncel, güvenilir sağlık içerikleri.';
+
+  @override
+  String get hfTitle => 'Aile Sağlığı';
+
+  @override
+  String get hfSubtitle => 'Anne ve baba için sağlık merkezi';
+
+  @override
+  String get hfFamilyContent => 'Aile İçeriği';
+
+  @override
+  String get hfNoParent => 'Henüz ebeveyn eklenmedi. Aile üyelerini ekleyin.';
+
+  @override
+  String get hfSetValue => 'Değeri ayarla';
+
+  @override
+  String get hfDailySuggestion => 'Günlük Öneri';
+
+  @override
+  String get hwTitle => 'Kadın Sağlığı';
+
+  @override
+  String get hwSubtitle => 'Anne için kişisel sağlık alanı';
+
+  @override
+  String get hwCycleTracking => 'Döngü Takibi';
+
+  @override
+  String hwCycleDay(Object day) {
+    return 'Adet döneminin $day. günündesin.';
+  }
+
+  @override
+  String get hwTapToChangeStart => 'Başlangıç tarihini değiştirmek için dokun';
+
+  @override
+  String get hwSymptomTracking => 'Semptom Takibi';
 }

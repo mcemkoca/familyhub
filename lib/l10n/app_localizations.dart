@@ -10409,6 +10409,120 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Google Drive Yedekleme'**
   String get cbTitle;
+
+  /// No description provided for @hMoodQuestion.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugün kendini nasıl hissediyorsun?'**
+  String get hMoodQuestion;
+
+  /// No description provided for @hTodaySuggestion.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugünün Önerisi'**
+  String get hTodaySuggestion;
+
+  /// No description provided for @hdWelcome.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hoş geldin {name}'**
+  String hdWelcome(Object name);
+
+  /// No description provided for @hdJourneyStart.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sağlık yolculuğun burada başlıyor.'**
+  String get hdJourneyStart;
+
+  /// No description provided for @hdDailySummary.
+  ///
+  /// In tr, this message translates to:
+  /// **'Günlük Sağlık Özeti'**
+  String get hdDailySummary;
+
+  /// No description provided for @hdArticles.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sağlık Makaleleri'**
+  String get hdArticles;
+
+  /// No description provided for @hdArticlesSub.
+  ///
+  /// In tr, this message translates to:
+  /// **'Güncel, güvenilir sağlık içerikleri.'**
+  String get hdArticlesSub;
+
+  /// No description provided for @hfTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile Sağlığı'**
+  String get hfTitle;
+
+  /// No description provided for @hfSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Anne ve baba için sağlık merkezi'**
+  String get hfSubtitle;
+
+  /// No description provided for @hfFamilyContent.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile İçeriği'**
+  String get hfFamilyContent;
+
+  /// No description provided for @hfNoParent.
+  ///
+  /// In tr, this message translates to:
+  /// **'Henüz ebeveyn eklenmedi. Aile üyelerini ekleyin.'**
+  String get hfNoParent;
+
+  /// No description provided for @hfSetValue.
+  ///
+  /// In tr, this message translates to:
+  /// **'Değeri ayarla'**
+  String get hfSetValue;
+
+  /// No description provided for @hfDailySuggestion.
+  ///
+  /// In tr, this message translates to:
+  /// **'Günlük Öneri'**
+  String get hfDailySuggestion;
+
+  /// No description provided for @hwTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kadın Sağlığı'**
+  String get hwTitle;
+
+  /// No description provided for @hwSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Anne için kişisel sağlık alanı'**
+  String get hwSubtitle;
+
+  /// No description provided for @hwCycleTracking.
+  ///
+  /// In tr, this message translates to:
+  /// **'Döngü Takibi'**
+  String get hwCycleTracking;
+
+  /// No description provided for @hwCycleDay.
+  ///
+  /// In tr, this message translates to:
+  /// **'Adet döneminin {day}. günündesin.'**
+  String hwCycleDay(Object day);
+
+  /// No description provided for @hwTapToChangeStart.
+  ///
+  /// In tr, this message translates to:
+  /// **'Başlangıç tarihini değiştirmek için dokun'**
+  String get hwTapToChangeStart;
+
+  /// No description provided for @hwSymptomTracking.
+  ///
+  /// In tr, this message translates to:
+  /// **'Semptom Takibi'**
+  String get hwSymptomTracking;
 }
 
 class _AppLocalizationsDelegate

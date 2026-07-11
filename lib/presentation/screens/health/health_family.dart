@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../domain/entities.dart';
 import '../../providers/app_providers.dart';
@@ -38,11 +39,11 @@ class _FamilySaglikScreenState extends ConsumerState<FamilySaglikScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            const HealthHeader(
-              title: 'Aile Sağlığı',
-              subtitle: 'Anne ve baba için sağlık merkezi',
+            HealthHeader(
+              title: AppLocalizations.of(context).hfTitle,
+              subtitle: AppLocalizations.of(context).hfSubtitle,
               icon: Icons.favorite_rounded,
-              gradient: [Color(0xFF8B5CF6), Color(0xFF6366F1)],
+              gradient: const [Color(0xFF8B5CF6), Color(0xFF6366F1)],
               showBack: true,
             ),
             Expanded(
@@ -116,8 +117,8 @@ class _FamilySaglikScreenState extends ConsumerState<FamilySaglikScreen> {
                   _tipCard(
                       'Bugün 10.000 adım hedefini tamamlamana ${(10000 - steps).clamp(0, 10000).round()} adım kaldı.'),
                   const SizedBox(height: 16),
-                  const Text('Aile İçeriği',
-                      style: TextStyle(
+                  Text(AppLocalizations.of(context).hfFamilyContent,
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 17,
                           fontWeight: FontWeight.w800)),
@@ -194,13 +195,13 @@ class _FamilySaglikScreenState extends ConsumerState<FamilySaglikScreen> {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: const Color(0xFF262631)),
       ),
-      child: const Row(
+      child: Row(
         children: [
-          Icon(Icons.group_add_rounded, color: Color(0xFF9CA3AF), size: 22),
-          SizedBox(width: 12),
+          const Icon(Icons.group_add_rounded, color: Color(0xFF9CA3AF), size: 22),
+          const SizedBox(width: 12),
           Expanded(
-            child: Text('Henüz ebeveyn eklenmedi. Aile üyelerini ekleyin.',
-                style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 14)),
+            child: Text(AppLocalizations.of(context).hfNoParent,
+                style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 14)),
           ),
         ],
       ),
@@ -231,8 +232,8 @@ class _FamilySaglikScreenState extends ConsumerState<FamilySaglikScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('Değeri ayarla',
-                  style: TextStyle(
+              Text(AppLocalizations.of(context).hfSetValue,
+                  style: const TextStyle(
                       color: Colors.white,
                       fontSize: 17,
                       fontWeight: FontWeight.w800)),
@@ -273,8 +274,8 @@ class _FamilySaglikScreenState extends ConsumerState<FamilySaglikScreen> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14)),
                   ),
-                  child: const Text('Kaydet',
-                      style: TextStyle(color: Colors.white)),
+                  child: Text(AppLocalizations.of(context).save,
+                      style: const TextStyle(color: Colors.white)),
                 ),
               ),
             ],
@@ -494,8 +495,8 @@ class _FamilySaglikScreenState extends ConsumerState<FamilySaglikScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Günlük Öneri',
-                    style: TextStyle(
+                Text(AppLocalizations.of(context).hfDailySuggestion,
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 15,
                         fontWeight: FontWeight.w800)),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'health_store.dart';
 
@@ -52,11 +53,11 @@ class _KadinSaglikScreenState extends State<KadinSaglikScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            const HealthHeader(
-              title: 'Kadın Sağlığı',
-              subtitle: 'Anne için kişisel sağlık alanı',
+            HealthHeader(
+              title: AppLocalizations.of(context).hwTitle,
+              subtitle: AppLocalizations.of(context).hwSubtitle,
               icon: Icons.favorite_rounded,
-              gradient: [Color(0xFFEC4899), Color(0xFFDB2777)],
+              gradient: const [Color(0xFFEC4899), Color(0xFFDB2777)],
               showBack: true,
             ),
             Expanded(
@@ -259,19 +260,19 @@ class _KadinSaglikScreenState extends State<KadinSaglikScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Döngü Takibi',
-                      style: TextStyle(
+                  Text(AppLocalizations.of(context).hwCycleTracking,
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 17,
                           fontWeight: FontWeight.w800)),
                   const SizedBox(height: 4),
-                  Text('Adet döneminin $day. günündesin.',
+                  Text(AppLocalizations.of(context).hwCycleDay(day),
                       style: const TextStyle(
                           color: Color(0xFF9CA3AF), fontSize: 13)),
                   const SizedBox(height: 2),
-                  const Text('Başlangıç tarihini değiştirmek için dokun',
+                  Text(AppLocalizations.of(context).hwTapToChangeStart,
                       style:
-                          TextStyle(color: Color(0xFF6B7280), fontSize: 11)),
+                          const TextStyle(color: Color(0xFF6B7280), fontSize: 11)),
                 ],
               ),
             ),
@@ -338,20 +339,20 @@ class _KadinSaglikScreenState extends State<KadinSaglikScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
-              Icon(Icons.monitor_heart, color: Color(0xFFEC4899), size: 20),
-              SizedBox(width: 8),
-              Text('Semptom Takibi',
-                  style: TextStyle(
+              const Icon(Icons.monitor_heart, color: Color(0xFFEC4899), size: 20),
+              const SizedBox(width: 8),
+              Text(AppLocalizations.of(context).hwSymptomTracking,
+                  style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.w800)),
             ],
           ),
           const SizedBox(height: 4),
-          const Text('Bugün kendini nasıl hissediyorsun?',
-              style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
+          Text(AppLocalizations.of(context).hMoodQuestion,
+              style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
           const SizedBox(height: 12),
           Wrap(
             spacing: 10,
@@ -414,29 +415,29 @@ class _KadinSaglikScreenState extends State<KadinSaglikScreen> {
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: const Color(0x33EC4899)),
       ),
-      child: const Row(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(Icons.spa, color: Color(0xFFEC4899), size: 22),
-          SizedBox(width: 12),
+          const Icon(Icons.spa, color: Color(0xFFEC4899), size: 22),
+          const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Bugünün Önerisi',
-                    style: TextStyle(
+                Text(AppLocalizations.of(context).hTodaySuggestion,
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.w800)),
-                SizedBox(height: 6),
-                Text(
+                const SizedBox(height: 6),
+                const Text(
                     'Bol su içmeyi unutma! Su, vücudunun dengesini korumasına ve şişkinliği azaltmana yardımcı olur.',
                     style: TextStyle(
                         color: Color(0xFFD1D5DB), fontSize: 13.5, height: 1.45)),
               ],
             ),
           ),
-          Text('💧', style: TextStyle(fontSize: 30)),
+          const Text('💧', style: TextStyle(fontSize: 30)),
         ],
       ),
     );

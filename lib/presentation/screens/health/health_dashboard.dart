@@ -96,7 +96,7 @@ class _HealthDashboardState extends ConsumerState<HealthDashboard> {
               children: [
                 Row(
                   children: [
-                    Text('Hoş geldin $name',
+                    Text(AppLocalizations.of(context).hdWelcome(name),
                         style: const TextStyle(
                             color: Colors.white,
                             fontSize: 21,
@@ -107,9 +107,9 @@ class _HealthDashboardState extends ConsumerState<HealthDashboard> {
                   ],
                 ),
                 const SizedBox(height: 6),
-                const Text('Sağlık yolculuğun burada başlıyor.',
+                Text(AppLocalizations.of(context).hdJourneyStart,
                     style:
-                        TextStyle(color: Color(0xFF9CA3AF), fontSize: 13.5)),
+                        const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13.5)),
               ],
             ),
           ),
@@ -277,20 +277,20 @@ class _HealthDashboardState extends ConsumerState<HealthDashboard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
-              Icon(Icons.trending_up, color: Color(0xFF8B5CF6), size: 20),
-              SizedBox(width: 8),
-              Text('Günlük Sağlık Özeti',
-                  style: TextStyle(
+              const Icon(Icons.trending_up, color: Color(0xFF8B5CF6), size: 20),
+              const SizedBox(width: 8),
+              Text(AppLocalizations.of(context).hdDailySummary,
+                  style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.w800)),
             ],
           ),
           const SizedBox(height: 6),
-          const Text('Bugün kendini nasıl hissediyorsun?',
-              style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
+          Text(AppLocalizations.of(context).hMoodQuestion,
+              style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
           const SizedBox(height: 14),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -352,15 +352,15 @@ class _HealthDashboardState extends ConsumerState<HealthDashboard> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Row(
+                Row(
                   children: [
-                    Text('Bugünün Önerisi',
-                        style: TextStyle(
+                    Text(AppLocalizations.of(context).hTodaySuggestion,
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                             fontWeight: FontWeight.w800)),
-                    SizedBox(width: 6),
-                    Icon(Icons.auto_awesome,
+                    const SizedBox(width: 6),
+                    const Icon(Icons.auto_awesome,
                         size: 13, color: Color(0xFF14B8A6)),
                   ],
                 ),
@@ -408,18 +408,18 @@ class _HealthDashboardState extends ConsumerState<HealthDashboard> {
                   color: Color(0xFF8B5CF6), size: 24),
             ),
             const SizedBox(width: 14),
-            const Expanded(
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Sağlık Makaleleri',
-                      style: TextStyle(
+                  Text(AppLocalizations.of(context).hdArticles,
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.w800)),
-                  SizedBox(height: 2),
-                  Text('Güncel, güvenilir sağlık içerikleri.',
-                      style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 12.5)),
+                  const SizedBox(height: 2),
+                  Text(AppLocalizations.of(context).hdArticlesSub,
+                      style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 12.5)),
                 ],
               ),
             ),
