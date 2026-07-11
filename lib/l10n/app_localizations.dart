@@ -8747,6 +8747,156 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Ebeveyn Kontrol Listesi'**
   String get cdParentChecklist;
+
+  /// No description provided for @fhFamilyDoctor.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile Hekimi'**
+  String get fhFamilyDoctor;
+
+  /// No description provided for @fhSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sağlık takibi & ilaç yönetimi'**
+  String get fhSubtitle;
+
+  /// No description provided for @fhAddMember.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile üyesi ekleyin'**
+  String get fhAddMember;
+
+  /// No description provided for @fhNameHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ad (örn. Anne, Ahmet)'**
+  String get fhNameHint;
+
+  /// No description provided for @fhAdd.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ekle'**
+  String get fhAdd;
+
+  /// No description provided for @fhMedName.
+  ///
+  /// In tr, this message translates to:
+  /// **'İlaç adı'**
+  String get fhMedName;
+
+  /// No description provided for @fhDoseHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Doz (örn. 500mg, 1 tablet)'**
+  String get fhDoseHint;
+
+  /// No description provided for @fhUsageHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kullanım (örn. Günde 2 kez, sabah)'**
+  String get fhUsageHint;
+
+  /// No description provided for @fhNotesOptional.
+  ///
+  /// In tr, this message translates to:
+  /// **'Notlar (isteğe bağlı)'**
+  String get fhNotesOptional;
+
+  /// No description provided for @fhSaveMed.
+  ///
+  /// In tr, this message translates to:
+  /// **'İlacı Kaydet'**
+  String get fhSaveMed;
+
+  /// No description provided for @fhVitaminName.
+  ///
+  /// In tr, this message translates to:
+  /// **'Vitamin adı (örn. D3, Omega-3)'**
+  String get fhVitaminName;
+
+  /// No description provided for @fhAmountHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Miktar (örn. 1000 IU, 2 kapsül)'**
+  String get fhAmountHint;
+
+  /// No description provided for @fhUsageTime.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kullanım zamanı'**
+  String get fhUsageTime;
+
+  /// No description provided for @fhSaveVitamin.
+  ///
+  /// In tr, this message translates to:
+  /// **'Vitamin Kaydet'**
+  String get fhSaveVitamin;
+
+  /// No description provided for @fhReportTitleHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Başlık (örn. Yıllık check-up)'**
+  String get fhReportTitleHint;
+
+  /// No description provided for @fhDoctorClinic.
+  ///
+  /// In tr, this message translates to:
+  /// **'Doktor / Klinik adı'**
+  String get fhDoctorClinic;
+
+  /// No description provided for @fhReportType.
+  ///
+  /// In tr, this message translates to:
+  /// **'Rapor türü'**
+  String get fhReportType;
+
+  /// No description provided for @fhNotesFindings.
+  ///
+  /// In tr, this message translates to:
+  /// **'Notlar / Bulgular'**
+  String get fhNotesFindings;
+
+  /// No description provided for @fhSaveReport.
+  ///
+  /// In tr, this message translates to:
+  /// **'Raporu Kaydet'**
+  String get fhSaveReport;
+
+  /// No description provided for @fhDoctorName.
+  ///
+  /// In tr, this message translates to:
+  /// **'Doktor adı'**
+  String get fhDoctorName;
+
+  /// No description provided for @fhSpecialtyHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Uzmanlık (Kardiyoloji, Göz vb.)'**
+  String get fhSpecialtyHint;
+
+  /// No description provided for @fhHospitalClinic.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hastane / Klinik'**
+  String get fhHospitalClinic;
+
+  /// No description provided for @fhSaveAppointment.
+  ///
+  /// In tr, this message translates to:
+  /// **'Randevuyu Kaydet'**
+  String get fhSaveAppointment;
+
+  /// No description provided for @fhStartDate.
+  ///
+  /// In tr, this message translates to:
+  /// **'Başlangıç: {date}'**
+  String fhStartDate(Object date);
+
+  /// No description provided for @fhComplete.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tamamla'**
+  String get fhComplete;
 }
 
 class _AppLocalizationsDelegate

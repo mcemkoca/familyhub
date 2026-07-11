@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
@@ -486,13 +487,13 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
                             child: const Icon(Icons.monitor_heart_outlined, color: Colors.white, size: 18),
                           ),
                           const SizedBox(width: 10),
-                          const Text('Aile Hekimi',
-                              style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900)),
+                          Text(AppLocalizations.of(context).fhFamilyDoctor,
+                              style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900)),
                         ],
                       ),
                       const SizedBox(height: 4),
-                      const Text('Sağlık takibi & ilaç yönetimi',
-                          style: TextStyle(color: Color(0xFF6B7280), fontSize: 12)),
+                      Text(AppLocalizations.of(context).fhSubtitle,
+                          style: const TextStyle(color: Color(0xFF6B7280), fontSize: 12)),
                       const SizedBox(height: 12),
                       // Member selector
                       SizedBox(
@@ -571,8 +572,8 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
           ),
 
           if (member == null)
-            const SliverFillRemaining(
-              child: Center(child: Text('Aile üyesi ekleyin')),
+            SliverFillRemaining(
+              child: Center(child: Text(AppLocalizations.of(context).fhAddMember)),
             )
           else
             SliverFillRemaining(
@@ -664,10 +665,10 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
                 }).toList(),
               ),
               const SizedBox(height: 14),
-              _Field(controller: nameCtrl, label: 'Ad (örn. Anne, Ahmet)'),
+              _Field(controller: nameCtrl, label: AppLocalizations.of(context).fhNameHint),
               const SizedBox(height: 16),
               _GradBtn(
-                label: 'Ekle',
+                label: AppLocalizations.of(context).fhAdd,
                 onTap: () {
                   if (nameCtrl.text.trim().isEmpty) return;
                   ref.read(familyHealthProvider.notifier).addMember(
@@ -700,21 +701,21 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
         title: '💊 İlaç Ekle — ${member.name}',
         child: Column(
           children: [
-            _Field(controller: nameCtrl, label: 'İlaç adı'),
+            _Field(controller: nameCtrl, label: AppLocalizations.of(context).fhMedName),
             const SizedBox(height: 10),
-            _Field(controller: dosageCtrl, label: 'Doz (örn. 500mg, 1 tablet)'),
+            _Field(controller: dosageCtrl, label: AppLocalizations.of(context).fhDoseHint),
             const SizedBox(height: 10),
             _Field(
                 controller: freqCtrl,
-                label: 'Kullanım (örn. Günde 2 kez, sabah)'),
+                label: AppLocalizations.of(context).fhUsageHint),
             const SizedBox(height: 10),
             _Field(
                 controller: notesCtrl,
-                label: 'Notlar (isteğe bağlı)',
+                label: AppLocalizations.of(context).fhNotesOptional,
                 maxLines: 2),
             const SizedBox(height: 16),
             _GradBtn(
-              label: 'İlacı Kaydet',
+              label: AppLocalizations.of(context).fhSaveMed,
               onTap: () {
                 if (nameCtrl.text.trim().isEmpty) return;
                 ref.read(familyHealthProvider.notifier).addMedicine(
@@ -752,12 +753,12 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _Field(controller: nameCtrl, label: 'Vitamin adı (örn. D3, Omega-3)'),
+              _Field(controller: nameCtrl, label: AppLocalizations.of(context).fhVitaminName),
               const SizedBox(height: 10),
-              _Field(controller: amountCtrl, label: 'Miktar (örn. 1000 IU, 2 kapsül)'),
+              _Field(controller: amountCtrl, label: AppLocalizations.of(context).fhAmountHint),
               const SizedBox(height: 12),
-              const Text('Kullanım zamanı',
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
+              Text(AppLocalizations.of(context).fhUsageTime,
+                  style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
               const SizedBox(height: 8),
               Wrap(
                 spacing: 6,
@@ -785,7 +786,7 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
               ),
               const SizedBox(height: 16),
               _GradBtn(
-                label: 'Vitamin Kaydet',
+                label: AppLocalizations.of(context).fhSaveVitamin,
                 onTap: () {
                   if (nameCtrl.text.trim().isEmpty) return;
                   ref.read(familyHealthProvider.notifier).addVitamin(
@@ -826,12 +827,12 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _Field(controller: titleCtrl, label: 'Başlık (örn. Yıllık check-up)'),
+              _Field(controller: titleCtrl, label: AppLocalizations.of(context).fhReportTitleHint),
               const SizedBox(height: 10),
-              _Field(controller: doctorCtrl, label: 'Doktor / Klinik adı'),
+              _Field(controller: doctorCtrl, label: AppLocalizations.of(context).fhDoctorClinic),
               const SizedBox(height: 10),
-              const Text('Rapor türü',
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
+              Text(AppLocalizations.of(context).fhReportType,
+                  style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
               const SizedBox(height: 6),
               Wrap(
                 spacing: 6,
@@ -861,7 +862,7 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
               const SizedBox(height: 10),
               _Field(
                   controller: notesCtrl,
-                  label: 'Notlar / Bulgular',
+                  label: AppLocalizations.of(context).fhNotesFindings,
                   maxLines: 3),
               const SizedBox(height: 8),
               // Belge / fotoğraf ekle (file_selector ile gerçek seçim).
@@ -899,7 +900,7 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
               ),
               const SizedBox(height: 14),
               _GradBtn(
-                label: 'Raporu Kaydet',
+                label: AppLocalizations.of(context).fhSaveReport,
                 onTap: () {
                   if (titleCtrl.text.trim().isEmpty) return;
                   ref.read(familyHealthProvider.notifier).addReport(
@@ -941,13 +942,13 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
           title: '📅 Randevu Ekle — ${member.name}',
           child: Column(
             children: [
-              _Field(controller: doctorCtrl, label: 'Doktor adı'),
+              _Field(controller: doctorCtrl, label: AppLocalizations.of(context).fhDoctorName),
               const SizedBox(height: 10),
               _Field(
                   controller: specialtyCtrl,
-                  label: 'Uzmanlık (Kardiyoloji, Göz vb.)'),
+                  label: AppLocalizations.of(context).fhSpecialtyHint),
               const SizedBox(height: 10),
-              _Field(controller: locationCtrl, label: 'Hastane / Klinik'),
+              _Field(controller: locationCtrl, label: AppLocalizations.of(context).fhHospitalClinic),
               const SizedBox(height: 12),
               GestureDetector(
                 onTap: () async {
@@ -982,7 +983,7 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
               ),
               const SizedBox(height: 16),
               _GradBtn(
-                label: 'Randevuyu Kaydet',
+                label: AppLocalizations.of(context).fhSaveAppointment,
                 onTap: () {
                   if (doctorCtrl.text.trim().isEmpty) return;
                   ref
@@ -1114,7 +1115,7 @@ class _MedicineTile extends StatelessWidget {
                       style: const TextStyle(
                           fontSize: 11, color: Color(0xFF9CA3AF))),
                 if (medicine.startDate.isNotEmpty)
-                  Text('Başlangıç: ${medicine.startDate}',
+                  Text(AppLocalizations.of(context).fhStartDate(medicine.startDate),
                       style: const TextStyle(
                           fontSize: 10, color: Color(0xFFB0B7C0))),
               ],
@@ -1443,8 +1444,8 @@ class _AppointmentTile extends StatelessWidget {
                   border: Border.all(
                       color: Colors.green.withAlpha(80)),
                 ),
-                child: const Text('Tamamla',
-                    style: TextStyle(
+                child: Text(AppLocalizations.of(context).fhComplete,
+                    style: const TextStyle(
                         fontSize: 11,
                         color: Colors.green,
                         fontWeight: FontWeight.w700)),

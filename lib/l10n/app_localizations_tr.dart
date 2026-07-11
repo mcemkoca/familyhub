@@ -4612,4 +4612,81 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get cdParentChecklist => 'Ebeveyn Kontrol Listesi';
+
+  @override
+  String get fhFamilyDoctor => 'Aile Hekimi';
+
+  @override
+  String get fhSubtitle => 'Sağlık takibi & ilaç yönetimi';
+
+  @override
+  String get fhAddMember => 'Aile üyesi ekleyin';
+
+  @override
+  String get fhNameHint => 'Ad (örn. Anne, Ahmet)';
+
+  @override
+  String get fhAdd => 'Ekle';
+
+  @override
+  String get fhMedName => 'İlaç adı';
+
+  @override
+  String get fhDoseHint => 'Doz (örn. 500mg, 1 tablet)';
+
+  @override
+  String get fhUsageHint => 'Kullanım (örn. Günde 2 kez, sabah)';
+
+  @override
+  String get fhNotesOptional => 'Notlar (isteğe bağlı)';
+
+  @override
+  String get fhSaveMed => 'İlacı Kaydet';
+
+  @override
+  String get fhVitaminName => 'Vitamin adı (örn. D3, Omega-3)';
+
+  @override
+  String get fhAmountHint => 'Miktar (örn. 1000 IU, 2 kapsül)';
+
+  @override
+  String get fhUsageTime => 'Kullanım zamanı';
+
+  @override
+  String get fhSaveVitamin => 'Vitamin Kaydet';
+
+  @override
+  String get fhReportTitleHint => 'Başlık (örn. Yıllık check-up)';
+
+  @override
+  String get fhDoctorClinic => 'Doktor / Klinik adı';
+
+  @override
+  String get fhReportType => 'Rapor türü';
+
+  @override
+  String get fhNotesFindings => 'Notlar / Bulgular';
+
+  @override
+  String get fhSaveReport => 'Raporu Kaydet';
+
+  @override
+  String get fhDoctorName => 'Doktor adı';
+
+  @override
+  String get fhSpecialtyHint => 'Uzmanlık (Kardiyoloji, Göz vb.)';
+
+  @override
+  String get fhHospitalClinic => 'Hastane / Klinik';
+
+  @override
+  String get fhSaveAppointment => 'Randevuyu Kaydet';
+
+  @override
+  String fhStartDate(Object date) {
+    return 'Başlangıç: $date';
+  }
+
+  @override
+  String get fhComplete => 'Tamamla';
 }

@@ -4591,4 +4591,81 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get cdParentChecklist => 'Ouderchecklist';
+
+  @override
+  String get fhFamilyDoctor => 'Huisarts';
+
+  @override
+  String get fhSubtitle => 'Gezondheidsopvolging & medicatiebeheer';
+
+  @override
+  String get fhAddMember => 'Voeg een gezinslid toe';
+
+  @override
+  String get fhNameHint => 'Naam (bijv. Mama, Jan)';
+
+  @override
+  String get fhAdd => 'Toevoegen';
+
+  @override
+  String get fhMedName => 'Naam medicijn';
+
+  @override
+  String get fhDoseHint => 'Dosis (bijv. 500mg, 1 tablet)';
+
+  @override
+  String get fhUsageHint => 'Gebruik (bijv. Tweemaal per dag, ochtend)';
+
+  @override
+  String get fhNotesOptional => 'Notities (optioneel)';
+
+  @override
+  String get fhSaveMed => 'Medicijn opslaan';
+
+  @override
+  String get fhVitaminName => 'Naam vitamine (bijv. D3, Omega-3)';
+
+  @override
+  String get fhAmountHint => 'Hoeveelheid (bijv. 1000 IE, 2 capsules)';
+
+  @override
+  String get fhUsageTime => 'Tijdstip van inname';
+
+  @override
+  String get fhSaveVitamin => 'Vitamine opslaan';
+
+  @override
+  String get fhReportTitleHint => 'Titel (bijv. Jaarlijkse controle)';
+
+  @override
+  String get fhDoctorClinic => 'Naam arts / kliniek';
+
+  @override
+  String get fhReportType => 'Type rapport';
+
+  @override
+  String get fhNotesFindings => 'Notities / Bevindingen';
+
+  @override
+  String get fhSaveReport => 'Rapport opslaan';
+
+  @override
+  String get fhDoctorName => 'Naam arts';
+
+  @override
+  String get fhSpecialtyHint => 'Specialisme (Cardiologie, Oog, enz.)';
+
+  @override
+  String get fhHospitalClinic => 'Ziekenhuis / Kliniek';
+
+  @override
+  String get fhSaveAppointment => 'Afspraak opslaan';
+
+  @override
+  String fhStartDate(Object date) {
+    return 'Start: $date';
+  }
+
+  @override
+  String get fhComplete => 'Voltooien';
 }

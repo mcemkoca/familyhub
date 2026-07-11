@@ -4591,4 +4591,81 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cdParentChecklist => 'Parent Checklist';
+
+  @override
+  String get fhFamilyDoctor => 'Family Doctor';
+
+  @override
+  String get fhSubtitle => 'Health tracking & medication management';
+
+  @override
+  String get fhAddMember => 'Add a family member';
+
+  @override
+  String get fhNameHint => 'Name (e.g. Mom, John)';
+
+  @override
+  String get fhAdd => 'Add';
+
+  @override
+  String get fhMedName => 'Medication name';
+
+  @override
+  String get fhDoseHint => 'Dose (e.g. 500mg, 1 tablet)';
+
+  @override
+  String get fhUsageHint => 'Usage (e.g. Twice a day, morning)';
+
+  @override
+  String get fhNotesOptional => 'Notes (optional)';
+
+  @override
+  String get fhSaveMed => 'Save Medication';
+
+  @override
+  String get fhVitaminName => 'Vitamin name (e.g. D3, Omega-3)';
+
+  @override
+  String get fhAmountHint => 'Amount (e.g. 1000 IU, 2 capsules)';
+
+  @override
+  String get fhUsageTime => 'Time of use';
+
+  @override
+  String get fhSaveVitamin => 'Save Vitamin';
+
+  @override
+  String get fhReportTitleHint => 'Title (e.g. Annual check-up)';
+
+  @override
+  String get fhDoctorClinic => 'Doctor / Clinic name';
+
+  @override
+  String get fhReportType => 'Report type';
+
+  @override
+  String get fhNotesFindings => 'Notes / Findings';
+
+  @override
+  String get fhSaveReport => 'Save Report';
+
+  @override
+  String get fhDoctorName => 'Doctor name';
+
+  @override
+  String get fhSpecialtyHint => 'Specialty (Cardiology, Eye, etc.)';
+
+  @override
+  String get fhHospitalClinic => 'Hospital / Clinic';
+
+  @override
+  String get fhSaveAppointment => 'Save Appointment';
+
+  @override
+  String fhStartDate(Object date) {
+    return 'Start: $date';
+  }
+
+  @override
+  String get fhComplete => 'Complete';
 }

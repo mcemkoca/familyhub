@@ -4609,4 +4609,81 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get cdParentChecklist => 'Liste de controle parentale';
+
+  @override
+  String get fhFamilyDoctor => 'Medecin de famille';
+
+  @override
+  String get fhSubtitle => 'Suivi de sante & gestion des medicaments';
+
+  @override
+  String get fhAddMember => 'Ajouter un membre de la famille';
+
+  @override
+  String get fhNameHint => 'Nom (ex. Maman, Jean)';
+
+  @override
+  String get fhAdd => 'Ajouter';
+
+  @override
+  String get fhMedName => 'Nom du medicament';
+
+  @override
+  String get fhDoseHint => 'Dose (ex. 500mg, 1 comprime)';
+
+  @override
+  String get fhUsageHint => 'Utilisation (ex. Deux fois par jour, matin)';
+
+  @override
+  String get fhNotesOptional => 'Notes (facultatif)';
+
+  @override
+  String get fhSaveMed => 'Enregistrer le medicament';
+
+  @override
+  String get fhVitaminName => 'Nom de la vitamine (ex. D3, Omega-3)';
+
+  @override
+  String get fhAmountHint => 'Quantite (ex. 1000 UI, 2 capsules)';
+
+  @override
+  String get fhUsageTime => 'Moment de prise';
+
+  @override
+  String get fhSaveVitamin => 'Enregistrer la vitamine';
+
+  @override
+  String get fhReportTitleHint => 'Titre (ex. Bilan annuel)';
+
+  @override
+  String get fhDoctorClinic => 'Nom du medecin / de la clinique';
+
+  @override
+  String get fhReportType => 'Type de rapport';
+
+  @override
+  String get fhNotesFindings => 'Notes / Observations';
+
+  @override
+  String get fhSaveReport => 'Enregistrer le rapport';
+
+  @override
+  String get fhDoctorName => 'Nom du medecin';
+
+  @override
+  String get fhSpecialtyHint => 'Specialite (Cardiologie, Ophtalmologie, etc.)';
+
+  @override
+  String get fhHospitalClinic => 'Hopital / Clinique';
+
+  @override
+  String get fhSaveAppointment => 'Enregistrer le rendez-vous';
+
+  @override
+  String fhStartDate(Object date) {
+    return 'Debut : $date';
+  }
+
+  @override
+  String get fhComplete => 'Terminer';
 }
