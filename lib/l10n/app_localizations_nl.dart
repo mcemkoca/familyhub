@@ -4252,4 +4252,107 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get gorevlerinEklendigindeBuradaGorunecek =>
       'Je taken verschijnen hier.';
+
+  @override
+  String get planBasic => 'Basic';
+
+  @override
+  String get planPlus => 'Plus';
+
+  @override
+  String get planComplete => 'Complete';
+
+  @override
+  String get planBasicTagline => 'Begin met het beheren van je gezin';
+
+  @override
+  String get planPlusTagline => 'Slimme functies + meer ruimte';
+
+  @override
+  String get planCompleteTagline => 'Volledige automatisering en onbeperkt';
+
+  @override
+  String get planFeatCore => 'Agenda, taken, boodschappen, budget';
+
+  @override
+  String get planFeatPlusIntel => 'Geavanceerde Gezinsintelligentie';
+
+  @override
+  String get planFeatLegal => 'Juridische rechten & toelagen';
+
+  @override
+  String get planFeatExport => 'PDF/CSV-export';
+
+  @override
+  String get planFeatProactive => 'Proactieve intelligentie & automatisering';
+
+  @override
+  String get planFeatRoutines => 'Gezinsroutines';
+
+  @override
+  String get planFeatGuest => 'Gasttoegang & rollen';
+
+  @override
+  String get planFeatUnlimitedHistory => 'Onbeperkte geschiedenis';
+
+  @override
+  String planFeatStorage(Object size) {
+    return '$size opslag';
+  }
+
+  @override
+  String planFeatHistory(Object days) {
+    return '$days dagen geschiedenis';
+  }
+
+  @override
+  String get plansTitle => 'Abonnementen';
+
+  @override
+  String get plansMonthly => 'Maandelijks';
+
+  @override
+  String get plansYearly => 'Jaarlijks';
+
+  @override
+  String get plansFree => 'Gratis';
+
+  @override
+  String get plansPopular => 'POPULAIR';
+
+  @override
+  String get plansCurrent => 'HUIDIG';
+
+  @override
+  String get plansComingSoon => 'Aankopen wordt binnenkort ingeschakeld.';
+
+  @override
+  String plansSave(Object percent) {
+    return 'Bespaar $percent%';
+  }
+
+  @override
+  String plansChoose(Object plan) {
+    return 'Kies $plan';
+  }
+
+  @override
+  String get gateTitle => 'Deze functie is vergrendeld';
+
+  @override
+  String gateBody(Object plan) {
+    return 'Deze functie is beschikbaar in het $plan-abonnement.';
+  }
+
+  @override
+  String get gatePerMonth => '/mnd';
+
+  @override
+  String get gatePerYear => '/jr';
+
+  @override
+  String get gateSeePlans => 'Bekijk abonnementen';
+
+  @override
+  String get gateNotNow => 'Niet nu';
 }

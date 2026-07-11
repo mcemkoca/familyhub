@@ -8099,6 +8099,192 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Görevlerin eklendiğinde burada görünecek.'**
   String get gorevlerinEklendigindeBuradaGorunecek;
+
+  /// No description provided for @planBasic.
+  ///
+  /// In tr, this message translates to:
+  /// **'Temel'**
+  String get planBasic;
+
+  /// No description provided for @planPlus.
+  ///
+  /// In tr, this message translates to:
+  /// **'Plus'**
+  String get planPlus;
+
+  /// No description provided for @planComplete.
+  ///
+  /// In tr, this message translates to:
+  /// **'Complete'**
+  String get planComplete;
+
+  /// No description provided for @planBasicTagline.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aileni yönetmeye başla'**
+  String get planBasicTagline;
+
+  /// No description provided for @planPlusTagline.
+  ///
+  /// In tr, this message translates to:
+  /// **'Akıllı özellikler + daha fazla alan'**
+  String get planPlusTagline;
+
+  /// No description provided for @planCompleteTagline.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tam otomasyon ve sınırsız'**
+  String get planCompleteTagline;
+
+  /// No description provided for @planFeatCore.
+  ///
+  /// In tr, this message translates to:
+  /// **'Takvim, görevler, alışveriş, bütçe'**
+  String get planFeatCore;
+
+  /// No description provided for @planFeatPlusIntel.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gelişmiş Aile Zekası'**
+  String get planFeatPlusIntel;
+
+  /// No description provided for @planFeatLegal.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yasal Haklar & yardımlar'**
+  String get planFeatLegal;
+
+  /// No description provided for @planFeatExport.
+  ///
+  /// In tr, this message translates to:
+  /// **'PDF/CSV dışa aktarma'**
+  String get planFeatExport;
+
+  /// No description provided for @planFeatProactive.
+  ///
+  /// In tr, this message translates to:
+  /// **'Proaktif zeka & otomasyon'**
+  String get planFeatProactive;
+
+  /// No description provided for @planFeatRoutines.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile rutinleri'**
+  String get planFeatRoutines;
+
+  /// No description provided for @planFeatGuest.
+  ///
+  /// In tr, this message translates to:
+  /// **'Misafir erişimi & roller'**
+  String get planFeatGuest;
+
+  /// No description provided for @planFeatUnlimitedHistory.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sınırsız geçmiş'**
+  String get planFeatUnlimitedHistory;
+
+  /// No description provided for @planFeatStorage.
+  ///
+  /// In tr, this message translates to:
+  /// **'{size} depolama'**
+  String planFeatStorage(Object size);
+
+  /// No description provided for @planFeatHistory.
+  ///
+  /// In tr, this message translates to:
+  /// **'{days} gün geçmiş'**
+  String planFeatHistory(Object days);
+
+  /// No description provided for @plansTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Planlar'**
+  String get plansTitle;
+
+  /// No description provided for @plansMonthly.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aylık'**
+  String get plansMonthly;
+
+  /// No description provided for @plansYearly.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yıllık'**
+  String get plansYearly;
+
+  /// No description provided for @plansFree.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ücretsiz'**
+  String get plansFree;
+
+  /// No description provided for @plansPopular.
+  ///
+  /// In tr, this message translates to:
+  /// **'POPÜLER'**
+  String get plansPopular;
+
+  /// No description provided for @plansCurrent.
+  ///
+  /// In tr, this message translates to:
+  /// **'MEVCUT'**
+  String get plansCurrent;
+
+  /// No description provided for @plansComingSoon.
+  ///
+  /// In tr, this message translates to:
+  /// **'Satın alma yakında etkinleşecek.'**
+  String get plansComingSoon;
+
+  /// No description provided for @plansSave.
+  ///
+  /// In tr, this message translates to:
+  /// **'%{percent} tasarruf'**
+  String plansSave(Object percent);
+
+  /// No description provided for @plansChoose.
+  ///
+  /// In tr, this message translates to:
+  /// **'{plan} seç'**
+  String plansChoose(Object plan);
+
+  /// No description provided for @gateTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu özellik kilitli'**
+  String get gateTitle;
+
+  /// No description provided for @gateBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu özellik {plan} planında açılır.'**
+  String gateBody(Object plan);
+
+  /// No description provided for @gatePerMonth.
+  ///
+  /// In tr, this message translates to:
+  /// **'/ay'**
+  String get gatePerMonth;
+
+  /// No description provided for @gatePerYear.
+  ///
+  /// In tr, this message translates to:
+  /// **'/yıl'**
+  String get gatePerYear;
+
+  /// No description provided for @gateSeePlans.
+  ///
+  /// In tr, this message translates to:
+  /// **'Planları gör'**
+  String get gateSeePlans;
+
+  /// No description provided for @gateNotNow.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şimdi değil'**
+  String get gateNotNow;
 }
 
 class _AppLocalizationsDelegate

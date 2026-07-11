@@ -106,6 +106,24 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 8)),
 
+            // ── PLANLAR ─────────────────────────────────────────────
+            SliverToBoxAdapter(
+              child: SettingsSection(
+                title: AppLocalizations.of(context).plansTitle,
+                icon: Icons.workspace_premium_outlined,
+                children: [
+                  SettingsItem(
+                    icon: Icons.workspace_premium_outlined,
+                    iconColor: const Color(0xFF6366F1),
+                    label: AppLocalizations.of(context).plansTitle,
+                    description: AppLocalizations.of(context).planPlusTagline,
+                    onTap: () => context.push(AppRoutes.plans),
+                    isLast: true,
+                  ),
+                ],
+              ),
+            ),
+
             // ── BİLDİRİMLER ─────────────────────────────────────────
             SliverToBoxAdapter(
               child: SettingsSection(

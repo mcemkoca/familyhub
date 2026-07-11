@@ -4268,4 +4268,107 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get gorevlerinEklendigindeBuradaGorunecek =>
       'Vos taches apparaitront ici.';
+
+  @override
+  String get planBasic => 'Basic';
+
+  @override
+  String get planPlus => 'Plus';
+
+  @override
+  String get planComplete => 'Complete';
+
+  @override
+  String get planBasicTagline => 'Commencez a gerer votre famille';
+
+  @override
+  String get planPlusTagline => 'Fonctions intelligentes + plus d\'espace';
+
+  @override
+  String get planCompleteTagline => 'Automatisation complete et illimitee';
+
+  @override
+  String get planFeatCore => 'Agenda, taches, courses, budget';
+
+  @override
+  String get planFeatPlusIntel => 'Intelligence familiale avancee';
+
+  @override
+  String get planFeatLegal => 'Droits legaux & allocations';
+
+  @override
+  String get planFeatExport => 'Export PDF/CSV';
+
+  @override
+  String get planFeatProactive => 'Intelligence proactive & automatisation';
+
+  @override
+  String get planFeatRoutines => 'Routines familiales';
+
+  @override
+  String get planFeatGuest => 'Acces invite & roles';
+
+  @override
+  String get planFeatUnlimitedHistory => 'Historique illimite';
+
+  @override
+  String planFeatStorage(Object size) {
+    return '$size de stockage';
+  }
+
+  @override
+  String planFeatHistory(Object days) {
+    return '$days jours d\'historique';
+  }
+
+  @override
+  String get plansTitle => 'Formules';
+
+  @override
+  String get plansMonthly => 'Mensuel';
+
+  @override
+  String get plansYearly => 'Annuel';
+
+  @override
+  String get plansFree => 'Gratuit';
+
+  @override
+  String get plansPopular => 'POPULAIRE';
+
+  @override
+  String get plansCurrent => 'ACTUEL';
+
+  @override
+  String get plansComingSoon => 'L\'achat sera bientot disponible.';
+
+  @override
+  String plansSave(Object percent) {
+    return 'Economisez $percent%';
+  }
+
+  @override
+  String plansChoose(Object plan) {
+    return 'Choisir $plan';
+  }
+
+  @override
+  String get gateTitle => 'Cette fonction est verrouillee';
+
+  @override
+  String gateBody(Object plan) {
+    return 'Cette fonction est disponible dans la formule $plan.';
+  }
+
+  @override
+  String get gatePerMonth => '/mois';
+
+  @override
+  String get gatePerYear => '/an';
+
+  @override
+  String get gateSeePlans => 'Voir les formules';
+
+  @override
+  String get gateNotNow => 'Pas maintenant';
 }

@@ -4252,4 +4252,107 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get gorevlerinEklendigindeBuradaGorunecek =>
       'Your tasks will appear here when added.';
+
+  @override
+  String get planBasic => 'Basic';
+
+  @override
+  String get planPlus => 'Plus';
+
+  @override
+  String get planComplete => 'Complete';
+
+  @override
+  String get planBasicTagline => 'Start managing your family';
+
+  @override
+  String get planPlusTagline => 'Smart features + more space';
+
+  @override
+  String get planCompleteTagline => 'Full automation and unlimited';
+
+  @override
+  String get planFeatCore => 'Calendar, tasks, shopping, budget';
+
+  @override
+  String get planFeatPlusIntel => 'Advanced Family Intelligence';
+
+  @override
+  String get planFeatLegal => 'Legal Benefits & allowances';
+
+  @override
+  String get planFeatExport => 'PDF/CSV export';
+
+  @override
+  String get planFeatProactive => 'Proactive intelligence & automation';
+
+  @override
+  String get planFeatRoutines => 'Family routines';
+
+  @override
+  String get planFeatGuest => 'Guest access & roles';
+
+  @override
+  String get planFeatUnlimitedHistory => 'Unlimited history';
+
+  @override
+  String planFeatStorage(Object size) {
+    return '$size storage';
+  }
+
+  @override
+  String planFeatHistory(Object days) {
+    return '$days days history';
+  }
+
+  @override
+  String get plansTitle => 'Plans';
+
+  @override
+  String get plansMonthly => 'Monthly';
+
+  @override
+  String get plansYearly => 'Yearly';
+
+  @override
+  String get plansFree => 'Free';
+
+  @override
+  String get plansPopular => 'POPULAR';
+
+  @override
+  String get plansCurrent => 'CURRENT';
+
+  @override
+  String get plansComingSoon => 'Purchasing will be enabled soon.';
+
+  @override
+  String plansSave(Object percent) {
+    return 'Save $percent%';
+  }
+
+  @override
+  String plansChoose(Object plan) {
+    return 'Choose $plan';
+  }
+
+  @override
+  String get gateTitle => 'This feature is locked';
+
+  @override
+  String gateBody(Object plan) {
+    return 'This feature is available on the $plan plan.';
+  }
+
+  @override
+  String get gatePerMonth => '/mo';
+
+  @override
+  String get gatePerYear => '/yr';
+
+  @override
+  String get gateSeePlans => 'See plans';
+
+  @override
+  String get gateNotNow => 'Not now';
 }

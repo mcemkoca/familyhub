@@ -126,4 +126,45 @@ class PlanCatalog {
         SubscriptionTier.plus => 1,
         SubscriptionTier.complete => 2,
       };
+
+  static const pricing = <SubscriptionTier, PlanPricing>{
+    SubscriptionTier.basic: PlanPricing(monthly: 0, yearly: 0),
+    SubscriptionTier.plus: PlanPricing(
+        monthly: 4.99,
+        yearly: 39.99,
+        monthlyProductId: 'familyhub_plus_monthly',
+        yearlyProductId: 'familyhub_plus_yearly'),
+    SubscriptionTier.complete: PlanPricing(
+        monthly: 7.99,
+        yearly: 69.99,
+        monthlyProductId: 'familyhub_complete_monthly',
+        yearlyProductId: 'familyhub_complete_yearly'),
+  };
+
+  static PlanPricing pricingFor(SubscriptionTier t) => pricing[t]!;
+}
+
+/// Plan fiyat + store product ID bilgisi (UI fallback fiyatı; asıl kaynak store).
+class PlanPricing {
+  final double monthly;
+  final double yearly;
+  final String? monthlyProductId;
+  final String? yearlyProductId;
+
+  const PlanPricing({
+    required this.monthly,
+    required this.yearly,
+    this.monthlyProductId,
+    this.yearlyProductId,
+  });
+
+  bool get isFree => monthly == 0 && yearly == 0;
+
+  /// Yıllık tasarruf oranı (%) — aylık×12 ile yıllık farkı. Hard-coded değil.
+  int get yearlySavingsPercent {
+    if (monthly == 0) return 0;
+    final full = monthly * 12;
+    if (full <= 0) return 0;
+    return (((full - yearly) / full) * 100).round();
+  }
 }

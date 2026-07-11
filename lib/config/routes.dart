@@ -81,6 +81,7 @@ import '../presentation/screens/streak/streak_screen.dart';
 import '../presentation/screens/main_shell.dart';
 import '../presentation/screens/health/health_dashboard.dart';
 import '../presentation/screens/budget/subscription_screen.dart';
+import '../features/subscription/presentation/plans_screen.dart';
 import '../presentation/screens/child/child_dev_dashboard.dart';
 import '../presentation/screens/ai/ai_assistant_screen.dart';
 import '../services/auth_service.dart';
@@ -181,6 +182,7 @@ class AppRoutes {
   static const String familyMap = '/family-map';
   static const String familyHealth = '/family-health';
   static const String subscriptions = '/subscriptions';
+  static const String plans = '/plans';
   static const String childDevelopment = '/child-development';
   static const String aiAssistant = '/ai-assistant';
   static const String familyReport = '/family-report';
@@ -367,6 +369,7 @@ final router = GoRouter(
     GoRoute(path: AppRoutes.documents, builder: (context, state) => const DocumentsScreen()),
     GoRoute(path: AppRoutes.familyHealth, builder: (context, state) => const HealthDashboard()),
     GoRoute(path: AppRoutes.subscriptions, builder: (context, state) => const SubscriptionScreen()),
+    GoRoute(path: AppRoutes.plans, builder: (context, state) => const PlansScreen()),
     GoRoute(path: AppRoutes.childDevelopment, builder: (context, state) => const ChildDevelopmentHome()),
     GoRoute(path: AppRoutes.aiAssistant, builder: (context, state) => const AIAssistantScreen()),
   ],

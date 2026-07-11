@@ -4273,4 +4273,107 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get gorevlerinEklendigindeBuradaGorunecek =>
       'Görevlerin eklendiğinde burada görünecek.';
+
+  @override
+  String get planBasic => 'Temel';
+
+  @override
+  String get planPlus => 'Plus';
+
+  @override
+  String get planComplete => 'Complete';
+
+  @override
+  String get planBasicTagline => 'Aileni yönetmeye başla';
+
+  @override
+  String get planPlusTagline => 'Akıllı özellikler + daha fazla alan';
+
+  @override
+  String get planCompleteTagline => 'Tam otomasyon ve sınırsız';
+
+  @override
+  String get planFeatCore => 'Takvim, görevler, alışveriş, bütçe';
+
+  @override
+  String get planFeatPlusIntel => 'Gelişmiş Aile Zekası';
+
+  @override
+  String get planFeatLegal => 'Yasal Haklar & yardımlar';
+
+  @override
+  String get planFeatExport => 'PDF/CSV dışa aktarma';
+
+  @override
+  String get planFeatProactive => 'Proaktif zeka & otomasyon';
+
+  @override
+  String get planFeatRoutines => 'Aile rutinleri';
+
+  @override
+  String get planFeatGuest => 'Misafir erişimi & roller';
+
+  @override
+  String get planFeatUnlimitedHistory => 'Sınırsız geçmiş';
+
+  @override
+  String planFeatStorage(Object size) {
+    return '$size depolama';
+  }
+
+  @override
+  String planFeatHistory(Object days) {
+    return '$days gün geçmiş';
+  }
+
+  @override
+  String get plansTitle => 'Planlar';
+
+  @override
+  String get plansMonthly => 'Aylık';
+
+  @override
+  String get plansYearly => 'Yıllık';
+
+  @override
+  String get plansFree => 'Ücretsiz';
+
+  @override
+  String get plansPopular => 'POPÜLER';
+
+  @override
+  String get plansCurrent => 'MEVCUT';
+
+  @override
+  String get plansComingSoon => 'Satın alma yakında etkinleşecek.';
+
+  @override
+  String plansSave(Object percent) {
+    return '%$percent tasarruf';
+  }
+
+  @override
+  String plansChoose(Object plan) {
+    return '$plan seç';
+  }
+
+  @override
+  String get gateTitle => 'Bu özellik kilitli';
+
+  @override
+  String gateBody(Object plan) {
+    return 'Bu özellik $plan planında açılır.';
+  }
+
+  @override
+  String get gatePerMonth => '/ay';
+
+  @override
+  String get gatePerYear => '/yıl';
+
+  @override
+  String get gateSeePlans => 'Planları gör';
+
+  @override
+  String get gateNotNow => 'Şimdi değil';
 }
