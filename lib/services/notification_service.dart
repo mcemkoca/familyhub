@@ -146,6 +146,51 @@ class NotificationService {
     );
   }
 
+  /// Verilen saat/dakikanın bir SONRAKI oluşumu (bugün geçtiyse yarın).
+  static tz.TZDateTime nextInstanceOfTime(int hour, int minute) {
+    final now = tz.TZDateTime.now(tz.local);
+    var scheduled =
+        tz.TZDateTime(tz.local, now.year, now.month, now.day, hour, minute);
+    if (!scheduled.isAfter(now)) {
+      scheduled = scheduled.add(const Duration(days: 1));
+    }
+    return scheduled;
+  }
+
+  /// Her gün aynı saatte tekrarlayan bildirim (ör. günlük özet).
+  static Future<void> scheduleDaily({
+    required int id,
+    required String title,
+    required String body,
+    required int hour,
+    int minute = 0,
+    String? payload,
+  }) async {
+    await _notifications.zonedSchedule(
+      id,
+      title,
+      body,
+      nextInstanceOfTime(hour, minute),
+      const NotificationDetails(
+        android: AndroidNotificationDetails(
+          'familyhub_channel',
+          'FamilyHub Bildirimleri',
+          channelDescription:
+              'Aile etkinlikleri, görevler ve acil durum bildirimleri',
+          importance: Importance.high,
+          priority: Priority.high,
+          icon: '@mipmap/ic_launcher',
+        ),
+        iOS: DarwinNotificationDetails(),
+      ),
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+      matchDateTimeComponents: DateTimeComponents.time, // günlük tekrar
+      payload: payload,
+    );
+  }
+
   static Future<void> cancelNotification(int id) async {
     await _notifications.cancel(id);
   }

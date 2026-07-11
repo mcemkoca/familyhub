@@ -3221,6 +3221,28 @@ class AppLocalizationsTr extends AppLocalizations {
   String get fiNotified => 'Bildirim gönderildi';
 
   @override
+  String get fiDailySummary => 'Günlük özet bildirimi';
+
+  @override
+  String get fiDailySummaryDesc =>
+      'Her gün belirlediğin saatte öne çıkanları bildir';
+
+  @override
+  String fiDailySummaryOn(Object hour) {
+    return 'Açık · her gün $hour:00';
+  }
+
+  @override
+  String get fiDailySummaryNotifTitle => 'Aile Zekası';
+
+  @override
+  String get fiDailySummaryNotifBody =>
+      'Bugünün öncelikleri hazır. Görmek için dokun.';
+
+  @override
+  String get fiPickHour => 'Saat';
+
+  @override
   String get fiQuietHours => 'Sessiz saatlerdesin — bildirim gönderilmedi';
 
   @override

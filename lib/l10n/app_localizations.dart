@@ -6182,6 +6182,42 @@ abstract class AppLocalizations {
   /// **'Bildirim gönderildi'**
   String get fiNotified;
 
+  /// No description provided for @fiDailySummary.
+  ///
+  /// In tr, this message translates to:
+  /// **'Günlük özet bildirimi'**
+  String get fiDailySummary;
+
+  /// No description provided for @fiDailySummaryDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Her gün belirlediğin saatte öne çıkanları bildir'**
+  String get fiDailySummaryDesc;
+
+  /// No description provided for @fiDailySummaryOn.
+  ///
+  /// In tr, this message translates to:
+  /// **'Açık · her gün {hour}:00'**
+  String fiDailySummaryOn(Object hour);
+
+  /// No description provided for @fiDailySummaryNotifTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile Zekası'**
+  String get fiDailySummaryNotifTitle;
+
+  /// No description provided for @fiDailySummaryNotifBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugünün öncelikleri hazır. Görmek için dokun.'**
+  String get fiDailySummaryNotifBody;
+
+  /// No description provided for @fiPickHour.
+  ///
+  /// In tr, this message translates to:
+  /// **'Saat'**
+  String get fiPickHour;
+
   /// No description provided for @fiQuietHours.
   ///
   /// In tr, this message translates to:

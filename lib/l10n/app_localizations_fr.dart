@@ -3220,6 +3220,28 @@ class AppLocalizationsFr extends AppLocalizations {
   String get fiNotified => 'Notification envoyée';
 
   @override
+  String get fiDailySummary => 'Résumé quotidien';
+
+  @override
+  String get fiDailySummaryDesc =>
+      'Notifier les priorités chaque jour à l\'heure choisie';
+
+  @override
+  String fiDailySummaryOn(Object hour) {
+    return 'Activé · tous les jours à $hour:00';
+  }
+
+  @override
+  String get fiDailySummaryNotifTitle => 'Intelligence familiale';
+
+  @override
+  String get fiDailySummaryNotifBody =>
+      'Les priorités du jour sont prêtes. Touchez pour les voir.';
+
+  @override
+  String get fiPickHour => 'Heure';
+
+  @override
   String get fiQuietHours =>
       'Vous êtes en heures silencieuses — aucune notification envoyée';
 

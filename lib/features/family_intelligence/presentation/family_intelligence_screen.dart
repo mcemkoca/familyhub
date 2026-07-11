@@ -6,6 +6,7 @@ import '../../../presentation/widgets/settings/screen_header.dart';
 import '../../../services/notification_service.dart';
 import '../application/family_intelligence_providers.dart';
 import '../application/quiet_hours.dart';
+import '../application/daily_summary_scheduler.dart';
 import '../domain/family_insight.dart';
 
 /// Aile Zekası — bağımsız bölüm. Kural tabanlı içgörüler (AI gerektirmez),
@@ -36,7 +37,9 @@ class FamilyIntelligenceScreen extends ConsumerWidget {
                   color: Color(0xFF6B7280),
                   fontSize: 11,
                   fontStyle: FontStyle.italic)),
-          const SizedBox(height: 16),
+          const SizedBox(height: 12),
+          const _DailySummaryTile(),
+          const SizedBox(height: 12),
           if (insights.isEmpty)
             _empty(t)
           else ...[
@@ -234,6 +237,124 @@ class _InsightCardState extends State<_InsightCard> {
                       height: 1.4,
                       fontStyle: FontStyle.italic)),
             ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Günlük özet bildirimi — aç/kapa + saat seçimi (tekrarlayan bildirim).
+class _DailySummaryTile extends StatefulWidget {
+  const _DailySummaryTile();
+
+  @override
+  State<_DailySummaryTile> createState() => _DailySummaryTileState();
+}
+
+class _DailySummaryTileState extends State<_DailySummaryTile> {
+  final _sched = DailySummaryScheduler.instance;
+
+  Future<void> _toggle(bool on, AppLocalizations t) async {
+    if (on) {
+      await _sched.enable(
+        hour: _sched.hour,
+        title: t.fiDailySummaryNotifTitle,
+        body: t.fiDailySummaryNotifBody,
+      );
+    } else {
+      await _sched.disable();
+    }
+    if (mounted) setState(() {});
+  }
+
+  Future<void> _pickHour(AppLocalizations t) async {
+    final picked = await showModalBottomSheet<int>(
+      context: context,
+      backgroundColor: const Color(0xFF13131A),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (ctx) => SafeArea(
+        child: SizedBox(
+          height: 320,
+          child: GridView.count(
+            crossAxisCount: 4,
+            padding: const EdgeInsets.all(16),
+            children: [
+              for (var h = 0; h < 24; h++)
+                GestureDetector(
+                  onTap: () => Navigator.pop(ctx, h),
+                  child: Container(
+                    margin: const EdgeInsets.all(4),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: h == _sched.hour
+                          ? const Color(0xFF8B5CF6)
+                          : const Color(0xFF1A1A24),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Text('$h:00',
+                        style: const TextStyle(color: Colors.white)),
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+    if (picked == null) return;
+    await _sched.enable(
+      hour: picked,
+      title: t.fiDailySummaryNotifTitle,
+      body: t.fiDailySummaryNotifBody,
+    );
+    if (mounted) setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
+    final on = _sched.isEnabled;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      decoration: BoxDecoration(
+        color: const Color(0xFF13131A),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: const Color(0x1AFFFFFF)),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.schedule_rounded, size: 20, color: Color(0xFF8B5CF6)),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(t.fiDailySummary,
+                    style: const TextStyle(
+                        color: Color(0xFFE5E7EB),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600)),
+                GestureDetector(
+                  onTap: on ? () => _pickHour(t) : null,
+                  child: Text(
+                      on
+                          ? t.fiDailySummaryOn(_sched.hour.toString())
+                          : t.fiDailySummaryDesc,
+                      style: TextStyle(
+                          color: on
+                              ? const Color(0xFF8B5CF6)
+                              : const Color(0xFF6B7280),
+                          fontSize: 11.5)),
+                ),
+              ],
+            ),
+          ),
+          Switch(
+            value: on,
+            activeTrackColor: const Color(0xFF8B5CF6),
+            activeThumbColor: Colors.white,
+            onChanged: (v) => _toggle(v, t),
+          ),
         ],
       ),
     );

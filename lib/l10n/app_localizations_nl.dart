@@ -3208,6 +3208,28 @@ class AppLocalizationsNl extends AppLocalizations {
   String get fiNotified => 'Melding verzonden';
 
   @override
+  String get fiDailySummary => 'Dagelijkse samenvatting';
+
+  @override
+  String get fiDailySummaryDesc =>
+      'Meld de topprioriteiten elke dag op het gekozen tijdstip';
+
+  @override
+  String fiDailySummaryOn(Object hour) {
+    return 'Aan · elke dag om $hour:00';
+  }
+
+  @override
+  String get fiDailySummaryNotifTitle => 'Gezinsintelligentie';
+
+  @override
+  String get fiDailySummaryNotifBody =>
+      'De prioriteiten van vandaag staan klaar. Tik om ze te zien.';
+
+  @override
+  String get fiPickHour => 'Uur';
+
+  @override
   String get fiQuietHours => 'Je bent in stille uren — geen melding verzonden';
 
   @override
