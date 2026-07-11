@@ -4403,4 +4403,40 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get exportColDone => 'Tamamlandı';
+
+  @override
+  String get pinSection => 'Uygulama PIN\'i';
+
+  @override
+  String get pinSubtitle => 'Biyometrik başarısız olursa PIN ile giriş';
+
+  @override
+  String get pinSet => 'PIN belirle';
+
+  @override
+  String get pinChange => 'PIN\'i değiştir';
+
+  @override
+  String get pinRemove => 'PIN\'i kaldır';
+
+  @override
+  String get pinRemoveConfirm => 'Uygulama PIN\'i kaldırılsın mı?';
+
+  @override
+  String get pinRemoved => 'PIN kaldırıldı';
+
+  @override
+  String get pinLabel => 'PIN (4-6 hane)';
+
+  @override
+  String get pinConfirmLabel => 'PIN (tekrar)';
+
+  @override
+  String get pinTooShort => 'PIN en az 4 hane olmalı';
+
+  @override
+  String get pinMismatch => 'PIN\'ler eşleşmiyor';
+
+  @override
+  String get pinSaved => 'PIN kaydedildi';
 }

@@ -8,6 +8,7 @@ import '../../../config/routes.dart';
 import '../../../core/supabase_client.dart';
 import '../../../core/validation/input_validator.dart';
 import '../../../services/auth_service.dart';
+import '../../../services/biometric_service.dart';
 import '../../../services/hive_service.dart';
 import '../../widgets/settings/screen_header.dart';
 import '../../widgets/settings/settings_section.dart';
@@ -23,12 +24,128 @@ class SecuritySettingsScreen extends StatefulWidget {
 class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
   bool _biometricEnabled = false;
   bool _biometricAvailable = false;
+  bool _hasPin = false;
   final _localAuth = LocalAuthentication();
 
   @override
   void initState() {
     super.initState();
     _checkBiometric();
+    _loadPinState();
+  }
+
+  Future<void> _loadPinState() async {
+    final has = await BiometricService.hasPin();
+    if (mounted) setState(() => _hasPin = has);
+  }
+
+  /// PIN belirleme/değiştirme diyaloğu — salt'lı hash olarak saklanır.
+  void _showSetPinDialog() {
+    final pinController = TextEditingController();
+    final confirmController = TextEditingController();
+    bool saving = false;
+    final t = AppLocalizations.of(context);
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) => StatefulBuilder(
+        builder: (context, setDialogState) => AlertDialog(
+          title: Text(_hasPin ? t.pinChange : t.pinSet),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: pinController,
+                obscureText: true,
+                keyboardType: TextInputType.number,
+                maxLength: 6,
+                decoration: InputDecoration(
+                  labelText: t.pinLabel,
+                  prefixIcon: const Icon(Icons.pin_outlined),
+                  counterText: '',
+                ),
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: confirmController,
+                obscureText: true,
+                keyboardType: TextInputType.number,
+                maxLength: 6,
+                decoration: InputDecoration(
+                  labelText: t.pinConfirmLabel,
+                  prefixIcon: const Icon(Icons.pin_outlined),
+                  counterText: '',
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: saving ? null : () => Navigator.pop(dialogContext),
+              child: Text(t.cancel),
+            ),
+            TextButton(
+              onPressed: saving
+                  ? null
+                  : () async {
+                      final pin = pinController.text.trim();
+                      final confirm = confirmController.text.trim();
+                      if (pin.length < 4) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(t.pinTooShort)),
+                        );
+                        return;
+                      }
+                      if (pin != confirm) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(t.pinMismatch)),
+                        );
+                        return;
+                      }
+                      setDialogState(() => saving = true);
+                      final messenger = ScaffoldMessenger.of(context);
+                      await BiometricService.registerPin(pin);
+                      if (!dialogContext.mounted) return;
+                      Navigator.pop(dialogContext);
+                      await _loadPinState();
+                      messenger.showSnackBar(
+                        SnackBar(content: Text(t.pinSaved)),
+                      );
+                    },
+              child: Text(t.save),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _removePin() async {
+    final t = AppLocalizations.of(context);
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(t.pinRemove),
+        content: Text(t.pinRemoveConfirm),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: Text(t.cancel)),
+          TextButton(
+              onPressed: () => Navigator.pop(ctx, true),
+              child: Text(t.pinRemove,
+                  style: const TextStyle(color: AppColors.error))),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+    await BiometricService.clearPin();
+    await _loadPinState();
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context).pinRemoved)),
+      );
+    }
   }
 
   Future<void> _checkBiometric() async {
@@ -315,6 +432,33 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () => context.push(AppRoutes.securityQuestionsSetup),
                 ),
+              ],
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: SettingsSection(
+              title: AppLocalizations.of(context).pinSection,
+              icon: Icons.pin_outlined,
+              children: [
+                ListTile(
+                  leading: const Icon(Icons.pin_outlined,
+                      color: Color(0xFF6366F1)),
+                  title: Text(_hasPin
+                      ? AppLocalizations.of(context).pinChange
+                      : AppLocalizations.of(context).pinSet),
+                  subtitle:
+                      Text(AppLocalizations.of(context).pinSubtitle),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: _showSetPinDialog,
+                ),
+                if (_hasPin)
+                  ListTile(
+                    leading: const Icon(Icons.lock_open_outlined,
+                        color: AppColors.error),
+                    title: Text(AppLocalizations.of(context).pinRemove,
+                        style: const TextStyle(color: AppColors.error)),
+                    onTap: _removePin,
+                  ),
               ],
             ),
           ),

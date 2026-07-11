@@ -4398,4 +4398,40 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get exportColDone => 'Termine';
+
+  @override
+  String get pinSection => 'Code PIN de l\'app';
+
+  @override
+  String get pinSubtitle => 'Connexion par PIN si la biometrie echoue';
+
+  @override
+  String get pinSet => 'Definir le PIN';
+
+  @override
+  String get pinChange => 'Modifier le PIN';
+
+  @override
+  String get pinRemove => 'Supprimer le PIN';
+
+  @override
+  String get pinRemoveConfirm => 'Supprimer le code PIN de l\'app ?';
+
+  @override
+  String get pinRemoved => 'PIN supprime';
+
+  @override
+  String get pinLabel => 'PIN (4-6 chiffres)';
+
+  @override
+  String get pinConfirmLabel => 'PIN (repeter)';
+
+  @override
+  String get pinTooShort => 'Le PIN doit comporter au moins 4 chiffres';
+
+  @override
+  String get pinMismatch => 'Les PIN ne correspondent pas';
+
+  @override
+  String get pinSaved => 'PIN enregistre';
 }

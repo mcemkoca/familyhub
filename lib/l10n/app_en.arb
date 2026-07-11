@@ -1396,5 +1396,17 @@
   "exportColQty": "Quantity",
   "exportColUnit": "Unit",
   "exportColCategory": "Category",
-  "exportColDone": "Done"
+  "exportColDone": "Done",
+  "pinSection": "App PIN",
+  "pinSubtitle": "Sign in with a PIN if biometrics fail",
+  "pinSet": "Set PIN",
+  "pinChange": "Change PIN",
+  "pinRemove": "Remove PIN",
+  "pinRemoveConfirm": "Remove the app PIN?",
+  "pinRemoved": "PIN removed",
+  "pinLabel": "PIN (4-6 digits)",
+  "pinConfirmLabel": "PIN (repeat)",
+  "pinTooShort": "PIN must be at least 4 digits",
+  "pinMismatch": "PINs do not match",
+  "pinSaved": "PIN saved"
 }

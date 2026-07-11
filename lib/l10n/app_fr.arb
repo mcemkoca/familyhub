@@ -1396,5 +1396,17 @@
   "exportColQty": "Quantite",
   "exportColUnit": "Unite",
   "exportColCategory": "Categorie",
-  "exportColDone": "Termine"
+  "exportColDone": "Termine",
+  "pinSection": "Code PIN de l'app",
+  "pinSubtitle": "Connexion par PIN si la biometrie echoue",
+  "pinSet": "Definir le PIN",
+  "pinChange": "Modifier le PIN",
+  "pinRemove": "Supprimer le PIN",
+  "pinRemoveConfirm": "Supprimer le code PIN de l'app ?",
+  "pinRemoved": "PIN supprime",
+  "pinLabel": "PIN (4-6 chiffres)",
+  "pinConfirmLabel": "PIN (repeter)",
+  "pinTooShort": "Le PIN doit comporter au moins 4 chiffres",
+  "pinMismatch": "Les PIN ne correspondent pas",
+  "pinSaved": "PIN enregistre"
 }

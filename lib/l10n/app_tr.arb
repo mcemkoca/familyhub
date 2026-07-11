@@ -1401,5 +1401,17 @@
   "exportColQty": "Miktar",
   "exportColUnit": "Birim",
   "exportColCategory": "Kategori",
-  "exportColDone": "Tamamlandı"
+  "exportColDone": "Tamamlandı",
+  "pinSection": "Uygulama PIN'i",
+  "pinSubtitle": "Biyometrik başarısız olursa PIN ile giriş",
+  "pinSet": "PIN belirle",
+  "pinChange": "PIN'i değiştir",
+  "pinRemove": "PIN'i kaldır",
+  "pinRemoveConfirm": "Uygulama PIN'i kaldırılsın mı?",
+  "pinRemoved": "PIN kaldırıldı",
+  "pinLabel": "PIN (4-6 hane)",
+  "pinConfirmLabel": "PIN (tekrar)",
+  "pinTooShort": "PIN en az 4 hane olmalı",
+  "pinMismatch": "PIN'ler eşleşmiyor",
+  "pinSaved": "PIN kaydedildi"
 }

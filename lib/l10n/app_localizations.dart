@@ -8339,6 +8339,78 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Tamamlandı'**
   String get exportColDone;
+
+  /// No description provided for @pinSection.
+  ///
+  /// In tr, this message translates to:
+  /// **'Uygulama PIN\'i'**
+  String get pinSection;
+
+  /// No description provided for @pinSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Biyometrik başarısız olursa PIN ile giriş'**
+  String get pinSubtitle;
+
+  /// No description provided for @pinSet.
+  ///
+  /// In tr, this message translates to:
+  /// **'PIN belirle'**
+  String get pinSet;
+
+  /// No description provided for @pinChange.
+  ///
+  /// In tr, this message translates to:
+  /// **'PIN\'i değiştir'**
+  String get pinChange;
+
+  /// No description provided for @pinRemove.
+  ///
+  /// In tr, this message translates to:
+  /// **'PIN\'i kaldır'**
+  String get pinRemove;
+
+  /// No description provided for @pinRemoveConfirm.
+  ///
+  /// In tr, this message translates to:
+  /// **'Uygulama PIN\'i kaldırılsın mı?'**
+  String get pinRemoveConfirm;
+
+  /// No description provided for @pinRemoved.
+  ///
+  /// In tr, this message translates to:
+  /// **'PIN kaldırıldı'**
+  String get pinRemoved;
+
+  /// No description provided for @pinLabel.
+  ///
+  /// In tr, this message translates to:
+  /// **'PIN (4-6 hane)'**
+  String get pinLabel;
+
+  /// No description provided for @pinConfirmLabel.
+  ///
+  /// In tr, this message translates to:
+  /// **'PIN (tekrar)'**
+  String get pinConfirmLabel;
+
+  /// No description provided for @pinTooShort.
+  ///
+  /// In tr, this message translates to:
+  /// **'PIN en az 4 hane olmalı'**
+  String get pinTooShort;
+
+  /// No description provided for @pinMismatch.
+  ///
+  /// In tr, this message translates to:
+  /// **'PIN\'ler eşleşmiyor'**
+  String get pinMismatch;
+
+  /// No description provided for @pinSaved.
+  ///
+  /// In tr, this message translates to:
+  /// **'PIN kaydedildi'**
+  String get pinSaved;
 }
 
 class _AppLocalizationsDelegate

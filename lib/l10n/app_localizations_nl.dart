@@ -4382,4 +4382,40 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get exportColDone => 'Klaar';
+
+  @override
+  String get pinSection => 'App-PIN';
+
+  @override
+  String get pinSubtitle => 'Aanmelden met PIN als biometrie mislukt';
+
+  @override
+  String get pinSet => 'PIN instellen';
+
+  @override
+  String get pinChange => 'PIN wijzigen';
+
+  @override
+  String get pinRemove => 'PIN verwijderen';
+
+  @override
+  String get pinRemoveConfirm => 'App-PIN verwijderen?';
+
+  @override
+  String get pinRemoved => 'PIN verwijderd';
+
+  @override
+  String get pinLabel => 'PIN (4-6 cijfers)';
+
+  @override
+  String get pinConfirmLabel => 'PIN (herhaal)';
+
+  @override
+  String get pinTooShort => 'PIN moet minstens 4 cijfers zijn';
+
+  @override
+  String get pinMismatch => 'PINs komen niet overeen';
+
+  @override
+  String get pinSaved => 'PIN opgeslagen';
 }

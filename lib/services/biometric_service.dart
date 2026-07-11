@@ -2,8 +2,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:crypto/crypto.dart';
-import 'dart:convert';
+import '../features/security/domain/pin_hasher.dart';
 
 class BiometricService {
   static final LocalAuthentication _localAuth = LocalAuthentication();
@@ -47,22 +46,30 @@ class BiometricService {
     return await _validatePin(fallbackPin);
   }
 
-  /// Stores a hashed PIN for fallback authentication.
+  /// Fallback PIN'i salt'lı + iterasyonlu olarak güvenli depoya yazar.
   static Future<void> registerPin(String pin) async {
-    final hash = _hashPin(pin);
-    await _secureStorage.write(key: _pinHashKey, value: hash);
+    await _secureStorage.write(key: _pinHashKey, value: PinHasher.hash(pin));
+  }
+
+  /// Kayıtlı bir fallback PIN var mı?
+  static Future<bool> hasPin() async {
+    final stored = await _secureStorage.read(key: _pinHashKey);
+    return stored != null && stored.isNotEmpty;
+  }
+
+  /// Kayıtlı PIN'i siler.
+  static Future<void> clearPin() async {
+    await _secureStorage.delete(key: _pinHashKey);
   }
 
   static Future<bool> _validatePin(String pin) async {
     final storedHash = await _secureStorage.read(key: _pinHashKey);
     if (storedHash == null || storedHash.isEmpty) return false;
-    final inputHash = _hashPin(pin);
-    return storedHash == inputHash;
-  }
-
-  static String _hashPin(String pin) {
-    final bytes = utf8.encode(pin);
-    final digest = sha256.convert(bytes);
-    return digest.toString();
+    final ok = PinHasher.verify(pin, storedHash);
+    // Eski saltsız kayıt doğru PIN ile açıldıysa yeni formata yükselt.
+    if (ok && PinHasher.isLegacyFormat(storedHash)) {
+      await _secureStorage.write(key: _pinHashKey, value: PinHasher.hash(pin));
+    }
+    return ok;
   }
 }

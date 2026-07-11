@@ -1396,5 +1396,17 @@
   "exportColQty": "Aantal",
   "exportColUnit": "Eenheid",
   "exportColCategory": "Categorie",
-  "exportColDone": "Klaar"
+  "exportColDone": "Klaar",
+  "pinSection": "App-PIN",
+  "pinSubtitle": "Aanmelden met PIN als biometrie mislukt",
+  "pinSet": "PIN instellen",
+  "pinChange": "PIN wijzigen",
+  "pinRemove": "PIN verwijderen",
+  "pinRemoveConfirm": "App-PIN verwijderen?",
+  "pinRemoved": "PIN verwijderd",
+  "pinLabel": "PIN (4-6 cijfers)",
+  "pinConfirmLabel": "PIN (herhaal)",
+  "pinTooShort": "PIN moet minstens 4 cijfers zijn",
+  "pinMismatch": "PINs komen niet overeen",
+  "pinSaved": "PIN opgeslagen"
 }

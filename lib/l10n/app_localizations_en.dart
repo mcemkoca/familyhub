@@ -4382,4 +4382,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get exportColDone => 'Done';
+
+  @override
+  String get pinSection => 'App PIN';
+
+  @override
+  String get pinSubtitle => 'Sign in with a PIN if biometrics fail';
+
+  @override
+  String get pinSet => 'Set PIN';
+
+  @override
+  String get pinChange => 'Change PIN';
+
+  @override
+  String get pinRemove => 'Remove PIN';
+
+  @override
+  String get pinRemoveConfirm => 'Remove the app PIN?';
+
+  @override
+  String get pinRemoved => 'PIN removed';
+
+  @override
+  String get pinLabel => 'PIN (4-6 digits)';
+
+  @override
+  String get pinConfirmLabel => 'PIN (repeat)';
+
+  @override
+  String get pinTooShort => 'PIN must be at least 4 digits';
+
+  @override
+  String get pinMismatch => 'PINs do not match';
+
+  @override
+  String get pinSaved => 'PIN saved';
 }
