@@ -4517,4 +4517,96 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get setCustomizeHomeDesc =>
       'Carte intelligente, astuces et ordre des tuiles';
+
+  @override
+  String get cdSubtitle => 'Suivi de croissance · Lecons · Devoirs';
+
+  @override
+  String get cdAddProfile => 'Ajouter un profil d\'enfant';
+
+  @override
+  String get cdChildName => 'Nom de l\'enfant';
+
+  @override
+  String get cdSchoolName => 'Nom de l\'ecole (facultatif)';
+
+  @override
+  String get cdCreateProfile => 'Creer le profil';
+
+  @override
+  String get cdPickOrWriteLesson =>
+      'Choisissez une lecon ou ecrivez la votre :';
+
+  @override
+  String get cdLessonName => 'Nom de la lecon';
+
+  @override
+  String get cdAddLesson => 'Ajouter une lecon';
+
+  @override
+  String get cdHomeworkDesc => 'Description du devoir';
+
+  @override
+  String get cdSaveHomework => 'Enregistrer le devoir';
+
+  @override
+  String get cdHeightCm => 'Taille (cm)';
+
+  @override
+  String get cdWeightKg => 'Poids (kg)';
+
+  @override
+  String cdDevGroup(Object group) {
+    return 'Groupe de developpement : $group';
+  }
+
+  @override
+  String get cdCompleted => 'termine';
+
+  @override
+  String get cdStepGrowsTree => 'Chaque etape terminee fait grandir l\'arbre';
+
+  @override
+  String cdWeeklyPlanFor(Object name) {
+    return 'Plan hebdomadaire IA pour $name';
+  }
+
+  @override
+  String get cdNoLessons => 'Aucune lecon\nAppuyez sur + pour ajouter';
+
+  @override
+  String get cdNoGrade => 'Aucune note saisie';
+
+  @override
+  String get cdAvg => 'moy.';
+
+  @override
+  String get cdGradeRange => 'Note (0-100)';
+
+  @override
+  String get cdNoHomework => 'Aucun devoir — super ! 🎉';
+
+  @override
+  String get cdNoMeasurements => 'Aucune mesure\nAppuyez sur + pour ajouter';
+
+  @override
+  String get cdHeight => 'Taille';
+
+  @override
+  String get cdWeight => 'Poids';
+
+  @override
+  String get cdRegenerate => 'Regenerer';
+
+  @override
+  String get cdGeneratingPlan => 'Gemini prepare un plan personnalise...';
+
+  @override
+  String get cdPlanFailed => 'Impossible de generer le plan (connexion/quota).';
+
+  @override
+  String get cdRetry => 'Reessayer';
+
+  @override
+  String get cdParentChecklist => 'Liste de controle parentale';
 }

@@ -8573,6 +8573,180 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Akıllı kart, ipuçları ve kutucuk sırası'**
   String get setCustomizeHomeDesc;
+
+  /// No description provided for @cdSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Büyüme takibi · Dersler · Ödevler'**
+  String get cdSubtitle;
+
+  /// No description provided for @cdAddProfile.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çocuk profili ekleyin'**
+  String get cdAddProfile;
+
+  /// No description provided for @cdChildName.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çocuğun adı'**
+  String get cdChildName;
+
+  /// No description provided for @cdSchoolName.
+  ///
+  /// In tr, this message translates to:
+  /// **'Okul adı (isteğe bağlı)'**
+  String get cdSchoolName;
+
+  /// No description provided for @cdCreateProfile.
+  ///
+  /// In tr, this message translates to:
+  /// **'Profil Oluştur'**
+  String get cdCreateProfile;
+
+  /// No description provided for @cdPickOrWriteLesson.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ders seç veya kendin yaz:'**
+  String get cdPickOrWriteLesson;
+
+  /// No description provided for @cdLessonName.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ders adı'**
+  String get cdLessonName;
+
+  /// No description provided for @cdAddLesson.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ders Ekle'**
+  String get cdAddLesson;
+
+  /// No description provided for @cdHomeworkDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ödev açıklaması'**
+  String get cdHomeworkDesc;
+
+  /// No description provided for @cdSaveHomework.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ödevi Kaydet'**
+  String get cdSaveHomework;
+
+  /// No description provided for @cdHeightCm.
+  ///
+  /// In tr, this message translates to:
+  /// **'Boy (cm)'**
+  String get cdHeightCm;
+
+  /// No description provided for @cdWeightKg.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kilo (kg)'**
+  String get cdWeightKg;
+
+  /// No description provided for @cdDevGroup.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gelişim grubu: {group}'**
+  String cdDevGroup(Object group);
+
+  /// No description provided for @cdCompleted.
+  ///
+  /// In tr, this message translates to:
+  /// **'tamamlandı'**
+  String get cdCompleted;
+
+  /// No description provided for @cdStepGrowsTree.
+  ///
+  /// In tr, this message translates to:
+  /// **'Her tamamlanan basamak ağacı büyütür'**
+  String get cdStepGrowsTree;
+
+  /// No description provided for @cdWeeklyPlanFor.
+  ///
+  /// In tr, this message translates to:
+  /// **'AI ile {name}\'e Özel Haftalık Plan'**
+  String cdWeeklyPlanFor(Object name);
+
+  /// No description provided for @cdNoLessons.
+  ///
+  /// In tr, this message translates to:
+  /// **'Henüz ders eklenmedi\n+ ile ekleyin'**
+  String get cdNoLessons;
+
+  /// No description provided for @cdNoGrade.
+  ///
+  /// In tr, this message translates to:
+  /// **'Not girilmedi'**
+  String get cdNoGrade;
+
+  /// No description provided for @cdAvg.
+  ///
+  /// In tr, this message translates to:
+  /// **'ort.'**
+  String get cdAvg;
+
+  /// No description provided for @cdGradeRange.
+  ///
+  /// In tr, this message translates to:
+  /// **'Not (0-100)'**
+  String get cdGradeRange;
+
+  /// No description provided for @cdNoHomework.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ödev yok — harika! 🎉'**
+  String get cdNoHomework;
+
+  /// No description provided for @cdNoMeasurements.
+  ///
+  /// In tr, this message translates to:
+  /// **'Henüz ölçüm girilmedi\n+ ile ekleyin'**
+  String get cdNoMeasurements;
+
+  /// No description provided for @cdHeight.
+  ///
+  /// In tr, this message translates to:
+  /// **'Boy'**
+  String get cdHeight;
+
+  /// No description provided for @cdWeight.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kilo'**
+  String get cdWeight;
+
+  /// No description provided for @cdRegenerate.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yeniden üret'**
+  String get cdRegenerate;
+
+  /// No description provided for @cdGeneratingPlan.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gemini kişisel plan hazırlıyor...'**
+  String get cdGeneratingPlan;
+
+  /// No description provided for @cdPlanFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Plan üretilemedi (bağlantı/kota).'**
+  String get cdPlanFailed;
+
+  /// No description provided for @cdRetry.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tekrar Dene'**
+  String get cdRetry;
+
+  /// No description provided for @cdParentChecklist.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ebeveyn Kontrol Listesi'**
+  String get cdParentChecklist;
 }
 
 class _AppLocalizationsDelegate

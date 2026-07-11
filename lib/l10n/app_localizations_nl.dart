@@ -4500,4 +4500,95 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get setCustomizeHomeDesc => 'Slimme kaart, tips en tegelvolgorde';
+
+  @override
+  String get cdSubtitle => 'Groeitracking · Lessen · Huiswerk';
+
+  @override
+  String get cdAddProfile => 'Voeg een kindprofiel toe';
+
+  @override
+  String get cdChildName => 'Naam van het kind';
+
+  @override
+  String get cdSchoolName => 'Schoolnaam (optioneel)';
+
+  @override
+  String get cdCreateProfile => 'Profiel aanmaken';
+
+  @override
+  String get cdPickOrWriteLesson => 'Kies een les of schrijf je eigen:';
+
+  @override
+  String get cdLessonName => 'Lesnaam';
+
+  @override
+  String get cdAddLesson => 'Les toevoegen';
+
+  @override
+  String get cdHomeworkDesc => 'Huiswerkbeschrijving';
+
+  @override
+  String get cdSaveHomework => 'Huiswerk opslaan';
+
+  @override
+  String get cdHeightCm => 'Lengte (cm)';
+
+  @override
+  String get cdWeightKg => 'Gewicht (kg)';
+
+  @override
+  String cdDevGroup(Object group) {
+    return 'Ontwikkelingsgroep: $group';
+  }
+
+  @override
+  String get cdCompleted => 'voltooid';
+
+  @override
+  String get cdStepGrowsTree => 'Elke voltooide stap laat de boom groeien';
+
+  @override
+  String cdWeeklyPlanFor(Object name) {
+    return 'AI-weekplan voor $name';
+  }
+
+  @override
+  String get cdNoLessons => 'Nog geen lessen\nTik op + om toe te voegen';
+
+  @override
+  String get cdNoGrade => 'Geen cijfer ingevoerd';
+
+  @override
+  String get cdAvg => 'gem.';
+
+  @override
+  String get cdGradeRange => 'Cijfer (0-100)';
+
+  @override
+  String get cdNoHomework => 'Geen huiswerk — geweldig! 🎉';
+
+  @override
+  String get cdNoMeasurements => 'Nog geen metingen\nTik op + om toe te voegen';
+
+  @override
+  String get cdHeight => 'Lengte';
+
+  @override
+  String get cdWeight => 'Gewicht';
+
+  @override
+  String get cdRegenerate => 'Opnieuw genereren';
+
+  @override
+  String get cdGeneratingPlan => 'Gemini bereidt een persoonlijk plan voor...';
+
+  @override
+  String get cdPlanFailed => 'Kan plan niet genereren (verbinding/quota).';
+
+  @override
+  String get cdRetry => 'Opnieuw proberen';
+
+  @override
+  String get cdParentChecklist => 'Ouderchecklist';
 }

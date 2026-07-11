@@ -4500,4 +4500,95 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get setCustomizeHomeDesc => 'Smart card, tips and tile order';
+
+  @override
+  String get cdSubtitle => 'Growth tracking · Lessons · Homework';
+
+  @override
+  String get cdAddProfile => 'Add a child profile';
+
+  @override
+  String get cdChildName => 'Child\'s name';
+
+  @override
+  String get cdSchoolName => 'School name (optional)';
+
+  @override
+  String get cdCreateProfile => 'Create Profile';
+
+  @override
+  String get cdPickOrWriteLesson => 'Pick a lesson or write your own:';
+
+  @override
+  String get cdLessonName => 'Lesson name';
+
+  @override
+  String get cdAddLesson => 'Add Lesson';
+
+  @override
+  String get cdHomeworkDesc => 'Homework description';
+
+  @override
+  String get cdSaveHomework => 'Save Homework';
+
+  @override
+  String get cdHeightCm => 'Height (cm)';
+
+  @override
+  String get cdWeightKg => 'Weight (kg)';
+
+  @override
+  String cdDevGroup(Object group) {
+    return 'Development group: $group';
+  }
+
+  @override
+  String get cdCompleted => 'completed';
+
+  @override
+  String get cdStepGrowsTree => 'Every completed step grows the tree';
+
+  @override
+  String cdWeeklyPlanFor(Object name) {
+    return 'AI Weekly Plan for $name';
+  }
+
+  @override
+  String get cdNoLessons => 'No lessons yet\nTap + to add';
+
+  @override
+  String get cdNoGrade => 'No grade entered';
+
+  @override
+  String get cdAvg => 'avg.';
+
+  @override
+  String get cdGradeRange => 'Grade (0-100)';
+
+  @override
+  String get cdNoHomework => 'No homework — great! 🎉';
+
+  @override
+  String get cdNoMeasurements => 'No measurements yet\nTap + to add';
+
+  @override
+  String get cdHeight => 'Height';
+
+  @override
+  String get cdWeight => 'Weight';
+
+  @override
+  String get cdRegenerate => 'Regenerate';
+
+  @override
+  String get cdGeneratingPlan => 'Gemini is preparing a personal plan...';
+
+  @override
+  String get cdPlanFailed => 'Could not generate plan (connection/quota).';
+
+  @override
+  String get cdRetry => 'Try Again';
+
+  @override
+  String get cdParentChecklist => 'Parent Checklist';
 }

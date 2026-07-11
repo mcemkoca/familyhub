@@ -4521,4 +4521,95 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get setCustomizeHomeDesc => 'Akıllı kart, ipuçları ve kutucuk sırası';
+
+  @override
+  String get cdSubtitle => 'Büyüme takibi · Dersler · Ödevler';
+
+  @override
+  String get cdAddProfile => 'Çocuk profili ekleyin';
+
+  @override
+  String get cdChildName => 'Çocuğun adı';
+
+  @override
+  String get cdSchoolName => 'Okul adı (isteğe bağlı)';
+
+  @override
+  String get cdCreateProfile => 'Profil Oluştur';
+
+  @override
+  String get cdPickOrWriteLesson => 'Ders seç veya kendin yaz:';
+
+  @override
+  String get cdLessonName => 'Ders adı';
+
+  @override
+  String get cdAddLesson => 'Ders Ekle';
+
+  @override
+  String get cdHomeworkDesc => 'Ödev açıklaması';
+
+  @override
+  String get cdSaveHomework => 'Ödevi Kaydet';
+
+  @override
+  String get cdHeightCm => 'Boy (cm)';
+
+  @override
+  String get cdWeightKg => 'Kilo (kg)';
+
+  @override
+  String cdDevGroup(Object group) {
+    return 'Gelişim grubu: $group';
+  }
+
+  @override
+  String get cdCompleted => 'tamamlandı';
+
+  @override
+  String get cdStepGrowsTree => 'Her tamamlanan basamak ağacı büyütür';
+
+  @override
+  String cdWeeklyPlanFor(Object name) {
+    return 'AI ile $name\'e Özel Haftalık Plan';
+  }
+
+  @override
+  String get cdNoLessons => 'Henüz ders eklenmedi\n+ ile ekleyin';
+
+  @override
+  String get cdNoGrade => 'Not girilmedi';
+
+  @override
+  String get cdAvg => 'ort.';
+
+  @override
+  String get cdGradeRange => 'Not (0-100)';
+
+  @override
+  String get cdNoHomework => 'Ödev yok — harika! 🎉';
+
+  @override
+  String get cdNoMeasurements => 'Henüz ölçüm girilmedi\n+ ile ekleyin';
+
+  @override
+  String get cdHeight => 'Boy';
+
+  @override
+  String get cdWeight => 'Kilo';
+
+  @override
+  String get cdRegenerate => 'Yeniden üret';
+
+  @override
+  String get cdGeneratingPlan => 'Gemini kişisel plan hazırlıyor...';
+
+  @override
+  String get cdPlanFailed => 'Plan üretilemedi (bağlantı/kota).';
+
+  @override
+  String get cdRetry => 'Tekrar Dene';
+
+  @override
+  String get cdParentChecklist => 'Ebeveyn Kontrol Listesi';
 }
