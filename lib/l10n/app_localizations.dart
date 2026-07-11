@@ -9653,6 +9653,72 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Not'**
   String get medNote;
+
+  /// No description provided for @fdTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile Detayları'**
+  String get fdTitle;
+
+  /// No description provided for @fdPhotoUpdated.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile fotoğrafı güncellendi'**
+  String get fdPhotoUpdated;
+
+  /// No description provided for @fdPhotoFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Fotoğraf yüklenemedi: {msg}'**
+  String fdPhotoFailed(Object msg);
+
+  /// No description provided for @fdInfoSaved.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile bilgileri kaydedildi'**
+  String get fdInfoSaved;
+
+  /// No description provided for @fdSaveFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kaydedilemedi: {msg}'**
+  String fdSaveFailed(Object msg);
+
+  /// No description provided for @fdDeleteMemoryConfirm.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu anı silmek istediğinize emin misiniz?'**
+  String get fdDeleteMemoryConfirm;
+
+  /// No description provided for @fdMemoryDeleted.
+  ///
+  /// In tr, this message translates to:
+  /// **'Anı silindi'**
+  String get fdMemoryDeleted;
+
+  /// No description provided for @fdDeleteFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Silinemedi: {msg}'**
+  String fdDeleteFailed(Object msg);
+
+  /// No description provided for @fdAddMemory.
+  ///
+  /// In tr, this message translates to:
+  /// **'Anı Ekle'**
+  String get fdAddMemory;
+
+  /// No description provided for @fdAddFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Eklenemedi: {msg}'**
+  String fdAddFailed(Object msg);
+
+  /// No description provided for @fdDetailOptional.
+  ///
+  /// In tr, this message translates to:
+  /// **'Detay (isteğe bağlı)'**
+  String get fdDetailOptional;
 }
 
 class _AppLocalizationsDelegate

@@ -1615,5 +1615,16 @@
   "medEndOptional": "End (optional)",
   "medReminder": "Reminder",
   "medReminderTime": "Reminder Time",
-  "medNote": "Note"
+  "medNote": "Note",
+  "fdTitle": "Family Details",
+  "fdPhotoUpdated": "Family photo updated",
+  "fdPhotoFailed": "Photo upload failed: {msg}",
+  "fdInfoSaved": "Family info saved",
+  "fdSaveFailed": "Could not save: {msg}",
+  "fdDeleteMemoryConfirm": "Are you sure you want to delete this memory?",
+  "fdMemoryDeleted": "Memory deleted",
+  "fdDeleteFailed": "Could not delete: {msg}",
+  "fdAddMemory": "Add Memory",
+  "fdAddFailed": "Could not add: {msg}",
+  "fdDetailOptional": "Detail (optional)"
 }

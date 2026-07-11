@@ -5085,4 +5085,46 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get medNote => 'Note';
+
+  @override
+  String get fdTitle => 'Details de la famille';
+
+  @override
+  String get fdPhotoUpdated => 'Photo de famille mise a jour';
+
+  @override
+  String fdPhotoFailed(Object msg) {
+    return 'Echec du telechargement de la photo : $msg';
+  }
+
+  @override
+  String get fdInfoSaved => 'Infos de la famille enregistrees';
+
+  @override
+  String fdSaveFailed(Object msg) {
+    return 'Impossible d\'enregistrer : $msg';
+  }
+
+  @override
+  String get fdDeleteMemoryConfirm =>
+      'Voulez-vous vraiment supprimer ce souvenir ?';
+
+  @override
+  String get fdMemoryDeleted => 'Souvenir supprime';
+
+  @override
+  String fdDeleteFailed(Object msg) {
+    return 'Impossible de supprimer : $msg';
+  }
+
+  @override
+  String get fdAddMemory => 'Ajouter un souvenir';
+
+  @override
+  String fdAddFailed(Object msg) {
+    return 'Impossible d\'ajouter : $msg';
+  }
+
+  @override
+  String get fdDetailOptional => 'Detail (facultatif)';
 }

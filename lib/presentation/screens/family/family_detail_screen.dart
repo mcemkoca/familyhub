@@ -114,14 +114,14 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Aile fotoğrafı güncellendi')),
+          SnackBar(content: Text(AppLocalizations.of(context).fdPhotoUpdated)),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Fotoğraf yüklenemedi: $e'),
+            content: Text(AppLocalizations.of(context).fdPhotoFailed('$e')),
             backgroundColor: AppColors.error,
           ),
         );
@@ -153,7 +153,7 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
           _isSaving = false;
         });
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Aile bilgileri kaydedildi')),
+          SnackBar(content: Text(AppLocalizations.of(context).fdInfoSaved)),
         );
       }
     } catch (e) {
@@ -161,7 +161,7 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
         setState(() => _isSaving = false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Kaydedilemedi: $e'),
+            content: Text(AppLocalizations.of(context).fdSaveFailed('$e')),
             backgroundColor: AppColors.error,
           ),
         );
@@ -199,7 +199,7 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context).delete),
-        content: const Text('Bu anı silmek istediğinize emin misiniz?'),
+        content: Text(AppLocalizations.of(context).fdDeleteMemoryConfirm),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -224,14 +224,14 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
       await _loadData();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Anı silindi')),
+          SnackBar(content: Text(AppLocalizations.of(context).fdMemoryDeleted)),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Silinemedi: $e'),
+            content: Text(AppLocalizations.of(context).fdDeleteFailed('$e')),
             backgroundColor: AppColors.error,
           ),
         );
@@ -260,7 +260,7 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
       return Scaffold(
         backgroundColor: bg,
         appBar: ScreenHeader(
-          title: 'Aile Detayları',
+          title: AppLocalizations.of(context).fdTitle,
           showBack: true,
           onBack: () => Navigator.pop(context),
         ),
@@ -272,7 +272,7 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
       return Scaffold(
         backgroundColor: bg,
         appBar: ScreenHeader(
-          title: 'Aile Detayları',
+          title: AppLocalizations.of(context).fdTitle,
           showBack: true,
           onBack: () => Navigator.pop(context),
         ),
@@ -285,7 +285,7 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
     return Scaffold(
       backgroundColor: bg,
       appBar: ScreenHeader(
-        title: 'Aile Detayları',
+        title: AppLocalizations.of(context).fdTitle,
         showBack: true,
         onBack: () => Navigator.pop(context),
         rightAction: _isEditing
@@ -378,7 +378,7 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
         onPressed: _addHistory,
         backgroundColor: const Color(0xFF6366F1),
         icon: const Icon(Icons.add, color: Colors.white),
-        label: const Text('Anı Ekle', style: TextStyle(color: Colors.white)),
+        label: Text(AppLocalizations.of(context).fdAddMemory, style: const TextStyle(color: Colors.white)),
       ),
     );
   }
@@ -865,7 +865,7 @@ class _AddHistorySheetState extends State<_AddHistorySheet> {
         setState(() => _saving = false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Eklenemedi: $e'),
+            content: Text(AppLocalizations.of(context).fdAddFailed('$e')),
             backgroundColor: AppColors.error,
           ),
         );
@@ -938,7 +938,7 @@ class _AddHistorySheetState extends State<_AddHistorySheet> {
                 controller: _contentController,
                 maxLines: 3,
                 decoration: InputDecoration(
-                  labelText: 'Detay (isteğe bağlı)',
+                  labelText: AppLocalizations.of(context).fdDetailOptional,
                   filled: true,
                   fillColor: const Color(0xFF13131A),
                   border: OutlineInputBorder(

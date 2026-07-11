@@ -5084,4 +5084,46 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get medNote => 'Not';
+
+  @override
+  String get fdTitle => 'Aile Detayları';
+
+  @override
+  String get fdPhotoUpdated => 'Aile fotoğrafı güncellendi';
+
+  @override
+  String fdPhotoFailed(Object msg) {
+    return 'Fotoğraf yüklenemedi: $msg';
+  }
+
+  @override
+  String get fdInfoSaved => 'Aile bilgileri kaydedildi';
+
+  @override
+  String fdSaveFailed(Object msg) {
+    return 'Kaydedilemedi: $msg';
+  }
+
+  @override
+  String get fdDeleteMemoryConfirm =>
+      'Bu anı silmek istediğinize emin misiniz?';
+
+  @override
+  String get fdMemoryDeleted => 'Anı silindi';
+
+  @override
+  String fdDeleteFailed(Object msg) {
+    return 'Silinemedi: $msg';
+  }
+
+  @override
+  String get fdAddMemory => 'Anı Ekle';
+
+  @override
+  String fdAddFailed(Object msg) {
+    return 'Eklenemedi: $msg';
+  }
+
+  @override
+  String get fdDetailOptional => 'Detay (isteğe bağlı)';
 }

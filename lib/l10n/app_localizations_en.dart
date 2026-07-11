@@ -5064,4 +5064,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get medNote => 'Note';
+
+  @override
+  String get fdTitle => 'Family Details';
+
+  @override
+  String get fdPhotoUpdated => 'Family photo updated';
+
+  @override
+  String fdPhotoFailed(Object msg) {
+    return 'Photo upload failed: $msg';
+  }
+
+  @override
+  String get fdInfoSaved => 'Family info saved';
+
+  @override
+  String fdSaveFailed(Object msg) {
+    return 'Could not save: $msg';
+  }
+
+  @override
+  String get fdDeleteMemoryConfirm =>
+      'Are you sure you want to delete this memory?';
+
+  @override
+  String get fdMemoryDeleted => 'Memory deleted';
+
+  @override
+  String fdDeleteFailed(Object msg) {
+    return 'Could not delete: $msg';
+  }
+
+  @override
+  String get fdAddMemory => 'Add Memory';
+
+  @override
+  String fdAddFailed(Object msg) {
+    return 'Could not add: $msg';
+  }
+
+  @override
+  String get fdDetailOptional => 'Detail (optional)';
 }

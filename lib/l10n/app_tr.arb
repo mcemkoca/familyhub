@@ -1630,5 +1630,20 @@
   "medEndOptional": "Bitiş (opsiyonel)",
   "medReminder": "Hatırlatma",
   "medReminderTime": "Hatırlatma Saati",
-  "medNote": "Not"
+  "medNote": "Not",
+  "fdTitle": "Aile Detayları",
+  "fdPhotoUpdated": "Aile fotoğrafı güncellendi",
+  "fdPhotoFailed": "Fotoğraf yüklenemedi: {msg}",
+  "@fdPhotoFailed": { "placeholders": { "msg": {} } },
+  "fdInfoSaved": "Aile bilgileri kaydedildi",
+  "fdSaveFailed": "Kaydedilemedi: {msg}",
+  "@fdSaveFailed": { "placeholders": { "msg": {} } },
+  "fdDeleteMemoryConfirm": "Bu anı silmek istediğinize emin misiniz?",
+  "fdMemoryDeleted": "Anı silindi",
+  "fdDeleteFailed": "Silinemedi: {msg}",
+  "@fdDeleteFailed": { "placeholders": { "msg": {} } },
+  "fdAddMemory": "Anı Ekle",
+  "fdAddFailed": "Eklenemedi: {msg}",
+  "@fdAddFailed": { "placeholders": { "msg": {} } },
+  "fdDetailOptional": "Detay (isteğe bağlı)"
 }

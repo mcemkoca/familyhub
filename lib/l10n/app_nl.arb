@@ -1615,5 +1615,16 @@
   "medEndOptional": "Einde (optioneel)",
   "medReminder": "Herinnering",
   "medReminderTime": "Herinneringstijd",
-  "medNote": "Notitie"
+  "medNote": "Notitie",
+  "fdTitle": "Gezinsdetails",
+  "fdPhotoUpdated": "Gezinsfoto bijgewerkt",
+  "fdPhotoFailed": "Foto uploaden mislukt: {msg}",
+  "fdInfoSaved": "Gezinsinfo opgeslagen",
+  "fdSaveFailed": "Kan niet opslaan: {msg}",
+  "fdDeleteMemoryConfirm": "Weet je zeker dat je deze herinnering wilt verwijderen?",
+  "fdMemoryDeleted": "Herinnering verwijderd",
+  "fdDeleteFailed": "Kan niet verwijderen: {msg}",
+  "fdAddMemory": "Herinnering toevoegen",
+  "fdAddFailed": "Kan niet toevoegen: {msg}",
+  "fdDetailOptional": "Detail (optioneel)"
 }

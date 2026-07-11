@@ -5065,4 +5065,46 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get medNote => 'Notitie';
+
+  @override
+  String get fdTitle => 'Gezinsdetails';
+
+  @override
+  String get fdPhotoUpdated => 'Gezinsfoto bijgewerkt';
+
+  @override
+  String fdPhotoFailed(Object msg) {
+    return 'Foto uploaden mislukt: $msg';
+  }
+
+  @override
+  String get fdInfoSaved => 'Gezinsinfo opgeslagen';
+
+  @override
+  String fdSaveFailed(Object msg) {
+    return 'Kan niet opslaan: $msg';
+  }
+
+  @override
+  String get fdDeleteMemoryConfirm =>
+      'Weet je zeker dat je deze herinnering wilt verwijderen?';
+
+  @override
+  String get fdMemoryDeleted => 'Herinnering verwijderd';
+
+  @override
+  String fdDeleteFailed(Object msg) {
+    return 'Kan niet verwijderen: $msg';
+  }
+
+  @override
+  String get fdAddMemory => 'Herinnering toevoegen';
+
+  @override
+  String fdAddFailed(Object msg) {
+    return 'Kan niet toevoegen: $msg';
+  }
+
+  @override
+  String get fdDetailOptional => 'Detail (optioneel)';
 }

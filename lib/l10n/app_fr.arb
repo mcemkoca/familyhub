@@ -1615,5 +1615,16 @@
   "medEndOptional": "Fin (facultatif)",
   "medReminder": "Rappel",
   "medReminderTime": "Heure du rappel",
-  "medNote": "Note"
+  "medNote": "Note",
+  "fdTitle": "Details de la famille",
+  "fdPhotoUpdated": "Photo de famille mise a jour",
+  "fdPhotoFailed": "Echec du telechargement de la photo : {msg}",
+  "fdInfoSaved": "Infos de la famille enregistrees",
+  "fdSaveFailed": "Impossible d'enregistrer : {msg}",
+  "fdDeleteMemoryConfirm": "Voulez-vous vraiment supprimer ce souvenir ?",
+  "fdMemoryDeleted": "Souvenir supprime",
+  "fdDeleteFailed": "Impossible de supprimer : {msg}",
+  "fdAddMemory": "Ajouter un souvenir",
+  "fdAddFailed": "Impossible d'ajouter : {msg}",
+  "fdDetailOptional": "Detail (facultatif)"
 }
