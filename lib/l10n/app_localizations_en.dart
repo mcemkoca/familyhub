@@ -4668,4 +4668,88 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get fhComplete => 'Complete';
+
+  @override
+  String get eduTitle => 'Family Education';
+
+  @override
+  String get eduSearchHint => 'Search activities...';
+
+  @override
+  String get eduNoActivity => 'No activities found';
+
+  @override
+  String get eduFilterByAge => 'Filter by Age';
+
+  @override
+  String get eduPracticalTips => 'Practical Tips';
+
+  @override
+  String get eduYoutubeSearch => 'YouTube video search';
+
+  @override
+  String get eduWatchYoutube => 'Watch video guides on YouTube';
+
+  @override
+  String get eduRelatedActivities => 'Related Activities';
+
+  @override
+  String get eduLearningTree => 'Your Learning Tree';
+
+  @override
+  String get eduTreeGrows => 'Every completed activity grows your tree';
+
+  @override
+  String get eduOverallProgress => 'Overall Progress';
+
+  @override
+  String get eduStopwatch => 'Stopwatch';
+
+  @override
+  String get eduEnterTitle => 'Please enter a title';
+
+  @override
+  String get eduAddActivity => 'Add New Activity';
+
+  @override
+  String get eduCreateOwn => 'Create your own educational content';
+
+  @override
+  String get eduCategory => 'Category';
+
+  @override
+  String get eduAgeRange => 'Age range';
+
+  @override
+  String get eduDuration => 'Duration';
+
+  @override
+  String get eduMaterials => 'Materials (one item per line)';
+
+  @override
+  String get eduHowTo => 'How to (one step per line)';
+
+  @override
+  String get eduEnterTopic => 'Enter a topic first';
+
+  @override
+  String get eduGenerateAI => 'Generate AI Lesson / Task';
+
+  @override
+  String get eduTopicHint => 'e.g. telling time, recycling, times tables';
+
+  @override
+  String get eduAge => 'Age';
+
+  @override
+  String get eduGenFailed =>
+      'Could not generate content (connection/quota). Try again.';
+
+  @override
+  String get eduSteps => 'Steps';
+
+  @override
+  String eduParentTip(Object tip) {
+    return 'Parent tip: $tip';
+  }
 }

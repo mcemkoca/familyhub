@@ -8897,6 +8897,168 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Tamamla'**
   String get fhComplete;
+
+  /// No description provided for @eduTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile Eğitimi'**
+  String get eduTitle;
+
+  /// No description provided for @eduSearchHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aktivite ara...'**
+  String get eduSearchHint;
+
+  /// No description provided for @eduNoActivity.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aktivite bulunamadı'**
+  String get eduNoActivity;
+
+  /// No description provided for @eduFilterByAge.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yaşa Göre Filtrele'**
+  String get eduFilterByAge;
+
+  /// No description provided for @eduPracticalTips.
+  ///
+  /// In tr, this message translates to:
+  /// **'Pratik İpuçları'**
+  String get eduPracticalTips;
+
+  /// No description provided for @eduYoutubeSearch.
+  ///
+  /// In tr, this message translates to:
+  /// **'YouTube video araması'**
+  String get eduYoutubeSearch;
+
+  /// No description provided for @eduWatchYoutube.
+  ///
+  /// In tr, this message translates to:
+  /// **'YouTube\'da video rehberleri izle'**
+  String get eduWatchYoutube;
+
+  /// No description provided for @eduRelatedActivities.
+  ///
+  /// In tr, this message translates to:
+  /// **'İlgili Aktiviteler'**
+  String get eduRelatedActivities;
+
+  /// No description provided for @eduLearningTree.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öğrenme Ağacın'**
+  String get eduLearningTree;
+
+  /// No description provided for @eduTreeGrows.
+  ///
+  /// In tr, this message translates to:
+  /// **'Her tamamlanan aktivite ağacını büyütür'**
+  String get eduTreeGrows;
+
+  /// No description provided for @eduOverallProgress.
+  ///
+  /// In tr, this message translates to:
+  /// **'Genel İlerleme'**
+  String get eduOverallProgress;
+
+  /// No description provided for @eduStopwatch.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kronometre'**
+  String get eduStopwatch;
+
+  /// No description provided for @eduEnterTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Lütfen bir başlık girin'**
+  String get eduEnterTitle;
+
+  /// No description provided for @eduAddActivity.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yeni Aktivite Ekle'**
+  String get eduAddActivity;
+
+  /// No description provided for @eduCreateOwn.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kendi eğitim içeriğinizi oluşturun'**
+  String get eduCreateOwn;
+
+  /// No description provided for @eduCategory.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kategori'**
+  String get eduCategory;
+
+  /// No description provided for @eduAgeRange.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yaş aralığı'**
+  String get eduAgeRange;
+
+  /// No description provided for @eduDuration.
+  ///
+  /// In tr, this message translates to:
+  /// **'Süre'**
+  String get eduDuration;
+
+  /// No description provided for @eduMaterials.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gerekenler (her satıra bir malzeme)'**
+  String get eduMaterials;
+
+  /// No description provided for @eduHowTo.
+  ///
+  /// In tr, this message translates to:
+  /// **'Nasıl Yapılır? (her satıra bir adım)'**
+  String get eduHowTo;
+
+  /// No description provided for @eduEnterTopic.
+  ///
+  /// In tr, this message translates to:
+  /// **'Önce bir konu yazın'**
+  String get eduEnterTopic;
+
+  /// No description provided for @eduGenerateAI.
+  ///
+  /// In tr, this message translates to:
+  /// **'AI Ders / Görev Üret'**
+  String get eduGenerateAI;
+
+  /// No description provided for @eduTopicHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Örn: saat okuma, geri dönüşüm, çarpım tablosu'**
+  String get eduTopicHint;
+
+  /// No description provided for @eduAge.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yaş'**
+  String get eduAge;
+
+  /// No description provided for @eduGenFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'İçerik üretilemedi (bağlantı/kota). Tekrar deneyin.'**
+  String get eduGenFailed;
+
+  /// No description provided for @eduSteps.
+  ///
+  /// In tr, this message translates to:
+  /// **'Adımlar'**
+  String get eduSteps;
+
+  /// No description provided for @eduParentTip.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ebeveyn ipucu: {tip}'**
+  String eduParentTip(Object tip);
 }
 
 class _AppLocalizationsDelegate

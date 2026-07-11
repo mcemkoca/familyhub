@@ -4668,4 +4668,88 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get fhComplete => 'Voltooien';
+
+  @override
+  String get eduTitle => 'Gezinseducatie';
+
+  @override
+  String get eduSearchHint => 'Activiteiten zoeken...';
+
+  @override
+  String get eduNoActivity => 'Geen activiteiten gevonden';
+
+  @override
+  String get eduFilterByAge => 'Filter op leeftijd';
+
+  @override
+  String get eduPracticalTips => 'Praktische tips';
+
+  @override
+  String get eduYoutubeSearch => 'YouTube-videozoekopdracht';
+
+  @override
+  String get eduWatchYoutube => 'Bekijk videogidsen op YouTube';
+
+  @override
+  String get eduRelatedActivities => 'Gerelateerde activiteiten';
+
+  @override
+  String get eduLearningTree => 'Jouw leerboom';
+
+  @override
+  String get eduTreeGrows => 'Elke voltooide activiteit laat je boom groeien';
+
+  @override
+  String get eduOverallProgress => 'Algehele voortgang';
+
+  @override
+  String get eduStopwatch => 'Stopwatch';
+
+  @override
+  String get eduEnterTitle => 'Voer een titel in';
+
+  @override
+  String get eduAddActivity => 'Nieuwe activiteit toevoegen';
+
+  @override
+  String get eduCreateOwn => 'Maak je eigen educatieve inhoud';
+
+  @override
+  String get eduCategory => 'Categorie';
+
+  @override
+  String get eduAgeRange => 'Leeftijdsbereik';
+
+  @override
+  String get eduDuration => 'Duur';
+
+  @override
+  String get eduMaterials => 'Benodigdheden (een item per regel)';
+
+  @override
+  String get eduHowTo => 'Hoe te doen (een stap per regel)';
+
+  @override
+  String get eduEnterTopic => 'Voer eerst een onderwerp in';
+
+  @override
+  String get eduGenerateAI => 'AI-les / taak genereren';
+
+  @override
+  String get eduTopicHint => 'bijv. kloklezen, recycleren, tafels';
+
+  @override
+  String get eduAge => 'Leeftijd';
+
+  @override
+  String get eduGenFailed =>
+      'Kan inhoud niet genereren (verbinding/quota). Probeer opnieuw.';
+
+  @override
+  String get eduSteps => 'Stappen';
+
+  @override
+  String eduParentTip(Object tip) {
+    return 'Oudertip: $tip';
+  }
 }

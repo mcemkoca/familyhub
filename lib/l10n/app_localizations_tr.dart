@@ -4689,4 +4689,88 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get fhComplete => 'Tamamla';
+
+  @override
+  String get eduTitle => 'Aile Eğitimi';
+
+  @override
+  String get eduSearchHint => 'Aktivite ara...';
+
+  @override
+  String get eduNoActivity => 'Aktivite bulunamadı';
+
+  @override
+  String get eduFilterByAge => 'Yaşa Göre Filtrele';
+
+  @override
+  String get eduPracticalTips => 'Pratik İpuçları';
+
+  @override
+  String get eduYoutubeSearch => 'YouTube video araması';
+
+  @override
+  String get eduWatchYoutube => 'YouTube\'da video rehberleri izle';
+
+  @override
+  String get eduRelatedActivities => 'İlgili Aktiviteler';
+
+  @override
+  String get eduLearningTree => 'Öğrenme Ağacın';
+
+  @override
+  String get eduTreeGrows => 'Her tamamlanan aktivite ağacını büyütür';
+
+  @override
+  String get eduOverallProgress => 'Genel İlerleme';
+
+  @override
+  String get eduStopwatch => 'Kronometre';
+
+  @override
+  String get eduEnterTitle => 'Lütfen bir başlık girin';
+
+  @override
+  String get eduAddActivity => 'Yeni Aktivite Ekle';
+
+  @override
+  String get eduCreateOwn => 'Kendi eğitim içeriğinizi oluşturun';
+
+  @override
+  String get eduCategory => 'Kategori';
+
+  @override
+  String get eduAgeRange => 'Yaş aralığı';
+
+  @override
+  String get eduDuration => 'Süre';
+
+  @override
+  String get eduMaterials => 'Gerekenler (her satıra bir malzeme)';
+
+  @override
+  String get eduHowTo => 'Nasıl Yapılır? (her satıra bir adım)';
+
+  @override
+  String get eduEnterTopic => 'Önce bir konu yazın';
+
+  @override
+  String get eduGenerateAI => 'AI Ders / Görev Üret';
+
+  @override
+  String get eduTopicHint => 'Örn: saat okuma, geri dönüşüm, çarpım tablosu';
+
+  @override
+  String get eduAge => 'Yaş';
+
+  @override
+  String get eduGenFailed =>
+      'İçerik üretilemedi (bağlantı/kota). Tekrar deneyin.';
+
+  @override
+  String get eduSteps => 'Adımlar';
+
+  @override
+  String eduParentTip(Object tip) {
+    return 'Ebeveyn ipucu: $tip';
+  }
 }

@@ -155,8 +155,8 @@ class _EducationScreenState extends State<EducationScreen>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Aile Eğitimi',
-                    style: TextStyle(fontWeight: FontWeight.w900, fontSize: 19, color: Colors.white)),
+                Text(AppLocalizations.of(context).eduTitle,
+                    style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 19, color: Colors.white)),
                 Text('${_activities.length} aktivite · rehber · takip',
                     style: TextStyle(fontSize: 11, color: Colors.white.withAlpha(120), fontWeight: FontWeight.w500)),
               ],
@@ -304,7 +304,7 @@ class _ActivitiesTabState extends State<_ActivitiesTab> {
                   style: const TextStyle(
                       color: Color(0xFFE5E7EB)),
                   decoration: InputDecoration(
-                    hintText: 'Aktivite ara...',
+                    hintText: AppLocalizations.of(context).eduSearchHint,
                     prefixIcon: const Icon(Icons.search, size: 18),
                     filled: true,
                     fillColor:
@@ -394,14 +394,14 @@ class _ActivitiesTabState extends State<_ActivitiesTab> {
         ),
         Expanded(
           child: filtered.isEmpty
-              ? const Center(
+              ? Center(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.search_off,
+                      const Icon(Icons.search_off,
                           size: 64, color: Color(0xFF6B7280)),
-                      SizedBox(height: 12),
-                      Text('Aktivite bulunamadı'),
+                      const SizedBox(height: 12),
+                      Text(AppLocalizations.of(context).eduNoActivity),
                     ],
                   ),
                 )
@@ -439,7 +439,7 @@ class _AgeFilterButton extends StatelessWidget {
       onTap: () => showDialog(
         context: context,
         builder: (_) => SimpleDialog(
-          title: const Text('Yaşa Göre Filtrele'),
+          title: Text(AppLocalizations.of(context).eduFilterByAge),
           children: [
             SimpleDialogOption(
               onPressed: () {
@@ -800,8 +800,8 @@ class _ParentGuideTab extends StatelessWidget {
                           Row(children: [
                             Icon(Icons.lightbulb, color: color, size: 18),
                             const SizedBox(width: 6),
-                            const Text('Pratik İpuçları',
-                                style: TextStyle(
+                            Text(AppLocalizations.of(context).eduPracticalTips,
+                                style: const TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w800,
                                     color: Colors.white)),
@@ -836,7 +836,7 @@ class _ParentGuideTab extends StatelessWidget {
                       onTap: () => openExternalLink(
                         context,
                         'https://www.youtube.com/results?search_query=${Uri.encodeComponent(videoQuery)}',
-                        label: 'YouTube video araması',
+                        label: AppLocalizations.of(context).eduYoutubeSearch,
                       ),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
@@ -847,19 +847,19 @@ class _ParentGuideTab extends StatelessWidget {
                           border: Border.all(
                               color: const Color(0xFFFF0000).withAlpha(90)),
                         ),
-                        child: const Row(
+                        child: Row(
                           children: [
-                            Icon(Icons.play_circle_fill,
+                            const Icon(Icons.play_circle_fill,
                                 color: Color(0xFFFF3B30), size: 24),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             Expanded(
-                              child: Text('YouTube\'da video rehberleri izle',
-                                  style: TextStyle(
+                              child: Text(AppLocalizations.of(context).eduWatchYoutube,
+                                  style: const TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w700,
                                       color: Colors.white)),
                             ),
-                            Icon(Icons.open_in_new,
+                            const Icon(Icons.open_in_new,
                                 color: Color(0xFF9CA3AF), size: 16),
                           ],
                         ),
@@ -870,8 +870,8 @@ class _ParentGuideTab extends StatelessWidget {
               })(),
               if (related.isNotEmpty) ...[
                 const SizedBox(height: 20),
-                const Text('İlgili Aktiviteler',
-                    style: TextStyle(
+                Text(AppLocalizations.of(context).eduRelatedActivities,
+                    style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w700,
                         color: Color(0xFFE5E7EB))),
@@ -950,14 +950,14 @@ class _ProgressTabState extends State<_ProgressTab> {
           ),
           child: Column(
             children: [
-              const Text('Öğrenme Ağacın',
-                  style: TextStyle(
+              Text(AppLocalizations.of(context).eduLearningTree,
+                  style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.w800)),
               const SizedBox(height: 4),
-              const Text('Her tamamlanan aktivite ağacını büyütür',
-                  style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 12)),
+              Text(AppLocalizations.of(context).eduTreeGrows,
+                  style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 12)),
               const SizedBox(height: 8),
               GrowingTree(progress: treeProgress, size: 200),
             ],
@@ -977,8 +977,8 @@ class _ProgressTabState extends State<_ProgressTab> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Genel İlerleme',
-                  style: TextStyle(
+              Text(AppLocalizations.of(context).eduOverallProgress,
+                  style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w800,
                       fontSize: 16)),
@@ -1720,8 +1720,8 @@ class _ActivityTimerState extends State<_ActivityTimer> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Kronometre',
-                    style: TextStyle(
+                Text(AppLocalizations.of(context).eduStopwatch,
+                    style: const TextStyle(
                         color: Color(0xFF9CA3AF),
                         fontSize: 12,
                         fontWeight: FontWeight.w600)),
@@ -1802,8 +1802,8 @@ class _AddActivitySheetState extends State<_AddActivitySheet> {
 
   void _save() {
     if (_title.text.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Lütfen bir başlık girin'),
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(AppLocalizations.of(context).eduEnterTitle),
           behavior: SnackBarBehavior.floating));
       return;
     }
@@ -1877,14 +1877,14 @@ class _AddActivitySheetState extends State<_AddActivitySheet> {
                     borderRadius: BorderRadius.circular(2)),
               ),
             ),
-            const Text('Yeni Aktivite Ekle',
-                style: TextStyle(
+            Text(AppLocalizations.of(context).eduAddActivity,
+                style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.w800)),
             const SizedBox(height: 4),
-            const Text('Kendi eğitim içeriğinizi oluşturun',
-                style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
+            Text(AppLocalizations.of(context).eduCreateOwn,
+                style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
             const SizedBox(height: 18),
             Text(AppLocalizations.of(context).baslik,
                 style: const TextStyle(
@@ -1895,8 +1895,8 @@ class _AddActivitySheetState extends State<_AddActivitySheet> {
                 style: const TextStyle(color: Colors.white),
                 decoration: _dec('Örn: Legolarla Şekil Yapma')),
             const SizedBox(height: 14),
-            const Text('Kategori',
-                style: TextStyle(
+            Text(AppLocalizations.of(context).eduCategory,
+                style: const TextStyle(
                     color: Color(0xFFC7CBD4), fontWeight: FontWeight.w600)),
             const SizedBox(height: 6),
             Wrap(
@@ -1931,8 +1931,8 @@ class _AddActivitySheetState extends State<_AddActivitySheet> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Yaş aralığı',
-                          style: TextStyle(
+                      Text(AppLocalizations.of(context).eduAgeRange,
+                          style: const TextStyle(
                               color: Color(0xFFC7CBD4),
                               fontWeight: FontWeight.w600)),
                       const SizedBox(height: 6),
@@ -1959,8 +1959,8 @@ class _AddActivitySheetState extends State<_AddActivitySheet> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Süre',
-                          style: TextStyle(
+                      Text(AppLocalizations.of(context).eduDuration,
+                          style: const TextStyle(
                               color: Color(0xFFC7CBD4),
                               fontWeight: FontWeight.w600)),
                       const SizedBox(height: 6),
@@ -1974,8 +1974,8 @@ class _AddActivitySheetState extends State<_AddActivitySheet> {
               ],
             ),
             const SizedBox(height: 14),
-            const Text('Gerekenler (her satıra bir malzeme)',
-                style: TextStyle(
+            Text(AppLocalizations.of(context).eduMaterials,
+                style: const TextStyle(
                     color: Color(0xFFC7CBD4), fontWeight: FontWeight.w600)),
             const SizedBox(height: 6),
             TextField(
@@ -1984,8 +1984,8 @@ class _AddActivitySheetState extends State<_AddActivitySheet> {
                 style: const TextStyle(color: Colors.white),
                 decoration: _dec('Legolar\nRenkli kağıt\nMakas')),
             const SizedBox(height: 14),
-            const Text('Nasıl Yapılır? (her satıra bir adım)',
-                style: TextStyle(
+            Text(AppLocalizations.of(context).eduHowTo,
+                style: const TextStyle(
                     color: Color(0xFFC7CBD4), fontWeight: FontWeight.w600)),
             const SizedBox(height: 6),
             TextField(
@@ -2004,8 +2004,8 @@ class _AddActivitySheetState extends State<_AddActivitySheet> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
                 ),
-                child: const Text('Kaydet',
-                    style: TextStyle(
+                child: Text(AppLocalizations.of(context).save,
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.w700)),
@@ -2100,7 +2100,7 @@ class _AiLessonSheetState extends State<_AiLessonSheet> {
     final topic = _topicCtrl.text.trim();
     if (topic.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Önce bir konu yazın')),
+        SnackBar(content: Text(AppLocalizations.of(context).eduEnterTopic)),
       );
       return;
     }
@@ -2151,12 +2151,12 @@ class _AiLessonSheetState extends State<_AiLessonSheet> {
               ),
             ),
             const SizedBox(height: 16),
-            const Row(
+            Row(
               children: [
-                Icon(Icons.auto_awesome, color: Color(0xFF6366F1)),
-                SizedBox(width: 8),
-                Text('AI Ders / Görev Üret',
-                    style: TextStyle(
+                const Icon(Icons.auto_awesome, color: Color(0xFF6366F1)),
+                const SizedBox(width: 8),
+                Text(AppLocalizations.of(context).eduGenerateAI,
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 17,
                         fontWeight: FontWeight.w800)),
@@ -2171,7 +2171,7 @@ class _AiLessonSheetState extends State<_AiLessonSheet> {
               controller: _topicCtrl,
               style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
-                hintText: 'Örn: saat okuma, geri dönüşüm, çarpım tablosu',
+                hintText: AppLocalizations.of(context).eduTopicHint,
                 hintStyle: const TextStyle(color: Color(0xFF6B7280)),
                 filled: true,
                 fillColor: const Color(0xFF1A1A24),
@@ -2185,8 +2185,8 @@ class _AiLessonSheetState extends State<_AiLessonSheet> {
             const SizedBox(height: 14),
             Row(
               children: [
-                const Text('Yaş',
-                    style: TextStyle(
+                Text(AppLocalizations.of(context).eduAge,
+                    style: const TextStyle(
                         color: Color(0xFFD1D5DB),
                         fontWeight: FontWeight.w600)),
                 const SizedBox(width: 12),
@@ -2238,10 +2238,10 @@ class _AiLessonSheetState extends State<_AiLessonSheet> {
             ),
             const SizedBox(height: 18),
             if (_requested && !_loading && _card == null)
-              const Padding(
-                padding: EdgeInsets.only(top: 8),
-                child: Text('İçerik üretilemedi (bağlantı/kota). Tekrar deneyin.',
-                    style: TextStyle(color: Color(0xFF9CA3AF))),
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Text(AppLocalizations.of(context).eduGenFailed,
+                    style: const TextStyle(color: Color(0xFF9CA3AF))),
               ),
             if (_card != null) _buildCard(_card!),
           ],
@@ -2299,8 +2299,8 @@ class _AiLessonSheetState extends State<_AiLessonSheet> {
           ),
           if (steps.isNotEmpty) ...[
             const SizedBox(height: 14),
-            const Text('Adımlar',
-                style: TextStyle(
+            Text(AppLocalizations.of(context).eduSteps,
+                style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
                     fontSize: 14)),
@@ -2348,7 +2348,7 @@ class _AiLessonSheetState extends State<_AiLessonSheet> {
                       size: 16, color: Color(0xFF6366F1)),
                   const SizedBox(width: 8),
                   Expanded(
-                      child: Text('Ebeveyn ipucu: $parentTip',
+                      child: Text(AppLocalizations.of(context).eduParentTip(parentTip),
                           style: const TextStyle(
                               color: Color(0xFFC7D2FE),
                               fontSize: 12.5,

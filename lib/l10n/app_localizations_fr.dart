@@ -4686,4 +4686,89 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get fhComplete => 'Terminer';
+
+  @override
+  String get eduTitle => 'Education familiale';
+
+  @override
+  String get eduSearchHint => 'Rechercher des activites...';
+
+  @override
+  String get eduNoActivity => 'Aucune activite trouvee';
+
+  @override
+  String get eduFilterByAge => 'Filtrer par age';
+
+  @override
+  String get eduPracticalTips => 'Conseils pratiques';
+
+  @override
+  String get eduYoutubeSearch => 'Recherche video YouTube';
+
+  @override
+  String get eduWatchYoutube => 'Regarder des guides video sur YouTube';
+
+  @override
+  String get eduRelatedActivities => 'Activites liees';
+
+  @override
+  String get eduLearningTree => 'Ton arbre d\'apprentissage';
+
+  @override
+  String get eduTreeGrows => 'Chaque activite terminee fait grandir ton arbre';
+
+  @override
+  String get eduOverallProgress => 'Progres global';
+
+  @override
+  String get eduStopwatch => 'Chronometre';
+
+  @override
+  String get eduEnterTitle => 'Veuillez saisir un titre';
+
+  @override
+  String get eduAddActivity => 'Ajouter une activite';
+
+  @override
+  String get eduCreateOwn => 'Creez votre propre contenu educatif';
+
+  @override
+  String get eduCategory => 'Categorie';
+
+  @override
+  String get eduAgeRange => 'Tranche d\'age';
+
+  @override
+  String get eduDuration => 'Duree';
+
+  @override
+  String get eduMaterials => 'Materiel (un element par ligne)';
+
+  @override
+  String get eduHowTo => 'Comment faire (une etape par ligne)';
+
+  @override
+  String get eduEnterTopic => 'Saisissez d\'abord un sujet';
+
+  @override
+  String get eduGenerateAI => 'Generer une lecon / tache IA';
+
+  @override
+  String get eduTopicHint =>
+      'ex. lire l\'heure, recyclage, tables de multiplication';
+
+  @override
+  String get eduAge => 'Age';
+
+  @override
+  String get eduGenFailed =>
+      'Impossible de generer le contenu (connexion/quota). Reessayez.';
+
+  @override
+  String get eduSteps => 'Etapes';
+
+  @override
+  String eduParentTip(Object tip) {
+    return 'Conseil parent : $tip';
+  }
 }
