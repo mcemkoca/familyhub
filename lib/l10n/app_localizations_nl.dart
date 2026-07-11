@@ -5134,4 +5134,111 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get hcNotes => 'Notities';
+
+  @override
+  String peTitle(Object label) {
+    return 'Profiel bewerken: $label';
+  }
+
+  @override
+  String peColor(Object color) {
+    return 'Kleur: $color';
+  }
+
+  @override
+  String get peHigh => 'Hoog (10m)';
+
+  @override
+  String get peMedium => 'Gemiddeld (50m)';
+
+  @override
+  String get peLow => 'Laag (100m+)';
+
+  @override
+  String get peWifiCellular => 'WiFi + mobiel proberen';
+
+  @override
+  String get peLastKnown => 'Laatst bekende locatie gebruiken';
+
+  @override
+  String get peFastFix => 'Snelle fix (vorige locatie)';
+
+  @override
+  String get peActivity => 'Activiteit';
+
+  @override
+  String get peManual => 'Handmatig';
+
+  @override
+  String get peSaved => 'Profiel opgeslagen';
+
+  @override
+  String get evTitleRequired => 'Titel is verplicht';
+
+  @override
+  String get evDeleteEvent => 'Evenement verwijderen';
+
+  @override
+  String get evTitleHint => 'Titel evenement...';
+
+  @override
+  String get evEnd => 'Einde';
+
+  @override
+  String get evLocationHint => 'Locatie toevoegen...';
+
+  @override
+  String get evDescHint => 'Beschrijving toevoegen...';
+
+  @override
+  String get cddObservation => 'Observatie';
+
+  @override
+  String get cddSources => 'Onze inhoudsbronnen';
+
+  @override
+  String get cddOverallScore => 'Algehele ontwikkelingsscore';
+
+  @override
+  String get cddTodayTasks => 'Taken van vandaag';
+
+  @override
+  String get cddTapToStart => 'Tik om te starten';
+
+  @override
+  String get cddAiComment => 'AI-opmerking';
+
+  @override
+  String get cddNoObservation =>
+      'Nog geen observaties — voeg de eerste toe met \"Observatie\".';
+
+  @override
+  String get cddNoChildProfile => 'Nog geen kindprofiel';
+
+  @override
+  String get hchTitle => 'Kindergezondheid';
+
+  @override
+  String get hchSubtitle => 'Gezondheidsopvolging voor kinderen';
+
+  @override
+  String get hchHealthSummary => 'Gezondheidsoverzicht';
+
+  @override
+  String get hchNoUpcoming => 'Geen aankomende afspraken';
+
+  @override
+  String get hchHeightWeight => 'Lengte & Gewicht';
+
+  @override
+  String get hchVaccineSchedule => 'Vaccinatieschema';
+
+  @override
+  String get hchVaccineSub => 'Bekijk en volg het vaccinatieschema.';
+
+  @override
+  String get hchView => 'Bekijken';
+
+  @override
+  String get hchTodayTip => 'Tip van vandaag';
 }

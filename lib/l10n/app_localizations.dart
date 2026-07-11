@@ -9773,6 +9773,210 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Notlar'**
   String get hcNotes;
+
+  /// No description provided for @peTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Profil Düzenle: {label}'**
+  String peTitle(Object label);
+
+  /// No description provided for @peColor.
+  ///
+  /// In tr, this message translates to:
+  /// **'Renk: {color}'**
+  String peColor(Object color);
+
+  /// No description provided for @peHigh.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yüksek (10m)'**
+  String get peHigh;
+
+  /// No description provided for @peMedium.
+  ///
+  /// In tr, this message translates to:
+  /// **'Orta (50m)'**
+  String get peMedium;
+
+  /// No description provided for @peLow.
+  ///
+  /// In tr, this message translates to:
+  /// **'Düşük (100m+)'**
+  String get peLow;
+
+  /// No description provided for @peWifiCellular.
+  ///
+  /// In tr, this message translates to:
+  /// **'WiFi + Cellular dene'**
+  String get peWifiCellular;
+
+  /// No description provided for @peLastKnown.
+  ///
+  /// In tr, this message translates to:
+  /// **'Son bilinen konumu kullan'**
+  String get peLastKnown;
+
+  /// No description provided for @peFastFix.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hızlı fix (önceki konumdan)'**
+  String get peFastFix;
+
+  /// No description provided for @peActivity.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aktivite'**
+  String get peActivity;
+
+  /// No description provided for @peManual.
+  ///
+  /// In tr, this message translates to:
+  /// **'Manuel'**
+  String get peManual;
+
+  /// No description provided for @peSaved.
+  ///
+  /// In tr, this message translates to:
+  /// **'Profil kaydedildi'**
+  String get peSaved;
+
+  /// No description provided for @evTitleRequired.
+  ///
+  /// In tr, this message translates to:
+  /// **'Başlık zorunlu'**
+  String get evTitleRequired;
+
+  /// No description provided for @evDeleteEvent.
+  ///
+  /// In tr, this message translates to:
+  /// **'Etkinliği Sil'**
+  String get evDeleteEvent;
+
+  /// No description provided for @evTitleHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Etkinlik başlığı...'**
+  String get evTitleHint;
+
+  /// No description provided for @evEnd.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bitiş'**
+  String get evEnd;
+
+  /// No description provided for @evLocationHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Konum ekle...'**
+  String get evLocationHint;
+
+  /// No description provided for @evDescHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Açıklama ekle...'**
+  String get evDescHint;
+
+  /// No description provided for @cddObservation.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gözlem'**
+  String get cddObservation;
+
+  /// No description provided for @cddSources.
+  ///
+  /// In tr, this message translates to:
+  /// **'İçeriklerimizin kaynakları'**
+  String get cddSources;
+
+  /// No description provided for @cddOverallScore.
+  ///
+  /// In tr, this message translates to:
+  /// **'Genel Gelişim Skoru'**
+  String get cddOverallScore;
+
+  /// No description provided for @cddTodayTasks.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugünün Görevleri'**
+  String get cddTodayTasks;
+
+  /// No description provided for @cddTapToStart.
+  ///
+  /// In tr, this message translates to:
+  /// **'Başlamak için dokun'**
+  String get cddTapToStart;
+
+  /// No description provided for @cddAiComment.
+  ///
+  /// In tr, this message translates to:
+  /// **'AI Yorumu'**
+  String get cddAiComment;
+
+  /// No description provided for @cddNoObservation.
+  ///
+  /// In tr, this message translates to:
+  /// **'Henüz gözlem yok — \"Gözlem\" ile ilk kaydı ekleyin.'**
+  String get cddNoObservation;
+
+  /// No description provided for @cddNoChildProfile.
+  ///
+  /// In tr, this message translates to:
+  /// **'Henüz çocuk profili yok'**
+  String get cddNoChildProfile;
+
+  /// No description provided for @hchTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çocuk Sağlığı'**
+  String get hchTitle;
+
+  /// No description provided for @hchSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çocuk için sağlık takibi'**
+  String get hchSubtitle;
+
+  /// No description provided for @hchHealthSummary.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sağlık Özeti'**
+  String get hchHealthSummary;
+
+  /// No description provided for @hchNoUpcoming.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yaklaşan randevu yok'**
+  String get hchNoUpcoming;
+
+  /// No description provided for @hchHeightWeight.
+  ///
+  /// In tr, this message translates to:
+  /// **'Boy & Kilo'**
+  String get hchHeightWeight;
+
+  /// No description provided for @hchVaccineSchedule.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aşı Takvimi'**
+  String get hchVaccineSchedule;
+
+  /// No description provided for @hchVaccineSub.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aşı takvimini görüntüleyin ve takip edin.'**
+  String get hchVaccineSub;
+
+  /// No description provided for @hchView.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gör'**
+  String get hchView;
+
+  /// No description provided for @hchTodayTip.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugünkü İpucu'**
+  String get hchTodayTip;
 }
 
 class _AppLocalizationsDelegate

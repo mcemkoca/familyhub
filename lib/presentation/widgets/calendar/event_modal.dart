@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -169,7 +170,7 @@ class _EventModalState extends ConsumerState<EventModal> {
     if (_titleCtrl.text.trim().isEmpty) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('Başlık zorunlu')));
+      ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).evTitleRequired)));
       return;
     }
     HapticFeedback.mediumImpact();
@@ -213,14 +214,14 @@ class _EventModalState extends ConsumerState<EventModal> {
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Text('Etkinliği Sil'),
+        title: Text(AppLocalizations.of(context).evDeleteEvent),
         content: const Text(
           'Bu etkinlik kalıcı olarak silinecek. Emin misiniz?',
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('İptal'),
+            child: Text(AppLocalizations.of(context).cancel),
           ),
           ElevatedButton(
             onPressed: () {
@@ -232,7 +233,7 @@ class _EventModalState extends ConsumerState<EventModal> {
               backgroundColor: AppColors.error,
               foregroundColor: Colors.white,
             ),
-            child: const Text('Sil'),
+            child: Text(AppLocalizations.of(context).budDelete),
           ),
         ],
       ),
@@ -318,7 +319,7 @@ class _EventModalState extends ConsumerState<EventModal> {
                               color: Color(0xFFE5E7EB),
                             ),
                             decoration: InputDecoration(
-                              hintText: 'Etkinlik başlığı...',
+                              hintText: AppLocalizations.of(context).evTitleHint,
                               hintStyle: TextStyle(
                                 color: isDark
                                     ? const Color(0xFF6B7280)
@@ -370,7 +371,7 @@ class _EventModalState extends ConsumerState<EventModal> {
                           _sectionLabel('Tarih ve Saat'),
                           const SizedBox(height: 8),
                           _DateTimeRow(
-                            label: 'Başlangıç',
+                            label: AppLocalizations.of(context).medStart,
                             date: _start,
                             onDateTap: () => _pickDate(true),
                             onTimeTap: () => _pickTime(true),
@@ -378,7 +379,7 @@ class _EventModalState extends ConsumerState<EventModal> {
                           ),
                           const SizedBox(height: 8),
                           _DateTimeRow(
-                            label: 'Bitiş',
+                            label: AppLocalizations.of(context).evEnd,
                             date: _end,
                             onDateTap: () => _pickDate(false),
                             onTimeTap: () => _pickTime(false),
@@ -411,7 +412,7 @@ class _EventModalState extends ConsumerState<EventModal> {
                               color: Color(0xFFE5E7EB),
                             ),
                             decoration: InputDecoration(
-                              hintText: 'Konum ekle...',
+                              hintText: AppLocalizations.of(context).evLocationHint,
                               hintStyle: TextStyle(
                                 color: isDark
                                     ? const Color(0xFF6B7280)
@@ -443,7 +444,7 @@ class _EventModalState extends ConsumerState<EventModal> {
                               color: Color(0xFFE5E7EB),
                             ),
                             decoration: InputDecoration(
-                              hintText: 'Açıklama ekle...',
+                              hintText: AppLocalizations.of(context).evDescHint,
                               hintStyle: TextStyle(
                                 color: isDark
                                     ? const Color(0xFF6B7280)

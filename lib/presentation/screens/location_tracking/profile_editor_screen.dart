@@ -36,7 +36,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profil Düzenle: $label'),
+        title: Text(AppLocalizations.of(context).peTitle(label)),
         actions: [
           IconButton(icon: const Icon(Icons.save), onPressed: _save),
           IconButton(icon: const Icon(Icons.restore), onPressed: _reset),
@@ -64,7 +64,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
                   ),
                   const SizedBox(width: 8),
                   Chip(
-                    label: Text('Renk: $color'),
+                    label: Text(AppLocalizations.of(context).peColor(color)),
                     backgroundColor: color.withAlpha(51),
                   ),
                 ],
@@ -108,10 +108,10 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
           _section(AppLocalizations.of(context).hassasiyet,
             children: [
               SegmentedButton<String>(
-                segments: const [
-                  ButtonSegment(value: 'high', label: Text('Yüksek (10m)')),
-                  ButtonSegment(value: 'medium', label: Text('Orta (50m)')),
-                  ButtonSegment(value: 'low', label: Text('Düşük (100m+)')),
+                segments: [
+                  ButtonSegment(value: 'high', label: Text(AppLocalizations.of(context).peHigh)),
+                  ButtonSegment(value: 'medium', label: Text(AppLocalizations.of(context).peMedium)),
+                  ButtonSegment(value: 'low', label: Text(AppLocalizations.of(context).peLow)),
                 ],
                 selected: {_accuracy},
                 onSelectionChanged: (s) => setState(() => _accuracy = s.first),
@@ -121,13 +121,13 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
                 style: const TextStyle(fontWeight: FontWeight.w600),
               ),
               RadioListTile(
-                title: const Text('WiFi + Cellular dene'),
+                title: Text(AppLocalizations.of(context).peWifiCellular),
                 value: 'fallback',
                 groupValue: 'fallback',
                 onChanged: (_) {},
               ),
               RadioListTile(
-                title: const Text('Son bilinen konumu kullan'),
+                title: Text(AppLocalizations.of(context).peLastKnown),
                 value: 'cached',
                 groupValue: 'fallback',
                 onChanged: (_) {},
@@ -155,7 +155,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
               SwitchListTile(
                 value: _quickFix,
                 onChanged: (v) => setState(() => _quickFix = v),
-                title: const Text('Hızlı fix (önceki konumdan)'),
+                title: Text(AppLocalizations.of(context).peFastFix),
               ),
               SwitchListTile(
                 value: _motionTrigger,
@@ -178,8 +178,8 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
               SegmentedButton<String>(
                 segments: [
                   ButtonSegment(value: 'speed', label: Text(AppLocalizations.of(context).hizEsigi)),
-                  const ButtonSegment(value: 'activity', label: Text('Aktivite')),
-                  const ButtonSegment(value: 'manual', label: Text('Manuel')),
+                  ButtonSegment(value: 'activity', label: Text(AppLocalizations.of(context).peActivity)),
+                  ButtonSegment(value: 'manual', label: Text(AppLocalizations.of(context).peManual)),
                 ],
                 selected: {_transitionType},
                 onSelectionChanged: (s) =>
@@ -218,7 +218,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
           ElevatedButton.icon(
             onPressed: _save,
             icon: const Icon(Icons.save),
-            label: const Text('KAYDET', style: TextStyle(fontSize: 16)),
+            label: Text(AppLocalizations.of(context).crashSaveUpper, style: const TextStyle(fontSize: 16)),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.green.shade700,
               foregroundColor: Colors.white,
@@ -272,7 +272,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
   void _save() {
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(const SnackBar(content: Text('Profil kaydedildi')));
+    ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).peSaved)));
   }
 
   void _reset() {

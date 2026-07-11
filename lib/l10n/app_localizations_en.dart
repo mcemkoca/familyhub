@@ -5133,4 +5133,111 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get hcNotes => 'Notes';
+
+  @override
+  String peTitle(Object label) {
+    return 'Edit Profile: $label';
+  }
+
+  @override
+  String peColor(Object color) {
+    return 'Color: $color';
+  }
+
+  @override
+  String get peHigh => 'High (10m)';
+
+  @override
+  String get peMedium => 'Medium (50m)';
+
+  @override
+  String get peLow => 'Low (100m+)';
+
+  @override
+  String get peWifiCellular => 'Try WiFi + Cellular';
+
+  @override
+  String get peLastKnown => 'Use last known location';
+
+  @override
+  String get peFastFix => 'Fast fix (from previous location)';
+
+  @override
+  String get peActivity => 'Activity';
+
+  @override
+  String get peManual => 'Manual';
+
+  @override
+  String get peSaved => 'Profile saved';
+
+  @override
+  String get evTitleRequired => 'Title is required';
+
+  @override
+  String get evDeleteEvent => 'Delete Event';
+
+  @override
+  String get evTitleHint => 'Event title...';
+
+  @override
+  String get evEnd => 'End';
+
+  @override
+  String get evLocationHint => 'Add location...';
+
+  @override
+  String get evDescHint => 'Add description...';
+
+  @override
+  String get cddObservation => 'Observation';
+
+  @override
+  String get cddSources => 'Our content sources';
+
+  @override
+  String get cddOverallScore => 'Overall Development Score';
+
+  @override
+  String get cddTodayTasks => 'Today\'s Tasks';
+
+  @override
+  String get cddTapToStart => 'Tap to start';
+
+  @override
+  String get cddAiComment => 'AI Comment';
+
+  @override
+  String get cddNoObservation =>
+      'No observations yet — add your first with \"Observation\".';
+
+  @override
+  String get cddNoChildProfile => 'No child profile yet';
+
+  @override
+  String get hchTitle => 'Child Health';
+
+  @override
+  String get hchSubtitle => 'Health tracking for children';
+
+  @override
+  String get hchHealthSummary => 'Health Summary';
+
+  @override
+  String get hchNoUpcoming => 'No upcoming appointments';
+
+  @override
+  String get hchHeightWeight => 'Height & Weight';
+
+  @override
+  String get hchVaccineSchedule => 'Vaccination Schedule';
+
+  @override
+  String get hchVaccineSub => 'View and track the vaccination schedule.';
+
+  @override
+  String get hchView => 'View';
+
+  @override
+  String get hchTodayTip => 'Today\'s Tip';
 }

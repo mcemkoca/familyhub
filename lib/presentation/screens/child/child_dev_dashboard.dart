@@ -94,8 +94,8 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
         onPressed: () => _openObservation(child),
         backgroundColor: const Color(0xFF6366F1),
         icon: const Icon(Icons.add, color: Colors.white),
-        label: const Text('Gözlem',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
+        label: Text(AppLocalizations.of(context).cddObservation,
+            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
       ),
       body: SafeArea(
         child: Column(
@@ -128,14 +128,14 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
                       MaterialPageRoute(
                           builder: (_) => const DevSourcesScreen()),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.verified_outlined,
+                        const Icon(Icons.verified_outlined,
                             size: 16, color: Color(0xFF3B82F6)),
-                        SizedBox(width: 6),
-                        Text('İçeriklerimizin kaynakları',
-                            style: TextStyle(
+                        const SizedBox(width: 6),
+                        Text(AppLocalizations.of(context).cddSources,
+                            style: const TextStyle(
                                 color: Color(0xFF3B82F6),
                                 fontSize: 13.5,
                                 fontWeight: FontWeight.w700)),
@@ -228,10 +228,10 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
             ),
           ),
           const SizedBox(width: 8),
-          const SizedBox(
+          SizedBox(
             width: 54,
-            child: Text('Genel Gelişim Skoru',
-                style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 12)),
+            child: Text(AppLocalizations.of(context).cddOverallScore,
+                style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 12)),
           ),
         ],
       ),
@@ -353,8 +353,8 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Bugünün Görevleri',
-                    style: TextStyle(
+                Text(AppLocalizations.of(context).cddTodayTasks,
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.w800)),
@@ -433,8 +433,8 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
                                     color: Colors.white,
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600)),
-                            const Text('Başlamak için dokun',
-                                style: TextStyle(
+                            Text(AppLocalizations.of(context).cddTapToStart,
+                                style: const TextStyle(
                                     color: Color(0xFF6B7280), fontSize: 11.5)),
                           ],
                         ),
@@ -519,8 +519,8 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('AI Yorumu',
-                      style: TextStyle(
+                  Text(AppLocalizations.of(context).cddAiComment,
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.w800)),
@@ -556,9 +556,9 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
               borderRadius: BorderRadius.circular(20),
               border: Border.all(color: const Color(0x14FFFFFF)),
             ),
-            child: const Center(
-              child: Text('Henüz gözlem yok — "Gözlem" ile ilk kaydı ekleyin.',
-                  style: TextStyle(color: Color(0xFF6B7280), fontSize: 13)),
+            child: Center(
+              child: Text(AppLocalizations.of(context).cddNoObservation,
+                  style: const TextStyle(color: Color(0xFF6B7280), fontSize: 13)),
             ),
           )
         else
@@ -653,23 +653,23 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
         child: Column(
           children: [
             DevHeader(title: AppLocalizations.of(context).gelisim, subtitle: 'Çocuk gelişim merkezi'),
-            const Expanded(
+            Expanded(
               child: Center(
                 child: Padding(
-                  padding: EdgeInsets.all(32),
+                  padding: const EdgeInsets.all(32),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.child_care,
+                      const Icon(Icons.child_care,
                           size: 64, color: Color(0xFF6B7280)),
-                      SizedBox(height: 16),
-                      Text('Henüz çocuk profili yok',
-                          style: TextStyle(
+                      const SizedBox(height: 16),
+                      Text(AppLocalizations.of(context).cddNoChildProfile,
+                          style: const TextStyle(
                               color: Color(0xFFE5E7EB),
                               fontSize: 18,
                               fontWeight: FontWeight.w700)),
-                      SizedBox(height: 8),
-                      Text(
+                      const SizedBox(height: 8),
+                      const Text(
                           'Gelişim takibi için Çocuk bölümünden bir profil ekleyin.',
                           textAlign: TextAlign.center,
                           style:

@@ -5154,4 +5154,111 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get hcNotes => 'Notes';
+
+  @override
+  String peTitle(Object label) {
+    return 'Modifier le profil : $label';
+  }
+
+  @override
+  String peColor(Object color) {
+    return 'Couleur : $color';
+  }
+
+  @override
+  String get peHigh => 'Eleve (10m)';
+
+  @override
+  String get peMedium => 'Moyen (50m)';
+
+  @override
+  String get peLow => 'Faible (100m+)';
+
+  @override
+  String get peWifiCellular => 'Essayer WiFi + cellulaire';
+
+  @override
+  String get peLastKnown => 'Utiliser la derniere position connue';
+
+  @override
+  String get peFastFix => 'Fix rapide (position precedente)';
+
+  @override
+  String get peActivity => 'Activite';
+
+  @override
+  String get peManual => 'Manuel';
+
+  @override
+  String get peSaved => 'Profil enregistre';
+
+  @override
+  String get evTitleRequired => 'Le titre est obligatoire';
+
+  @override
+  String get evDeleteEvent => 'Supprimer l\'evenement';
+
+  @override
+  String get evTitleHint => 'Titre de l\'evenement...';
+
+  @override
+  String get evEnd => 'Fin';
+
+  @override
+  String get evLocationHint => 'Ajouter un lieu...';
+
+  @override
+  String get evDescHint => 'Ajouter une description...';
+
+  @override
+  String get cddObservation => 'Observation';
+
+  @override
+  String get cddSources => 'Nos sources de contenu';
+
+  @override
+  String get cddOverallScore => 'Score de developpement global';
+
+  @override
+  String get cddTodayTasks => 'Taches du jour';
+
+  @override
+  String get cddTapToStart => 'Appuyez pour commencer';
+
+  @override
+  String get cddAiComment => 'Commentaire IA';
+
+  @override
+  String get cddNoObservation =>
+      'Aucune observation — ajoutez la premiere avec \"Observation\".';
+
+  @override
+  String get cddNoChildProfile => 'Aucun profil d\'enfant';
+
+  @override
+  String get hchTitle => 'Sante de l\'enfant';
+
+  @override
+  String get hchSubtitle => 'Suivi de sante pour l\'enfant';
+
+  @override
+  String get hchHealthSummary => 'Resume de sante';
+
+  @override
+  String get hchNoUpcoming => 'Aucun rendez-vous a venir';
+
+  @override
+  String get hchHeightWeight => 'Taille & Poids';
+
+  @override
+  String get hchVaccineSchedule => 'Calendrier vaccinal';
+
+  @override
+  String get hchVaccineSub => 'Consultez et suivez le calendrier vaccinal.';
+
+  @override
+  String get hchView => 'Voir';
+
+  @override
+  String get hchTodayTip => 'Astuce du jour';
 }

@@ -5153,4 +5153,111 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get hcNotes => 'Notlar';
+
+  @override
+  String peTitle(Object label) {
+    return 'Profil Düzenle: $label';
+  }
+
+  @override
+  String peColor(Object color) {
+    return 'Renk: $color';
+  }
+
+  @override
+  String get peHigh => 'Yüksek (10m)';
+
+  @override
+  String get peMedium => 'Orta (50m)';
+
+  @override
+  String get peLow => 'Düşük (100m+)';
+
+  @override
+  String get peWifiCellular => 'WiFi + Cellular dene';
+
+  @override
+  String get peLastKnown => 'Son bilinen konumu kullan';
+
+  @override
+  String get peFastFix => 'Hızlı fix (önceki konumdan)';
+
+  @override
+  String get peActivity => 'Aktivite';
+
+  @override
+  String get peManual => 'Manuel';
+
+  @override
+  String get peSaved => 'Profil kaydedildi';
+
+  @override
+  String get evTitleRequired => 'Başlık zorunlu';
+
+  @override
+  String get evDeleteEvent => 'Etkinliği Sil';
+
+  @override
+  String get evTitleHint => 'Etkinlik başlığı...';
+
+  @override
+  String get evEnd => 'Bitiş';
+
+  @override
+  String get evLocationHint => 'Konum ekle...';
+
+  @override
+  String get evDescHint => 'Açıklama ekle...';
+
+  @override
+  String get cddObservation => 'Gözlem';
+
+  @override
+  String get cddSources => 'İçeriklerimizin kaynakları';
+
+  @override
+  String get cddOverallScore => 'Genel Gelişim Skoru';
+
+  @override
+  String get cddTodayTasks => 'Bugünün Görevleri';
+
+  @override
+  String get cddTapToStart => 'Başlamak için dokun';
+
+  @override
+  String get cddAiComment => 'AI Yorumu';
+
+  @override
+  String get cddNoObservation =>
+      'Henüz gözlem yok — \"Gözlem\" ile ilk kaydı ekleyin.';
+
+  @override
+  String get cddNoChildProfile => 'Henüz çocuk profili yok';
+
+  @override
+  String get hchTitle => 'Çocuk Sağlığı';
+
+  @override
+  String get hchSubtitle => 'Çocuk için sağlık takibi';
+
+  @override
+  String get hchHealthSummary => 'Sağlık Özeti';
+
+  @override
+  String get hchNoUpcoming => 'Yaklaşan randevu yok';
+
+  @override
+  String get hchHeightWeight => 'Boy & Kilo';
+
+  @override
+  String get hchVaccineSchedule => 'Aşı Takvimi';
+
+  @override
+  String get hchVaccineSub => 'Aşı takvimini görüntüleyin ve takip edin.';
+
+  @override
+  String get hchView => 'Gör';
+
+  @override
+  String get hchTodayTip => 'Bugünkü İpucu';
 }

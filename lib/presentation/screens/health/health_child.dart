@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../child/child_development_screen.dart' show childDevProvider;
 import 'health_store.dart';
@@ -25,11 +26,11 @@ class _CocukSaglikScreenState extends ConsumerState<CocukSaglikScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            const HealthHeader(
-              title: 'Çocuk Sağlığı',
-              subtitle: 'Çocuk için sağlık takibi',
+            HealthHeader(
+              title: AppLocalizations.of(context).hchTitle,
+              subtitle: AppLocalizations.of(context).hchSubtitle,
               icon: Icons.child_care_rounded,
-              gradient: [Color(0xFF3B82F6), Color(0xFF2563EB)],
+              gradient: const [Color(0xFF3B82F6), Color(0xFF2563EB)],
               showBack: true,
             ),
             Expanded(
@@ -38,8 +39,8 @@ class _CocukSaglikScreenState extends ConsumerState<CocukSaglikScreen> {
                 children: [
                   _childCard(name, ageLabel),
                   const SizedBox(height: 18),
-                  const Text('Sağlık Özeti',
-                      style: TextStyle(
+                  Text(AppLocalizations.of(context).hchHealthSummary,
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                           fontWeight: FontWeight.w800)),
@@ -82,10 +83,10 @@ class _CocukSaglikScreenState extends ConsumerState<CocukSaglikScreen> {
                   const SizedBox(height: 18),
                   _sectionCard(
                     'Yaklaşanlar',
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 6),
-                      child: Text('Yaklaşan randevu yok',
-                          style: TextStyle(
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 6),
+                      child: Text(AppLocalizations.of(context).hchNoUpcoming,
+                          style: const TextStyle(
                               color: Color(0xFF9CA3AF), fontSize: 14)),
                     ),
                   ),
@@ -119,8 +120,8 @@ class _CocukSaglikScreenState extends ConsumerState<CocukSaglikScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('Boy & Kilo',
-                  style: TextStyle(
+              Text(AppLocalizations.of(context).hchHeightWeight,
+                  style: const TextStyle(
                       color: Colors.white,
                       fontSize: 17,
                       fontWeight: FontWeight.w800)),
@@ -147,8 +148,8 @@ class _CocukSaglikScreenState extends ConsumerState<CocukSaglikScreen> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14)),
                   ),
-                  child: const Text('Kaydet',
-                      style: TextStyle(color: Colors.white)),
+                  child: Text(AppLocalizations.of(context).save,
+                      style: const TextStyle(color: Colors.white)),
                 ),
               ),
             ],
@@ -317,18 +318,18 @@ class _CocukSaglikScreenState extends ConsumerState<CocukSaglikScreen> {
             child: const Icon(Icons.vaccines, color: Color(0xFF14B8A6), size: 24),
           ),
           const SizedBox(width: 12),
-          const Expanded(
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Aşı Takvimi',
-                    style: TextStyle(
+                Text(AppLocalizations.of(context).hchVaccineSchedule,
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.w800)),
-                SizedBox(height: 2),
-                Text('Aşı takvimini görüntüleyin ve takip edin.',
-                    style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 12.5)),
+                const SizedBox(height: 2),
+                Text(AppLocalizations.of(context).hchVaccineSub,
+                    style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 12.5)),
               ],
             ),
           ),
@@ -338,13 +339,13 @@ class _CocukSaglikScreenState extends ConsumerState<CocukSaglikScreen> {
               color: const Color(0xFF14B8A6).withAlpha(30),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: const Row(
+            child: Row(
               children: [
-                Text('Gör',
-                    style: TextStyle(
+                Text(AppLocalizations.of(context).hchView,
+                    style: const TextStyle(
                         color: Color(0xFF14B8A6),
                         fontWeight: FontWeight.w700)),
-                Icon(Icons.chevron_right, color: Color(0xFF14B8A6), size: 18),
+                const Icon(Icons.chevron_right, color: Color(0xFF14B8A6), size: 18),
               ],
             ),
           ),
@@ -361,29 +362,29 @@ class _CocukSaglikScreenState extends ConsumerState<CocukSaglikScreen> {
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: const Color(0x223B82F6)),
       ),
-      child: const Row(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(Icons.lightbulb, color: Color(0xFF3B82F6), size: 22),
-          SizedBox(width: 12),
+          const Icon(Icons.lightbulb, color: Color(0xFF3B82F6), size: 22),
+          const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Bugünkü İpucu',
-                    style: TextStyle(
+                Text(AppLocalizations.of(context).hchTodayTip,
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.w800)),
-                SizedBox(height: 6),
-                Text(
+                const SizedBox(height: 6),
+                const Text(
                     'Bol su içmek, çocukların hem fiziksel hem de zihinsel gelişimi için çok önemlidir. Gün içinde su içmeyi alışkanlık haline getirmeyi unutmayın.',
                     style: TextStyle(
                         color: Color(0xFFD1D5DB), fontSize: 13.5, height: 1.45)),
               ],
             ),
           ),
-          Text('💧', style: TextStyle(fontSize: 30)),
+          const Text('💧', style: TextStyle(fontSize: 30)),
         ],
       ),
     );
