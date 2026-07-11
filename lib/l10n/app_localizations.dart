@@ -6314,6 +6314,48 @@ abstract class AppLocalizations {
   /// **'Onayla'**
   String get fhaConfirm;
 
+  /// No description provided for @fhaPin.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sabitle'**
+  String get fhaPin;
+
+  /// No description provided for @fhaUnpin.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sabiti kaldır'**
+  String get fhaUnpin;
+
+  /// No description provided for @fhaEditSuggestion.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öneriyi düzenle'**
+  String get fhaEditSuggestion;
+
+  /// No description provided for @fhaDeleteSuggestion.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öneriyi sil'**
+  String get fhaDeleteSuggestion;
+
+  /// No description provided for @fhaHideSuggestion.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öneriyi gizle'**
+  String get fhaHideSuggestion;
+
+  /// No description provided for @fhaAddSuggestion.
+  ///
+  /// In tr, this message translates to:
+  /// **'Özel öneri ekle'**
+  String get fhaAddSuggestion;
+
+  /// No description provided for @fhaSuggestionHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öneri metnini yaz…'**
+  String get fhaSuggestionHint;
+
   /// No description provided for @fhaCancel.
   ///
   /// In tr, this message translates to:

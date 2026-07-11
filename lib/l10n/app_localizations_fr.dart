@@ -3294,6 +3294,27 @@ class AppLocalizationsFr extends AppLocalizations {
   String get fhaConfirm => 'Confirmer';
 
   @override
+  String get fhaPin => 'Épingler';
+
+  @override
+  String get fhaUnpin => 'Détacher';
+
+  @override
+  String get fhaEditSuggestion => 'Modifier la suggestion';
+
+  @override
+  String get fhaDeleteSuggestion => 'Supprimer la suggestion';
+
+  @override
+  String get fhaHideSuggestion => 'Masquer la suggestion';
+
+  @override
+  String get fhaAddSuggestion => 'Ajouter une suggestion';
+
+  @override
+  String get fhaSuggestionHint => 'Écrivez la suggestion…';
+
+  @override
   String get fhaCancel => 'Annuler';
 
   @override

@@ -3281,6 +3281,27 @@ class AppLocalizationsNl extends AppLocalizations {
   String get fhaConfirm => 'Bevestigen';
 
   @override
+  String get fhaPin => 'Vastmaken';
+
+  @override
+  String get fhaUnpin => 'Losmaken';
+
+  @override
+  String get fhaEditSuggestion => 'Suggestie bewerken';
+
+  @override
+  String get fhaDeleteSuggestion => 'Suggestie verwijderen';
+
+  @override
+  String get fhaHideSuggestion => 'Suggestie verbergen';
+
+  @override
+  String get fhaAddSuggestion => 'Aangepaste suggestie';
+
+  @override
+  String get fhaSuggestionHint => 'Schrijf de suggestie…';
+
+  @override
   String get fhaCancel => 'Annuleren';
 
   @override

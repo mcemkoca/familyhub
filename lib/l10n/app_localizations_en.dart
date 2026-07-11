@@ -3280,6 +3280,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String get fhaConfirm => 'Confirm';
 
   @override
+  String get fhaPin => 'Pin';
+
+  @override
+  String get fhaUnpin => 'Unpin';
+
+  @override
+  String get fhaEditSuggestion => 'Edit suggestion';
+
+  @override
+  String get fhaDeleteSuggestion => 'Delete suggestion';
+
+  @override
+  String get fhaHideSuggestion => 'Hide suggestion';
+
+  @override
+  String get fhaAddSuggestion => 'Add custom suggestion';
+
+  @override
+  String get fhaSuggestionHint => 'Write the suggestion…';
+
+  @override
   String get fhaCancel => 'Cancel';
 
   @override

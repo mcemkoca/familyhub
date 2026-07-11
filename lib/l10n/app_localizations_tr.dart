@@ -3293,6 +3293,27 @@ class AppLocalizationsTr extends AppLocalizations {
   String get fhaConfirm => 'Onayla';
 
   @override
+  String get fhaPin => 'Sabitle';
+
+  @override
+  String get fhaUnpin => 'Sabiti kaldır';
+
+  @override
+  String get fhaEditSuggestion => 'Öneriyi düzenle';
+
+  @override
+  String get fhaDeleteSuggestion => 'Öneriyi sil';
+
+  @override
+  String get fhaHideSuggestion => 'Öneriyi gizle';
+
+  @override
+  String get fhaAddSuggestion => 'Özel öneri ekle';
+
+  @override
+  String get fhaSuggestionHint => 'Öneri metnini yaz…';
+
+  @override
   String get fhaCancel => 'İptal';
 
   @override

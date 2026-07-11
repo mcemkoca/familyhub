@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../../services/ai/ai_assistant_service.dart';
+import '../../../features/familyhub_ai/domain/ai_suggestion.dart';
+import '../../../features/familyhub_ai/data/ai_suggestion_repository.dart';
 
 class _ChatMessage {
   final String text;
@@ -43,12 +46,131 @@ class _AIAssistantScreenState extends State<AIAssistantScreen> {
     setState(() {});
   }
 
-  static const _suggestions = [
-    'Bu hafta 4 kişilik ekonomik yemek planı yap, eksik malzemeleri alışveriş listeme ekle, bütçeyi 60 euro altında tut.',
-    'Pazartesi akşamı için kolay bir tarif öner ve malzemeleri listeye ekle.',
-    'Bu ayki harcamalarımı analiz et ve tasarruf önerileri sun.',
-    'Yarın için sağlıklı kahvaltı seçenekleri öner.',
+  // Sistem önerileri — STABLE id (sys_N). Metin içerik olduğundan TR kalır.
+  static const _systemSuggestions = <AISuggestion>[
+    AISuggestion(id: 'sys_0', isSystem: true, text: 'Bu hafta 4 kişilik ekonomik yemek planı yap, eksik malzemeleri alışveriş listeme ekle, bütçeyi 60 euro altında tut.'),
+    AISuggestion(id: 'sys_1', isSystem: true, text: 'Pazartesi akşamı için kolay bir tarif öner ve malzemeleri listeye ekle.'),
+    AISuggestion(id: 'sys_2', isSystem: true, text: 'Bu ayki harcamalarımı analiz et ve tasarruf önerileri sun.'),
+    AISuggestion(id: 'sys_3', isSystem: true, text: 'Yarın için sağlıklı kahvaltı seçenekleri öner.'),
   ];
+
+  final _sugRepo = AISuggestionRepository.instance;
+
+  /// Sistem + özel önerileri birleştirip çözer (gizli çıkar, pinned öne).
+  List<AISuggestion> _resolvedSuggestions() => AISuggestionResolver.resolve(
+        system: _systemSuggestions,
+        custom: _sugRepo.customSuggestions(),
+        hiddenSystemIds: _sugRepo.hiddenSystemIds(),
+        pinnedIds: _sugRepo.pinnedIds(),
+      );
+
+  /// Öneri uzun basıldığında yönetim menüsü (sabitle/düzenle/sil/gizle).
+  Future<void> _suggestionMenu(AISuggestion s) async {
+    final t = AppLocalizations.of(context);
+    await showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: const Color(0xFF13131A),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (ctx) => SafeArea(
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
+          ListTile(
+            leading: Icon(s.isPinned
+                ? Icons.push_pin
+                : Icons.push_pin_outlined,
+                color: const Color(0xFF8B5CF6)),
+            title: Text(s.isPinned ? t.fhaUnpin : t.fhaPin,
+                style: const TextStyle(color: Colors.white)),
+            onTap: () async {
+              Navigator.pop(ctx);
+              await _sugRepo.togglePin(s.id);
+              setState(() {});
+            },
+          ),
+          if (!s.isSystem) ...[
+            ListTile(
+              leading: const Icon(Icons.edit_outlined, color: Color(0xFF10B981)),
+              title: Text(t.fhaEditSuggestion,
+                  style: const TextStyle(color: Colors.white)),
+              onTap: () {
+                Navigator.pop(ctx);
+                _suggestionDialog(existing: s);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.delete_outline, color: Color(0xFFEF4444)),
+              title: Text(t.fhaDeleteSuggestion,
+                  style: const TextStyle(color: Color(0xFFF87171))),
+              onTap: () async {
+                Navigator.pop(ctx);
+                await _sugRepo.deleteCustom(s.id);
+                setState(() {});
+              },
+            ),
+          ] else
+            ListTile(
+              leading: const Icon(Icons.visibility_off_outlined,
+                  color: Color(0xFF9CA3AF)),
+              title: Text(t.fhaHideSuggestion,
+                  style: const TextStyle(color: Colors.white)),
+              onTap: () async {
+                Navigator.pop(ctx);
+                await _sugRepo.hideSystem(s.id);
+                setState(() {});
+              },
+            ),
+        ]),
+      ),
+    );
+  }
+
+  /// Özel öneri ekle/düzenle dialogu.
+  Future<void> _suggestionDialog({AISuggestion? existing}) async {
+    final t = AppLocalizations.of(context);
+    final ctrl = TextEditingController(text: existing?.text ?? '');
+    final saved = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: const Color(0xFF13131A),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: Text(
+            existing == null ? t.fhaAddSuggestion : t.fhaEditSuggestion,
+            style: const TextStyle(color: Colors.white, fontSize: 16)),
+        content: TextField(
+          controller: ctrl,
+          maxLines: 3,
+          autofocus: true,
+          style: const TextStyle(color: Colors.white),
+          decoration: InputDecoration(
+            hintText: t.fhaSuggestionHint,
+            hintStyle: const TextStyle(color: Color(0xFF6B7280)),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(t.fhaCancel,
+                style: const TextStyle(color: Color(0xFF9CA3AF))),
+          ),
+          FilledButton(
+            style: FilledButton.styleFrom(
+                backgroundColor: const Color(0xFF8B5CF6)),
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text(t.fhaConfirm),
+          ),
+        ],
+      ),
+    );
+    if (saved != true) return;
+    final text = ctrl.text.trim();
+    if (text.isEmpty) return;
+    if (existing == null) {
+      await _sugRepo.addCustom(text);
+    } else {
+      await _sugRepo.editCustom(existing.id, text);
+    }
+    if (mounted) setState(() {});
+  }
 
   @override
   void initState() {
@@ -167,29 +289,85 @@ class _AIAssistantScreenState extends State<AIAssistantScreen> {
   }
 
   Widget _buildSuggestionChips() {
+    final suggestions = _resolvedSuggestions();
     return SizedBox(
       height: 90,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        itemCount: _suggestions.length,
+        itemCount: suggestions.length + 1, // +1 = "özel öneri ekle"
         separatorBuilder: (_, _) => const SizedBox(width: 8),
         itemBuilder: (context, i) {
+          // Son öğe: özel öneri ekle chip'i.
+          if (i == suggestions.length) {
+            return GestureDetector(
+              onTap: () => _suggestionDialog(),
+              child: Container(
+                width: 120,
+                padding: const EdgeInsets.all(10),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: const Color(0x1A8B5CF6),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: const Color(0x338B5CF6)),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.add, color: Color(0xFF8B5CF6), size: 20),
+                    const SizedBox(height: 4),
+                    Text(AppLocalizations.of(context).fhaAddSuggestion,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                            fontSize: 11, color: Color(0xFF8B5CF6))),
+                  ],
+                ),
+              ),
+            );
+          }
+          final s = suggestions[i];
           return GestureDetector(
-            onTap: () => _fillInput(_suggestions[i]),
+            onTap: () => _fillInput(s.text),
+            onLongPress: () => _suggestionMenu(s),
             child: Container(
               width: 220,
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: const Color(0xFF13131A),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: const Color(0x1EFFFFFF), width: 0.5),
+                border: Border.all(
+                    color: s.isPinned
+                        ? const Color(0x558B5CF6)
+                        : const Color(0x1EFFFFFF),
+                    width: s.isPinned ? 1 : 0.5),
               ),
-              child: Text(
-                _suggestions[i],
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 12, color: Color(0xFF9CA3AF), height: 1.4),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(children: [
+                    if (s.isPinned)
+                      const Padding(
+                        padding: EdgeInsets.only(right: 4),
+                        child: Icon(Icons.push_pin,
+                            size: 11, color: Color(0xFF8B5CF6)),
+                      ),
+                    if (!s.isSystem)
+                      const Icon(Icons.person_outline,
+                          size: 11, color: Color(0xFF10B981)),
+                  ]),
+                  Expanded(
+                    child: Text(
+                      s.text,
+                      maxLines: s.isPinned || !s.isSystem ? 2 : 3,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontSize: 12,
+                          color: Color(0xFF9CA3AF),
+                          height: 1.4),
+                    ),
+                  ),
+                ],
               ),
             ),
           );
