@@ -1626,5 +1626,14 @@
   "fdDeleteFailed": "Kan niet verwijderen: {msg}",
   "fdAddMemory": "Herinnering toevoegen",
   "fdAddFailed": "Kan niet toevoegen: {msg}",
-  "fdDetailOptional": "Detail (optioneel)"
+  "fdDetailOptional": "Detail (optioneel)",
+  "hcUpdated": "Gezondheidskaart bijgewerkt",
+  "hcHealthInfo": "GEZONDHEIDSINFORMATIE",
+  "hcAllergies": "Allergieen",
+  "hcOrganDonor": "Orgaandonor",
+  "hcEmergencyContact": "NOODCONTACT",
+  "hcFullName": "Volledige naam",
+  "hcDoctorInfo": "ARTSINFORMATIE",
+  "hcExtraNotes": "EXTRA NOTITIES",
+  "hcNotes": "Notities"
 }

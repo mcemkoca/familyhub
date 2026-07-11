@@ -5127,4 +5127,31 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get fdDetailOptional => 'Detail (facultatif)';
+
+  @override
+  String get hcUpdated => 'Carte de sante mise a jour';
+
+  @override
+  String get hcHealthInfo => 'INFORMATIONS DE SANTE';
+
+  @override
+  String get hcAllergies => 'Allergies';
+
+  @override
+  String get hcOrganDonor => 'Donneur d\'organes';
+
+  @override
+  String get hcEmergencyContact => 'CONTACT D\'URGENCE';
+
+  @override
+  String get hcFullName => 'Nom complet';
+
+  @override
+  String get hcDoctorInfo => 'INFORMATIONS DU MEDECIN';
+
+  @override
+  String get hcExtraNotes => 'NOTES SUPPLEMENTAIRES';
+
+  @override
+  String get hcNotes => 'Notes';
 }

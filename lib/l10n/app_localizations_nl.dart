@@ -5107,4 +5107,31 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get fdDetailOptional => 'Detail (optioneel)';
+
+  @override
+  String get hcUpdated => 'Gezondheidskaart bijgewerkt';
+
+  @override
+  String get hcHealthInfo => 'GEZONDHEIDSINFORMATIE';
+
+  @override
+  String get hcAllergies => 'Allergieen';
+
+  @override
+  String get hcOrganDonor => 'Orgaandonor';
+
+  @override
+  String get hcEmergencyContact => 'NOODCONTACT';
+
+  @override
+  String get hcFullName => 'Volledige naam';
+
+  @override
+  String get hcDoctorInfo => 'ARTSINFORMATIE';
+
+  @override
+  String get hcExtraNotes => 'EXTRA NOTITIES';
+
+  @override
+  String get hcNotes => 'Notities';
 }

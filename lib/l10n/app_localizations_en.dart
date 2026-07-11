@@ -5106,4 +5106,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get fdDetailOptional => 'Detail (optional)';
+
+  @override
+  String get hcUpdated => 'Health card updated';
+
+  @override
+  String get hcHealthInfo => 'HEALTH INFORMATION';
+
+  @override
+  String get hcAllergies => 'Allergies';
+
+  @override
+  String get hcOrganDonor => 'Organ Donor';
+
+  @override
+  String get hcEmergencyContact => 'EMERGENCY CONTACT';
+
+  @override
+  String get hcFullName => 'Full Name';
+
+  @override
+  String get hcDoctorInfo => 'DOCTOR INFORMATION';
+
+  @override
+  String get hcExtraNotes => 'EXTRA NOTES';
+
+  @override
+  String get hcNotes => 'Notes';
 }

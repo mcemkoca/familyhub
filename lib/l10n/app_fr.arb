@@ -1626,5 +1626,14 @@
   "fdDeleteFailed": "Impossible de supprimer : {msg}",
   "fdAddMemory": "Ajouter un souvenir",
   "fdAddFailed": "Impossible d'ajouter : {msg}",
-  "fdDetailOptional": "Detail (facultatif)"
+  "fdDetailOptional": "Detail (facultatif)",
+  "hcUpdated": "Carte de sante mise a jour",
+  "hcHealthInfo": "INFORMATIONS DE SANTE",
+  "hcAllergies": "Allergies",
+  "hcOrganDonor": "Donneur d'organes",
+  "hcEmergencyContact": "CONTACT D'URGENCE",
+  "hcFullName": "Nom complet",
+  "hcDoctorInfo": "INFORMATIONS DU MEDECIN",
+  "hcExtraNotes": "NOTES SUPPLEMENTAIRES",
+  "hcNotes": "Notes"
 }

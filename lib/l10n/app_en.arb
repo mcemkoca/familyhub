@@ -1626,5 +1626,14 @@
   "fdDeleteFailed": "Could not delete: {msg}",
   "fdAddMemory": "Add Memory",
   "fdAddFailed": "Could not add: {msg}",
-  "fdDetailOptional": "Detail (optional)"
+  "fdDetailOptional": "Detail (optional)",
+  "hcUpdated": "Health card updated",
+  "hcHealthInfo": "HEALTH INFORMATION",
+  "hcAllergies": "Allergies",
+  "hcOrganDonor": "Organ Donor",
+  "hcEmergencyContact": "EMERGENCY CONTACT",
+  "hcFullName": "Full Name",
+  "hcDoctorInfo": "DOCTOR INFORMATION",
+  "hcExtraNotes": "EXTRA NOTES",
+  "hcNotes": "Notes"
 }

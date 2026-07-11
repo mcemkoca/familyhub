@@ -1645,5 +1645,14 @@
   "fdAddMemory": "Anı Ekle",
   "fdAddFailed": "Eklenemedi: {msg}",
   "@fdAddFailed": { "placeholders": { "msg": {} } },
-  "fdDetailOptional": "Detay (isteğe bağlı)"
+  "fdDetailOptional": "Detay (isteğe bağlı)",
+  "hcUpdated": "Sağlık kartı güncellendi",
+  "hcHealthInfo": "SAĞLIK BİLGİLERİ",
+  "hcAllergies": "Alerjiler",
+  "hcOrganDonor": "Organ Bağışçısı",
+  "hcEmergencyContact": "ACİL DURUM KİŞİSİ",
+  "hcFullName": "Ad Soyad",
+  "hcDoctorInfo": "DOKTOR BİLGİLERİ",
+  "hcExtraNotes": "EK NOTLAR",
+  "hcNotes": "Notlar"
 }

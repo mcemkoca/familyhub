@@ -137,7 +137,7 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
       if (mounted) {
         setState(() => _saving = false);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Sağlık kartı güncellendi')),
+          SnackBar(content: Text(AppLocalizations.of(context).hcUpdated)),
         );
         if (context.mounted) context.pop();
       }
@@ -146,7 +146,7 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
         setState(() => _saving = false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Kaydedilemedi: $e'),
+            content: Text(AppLocalizations.of(context).fdSaveFailed('$e')),
             backgroundColor: AppColors.error,
           ),
         );
@@ -222,7 +222,7 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
                 children: [
                   // Sağlık Bilgileri
                   SettingsSection(
-                    title: 'SAĞLIK BİLGİLERİ',
+                    title: AppLocalizations.of(context).hcHealthInfo,
                     icon: Icons.health_and_safety_outlined,
                     children: [
                       Padding(
@@ -262,7 +262,7 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
                         ),
                       ),
                       _buildInput(
-                        label: 'Alerjiler',
+                        label: AppLocalizations.of(context).hcAllergies,
                         controller: _allergiesController,
                         hint: 'Örn: yer fıstığı, polen, antibiyotik',
                         icon: Icons.healing_outlined,
@@ -280,7 +280,7 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
                         icon: Icons.medication_outlined,
                       ),
                       _buildSwitch(
-                        label: 'Organ Bağışçısı',
+                        label: AppLocalizations.of(context).hcOrganDonor,
                         value: _organDonor,
                         onChanged: (v) => setState(() => _organDonor = v),
                       ),
@@ -289,16 +289,16 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
                   const SizedBox(height: 8),
                   // Acil Durum Kişisi
                   SettingsSection(
-                    title: 'ACİL DURUM KİŞİSİ',
+                    title: AppLocalizations.of(context).hcEmergencyContact,
                     icon: Icons.emergency_outlined,
                     children: [
                       _buildInput(
-                        label: 'Ad Soyad',
+                        label: AppLocalizations.of(context).hcFullName,
                         controller: _emergencyNameController,
                         icon: Icons.person_outline,
                       ),
                       _buildInput(
-                        label: 'Telefon',
+                        label: AppLocalizations.of(context).crashPhone,
                         controller: _emergencyPhoneController,
                         icon: Icons.phone_outlined,
                         keyboardType: TextInputType.phone,
@@ -314,7 +314,7 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
                   const SizedBox(height: 8),
                   // Doktor Bilgileri
                   SettingsSection(
-                    title: 'DOKTOR BİLGİLERİ',
+                    title: AppLocalizations.of(context).hcDoctorInfo,
                     icon: Icons.local_hospital_outlined,
                     children: [
                       _buildInput(
@@ -323,13 +323,13 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
                         icon: Icons.person_outline,
                       ),
                       _buildInput(
-                        label: 'Telefon',
+                        label: AppLocalizations.of(context).crashPhone,
                         controller: _doctorPhoneController,
                         icon: Icons.phone_outlined,
                         keyboardType: TextInputType.phone,
                       ),
                       _buildInput(
-                        label: 'Hastane / Klinik',
+                        label: AppLocalizations.of(context).fhHospitalClinic,
                         controller: _doctorHospitalController,
                         icon: Icons.local_hospital_outlined,
                       ),
@@ -338,11 +338,11 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
                   const SizedBox(height: 8),
                   // Ek Notlar
                   SettingsSection(
-                    title: 'EK NOTLAR',
+                    title: AppLocalizations.of(context).hcExtraNotes,
                     icon: Icons.notes_outlined,
                     children: [
                       _buildInput(
-                        label: 'Notlar',
+                        label: AppLocalizations.of(context).hcNotes,
                         controller: _notesController,
                         hint: 'Eklemek istediğiniz sağlık notları...',
                         icon: Icons.notes_outlined,

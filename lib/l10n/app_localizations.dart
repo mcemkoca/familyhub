@@ -9719,6 +9719,60 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Detay (isteğe bağlı)'**
   String get fdDetailOptional;
+
+  /// No description provided for @hcUpdated.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sağlık kartı güncellendi'**
+  String get hcUpdated;
+
+  /// No description provided for @hcHealthInfo.
+  ///
+  /// In tr, this message translates to:
+  /// **'SAĞLIK BİLGİLERİ'**
+  String get hcHealthInfo;
+
+  /// No description provided for @hcAllergies.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alerjiler'**
+  String get hcAllergies;
+
+  /// No description provided for @hcOrganDonor.
+  ///
+  /// In tr, this message translates to:
+  /// **'Organ Bağışçısı'**
+  String get hcOrganDonor;
+
+  /// No description provided for @hcEmergencyContact.
+  ///
+  /// In tr, this message translates to:
+  /// **'ACİL DURUM KİŞİSİ'**
+  String get hcEmergencyContact;
+
+  /// No description provided for @hcFullName.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ad Soyad'**
+  String get hcFullName;
+
+  /// No description provided for @hcDoctorInfo.
+  ///
+  /// In tr, this message translates to:
+  /// **'DOKTOR BİLGİLERİ'**
+  String get hcDoctorInfo;
+
+  /// No description provided for @hcExtraNotes.
+  ///
+  /// In tr, this message translates to:
+  /// **'EK NOTLAR'**
+  String get hcExtraNotes;
+
+  /// No description provided for @hcNotes.
+  ///
+  /// In tr, this message translates to:
+  /// **'Notlar'**
+  String get hcNotes;
 }
 
 class _AppLocalizationsDelegate

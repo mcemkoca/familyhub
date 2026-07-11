@@ -5126,4 +5126,31 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get fdDetailOptional => 'Detay (isteğe bağlı)';
+
+  @override
+  String get hcUpdated => 'Sağlık kartı güncellendi';
+
+  @override
+  String get hcHealthInfo => 'SAĞLIK BİLGİLERİ';
+
+  @override
+  String get hcAllergies => 'Alerjiler';
+
+  @override
+  String get hcOrganDonor => 'Organ Bağışçısı';
+
+  @override
+  String get hcEmergencyContact => 'ACİL DURUM KİŞİSİ';
+
+  @override
+  String get hcFullName => 'Ad Soyad';
+
+  @override
+  String get hcDoctorInfo => 'DOKTOR BİLGİLERİ';
+
+  @override
+  String get hcExtraNotes => 'EK NOTLAR';
+
+  @override
+  String get hcNotes => 'Notlar';
 }
