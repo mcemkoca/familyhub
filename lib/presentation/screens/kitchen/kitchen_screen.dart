@@ -114,6 +114,7 @@ class _KitchenScreenState extends State<KitchenScreen>
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    _loadWeeklyPlan();
     _loadRecipes();
   }
 
@@ -143,6 +144,28 @@ class _KitchenScreenState extends State<KitchenScreen>
   // tarifleri görünmesin (yerel içerik; bulutla senkron değil).
   String get _customKey =>
       'custom_recipes_${AuthService.currentUserId ?? 'anon'}';
+
+  // Haftalık plan da kullanıcı-izole + KALICI (önceden bellekte tutuluyordu →
+  // ekran kapanınca kayboluyordu = veri kaybı).
+  String get _weeklyPlanKey =>
+      'weekly_plan_${AuthService.currentUserId ?? 'anon'}';
+
+  void _loadWeeklyPlan() {
+    try {
+      final raw = HiveService.getSetting(_weeklyPlanKey);
+      if (raw == null || raw.isEmpty) return;
+      final map = jsonDecode(raw) as Map<String, dynamic>;
+      for (final day in _weeklyPlan.keys) {
+        final v = map[day];
+        if (v is String) _weeklyPlan[day] = v;
+      }
+    } catch (_) {}
+  }
+
+  Future<void> _saveWeeklyPlan() async {
+    // null değerleri de yaz (temizlenen günler korunsun).
+    await HiveService.setSetting(_weeklyPlanKey, jsonEncode(_weeklyPlan));
+  }
 
   List<Map<String, dynamic>> _loadCustom() {
     try {
@@ -217,6 +240,7 @@ class _KitchenScreenState extends State<KitchenScreen>
         _weeklyPlan[day] = pick['title'] as String?;
       }
     });
+    _saveWeeklyPlan();
   }
 
   @override
@@ -253,7 +277,10 @@ class _KitchenScreenState extends State<KitchenScreen>
                     plan: _weeklyPlan,
                     onAutoFill: _autoFillWeek,
                     onPickDay: (day) => _showPickForDay(day),
-                    onClear: (day) => setState(() => _weeklyPlan[day] = null),
+                    onClear: (day) {
+                      setState(() => _weeklyPlan[day] = null);
+                      _saveWeeklyPlan();
+                    },
                     isDark: isDark,
                   ),
                   _MealShoppingTab(
@@ -425,6 +452,7 @@ class _KitchenScreenState extends State<KitchenScreen>
                     child: ListTile(
                       onTap: () {
                         setState(() => _weeklyPlan[day] = r['title'] as String?);
+                        _saveWeeklyPlan();
                         Navigator.pop(context);
                       },
                       leading: Container(
