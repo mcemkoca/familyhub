@@ -1544,5 +1544,20 @@
   "kitCategory": "Kategori",
   "kitWeeklyAISuggestions": "Bu Haftanın AI Önerileri",
   "kitIngredients": "Malzemeler",
-  "kitPreparation": "Hazırlanışı"
+  "kitPreparation": "Hazırlanışı",
+  "chatGettingLocation": "Konum alınıyor…",
+  "chatCreatePoll": "Anket Oluştur",
+  "chatAddOption": "Seçenek ekle",
+  "chatSendPoll": "Anketi Gönder",
+  "chatFileFailed": "Dosya seçilemedi",
+  "chatSearchMessages": "Mesajlarda Ara",
+  "chatClearChat": "Sohbeti Temizle",
+  "chatCamera": "Kamera",
+  "chatGallery": "Galeri",
+  "chatLocation": "Konum",
+  "chatEvent": "Etkinlik",
+  "chatPoll": "Anket",
+  "chatGif": "GIF",
+  "chatVideo": "Video",
+  "chatFile": "Dosya"
 }

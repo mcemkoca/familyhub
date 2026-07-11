@@ -233,8 +233,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     final messenger = ScaffoldMessenger.of(context);
     final locationUnavailable =
         AppLocalizations.of(context).locationUnavailable;
-    messenger.showSnackBar(const SnackBar(
-        content: Text('Konum alınıyor…'), duration: Duration(seconds: 1)));
+    messenger.showSnackBar(SnackBar(
+        content: Text(AppLocalizations.of(context).chatGettingLocation), duration: const Duration(seconds: 1)));
 
     final pos = await LocationService.getCurrentPosition();
     if (pos == null) {
@@ -391,7 +391,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                         const Icon(Icons.poll_rounded,
                             color: Color(0xFF8B5CF6), size: 22),
                         const SizedBox(width: 8),
-                        Text('Anket Oluştur',
+                        Text(AppLocalizations.of(context).chatCreatePoll,
                             style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w800,
@@ -436,8 +436,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                             optionCtrls.add(TextEditingController())),
                         icon: const Icon(Icons.add_rounded,
                             size: 18, color: Color(0xFF8B5CF6)),
-                        label: const Text('Seçenek ekle',
-                            style: TextStyle(color: Color(0xFF8B5CF6))),
+                        label: Text(AppLocalizations.of(context).chatAddOption,
+                            style: const TextStyle(color: Color(0xFF8B5CF6))),
                       ),
                     const SizedBox(height: 8),
                     SizedBox(
@@ -466,8 +466,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                           Navigator.pop(ctx);
                           _sendPoll(q, opts);
                         },
-                        child: const Text('Anketi Gönder',
-                            style: TextStyle(
+                        child: Text(AppLocalizations.of(context).chatSendPoll,
+                            style: const TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 15)),
                       ),
                     ),
@@ -532,7 +532,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Dosya seçilemedi')),
+          SnackBar(content: Text(AppLocalizations.of(context).chatFileFailed)),
         );
       }
     }
@@ -950,7 +950,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                 const SizedBox(height: 20),
                 _MenuItem(
                   icon: Icons.search,
-                  label: 'Mesajlarda Ara',
+                  label: AppLocalizations.of(context).chatSearchMessages,
                   onTap: () => Navigator.pop(context),
                 ),
                 _MenuItem(
@@ -965,7 +965,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                 ),
                 _MenuItem(
                   icon: Icons.delete_outline,
-                  label: 'Sohbeti Temizle',
+                  label: AppLocalizations.of(context).chatClearChat,
                   isDanger: true,
                   onTap: () => Navigator.pop(context),
                 ),
@@ -1124,31 +1124,31 @@ class _AttachmentMenu extends StatelessWidget {
                         _AttachmentItem(
                           icon: Icons.camera_alt,
                           color: AppColors.error,
-                          label: 'Kamera',
+                          label: AppLocalizations.of(context).chatCamera,
                           onTap: onCamera,
                         ),
                         _AttachmentItem(
                           icon: Icons.photo,
                           color: const Color(0xFF6366F1),
-                          label: 'Galeri',
+                          label: AppLocalizations.of(context).chatGallery,
                           onTap: onGallery,
                         ),
                         _AttachmentItem(
                           icon: Icons.location_on,
                           color: const Color(0xFF10B981),
-                          label: 'Konum',
+                          label: AppLocalizations.of(context).chatLocation,
                           onTap: onLocation,
                         ),
                         _AttachmentItem(
                           icon: Icons.event,
                           color: const Color(0xFFF59E0B),
-                          label: 'Etkinlik',
+                          label: AppLocalizations.of(context).chatEvent,
                           onTap: () => context.push(AppRoutes.calendar),
                         ),
                         _AttachmentItem(
                           icon: Icons.poll,
                           color: const Color(0xFF6366F1),
-                          label: 'Anket',
+                          label: AppLocalizations.of(context).chatPoll,
                           onTap: onPoll ?? () {},
                         ),
                         _AttachmentItem(
@@ -1160,19 +1160,19 @@ class _AttachmentMenu extends StatelessWidget {
                         _AttachmentItem(
                           icon: Icons.gif_box_outlined,
                           color: AppColors.orange,
-                          label: 'GIF',
+                          label: AppLocalizations.of(context).chatGif,
                           onTap: onGif ?? () {},
                         ),
                         _AttachmentItem(
                           icon: Icons.videocam_outlined,
                           color: const Color(0xFF7C3AED),
-                          label: 'Video',
+                          label: AppLocalizations.of(context).chatVideo,
                           onTap: onVideo ?? () {},
                         ),
                         _AttachmentItem(
                           icon: Icons.description,
                           color: const Color(0xFF6B7280),
-                          label: 'Dosya',
+                          label: AppLocalizations.of(context).chatFile,
                           onTap: onFile ?? () {},
                         ),
                       ],

@@ -1535,5 +1535,20 @@
   "kitCategory": "Categorie",
   "kitWeeklyAISuggestions": "AI-suggesties van deze week",
   "kitIngredients": "Ingredienten",
-  "kitPreparation": "Bereiding"
+  "kitPreparation": "Bereiding",
+  "chatGettingLocation": "Locatie ophalen…",
+  "chatCreatePoll": "Poll maken",
+  "chatAddOption": "Optie toevoegen",
+  "chatSendPoll": "Poll versturen",
+  "chatFileFailed": "Kan bestand niet kiezen",
+  "chatSearchMessages": "Berichten zoeken",
+  "chatClearChat": "Chat wissen",
+  "chatCamera": "Camera",
+  "chatGallery": "Galerij",
+  "chatLocation": "Locatie",
+  "chatEvent": "Evenement",
+  "chatPoll": "Poll",
+  "chatGif": "GIF",
+  "chatVideo": "Video",
+  "chatFile": "Bestand"
 }

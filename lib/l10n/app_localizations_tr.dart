@@ -4832,4 +4832,49 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get kitPreparation => 'Hazırlanışı';
+
+  @override
+  String get chatGettingLocation => 'Konum alınıyor…';
+
+  @override
+  String get chatCreatePoll => 'Anket Oluştur';
+
+  @override
+  String get chatAddOption => 'Seçenek ekle';
+
+  @override
+  String get chatSendPoll => 'Anketi Gönder';
+
+  @override
+  String get chatFileFailed => 'Dosya seçilemedi';
+
+  @override
+  String get chatSearchMessages => 'Mesajlarda Ara';
+
+  @override
+  String get chatClearChat => 'Sohbeti Temizle';
+
+  @override
+  String get chatCamera => 'Kamera';
+
+  @override
+  String get chatGallery => 'Galeri';
+
+  @override
+  String get chatLocation => 'Konum';
+
+  @override
+  String get chatEvent => 'Etkinlik';
+
+  @override
+  String get chatPoll => 'Anket';
+
+  @override
+  String get chatGif => 'GIF';
+
+  @override
+  String get chatVideo => 'Video';
+
+  @override
+  String get chatFile => 'Dosya';
 }

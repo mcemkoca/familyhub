@@ -1535,5 +1535,20 @@
   "kitCategory": "Category",
   "kitWeeklyAISuggestions": "This Week's AI Suggestions",
   "kitIngredients": "Ingredients",
-  "kitPreparation": "Preparation"
+  "kitPreparation": "Preparation",
+  "chatGettingLocation": "Getting location…",
+  "chatCreatePoll": "Create Poll",
+  "chatAddOption": "Add option",
+  "chatSendPoll": "Send Poll",
+  "chatFileFailed": "Couldn't pick file",
+  "chatSearchMessages": "Search Messages",
+  "chatClearChat": "Clear Chat",
+  "chatCamera": "Camera",
+  "chatGallery": "Gallery",
+  "chatLocation": "Location",
+  "chatEvent": "Event",
+  "chatPoll": "Poll",
+  "chatGif": "GIF",
+  "chatVideo": "Video",
+  "chatFile": "File"
 }

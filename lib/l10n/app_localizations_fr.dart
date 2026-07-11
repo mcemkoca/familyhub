@@ -4832,4 +4832,49 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get kitPreparation => 'Preparation';
+
+  @override
+  String get chatGettingLocation => 'Localisation en cours…';
+
+  @override
+  String get chatCreatePoll => 'Creer un sondage';
+
+  @override
+  String get chatAddOption => 'Ajouter une option';
+
+  @override
+  String get chatSendPoll => 'Envoyer le sondage';
+
+  @override
+  String get chatFileFailed => 'Impossible de choisir le fichier';
+
+  @override
+  String get chatSearchMessages => 'Rechercher des messages';
+
+  @override
+  String get chatClearChat => 'Effacer la conversation';
+
+  @override
+  String get chatCamera => 'Camera';
+
+  @override
+  String get chatGallery => 'Galerie';
+
+  @override
+  String get chatLocation => 'Localisation';
+
+  @override
+  String get chatEvent => 'Evenement';
+
+  @override
+  String get chatPoll => 'Sondage';
+
+  @override
+  String get chatGif => 'GIF';
+
+  @override
+  String get chatVideo => 'Video';
+
+  @override
+  String get chatFile => 'Fichier';
 }

@@ -4812,4 +4812,49 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get kitPreparation => 'Bereiding';
+
+  @override
+  String get chatGettingLocation => 'Locatie ophalen…';
+
+  @override
+  String get chatCreatePoll => 'Poll maken';
+
+  @override
+  String get chatAddOption => 'Optie toevoegen';
+
+  @override
+  String get chatSendPoll => 'Poll versturen';
+
+  @override
+  String get chatFileFailed => 'Kan bestand niet kiezen';
+
+  @override
+  String get chatSearchMessages => 'Berichten zoeken';
+
+  @override
+  String get chatClearChat => 'Chat wissen';
+
+  @override
+  String get chatCamera => 'Camera';
+
+  @override
+  String get chatGallery => 'Galerij';
+
+  @override
+  String get chatLocation => 'Locatie';
+
+  @override
+  String get chatEvent => 'Evenement';
+
+  @override
+  String get chatPoll => 'Poll';
+
+  @override
+  String get chatGif => 'GIF';
+
+  @override
+  String get chatVideo => 'Video';
+
+  @override
+  String get chatFile => 'Bestand';
 }

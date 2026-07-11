@@ -9173,6 +9173,96 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Hazırlanışı'**
   String get kitPreparation;
+
+  /// No description provided for @chatGettingLocation.
+  ///
+  /// In tr, this message translates to:
+  /// **'Konum alınıyor…'**
+  String get chatGettingLocation;
+
+  /// No description provided for @chatCreatePoll.
+  ///
+  /// In tr, this message translates to:
+  /// **'Anket Oluştur'**
+  String get chatCreatePoll;
+
+  /// No description provided for @chatAddOption.
+  ///
+  /// In tr, this message translates to:
+  /// **'Seçenek ekle'**
+  String get chatAddOption;
+
+  /// No description provided for @chatSendPoll.
+  ///
+  /// In tr, this message translates to:
+  /// **'Anketi Gönder'**
+  String get chatSendPoll;
+
+  /// No description provided for @chatFileFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Dosya seçilemedi'**
+  String get chatFileFailed;
+
+  /// No description provided for @chatSearchMessages.
+  ///
+  /// In tr, this message translates to:
+  /// **'Mesajlarda Ara'**
+  String get chatSearchMessages;
+
+  /// No description provided for @chatClearChat.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sohbeti Temizle'**
+  String get chatClearChat;
+
+  /// No description provided for @chatCamera.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kamera'**
+  String get chatCamera;
+
+  /// No description provided for @chatGallery.
+  ///
+  /// In tr, this message translates to:
+  /// **'Galeri'**
+  String get chatGallery;
+
+  /// No description provided for @chatLocation.
+  ///
+  /// In tr, this message translates to:
+  /// **'Konum'**
+  String get chatLocation;
+
+  /// No description provided for @chatEvent.
+  ///
+  /// In tr, this message translates to:
+  /// **'Etkinlik'**
+  String get chatEvent;
+
+  /// No description provided for @chatPoll.
+  ///
+  /// In tr, this message translates to:
+  /// **'Anket'**
+  String get chatPoll;
+
+  /// No description provided for @chatGif.
+  ///
+  /// In tr, this message translates to:
+  /// **'GIF'**
+  String get chatGif;
+
+  /// No description provided for @chatVideo.
+  ///
+  /// In tr, this message translates to:
+  /// **'Video'**
+  String get chatVideo;
+
+  /// No description provided for @chatFile.
+  ///
+  /// In tr, this message translates to:
+  /// **'Dosya'**
+  String get chatFile;
 }
 
 class _AppLocalizationsDelegate
