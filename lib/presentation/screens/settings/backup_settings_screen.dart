@@ -122,7 +122,7 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Yedekleme hatası: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context).cbBackupFailed('$e'))),
         );
       }
     } finally {
@@ -147,7 +147,7 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Geri yükleme hatası: $e'),
+            content: Text(AppLocalizations.of(context).cbRestoreFailed('$e')),
             backgroundColor: Colors.red,
           ),
         );
@@ -324,15 +324,15 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
               ),
             ),
           ),
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: SettingsSection(
-              title: 'AYARLAR',
+              title: AppLocalizations.of(context).bsSettingsSection,
               icon: Icons.settings_outlined,
               children: [
                 HiveSettingsToggle(
                   settingsKey: 'auto_backup_enabled',
-                  title: 'Otomatik Yedekleme',
-                  subtitle: 'Her hafta otomatik yedekle',
+                  title: AppLocalizations.of(context).bsAutoBackup,
+                  subtitle: AppLocalizations.of(context).bsAutoBackupSub,
                   defaultValue: false,
                 ),
               ],

@@ -1760,5 +1760,21 @@
   "hwCycleTracking": "Cyclusopvolging",
   "hwCycleDay": "Je bent op dag {day} van je menstruatie.",
   "hwTapToChangeStart": "Tik om de startdatum te wijzigen",
-  "hwSymptomTracking": "Symptoomopvolging"
+  "hwSymptomTracking": "Symptoomopvolging",
+  "sosTriggerWord": "Analyse van triggerwoord",
+  "ltAiOptimize": "AI-optimaliseren",
+  "ltTrackingActive": "Locatietracking actief",
+  "ltBalanced": "Gebalanceerd",
+  "ltAccuracy": "Nauwkeurig",
+  "stLockFailed": "Vergrendelen mislukt: {msg}",
+  "stDuration": "Duur: {h}u {m}m",
+  "stReasonOptional": "Reden (optioneel)",
+  "stLock": "Vergrendelen",
+  "apAa": "Aa",
+  "apFontSizeNote": "Lettergrootte wordt direct in de hele app toegepast.",
+  "bsSettingsSection": "INSTELLINGEN",
+  "bsAutoBackup": "Automatische back-up",
+  "bsAutoBackupSub": "Elke week automatisch back-uppen",
+  "pfSaved": "Profielinfo opgeslagen",
+  "pfNewEmail": "Nieuw e-mailadres"
 }

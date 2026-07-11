@@ -1760,5 +1760,21 @@
   "hwCycleTracking": "Suivi du cycle",
   "hwCycleDay": "Vous etes au jour {day} de vos regles.",
   "hwTapToChangeStart": "Appuyez pour modifier la date de debut",
-  "hwSymptomTracking": "Suivi des symptomes"
+  "hwSymptomTracking": "Suivi des symptomes",
+  "sosTriggerWord": "Analyse du mot declencheur",
+  "ltAiOptimize": "Optimiser par IA",
+  "ltTrackingActive": "Suivi de position actif",
+  "ltBalanced": "Equilibre",
+  "ltAccuracy": "Precis",
+  "stLockFailed": "Echec du verrouillage : {msg}",
+  "stDuration": "Duree : {h}h {m}m",
+  "stReasonOptional": "Raison (facultatif)",
+  "stLock": "Verrouiller",
+  "apAa": "Aa",
+  "apFontSizeNote": "La taille de police s'applique instantanement a toute l'app.",
+  "bsSettingsSection": "PARAMETRES",
+  "bsAutoBackup": "Sauvegarde automatique",
+  "bsAutoBackupSub": "Sauvegarder automatiquement chaque semaine",
+  "pfSaved": "Infos du profil enregistrees",
+  "pfNewEmail": "Nouvel e-mail"
 }

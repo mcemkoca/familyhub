@@ -118,7 +118,7 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Fotoğraf yüklenemedi: $e'),
+            content: Text(AppLocalizations.of(context).fdPhotoFailed('$e')),
             backgroundColor: AppColors.error,
           ),
         );
@@ -162,7 +162,7 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
       if (mounted) {
         setState(() => _saving = false);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Profil bilgileri kaydedildi')),
+          SnackBar(content: Text(AppLocalizations.of(context).pfSaved)),
         );
         if (context.mounted) context.pop();
       }
@@ -199,9 +199,9 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
               TextField(
                 controller: controller,
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  labelText: 'Yeni E-posta',
-                  prefixIcon: Icon(Icons.email_outlined),
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context).pfNewEmail,
+                  prefixIcon: const Icon(Icons.email_outlined),
                 ),
               ),
             ],
@@ -245,7 +245,7 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
                         if (!mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('Hata: $e'),
+                            content: Text(AppLocalizations.of(context).srError('$e')),
                             backgroundColor: AppColors.error,
                           ),
                         );
@@ -396,21 +396,21 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
                   icon: Icons.person_outline,
                   children: [
                     _buildInput(
-                      label: 'Ad Soyad',
+                      label: AppLocalizations.of(context).hcFullName,
                       controller: _nameController,
                       hint: 'Adınızı girin',
                       icon: Icons.person_outline,
                       onChanged: () => setState(() {}),
                     ),
                     _buildInput(
-                      label: 'Telefon',
+                      label: AppLocalizations.of(context).crashPhone,
                       controller: _phoneController,
                       hint: 'Telefon numarası',
                       icon: Icons.phone_outlined,
                       keyboardType: TextInputType.phone,
                     ),
                     _buildInput(
-                      label: 'E-posta',
+                      label: AppLocalizations.of(context).conEmail,
                       controller: _emailController,
                       icon: Icons.email_outlined,
                       enabled: false,

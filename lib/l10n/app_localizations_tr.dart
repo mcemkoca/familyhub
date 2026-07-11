@@ -5566,4 +5566,56 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get hwSymptomTracking => 'Semptom Takibi';
+
+  @override
+  String get sosTriggerWord => 'Trigger word analizi';
+
+  @override
+  String get ltAiOptimize => 'AI Optimize Et';
+
+  @override
+  String get ltTrackingActive => 'Konum takibi aktif';
+
+  @override
+  String get ltBalanced => 'Dengeli';
+
+  @override
+  String get ltAccuracy => 'Hassas';
+
+  @override
+  String stLockFailed(Object msg) {
+    return 'Kilitleme başarısız: $msg';
+  }
+
+  @override
+  String stDuration(Object h, Object m) {
+    return 'Süre: ${h}s ${m}d';
+  }
+
+  @override
+  String get stReasonOptional => 'Neden (isteğe bağlı)';
+
+  @override
+  String get stLock => 'Kilitle';
+
+  @override
+  String get apAa => 'Aa';
+
+  @override
+  String get apFontSizeNote => 'Yazı boyutu tüm uygulamaya anında uygulanır.';
+
+  @override
+  String get bsSettingsSection => 'AYARLAR';
+
+  @override
+  String get bsAutoBackup => 'Otomatik Yedekleme';
+
+  @override
+  String get bsAutoBackupSub => 'Her hafta otomatik yedekle';
+
+  @override
+  String get pfSaved => 'Profil bilgileri kaydedildi';
+
+  @override
+  String get pfNewEmail => 'Yeni E-posta';
 }

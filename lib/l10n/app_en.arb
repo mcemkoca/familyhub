@@ -1760,5 +1760,21 @@
   "hwCycleTracking": "Cycle Tracking",
   "hwCycleDay": "You are on day {day} of your period.",
   "hwTapToChangeStart": "Tap to change the start date",
-  "hwSymptomTracking": "Symptom Tracking"
+  "hwSymptomTracking": "Symptom Tracking",
+  "sosTriggerWord": "Trigger word analysis",
+  "ltAiOptimize": "AI Optimize",
+  "ltTrackingActive": "Location tracking active",
+  "ltBalanced": "Balanced",
+  "ltAccuracy": "Precise",
+  "stLockFailed": "Lock failed: {msg}",
+  "stDuration": "Duration: {h}h {m}m",
+  "stReasonOptional": "Reason (optional)",
+  "stLock": "Lock",
+  "apAa": "Aa",
+  "apFontSizeNote": "Font size applies instantly across the whole app.",
+  "bsSettingsSection": "SETTINGS",
+  "bsAutoBackup": "Automatic Backup",
+  "bsAutoBackupSub": "Back up automatically every week",
+  "pfSaved": "Profile info saved",
+  "pfNewEmail": "New Email"
 }

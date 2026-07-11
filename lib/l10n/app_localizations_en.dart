@@ -5546,4 +5546,57 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get hwSymptomTracking => 'Symptom Tracking';
+
+  @override
+  String get sosTriggerWord => 'Trigger word analysis';
+
+  @override
+  String get ltAiOptimize => 'AI Optimize';
+
+  @override
+  String get ltTrackingActive => 'Location tracking active';
+
+  @override
+  String get ltBalanced => 'Balanced';
+
+  @override
+  String get ltAccuracy => 'Precise';
+
+  @override
+  String stLockFailed(Object msg) {
+    return 'Lock failed: $msg';
+  }
+
+  @override
+  String stDuration(Object h, Object m) {
+    return 'Duration: ${h}h ${m}m';
+  }
+
+  @override
+  String get stReasonOptional => 'Reason (optional)';
+
+  @override
+  String get stLock => 'Lock';
+
+  @override
+  String get apAa => 'Aa';
+
+  @override
+  String get apFontSizeNote =>
+      'Font size applies instantly across the whole app.';
+
+  @override
+  String get bsSettingsSection => 'SETTINGS';
+
+  @override
+  String get bsAutoBackup => 'Automatic Backup';
+
+  @override
+  String get bsAutoBackupSub => 'Back up automatically every week';
+
+  @override
+  String get pfSaved => 'Profile info saved';
+
+  @override
+  String get pfNewEmail => 'New Email';
 }

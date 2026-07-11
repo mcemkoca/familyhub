@@ -33,12 +33,12 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
         actions: [
           IconButton(
             icon: const Icon(Icons.auto_awesome),
-            tooltip: 'AI Optimize Et',
+            tooltip: AppLocalizations.of(context).ltAiOptimize,
             onPressed: () {},
           ),
           IconButton(
             icon: const Icon(Icons.save),
-            tooltip: 'Kaydet',
+            tooltip: AppLocalizations.of(context).save,
             onPressed: _save,
           ),
         ],
@@ -50,7 +50,7 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
             SwitchListTile(
               value: _enabled,
               onChanged: (v) => setState(() => _enabled = v),
-              title: const Text('Konum takibi aktif'),
+              title: Text(AppLocalizations.of(context).ltTrackingActive),
               secondary: const Icon(Icons.location_on, color: Colors.green),
             ),
             const SizedBox(height: 8),
@@ -58,9 +58,9 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
             const SizedBox(height: 8),
             SegmentedButton<TrackingPriority>(
               segments: [
-                const ButtonSegment(value: TrackingPriority.battery, label: Text('Batarya')),
-                const ButtonSegment(value: TrackingPriority.balanced, label: Text('Dengeli')),
-                const ButtonSegment(value: TrackingPriority.accuracy, label: Text('Hassas')),
+                ButtonSegment(value: TrackingPriority.battery, label: Text(AppLocalizations.of(context).fssBattery)),
+                ButtonSegment(value: TrackingPriority.balanced, label: Text(AppLocalizations.of(context).ltBalanced)),
+                ButtonSegment(value: TrackingPriority.accuracy, label: Text(AppLocalizations.of(context).ltAccuracy)),
                 ButtonSegment(value: TrackingPriority.custom, label: Text(AppLocalizations.of(context).ozel)),
               ],
               selected: {_priority},
@@ -117,7 +117,7 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
           ElevatedButton.icon(
             onPressed: _save,
             icon: const Icon(Icons.save),
-            label: const Text('KAYDET', style: TextStyle(fontSize: 16)),
+            label: Text(AppLocalizations.of(context).crashSaveUpper, style: const TextStyle(fontSize: 16)),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.green.shade700,
               foregroundColor: Colors.white,
@@ -213,7 +213,7 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
 
   void _save() {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Ayarlar kaydedildi')),
+      SnackBar(content: Text(AppLocalizations.of(context).crashSettingsSaved)),
     );
   }
 }

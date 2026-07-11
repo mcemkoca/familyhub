@@ -83,7 +83,7 @@ class _ScreenTimeSettingsScreenState
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Hata: $e'), backgroundColor: AppColors.error),
+          SnackBar(content: Text(AppLocalizations.of(context).srError('$e')), backgroundColor: AppColors.error),
         );
       }
     }
@@ -109,7 +109,7 @@ class _ScreenTimeSettingsScreenState
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Kilitleme başarısız: $e'), backgroundColor: AppColors.error),
+          SnackBar(content: Text(AppLocalizations.of(context).stLockFailed('$e')), backgroundColor: AppColors.error),
         );
       }
     }
@@ -136,7 +136,7 @@ class _ScreenTimeSettingsScreenState
               children: [
                 Text(AppLocalizations.of(context).buCihaziHemenKilitleyinCocukGirisYapamayacak),
                 const SizedBox(height: 16),
-                Text('Süre: ${selectedMinutes ~/ 60}s ${selectedMinutes % 60}d',
+                Text(AppLocalizations.of(context).stDuration(selectedMinutes ~/ 60, selectedMinutes % 60),
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Slider(
@@ -150,7 +150,7 @@ class _ScreenTimeSettingsScreenState
                 TextField(
                   controller: reasonController,
                   decoration: InputDecoration(
-                    labelText: 'Neden (isteğe bağlı)',
+                    labelText: AppLocalizations.of(context).stReasonOptional,
                     hintText: AppLocalizations.of(context).ornOdevZamani,
                   ),
                 ),
@@ -168,7 +168,7 @@ class _ScreenTimeSettingsScreenState
                 _lockChild(childId, childName, selectedMinutes, reasonController.text);
               },
               icon: const Icon(Icons.lock),
-              label: const Text('Kilitle'),
+              label: Text(AppLocalizations.of(context).stLock),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.error,
                 foregroundColor: Colors.white,

@@ -5570,4 +5570,57 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get hwSymptomTracking => 'Suivi des symptomes';
+
+  @override
+  String get sosTriggerWord => 'Analyse du mot declencheur';
+
+  @override
+  String get ltAiOptimize => 'Optimiser par IA';
+
+  @override
+  String get ltTrackingActive => 'Suivi de position actif';
+
+  @override
+  String get ltBalanced => 'Equilibre';
+
+  @override
+  String get ltAccuracy => 'Precis';
+
+  @override
+  String stLockFailed(Object msg) {
+    return 'Echec du verrouillage : $msg';
+  }
+
+  @override
+  String stDuration(Object h, Object m) {
+    return 'Duree : ${h}h ${m}m';
+  }
+
+  @override
+  String get stReasonOptional => 'Raison (facultatif)';
+
+  @override
+  String get stLock => 'Verrouiller';
+
+  @override
+  String get apAa => 'Aa';
+
+  @override
+  String get apFontSizeNote =>
+      'La taille de police s\'applique instantanement a toute l\'app.';
+
+  @override
+  String get bsSettingsSection => 'PARAMETRES';
+
+  @override
+  String get bsAutoBackup => 'Sauvegarde automatique';
+
+  @override
+  String get bsAutoBackupSub => 'Sauvegarder automatiquement chaque semaine';
+
+  @override
+  String get pfSaved => 'Infos du profil enregistrees';
+
+  @override
+  String get pfNewEmail => 'Nouvel e-mail';
 }

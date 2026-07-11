@@ -5550,4 +5550,57 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get hwSymptomTracking => 'Symptoomopvolging';
+
+  @override
+  String get sosTriggerWord => 'Analyse van triggerwoord';
+
+  @override
+  String get ltAiOptimize => 'AI-optimaliseren';
+
+  @override
+  String get ltTrackingActive => 'Locatietracking actief';
+
+  @override
+  String get ltBalanced => 'Gebalanceerd';
+
+  @override
+  String get ltAccuracy => 'Nauwkeurig';
+
+  @override
+  String stLockFailed(Object msg) {
+    return 'Vergrendelen mislukt: $msg';
+  }
+
+  @override
+  String stDuration(Object h, Object m) {
+    return 'Duur: ${h}u ${m}m';
+  }
+
+  @override
+  String get stReasonOptional => 'Reden (optioneel)';
+
+  @override
+  String get stLock => 'Vergrendelen';
+
+  @override
+  String get apAa => 'Aa';
+
+  @override
+  String get apFontSizeNote =>
+      'Lettergrootte wordt direct in de hele app toegepast.';
+
+  @override
+  String get bsSettingsSection => 'INSTELLINGEN';
+
+  @override
+  String get bsAutoBackup => 'Automatische back-up';
+
+  @override
+  String get bsAutoBackupSub => 'Elke week automatisch back-uppen';
+
+  @override
+  String get pfSaved => 'Profielinfo opgeslagen';
+
+  @override
+  String get pfNewEmail => 'Nieuw e-mailadres';
 }

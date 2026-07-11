@@ -10523,6 +10523,102 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Semptom Takibi'**
   String get hwSymptomTracking;
+
+  /// No description provided for @sosTriggerWord.
+  ///
+  /// In tr, this message translates to:
+  /// **'Trigger word analizi'**
+  String get sosTriggerWord;
+
+  /// No description provided for @ltAiOptimize.
+  ///
+  /// In tr, this message translates to:
+  /// **'AI Optimize Et'**
+  String get ltAiOptimize;
+
+  /// No description provided for @ltTrackingActive.
+  ///
+  /// In tr, this message translates to:
+  /// **'Konum takibi aktif'**
+  String get ltTrackingActive;
+
+  /// No description provided for @ltBalanced.
+  ///
+  /// In tr, this message translates to:
+  /// **'Dengeli'**
+  String get ltBalanced;
+
+  /// No description provided for @ltAccuracy.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hassas'**
+  String get ltAccuracy;
+
+  /// No description provided for @stLockFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kilitleme başarısız: {msg}'**
+  String stLockFailed(Object msg);
+
+  /// No description provided for @stDuration.
+  ///
+  /// In tr, this message translates to:
+  /// **'Süre: {h}s {m}d'**
+  String stDuration(Object h, Object m);
+
+  /// No description provided for @stReasonOptional.
+  ///
+  /// In tr, this message translates to:
+  /// **'Neden (isteğe bağlı)'**
+  String get stReasonOptional;
+
+  /// No description provided for @stLock.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kilitle'**
+  String get stLock;
+
+  /// No description provided for @apAa.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aa'**
+  String get apAa;
+
+  /// No description provided for @apFontSizeNote.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yazı boyutu tüm uygulamaya anında uygulanır.'**
+  String get apFontSizeNote;
+
+  /// No description provided for @bsSettingsSection.
+  ///
+  /// In tr, this message translates to:
+  /// **'AYARLAR'**
+  String get bsSettingsSection;
+
+  /// No description provided for @bsAutoBackup.
+  ///
+  /// In tr, this message translates to:
+  /// **'Otomatik Yedekleme'**
+  String get bsAutoBackup;
+
+  /// No description provided for @bsAutoBackupSub.
+  ///
+  /// In tr, this message translates to:
+  /// **'Her hafta otomatik yedekle'**
+  String get bsAutoBackupSub;
+
+  /// No description provided for @pfSaved.
+  ///
+  /// In tr, this message translates to:
+  /// **'Profil bilgileri kaydedildi'**
+  String get pfSaved;
+
+  /// No description provided for @pfNewEmail.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yeni E-posta'**
+  String get pfNewEmail;
 }
 
 class _AppLocalizationsDelegate

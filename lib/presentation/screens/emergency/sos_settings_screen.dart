@@ -211,7 +211,7 @@ class _SosSettingsScreenState extends State<SosSettingsScreen> {
               SwitchListTile(
                 value: _triggerWords,
                 onChanged: (v) => setState(() => _triggerWords = v),
-                title: const Text('Trigger word analizi'),
+                title: Text(AppLocalizations.of(context).sosTriggerWord),
                 dense: true,
               ),
             ],
@@ -238,7 +238,7 @@ class _SosSettingsScreenState extends State<SosSettingsScreen> {
           ElevatedButton.icon(
             onPressed: _save,
             icon: const Icon(Icons.save),
-            label: const Text('KAYDET', style: TextStyle(fontSize: 16)),
+            label: Text(AppLocalizations.of(context).crashSaveUpper, style: const TextStyle(fontSize: 16)),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.green.shade700,
               foregroundColor: Colors.white,

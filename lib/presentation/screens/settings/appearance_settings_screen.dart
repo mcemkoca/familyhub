@@ -201,7 +201,7 @@ class _AppearanceSettingsScreenState extends ConsumerState<AppearanceSettingsScr
                       ),
                       child: Column(
                         children: [
-                          Text('Aa',
+                          Text(AppLocalizations.of(context).apAa,
                               style: TextStyle(
                                   color: sel
                                       ? _selectedAccent
@@ -226,8 +226,8 @@ class _AppearanceSettingsScreenState extends ConsumerState<AppearanceSettingsScr
             ),
           ),
           const SizedBox(height: 10),
-          const Text('Yazı boyutu tüm uygulamaya anında uygulanır.',
-              style: TextStyle(color: Color(0xFF6B7280), fontSize: 12)),
+          Text(AppLocalizations.of(context).apFontSizeNote,
+              style: const TextStyle(color: Color(0xFF6B7280), fontSize: 12)),
           const SizedBox(height: 28),
           SizedBox(
             width: double.infinity,
