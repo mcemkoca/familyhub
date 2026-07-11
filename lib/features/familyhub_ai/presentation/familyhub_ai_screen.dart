@@ -5,6 +5,7 @@ import 'package:familyhub/l10n/app_localizations.dart';
 import '../../../presentation/widgets/settings/screen_header.dart';
 import '../../family_intelligence/application/family_intelligence_providers.dart';
 import '../application/familyhub_ai_providers.dart';
+import '../application/ai_action_executor.dart';
 import '../domain/ai_action.dart';
 
 /// FamilyHub AI — bağımsız bölüm. Bağlamsal (deterministik) hızlı aksiyonlar,
@@ -81,7 +82,7 @@ class FamilyHubAIScreen extends ConsumerWidget {
                   fontSize: 13,
                   fontWeight: FontWeight.w700)),
           const SizedBox(height: 10),
-          for (final q in quick) _actionTile(context, t, q),
+          for (final q in quick) _actionTile(context, ref, t, q),
           const SizedBox(height: 16),
           // Sohbet henüz yok — dürüst bilgilendirme
           _note(t.fhaChatComingSoon, const Color(0xFF6366F1),
@@ -94,6 +95,97 @@ class FamilyHubAIScreen extends ConsumerWidget {
               Icons.info_outline_rounded),
         ],
       ),
+    );
+  }
+
+  /// Aksiyonu ele alır: onay gerekiyorsa önce preview dialogu gösterir,
+  /// sonra güvenli executor ile yürütür. AI doğrudan kritik işlem yapamaz.
+  Future<void> _onAction(BuildContext context, WidgetRef ref,
+      AppLocalizations t, AIAction a) async {
+    if (!AIActionPolicy.isValid(a)) {
+      _snack(context, t.fhaActionFailed);
+      return;
+    }
+
+    if (a.requiresConfirmation) {
+      final confirmed = await _showPreview(context, t, a);
+      if (confirmed != true) return;
+    }
+
+    if (!context.mounted) return;
+    final result =
+        await const AIActionExecutor().execute(a, ref, context);
+    if (!context.mounted) return;
+    switch (result) {
+      case AIExecResult.done:
+        if (a.type == AIActionType.addShoppingItems) {
+          final n = (a.payload['items'] as List).length;
+          _snack(context, t.fhaAddedItems(n));
+        }
+        break;
+      case AIExecResult.invalid:
+        _snack(context, t.fhaActionFailed);
+        break;
+      case AIExecResult.unsupported:
+        _snack(context, t.fhaActionUnsupported);
+        break;
+    }
+  }
+
+  /// Onay öncesi işlem önizlemesi (ne yapılacağını açıkça gösterir).
+  Future<bool?> _showPreview(
+      BuildContext context, AppLocalizations t, AIAction a) {
+    final items = a.type == AIActionType.addShoppingItems
+        ? (a.payload['items'] as List).map((e) => e.toString()).toList()
+        : const <String>[];
+    return showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: const Color(0xFF13131A),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+        title: Text(t.fhaConfirmTitle,
+            style: const TextStyle(
+                color: Colors.white, fontWeight: FontWeight.w800, fontSize: 16)),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (items.isNotEmpty) ...[
+              Text(t.fhaPreviewAddItems,
+                  style: const TextStyle(color: Color(0xFFD1D5DB))),
+              const SizedBox(height: 8),
+              for (final i in items)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 4),
+                  child: Row(children: [
+                    const Icon(Icons.check, size: 14, color: Color(0xFF10B981)),
+                    const SizedBox(width: 6),
+                    Text(i, style: const TextStyle(color: Colors.white)),
+                  ]),
+                ),
+            ],
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(t.fhaCancel,
+                style: const TextStyle(color: Color(0xFF9CA3AF))),
+          ),
+          FilledButton(
+            style: FilledButton.styleFrom(
+                backgroundColor: const Color(0xFF8B5CF6)),
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text(t.fhaConfirm),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _snack(BuildContext context, String msg) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(msg), behavior: SnackBarBehavior.floating),
     );
   }
 
@@ -114,22 +206,15 @@ class FamilyHubAIScreen extends ConsumerWidget {
         ]),
       );
 
-  Widget _actionTile(BuildContext context, AppLocalizations t, AIQuickAction q) {
+  Widget _actionTile(
+      BuildContext context, WidgetRef ref, AppLocalizations t, AIQuickAction q) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(14),
-          onTap: () {
-            // LOW-risk navigasyon aksiyonu — onay gerektirmez; şema doğrulanır.
-            final a = q.action;
-            if (!a.requiresConfirmation &&
-                AIActionPolicy.isValid(a) &&
-                a.route != null) {
-              context.push(a.route!);
-            }
-          },
+          onTap: () => _onAction(context, ref, t, q.action),
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
             decoration: BoxDecoration(

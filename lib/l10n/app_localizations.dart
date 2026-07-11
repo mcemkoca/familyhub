@@ -6152,6 +6152,54 @@ abstract class AppLocalizations {
   /// **'Doğal dil sohbeti yakında. Şimdilik bağlamsal hızlı aksiyonları kullanabilirsin.'**
   String get fhaChatComingSoon;
 
+  /// No description provided for @fhaConfirmTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu işlemi onaylıyor musun?'**
+  String get fhaConfirmTitle;
+
+  /// No description provided for @fhaConfirm.
+  ///
+  /// In tr, this message translates to:
+  /// **'Onayla'**
+  String get fhaConfirm;
+
+  /// No description provided for @fhaCancel.
+  ///
+  /// In tr, this message translates to:
+  /// **'İptal'**
+  String get fhaCancel;
+
+  /// No description provided for @fhaPreviewAddItems.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şu ürünler alışveriş listene eklenecek:'**
+  String get fhaPreviewAddItems;
+
+  /// No description provided for @fhaAddedItems.
+  ///
+  /// In tr, this message translates to:
+  /// **'{count} ürün listeye eklendi'**
+  String fhaAddedItems(Object count);
+
+  /// No description provided for @fhaQuickAddItems.
+  ///
+  /// In tr, this message translates to:
+  /// **'Önerilen ürünleri ekle'**
+  String get fhaQuickAddItems;
+
+  /// No description provided for @fhaActionFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'İşlem yapılamadı'**
+  String get fhaActionFailed;
+
+  /// No description provided for @fhaActionUnsupported.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu işlem için ilgili modülü kullan'**
+  String get fhaActionUnsupported;
+
   /// No description provided for @henuzVeriYok.
   ///
   /// In tr, this message translates to:

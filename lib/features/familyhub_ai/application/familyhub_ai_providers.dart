@@ -36,6 +36,18 @@ final aiQuickActionsProvider = Provider<List<AIQuickAction>>((ref) {
           AIAction(type: AIActionType.openModule, route: AppRoutes.calendar),
     ));
   }
+  // Alışveriş listesi boşsa temel ürün önerisi (MEDIUM-risk → onay gerektirir).
+  if (s.pendingShoppingItems == 0) {
+    actions.add(const AIQuickAction(
+      labelKey: 'fhaQuickAddItems',
+      action: AIAction(
+        type: AIActionType.addShoppingItems,
+        route: AppRoutes.shopping,
+        payload: {'items': ['Süt', 'Ekmek', 'Yumurta']},
+      ),
+    ));
+  }
+
   // Her zaman kullanışlı sabit aksiyonlar.
   actions.add(const AIQuickAction(
     labelKey: 'fhaQuickBudget',

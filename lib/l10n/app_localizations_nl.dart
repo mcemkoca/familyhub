@@ -3188,6 +3188,34 @@ class AppLocalizationsNl extends AppLocalizations {
       'Chat in natuurlijke taal komt binnenkort. Gebruik voorlopig de contextuele snelle acties.';
 
   @override
+  String get fhaConfirmTitle => 'Bevestig je deze actie?';
+
+  @override
+  String get fhaConfirm => 'Bevestigen';
+
+  @override
+  String get fhaCancel => 'Annuleren';
+
+  @override
+  String get fhaPreviewAddItems =>
+      'Deze items worden aan je boodschappenlijst toegevoegd:';
+
+  @override
+  String fhaAddedItems(Object count) {
+    return '$count items toegevoegd aan de lijst';
+  }
+
+  @override
+  String get fhaQuickAddItems => 'Voorgestelde items toevoegen';
+
+  @override
+  String get fhaActionFailed => 'De actie kon niet worden voltooid';
+
+  @override
+  String get fhaActionUnsupported =>
+      'Gebruik de betreffende module voor deze actie';
+
+  @override
   String get henuzVeriYok => 'Nog geen gegevens';
 
   @override

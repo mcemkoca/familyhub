@@ -3200,6 +3200,34 @@ class AppLocalizationsFr extends AppLocalizations {
       'Le chat en langage naturel arrive bientôt. Pour l\'instant, utilisez les actions rapides contextuelles.';
 
   @override
+  String get fhaConfirmTitle => 'Confirmez-vous cette action ?';
+
+  @override
+  String get fhaConfirm => 'Confirmer';
+
+  @override
+  String get fhaCancel => 'Annuler';
+
+  @override
+  String get fhaPreviewAddItems =>
+      'Ces articles seront ajoutés à votre liste de courses :';
+
+  @override
+  String fhaAddedItems(Object count) {
+    return '$count articles ajoutés à la liste';
+  }
+
+  @override
+  String get fhaQuickAddItems => 'Ajouter les articles suggérés';
+
+  @override
+  String get fhaActionFailed => 'L\'action n\'a pas pu être effectuée';
+
+  @override
+  String get fhaActionUnsupported =>
+      'Utilisez le module concerné pour cette action';
+
+  @override
   String get henuzVeriYok => 'Aucune donnee';
 
   @override

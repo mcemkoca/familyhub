@@ -3187,6 +3187,33 @@ class AppLocalizationsEn extends AppLocalizations {
       'Natural-language chat is coming soon. For now, use the contextual quick actions.';
 
   @override
+  String get fhaConfirmTitle => 'Do you confirm this action?';
+
+  @override
+  String get fhaConfirm => 'Confirm';
+
+  @override
+  String get fhaCancel => 'Cancel';
+
+  @override
+  String get fhaPreviewAddItems =>
+      'These items will be added to your shopping list:';
+
+  @override
+  String fhaAddedItems(Object count) {
+    return '$count items added to the list';
+  }
+
+  @override
+  String get fhaQuickAddItems => 'Add suggested items';
+
+  @override
+  String get fhaActionFailed => 'The action could not be completed';
+
+  @override
+  String get fhaActionUnsupported => 'Use the related module for this action';
+
+  @override
   String get henuzVeriYok => 'No data yet';
 
   @override

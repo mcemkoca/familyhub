@@ -3201,6 +3201,32 @@ class AppLocalizationsTr extends AppLocalizations {
       'Doğal dil sohbeti yakında. Şimdilik bağlamsal hızlı aksiyonları kullanabilirsin.';
 
   @override
+  String get fhaConfirmTitle => 'Bu işlemi onaylıyor musun?';
+
+  @override
+  String get fhaConfirm => 'Onayla';
+
+  @override
+  String get fhaCancel => 'İptal';
+
+  @override
+  String get fhaPreviewAddItems => 'Şu ürünler alışveriş listene eklenecek:';
+
+  @override
+  String fhaAddedItems(Object count) {
+    return '$count ürün listeye eklendi';
+  }
+
+  @override
+  String get fhaQuickAddItems => 'Önerilen ürünleri ekle';
+
+  @override
+  String get fhaActionFailed => 'İşlem yapılamadı';
+
+  @override
+  String get fhaActionUnsupported => 'Bu işlem için ilgili modülü kullan';
+
+  @override
   String get henuzVeriYok => 'Henüz veri yok';
 
   @override
