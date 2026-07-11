@@ -3224,6 +3224,9 @@ class AppLocalizationsFr extends AppLocalizations {
       'Vous êtes en heures silencieuses — aucune notification envoyée';
 
   @override
+  String get fiPreparingDay => 'Je prépare votre journée…';
+
+  @override
   String get familyHubAITitle => 'FamilyHub AI';
 
   @override

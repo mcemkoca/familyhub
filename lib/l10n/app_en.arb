@@ -1035,6 +1035,7 @@
   "fiNotifyTop": "Notify top priority",
   "fiNotified": "Notification sent",
   "fiQuietHours": "You are in quiet hours — no notification sent",
+  "fiPreparingDay": "Preparing your day…",
   "familyHubAITitle": "FamilyHub AI",
   "familyHubAISubtitle": "Smart assistant for your family",
   "fhaSummaryTitle": "Today's context",

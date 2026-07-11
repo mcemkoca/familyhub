@@ -6188,6 +6188,12 @@ abstract class AppLocalizations {
   /// **'Sessiz saatlerdesin — bildirim gönderilmedi'**
   String get fiQuietHours;
 
+  /// No description provided for @fiPreparingDay.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugünü senin için hazırlıyorum…'**
+  String get fiPreparingDay;
+
   /// No description provided for @familyHubAITitle.
   ///
   /// In tr, this message translates to:

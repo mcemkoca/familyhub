@@ -157,7 +157,7 @@ class _DailyBriefingCardState extends ConsumerState<DailyBriefingCard> {
                         context.push(AppRoutes.familyIntelligence),
                     icon: const Icon(Icons.open_in_full_rounded,
                         color: Color(0xFF8B5CF6), size: 18),
-                    tooltip: 'Aile Zekası',
+                    tooltip: AppLocalizations.of(context).familyIntelligenceTitle,
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
                   ),
@@ -205,15 +205,16 @@ class _DailyBriefingCardState extends ConsumerState<DailyBriefingCard> {
               const SizedBox.shrink()
             else if (!weatherSettled) ...[
               const SizedBox(height: 12),
-              const Row(children: [
-                SizedBox(
+              Row(children: [
+                const SizedBox(
                     width: 16,
                     height: 16,
                     child: CircularProgressIndicator(
                         strokeWidth: 2, color: Color(0xFF8B5CF6))),
-                SizedBox(width: 10),
-                Text('Bugünü senin için hazırlıyorum…',
-                    style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
+                const SizedBox(width: 10),
+                Text(AppLocalizations.of(context).fiPreparingDay,
+                    style: const TextStyle(
+                        color: Color(0xFF9CA3AF), fontSize: 13)),
               ]),
             ] else ...[
             const SizedBox(height: 12),
@@ -254,19 +255,19 @@ zaten üstteki hava rozetinde görüyor; sayı yazarsan tutarsız görünür.'''
               ),
               builder: (context, snap) {
                 if (snap.connectionState == ConnectionState.waiting) {
-                  return const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8),
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
                     child: Row(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 16,
                           height: 16,
                           child: CircularProgressIndicator(
                               strokeWidth: 2, color: Color(0xFF8B5CF6)),
                         ),
-                        SizedBox(width: 10),
-                        Text('Bugünü senin için özetliyorum…',
-                            style: TextStyle(
+                        const SizedBox(width: 10),
+                        Text(AppLocalizations.of(context).fiPreparingDay,
+                            style: const TextStyle(
                                 color: Color(0xFF9CA3AF), fontSize: 13)),
                       ],
                     ),
