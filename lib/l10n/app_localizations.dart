@@ -8411,6 +8411,168 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'PIN kaydedildi'**
   String get pinSaved;
+
+  /// No description provided for @setAccount.
+  ///
+  /// In tr, this message translates to:
+  /// **'HESAP'**
+  String get setAccount;
+
+  /// No description provided for @setProfileInfo.
+  ///
+  /// In tr, this message translates to:
+  /// **'Profil Bilgileri'**
+  String get setProfileInfo;
+
+  /// No description provided for @setPrivacy.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gizlilik'**
+  String get setPrivacy;
+
+  /// No description provided for @setSecure.
+  ///
+  /// In tr, this message translates to:
+  /// **'Güvenli'**
+  String get setSecure;
+
+  /// No description provided for @setWeatherSection.
+  ///
+  /// In tr, this message translates to:
+  /// **'HAVA DURUMU'**
+  String get setWeatherSection;
+
+  /// No description provided for @setBackupRestore.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yedekleme ve Geri Yükleme'**
+  String get setBackupRestore;
+
+  /// No description provided for @setBackupRestoreDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Verilerinizi buluta yedekleyin veya kurtarın'**
+  String get setBackupRestoreDesc;
+
+  /// No description provided for @setDeleteData.
+  ///
+  /// In tr, this message translates to:
+  /// **'Verileri Sil'**
+  String get setDeleteData;
+
+  /// No description provided for @setPremiumSection.
+  ///
+  /// In tr, this message translates to:
+  /// **'PREMIUM'**
+  String get setPremiumSection;
+
+  /// No description provided for @setPremiumTier.
+  ///
+  /// In tr, this message translates to:
+  /// **'Premium'**
+  String get setPremiumTier;
+
+  /// No description provided for @setFreeTier.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ücretsiz'**
+  String get setFreeTier;
+
+  /// No description provided for @setActive.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aktif'**
+  String get setActive;
+
+  /// No description provided for @setFeatUnlimitedPhotos.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sınırsız fotoğraf depolama'**
+  String get setFeatUnlimitedPhotos;
+
+  /// No description provided for @setFeat8Members.
+  ///
+  /// In tr, this message translates to:
+  /// **'8 aile üyesi'**
+  String get setFeat8Members;
+
+  /// No description provided for @setFeatAI.
+  ///
+  /// In tr, this message translates to:
+  /// **'AI asistan'**
+  String get setFeatAI;
+
+  /// No description provided for @setFeatAdvSecurity.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gelişmiş güvenlik'**
+  String get setFeatAdvSecurity;
+
+  /// No description provided for @setFeatBasic.
+  ///
+  /// In tr, this message translates to:
+  /// **'Temel özellikler'**
+  String get setFeatBasic;
+
+  /// No description provided for @setFeat4Members.
+  ///
+  /// In tr, this message translates to:
+  /// **'4 aile üyesi'**
+  String get setFeat4Members;
+
+  /// No description provided for @setFeat1GB.
+  ///
+  /// In tr, this message translates to:
+  /// **'1 GB depolama'**
+  String get setFeat1GB;
+
+  /// No description provided for @setHelpSection.
+  ///
+  /// In tr, this message translates to:
+  /// **'YARDIM'**
+  String get setHelpSection;
+
+  /// No description provided for @setUserGuideDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'FamilyHub\'ı nasıl kullanacağınızı öğrenin'**
+  String get setUserGuideDesc;
+
+  /// No description provided for @setLegalSection.
+  ///
+  /// In tr, this message translates to:
+  /// **'YASAL'**
+  String get setLegalSection;
+
+  /// No description provided for @setCurrent.
+  ///
+  /// In tr, this message translates to:
+  /// **'Güncel'**
+  String get setCurrent;
+
+  /// No description provided for @setAccentColor.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aksan Rengi'**
+  String get setAccentColor;
+
+  /// No description provided for @setFontSizeDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Metin boyutunu ayarla'**
+  String get setFontSizeDesc;
+
+  /// No description provided for @setCustomizeHome.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ana Ekranı Özelleştir'**
+  String get setCustomizeHome;
+
+  /// No description provided for @setCustomizeHomeDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Akıllı kart, ipuçları ve kutucuk sırası'**
+  String get setCustomizeHomeDesc;
 }
 
 class _AppLocalizationsDelegate

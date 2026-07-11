@@ -4439,4 +4439,86 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get pinSaved => 'PIN kaydedildi';
+
+  @override
+  String get setAccount => 'HESAP';
+
+  @override
+  String get setProfileInfo => 'Profil Bilgileri';
+
+  @override
+  String get setPrivacy => 'Gizlilik';
+
+  @override
+  String get setSecure => 'Güvenli';
+
+  @override
+  String get setWeatherSection => 'HAVA DURUMU';
+
+  @override
+  String get setBackupRestore => 'Yedekleme ve Geri Yükleme';
+
+  @override
+  String get setBackupRestoreDesc =>
+      'Verilerinizi buluta yedekleyin veya kurtarın';
+
+  @override
+  String get setDeleteData => 'Verileri Sil';
+
+  @override
+  String get setPremiumSection => 'PREMIUM';
+
+  @override
+  String get setPremiumTier => 'Premium';
+
+  @override
+  String get setFreeTier => 'Ücretsiz';
+
+  @override
+  String get setActive => 'Aktif';
+
+  @override
+  String get setFeatUnlimitedPhotos => 'Sınırsız fotoğraf depolama';
+
+  @override
+  String get setFeat8Members => '8 aile üyesi';
+
+  @override
+  String get setFeatAI => 'AI asistan';
+
+  @override
+  String get setFeatAdvSecurity => 'Gelişmiş güvenlik';
+
+  @override
+  String get setFeatBasic => 'Temel özellikler';
+
+  @override
+  String get setFeat4Members => '4 aile üyesi';
+
+  @override
+  String get setFeat1GB => '1 GB depolama';
+
+  @override
+  String get setHelpSection => 'YARDIM';
+
+  @override
+  String get setUserGuideDesc => 'FamilyHub\'ı nasıl kullanacağınızı öğrenin';
+
+  @override
+  String get setLegalSection => 'YASAL';
+
+  @override
+  String get setCurrent => 'Güncel';
+
+  @override
+  String get setAccentColor => 'Aksan Rengi';
+
+  @override
+  String get setFontSizeDesc => 'Metin boyutunu ayarla';
+
+  @override
+  String get setCustomizeHome => 'Ana Ekranı Özelleştir';
+
+  @override
+  String get setCustomizeHomeDesc => 'Akıllı kart, ipuçları ve kutucuk sırası';
 }

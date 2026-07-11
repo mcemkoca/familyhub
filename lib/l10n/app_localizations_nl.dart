@@ -4418,4 +4418,86 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get pinSaved => 'PIN opgeslagen';
+
+  @override
+  String get setAccount => 'ACCOUNT';
+
+  @override
+  String get setProfileInfo => 'Profielinformatie';
+
+  @override
+  String get setPrivacy => 'Privacy';
+
+  @override
+  String get setSecure => 'Beveiligd';
+
+  @override
+  String get setWeatherSection => 'WEER';
+
+  @override
+  String get setBackupRestore => 'Back-up en herstel';
+
+  @override
+  String get setBackupRestoreDesc =>
+      'Maak een back-up van je gegevens in de cloud of herstel ze';
+
+  @override
+  String get setDeleteData => 'Gegevens verwijderen';
+
+  @override
+  String get setPremiumSection => 'PREMIUM';
+
+  @override
+  String get setPremiumTier => 'Premium';
+
+  @override
+  String get setFreeTier => 'Gratis';
+
+  @override
+  String get setActive => 'Actief';
+
+  @override
+  String get setFeatUnlimitedPhotos => 'Onbeperkte foto-opslag';
+
+  @override
+  String get setFeat8Members => '8 gezinsleden';
+
+  @override
+  String get setFeatAI => 'AI-assistent';
+
+  @override
+  String get setFeatAdvSecurity => 'Geavanceerde beveiliging';
+
+  @override
+  String get setFeatBasic => 'Basisfuncties';
+
+  @override
+  String get setFeat4Members => '4 gezinsleden';
+
+  @override
+  String get setFeat1GB => '1 GB opslag';
+
+  @override
+  String get setHelpSection => 'HULP';
+
+  @override
+  String get setUserGuideDesc => 'Leer hoe je FamilyHub gebruikt';
+
+  @override
+  String get setLegalSection => 'JURIDISCH';
+
+  @override
+  String get setCurrent => 'Actueel';
+
+  @override
+  String get setAccentColor => 'Accentkleur';
+
+  @override
+  String get setFontSizeDesc => 'Pas de tekstgrootte aan';
+
+  @override
+  String get setCustomizeHome => 'Startscherm aanpassen';
+
+  @override
+  String get setCustomizeHomeDesc => 'Slimme kaart, tips en tegelvolgorde';
 }

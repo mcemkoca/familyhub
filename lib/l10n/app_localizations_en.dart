@@ -4418,4 +4418,86 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pinSaved => 'PIN saved';
+
+  @override
+  String get setAccount => 'ACCOUNT';
+
+  @override
+  String get setProfileInfo => 'Profile Information';
+
+  @override
+  String get setPrivacy => 'Privacy';
+
+  @override
+  String get setSecure => 'Secure';
+
+  @override
+  String get setWeatherSection => 'WEATHER';
+
+  @override
+  String get setBackupRestore => 'Backup & Restore';
+
+  @override
+  String get setBackupRestoreDesc =>
+      'Back up your data to the cloud or restore it';
+
+  @override
+  String get setDeleteData => 'Delete Data';
+
+  @override
+  String get setPremiumSection => 'PREMIUM';
+
+  @override
+  String get setPremiumTier => 'Premium';
+
+  @override
+  String get setFreeTier => 'Free';
+
+  @override
+  String get setActive => 'Active';
+
+  @override
+  String get setFeatUnlimitedPhotos => 'Unlimited photo storage';
+
+  @override
+  String get setFeat8Members => '8 family members';
+
+  @override
+  String get setFeatAI => 'AI assistant';
+
+  @override
+  String get setFeatAdvSecurity => 'Advanced security';
+
+  @override
+  String get setFeatBasic => 'Basic features';
+
+  @override
+  String get setFeat4Members => '4 family members';
+
+  @override
+  String get setFeat1GB => '1 GB storage';
+
+  @override
+  String get setHelpSection => 'HELP';
+
+  @override
+  String get setUserGuideDesc => 'Learn how to use FamilyHub';
+
+  @override
+  String get setLegalSection => 'LEGAL';
+
+  @override
+  String get setCurrent => 'Up to date';
+
+  @override
+  String get setAccentColor => 'Accent Color';
+
+  @override
+  String get setFontSizeDesc => 'Adjust the text size';
+
+  @override
+  String get setCustomizeHome => 'Customize Home';
+
+  @override
+  String get setCustomizeHomeDesc => 'Smart card, tips and tile order';
 }

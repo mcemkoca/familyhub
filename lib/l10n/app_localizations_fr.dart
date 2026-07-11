@@ -4434,4 +4434,87 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get pinSaved => 'PIN enregistre';
+
+  @override
+  String get setAccount => 'COMPTE';
+
+  @override
+  String get setProfileInfo => 'Informations du profil';
+
+  @override
+  String get setPrivacy => 'Confidentialite';
+
+  @override
+  String get setSecure => 'Securise';
+
+  @override
+  String get setWeatherSection => 'METEO';
+
+  @override
+  String get setBackupRestore => 'Sauvegarde et restauration';
+
+  @override
+  String get setBackupRestoreDesc =>
+      'Sauvegardez vos donnees dans le cloud ou restaurez-les';
+
+  @override
+  String get setDeleteData => 'Supprimer les donnees';
+
+  @override
+  String get setPremiumSection => 'PREMIUM';
+
+  @override
+  String get setPremiumTier => 'Premium';
+
+  @override
+  String get setFreeTier => 'Gratuit';
+
+  @override
+  String get setActive => 'Actif';
+
+  @override
+  String get setFeatUnlimitedPhotos => 'Stockage photo illimite';
+
+  @override
+  String get setFeat8Members => '8 membres de la famille';
+
+  @override
+  String get setFeatAI => 'Assistant IA';
+
+  @override
+  String get setFeatAdvSecurity => 'Securite avancee';
+
+  @override
+  String get setFeatBasic => 'Fonctions de base';
+
+  @override
+  String get setFeat4Members => '4 membres de la famille';
+
+  @override
+  String get setFeat1GB => '1 Go de stockage';
+
+  @override
+  String get setHelpSection => 'AIDE';
+
+  @override
+  String get setUserGuideDesc => 'Apprenez a utiliser FamilyHub';
+
+  @override
+  String get setLegalSection => 'MENTIONS LEGALES';
+
+  @override
+  String get setCurrent => 'A jour';
+
+  @override
+  String get setAccentColor => 'Couleur d\'accent';
+
+  @override
+  String get setFontSizeDesc => 'Ajuster la taille du texte';
+
+  @override
+  String get setCustomizeHome => 'Personnaliser l\'accueil';
+
+  @override
+  String get setCustomizeHomeDesc =>
+      'Carte intelligente, astuces et ordre des tuiles';
 }

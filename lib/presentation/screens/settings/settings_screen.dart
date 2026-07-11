@@ -217,13 +217,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             // ── HESAP ───────────────────────────────────────────────
             SliverToBoxAdapter(
               child: SettingsSection(
-                title: 'HESAP',
+                title: AppLocalizations.of(context).setAccount,
                 icon: Icons.person_outline,
                 children: [
                   SettingsItem(
                     icon: Icons.person_outline,
                     iconColor: const Color(0xFF6366F1),
-                    label: 'Profil Bilgileri',
+                    label: AppLocalizations.of(context).setProfileInfo,
                     description: AppLocalizations.of(context).adFotografTelefonNumarasi,
                     onTap: () => context.push(AppRoutes.profileEdit),
                   ),
@@ -232,13 +232,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     iconColor: const Color(0xFFF59E0B),
                     label: AppLocalizations.of(context).safety,
                     description: AppLocalizations.of(context).sifreIkiFaktorBiyometrikGiris,
-                    showValue: 'Güvenli',
+                    showValue: AppLocalizations.of(context).setSecure,
                     onTap: () => context.push(AppRoutes.securitySettings),
                   ),
                   SettingsItem(
                     icon: Icons.lock_outline,
                     iconColor: const Color(0xFF10B981),
-                    label: 'Gizlilik',
+                    label: AppLocalizations.of(context).setPrivacy,
                     description: AppLocalizations.of(context).veriPaylasimiKonumIzinleri,
                     onTap: () => context.push(AppRoutes.privacySettings),
                   ),
@@ -258,7 +258,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             // ── HAVA DURUMU ─────────────────────────────────────────
             SliverToBoxAdapter(
               child: SettingsSection(
-                title: 'HAVA DURUMU',
+                title: AppLocalizations.of(context).setWeatherSection,
                 icon: Icons.wb_sunny_outlined,
                 children: [
                   SettingsItem(
@@ -288,8 +288,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   SettingsItem(
                     icon: Icons.backup_outlined,
                     iconColor: const Color(0xFF6366F1),
-                    label: 'Yedekleme ve Geri Yükleme',
-                    description: 'Verilerinizi buluta yedekleyin veya kurtarın',
+                    label: AppLocalizations.of(context).setBackupRestore,
+                    description: AppLocalizations.of(context).setBackupRestoreDesc,
                     showValueWidget: FutureBuilder<String>(
                       future: _getLastBackupTime(),
                       builder: (context, snapshot) {
@@ -314,7 +314,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   SettingsItem(
                     icon: Icons.delete_outline,
                     iconColor: const Color(0xFFEF4444),
-                    label: 'Verileri Sil',
+                    label: AppLocalizations.of(context).setDeleteData,
                     description: AppLocalizations.of(context).tumVerileriniziKaliciOlarakSilin,
                     onTap: () => _showDeleteDataDialog(context),
                     isDanger: true,
@@ -327,7 +327,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             // ── PREMIUM ─────────────────────────────────────────────
             SliverToBoxAdapter(
               child: SettingsSection(
-                title: 'PREMIUM',
+                title: AppLocalizations.of(context).setPremiumSection,
                 icon: Icons.star_outline,
                 highlight: true,
                 children: [
@@ -338,19 +338,19 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         data: (isPremium) => Padding(
                           padding: const EdgeInsets.all(16),
                           child: PremiumCard(
-                            tier: isPremium ? 'Premium' : 'Ücretsiz',
-                            expiry: isPremium ? 'Aktif' : null,
+                            tier: isPremium ? AppLocalizations.of(context).setPremiumTier : AppLocalizations.of(context).setFreeTier,
+                            expiry: isPremium ? AppLocalizations.of(context).setActive : null,
                             features: isPremium
-                                ? const [
-                                    'Sınırsız fotoğraf depolama',
-                                    '8 aile üyesi',
-                                    'AI asistan',
-                                    'Gelişmiş güvenlik',
+                                ? [
+                                    AppLocalizations.of(context).setFeatUnlimitedPhotos,
+                                    AppLocalizations.of(context).setFeat8Members,
+                                    AppLocalizations.of(context).setFeatAI,
+                                    AppLocalizations.of(context).setFeatAdvSecurity,
                                   ]
-                                : const [
-                                    'Temel özellikler',
-                                    '4 aile üyesi',
-                                    '1 GB depolama',
+                                : [
+                                    AppLocalizations.of(context).setFeatBasic,
+                                    AppLocalizations.of(context).setFeat4Members,
+                                    AppLocalizations.of(context).setFeat1GB,
                                   ],
                             onManage: () => context.push(AppRoutes.premium),
                           ),
@@ -376,14 +376,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             // kaldırıldı (iletişim minimal olarak Hakkında altında).
             SliverToBoxAdapter(
               child: SettingsSection(
-                title: 'YARDIM',
+                title: AppLocalizations.of(context).setHelpSection,
                 icon: Icons.help_outline,
                 children: [
                   SettingsItem(
                     icon: Icons.menu_book_outlined,
                     iconColor: const Color(0xFF6366F1),
                     label: AppLocalizations.of(context).kullanimKilavuzu,
-                    description: 'FamilyHub\'ı nasıl kullanacağınızı öğrenin',
+                    description: AppLocalizations.of(context).setUserGuideDesc,
                     onTap: () => context.push(AppRoutes.userGuide),
                     isLast: true,
                   ),
@@ -394,7 +394,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             // ── YASAL ───────────────────────────────────────────────
             SliverToBoxAdapter(
               child: SettingsSection(
-                title: 'YASAL',
+                title: AppLocalizations.of(context).setLegalSection,
                 icon: Icons.description_outlined,
                 children: [
                   SettingsItem(
@@ -416,7 +416,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     iconColor: const Color(0xFF6B7280),
                     label: AppLocalizations.of(context).hakkinda,
                     description: AppLocalizations.of(context).surum210FamilyhubInc,
-                    showValue: 'Güncel',
+                    showValue: AppLocalizations.of(context).setCurrent,
                     onTap: () => context.push(AppRoutes.aboutApp),
                     isLast: true,
                   ),
@@ -433,7 +433,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   SettingsItem(
                     icon: Icons.color_lens_outlined,
                     iconColor: const Color(0xFFEC4899),
-                    label: 'Aksan Rengi',
+                    label: AppLocalizations.of(context).setAccentColor,
                     description: AppLocalizations.of(context).uygulamaVurguRenginiDegistir,
                     showValue: _accentLabel,
                     onTap: () => context.push(AppRoutes.appearanceSettings),
@@ -442,15 +442,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     icon: Icons.text_fields,
                     iconColor: const Color(0xFF8B5CF6),
                     label: AppLocalizations.of(context).fontSize,
-                    description: 'Metin boyutunu ayarla',
+                    description: AppLocalizations.of(context).setFontSizeDesc,
                     showValue: _fontLabel,
                     onTap: () => context.push(AppRoutes.appearanceSettings),
                   ),
                   SettingsItem(
                     icon: Icons.dashboard_customize_outlined,
                     iconColor: const Color(0xFF06B6D4),
-                    label: 'Ana Ekranı Özelleştir',
-                    description: 'Akıllı kart, ipuçları ve kutucuk sırası',
+                    label: AppLocalizations.of(context).setCustomizeHome,
+                    description: AppLocalizations.of(context).setCustomizeHomeDesc,
                     onTap: () => context.push(AppRoutes.hubCustomize),
                     isLast: true,
                   ),
