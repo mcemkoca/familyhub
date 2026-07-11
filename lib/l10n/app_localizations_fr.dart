@@ -4771,4 +4771,65 @@ class AppLocalizationsFr extends AppLocalizations {
   String eduParentTip(Object tip) {
     return 'Conseil parent : $tip';
   }
+
+  @override
+  String get kitRecipe => 'Recette';
+
+  @override
+  String get kitNoRecipe => 'Aucune recette trouvee';
+
+  @override
+  String get kitCreateWeeklyPlan => 'Creer un plan hebdomadaire';
+
+  @override
+  String get kitAIFillWeek =>
+      'Laissez l\'IA remplir toute la semaine automatiquement';
+
+  @override
+  String get kitFill => 'Remplir';
+
+  @override
+  String get kitTapToChange => 'Appuyez pour modifier';
+
+  @override
+  String get kitPickMeal => 'Choisir un plat...';
+
+  @override
+  String get kitNewFoodIdea => 'Nouvelle idee de plat';
+
+  @override
+  String get kitAddOwnRecipe => 'Ajouter votre propre recette';
+
+  @override
+  String get kitAddWebRecipe => 'Ajouter une recette web';
+
+  @override
+  String get kitWebRecipeSub =>
+      'Collez le lien d\'une belle recette trouvee sur le web.';
+
+  @override
+  String get kitEnterNameForAI =>
+      'Saisissez d\'abord le nom de la recette, l\'IA fait le reste';
+
+  @override
+  String get kitAINoResponse =>
+      'L\'IA n\'a pas pu repondre, vous pouvez remplir manuellement';
+
+  @override
+  String get kitEnterRecipeName => 'Veuillez saisir un nom de recette';
+
+  @override
+  String get kitPasteLink => 'Veuillez coller le lien de la recette';
+
+  @override
+  String get kitCategory => 'Categorie';
+
+  @override
+  String get kitWeeklyAISuggestions => 'Suggestions IA de la semaine';
+
+  @override
+  String get kitIngredients => 'Ingredients';
+
+  @override
+  String get kitPreparation => 'Preparation';
 }

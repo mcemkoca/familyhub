@@ -4773,4 +4773,63 @@ class AppLocalizationsTr extends AppLocalizations {
   String eduParentTip(Object tip) {
     return 'Ebeveyn ipucu: $tip';
   }
+
+  @override
+  String get kitRecipe => 'Tarif';
+
+  @override
+  String get kitNoRecipe => 'Tarif bulunamadı';
+
+  @override
+  String get kitCreateWeeklyPlan => 'Haftalık Plan Oluştur';
+
+  @override
+  String get kitAIFillWeek => 'AI tüm haftayı otomatik doldursun';
+
+  @override
+  String get kitFill => 'Doldur';
+
+  @override
+  String get kitTapToChange => 'Değiştirmek için dokun';
+
+  @override
+  String get kitPickMeal => 'Yemek seç...';
+
+  @override
+  String get kitNewFoodIdea => 'Yeni Yemek Fikri';
+
+  @override
+  String get kitAddOwnRecipe => 'Kendi Tarifini Ekle';
+
+  @override
+  String get kitAddWebRecipe => 'Web Tarifi Ekle';
+
+  @override
+  String get kitWebRecipeSub =>
+      'Web\'de bulduğun güzel bir tarifin linkini yapıştır.';
+
+  @override
+  String get kitEnterNameForAI =>
+      'Önce tarif adını yazın, AI gerisini doldursun';
+
+  @override
+  String get kitAINoResponse => 'AI şu an yanıt veremedi, elle doldurabilirsin';
+
+  @override
+  String get kitEnterRecipeName => 'Lütfen bir tarif adı girin';
+
+  @override
+  String get kitPasteLink => 'Lütfen tarif linkini yapıştırın';
+
+  @override
+  String get kitCategory => 'Kategori';
+
+  @override
+  String get kitWeeklyAISuggestions => 'Bu Haftanın AI Önerileri';
+
+  @override
+  String get kitIngredients => 'Malzemeler';
+
+  @override
+  String get kitPreparation => 'Hazırlanışı';
 }

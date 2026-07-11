@@ -9059,6 +9059,120 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Ebeveyn ipucu: {tip}'**
   String eduParentTip(Object tip);
+
+  /// No description provided for @kitRecipe.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tarif'**
+  String get kitRecipe;
+
+  /// No description provided for @kitNoRecipe.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tarif bulunamadı'**
+  String get kitNoRecipe;
+
+  /// No description provided for @kitCreateWeeklyPlan.
+  ///
+  /// In tr, this message translates to:
+  /// **'Haftalık Plan Oluştur'**
+  String get kitCreateWeeklyPlan;
+
+  /// No description provided for @kitAIFillWeek.
+  ///
+  /// In tr, this message translates to:
+  /// **'AI tüm haftayı otomatik doldursun'**
+  String get kitAIFillWeek;
+
+  /// No description provided for @kitFill.
+  ///
+  /// In tr, this message translates to:
+  /// **'Doldur'**
+  String get kitFill;
+
+  /// No description provided for @kitTapToChange.
+  ///
+  /// In tr, this message translates to:
+  /// **'Değiştirmek için dokun'**
+  String get kitTapToChange;
+
+  /// No description provided for @kitPickMeal.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yemek seç...'**
+  String get kitPickMeal;
+
+  /// No description provided for @kitNewFoodIdea.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yeni Yemek Fikri'**
+  String get kitNewFoodIdea;
+
+  /// No description provided for @kitAddOwnRecipe.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kendi Tarifini Ekle'**
+  String get kitAddOwnRecipe;
+
+  /// No description provided for @kitAddWebRecipe.
+  ///
+  /// In tr, this message translates to:
+  /// **'Web Tarifi Ekle'**
+  String get kitAddWebRecipe;
+
+  /// No description provided for @kitWebRecipeSub.
+  ///
+  /// In tr, this message translates to:
+  /// **'Web\'de bulduğun güzel bir tarifin linkini yapıştır.'**
+  String get kitWebRecipeSub;
+
+  /// No description provided for @kitEnterNameForAI.
+  ///
+  /// In tr, this message translates to:
+  /// **'Önce tarif adını yazın, AI gerisini doldursun'**
+  String get kitEnterNameForAI;
+
+  /// No description provided for @kitAINoResponse.
+  ///
+  /// In tr, this message translates to:
+  /// **'AI şu an yanıt veremedi, elle doldurabilirsin'**
+  String get kitAINoResponse;
+
+  /// No description provided for @kitEnterRecipeName.
+  ///
+  /// In tr, this message translates to:
+  /// **'Lütfen bir tarif adı girin'**
+  String get kitEnterRecipeName;
+
+  /// No description provided for @kitPasteLink.
+  ///
+  /// In tr, this message translates to:
+  /// **'Lütfen tarif linkini yapıştırın'**
+  String get kitPasteLink;
+
+  /// No description provided for @kitCategory.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kategori'**
+  String get kitCategory;
+
+  /// No description provided for @kitWeeklyAISuggestions.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu Haftanın AI Önerileri'**
+  String get kitWeeklyAISuggestions;
+
+  /// No description provided for @kitIngredients.
+  ///
+  /// In tr, this message translates to:
+  /// **'Malzemeler'**
+  String get kitIngredients;
+
+  /// No description provided for @kitPreparation.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hazırlanışı'**
+  String get kitPreparation;
 }
 
 class _AppLocalizationsDelegate

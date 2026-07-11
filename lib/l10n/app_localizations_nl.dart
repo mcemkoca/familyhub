@@ -4752,4 +4752,64 @@ class AppLocalizationsNl extends AppLocalizations {
   String eduParentTip(Object tip) {
     return 'Oudertip: $tip';
   }
+
+  @override
+  String get kitRecipe => 'Recept';
+
+  @override
+  String get kitNoRecipe => 'Geen recepten gevonden';
+
+  @override
+  String get kitCreateWeeklyPlan => 'Weekplan maken';
+
+  @override
+  String get kitAIFillWeek => 'Laat AI de hele week automatisch invullen';
+
+  @override
+  String get kitFill => 'Invullen';
+
+  @override
+  String get kitTapToChange => 'Tik om te wijzigen';
+
+  @override
+  String get kitPickMeal => 'Kies een maaltijd...';
+
+  @override
+  String get kitNewFoodIdea => 'Nieuw gerechtidee';
+
+  @override
+  String get kitAddOwnRecipe => 'Eigen recept toevoegen';
+
+  @override
+  String get kitAddWebRecipe => 'Webrecept toevoegen';
+
+  @override
+  String get kitWebRecipeSub =>
+      'Plak de link van een mooi recept dat je op het web vond.';
+
+  @override
+  String get kitEnterNameForAI =>
+      'Voer eerst de receptnaam in, AI vult de rest in';
+
+  @override
+  String get kitAINoResponse =>
+      'AI kon nu niet reageren, je kunt het handmatig invullen';
+
+  @override
+  String get kitEnterRecipeName => 'Voer een receptnaam in';
+
+  @override
+  String get kitPasteLink => 'Plak de receptlink';
+
+  @override
+  String get kitCategory => 'Categorie';
+
+  @override
+  String get kitWeeklyAISuggestions => 'AI-suggesties van deze week';
+
+  @override
+  String get kitIngredients => 'Ingredienten';
+
+  @override
+  String get kitPreparation => 'Bereiding';
 }

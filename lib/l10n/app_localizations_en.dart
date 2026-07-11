@@ -4752,4 +4752,64 @@ class AppLocalizationsEn extends AppLocalizations {
   String eduParentTip(Object tip) {
     return 'Parent tip: $tip';
   }
+
+  @override
+  String get kitRecipe => 'Recipe';
+
+  @override
+  String get kitNoRecipe => 'No recipes found';
+
+  @override
+  String get kitCreateWeeklyPlan => 'Create Weekly Plan';
+
+  @override
+  String get kitAIFillWeek => 'Let AI fill the whole week automatically';
+
+  @override
+  String get kitFill => 'Fill';
+
+  @override
+  String get kitTapToChange => 'Tap to change';
+
+  @override
+  String get kitPickMeal => 'Pick a meal...';
+
+  @override
+  String get kitNewFoodIdea => 'New Food Idea';
+
+  @override
+  String get kitAddOwnRecipe => 'Add Your Own Recipe';
+
+  @override
+  String get kitAddWebRecipe => 'Add Web Recipe';
+
+  @override
+  String get kitWebRecipeSub =>
+      'Paste the link of a nice recipe you found on the web.';
+
+  @override
+  String get kitEnterNameForAI =>
+      'Enter the recipe name first, AI fills the rest';
+
+  @override
+  String get kitAINoResponse =>
+      'AI couldn\'t respond right now, you can fill it manually';
+
+  @override
+  String get kitEnterRecipeName => 'Please enter a recipe name';
+
+  @override
+  String get kitPasteLink => 'Please paste the recipe link';
+
+  @override
+  String get kitCategory => 'Category';
+
+  @override
+  String get kitWeeklyAISuggestions => 'This Week\'s AI Suggestions';
+
+  @override
+  String get kitIngredients => 'Ingredients';
+
+  @override
+  String get kitPreparation => 'Preparation';
 }

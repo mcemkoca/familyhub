@@ -360,12 +360,12 @@ class _KitchenScreenState extends State<KitchenScreen>
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [BoxShadow(color: amber.withAlpha(70), blurRadius: 8)],
               ),
-              child: const Row(
+              child: Row(
                 children: [
-                  Icon(Icons.add, size: 16, color: Colors.white),
-                  SizedBox(width: 4),
-                  Text('Tarif',
-                      style: TextStyle(
+                  const Icon(Icons.add, size: 16, color: Colors.white),
+                  const SizedBox(width: 4),
+                  Text(AppLocalizations.of(context).kitRecipe,
+                      style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w800,
                           fontSize: 13)),
@@ -518,13 +518,13 @@ class _RecipesTab extends StatelessWidget {
           child: loading
               ? const Center(child: CircularProgressIndicator())
               : filtered.isEmpty
-                  ? const Center(
+                  ? Center(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.search_off, size: 64, color: Color(0xFF6B7280)),
-                          SizedBox(height: 12),
-                          Text('Tarif bulunamadı'),
+                          const Icon(Icons.search_off, size: 64, color: Color(0xFF6B7280)),
+                          const SizedBox(height: 12),
+                          Text(AppLocalizations.of(context).kitNoRecipe),
                         ],
                       ),
                     )
@@ -633,19 +633,19 @@ class _WeeklyPlanTab extends StatelessWidget {
             children: [
               const Icon(Icons.auto_awesome, color: Colors.white, size: 28),
               const SizedBox(width: 12),
-              const Expanded(
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Haftalık Plan Oluştur',
-                        style: TextStyle(
+                    Text(AppLocalizations.of(context).kitCreateWeeklyPlan,
+                        style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w800,
                             fontSize: 15)),
-                    SizedBox(height: 2),
-                    Text('AI tüm haftayı otomatik doldursun',
+                    const SizedBox(height: 2),
+                    Text(AppLocalizations.of(context).kitAIFillWeek,
                         style:
-                            TextStyle(color: Colors.white70, fontSize: 12)),
+                            const TextStyle(color: Colors.white70, fontSize: 12)),
                   ],
                 ),
               ),
@@ -660,8 +660,8 @@ class _WeeklyPlanTab extends StatelessWidget {
                       horizontal: 14, vertical: 8),
                   elevation: 0,
                 ),
-                child: const Text('Doldur',
-                    style: TextStyle(fontWeight: FontWeight.w800)),
+                child: Text(AppLocalizations.of(context).kitFill,
+                    style: const TextStyle(fontWeight: FontWeight.w800)),
               ),
             ],
           ),
@@ -722,14 +722,14 @@ class _WeeklyPlanTab extends StatelessWidget {
                                         fontWeight: FontWeight.w700,
                                         color: Color(0xFFE5E7EB))),
                                 const SizedBox(height: 2),
-                                const Text('Değiştirmek için dokun',
-                                    style: TextStyle(
+                                Text(AppLocalizations.of(context).kitTapToChange,
+                                    style: const TextStyle(
                                         fontSize: 11,
                                         color: Color(0xFF6B7280))),
                               ],
                             )
-                          : const Text('Yemek seç...',
-                              style: TextStyle(
+                          : Text(AppLocalizations.of(context).kitPickMeal,
+                              style: const TextStyle(
                                   fontSize: 13,
                                   color: Color(0xFF6B7280))),
                     ),
@@ -1441,8 +1441,8 @@ class _NewFoodIdeaSheet extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 18),
-              const Text('Yeni Yemek Fikri',
-                  style: TextStyle(
+              Text(AppLocalizations.of(context).kitNewFoodIdea,
+                  style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20,
                       fontWeight: FontWeight.w800)),
@@ -1450,7 +1450,7 @@ class _NewFoodIdeaSheet extends StatelessWidget {
               _IdeaCard(
                 color: const Color(0xFF4F7DF3),
                 icon: Icons.restaurant,
-                title: 'Kendi Tarifini Ekle',
+                title: AppLocalizations.of(context).kitAddOwnRecipe,
                 subtitle:
                     'Anneannenin elmalı turtası ya da kendi yaratımın olsun.',
                 onTap: onOwn,
@@ -1459,8 +1459,8 @@ class _NewFoodIdeaSheet extends StatelessWidget {
               _IdeaCard(
                 color: const Color(0xFFF07167),
                 icon: Icons.link,
-                title: 'Web Tarifi Ekle',
-                subtitle: 'Web\'de bulduğun güzel bir tarifin linkini yapıştır.',
+                title: AppLocalizations.of(context).kitAddWebRecipe,
+                subtitle: AppLocalizations.of(context).kitWebRecipeSub,
                 onTap: onWeb,
               ),
             ],
@@ -1573,7 +1573,7 @@ class _AddRecipeSheetState extends State<_AddRecipeSheet> {
     final title = _title.text.trim();
     if (title.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Önce tarif adını yazın, AI gerisini doldursun')),
+        SnackBar(content: Text(AppLocalizations.of(context).kitEnterNameForAI)),
       );
       return;
     }
@@ -1606,13 +1606,13 @@ Malzemeler miktarıyla, adımlar kısa ve net olsun. Türkçe.''';
       }
       if (mounted && (ings is! List || ings.isEmpty)) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('AI şu an yanıt veremedi, elle doldurabilirsin')),
+          SnackBar(content: Text(AppLocalizations.of(context).kitAINoResponse)),
         );
       }
     } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('AI şu an yanıt veremedi, elle doldurabilirsin')),
+          SnackBar(content: Text(AppLocalizations.of(context).kitAINoResponse)),
         );
       }
     } finally {
@@ -1624,13 +1624,13 @@ Malzemeler miktarıyla, adımlar kısa ve net olsun. Türkçe.''';
     final title = _title.text.trim();
     if (title.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Lütfen bir tarif adı girin')),
+        SnackBar(content: Text(AppLocalizations.of(context).kitEnterRecipeName)),
       );
       return;
     }
     if (widget.fromWeb && _url.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Lütfen tarif linkini yapıştırın')),
+        SnackBar(content: Text(AppLocalizations.of(context).kitPasteLink)),
       );
       return;
     }
@@ -1708,8 +1708,8 @@ Malzemeler miktarıyla, adımlar kısa ve net olsun. Türkçe.''';
                     hint: 'https://...', keyboard: TextInputType.url),
               ],
               const SizedBox(height: 12),
-              const Text('Kategori',
-                  style: TextStyle(
+              Text(AppLocalizations.of(context).kitCategory,
+                  style: const TextStyle(
                       color: Color(0xFFD1D5DB),
                       fontSize: 13,
                       fontWeight: FontWeight.w600)),
@@ -1786,8 +1786,8 @@ Malzemeler miktarıyla, adımlar kısa ve net olsun. Türkçe.''';
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14)),
                   ),
-                  child: const Text('Kaydet',
-                      style: TextStyle(
+                  child: Text(AppLocalizations.of(context).save,
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.w700)),
@@ -1860,15 +1860,15 @@ class _AiRecipeStrip extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.fromLTRB(16, 0, 16, 6),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 6),
                 child: Row(
                   children: [
-                    Icon(Icons.auto_awesome,
+                    const Icon(Icons.auto_awesome,
                         size: 15, color: Color(0xFFF59E0B)),
-                    SizedBox(width: 6),
-                    Text('Bu Haftanın AI Önerileri',
-                        style: TextStyle(
+                    const SizedBox(width: 6),
+                    Text(AppLocalizations.of(context).kitWeeklyAISuggestions,
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 13,
                             fontWeight: FontWeight.w700)),
@@ -1969,8 +1969,8 @@ class _AiRecipeStrip extends StatelessWidget {
                   style: const TextStyle(color: Color(0xFF9CA3AF))),
               if (ings.isNotEmpty) ...[
                 const SizedBox(height: 18),
-                const Text('Malzemeler',
-                    style: TextStyle(
+                Text(AppLocalizations.of(context).kitIngredients,
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.w800)),
@@ -1985,8 +1985,8 @@ class _AiRecipeStrip extends StatelessWidget {
               ],
               if (steps.isNotEmpty) ...[
                 const SizedBox(height: 14),
-                const Text('Hazırlanışı',
-                    style: TextStyle(
+                Text(AppLocalizations.of(context).kitPreparation,
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.w800)),
