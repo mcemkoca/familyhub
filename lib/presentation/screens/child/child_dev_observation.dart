@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 import 'child_development_screen.dart' show ChildProfile;
 import 'child_dev_content.dart';
@@ -68,7 +69,7 @@ class _ObservationInputScreenState extends State<ObservationInputScreen> {
     if (!mounted) return;
     Navigator.pop(context, true);
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Gözlem kaydedildi')),
+      SnackBar(content: Text(AppLocalizations.of(context).obsSaved)),
     );
   }
 
@@ -80,7 +81,7 @@ class _ObservationInputScreenState extends State<ObservationInputScreen> {
         child: Column(
           children: [
             DevHeader(
-              title: 'Gözlem Ekle',
+              title: AppLocalizations.of(context).obsAdd,
               subtitle: '${widget.child.name} için gelişim kaydı',
               trailing: const Icon(Icons.more_horiz, color: Color(0xFF9CA3AF)),
             ),
@@ -88,19 +89,19 @@ class _ObservationInputScreenState extends State<ObservationInputScreen> {
               child: ListView(
                 padding: const EdgeInsets.fromLTRB(20, 4, 20, 24),
                 children: [
-                  _label('Gelişim Alanı'),
+                  _label(AppLocalizations.of(context).obsDevArea),
                   const SizedBox(height: 10),
                   _areaGrid(),
                   const SizedBox(height: 20),
-                  _label('Gözleminiz'),
+                  _label(AppLocalizations.of(context).obsYourObs),
                   const SizedBox(height: 10),
                   _noteField(),
                   const SizedBox(height: 20),
-                  _label('Durum / Ruh Hali'),
+                  _label(AppLocalizations.of(context).obsMood),
                   const SizedBox(height: 10),
                   _moodRow(),
                   const SizedBox(height: 20),
-                  _label('Beceri Durumu'),
+                  _label(AppLocalizations.of(context).obsSkillStatus),
                   const SizedBox(height: 10),
                   _skillRow(),
                   const SizedBox(height: 16),
@@ -116,8 +117,8 @@ class _ObservationInputScreenState extends State<ObservationInputScreen> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16)),
                       ),
-                      child: const Text('Kaydet',
-                          style: TextStyle(
+                      child: Text(AppLocalizations.of(context).save,
+                          style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.w700)),
@@ -194,7 +195,7 @@ class _ObservationInputScreenState extends State<ObservationInputScreen> {
       maxLength: 500,
       style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
-        hintText: 'Bugün ne fark ettiniz?',
+        hintText: AppLocalizations.of(context).obsHint,
         hintStyle: const TextStyle(color: Color(0xFF6B7280)),
         filled: true,
         fillColor: const Color(0xFF13131A),
@@ -319,9 +320,9 @@ class _ObservationInputScreenState extends State<ObservationInputScreen> {
                           fontSize: 15,
                           fontWeight: FontWeight.w600)),
                   const SizedBox(height: 2),
-                  const Text('Maks. 5 dosya • JPG, PNG, MP4',
+                  Text(AppLocalizations.of(context).obsMaxFiles,
                       style:
-                          TextStyle(color: Color(0xFF6B7280), fontSize: 12.5)),
+                          const TextStyle(color: Color(0xFF6B7280), fontSize: 12.5)),
                 ],
               ),
             ),

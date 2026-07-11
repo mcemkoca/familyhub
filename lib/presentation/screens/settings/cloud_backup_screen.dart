@@ -69,7 +69,7 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Giriş hatası: $e'),
+            content: Text(AppLocalizations.of(context).cbSignInFailed('$e')),
             backgroundColor: AppColors.error,
           ),
         );
@@ -96,7 +96,7 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Bağlantı kesme hatası: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context).cbDisconnectFailed('$e'))),
         );
       }
     }
@@ -132,7 +132,7 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Yedekleme hatası: $e'),
+            content: Text(AppLocalizations.of(context).cbBackupFailed('$e')),
             backgroundColor: Colors.red,
           ),
         );
@@ -182,7 +182,7 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Geri yükleme hatası: $e'),
+            content: Text(AppLocalizations.of(context).cbRestoreFailed('$e')),
             backgroundColor: Colors.red,
           ),
         );
@@ -219,13 +219,13 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
       await _loadBackups();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Yedek silindi')),
+          SnackBar(content: Text(AppLocalizations.of(context).cbBackupDeleted)),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Silme hatası: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context).cbDeleteFailed('$e'))),
         );
       }
     }
@@ -600,7 +600,7 @@ class _CloudBackupScreenState extends State<CloudBackupScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
-        title: 'Google Drive Yedekleme',
+        title: AppLocalizations.of(context).cbTitle,
         showBack: true,
         onBack: () => context.pop(),
       ),

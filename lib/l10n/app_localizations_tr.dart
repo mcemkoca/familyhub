@@ -5404,4 +5404,105 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get fssSignal => 'Sinyal';
+
+  @override
+  String get obsSaved => 'Gözlem kaydedildi';
+
+  @override
+  String get obsAdd => 'Gözlem Ekle';
+
+  @override
+  String get obsDevArea => 'Gelişim Alanı';
+
+  @override
+  String get obsYourObs => 'Gözleminiz';
+
+  @override
+  String get obsMood => 'Durum / Ruh Hali';
+
+  @override
+  String get obsSkillStatus => 'Beceri Durumu';
+
+  @override
+  String get obsHint => 'Bugün ne fark ettiniz?';
+
+  @override
+  String get obsMaxFiles => 'Maks. 5 dosya • JPG, PNG, MP4';
+
+  @override
+  String cmDeleteFailed(Object msg) {
+    return 'Silme başarısız: $msg';
+  }
+
+  @override
+  String get cmTapToAddMember => 'Aile üyesi eklemek için aşağıya dokun';
+
+  @override
+  String get cmBaby => 'Bebek';
+
+  @override
+  String get cmPermissions => 'İzinler';
+
+  @override
+  String get cmCanMessage => 'Mesaj gönderebilir';
+
+  @override
+  String get cmCanApproveTask => 'Görev onaylayabilir';
+
+  @override
+  String get cmCanSeeBudget => 'Bütçeyi görebilir';
+
+  @override
+  String get cmDailyScreenTime => 'Günlük ekran süresi';
+
+  @override
+  String get cmPinRepeat => 'PIN Tekrar';
+
+  @override
+  String get rtNewRoutine => 'Yeni Rutin';
+
+  @override
+  String rtNow(Object step) {
+    return 'Şu an: $step';
+  }
+
+  @override
+  String get rtContinue => 'Devam Et';
+
+  @override
+  String get rtApply => 'Uygula';
+
+  @override
+  String get rtDeleteRoutine => 'Rutini Sil';
+
+  @override
+  String cbSignInFailed(Object msg) {
+    return 'Giriş hatası: $msg';
+  }
+
+  @override
+  String cbDisconnectFailed(Object msg) {
+    return 'Bağlantı kesme hatası: $msg';
+  }
+
+  @override
+  String cbBackupFailed(Object msg) {
+    return 'Yedekleme hatası: $msg';
+  }
+
+  @override
+  String cbRestoreFailed(Object msg) {
+    return 'Geri yükleme hatası: $msg';
+  }
+
+  @override
+  String get cbBackupDeleted => 'Yedek silindi';
+
+  @override
+  String cbDeleteFailed(Object msg) {
+    return 'Silme hatası: $msg';
+  }
+
+  @override
+  String get cbTitle => 'Google Drive Yedekleme';
 }

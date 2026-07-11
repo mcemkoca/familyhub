@@ -125,7 +125,7 @@ class _ChildManagementScreenState extends ConsumerState<ChildManagementScreen> {
       } catch (e) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Silme başarısız: $e')),
+            SnackBar(content: Text(AppLocalizations.of(context).cmDeleteFailed('$e'))),
           );
         }
       }
@@ -214,8 +214,8 @@ class _ChildManagementScreenState extends ConsumerState<ChildManagementScreen> {
                       Text(AppLocalizations.of(context).henuzCocukHesabiYok,
                           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFFE5E7EB))),
                       const SizedBox(height: 8),
-                      const Text('Aile üyesi eklemek için aşağıya dokun',
-                          style: TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
+                      Text(AppLocalizations.of(context).cmTapToAddMember,
+                          style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
                       const SizedBox(height: 24),
                       ElevatedButton.icon(
                         onPressed: () => _showAddEditChild(),
@@ -590,10 +590,10 @@ class _ChildFormSheetState extends State<_ChildFormSheet> {
                 label: Text(AppLocalizations.of(context).genc),
                 icon: const Icon(Icons.emoji_people),
               ),
-              const ButtonSegment(
+              ButtonSegment(
                 value: ChildRole.baby,
-                label: Text('Bebek'),
-                icon: Icon(Icons.crib),
+                label: Text(AppLocalizations.of(context).cmBaby),
+                icon: const Icon(Icons.crib),
               ),
             ],
             selected: {_role},
@@ -604,19 +604,19 @@ class _ChildFormSheetState extends State<_ChildFormSheet> {
           const SizedBox(height: AppSpacing.sm),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
-            title: const Text('Mesaj gönderebilir'),
+            title: Text(AppLocalizations.of(context).cmCanMessage),
             value: _canSendMessages,
             onChanged: (v) => setState(() => _canSendMessages = v),
           ),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
-            title: const Text('Görev onaylayabilir'),
+            title: Text(AppLocalizations.of(context).cmCanApproveTask),
             value: _canApproveTasks,
             onChanged: (v) => setState(() => _canApproveTasks = v),
           ),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
-            title: const Text('Bütçeyi görebilir'),
+            title: Text(AppLocalizations.of(context).cmCanSeeBudget),
             value: _canViewBudget,
             onChanged: (v) => setState(() => _canViewBudget = v),
           ),
@@ -625,7 +625,7 @@ class _ChildFormSheetState extends State<_ChildFormSheet> {
             children: [
               const Icon(Icons.timer_outlined, size: 18, color: Color(0xFF8B5CF6)),
               const SizedBox(width: 8),
-              const Text('Günlük ekran süresi'),
+              Text(AppLocalizations.of(context).cmDailyScreenTime),
               const Spacer(),
               Text('$_dailyScreenTime dk',
                   style: const TextStyle(fontWeight: FontWeight.w700)),
@@ -691,9 +691,9 @@ class _ChildFormSheetState extends State<_ChildFormSheet> {
               keyboardType: TextInputType.number,
               obscureText: true,
               maxLength: 6,
-              decoration: const InputDecoration(
-                labelText: 'PIN Tekrar',
-                prefixIcon: Icon(Icons.lock_outline),
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context).cmPinRepeat,
+                prefixIcon: const Icon(Icons.lock_outline),
                 counterText: '',
               ),
             ),

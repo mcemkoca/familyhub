@@ -5384,4 +5384,105 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get fssSignal => 'Signal';
+
+  @override
+  String get obsSaved => 'Observation saved';
+
+  @override
+  String get obsAdd => 'Add Observation';
+
+  @override
+  String get obsDevArea => 'Development Area';
+
+  @override
+  String get obsYourObs => 'Your Observation';
+
+  @override
+  String get obsMood => 'Status / Mood';
+
+  @override
+  String get obsSkillStatus => 'Skill Status';
+
+  @override
+  String get obsHint => 'What did you notice today?';
+
+  @override
+  String get obsMaxFiles => 'Max 5 files • JPG, PNG, MP4';
+
+  @override
+  String cmDeleteFailed(Object msg) {
+    return 'Delete failed: $msg';
+  }
+
+  @override
+  String get cmTapToAddMember => 'Tap below to add a family member';
+
+  @override
+  String get cmBaby => 'Baby';
+
+  @override
+  String get cmPermissions => 'Permissions';
+
+  @override
+  String get cmCanMessage => 'Can send messages';
+
+  @override
+  String get cmCanApproveTask => 'Can approve tasks';
+
+  @override
+  String get cmCanSeeBudget => 'Can see budget';
+
+  @override
+  String get cmDailyScreenTime => 'Daily screen time';
+
+  @override
+  String get cmPinRepeat => 'Repeat PIN';
+
+  @override
+  String get rtNewRoutine => 'New Routine';
+
+  @override
+  String rtNow(Object step) {
+    return 'Now: $step';
+  }
+
+  @override
+  String get rtContinue => 'Continue';
+
+  @override
+  String get rtApply => 'Apply';
+
+  @override
+  String get rtDeleteRoutine => 'Delete Routine';
+
+  @override
+  String cbSignInFailed(Object msg) {
+    return 'Sign-in error: $msg';
+  }
+
+  @override
+  String cbDisconnectFailed(Object msg) {
+    return 'Disconnect error: $msg';
+  }
+
+  @override
+  String cbBackupFailed(Object msg) {
+    return 'Backup error: $msg';
+  }
+
+  @override
+  String cbRestoreFailed(Object msg) {
+    return 'Restore error: $msg';
+  }
+
+  @override
+  String get cbBackupDeleted => 'Backup deleted';
+
+  @override
+  String cbDeleteFailed(Object msg) {
+    return 'Delete error: $msg';
+  }
+
+  @override
+  String get cbTitle => 'Google Drive Backup';
 }

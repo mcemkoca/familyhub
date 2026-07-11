@@ -10235,6 +10235,180 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Sinyal'**
   String get fssSignal;
+
+  /// No description provided for @obsSaved.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gözlem kaydedildi'**
+  String get obsSaved;
+
+  /// No description provided for @obsAdd.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gözlem Ekle'**
+  String get obsAdd;
+
+  /// No description provided for @obsDevArea.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gelişim Alanı'**
+  String get obsDevArea;
+
+  /// No description provided for @obsYourObs.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gözleminiz'**
+  String get obsYourObs;
+
+  /// No description provided for @obsMood.
+  ///
+  /// In tr, this message translates to:
+  /// **'Durum / Ruh Hali'**
+  String get obsMood;
+
+  /// No description provided for @obsSkillStatus.
+  ///
+  /// In tr, this message translates to:
+  /// **'Beceri Durumu'**
+  String get obsSkillStatus;
+
+  /// No description provided for @obsHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugün ne fark ettiniz?'**
+  String get obsHint;
+
+  /// No description provided for @obsMaxFiles.
+  ///
+  /// In tr, this message translates to:
+  /// **'Maks. 5 dosya • JPG, PNG, MP4'**
+  String get obsMaxFiles;
+
+  /// No description provided for @cmDeleteFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Silme başarısız: {msg}'**
+  String cmDeleteFailed(Object msg);
+
+  /// No description provided for @cmTapToAddMember.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile üyesi eklemek için aşağıya dokun'**
+  String get cmTapToAddMember;
+
+  /// No description provided for @cmBaby.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bebek'**
+  String get cmBaby;
+
+  /// No description provided for @cmPermissions.
+  ///
+  /// In tr, this message translates to:
+  /// **'İzinler'**
+  String get cmPermissions;
+
+  /// No description provided for @cmCanMessage.
+  ///
+  /// In tr, this message translates to:
+  /// **'Mesaj gönderebilir'**
+  String get cmCanMessage;
+
+  /// No description provided for @cmCanApproveTask.
+  ///
+  /// In tr, this message translates to:
+  /// **'Görev onaylayabilir'**
+  String get cmCanApproveTask;
+
+  /// No description provided for @cmCanSeeBudget.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bütçeyi görebilir'**
+  String get cmCanSeeBudget;
+
+  /// No description provided for @cmDailyScreenTime.
+  ///
+  /// In tr, this message translates to:
+  /// **'Günlük ekran süresi'**
+  String get cmDailyScreenTime;
+
+  /// No description provided for @cmPinRepeat.
+  ///
+  /// In tr, this message translates to:
+  /// **'PIN Tekrar'**
+  String get cmPinRepeat;
+
+  /// No description provided for @rtNewRoutine.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yeni Rutin'**
+  String get rtNewRoutine;
+
+  /// No description provided for @rtNow.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şu an: {step}'**
+  String rtNow(Object step);
+
+  /// No description provided for @rtContinue.
+  ///
+  /// In tr, this message translates to:
+  /// **'Devam Et'**
+  String get rtContinue;
+
+  /// No description provided for @rtApply.
+  ///
+  /// In tr, this message translates to:
+  /// **'Uygula'**
+  String get rtApply;
+
+  /// No description provided for @rtDeleteRoutine.
+  ///
+  /// In tr, this message translates to:
+  /// **'Rutini Sil'**
+  String get rtDeleteRoutine;
+
+  /// No description provided for @cbSignInFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Giriş hatası: {msg}'**
+  String cbSignInFailed(Object msg);
+
+  /// No description provided for @cbDisconnectFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bağlantı kesme hatası: {msg}'**
+  String cbDisconnectFailed(Object msg);
+
+  /// No description provided for @cbBackupFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yedekleme hatası: {msg}'**
+  String cbBackupFailed(Object msg);
+
+  /// No description provided for @cbRestoreFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Geri yükleme hatası: {msg}'**
+  String cbRestoreFailed(Object msg);
+
+  /// No description provided for @cbBackupDeleted.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yedek silindi'**
+  String get cbBackupDeleted;
+
+  /// No description provided for @cbDeleteFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Silme hatası: {msg}'**
+  String cbDeleteFailed(Object msg);
+
+  /// No description provided for @cbTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Google Drive Yedekleme'**
+  String get cbTitle;
 }
 
 class _AppLocalizationsDelegate

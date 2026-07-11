@@ -5407,4 +5407,105 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get fssSignal => 'Signal';
+
+  @override
+  String get obsSaved => 'Observation enregistree';
+
+  @override
+  String get obsAdd => 'Ajouter une observation';
+
+  @override
+  String get obsDevArea => 'Domaine de developpement';
+
+  @override
+  String get obsYourObs => 'Votre observation';
+
+  @override
+  String get obsMood => 'Etat / Humeur';
+
+  @override
+  String get obsSkillStatus => 'Niveau de competence';
+
+  @override
+  String get obsHint => 'Qu\'avez-vous remarque aujourd\'hui ?';
+
+  @override
+  String get obsMaxFiles => 'Max 5 fichiers • JPG, PNG, MP4';
+
+  @override
+  String cmDeleteFailed(Object msg) {
+    return 'Echec de la suppression : $msg';
+  }
+
+  @override
+  String get cmTapToAddMember => 'Appuyez ci-dessous pour ajouter un membre';
+
+  @override
+  String get cmBaby => 'Bebe';
+
+  @override
+  String get cmPermissions => 'Autorisations';
+
+  @override
+  String get cmCanMessage => 'Peut envoyer des messages';
+
+  @override
+  String get cmCanApproveTask => 'Peut approuver les taches';
+
+  @override
+  String get cmCanSeeBudget => 'Peut voir le budget';
+
+  @override
+  String get cmDailyScreenTime => 'Temps d\'ecran quotidien';
+
+  @override
+  String get cmPinRepeat => 'Repeter le PIN';
+
+  @override
+  String get rtNewRoutine => 'Nouvelle routine';
+
+  @override
+  String rtNow(Object step) {
+    return 'Maintenant : $step';
+  }
+
+  @override
+  String get rtContinue => 'Continuer';
+
+  @override
+  String get rtApply => 'Appliquer';
+
+  @override
+  String get rtDeleteRoutine => 'Supprimer la routine';
+
+  @override
+  String cbSignInFailed(Object msg) {
+    return 'Erreur de connexion : $msg';
+  }
+
+  @override
+  String cbDisconnectFailed(Object msg) {
+    return 'Erreur de deconnexion : $msg';
+  }
+
+  @override
+  String cbBackupFailed(Object msg) {
+    return 'Erreur de sauvegarde : $msg';
+  }
+
+  @override
+  String cbRestoreFailed(Object msg) {
+    return 'Erreur de restauration : $msg';
+  }
+
+  @override
+  String get cbBackupDeleted => 'Sauvegarde supprimee';
+
+  @override
+  String cbDeleteFailed(Object msg) {
+    return 'Erreur de suppression : $msg';
+  }
+
+  @override
+  String get cbTitle => 'Sauvegarde Google Drive';
 }

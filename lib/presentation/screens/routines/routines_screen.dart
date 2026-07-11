@@ -206,7 +206,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _navigateToCreate,
         icon: const Icon(Icons.add),
-        label: const Text('Yeni Rutin'),
+        label: Text(AppLocalizations.of(context).rtNewRoutine),
         backgroundColor: const Color(0xFF6366F1),
       ),
     );
@@ -269,7 +269,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
             children: [
               Text('$completed/${routine.steps.length} adım | ${routine.estimatedTotalDuration} dk', style: TextStyle(color: Colors.white.withAlpha(230))),
               if (currentStep != null)
-                Text('Şu an: ${currentStep.title}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+                Text(AppLocalizations.of(context).rtNow(currentStep.title), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
             ],
           ),
           const SizedBox(height: 12),
@@ -279,7 +279,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
                 child: ElevatedButton.icon(
                   onPressed: () => _navigateToDetail(routine),
                   icon: const Icon(Icons.play_arrow),
-                  label: const Text('Devam Et'),
+                  label: Text(AppLocalizations.of(context).rtContinue),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: color,
@@ -328,7 +328,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
                     ],
                   ),
                 ),
-                TextButton(onPressed: () { HapticFeedback.lightImpact(); }, child: const Text('Uygula')),
+                TextButton(onPressed: () { HapticFeedback.lightImpact(); }, child: Text(AppLocalizations.of(context).rtApply)),
               ],
             ),
           )),
@@ -459,7 +459,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Rutini Sil'),
+        title: Text(AppLocalizations.of(context).rtDeleteRoutine),
         content: Text('"${routine.name}" silinecek. Emin misiniz?'),
         actions: [
           TextButton(onPressed: () => Navigator.pop(ctx), child: Text(AppLocalizations.of(context).cancel)),
@@ -469,7 +469,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
               Navigator.pop(ctx);
               HapticFeedback.mediumImpact();
             },
-            child: const Text('Sil', style: TextStyle(color: Colors.red)),
+            child: Text(AppLocalizations.of(context).budDelete, style: const TextStyle(color: Colors.red)),
           ),
         ],
       ),

@@ -5388,4 +5388,105 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get fssSignal => 'Signaal';
+
+  @override
+  String get obsSaved => 'Observatie opgeslagen';
+
+  @override
+  String get obsAdd => 'Observatie toevoegen';
+
+  @override
+  String get obsDevArea => 'Ontwikkelingsgebied';
+
+  @override
+  String get obsYourObs => 'Jouw observatie';
+
+  @override
+  String get obsMood => 'Status / Stemming';
+
+  @override
+  String get obsSkillStatus => 'Vaardigheidsniveau';
+
+  @override
+  String get obsHint => 'Wat viel je vandaag op?';
+
+  @override
+  String get obsMaxFiles => 'Max 5 bestanden • JPG, PNG, MP4';
+
+  @override
+  String cmDeleteFailed(Object msg) {
+    return 'Verwijderen mislukt: $msg';
+  }
+
+  @override
+  String get cmTapToAddMember => 'Tik hieronder om een gezinslid toe te voegen';
+
+  @override
+  String get cmBaby => 'Baby';
+
+  @override
+  String get cmPermissions => 'Machtigingen';
+
+  @override
+  String get cmCanMessage => 'Kan berichten sturen';
+
+  @override
+  String get cmCanApproveTask => 'Kan taken goedkeuren';
+
+  @override
+  String get cmCanSeeBudget => 'Kan budget zien';
+
+  @override
+  String get cmDailyScreenTime => 'Dagelijkse schermtijd';
+
+  @override
+  String get cmPinRepeat => 'PIN herhalen';
+
+  @override
+  String get rtNewRoutine => 'Nieuwe routine';
+
+  @override
+  String rtNow(Object step) {
+    return 'Nu: $step';
+  }
+
+  @override
+  String get rtContinue => 'Doorgaan';
+
+  @override
+  String get rtApply => 'Toepassen';
+
+  @override
+  String get rtDeleteRoutine => 'Routine verwijderen';
+
+  @override
+  String cbSignInFailed(Object msg) {
+    return 'Aanmeldfout: $msg';
+  }
+
+  @override
+  String cbDisconnectFailed(Object msg) {
+    return 'Verbreekfout: $msg';
+  }
+
+  @override
+  String cbBackupFailed(Object msg) {
+    return 'Back-upfout: $msg';
+  }
+
+  @override
+  String cbRestoreFailed(Object msg) {
+    return 'Herstelfout: $msg';
+  }
+
+  @override
+  String get cbBackupDeleted => 'Back-up verwijderd';
+
+  @override
+  String cbDeleteFailed(Object msg) {
+    return 'Verwijderfout: $msg';
+  }
+
+  @override
+  String get cbTitle => 'Google Drive-back-up';
 }
