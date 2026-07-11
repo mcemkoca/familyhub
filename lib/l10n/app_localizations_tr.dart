@@ -4962,4 +4962,42 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get srSmartChoice => 'Akıllı seçim (AI önerir)';
+
+  @override
+  String get budIncome => 'Gelir';
+
+  @override
+  String get budExpense => 'Gider';
+
+  @override
+  String get budBalance => 'Bakiye';
+
+  @override
+  String get budAnalyzing => 'Gemini analiz ediyor…';
+
+  @override
+  String get budMonthlyLimit => 'Aylık Limit (€)';
+
+  @override
+  String get budDelete => 'Sil';
+
+  @override
+  String get budAmount => 'Tutar';
+
+  @override
+  String get budCategory => 'Kategori';
+
+  @override
+  String get budDescOptional => 'Açıklama (opsiyonel)';
+
+  @override
+  String budAiSuggestion(Object cat) {
+    return 'AI önerisi: $cat';
+  }
+
+  @override
+  String get budSuggestCategory => 'AI ile kategori öner';
+
+  @override
+  String get budEnterValidAmount => 'Geçerli bir tutar girin';
 }

@@ -82,7 +82,7 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
       backgroundColor: const Color(0xFF0A0A0F),
       body: transactionsAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => Center(child: Text('Hata: $e')),
+        error: (e, _) => Center(child: Text(AppLocalizations.of(context).srError('$e'))),
         data: (transactions) {
           final totalIncome = transactions
               .where((t) => t.type == TransactionType.income)
@@ -164,7 +164,7 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                   child: Row(
                     children: [
                       _SummaryCard(
-                        label: 'Gelir',
+                        label: AppLocalizations.of(context).budIncome,
                         amount: totalIncome,
                         icon: Icons.arrow_downward,
                         color: AppColors.green,
@@ -173,7 +173,7 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                       ),
                       const SizedBox(width: 10),
                       _SummaryCard(
-                        label: 'Gider',
+                        label: AppLocalizations.of(context).budExpense,
                         amount: totalExpense,
                         icon: Icons.arrow_upward,
                         color: AppColors.error,
@@ -182,7 +182,7 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                       ),
                       const SizedBox(width: 10),
                       _SummaryCard(
-                        label: 'Bakiye',
+                        label: AppLocalizations.of(context).budBalance,
                         amount: balance,
                         icon: Icons.account_balance_wallet,
                         color: const Color(0xFF6366F1),
@@ -441,19 +441,19 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
               future: aiFuture,
               builder: (context, snap) {
                 if (snap.connectionState == ConnectionState.waiting) {
-                  return const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16),
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                     child: Row(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 18,
                           height: 18,
                           child: CircularProgressIndicator(
                               strokeWidth: 2, color: Color(0xFF8B5CF6)),
                         ),
-                        SizedBox(width: 12),
-                        Text('Gemini analiz ediyor…',
-                            style: TextStyle(
+                        const SizedBox(width: 12),
+                        Text(AppLocalizations.of(context).budAnalyzing,
+                            style: const TextStyle(
                                 fontSize: 14, color: Color(0xFF9CA3AF))),
                       ],
                     ),
@@ -586,9 +586,9 @@ ${categories.join(', ')}''';
         content: TextField(
           controller: controller,
           keyboardType: TextInputType.number,
-          decoration: const InputDecoration(
-            labelText: 'Aylık Limit (€)',
-            prefixIcon: Icon(Icons.payments_outlined),
+          decoration: InputDecoration(
+            labelText: AppLocalizations.of(context).budMonthlyLimit,
+            prefixIcon: const Icon(Icons.payments_outlined),
           ),
         ),
         actions: [
@@ -603,7 +603,7 @@ ${categories.join(', ')}''';
               Navigator.pop(ctx);
             },
             style: ElevatedButton.styleFrom(backgroundColor: AppColors.green),
-            child: const Text('Kaydet', style: TextStyle(color: Colors.white)),
+            child: Text(AppLocalizations.of(context).save, style: const TextStyle(color: Colors.white)),
           ),
         ],
       ),
@@ -628,7 +628,7 @@ ${categories.join(', ')}''';
           TextButton(onPressed: () => Navigator.pop(context, false), child: Text(AppLocalizations.of(context).cancel)),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Sil', style: TextStyle(color: AppColors.error)),
+            child: Text(AppLocalizations.of(context).budDelete, style: const TextStyle(color: AppColors.error)),
           ),
         ],
       ),
@@ -779,7 +779,7 @@ ${categories.join(', ')}''';
                       keyboardType: TextInputType.number,
                       style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                       decoration: InputDecoration(
-                        labelText: 'Tutar',
+                        labelText: AppLocalizations.of(context).budAmount,
                         prefixText: '€ ',
                         prefixStyle: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Color(0xFFE5E7EB)),
                         border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
@@ -788,7 +788,7 @@ ${categories.join(', ')}''';
                     const SizedBox(height: 16),
 
                     // Category Grid
-                    const Text('Kategori', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                    Text(AppLocalizations.of(context).budCategory, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
                     const SizedBox(height: 8),
                     Wrap(
                       spacing: 8,
@@ -867,7 +867,7 @@ ${categories.join(', ')}''';
                     TextField(
                       controller: descController,
                       decoration: InputDecoration(
-                        labelText: 'Açıklama (opsiyonel)',
+                        labelText: AppLocalizations.of(context).budDescOptional,
                         prefixIcon: const Icon(Icons.notes_outlined),
                         border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                       ),
@@ -894,15 +894,15 @@ ${categories.join(', ')}''';
                             setModalState(() => selectedCategory = cat);
                             if (ctx.mounted) {
                               ScaffoldMessenger.of(ctx).showSnackBar(
-                                SnackBar(content: Text('AI önerisi: $cat')),
+                                SnackBar(content: Text(AppLocalizations.of(context).budAiSuggestion(cat))),
                               );
                             }
                           }
                         },
                         icon: const Icon(Icons.auto_awesome,
                             size: 18, color: Color(0xFF8B5CF6)),
-                        label: const Text('AI ile kategori öner',
-                            style: TextStyle(color: Color(0xFF8B5CF6))),
+                        label: Text(AppLocalizations.of(context).budSuggestCategory,
+                            style: const TextStyle(color: Color(0xFF8B5CF6))),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -918,9 +918,9 @@ ${categories.join(', ')}''';
                               0;
                           if (amount <= 0) {
                             ScaffoldMessenger.of(ctx).showSnackBar(
-                              const SnackBar(
+                              SnackBar(
                                   content:
-                                      Text('Geçerli bir tutar girin')),
+                                      Text(AppLocalizations.of(context).budEnterValidAmount)),
                             );
                             return;
                           }

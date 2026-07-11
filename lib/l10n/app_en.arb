@@ -1575,5 +1575,17 @@
   "srOr": "OR",
   "srInterruptibility": "Interruptibility: {pct}%",
   "srTone": "Tone",
-  "srSmartChoice": "Smart choice (AI suggests)"
+  "srSmartChoice": "Smart choice (AI suggests)",
+  "budIncome": "Income",
+  "budExpense": "Expense",
+  "budBalance": "Balance",
+  "budAnalyzing": "Gemini is analyzing…",
+  "budMonthlyLimit": "Monthly Limit (€)",
+  "budDelete": "Delete",
+  "budAmount": "Amount",
+  "budCategory": "Category",
+  "budDescOptional": "Description (optional)",
+  "budAiSuggestion": "AI suggestion: {cat}",
+  "budSuggestCategory": "Suggest category with AI",
+  "budEnterValidAmount": "Enter a valid amount"
 }

@@ -1575,5 +1575,17 @@
   "srOr": "OU",
   "srInterruptibility": "Interruptibilite : {pct}%",
   "srTone": "Ton",
-  "srSmartChoice": "Choix intelligent (suggere par l'IA)"
+  "srSmartChoice": "Choix intelligent (suggere par l'IA)",
+  "budIncome": "Revenu",
+  "budExpense": "Depense",
+  "budBalance": "Solde",
+  "budAnalyzing": "Gemini analyse…",
+  "budMonthlyLimit": "Limite mensuelle (€)",
+  "budDelete": "Supprimer",
+  "budAmount": "Montant",
+  "budCategory": "Categorie",
+  "budDescOptional": "Description (facultatif)",
+  "budAiSuggestion": "Suggestion IA : {cat}",
+  "budSuggestCategory": "Suggerer une categorie avec l'IA",
+  "budEnterValidAmount": "Saisissez un montant valide"
 }

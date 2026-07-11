@@ -9413,6 +9413,78 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Akıllı seçim (AI önerir)'**
   String get srSmartChoice;
+
+  /// No description provided for @budIncome.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gelir'**
+  String get budIncome;
+
+  /// No description provided for @budExpense.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gider'**
+  String get budExpense;
+
+  /// No description provided for @budBalance.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bakiye'**
+  String get budBalance;
+
+  /// No description provided for @budAnalyzing.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gemini analiz ediyor…'**
+  String get budAnalyzing;
+
+  /// No description provided for @budMonthlyLimit.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aylık Limit (€)'**
+  String get budMonthlyLimit;
+
+  /// No description provided for @budDelete.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sil'**
+  String get budDelete;
+
+  /// No description provided for @budAmount.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tutar'**
+  String get budAmount;
+
+  /// No description provided for @budCategory.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kategori'**
+  String get budCategory;
+
+  /// No description provided for @budDescOptional.
+  ///
+  /// In tr, this message translates to:
+  /// **'Açıklama (opsiyonel)'**
+  String get budDescOptional;
+
+  /// No description provided for @budAiSuggestion.
+  ///
+  /// In tr, this message translates to:
+  /// **'AI önerisi: {cat}'**
+  String budAiSuggestion(Object cat);
+
+  /// No description provided for @budSuggestCategory.
+  ///
+  /// In tr, this message translates to:
+  /// **'AI ile kategori öner'**
+  String get budSuggestCategory;
+
+  /// No description provided for @budEnterValidAmount.
+  ///
+  /// In tr, this message translates to:
+  /// **'Geçerli bir tutar girin'**
+  String get budEnterValidAmount;
 }
 
 class _AppLocalizationsDelegate

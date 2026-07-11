@@ -4942,4 +4942,42 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get srSmartChoice => 'Smart choice (AI suggests)';
+
+  @override
+  String get budIncome => 'Income';
+
+  @override
+  String get budExpense => 'Expense';
+
+  @override
+  String get budBalance => 'Balance';
+
+  @override
+  String get budAnalyzing => 'Gemini is analyzing…';
+
+  @override
+  String get budMonthlyLimit => 'Monthly Limit (€)';
+
+  @override
+  String get budDelete => 'Delete';
+
+  @override
+  String get budAmount => 'Amount';
+
+  @override
+  String get budCategory => 'Category';
+
+  @override
+  String get budDescOptional => 'Description (optional)';
+
+  @override
+  String budAiSuggestion(Object cat) {
+    return 'AI suggestion: $cat';
+  }
+
+  @override
+  String get budSuggestCategory => 'Suggest category with AI';
+
+  @override
+  String get budEnterValidAmount => 'Enter a valid amount';
 }

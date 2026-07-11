@@ -4943,4 +4943,42 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get srSmartChoice => 'Slimme keuze (AI stelt voor)';
+
+  @override
+  String get budIncome => 'Inkomsten';
+
+  @override
+  String get budExpense => 'Uitgave';
+
+  @override
+  String get budBalance => 'Saldo';
+
+  @override
+  String get budAnalyzing => 'Gemini analyseert…';
+
+  @override
+  String get budMonthlyLimit => 'Maandlimiet (€)';
+
+  @override
+  String get budDelete => 'Verwijderen';
+
+  @override
+  String get budAmount => 'Bedrag';
+
+  @override
+  String get budCategory => 'Categorie';
+
+  @override
+  String get budDescOptional => 'Omschrijving (optioneel)';
+
+  @override
+  String budAiSuggestion(Object cat) {
+    return 'AI-suggestie: $cat';
+  }
+
+  @override
+  String get budSuggestCategory => 'Categorie voorstellen met AI';
+
+  @override
+  String get budEnterValidAmount => 'Voer een geldig bedrag in';
 }

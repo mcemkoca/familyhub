@@ -1589,5 +1589,18 @@
   "srInterruptibility": "Rahatsız Edilebilirlik: {pct}%",
   "@srInterruptibility": { "placeholders": { "pct": {} } },
   "srTone": "Ton",
-  "srSmartChoice": "Akıllı seçim (AI önerir)"
+  "srSmartChoice": "Akıllı seçim (AI önerir)",
+  "budIncome": "Gelir",
+  "budExpense": "Gider",
+  "budBalance": "Bakiye",
+  "budAnalyzing": "Gemini analiz ediyor…",
+  "budMonthlyLimit": "Aylık Limit (€)",
+  "budDelete": "Sil",
+  "budAmount": "Tutar",
+  "budCategory": "Kategori",
+  "budDescOptional": "Açıklama (opsiyonel)",
+  "budAiSuggestion": "AI önerisi: {cat}",
+  "@budAiSuggestion": { "placeholders": { "cat": {} } },
+  "budSuggestCategory": "AI ile kategori öner",
+  "budEnterValidAmount": "Geçerli bir tutar girin"
 }

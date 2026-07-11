@@ -1575,5 +1575,17 @@
   "srOr": "OF",
   "srInterruptibility": "Onderbreekbaarheid: {pct}%",
   "srTone": "Toon",
-  "srSmartChoice": "Slimme keuze (AI stelt voor)"
+  "srSmartChoice": "Slimme keuze (AI stelt voor)",
+  "budIncome": "Inkomsten",
+  "budExpense": "Uitgave",
+  "budBalance": "Saldo",
+  "budAnalyzing": "Gemini analyseert…",
+  "budMonthlyLimit": "Maandlimiet (€)",
+  "budDelete": "Verwijderen",
+  "budAmount": "Bedrag",
+  "budCategory": "Categorie",
+  "budDescOptional": "Omschrijving (optioneel)",
+  "budAiSuggestion": "AI-suggestie: {cat}",
+  "budSuggestCategory": "Categorie voorstellen met AI",
+  "budEnterValidAmount": "Voer een geldig bedrag in"
 }
