@@ -588,6 +588,14 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
               ],
             ),
           ),
+        // Bağımsız FamilyHub AI bölümünü aç.
+        IconButton(
+          onPressed: () => context.push(AppRoutes.familyHubAI),
+          icon: const Icon(Icons.open_in_full_rounded,
+              size: 18, color: Color(0xFF8B5CF6)),
+          tooltip: AppLocalizations.of(context).familyHubAITitle,
+          visualDensity: VisualDensity.compact,
+        ),
       ],
     );
   }
