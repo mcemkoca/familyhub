@@ -87,6 +87,10 @@ class _HubScreenState extends ConsumerState<HubScreen>
     const _Feature(Icons.collections_rounded,      'Galeri',      [Color(0xFFEC4899), Color(0xFFDB2777)], Color(0xFF831843), AppRoutes.gallery, asset: 'assets/icons/tiles/gallery.png'),
     const _Feature(Icons.school_rounded,           'Eğitim',      [Color(0xFF8B5CF6), Color(0xFF7C3AED)], Color(0xFF4C1D95), AppRoutes.education, asset: 'assets/icons/tiles/education.png'),
     const _Feature(Icons.auto_awesome_rounded,     'AI',          [Color(0xFF4776E6), Color(0xFF2D3A8C)], Color(0xFF1E1B4B), AppRoutes.aiAssistant, asset: 'assets/icons/tiles/ai.png'),
+    // Yeni bağımsız modüller — asset yok, gradient+ikon fallback.
+    const _Feature(Icons.gavel_rounded,            'Yasal Haklar', [Color(0xFF10B981), Color(0xFF059669)], Color(0xFF064E3B), AppRoutes.legalBenefits),
+    const _Feature(Icons.auto_awesome_mosaic_rounded, 'Aile Zekası', [Color(0xFF8B5CF6), Color(0xFF6366F1)], Color(0xFF3730A3), AppRoutes.familyIntelligence),
+    const _Feature(Icons.smart_toy_rounded,        'FamilyHub AI', [Color(0xFFEC4899), Color(0xFF8B5CF6)], Color(0xFF831843), AppRoutes.familyHubAI),
   ];
 
   @override

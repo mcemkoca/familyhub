@@ -32,6 +32,9 @@ class _HubCustomizeScreenState extends State<HubCustomizeScreen> {
     (AppRoutes.gallery, 'Galeri', Icons.photo_library_outlined),
     (AppRoutes.education, 'Eğitim', Icons.menu_book_outlined),
     (AppRoutes.aiAssistant, 'AI', Icons.psychology_outlined),
+    (AppRoutes.legalBenefits, 'Yasal Haklar', Icons.gavel_outlined),
+    (AppRoutes.familyIntelligence, 'Aile Zekası', Icons.auto_awesome_mosaic_outlined),
+    (AppRoutes.familyHubAI, 'FamilyHub AI', Icons.smart_toy_outlined),
   ];
 
   @override
