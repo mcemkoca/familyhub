@@ -171,7 +171,8 @@ class LegalBenefitsScreen extends ConsumerWidget {
   Widget _benefitCard(BuildContext context, WidgetRef ref, AppLocalizations t,
       LegalBenefit b, LegalBenefitsRepository repo) {
     final saved = repo.isSaved(b.id);
-    final dateStr = DateFormat.yMMMd().format(b.lastVerifiedAt);
+    final dateStr = DateFormat.yMMMd(Localizations.localeOf(context).toString())
+        .format(b.lastVerifiedAt);
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(14),
