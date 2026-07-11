@@ -5026,4 +5026,43 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get crashTestMode => 'Testmodus';
+
+  @override
+  String get medEnterName => 'Voer de naam van het medicijn in.';
+
+  @override
+  String get medTime => 'Medicijntijd 💊';
+
+  @override
+  String get medNewRecordSub => 'Nieuw medicijnrecord aanmaken';
+
+  @override
+  String get medWhose => 'Van wie?';
+
+  @override
+  String get medName => 'Naam medicijn';
+
+  @override
+  String get medType => 'Type medicijn';
+
+  @override
+  String get medDose => 'Dosis';
+
+  @override
+  String get medFrequency => 'Frequentie';
+
+  @override
+  String get medStart => 'Start';
+
+  @override
+  String get medEndOptional => 'Einde (optioneel)';
+
+  @override
+  String get medReminder => 'Herinnering';
+
+  @override
+  String get medReminderTime => 'Herinneringstijd';
+
+  @override
+  String get medNote => 'Notitie';
 }

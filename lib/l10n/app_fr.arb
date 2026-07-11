@@ -1602,5 +1602,18 @@
   "crashContacts": "Contacts d'urgence",
   "crashNoContacts": "Aucun contact d'urgence. Ajoutez avec +.",
   "crashSettingsSaved": "Parametres enregistres",
-  "crashTestMode": "Mode test"
+  "crashTestMode": "Mode test",
+  "medEnterName": "Veuillez saisir le nom du medicament.",
+  "medTime": "Heure du medicament 💊",
+  "medNewRecordSub": "Creer un nouvel enregistrement de medicament",
+  "medWhose": "Pour qui ?",
+  "medName": "Nom du medicament",
+  "medType": "Type de medicament",
+  "medDose": "Dose",
+  "medFrequency": "Frequence",
+  "medStart": "Debut",
+  "medEndOptional": "Fin (facultatif)",
+  "medReminder": "Rappel",
+  "medReminderTime": "Heure du rappel",
+  "medNote": "Note"
 }

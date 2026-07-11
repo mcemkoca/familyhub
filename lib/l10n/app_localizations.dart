@@ -9575,6 +9575,84 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Test Modu'**
   String get crashTestMode;
+
+  /// No description provided for @medEnterName.
+  ///
+  /// In tr, this message translates to:
+  /// **'Lütfen ilaç adını girin.'**
+  String get medEnterName;
+
+  /// No description provided for @medTime.
+  ///
+  /// In tr, this message translates to:
+  /// **'İlaç Zamanı 💊'**
+  String get medTime;
+
+  /// No description provided for @medNewRecordSub.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yeni ilaç kaydı oluştur'**
+  String get medNewRecordSub;
+
+  /// No description provided for @medWhose.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kime ait?'**
+  String get medWhose;
+
+  /// No description provided for @medName.
+  ///
+  /// In tr, this message translates to:
+  /// **'İlaç Adı'**
+  String get medName;
+
+  /// No description provided for @medType.
+  ///
+  /// In tr, this message translates to:
+  /// **'İlaç Türü'**
+  String get medType;
+
+  /// No description provided for @medDose.
+  ///
+  /// In tr, this message translates to:
+  /// **'Doz'**
+  String get medDose;
+
+  /// No description provided for @medFrequency.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kullanım Sıklığı'**
+  String get medFrequency;
+
+  /// No description provided for @medStart.
+  ///
+  /// In tr, this message translates to:
+  /// **'Başlangıç'**
+  String get medStart;
+
+  /// No description provided for @medEndOptional.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bitiş (opsiyonel)'**
+  String get medEndOptional;
+
+  /// No description provided for @medReminder.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hatırlatma'**
+  String get medReminder;
+
+  /// No description provided for @medReminderTime.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hatırlatma Saati'**
+  String get medReminderTime;
+
+  /// No description provided for @medNote.
+  ///
+  /// In tr, this message translates to:
+  /// **'Not'**
+  String get medNote;
 }
 
 class _AppLocalizationsDelegate

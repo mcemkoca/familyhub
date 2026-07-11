@@ -5025,4 +5025,43 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get crashTestMode => 'Test Mode';
+
+  @override
+  String get medEnterName => 'Please enter the medication name.';
+
+  @override
+  String get medTime => 'Medication Time 💊';
+
+  @override
+  String get medNewRecordSub => 'Create a new medication record';
+
+  @override
+  String get medWhose => 'Whose is it?';
+
+  @override
+  String get medName => 'Medication Name';
+
+  @override
+  String get medType => 'Medication Type';
+
+  @override
+  String get medDose => 'Dose';
+
+  @override
+  String get medFrequency => 'Frequency';
+
+  @override
+  String get medStart => 'Start';
+
+  @override
+  String get medEndOptional => 'End (optional)';
+
+  @override
+  String get medReminder => 'Reminder';
+
+  @override
+  String get medReminderTime => 'Reminder Time';
+
+  @override
+  String get medNote => 'Note';
 }

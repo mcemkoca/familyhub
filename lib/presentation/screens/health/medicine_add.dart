@@ -85,7 +85,7 @@ class _MedicineAddScreenState extends ConsumerState<MedicineAddScreen> {
     final name = _name.text.trim();
     if (name.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Lütfen ilaç adını girin.')),
+        SnackBar(content: Text(AppLocalizations.of(context).medEnterName)),
       );
       return;
     }
@@ -118,6 +118,7 @@ class _MedicineAddScreenState extends ConsumerState<MedicineAddScreen> {
 
   /// İlk uygun tarihte (bugün geçtiyse yarın) günlük hatırlatma kurar.
   Future<bool> _scheduleReminder(int id, String name) async {
+    final medTimeTitle = AppLocalizations.of(context).medTime;
     try {
       await NotificationService.requestPermission();
       final now = DateTime.now();
@@ -127,7 +128,7 @@ class _MedicineAddScreenState extends ConsumerState<MedicineAddScreen> {
       final doseLabel = _dosage.text.trim().isEmpty ? _type : _dosage.text.trim();
       await NotificationService.scheduleNotification(
         id: id % 2147483647,
-        title: 'İlaç Zamanı 💊',
+        title: medTimeTitle,
         body: '$name · $doseLabel zamanı!',
         scheduledDate: when,
         payload: 'medicine_reminder',
@@ -155,7 +156,7 @@ class _MedicineAddScreenState extends ConsumerState<MedicineAddScreen> {
           children: [
             HealthHeader(
               title: AppLocalizations.of(context).ilacEkle,
-              subtitle: 'Yeni ilaç kaydı oluştur',
+              subtitle: AppLocalizations.of(context).medNewRecordSub,
               icon: Icons.medication_rounded,
               gradient: const [Color(0xFF14B8A6), Color(0xFF0D9488)],
               showBack: true,
@@ -165,7 +166,7 @@ class _MedicineAddScreenState extends ConsumerState<MedicineAddScreen> {
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
                 children: [
                   if (members.isNotEmpty) ...[
-                    _label('Kime ait?'),
+                    _label(AppLocalizations.of(context).medWhose),
                     const SizedBox(height: 8),
                     Wrap(
                       spacing: 8,
@@ -199,19 +200,19 @@ class _MedicineAddScreenState extends ConsumerState<MedicineAddScreen> {
                     ),
                     const SizedBox(height: 18),
                   ],
-                  _label('İlaç Adı'),
+                  _label(AppLocalizations.of(context).medName),
                   const SizedBox(height: 8),
                   _field(_name, 'Örn: Parol 500 mg'),
                   const SizedBox(height: 18),
-                  _label('İlaç Türü'),
+                  _label(AppLocalizations.of(context).medType),
                   const SizedBox(height: 8),
                   _dropdown(_type, _types, (v) => setState(() => _type = v!)),
                   const SizedBox(height: 18),
-                  _label('Doz'),
+                  _label(AppLocalizations.of(context).medDose),
                   const SizedBox(height: 8),
                   _field(_dosage, 'Örn: 1 tablet'),
                   const SizedBox(height: 18),
-                  _label('Kullanım Sıklığı'),
+                  _label(AppLocalizations.of(context).medFrequency),
                   const SizedBox(height: 8),
                   _dropdown(_frequency, _frequencies,
                       (v) => setState(() => _frequency = v!)),
@@ -222,7 +223,7 @@ class _MedicineAddScreenState extends ConsumerState<MedicineAddScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _label('Başlangıç'),
+                            _label(AppLocalizations.of(context).medStart),
                             const SizedBox(height: 8),
                             _dateBtn(_fmt(_start), () => _pickDate(true)),
                           ],
@@ -233,7 +234,7 @@ class _MedicineAddScreenState extends ConsumerState<MedicineAddScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _label('Bitiş (opsiyonel)'),
+                            _label(AppLocalizations.of(context).medEndOptional),
                             const SizedBox(height: 8),
                             _dateBtn(_end == null ? 'Seç' : _fmt(_end!),
                                 () => _pickDate(false)),
@@ -256,9 +257,9 @@ class _MedicineAddScreenState extends ConsumerState<MedicineAddScreen> {
                         const Icon(Icons.notifications_active_rounded,
                             color: Color(0xFF14B8A6), size: 20),
                         const SizedBox(width: 12),
-                        const Expanded(
-                          child: Text('Hatırlatma',
-                              style: TextStyle(
+                        Expanded(
+                          child: Text(AppLocalizations.of(context).medReminder,
+                              style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600)),
@@ -305,9 +306,9 @@ class _MedicineAddScreenState extends ConsumerState<MedicineAddScreen> {
                             const Icon(Icons.schedule_rounded,
                                 color: Color(0xFF14B8A6), size: 20),
                             const SizedBox(width: 12),
-                            const Expanded(
-                              child: Text('Hatırlatma Saati',
-                                  style: TextStyle(
+                            Expanded(
+                              child: Text(AppLocalizations.of(context).medReminderTime,
+                                  style: const TextStyle(
                                       color: Colors.white, fontSize: 15)),
                             ),
                             Text(_fmtTime(_reminderTime),
@@ -321,7 +322,7 @@ class _MedicineAddScreenState extends ConsumerState<MedicineAddScreen> {
                     ),
                   ],
                   const SizedBox(height: 18),
-                  _label('Not'),
+                  _label(AppLocalizations.of(context).medNote),
                   const SizedBox(height: 8),
                   _field(_notes, 'Yemekten sonra al...', maxLines: 3),
                   const SizedBox(height: 26),
@@ -335,8 +336,8 @@ class _MedicineAddScreenState extends ConsumerState<MedicineAddScreen> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16)),
                       ),
-                      child: const Text('Kaydet',
-                          style: TextStyle(
+                      child: Text(AppLocalizations.of(context).save,
+                          style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.w800)),

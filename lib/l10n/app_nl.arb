@@ -1602,5 +1602,18 @@
   "crashContacts": "Noodcontacten",
   "crashNoContacts": "Nog geen noodcontacten. Voeg toe met +.",
   "crashSettingsSaved": "Instellingen opgeslagen",
-  "crashTestMode": "Testmodus"
+  "crashTestMode": "Testmodus",
+  "medEnterName": "Voer de naam van het medicijn in.",
+  "medTime": "Medicijntijd 💊",
+  "medNewRecordSub": "Nieuw medicijnrecord aanmaken",
+  "medWhose": "Van wie?",
+  "medName": "Naam medicijn",
+  "medType": "Type medicijn",
+  "medDose": "Dosis",
+  "medFrequency": "Frequentie",
+  "medStart": "Start",
+  "medEndOptional": "Einde (optioneel)",
+  "medReminder": "Herinnering",
+  "medReminderTime": "Herinneringstijd",
+  "medNote": "Notitie"
 }

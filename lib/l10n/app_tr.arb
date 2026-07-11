@@ -1617,5 +1617,18 @@
   "crashContacts": "Acil Kişiler",
   "crashNoContacts": "Henüz acil kişi yok. + ile ekleyin.",
   "crashSettingsSaved": "Ayarlar kaydedildi",
-  "crashTestMode": "Test Modu"
+  "crashTestMode": "Test Modu",
+  "medEnterName": "Lütfen ilaç adını girin.",
+  "medTime": "İlaç Zamanı 💊",
+  "medNewRecordSub": "Yeni ilaç kaydı oluştur",
+  "medWhose": "Kime ait?",
+  "medName": "İlaç Adı",
+  "medType": "İlaç Türü",
+  "medDose": "Doz",
+  "medFrequency": "Kullanım Sıklığı",
+  "medStart": "Başlangıç",
+  "medEndOptional": "Bitiş (opsiyonel)",
+  "medReminder": "Hatırlatma",
+  "medReminderTime": "Hatırlatma Saati",
+  "medNote": "Not"
 }

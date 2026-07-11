@@ -5045,4 +5045,43 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get crashTestMode => 'Test Modu';
+
+  @override
+  String get medEnterName => 'Lütfen ilaç adını girin.';
+
+  @override
+  String get medTime => 'İlaç Zamanı 💊';
+
+  @override
+  String get medNewRecordSub => 'Yeni ilaç kaydı oluştur';
+
+  @override
+  String get medWhose => 'Kime ait?';
+
+  @override
+  String get medName => 'İlaç Adı';
+
+  @override
+  String get medType => 'İlaç Türü';
+
+  @override
+  String get medDose => 'Doz';
+
+  @override
+  String get medFrequency => 'Kullanım Sıklığı';
+
+  @override
+  String get medStart => 'Başlangıç';
+
+  @override
+  String get medEndOptional => 'Bitiş (opsiyonel)';
+
+  @override
+  String get medReminder => 'Hatırlatma';
+
+  @override
+  String get medReminderTime => 'Hatırlatma Saati';
+
+  @override
+  String get medNote => 'Not';
 }
