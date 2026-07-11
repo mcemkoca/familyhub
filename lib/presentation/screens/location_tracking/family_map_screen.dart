@@ -320,8 +320,8 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Aile Haritası',
-                    style: TextStyle(
+                Text(AppLocalizations.of(context).fmTitle,
+                    style: const TextStyle(
                       fontWeight: FontWeight.w900,
                       fontSize: 20,
                       color: Colors.white,
@@ -595,8 +595,8 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
                               fontSize: 22,
                               fontWeight: FontWeight.w800,
                               color: m.color)),
-                      const Text('km/h',
-                          style: TextStyle(
+                      Text(AppLocalizations.of(context).fmKmh,
+                          style: const TextStyle(
                               fontSize: 10, color: Color(0xFF6B7280))),
                     ],
                   ),
@@ -632,7 +632,7 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
                           builder: (_) => const CallContactListScreen()),
                     ),
                     icon: const Icon(Icons.call, size: 16),
-                    label: const Text('Ara'),
+                    label: Text(AppLocalizations.of(context).fmCall),
                     style: OutlinedButton.styleFrom(
                         foregroundColor: m.color,
                         side: BorderSide(color: m.color)),
@@ -643,7 +643,7 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
                   child: OutlinedButton.icon(
                     onPressed: () => context.push(AppRoutes.chat),
                     icon: const Icon(Icons.message, size: 16),
-                    label: const Text('Mesaj'),
+                    label: Text(AppLocalizations.of(context).fmMessage),
                     style: OutlinedButton.styleFrom(
                         foregroundColor: m.color,
                         side: BorderSide(color: m.color)),
@@ -654,7 +654,7 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
                   child: OutlinedButton.icon(
                     onPressed: () => _openDirectionsTo(m),
                     icon: const Icon(Icons.navigation, size: 16),
-                    label: const Text('Yol'),
+                    label: Text(AppLocalizations.of(context).fmRoute),
                     style: OutlinedButton.styleFrom(
                         foregroundColor: m.color,
                         side: BorderSide(color: m.color)),
@@ -685,7 +685,7 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
               TextButton.icon(
                 onPressed: () => context.push(AppRoutes.safeZones),
                 icon: const Icon(Icons.add, size: 14),
-                label: const Text('Ekle', style: TextStyle(fontSize: 12)),
+                label: Text(AppLocalizations.of(context).crashAdd, style: const TextStyle(fontSize: 12)),
                 style: TextButton.styleFrom(
                     foregroundColor: const Color(0xFF10B981)),
               ),
@@ -762,8 +762,8 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Bugünkü Aktiviteler',
-              style: TextStyle(
+          Text(AppLocalizations.of(context).fmTodayActivities,
+              style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w700,
                   color: Color(0xFFE5E7EB))),
@@ -776,8 +776,8 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
                 color: const Color(0x1AFFFFFF),
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: const Text('Bugün için konum aktivitesi yok.',
-                  style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13.5)),
+              child: Text(AppLocalizations.of(context).fmNoActivity,
+                  style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13.5)),
             )
           else
           Container(

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import '../../../config/constants.dart';
 import '../../../domain/models/safety_models.dart';
@@ -212,7 +213,7 @@ class _MemberCard extends StatelessWidget {
                       if (member.eta != null)
                         _buildChip(
                           icon: Icons.timer,
-                          label: 'ETA: ${member.eta}',
+                          label: AppLocalizations.of(context).fssEta(member.eta ?? ''),
                           color: const Color(0xFF6366F1),
                         ),
                     ],
@@ -365,7 +366,7 @@ class _MemberCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 // Stats grid
-                _buildStatsGrid(member, isDark),
+                _buildStatsGrid(context, member, isDark),
                 const SizedBox(height: 24),
                 // Safe zones
                 if (member.safeZones.isNotEmpty) ...[
@@ -455,7 +456,7 @@ class _MemberCard extends StatelessWidget {
                           );
                         },
                         icon: const Icon(Icons.call, size: 18),
-                        label: const Text('Ara'),
+                        label: Text(AppLocalizations.of(context).fmCall),
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -472,7 +473,7 @@ class _MemberCard extends StatelessWidget {
                           );
                         },
                         icon: const Icon(Icons.location_on, size: 18),
-                        label: const Text('Harita'),
+                        label: Text(AppLocalizations.of(context).fssMap),
                       ),
                     ),
                   ],
@@ -493,7 +494,7 @@ class _MemberCard extends StatelessWidget {
                         );
                       },
                       icon: const Icon(Icons.notifications_active, size: 18),
-                      label: const Text('Hatırlatıcı Gönder'),
+                      label: Text(AppLocalizations.of(context).fssSendReminder),
                     ),
                   ),
                 const SizedBox(height: 20),
@@ -505,27 +506,27 @@ class _MemberCard extends StatelessWidget {
     );
   }
 
-  Widget _buildStatsGrid(MemberSafetyStatus member, bool isDark) {
+  Widget _buildStatsGrid(BuildContext context, MemberSafetyStatus member, bool isDark) {
     final stats = <_StatItem>[];
 
     if (member.lastLocation != null) {
       stats.add(_StatItem(
         icon: Icons.speed,
-        label: 'Hız',
+        label: AppLocalizations.of(context).fssSpeed,
         value: '${member.lastLocation!.speedKmh.toStringAsFixed(0)} km/h',
       ));
     }
 
     stats.add(_StatItem(
       icon: Icons.battery_full,
-      label: 'Batarya',
+      label: AppLocalizations.of(context).fssBattery,
       value: '%${member.batteryPercent}',
       valueColor: member.batteryPercent < 20 ? const Color(0xFFF59E0B) : null,
     ));
 
     stats.add(_StatItem(
       icon: Icons.signal_cellular_alt,
-      label: 'Sinyal',
+      label: AppLocalizations.of(context).fssSignal,
       value: member.signalStrength,
       valueColor: member.signalStrength == 'Zayıf' ? const Color(0xFFF59E0B) : null,
     ));
@@ -533,7 +534,7 @@ class _MemberCard extends StatelessWidget {
     if (member.currentPlace != null) {
       stats.add(_StatItem(
         icon: Icons.place,
-        label: 'Konum',
+        label: AppLocalizations.of(context).chatLocation,
         value: member.currentPlace!,
       ));
     }

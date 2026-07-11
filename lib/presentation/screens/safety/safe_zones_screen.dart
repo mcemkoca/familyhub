@@ -79,15 +79,15 @@ class _SafeZonesScreenState extends State<SafeZonesScreen> {
                         fontSize: 18,
                         fontWeight: FontWeight.w800)),
                 const SizedBox(height: 4),
-                const Text('Şu anki konumun merkez alınır.',
-                    style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
+                Text(AppLocalizations.of(context).szCenterCurrent,
+                    style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
                 const SizedBox(height: 16),
                 TextField(
                   controller: nameCtrl,
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    labelText: 'Bölge adı',
-                    hintText: 'Örn: Ev, Okul, İş',
+                    labelText: AppLocalizations.of(context).szZoneName,
+                    hintText: AppLocalizations.of(context).szZoneNameHint,
                     labelStyle: const TextStyle(color: Color(0xFF9CA3AF)),
                     hintStyle: const TextStyle(color: Color(0xFF6B7280)),
                     filled: true,
@@ -144,7 +144,7 @@ class _SafeZonesScreenState extends State<SafeZonesScreen> {
                   }).toList(),
                 ),
                 const SizedBox(height: 14),
-                Text('Yarıçap: ${radius.round()} m',
+                Text(AppLocalizations.of(context).szRadius(radius.round()),
                     style: const TextStyle(color: Color(0xFFD1D5DB))),
                 Slider(
                   value: radius,
@@ -161,7 +161,7 @@ class _SafeZonesScreenState extends State<SafeZonesScreen> {
                     onPressed: () {
                       if (nameCtrl.text.trim().isEmpty) {
                         ScaffoldMessenger.of(ctx).showSnackBar(
-                          const SnackBar(content: Text('Lütfen bölge adı girin')),
+                          SnackBar(content: Text(AppLocalizations.of(context).szEnterName)),
                         );
                         return;
                       }
@@ -172,8 +172,8 @@ class _SafeZonesScreenState extends State<SafeZonesScreen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(14)),
                     ),
-                    child: const Text('Kaydet',
-                        style: TextStyle(
+                    child: Text(AppLocalizations.of(context).save,
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                             fontWeight: FontWeight.w700)),
@@ -188,10 +188,10 @@ class _SafeZonesScreenState extends State<SafeZonesScreen> {
 
     if (saved != true || !mounted) return;
     final messenger = ScaffoldMessenger.of(context);
+    final noLocationMsg = AppLocalizations.of(context).szNoLocation;
     final pos = await LocationService.getCurrentPosition();
     if (pos == null) {
-      messenger.showSnackBar(const SnackBar(
-          content: Text('Konum alınamadı. GPS açık olmalı.')));
+      messenger.showSnackBar(SnackBar(content: Text(noLocationMsg)));
       return;
     }
     await SafeZoneService.addZone(SafeZone(
@@ -325,11 +325,11 @@ class _SafeZonesScreenState extends State<SafeZonesScreen> {
                         children: [
                           Icon(Icons.radar, size: 14, color: color),
                           const SizedBox(width: 6),
-                          Text('Çap: ${zone.radiusMeters.toInt()}m'),
+                          Text(AppLocalizations.of(context).szDiameter(zone.radiusMeters.toInt())),
                           const SizedBox(width: 16),
                           Icon(Icons.social_distance, size: 14, color: color),
                           const SizedBox(width: 6),
-                          Text('Mesafe: ${distance < 1000 ? '${distance.round()}m' : '${(distance / 1000).toStringAsFixed(1)}km'}'),
+                          Text(AppLocalizations.of(context).szDistance(distance < 1000 ? '${distance.round()}m' : '${(distance / 1000).toStringAsFixed(1)}km')),
                         ],
                       ),
                     ],

@@ -5316,4 +5316,76 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get conSearchHint => 'Zoeken...';
+
+  @override
+  String get fmTitle => 'Gezinskaart';
+
+  @override
+  String get fmKmh => 'km/u';
+
+  @override
+  String get fmCall => 'Bellen';
+
+  @override
+  String get fmMessage => 'Bericht';
+
+  @override
+  String get fmRoute => 'Route';
+
+  @override
+  String get fmTodayActivities => 'Activiteiten van vandaag';
+
+  @override
+  String get fmNoActivity => 'Geen locatieactiviteit voor vandaag.';
+
+  @override
+  String get szCenterCurrent =>
+      'Je huidige locatie wordt als middelpunt gebruikt.';
+
+  @override
+  String get szZoneName => 'Zonenaam';
+
+  @override
+  String get szZoneNameHint => 'bijv. Thuis, School, Werk';
+
+  @override
+  String szRadius(Object m) {
+    return 'Straal: $m m';
+  }
+
+  @override
+  String get szEnterName => 'Voer een zonenaam in';
+
+  @override
+  String get szNoLocation => 'Locatie niet beschikbaar. GPS moet aan staan.';
+
+  @override
+  String szDiameter(Object m) {
+    return 'Diameter: ${m}m';
+  }
+
+  @override
+  String szDistance(Object d) {
+    return 'Afstand: $d';
+  }
+
+  @override
+  String fssEta(Object eta) {
+    return 'ETA: $eta';
+  }
+
+  @override
+  String get fssMap => 'Kaart';
+
+  @override
+  String get fssSendReminder => 'Herinnering sturen';
+
+  @override
+  String get fssSpeed => 'Snelheid';
+
+  @override
+  String get fssBattery => 'Batterij';
+
+  @override
+  String get fssSignal => 'Signaal';
 }

@@ -5335,4 +5335,76 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get conSearchHint => 'Rechercher...';
+
+  @override
+  String get fmTitle => 'Carte de la famille';
+
+  @override
+  String get fmKmh => 'km/h';
+
+  @override
+  String get fmCall => 'Appeler';
+
+  @override
+  String get fmMessage => 'Message';
+
+  @override
+  String get fmRoute => 'Itineraire';
+
+  @override
+  String get fmTodayActivities => 'Activites du jour';
+
+  @override
+  String get fmNoActivity => 'Aucune activite de localisation aujourd\'hui.';
+
+  @override
+  String get szCenterCurrent =>
+      'Votre position actuelle est utilisee comme centre.';
+
+  @override
+  String get szZoneName => 'Nom de la zone';
+
+  @override
+  String get szZoneNameHint => 'ex. Maison, Ecole, Travail';
+
+  @override
+  String szRadius(Object m) {
+    return 'Rayon : $m m';
+  }
+
+  @override
+  String get szEnterName => 'Veuillez saisir un nom de zone';
+
+  @override
+  String get szNoLocation => 'Position indisponible. Le GPS doit etre active.';
+
+  @override
+  String szDiameter(Object m) {
+    return 'Diametre : ${m}m';
+  }
+
+  @override
+  String szDistance(Object d) {
+    return 'Distance : $d';
+  }
+
+  @override
+  String fssEta(Object eta) {
+    return 'ETA : $eta';
+  }
+
+  @override
+  String get fssMap => 'Carte';
+
+  @override
+  String get fssSendReminder => 'Envoyer un rappel';
+
+  @override
+  String get fssSpeed => 'Vitesse';
+
+  @override
+  String get fssBattery => 'Batterie';
+
+  @override
+  String get fssSignal => 'Signal';
 }

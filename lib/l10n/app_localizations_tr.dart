@@ -5333,4 +5333,75 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get conSearchHint => 'Ara...';
+
+  @override
+  String get fmTitle => 'Aile Haritası';
+
+  @override
+  String get fmKmh => 'km/h';
+
+  @override
+  String get fmCall => 'Ara';
+
+  @override
+  String get fmMessage => 'Mesaj';
+
+  @override
+  String get fmRoute => 'Yol';
+
+  @override
+  String get fmTodayActivities => 'Bugünkü Aktiviteler';
+
+  @override
+  String get fmNoActivity => 'Bugün için konum aktivitesi yok.';
+
+  @override
+  String get szCenterCurrent => 'Şu anki konumun merkez alınır.';
+
+  @override
+  String get szZoneName => 'Bölge adı';
+
+  @override
+  String get szZoneNameHint => 'Örn: Ev, Okul, İş';
+
+  @override
+  String szRadius(Object m) {
+    return 'Yarıçap: $m m';
+  }
+
+  @override
+  String get szEnterName => 'Lütfen bölge adı girin';
+
+  @override
+  String get szNoLocation => 'Konum alınamadı. GPS açık olmalı.';
+
+  @override
+  String szDiameter(Object m) {
+    return 'Çap: ${m}m';
+  }
+
+  @override
+  String szDistance(Object d) {
+    return 'Mesafe: $d';
+  }
+
+  @override
+  String fssEta(Object eta) {
+    return 'ETA: $eta';
+  }
+
+  @override
+  String get fssMap => 'Harita';
+
+  @override
+  String get fssSendReminder => 'Hatırlatıcı Gönder';
+
+  @override
+  String get fssSpeed => 'Hız';
+
+  @override
+  String get fssBattery => 'Batarya';
+
+  @override
+  String get fssSignal => 'Sinyal';
 }

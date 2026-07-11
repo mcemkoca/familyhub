@@ -10109,6 +10109,132 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Ara...'**
   String get conSearchHint;
+
+  /// No description provided for @fmTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile Haritası'**
+  String get fmTitle;
+
+  /// No description provided for @fmKmh.
+  ///
+  /// In tr, this message translates to:
+  /// **'km/h'**
+  String get fmKmh;
+
+  /// No description provided for @fmCall.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ara'**
+  String get fmCall;
+
+  /// No description provided for @fmMessage.
+  ///
+  /// In tr, this message translates to:
+  /// **'Mesaj'**
+  String get fmMessage;
+
+  /// No description provided for @fmRoute.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yol'**
+  String get fmRoute;
+
+  /// No description provided for @fmTodayActivities.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugünkü Aktiviteler'**
+  String get fmTodayActivities;
+
+  /// No description provided for @fmNoActivity.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugün için konum aktivitesi yok.'**
+  String get fmNoActivity;
+
+  /// No description provided for @szCenterCurrent.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şu anki konumun merkez alınır.'**
+  String get szCenterCurrent;
+
+  /// No description provided for @szZoneName.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bölge adı'**
+  String get szZoneName;
+
+  /// No description provided for @szZoneNameHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Örn: Ev, Okul, İş'**
+  String get szZoneNameHint;
+
+  /// No description provided for @szRadius.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yarıçap: {m} m'**
+  String szRadius(Object m);
+
+  /// No description provided for @szEnterName.
+  ///
+  /// In tr, this message translates to:
+  /// **'Lütfen bölge adı girin'**
+  String get szEnterName;
+
+  /// No description provided for @szNoLocation.
+  ///
+  /// In tr, this message translates to:
+  /// **'Konum alınamadı. GPS açık olmalı.'**
+  String get szNoLocation;
+
+  /// No description provided for @szDiameter.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çap: {m}m'**
+  String szDiameter(Object m);
+
+  /// No description provided for @szDistance.
+  ///
+  /// In tr, this message translates to:
+  /// **'Mesafe: {d}'**
+  String szDistance(Object d);
+
+  /// No description provided for @fssEta.
+  ///
+  /// In tr, this message translates to:
+  /// **'ETA: {eta}'**
+  String fssEta(Object eta);
+
+  /// No description provided for @fssMap.
+  ///
+  /// In tr, this message translates to:
+  /// **'Harita'**
+  String get fssMap;
+
+  /// No description provided for @fssSendReminder.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hatırlatıcı Gönder'**
+  String get fssSendReminder;
+
+  /// No description provided for @fssSpeed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hız'**
+  String get fssSpeed;
+
+  /// No description provided for @fssBattery.
+  ///
+  /// In tr, this message translates to:
+  /// **'Batarya'**
+  String get fssBattery;
+
+  /// No description provided for @fssSignal.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sinyal'**
+  String get fssSignal;
 }
 
 class _AppLocalizationsDelegate

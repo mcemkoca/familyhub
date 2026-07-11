@@ -5313,4 +5313,75 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get conSearchHint => 'Search...';
+
+  @override
+  String get fmTitle => 'Family Map';
+
+  @override
+  String get fmKmh => 'km/h';
+
+  @override
+  String get fmCall => 'Call';
+
+  @override
+  String get fmMessage => 'Message';
+
+  @override
+  String get fmRoute => 'Route';
+
+  @override
+  String get fmTodayActivities => 'Today\'s Activities';
+
+  @override
+  String get fmNoActivity => 'No location activity for today.';
+
+  @override
+  String get szCenterCurrent => 'Your current location is used as the center.';
+
+  @override
+  String get szZoneName => 'Zone name';
+
+  @override
+  String get szZoneNameHint => 'e.g. Home, School, Work';
+
+  @override
+  String szRadius(Object m) {
+    return 'Radius: $m m';
+  }
+
+  @override
+  String get szEnterName => 'Please enter a zone name';
+
+  @override
+  String get szNoLocation => 'Location unavailable. GPS must be on.';
+
+  @override
+  String szDiameter(Object m) {
+    return 'Diameter: ${m}m';
+  }
+
+  @override
+  String szDistance(Object d) {
+    return 'Distance: $d';
+  }
+
+  @override
+  String fssEta(Object eta) {
+    return 'ETA: $eta';
+  }
+
+  @override
+  String get fssMap => 'Map';
+
+  @override
+  String get fssSendReminder => 'Send Reminder';
+
+  @override
+  String get fssSpeed => 'Speed';
+
+  @override
+  String get fssBattery => 'Battery';
+
+  @override
+  String get fssSignal => 'Signal';
 }
