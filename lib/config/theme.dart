@@ -149,14 +149,16 @@ class AppTheme {
       useMaterial3: true,
       brightness: Brightness.dark,
       scaffoldBackgroundColor: const Color(0xFF0A0A0F),
-      colorScheme: const ColorScheme.dark(
-        primary: Color(0xFF6366F1),
-        secondary: Color(0xFFEC4899),
-        surface: Color(0xFF13131A),
+      // Accent seçimi colorScheme.primary'ye yansır (önceden sabit indigo idi →
+      // accent yalnızca bazı bileşenlerde çalışıyordu). Kök neden düzeltmesi.
+      colorScheme: ColorScheme.dark(
+        primary: accentColor,
+        secondary: const Color(0xFFEC4899),
+        surface: const Color(0xFF13131A),
         error: AppColors.error,
         onPrimary: Colors.white,
         onSecondary: Colors.white,
-        onSurface: Color(0xFFE5E7EB),
+        onSurface: const Color(0xFFE5E7EB),
       ),
       textTheme: _textTheme(Brightness.dark),
       cardTheme: CardThemeData(
@@ -167,10 +169,10 @@ class AppTheme {
           side: const BorderSide(color: Color(0x1AFFFFFF), width: 0.5),
         ),
       ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: Color(0xFF13131A),
-        selectedItemColor: Color(0xFF6366F1),
-        unselectedItemColor: Color(0xFF6B7280),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: const Color(0xFF13131A),
+        selectedItemColor: accentColor,
+        unselectedItemColor: const Color(0xFF6B7280),
         type: BottomNavigationBarType.fixed,
         elevation: 8,
       ),
