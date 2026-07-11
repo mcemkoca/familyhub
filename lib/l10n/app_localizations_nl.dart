@@ -3046,6 +3046,35 @@ class AppLocalizationsNl extends AppLocalizations {
   String get legalRegionOther => 'Overig';
 
   @override
+  String get legalRemind => 'Herinner';
+
+  @override
+  String get legalReminderSet => 'Herinnering ingesteld';
+
+  @override
+  String get legalReminderRemoved => 'Herinnering verwijderd';
+
+  @override
+  String get legalReminderTitle => 'Wanneer wil je een herinnering?';
+
+  @override
+  String get legalRemindIn1Day => 'Over 1 dag';
+
+  @override
+  String get legalRemindIn7Days => 'Over 7 dagen';
+
+  @override
+  String get legalRemindIn30Days => 'Over 30 dagen';
+
+  @override
+  String get legalReminderNotifTitle => 'Herinnering rechten';
+
+  @override
+  String legalReminderNotifBody(Object title) {
+    return '$title — controleer de actuele info bij de officiële bron.';
+  }
+
+  @override
   String get familyIntelligenceTitle => 'Gezinsintelligentie';
 
   @override

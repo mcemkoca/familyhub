@@ -3063,6 +3063,35 @@ class AppLocalizationsTr extends AppLocalizations {
   String get legalRegionOther => 'Diğer';
 
   @override
+  String get legalRemind => 'Hatırlat';
+
+  @override
+  String get legalReminderSet => 'Hatırlatma kuruldu';
+
+  @override
+  String get legalReminderRemoved => 'Hatırlatma kaldırıldı';
+
+  @override
+  String get legalReminderTitle => 'Ne zaman hatırlatılsın?';
+
+  @override
+  String get legalRemindIn1Day => '1 gün sonra';
+
+  @override
+  String get legalRemindIn7Days => '7 gün sonra';
+
+  @override
+  String get legalRemindIn30Days => '30 gün sonra';
+
+  @override
+  String get legalReminderNotifTitle => 'Yasal hak hatırlatması';
+
+  @override
+  String legalReminderNotifBody(Object title) {
+    return '$title — resmî kaynaktan güncel bilgileri kontrol et.';
+  }
+
+  @override
   String get familyIntelligenceTitle => 'Aile Zekası';
 
   @override

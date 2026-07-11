@@ -3046,6 +3046,35 @@ class AppLocalizationsEn extends AppLocalizations {
   String get legalRegionOther => 'Other';
 
   @override
+  String get legalRemind => 'Remind';
+
+  @override
+  String get legalReminderSet => 'Reminder set';
+
+  @override
+  String get legalReminderRemoved => 'Reminder removed';
+
+  @override
+  String get legalReminderTitle => 'When should we remind you?';
+
+  @override
+  String get legalRemindIn1Day => 'In 1 day';
+
+  @override
+  String get legalRemindIn7Days => 'In 7 days';
+
+  @override
+  String get legalRemindIn30Days => 'In 30 days';
+
+  @override
+  String get legalReminderNotifTitle => 'Legal benefit reminder';
+
+  @override
+  String legalReminderNotifBody(Object title) {
+    return '$title — check the latest info from the official source.';
+  }
+
+  @override
   String get familyIntelligenceTitle => 'Family Intelligence';
 
   @override

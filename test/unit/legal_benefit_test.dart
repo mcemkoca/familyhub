@@ -1,7 +1,22 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:familyhub/features/legal_benefits/domain/legal_benefit.dart';
+import 'package:familyhub/features/legal_benefits/data/legal_reminder_service.dart';
 
 void main() {
+  group('LegalReminderService — bildirim id', () {
+    test('aynı benefit id → aynı stabil 31-bit bildirim id', () {
+      final a = LegalReminderService.notificationId('be_groeipakket');
+      final b = LegalReminderService.notificationId('be_groeipakket');
+      expect(a, b);
+      expect(a >= 0, true); // negatif olmamalı (31-bit)
+    });
+
+    test('farklı benefit id → farklı bildirim id', () {
+      expect(LegalReminderService.notificationId('a'),
+          isNot(LegalReminderService.notificationId('b')));
+    });
+  });
+
   group('LegalCategory / LegalRegion stable key', () {
     test('kategori adı stable key olarak korunur', () {
       expect(LegalCategory.childBenefits.name, 'childBenefits');

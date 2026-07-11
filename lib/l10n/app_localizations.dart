@@ -5912,6 +5912,60 @@ abstract class AppLocalizations {
   /// **'Diğer'**
   String get legalRegionOther;
 
+  /// No description provided for @legalRemind.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hatırlat'**
+  String get legalRemind;
+
+  /// No description provided for @legalReminderSet.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hatırlatma kuruldu'**
+  String get legalReminderSet;
+
+  /// No description provided for @legalReminderRemoved.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hatırlatma kaldırıldı'**
+  String get legalReminderRemoved;
+
+  /// No description provided for @legalReminderTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ne zaman hatırlatılsın?'**
+  String get legalReminderTitle;
+
+  /// No description provided for @legalRemindIn1Day.
+  ///
+  /// In tr, this message translates to:
+  /// **'1 gün sonra'**
+  String get legalRemindIn1Day;
+
+  /// No description provided for @legalRemindIn7Days.
+  ///
+  /// In tr, this message translates to:
+  /// **'7 gün sonra'**
+  String get legalRemindIn7Days;
+
+  /// No description provided for @legalRemindIn30Days.
+  ///
+  /// In tr, this message translates to:
+  /// **'30 gün sonra'**
+  String get legalRemindIn30Days;
+
+  /// No description provided for @legalReminderNotifTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yasal hak hatırlatması'**
+  String get legalReminderNotifTitle;
+
+  /// No description provided for @legalReminderNotifBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'{title} — resmî kaynaktan güncel bilgileri kontrol et.'**
+  String legalReminderNotifBody(Object title);
+
   /// No description provided for @familyIntelligenceTitle.
   ///
   /// In tr, this message translates to:

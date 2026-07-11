@@ -3057,6 +3057,35 @@ class AppLocalizationsFr extends AppLocalizations {
   String get legalRegionOther => 'Autre';
 
   @override
+  String get legalRemind => 'Rappeler';
+
+  @override
+  String get legalReminderSet => 'Rappel programmé';
+
+  @override
+  String get legalReminderRemoved => 'Rappel supprimé';
+
+  @override
+  String get legalReminderTitle => 'Quand vous rappeler ?';
+
+  @override
+  String get legalRemindIn1Day => 'Dans 1 jour';
+
+  @override
+  String get legalRemindIn7Days => 'Dans 7 jours';
+
+  @override
+  String get legalRemindIn30Days => 'Dans 30 jours';
+
+  @override
+  String get legalReminderNotifTitle => 'Rappel de droits';
+
+  @override
+  String legalReminderNotifBody(Object title) {
+    return '$title — vérifiez les informations à jour à la source officielle.';
+  }
+
+  @override
   String get familyIntelligenceTitle => 'Intelligence familiale';
 
   @override

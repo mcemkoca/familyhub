@@ -8,6 +8,7 @@ import '../../../presentation/providers/app_providers.dart';
 import '../../../presentation/widgets/settings/screen_header.dart';
 import '../application/legal_benefits_providers.dart';
 import '../data/legal_benefits_repository.dart';
+import '../data/legal_reminder_service.dart';
 import '../domain/legal_benefit.dart';
 
 /// Yasal Haklar ve Avantajlar — bağımsız bölüm ekranı.
@@ -197,6 +198,23 @@ class LegalBenefitsScreen extends ConsumerWidget {
               ),
               Semantics(
                 button: true,
+                label: t.legalRemind,
+                child: IconButton(
+                  onPressed: () => _reminderSheet(context, ref, t, b),
+                  icon: Icon(
+                      LegalReminderService.instance.hasReminder(b.id)
+                          ? Icons.notifications_active
+                          : Icons.notifications_none,
+                      color: LegalReminderService.instance.hasReminder(b.id)
+                          ? const Color(0xFFF59E0B)
+                          : const Color(0xFF9CA3AF),
+                      size: 22),
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+                ),
+              ),
+              Semantics(
+                button: true,
                 label: saved ? t.legalSaved : t.legalSave,
                 child: IconButton(
                   onPressed: () async {
@@ -315,6 +333,77 @@ class LegalBenefitsScreen extends ConsumerWidget {
           ),
         ),
       );
+
+  /// Hatırlatma bottom-sheet'i: hatırlatma varsa kaldır, yoksa süre seç.
+  Future<void> _reminderSheet(BuildContext context, WidgetRef ref,
+      AppLocalizations t, LegalBenefit b) async {
+    final svc = LegalReminderService.instance;
+    final messenger = ScaffoldMessenger.of(context);
+
+    if (svc.hasReminder(b.id)) {
+      await svc.cancel(b.id);
+      ref.read(legalSavedTickProvider.notifier).state++;
+      messenger.showSnackBar(SnackBar(
+          content: Text(t.legalReminderRemoved),
+          behavior: SnackBarBehavior.floating));
+      return;
+    }
+
+    final notifTitle = t.legalReminderNotifTitle;
+    final notifBody = t.legalReminderNotifBody(b.title);
+
+    await showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: const Color(0xFF13131A),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (ctx) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+              child: Row(children: [
+                const Icon(Icons.notifications_active,
+                    color: Color(0xFFF59E0B), size: 20),
+                const SizedBox(width: 10),
+                Text(t.legalReminderTitle,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700)),
+              ]),
+            ),
+            for (final opt in [
+              (1, t.legalRemindIn1Day),
+              (7, t.legalRemindIn7Days),
+              (30, t.legalRemindIn30Days),
+            ])
+              ListTile(
+                leading: const Icon(Icons.schedule, color: Color(0xFF9CA3AF)),
+                title: Text(opt.$2,
+                    style: const TextStyle(color: Color(0xFFE5E7EB))),
+                onTap: () async {
+                  Navigator.pop(ctx);
+                  final ok = await svc.schedule(
+                    benefitId: b.id,
+                    days: opt.$1,
+                    title: notifTitle,
+                    body: notifBody,
+                  );
+                  if (!ok) return;
+                  ref.read(legalSavedTickProvider.notifier).state++;
+                  messenger.showSnackBar(SnackBar(
+                      content: Text(t.legalReminderSet),
+                      behavior: SnackBarBehavior.floating));
+                },
+              ),
+            const SizedBox(height: 8),
+          ],
+        ),
+      ),
+    );
+  }
 
   Future<void> _openSource(BuildContext context, String url) async {
     final uri = Uri.tryParse(url);
