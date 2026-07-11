@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../config/constants.dart';
 import '../../../services/hive_service.dart';
+import '../../../services/auth_service.dart';
 import '../../../services/content/meal_image_service.dart';
 import '../../providers/app_providers.dart';
 import '../../widgets/ds.dart';
@@ -138,9 +139,14 @@ class _KitchenScreenState extends State<KitchenScreen>
     }
   }
 
+  // Kullanıcı-izole anahtar — hesap değişiminde başka kullanıcının kendi
+  // tarifleri görünmesin (yerel içerik; bulutla senkron değil).
+  String get _customKey =>
+      'custom_recipes_${AuthService.currentUserId ?? 'anon'}';
+
   List<Map<String, dynamic>> _loadCustom() {
     try {
-      final raw = HiveService.getSetting('custom_recipes');
+      final raw = HiveService.getSetting(_customKey);
       if (raw == null || raw.isEmpty) return [];
       return (jsonDecode(raw) as List).cast<Map<String, dynamic>>();
     } catch (_) {
@@ -151,7 +157,7 @@ class _KitchenScreenState extends State<KitchenScreen>
   Future<void> _saveCustom(Map<String, dynamic> recipe) async {
     final list = _loadCustom();
     list.insert(0, recipe);
-    await HiveService.setSetting('custom_recipes', jsonEncode(list));
+    await HiveService.setSetting(_customKey, jsonEncode(list));
     setState(() {
       _recipes = [recipe, ..._recipes];
       _applyFilter();
@@ -830,15 +836,24 @@ class _MealShoppingTab extends StatelessWidget {
             child: ElevatedButton.icon(
               onPressed: () {
                 final notifier = ref.read(shoppingItemsProvider.notifier);
+                // Duplicate koruması: listede bekleyen aynı adlı ürünü tekrar
+                // ekleme (alışveriş ekranıyla aynı normalize mantığı).
+                final existing = ref.read(shoppingItemsProvider).valueOrNull ?? [];
+                final pending = existing
+                    .where((i) => !i.isCompleted)
+                    .map((i) => i.name.trim().toLowerCase())
+                    .toSet();
+                var added = 0;
                 for (final ing in ingredients) {
-                  notifier.addItem(
-                    (ing['name'] ?? '').toString(),
-                    quantity: ing['count'] as int? ?? 1,
-                  );
+                  final name = (ing['name'] ?? '').toString().trim();
+                  if (name.isEmpty) continue;
+                  if (!pending.add(name.toLowerCase())) continue; // zaten var
+                  notifier.addItem(name, quantity: ing['count'] as int? ?? 1);
+                  added++;
                 }
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: Text(
-                        '${ingredients.length} malzeme alışveriş listesine eklendi'),
+                        '$added malzeme alışveriş listesine eklendi'),
                     behavior: SnackBarBehavior.floating));
               },
               style: ElevatedButton.styleFrom(
