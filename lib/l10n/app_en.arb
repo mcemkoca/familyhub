@@ -1387,5 +1387,14 @@
   "gatePerMonth": "/mo",
   "gatePerYear": "/yr",
   "gateSeePlans": "See plans",
-  "gateNotNow": "Not now"
+  "gateNotNow": "Not now",
+  "exportCsvTooltip": "Export as CSV",
+  "exportShopping": "FamilyHub shopping list",
+  "exportEmpty": "Nothing to export.",
+  "exportFailed": "Export failed.",
+  "exportColName": "Item",
+  "exportColQty": "Quantity",
+  "exportColUnit": "Unit",
+  "exportColCategory": "Category",
+  "exportColDone": "Done"
 }

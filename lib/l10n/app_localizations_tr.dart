@@ -4376,4 +4376,31 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get gateNotNow => 'Şimdi değil';
+
+  @override
+  String get exportCsvTooltip => 'CSV olarak dışa aktar';
+
+  @override
+  String get exportShopping => 'FamilyHub alışveriş listesi';
+
+  @override
+  String get exportEmpty => 'Dışa aktarılacak öğe yok.';
+
+  @override
+  String get exportFailed => 'Dışa aktarma başarısız.';
+
+  @override
+  String get exportColName => 'Ürün';
+
+  @override
+  String get exportColQty => 'Miktar';
+
+  @override
+  String get exportColUnit => 'Birim';
+
+  @override
+  String get exportColCategory => 'Kategori';
+
+  @override
+  String get exportColDone => 'Tamamlandı';
 }

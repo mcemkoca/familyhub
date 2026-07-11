@@ -1387,5 +1387,14 @@
   "gatePerMonth": "/mois",
   "gatePerYear": "/an",
   "gateSeePlans": "Voir les formules",
-  "gateNotNow": "Pas maintenant"
+  "gateNotNow": "Pas maintenant",
+  "exportCsvTooltip": "Exporter en CSV",
+  "exportShopping": "Liste de courses FamilyHub",
+  "exportEmpty": "Rien a exporter.",
+  "exportFailed": "Echec de l'export.",
+  "exportColName": "Article",
+  "exportColQty": "Quantite",
+  "exportColUnit": "Unite",
+  "exportColCategory": "Categorie",
+  "exportColDone": "Termine"
 }

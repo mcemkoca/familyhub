@@ -12,6 +12,12 @@ import '../../../services/hive_service.dart';
 import '../../../services/ai/ai_content_service.dart';
 import '../../providers/app_providers.dart';
 import '../../widgets/screen_background.dart';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
+import '../../../features/export/data/shopping_csv_builder.dart';
+import '../../../features/subscription/domain/subscription_tier.dart';
+import '../../../features/subscription/presentation/feature_gate.dart';
 
 // Quick AI-suggested common items (tokensiz)
 const _aiSuggestions = [
@@ -247,6 +253,45 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
     );
   }
 
+  /// Alışveriş listesini CSV olarak paylaşır. Plus özelliği → paywall'lı.
+  Future<void> _exportCsv(List<ShoppingItem> items) async {
+    final t = AppLocalizations.of(context);
+    if (!await FeatureGate.require(context, ref, Feature.exportCsv)) return;
+    if (items.isEmpty) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(t.exportEmpty)),
+      );
+      return;
+    }
+    try {
+      final csv = ShoppingCsvBuilder.build(
+        items,
+        [
+          t.exportColName,
+          t.exportColQty,
+          t.exportColUnit,
+          t.exportColCategory,
+          t.exportColDone,
+        ],
+        yes: t.yes,
+        no: t.no,
+      );
+      final dir = await getTemporaryDirectory();
+      final file = File('${dir.path}/familyhub_shopping.csv');
+      await file.writeAsString(csv);
+      await SharePlus.instance.share(
+        ShareParams(files: [XFile(file.path)], text: t.exportShopping),
+      );
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(t.exportFailed)),
+        );
+      }
+    }
+  }
+
   Widget _buildHeader(BuildContext context, bool isDark,
       AsyncValue<List<ShoppingItem>> itemsAsync) {
     final total = itemsAsync.valueOrNull?.length ?? 0;
@@ -327,6 +372,12 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
                       : const Color(0xFF6B7280),
                 ),
                 tooltip: AppLocalizations.of(context).shoppingHizliEkle,
+              ),
+              IconButton(
+                onPressed: () => _exportCsv(itemsAsync.valueOrNull ?? const []),
+                icon: const Icon(Icons.ios_share_outlined),
+                color: const Color(0xFF6366F1),
+                tooltip: AppLocalizations.of(context).exportCsvTooltip,
               ),
               IconButton(
                 onPressed: () =>

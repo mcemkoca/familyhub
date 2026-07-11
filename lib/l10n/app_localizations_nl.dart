@@ -4355,4 +4355,31 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get gateNotNow => 'Niet nu';
+
+  @override
+  String get exportCsvTooltip => 'Exporteren als CSV';
+
+  @override
+  String get exportShopping => 'FamilyHub boodschappenlijst';
+
+  @override
+  String get exportEmpty => 'Niets om te exporteren.';
+
+  @override
+  String get exportFailed => 'Exporteren mislukt.';
+
+  @override
+  String get exportColName => 'Item';
+
+  @override
+  String get exportColQty => 'Aantal';
+
+  @override
+  String get exportColUnit => 'Eenheid';
+
+  @override
+  String get exportColCategory => 'Categorie';
+
+  @override
+  String get exportColDone => 'Klaar';
 }

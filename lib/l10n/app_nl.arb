@@ -1387,5 +1387,14 @@
   "gatePerMonth": "/mnd",
   "gatePerYear": "/jr",
   "gateSeePlans": "Bekijk abonnementen",
-  "gateNotNow": "Niet nu"
+  "gateNotNow": "Niet nu",
+  "exportCsvTooltip": "Exporteren als CSV",
+  "exportShopping": "FamilyHub boodschappenlijst",
+  "exportEmpty": "Niets om te exporteren.",
+  "exportFailed": "Exporteren mislukt.",
+  "exportColName": "Item",
+  "exportColQty": "Aantal",
+  "exportColUnit": "Eenheid",
+  "exportColCategory": "Categorie",
+  "exportColDone": "Klaar"
 }

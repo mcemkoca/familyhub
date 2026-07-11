@@ -4371,4 +4371,31 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get gateNotNow => 'Pas maintenant';
+
+  @override
+  String get exportCsvTooltip => 'Exporter en CSV';
+
+  @override
+  String get exportShopping => 'Liste de courses FamilyHub';
+
+  @override
+  String get exportEmpty => 'Rien a exporter.';
+
+  @override
+  String get exportFailed => 'Echec de l\'export.';
+
+  @override
+  String get exportColName => 'Article';
+
+  @override
+  String get exportColQty => 'Quantite';
+
+  @override
+  String get exportColUnit => 'Unite';
+
+  @override
+  String get exportColCategory => 'Categorie';
+
+  @override
+  String get exportColDone => 'Termine';
 }

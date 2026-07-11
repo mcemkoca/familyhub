@@ -8285,6 +8285,60 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Şimdi değil'**
   String get gateNotNow;
+
+  /// No description provided for @exportCsvTooltip.
+  ///
+  /// In tr, this message translates to:
+  /// **'CSV olarak dışa aktar'**
+  String get exportCsvTooltip;
+
+  /// No description provided for @exportShopping.
+  ///
+  /// In tr, this message translates to:
+  /// **'FamilyHub alışveriş listesi'**
+  String get exportShopping;
+
+  /// No description provided for @exportEmpty.
+  ///
+  /// In tr, this message translates to:
+  /// **'Dışa aktarılacak öğe yok.'**
+  String get exportEmpty;
+
+  /// No description provided for @exportFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Dışa aktarma başarısız.'**
+  String get exportFailed;
+
+  /// No description provided for @exportColName.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ürün'**
+  String get exportColName;
+
+  /// No description provided for @exportColQty.
+  ///
+  /// In tr, this message translates to:
+  /// **'Miktar'**
+  String get exportColQty;
+
+  /// No description provided for @exportColUnit.
+  ///
+  /// In tr, this message translates to:
+  /// **'Birim'**
+  String get exportColUnit;
+
+  /// No description provided for @exportColCategory.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kategori'**
+  String get exportColCategory;
+
+  /// No description provided for @exportColDone.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tamamlandı'**
+  String get exportColDone;
 }
 
 class _AppLocalizationsDelegate

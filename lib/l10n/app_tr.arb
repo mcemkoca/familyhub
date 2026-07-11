@@ -1392,5 +1392,14 @@
   "gatePerMonth": "/ay",
   "gatePerYear": "/yıl",
   "gateSeePlans": "Planları gör",
-  "gateNotNow": "Şimdi değil"
+  "gateNotNow": "Şimdi değil",
+  "exportCsvTooltip": "CSV olarak dışa aktar",
+  "exportShopping": "FamilyHub alışveriş listesi",
+  "exportEmpty": "Dışa aktarılacak öğe yok.",
+  "exportFailed": "Dışa aktarma başarısız.",
+  "exportColName": "Ürün",
+  "exportColQty": "Miktar",
+  "exportColUnit": "Birim",
+  "exportColCategory": "Kategori",
+  "exportColDone": "Tamamlandı"
 }
