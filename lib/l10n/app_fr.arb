@@ -1024,6 +1024,8 @@
   "fiInsightAllClearTitle": "Tout est en ordre",
   "fiInsightAllClearBody": "Aucune tâche ni course en attente. Bravo !",
   "fiReasonAllClear": "Aucune tâche en retard, tâche en attente ou article de courses trouvé.",
+  "fiNotifyTop": "Notifier la priorité",
+  "fiNotified": "Notification envoyée",
   "familyHubAITitle": "FamilyHub AI",
   "familyHubAISubtitle": "Assistant intelligent pour votre famille",
   "fhaSummaryTitle": "Contexte du jour",

@@ -3177,6 +3177,12 @@ class AppLocalizationsEn extends AppLocalizations {
       'No overdue tasks, pending tasks or shopping items were found.';
 
   @override
+  String get fiNotifyTop => 'Notify top priority';
+
+  @override
+  String get fiNotified => 'Notification sent';
+
+  @override
   String get familyHubAITitle => 'FamilyHub AI';
 
   @override

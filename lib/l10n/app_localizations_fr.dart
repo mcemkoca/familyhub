@@ -3190,6 +3190,12 @@ class AppLocalizationsFr extends AppLocalizations {
       'Aucune tâche en retard, tâche en attente ou article de courses trouvé.';
 
   @override
+  String get fiNotifyTop => 'Notifier la priorité';
+
+  @override
+  String get fiNotified => 'Notification envoyée';
+
+  @override
   String get familyHubAITitle => 'FamilyHub AI';
 
   @override

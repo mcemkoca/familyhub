@@ -3191,6 +3191,12 @@ class AppLocalizationsTr extends AppLocalizations {
       'Geciken görev, bekleyen görev ve alışveriş öğesi bulunmadı.';
 
   @override
+  String get fiNotifyTop => 'Öne çıkanı bildir';
+
+  @override
+  String get fiNotified => 'Bildirim gönderildi';
+
+  @override
   String get familyHubAITitle => 'FamilyHub AI';
 
   @override

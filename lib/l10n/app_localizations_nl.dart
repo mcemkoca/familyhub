@@ -3178,6 +3178,12 @@ class AppLocalizationsNl extends AppLocalizations {
       'Geen achterstallige taken, openstaande taken of boodschappen gevonden.';
 
   @override
+  String get fiNotifyTop => 'Topprioriteit melden';
+
+  @override
+  String get fiNotified => 'Melding verzonden';
+
+  @override
   String get familyHubAITitle => 'FamilyHub AI';
 
   @override

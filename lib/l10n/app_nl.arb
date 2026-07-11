@@ -1024,6 +1024,8 @@
   "fiInsightAllClearTitle": "Alles in orde",
   "fiInsightAllClearBody": "Geen openstaande taken of boodschappen. Goed bezig!",
   "fiReasonAllClear": "Geen achterstallige taken, openstaande taken of boodschappen gevonden.",
+  "fiNotifyTop": "Topprioriteit melden",
+  "fiNotified": "Melding verzonden",
   "familyHubAITitle": "FamilyHub AI",
   "familyHubAISubtitle": "Slimme assistent voor je gezin",
   "fhaSummaryTitle": "Context van vandaag",

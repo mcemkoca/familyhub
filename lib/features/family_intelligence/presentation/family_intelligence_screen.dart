@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 import '../../../presentation/widgets/settings/screen_header.dart';
+import '../../../services/notification_service.dart';
 import '../application/family_intelligence_providers.dart';
 import '../domain/family_insight.dart';
 
@@ -37,10 +38,34 @@ class FamilyIntelligenceScreen extends ConsumerWidget {
           const SizedBox(height: 16),
           if (insights.isEmpty)
             _empty(t)
-          else
+          else ...[
+            // Öne çıkan (en yüksek öncelikli) içgörüyü bildir.
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton.icon(
+                onPressed: () => _notifyTop(context, t, insights.first),
+                icon: const Icon(Icons.notifications_active_outlined, size: 16),
+                label: Text(t.fiNotifyTop),
+                style: TextButton.styleFrom(
+                    foregroundColor: const Color(0xFF8B5CF6)),
+              ),
+            ),
             for (final i in insights) _InsightCard(insight: i),
+          ],
         ],
       ),
+    );
+  }
+
+  Future<void> _notifyTop(
+      BuildContext context, AppLocalizations t, FamilyInsight top) async {
+    final title = FamilyIntelligenceStrings.resolve(t, top.titleKey, top.args);
+    final body = FamilyIntelligenceStrings.resolve(t, top.bodyKey, top.args);
+    await NotificationService.showInstantNotification(
+        title: title, body: body, payload: 'fi:${top.id}');
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(t.fiNotified), behavior: SnackBarBehavior.floating),
     );
   }
 

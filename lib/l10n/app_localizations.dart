@@ -6134,6 +6134,18 @@ abstract class AppLocalizations {
   /// **'Geciken görev, bekleyen görev ve alışveriş öğesi bulunmadı.'**
   String get fiReasonAllClear;
 
+  /// No description provided for @fiNotifyTop.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öne çıkanı bildir'**
+  String get fiNotifyTop;
+
+  /// No description provided for @fiNotified.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bildirim gönderildi'**
+  String get fiNotified;
+
   /// No description provided for @familyHubAITitle.
   ///
   /// In tr, this message translates to:
