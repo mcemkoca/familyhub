@@ -48,8 +48,8 @@ class MedicineReminderScreen extends StatelessWidget {
                     color: Colors.white, size: 60),
               ),
               const SizedBox(height: 32),
-              const Text('İlaç Zamanı',
-                  style: TextStyle(
+              Text(AppLocalizations.of(context).mrMedTime,
+                  style: const TextStyle(
                       color: Color(0xFF9CA3AF),
                       fontSize: 16,
                       fontWeight: FontWeight.w600)),
@@ -97,14 +97,14 @@ class MedicineReminderScreen extends StatelessWidget {
                 child: ElevatedButton.icon(
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('İlaç alındı olarak işaretlendi ✓')),
+                      SnackBar(content: Text(AppLocalizations.of(context).mrTaken)),
                     );
                     Navigator.pop(context);
                   },
                   icon: const Icon(Icons.check_circle_rounded,
                       color: Colors.white),
-                  label: const Text('Aldım',
-                      style: TextStyle(
+                  label: Text(AppLocalizations.of(context).mrTook,
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.w800)),
@@ -124,11 +124,13 @@ class MedicineReminderScreen extends StatelessWidget {
                   onPressed: () async {
                     final messenger = ScaffoldMessenger.of(context);
                     final navigator = Navigator.of(context);
+                    final medTimeTitle = AppLocalizations.of(context).medTime;
+                    final snoozeMsg = AppLocalizations.of(context).mrSnoozeMsg;
                     try {
                       await NotificationService.requestPermission();
                       await NotificationService.scheduleNotification(
                         id: DateTime.now().millisecondsSinceEpoch % 2147483647,
-                        title: 'İlaç Zamanı 💊',
+                        title: medTimeTitle,
                         body: '$name · $dose zamanı!',
                         scheduledDate:
                             DateTime.now().add(const Duration(minutes: 15)),
@@ -136,15 +138,14 @@ class MedicineReminderScreen extends StatelessWidget {
                       );
                     } catch (_) {}
                     messenger.showSnackBar(
-                      const SnackBar(
-                          content: Text('15 dakika sonra tekrar hatırlatılacak.')),
+                      SnackBar(content: Text(snoozeMsg)),
                     );
                     navigator.pop();
                   },
                   icon: const Icon(Icons.snooze_rounded,
                       color: Color(0xFF14B8A6)),
-                  label: const Text('15 dk. sonra hatırlat',
-                      style: TextStyle(
+                  label: Text(AppLocalizations.of(context).mrSnooze15,
+                      style: const TextStyle(
                           color: Color(0xFF14B8A6),
                           fontSize: 16,
                           fontWeight: FontWeight.w700)),

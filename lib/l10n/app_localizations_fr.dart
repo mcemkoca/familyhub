@@ -5667,4 +5667,57 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get dsAuthSources => 'Sources officielles et fiables';
+
+  @override
+  String get aisShared => 'Partage au groupe familial';
+
+  @override
+  String get aisMissing => 'Manquant';
+
+  @override
+  String aisTurn(Object who) {
+    return 'Tour : $who';
+  }
+
+  @override
+  String get aisCommentHint => 'Vos reflexions sur cette suggestion...';
+
+  @override
+  String get aisCommentSaved => 'Commentaire enregistre';
+
+  @override
+  String get aisAccept => 'Accepter';
+
+  @override
+  String get aisPostpone => 'Reporter';
+
+  @override
+  String get aisShowLess => 'Afficher moins';
+
+  @override
+  String get huShowSmartCard => 'Afficher la carte intelligente';
+
+  @override
+  String get huShowTips => 'Afficher les astuces';
+
+  @override
+  String get huEditTiles => 'Modifier les tuiles d\'accueil';
+
+  @override
+  String get huDragSort => 'Glisser pour reordonner les tuiles';
+
+  @override
+  String get mrMedTime => 'Heure du medicament';
+
+  @override
+  String get mrTaken => 'Marque comme pris ✓';
+
+  @override
+  String get mrTook => 'Pris';
+
+  @override
+  String get mrSnooze15 => 'Rappeler dans 15 min';
+
+  @override
+  String get mrSnoozeMsg => 'Vous serez rappele dans 15 minutes.';
 }

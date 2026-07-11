@@ -1789,5 +1789,22 @@
   "wtFahrenheit": "Fahrenheit (°F)",
   "wtFeelsLike": "Ressenti",
   "wtHumidity": "Humidite",
-  "dsAuthSources": "Sources officielles et fiables"
+  "dsAuthSources": "Sources officielles et fiables",
+  "aisShared": "Partage au groupe familial",
+  "aisMissing": "Manquant",
+  "aisTurn": "Tour : {who}",
+  "aisCommentHint": "Vos reflexions sur cette suggestion...",
+  "aisCommentSaved": "Commentaire enregistre",
+  "aisAccept": "Accepter",
+  "aisPostpone": "Reporter",
+  "aisShowLess": "Afficher moins",
+  "huShowSmartCard": "Afficher la carte intelligente",
+  "huShowTips": "Afficher les astuces",
+  "huEditTiles": "Modifier les tuiles d'accueil",
+  "huDragSort": "Glisser pour reordonner les tuiles",
+  "mrMedTime": "Heure du medicament",
+  "mrTaken": "Marque comme pris ✓",
+  "mrTook": "Pris",
+  "mrSnooze15": "Rappeler dans 15 min",
+  "mrSnoozeMsg": "Vous serez rappele dans 15 minutes."
 }

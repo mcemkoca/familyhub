@@ -80,7 +80,7 @@ class _HubCustomizeScreenState extends State<HubCustomizeScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
-        title: 'Ana Ekranı Özelleştir',
+        title: AppLocalizations.of(context).setCustomizeHome,
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -94,7 +94,7 @@ class _HubCustomizeScreenState extends State<HubCustomizeScreen> {
               _toggleTile(
                 icon: Icons.dashboard_customize_outlined,
                 color: const Color(0xFF6366F1),
-                title: 'Akıllı Kartı Göster',
+                title: AppLocalizations.of(context).huShowSmartCard,
                 subtitle:
                     'Aile aktivitesine dair hızlı güncellemeleri ana ekranda gösterir.',
                 value: _smartCard,
@@ -107,7 +107,7 @@ class _HubCustomizeScreenState extends State<HubCustomizeScreen> {
               _toggleTile(
                 icon: Icons.lightbulb_outline,
                 color: const Color(0xFFF59E0B),
-                title: 'İpuçlarını Göster',
+                title: AppLocalizations.of(context).huShowTips,
                 subtitle:
                     'Uygulama ve özellikler hakkında yararlı ipuçları (Keşfet) gösterir.',
                 value: _tips,
@@ -144,8 +144,8 @@ class _HubCustomizeScreenState extends State<HubCustomizeScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Ana Ekran Kutucuklarını Düzenle',
-                              style: TextStyle(
+                          Text(AppLocalizations.of(context).huEditTiles,
+                              style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
                                   color: Color(0xFFE5E7EB))),
@@ -295,9 +295,9 @@ class _ReorderSheetState extends State<_ReorderSheet> {
               padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
               child: Row(
                 children: [
-                  const Expanded(
-                    child: Text('Kutucukları Sürükle-Sırala',
-                        style: TextStyle(
+                  Expanded(
+                    child: Text(AppLocalizations.of(context).huDragSort,
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 17,
                             fontWeight: FontWeight.w800)),
@@ -307,8 +307,8 @@ class _ReorderSheetState extends State<_ReorderSheet> {
                       await widget.onSave(_items);
                       if (context.mounted) Navigator.pop(context);
                     },
-                    child: const Text('Kaydet',
-                        style: TextStyle(
+                    child: Text(AppLocalizations.of(context).save,
+                        style: const TextStyle(
                             color: Color(0xFF6366F1),
                             fontWeight: FontWeight.w700)),
                   ),

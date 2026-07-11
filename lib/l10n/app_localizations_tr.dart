@@ -5662,4 +5662,57 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get dsAuthSources => 'Resmi ve otoriter kaynaklar';
+
+  @override
+  String get aisShared => 'Aile grubuna paylaşıldı';
+
+  @override
+  String get aisMissing => 'Eksik';
+
+  @override
+  String aisTurn(Object who) {
+    return 'Sıra: $who';
+  }
+
+  @override
+  String get aisCommentHint => 'Bu öneri hakkında düşünceleriniz...';
+
+  @override
+  String get aisCommentSaved => 'Yorum kaydedildi';
+
+  @override
+  String get aisAccept => 'Kabul Et';
+
+  @override
+  String get aisPostpone => 'Ertele';
+
+  @override
+  String get aisShowLess => 'Daha Az Göster';
+
+  @override
+  String get huShowSmartCard => 'Akıllı Kartı Göster';
+
+  @override
+  String get huShowTips => 'İpuçlarını Göster';
+
+  @override
+  String get huEditTiles => 'Ana Ekran Kutucuklarını Düzenle';
+
+  @override
+  String get huDragSort => 'Kutucukları Sürükle-Sırala';
+
+  @override
+  String get mrMedTime => 'İlaç Zamanı';
+
+  @override
+  String get mrTaken => 'İlaç alındı olarak işaretlendi ✓';
+
+  @override
+  String get mrTook => 'Aldım';
+
+  @override
+  String get mrSnooze15 => '15 dk. sonra hatırlat';
+
+  @override
+  String get mrSnoozeMsg => '15 dakika sonra tekrar hatırlatılacak.';
 }

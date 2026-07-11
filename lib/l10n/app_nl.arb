@@ -1789,5 +1789,22 @@
   "wtFahrenheit": "Fahrenheit (°F)",
   "wtFeelsLike": "Gevoelstemperatuur",
   "wtHumidity": "Vochtigheid",
-  "dsAuthSources": "Officiele en gezaghebbende bronnen"
+  "dsAuthSources": "Officiele en gezaghebbende bronnen",
+  "aisShared": "Gedeeld met de gezinsgroep",
+  "aisMissing": "Ontbreekt",
+  "aisTurn": "Beurt: {who}",
+  "aisCommentHint": "Jouw gedachten over deze suggestie...",
+  "aisCommentSaved": "Opmerking opgeslagen",
+  "aisAccept": "Accepteren",
+  "aisPostpone": "Uitstellen",
+  "aisShowLess": "Minder tonen",
+  "huShowSmartCard": "Slimme kaart tonen",
+  "huShowTips": "Tips tonen",
+  "huEditTiles": "Starttegels bewerken",
+  "huDragSort": "Sleep om tegels te herordenen",
+  "mrMedTime": "Medicijntijd",
+  "mrTaken": "Gemarkeerd als ingenomen ✓",
+  "mrTook": "Ingenomen",
+  "mrSnooze15": "Herinner over 15 min",
+  "mrSnoozeMsg": "Je wordt over 15 minuten opnieuw herinnerd."
 }

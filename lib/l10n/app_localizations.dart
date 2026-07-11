@@ -10697,6 +10697,108 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Resmi ve otoriter kaynaklar'**
   String get dsAuthSources;
+
+  /// No description provided for @aisShared.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile grubuna paylaşıldı'**
+  String get aisShared;
+
+  /// No description provided for @aisMissing.
+  ///
+  /// In tr, this message translates to:
+  /// **'Eksik'**
+  String get aisMissing;
+
+  /// No description provided for @aisTurn.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sıra: {who}'**
+  String aisTurn(Object who);
+
+  /// No description provided for @aisCommentHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu öneri hakkında düşünceleriniz...'**
+  String get aisCommentHint;
+
+  /// No description provided for @aisCommentSaved.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yorum kaydedildi'**
+  String get aisCommentSaved;
+
+  /// No description provided for @aisAccept.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kabul Et'**
+  String get aisAccept;
+
+  /// No description provided for @aisPostpone.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ertele'**
+  String get aisPostpone;
+
+  /// No description provided for @aisShowLess.
+  ///
+  /// In tr, this message translates to:
+  /// **'Daha Az Göster'**
+  String get aisShowLess;
+
+  /// No description provided for @huShowSmartCard.
+  ///
+  /// In tr, this message translates to:
+  /// **'Akıllı Kartı Göster'**
+  String get huShowSmartCard;
+
+  /// No description provided for @huShowTips.
+  ///
+  /// In tr, this message translates to:
+  /// **'İpuçlarını Göster'**
+  String get huShowTips;
+
+  /// No description provided for @huEditTiles.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ana Ekran Kutucuklarını Düzenle'**
+  String get huEditTiles;
+
+  /// No description provided for @huDragSort.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kutucukları Sürükle-Sırala'**
+  String get huDragSort;
+
+  /// No description provided for @mrMedTime.
+  ///
+  /// In tr, this message translates to:
+  /// **'İlaç Zamanı'**
+  String get mrMedTime;
+
+  /// No description provided for @mrTaken.
+  ///
+  /// In tr, this message translates to:
+  /// **'İlaç alındı olarak işaretlendi ✓'**
+  String get mrTaken;
+
+  /// No description provided for @mrTook.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aldım'**
+  String get mrTook;
+
+  /// No description provided for @mrSnooze15.
+  ///
+  /// In tr, this message translates to:
+  /// **'15 dk. sonra hatırlat'**
+  String get mrSnooze15;
+
+  /// No description provided for @mrSnoozeMsg.
+  ///
+  /// In tr, this message translates to:
+  /// **'15 dakika sonra tekrar hatırlatılacak.'**
+  String get mrSnoozeMsg;
 }
 
 class _AppLocalizationsDelegate

@@ -1789,5 +1789,22 @@
   "wtFahrenheit": "Fahrenheit (°F)",
   "wtFeelsLike": "Feels like",
   "wtHumidity": "Humidity",
-  "dsAuthSources": "Official and authoritative sources"
+  "dsAuthSources": "Official and authoritative sources",
+  "aisShared": "Shared to the family group",
+  "aisMissing": "Missing",
+  "aisTurn": "Turn: {who}",
+  "aisCommentHint": "Your thoughts on this suggestion...",
+  "aisCommentSaved": "Comment saved",
+  "aisAccept": "Accept",
+  "aisPostpone": "Postpone",
+  "aisShowLess": "Show Less",
+  "huShowSmartCard": "Show Smart Card",
+  "huShowTips": "Show Tips",
+  "huEditTiles": "Edit Home Tiles",
+  "huDragSort": "Drag to reorder tiles",
+  "mrMedTime": "Medication Time",
+  "mrTaken": "Marked as taken ✓",
+  "mrTook": "Took it",
+  "mrSnooze15": "Remind in 15 min",
+  "mrSnoozeMsg": "You'll be reminded again in 15 minutes."
 }

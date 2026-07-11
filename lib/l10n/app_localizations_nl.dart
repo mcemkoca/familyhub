@@ -5647,4 +5647,57 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get dsAuthSources => 'Officiele en gezaghebbende bronnen';
+
+  @override
+  String get aisShared => 'Gedeeld met de gezinsgroep';
+
+  @override
+  String get aisMissing => 'Ontbreekt';
+
+  @override
+  String aisTurn(Object who) {
+    return 'Beurt: $who';
+  }
+
+  @override
+  String get aisCommentHint => 'Jouw gedachten over deze suggestie...';
+
+  @override
+  String get aisCommentSaved => 'Opmerking opgeslagen';
+
+  @override
+  String get aisAccept => 'Accepteren';
+
+  @override
+  String get aisPostpone => 'Uitstellen';
+
+  @override
+  String get aisShowLess => 'Minder tonen';
+
+  @override
+  String get huShowSmartCard => 'Slimme kaart tonen';
+
+  @override
+  String get huShowTips => 'Tips tonen';
+
+  @override
+  String get huEditTiles => 'Starttegels bewerken';
+
+  @override
+  String get huDragSort => 'Sleep om tegels te herordenen';
+
+  @override
+  String get mrMedTime => 'Medicijntijd';
+
+  @override
+  String get mrTaken => 'Gemarkeerd als ingenomen ✓';
+
+  @override
+  String get mrTook => 'Ingenomen';
+
+  @override
+  String get mrSnooze15 => 'Herinner over 15 min';
+
+  @override
+  String get mrSnoozeMsg => 'Je wordt over 15 minuten opnieuw herinnerd.';
 }

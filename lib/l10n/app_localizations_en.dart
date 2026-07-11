@@ -5643,4 +5643,57 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dsAuthSources => 'Official and authoritative sources';
+
+  @override
+  String get aisShared => 'Shared to the family group';
+
+  @override
+  String get aisMissing => 'Missing';
+
+  @override
+  String aisTurn(Object who) {
+    return 'Turn: $who';
+  }
+
+  @override
+  String get aisCommentHint => 'Your thoughts on this suggestion...';
+
+  @override
+  String get aisCommentSaved => 'Comment saved';
+
+  @override
+  String get aisAccept => 'Accept';
+
+  @override
+  String get aisPostpone => 'Postpone';
+
+  @override
+  String get aisShowLess => 'Show Less';
+
+  @override
+  String get huShowSmartCard => 'Show Smart Card';
+
+  @override
+  String get huShowTips => 'Show Tips';
+
+  @override
+  String get huEditTiles => 'Edit Home Tiles';
+
+  @override
+  String get huDragSort => 'Drag to reorder tiles';
+
+  @override
+  String get mrMedTime => 'Medication Time';
+
+  @override
+  String get mrTaken => 'Marked as taken ✓';
+
+  @override
+  String get mrTook => 'Took it';
+
+  @override
+  String get mrSnooze15 => 'Remind in 15 min';
+
+  @override
+  String get mrSnoozeMsg => 'You\'ll be reminded again in 15 minutes.';
 }

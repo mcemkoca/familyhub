@@ -304,8 +304,8 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
   void _shareSuggestion(AISuggestion suggestion) {
     // In a real app, this would open a share dialog or send to chat
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Aile grubuna paylaşıldı'),
+      SnackBar(
+        content: Text(AppLocalizations.of(context).aisShared),
         behavior: SnackBarBehavior.floating,
       ),
     );
@@ -843,7 +843,7 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
           ),
           TextButton(
             onPressed: _loadSuggestions,
-            child: const Text('Tekrar Dene'),
+            child: Text(AppLocalizations.of(context).cdRetry),
           ),
         ],
       ),
@@ -1193,8 +1193,8 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                           subtitle: Text(i.amount),
                           trailing: !i.inStock
                               ? Chip(
-                                  label: const Text('Eksik',
-                                      style: TextStyle(fontSize: 10)),
+                                  label: Text(AppLocalizations.of(context).aisMissing,
+                                      style: const TextStyle(fontSize: 10)),
                                   backgroundColor:
                                       AppColors.error.withAlpha(20),
                                   side: BorderSide.none,
@@ -1326,7 +1326,7 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                                 children: [
                                   const Icon(Icons.person, size: 18),
                                   const SizedBox(width: AppSpacing.sm),
-                                  Text('Sıra: ${widget.suggestion.assignedTo}'),
+                                  Text(AppLocalizations.of(context).aisTurn(widget.suggestion.assignedTo ?? '')),
                                 ],
                               ),
                             if (widget.suggestion.lastDone != null) ...[
@@ -1407,7 +1407,7 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                     TextField(
                       controller: _commentController,
                       decoration: InputDecoration(
-                        hintText: 'Bu öneri hakkında düşünceleriniz...',
+                        hintText: AppLocalizations.of(context).aisCommentHint,
                         border: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.circular(AppRadius.medium),
@@ -1421,8 +1421,8 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                               _commentController.clear();
                               FocusScope.of(context).unfocus();
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Yorum kaydedildi'),
+                                SnackBar(
+                                  content: Text(AppLocalizations.of(context).aisCommentSaved),
                                   behavior: SnackBarBehavior.floating,
                                 ),
                               );
@@ -1463,7 +1463,7 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                               Navigator.pop(context);
                             },
                             icon: const Icon(Icons.check),
-                            label: const Text('Kabul Et'),
+                            label: Text(AppLocalizations.of(context).aisAccept),
                           ),
                         ),
                       ],
@@ -1479,7 +1479,7 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                               _showPostponePicker();
                             },
                             icon: const Icon(Icons.snooze),
-                            label: const Text('Ertele'),
+                            label: Text(AppLocalizations.of(context).aisPostpone),
                           ),
                         ),
                         const SizedBox(width: AppSpacing.sm),
@@ -1542,7 +1542,7 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                                 Navigator.pop(context);
                               },
                               icon: const Icon(Icons.hide_source),
-                              label: const Text('Daha Az Göster'),
+                              label: Text(AppLocalizations.of(context).aisShowLess),
                             ),
                           ),
                       ],
