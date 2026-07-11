@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../config/constants.dart';
 import '../../../core/localization/app_locale.dart';
+import '../../../core/localization/app_strings.dart';
 import '../../../services/hive_service.dart';
 import '../../providers/app_providers.dart';
 import '../../widgets/settings/screen_header.dart';
@@ -24,11 +25,11 @@ class _LanguageSettingsScreenState
   String _dateFormat = 'DD/MM/YYYY';
 
   static const _regions = <_RegionOption>[
-    _RegionOption(code: 'BE', label: 'België / Belgique'),
-    _RegionOption(code: 'NL', label: 'Nederland'),
-    _RegionOption(code: 'FR', label: 'France'),
-    _RegionOption(code: 'TR', label: 'Türkiye'),
-    _RegionOption(code: 'GB', label: 'United Kingdom'),
+    _RegionOption(code: 'BE', labelKey: 'region.be'),
+    _RegionOption(code: 'NL', labelKey: 'region.nl'),
+    _RegionOption(code: 'FR', labelKey: 'region.fr'),
+    _RegionOption(code: 'TR', labelKey: 'region.tr'),
+    _RegionOption(code: 'GB', labelKey: 'region.gb'),
   ];
 
   static const _dateFormats = <String>[
@@ -57,8 +58,6 @@ class _LanguageSettingsScreenState
   Future<void> _saveLanguage(AppLanguage language) async {
     setState(() => _selectedLanguage = language);
 
-    // `languageCode` is the canonical value. The legacy display-name setting is
-    // maintained temporarily because older screens still read it directly.
     await HiveService.setSetting('languageCode', language.code);
     await HiveService.setSetting('language', language.nativeName);
 
@@ -69,7 +68,7 @@ class _LanguageSettingsScreenState
   Future<void> _saveRegion(_RegionOption region) async {
     setState(() => _selectedRegionCode = region.code);
     await HiveService.setSetting('regionCode', region.code);
-    await HiveService.setSetting('region', region.label);
+    await HiveService.setSetting('region', region.code);
     HapticFeedback.selectionClick();
   }
 
@@ -96,6 +95,7 @@ class _LanguageSettingsScreenState
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppStrings.of(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final background =
         isDark ? AppColors.darkBackground : AppColors.cloudWhite;
@@ -104,7 +104,7 @@ class _LanguageSettingsScreenState
     return Scaffold(
       backgroundColor: background,
       appBar: ScreenHeader(
-        title: 'Dil ve Bölge',
+        title: strings.text('language.title'),
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -113,7 +113,7 @@ class _LanguageSettingsScreenState
         padding: const EdgeInsets.all(16),
         children: [
           _buildGroup(
-            title: 'UYGULAMA DİLİ',
+            title: strings.text('language.application'),
             children: AppLanguage.values.map((language) {
               final selected = _selectedLanguage == language;
               return _buildOptionTile(
@@ -126,11 +126,11 @@ class _LanguageSettingsScreenState
           ),
           const SizedBox(height: 16),
           _buildGroup(
-            title: 'BÖLGE',
+            title: strings.text('language.region'),
             children: _regions.map((region) {
               final selected = _selectedRegionCode == region.code;
               return _buildOptionTile(
-                label: region.label,
+                label: strings.text(region.labelKey),
                 selected: selected,
                 onTap: () => _saveRegion(region),
                 cardBackground: cardBackground,
@@ -139,7 +139,7 @@ class _LanguageSettingsScreenState
           ),
           const SizedBox(height: 16),
           _buildGroup(
-            title: 'TARİH FORMATI',
+            title: strings.text('language.dateFormat'),
             children: _dateFormats.map((format) {
               final selected = _dateFormat == format;
               return _buildOptionTile(
@@ -202,34 +202,30 @@ class _LanguageSettingsScreenState
     required Color cardBackground,
   }) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    return Material(
-      color: cardBackground,
-      child: InkWell(
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          child: Row(
-            children: [
-              Expanded(
-                child: Text(
-                  label,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight:
-                        selected ? FontWeight.w600 : FontWeight.w400,
-                    color:
-                        isDark ? AppColors.darkTextPrimary : AppColors.dark,
-                  ),
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(16),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                label,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
+                  color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
                 ),
               ),
-              if (selected)
-                const Icon(
-                  Icons.check_circle,
-                  color: AppColors.cobalt,
-                  size: 22,
-                ),
-            ],
-          ),
+            ),
+            if (selected)
+              const Icon(
+                Icons.check_circle,
+                color: AppColors.cobalt,
+                size: 22,
+              ),
+          ],
         ),
       ),
     );
@@ -237,8 +233,8 @@ class _LanguageSettingsScreenState
 }
 
 class _RegionOption {
-  const _RegionOption({required this.code, required this.label});
+  const _RegionOption({required this.code, required this.labelKey});
 
   final String code;
-  final String label;
+  final String labelKey;
 }
