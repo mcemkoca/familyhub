@@ -11,12 +11,22 @@ class DailySummaryScheduler {
   static const _enabledKey = 'fi_daily_summary_enabled';
   static const _hourKey = 'fi_daily_summary_hour';
 
-  bool get isEnabled =>
-      HiveService.getBoolSetting(_enabledKey, defaultValue: false);
+  bool get isEnabled {
+    try {
+      return HiveService.getBoolSetting(_enabledKey, defaultValue: false);
+    } catch (_) {
+      return false; // Hive hazır değil (test/erken init) → güvenli varsayılan.
+    }
+  }
 
-  int get hour => HiveService.getSetting(_hourKey) != null
-      ? int.tryParse(HiveService.getSetting(_hourKey)!) ?? 8
-      : 8;
+  int get hour {
+    try {
+      final raw = HiveService.getSetting(_hourKey);
+      return raw != null ? int.tryParse(raw) ?? 8 : 8;
+    } catch (_) {
+      return 8;
+    }
+  }
 
   /// Günlük özeti [hour]:00'da planlar ve tercihi kaydeder.
   Future<void> enable({
