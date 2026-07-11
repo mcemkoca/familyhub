@@ -353,10 +353,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               ),
             ),
 
-            // ── YARDIM VE DESTEK ────────────────────────────────────
+            // ── YARDIM ──────────────────────────────────────────────
+            // Yalnızca Kullanım Kılavuzu. Destek/Hata Bildir/Değerlendir
+            // kaldırıldı (iletişim minimal olarak Hakkında altında).
             SliverToBoxAdapter(
               child: SettingsSection(
-                title: 'YARDIM VE DESTEK',
+                title: 'YARDIM',
                 icon: Icons.help_outline,
                 children: [
                   SettingsItem(
@@ -365,27 +367,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     label: AppLocalizations.of(context).kullanimKilavuzu,
                     description: 'FamilyHub\'ı nasıl kullanacağınızı öğrenin',
                     onTap: () => context.push(AppRoutes.userGuide),
-                  ),
-                  SettingsItem(
-                    icon: Icons.support_agent_outlined,
-                    iconColor: const Color(0xFF10B981),
-                    label: AppLocalizations.of(context).destekIleIletisim,
-                    description: AppLocalizations.of(context).sorulariniziVeOnerileriniziPaylasin,
-                    onTap: () => _openSupport(context),
-                  ),
-                  SettingsItem(
-                    icon: Icons.bug_report_outlined,
-                    iconColor: const Color(0xFFF59E0B),
-                    label: 'Hata Bildir',
-                    description: AppLocalizations.of(context).karsilastiginizSorunuRaporlayin,
-                    onTap: () => _openBugReport(context),
-                  ),
-                  SettingsItem(
-                    icon: Icons.star_outline,
-                    iconColor: const Color(0xFFEC4899),
-                    label: AppLocalizations.of(context).biziDegerlendirin,
-                    description: 'App Store\'da puan verin',
-                    onTap: () => _openAppStore(context),
                     isLast: true,
                   ),
                 ],
@@ -586,26 +567,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ),
         ],
       ),
-    );
-  }
-
-  // ── Yardımcı Aksiyonlar ──────────────────────────────────────────────────
-
-  void _openSupport(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('destek@familyhub.app')),
-    );
-  }
-
-  void _openBugReport(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('hata@familyhub.app')),
-    );
-  }
-
-  void _openAppStore(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(AppLocalizations.of(context).degerlendirmeSayfasiAciliyor)),
     );
   }
 
