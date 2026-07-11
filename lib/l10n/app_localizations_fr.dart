@@ -3063,6 +3063,40 @@ class AppLocalizationsFr extends AppLocalizations {
   String get kitchenTitle => 'Cuisine familiale';
 
   @override
+  String get privacyAiSection => 'AUTORISATIONS IA';
+
+  @override
+  String get privacyAiDesc =>
+      'À quelles données FamilyHub AI peut accéder ; les données sensibles sont désactivées par défaut';
+
+  @override
+  String get privacySensitive => 'Sensible';
+
+  @override
+  String get privacyModCalendar => 'Calendrier';
+
+  @override
+  String get privacyModTasks => 'Tâches';
+
+  @override
+  String get privacyModShopping => 'Courses';
+
+  @override
+  String get privacyModKitchen => 'Cuisine';
+
+  @override
+  String get privacyModHealth => 'Santé';
+
+  @override
+  String get privacyModFinance => 'Finances';
+
+  @override
+  String get privacyModChild => 'Enfant';
+
+  @override
+  String get privacyModLocation => 'Localisation';
+
+  @override
   String kitchenRecipeCount(Object count) {
     return '$count recettes · plan hebdo';
   }

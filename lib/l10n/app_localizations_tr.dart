@@ -3069,6 +3069,40 @@ class AppLocalizationsTr extends AppLocalizations {
   String get kitchenTitle => 'Aile Mutfağı';
 
   @override
+  String get privacyAiSection => 'AI VERİ İZİNLERİ';
+
+  @override
+  String get privacyAiDesc =>
+      'FamilyHub AI hangi verilere erişebilir; hassas veriler varsayılan kapalı';
+
+  @override
+  String get privacySensitive => 'Hassas';
+
+  @override
+  String get privacyModCalendar => 'Takvim';
+
+  @override
+  String get privacyModTasks => 'Görevler';
+
+  @override
+  String get privacyModShopping => 'Alışveriş';
+
+  @override
+  String get privacyModKitchen => 'Mutfak';
+
+  @override
+  String get privacyModHealth => 'Sağlık';
+
+  @override
+  String get privacyModFinance => 'Finans';
+
+  @override
+  String get privacyModChild => 'Çocuk';
+
+  @override
+  String get privacyModLocation => 'Konum';
+
+  @override
   String kitchenRecipeCount(Object count) {
     return '$count tarif · haftalık plan';
   }

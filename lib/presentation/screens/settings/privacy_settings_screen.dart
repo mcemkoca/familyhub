@@ -6,6 +6,8 @@ import 'dart:io';
 
 import '../../../core/supabase_client.dart';
 import '../../../services/auth_service.dart';
+import '../../../features/privacy/domain/privacy_preferences.dart';
+import '../../../features/privacy/data/privacy_repository.dart';
 import '../../widgets/settings/hive_settings_toggle.dart';
 import '../../widgets/settings/screen_header.dart';
 import '../../widgets/settings/settings_section.dart';
@@ -186,6 +188,14 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
               ],
             ),
           ),
+          // ── AI VERİ İZİNLERİ (PrivacyPreferences modeline bağlı) ──
+          SliverToBoxAdapter(
+            child: SettingsSection(
+              title: AppLocalizations.of(context).privacyAiSection,
+              icon: Icons.smart_toy_outlined,
+              children: [_AiPermissions()],
+            ),
+          ),
           SliverToBoxAdapter(
             child: SettingsSection(
               title: 'GDPR',
@@ -208,6 +218,86 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
           ),
         ],
       ),
+    );
+  }
+}
+
+/// AI veri izinleri — PrivacyPreferences modeline bağlı, modül bazlı switch.
+/// Hassas modüller (sağlık/finans/çocuk/konum) varsayılan kapalı + rozet.
+class _AiPermissions extends StatefulWidget {
+  @override
+  State<_AiPermissions> createState() => _AiPermissionsState();
+}
+
+class _AiPermissionsState extends State<_AiPermissions> {
+  final _repo = PrivacyRepository.instance;
+  late PrivacyPreferences _prefs = _repo.load();
+
+  static const _order = [
+    PrivacyModule.calendar,
+    PrivacyModule.tasks,
+    PrivacyModule.shopping,
+    PrivacyModule.kitchen,
+    PrivacyModule.health,
+    PrivacyModule.finance,
+    PrivacyModule.child,
+    PrivacyModule.location,
+  ];
+
+  String _label(AppLocalizations t, PrivacyModule m) => switch (m) {
+        PrivacyModule.calendar => t.privacyModCalendar,
+        PrivacyModule.tasks => t.privacyModTasks,
+        PrivacyModule.shopping => t.privacyModShopping,
+        PrivacyModule.kitchen => t.privacyModKitchen,
+        PrivacyModule.health => t.privacyModHealth,
+        PrivacyModule.finance => t.privacyModFinance,
+        PrivacyModule.child => t.privacyModChild,
+        PrivacyModule.location => t.privacyModLocation,
+      };
+
+  Future<void> _toggle(PrivacyModule m, bool v) async {
+    final next = _prefs.toggleModule(m, v);
+    await _repo.save(next);
+    if (mounted) setState(() => _prefs = next);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
+          child: Text(t.privacyAiDesc,
+              style: const TextStyle(color: Color(0xFF6B7280), fontSize: 12)),
+        ),
+        for (final m in _order)
+          SwitchListTile(
+            value: _prefs.aiAllows(m),
+            activeTrackColor: const Color(0xFF6366F1),
+            onChanged: (v) => _toggle(m, v),
+            title: Row(children: [
+              Text(_label(t, m),
+                  style: const TextStyle(color: Color(0xFFE5E7EB), fontSize: 15)),
+              if (PrivacyPreferences.isSensitive(m)) ...[
+                const SizedBox(width: 8),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: const Color(0x33F59E0B),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Text(t.privacySensitive,
+                      style: const TextStyle(
+                          color: Color(0xFFF59E0B),
+                          fontSize: 10,
+                          fontWeight: FontWeight.w700)),
+                ),
+              ],
+            ]),
+          ),
+      ],
     );
   }
 }

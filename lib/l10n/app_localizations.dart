@@ -5924,6 +5924,72 @@ abstract class AppLocalizations {
   /// **'Aile Mutfağı'**
   String get kitchenTitle;
 
+  /// No description provided for @privacyAiSection.
+  ///
+  /// In tr, this message translates to:
+  /// **'AI VERİ İZİNLERİ'**
+  String get privacyAiSection;
+
+  /// No description provided for @privacyAiDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'FamilyHub AI hangi verilere erişebilir; hassas veriler varsayılan kapalı'**
+  String get privacyAiDesc;
+
+  /// No description provided for @privacySensitive.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hassas'**
+  String get privacySensitive;
+
+  /// No description provided for @privacyModCalendar.
+  ///
+  /// In tr, this message translates to:
+  /// **'Takvim'**
+  String get privacyModCalendar;
+
+  /// No description provided for @privacyModTasks.
+  ///
+  /// In tr, this message translates to:
+  /// **'Görevler'**
+  String get privacyModTasks;
+
+  /// No description provided for @privacyModShopping.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alışveriş'**
+  String get privacyModShopping;
+
+  /// No description provided for @privacyModKitchen.
+  ///
+  /// In tr, this message translates to:
+  /// **'Mutfak'**
+  String get privacyModKitchen;
+
+  /// No description provided for @privacyModHealth.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sağlık'**
+  String get privacyModHealth;
+
+  /// No description provided for @privacyModFinance.
+  ///
+  /// In tr, this message translates to:
+  /// **'Finans'**
+  String get privacyModFinance;
+
+  /// No description provided for @privacyModChild.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çocuk'**
+  String get privacyModChild;
+
+  /// No description provided for @privacyModLocation.
+  ///
+  /// In tr, this message translates to:
+  /// **'Konum'**
+  String get privacyModLocation;
+
   /// No description provided for @kitchenRecipeCount.
   ///
   /// In tr, this message translates to:

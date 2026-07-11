@@ -3052,6 +3052,40 @@ class AppLocalizationsNl extends AppLocalizations {
   String get kitchenTitle => 'Gezinskeuken';
 
   @override
+  String get privacyAiSection => 'AI-GEGEVENSTOEGANG';
+
+  @override
+  String get privacyAiDesc =>
+      'Tot welke gegevens FamilyHub AI toegang heeft; gevoelige gegevens standaard uit';
+
+  @override
+  String get privacySensitive => 'Gevoelig';
+
+  @override
+  String get privacyModCalendar => 'Agenda';
+
+  @override
+  String get privacyModTasks => 'Taken';
+
+  @override
+  String get privacyModShopping => 'Boodschappen';
+
+  @override
+  String get privacyModKitchen => 'Keuken';
+
+  @override
+  String get privacyModHealth => 'Gezondheid';
+
+  @override
+  String get privacyModFinance => 'Financiën';
+
+  @override
+  String get privacyModChild => 'Kind';
+
+  @override
+  String get privacyModLocation => 'Locatie';
+
+  @override
   String kitchenRecipeCount(Object count) {
     return '$count recepten · weekplan';
   }
