@@ -21,6 +21,7 @@ class FamilyHubAIScreen extends ConsumerWidget {
         'fhaQuickPlanDay' => t.fhaQuickPlanDay,
         'fhaQuickBudget' => t.fhaQuickBudget,
         'fhaQuickLegal' => t.fhaQuickLegal,
+        'fhaQuickAddItems' => t.fhaQuickAddItems,
         _ => key,
       };
 
