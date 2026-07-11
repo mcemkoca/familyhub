@@ -28,8 +28,20 @@ class AIAssistantScreen extends StatefulWidget {
 class _AIAssistantScreenState extends State<AIAssistantScreen> {
   final _controller = TextEditingController();
   final _scrollController = ScrollController();
+  final _focusNode = FocusNode();
   final _messages = <_ChatMessage>[];
   bool _isLoading = false;
+
+  /// Öneriye dokununca DOĞRUDAN göndermez — input'a aktarır, imleci sona alır
+  /// ve klavyeyi açar; kullanıcı düzenleyip gönderir.
+  void _fillInput(String text) {
+    HapticFeedback.selectionClick();
+    _controller.text = text;
+    _controller.selection =
+        TextSelection.collapsed(offset: _controller.text.length);
+    _focusNode.requestFocus();
+    setState(() {});
+  }
 
   static const _suggestions = [
     'Bu hafta 4 kişilik ekonomik yemek planı yap, eksik malzemeleri alışveriş listeme ekle, bütçeyi 60 euro altında tut.',
@@ -95,6 +107,7 @@ class _AIAssistantScreenState extends State<AIAssistantScreen> {
   void dispose() {
     _controller.dispose();
     _scrollController.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -132,7 +145,6 @@ class _AIAssistantScreenState extends State<AIAssistantScreen> {
       ),
       body: Column(
         children: [
-          if (_messages.length == 1) _buildSuggestionChips(),
           Expanded(
             child: ListView.builder(
               controller: _scrollController,
@@ -144,6 +156,10 @@ class _AIAssistantScreenState extends State<AIAssistantScreen> {
               },
             ),
           ),
+          // Öneriler input'un HEMEN ÜSTÜNDE (klavye açıkken de görünür,
+          // mesajları örtmez). Yalnızca input boşken göster — dağıtmaz.
+          if (_controller.text.trim().isEmpty && !_isLoading)
+            _buildSuggestionChips(),
           _buildInput(),
         ],
       ),
@@ -160,7 +176,7 @@ class _AIAssistantScreenState extends State<AIAssistantScreen> {
         separatorBuilder: (_, _) => const SizedBox(width: 8),
         itemBuilder: (context, i) {
           return GestureDetector(
-            onTap: () => _sendMessage(_suggestions[i]),
+            onTap: () => _fillInput(_suggestions[i]),
             child: Container(
               width: 220,
               padding: const EdgeInsets.all(10),
@@ -334,8 +350,11 @@ class _AIAssistantScreenState extends State<AIAssistantScreen> {
                   ),
                   child: TextField(
                     controller: _controller,
+                    focusNode: _focusNode,
                     maxLines: null,
                     textCapitalization: TextCapitalization.sentences,
+                    // Yazdıkça öneri panelinin görünürlüğü güncellensin.
+                    onChanged: (_) => setState(() {}),
                     style: const TextStyle(color: Color(0xFFE5E7EB), fontSize: 14),
                     decoration: const InputDecoration(
                       hintText: 'Ne yapmamı istersin?',
