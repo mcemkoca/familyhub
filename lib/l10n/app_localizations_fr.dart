@@ -3227,6 +3227,28 @@ class AppLocalizationsFr extends AppLocalizations {
   String get fiPreparingDay => 'Je prépare votre journée…';
 
   @override
+  String get googleErrCancelled => 'Connexion annulée';
+
+  @override
+  String get googleErrConfig =>
+      'La connexion Google n\'a pas pu être configurée pour le moment. Réessayez plus tard.';
+
+  @override
+  String get googleErrNetwork =>
+      'Vérifiez votre connexion Internet et réessayez.';
+
+  @override
+  String get googleErrScope =>
+      'L\'autorisation Google Drive requise n\'a pas été accordée.';
+
+  @override
+  String get googleErrDrive => 'Google Drive est actuellement indisponible.';
+
+  @override
+  String get googleErrUnknown =>
+      'Impossible de se connecter à Google. Veuillez réessayer.';
+
+  @override
   String get familyHubAITitle => 'FamilyHub AI';
 
   @override

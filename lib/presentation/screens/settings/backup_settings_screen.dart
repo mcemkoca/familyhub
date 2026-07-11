@@ -46,6 +46,19 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
     } catch (e) { debugPrint('Backup settings error: $e'); }
   }
 
+  /// Google hata türünü lokalize mesaja çevirir (ham exception gösterme).
+  String _googleErrMessage(GoogleAuthError type) {
+    final t = AppLocalizations.of(context);
+    return switch (type) {
+      GoogleAuthError.cancelled => t.googleErrCancelled,
+      GoogleAuthError.configuration => t.googleErrConfig,
+      GoogleAuthError.network => t.googleErrNetwork,
+      GoogleAuthError.scopeDenied => t.googleErrScope,
+      GoogleAuthError.driveUnavailable => t.googleErrDrive,
+      GoogleAuthError.unknown => t.googleErrUnknown,
+    };
+  }
+
   Future<void> _signIn() async {
     HapticFeedback.mediumImpact();
     try {
@@ -58,11 +71,17 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
         await _loadBackups();
       }
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Giriş hatası: $e'), backgroundColor: AppColors.error),
-        );
-      }
+      if (!mounted) return;
+      final type = GoogleDriveService.classifyError(e);
+      // İptal bir hata değildir — kırmızı hata yerine nötr bilgi göster.
+      final isCancel = type == GoogleAuthError.cancelled;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(_googleErrMessage(type)),
+          backgroundColor: isCancel ? null : AppColors.error,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
     }
   }
 

@@ -3214,6 +3214,28 @@ class AppLocalizationsNl extends AppLocalizations {
   String get fiPreparingDay => 'Ik bereid je dag voor…';
 
   @override
+  String get googleErrCancelled => 'Aanmelding geannuleerd';
+
+  @override
+  String get googleErrConfig =>
+      'Google-verbinding kon nu niet worden geconfigureerd. Probeer het later opnieuw.';
+
+  @override
+  String get googleErrNetwork =>
+      'Controleer je internetverbinding en probeer het opnieuw.';
+
+  @override
+  String get googleErrScope =>
+      'De vereiste Google Drive-toestemming is niet verleend.';
+
+  @override
+  String get googleErrDrive => 'Google Drive is momenteel niet beschikbaar.';
+
+  @override
+  String get googleErrUnknown =>
+      'Kan geen verbinding maken met Google. Probeer het opnieuw.';
+
+  @override
   String get familyHubAITitle => 'FamilyHub AI';
 
   @override

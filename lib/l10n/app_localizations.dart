@@ -6194,6 +6194,42 @@ abstract class AppLocalizations {
   /// **'Bugünü senin için hazırlıyorum…'**
   String get fiPreparingDay;
 
+  /// No description provided for @googleErrCancelled.
+  ///
+  /// In tr, this message translates to:
+  /// **'Giriş iptal edildi'**
+  String get googleErrCancelled;
+
+  /// No description provided for @googleErrConfig.
+  ///
+  /// In tr, this message translates to:
+  /// **'Google bağlantısı şu an yapılandırılamadı. Lütfen daha sonra tekrar deneyin.'**
+  String get googleErrConfig;
+
+  /// No description provided for @googleErrNetwork.
+  ///
+  /// In tr, this message translates to:
+  /// **'İnternet bağlantınızı kontrol edip tekrar deneyin.'**
+  String get googleErrNetwork;
+
+  /// No description provided for @googleErrScope.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gerekli Google Drive izni verilmedi.'**
+  String get googleErrScope;
+
+  /// No description provided for @googleErrDrive.
+  ///
+  /// In tr, this message translates to:
+  /// **'Google Drive şu anda kullanılamıyor.'**
+  String get googleErrDrive;
+
+  /// No description provided for @googleErrUnknown.
+  ///
+  /// In tr, this message translates to:
+  /// **'Google\'a bağlanılamadı. Lütfen tekrar deneyin.'**
+  String get googleErrUnknown;
+
   /// No description provided for @familyHubAITitle.
   ///
   /// In tr, this message translates to:

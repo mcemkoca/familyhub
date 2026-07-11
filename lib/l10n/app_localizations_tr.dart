@@ -3227,6 +3227,27 @@ class AppLocalizationsTr extends AppLocalizations {
   String get fiPreparingDay => 'Bugünü senin için hazırlıyorum…';
 
   @override
+  String get googleErrCancelled => 'Giriş iptal edildi';
+
+  @override
+  String get googleErrConfig =>
+      'Google bağlantısı şu an yapılandırılamadı. Lütfen daha sonra tekrar deneyin.';
+
+  @override
+  String get googleErrNetwork =>
+      'İnternet bağlantınızı kontrol edip tekrar deneyin.';
+
+  @override
+  String get googleErrScope => 'Gerekli Google Drive izni verilmedi.';
+
+  @override
+  String get googleErrDrive => 'Google Drive şu anda kullanılamıyor.';
+
+  @override
+  String get googleErrUnknown =>
+      'Google\'a bağlanılamadı. Lütfen tekrar deneyin.';
+
+  @override
   String get familyHubAITitle => 'FamilyHub AI';
 
   @override
