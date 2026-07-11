@@ -5260,4 +5260,77 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get hchTodayTip => 'Bugünkü İpucu';
+
+  @override
+  String get docInfo => 'Belge Bilgileri';
+
+  @override
+  String get docName => 'Belge Adı';
+
+  @override
+  String docUploadFailed(Object msg) {
+    return 'Yükleme hatası: $msg';
+  }
+
+  @override
+  String get docDeleteDoc => 'Belgeyi Sil';
+
+  @override
+  String get docVault => 'Evrak Kasası';
+
+  @override
+  String galSyncFailed(Object msg) {
+    return 'Senkron hatası: $msg';
+  }
+
+  @override
+  String get galDeleteConfirm => 'Bu medya silinecek. Emin misiniz?';
+
+  @override
+  String get galPickMulti => 'Galeriden Seç (Çoklu)';
+
+  @override
+  String get galSyncDevice => 'Cihaz Galerisini Senkronla';
+
+  @override
+  String get galSyncDeviceSub => 'Son fotoğrafları aile galerisine aktar';
+
+  @override
+  String get galAutoSync => 'Otomatik Senkron';
+
+  @override
+  String get galTitle => 'Aile Galerisi';
+
+  @override
+  String get sfLocationDenied =>
+      'Konum izni kalıcı reddedildi. Ayarlardan etkinleştirin.';
+
+  @override
+  String get sfSettings => 'Ayarlar';
+
+  @override
+  String get sfEmergencyActive => 'ACİL DURUM AKTİF';
+
+  @override
+  String get sfUpdateLocation => 'Konumu Güncelle';
+
+  @override
+  String get sfAmbientListen => 'Ortam Dinleme';
+
+  @override
+  String get sfFlashlight => 'Fener';
+
+  @override
+  String conImportFailed(Object msg) {
+    return 'İçe aktarma hatası: $msg';
+  }
+
+  @override
+  String get conEmail => 'E-posta';
+
+  @override
+  String get conTitle => 'Aile Rehberi';
+
+  @override
+  String get conSearchHint => 'Ara...';
 }

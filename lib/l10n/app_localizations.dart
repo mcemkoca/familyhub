@@ -9977,6 +9977,138 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Bugünkü İpucu'**
   String get hchTodayTip;
+
+  /// No description provided for @docInfo.
+  ///
+  /// In tr, this message translates to:
+  /// **'Belge Bilgileri'**
+  String get docInfo;
+
+  /// No description provided for @docName.
+  ///
+  /// In tr, this message translates to:
+  /// **'Belge Adı'**
+  String get docName;
+
+  /// No description provided for @docUploadFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yükleme hatası: {msg}'**
+  String docUploadFailed(Object msg);
+
+  /// No description provided for @docDeleteDoc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Belgeyi Sil'**
+  String get docDeleteDoc;
+
+  /// No description provided for @docVault.
+  ///
+  /// In tr, this message translates to:
+  /// **'Evrak Kasası'**
+  String get docVault;
+
+  /// No description provided for @galSyncFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Senkron hatası: {msg}'**
+  String galSyncFailed(Object msg);
+
+  /// No description provided for @galDeleteConfirm.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu medya silinecek. Emin misiniz?'**
+  String get galDeleteConfirm;
+
+  /// No description provided for @galPickMulti.
+  ///
+  /// In tr, this message translates to:
+  /// **'Galeriden Seç (Çoklu)'**
+  String get galPickMulti;
+
+  /// No description provided for @galSyncDevice.
+  ///
+  /// In tr, this message translates to:
+  /// **'Cihaz Galerisini Senkronla'**
+  String get galSyncDevice;
+
+  /// No description provided for @galSyncDeviceSub.
+  ///
+  /// In tr, this message translates to:
+  /// **'Son fotoğrafları aile galerisine aktar'**
+  String get galSyncDeviceSub;
+
+  /// No description provided for @galAutoSync.
+  ///
+  /// In tr, this message translates to:
+  /// **'Otomatik Senkron'**
+  String get galAutoSync;
+
+  /// No description provided for @galTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile Galerisi'**
+  String get galTitle;
+
+  /// No description provided for @sfLocationDenied.
+  ///
+  /// In tr, this message translates to:
+  /// **'Konum izni kalıcı reddedildi. Ayarlardan etkinleştirin.'**
+  String get sfLocationDenied;
+
+  /// No description provided for @sfSettings.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ayarlar'**
+  String get sfSettings;
+
+  /// No description provided for @sfEmergencyActive.
+  ///
+  /// In tr, this message translates to:
+  /// **'ACİL DURUM AKTİF'**
+  String get sfEmergencyActive;
+
+  /// No description provided for @sfUpdateLocation.
+  ///
+  /// In tr, this message translates to:
+  /// **'Konumu Güncelle'**
+  String get sfUpdateLocation;
+
+  /// No description provided for @sfAmbientListen.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ortam Dinleme'**
+  String get sfAmbientListen;
+
+  /// No description provided for @sfFlashlight.
+  ///
+  /// In tr, this message translates to:
+  /// **'Fener'**
+  String get sfFlashlight;
+
+  /// No description provided for @conImportFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'İçe aktarma hatası: {msg}'**
+  String conImportFailed(Object msg);
+
+  /// No description provided for @conEmail.
+  ///
+  /// In tr, this message translates to:
+  /// **'E-posta'**
+  String get conEmail;
+
+  /// No description provided for @conTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile Rehberi'**
+  String get conTitle;
+
+  /// No description provided for @conSearchHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ara...'**
+  String get conSearchHint;
 }
 
 class _AppLocalizationsDelegate

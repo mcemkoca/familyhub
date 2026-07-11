@@ -5240,4 +5240,77 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get hchTodayTip => 'Today\'s Tip';
+
+  @override
+  String get docInfo => 'Document Details';
+
+  @override
+  String get docName => 'Document Name';
+
+  @override
+  String docUploadFailed(Object msg) {
+    return 'Upload failed: $msg';
+  }
+
+  @override
+  String get docDeleteDoc => 'Delete Document';
+
+  @override
+  String get docVault => 'Document Vault';
+
+  @override
+  String galSyncFailed(Object msg) {
+    return 'Sync failed: $msg';
+  }
+
+  @override
+  String get galDeleteConfirm => 'This media will be deleted. Are you sure?';
+
+  @override
+  String get galPickMulti => 'Pick from Gallery (Multiple)';
+
+  @override
+  String get galSyncDevice => 'Sync Device Gallery';
+
+  @override
+  String get galSyncDeviceSub => 'Import recent photos to the family gallery';
+
+  @override
+  String get galAutoSync => 'Auto Sync';
+
+  @override
+  String get galTitle => 'Family Gallery';
+
+  @override
+  String get sfLocationDenied =>
+      'Location permission permanently denied. Enable it in Settings.';
+
+  @override
+  String get sfSettings => 'Settings';
+
+  @override
+  String get sfEmergencyActive => 'EMERGENCY ACTIVE';
+
+  @override
+  String get sfUpdateLocation => 'Update Location';
+
+  @override
+  String get sfAmbientListen => 'Ambient Listening';
+
+  @override
+  String get sfFlashlight => 'Flashlight';
+
+  @override
+  String conImportFailed(Object msg) {
+    return 'Import failed: $msg';
+  }
+
+  @override
+  String get conEmail => 'Email';
+
+  @override
+  String get conTitle => 'Family Contacts';
+
+  @override
+  String get conSearchHint => 'Search...';
 }

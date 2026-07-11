@@ -5241,4 +5241,79 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get hchTodayTip => 'Tip van vandaag';
+
+  @override
+  String get docInfo => 'Documentgegevens';
+
+  @override
+  String get docName => 'Documentnaam';
+
+  @override
+  String docUploadFailed(Object msg) {
+    return 'Uploaden mislukt: $msg';
+  }
+
+  @override
+  String get docDeleteDoc => 'Document verwijderen';
+
+  @override
+  String get docVault => 'Documentkluis';
+
+  @override
+  String galSyncFailed(Object msg) {
+    return 'Synchronisatie mislukt: $msg';
+  }
+
+  @override
+  String get galDeleteConfirm =>
+      'Deze media wordt verwijderd. Weet je het zeker?';
+
+  @override
+  String get galPickMulti => 'Kiezen uit galerij (meerdere)';
+
+  @override
+  String get galSyncDevice => 'Apparaatgalerij synchroniseren';
+
+  @override
+  String get galSyncDeviceSub =>
+      'Recente foto\'s importeren naar de gezinsgalerij';
+
+  @override
+  String get galAutoSync => 'Automatisch synchroniseren';
+
+  @override
+  String get galTitle => 'Gezinsgalerij';
+
+  @override
+  String get sfLocationDenied =>
+      'Locatietoestemming permanent geweigerd. Schakel in via Instellingen.';
+
+  @override
+  String get sfSettings => 'Instellingen';
+
+  @override
+  String get sfEmergencyActive => 'NOODGEVAL ACTIEF';
+
+  @override
+  String get sfUpdateLocation => 'Locatie bijwerken';
+
+  @override
+  String get sfAmbientListen => 'Omgevingsgeluid';
+
+  @override
+  String get sfFlashlight => 'Zaklamp';
+
+  @override
+  String conImportFailed(Object msg) {
+    return 'Importeren mislukt: $msg';
+  }
+
+  @override
+  String get conEmail => 'E-mail';
+
+  @override
+  String get conTitle => 'Gezinscontacten';
+
+  @override
+  String get conSearchHint => 'Zoeken...';
 }

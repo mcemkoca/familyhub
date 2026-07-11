@@ -5261,4 +5261,78 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get hchTodayTip => 'Astuce du jour';
+
+  @override
+  String get docInfo => 'Details du document';
+
+  @override
+  String get docName => 'Nom du document';
+
+  @override
+  String docUploadFailed(Object msg) {
+    return 'Echec du telechargement : $msg';
+  }
+
+  @override
+  String get docDeleteDoc => 'Supprimer le document';
+
+  @override
+  String get docVault => 'Coffre-fort de documents';
+
+  @override
+  String galSyncFailed(Object msg) {
+    return 'Echec de la synchronisation : $msg';
+  }
+
+  @override
+  String get galDeleteConfirm => 'Ce media sera supprime. Etes-vous sur ?';
+
+  @override
+  String get galPickMulti => 'Choisir dans la galerie (multiple)';
+
+  @override
+  String get galSyncDevice => 'Synchroniser la galerie de l\'appareil';
+
+  @override
+  String get galSyncDeviceSub =>
+      'Importer les photos recentes dans la galerie familiale';
+
+  @override
+  String get galAutoSync => 'Synchronisation auto';
+
+  @override
+  String get galTitle => 'Galerie familiale';
+
+  @override
+  String get sfLocationDenied =>
+      'Autorisation de localisation refusee. Activez-la dans les Parametres.';
+
+  @override
+  String get sfSettings => 'Parametres';
+
+  @override
+  String get sfEmergencyActive => 'URGENCE ACTIVE';
+
+  @override
+  String get sfUpdateLocation => 'Mettre a jour la position';
+
+  @override
+  String get sfAmbientListen => 'Ecoute ambiante';
+
+  @override
+  String get sfFlashlight => 'Lampe torche';
+
+  @override
+  String conImportFailed(Object msg) {
+    return 'Echec de l\'import : $msg';
+  }
+
+  @override
+  String get conEmail => 'E-mail';
+
+  @override
+  String get conTitle => 'Contacts de la famille';
+
+  @override
+  String get conSearchHint => 'Rechercher...';
 }

@@ -129,7 +129,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('İçe aktarma hatası: $e')));
+        ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).conImportFailed('$e'))));
       }
     } finally {
       setState(() => _isLoading = false);
@@ -171,24 +171,24 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
                 const SizedBox(height: 16),
                 TextField(
                   controller: _nameController,
-                  decoration: const InputDecoration(labelText: 'Ad Soyad'),
+                  decoration: InputDecoration(labelText: AppLocalizations.of(context).hcFullName),
                 ),
                 const SizedBox(height: 12),
                 TextField(
                   controller: _phoneController,
                   keyboardType: TextInputType.phone,
-                  decoration: const InputDecoration(labelText: 'Telefon'),
+                  decoration: InputDecoration(labelText: AppLocalizations.of(context).crashPhone),
                 ),
                 const SizedBox(height: 12),
                 TextField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(labelText: 'E-posta'),
+                  decoration: InputDecoration(labelText: AppLocalizations.of(context).conEmail),
                 ),
                 const SizedBox(height: 12),
                 TextField(
                   controller: _notesController,
-                  decoration: const InputDecoration(labelText: 'Notlar'),
+                  decoration: InputDecoration(labelText: AppLocalizations.of(context).hcNotes),
                 ),
                 const SizedBox(height: 12),
                 Text(AppLocalizations.of(context).tur, style: Theme.of(context).textTheme.bodySmall),
@@ -288,7 +288,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Sil', style: TextStyle(color: AppColors.error)),
+            child: Text(AppLocalizations.of(context).budDelete, style: const TextStyle(color: AppColors.error)),
           ),
         ],
       ),
@@ -315,7 +315,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Aile Rehberi'),
+        title: Text(AppLocalizations.of(context).conTitle),
         centerTitle: true,
         actions: [
           IconButton(
@@ -332,7 +332,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'Ara...',
+                hintText: AppLocalizations.of(context).conSearchHint,
                 prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),

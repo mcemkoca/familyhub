@@ -101,8 +101,8 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
             borderRadius: BorderRadius.circular(20),
             side: const BorderSide(color: Color(0x1EFFFFFF), width: 0.5),
           ),
-          title: const Text('Belge Bilgileri',
-              style: TextStyle(color: Color(0xFFE5E7EB))),
+          title: Text(AppLocalizations.of(context).docInfo,
+              style: const TextStyle(color: Color(0xFFE5E7EB))),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -113,7 +113,7 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
                   controller: titleCtrl,
                   style: const TextStyle(color: Color(0xFFE5E7EB)),
                   decoration: InputDecoration(
-                    labelText: 'Belge Adı',
+                    labelText: AppLocalizations.of(context).docName,
                     labelStyle: const TextStyle(color: Color(0xFF9CA3AF)),
                     filled: true,
                     fillColor: const Color(0x1AFFFFFF),
@@ -125,8 +125,8 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
                 ),
                 const SizedBox(height: 16),
                 // Category
-                const Text('Kategori',
-                    style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 12)),
+                Text(AppLocalizations.of(context).budCategory,
+                    style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 12)),
                 const SizedBox(height: 8),
                 Wrap(
                   spacing: 8,
@@ -239,7 +239,7 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
                 category: category,
                 expiry: expiry,
               )),
-              child: const Text('Kaydet'),
+              child: Text(AppLocalizations.of(context).save),
             ),
           ],
         ),
@@ -345,7 +345,7 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Yükleme hatası: $e'),
+            content: Text(AppLocalizations.of(context).docUploadFailed('$e')),
             backgroundColor: const Color(0xFFEF4444),
           ),
         );
@@ -359,7 +359,7 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Belgeyi Sil'),
+        title: Text(AppLocalizations.of(context).docDeleteDoc),
         content: Text('${doc.title} silinecek. Emin misiniz?'),
         actions: [
           TextButton(
@@ -368,7 +368,7 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Sil', style: TextStyle(color: AppColors.error)),
+            child: Text(AppLocalizations.of(context).budDelete, style: const TextStyle(color: AppColors.error)),
           ),
         ],
       ),
@@ -458,7 +458,7 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
       appBar: AppBar(
-        title: const Text('Evrak Kasası'),
+        title: Text(AppLocalizations.of(context).docVault),
         centerTitle: true,
         backgroundColor: const Color(0xFF0A0A0F),
         foregroundColor: const Color(0xFFE5E7EB),
@@ -667,10 +667,10 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
                       child: Text(AppLocalizations.of(context).gorevOlustur,
                           style: const TextStyle(color: Color(0xFFE5E7EB))),
                     ),
-                    const PopupMenuItem(
+                    PopupMenuItem(
                       value: 'delete',
-                      child: Text('Sil',
-                          style: TextStyle(color: Color(0xFFEF4444))),
+                      child: Text(AppLocalizations.of(context).budDelete,
+                          style: const TextStyle(color: Color(0xFFEF4444))),
                     ),
                   ],
                 ),

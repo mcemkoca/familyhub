@@ -72,7 +72,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Senkron hatası: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context).galSyncFailed('$e'))),
         );
       }
     } finally {
@@ -195,12 +195,12 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
       context: context,
       builder: (_) => AlertDialog(
         title: Text(AppLocalizations.of(context).delete),
-        content: const Text('Bu medya silinecek. Emin misiniz?'),
+        content: Text(AppLocalizations.of(context).galDeleteConfirm),
         actions: [
           TextButton(onPressed: () => Navigator.pop(context, false), child: Text(AppLocalizations.of(context).cancel)),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Sil', style: TextStyle(color: AppColors.error)),
+            child: Text(AppLocalizations.of(context).budDelete, style: const TextStyle(color: AppColors.error)),
           ),
         ],
       ),
@@ -286,7 +286,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
                 _DarkListTile(
                   icon: Icons.photo_library_outlined,
                   color: const Color(0xFFEC4899),
-                  title: 'Galeriden Seç (Çoklu)',
+                  title: AppLocalizations.of(context).galPickMulti,
                   subtitle: AppLocalizations.of(context).birdenFazlaFotografVeyaVideo,
                   onTap: () { Navigator.pop(context); _pickMultipleFromGallery(); },
                 ),
@@ -301,8 +301,8 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
                 _DarkListTile(
                   icon: Icons.sync,
                   color: const Color(0xFF10B981),
-                  title: 'Cihaz Galerisini Senkronla',
-                  subtitle: 'Son fotoğrafları aile galerisine aktar',
+                  title: AppLocalizations.of(context).galSyncDevice,
+                  subtitle: AppLocalizations.of(context).galSyncDeviceSub,
                   onTap: () { Navigator.pop(context); _manualSync(); },
                 ),
                 const SizedBox(height: 8),
@@ -325,9 +325,9 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
                           child: const Icon(Icons.autorenew, size: 18, color: Color(0xFF10B981)),
                         ),
                         const SizedBox(width: 12),
-                        const Expanded(
-                          child: Text('Otomatik Senkron',
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFFE5E7EB))),
+                        Expanded(
+                          child: Text(AppLocalizations.of(context).galAutoSync,
+                              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFFE5E7EB))),
                         ),
                         Switch(
                           value: GallerySyncService.autoSyncEnabled,
@@ -471,8 +471,8 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
               child: const Icon(Icons.photo_library_outlined, color: Colors.white, size: 17),
             ),
             const SizedBox(width: 10),
-            const Text('Aile Galerisi',
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: Color(0xFFE5E7EB))),
+            Text(AppLocalizations.of(context).galTitle,
+                style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: Color(0xFFE5E7EB))),
           ],
         ),
         bottom: TabBar(
@@ -516,7 +516,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen>
               onPressed: _showUploadOptions,
               backgroundColor: const Color(0xFF6366F1),
               icon: const Icon(Icons.add, color: Colors.white),
-              label: const Text('Ekle', style: TextStyle(color: Colors.white)),
+              label: Text(AppLocalizations.of(context).crashAdd, style: const TextStyle(color: Colors.white)),
             ),
     );
   }

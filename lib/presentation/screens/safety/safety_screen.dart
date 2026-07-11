@@ -71,12 +71,12 @@ class _SafetyScreenState extends State<SafetyScreen>
       onDeniedForever: () async {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Konum izni kalıcı reddedildi. Ayarlardan etkinleştirin.'),
-            backgroundColor: Color(0xFF13131A),
+          SnackBar(
+            content: Text(AppLocalizations.of(context).sfLocationDenied),
+            backgroundColor: const Color(0xFF13131A),
             action: SnackBarAction(
-              label: 'Ayarlar',
-              textColor: Color(0xFF6366F1),
+              label: AppLocalizations.of(context).sfSettings,
+              textColor: const Color(0xFF6366F1),
               onPressed: openAppSettings,
             ),
           ),
@@ -199,11 +199,11 @@ class _SafetyScreenState extends State<SafetyScreen>
         builder: (context) => AlertDialog(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          title: const Row(
+          title: Row(
             children: [
-              Icon(Icons.warning_amber_rounded, color: AppColors.error),
-              SizedBox(width: 8),
-              Text('ACİL DURUM AKTİF'),
+              const Icon(Icons.warning_amber_rounded, color: AppColors.error),
+              const SizedBox(width: 8),
+              Text(AppLocalizations.of(context).sfEmergencyActive),
             ],
           ),
           content: const Text(
@@ -220,7 +220,7 @@ class _SafetyScreenState extends State<SafetyScreen>
             ),
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('Konumu Güncelle'),
+              child: Text(AppLocalizations.of(context).sfUpdateLocation),
             ),
             TextButton(
               onPressed: () {
@@ -564,14 +564,14 @@ class _SafetyScreenState extends State<SafetyScreen>
                     SafetyTool(
                       icon: Icons.mic_none,
                       iconColor: const Color(0xFFF59E0B),
-                      label: 'Ortam Dinleme',
+                      label: AppLocalizations.of(context).sfAmbientListen,
                       description: AppLocalizations.of(context).acilDurumdaSesKaydi,
                       onTap: () => context.push(AppRoutes.ambientListening),
                     ),
                     SafetyTool(
                       icon: Icons.flashlight_on_outlined,
                       iconColor: const Color(0xFF8B5CF6),
-                      label: 'Fener',
+                      label: AppLocalizations.of(context).sfFlashlight,
                       description: AppLocalizations.of(context).telefonFeneriniAc,
                       onTap: () => context.push(AppRoutes.flashlight),
                     ),
