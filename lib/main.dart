@@ -10,6 +10,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'l10n/app_localizations.dart';
 import 'core/config/env.dart';
+import 'core/localization/app_locale.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'config/constants.dart';
@@ -88,6 +89,7 @@ Future<void> _initAndRunApp() async {
   ThemeMode themeMode = ThemeMode.light;
   Color accentColor = AppColors.cobalt;
   double fontScale = 1.0;
+  Locale initialLocale = AppLanguage.defaultLanguage.locale;
   List<Task> savedTasks = [];
   List<ChatMessage> savedChatMessages = [];
   List<StreakEntry> savedStreaks = [];
@@ -95,9 +97,18 @@ Future<void> _initAndRunApp() async {
   try {
     // Fast local init first
     await _safeInit(
-      () => initializeDateFormatting('tr_TR', null),
+      () async {
+        for (final localeName in const [
+          'tr_TR',
+          'nl_BE',
+          'fr_BE',
+          'en_GB',
+        ]) {
+          await initializeDateFormatting(localeName, null);
+        }
+      },
       'dateFormatting',
-      ms: 2000,
+      ms: 4000,
     );
     await _safeInit(Hive.initFlutter, 'Hive', ms: 2000);
     await _safeInit(HiveService.init, 'HiveService', ms: 2000);
@@ -118,6 +129,16 @@ Future<void> _initAndRunApp() async {
       _ => AppColors.cobalt,
     };
     fontScale = HiveService.getDoubleSetting('fontScale') ?? 1.0;
+
+    final savedLanguage =
+        HiveService.getSetting('languageCode') ??
+        HiveService.getSetting('language');
+    final appLanguage = AppLanguage.fromStoredValue(savedLanguage);
+    initialLocale = appLanguage.locale;
+
+    // Migrate legacy display-name storage to a stable language code.
+    await HiveService.setSetting('languageCode', appLanguage.code);
+    await HiveService.setSetting('language', appLanguage.nativeName);
 
     savedTasks = _safeCall(HiveService.getTasks, 'getTasks');
     savedChatMessages = _safeCall(
@@ -222,6 +243,7 @@ Future<void> _initAndRunApp() async {
           themeModeProvider.overrideWith((ref) => themeMode),
           accentColorProvider.overrideWith((ref) => accentColor),
           fontScaleProvider.overrideWith((ref) => fontScale),
+          localeProvider.overrideWith((ref) => initialLocale),
           tasksProvider.overrideWith((ref) => savedTasks),
           // transactionsProvider intentionally not overridden — BudgetNotifier loads from repository
           chatMessagesProvider.overrideWith((ref) => savedChatMessages),
@@ -359,14 +381,14 @@ class _FamilyHubAppState extends ConsumerState<FamilyHubApp>
       ),
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        title: 'FamilyHub',
+        onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: const [Locale('tr', 'TR'), Locale('en', 'US')],
+        supportedLocales: supportedAppLocales,
         locale: ref.watch(localeProvider),
         theme: AppTheme.lightTheme(accentColor, fontScale: fontScale),
         darkTheme: AppTheme.darkTheme(accentColor, fontScale: fontScale),
