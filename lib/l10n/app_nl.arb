@@ -1587,5 +1587,20 @@
   "budDescOptional": "Omschrijving (optioneel)",
   "budAiSuggestion": "AI-suggestie: {cat}",
   "budSuggestCategory": "Categorie voorstellen met AI",
-  "budEnterValidAmount": "Voer een geldig bedrag in"
+  "budEnterValidAmount": "Voer een geldig bedrag in",
+  "crashTest": "Testen",
+  "crashDetectionActive": "Crashdetectie actief",
+  "crashSound": "Geluid",
+  "crashEmergencyAlarm": "Noodalarm",
+  "crashSiren": "Sirene",
+  "crashSos": "SOS",
+  "crashAlarm": "Alarm",
+  "crashSaveUpper": "OPSLAAN",
+  "crashAddContact": "Noodcontact toevoegen",
+  "crashPhone": "Telefoon",
+  "crashAdd": "Toevoegen",
+  "crashContacts": "Noodcontacten",
+  "crashNoContacts": "Nog geen noodcontacten. Voeg toe met +.",
+  "crashSettingsSaved": "Instellingen opgeslagen",
+  "crashTestMode": "Testmodus"
 }

@@ -9485,6 +9485,96 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Geçerli bir tutar girin'**
   String get budEnterValidAmount;
+
+  /// No description provided for @crashTest.
+  ///
+  /// In tr, this message translates to:
+  /// **'Test Et'**
+  String get crashTest;
+
+  /// No description provided for @crashDetectionActive.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kaza tespiti aktif'**
+  String get crashDetectionActive;
+
+  /// No description provided for @crashSound.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ses'**
+  String get crashSound;
+
+  /// No description provided for @crashEmergencyAlarm.
+  ///
+  /// In tr, this message translates to:
+  /// **'Acil alarm'**
+  String get crashEmergencyAlarm;
+
+  /// No description provided for @crashSiren.
+  ///
+  /// In tr, this message translates to:
+  /// **'Siren'**
+  String get crashSiren;
+
+  /// No description provided for @crashSos.
+  ///
+  /// In tr, this message translates to:
+  /// **'SOS'**
+  String get crashSos;
+
+  /// No description provided for @crashAlarm.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alarm'**
+  String get crashAlarm;
+
+  /// No description provided for @crashSaveUpper.
+  ///
+  /// In tr, this message translates to:
+  /// **'KAYDET'**
+  String get crashSaveUpper;
+
+  /// No description provided for @crashAddContact.
+  ///
+  /// In tr, this message translates to:
+  /// **'Acil Kişi Ekle'**
+  String get crashAddContact;
+
+  /// No description provided for @crashPhone.
+  ///
+  /// In tr, this message translates to:
+  /// **'Telefon'**
+  String get crashPhone;
+
+  /// No description provided for @crashAdd.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ekle'**
+  String get crashAdd;
+
+  /// No description provided for @crashContacts.
+  ///
+  /// In tr, this message translates to:
+  /// **'Acil Kişiler'**
+  String get crashContacts;
+
+  /// No description provided for @crashNoContacts.
+  ///
+  /// In tr, this message translates to:
+  /// **'Henüz acil kişi yok. + ile ekleyin.'**
+  String get crashNoContacts;
+
+  /// No description provided for @crashSettingsSaved.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ayarlar kaydedildi'**
+  String get crashSettingsSaved;
+
+  /// No description provided for @crashTestMode.
+  ///
+  /// In tr, this message translates to:
+  /// **'Test Modu'**
+  String get crashTestMode;
 }
 
 class _AppLocalizationsDelegate

@@ -4980,4 +4980,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get budEnterValidAmount => 'Enter a valid amount';
+
+  @override
+  String get crashTest => 'Test';
+
+  @override
+  String get crashDetectionActive => 'Crash detection active';
+
+  @override
+  String get crashSound => 'Sound';
+
+  @override
+  String get crashEmergencyAlarm => 'Emergency alarm';
+
+  @override
+  String get crashSiren => 'Siren';
+
+  @override
+  String get crashSos => 'SOS';
+
+  @override
+  String get crashAlarm => 'Alarm';
+
+  @override
+  String get crashSaveUpper => 'SAVE';
+
+  @override
+  String get crashAddContact => 'Add Emergency Contact';
+
+  @override
+  String get crashPhone => 'Phone';
+
+  @override
+  String get crashAdd => 'Add';
+
+  @override
+  String get crashContacts => 'Emergency Contacts';
+
+  @override
+  String get crashNoContacts => 'No emergency contacts yet. Add with +.';
+
+  @override
+  String get crashSettingsSaved => 'Settings saved';
+
+  @override
+  String get crashTestMode => 'Test Mode';
 }

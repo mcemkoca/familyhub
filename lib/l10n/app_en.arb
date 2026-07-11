@@ -1587,5 +1587,20 @@
   "budDescOptional": "Description (optional)",
   "budAiSuggestion": "AI suggestion: {cat}",
   "budSuggestCategory": "Suggest category with AI",
-  "budEnterValidAmount": "Enter a valid amount"
+  "budEnterValidAmount": "Enter a valid amount",
+  "crashTest": "Test",
+  "crashDetectionActive": "Crash detection active",
+  "crashSound": "Sound",
+  "crashEmergencyAlarm": "Emergency alarm",
+  "crashSiren": "Siren",
+  "crashSos": "SOS",
+  "crashAlarm": "Alarm",
+  "crashSaveUpper": "SAVE",
+  "crashAddContact": "Add Emergency Contact",
+  "crashPhone": "Phone",
+  "crashAdd": "Add",
+  "crashContacts": "Emergency Contacts",
+  "crashNoContacts": "No emergency contacts yet. Add with +.",
+  "crashSettingsSaved": "Settings saved",
+  "crashTestMode": "Test Mode"
 }

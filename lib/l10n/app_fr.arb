@@ -1587,5 +1587,20 @@
   "budDescOptional": "Description (facultatif)",
   "budAiSuggestion": "Suggestion IA : {cat}",
   "budSuggestCategory": "Suggerer une categorie avec l'IA",
-  "budEnterValidAmount": "Saisissez un montant valide"
+  "budEnterValidAmount": "Saisissez un montant valide",
+  "crashTest": "Tester",
+  "crashDetectionActive": "Detection d'accident active",
+  "crashSound": "Son",
+  "crashEmergencyAlarm": "Alarme d'urgence",
+  "crashSiren": "Sirene",
+  "crashSos": "SOS",
+  "crashAlarm": "Alarme",
+  "crashSaveUpper": "ENREGISTRER",
+  "crashAddContact": "Ajouter un contact d'urgence",
+  "crashPhone": "Telephone",
+  "crashAdd": "Ajouter",
+  "crashContacts": "Contacts d'urgence",
+  "crashNoContacts": "Aucun contact d'urgence. Ajoutez avec +.",
+  "crashSettingsSaved": "Parametres enregistres",
+  "crashTestMode": "Mode test"
 }

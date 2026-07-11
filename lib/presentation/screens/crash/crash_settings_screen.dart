@@ -71,12 +71,12 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.science),
-            tooltip: 'Test Et',
+            tooltip: AppLocalizations.of(context).crashTest,
             onPressed: _showTestDialog,
           ),
           IconButton(
             icon: const Icon(Icons.save),
-            tooltip: 'Kaydet',
+            tooltip: AppLocalizations.of(context).save,
             onPressed: _saveSettings,
           ),
         ],
@@ -90,7 +90,7 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
               SwitchListTile(
                 value: _enabled,
                 onChanged: (v) => setState(() => _enabled = v),
-                title: const Text('Kaza tespiti aktif'),
+                title: Text(AppLocalizations.of(context).crashDetectionActive),
                 secondary: const Icon(Icons.shield, color: Colors.green),
               ),
               const SizedBox(height: 8),
@@ -219,13 +219,13 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
                   padding: const EdgeInsets.only(left: 16),
                   child: DropdownButtonFormField<String>(
                     initialValue: _soundType,
-                    decoration: const InputDecoration(labelText: 'Ses'),
+                    decoration: InputDecoration(labelText: AppLocalizations.of(context).crashSound),
                     items: [
-                      const DropdownMenuItem(
+                      DropdownMenuItem(
                         value: 'crash_alarm',
-                        child: Text('Acil alarm'),
+                        child: Text(AppLocalizations.of(context).crashEmergencyAlarm),
                       ),
-                      const DropdownMenuItem(value: 'siren', child: Text('Siren')),
+                      DropdownMenuItem(value: 'siren', child: Text(AppLocalizations.of(context).crashSiren)),
                       DropdownMenuItem(value: 'plain', child: Text(AppLocalizations.of(context).duzSes)),
                     ],
                     onChanged: (v) => setState(() => _soundType = v!),
@@ -241,13 +241,13 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
                   padding: const EdgeInsets.only(left: 16),
                   child: SegmentedButton<VibrationPattern>(
                     segments: [
-                      const ButtonSegment(
+                      ButtonSegment(
                         value: VibrationPattern.sos,
-                        label: Text('SOS'),
+                        label: Text(AppLocalizations.of(context).crashSos),
                       ),
-                      const ButtonSegment(
+                      ButtonSegment(
                         value: VibrationPattern.alarm,
-                        label: Text('Alarm'),
+                        label: Text(AppLocalizations.of(context).crashAlarm),
                       ),
                       ButtonSegment(
                         value: VibrationPattern.pulse,
@@ -305,7 +305,7 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
           ElevatedButton.icon(
             onPressed: _saveSettings,
             icon: const Icon(Icons.save),
-            label: const Text('KAYDET', style: TextStyle(fontSize: 16)),
+            label: Text(AppLocalizations.of(context).crashSaveUpper, style: const TextStyle(fontSize: 16)),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.green.shade700,
               foregroundColor: Colors.white,
@@ -387,7 +387,7 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
             final ok = await showDialog<bool>(
               context: ctx,
               builder: (d) => AlertDialog(
-                title: const Text('Acil Kişi Ekle'),
+                title: Text(AppLocalizations.of(context).crashAddContact),
                 content: Column(mainAxisSize: MainAxisSize.min, children: [
                   TextField(
                       controller: nameC,
@@ -395,7 +395,7 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
                   TextField(
                       controller: phoneC,
                       keyboardType: TextInputType.phone,
-                      decoration: const InputDecoration(labelText: 'Telefon')),
+                      decoration: InputDecoration(labelText: AppLocalizations.of(context).crashPhone)),
                 ]),
                 actions: [
                   TextButton(
@@ -403,7 +403,7 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
                       child: Text(AppLocalizations.of(context).cancel)),
                   FilledButton(
                       onPressed: () => Navigator.pop(d, true),
-                      child: const Text('Ekle')),
+                      child: Text(AppLocalizations.of(context).crashAdd)),
                 ],
               ),
             );
@@ -430,7 +430,7 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
                 Row(children: [
                   const Icon(Icons.contacts, color: Color(0xFFEF4444)),
                   const SizedBox(width: 8),
-                  Text('Acil Kişiler',
+                  Text(AppLocalizations.of(context).crashContacts,
                       style: TextStyle(
                           color: onS,
                           fontSize: 18,
@@ -445,7 +445,7 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
                 if (_emergencyContacts.isEmpty)
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Text('Henüz acil kişi yok. + ile ekleyin.',
+                    child: Text(AppLocalizations.of(context).crashNoContacts,
                         style: TextStyle(color: onS.withAlpha(150))),
                   )
                 else
@@ -477,14 +477,14 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
   void _saveSettings() {
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(const SnackBar(content: Text('Ayarlar kaydedildi')));
+    ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).crashSettingsSaved)));
   }
 
   void _showTestDialog() {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Test Modu'),
+        title: Text(AppLocalizations.of(context).crashTestMode),
         content: Text(AppLocalizations.of(context).telefonuSallayarakKazaSimulasyonunuBaslatin),
         actions: [
           TextButton(

@@ -4981,4 +4981,49 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get budEnterValidAmount => 'Voer een geldig bedrag in';
+
+  @override
+  String get crashTest => 'Testen';
+
+  @override
+  String get crashDetectionActive => 'Crashdetectie actief';
+
+  @override
+  String get crashSound => 'Geluid';
+
+  @override
+  String get crashEmergencyAlarm => 'Noodalarm';
+
+  @override
+  String get crashSiren => 'Sirene';
+
+  @override
+  String get crashSos => 'SOS';
+
+  @override
+  String get crashAlarm => 'Alarm';
+
+  @override
+  String get crashSaveUpper => 'OPSLAAN';
+
+  @override
+  String get crashAddContact => 'Noodcontact toevoegen';
+
+  @override
+  String get crashPhone => 'Telefoon';
+
+  @override
+  String get crashAdd => 'Toevoegen';
+
+  @override
+  String get crashContacts => 'Noodcontacten';
+
+  @override
+  String get crashNoContacts => 'Nog geen noodcontacten. Voeg toe met +.';
+
+  @override
+  String get crashSettingsSaved => 'Instellingen opgeslagen';
+
+  @override
+  String get crashTestMode => 'Testmodus';
 }

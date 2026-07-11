@@ -5001,4 +5001,49 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get budEnterValidAmount => 'Saisissez un montant valide';
+
+  @override
+  String get crashTest => 'Tester';
+
+  @override
+  String get crashDetectionActive => 'Detection d\'accident active';
+
+  @override
+  String get crashSound => 'Son';
+
+  @override
+  String get crashEmergencyAlarm => 'Alarme d\'urgence';
+
+  @override
+  String get crashSiren => 'Sirene';
+
+  @override
+  String get crashSos => 'SOS';
+
+  @override
+  String get crashAlarm => 'Alarme';
+
+  @override
+  String get crashSaveUpper => 'ENREGISTRER';
+
+  @override
+  String get crashAddContact => 'Ajouter un contact d\'urgence';
+
+  @override
+  String get crashPhone => 'Telephone';
+
+  @override
+  String get crashAdd => 'Ajouter';
+
+  @override
+  String get crashContacts => 'Contacts d\'urgence';
+
+  @override
+  String get crashNoContacts => 'Aucun contact d\'urgence. Ajoutez avec +.';
+
+  @override
+  String get crashSettingsSaved => 'Parametres enregistres';
+
+  @override
+  String get crashTestMode => 'Mode test';
 }

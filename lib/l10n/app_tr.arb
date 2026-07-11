@@ -1602,5 +1602,20 @@
   "budAiSuggestion": "AI önerisi: {cat}",
   "@budAiSuggestion": { "placeholders": { "cat": {} } },
   "budSuggestCategory": "AI ile kategori öner",
-  "budEnterValidAmount": "Geçerli bir tutar girin"
+  "budEnterValidAmount": "Geçerli bir tutar girin",
+  "crashTest": "Test Et",
+  "crashDetectionActive": "Kaza tespiti aktif",
+  "crashSound": "Ses",
+  "crashEmergencyAlarm": "Acil alarm",
+  "crashSiren": "Siren",
+  "crashSos": "SOS",
+  "crashAlarm": "Alarm",
+  "crashSaveUpper": "KAYDET",
+  "crashAddContact": "Acil Kişi Ekle",
+  "crashPhone": "Telefon",
+  "crashAdd": "Ekle",
+  "crashContacts": "Acil Kişiler",
+  "crashNoContacts": "Henüz acil kişi yok. + ile ekleyin.",
+  "crashSettingsSaved": "Ayarlar kaydedildi",
+  "crashTestMode": "Test Modu"
 }

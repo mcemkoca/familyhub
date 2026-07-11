@@ -5000,4 +5000,49 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get budEnterValidAmount => 'Geçerli bir tutar girin';
+
+  @override
+  String get crashTest => 'Test Et';
+
+  @override
+  String get crashDetectionActive => 'Kaza tespiti aktif';
+
+  @override
+  String get crashSound => 'Ses';
+
+  @override
+  String get crashEmergencyAlarm => 'Acil alarm';
+
+  @override
+  String get crashSiren => 'Siren';
+
+  @override
+  String get crashSos => 'SOS';
+
+  @override
+  String get crashAlarm => 'Alarm';
+
+  @override
+  String get crashSaveUpper => 'KAYDET';
+
+  @override
+  String get crashAddContact => 'Acil Kişi Ekle';
+
+  @override
+  String get crashPhone => 'Telefon';
+
+  @override
+  String get crashAdd => 'Ekle';
+
+  @override
+  String get crashContacts => 'Acil Kişiler';
+
+  @override
+  String get crashNoContacts => 'Henüz acil kişi yok. + ile ekleyin.';
+
+  @override
+  String get crashSettingsSaved => 'Ayarlar kaydedildi';
+
+  @override
+  String get crashTestMode => 'Test Modu';
 }
