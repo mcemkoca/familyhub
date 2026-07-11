@@ -3066,6 +3066,39 @@ class AppLocalizationsTr extends AppLocalizations {
   String get legalRemind => 'Hatırlat';
 
   @override
+  String get kitchenTitle => 'Aile Mutfağı';
+
+  @override
+  String kitchenRecipeCount(Object count) {
+    return '$count tarif · haftalık plan';
+  }
+
+  @override
+  String get kitchenAddRecipe => 'Tarif';
+
+  @override
+  String get kitchenTabRecipes => 'Tarifler';
+
+  @override
+  String get kitchenTabWeekly => 'Haftalık';
+
+  @override
+  String get kitchenTabShopping => 'Alışveriş';
+
+  @override
+  String get kitchenSearchHint => 'Tarif ara...';
+
+  @override
+  String get kitchenFillWeeklyFirst => 'Önce Haftalık Plan sekmesini doldur';
+
+  @override
+  String get kitchenAutoIngredientList =>
+      'Malzeme listesi otomatik oluşturulur';
+
+  @override
+  String get kitchenAddAllToShopping => 'Tümünü Alışveriş Listesine Ekle';
+
+  @override
   String get legalReminderSet => 'Hatırlatma kuruldu';
 
   @override

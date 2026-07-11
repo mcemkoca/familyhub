@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../config/constants.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../../services/hive_service.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/content/meal_image_service.dart';
@@ -340,9 +341,9 @@ class _KitchenScreenState extends State<KitchenScreen>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Aile Mutfağı',
-                    style: TextStyle(fontWeight: FontWeight.w900, fontSize: 19, color: Colors.white)),
-                Text('${_recipes.length} tarif · haftalık plan',
+                Text(AppLocalizations.of(context).kitchenTitle,
+                    style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 19, color: Colors.white)),
+                Text(AppLocalizations.of(context).kitchenRecipeCount('${_recipes.length}'),
                     style: TextStyle(fontSize: 11, color: Colors.white.withAlpha(120), fontWeight: FontWeight.w500)),
               ],
             ),
@@ -397,10 +398,10 @@ class _KitchenScreenState extends State<KitchenScreen>
         dividerColor: Colors.transparent,
         labelStyle: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700),
         unselectedLabelStyle: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500),
-        tabs: const [
-          Tab(icon: Icon(Icons.restaurant_menu, size: 16), text: 'Tarifler'),
-          Tab(icon: Icon(Icons.calendar_view_week, size: 16), text: 'Haftalık'),
-          Tab(icon: Icon(Icons.shopping_cart_outlined, size: 16), text: 'Alışveriş'),
+        tabs: [
+          Tab(icon: const Icon(Icons.restaurant_menu, size: 16), text: AppLocalizations.of(context).kitchenTabRecipes),
+          Tab(icon: const Icon(Icons.calendar_view_week, size: 16), text: AppLocalizations.of(context).kitchenTabWeekly),
+          Tab(icon: const Icon(Icons.shopping_cart_outlined, size: 16), text: AppLocalizations.of(context).kitchenTabShopping),
         ],
       ),
     );
@@ -537,7 +538,7 @@ class _RecipesTab extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 8, 12, 4),
       child: DsInput(
-        hint: 'Tarif ara...',
+        hint: AppLocalizations.of(context).kitchenSearchHint,
         prefixIcon: Icons.search,
         onChanged: onSearch,
       ),
@@ -817,12 +818,12 @@ class _MealShoppingTab extends StatelessWidget {
             Icon(Icons.calendar_view_week,
                 size: 72, color: const Color(0xFF6B7280).withAlpha(100)),
             const SizedBox(height: 16),
-            const Text('Önce Haftalık Plan sekmesini doldur',
-                style:
-                    TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
+            Text(AppLocalizations.of(context).kitchenFillWeeklyFirst,
+                style: const TextStyle(
+                    fontSize: 15, fontWeight: FontWeight.w600)),
             const SizedBox(height: 6),
-            const Text('Malzeme listesi otomatik oluşturulur',
-                style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+            Text(AppLocalizations.of(context).kitchenAutoIngredientList,
+                style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
           ],
         ),
       );
@@ -891,8 +892,8 @@ class _MealShoppingTab extends StatelessWidget {
                     borderRadius: BorderRadius.circular(14)),
               ),
               icon: const Icon(Icons.add_shopping_cart, color: Colors.white),
-              label: const Text('Tümünü Alışveriş Listesine Ekle',
-                  style: TextStyle(
+              label: Text(AppLocalizations.of(context).kitchenAddAllToShopping,
+                  style: const TextStyle(
                       color: Colors.white, fontWeight: FontWeight.w700)),
             ),
           ),

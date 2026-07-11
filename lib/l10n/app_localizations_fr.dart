@@ -3060,6 +3060,40 @@ class AppLocalizationsFr extends AppLocalizations {
   String get legalRemind => 'Rappeler';
 
   @override
+  String get kitchenTitle => 'Cuisine familiale';
+
+  @override
+  String kitchenRecipeCount(Object count) {
+    return '$count recettes · plan hebdo';
+  }
+
+  @override
+  String get kitchenAddRecipe => 'Recette';
+
+  @override
+  String get kitchenTabRecipes => 'Recettes';
+
+  @override
+  String get kitchenTabWeekly => 'Hebdo';
+
+  @override
+  String get kitchenTabShopping => 'Courses';
+
+  @override
+  String get kitchenSearchHint => 'Rechercher des recettes...';
+
+  @override
+  String get kitchenFillWeeklyFirst =>
+      'Remplissez d\'abord l\'onglet Plan hebdomadaire';
+
+  @override
+  String get kitchenAutoIngredientList =>
+      'La liste des ingrédients est générée automatiquement';
+
+  @override
+  String get kitchenAddAllToShopping => 'Tout ajouter à la liste de courses';
+
+  @override
   String get legalReminderSet => 'Rappel programmé';
 
   @override

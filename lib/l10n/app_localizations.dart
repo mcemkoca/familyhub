@@ -5918,6 +5918,66 @@ abstract class AppLocalizations {
   /// **'Hatırlat'**
   String get legalRemind;
 
+  /// No description provided for @kitchenTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile Mutfağı'**
+  String get kitchenTitle;
+
+  /// No description provided for @kitchenRecipeCount.
+  ///
+  /// In tr, this message translates to:
+  /// **'{count} tarif · haftalık plan'**
+  String kitchenRecipeCount(Object count);
+
+  /// No description provided for @kitchenAddRecipe.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tarif'**
+  String get kitchenAddRecipe;
+
+  /// No description provided for @kitchenTabRecipes.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tarifler'**
+  String get kitchenTabRecipes;
+
+  /// No description provided for @kitchenTabWeekly.
+  ///
+  /// In tr, this message translates to:
+  /// **'Haftalık'**
+  String get kitchenTabWeekly;
+
+  /// No description provided for @kitchenTabShopping.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alışveriş'**
+  String get kitchenTabShopping;
+
+  /// No description provided for @kitchenSearchHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tarif ara...'**
+  String get kitchenSearchHint;
+
+  /// No description provided for @kitchenFillWeeklyFirst.
+  ///
+  /// In tr, this message translates to:
+  /// **'Önce Haftalık Plan sekmesini doldur'**
+  String get kitchenFillWeeklyFirst;
+
+  /// No description provided for @kitchenAutoIngredientList.
+  ///
+  /// In tr, this message translates to:
+  /// **'Malzeme listesi otomatik oluşturulur'**
+  String get kitchenAutoIngredientList;
+
+  /// No description provided for @kitchenAddAllToShopping.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tümünü Alışveriş Listesine Ekle'**
+  String get kitchenAddAllToShopping;
+
   /// No description provided for @legalReminderSet.
   ///
   /// In tr, this message translates to:

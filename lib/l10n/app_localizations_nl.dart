@@ -3049,6 +3049,39 @@ class AppLocalizationsNl extends AppLocalizations {
   String get legalRemind => 'Herinner';
 
   @override
+  String get kitchenTitle => 'Gezinskeuken';
+
+  @override
+  String kitchenRecipeCount(Object count) {
+    return '$count recepten · weekplan';
+  }
+
+  @override
+  String get kitchenAddRecipe => 'Recept';
+
+  @override
+  String get kitchenTabRecipes => 'Recepten';
+
+  @override
+  String get kitchenTabWeekly => 'Wekelijks';
+
+  @override
+  String get kitchenTabShopping => 'Boodschappen';
+
+  @override
+  String get kitchenSearchHint => 'Recepten zoeken...';
+
+  @override
+  String get kitchenFillWeeklyFirst => 'Vul eerst het tabblad Weekplan in';
+
+  @override
+  String get kitchenAutoIngredientList =>
+      'De ingrediëntenlijst wordt automatisch gemaakt';
+
+  @override
+  String get kitchenAddAllToShopping => 'Alles toevoegen aan boodschappenlijst';
+
+  @override
   String get legalReminderSet => 'Herinnering ingesteld';
 
   @override

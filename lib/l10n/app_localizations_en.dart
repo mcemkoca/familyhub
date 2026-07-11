@@ -3049,6 +3049,39 @@ class AppLocalizationsEn extends AppLocalizations {
   String get legalRemind => 'Remind';
 
   @override
+  String get kitchenTitle => 'Family Kitchen';
+
+  @override
+  String kitchenRecipeCount(Object count) {
+    return '$count recipes · weekly plan';
+  }
+
+  @override
+  String get kitchenAddRecipe => 'Recipe';
+
+  @override
+  String get kitchenTabRecipes => 'Recipes';
+
+  @override
+  String get kitchenTabWeekly => 'Weekly';
+
+  @override
+  String get kitchenTabShopping => 'Shopping';
+
+  @override
+  String get kitchenSearchHint => 'Search recipes...';
+
+  @override
+  String get kitchenFillWeeklyFirst => 'Fill the Weekly Plan tab first';
+
+  @override
+  String get kitchenAutoIngredientList =>
+      'The ingredient list is generated automatically';
+
+  @override
+  String get kitchenAddAllToShopping => 'Add All to Shopping List';
+
+  @override
   String get legalReminderSet => 'Reminder set';
 
   @override
