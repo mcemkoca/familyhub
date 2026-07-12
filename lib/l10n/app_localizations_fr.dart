@@ -6323,4 +6323,37 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get sfCall112 => 'Appeler le 112';
+
+  @override
+  String get commonClose => 'Fermer';
+
+  @override
+  String pmPayFailed(Object msg) {
+    return 'Echec du paiement : $msg';
+  }
+
+  @override
+  String get pmPlans => 'Formules Premium';
+
+  @override
+  String get jfJoined => 'Vous avez rejoint la famille !';
+
+  @override
+  String icCreateFailed(Object msg) {
+    return 'Impossible de creer le code d\'invitation : $msg';
+  }
+
+  @override
+  String get icTitle => 'Code d\'invitation';
+
+  @override
+  String get actTitle => 'Activite recente';
+
+  @override
+  String get moodTitle => 'Humeur familiale';
+
+  @override
+  String ccCallFailed(Object msg) {
+    return 'Impossible de demarrer l\'appel : $msg';
+  }
 }

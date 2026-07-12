@@ -6302,4 +6302,37 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get sfCall112 => '112 bellen';
+
+  @override
+  String get commonClose => 'Sluiten';
+
+  @override
+  String pmPayFailed(Object msg) {
+    return 'Betaling mislukt: $msg';
+  }
+
+  @override
+  String get pmPlans => 'Premium-abonnementen';
+
+  @override
+  String get jfJoined => 'Je bent lid geworden van het gezin!';
+
+  @override
+  String icCreateFailed(Object msg) {
+    return 'Kan uitnodigingscode niet maken: $msg';
+  }
+
+  @override
+  String get icTitle => 'Uitnodigingscode';
+
+  @override
+  String get actTitle => 'Recente activiteit';
+
+  @override
+  String get moodTitle => 'Gezinsstemming';
+
+  @override
+  String ccCallFailed(Object msg) {
+    return 'Kan oproep niet starten: $msg';
+  }
 }

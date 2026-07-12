@@ -6317,4 +6317,37 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get sfCall112 => '112 Ara';
+
+  @override
+  String get commonClose => 'Kapat';
+
+  @override
+  String pmPayFailed(Object msg) {
+    return 'Ödeme başarısız: $msg';
+  }
+
+  @override
+  String get pmPlans => 'Premium Planlar';
+
+  @override
+  String get jfJoined => 'Aileye başarıyla katıldınız!';
+
+  @override
+  String icCreateFailed(Object msg) {
+    return 'Davet kodu oluşturulamadı: $msg';
+  }
+
+  @override
+  String get icTitle => 'Davet Kodu';
+
+  @override
+  String get actTitle => 'Son Aktiviteler';
+
+  @override
+  String get moodTitle => 'Aile Ruh Hali';
+
+  @override
+  String ccCallFailed(Object msg) {
+    return 'Arama başlatılamadı: $msg';
+  }
 }

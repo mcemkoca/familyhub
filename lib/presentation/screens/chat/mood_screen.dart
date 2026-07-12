@@ -12,7 +12,7 @@ class MoodScreen extends ConsumerWidget {
     final members = ref.watch(familyMembersProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Aile Ruh Hali'), centerTitle: true),
+      appBar: AppBar(title: Text(AppLocalizations.of(context).moodTitle), centerTitle: true),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
@@ -39,7 +39,7 @@ class MoodScreen extends ConsumerWidget {
             }).toList(),
           ),
           const SizedBox(height: 32),
-          Text('Aile Ruh Hali', style: Theme.of(context).textTheme.displaySmall),
+          Text(AppLocalizations.of(context).moodTitle, style: Theme.of(context).textTheme.displaySmall),
           const SizedBox(height: 12),
           ...moods.map((mood) {
             final member = members.firstWhere((m) => m.id == mood.userId, orElse: () => members.first);

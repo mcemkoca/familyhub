@@ -2055,5 +2055,17 @@
   "srApproach": "Yaklaşınca",
   "eduAgeYears": "{age} yaş",
   "@eduAgeYears": { "placeholders": { "age": {} } },
-  "sfCall112": "112 Ara"
+  "sfCall112": "112 Ara",
+  "commonClose": "Kapat",
+  "pmPayFailed": "Ödeme başarısız: {msg}",
+  "@pmPayFailed": { "placeholders": { "msg": {} } },
+  "pmPlans": "Premium Planlar",
+  "jfJoined": "Aileye başarıyla katıldınız!",
+  "icCreateFailed": "Davet kodu oluşturulamadı: {msg}",
+  "@icCreateFailed": { "placeholders": { "msg": {} } },
+  "icTitle": "Davet Kodu",
+  "actTitle": "Son Aktiviteler",
+  "moodTitle": "Aile Ruh Hali",
+  "ccCallFailed": "Arama başlatılamadı: {msg}",
+  "@ccCallFailed": { "placeholders": { "msg": {} } }
 }

@@ -107,7 +107,7 @@ class _CallContactListScreenState extends State<CallContactListScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Arama başlatılamadı: $e'),
+            content: Text(AppLocalizations.of(context).ccCallFailed('$e')),
             backgroundColor: AppColors.error,
           ),
         );
@@ -131,7 +131,7 @@ class _CallContactListScreenState extends State<CallContactListScreen> {
             const Color(0xFF0A0A0F),
         foregroundColor: const Color(0xFFE5E7EB),
         elevation: 0,
-        title: const Text('Aile Rehberi'),
+        title: Text(AppLocalizations.of(context).conTitle),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),

@@ -1989,5 +1989,14 @@
   "srExit": "Bij vertrek",
   "srApproach": "Bij nadering",
   "eduAgeYears": "{age} jaar",
-  "sfCall112": "112 bellen"
+  "sfCall112": "112 bellen",
+  "commonClose": "Sluiten",
+  "pmPayFailed": "Betaling mislukt: {msg}",
+  "pmPlans": "Premium-abonnementen",
+  "jfJoined": "Je bent lid geworden van het gezin!",
+  "icCreateFailed": "Kan uitnodigingscode niet maken: {msg}",
+  "icTitle": "Uitnodigingscode",
+  "actTitle": "Recente activiteit",
+  "moodTitle": "Gezinsstemming",
+  "ccCallFailed": "Kan oproep niet starten: {msg}"
 }

@@ -6297,4 +6297,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sfCall112 => 'Call 112';
+
+  @override
+  String get commonClose => 'Close';
+
+  @override
+  String pmPayFailed(Object msg) {
+    return 'Payment failed: $msg';
+  }
+
+  @override
+  String get pmPlans => 'Premium Plans';
+
+  @override
+  String get jfJoined => 'You joined the family!';
+
+  @override
+  String icCreateFailed(Object msg) {
+    return 'Could not create invite code: $msg';
+  }
+
+  @override
+  String get icTitle => 'Invite Code';
+
+  @override
+  String get actTitle => 'Recent Activity';
+
+  @override
+  String get moodTitle => 'Family Mood';
+
+  @override
+  String ccCallFailed(Object msg) {
+    return 'Could not start call: $msg';
+  }
 }

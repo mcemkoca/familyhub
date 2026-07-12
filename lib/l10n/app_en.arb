@@ -1989,5 +1989,14 @@
   "srExit": "On exit",
   "srApproach": "On approach",
   "eduAgeYears": "age {age}",
-  "sfCall112": "Call 112"
+  "sfCall112": "Call 112",
+  "commonClose": "Close",
+  "pmPayFailed": "Payment failed: {msg}",
+  "pmPlans": "Premium Plans",
+  "jfJoined": "You joined the family!",
+  "icCreateFailed": "Could not create invite code: {msg}",
+  "icTitle": "Invite Code",
+  "actTitle": "Recent Activity",
+  "moodTitle": "Family Mood",
+  "ccCallFailed": "Could not start call: {msg}"
 }

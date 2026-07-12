@@ -64,7 +64,7 @@ class _LocationScreenState extends State<LocationScreen> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Kapat', style: TextStyle(color: Color(0xFF6B7280))),
+                child: Text(AppLocalizations.of(context).commonClose, style: const TextStyle(color: Color(0xFF6B7280))),
               ),
               ElevatedButton.icon(
                 onPressed: () { Navigator.pop(context); openAppSettings(); },
@@ -289,14 +289,14 @@ class _LocationScreenState extends State<LocationScreen> {
                     )
                   else ...[
                     _CoordRow(
-                      label: 'Enlem',
+                      label: AppLocalizations.of(context).srLatitude,
                       value:
                           _currentPosition?.latitude.toStringAsFixed(6) ?? '-',
                       icon: Icons.north,
                     ),
                     const SizedBox(height: 12),
                     _CoordRow(
-                      label: 'Boylam',
+                      label: AppLocalizations.of(context).srLongitude,
                       value:
                           _currentPosition?.longitude.toStringAsFixed(6) ?? '-',
                       icon: Icons.east,

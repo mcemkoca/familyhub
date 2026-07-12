@@ -67,9 +67,9 @@ class _JoinFamilyScreenState extends State<JoinFamilyScreen> {
       if (!mounted) return;
       HapticFeedback.mediumImpact();
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Aileye başarıyla katıldınız!'),
-          backgroundColor: Color(0xFF10B981),
+        SnackBar(
+          content: Text(AppLocalizations.of(context).jfJoined),
+          backgroundColor: const Color(0xFF10B981),
           behavior: SnackBarBehavior.floating,
         ),
       );

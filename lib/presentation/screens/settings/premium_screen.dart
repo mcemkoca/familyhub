@@ -106,7 +106,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Ödeme başarısız: $e'),
+            content: Text(AppLocalizations.of(context).pmPayFailed('$e')),
             backgroundColor: AppColors.error,
           ),
         );
@@ -182,7 +182,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Premium Planlar'),
+        title: Text(AppLocalizations.of(context).pmPlans),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),

@@ -1989,5 +1989,14 @@
   "srExit": "A la sortie",
   "srApproach": "A l'approche",
   "eduAgeYears": "{age} ans",
-  "sfCall112": "Appeler le 112"
+  "sfCall112": "Appeler le 112",
+  "commonClose": "Fermer",
+  "pmPayFailed": "Echec du paiement : {msg}",
+  "pmPlans": "Formules Premium",
+  "jfJoined": "Vous avez rejoint la famille !",
+  "icCreateFailed": "Impossible de creer le code d'invitation : {msg}",
+  "icTitle": "Code d'invitation",
+  "actTitle": "Activite recente",
+  "moodTitle": "Humeur familiale",
+  "ccCallFailed": "Impossible de demarrer l'appel : {msg}"
 }

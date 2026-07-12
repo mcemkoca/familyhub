@@ -11897,6 +11897,60 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'112 Ara'**
   String get sfCall112;
+
+  /// No description provided for @commonClose.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kapat'**
+  String get commonClose;
+
+  /// No description provided for @pmPayFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ödeme başarısız: {msg}'**
+  String pmPayFailed(Object msg);
+
+  /// No description provided for @pmPlans.
+  ///
+  /// In tr, this message translates to:
+  /// **'Premium Planlar'**
+  String get pmPlans;
+
+  /// No description provided for @jfJoined.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aileye başarıyla katıldınız!'**
+  String get jfJoined;
+
+  /// No description provided for @icCreateFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Davet kodu oluşturulamadı: {msg}'**
+  String icCreateFailed(Object msg);
+
+  /// No description provided for @icTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Davet Kodu'**
+  String get icTitle;
+
+  /// No description provided for @actTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Son Aktiviteler'**
+  String get actTitle;
+
+  /// No description provided for @moodTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile Ruh Hali'**
+  String get moodTitle;
+
+  /// No description provided for @ccCallFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Arama başlatılamadı: {msg}'**
+  String ccCallFailed(Object msg);
 }
 
 class _AppLocalizationsDelegate

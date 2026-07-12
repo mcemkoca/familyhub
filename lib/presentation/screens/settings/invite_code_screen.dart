@@ -64,7 +64,7 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
         setState(() => _generating = false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Davet kodu oluşturulamadı: $e'),
+            content: Text(AppLocalizations.of(context).icCreateFailed('$e')),
             behavior: SnackBarBehavior.floating,
             backgroundColor: AppColors.error,
           ),
@@ -104,7 +104,7 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
     return Scaffold(
       backgroundColor: bg,
       appBar: ScreenHeader(
-        title: 'Davet Kodu',
+        title: AppLocalizations.of(context).icTitle,
         showBack: true,
         onBack: () => context.pop(),
       ),

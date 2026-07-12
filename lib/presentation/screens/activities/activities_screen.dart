@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/app_providers.dart';
 import '../../widgets/activity_card.dart';
@@ -15,7 +16,7 @@ class ActivitiesScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: bg,
       appBar: ScreenHeader(
-        title: 'Son Aktiviteler',
+        title: AppLocalizations.of(context).actTitle,
         showBack: true,
         onBack: () => Navigator.of(context).pop(),
       ),
@@ -29,7 +30,7 @@ class ActivitiesScreen extends ConsumerWidget {
           },
         ),
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => Center(child: Text('Hata: $e')),
+        error: (e, _) => Center(child: Text(AppLocalizations.of(context).srError('$e'))),
       ),
     );
   }
