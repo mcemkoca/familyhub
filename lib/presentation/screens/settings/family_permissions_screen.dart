@@ -200,7 +200,7 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
       });
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Rol güncellendi: ${_roleLabel(newRole)}')),
+          SnackBar(content: Text(AppLocalizations.of(context).fpRoleUpdated(_roleLabel(newRole)))),
         );
       }
       return;
@@ -219,7 +219,7 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
       HapticFeedback.mediumImpact();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Rol güncellendi: ${_roleLabel(newRole)}')),
+          SnackBar(content: Text(AppLocalizations.of(context).fpRoleUpdated(_roleLabel(newRole)))),
         );
       }
       setState(() => _isLoading = true);
@@ -228,7 +228,7 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Rol güncellenemedi: $e'), backgroundColor: AppColors.error),
+          SnackBar(content: Text(AppLocalizations.of(context).fmnRoleUpdateFailed('$e')), backgroundColor: AppColors.error),
         );
       }
     }
@@ -263,7 +263,7 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Yetki güncellenemedi: $e'), backgroundColor: AppColors.error),
+          SnackBar(content: Text(AppLocalizations.of(context).fpPermUpdateFailed('$e')), backgroundColor: AppColors.error),
         );
       }
     }

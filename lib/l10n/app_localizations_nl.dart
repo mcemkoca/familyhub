@@ -5947,4 +5947,55 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get chatYesterday => 'Gisteren';
+
+  @override
+  String get ambMicRequired => 'Microfoontoestemming vereist';
+
+  @override
+  String ambRecordSaved(Object name) {
+    return 'Opname opgeslagen: $name';
+  }
+
+  @override
+  String get ambManualButton => 'Handmatige knop';
+
+  @override
+  String get masViewProfile => 'Profiel bekijken';
+
+  @override
+  String get masHealthCard => 'Gezondheidskaart';
+
+  @override
+  String get masLiveLocation => 'Live locatie';
+
+  @override
+  String get masLeaveFamily => 'Gezin verlaten';
+
+  @override
+  String get masRemoveMember => 'Lid verwijderen';
+
+  @override
+  String fpRoleUpdated(Object role) {
+    return 'Rol bijgewerkt: $role';
+  }
+
+  @override
+  String fpPermUpdateFailed(Object msg) {
+    return 'Kan machtiging niet bijwerken: $msg';
+  }
+
+  @override
+  String get chlAnotherSuggestion => 'Andere suggestie';
+
+  @override
+  String get chlTodayMeal => 'Maaltijd van vandaag';
+
+  @override
+  String get chlHousework => 'Huishoudelijk werk';
+
+  @override
+  String get chlSaveTip => 'Bespaartip';
+
+  @override
+  String get chlEmergency => 'Noodgeval';
 }

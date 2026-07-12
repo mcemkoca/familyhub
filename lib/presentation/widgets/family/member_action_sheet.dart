@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import '../../../config/constants.dart';
 import '../../../domain/entities.dart';
@@ -111,18 +112,18 @@ class MemberActionSheet extends StatelessWidget {
                     // Actions
                     _ActionButton(
                       icon: Icons.person_outline,
-                      label: 'Profili Görüntüle',
+                      label: AppLocalizations.of(context).masViewProfile,
                       onTap: onViewProfile ?? onClose,
                     ),
                     _ActionButton(
                       icon: Icons.health_and_safety_outlined,
-                      label: 'Sağlık Kartı',
+                      label: AppLocalizations.of(context).masHealthCard,
                       iconColor: const Color(0xFF10B981),
                       onTap: onViewHealth ?? onClose,
                     ),
                     _ActionButton(
                       icon: Icons.location_on_outlined,
-                      label: 'Canlı Konum',
+                      label: AppLocalizations.of(context).masLiveLocation,
                       iconColor: const Color(0xFF6366F1),
                       onTap: onViewLocation ?? onClose,
                     ),
@@ -169,7 +170,7 @@ class MemberActionSheet extends StatelessWidget {
                     if (isMe)
                       _ActionButton(
                         icon: Icons.exit_to_app,
-                        label: 'Aileden Ayrıl',
+                        label: AppLocalizations.of(context).masLeaveFamily,
                         iconColor: AppColors.error,
                         onTap: () {
                           onClose();
@@ -179,7 +180,7 @@ class MemberActionSheet extends StatelessWidget {
                     else if (isAdmin)
                       _ActionButton(
                         icon: Icons.person_remove_outlined,
-                        label: 'Üyeyi Çıkar',
+                        label: AppLocalizations.of(context).masRemoveMember,
                         iconColor: AppColors.error,
                         onTap: () {
                           onClose();

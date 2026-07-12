@@ -5968,4 +5968,55 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatYesterday => 'Hier';
+
+  @override
+  String get ambMicRequired => 'Autorisation du microphone requise';
+
+  @override
+  String ambRecordSaved(Object name) {
+    return 'Enregistrement sauvegarde : $name';
+  }
+
+  @override
+  String get ambManualButton => 'Bouton manuel';
+
+  @override
+  String get masViewProfile => 'Voir le profil';
+
+  @override
+  String get masHealthCard => 'Carte de sante';
+
+  @override
+  String get masLiveLocation => 'Position en direct';
+
+  @override
+  String get masLeaveFamily => 'Quitter la famille';
+
+  @override
+  String get masRemoveMember => 'Retirer le membre';
+
+  @override
+  String fpRoleUpdated(Object role) {
+    return 'Role mis a jour : $role';
+  }
+
+  @override
+  String fpPermUpdateFailed(Object msg) {
+    return 'Impossible de mettre a jour l\'autorisation : $msg';
+  }
+
+  @override
+  String get chlAnotherSuggestion => 'Autre suggestion';
+
+  @override
+  String get chlTodayMeal => 'Le repas du jour';
+
+  @override
+  String get chlHousework => 'Taches menageres';
+
+  @override
+  String get chlSaveTip => 'Astuce d\'economie';
+
+  @override
+  String get chlEmergency => 'Urgence';
 }

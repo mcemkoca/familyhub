@@ -88,7 +88,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
                 TextButton.icon(
                   onPressed: _cycleAll,
                   icon: const Icon(Icons.shuffle, size: 18),
-                  label: const Text('Başka Öneri'),
+                  label: Text(AppLocalizations.of(context).chlAnotherSuggestion),
                   style: TextButton.styleFrom(
                     foregroundColor: const Color(0xFF6366F1),
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -122,7 +122,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
     return _HighlightCard(
       icon: Icons.restaurant_menu,
       iconColor: AppColors.orange,
-      title: 'Bugünün Yemeği',
+      title: AppLocalizations.of(context).chlTodayMeal,
       subtitle: recipe?.name ?? todayMeals?.dinner ?? '—',
       detail: recipe != null
           ? '${recipe.prepTime} hazırlık · ${recipe.costEstimateEur.toStringAsFixed(0)}€'
@@ -156,7 +156,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
     return _HighlightCard(
       icon: Icons.cleaning_services,
       iconColor: AppColors.cyan,
-      title: 'Ev İşleri',
+      title: AppLocalizations.of(context).chlHousework,
       subtitle: task ?? '—',
       detail: tip,
       isDark: isDark,
@@ -171,7 +171,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
     return _HighlightCard(
       icon: Icons.savings,
       iconColor: AppColors.green,
-      title: 'Tasarruf İpucu',
+      title: AppLocalizations.of(context).chlSaveTip,
       subtitle: tip?.tip ?? '—',
       detail: tip != null ? '~${tip.monthlySavingsEur}€/ay tasarruf' : null,
       isDark: isDark,
@@ -187,7 +187,7 @@ class _ContentHighlightsWidgetState extends State<ContentHighlightsWidget> {
     return _HighlightCard(
       icon: Icons.emergency,
       iconColor: AppColors.error,
-      title: 'Acil Durum',
+      title: AppLocalizations.of(context).chlEmergency,
       subtitle: emergency?.name ?? '—',
       detail: emergency?.number,
       isDark: isDark,

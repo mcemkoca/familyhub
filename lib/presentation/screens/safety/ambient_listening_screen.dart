@@ -58,7 +58,7 @@ class _AmbientListeningScreenState extends State<AmbientListeningScreen> {
       if (!mounted) return;
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('Mikrofon izni gerekli')));
+      ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).ambMicRequired)));
       return;
     }
     setState(() {
@@ -83,7 +83,7 @@ class _AmbientListeningScreenState extends State<AmbientListeningScreen> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Kayıt kaydedildi: ${path.split('/').last}'),
+          content: Text(AppLocalizations.of(context).ambRecordSaved(path.split('/').last)),
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -102,7 +102,7 @@ class _AmbientListeningScreenState extends State<AmbientListeningScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
       appBar: AppBar(
-        title: const Text('Ortam Dinleme'),
+        title: Text(AppLocalizations.of(context).sfAmbientListen),
         centerTitle: true,
         backgroundColor: const Color(0xFF0A0A0F),
         foregroundColor: const Color(0xFFE5E7EB),
@@ -227,7 +227,7 @@ class _AmbientListeningScreenState extends State<AmbientListeningScreen> {
                   ),
                   ListTile(
                     leading: const Icon(Icons.touch_app),
-                    title: const Text('Manuel Buton'),
+                    title: Text(AppLocalizations.of(context).ambManualButton),
                     subtitle: Text(AppLocalizations.of(context).ekrandakiButonaBasarakBaslat),
                   ),
                 ],

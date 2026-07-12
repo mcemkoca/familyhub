@@ -1881,5 +1881,20 @@
   "stLesson": "Story Lesson",
   "chatPickGif": "Pick GIF",
   "chatToday": "Today",
-  "chatYesterday": "Yesterday"
+  "chatYesterday": "Yesterday",
+  "ambMicRequired": "Microphone permission required",
+  "ambRecordSaved": "Recording saved: {name}",
+  "ambManualButton": "Manual Button",
+  "masViewProfile": "View Profile",
+  "masHealthCard": "Health Card",
+  "masLiveLocation": "Live Location",
+  "masLeaveFamily": "Leave Family",
+  "masRemoveMember": "Remove Member",
+  "fpRoleUpdated": "Role updated: {role}",
+  "fpPermUpdateFailed": "Could not update permission: {msg}",
+  "chlAnotherSuggestion": "Another Suggestion",
+  "chlTodayMeal": "Today's Meal",
+  "chlHousework": "Housework",
+  "chlSaveTip": "Saving Tip",
+  "chlEmergency": "Emergency"
 }

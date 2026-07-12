@@ -1881,5 +1881,20 @@
   "stLesson": "De les van het verhaal",
   "chatPickGif": "GIF kiezen",
   "chatToday": "Vandaag",
-  "chatYesterday": "Gisteren"
+  "chatYesterday": "Gisteren",
+  "ambMicRequired": "Microfoontoestemming vereist",
+  "ambRecordSaved": "Opname opgeslagen: {name}",
+  "ambManualButton": "Handmatige knop",
+  "masViewProfile": "Profiel bekijken",
+  "masHealthCard": "Gezondheidskaart",
+  "masLiveLocation": "Live locatie",
+  "masLeaveFamily": "Gezin verlaten",
+  "masRemoveMember": "Lid verwijderen",
+  "fpRoleUpdated": "Rol bijgewerkt: {role}",
+  "fpPermUpdateFailed": "Kan machtiging niet bijwerken: {msg}",
+  "chlAnotherSuggestion": "Andere suggestie",
+  "chlTodayMeal": "Maaltijd van vandaag",
+  "chlHousework": "Huishoudelijk werk",
+  "chlSaveTip": "Bespaartip",
+  "chlEmergency": "Noodgeval"
 }

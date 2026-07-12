@@ -5962,4 +5962,55 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get chatYesterday => 'Dün';
+
+  @override
+  String get ambMicRequired => 'Mikrofon izni gerekli';
+
+  @override
+  String ambRecordSaved(Object name) {
+    return 'Kayıt kaydedildi: $name';
+  }
+
+  @override
+  String get ambManualButton => 'Manuel Buton';
+
+  @override
+  String get masViewProfile => 'Profili Görüntüle';
+
+  @override
+  String get masHealthCard => 'Sağlık Kartı';
+
+  @override
+  String get masLiveLocation => 'Canlı Konum';
+
+  @override
+  String get masLeaveFamily => 'Aileden Ayrıl';
+
+  @override
+  String get masRemoveMember => 'Üyeyi Çıkar';
+
+  @override
+  String fpRoleUpdated(Object role) {
+    return 'Rol güncellendi: $role';
+  }
+
+  @override
+  String fpPermUpdateFailed(Object msg) {
+    return 'Yetki güncellenemedi: $msg';
+  }
+
+  @override
+  String get chlAnotherSuggestion => 'Başka Öneri';
+
+  @override
+  String get chlTodayMeal => 'Bugünün Yemeği';
+
+  @override
+  String get chlHousework => 'Ev İşleri';
+
+  @override
+  String get chlSaveTip => 'Tasarruf İpucu';
+
+  @override
+  String get chlEmergency => 'Acil Durum';
 }

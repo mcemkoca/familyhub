@@ -1881,5 +1881,20 @@
   "stLesson": "La morale de l'histoire",
   "chatPickGif": "Choisir un GIF",
   "chatToday": "Aujourd'hui",
-  "chatYesterday": "Hier"
+  "chatYesterday": "Hier",
+  "ambMicRequired": "Autorisation du microphone requise",
+  "ambRecordSaved": "Enregistrement sauvegarde : {name}",
+  "ambManualButton": "Bouton manuel",
+  "masViewProfile": "Voir le profil",
+  "masHealthCard": "Carte de sante",
+  "masLiveLocation": "Position en direct",
+  "masLeaveFamily": "Quitter la famille",
+  "masRemoveMember": "Retirer le membre",
+  "fpRoleUpdated": "Role mis a jour : {role}",
+  "fpPermUpdateFailed": "Impossible de mettre a jour l'autorisation : {msg}",
+  "chlAnotherSuggestion": "Autre suggestion",
+  "chlTodayMeal": "Le repas du jour",
+  "chlHousework": "Taches menageres",
+  "chlSaveTip": "Astuce d'economie",
+  "chlEmergency": "Urgence"
 }

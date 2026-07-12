@@ -5943,4 +5943,55 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatYesterday => 'Yesterday';
+
+  @override
+  String get ambMicRequired => 'Microphone permission required';
+
+  @override
+  String ambRecordSaved(Object name) {
+    return 'Recording saved: $name';
+  }
+
+  @override
+  String get ambManualButton => 'Manual Button';
+
+  @override
+  String get masViewProfile => 'View Profile';
+
+  @override
+  String get masHealthCard => 'Health Card';
+
+  @override
+  String get masLiveLocation => 'Live Location';
+
+  @override
+  String get masLeaveFamily => 'Leave Family';
+
+  @override
+  String get masRemoveMember => 'Remove Member';
+
+  @override
+  String fpRoleUpdated(Object role) {
+    return 'Role updated: $role';
+  }
+
+  @override
+  String fpPermUpdateFailed(Object msg) {
+    return 'Could not update permission: $msg';
+  }
+
+  @override
+  String get chlAnotherSuggestion => 'Another Suggestion';
+
+  @override
+  String get chlTodayMeal => 'Today\'s Meal';
+
+  @override
+  String get chlHousework => 'Housework';
+
+  @override
+  String get chlSaveTip => 'Saving Tip';
+
+  @override
+  String get chlEmergency => 'Emergency';
 }

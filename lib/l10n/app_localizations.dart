@@ -11249,6 +11249,96 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Dün'**
   String get chatYesterday;
+
+  /// No description provided for @ambMicRequired.
+  ///
+  /// In tr, this message translates to:
+  /// **'Mikrofon izni gerekli'**
+  String get ambMicRequired;
+
+  /// No description provided for @ambRecordSaved.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kayıt kaydedildi: {name}'**
+  String ambRecordSaved(Object name);
+
+  /// No description provided for @ambManualButton.
+  ///
+  /// In tr, this message translates to:
+  /// **'Manuel Buton'**
+  String get ambManualButton;
+
+  /// No description provided for @masViewProfile.
+  ///
+  /// In tr, this message translates to:
+  /// **'Profili Görüntüle'**
+  String get masViewProfile;
+
+  /// No description provided for @masHealthCard.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sağlık Kartı'**
+  String get masHealthCard;
+
+  /// No description provided for @masLiveLocation.
+  ///
+  /// In tr, this message translates to:
+  /// **'Canlı Konum'**
+  String get masLiveLocation;
+
+  /// No description provided for @masLeaveFamily.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aileden Ayrıl'**
+  String get masLeaveFamily;
+
+  /// No description provided for @masRemoveMember.
+  ///
+  /// In tr, this message translates to:
+  /// **'Üyeyi Çıkar'**
+  String get masRemoveMember;
+
+  /// No description provided for @fpRoleUpdated.
+  ///
+  /// In tr, this message translates to:
+  /// **'Rol güncellendi: {role}'**
+  String fpRoleUpdated(Object role);
+
+  /// No description provided for @fpPermUpdateFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yetki güncellenemedi: {msg}'**
+  String fpPermUpdateFailed(Object msg);
+
+  /// No description provided for @chlAnotherSuggestion.
+  ///
+  /// In tr, this message translates to:
+  /// **'Başka Öneri'**
+  String get chlAnotherSuggestion;
+
+  /// No description provided for @chlTodayMeal.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugünün Yemeği'**
+  String get chlTodayMeal;
+
+  /// No description provided for @chlHousework.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ev İşleri'**
+  String get chlHousework;
+
+  /// No description provided for @chlSaveTip.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tasarruf İpucu'**
+  String get chlSaveTip;
+
+  /// No description provided for @chlEmergency.
+  ///
+  /// In tr, this message translates to:
+  /// **'Acil Durum'**
+  String get chlEmergency;
 }
 
 class _AppLocalizationsDelegate
