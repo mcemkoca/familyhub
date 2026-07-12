@@ -1819,5 +1819,18 @@
   "frpCategories": "Categories",
   "frpOverallScore": "Overall Family Score",
   "frpAiPreparing": "AI comment is being prepared…",
-  "frpAiComment": "AI Family Comment"
+  "frpAiComment": "AI Family Comment",
+  "roleAdmin": "Admin",
+  "roleParent": "Parent",
+  "roleTeen": "Teen",
+  "roleChild": "Child",
+  "roleElder": "Elder",
+  "roleGuest": "Guest",
+  "evCatAppointment": "Appointment",
+  "evCatBirthday": "Birthday",
+  "evCatSchool": "School",
+  "evCatWork": "Work",
+  "evCatFamily": "Family",
+  "evCatTravel": "Travel",
+  "evCatOther": "Other"
 }

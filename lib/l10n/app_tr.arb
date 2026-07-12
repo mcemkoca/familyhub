@@ -1861,5 +1861,18 @@
   "frpCategories": "Kategoriler",
   "frpOverallScore": "Genel Aile Skoru",
   "frpAiPreparing": "AI yorumu hazırlanıyor…",
-  "frpAiComment": "AI Aile Yorumu"
+  "frpAiComment": "AI Aile Yorumu",
+  "roleAdmin": "Yönetici",
+  "roleParent": "Ebeveyn",
+  "roleTeen": "Genç",
+  "roleChild": "Çocuk",
+  "roleElder": "Büyük",
+  "roleGuest": "Misafir",
+  "evCatAppointment": "Randevu",
+  "evCatBirthday": "Doğum Günü",
+  "evCatSchool": "Okul",
+  "evCatWork": "İş",
+  "evCatFamily": "Aile",
+  "evCatTravel": "Seyahat",
+  "evCatOther": "Diğer"
 }

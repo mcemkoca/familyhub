@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../../config/constants.dart';
 import '../../../domain/entities.dart';
 
@@ -17,7 +18,7 @@ class MemberCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final roleConfig = _roleConfig(member.role);
+    final roleConfig = _roleConfig(context, member.role);
     final statusText = member.isOnline
         ? 'Çevrimiçi'
         : _formatLastSeen(member.lastSeen);
@@ -190,22 +191,22 @@ class MemberCard extends StatelessWidget {
     );
   }
 
-  _RoleConfig _roleConfig(MemberRole role) {
+  _RoleConfig _roleConfig(BuildContext context, MemberRole role) {
     return switch (role) {
       MemberRole.admin =>
-        _RoleConfig(label: 'Yönetici', color: const Color(0xFF6366F1)),
+        _RoleConfig(label: AppLocalizations.of(context).roleAdmin, color: const Color(0xFF6366F1)),
       MemberRole.parent =>
-        _RoleConfig(label: 'Ebeveyn', color: const Color(0xFFEC4899)),
+        _RoleConfig(label: AppLocalizations.of(context).roleParent, color: const Color(0xFFEC4899)),
       MemberRole.teen =>
-        _RoleConfig(label: 'Genç', color: const Color(0xFFF59E0B)),
+        _RoleConfig(label: AppLocalizations.of(context).roleTeen, color: const Color(0xFFF59E0B)),
       MemberRole.child =>
-        _RoleConfig(label: 'Çocuk', color: const Color(0xFF10B981)),
+        _RoleConfig(label: AppLocalizations.of(context).roleChild, color: const Color(0xFF10B981)),
       MemberRole.elder =>
-        _RoleConfig(label: 'Büyük', color: const Color(0xFF8B5CF6)),
+        _RoleConfig(label: AppLocalizations.of(context).roleElder, color: const Color(0xFF8B5CF6)),
       MemberRole.guest =>
-        _RoleConfig(label: 'Misafir', color: const Color(0xFF6B7280)),
+        _RoleConfig(label: AppLocalizations.of(context).roleGuest, color: const Color(0xFF6B7280)),
       MemberRole.baby =>
-        _RoleConfig(label: 'Bebek', color: AppColors.cyan),
+        _RoleConfig(label: AppLocalizations.of(context).cmBaby, color: AppColors.cyan),
     };
   }
 

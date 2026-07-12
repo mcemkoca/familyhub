@@ -1819,5 +1819,18 @@
   "frpCategories": "Categories",
   "frpOverallScore": "Score familial global",
   "frpAiPreparing": "Le commentaire IA est en preparation…",
-  "frpAiComment": "Commentaire familial IA"
+  "frpAiComment": "Commentaire familial IA",
+  "roleAdmin": "Administrateur",
+  "roleParent": "Parent",
+  "roleTeen": "Ado",
+  "roleChild": "Enfant",
+  "roleElder": "Aine",
+  "roleGuest": "Invite",
+  "evCatAppointment": "Rendez-vous",
+  "evCatBirthday": "Anniversaire",
+  "evCatSchool": "Ecole",
+  "evCatWork": "Travail",
+  "evCatFamily": "Famille",
+  "evCatTravel": "Voyage",
+  "evCatOther": "Autre"
 }

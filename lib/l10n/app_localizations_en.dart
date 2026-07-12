@@ -5735,4 +5735,43 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get frpAiComment => 'AI Family Comment';
+
+  @override
+  String get roleAdmin => 'Admin';
+
+  @override
+  String get roleParent => 'Parent';
+
+  @override
+  String get roleTeen => 'Teen';
+
+  @override
+  String get roleChild => 'Child';
+
+  @override
+  String get roleElder => 'Elder';
+
+  @override
+  String get roleGuest => 'Guest';
+
+  @override
+  String get evCatAppointment => 'Appointment';
+
+  @override
+  String get evCatBirthday => 'Birthday';
+
+  @override
+  String get evCatSchool => 'School';
+
+  @override
+  String get evCatWork => 'Work';
+
+  @override
+  String get evCatFamily => 'Family';
+
+  @override
+  String get evCatTravel => 'Travel';
+
+  @override
+  String get evCatOther => 'Other';
 }

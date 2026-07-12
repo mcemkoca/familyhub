@@ -5739,4 +5739,43 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get frpAiComment => 'AI-gezinscommentaar';
+
+  @override
+  String get roleAdmin => 'Beheerder';
+
+  @override
+  String get roleParent => 'Ouder';
+
+  @override
+  String get roleTeen => 'Tiener';
+
+  @override
+  String get roleChild => 'Kind';
+
+  @override
+  String get roleElder => 'Oudere';
+
+  @override
+  String get roleGuest => 'Gast';
+
+  @override
+  String get evCatAppointment => 'Afspraak';
+
+  @override
+  String get evCatBirthday => 'Verjaardag';
+
+  @override
+  String get evCatSchool => 'School';
+
+  @override
+  String get evCatWork => 'Werk';
+
+  @override
+  String get evCatFamily => 'Gezin';
+
+  @override
+  String get evCatTravel => 'Reis';
+
+  @override
+  String get evCatOther => 'Overig';
 }

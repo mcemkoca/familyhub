@@ -10877,6 +10877,84 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'AI Aile Yorumu'**
   String get frpAiComment;
+
+  /// No description provided for @roleAdmin.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yönetici'**
+  String get roleAdmin;
+
+  /// No description provided for @roleParent.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ebeveyn'**
+  String get roleParent;
+
+  /// No description provided for @roleTeen.
+  ///
+  /// In tr, this message translates to:
+  /// **'Genç'**
+  String get roleTeen;
+
+  /// No description provided for @roleChild.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çocuk'**
+  String get roleChild;
+
+  /// No description provided for @roleElder.
+  ///
+  /// In tr, this message translates to:
+  /// **'Büyük'**
+  String get roleElder;
+
+  /// No description provided for @roleGuest.
+  ///
+  /// In tr, this message translates to:
+  /// **'Misafir'**
+  String get roleGuest;
+
+  /// No description provided for @evCatAppointment.
+  ///
+  /// In tr, this message translates to:
+  /// **'Randevu'**
+  String get evCatAppointment;
+
+  /// No description provided for @evCatBirthday.
+  ///
+  /// In tr, this message translates to:
+  /// **'Doğum Günü'**
+  String get evCatBirthday;
+
+  /// No description provided for @evCatSchool.
+  ///
+  /// In tr, this message translates to:
+  /// **'Okul'**
+  String get evCatSchool;
+
+  /// No description provided for @evCatWork.
+  ///
+  /// In tr, this message translates to:
+  /// **'İş'**
+  String get evCatWork;
+
+  /// No description provided for @evCatFamily.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile'**
+  String get evCatFamily;
+
+  /// No description provided for @evCatTravel.
+  ///
+  /// In tr, this message translates to:
+  /// **'Seyahat'**
+  String get evCatTravel;
+
+  /// No description provided for @evCatOther.
+  ///
+  /// In tr, this message translates to:
+  /// **'Diğer'**
+  String get evCatOther;
 }
 
 class _AppLocalizationsDelegate

@@ -1819,5 +1819,18 @@
   "frpCategories": "Categorieen",
   "frpOverallScore": "Algehele gezinsscore",
   "frpAiPreparing": "AI-commentaar wordt voorbereid…",
-  "frpAiComment": "AI-gezinscommentaar"
+  "frpAiComment": "AI-gezinscommentaar",
+  "roleAdmin": "Beheerder",
+  "roleParent": "Ouder",
+  "roleTeen": "Tiener",
+  "roleChild": "Kind",
+  "roleElder": "Oudere",
+  "roleGuest": "Gast",
+  "evCatAppointment": "Afspraak",
+  "evCatBirthday": "Verjaardag",
+  "evCatSchool": "School",
+  "evCatWork": "Werk",
+  "evCatFamily": "Gezin",
+  "evCatTravel": "Reis",
+  "evCatOther": "Overig"
 }

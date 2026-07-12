@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../domain/entities.dart';
@@ -14,7 +15,7 @@ class EventCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final isPast = event.end.isBefore(DateTime.now());
-    final catConfig = _categoryConfig(event.category);
+    final catConfig = _categoryConfig(context, event.category);
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
@@ -281,24 +282,24 @@ class EventCard extends ConsumerWidget {
     return '${minutes ~/ 10080} hafta';
   }
 
-  _CategoryConfig _categoryConfig(EventCategory cat) {
+  _CategoryConfig _categoryConfig(BuildContext context, EventCategory cat) {
     return switch (cat) {
       EventCategory.appointment =>
-        _CategoryConfig(label: 'Randevu', icon: Icons.medical_services_outlined),
+        _CategoryConfig(label: AppLocalizations.of(context).evCatAppointment, icon: Icons.medical_services_outlined),
       EventCategory.birthday =>
-        _CategoryConfig(label: 'Doğum Günü', icon: Icons.cake_outlined),
+        _CategoryConfig(label: AppLocalizations.of(context).evCatBirthday, icon: Icons.cake_outlined),
       EventCategory.school =>
-        _CategoryConfig(label: 'Okul', icon: Icons.school_outlined),
+        _CategoryConfig(label: AppLocalizations.of(context).evCatSchool, icon: Icons.school_outlined),
       EventCategory.activity =>
-        _CategoryConfig(label: 'Aktivite', icon: Icons.sports_soccer_outlined),
+        _CategoryConfig(label: AppLocalizations.of(context).peActivity, icon: Icons.sports_soccer_outlined),
       EventCategory.work =>
-        _CategoryConfig(label: 'İş', icon: Icons.work_outline),
+        _CategoryConfig(label: AppLocalizations.of(context).evCatWork, icon: Icons.work_outline),
       EventCategory.family =>
-        _CategoryConfig(label: 'Aile', icon: Icons.people_outline),
+        _CategoryConfig(label: AppLocalizations.of(context).evCatFamily, icon: Icons.people_outline),
       EventCategory.travel =>
-        _CategoryConfig(label: 'Seyahat', icon: Icons.flight_takeoff),
+        _CategoryConfig(label: AppLocalizations.of(context).evCatTravel, icon: Icons.flight_takeoff),
       EventCategory.other =>
-        _CategoryConfig(label: 'Diğer', icon: Icons.circle_outlined),
+        _CategoryConfig(label: AppLocalizations.of(context).evCatOther, icon: Icons.circle_outlined),
     };
   }
 }
