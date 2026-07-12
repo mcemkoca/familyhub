@@ -157,6 +157,7 @@ class _SafetyScreenState extends State<SafetyScreen>
   }
 
   Future<void> _activateSOS() async {
+    final defaultUser = AppLocalizations.of(context).commonUser;
     setState(() {
       _sosActive = true;
       _sosProgress = 0;
@@ -171,7 +172,7 @@ class _SafetyScreenState extends State<SafetyScreen>
     setState(() => _currentLocation = location);
 
     final user = AuthService.currentUser;
-    final userName = user?.userMetadata?['display_name'] as String? ?? 'Kullanıcı';
+    final userName = user?.userMetadata?['display_name'] as String? ?? defaultUser;
     final familyId = AuthService.currentUser?.userMetadata?['family_id'] as String?;
     if (familyId != null && familyId.isNotEmpty) {
       await EmergencyService.triggerSOS(
@@ -206,8 +207,8 @@ class _SafetyScreenState extends State<SafetyScreen>
               Text(AppLocalizations.of(context).sfEmergencyActive),
             ],
           ),
-          content: const Text(
-            'Aile üyelerine bildirim gönderildi. Canlı konum paylaşılıyor.',
+          content: Text(
+            AppLocalizations.of(context).sfNotifSent,
           ),
           actions: [
             TextButton(
@@ -216,7 +217,7 @@ class _SafetyScreenState extends State<SafetyScreen>
                 _callEmergency();
               },
               style: TextButton.styleFrom(foregroundColor: AppColors.error),
-              child: const Text('112 Ara'),
+              child: Text(AppLocalizations.of(context).sfCall112),
             ),
             TextButton(
               onPressed: () => Navigator.pop(context),
@@ -244,7 +245,7 @@ class _SafetyScreenState extends State<SafetyScreen>
     _toggleLocationSharing(force: false);
 
     final user = AuthService.currentUser;
-    final userName = user?.userMetadata?['display_name'] as String? ?? 'Kullanıcı';
+    final userName = user?.userMetadata?['display_name'] as String? ?? AppLocalizations.of(context).commonUser;
     await EmergencyService.sendSOSCancel(
       userName: userName,
       familyId: AuthService.currentUserId ?? '',
@@ -344,9 +345,9 @@ class _SafetyScreenState extends State<SafetyScreen>
                 child: Column(
                   children: [
                     const SizedBox(height: 16),
-                    const Text(
-                      'Acil Durum Butonu',
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context).emTitle,
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
                         color: Color(0xFFE5E7EB),
@@ -429,7 +430,7 @@ class _SafetyScreenState extends State<SafetyScreen>
                         ),
                         const SizedBox(width: 6),
                         Text(
-                          _locationSharing ? 'Aktif' : 'Pasif',
+                          _locationSharing ? AppLocalizations.of(context).commonActive : AppLocalizations.of(context).commonPassive,
                           style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
@@ -502,8 +503,8 @@ class _SafetyScreenState extends State<SafetyScreen>
                       iconColor: const Color(0xFF6366F1),
                       label: AppLocalizations.of(context).konumumuPaylas,
                       description: _locationSharing
-                          ? 'Canlı konum aktif'
-                          : 'Canlı konum gönder',
+                          ? AppLocalizations.of(context).sfLiveActive
+                          : AppLocalizations.of(context).sfLiveSend,
                       isActive: _locationSharing,
                       pulse: _locationSharing,
                       onPress: () => _toggleLocationSharing(),
@@ -525,7 +526,7 @@ class _SafetyScreenState extends State<SafetyScreen>
                       iconColor: const Color(0xFF7C3AED),
                       label: AppLocalizations.of(context).saglikKartim,
                       description: AppLocalizations.of(context).alerjiVeIlacBilgileri,
-                      badge: 'Güncel',
+                      badge: AppLocalizations.of(context).setCurrent,
                       onPress: () => context.push(AppRoutes.healthCard),
                     ),
                   ],

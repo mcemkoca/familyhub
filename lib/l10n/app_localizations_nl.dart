@@ -6263,4 +6263,43 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get famInvite => 'Uitnodigen';
+
+  @override
+  String get commonActive => 'Actief';
+
+  @override
+  String get commonPassive => 'Inactief';
+
+  @override
+  String get commonUser => 'Gebruiker';
+
+  @override
+  String get sfNotifSent =>
+      'Gezinsleden gewaarschuwd. Live locatie wordt gedeeld.';
+
+  @override
+  String get sfLiveActive => 'Live locatie actief';
+
+  @override
+  String get sfLiveSend => 'Live locatie sturen';
+
+  @override
+  String get srTestReminder => 'Testherinnering';
+
+  @override
+  String get srEnter => 'Bij binnenkomst';
+
+  @override
+  String get srExit => 'Bij vertrek';
+
+  @override
+  String get srApproach => 'Bij nadering';
+
+  @override
+  String eduAgeYears(Object age) {
+    return '$age jaar';
+  }
+
+  @override
+  String get sfCall112 => '112 bellen';
 }

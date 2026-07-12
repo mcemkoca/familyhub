@@ -1977,5 +1977,17 @@
   "llMapView": "Map View",
   "llRefresh": "Refresh",
   "famRemoveFailed": "Could not remove member: {msg}",
-  "famInvite": "Invite"
+  "famInvite": "Invite",
+  "commonActive": "Active",
+  "commonPassive": "Inactive",
+  "commonUser": "User",
+  "sfNotifSent": "Family members notified. Live location is being shared.",
+  "sfLiveActive": "Live location active",
+  "sfLiveSend": "Send live location",
+  "srTestReminder": "Test Reminder",
+  "srEnter": "On enter",
+  "srExit": "On exit",
+  "srApproach": "On approach",
+  "eduAgeYears": "age {age}",
+  "sfCall112": "Call 112"
 }

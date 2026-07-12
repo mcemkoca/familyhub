@@ -2042,5 +2042,18 @@
   "llRefresh": "Yenile",
   "famRemoveFailed": "Üye çıkarılamadı: {msg}",
   "@famRemoveFailed": { "placeholders": { "msg": {} } },
-  "famInvite": "Davet Et"
+  "famInvite": "Davet Et",
+  "commonActive": "Aktif",
+  "commonPassive": "Pasif",
+  "commonUser": "Kullanıcı",
+  "sfNotifSent": "Aile üyelerine bildirim gönderildi. Canlı konum paylaşılıyor.",
+  "sfLiveActive": "Canlı konum aktif",
+  "sfLiveSend": "Canlı konum gönder",
+  "srTestReminder": "Test Hatırlatıcı",
+  "srEnter": "Girince",
+  "srExit": "Çıkınca",
+  "srApproach": "Yaklaşınca",
+  "eduAgeYears": "{age} yaş",
+  "@eduAgeYears": { "placeholders": { "age": {} } },
+  "sfCall112": "112 Ara"
 }

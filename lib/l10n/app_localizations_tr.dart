@@ -6278,4 +6278,43 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get famInvite => 'Davet Et';
+
+  @override
+  String get commonActive => 'Aktif';
+
+  @override
+  String get commonPassive => 'Pasif';
+
+  @override
+  String get commonUser => 'Kullanıcı';
+
+  @override
+  String get sfNotifSent =>
+      'Aile üyelerine bildirim gönderildi. Canlı konum paylaşılıyor.';
+
+  @override
+  String get sfLiveActive => 'Canlı konum aktif';
+
+  @override
+  String get sfLiveSend => 'Canlı konum gönder';
+
+  @override
+  String get srTestReminder => 'Test Hatırlatıcı';
+
+  @override
+  String get srEnter => 'Girince';
+
+  @override
+  String get srExit => 'Çıkınca';
+
+  @override
+  String get srApproach => 'Yaklaşınca';
+
+  @override
+  String eduAgeYears(Object age) {
+    return '$age yaş';
+  }
+
+  @override
+  String get sfCall112 => '112 Ara';
 }

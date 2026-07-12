@@ -11825,6 +11825,78 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Davet Et'**
   String get famInvite;
+
+  /// No description provided for @commonActive.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aktif'**
+  String get commonActive;
+
+  /// No description provided for @commonPassive.
+  ///
+  /// In tr, this message translates to:
+  /// **'Pasif'**
+  String get commonPassive;
+
+  /// No description provided for @commonUser.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kullanıcı'**
+  String get commonUser;
+
+  /// No description provided for @sfNotifSent.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile üyelerine bildirim gönderildi. Canlı konum paylaşılıyor.'**
+  String get sfNotifSent;
+
+  /// No description provided for @sfLiveActive.
+  ///
+  /// In tr, this message translates to:
+  /// **'Canlı konum aktif'**
+  String get sfLiveActive;
+
+  /// No description provided for @sfLiveSend.
+  ///
+  /// In tr, this message translates to:
+  /// **'Canlı konum gönder'**
+  String get sfLiveSend;
+
+  /// No description provided for @srTestReminder.
+  ///
+  /// In tr, this message translates to:
+  /// **'Test Hatırlatıcı'**
+  String get srTestReminder;
+
+  /// No description provided for @srEnter.
+  ///
+  /// In tr, this message translates to:
+  /// **'Girince'**
+  String get srEnter;
+
+  /// No description provided for @srExit.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çıkınca'**
+  String get srExit;
+
+  /// No description provided for @srApproach.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yaklaşınca'**
+  String get srApproach;
+
+  /// No description provided for @eduAgeYears.
+  ///
+  /// In tr, this message translates to:
+  /// **'{age} yaş'**
+  String eduAgeYears(Object age);
+
+  /// No description provided for @sfCall112.
+  ///
+  /// In tr, this message translates to:
+  /// **'112 Ara'**
+  String get sfCall112;
 }
 
 class _AppLocalizationsDelegate

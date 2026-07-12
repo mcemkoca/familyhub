@@ -214,7 +214,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
       ),
       builder: (ctx) => _TestPreviewSheet(
         title: _titleController.text.isEmpty
-            ? 'Test Hatırlatıcı'
+            ? AppLocalizations.of(context).srTestReminder
             : _titleController.text,
         description: _descController.text,
         tone: _tone,
@@ -332,7 +332,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
           // Location
           SwitchListTile(
             title: const Text('📍 Lokasyon'),
-            subtitle: Text(_locationEnabled ? 'Aktif' : 'Pasif'),
+            subtitle: Text(_locationEnabled ? AppLocalizations.of(context).commonActive : AppLocalizations.of(context).commonPassive),
             value: _locationEnabled,
             onChanged: (v) => setState(() => _locationEnabled = v),
           ),
@@ -406,7 +406,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
           // Time
           SwitchListTile(
             title: const Text('⏰ Zaman'),
-            subtitle: Text(_timeEnabled ? 'Aktif' : 'Pasif'),
+            subtitle: Text(_timeEnabled ? AppLocalizations.of(context).commonActive : AppLocalizations.of(context).commonPassive),
             value: _timeEnabled,
             onChanged: (v) => setState(() => _timeEnabled = v),
           ),
@@ -471,7 +471,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
           // Behavior
           SwitchListTile(
             title: Text(AppLocalizations.of(context).davranis),
-            subtitle: Text(_behaviorEnabled ? 'Aktif' : 'Pasif'),
+            subtitle: Text(_behaviorEnabled ? AppLocalizations.of(context).commonActive : AppLocalizations.of(context).commonPassive),
             value: _behaviorEnabled,
             onChanged: (v) => setState(() => _behaviorEnabled = v),
           ),
@@ -634,11 +634,11 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
   String _locationTypeLabel(LocationTriggerType t) {
     switch (t) {
       case LocationTriggerType.enter:
-        return 'Girince';
+        return AppLocalizations.of(context).srEnter;
       case LocationTriggerType.exit:
-        return 'Çıkınca';
+        return AppLocalizations.of(context).srExit;
       case LocationTriggerType.nearby:
-        return 'Yaklaşınca';
+        return AppLocalizations.of(context).srApproach;
       case LocationTriggerType.leaveHome:
         return 'Evden çıkınca';
       case LocationTriggerType.arriveWork:

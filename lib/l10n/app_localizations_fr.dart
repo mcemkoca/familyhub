@@ -6284,4 +6284,43 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get famInvite => 'Inviter';
+
+  @override
+  String get commonActive => 'Actif';
+
+  @override
+  String get commonPassive => 'Inactif';
+
+  @override
+  String get commonUser => 'Utilisateur';
+
+  @override
+  String get sfNotifSent =>
+      'Membres de la famille notifies. Position en direct partagee.';
+
+  @override
+  String get sfLiveActive => 'Position en direct active';
+
+  @override
+  String get sfLiveSend => 'Envoyer la position en direct';
+
+  @override
+  String get srTestReminder => 'Rappel test';
+
+  @override
+  String get srEnter => 'A l\'entree';
+
+  @override
+  String get srExit => 'A la sortie';
+
+  @override
+  String get srApproach => 'A l\'approche';
+
+  @override
+  String eduAgeYears(Object age) {
+    return '$age ans';
+  }
+
+  @override
+  String get sfCall112 => 'Appeler le 112';
 }

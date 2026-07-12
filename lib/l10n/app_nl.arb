@@ -1977,5 +1977,17 @@
   "llMapView": "Kaartweergave",
   "llRefresh": "Vernieuwen",
   "famRemoveFailed": "Kan lid niet verwijderen: {msg}",
-  "famInvite": "Uitnodigen"
+  "famInvite": "Uitnodigen",
+  "commonActive": "Actief",
+  "commonPassive": "Inactief",
+  "commonUser": "Gebruiker",
+  "sfNotifSent": "Gezinsleden gewaarschuwd. Live locatie wordt gedeeld.",
+  "sfLiveActive": "Live locatie actief",
+  "sfLiveSend": "Live locatie sturen",
+  "srTestReminder": "Testherinnering",
+  "srEnter": "Bij binnenkomst",
+  "srExit": "Bij vertrek",
+  "srApproach": "Bij nadering",
+  "eduAgeYears": "{age} jaar",
+  "sfCall112": "112 bellen"
 }

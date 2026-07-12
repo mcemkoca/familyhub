@@ -477,7 +477,7 @@ class _AgeFilterButton extends StatelessWidget {
                 size: 16,
                 color: age != null ? Colors.white : const Color(0xFF6B7280)),
             const SizedBox(width: 4),
-            Text(age != null ? '$age yaş' : 'Yaş',
+            Text(age != null ? AppLocalizations.of(context).eduAgeYears(age!) : AppLocalizations.of(context).eduAge,
                 style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,

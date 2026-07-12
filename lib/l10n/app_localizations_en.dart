@@ -6258,4 +6258,43 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get famInvite => 'Invite';
+
+  @override
+  String get commonActive => 'Active';
+
+  @override
+  String get commonPassive => 'Inactive';
+
+  @override
+  String get commonUser => 'User';
+
+  @override
+  String get sfNotifSent =>
+      'Family members notified. Live location is being shared.';
+
+  @override
+  String get sfLiveActive => 'Live location active';
+
+  @override
+  String get sfLiveSend => 'Send live location';
+
+  @override
+  String get srTestReminder => 'Test Reminder';
+
+  @override
+  String get srEnter => 'On enter';
+
+  @override
+  String get srExit => 'On exit';
+
+  @override
+  String get srApproach => 'On approach';
+
+  @override
+  String eduAgeYears(Object age) {
+    return 'age $age';
+  }
+
+  @override
+  String get sfCall112 => 'Call 112';
 }

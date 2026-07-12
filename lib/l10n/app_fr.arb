@@ -1977,5 +1977,17 @@
   "llMapView": "Vue carte",
   "llRefresh": "Actualiser",
   "famRemoveFailed": "Impossible de retirer le membre : {msg}",
-  "famInvite": "Inviter"
+  "famInvite": "Inviter",
+  "commonActive": "Actif",
+  "commonPassive": "Inactif",
+  "commonUser": "Utilisateur",
+  "sfNotifSent": "Membres de la famille notifies. Position en direct partagee.",
+  "sfLiveActive": "Position en direct active",
+  "sfLiveSend": "Envoyer la position en direct",
+  "srTestReminder": "Rappel test",
+  "srEnter": "A l'entree",
+  "srExit": "A la sortie",
+  "srApproach": "A l'approche",
+  "eduAgeYears": "{age} ans",
+  "sfCall112": "Appeler le 112"
 }
