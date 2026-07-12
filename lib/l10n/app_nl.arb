@@ -1861,5 +1861,17 @@
   "stgAllDeleted": "Alle gegevens verwijderd.",
   "stgDeleteFailed": "Verwijderfout: {msg}",
   "stgCacheCleared": "Cache gewist.",
-  "stgClearFailed": "Wisfout: {msg}"
+  "stgClearFailed": "Wisfout: {msg}",
+  "regEmailHint": "Je e-mailadres",
+  "regFamilyCodeHint": "Gezinscode (bijv. FH-123456)",
+  "regFamilyNameHint": "Gezinsnaam (bijv. Familie Janssen)",
+  "regOr": "of",
+  "regPasswordHint": "Wachtwoord (minstens 8 tekens)",
+  "privExportShareText": "FamilyHub-gegevensexport",
+  "privActivityStatus": "Activiteitsstatus",
+  "baOptimize": "Optimaliseren",
+  "baRecalculate": "Herberekenen",
+  "baAvgAccuracy": "Gemiddelde nauwkeurigheid",
+  "baOptimalRatio": "Optimale profielverhouding",
+  "baWrongSwitch": "Verkeerde profielwissel"
 }

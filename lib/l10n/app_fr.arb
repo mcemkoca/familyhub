@@ -1861,5 +1861,17 @@
   "stgAllDeleted": "Toutes les donnees ont ete supprimees.",
   "stgDeleteFailed": "Erreur de suppression : {msg}",
   "stgCacheCleared": "Cache vide.",
-  "stgClearFailed": "Erreur de nettoyage : {msg}"
+  "stgClearFailed": "Erreur de nettoyage : {msg}",
+  "regEmailHint": "Votre adresse e-mail",
+  "regFamilyCodeHint": "Code famille (ex. FH-123456)",
+  "regFamilyNameHint": "Nom de famille (ex. Famille Dupont)",
+  "regOr": "ou",
+  "regPasswordHint": "Mot de passe (au moins 8 caracteres)",
+  "privExportShareText": "Export de donnees FamilyHub",
+  "privActivityStatus": "Statut d'activite",
+  "baOptimize": "Optimiser",
+  "baRecalculate": "Recalculer",
+  "baAvgAccuracy": "Precision moyenne",
+  "baOptimalRatio": "Taux de profil optimal",
+  "baWrongSwitch": "Mauvais changement de profil"
 }

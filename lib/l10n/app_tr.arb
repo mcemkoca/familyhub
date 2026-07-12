@@ -1912,5 +1912,17 @@
   "@stgDeleteFailed": { "placeholders": { "msg": {} } },
   "stgCacheCleared": "Önbellek temizlendi.",
   "stgClearFailed": "Temizleme hatası: {msg}",
-  "@stgClearFailed": { "placeholders": { "msg": {} } }
+  "@stgClearFailed": { "placeholders": { "msg": {} } },
+  "regEmailHint": "E-posta adresiniz",
+  "regFamilyCodeHint": "Aile Kodu (Örn: FH-123456)",
+  "regFamilyNameHint": "Aile Adı (Örn: Yılmaz Ailesi)",
+  "regOr": "veya",
+  "regPasswordHint": "Şifre (en az 8 karakter)",
+  "privExportShareText": "FamilyHub Veri Dışa Aktarımı",
+  "privActivityStatus": "Aktivite Durumu",
+  "baOptimize": "Optimize Et",
+  "baRecalculate": "Yeniden Hesapla",
+  "baAvgAccuracy": "Ortalama hassasiyet",
+  "baOptimalRatio": "Optimal profil oranı",
+  "baWrongSwitch": "Yanlış profil geçişi"
 }

@@ -41,6 +41,7 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
   }
 
   Future<void> _exportUserData() async {
+    final shareText = AppLocalizations.of(context).privExportShareText;
     final client = SupabaseConfig.safeClient;
     final userId = AuthService.currentUserId;
     if (client == null || userId == null) return;
@@ -67,7 +68,7 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
       await SharePlus.instance.share(
         ShareParams(
           files: [XFile(file.path)],
-          text: 'FamilyHub Veri Dışa Aktarımı',
+          text: shareText,
         ),
       );
     } catch (e) {
@@ -137,7 +138,7 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
     return Scaffold(
       backgroundColor: bg,
       appBar: ScreenHeader(
-        title: 'Gizlilik',
+        title: AppLocalizations.of(context).setPrivacy,
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -165,7 +166,7 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
                 ),
                 HiveSettingsToggle(
                   settingsKey: 'privacy_activity_status',
-                  title: 'Aktivite Durumu',
+                  title: AppLocalizations.of(context).privActivityStatus,
                   subtitle: AppLocalizations.of(context).cevrimiciDurumunuzuGoster,
                   defaultValue: true,
                   onSupabaseSync: (v) => _syncToSupabase('activity_status', v),

@@ -1861,5 +1861,17 @@
   "stgAllDeleted": "All data deleted.",
   "stgDeleteFailed": "Delete error: {msg}",
   "stgCacheCleared": "Cache cleared.",
-  "stgClearFailed": "Clear error: {msg}"
+  "stgClearFailed": "Clear error: {msg}",
+  "regEmailHint": "Your email address",
+  "regFamilyCodeHint": "Family Code (e.g. FH-123456)",
+  "regFamilyNameHint": "Family Name (e.g. Smith Family)",
+  "regOr": "or",
+  "regPasswordHint": "Password (at least 8 characters)",
+  "privExportShareText": "FamilyHub Data Export",
+  "privActivityStatus": "Activity Status",
+  "baOptimize": "Optimise",
+  "baRecalculate": "Recalculate",
+  "baAvgAccuracy": "Average accuracy",
+  "baOptimalRatio": "Optimal profile ratio",
+  "baWrongSwitch": "Wrong profile switch"
 }

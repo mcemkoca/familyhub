@@ -5881,4 +5881,40 @@ class AppLocalizationsEn extends AppLocalizations {
   String stgClearFailed(Object msg) {
     return 'Clear error: $msg';
   }
+
+  @override
+  String get regEmailHint => 'Your email address';
+
+  @override
+  String get regFamilyCodeHint => 'Family Code (e.g. FH-123456)';
+
+  @override
+  String get regFamilyNameHint => 'Family Name (e.g. Smith Family)';
+
+  @override
+  String get regOr => 'or';
+
+  @override
+  String get regPasswordHint => 'Password (at least 8 characters)';
+
+  @override
+  String get privExportShareText => 'FamilyHub Data Export';
+
+  @override
+  String get privActivityStatus => 'Activity Status';
+
+  @override
+  String get baOptimize => 'Optimise';
+
+  @override
+  String get baRecalculate => 'Recalculate';
+
+  @override
+  String get baAvgAccuracy => 'Average accuracy';
+
+  @override
+  String get baOptimalRatio => 'Optimal profile ratio';
+
+  @override
+  String get baWrongSwitch => 'Wrong profile switch';
 }

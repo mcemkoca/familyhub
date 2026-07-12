@@ -5900,4 +5900,40 @@ class AppLocalizationsTr extends AppLocalizations {
   String stgClearFailed(Object msg) {
     return 'Temizleme hatası: $msg';
   }
+
+  @override
+  String get regEmailHint => 'E-posta adresiniz';
+
+  @override
+  String get regFamilyCodeHint => 'Aile Kodu (Örn: FH-123456)';
+
+  @override
+  String get regFamilyNameHint => 'Aile Adı (Örn: Yılmaz Ailesi)';
+
+  @override
+  String get regOr => 'veya';
+
+  @override
+  String get regPasswordHint => 'Şifre (en az 8 karakter)';
+
+  @override
+  String get privExportShareText => 'FamilyHub Veri Dışa Aktarımı';
+
+  @override
+  String get privActivityStatus => 'Aktivite Durumu';
+
+  @override
+  String get baOptimize => 'Optimize Et';
+
+  @override
+  String get baRecalculate => 'Yeniden Hesapla';
+
+  @override
+  String get baAvgAccuracy => 'Ortalama hassasiyet';
+
+  @override
+  String get baOptimalRatio => 'Optimal profil oranı';
+
+  @override
+  String get baWrongSwitch => 'Yanlış profil geçişi';
 }

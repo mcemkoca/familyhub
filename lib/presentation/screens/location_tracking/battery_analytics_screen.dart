@@ -60,7 +60,7 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
             ElevatedButton.icon(
               onPressed: () {},
               icon: const Icon(Icons.track_changes),
-              label: const Text('Optimize Et'),
+              label: Text(AppLocalizations.of(context).baOptimize),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green.shade700,
                 foregroundColor: Colors.white,
@@ -71,9 +71,9 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
           // Efficiency metrics
           _section(AppLocalizations.of(context).verimlilikMetrikleri, children: [
             _metricRow('Konum/Batarya', '2.5 nokta/%', target: '3.0+'),
-            _metricRow('Ortalama hassasiyet', '35m', target: '<50m'),
-            _metricRow('Optimal profil oranı', '%68', target: '%80+'),
-            _metricRow('Yanlış profil geçişi', '12/gün', target: '<5/gün'),
+            _metricRow(AppLocalizations.of(context).baAvgAccuracy, '35m', target: '<50m'),
+            _metricRow(AppLocalizations.of(context).baOptimalRatio, '%68', target: '%80+'),
+            _metricRow(AppLocalizations.of(context).baWrongSwitch, '12/gün', target: '<5/gün'),
           ]),
 
           // AI suggestions
@@ -100,7 +100,7 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
                 child: ElevatedButton.icon(
                   onPressed: () {},
                   icon: const Icon(Icons.calculate),
-                  label: const Text('Yeniden Hesapla'),
+                  label: Text(AppLocalizations.of(context).baRecalculate),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue.shade700,
                     foregroundColor: Colors.white,

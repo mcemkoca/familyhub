@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -337,7 +338,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
                                   // Name
                                   _buildField(
                                     controller: _nameController,
-                                    label: 'Ad Soyad',
+                                    label: AppLocalizations.of(context).hcFullName,
                                     emoji: '👤',
                                     action: TextInputAction.next,
                                   ),
@@ -346,7 +347,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
                                   // Email
                                   _buildField(
                                     controller: _emailController,
-                                    label: 'E-posta adresiniz',
+                                    label: AppLocalizations.of(context).regEmailHint,
                                     emoji: '📧',
                                     keyboardType: TextInputType.emailAddress,
                                     action: TextInputAction.next,
@@ -361,14 +362,14 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
                                   if (_hasFamilyCode)
                                     _buildField(
                                       controller: _familyCodeController,
-                                      label: 'Aile Kodu (Örn: FH-123456)',
+                                      label: AppLocalizations.of(context).regFamilyCodeHint,
                                       emoji: '🔑',
                                       action: TextInputAction.done,
                                     )
                                   else
                                     _buildField(
                                       controller: _familyNameController,
-                                      label: 'Aile Adı (Örn: Yılmaz Ailesi)',
+                                      label: AppLocalizations.of(context).regFamilyNameHint,
                                       emoji: '🏠',
                                       action: TextInputAction.done,
                                     ),
@@ -387,7 +388,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
                                     Expanded(child: Divider(color: isDark ? const Color(0x22FFFFFF) : const Color(0xFFE5E7EB))),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(horizontal: 12),
-                                      child: Text('veya', style: TextStyle(color: isDark ? const Color(0xFF6B7280) : const Color(0xFF9CA3AF), fontSize: 13)),
+                                      child: Text(AppLocalizations.of(context).regOr, style: TextStyle(color: isDark ? const Color(0xFF6B7280) : const Color(0xFF9CA3AF), fontSize: 13)),
                                     ),
                                     Expanded(child: Divider(color: isDark ? const Color(0x22FFFFFF) : const Color(0xFFE5E7EB))),
                                   ]),
@@ -645,7 +646,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
         obscureText: _obscurePassword,
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          labelText: 'Şifre (en az 8 karakter)',
+          labelText: AppLocalizations.of(context).regPasswordHint,
           prefixText: '🔒  ',
           prefixStyle: const TextStyle(fontSize: 15),
           border: InputBorder.none,

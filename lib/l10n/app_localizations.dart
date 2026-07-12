@@ -11129,6 +11129,78 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Temizleme hatası: {msg}'**
   String stgClearFailed(Object msg);
+
+  /// No description provided for @regEmailHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'E-posta adresiniz'**
+  String get regEmailHint;
+
+  /// No description provided for @regFamilyCodeHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile Kodu (Örn: FH-123456)'**
+  String get regFamilyCodeHint;
+
+  /// No description provided for @regFamilyNameHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile Adı (Örn: Yılmaz Ailesi)'**
+  String get regFamilyNameHint;
+
+  /// No description provided for @regOr.
+  ///
+  /// In tr, this message translates to:
+  /// **'veya'**
+  String get regOr;
+
+  /// No description provided for @regPasswordHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şifre (en az 8 karakter)'**
+  String get regPasswordHint;
+
+  /// No description provided for @privExportShareText.
+  ///
+  /// In tr, this message translates to:
+  /// **'FamilyHub Veri Dışa Aktarımı'**
+  String get privExportShareText;
+
+  /// No description provided for @privActivityStatus.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aktivite Durumu'**
+  String get privActivityStatus;
+
+  /// No description provided for @baOptimize.
+  ///
+  /// In tr, this message translates to:
+  /// **'Optimize Et'**
+  String get baOptimize;
+
+  /// No description provided for @baRecalculate.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yeniden Hesapla'**
+  String get baRecalculate;
+
+  /// No description provided for @baAvgAccuracy.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ortalama hassasiyet'**
+  String get baAvgAccuracy;
+
+  /// No description provided for @baOptimalRatio.
+  ///
+  /// In tr, this message translates to:
+  /// **'Optimal profil oranı'**
+  String get baOptimalRatio;
+
+  /// No description provided for @baWrongSwitch.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yanlış profil geçişi'**
+  String get baWrongSwitch;
 }
 
 class _AppLocalizationsDelegate

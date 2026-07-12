@@ -5885,4 +5885,40 @@ class AppLocalizationsNl extends AppLocalizations {
   String stgClearFailed(Object msg) {
     return 'Wisfout: $msg';
   }
+
+  @override
+  String get regEmailHint => 'Je e-mailadres';
+
+  @override
+  String get regFamilyCodeHint => 'Gezinscode (bijv. FH-123456)';
+
+  @override
+  String get regFamilyNameHint => 'Gezinsnaam (bijv. Familie Janssen)';
+
+  @override
+  String get regOr => 'of';
+
+  @override
+  String get regPasswordHint => 'Wachtwoord (minstens 8 tekens)';
+
+  @override
+  String get privExportShareText => 'FamilyHub-gegevensexport';
+
+  @override
+  String get privActivityStatus => 'Activiteitsstatus';
+
+  @override
+  String get baOptimize => 'Optimaliseren';
+
+  @override
+  String get baRecalculate => 'Herberekenen';
+
+  @override
+  String get baAvgAccuracy => 'Gemiddelde nauwkeurigheid';
+
+  @override
+  String get baOptimalRatio => 'Optimale profielverhouding';
+
+  @override
+  String get baWrongSwitch => 'Verkeerde profielwissel';
 }
