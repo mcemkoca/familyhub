@@ -5858,4 +5858,46 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get hbAllUpToDate => 'Her şey güncel';
+
+  @override
+  String get stgTitle => 'Ayarlar';
+
+  @override
+  String get stgSubtitle => 'FamilyHub\'ınızı yönetin';
+
+  @override
+  String get stgNotifDesc =>
+      'Etkinlik, görev, acil durum, sohbet ve konum bildirimleri';
+
+  @override
+  String stgMemberCount(Object n) {
+    return '$n Üye';
+  }
+
+  @override
+  String get stgClear => 'Temizle';
+
+  @override
+  String get stgLeftFamily => 'Aileden ayrıldınız.';
+
+  @override
+  String stgLeaveFailed(Object msg) {
+    return 'Ayrılma hatası: $msg';
+  }
+
+  @override
+  String get stgAllDeleted => 'Tüm veriler silindi.';
+
+  @override
+  String stgDeleteFailed(Object msg) {
+    return 'Silme hatası: $msg';
+  }
+
+  @override
+  String get stgCacheCleared => 'Önbellek temizlendi.';
+
+  @override
+  String stgClearFailed(Object msg) {
+    return 'Temizleme hatası: $msg';
+  }
 }

@@ -11063,6 +11063,72 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Her şey güncel'**
   String get hbAllUpToDate;
+
+  /// No description provided for @stgTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ayarlar'**
+  String get stgTitle;
+
+  /// No description provided for @stgSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'FamilyHub\'ınızı yönetin'**
+  String get stgSubtitle;
+
+  /// No description provided for @stgNotifDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Etkinlik, görev, acil durum, sohbet ve konum bildirimleri'**
+  String get stgNotifDesc;
+
+  /// No description provided for @stgMemberCount.
+  ///
+  /// In tr, this message translates to:
+  /// **'{n} Üye'**
+  String stgMemberCount(Object n);
+
+  /// No description provided for @stgClear.
+  ///
+  /// In tr, this message translates to:
+  /// **'Temizle'**
+  String get stgClear;
+
+  /// No description provided for @stgLeftFamily.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aileden ayrıldınız.'**
+  String get stgLeftFamily;
+
+  /// No description provided for @stgLeaveFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ayrılma hatası: {msg}'**
+  String stgLeaveFailed(Object msg);
+
+  /// No description provided for @stgAllDeleted.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tüm veriler silindi.'**
+  String get stgAllDeleted;
+
+  /// No description provided for @stgDeleteFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Silme hatası: {msg}'**
+  String stgDeleteFailed(Object msg);
+
+  /// No description provided for @stgCacheCleared.
+  ///
+  /// In tr, this message translates to:
+  /// **'Önbellek temizlendi.'**
+  String get stgCacheCleared;
+
+  /// No description provided for @stgClearFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Temizleme hatası: {msg}'**
+  String stgClearFailed(Object msg);
 }
 
 class _AppLocalizationsDelegate

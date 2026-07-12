@@ -5864,4 +5864,46 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get hbAllUpToDate => 'Tout est a jour';
+
+  @override
+  String get stgTitle => 'Parametres';
+
+  @override
+  String get stgSubtitle => 'Gerez votre FamilyHub';
+
+  @override
+  String get stgNotifDesc =>
+      'Notifications d\'evenement, tache, urgence, chat et position';
+
+  @override
+  String stgMemberCount(Object n) {
+    return '$n membres';
+  }
+
+  @override
+  String get stgClear => 'Effacer';
+
+  @override
+  String get stgLeftFamily => 'Vous avez quitte la famille.';
+
+  @override
+  String stgLeaveFailed(Object msg) {
+    return 'Erreur de depart : $msg';
+  }
+
+  @override
+  String get stgAllDeleted => 'Toutes les donnees ont ete supprimees.';
+
+  @override
+  String stgDeleteFailed(Object msg) {
+    return 'Erreur de suppression : $msg';
+  }
+
+  @override
+  String get stgCacheCleared => 'Cache vide.';
+
+  @override
+  String stgClearFailed(Object msg) {
+    return 'Erreur de nettoyage : $msg';
+  }
 }

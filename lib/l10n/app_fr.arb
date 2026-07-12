@@ -1850,5 +1850,16 @@
   "catLevel": "Niveau {n} • Heros",
   "catNextLevel": "Niveau suivant :",
   "catOk": "OK",
-  "hbAllUpToDate": "Tout est a jour"
+  "hbAllUpToDate": "Tout est a jour",
+  "stgTitle": "Parametres",
+  "stgSubtitle": "Gerez votre FamilyHub",
+  "stgNotifDesc": "Notifications d'evenement, tache, urgence, chat et position",
+  "stgMemberCount": "{n} membres",
+  "stgClear": "Effacer",
+  "stgLeftFamily": "Vous avez quitte la famille.",
+  "stgLeaveFailed": "Erreur de depart : {msg}",
+  "stgAllDeleted": "Toutes les donnees ont ete supprimees.",
+  "stgDeleteFailed": "Erreur de suppression : {msg}",
+  "stgCacheCleared": "Cache vide.",
+  "stgClearFailed": "Erreur de nettoyage : {msg}"
 }

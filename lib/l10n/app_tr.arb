@@ -1897,5 +1897,20 @@
   "@catLevel": { "placeholders": { "n": {} } },
   "catNextLevel": "Sonraki seviyeye:",
   "catOk": "Tamam",
-  "hbAllUpToDate": "Her şey güncel"
+  "hbAllUpToDate": "Her şey güncel",
+  "stgTitle": "Ayarlar",
+  "stgSubtitle": "FamilyHub'ınızı yönetin",
+  "stgNotifDesc": "Etkinlik, görev, acil durum, sohbet ve konum bildirimleri",
+  "stgMemberCount": "{n} Üye",
+  "@stgMemberCount": { "placeholders": { "n": {} } },
+  "stgClear": "Temizle",
+  "stgLeftFamily": "Aileden ayrıldınız.",
+  "stgLeaveFailed": "Ayrılma hatası: {msg}",
+  "@stgLeaveFailed": { "placeholders": { "msg": {} } },
+  "stgAllDeleted": "Tüm veriler silindi.",
+  "stgDeleteFailed": "Silme hatası: {msg}",
+  "@stgDeleteFailed": { "placeholders": { "msg": {} } },
+  "stgCacheCleared": "Önbellek temizlendi.",
+  "stgClearFailed": "Temizleme hatası: {msg}",
+  "@stgClearFailed": { "placeholders": { "msg": {} } }
 }

@@ -1850,5 +1850,16 @@
   "catLevel": "Level {n} • Hero",
   "catNextLevel": "To next level:",
   "catOk": "OK",
-  "hbAllUpToDate": "All up to date"
+  "hbAllUpToDate": "All up to date",
+  "stgTitle": "Settings",
+  "stgSubtitle": "Manage your FamilyHub",
+  "stgNotifDesc": "Event, task, emergency, chat and location notifications",
+  "stgMemberCount": "{n} Members",
+  "stgClear": "Clear",
+  "stgLeftFamily": "You left the family.",
+  "stgLeaveFailed": "Leave error: {msg}",
+  "stgAllDeleted": "All data deleted.",
+  "stgDeleteFailed": "Delete error: {msg}",
+  "stgCacheCleared": "Cache cleared.",
+  "stgClearFailed": "Clear error: {msg}"
 }

@@ -5839,4 +5839,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get hbAllUpToDate => 'All up to date';
+
+  @override
+  String get stgTitle => 'Settings';
+
+  @override
+  String get stgSubtitle => 'Manage your FamilyHub';
+
+  @override
+  String get stgNotifDesc =>
+      'Event, task, emergency, chat and location notifications';
+
+  @override
+  String stgMemberCount(Object n) {
+    return '$n Members';
+  }
+
+  @override
+  String get stgClear => 'Clear';
+
+  @override
+  String get stgLeftFamily => 'You left the family.';
+
+  @override
+  String stgLeaveFailed(Object msg) {
+    return 'Leave error: $msg';
+  }
+
+  @override
+  String get stgAllDeleted => 'All data deleted.';
+
+  @override
+  String stgDeleteFailed(Object msg) {
+    return 'Delete error: $msg';
+  }
+
+  @override
+  String get stgCacheCleared => 'Cache cleared.';
+
+  @override
+  String stgClearFailed(Object msg) {
+    return 'Clear error: $msg';
+  }
 }

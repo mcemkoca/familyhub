@@ -79,7 +79,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Ayarlar',
+                      AppLocalizations.of(context).stgTitle,
                       style: Theme.of(context)
                           .textTheme
                           .displayLarge
@@ -87,7 +87,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'FamilyHub\'ınızı yönetin',
+                      AppLocalizations.of(context).stgSubtitle,
                       style: TextStyle(
                         fontSize: 14,
                         color: Theme.of(context).colorScheme.onSurface.withAlpha(128),
@@ -135,7 +135,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     iconColor: const Color(0xFF6366F1),
                     label: AppLocalizations.of(context).bildirimAyarlari,
                     description:
-                        'Etkinlik, görev, acil durum, sohbet ve konum bildirimleri',
+                        AppLocalizations.of(context).stgNotifDesc,
                     onTap: () => context.push(AppRoutes.notificationSettings),
                     isLast: true,
                   ),
@@ -167,7 +167,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             ),
                           );
                         }
-                        return Text('${snapshot.data} Üye');
+                        return Text(AppLocalizations.of(context).stgMemberCount('${snapshot.data}'));
                       },
                     ),
                     onTap: () => context.push(AppRoutes.familyManage),
@@ -198,7 +198,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     iconColor: const Color(0xFFEC4899),
                     label: AppLocalizations.of(context).ekranSuresi,
                     description: AppLocalizations.of(context).cocukUyelerIcinKullanimLimitleri,
-                    showValue: 'Aktif',
+                    showValue: AppLocalizations.of(context).setActive,
                     onTap: () => context.push(AppRoutes.screenTimeSettings),
                   ),
                   SettingsItem(
@@ -544,7 +544,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     showDialog(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: const Text('Verileri Sil'),
+        title: Text(AppLocalizations.of(context).setDeleteData),
         content: Text(AppLocalizations.of(context).tumVerilerinizKaliciOlarakSilinecekBuIslemGeriAlinamaz,
         ),
         actions: [
@@ -557,7 +557,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               Navigator.of(dialogContext).pop();
               await _deleteAllData();
             },
-            child: const Text('Sil', style: TextStyle(color: Color(0xFFEF4444))),
+            child: Text(AppLocalizations.of(context).budDelete, style: const TextStyle(color: Color(0xFFEF4444))),
           ),
         ],
       ),
@@ -581,7 +581,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               Navigator.of(dialogContext).pop();
               await _clearCache();
             },
-            child: const Text('Temizle', style: TextStyle(color: Color(0xFF6366F1))),
+            child: Text(AppLocalizations.of(context).stgClear, style: const TextStyle(color: Color(0xFF6366F1))),
           ),
         ],
       ),
@@ -634,7 +634,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       await AuthService.signOut();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Aileden ayrıldınız.')),
+          SnackBar(content: Text(AppLocalizations.of(context).stgLeftFamily)),
         );
         await Future.delayed(const Duration(seconds: 1));
         if (mounted) context.go(AppRoutes.login);
@@ -642,7 +642,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Ayrılma hatası: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context).stgLeaveFailed('$e'))),
         );
       }
     }
@@ -665,7 +665,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       await Hive.deleteFromDisk();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Tüm veriler silindi.')),
+          SnackBar(content: Text(AppLocalizations.of(context).stgAllDeleted)),
         );
         await Future.delayed(const Duration(seconds: 1));
         if (mounted) context.go(AppRoutes.login);
@@ -673,7 +673,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Silme hatası: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context).stgDeleteFailed('$e'))),
         );
       }
     }
@@ -692,7 +692,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       }
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Önbellek temizlendi.')),
+          SnackBar(content: Text(AppLocalizations.of(context).stgCacheCleared)),
         );
         // Yeni boyutu yansıt
         setState(() {});
@@ -700,7 +700,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Temizleme hatası: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context).stgClearFailed('$e'))),
         );
       }
     }

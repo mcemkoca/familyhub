@@ -1850,5 +1850,16 @@
   "catLevel": "Niveau {n} • Held",
   "catNextLevel": "Naar volgend niveau:",
   "catOk": "OK",
-  "hbAllUpToDate": "Alles up-to-date"
+  "hbAllUpToDate": "Alles up-to-date",
+  "stgTitle": "Instellingen",
+  "stgSubtitle": "Beheer je FamilyHub",
+  "stgNotifDesc": "Meldingen voor evenement, taak, noodgeval, chat en locatie",
+  "stgMemberCount": "{n} leden",
+  "stgClear": "Wissen",
+  "stgLeftFamily": "Je hebt het gezin verlaten.",
+  "stgLeaveFailed": "Verlaatfout: {msg}",
+  "stgAllDeleted": "Alle gegevens verwijderd.",
+  "stgDeleteFailed": "Verwijderfout: {msg}",
+  "stgCacheCleared": "Cache gewist.",
+  "stgClearFailed": "Wisfout: {msg}"
 }

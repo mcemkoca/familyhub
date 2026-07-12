@@ -5843,4 +5843,46 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get hbAllUpToDate => 'Alles up-to-date';
+
+  @override
+  String get stgTitle => 'Instellingen';
+
+  @override
+  String get stgSubtitle => 'Beheer je FamilyHub';
+
+  @override
+  String get stgNotifDesc =>
+      'Meldingen voor evenement, taak, noodgeval, chat en locatie';
+
+  @override
+  String stgMemberCount(Object n) {
+    return '$n leden';
+  }
+
+  @override
+  String get stgClear => 'Wissen';
+
+  @override
+  String get stgLeftFamily => 'Je hebt het gezin verlaten.';
+
+  @override
+  String stgLeaveFailed(Object msg) {
+    return 'Verlaatfout: $msg';
+  }
+
+  @override
+  String get stgAllDeleted => 'Alle gegevens verwijderd.';
+
+  @override
+  String stgDeleteFailed(Object msg) {
+    return 'Verwijderfout: $msg';
+  }
+
+  @override
+  String get stgCacheCleared => 'Cache gewist.';
+
+  @override
+  String stgClearFailed(Object msg) {
+    return 'Wisfout: $msg';
+  }
 }
