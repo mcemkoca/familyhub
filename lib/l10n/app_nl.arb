@@ -2009,5 +2009,15 @@
   "cpsTitle": "Wekelijks ontwikkelingsplan",
   "cpsSubtitle": "Persoonlijk plan voor {name}",
   "cpsCreating": "Aanmaken...",
-  "cpsCreate": "Plan maken"
+  "cpsCreate": "Plan maken",
+  "fpEmailAddr": "E-mailadres",
+  "srSaveFailed": "Kan toewijzing niet opslaan: {msg}",
+  "srRejectFailed": "Kan afwijzing niet opslaan: {msg}",
+  "srPoints": "ptn",
+  "srApprove": "Goedkeuren",
+  "srdApplied": "Toegepast: {s}",
+  "hcsBloodType": "Bloedgroep",
+  "sicTitle": "Slimme meldingen",
+  "cadScore": "Ontwikkelingsscore: {score}%",
+  "cadAiPreparing": "AI-suggesties worden voorbereid…"
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../config/routes.dart';
@@ -32,22 +33,22 @@ class SmartInsightsCard extends ConsumerWidget {
                 const Icon(Icons.insights_rounded,
                     size: 18, color: Color(0xFF8B5CF6)),
                 const SizedBox(width: 8),
-                const Text('Akıllı Uyarılar',
-                    style: TextStyle(
+                Text(AppLocalizations.of(context).sicTitle,
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 15,
                         fontWeight: FontWeight.w800)),
                 const Spacer(),
                 GestureDetector(
                   onTap: () => context.push(AppRoutes.familyReport),
-                  child: const Row(
+                  child: Row(
                     children: [
-                      Text('Aile Karnesi',
-                          style: TextStyle(
+                      Text(AppLocalizations.of(context).frpTitle,
+                          style: const TextStyle(
                               color: Color(0xFF8B5CF6),
                               fontSize: 12.5,
                               fontWeight: FontWeight.w700)),
-                      Icon(Icons.chevron_right_rounded,
+                      const Icon(Icons.chevron_right_rounded,
                           color: Color(0xFF8B5CF6), size: 18),
                     ],
                   ),

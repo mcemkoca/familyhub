@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../widgets/external_link.dart';
 import '../../../services/ai/ai_content_service.dart';
 import 'child_development_screen.dart' show ChildProfile;
@@ -35,7 +36,7 @@ class AreaDetailScreen extends StatelessWidget {
               child: ListView(
                 padding: const EdgeInsets.fromLTRB(16, 4, 16, 28),
                 children: [
-                  _hero(area, content, score),
+                  _hero(context, area, content, score),
                   const SizedBox(height: 12),
                   const DevDisclaimerBanner(),
                   const SizedBox(height: 18),
@@ -112,7 +113,7 @@ class AreaDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _hero(DevArea area, AreaContent content, int score) {
+  Widget _hero(BuildContext context, DevArea area, AreaContent content, int score) {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
@@ -153,7 +154,7 @@ class AreaDetailScreen extends StatelessWidget {
                             color: Colors.white,
                             fontSize: 19,
                             fontWeight: FontWeight.w800)),
-                    Text('Gelişim skoru: %$score',
+                    Text(AppLocalizations.of(context).cadScore(score),
                         style: TextStyle(
                             color: area.gradient.first,
                             fontSize: 13,
@@ -328,8 +329,8 @@ class _AiWeeklyIdeas extends StatelessWidget {
                 child: CircularProgressIndicator(strokeWidth: 2, color: color),
               ),
               const SizedBox(width: 10),
-              const Text('AI öneriler hazırlanıyor…',
-                  style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
+              Text(AppLocalizations.of(context).cadAiPreparing,
+                  style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
             ],
           );
         }

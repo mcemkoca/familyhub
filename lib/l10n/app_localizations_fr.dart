@@ -6393,4 +6393,42 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get cpsCreate => 'Creer le plan';
+
+  @override
+  String get fpEmailAddr => 'Adresse e-mail';
+
+  @override
+  String srSaveFailed(Object msg) {
+    return 'Impossible d\'enregistrer l\'affectation : $msg';
+  }
+
+  @override
+  String srRejectFailed(Object msg) {
+    return 'Impossible d\'enregistrer le refus : $msg';
+  }
+
+  @override
+  String get srPoints => 'pts';
+
+  @override
+  String get srApprove => 'Approuver';
+
+  @override
+  String srdApplied(Object s) {
+    return 'Applique : $s';
+  }
+
+  @override
+  String get hcsBloodType => 'Groupe sanguin';
+
+  @override
+  String get sicTitle => 'Alertes intelligentes';
+
+  @override
+  String cadScore(Object score) {
+    return 'Score de developpement : $score%';
+  }
+
+  @override
+  String get cadAiPreparing => 'Les suggestions IA sont en preparation…';
 }

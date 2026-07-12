@@ -12017,6 +12017,66 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Planı Oluştur'**
   String get cpsCreate;
+
+  /// No description provided for @fpEmailAddr.
+  ///
+  /// In tr, this message translates to:
+  /// **'E-posta Adresi'**
+  String get fpEmailAddr;
+
+  /// No description provided for @srSaveFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Atama kaydedilemedi: {msg}'**
+  String srSaveFailed(Object msg);
+
+  /// No description provided for @srRejectFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Reddetme kaydedilemedi: {msg}'**
+  String srRejectFailed(Object msg);
+
+  /// No description provided for @srPoints.
+  ///
+  /// In tr, this message translates to:
+  /// **'puan'**
+  String get srPoints;
+
+  /// No description provided for @srApprove.
+  ///
+  /// In tr, this message translates to:
+  /// **'Onayla'**
+  String get srApprove;
+
+  /// No description provided for @srdApplied.
+  ///
+  /// In tr, this message translates to:
+  /// **'Uygulandı: {s}'**
+  String srdApplied(Object s);
+
+  /// No description provided for @hcsBloodType.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kan Grubu'**
+  String get hcsBloodType;
+
+  /// No description provided for @sicTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Akıllı Uyarılar'**
+  String get sicTitle;
+
+  /// No description provided for @cadScore.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gelişim skoru: %{score}'**
+  String cadScore(Object score);
+
+  /// No description provided for @cadAiPreparing.
+  ///
+  /// In tr, this message translates to:
+  /// **'AI öneriler hazırlanıyor…'**
+  String get cadAiPreparing;
 }
 
 class _AppLocalizationsDelegate

@@ -270,7 +270,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           textInputAction: TextInputAction.done,
           onSubmitted: (_) => _submitEmail(),
           decoration: InputDecoration(
-            labelText: 'E-posta Adresi',
+            labelText: AppLocalizations.of(context).fpEmailAddr,
             prefixIcon: const Icon(Icons.email_outlined),
             filled: true,
             fillColor: const Color(0x1AFFFFFF),
@@ -577,7 +577,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           textInputAction: TextInputAction.done,
           onSubmitted: (_) => _changePassword(),
           decoration: InputDecoration(
-            labelText: 'Yeni Şifre (Tekrar)',
+            labelText: AppLocalizations.of(context).secNewPasswordRepeat,
             prefixIcon: const Icon(Icons.lock_outline),
             filled: true,
             fillColor: const Color(0x1AFFFFFF),

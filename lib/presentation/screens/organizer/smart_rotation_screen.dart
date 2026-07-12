@@ -235,7 +235,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
       } catch (e) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Atama kaydedilemedi: $e')),
+            SnackBar(content: Text(AppLocalizations.of(context).srSaveFailed('$e'))),
           );
         }
       }
@@ -259,7 +259,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Reddetme kaydedilemedi: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context).srRejectFailed('$e'))),
         );
       }
     }
@@ -282,7 +282,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: _loadRealData,
-            tooltip: 'Yenile',
+            tooltip: AppLocalizations.of(context).llRefresh,
           ),
           IconButton(
             icon: const Icon(Icons.rule_folder_outlined),
@@ -500,7 +500,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
                           color: isFirst ? const Color(0xFFB7791F) : const Color(0xFF6366F1),
                         ),
                       ),
-                      const Text('puan', style: TextStyle(fontSize: 10, color: Color(0xFF6B7280))),
+                      Text(AppLocalizations.of(context).srPoints, style: const TextStyle(fontSize: 10, color: Color(0xFF6B7280))),
                     ],
                   ),
                 ],
@@ -1082,13 +1082,13 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
             IconButton(
               icon: const Icon(Icons.check_circle, color: Color(0xFF10B981)),
               onPressed: () => _acceptAssignment(a),
-              tooltip: 'Onayla',
+              tooltip: AppLocalizations.of(context).srApprove,
               iconSize: 22,
             ),
             IconButton(
               icon: const Icon(Icons.cancel, color: AppColors.error),
               onPressed: () => _rejectAssignment(task.id),
-              tooltip: 'Reddet',
+              tooltip: AppLocalizations.of(context).vcReject,
               iconSize: 22,
             ),
           ] else

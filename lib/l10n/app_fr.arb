@@ -2009,5 +2009,15 @@
   "cpsTitle": "Plan de developpement hebdomadaire",
   "cpsSubtitle": "Plan personnalise pour {name}",
   "cpsCreating": "Creation...",
-  "cpsCreate": "Creer le plan"
+  "cpsCreate": "Creer le plan",
+  "fpEmailAddr": "Adresse e-mail",
+  "srSaveFailed": "Impossible d'enregistrer l'affectation : {msg}",
+  "srRejectFailed": "Impossible d'enregistrer le refus : {msg}",
+  "srPoints": "pts",
+  "srApprove": "Approuver",
+  "srdApplied": "Applique : {s}",
+  "hcsBloodType": "Groupe sanguin",
+  "sicTitle": "Alertes intelligentes",
+  "cadScore": "Score de developpement : {score}%",
+  "cadAiPreparing": "Les suggestions IA sont en preparation…"
 }

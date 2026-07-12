@@ -2080,5 +2080,19 @@
   "cpsSubtitle": "{name} için kişiselleştirilmiş plan",
   "@cpsSubtitle": { "placeholders": { "name": {} } },
   "cpsCreating": "Oluşturuluyor...",
-  "cpsCreate": "Planı Oluştur"
+  "cpsCreate": "Planı Oluştur",
+  "fpEmailAddr": "E-posta Adresi",
+  "srSaveFailed": "Atama kaydedilemedi: {msg}",
+  "@srSaveFailed": { "placeholders": { "msg": {} } },
+  "srRejectFailed": "Reddetme kaydedilemedi: {msg}",
+  "@srRejectFailed": { "placeholders": { "msg": {} } },
+  "srPoints": "puan",
+  "srApprove": "Onayla",
+  "srdApplied": "Uygulandı: {s}",
+  "@srdApplied": { "placeholders": { "s": {} } },
+  "hcsBloodType": "Kan Grubu",
+  "sicTitle": "Akıllı Uyarılar",
+  "cadScore": "Gelişim skoru: %{score}",
+  "@cadScore": { "placeholders": { "score": {} } },
+  "cadAiPreparing": "AI öneriler hazırlanıyor…"
 }

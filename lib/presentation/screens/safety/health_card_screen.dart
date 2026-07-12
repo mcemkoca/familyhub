@@ -168,13 +168,13 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                   ),
                   // Info Rows
                   _InfoRow(
-                    label: 'Kan Grubu',
+                    label: AppLocalizations.of(context).hcsBloodType,
                     value: _data?.bloodType ?? '-',
                     highlight: true,
                   ),
                   const Divider(height: 1, indent: 20, endIndent: 20),
                   _InfoRow(
-                    label: 'Alerjiler',
+                    label: AppLocalizations.of(context).hcAllergies,
                     value: _data?.allergies.isNotEmpty == true
                         ? _data!.allergies.join(', ')
                         : 'Yok',

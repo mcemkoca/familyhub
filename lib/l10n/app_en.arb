@@ -2009,5 +2009,15 @@
   "cpsTitle": "Weekly Development Plan",
   "cpsSubtitle": "Personalised plan for {name}",
   "cpsCreating": "Creating...",
-  "cpsCreate": "Create Plan"
+  "cpsCreate": "Create Plan",
+  "fpEmailAddr": "Email Address",
+  "srSaveFailed": "Could not save assignment: {msg}",
+  "srRejectFailed": "Could not save rejection: {msg}",
+  "srPoints": "pts",
+  "srApprove": "Approve",
+  "srdApplied": "Applied: {s}",
+  "hcsBloodType": "Blood Type",
+  "sicTitle": "Smart Alerts",
+  "cadScore": "Development score: {score}%",
+  "cadAiPreparing": "AI suggestions are being prepared…"
 }

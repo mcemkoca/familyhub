@@ -43,7 +43,7 @@ class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
     HapticFeedback.mediumImpact();
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(SnackBar(content: Text('Uygulandı: $suggestion')));
+    ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).srdApplied(suggestion))));
   }
 
   @override
@@ -324,7 +324,7 @@ class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
                   Expanded(child: Text(s.text)),
                   TextButton(
                     onPressed: () => _applyOptimization(s.text),
-                    child: const Text('Uygula'),
+                    child: Text(AppLocalizations.of(context).rtApply),
                   ),
                 ],
               ),

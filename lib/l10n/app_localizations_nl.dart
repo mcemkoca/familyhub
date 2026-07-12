@@ -6372,4 +6372,42 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get cpsCreate => 'Plan maken';
+
+  @override
+  String get fpEmailAddr => 'E-mailadres';
+
+  @override
+  String srSaveFailed(Object msg) {
+    return 'Kan toewijzing niet opslaan: $msg';
+  }
+
+  @override
+  String srRejectFailed(Object msg) {
+    return 'Kan afwijzing niet opslaan: $msg';
+  }
+
+  @override
+  String get srPoints => 'ptn';
+
+  @override
+  String get srApprove => 'Goedkeuren';
+
+  @override
+  String srdApplied(Object s) {
+    return 'Toegepast: $s';
+  }
+
+  @override
+  String get hcsBloodType => 'Bloedgroep';
+
+  @override
+  String get sicTitle => 'Slimme meldingen';
+
+  @override
+  String cadScore(Object score) {
+    return 'Ontwikkelingsscore: $score%';
+  }
+
+  @override
+  String get cadAiPreparing => 'AI-suggesties worden voorbereid…';
 }

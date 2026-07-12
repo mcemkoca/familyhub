@@ -6388,4 +6388,42 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get cpsCreate => 'Planı Oluştur';
+
+  @override
+  String get fpEmailAddr => 'E-posta Adresi';
+
+  @override
+  String srSaveFailed(Object msg) {
+    return 'Atama kaydedilemedi: $msg';
+  }
+
+  @override
+  String srRejectFailed(Object msg) {
+    return 'Reddetme kaydedilemedi: $msg';
+  }
+
+  @override
+  String get srPoints => 'puan';
+
+  @override
+  String get srApprove => 'Onayla';
+
+  @override
+  String srdApplied(Object s) {
+    return 'Uygulandı: $s';
+  }
+
+  @override
+  String get hcsBloodType => 'Kan Grubu';
+
+  @override
+  String get sicTitle => 'Akıllı Uyarılar';
+
+  @override
+  String cadScore(Object score) {
+    return 'Gelişim skoru: %$score';
+  }
+
+  @override
+  String get cadAiPreparing => 'AI öneriler hazırlanıyor…';
 }

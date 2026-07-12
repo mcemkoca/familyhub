@@ -6367,4 +6367,42 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cpsCreate => 'Create Plan';
+
+  @override
+  String get fpEmailAddr => 'Email Address';
+
+  @override
+  String srSaveFailed(Object msg) {
+    return 'Could not save assignment: $msg';
+  }
+
+  @override
+  String srRejectFailed(Object msg) {
+    return 'Could not save rejection: $msg';
+  }
+
+  @override
+  String get srPoints => 'pts';
+
+  @override
+  String get srApprove => 'Approve';
+
+  @override
+  String srdApplied(Object s) {
+    return 'Applied: $s';
+  }
+
+  @override
+  String get hcsBloodType => 'Blood Type';
+
+  @override
+  String get sicTitle => 'Smart Alerts';
+
+  @override
+  String cadScore(Object score) {
+    return 'Development score: $score%';
+  }
+
+  @override
+  String get cadAiPreparing => 'AI suggestions are being prepared…';
 }

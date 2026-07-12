@@ -439,7 +439,7 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
               await SmartReminderRepository().delete(reminder.id);
               await SmartReminderBackgroundService.cancelReminder(reminder.id);
             },
-            child: const Text('Sil', style: TextStyle(color: Colors.red)),
+            child: Text(AppLocalizations.of(context).budDelete, style: const TextStyle(color: Colors.red)),
           ),
         ],
       ),
