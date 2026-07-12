@@ -3910,8 +3910,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Activites, meteo et acces rapide.';
 
   @override
-  String get sagUsttekiHavaDurumuChip =>
-      'La pastille météo en haut à droite';
+  String get sagUsttekiHavaDurumuChip => 'La pastille météo en haut à droite';
 
   @override
   String get etkinlikOlusturma => 'Creer des evenements';
@@ -6260,4 +6259,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ccMsgHint => 'Ecrire un message...';
+
+  @override
+  String privExportFailed(Object msg) {
+    return 'Echec de l\'export des donnees : $msg';
+  }
 }

@@ -1970,5 +1970,6 @@
   "cdaViewSources": "View sources",
   "elLeaving": "You are leaving the app",
   "ccSaving": "Saving...",
-  "ccMsgHint": "Type a message..."
+  "ccMsgHint": "Type a message...",
+  "privExportFailed": "Data export failed: {msg}"
 }

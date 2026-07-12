@@ -1970,5 +1970,6 @@
   "cdaViewSources": "Voir les sources",
   "elLeaving": "Vous quittez l'application",
   "ccSaving": "Enregistrement...",
-  "ccMsgHint": "Ecrire un message..."
+  "ccMsgHint": "Ecrire un message...",
+  "privExportFailed": "Echec de l'export des donnees : {msg}"
 }

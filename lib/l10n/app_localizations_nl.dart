@@ -6238,4 +6238,9 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get ccMsgHint => 'Typ een bericht...';
+
+  @override
+  String privExportFailed(Object msg) {
+    return 'Gegevensexport mislukt: $msg';
+  }
 }

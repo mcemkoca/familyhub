@@ -6253,4 +6253,9 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get ccMsgHint => 'Mesaj yaz...';
+
+  @override
+  String privExportFailed(Object msg) {
+    return 'Veri dışa aktarma başarısız: $msg';
+  }
 }

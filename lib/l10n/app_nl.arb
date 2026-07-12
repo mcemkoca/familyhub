@@ -1970,5 +1970,6 @@
   "cdaViewSources": "Bronnen bekijken",
   "elLeaving": "Je verlaat de app",
   "ccSaving": "Opslaan...",
-  "ccMsgHint": "Typ een bericht..."
+  "ccMsgHint": "Typ een bericht...",
+  "privExportFailed": "Gegevensexport mislukt: {msg}"
 }

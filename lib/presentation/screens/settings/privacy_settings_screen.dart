@@ -74,7 +74,7 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Veri dışa aktarma başarısız: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context).privExportFailed('$e'))),
         );
       }
     }
@@ -93,7 +93,7 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
           ),
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, true),
-            child: const Text('Sil', style: TextStyle(color: Color(0xFFEF4444))),
+            child: Text(AppLocalizations.of(context).budDelete, style: const TextStyle(color: Color(0xFFEF4444))),
           ),
         ],
       ),
@@ -125,7 +125,7 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Hesap silme hatası: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context).secAccountDeleteFailed('$e'))),
         );
       }
     }

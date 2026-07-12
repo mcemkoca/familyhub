@@ -11783,6 +11783,12 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Mesaj yaz...'**
   String get ccMsgHint;
+
+  /// No description provided for @privExportFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Veri dışa aktarma başarısız: {msg}'**
+  String privExportFailed(Object msg);
 }
 
 class _AppLocalizationsDelegate

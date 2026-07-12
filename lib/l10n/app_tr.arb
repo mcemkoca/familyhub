@@ -2033,5 +2033,7 @@
   "cdaViewSources": "Kaynakları gör",
   "elLeaving": "Uygulamadan Ayrılıyorsunuz",
   "ccSaving": "Kaydediliyor...",
-  "ccMsgHint": "Mesaj yaz..."
+  "ccMsgHint": "Mesaj yaz...",
+  "privExportFailed": "Veri dışa aktarma başarısız: {msg}",
+  "@privExportFailed": { "placeholders": { "msg": {} } }
 }

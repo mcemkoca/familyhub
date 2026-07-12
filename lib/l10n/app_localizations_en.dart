@@ -6233,4 +6233,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ccMsgHint => 'Type a message...';
+
+  @override
+  String privExportFailed(Object msg) {
+    return 'Data export failed: $msg';
+  }
 }
