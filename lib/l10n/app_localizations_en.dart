@@ -5696,4 +5696,43 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mrSnoozeMsg => 'You\'ll be reminded again in 15 minutes.';
+
+  @override
+  String get cdtLessonAdded => 'Lesson added';
+
+  @override
+  String get cdtDeleteLesson => 'Delete Lesson';
+
+  @override
+  String get cdtSaved => 'Saved';
+
+  @override
+  String get chtFamilyChat => 'Family Chat';
+
+  @override
+  String get chtMyLocation => 'My Location';
+
+  @override
+  String get chtMyFamily => 'My Family';
+
+  @override
+  String get chtBackup => 'Backup';
+
+  @override
+  String get chtRotation => 'Rotation';
+
+  @override
+  String get frpTitle => 'Family Report Card';
+
+  @override
+  String get frpCategories => 'Categories';
+
+  @override
+  String get frpOverallScore => 'Overall Family Score';
+
+  @override
+  String get frpAiPreparing => 'AI comment is being prepared…';
+
+  @override
+  String get frpAiComment => 'AI Family Comment';
 }

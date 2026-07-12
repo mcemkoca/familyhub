@@ -431,7 +431,7 @@ class _HomeworksTabState extends State<_HomeworksTab> {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Hata: $e')));
+        ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).srError('$e'))));
       }
     }
   }
@@ -791,8 +791,8 @@ class _ScheduleTabState extends State<_ScheduleTab> {
         Navigator.pop(context);
         setState(() {});
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Ders eklendi'),
+          SnackBar(
+            content: Text(AppLocalizations.of(context).cdtLessonAdded),
             backgroundColor: Colors.green,
           ),
         );
@@ -801,7 +801,7 @@ class _ScheduleTabState extends State<_ScheduleTab> {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Hata: $e')));
+        ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).srError('$e'))));
       }
     }
   }
@@ -811,7 +811,7 @@ class _ScheduleTabState extends State<_ScheduleTab> {
       context: context,
       builder: (c) => AlertDialog(
         backgroundColor: const Color(0xFF1E293B),
-        title: const Text('Ders Sil', style: TextStyle(color: Colors.white)),
+        title: Text(AppLocalizations.of(context).cdtDeleteLesson, style: const TextStyle(color: Colors.white)),
         content: const Text(
           'Bu dersi silmek istiyor musun?',
           style: TextStyle(color: Colors.white70),
@@ -1052,8 +1052,8 @@ class _DevelopmentTabState extends State<_DevelopmentTab> {
         Navigator.pop(context);
         setState(() {});
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Kaydedildi'),
+          SnackBar(
+            content: Text(AppLocalizations.of(context).cdtSaved),
             backgroundColor: Colors.green,
           ),
         );
@@ -1062,7 +1062,7 @@ class _DevelopmentTabState extends State<_DevelopmentTab> {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Hata: $e')));
+        ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).srError('$e'))));
       }
     }
   }

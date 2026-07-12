@@ -5715,4 +5715,43 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get mrSnoozeMsg => '15 dakika sonra tekrar hatırlatılacak.';
+
+  @override
+  String get cdtLessonAdded => 'Ders eklendi';
+
+  @override
+  String get cdtDeleteLesson => 'Ders Sil';
+
+  @override
+  String get cdtSaved => 'Kaydedildi';
+
+  @override
+  String get chtFamilyChat => 'Aile Sohbeti';
+
+  @override
+  String get chtMyLocation => 'Konumum';
+
+  @override
+  String get chtMyFamily => 'Ailem';
+
+  @override
+  String get chtBackup => 'Yedekleme';
+
+  @override
+  String get chtRotation => 'Rotasyon';
+
+  @override
+  String get frpTitle => 'Aile Karnesi';
+
+  @override
+  String get frpCategories => 'Kategoriler';
+
+  @override
+  String get frpOverallScore => 'Genel Aile Skoru';
+
+  @override
+  String get frpAiPreparing => 'AI yorumu hazırlanıyor…';
+
+  @override
+  String get frpAiComment => 'AI Aile Yorumu';
 }

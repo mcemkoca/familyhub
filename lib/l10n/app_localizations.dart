@@ -10799,6 +10799,84 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'15 dakika sonra tekrar hatırlatılacak.'**
   String get mrSnoozeMsg;
+
+  /// No description provided for @cdtLessonAdded.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ders eklendi'**
+  String get cdtLessonAdded;
+
+  /// No description provided for @cdtDeleteLesson.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ders Sil'**
+  String get cdtDeleteLesson;
+
+  /// No description provided for @cdtSaved.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kaydedildi'**
+  String get cdtSaved;
+
+  /// No description provided for @chtFamilyChat.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile Sohbeti'**
+  String get chtFamilyChat;
+
+  /// No description provided for @chtMyLocation.
+  ///
+  /// In tr, this message translates to:
+  /// **'Konumum'**
+  String get chtMyLocation;
+
+  /// No description provided for @chtMyFamily.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ailem'**
+  String get chtMyFamily;
+
+  /// No description provided for @chtBackup.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yedekleme'**
+  String get chtBackup;
+
+  /// No description provided for @chtRotation.
+  ///
+  /// In tr, this message translates to:
+  /// **'Rotasyon'**
+  String get chtRotation;
+
+  /// No description provided for @frpTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile Karnesi'**
+  String get frpTitle;
+
+  /// No description provided for @frpCategories.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kategoriler'**
+  String get frpCategories;
+
+  /// No description provided for @frpOverallScore.
+  ///
+  /// In tr, this message translates to:
+  /// **'Genel Aile Skoru'**
+  String get frpOverallScore;
+
+  /// No description provided for @frpAiPreparing.
+  ///
+  /// In tr, this message translates to:
+  /// **'AI yorumu hazırlanıyor…'**
+  String get frpAiPreparing;
+
+  /// No description provided for @frpAiComment.
+  ///
+  /// In tr, this message translates to:
+  /// **'AI Aile Yorumu'**
+  String get frpAiComment;
 }
 
 class _AppLocalizationsDelegate

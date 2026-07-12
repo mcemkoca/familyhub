@@ -5700,4 +5700,43 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get mrSnoozeMsg => 'Je wordt over 15 minuten opnieuw herinnerd.';
+
+  @override
+  String get cdtLessonAdded => 'Les toegevoegd';
+
+  @override
+  String get cdtDeleteLesson => 'Les verwijderen';
+
+  @override
+  String get cdtSaved => 'Opgeslagen';
+
+  @override
+  String get chtFamilyChat => 'Gezinschat';
+
+  @override
+  String get chtMyLocation => 'Mijn locatie';
+
+  @override
+  String get chtMyFamily => 'Mijn gezin';
+
+  @override
+  String get chtBackup => 'Back-up';
+
+  @override
+  String get chtRotation => 'Rotatie';
+
+  @override
+  String get frpTitle => 'Gezinsrapport';
+
+  @override
+  String get frpCategories => 'Categorieen';
+
+  @override
+  String get frpOverallScore => 'Algehele gezinsscore';
+
+  @override
+  String get frpAiPreparing => 'AI-commentaar wordt voorbereid…';
+
+  @override
+  String get frpAiComment => 'AI-gezinscommentaar';
 }

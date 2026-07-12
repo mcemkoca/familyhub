@@ -1848,5 +1848,18 @@
   "mrTaken": "İlaç alındı olarak işaretlendi ✓",
   "mrTook": "Aldım",
   "mrSnooze15": "15 dk. sonra hatırlat",
-  "mrSnoozeMsg": "15 dakika sonra tekrar hatırlatılacak."
+  "mrSnoozeMsg": "15 dakika sonra tekrar hatırlatılacak.",
+  "cdtLessonAdded": "Ders eklendi",
+  "cdtDeleteLesson": "Ders Sil",
+  "cdtSaved": "Kaydedildi",
+  "chtFamilyChat": "Aile Sohbeti",
+  "chtMyLocation": "Konumum",
+  "chtMyFamily": "Ailem",
+  "chtBackup": "Yedekleme",
+  "chtRotation": "Rotasyon",
+  "frpTitle": "Aile Karnesi",
+  "frpCategories": "Kategoriler",
+  "frpOverallScore": "Genel Aile Skoru",
+  "frpAiPreparing": "AI yorumu hazırlanıyor…",
+  "frpAiComment": "AI Aile Yorumu"
 }

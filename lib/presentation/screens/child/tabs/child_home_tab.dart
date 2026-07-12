@@ -690,14 +690,14 @@ class _QuickAccessGrid extends StatelessWidget {
             const SizedBox(width: AppSpacing.md),
             _QuickAccessCard(
               icon: Icons.chat_bubble,
-              label: 'Aile Sohbeti',
+              label: AppLocalizations.of(context).chtFamilyChat,
               color: Colors.blue,
               onTap: () => context.push(AppRoutes.chat),
             ),
             const SizedBox(width: AppSpacing.md),
             _QuickAccessCard(
               icon: Icons.location_on,
-              label: 'Konumum',
+              label: AppLocalizations.of(context).chtMyLocation,
               color: Colors.purple,
               onTap: () => context.push(AppRoutes.location),
             ),
@@ -708,21 +708,21 @@ class _QuickAccessGrid extends StatelessWidget {
           children: [
             _QuickAccessCard(
               icon: Icons.family_restroom,
-              label: 'Ailem',
+              label: AppLocalizations.of(context).chtMyFamily,
               color: Colors.teal,
               onTap: () => context.push('/family-manage'),
             ),
             const SizedBox(width: AppSpacing.md),
             _QuickAccessCard(
               icon: Icons.backup,
-              label: 'Yedekleme',
+              label: AppLocalizations.of(context).chtBackup,
               color: const Color(0xFF4285F4),
               onTap: () => context.push('/google-drive-backup'),
             ),
             const SizedBox(width: AppSpacing.md),
             _QuickAccessCard(
               icon: Icons.auto_awesome,
-              label: 'Rotasyon',
+              label: AppLocalizations.of(context).chtRotation,
               color: const Color(0xFF8B5CF6),
               onTap: () => context.push(
                 AppRoutes.smartRotation,

@@ -1806,5 +1806,18 @@
   "mrTaken": "Gemarkeerd als ingenomen ✓",
   "mrTook": "Ingenomen",
   "mrSnooze15": "Herinner over 15 min",
-  "mrSnoozeMsg": "Je wordt over 15 minuten opnieuw herinnerd."
+  "mrSnoozeMsg": "Je wordt over 15 minuten opnieuw herinnerd.",
+  "cdtLessonAdded": "Les toegevoegd",
+  "cdtDeleteLesson": "Les verwijderen",
+  "cdtSaved": "Opgeslagen",
+  "chtFamilyChat": "Gezinschat",
+  "chtMyLocation": "Mijn locatie",
+  "chtMyFamily": "Mijn gezin",
+  "chtBackup": "Back-up",
+  "chtRotation": "Rotatie",
+  "frpTitle": "Gezinsrapport",
+  "frpCategories": "Categorieen",
+  "frpOverallScore": "Algehele gezinsscore",
+  "frpAiPreparing": "AI-commentaar wordt voorbereid…",
+  "frpAiComment": "AI-gezinscommentaar"
 }

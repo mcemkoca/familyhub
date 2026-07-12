@@ -5720,4 +5720,43 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mrSnoozeMsg => 'Vous serez rappele dans 15 minutes.';
+
+  @override
+  String get cdtLessonAdded => 'Lecon ajoutee';
+
+  @override
+  String get cdtDeleteLesson => 'Supprimer la lecon';
+
+  @override
+  String get cdtSaved => 'Enregistre';
+
+  @override
+  String get chtFamilyChat => 'Chat familial';
+
+  @override
+  String get chtMyLocation => 'Ma position';
+
+  @override
+  String get chtMyFamily => 'Ma famille';
+
+  @override
+  String get chtBackup => 'Sauvegarde';
+
+  @override
+  String get chtRotation => 'Rotation';
+
+  @override
+  String get frpTitle => 'Bulletin familial';
+
+  @override
+  String get frpCategories => 'Categories';
+
+  @override
+  String get frpOverallScore => 'Score familial global';
+
+  @override
+  String get frpAiPreparing => 'Le commentaire IA est en preparation…';
+
+  @override
+  String get frpAiComment => 'Commentaire familial IA';
 }

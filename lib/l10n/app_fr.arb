@@ -1806,5 +1806,18 @@
   "mrTaken": "Marque comme pris ✓",
   "mrTook": "Pris",
   "mrSnooze15": "Rappeler dans 15 min",
-  "mrSnoozeMsg": "Vous serez rappele dans 15 minutes."
+  "mrSnoozeMsg": "Vous serez rappele dans 15 minutes.",
+  "cdtLessonAdded": "Lecon ajoutee",
+  "cdtDeleteLesson": "Supprimer la lecon",
+  "cdtSaved": "Enregistre",
+  "chtFamilyChat": "Chat familial",
+  "chtMyLocation": "Ma position",
+  "chtMyFamily": "Ma famille",
+  "chtBackup": "Sauvegarde",
+  "chtRotation": "Rotation",
+  "frpTitle": "Bulletin familial",
+  "frpCategories": "Categories",
+  "frpOverallScore": "Score familial global",
+  "frpAiPreparing": "Le commentaire IA est en preparation…",
+  "frpAiComment": "Commentaire familial IA"
 }

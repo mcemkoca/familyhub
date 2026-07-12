@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../domain/entities.dart';
 import '../../../services/ai/ai_content_service.dart';
@@ -140,16 +141,16 @@ class FamilyReportScreen extends ConsumerWidget {
         backgroundColor: const Color(0xFF0A0A0F),
         foregroundColor: Colors.white,
         elevation: 0,
-        title: const Text('Aile Karnesi'),
+        title: Text(AppLocalizations.of(context).frpTitle),
         centerTitle: true,
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 28),
         children: [
-          _overallCard(overall, parts.isEmpty),
+          _overallCard(context, overall, parts.isEmpty),
           const SizedBox(height: 18),
-          const Text('Kategoriler',
-              style: TextStyle(
+          Text(AppLocalizations.of(context).frpCategories,
+              style: const TextStyle(
                   color: Colors.white,
                   fontSize: 17,
                   fontWeight: FontWeight.w800)),
@@ -188,7 +189,7 @@ class FamilyReportScreen extends ConsumerWidget {
     );
   }
 
-  Widget _overallCard(int overall, bool empty) {
+  Widget _overallCard(BuildContext context, int overall, bool empty) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -232,8 +233,8 @@ class FamilyReportScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Genel Aile Skoru',
-                    style: TextStyle(
+                Text(AppLocalizations.of(context).frpOverallScore,
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 17,
                         fontWeight: FontWeight.w800)),
@@ -355,17 +356,17 @@ class FamilyReportScreen extends ConsumerWidget {
                 .toList() ??
             const [];
         if (comment.isEmpty && snap.connectionState == ConnectionState.waiting) {
-          return const Padding(
-            padding: EdgeInsets.symmetric(vertical: 8),
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
             child: Row(children: [
-              SizedBox(
+              const SizedBox(
                   width: 16,
                   height: 16,
                   child: CircularProgressIndicator(
                       strokeWidth: 2, color: Color(0xFF8B5CF6))),
-              SizedBox(width: 10),
-              Text('AI yorumu hazırlanıyor…',
-                  style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
+              const SizedBox(width: 10),
+              Text(AppLocalizations.of(context).frpAiPreparing,
+                  style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
             ]),
           );
         }
@@ -380,11 +381,11 @@ class FamilyReportScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Row(children: [
-                Icon(Icons.auto_awesome, color: Color(0xFF8B5CF6), size: 18),
-                SizedBox(width: 8),
-                Text('AI Aile Yorumu',
-                    style: TextStyle(
+              Row(children: [
+                const Icon(Icons.auto_awesome, color: Color(0xFF8B5CF6), size: 18),
+                const SizedBox(width: 8),
+                Text(AppLocalizations.of(context).frpAiComment,
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 15,
                         fontWeight: FontWeight.w800)),

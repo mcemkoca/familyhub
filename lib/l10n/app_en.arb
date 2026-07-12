@@ -1806,5 +1806,18 @@
   "mrTaken": "Marked as taken ✓",
   "mrTook": "Took it",
   "mrSnooze15": "Remind in 15 min",
-  "mrSnoozeMsg": "You'll be reminded again in 15 minutes."
+  "mrSnoozeMsg": "You'll be reminded again in 15 minutes.",
+  "cdtLessonAdded": "Lesson added",
+  "cdtDeleteLesson": "Delete Lesson",
+  "cdtSaved": "Saved",
+  "chtFamilyChat": "Family Chat",
+  "chtMyLocation": "My Location",
+  "chtMyFamily": "My Family",
+  "chtBackup": "Backup",
+  "chtRotation": "Rotation",
+  "frpTitle": "Family Report Card",
+  "frpCategories": "Categories",
+  "frpOverallScore": "Overall Family Score",
+  "frpAiPreparing": "AI comment is being prepared…",
+  "frpAiComment": "AI Family Comment"
 }
