@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'child_development_screen.dart' show ChildProfile;
 import 'child_dev_content.dart';
 import 'child_dev_store.dart';
@@ -54,7 +55,7 @@ class _SkillAssessmentScreenState extends State<SkillAssessmentScreen> {
         child: Column(
           children: [
             DevHeader(
-              title: 'Beceri Değerlendirme',
+              title: AppLocalizations.of(context).cdaTitle,
               subtitle: '$ageYears Yaş Gelişim Kontrolü',
               trailing: Text('$_answered/${_items.length}',
                   style: const TextStyle(
@@ -78,7 +79,7 @@ class _SkillAssessmentScreenState extends State<SkillAssessmentScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 6),
-              child: Text('İlerlemeniz: %${(progress * 100).round()}',
+              child: Text(AppLocalizations.of(context).cdaProgress((progress * 100).round()),
                   style: const TextStyle(
                       color: Color(0xFF8B5CF6),
                       fontSize: 13,
@@ -96,14 +97,14 @@ class _SkillAssessmentScreenState extends State<SkillAssessmentScreen> {
                       MaterialPageRoute(
                           builder: (_) => const DevSourcesScreen()),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Icon(Icons.verified_outlined,
+                        const Icon(Icons.verified_outlined,
                             size: 15, color: Color(0xFF3B82F6)),
-                        SizedBox(width: 5),
-                        Text('Kaynakları gör',
-                            style: TextStyle(
+                        const SizedBox(width: 5),
+                        Text(AppLocalizations.of(context).cdaViewSources,
+                            style: const TextStyle(
                                 color: Color(0xFF3B82F6),
                                 fontSize: 13,
                                 fontWeight: FontWeight.w700)),

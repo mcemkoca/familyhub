@@ -36,9 +36,9 @@ jobs:
         run: dart run tool/localization_audit.dart
 
       - name: Hard-coded metin ratchet (gerileme önleyici)
-        # Mevcut taban 234; YENİ hard-coded metin eklenince CI kırılır.
+        # Mevcut taban 220; YENİ hard-coded metin eklenince CI kırılır.
         # Taban düştükçe eşik de düşürülmelidir (yalnızca aşağı yönlü).
-        run: dart run tool/hardcoded_string_scan.dart --ci 234
+        run: dart run tool/hardcoded_string_scan.dart --ci 220
 
       - name: Analyze
         run: flutter analyze --fatal-warnings 2>&1 | tee analyze.log

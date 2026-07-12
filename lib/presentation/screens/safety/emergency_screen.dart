@@ -78,7 +78,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
             padding: const EdgeInsets.all(24),
             child: Column(
               children: [
-                Text('Acil Durum Butonu', style: Theme.of(context).textTheme.displaySmall),
+                Text(AppLocalizations.of(context).emTitle, style: Theme.of(context).textTheme.displaySmall),
                 const SizedBox(height: 8),
                 Text(AppLocalizations.of(context).emergencyInfo, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: const Color(0xFF6B7280))),
               ],
@@ -102,7 +102,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                         width: 180,
                         height: 180,
                         decoration: const BoxDecoration(gradient: LinearGradient(colors: [AppColors.red, Color(0xFFFBBF24)], begin: Alignment.topLeft, end: Alignment.bottomRight), shape: BoxShape.circle, boxShadow: [BoxShadow(color: AppColors.red, blurRadius: 30, offset: Offset(0, 10))]),
-                        child: const Column(mainAxisAlignment: MainAxisAlignment.center, children: [Icon(Icons.sos, color: Colors.white, size: 48), SizedBox(height: 8), Text('SOS', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold))]),
+                        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [const Icon(Icons.sos, color: Colors.white, size: 48), const SizedBox(height: 8), Text(AppLocalizations.of(context).crashSos, style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold))]),
                       ),
                     ),
                   ],

@@ -153,25 +153,25 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
     ];
 
     final navItems = [
-      const _NavItem(
+      _NavItem(
         icon: Icons.home_outlined,
         activeIcon: Icons.home,
-        label: 'Ana Sayfa',
+        label: AppLocalizations.of(context).cdbHome,
       ),
       _NavItem(
         icon: Icons.check_circle_outline,
         activeIcon: Icons.check_circle,
         label: AppLocalizations.of(context).gorevlerim,
       ),
-      const _NavItem(
+      _NavItem(
         icon: Icons.chat_bubble_outline,
         activeIcon: Icons.chat_bubble,
-        label: 'Sohbet',
+        label: AppLocalizations.of(context).cdbChat,
       ),
-      const _NavItem(
+      _NavItem(
         icon: Icons.emoji_events_outlined,
         activeIcon: Icons.emoji_events,
-        label: 'Rozetler',
+        label: AppLocalizations.of(context).cdbBadges,
       ),
       _NavItem(
         icon: Icons.shield_outlined,
@@ -255,7 +255,7 @@ class _NavItem {
   final IconData icon;
   final IconData activeIcon;
   final String label;
-  const _NavItem({
+  _NavItem({
     required this.icon,
     required this.activeIcon,
     required this.label,

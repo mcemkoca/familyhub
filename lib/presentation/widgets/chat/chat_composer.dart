@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import '../../../config/constants.dart';
 import '../../../services/permission_service.dart';
@@ -225,7 +226,7 @@ class _ChatComposerState extends State<ChatComposer>
                       child: SizedBox(
                         height: 32,
                         child: _amplitudes.isEmpty
-                            ? const Center(child: Text('Kaydediliyor...'))
+                            ? Center(child: Text(AppLocalizations.of(context).ccSaving))
                             : Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -244,7 +245,7 @@ class _ChatComposerState extends State<ChatComposer>
                     ),
                     TextButton(
                       onPressed: _cancelRecording,
-                      child: const Text('İptal', style: TextStyle(color: AppColors.error)),
+                      child: Text(AppLocalizations.of(context).cancel, style: const TextStyle(color: AppColors.error)),
                     ),
                   ],
                 ),
@@ -282,13 +283,13 @@ class _ChatComposerState extends State<ChatComposer>
                                 maxLines: null,
                                 textCapitalization:
                                     TextCapitalization.sentences,
-                                decoration: const InputDecoration(
-                                  hintText: 'Mesaj yaz...',
-                                  hintStyle: TextStyle(
+                                decoration: InputDecoration(
+                                  hintText: AppLocalizations.of(context).ccMsgHint,
+                                  hintStyle: const TextStyle(
                                     color: Color(0xFF6B7280),
                                   ),
                                   border: InputBorder.none,
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 16,
                                     vertical: 10,
                                   ),

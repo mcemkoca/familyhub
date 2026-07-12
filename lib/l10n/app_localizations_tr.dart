@@ -6221,4 +6221,36 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get aiaHint => 'Ne yapmamı istersin?';
+
+  @override
+  String get emTitle => 'Acil Durum Butonu';
+
+  @override
+  String get cdbHome => 'Ana Sayfa';
+
+  @override
+  String get cdbChat => 'Sohbet';
+
+  @override
+  String get cdbBadges => 'Rozetler';
+
+  @override
+  String get cdaTitle => 'Beceri Değerlendirme';
+
+  @override
+  String cdaProgress(Object pct) {
+    return 'İlerlemeniz: %$pct';
+  }
+
+  @override
+  String get cdaViewSources => 'Kaynakları gör';
+
+  @override
+  String get elLeaving => 'Uygulamadan Ayrılıyorsunuz';
+
+  @override
+  String get ccSaving => 'Kaydediliyor...';
+
+  @override
+  String get ccMsgHint => 'Mesaj yaz...';
 }

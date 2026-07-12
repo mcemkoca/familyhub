@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Dış bağlantıyı (YouTube, web) açmadan önce kullanıcıyı uyarır.
@@ -19,9 +20,9 @@ Future<void> openExternalLink(BuildContext context, String url,
           Icon(isYoutube ? Icons.smart_display : Icons.open_in_new,
               color: const Color(0xFF6366F1), size: 22),
           const SizedBox(width: 10),
-          const Expanded(
-            child: Text('Uygulamadan Ayrılıyorsunuz',
-                style: TextStyle(
+          Expanded(
+            child: Text(AppLocalizations.of(context).elLeaving,
+                style: const TextStyle(
                     color: Colors.white,
                     fontSize: 17,
                     fontWeight: FontWeight.w800)),
@@ -37,8 +38,8 @@ Future<void> openExternalLink(BuildContext context, String url,
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(ctx, false),
-          child: const Text('Vazgeç',
-              style: TextStyle(color: Color(0xFF9CA3AF))),
+          child: Text(AppLocalizations.of(context).cancel,
+              style: const TextStyle(color: Color(0xFF9CA3AF))),
         ),
         ElevatedButton(
           onPressed: () => Navigator.pop(ctx, true),
@@ -48,7 +49,7 @@ Future<void> openExternalLink(BuildContext context, String url,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12)),
           ),
-          child: const Text('Devam Et'),
+          child: Text(AppLocalizations.of(context).rtContinue),
         ),
       ],
     ),

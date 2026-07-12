@@ -1960,5 +1960,15 @@
   "atHigh": "Hoog",
   "aiaTitle": "AI-assistent",
   "aiaSub": "Boodschappen • Keuken • Budget",
-  "aiaHint": "Wat wil je dat ik doe?"
+  "aiaHint": "Wat wil je dat ik doe?",
+  "emTitle": "Noodknop",
+  "cdbHome": "Start",
+  "cdbChat": "Chat",
+  "cdbBadges": "Badges",
+  "cdaTitle": "Vaardigheidsbeoordeling",
+  "cdaProgress": "Jouw voortgang: {pct}%",
+  "cdaViewSources": "Bronnen bekijken",
+  "elLeaving": "Je verlaat de app",
+  "ccSaving": "Opslaan...",
+  "ccMsgHint": "Typ een bericht..."
 }

@@ -6206,4 +6206,36 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get aiaHint => 'Wat wil je dat ik doe?';
+
+  @override
+  String get emTitle => 'Noodknop';
+
+  @override
+  String get cdbHome => 'Start';
+
+  @override
+  String get cdbChat => 'Chat';
+
+  @override
+  String get cdbBadges => 'Badges';
+
+  @override
+  String get cdaTitle => 'Vaardigheidsbeoordeling';
+
+  @override
+  String cdaProgress(Object pct) {
+    return 'Jouw voortgang: $pct%';
+  }
+
+  @override
+  String get cdaViewSources => 'Bronnen bekijken';
+
+  @override
+  String get elLeaving => 'Je verlaat de app';
+
+  @override
+  String get ccSaving => 'Opslaan...';
+
+  @override
+  String get ccMsgHint => 'Typ een bericht...';
 }

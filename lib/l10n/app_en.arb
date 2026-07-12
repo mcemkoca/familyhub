@@ -1960,5 +1960,15 @@
   "atHigh": "High",
   "aiaTitle": "AI Assistant",
   "aiaSub": "Shopping • Kitchen • Budget",
-  "aiaHint": "What would you like me to do?"
+  "aiaHint": "What would you like me to do?",
+  "emTitle": "Emergency Button",
+  "cdbHome": "Home",
+  "cdbChat": "Chat",
+  "cdbBadges": "Badges",
+  "cdaTitle": "Skill Assessment",
+  "cdaProgress": "Your progress: {pct}%",
+  "cdaViewSources": "View sources",
+  "elLeaving": "You are leaving the app",
+  "ccSaving": "Saving...",
+  "ccMsgHint": "Type a message..."
 }

@@ -11723,6 +11723,66 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Ne yapmamı istersin?'**
   String get aiaHint;
+
+  /// No description provided for @emTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Acil Durum Butonu'**
+  String get emTitle;
+
+  /// No description provided for @cdbHome.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ana Sayfa'**
+  String get cdbHome;
+
+  /// No description provided for @cdbChat.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sohbet'**
+  String get cdbChat;
+
+  /// No description provided for @cdbBadges.
+  ///
+  /// In tr, this message translates to:
+  /// **'Rozetler'**
+  String get cdbBadges;
+
+  /// No description provided for @cdaTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Beceri Değerlendirme'**
+  String get cdaTitle;
+
+  /// No description provided for @cdaProgress.
+  ///
+  /// In tr, this message translates to:
+  /// **'İlerlemeniz: %{pct}'**
+  String cdaProgress(Object pct);
+
+  /// No description provided for @cdaViewSources.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kaynakları gör'**
+  String get cdaViewSources;
+
+  /// No description provided for @elLeaving.
+  ///
+  /// In tr, this message translates to:
+  /// **'Uygulamadan Ayrılıyorsunuz'**
+  String get elLeaving;
+
+  /// No description provided for @ccSaving.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kaydediliyor...'**
+  String get ccSaving;
+
+  /// No description provided for @ccMsgHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Mesaj yaz...'**
+  String get ccMsgHint;
 }
 
 class _AppLocalizationsDelegate

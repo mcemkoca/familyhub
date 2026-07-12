@@ -6201,4 +6201,36 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aiaHint => 'What would you like me to do?';
+
+  @override
+  String get emTitle => 'Emergency Button';
+
+  @override
+  String get cdbHome => 'Home';
+
+  @override
+  String get cdbChat => 'Chat';
+
+  @override
+  String get cdbBadges => 'Badges';
+
+  @override
+  String get cdaTitle => 'Skill Assessment';
+
+  @override
+  String cdaProgress(Object pct) {
+    return 'Your progress: $pct%';
+  }
+
+  @override
+  String get cdaViewSources => 'View sources';
+
+  @override
+  String get elLeaving => 'You are leaving the app';
+
+  @override
+  String get ccSaving => 'Saving...';
+
+  @override
+  String get ccMsgHint => 'Type a message...';
 }

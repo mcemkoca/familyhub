@@ -2022,5 +2022,16 @@
   "atHigh": "Yüksek",
   "aiaTitle": "AI Asistan",
   "aiaSub": "Alışveriş • Mutfak • Bütçe",
-  "aiaHint": "Ne yapmamı istersin?"
+  "aiaHint": "Ne yapmamı istersin?",
+  "emTitle": "Acil Durum Butonu",
+  "cdbHome": "Ana Sayfa",
+  "cdbChat": "Sohbet",
+  "cdbBadges": "Rozetler",
+  "cdaTitle": "Beceri Değerlendirme",
+  "cdaProgress": "İlerlemeniz: %{pct}",
+  "@cdaProgress": { "placeholders": { "pct": {} } },
+  "cdaViewSources": "Kaynakları gör",
+  "elLeaving": "Uygulamadan Ayrılıyorsunuz",
+  "ccSaving": "Kaydediliyor...",
+  "ccMsgHint": "Mesaj yaz..."
 }

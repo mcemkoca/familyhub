@@ -332,7 +332,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get turkish => 'Turc';
 
   @override
-  String get english => 'English';
+  String get english => 'Anglais';
 
   @override
   String get theme => 'Thème';
@@ -1495,7 +1495,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sonSosGecmisi => 'HISTORIQUE SOS RECENT';
 
   @override
-  String get subat20250815 => '2 fevrier 2025 - 08:15';
+  String get subat20250815 => '2 février 2025 - 08:15';
 
   @override
   String get gercekAcilDurum => 'Urgence reelle';
@@ -2232,7 +2232,8 @@ class AppLocalizationsFr extends AppLocalizations {
       'Succes 95% 17h-19h, reduire la fenetre';
 
   @override
-  String get a101DisindaBasariDusukSadeceA101 => 'Succes faible hors A101\\';
+  String get a101DisindaBasariDusukSadeceA101 =>
+      'Taux de réussite faible hors d\'A101, utilisez uniquement A101';
 
   @override
   String get ertelemeOraniYuksekNazikTonDeneyin =>
@@ -3909,7 +3910,8 @@ class AppLocalizationsFr extends AppLocalizations {
       'Activites, meteo et acces rapide.';
 
   @override
-  String get sagUsttekiHavaDurumuChip => 'le widget meteo en haut a droite\\';
+  String get sagUsttekiHavaDurumuChip =>
+      'La pastille météo en haut à droite';
 
   @override
   String get etkinlikOlusturma => 'Creer des evenements';
@@ -3920,7 +3922,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get altMenudenPlanSekmesineVeyaHub =>
-      'Depuis le menu bas, l\'onglet \"Plan\" ou Hub\\';
+      'Dans le menu inférieur, ouvrez l\'onglet \"Plan\" ou le Hub';
 
   @override
   String get sagAlttakiButonunaBasarakYeniEtkinlikEkleyin =>
@@ -3947,7 +3949,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get dakiGorevlerKartinaVeyaMerkezMenudenGorevler =>
-      'la carte \"Taches\" ou \"Taches\"\\';
+      'Ouvrez la carte \"Tâches\" ou \"Tâches\" dans le menu principal';
 
   @override
   String get yeniGorevOlusturmakIcinButonunaBasin =>
@@ -4016,7 +4018,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get altMenudenAnilarSekmesineVeyaHubMenusundenAlbumler =>
-      'l\'onglet \"Souvenirs\" ou \"Albums\"\\';
+      'Dans le menu inférieur, ouvrez \"Souvenirs\" ou \"Albums\" depuis le Hub';
 
   @override
   String get fotografaDokunarakBuyutunKaydedinVeyaPaylasin =>
@@ -4276,7 +4278,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get planPlus => 'Plus';
 
   @override
-  String get planComplete => 'Complete';
+  String get planComplete => 'Complet';
 
   @override
   String get planBasicTagline => 'Commencez a gerer votre famille';
@@ -4285,7 +4287,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get planPlusTagline => 'Fonctions intelligentes + plus d\'espace';
 
   @override
-  String get planCompleteTagline => 'Automatisation complete et illimitee';
+  String get planCompleteTagline => 'Automatisation complète et illimitée';
 
   @override
   String get planFeatCore => 'Agenda, taches, courses, budget';
@@ -6226,4 +6228,36 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get aiaHint => 'Que voulez-vous que je fasse ?';
+
+  @override
+  String get emTitle => 'Bouton d\'urgence';
+
+  @override
+  String get cdbHome => 'Accueil';
+
+  @override
+  String get cdbChat => 'Chat';
+
+  @override
+  String get cdbBadges => 'Badges';
+
+  @override
+  String get cdaTitle => 'Evaluation des competences';
+
+  @override
+  String cdaProgress(Object pct) {
+    return 'Votre progression : $pct%';
+  }
+
+  @override
+  String get cdaViewSources => 'Voir les sources';
+
+  @override
+  String get elLeaving => 'Vous quittez l\'application';
+
+  @override
+  String get ccSaving => 'Enregistrement...';
+
+  @override
+  String get ccMsgHint => 'Ecrire un message...';
 }
