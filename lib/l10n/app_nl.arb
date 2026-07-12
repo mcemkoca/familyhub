@@ -1896,5 +1896,14 @@
   "chlTodayMeal": "Maaltijd van vandaag",
   "chlHousework": "Huishoudelijk werk",
   "chlSaveTip": "Bespaartip",
-  "chlEmergency": "Noodgeval"
+  "chlEmergency": "Noodgeval",
+  "strTitleHint": "Titel (bijv. Sporten, Lezen)",
+  "strNoteHint": "Notitie (optioneel)",
+  "strTitle": "Reeks",
+  "strAddNew": "Nieuwe reeks toevoegen",
+  "hapFullChat": "Volledige chat",
+  "hapThinking": "Aan het denken…",
+  "hapAskHint": "Vraag FamilyHub AI…",
+  "flStandard": "Standaard",
+  "flStrobe": "Stroboscoop"
 }

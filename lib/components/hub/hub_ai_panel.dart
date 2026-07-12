@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import '../../config/routes.dart';
 import '../../services/ai/ai_engine.dart';
@@ -124,23 +125,23 @@ class _HubAiPanelState extends State<HubAiPanel> {
                     color: Colors.white, size: 18),
               ),
               const SizedBox(width: 10),
-              const Expanded(
-                child: Text('FamilyHub AI',
-                    style: TextStyle(
+              Expanded(
+                child: Text(AppLocalizations.of(context).familyHubAITitle,
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.w800)),
               ),
               GestureDetector(
                 onTap: () => context.push(AppRoutes.aiAssistant),
-                child: const Row(
+                child: Row(
                   children: [
-                    Text('Tam sohbet',
-                        style: TextStyle(
+                    Text(AppLocalizations.of(context).hapFullChat,
+                        style: const TextStyle(
                             color: Color(0xFF8B5CF6),
                             fontSize: 12.5,
                             fontWeight: FontWeight.w700)),
-                    Icon(Icons.chevron_right, color: Color(0xFF8B5CF6), size: 18),
+                    const Icon(Icons.chevron_right, color: Color(0xFF8B5CF6), size: 18),
                   ],
                 ),
               ),
@@ -158,16 +159,16 @@ class _HubAiPanelState extends State<HubAiPanel> {
                 borderRadius: BorderRadius.circular(14),
               ),
               child: _loading
-                  ? const Row(
+                  ? Row(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                             width: 16,
                             height: 16,
                             child: CircularProgressIndicator(
                                 strokeWidth: 2, color: Color(0xFF8B5CF6))),
-                        SizedBox(width: 10),
-                        Text('Düşünüyor…',
-                            style: TextStyle(color: Color(0xFF9CA3AF))),
+                        const SizedBox(width: 10),
+                        Text(AppLocalizations.of(context).hapThinking,
+                            style: const TextStyle(color: Color(0xFF9CA3AF))),
                       ],
                     )
                   : SingleChildScrollView(
@@ -215,7 +216,7 @@ class _HubAiPanelState extends State<HubAiPanel> {
                   onSubmitted: (_) => _ask(),
                   decoration: InputDecoration(
                     isDense: true,
-                    hintText: 'FamilyHub AI\'ya sor…',
+                    hintText: AppLocalizations.of(context).hapAskHint,
                     hintStyle: const TextStyle(color: Color(0xFF6B7280)),
                     filled: true,
                     fillColor: const Color(0xFF0E0B1C),

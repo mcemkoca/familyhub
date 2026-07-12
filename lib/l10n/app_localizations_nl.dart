@@ -5998,4 +5998,31 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get chlEmergency => 'Noodgeval';
+
+  @override
+  String get strTitleHint => 'Titel (bijv. Sporten, Lezen)';
+
+  @override
+  String get strNoteHint => 'Notitie (optioneel)';
+
+  @override
+  String get strTitle => 'Reeks';
+
+  @override
+  String get strAddNew => 'Nieuwe reeks toevoegen';
+
+  @override
+  String get hapFullChat => 'Volledige chat';
+
+  @override
+  String get hapThinking => 'Aan het denken…';
+
+  @override
+  String get hapAskHint => 'Vraag FamilyHub AI…';
+
+  @override
+  String get flStandard => 'Standaard';
+
+  @override
+  String get flStrobe => 'Stroboscoop';
 }

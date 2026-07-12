@@ -1951,5 +1951,14 @@
   "chlTodayMeal": "Bugünün Yemeği",
   "chlHousework": "Ev İşleri",
   "chlSaveTip": "Tasarruf İpucu",
-  "chlEmergency": "Acil Durum"
+  "chlEmergency": "Acil Durum",
+  "strTitleHint": "Başlık (örn: Egzersiz, Kitap Okuma)",
+  "strNoteHint": "Not (isteğe bağlı)",
+  "strTitle": "Streak",
+  "strAddNew": "Yeni Streak Ekle",
+  "hapFullChat": "Tam sohbet",
+  "hapThinking": "Düşünüyor…",
+  "hapAskHint": "FamilyHub AI'ya sor…",
+  "flStandard": "Standart",
+  "flStrobe": "Strobe"
 }

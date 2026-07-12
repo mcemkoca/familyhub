@@ -1896,5 +1896,14 @@
   "chlTodayMeal": "Le repas du jour",
   "chlHousework": "Taches menageres",
   "chlSaveTip": "Astuce d'economie",
-  "chlEmergency": "Urgence"
+  "chlEmergency": "Urgence",
+  "strTitleHint": "Titre (ex. Exercice, Lecture)",
+  "strNoteHint": "Note (facultatif)",
+  "strTitle": "Serie",
+  "strAddNew": "Ajouter une serie",
+  "hapFullChat": "Chat complet",
+  "hapThinking": "Reflexion…",
+  "hapAskHint": "Demander a FamilyHub AI…",
+  "flStandard": "Standard",
+  "flStrobe": "Stroboscope"
 }

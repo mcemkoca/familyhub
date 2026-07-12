@@ -6019,4 +6019,31 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chlEmergency => 'Urgence';
+
+  @override
+  String get strTitleHint => 'Titre (ex. Exercice, Lecture)';
+
+  @override
+  String get strNoteHint => 'Note (facultatif)';
+
+  @override
+  String get strTitle => 'Serie';
+
+  @override
+  String get strAddNew => 'Ajouter une serie';
+
+  @override
+  String get hapFullChat => 'Chat complet';
+
+  @override
+  String get hapThinking => 'Reflexion…';
+
+  @override
+  String get hapAskHint => 'Demander a FamilyHub AI…';
+
+  @override
+  String get flStandard => 'Standard';
+
+  @override
+  String get flStrobe => 'Stroboscope';
 }

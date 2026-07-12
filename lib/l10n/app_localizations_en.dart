@@ -5994,4 +5994,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chlEmergency => 'Emergency';
+
+  @override
+  String get strTitleHint => 'Title (e.g. Exercise, Reading)';
+
+  @override
+  String get strNoteHint => 'Note (optional)';
+
+  @override
+  String get strTitle => 'Streak';
+
+  @override
+  String get strAddNew => 'Add New Streak';
+
+  @override
+  String get hapFullChat => 'Full chat';
+
+  @override
+  String get hapThinking => 'Thinking…';
+
+  @override
+  String get hapAskHint => 'Ask FamilyHub AI…';
+
+  @override
+  String get flStandard => 'Standard';
+
+  @override
+  String get flStrobe => 'Strobe';
 }

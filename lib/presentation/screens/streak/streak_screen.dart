@@ -93,15 +93,15 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
             TextField(
               controller: _titleController,
               autofocus: true,
-              decoration: const InputDecoration(
-                labelText: 'Başlık (örn: Egzersiz, Kitap Okuma)',
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context).strTitleHint,
               ),
             ),
             const SizedBox(height: 12),
             TextField(
               controller: _noteController,
-              decoration: const InputDecoration(
-                labelText: 'Not (isteğe bağlı)',
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context).strNoteHint,
               ),
             ),
             const SizedBox(height: 24),
@@ -214,7 +214,7 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
-        title: 'Streak',
+        title: AppLocalizations.of(context).strTitle,
         showBack: true,
         onBack: () => Navigator.of(context).pop(),
       ),
@@ -363,7 +363,7 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
                     child: ElevatedButton.icon(
                       onPressed: _showAddSheet,
                       icon: const Icon(Icons.add),
-                      label: const Text('Yeni Streak Ekle'),
+                      label: Text(AppLocalizations.of(context).strAddNew),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.orange,
                         foregroundColor: Colors.white,

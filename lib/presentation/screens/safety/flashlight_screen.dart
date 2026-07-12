@@ -64,7 +64,7 @@ class _FlashlightScreenState extends State<FlashlightScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
       appBar: AppBar(
-        title: const Text('Fener'),
+        title: Text(AppLocalizations.of(context).sfFlashlight),
         centerTitle: true,
         backgroundColor: const Color(0xFF0A0A0F),
         foregroundColor: const Color(0xFFE5E7EB),
@@ -155,7 +155,7 @@ class _FlashlightScreenState extends State<FlashlightScreen> {
                       Expanded(
                         child: _ModeButton(
                           icon: Icons.flashlight_on,
-                          label: 'Standart',
+                          label: AppLocalizations.of(context).flStandard,
                           active: _isOn && !_sosActive && !_strobeActive,
                           onTap: () async {
                             FlashlightService.stopSos();
@@ -173,7 +173,7 @@ class _FlashlightScreenState extends State<FlashlightScreen> {
                       Expanded(
                         child: _ModeButton(
                           icon: Icons.sos,
-                          label: 'SOS',
+                          label: AppLocalizations.of(context).crashSos,
                           active: _sosActive,
                           color: AppColors.error,
                           onTap: _toggleSos,
@@ -183,7 +183,7 @@ class _FlashlightScreenState extends State<FlashlightScreen> {
                       Expanded(
                         child: _ModeButton(
                           icon: Icons.bolt,
-                          label: 'Strobe',
+                          label: AppLocalizations.of(context).flStrobe,
                           active: _strobeActive,
                           color: const Color(0xFFF59E0B),
                           onTap: _toggleStrobe,

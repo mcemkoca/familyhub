@@ -6013,4 +6013,31 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get chlEmergency => 'Acil Durum';
+
+  @override
+  String get strTitleHint => 'Başlık (örn: Egzersiz, Kitap Okuma)';
+
+  @override
+  String get strNoteHint => 'Not (isteğe bağlı)';
+
+  @override
+  String get strTitle => 'Streak';
+
+  @override
+  String get strAddNew => 'Yeni Streak Ekle';
+
+  @override
+  String get hapFullChat => 'Tam sohbet';
+
+  @override
+  String get hapThinking => 'Düşünüyor…';
+
+  @override
+  String get hapAskHint => 'FamilyHub AI\'ya sor…';
+
+  @override
+  String get flStandard => 'Standart';
+
+  @override
+  String get flStrobe => 'Strobe';
 }

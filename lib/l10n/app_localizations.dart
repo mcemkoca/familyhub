@@ -11339,6 +11339,60 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Acil Durum'**
   String get chlEmergency;
+
+  /// No description provided for @strTitleHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Başlık (örn: Egzersiz, Kitap Okuma)'**
+  String get strTitleHint;
+
+  /// No description provided for @strNoteHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Not (isteğe bağlı)'**
+  String get strNoteHint;
+
+  /// No description provided for @strTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Streak'**
+  String get strTitle;
+
+  /// No description provided for @strAddNew.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yeni Streak Ekle'**
+  String get strAddNew;
+
+  /// No description provided for @hapFullChat.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tam sohbet'**
+  String get hapFullChat;
+
+  /// No description provided for @hapThinking.
+  ///
+  /// In tr, this message translates to:
+  /// **'Düşünüyor…'**
+  String get hapThinking;
+
+  /// No description provided for @hapAskHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'FamilyHub AI\'ya sor…'**
+  String get hapAskHint;
+
+  /// No description provided for @flStandard.
+  ///
+  /// In tr, this message translates to:
+  /// **'Standart'**
+  String get flStandard;
+
+  /// No description provided for @flStrobe.
+  ///
+  /// In tr, this message translates to:
+  /// **'Strobe'**
+  String get flStrobe;
 }
 
 class _AppLocalizationsDelegate
