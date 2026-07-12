@@ -1873,5 +1873,10 @@
   "baRecalculate": "Recalculate",
   "baAvgAccuracy": "Average accuracy",
   "baOptimalRatio": "Optimal profile ratio",
-  "baWrongSwitch": "Wrong profile switch"
+  "baWrongSwitch": "Wrong profile switch",
+  "stTime": "Story Time",
+  "stDailySub": "Today's 4 illustrated stories",
+  "stPageRead": "{n} pages · Read",
+  "stIllustrated": "Illustrated story",
+  "stLesson": "Story Lesson"
 }

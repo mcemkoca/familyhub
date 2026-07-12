@@ -5921,4 +5921,21 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get baWrongSwitch => 'Verkeerde profielwissel';
+
+  @override
+  String get stTime => 'Verhaaltjestijd';
+
+  @override
+  String get stDailySub => 'De 4 geillustreerde verhalen van vandaag';
+
+  @override
+  String stPageRead(Object n) {
+    return '$n pagina\'s · Lezen';
+  }
+
+  @override
+  String get stIllustrated => 'Geillustreerd verhaal';
+
+  @override
+  String get stLesson => 'De les van het verhaal';
 }

@@ -1924,5 +1924,11 @@
   "baRecalculate": "Yeniden Hesapla",
   "baAvgAccuracy": "Ortalama hassasiyet",
   "baOptimalRatio": "Optimal profil oranı",
-  "baWrongSwitch": "Yanlış profil geçişi"
+  "baWrongSwitch": "Yanlış profil geçişi",
+  "stTime": "Hikaye Zamanı",
+  "stDailySub": "Bugünün 4 görselli hikayesi",
+  "stPageRead": "{n} sayfa · Oku",
+  "@stPageRead": { "placeholders": { "n": {} } },
+  "stIllustrated": "Görselli hikaye",
+  "stLesson": "Hikayeden Ders"
 }

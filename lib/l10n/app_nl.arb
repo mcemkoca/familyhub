@@ -1873,5 +1873,10 @@
   "baRecalculate": "Herberekenen",
   "baAvgAccuracy": "Gemiddelde nauwkeurigheid",
   "baOptimalRatio": "Optimale profielverhouding",
-  "baWrongSwitch": "Verkeerde profielwissel"
+  "baWrongSwitch": "Verkeerde profielwissel",
+  "stTime": "Verhaaltjestijd",
+  "stDailySub": "De 4 geillustreerde verhalen van vandaag",
+  "stPageRead": "{n} pagina's · Lezen",
+  "stIllustrated": "Geillustreerd verhaal",
+  "stLesson": "De les van het verhaal"
 }

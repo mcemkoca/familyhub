@@ -11201,6 +11201,36 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Yanlış profil geçişi'**
   String get baWrongSwitch;
+
+  /// No description provided for @stTime.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hikaye Zamanı'**
+  String get stTime;
+
+  /// No description provided for @stDailySub.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugünün 4 görselli hikayesi'**
+  String get stDailySub;
+
+  /// No description provided for @stPageRead.
+  ///
+  /// In tr, this message translates to:
+  /// **'{n} sayfa · Oku'**
+  String stPageRead(Object n);
+
+  /// No description provided for @stIllustrated.
+  ///
+  /// In tr, this message translates to:
+  /// **'Görselli hikaye'**
+  String get stIllustrated;
+
+  /// No description provided for @stLesson.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hikayeden Ders'**
+  String get stLesson;
 }
 
 class _AppLocalizationsDelegate

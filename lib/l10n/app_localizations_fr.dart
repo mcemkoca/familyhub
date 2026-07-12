@@ -5942,4 +5942,21 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get baWrongSwitch => 'Mauvais changement de profil';
+
+  @override
+  String get stTime => 'L\'heure du conte';
+
+  @override
+  String get stDailySub => 'Les 4 histoires illustrees du jour';
+
+  @override
+  String stPageRead(Object n) {
+    return '$n pages · Lire';
+  }
+
+  @override
+  String get stIllustrated => 'Histoire illustree';
+
+  @override
+  String get stLesson => 'La morale de l\'histoire';
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../widgets/external_link.dart';
 import 'child_dev_content.dart' show DevHeader;
 import 'child_dev_stories.dart';
@@ -14,9 +15,9 @@ class StoryTimeScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            const DevHeader(
-              title: 'Hikaye Zamanı',
-              subtitle: 'Bugünün 4 görselli hikayesi',
+            DevHeader(
+              title: AppLocalizations.of(context).stTime,
+              subtitle: AppLocalizations.of(context).stDailySub,
             ),
             Expanded(
               child: FutureBuilder<List<KidStory>>(
@@ -40,6 +41,7 @@ class StoryTimeScreen extends StatelessWidget {
   }
 
   Widget _storyCard(BuildContext context, KidStory s, int index) {
+    final loc = Localizations.localeOf(context).languageCode;
     return GestureDetector(
       onTap: () => Navigator.push(
         context,
@@ -92,7 +94,7 @@ class StoryTimeScreen extends StatelessWidget {
                     ],
                   ),
                   const Spacer(),
-                  Text(s.title,
+                  Text(s.titleOf(loc),
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 22,
@@ -103,7 +105,7 @@ class StoryTimeScreen extends StatelessWidget {
                       const Icon(Icons.menu_book,
                           size: 14, color: Colors.white70),
                       const SizedBox(width: 6),
-                      Text('${s.pages.length} sayfa · Oku',
+                      Text(AppLocalizations.of(context).stPageRead(s.pagesOf(loc).length),
                           style: const TextStyle(
                               color: Colors.white70,
                               fontSize: 12.5,
@@ -142,13 +144,15 @@ class _StoryReaderScreenState extends State<StoryReaderScreen> {
   @override
   Widget build(BuildContext context) {
     final s = widget.story;
-    final totalPages = s.pages.length + 1; // +1 son sayfa (ders)
+    final loc = Localizations.localeOf(context).languageCode;
+    final pages = s.pagesOf(loc);
+    final totalPages = pages.length + 1; // +1 son sayfa (ders)
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
       body: SafeArea(
         child: Column(
           children: [
-            DevHeader(title: s.title, subtitle: 'Görselli hikaye'),
+            DevHeader(title: s.titleOf(loc), subtitle: AppLocalizations.of(context).stIllustrated),
             // Sayfa göstergesi
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -176,8 +180,8 @@ class _StoryReaderScreenState extends State<StoryReaderScreen> {
                 onPageChanged: (p) => setState(() => _page = p),
                 itemCount: totalPages,
                 itemBuilder: (context, i) {
-                  if (i == s.pages.length) return _endPage(s);
-                  return _storyPage(s, s.pages[i]);
+                  if (i == pages.length) return _endPage(context, s);
+                  return _storyPage(s, pages[i]);
                 },
               ),
             ),
@@ -244,7 +248,7 @@ class _StoryReaderScreenState extends State<StoryReaderScreen> {
     );
   }
 
-  Widget _endPage(KidStory s) {
+  Widget _endPage(BuildContext context, KidStory s) {
     return Padding(
       padding: const EdgeInsets.all(24),
       child: Column(
@@ -260,13 +264,13 @@ class _StoryReaderScreenState extends State<StoryReaderScreen> {
             child: const Icon(Icons.lightbulb, color: Colors.white, size: 44),
           ),
           const SizedBox(height: 20),
-          const Text('Hikayeden Ders',
-              style: TextStyle(
+          Text(AppLocalizations.of(context).stLesson,
+              style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.w800)),
           const SizedBox(height: 12),
-          Text(s.moral,
+          Text(s.moralOf(Localizations.localeOf(context).languageCode),
               textAlign: TextAlign.center,
               style: const TextStyle(
                   color: Color(0xFFD1D5DB), fontSize: 16, height: 1.5)),

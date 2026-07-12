@@ -5917,4 +5917,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get baWrongSwitch => 'Wrong profile switch';
+
+  @override
+  String get stTime => 'Story Time';
+
+  @override
+  String get stDailySub => 'Today\'s 4 illustrated stories';
+
+  @override
+  String stPageRead(Object n) {
+    return '$n pages · Read';
+  }
+
+  @override
+  String get stIllustrated => 'Illustrated story';
+
+  @override
+  String get stLesson => 'Story Lesson';
 }

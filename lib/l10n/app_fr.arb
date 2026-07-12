@@ -1873,5 +1873,10 @@
   "baRecalculate": "Recalculer",
   "baAvgAccuracy": "Precision moyenne",
   "baOptimalRatio": "Taux de profil optimal",
-  "baWrongSwitch": "Mauvais changement de profil"
+  "baWrongSwitch": "Mauvais changement de profil",
+  "stTime": "L'heure du conte",
+  "stDailySub": "Les 4 histoires illustrees du jour",
+  "stPageRead": "{n} pages · Lire",
+  "stIllustrated": "Histoire illustree",
+  "stLesson": "La morale de l'histoire"
 }

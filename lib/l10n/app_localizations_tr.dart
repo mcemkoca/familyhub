@@ -5936,4 +5936,21 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get baWrongSwitch => 'Yanlış profil geçişi';
+
+  @override
+  String get stTime => 'Hikaye Zamanı';
+
+  @override
+  String get stDailySub => 'Bugünün 4 görselli hikayesi';
+
+  @override
+  String stPageRead(Object n) {
+    return '$n sayfa · Oku';
+  }
+
+  @override
+  String get stIllustrated => 'Görselli hikaye';
+
+  @override
+  String get stLesson => 'Hikayeden Ders';
 }
