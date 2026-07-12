@@ -6049,4 +6049,70 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get csMainCalendar => 'Main calendar';
+
+  @override
+  String secBiometricError(Object msg) {
+    return 'Biometric error: $msg';
+  }
+
+  @override
+  String get secNewPasswordRepeat => 'New Password (Repeat)';
+
+  @override
+  String secAccountDeleteFailed(Object msg) {
+    return 'Account deletion error: $msg';
+  }
+
+  @override
+  String get secBioEnabled => 'Biometric login enabled';
+
+  @override
+  String get secBioDisabled => 'Biometric login disabled';
+
+  @override
+  String get cstLocationDenied => 'Location permission permanently denied.';
+
+  @override
+  String cstShareFailed(Object msg) {
+    return 'Could not share location: $msg';
+  }
+
+  @override
+  String get abProcessing => 'Processing...';
+
+  @override
+  String get pgUpgrade => 'Upgrade to Premium';
+
+  @override
+  String get pgNotNow => 'Not Now';
+
+  @override
+  String get pgNoProduct =>
+      'No product available right now. Please try again later.';
+
+  @override
+  String get pgActive => 'Premium active! 🎉';
+
+  @override
+  String get pgRequired => 'Premium Required';
+
+  @override
+  String pgFeatureLabel(Object feature) {
+    return '$feature Feature';
+  }
+
+  @override
+  String get pgUpgradeDesc => 'Upgrade to Premium to use this feature.';
+
+  @override
+  String get invCopied => 'Code copied';
+
+  @override
+  String get invCopy => 'Copy';
+
+  @override
+  String get invShare => 'Share';
+
+  @override
+  String get accFamilyCode => 'Family Code';
 }

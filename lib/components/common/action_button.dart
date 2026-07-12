@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../config/constants.dart';
 import '../../core/navigation/action_registry.dart';
 
@@ -65,7 +66,7 @@ class _ActionButtonState extends State<ActionButton> {
               ),
             ),
             const SizedBox(width: 12),
-            const Text('İşleniyor...'),
+            Text(AppLocalizations.of(context).abProcessing),
           ],
         ),
         duration: const Duration(days: 1),
@@ -106,7 +107,7 @@ class _ActionButtonState extends State<ActionButton> {
               backgroundColor: AppColors.error,
               behavior: SnackBarBehavior.floating,
               action: SnackBarAction(
-                label: 'Tekrar Dene',
+                label: AppLocalizations.of(context).cdRetry,
                 textColor: Colors.white,
                 onPressed: _handlePress,
               ),

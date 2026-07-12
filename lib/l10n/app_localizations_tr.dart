@@ -6068,4 +6068,71 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get csMainCalendar => 'Ana takvim';
+
+  @override
+  String secBiometricError(Object msg) {
+    return 'Biyometrik hata: $msg';
+  }
+
+  @override
+  String get secNewPasswordRepeat => 'Yeni Şifre (Tekrar)';
+
+  @override
+  String secAccountDeleteFailed(Object msg) {
+    return 'Hesap silme hatası: $msg';
+  }
+
+  @override
+  String get secBioEnabled => 'Biyometrik giriş etkinleştirildi';
+
+  @override
+  String get secBioDisabled => 'Biyometrik giriş devre dışı bırakıldı';
+
+  @override
+  String get cstLocationDenied => 'Konum izni kalıcı reddedildi.';
+
+  @override
+  String cstShareFailed(Object msg) {
+    return 'Konum paylaşılamadı: $msg';
+  }
+
+  @override
+  String get abProcessing => 'İşleniyor...';
+
+  @override
+  String get pgUpgrade => 'Premium\'a Yükselt';
+
+  @override
+  String get pgNotNow => 'Şimdi Değil';
+
+  @override
+  String get pgNoProduct =>
+      'Şu anda ürün bulunamadı. Lütfen daha sonra tekrar deneyin.';
+
+  @override
+  String get pgActive => 'Premium aktif! 🎉';
+
+  @override
+  String get pgRequired => 'Premium Gerekli';
+
+  @override
+  String pgFeatureLabel(Object feature) {
+    return '$feature Özelliği';
+  }
+
+  @override
+  String get pgUpgradeDesc =>
+      'Bu özelliği kullanmak için Premium\'a yükseltin.';
+
+  @override
+  String get invCopied => 'Kod kopyalandı';
+
+  @override
+  String get invCopy => 'Kopyala';
+
+  @override
+  String get invShare => 'Paylaş';
+
+  @override
+  String get accFamilyCode => 'Aile Kodu';
 }

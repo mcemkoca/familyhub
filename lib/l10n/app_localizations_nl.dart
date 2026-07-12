@@ -6053,4 +6053,71 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get csMainCalendar => 'Hoofdagenda';
+
+  @override
+  String secBiometricError(Object msg) {
+    return 'Biometrische fout: $msg';
+  }
+
+  @override
+  String get secNewPasswordRepeat => 'Nieuw wachtwoord (herhaal)';
+
+  @override
+  String secAccountDeleteFailed(Object msg) {
+    return 'Fout bij accountverwijdering: $msg';
+  }
+
+  @override
+  String get secBioEnabled => 'Biometrische login ingeschakeld';
+
+  @override
+  String get secBioDisabled => 'Biometrische login uitgeschakeld';
+
+  @override
+  String get cstLocationDenied => 'Locatietoestemming permanent geweigerd.';
+
+  @override
+  String cstShareFailed(Object msg) {
+    return 'Kan locatie niet delen: $msg';
+  }
+
+  @override
+  String get abProcessing => 'Bezig...';
+
+  @override
+  String get pgUpgrade => 'Upgraden naar Premium';
+
+  @override
+  String get pgNotNow => 'Niet nu';
+
+  @override
+  String get pgNoProduct =>
+      'Momenteel geen product beschikbaar. Probeer later opnieuw.';
+
+  @override
+  String get pgActive => 'Premium actief! 🎉';
+
+  @override
+  String get pgRequired => 'Premium vereist';
+
+  @override
+  String pgFeatureLabel(Object feature) {
+    return '$feature-functie';
+  }
+
+  @override
+  String get pgUpgradeDesc =>
+      'Upgrade naar Premium om deze functie te gebruiken.';
+
+  @override
+  String get invCopied => 'Code gekopieerd';
+
+  @override
+  String get invCopy => 'Kopieren';
+
+  @override
+  String get invShare => 'Delen';
+
+  @override
+  String get accFamilyCode => 'Gezinscode';
 }

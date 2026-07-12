@@ -142,12 +142,12 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
         onDeniedForever: () async {
           if (!mounted) return;
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Konum izni kalıcı reddedildi.'),
-              backgroundColor: Color(0xFF13131A),
+            SnackBar(
+              content: Text(AppLocalizations.of(context).cstLocationDenied),
+              backgroundColor: const Color(0xFF13131A),
               action: SnackBarAction(
-                label: 'Ayarlar',
-                textColor: Color(0xFF6366F1),
+                label: AppLocalizations.of(context).sfSettings,
+                textColor: const Color(0xFF6366F1),
                 onPressed: openAppSettings,
               ),
             ),
@@ -171,7 +171,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Konum paylaşılamadı: $e')));
+        ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).cstShareFailed('$e'))));
       }
     } finally {
       if (mounted) setState(() => _locationLoading = false);

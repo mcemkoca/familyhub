@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -37,7 +38,7 @@ class _InviteModalState extends State<InviteModal> {
     Clipboard.setData(ClipboardData(text: _code!));
     HapticFeedback.lightImpact();
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Kod kopyalandı')),
+      SnackBar(content: Text(AppLocalizations.of(context).invCopied)),
     );
   }
 
@@ -161,7 +162,7 @@ class _InviteModalState extends State<InviteModal> {
                       Expanded(
                         child: _ActionChip(
                           icon: Icons.copy,
-                          label: 'Kopyala',
+                          label: AppLocalizations.of(context).invCopy,
                           onTap: _copyCode,
                         ),
                       ),
@@ -169,7 +170,7 @@ class _InviteModalState extends State<InviteModal> {
                       Expanded(
                         child: _ActionChip(
                           icon: Icons.share,
-                          label: 'Paylaş',
+                          label: AppLocalizations.of(context).invShare,
                           onTap: _shareCode,
                         ),
                       ),
@@ -181,7 +182,7 @@ class _InviteModalState extends State<InviteModal> {
                     child: ElevatedButton.icon(
                       onPressed: _shareCode,
                       icon: const Icon(Icons.chat_bubble, size: 20),
-                      label: const Text('Paylaş'),
+                      label: Text(AppLocalizations.of(context).invShare),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF10B981),
                         foregroundColor: Colors.white,

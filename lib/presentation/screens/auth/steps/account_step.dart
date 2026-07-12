@@ -187,14 +187,14 @@ class _AccountStepState extends State<AccountStep> {
           const SizedBox(height: 20),
           _buildTextField(
             controller: _nameController,
-            label: 'Ad Soyad',
+            label: AppLocalizations.of(context).hcFullName,
             icon: Icons.person_outline,
             textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: 16),
           _buildTextField(
             controller: _emailController,
-            label: 'E-posta',
+            label: AppLocalizations.of(context).conEmail,
             icon: Icons.email_outlined,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
@@ -212,7 +212,7 @@ class _AccountStepState extends State<AccountStep> {
           if (_hasFamilyCode)
             _buildTextField(
               controller: _familyCodeController,
-              label: 'Aile Kodu',
+              label: AppLocalizations.of(context).accFamilyCode,
               icon: Icons.key_outlined,
               hintText: AppLocalizations.of(context).ornFh123456,
             )

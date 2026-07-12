@@ -11441,6 +11441,120 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Ana takvim'**
   String get csMainCalendar;
+
+  /// No description provided for @secBiometricError.
+  ///
+  /// In tr, this message translates to:
+  /// **'Biyometrik hata: {msg}'**
+  String secBiometricError(Object msg);
+
+  /// No description provided for @secNewPasswordRepeat.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yeni Şifre (Tekrar)'**
+  String get secNewPasswordRepeat;
+
+  /// No description provided for @secAccountDeleteFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hesap silme hatası: {msg}'**
+  String secAccountDeleteFailed(Object msg);
+
+  /// No description provided for @secBioEnabled.
+  ///
+  /// In tr, this message translates to:
+  /// **'Biyometrik giriş etkinleştirildi'**
+  String get secBioEnabled;
+
+  /// No description provided for @secBioDisabled.
+  ///
+  /// In tr, this message translates to:
+  /// **'Biyometrik giriş devre dışı bırakıldı'**
+  String get secBioDisabled;
+
+  /// No description provided for @cstLocationDenied.
+  ///
+  /// In tr, this message translates to:
+  /// **'Konum izni kalıcı reddedildi.'**
+  String get cstLocationDenied;
+
+  /// No description provided for @cstShareFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Konum paylaşılamadı: {msg}'**
+  String cstShareFailed(Object msg);
+
+  /// No description provided for @abProcessing.
+  ///
+  /// In tr, this message translates to:
+  /// **'İşleniyor...'**
+  String get abProcessing;
+
+  /// No description provided for @pgUpgrade.
+  ///
+  /// In tr, this message translates to:
+  /// **'Premium\'a Yükselt'**
+  String get pgUpgrade;
+
+  /// No description provided for @pgNotNow.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şimdi Değil'**
+  String get pgNotNow;
+
+  /// No description provided for @pgNoProduct.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şu anda ürün bulunamadı. Lütfen daha sonra tekrar deneyin.'**
+  String get pgNoProduct;
+
+  /// No description provided for @pgActive.
+  ///
+  /// In tr, this message translates to:
+  /// **'Premium aktif! 🎉'**
+  String get pgActive;
+
+  /// No description provided for @pgRequired.
+  ///
+  /// In tr, this message translates to:
+  /// **'Premium Gerekli'**
+  String get pgRequired;
+
+  /// No description provided for @pgFeatureLabel.
+  ///
+  /// In tr, this message translates to:
+  /// **'{feature} Özelliği'**
+  String pgFeatureLabel(Object feature);
+
+  /// No description provided for @pgUpgradeDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu özelliği kullanmak için Premium\'a yükseltin.'**
+  String get pgUpgradeDesc;
+
+  /// No description provided for @invCopied.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kod kopyalandı'**
+  String get invCopied;
+
+  /// No description provided for @invCopy.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kopyala'**
+  String get invCopy;
+
+  /// No description provided for @invShare.
+  ///
+  /// In tr, this message translates to:
+  /// **'Paylaş'**
+  String get invShare;
+
+  /// No description provided for @accFamilyCode.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile Kodu'**
+  String get accFamilyCode;
 }
 
 class _AppLocalizationsDelegate

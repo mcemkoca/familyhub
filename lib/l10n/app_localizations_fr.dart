@@ -6074,4 +6074,70 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get csMainCalendar => 'Agenda principal';
+
+  @override
+  String secBiometricError(Object msg) {
+    return 'Erreur biometrique : $msg';
+  }
+
+  @override
+  String get secNewPasswordRepeat => 'Nouveau mot de passe (repeter)';
+
+  @override
+  String secAccountDeleteFailed(Object msg) {
+    return 'Erreur de suppression du compte : $msg';
+  }
+
+  @override
+  String get secBioEnabled => 'Connexion biometrique activee';
+
+  @override
+  String get secBioDisabled => 'Connexion biometrique desactivee';
+
+  @override
+  String get cstLocationDenied => 'Autorisation de localisation refusee.';
+
+  @override
+  String cstShareFailed(Object msg) {
+    return 'Impossible de partager la position : $msg';
+  }
+
+  @override
+  String get abProcessing => 'Traitement...';
+
+  @override
+  String get pgUpgrade => 'Passer a Premium';
+
+  @override
+  String get pgNotNow => 'Pas maintenant';
+
+  @override
+  String get pgNoProduct =>
+      'Aucun produit disponible pour le moment. Reessayez plus tard.';
+
+  @override
+  String get pgActive => 'Premium actif ! 🎉';
+
+  @override
+  String get pgRequired => 'Premium requis';
+
+  @override
+  String pgFeatureLabel(Object feature) {
+    return 'Fonction $feature';
+  }
+
+  @override
+  String get pgUpgradeDesc => 'Passez a Premium pour utiliser cette fonction.';
+
+  @override
+  String get invCopied => 'Code copie';
+
+  @override
+  String get invCopy => 'Copier';
+
+  @override
+  String get invShare => 'Partager';
+
+  @override
+  String get accFamilyCode => 'Code famille';
 }

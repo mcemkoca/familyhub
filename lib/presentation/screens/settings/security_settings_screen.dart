@@ -184,7 +184,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
       } catch (e) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Biyometrik hata: $e')),
+            SnackBar(content: Text(AppLocalizations.of(context).secBiometricError('$e'))),
           );
         }
         return;
@@ -212,8 +212,8 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
         SnackBar(
           content: Text(
             enabled
-                ? 'Biyometrik giriş etkinleştirildi'
-                : 'Biyometrik giriş devre dışı bırakıldı',
+                ? AppLocalizations.of(context).secBioEnabled
+                : AppLocalizations.of(context).secBioDisabled,
           ),
         ),
       );
@@ -257,9 +257,9 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
                 TextField(
                   controller: confirmController,
                   obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Yeni Şifre (Tekrar)',
-                    prefixIcon: Icon(Icons.lock_outline),
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context).secNewPasswordRepeat,
+                    prefixIcon: const Icon(Icons.lock_outline),
                   ),
                 ),
               ],
@@ -360,7 +360,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
           ),
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, true),
-            child: const Text('Sil', style: TextStyle(color: AppColors.error)),
+            child: Text(AppLocalizations.of(context).budDelete, style: const TextStyle(color: AppColors.error)),
           ),
         ],
       ),
@@ -387,7 +387,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Hesap silme hatası: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context).secAccountDeleteFailed('$e'))),
         );
       }
     }

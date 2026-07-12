@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 
 import '../../core/analytics/analytics_service.dart';
 import '../../services/billing/subscription_service.dart';
@@ -37,9 +38,9 @@ class PremiumGate extends StatelessWidget {
                 children: [
                   const Icon(Icons.lock, color: Color(0xFFF59E0B), size: 32),
                   const SizedBox(height: 8),
-                  const Text(
-                    'Premium Gerekli',
-                    style: TextStyle(
+                  Text(
+                    AppLocalizations.of(context).pgRequired,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -112,7 +113,7 @@ class _PremiumUpgradeSheet extends StatelessWidget {
             const Icon(Icons.workspace_premium, color: Color(0xFFF59E0B), size: 48),
             const SizedBox(height: 16),
             Text(
-              '$feature Özelliği',
+              AppLocalizations.of(context).pgFeatureLabel(feature),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     color: Colors.white,
@@ -120,10 +121,10 @@ class _PremiumUpgradeSheet extends StatelessWidget {
                   ),
             ),
             const SizedBox(height: 8),
-            const Text(
-              'Bu özelliği kullanmak için Premium\'a yükseltin.',
+            Text(
+              AppLocalizations.of(context).pgUpgradeDesc,
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white70),
+              style: const TextStyle(color: Colors.white70),
             ),
             const SizedBox(height: 24),
             ElevatedButton(
@@ -133,12 +134,12 @@ class _PremiumUpgradeSheet extends StatelessWidget {
                 foregroundColor: Colors.black,
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
-              child: const Text('Premium\'a Yükselt', style: TextStyle(fontWeight: FontWeight.bold)),
+              child: Text(AppLocalizations.of(context).pgUpgrade, style: const TextStyle(fontWeight: FontWeight.bold)),
             ),
             const SizedBox(height: 12),
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('Şimdi Değil', style: TextStyle(color: Colors.white54)),
+              child: Text(AppLocalizations.of(context).pgNotNow, style: const TextStyle(color: Colors.white54)),
             ),
           ],
         ),
@@ -153,7 +154,7 @@ class _PremiumUpgradeSheet extends StatelessWidget {
     if (packages == null || packages.isEmpty) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Şu anda ürün bulunamadı. Lütfen daha sonra tekrar deneyin.')),
+          SnackBar(content: Text(AppLocalizations.of(context).pgNoProduct)),
         );
       }
       return;
@@ -163,7 +164,7 @@ class _PremiumUpgradeSheet extends StatelessWidget {
     if (success && context.mounted) {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Premium aktif! 🎉')),
+        SnackBar(content: Text(AppLocalizations.of(context).pgActive)),
       );
     }
   }
