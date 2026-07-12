@@ -1948,5 +1948,17 @@
   "devCatMath": "Wiskunde",
   "devCatMusic": "Muziek",
   "devCatArt": "Tekenen",
-  "devCatTurkish": "Taal"
+  "devCatTurkish": "Taal",
+  "lgPassword": "Je wachtwoord",
+  "psPreferredLang": "Voorkeurstaal",
+  "psThemePref": "Themavoorkeur",
+  "szsHome": "Thuis",
+  "szsSchool": "School",
+  "szsRadius": "Straal: {m}m",
+  "atLow": "Laag",
+  "atMedium": "Gemiddeld",
+  "atHigh": "Hoog",
+  "aiaTitle": "AI-assistent",
+  "aiaSub": "Boodschappen • Keuken • Budget",
+  "aiaHint": "Wat wil je dat ik doe?"
 }

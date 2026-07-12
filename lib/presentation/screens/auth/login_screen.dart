@@ -303,7 +303,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
               controller: _emailController,
               focusNode: _emailFocus,
               nextFocus: _passwordFocus,
-              label: 'E-posta adresiniz',
+              label: AppLocalizations.of(context).regEmailHint,
               emoji: '📧',
               keyboardType: TextInputType.emailAddress,
               action: TextInputAction.next,
@@ -348,7 +348,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                 const Expanded(child: Divider()),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: Text('veya',
+                  child: Text(AppLocalizations.of(context).regOr,
                       style: TextStyle(
                           fontSize: 12,
                           color: isDark ? const Color(0xFF6B7280) : const Color(0xFF9CA3AF),
@@ -506,7 +506,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
         textInputAction: TextInputAction.done,
         onSubmitted: (_) => _login(),
         decoration: InputDecoration(
-          labelText: 'Şifreniz',
+          labelText: AppLocalizations.of(context).lgPassword,
           prefixText: '🔒  ',
           prefixStyle: const TextStyle(fontSize: 16),
           border: InputBorder.none,

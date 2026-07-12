@@ -97,7 +97,7 @@ class _ProfileStepState extends State<ProfileStep> {
           _buildDatePicker(isDark),
           const SizedBox(height: 16),
           _buildDropdown(
-            label: 'Tercih Edilen Dil',
+            label: AppLocalizations.of(context).psPreferredLang,
             value: _language,
             items: const [
               {'value': 'tr', 'label': 'Türkçe'},
@@ -107,7 +107,7 @@ class _ProfileStepState extends State<ProfileStep> {
           ),
           const SizedBox(height: 16),
           _buildDropdown(
-            label: 'Tema Tercihi',
+            label: AppLocalizations.of(context).psThemePref,
             value: _theme,
             items: const [
               {'value': 'light', 'label': 'Açık'},

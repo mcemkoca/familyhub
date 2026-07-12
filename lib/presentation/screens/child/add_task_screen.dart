@@ -287,7 +287,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                 ),
                                 const SizedBox(height: 6),
                                 Text(
-                                  p.label,
+                                  switch (p.value) {
+                                    'low' => AppLocalizations.of(context).atLow,
+                                    'medium' => AppLocalizations.of(context).atMedium,
+                                    'high' => AppLocalizations.of(context).atHigh,
+                                    _ => p.label,
+                                  },
                                   style: TextStyle(
                                     color: _priority == p.value
                                         ? p.color

@@ -255,11 +255,11 @@ class _AIAssistantScreenState extends State<AIAssistantScreen> {
               child: const Icon(Icons.auto_awesome, color: Colors.white, size: 18),
             ),
             const SizedBox(width: 10),
-            const Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('AI Asistan', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
-                Text('Alışveriş • Mutfak • Bütçe', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                Text(AppLocalizations.of(context).aiaTitle, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+                Text(AppLocalizations.of(context).aiaSub, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
               ],
             ),
           ],
@@ -534,11 +534,11 @@ class _AIAssistantScreenState extends State<AIAssistantScreen> {
                     // Yazdıkça öneri panelinin görünürlüğü güncellensin.
                     onChanged: (_) => setState(() {}),
                     style: const TextStyle(color: Color(0xFFE5E7EB), fontSize: 14),
-                    decoration: const InputDecoration(
-                      hintText: 'Ne yapmamı istersin?',
-                      hintStyle: TextStyle(color: Color(0xFF6B7280), fontSize: 14),
+                    decoration: InputDecoration(
+                      hintText: AppLocalizations.of(context).aiaHint,
+                      hintStyle: const TextStyle(color: Color(0xFF6B7280), fontSize: 14),
                       border: InputBorder.none,
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                     ),
                     onSubmitted: _sendMessage,
                   ),

@@ -6168,4 +6168,42 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get devCatTurkish => 'Taal';
+
+  @override
+  String get lgPassword => 'Je wachtwoord';
+
+  @override
+  String get psPreferredLang => 'Voorkeurstaal';
+
+  @override
+  String get psThemePref => 'Themavoorkeur';
+
+  @override
+  String get szsHome => 'Thuis';
+
+  @override
+  String get szsSchool => 'School';
+
+  @override
+  String szsRadius(Object m) {
+    return 'Straal: ${m}m';
+  }
+
+  @override
+  String get atLow => 'Laag';
+
+  @override
+  String get atMedium => 'Gemiddeld';
+
+  @override
+  String get atHigh => 'Hoog';
+
+  @override
+  String get aiaTitle => 'AI-assistent';
+
+  @override
+  String get aiaSub => 'Boodschappen • Keuken • Budget';
+
+  @override
+  String get aiaHint => 'Wat wil je dat ik doe?';
 }

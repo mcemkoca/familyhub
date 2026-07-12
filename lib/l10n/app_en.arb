@@ -1948,5 +1948,17 @@
   "devCatMath": "Maths",
   "devCatMusic": "Music",
   "devCatArt": "Art",
-  "devCatTurkish": "Language Arts"
+  "devCatTurkish": "Language Arts",
+  "lgPassword": "Your password",
+  "psPreferredLang": "Preferred Language",
+  "psThemePref": "Theme Preference",
+  "szsHome": "Home",
+  "szsSchool": "School",
+  "szsRadius": "Radius: {m}m",
+  "atLow": "Low",
+  "atMedium": "Medium",
+  "atHigh": "High",
+  "aiaTitle": "AI Assistant",
+  "aiaSub": "Shopping • Kitchen • Budget",
+  "aiaHint": "What would you like me to do?"
 }

@@ -11651,6 +11651,78 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Türkçe'**
   String get devCatTurkish;
+
+  /// No description provided for @lgPassword.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şifreniz'**
+  String get lgPassword;
+
+  /// No description provided for @psPreferredLang.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tercih Edilen Dil'**
+  String get psPreferredLang;
+
+  /// No description provided for @psThemePref.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tema Tercihi'**
+  String get psThemePref;
+
+  /// No description provided for @szsHome.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ev'**
+  String get szsHome;
+
+  /// No description provided for @szsSchool.
+  ///
+  /// In tr, this message translates to:
+  /// **'Okul'**
+  String get szsSchool;
+
+  /// No description provided for @szsRadius.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yarıçap: {m}m'**
+  String szsRadius(Object m);
+
+  /// No description provided for @atLow.
+  ///
+  /// In tr, this message translates to:
+  /// **'Düşük'**
+  String get atLow;
+
+  /// No description provided for @atMedium.
+  ///
+  /// In tr, this message translates to:
+  /// **'Orta'**
+  String get atMedium;
+
+  /// No description provided for @atHigh.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yüksek'**
+  String get atHigh;
+
+  /// No description provided for @aiaTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'AI Asistan'**
+  String get aiaTitle;
+
+  /// No description provided for @aiaSub.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alışveriş • Mutfak • Bütçe'**
+  String get aiaSub;
+
+  /// No description provided for @aiaHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ne yapmamı istersin?'**
+  String get aiaHint;
 }
 
 class _AppLocalizationsDelegate

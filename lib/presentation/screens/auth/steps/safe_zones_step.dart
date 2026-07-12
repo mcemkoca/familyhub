@@ -216,15 +216,15 @@ class _AddZoneDialogState extends State<_AddZoneDialog> {
               initialValue: _type,
               decoration: InputDecoration(labelText: AppLocalizations.of(context).bolgeTipi),
               items: [
-                const DropdownMenuItem(value: 'home', child: Text('Ev')),
+                DropdownMenuItem(value: 'home', child: Text(AppLocalizations.of(context).szsHome)),
                 DropdownMenuItem(value: 'work', child: Text(AppLocalizations.of(context).isLabel)),
-                const DropdownMenuItem(value: 'school', child: Text('Okul')),
+                DropdownMenuItem(value: 'school', child: Text(AppLocalizations.of(context).szsSchool)),
                 DropdownMenuItem(value: 'custom', child: Text(AppLocalizations.of(context).ozel)),
               ],
               onChanged: (v) => setState(() => _type = v!),
             ),
             const SizedBox(height: 16),
-            Text('Yarıçap: ${_radius.round()}m'),
+            Text(AppLocalizations.of(context).szsRadius(_radius.round())),
             Slider(
               value: _radius,
               min: 50,

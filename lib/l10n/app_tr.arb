@@ -2009,5 +2009,18 @@
   "devCatMath": "Matematik",
   "devCatMusic": "Müzik",
   "devCatArt": "Resim",
-  "devCatTurkish": "Türkçe"
+  "devCatTurkish": "Türkçe",
+  "lgPassword": "Şifreniz",
+  "psPreferredLang": "Tercih Edilen Dil",
+  "psThemePref": "Tema Tercihi",
+  "szsHome": "Ev",
+  "szsSchool": "Okul",
+  "szsRadius": "Yarıçap: {m}m",
+  "@szsRadius": { "placeholders": { "m": {} } },
+  "atLow": "Düşük",
+  "atMedium": "Orta",
+  "atHigh": "Yüksek",
+  "aiaTitle": "AI Asistan",
+  "aiaSub": "Alışveriş • Mutfak • Bütçe",
+  "aiaHint": "Ne yapmamı istersin?"
 }

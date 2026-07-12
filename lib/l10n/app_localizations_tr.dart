@@ -6183,4 +6183,42 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get devCatTurkish => 'Türkçe';
+
+  @override
+  String get lgPassword => 'Şifreniz';
+
+  @override
+  String get psPreferredLang => 'Tercih Edilen Dil';
+
+  @override
+  String get psThemePref => 'Tema Tercihi';
+
+  @override
+  String get szsHome => 'Ev';
+
+  @override
+  String get szsSchool => 'Okul';
+
+  @override
+  String szsRadius(Object m) {
+    return 'Yarıçap: ${m}m';
+  }
+
+  @override
+  String get atLow => 'Düşük';
+
+  @override
+  String get atMedium => 'Orta';
+
+  @override
+  String get atHigh => 'Yüksek';
+
+  @override
+  String get aiaTitle => 'AI Asistan';
+
+  @override
+  String get aiaSub => 'Alışveriş • Mutfak • Bütçe';
+
+  @override
+  String get aiaHint => 'Ne yapmamı istersin?';
 }
