@@ -20,7 +20,7 @@ _Son güncelleme: 2026-07-12 (Europe/Brussels) · Otonom oturum_
 | Boş çeviri | 0 | DONE |
 | Placeholder uyumsuzluğu | 0 kritik | DONE |
 | l10n audit | 0 kritik, 51 uyarı (marka/özel ad — Plus, Complete, GIF, SOS…) | DONE |
-| Hard-coded kullanıcı metni | 323 (830→323, ~54 dosya, %61) | IN_PROGRESS |
+| Hard-coded kullanıcı metni | 307 (830→307, ~57 dosya, %63) | IN_PROGRESS |
 | TODO/FIXME/HACK | 6 | NOT_STARTED |
 | Locale kodları | tr_TR, en_US, fr_BE, nl_BE (talimat en_GB/nl_BE/fr_BE istiyor) | IN_PROGRESS |
 | Çok-dilli içerik modeli | yok → ekleniyor | IN_PROGRESS |

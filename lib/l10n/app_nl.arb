@@ -1878,5 +1878,8 @@
   "stDailySub": "De 4 geillustreerde verhalen van vandaag",
   "stPageRead": "{n} pagina's · Lezen",
   "stIllustrated": "Geillustreerd verhaal",
-  "stLesson": "De les van het verhaal"
+  "stLesson": "De les van het verhaal",
+  "chatPickGif": "GIF kiezen",
+  "chatToday": "Vandaag",
+  "chatYesterday": "Gisteren"
 }

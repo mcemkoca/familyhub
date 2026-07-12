@@ -575,11 +575,11 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.all(16),
+              Padding(
+                padding: const EdgeInsets.all(16),
                 child: Text(
-                  'GIF Seç',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                  AppLocalizations.of(context).chatPickGif,
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
                 ),
               ),
               Expanded(
@@ -645,15 +645,15 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     HapticFeedback.mediumImpact();
   }
 
-  String _dayLabel(DateTime dt) {
+  String _dayLabel(BuildContext context, DateTime dt) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final yesterday = today.subtract(const Duration(days: 1));
     final messageDay = DateTime(dt.year, dt.month, dt.day);
 
-    if (messageDay == today) return 'Bugün';
-    if (messageDay == yesterday) return 'Dün';
-    return DateFormat('d MMMM', 'tr_TR').format(dt);
+    if (messageDay == today) return AppLocalizations.of(context).chatToday;
+    if (messageDay == yesterday) return AppLocalizations.of(context).chatYesterday;
+    return DateFormat('d MMMM', Localizations.localeOf(context).toString()).format(dt);
   }
 
   @override
@@ -696,9 +696,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Aile Sohbeti',
-                    style: TextStyle(
+                  Text(
+                    AppLocalizations.of(context).chtFamilyChat,
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
                     ),
@@ -784,7 +784,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                       return Column(
                         children: [
                           if (showDay)
-                            _DaySeparator(label: _dayLabel(msg.createdAt)),
+                            _DaySeparator(label: _dayLabel(context, msg.createdAt)),
                           Padding(
                             padding: const EdgeInsets.only(bottom: 4),
                             child: Dismissible(

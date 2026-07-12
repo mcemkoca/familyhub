@@ -1878,5 +1878,8 @@
   "stDailySub": "Today's 4 illustrated stories",
   "stPageRead": "{n} pages · Read",
   "stIllustrated": "Illustrated story",
-  "stLesson": "Story Lesson"
+  "stLesson": "Story Lesson",
+  "chatPickGif": "Pick GIF",
+  "chatToday": "Today",
+  "chatYesterday": "Yesterday"
 }

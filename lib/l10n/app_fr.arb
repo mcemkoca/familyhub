@@ -1878,5 +1878,8 @@
   "stDailySub": "Les 4 histoires illustrees du jour",
   "stPageRead": "{n} pages · Lire",
   "stIllustrated": "Histoire illustree",
-  "stLesson": "La morale de l'histoire"
+  "stLesson": "La morale de l'histoire",
+  "chatPickGif": "Choisir un GIF",
+  "chatToday": "Aujourd'hui",
+  "chatYesterday": "Hier"
 }

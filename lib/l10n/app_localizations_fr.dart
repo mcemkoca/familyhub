@@ -5959,4 +5959,13 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get stLesson => 'La morale de l\'histoire';
+
+  @override
+  String get chatPickGif => 'Choisir un GIF';
+
+  @override
+  String get chatToday => 'Aujourd\'hui';
+
+  @override
+  String get chatYesterday => 'Hier';
 }

@@ -5953,4 +5953,13 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get stLesson => 'Hikayeden Ders';
+
+  @override
+  String get chatPickGif => 'GIF Seç';
+
+  @override
+  String get chatToday => 'Bugün';
+
+  @override
+  String get chatYesterday => 'Dün';
 }

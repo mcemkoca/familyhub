@@ -11231,6 +11231,24 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Hikayeden Ders'**
   String get stLesson;
+
+  /// No description provided for @chatPickGif.
+  ///
+  /// In tr, this message translates to:
+  /// **'GIF Seç'**
+  String get chatPickGif;
+
+  /// No description provided for @chatToday.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugün'**
+  String get chatToday;
+
+  /// No description provided for @chatYesterday.
+  ///
+  /// In tr, this message translates to:
+  /// **'Dün'**
+  String get chatYesterday;
 }
 
 class _AppLocalizationsDelegate

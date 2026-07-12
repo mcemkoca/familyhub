@@ -1930,5 +1930,8 @@
   "stPageRead": "{n} sayfa · Oku",
   "@stPageRead": { "placeholders": { "n": {} } },
   "stIllustrated": "Görselli hikaye",
-  "stLesson": "Hikayeden Ders"
+  "stLesson": "Hikayeden Ders",
+  "chatPickGif": "GIF Seç",
+  "chatToday": "Bugün",
+  "chatYesterday": "Dün"
 }

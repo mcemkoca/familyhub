@@ -5938,4 +5938,13 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get stLesson => 'De les van het verhaal';
+
+  @override
+  String get chatPickGif => 'GIF kiezen';
+
+  @override
+  String get chatToday => 'Vandaag';
+
+  @override
+  String get chatYesterday => 'Gisteren';
 }
