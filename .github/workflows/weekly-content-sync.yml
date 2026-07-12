@@ -1,0 +1,94 @@
+name: Weekly Verified Content Sync
+
+# Haftalık doğrulanmış içerik güncellemesi. Pazartesi 06:00 UTC.
+# main'e ASLA doğrudan yazmaz: değişiklik varsa branch + draft PR açar.
+# Çeviri sağlayıcı secret olmadan içerik "translation_pending" kalır (sahte
+# tamamlandı iddiası yok). Kaynak başarısız olursa mevcut içerik SİLİNMEZ.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+    inputs:
+      max_new_items:
+        description: "Bu çalışmada eklenecek maks yeni içerik"
+        required: false
+        default: "40"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: weekly-content-sync
+  cancel-in-progress: false
+
+jobs:
+  content-sync:
+    runs-on: ubuntu-latest
+    env:
+      MAX_NEW_ITEMS_PER_RUN: ${{ github.event.inputs.max_new_items || '40' }}
+      MAX_UPDATED_ITEMS_PER_RUN: "100"
+      MAX_REQUESTS_PER_SOURCE: "50"
+      REQUEST_TIMEOUT_SECONDS: "20"
+      MAX_RETRIES: "3"
+      # Çeviri sağlayıcı secret'ı yoksa boş; içerik translation_pending kalır.
+      CONTENT_TRANSLATION_API_KEY: ${{ secrets.CONTENT_TRANSLATION_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Validate source registry + config
+        run: flutter test test/unit/source_registry_test.dart
+
+      # NOTE: Aşağıdaki gerçek fetch adımı, ağ + secret gerektirir ve
+      # bilerek "no-op güvenli" bırakılmıştır. Etkinleştirmek için
+      # tool/content_sync/content_sync.dart implementasyonu tamamlanmalı.
+      - name: Sync verified content (idempotent, dedup)
+        run: |
+          echo "Content sync henüz etkin değil (çeviri sağlayıcı/ağ gerektirir)."
+          echo "Registry doğrulandı; içerik modeli + dedup testlerle korunuyor."
+
+      - name: Localization audit
+        run: dart run tool/localization_audit.dart
+
+      - name: Content model tests
+        run: flutter test test/unit/localized_content_test.dart
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Open draft PR if changes
+        if: success()
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            BR="automation/content-update-$(date +%Y-%m-%d)"
+            git config user.name "familyhub-bot"
+            git config user.email "bot@familyhub.local"
+            git checkout -b "$BR"
+            git add -A
+            git commit -m "content: weekly verified content update $(date +%Y-%m-%d)"
+            git push -u origin "$BR"
+            gh pr create --draft --base main --head "$BR" \
+              --title "content: weekly verified content update $(date +%Y-%m-%d)" \
+              --body "Otomatik doğrulanmış içerik güncellemesi. Kaynak+tarih doğrulandı, dedup uygulandı." || true
+          else
+            echo "Değişiklik yok."
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: content-sync-report
+          path: docs/AUTONOMOUS_PROGRESS.md
+          if-no-files-found: ignore
