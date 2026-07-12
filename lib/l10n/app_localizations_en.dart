@@ -6405,4 +6405,69 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cadAiPreparing => 'AI suggestions are being prepared…';
+
+  @override
+  String get srReminderBody => 'Reminder time!';
+
+  @override
+  String get srExitHome => 'On leaving home';
+
+  @override
+  String get srArriveWork => 'On arriving at work';
+
+  @override
+  String get srExactTime => 'Exact time';
+
+  @override
+  String get srRelativeTime => 'Relative time';
+
+  @override
+  String get srRecurring => 'Recurring';
+
+  @override
+  String get srSmartWindow => 'Smart window';
+
+  @override
+  String get srAppOpen => 'On app open';
+
+  @override
+  String get srTaskDone => 'On task done';
+
+  @override
+  String get srLocationPattern => 'Location pattern';
+
+  @override
+  String get srInactivity => 'Inactivity';
+
+  @override
+  String get srEnergyLevel => 'Energy level';
+
+  @override
+  String get srSocialContext => 'Social context';
+
+  @override
+  String get srWeatherChange => 'Weather change';
+
+  @override
+  String get srShoppingIntent => 'Shopping intent';
+
+  @override
+  String get srToneFormal => 'Formal';
+
+  @override
+  String get srToneFriendly => 'Friendly';
+
+  @override
+  String get srToneUrgent => 'Urgent';
+
+  @override
+  String get srToneGentle => 'Gentle';
+
+  @override
+  String get chatPollQuestion => 'Question (e.g. What\'s for dinner?)';
+
+  @override
+  String chatOption(Object n) {
+    return 'Option $n';
+  }
 }

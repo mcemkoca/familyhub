@@ -403,7 +403,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                       controller: questionCtrl,
                       style: TextStyle(color: onSurface),
                       textCapitalization: TextCapitalization.sentences,
-                      decoration: deco('Soru (ör. Akşam ne yiyelim?)'),
+                      decoration: deco(AppLocalizations.of(context).chatPollQuestion),
                     ),
                     const SizedBox(height: 12),
                     for (int i = 0; i < optionCtrls.length; i++)
@@ -417,7 +417,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                                 style: TextStyle(color: onSurface),
                                 textCapitalization:
                                     TextCapitalization.sentences,
-                                decoration: deco('Seçenek ${i + 1}'),
+                                decoration: deco(AppLocalizations.of(context).chatOption(i + 1)),
                               ),
                             ),
                             if (optionCtrls.length > 2)

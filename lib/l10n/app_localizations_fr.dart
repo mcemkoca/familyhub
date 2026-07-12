@@ -6431,4 +6431,69 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get cadAiPreparing => 'Les suggestions IA sont en preparation…';
+
+  @override
+  String get srReminderBody => 'C\'est l\'heure du rappel !';
+
+  @override
+  String get srExitHome => 'En quittant la maison';
+
+  @override
+  String get srArriveWork => 'En arrivant au travail';
+
+  @override
+  String get srExactTime => 'Heure exacte';
+
+  @override
+  String get srRelativeTime => 'Heure relative';
+
+  @override
+  String get srRecurring => 'Recurrent';
+
+  @override
+  String get srSmartWindow => 'Fenetre intelligente';
+
+  @override
+  String get srAppOpen => 'A l\'ouverture de l\'app';
+
+  @override
+  String get srTaskDone => 'A la fin de la tache';
+
+  @override
+  String get srLocationPattern => 'Modele de localisation';
+
+  @override
+  String get srInactivity => 'Inactivite';
+
+  @override
+  String get srEnergyLevel => 'Niveau d\'energie';
+
+  @override
+  String get srSocialContext => 'Contexte social';
+
+  @override
+  String get srWeatherChange => 'Changement de meteo';
+
+  @override
+  String get srShoppingIntent => 'Intention d\'achat';
+
+  @override
+  String get srToneFormal => 'Formel';
+
+  @override
+  String get srToneFriendly => 'Amical';
+
+  @override
+  String get srToneUrgent => 'Urgent';
+
+  @override
+  String get srToneGentle => 'Doux';
+
+  @override
+  String get chatPollQuestion => 'Question (ex. Que mange-t-on ce soir ?)';
+
+  @override
+  String chatOption(Object n) {
+    return 'Option $n';
+  }
 }

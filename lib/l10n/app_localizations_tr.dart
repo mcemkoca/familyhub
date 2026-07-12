@@ -6426,4 +6426,69 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get cadAiPreparing => 'AI öneriler hazırlanıyor…';
+
+  @override
+  String get srReminderBody => 'Hatırlatma zamanı!';
+
+  @override
+  String get srExitHome => 'Evden çıkınca';
+
+  @override
+  String get srArriveWork => 'İşe varınca';
+
+  @override
+  String get srExactTime => 'Kesin zaman';
+
+  @override
+  String get srRelativeTime => 'Göreli zaman';
+
+  @override
+  String get srRecurring => 'Tekrarlayan';
+
+  @override
+  String get srSmartWindow => 'Akıllı pencere';
+
+  @override
+  String get srAppOpen => 'App açılınca';
+
+  @override
+  String get srTaskDone => 'Görev tamamlanınca';
+
+  @override
+  String get srLocationPattern => 'Lokasyon pattern';
+
+  @override
+  String get srInactivity => 'Hareketsizlik';
+
+  @override
+  String get srEnergyLevel => 'Enerji seviyesi';
+
+  @override
+  String get srSocialContext => 'Sosyal bağlam';
+
+  @override
+  String get srWeatherChange => 'Hava değişimi';
+
+  @override
+  String get srShoppingIntent => 'Alışveriş niyeti';
+
+  @override
+  String get srToneFormal => 'Resmi';
+
+  @override
+  String get srToneFriendly => 'Arkadaşça';
+
+  @override
+  String get srToneUrgent => 'Acil';
+
+  @override
+  String get srToneGentle => 'Nazik';
+
+  @override
+  String get chatPollQuestion => 'Soru (ör. Akşam ne yiyelim?)';
+
+  @override
+  String chatOption(Object n) {
+    return 'Seçenek $n';
+  }
 }

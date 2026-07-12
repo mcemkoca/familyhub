@@ -12077,6 +12077,132 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'AI öneriler hazırlanıyor…'**
   String get cadAiPreparing;
+
+  /// No description provided for @srReminderBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hatırlatma zamanı!'**
+  String get srReminderBody;
+
+  /// No description provided for @srExitHome.
+  ///
+  /// In tr, this message translates to:
+  /// **'Evden çıkınca'**
+  String get srExitHome;
+
+  /// No description provided for @srArriveWork.
+  ///
+  /// In tr, this message translates to:
+  /// **'İşe varınca'**
+  String get srArriveWork;
+
+  /// No description provided for @srExactTime.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kesin zaman'**
+  String get srExactTime;
+
+  /// No description provided for @srRelativeTime.
+  ///
+  /// In tr, this message translates to:
+  /// **'Göreli zaman'**
+  String get srRelativeTime;
+
+  /// No description provided for @srRecurring.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tekrarlayan'**
+  String get srRecurring;
+
+  /// No description provided for @srSmartWindow.
+  ///
+  /// In tr, this message translates to:
+  /// **'Akıllı pencere'**
+  String get srSmartWindow;
+
+  /// No description provided for @srAppOpen.
+  ///
+  /// In tr, this message translates to:
+  /// **'App açılınca'**
+  String get srAppOpen;
+
+  /// No description provided for @srTaskDone.
+  ///
+  /// In tr, this message translates to:
+  /// **'Görev tamamlanınca'**
+  String get srTaskDone;
+
+  /// No description provided for @srLocationPattern.
+  ///
+  /// In tr, this message translates to:
+  /// **'Lokasyon pattern'**
+  String get srLocationPattern;
+
+  /// No description provided for @srInactivity.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hareketsizlik'**
+  String get srInactivity;
+
+  /// No description provided for @srEnergyLevel.
+  ///
+  /// In tr, this message translates to:
+  /// **'Enerji seviyesi'**
+  String get srEnergyLevel;
+
+  /// No description provided for @srSocialContext.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sosyal bağlam'**
+  String get srSocialContext;
+
+  /// No description provided for @srWeatherChange.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hava değişimi'**
+  String get srWeatherChange;
+
+  /// No description provided for @srShoppingIntent.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alışveriş niyeti'**
+  String get srShoppingIntent;
+
+  /// No description provided for @srToneFormal.
+  ///
+  /// In tr, this message translates to:
+  /// **'Resmi'**
+  String get srToneFormal;
+
+  /// No description provided for @srToneFriendly.
+  ///
+  /// In tr, this message translates to:
+  /// **'Arkadaşça'**
+  String get srToneFriendly;
+
+  /// No description provided for @srToneUrgent.
+  ///
+  /// In tr, this message translates to:
+  /// **'Acil'**
+  String get srToneUrgent;
+
+  /// No description provided for @srToneGentle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Nazik'**
+  String get srToneGentle;
+
+  /// No description provided for @chatPollQuestion.
+  ///
+  /// In tr, this message translates to:
+  /// **'Soru (ör. Akşam ne yiyelim?)'**
+  String get chatPollQuestion;
+
+  /// No description provided for @chatOption.
+  ///
+  /// In tr, this message translates to:
+  /// **'Seçenek {n}'**
+  String chatOption(Object n);
 }
 
 class _AppLocalizationsDelegate

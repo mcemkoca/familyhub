@@ -75,6 +75,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
   }
 
   Future<void> _save() async {
+    final reminderBody = AppLocalizations.of(context).srReminderBody;
     if (_titleController.text.trim().isEmpty) {
       ScaffoldMessenger.of(
         context,
@@ -187,7 +188,7 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
           id: created.id,
           when: triggerTime,
           title: created.title,
-          body: created.description ?? 'Hatırlatma zamanı!',
+          body: created.description ?? reminderBody,
         );
       }
       if (mounted) {
@@ -640,56 +641,56 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
       case LocationTriggerType.nearby:
         return AppLocalizations.of(context).srApproach;
       case LocationTriggerType.leaveHome:
-        return 'Evden çıkınca';
+        return AppLocalizations.of(context).srExitHome;
       case LocationTriggerType.arriveWork:
-        return 'İşe varınca';
+        return AppLocalizations.of(context).srArriveWork;
     }
   }
 
   String _timeTypeLabel(TimeTriggerType t) {
     switch (t) {
       case TimeTriggerType.absolute:
-        return 'Kesin zaman';
+        return AppLocalizations.of(context).srExactTime;
       case TimeTriggerType.relative:
-        return 'Göreli zaman';
+        return AppLocalizations.of(context).srRelativeTime;
       case TimeTriggerType.recurring:
-        return 'Tekrarlayan';
+        return AppLocalizations.of(context).srRecurring;
       case TimeTriggerType.smartSuggest:
-        return 'Akıllı pencere';
+        return AppLocalizations.of(context).srSmartWindow;
     }
   }
 
   String _behaviorTypeLabel(BehaviorTriggerType t) {
     switch (t) {
       case BehaviorTriggerType.appOpen:
-        return 'App açılınca';
+        return AppLocalizations.of(context).srAppOpen;
       case BehaviorTriggerType.taskComplete:
-        return 'Görev tamamlanınca';
+        return AppLocalizations.of(context).srTaskDone;
       case BehaviorTriggerType.locationPattern:
-        return 'Lokasyon pattern';
+        return AppLocalizations.of(context).srLocationPattern;
       case BehaviorTriggerType.inactivity:
-        return 'Hareketsizlik';
+        return AppLocalizations.of(context).srInactivity;
       case BehaviorTriggerType.energyLevel:
-        return 'Enerji seviyesi';
+        return AppLocalizations.of(context).srEnergyLevel;
       case BehaviorTriggerType.socialContext:
-        return 'Sosyal bağlam';
+        return AppLocalizations.of(context).srSocialContext;
       case BehaviorTriggerType.weatherChange:
-        return 'Hava değişimi';
+        return AppLocalizations.of(context).srWeatherChange;
       case BehaviorTriggerType.purchaseIntent:
-        return 'Alışveriş niyeti';
+        return AppLocalizations.of(context).srShoppingIntent;
     }
   }
 
   String _toneLabel(ReminderTone t) {
     switch (t) {
       case ReminderTone.formal:
-        return 'Resmi';
+        return AppLocalizations.of(context).srToneFormal;
       case ReminderTone.friendly:
-        return 'Arkadaşça';
+        return AppLocalizations.of(context).srToneFriendly;
       case ReminderTone.urgent:
-        return 'Acil';
+        return AppLocalizations.of(context).srToneUrgent;
       case ReminderTone.gentle:
-        return 'Nazik';
+        return AppLocalizations.of(context).srToneGentle;
     }
   }
 }

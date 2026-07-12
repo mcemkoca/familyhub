@@ -6410,4 +6410,69 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get cadAiPreparing => 'AI-suggesties worden voorbereid…';
+
+  @override
+  String get srReminderBody => 'Tijd voor de herinnering!';
+
+  @override
+  String get srExitHome => 'Bij vertrek van huis';
+
+  @override
+  String get srArriveWork => 'Bij aankomst op het werk';
+
+  @override
+  String get srExactTime => 'Exacte tijd';
+
+  @override
+  String get srRelativeTime => 'Relatieve tijd';
+
+  @override
+  String get srRecurring => 'Terugkerend';
+
+  @override
+  String get srSmartWindow => 'Slim venster';
+
+  @override
+  String get srAppOpen => 'Bij openen app';
+
+  @override
+  String get srTaskDone => 'Bij voltooide taak';
+
+  @override
+  String get srLocationPattern => 'Locatiepatroon';
+
+  @override
+  String get srInactivity => 'Inactiviteit';
+
+  @override
+  String get srEnergyLevel => 'Energieniveau';
+
+  @override
+  String get srSocialContext => 'Sociale context';
+
+  @override
+  String get srWeatherChange => 'Weersverandering';
+
+  @override
+  String get srShoppingIntent => 'Aankoopintentie';
+
+  @override
+  String get srToneFormal => 'Formeel';
+
+  @override
+  String get srToneFriendly => 'Vriendelijk';
+
+  @override
+  String get srToneUrgent => 'Urgent';
+
+  @override
+  String get srToneGentle => 'Zacht';
+
+  @override
+  String get chatPollQuestion => 'Vraag (bijv. Wat eten we vanavond?)';
+
+  @override
+  String chatOption(Object n) {
+    return 'Optie $n';
+  }
 }
