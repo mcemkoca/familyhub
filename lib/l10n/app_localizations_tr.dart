@@ -6258,4 +6258,24 @@ class AppLocalizationsTr extends AppLocalizations {
   String privExportFailed(Object msg) {
     return 'Veri dışa aktarma başarısız: $msg';
   }
+
+  @override
+  String get saAttempt => 'Deneme: 1/3';
+
+  @override
+  String get steMsgHint => 'Sesli mesaj metni...';
+
+  @override
+  String get llMapView => 'Harita Görünümü';
+
+  @override
+  String get llRefresh => 'Yenile';
+
+  @override
+  String famRemoveFailed(Object msg) {
+    return 'Üye çıkarılamadı: $msg';
+  }
+
+  @override
+  String get famInvite => 'Davet Et';
 }

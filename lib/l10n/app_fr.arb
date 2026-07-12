@@ -1971,5 +1971,11 @@
   "elLeaving": "Vous quittez l'application",
   "ccSaving": "Enregistrement...",
   "ccMsgHint": "Ecrire un message...",
-  "privExportFailed": "Echec de l'export des donnees : {msg}"
+  "privExportFailed": "Echec de l'export des donnees : {msg}",
+  "saAttempt": "Tentative : 1/3",
+  "steMsgHint": "Texte du message vocal...",
+  "llMapView": "Vue carte",
+  "llRefresh": "Actualiser",
+  "famRemoveFailed": "Impossible de retirer le membre : {msg}",
+  "famInvite": "Inviter"
 }

@@ -132,7 +132,7 @@ class _SosActiveScreenState extends State<SosActiveScreen> {
                         _checkRow(
                           false,
                           '112 aranıyor...',
-                          subtitle: 'Deneme: 1/3',
+                          subtitle: AppLocalizations.of(context).saAttempt,
                           active: true,
                         ),
                         _checkRow(

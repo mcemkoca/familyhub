@@ -1971,5 +1971,11 @@
   "elLeaving": "You are leaving the app",
   "ccSaving": "Saving...",
   "ccMsgHint": "Type a message...",
-  "privExportFailed": "Data export failed: {msg}"
+  "privExportFailed": "Data export failed: {msg}",
+  "saAttempt": "Attempt: 1/3",
+  "steMsgHint": "Voice message text...",
+  "llMapView": "Map View",
+  "llRefresh": "Refresh",
+  "famRemoveFailed": "Could not remove member: {msg}",
+  "famInvite": "Invite"
 }

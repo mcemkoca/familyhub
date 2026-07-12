@@ -6264,4 +6264,24 @@ class AppLocalizationsFr extends AppLocalizations {
   String privExportFailed(Object msg) {
     return 'Echec de l\'export des donnees : $msg';
   }
+
+  @override
+  String get saAttempt => 'Tentative : 1/3';
+
+  @override
+  String get steMsgHint => 'Texte du message vocal...';
+
+  @override
+  String get llMapView => 'Vue carte';
+
+  @override
+  String get llRefresh => 'Actualiser';
+
+  @override
+  String famRemoveFailed(Object msg) {
+    return 'Impossible de retirer le membre : $msg';
+  }
+
+  @override
+  String get famInvite => 'Inviter';
 }

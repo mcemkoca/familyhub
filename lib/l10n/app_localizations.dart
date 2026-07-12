@@ -11789,6 +11789,42 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Veri dışa aktarma başarısız: {msg}'**
   String privExportFailed(Object msg);
+
+  /// No description provided for @saAttempt.
+  ///
+  /// In tr, this message translates to:
+  /// **'Deneme: 1/3'**
+  String get saAttempt;
+
+  /// No description provided for @steMsgHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sesli mesaj metni...'**
+  String get steMsgHint;
+
+  /// No description provided for @llMapView.
+  ///
+  /// In tr, this message translates to:
+  /// **'Harita Görünümü'**
+  String get llMapView;
+
+  /// No description provided for @llRefresh.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yenile'**
+  String get llRefresh;
+
+  /// No description provided for @famRemoveFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Üye çıkarılamadı: {msg}'**
+  String famRemoveFailed(Object msg);
+
+  /// No description provided for @famInvite.
+  ///
+  /// In tr, this message translates to:
+  /// **'Davet Et'**
+  String get famInvite;
 }
 
 class _AppLocalizationsDelegate

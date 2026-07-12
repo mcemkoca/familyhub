@@ -2035,5 +2035,12 @@
   "ccSaving": "Kaydediliyor...",
   "ccMsgHint": "Mesaj yaz...",
   "privExportFailed": "Veri dışa aktarma başarısız: {msg}",
-  "@privExportFailed": { "placeholders": { "msg": {} } }
+  "@privExportFailed": { "placeholders": { "msg": {} } },
+  "saAttempt": "Deneme: 1/3",
+  "steMsgHint": "Sesli mesaj metni...",
+  "llMapView": "Harita Görünümü",
+  "llRefresh": "Yenile",
+  "famRemoveFailed": "Üye çıkarılamadı: {msg}",
+  "@famRemoveFailed": { "placeholders": { "msg": {} } },
+  "famInvite": "Davet Et"
 }

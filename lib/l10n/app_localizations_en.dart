@@ -6238,4 +6238,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String privExportFailed(Object msg) {
     return 'Data export failed: $msg';
   }
+
+  @override
+  String get saAttempt => 'Attempt: 1/3';
+
+  @override
+  String get steMsgHint => 'Voice message text...';
+
+  @override
+  String get llMapView => 'Map View';
+
+  @override
+  String get llRefresh => 'Refresh';
+
+  @override
+  String famRemoveFailed(Object msg) {
+    return 'Could not remove member: $msg';
+  }
+
+  @override
+  String get famInvite => 'Invite';
 }

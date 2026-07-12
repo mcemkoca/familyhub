@@ -75,15 +75,15 @@ class _LiveLocationScreenState extends State<LiveLocationScreen> {
               color: const Color(0xFF16213E),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: const Center(
+            child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.map, size: 48, color: Colors.white38),
-                  SizedBox(height: 8),
-                  Text('Harita Görünümü', style: TextStyle(color: Colors.white38)),
-                  SizedBox(height: 4),
-                  Text('🟢 Aktif rota gösteriliyor', style: TextStyle(color: Colors.green, fontSize: 12)),
+                  const Icon(Icons.map, size: 48, color: Colors.white38),
+                  const SizedBox(height: 8),
+                  Text(AppLocalizations.of(context).llMapView, style: const TextStyle(color: Colors.white38)),
+                  const SizedBox(height: 4),
+                  const Text('🟢 Aktif rota gösteriliyor', style: TextStyle(color: Colors.green, fontSize: 12)),
                 ],
               ),
             ),
@@ -162,7 +162,7 @@ class _LiveLocationScreenState extends State<LiveLocationScreen> {
                 child: ElevatedButton.icon(
                   onPressed: _shareNow,
                   icon: const Icon(Icons.refresh),
-                  label: const Text('Yenile'),
+                  label: Text(AppLocalizations.of(context).llRefresh),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue.shade700,
                     foregroundColor: Colors.white,

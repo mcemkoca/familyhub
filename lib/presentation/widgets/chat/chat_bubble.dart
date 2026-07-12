@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../domain/entities.dart';
@@ -609,7 +610,7 @@ class _GifPreview extends StatelessWidget {
           child: Image.network(gifUrl, width: 220, height: 160, fit: BoxFit.cover,
             errorBuilder: (_, _, _) => Container(
               width: 220, height: 120, color: Colors.black26,
-              child: const Center(child: Text('GIF', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold))),
+              child: Center(child: Text(AppLocalizations.of(context).chatGif, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold))),
             ),
           ),
         ),
@@ -617,7 +618,7 @@ class _GifPreview extends StatelessWidget {
           margin: const EdgeInsets.only(top: 2),
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
           decoration: BoxDecoration(color: Colors.black38, borderRadius: BorderRadius.circular(4)),
-          child: const Text('GIF', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+          child: Text(AppLocalizations.of(context).chatGif, style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
         ),
       ],
     );
@@ -736,7 +737,7 @@ class _PollCard extends StatelessWidget {
             children: [
               Icon(Icons.poll_rounded, size: 16, color: accent),
               const SizedBox(width: 6),
-              Text('Anket',
+              Text(AppLocalizations.of(context).chatPoll,
                   style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w700,

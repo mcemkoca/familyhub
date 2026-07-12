@@ -115,7 +115,7 @@ class _FamilyScreenState extends ConsumerState<FamilyScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Rol güncellenemedi: $e'),
+            content: Text(AppLocalizations.of(context).fmnRoleUpdateFailed('$e')),
             backgroundColor: AppColors.error,
           ),
         );
@@ -175,7 +175,7 @@ class _FamilyScreenState extends ConsumerState<FamilyScreen> {
                 if (mounted && context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('Üye çıkarılamadı: $e'),
+                      content: Text(AppLocalizations.of(context).famRemoveFailed('$e')),
                       backgroundColor: AppColors.error,
                     ),
                   );
@@ -466,7 +466,7 @@ class _FamilyScreenState extends ConsumerState<FamilyScreen> {
         onPressed: () => setState(() => _showInvite = true),
         backgroundColor: const Color(0xFF6366F1),
         icon: const Icon(Icons.person_add, color: Colors.white),
-        label: const Text('Davet Et', style: TextStyle(color: Colors.white)),
+        label: Text(AppLocalizations.of(context).famInvite, style: const TextStyle(color: Colors.white)),
       ),
     );
   }

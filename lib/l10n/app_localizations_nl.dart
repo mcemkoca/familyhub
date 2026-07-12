@@ -6243,4 +6243,24 @@ class AppLocalizationsNl extends AppLocalizations {
   String privExportFailed(Object msg) {
     return 'Gegevensexport mislukt: $msg';
   }
+
+  @override
+  String get saAttempt => 'Poging: 1/3';
+
+  @override
+  String get steMsgHint => 'Tekst spraakbericht...';
+
+  @override
+  String get llMapView => 'Kaartweergave';
+
+  @override
+  String get llRefresh => 'Vernieuwen';
+
+  @override
+  String famRemoveFailed(Object msg) {
+    return 'Kan lid niet verwijderen: $msg';
+  }
+
+  @override
+  String get famInvite => 'Uitnodigen';
 }

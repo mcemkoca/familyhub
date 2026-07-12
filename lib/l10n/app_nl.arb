@@ -1971,5 +1971,11 @@
   "elLeaving": "Je verlaat de app",
   "ccSaving": "Opslaan...",
   "ccMsgHint": "Typ een bericht...",
-  "privExportFailed": "Gegevensexport mislukt: {msg}"
+  "privExportFailed": "Gegevensexport mislukt: {msg}",
+  "saAttempt": "Poging: 1/3",
+  "steMsgHint": "Tekst spraakbericht...",
+  "llMapView": "Kaartweergave",
+  "llRefresh": "Vernieuwen",
+  "famRemoveFailed": "Kan lid niet verwijderen: {msg}",
+  "famInvite": "Uitnodigen"
 }

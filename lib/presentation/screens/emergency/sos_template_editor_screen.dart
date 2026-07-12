@@ -95,9 +95,9 @@ class _SosTemplateEditorScreenState extends State<SosTemplateEditorScreen> {
             TextField(
               controller: _voiceCtrl,
               maxLines: 5,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Sesli mesaj metni...',
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                hintText: AppLocalizations.of(context).steMsgHint,
               ),
             ),
             const SizedBox(height: 12),
@@ -136,7 +136,7 @@ class _SosTemplateEditorScreenState extends State<SosTemplateEditorScreen> {
           ElevatedButton.icon(
             onPressed: _save,
             icon: const Icon(Icons.save),
-            label: const Text('KAYDET', style: TextStyle(fontSize: 16)),
+            label: Text(AppLocalizations.of(context).crashSaveUpper, style: const TextStyle(fontSize: 16)),
             style: ElevatedButton.styleFrom(backgroundColor: Colors.green.shade700, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16)),
           ),
         ],
