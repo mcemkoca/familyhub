@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../config/routes.dart';
@@ -45,17 +46,17 @@ class FamilyMoodStrip extends ConsumerWidget {
                 const Icon(Icons.mood_rounded,
                     size: 16, color: Color(0xFF14B8A6)),
                 const SizedBox(width: 6),
-                const Expanded(
-                  child: Text('Ailenin Ruh Hali',
-                      style: TextStyle(
+                Expanded(
+                  child: Text(AppLocalizations.of(context).fmsTitle,
+                      style: const TextStyle(
                           color: Color(0xFFE5E7EB),
                           fontSize: 13.5,
                           fontWeight: FontWeight.w700)),
                 ),
                 GestureDetector(
                   onTap: () => context.push(AppRoutes.mood),
-                  child: const Text('Ekle',
-                      style: TextStyle(
+                  child: Text(AppLocalizations.of(context).crashAdd,
+                      style: const TextStyle(
                           color: Color(0xFF14B8A6),
                           fontSize: 12,
                           fontWeight: FontWeight.w700)),

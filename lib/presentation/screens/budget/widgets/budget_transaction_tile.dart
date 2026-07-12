@@ -28,12 +28,12 @@ class _TransactionTile extends StatelessWidget {
           color: AppColors.error,
           borderRadius: BorderRadius.circular(16),
         ),
-        child: const Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Icon(Icons.delete, color: Colors.white),
-            SizedBox(width: 8),
-            Text('Sil', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+            const Icon(Icons.delete, color: Colors.white),
+            const SizedBox(width: 8),
+            Text(AppLocalizations.of(context).budDelete, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
           ],
         ),
       ),
@@ -47,7 +47,7 @@ class _TransactionTile extends StatelessWidget {
               TextButton(onPressed: () => Navigator.pop(context, false), child: Text(AppLocalizations.of(context).cancel)),
               TextButton(
                 onPressed: () => Navigator.pop(context, true),
-                child: const Text('Sil', style: TextStyle(color: AppColors.error)),
+                child: Text(AppLocalizations.of(context).budDelete, style: const TextStyle(color: AppColors.error)),
               ),
             ],
           ),

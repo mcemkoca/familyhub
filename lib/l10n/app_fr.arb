@@ -1998,5 +1998,16 @@
   "icTitle": "Code d'invitation",
   "actTitle": "Activite recente",
   "moodTitle": "Humeur familiale",
-  "ccCallFailed": "Impossible de demarrer l'appel : {msg}"
+  "ccCallFailed": "Impossible de demarrer l'appel : {msg}",
+  "sqAnswer1": "Reponse 1",
+  "sqAnswer2": "Reponse 2",
+  "sarDestination": "Destination",
+  "cctSendFailed": "Impossible d'envoyer le message : {msg}",
+  "pcEdit": "Modifier",
+  "fmsTitle": "Humeur familiale",
+  "cpsOfflinePlan": "Plan hors ligne prepare (IA indisponible).",
+  "cpsTitle": "Plan de developpement hebdomadaire",
+  "cpsSubtitle": "Plan personnalise pour {name}",
+  "cpsCreating": "Creation...",
+  "cpsCreate": "Creer le plan"
 }

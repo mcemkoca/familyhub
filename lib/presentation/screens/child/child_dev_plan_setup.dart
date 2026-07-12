@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../../services/hive_service.dart';
 import '../../../services/ai/pedagogy_engine.dart';
 import 'child_development_screen.dart' show ChildProfile;
@@ -79,8 +80,8 @@ class _WeeklyPlanSetupScreenState extends State<WeeklyPlanSetupScreen> {
         : _localFallbackPlan(focusLabel);
     if (plan == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('Çevrimdışı plan hazırlandı (AI\'ya ulaşılamadı).')),
+        SnackBar(
+            content: Text(AppLocalizations.of(context).cpsOfflinePlan)),
       );
     }
     showModalBottomSheet(
@@ -131,8 +132,8 @@ class _WeeklyPlanSetupScreenState extends State<WeeklyPlanSetupScreen> {
         child: Column(
           children: [
             DevHeader(
-              title: 'Haftalık Gelişim Planı',
-              subtitle: '${widget.child.name} için kişiselleştirilmiş plan',
+              title: AppLocalizations.of(context).cpsTitle,
+              subtitle: AppLocalizations.of(context).cpsSubtitle(widget.child.name),
               trailing: const Icon(Icons.calendar_month, color: Colors.white),
             ),
             Expanded(
@@ -166,7 +167,7 @@ class _WeeklyPlanSetupScreenState extends State<WeeklyPlanSetupScreen> {
                               child: CircularProgressIndicator(
                                   color: Colors.white, strokeWidth: 2))
                           : const Icon(Icons.auto_awesome, color: Colors.white),
-                      label: Text(_loading ? 'Oluşturuluyor...' : 'Planı Oluştur',
+                      label: Text(_loading ? AppLocalizations.of(context).cpsCreating : AppLocalizations.of(context).cpsCreate,
                           style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,

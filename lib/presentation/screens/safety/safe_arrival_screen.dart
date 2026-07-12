@@ -130,7 +130,7 @@ class _SafeArrivalScreenState extends State<SafeArrivalScreen> {
               const SizedBox(height: 12),
               TextField(
                 controller: destCtrl,
-                decoration: const InputDecoration(labelText: 'Hedef'),
+                decoration: InputDecoration(labelText: AppLocalizations.of(context).sarDestination),
               ),
               const SizedBox(height: 12),
               Row(

@@ -217,7 +217,7 @@ class _SecurityQuestionsSetupScreenState extends State<SecurityQuestionsSetupScr
                           TextField(
                             controller: _answer1Controller,
                             decoration: InputDecoration(
-                              labelText: 'Cevap 1',
+                              labelText: AppLocalizations.of(context).sqAnswer1,
                               hintText: AppLocalizations.of(context).guvenlikSorusununCevabi,
                               filled: true,
                               fillColor: const Color(0x1AFFFFFF),
@@ -258,7 +258,7 @@ class _SecurityQuestionsSetupScreenState extends State<SecurityQuestionsSetupScr
                           TextField(
                             controller: _answer2Controller,
                             decoration: InputDecoration(
-                              labelText: 'Cevap 2',
+                              labelText: AppLocalizations.of(context).sqAnswer2,
                               hintText: AppLocalizations.of(context).guvenlikSorusununCevabi,
                               filled: true,
                               fillColor: const Color(0x1AFFFFFF),

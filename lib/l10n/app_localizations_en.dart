@@ -6330,4 +6330,41 @@ class AppLocalizationsEn extends AppLocalizations {
   String ccCallFailed(Object msg) {
     return 'Could not start call: $msg';
   }
+
+  @override
+  String get sqAnswer1 => 'Answer 1';
+
+  @override
+  String get sqAnswer2 => 'Answer 2';
+
+  @override
+  String get sarDestination => 'Destination';
+
+  @override
+  String cctSendFailed(Object msg) {
+    return 'Could not send message: $msg';
+  }
+
+  @override
+  String get pcEdit => 'Edit';
+
+  @override
+  String get fmsTitle => 'Family Mood';
+
+  @override
+  String get cpsOfflinePlan => 'Offline plan prepared (AI unavailable).';
+
+  @override
+  String get cpsTitle => 'Weekly Development Plan';
+
+  @override
+  String cpsSubtitle(Object name) {
+    return 'Personalised plan for $name';
+  }
+
+  @override
+  String get cpsCreating => 'Creating...';
+
+  @override
+  String get cpsCreate => 'Create Plan';
 }

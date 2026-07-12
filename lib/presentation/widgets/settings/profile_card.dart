@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
@@ -311,7 +312,7 @@ class _ProfileError extends ConsumerWidget {
                   OutlinedButton.icon(
                     onPressed: () => context.push(AppRoutes.profileEdit),
                     icon: const Icon(Icons.edit, size: 14),
-                    label: const Text('Düzenle'),
+                    label: Text(AppLocalizations.of(context).pcEdit),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: const Color(0xFF6366F1),
                       side: const BorderSide(color: Color(0x336366F1)),
@@ -325,7 +326,7 @@ class _ProfileError extends ConsumerWidget {
                   OutlinedButton.icon(
                     onPressed: () => ref.refresh(_profileCardDataProvider),
                     icon: const Icon(Icons.refresh, size: 14),
-                    label: const Text('Tekrar Dene'),
+                    label: Text(AppLocalizations.of(context).cdRetry),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: const Color(0xFF10B981),
                       side: const BorderSide(color: Color(0x3310B981)),

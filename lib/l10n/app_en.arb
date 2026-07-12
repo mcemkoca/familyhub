@@ -1998,5 +1998,16 @@
   "icTitle": "Invite Code",
   "actTitle": "Recent Activity",
   "moodTitle": "Family Mood",
-  "ccCallFailed": "Could not start call: {msg}"
+  "ccCallFailed": "Could not start call: {msg}",
+  "sqAnswer1": "Answer 1",
+  "sqAnswer2": "Answer 2",
+  "sarDestination": "Destination",
+  "cctSendFailed": "Could not send message: {msg}",
+  "pcEdit": "Edit",
+  "fmsTitle": "Family Mood",
+  "cpsOfflinePlan": "Offline plan prepared (AI unavailable).",
+  "cpsTitle": "Weekly Development Plan",
+  "cpsSubtitle": "Personalised plan for {name}",
+  "cpsCreating": "Creating...",
+  "cpsCreate": "Create Plan"
 }

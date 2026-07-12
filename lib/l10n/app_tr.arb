@@ -2067,5 +2067,18 @@
   "actTitle": "Son Aktiviteler",
   "moodTitle": "Aile Ruh Hali",
   "ccCallFailed": "Arama başlatılamadı: {msg}",
-  "@ccCallFailed": { "placeholders": { "msg": {} } }
+  "@ccCallFailed": { "placeholders": { "msg": {} } },
+  "sqAnswer1": "Cevap 1",
+  "sqAnswer2": "Cevap 2",
+  "sarDestination": "Hedef",
+  "cctSendFailed": "Mesaj gönderilemedi: {msg}",
+  "@cctSendFailed": { "placeholders": { "msg": {} } },
+  "pcEdit": "Düzenle",
+  "fmsTitle": "Ailenin Ruh Hali",
+  "cpsOfflinePlan": "Çevrimdışı plan hazırlandı (AI'ya ulaşılamadı).",
+  "cpsTitle": "Haftalık Gelişim Planı",
+  "cpsSubtitle": "{name} için kişiselleştirilmiş plan",
+  "@cpsSubtitle": { "placeholders": { "name": {} } },
+  "cpsCreating": "Oluşturuluyor...",
+  "cpsCreate": "Planı Oluştur"
 }

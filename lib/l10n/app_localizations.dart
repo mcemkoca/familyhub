@@ -11951,6 +11951,72 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Arama başlatılamadı: {msg}'**
   String ccCallFailed(Object msg);
+
+  /// No description provided for @sqAnswer1.
+  ///
+  /// In tr, this message translates to:
+  /// **'Cevap 1'**
+  String get sqAnswer1;
+
+  /// No description provided for @sqAnswer2.
+  ///
+  /// In tr, this message translates to:
+  /// **'Cevap 2'**
+  String get sqAnswer2;
+
+  /// No description provided for @sarDestination.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hedef'**
+  String get sarDestination;
+
+  /// No description provided for @cctSendFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Mesaj gönderilemedi: {msg}'**
+  String cctSendFailed(Object msg);
+
+  /// No description provided for @pcEdit.
+  ///
+  /// In tr, this message translates to:
+  /// **'Düzenle'**
+  String get pcEdit;
+
+  /// No description provided for @fmsTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ailenin Ruh Hali'**
+  String get fmsTitle;
+
+  /// No description provided for @cpsOfflinePlan.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çevrimdışı plan hazırlandı (AI\'ya ulaşılamadı).'**
+  String get cpsOfflinePlan;
+
+  /// No description provided for @cpsTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Haftalık Gelişim Planı'**
+  String get cpsTitle;
+
+  /// No description provided for @cpsSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'{name} için kişiselleştirilmiş plan'**
+  String cpsSubtitle(Object name);
+
+  /// No description provided for @cpsCreating.
+  ///
+  /// In tr, this message translates to:
+  /// **'Oluşturuluyor...'**
+  String get cpsCreating;
+
+  /// No description provided for @cpsCreate.
+  ///
+  /// In tr, this message translates to:
+  /// **'Planı Oluştur'**
+  String get cpsCreate;
 }
 
 class _AppLocalizationsDelegate

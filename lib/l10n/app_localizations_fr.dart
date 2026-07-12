@@ -6356,4 +6356,41 @@ class AppLocalizationsFr extends AppLocalizations {
   String ccCallFailed(Object msg) {
     return 'Impossible de demarrer l\'appel : $msg';
   }
+
+  @override
+  String get sqAnswer1 => 'Reponse 1';
+
+  @override
+  String get sqAnswer2 => 'Reponse 2';
+
+  @override
+  String get sarDestination => 'Destination';
+
+  @override
+  String cctSendFailed(Object msg) {
+    return 'Impossible d\'envoyer le message : $msg';
+  }
+
+  @override
+  String get pcEdit => 'Modifier';
+
+  @override
+  String get fmsTitle => 'Humeur familiale';
+
+  @override
+  String get cpsOfflinePlan => 'Plan hors ligne prepare (IA indisponible).';
+
+  @override
+  String get cpsTitle => 'Plan de developpement hebdomadaire';
+
+  @override
+  String cpsSubtitle(Object name) {
+    return 'Plan personnalise pour $name';
+  }
+
+  @override
+  String get cpsCreating => 'Creation...';
+
+  @override
+  String get cpsCreate => 'Creer le plan';
 }

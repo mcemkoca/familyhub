@@ -1998,5 +1998,16 @@
   "icTitle": "Uitnodigingscode",
   "actTitle": "Recente activiteit",
   "moodTitle": "Gezinsstemming",
-  "ccCallFailed": "Kan oproep niet starten: {msg}"
+  "ccCallFailed": "Kan oproep niet starten: {msg}",
+  "sqAnswer1": "Antwoord 1",
+  "sqAnswer2": "Antwoord 2",
+  "sarDestination": "Bestemming",
+  "cctSendFailed": "Kan bericht niet verzenden: {msg}",
+  "pcEdit": "Bewerken",
+  "fmsTitle": "Gezinsstemming",
+  "cpsOfflinePlan": "Offline plan voorbereid (AI niet beschikbaar).",
+  "cpsTitle": "Wekelijks ontwikkelingsplan",
+  "cpsSubtitle": "Persoonlijk plan voor {name}",
+  "cpsCreating": "Aanmaken...",
+  "cpsCreate": "Plan maken"
 }

@@ -49,7 +49,7 @@ class _ChildChatTabState extends State<ChildChatTab> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Mesaj gönderilemedi: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context).cctSendFailed('$e'))),
         );
       }
     } finally {
@@ -224,7 +224,7 @@ class _ChatInput extends StatelessWidget {
               child: TextField(
                 controller: controller,
                 decoration: InputDecoration(
-                  hintText: 'Mesaj yaz...',
+                  hintText: AppLocalizations.of(context).ccMsgHint,
                   filled: true,
                   fillColor: const Color(0x1AFFFFFF),
                   border: OutlineInputBorder(

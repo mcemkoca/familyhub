@@ -6350,4 +6350,42 @@ class AppLocalizationsTr extends AppLocalizations {
   String ccCallFailed(Object msg) {
     return 'Arama başlatılamadı: $msg';
   }
+
+  @override
+  String get sqAnswer1 => 'Cevap 1';
+
+  @override
+  String get sqAnswer2 => 'Cevap 2';
+
+  @override
+  String get sarDestination => 'Hedef';
+
+  @override
+  String cctSendFailed(Object msg) {
+    return 'Mesaj gönderilemedi: $msg';
+  }
+
+  @override
+  String get pcEdit => 'Düzenle';
+
+  @override
+  String get fmsTitle => 'Ailenin Ruh Hali';
+
+  @override
+  String get cpsOfflinePlan =>
+      'Çevrimdışı plan hazırlandı (AI\'ya ulaşılamadı).';
+
+  @override
+  String get cpsTitle => 'Haftalık Gelişim Planı';
+
+  @override
+  String cpsSubtitle(Object name) {
+    return '$name için kişiselleştirilmiş plan';
+  }
+
+  @override
+  String get cpsCreating => 'Oluşturuluyor...';
+
+  @override
+  String get cpsCreate => 'Planı Oluştur';
 }

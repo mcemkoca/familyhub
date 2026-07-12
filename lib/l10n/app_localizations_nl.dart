@@ -6335,4 +6335,41 @@ class AppLocalizationsNl extends AppLocalizations {
   String ccCallFailed(Object msg) {
     return 'Kan oproep niet starten: $msg';
   }
+
+  @override
+  String get sqAnswer1 => 'Antwoord 1';
+
+  @override
+  String get sqAnswer2 => 'Antwoord 2';
+
+  @override
+  String get sarDestination => 'Bestemming';
+
+  @override
+  String cctSendFailed(Object msg) {
+    return 'Kan bericht niet verzenden: $msg';
+  }
+
+  @override
+  String get pcEdit => 'Bewerken';
+
+  @override
+  String get fmsTitle => 'Gezinsstemming';
+
+  @override
+  String get cpsOfflinePlan => 'Offline plan voorbereid (AI niet beschikbaar).';
+
+  @override
+  String get cpsTitle => 'Wekelijks ontwikkelingsplan';
+
+  @override
+  String cpsSubtitle(Object name) {
+    return 'Persoonlijk plan voor $name';
+  }
+
+  @override
+  String get cpsCreating => 'Aanmaken...';
+
+  @override
+  String get cpsCreate => 'Plan maken';
 }
