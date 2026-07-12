@@ -5798,4 +5798,70 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get evCatOther => 'Autre';
+
+  @override
+  String get hbNoNotifications =>
+      'Aucune nouvelle notification pour l\'instant';
+
+  @override
+  String get hbCoverUpdated => 'Photo de couverture mise a jour';
+
+  @override
+  String get hbCoverFailed => 'Impossible d\'enregistrer la photo';
+
+  @override
+  String get hbTodayTask => 'TACHES DU JOUR';
+
+  @override
+  String get hbDayStreak => 'SERIE DE JOURS';
+
+  @override
+  String get hbOnline => 'EN LIGNE';
+
+  @override
+  String get fmnRole => 'Role';
+
+  @override
+  String get fmnEnterName => 'Veuillez saisir un nom';
+
+  @override
+  String fmnRoleUpdateFailed(Object msg) {
+    return 'Impossible de mettre a jour le role : $msg';
+  }
+
+  @override
+  String fmnOpFailed(Object msg) {
+    return 'Operation echouee : $msg';
+  }
+
+  @override
+  String get hsAllergyHint =>
+      'ex. arachides, pollen, antibiotiques (separes par virgule)';
+
+  @override
+  String get hsConditionHint => 'ex. asthme, diabete (separes par virgule)';
+
+  @override
+  String catEarned(Object n) {
+    return 'Badges obtenus ($n)';
+  }
+
+  @override
+  String catPending(Object n) {
+    return 'En attente ($n)';
+  }
+
+  @override
+  String catLevel(Object n) {
+    return 'Niveau $n • Heros';
+  }
+
+  @override
+  String get catNextLevel => 'Niveau suivant :';
+
+  @override
+  String get catOk => 'OK';
+
+  @override
+  String get hbAllUpToDate => 'Tout est a jour';
 }

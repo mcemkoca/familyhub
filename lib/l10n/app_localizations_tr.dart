@@ -5793,4 +5793,69 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get evCatOther => 'Diğer';
+
+  @override
+  String get hbNoNotifications => 'Şimdilik yeni bildirim yok';
+
+  @override
+  String get hbCoverUpdated => 'Kapak fotoğrafı güncellendi';
+
+  @override
+  String get hbCoverFailed => 'Fotoğraf kaydedilemedi';
+
+  @override
+  String get hbTodayTask => 'BUGÜN GÖREV';
+
+  @override
+  String get hbDayStreak => 'GÜN SERİSİ';
+
+  @override
+  String get hbOnline => 'ÇEVRİMİÇİ';
+
+  @override
+  String get fmnRole => 'Rol';
+
+  @override
+  String get fmnEnterName => 'Lütfen ad girin';
+
+  @override
+  String fmnRoleUpdateFailed(Object msg) {
+    return 'Rol güncellenemedi: $msg';
+  }
+
+  @override
+  String fmnOpFailed(Object msg) {
+    return 'İşlem başarısız: $msg';
+  }
+
+  @override
+  String get hsAllergyHint =>
+      'Örn: yer fıstığı, polen, antibiyotik (virgülle ayırın)';
+
+  @override
+  String get hsConditionHint => 'Örn: astım, diyabet (virgülle ayırın)';
+
+  @override
+  String catEarned(Object n) {
+    return 'Kazanılan Rozetler ($n)';
+  }
+
+  @override
+  String catPending(Object n) {
+    return 'Kazanılmayı Bekleyen ($n)';
+  }
+
+  @override
+  String catLevel(Object n) {
+    return 'Seviye $n • Kahraman';
+  }
+
+  @override
+  String get catNextLevel => 'Sonraki seviyeye:';
+
+  @override
+  String get catOk => 'Tamam';
+
+  @override
+  String get hbAllUpToDate => 'Her şey güncel';
 }

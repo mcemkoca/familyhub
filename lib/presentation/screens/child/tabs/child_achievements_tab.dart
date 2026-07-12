@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 
 class ChildAchievementsTab extends StatefulWidget {
@@ -73,7 +74,7 @@ class _ChildAchievementsTabState extends State<ChildAchievementsTab>
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-            child: Text('Kazanılan Rozetler (${earned.length})',
+            child: Text(AppLocalizations.of(context).catEarned(earned.length),
                 style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
@@ -98,7 +99,7 @@ class _ChildAchievementsTabState extends State<ChildAchievementsTab>
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
-            child: Text('Kazanılmayı Bekleyen (${notEarned.length})',
+            child: Text(AppLocalizations.of(context).catPending(notEarned.length),
                 style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
@@ -176,7 +177,7 @@ class _ChildAchievementsTabState extends State<ChildAchievementsTab>
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Seviye $_level • Kahraman',
+                      Text(AppLocalizations.of(context).catLevel(_level),
                           style: const TextStyle(
                               color: Colors.white70, fontSize: 12)),
                       const SizedBox(height: 2),
@@ -198,8 +199,8 @@ class _ChildAchievementsTabState extends State<ChildAchievementsTab>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Sonraki seviyeye:',
-                    style: TextStyle(color: Colors.white70, fontSize: 12)),
+                Text(AppLocalizations.of(context).catNextLevel,
+                    style: const TextStyle(color: Colors.white70, fontSize: 12)),
                 Text('$_pointsToNext XP kaldı',
                     style: const TextStyle(
                         color: Colors.white,
@@ -254,7 +255,7 @@ class _BadgeTile extends StatelessWidget {
             actions: [
               TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Tamam')),
+                  child: Text(AppLocalizations.of(context).catOk)),
             ],
           ),
         );

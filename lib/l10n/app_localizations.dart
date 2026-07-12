@@ -10955,6 +10955,114 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Diğer'**
   String get evCatOther;
+
+  /// No description provided for @hbNoNotifications.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şimdilik yeni bildirim yok'**
+  String get hbNoNotifications;
+
+  /// No description provided for @hbCoverUpdated.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kapak fotoğrafı güncellendi'**
+  String get hbCoverUpdated;
+
+  /// No description provided for @hbCoverFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Fotoğraf kaydedilemedi'**
+  String get hbCoverFailed;
+
+  /// No description provided for @hbTodayTask.
+  ///
+  /// In tr, this message translates to:
+  /// **'BUGÜN GÖREV'**
+  String get hbTodayTask;
+
+  /// No description provided for @hbDayStreak.
+  ///
+  /// In tr, this message translates to:
+  /// **'GÜN SERİSİ'**
+  String get hbDayStreak;
+
+  /// No description provided for @hbOnline.
+  ///
+  /// In tr, this message translates to:
+  /// **'ÇEVRİMİÇİ'**
+  String get hbOnline;
+
+  /// No description provided for @fmnRole.
+  ///
+  /// In tr, this message translates to:
+  /// **'Rol'**
+  String get fmnRole;
+
+  /// No description provided for @fmnEnterName.
+  ///
+  /// In tr, this message translates to:
+  /// **'Lütfen ad girin'**
+  String get fmnEnterName;
+
+  /// No description provided for @fmnRoleUpdateFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Rol güncellenemedi: {msg}'**
+  String fmnRoleUpdateFailed(Object msg);
+
+  /// No description provided for @fmnOpFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'İşlem başarısız: {msg}'**
+  String fmnOpFailed(Object msg);
+
+  /// No description provided for @hsAllergyHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Örn: yer fıstığı, polen, antibiyotik (virgülle ayırın)'**
+  String get hsAllergyHint;
+
+  /// No description provided for @hsConditionHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Örn: astım, diyabet (virgülle ayırın)'**
+  String get hsConditionHint;
+
+  /// No description provided for @catEarned.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kazanılan Rozetler ({n})'**
+  String catEarned(Object n);
+
+  /// No description provided for @catPending.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kazanılmayı Bekleyen ({n})'**
+  String catPending(Object n);
+
+  /// No description provided for @catLevel.
+  ///
+  /// In tr, this message translates to:
+  /// **'Seviye {n} • Kahraman'**
+  String catLevel(Object n);
+
+  /// No description provided for @catNextLevel.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sonraki seviyeye:'**
+  String get catNextLevel;
+
+  /// No description provided for @catOk.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tamam'**
+  String get catOk;
+
+  /// No description provided for @hbAllUpToDate.
+  ///
+  /// In tr, this message translates to:
+  /// **'Her şey güncel'**
+  String get hbAllUpToDate;
 }
 
 class _AppLocalizationsDelegate

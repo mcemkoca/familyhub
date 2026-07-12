@@ -227,8 +227,8 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                   decoration: _fieldDeco('Ad Soyad', 'Örn: Ayşe Koca'),
                 ),
                 const SizedBox(height: 12),
-                const Text('Rol',
-                    style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
+                Text(AppLocalizations.of(context).fmnRole,
+                    style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
                 const SizedBox(height: 8),
                 Wrap(
                   spacing: 8,
@@ -274,7 +274,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                     onPressed: () {
                       if (nameCtrl.text.trim().isEmpty) {
                         ScaffoldMessenger.of(ctx).showSnackBar(
-                          const SnackBar(content: Text('Lütfen ad girin')),
+                          SnackBar(content: Text(AppLocalizations.of(context).fmnEnterName)),
                         );
                         return;
                       }
@@ -285,8 +285,8 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(14)),
                     ),
-                    child: const Text('Kaydet',
-                        style: TextStyle(
+                    child: Text(AppLocalizations.of(context).save,
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                             fontWeight: FontWeight.w700)),
@@ -332,7 +332,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
         actions: [
           TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('Vazgeç')),
+              child: Text(AppLocalizations.of(context).cancel)),
           ElevatedButton(
             onPressed: () => Navigator.pop(ctx, true),
             style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
@@ -426,7 +426,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Rol güncellenemedi: $e'), backgroundColor: AppColors.error),
+          SnackBar(content: Text(AppLocalizations.of(context).fmnRoleUpdateFailed('$e')), backgroundColor: AppColors.error),
         );
       }
     }
@@ -490,7 +490,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('İşlem başarısız: $e'), backgroundColor: AppColors.error),
+          SnackBar(content: Text(AppLocalizations.of(context).fmnOpFailed('$e')), backgroundColor: AppColors.error),
         );
       }
     }

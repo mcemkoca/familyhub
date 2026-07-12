@@ -231,11 +231,11 @@ class _HubScreenState extends ConsumerState<HubScreen>
       ));
     }
     if (list.isEmpty) {
-      list.add(const _HubNotif(
+      list.add(_HubNotif(
         icon: Icons.notifications_none_rounded,
-        color: Color(0xFF6B7280),
-        title: 'Şimdilik yeni bildirim yok',
-        source: 'Her şey güncel',
+        color: const Color(0xFF6B7280),
+        title: AppLocalizations.of(context).hbNoNotifications,
+        source: AppLocalizations.of(context).hbAllUpToDate,
         time: '',
       ));
     }
@@ -761,6 +761,8 @@ class _CoverSection extends ConsumerWidget {
 
   Future<void> _pickCoverPhoto(BuildContext context, WidgetRef ref) async {
     final messenger = ScaffoldMessenger.of(context);
+    final coverUpdatedMsg = AppLocalizations.of(context).hbCoverUpdated;
+    final coverFailedMsg = AppLocalizations.of(context).hbCoverFailed;
     final picker = ImagePicker();
     final picked =
         await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
@@ -777,17 +779,17 @@ class _CoverSection extends ConsumerWidget {
       await HiveService.setSetting('cover_photo_local', localPath);
       ref.read(coverPhotoProvider.notifier).state = localPath;
       messenger.showSnackBar(
-        const SnackBar(
-          content: Text('Kapak fotoğrafı güncellendi'),
-          backgroundColor: Color(0xFF6366F1),
+        SnackBar(
+          content: Text(coverUpdatedMsg),
+          backgroundColor: const Color(0xFF6366F1),
         ),
       );
     } catch (_) {
       // Yerel kopya bile başarısızsa devam etme.
       messenger.showSnackBar(
-        const SnackBar(
-          content: Text('Fotoğraf kaydedilemedi'),
-          backgroundColor: Color(0xFFEF4444),
+        SnackBar(
+          content: Text(coverFailedMsg),
+          backgroundColor: const Color(0xFFEF4444),
         ),
       );
       return;
@@ -1257,12 +1259,12 @@ class _StatStrip extends ConsumerWidget {
       padding: const EdgeInsets.fromLTRB(12, 10, 12, 0),
       child: Row(
         children: [
-          _StatCard(value: '$taskCount', label: 'BUGÜN GÖREV'),
+          _StatCard(value: '$taskCount', label: AppLocalizations.of(context).hbTodayTask),
           const SizedBox(width: 8),
-          const _StatCard(value: '🔥 7', label: 'GÜN SERİSİ'),
+          _StatCard(value: '🔥 7', label: AppLocalizations.of(context).hbDayStreak),
           const SizedBox(width: 8),
-          const _StatCard(value: '3', label: 'ÇEVRİMİÇİ',
-              accent: Color(0xFF22C55E)),
+          _StatCard(value: '3', label: AppLocalizations.of(context).hbOnline,
+              accent: const Color(0xFF22C55E)),
         ],
       ),
     );

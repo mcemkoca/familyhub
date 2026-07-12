@@ -5778,4 +5778,69 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get evCatOther => 'Overig';
+
+  @override
+  String get hbNoNotifications => 'Voorlopig geen nieuwe meldingen';
+
+  @override
+  String get hbCoverUpdated => 'Omslagfoto bijgewerkt';
+
+  @override
+  String get hbCoverFailed => 'Kan foto niet opslaan';
+
+  @override
+  String get hbTodayTask => 'TAKEN VANDAAG';
+
+  @override
+  String get hbDayStreak => 'DAGENREEKS';
+
+  @override
+  String get hbOnline => 'ONLINE';
+
+  @override
+  String get fmnRole => 'Rol';
+
+  @override
+  String get fmnEnterName => 'Voer een naam in';
+
+  @override
+  String fmnRoleUpdateFailed(Object msg) {
+    return 'Kan rol niet bijwerken: $msg';
+  }
+
+  @override
+  String fmnOpFailed(Object msg) {
+    return 'Bewerking mislukt: $msg';
+  }
+
+  @override
+  String get hsAllergyHint =>
+      'bijv. pinda\'s, pollen, antibiotica (komma-gescheiden)';
+
+  @override
+  String get hsConditionHint => 'bijv. astma, diabetes (komma-gescheiden)';
+
+  @override
+  String catEarned(Object n) {
+    return 'Behaalde badges ($n)';
+  }
+
+  @override
+  String catPending(Object n) {
+    return 'In afwachting ($n)';
+  }
+
+  @override
+  String catLevel(Object n) {
+    return 'Niveau $n • Held';
+  }
+
+  @override
+  String get catNextLevel => 'Naar volgend niveau:';
+
+  @override
+  String get catOk => 'OK';
+
+  @override
+  String get hbAllUpToDate => 'Alles up-to-date';
 }
