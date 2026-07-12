@@ -4,7 +4,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import '../../core/supabase_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:hive_flutter/hive_flutter.dart';
-import '../../config/constants.dart';
 import '../../domain/entities.dart';
 import '../../repositories/hub_repository.dart';
 import '../../repositories/shopping_repository.dart';
@@ -252,111 +251,6 @@ final currentMemberRoleProvider = Provider<MemberRole>((ref) {
   } catch (_) {
     return MemberRole.parent;
   }
-});
-
-final hubCardsProvider = Provider<List<HubCard>>((ref) {
-  return [
-    HubCard(
-      id: 'tasks',
-      type: HubCardType.tasks,
-      title: 'Görevler',
-      subtitle: 'Aile görevlerini yönet',
-      progress: 0,
-      gradient: [const Color(0xFF8B5CF6), const Color(0xFF6366F1)],
-      icon: Icons.task_alt,
-      updatedAt: DateTime.now(),
-    ),
-    HubCard(
-      id: 'calendar',
-      type: HubCardType.calendar,
-      title: 'Takvim',
-      subtitle: 'Etkinlikleri planla',
-      progress: 0,
-      gradient: [AppColors.orange, AppColors.red],
-      icon: Icons.calendar_today,
-      updatedAt: DateTime.now(),
-    ),
-    HubCard(
-      id: 'budget',
-      type: HubCardType.budget,
-      title: 'Bütçe',
-      subtitle: 'Harcamaları takip et',
-      progress: 0,
-      gradient: [AppColors.green, const Color(0xFF6366F1)],
-      icon: Icons.account_balance_wallet,
-      updatedAt: DateTime.now(),
-    ),
-    HubCard(
-      id: 'contacts',
-      type: HubCardType.contacts,
-      title: 'Rehber',
-      subtitle: 'Aile rehberi',
-      progress: 0,
-      gradient: [AppColors.blue, const Color(0xFF8B5CF6)],
-      icon: Icons.contacts,
-      updatedAt: DateTime.now(),
-    ),
-    HubCard(
-      id: 'gallery',
-      type: HubCardType.gallery,
-      title: 'Galeri',
-      subtitle: 'Fotoğraf ve videolar',
-      progress: 0,
-      gradient: [const Color(0xFFEC4899), AppColors.orange],
-      icon: Icons.photo_library,
-      updatedAt: DateTime.now(),
-    ),
-    HubCard(
-      id: 'documents',
-      type: HubCardType.documents,
-      title: 'Belgeler',
-      subtitle: 'OCR ve belge yönetimi',
-      progress: 0,
-      gradient: [const Color(0xFF6B7280), const Color(0xFFE5E7EB)],
-      icon: Icons.folder_open,
-      updatedAt: DateTime.now(),
-    ),
-    HubCard(
-      id: 'kitchen',
-      type: HubCardType.kitchen,
-      title: 'Mutfak',
-      subtitle: 'Tarif & yemek önerileri',
-      progress: 0,
-      gradient: [const Color(0xFFF97316), const Color(0xFFEF4444)],
-      icon: Icons.restaurant,
-      updatedAt: DateTime.now(),
-    ),
-    HubCard(
-      id: 'education',
-      type: HubCardType.education,
-      title: 'Eğitim',
-      subtitle: 'Aktivite & öğrenme',
-      progress: 0,
-      gradient: [const Color(0xFF8B5CF6), const Color(0xFF6366F1)],
-      icon: Icons.school,
-      updatedAt: DateTime.now(),
-    ),
-    HubCard(
-      id: 'shopping',
-      type: HubCardType.shopping,
-      title: 'Alışveriş',
-      subtitle: 'Alışveriş listesi',
-      progress: 0,
-      gradient: [const Color(0xFF10B981), const Color(0xFF6366F1)],
-      icon: Icons.shopping_cart_outlined,
-      updatedAt: DateTime.now(),
-    ),
-    HubCard(
-      id: 'childDev',
-      type: HubCardType.childDev,
-      title: 'Çocuk',
-      subtitle: 'Gelişim ve görevler',
-      progress: 0,
-      gradient: [const Color(0xFFEC4899), const Color(0xFFEC4899)],
-      icon: Icons.child_care,
-      updatedAt: DateTime.now(),
-    ),
-  ];
 });
 
 final recentActivityProvider = FutureProvider<List<Activity>>((ref) async {
