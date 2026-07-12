@@ -253,11 +253,11 @@ class _AddChildDialogState extends State<_AddChildDialog> {
             const SizedBox(height: 12),
             DropdownButtonFormField<String>(
               initialValue: _role,
-              decoration: const InputDecoration(labelText: 'Rol'),
+              decoration: InputDecoration(labelText: AppLocalizations.of(context).fmnRole),
               items: [
                 DropdownMenuItem(value: 'child', child: Text(AppLocalizations.of(context).child)),
                 DropdownMenuItem(value: 'teen', child: Text(AppLocalizations.of(context).genc)),
-                const DropdownMenuItem(value: 'baby', child: Text('Bebek')),
+                DropdownMenuItem(value: 'baby', child: Text(AppLocalizations.of(context).cmBaby)),
               ],
               onChanged: (v) => setState(() => _role = v!),
             ),
@@ -266,9 +266,9 @@ class _AddChildDialogState extends State<_AddChildDialog> {
               controller: _pinController,
               keyboardType: TextInputType.number,
               obscureText: true,
-              decoration: const InputDecoration(
-                labelText: 'PIN (4-6 hane)',
-                prefixIcon: Icon(Icons.pin),
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context).pinLabel,
+                prefixIcon: const Icon(Icons.pin),
               ),
               maxLength: 6,
             ),
@@ -276,9 +276,9 @@ class _AddChildDialogState extends State<_AddChildDialog> {
               controller: _pinConfirmController,
               keyboardType: TextInputType.number,
               obscureText: true,
-              decoration: const InputDecoration(
-                labelText: 'PIN Tekrar',
-                prefixIcon: Icon(Icons.pin),
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context).cmPinRepeat,
+                prefixIcon: const Icon(Icons.pin),
               ),
               maxLength: 6,
             ),

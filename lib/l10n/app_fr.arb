@@ -1905,5 +1905,13 @@
   "hapThinking": "Reflexion…",
   "hapAskHint": "Demander a FamilyHub AI…",
   "flStandard": "Standard",
-  "flStrobe": "Stroboscope"
+  "flStrobe": "Stroboscope",
+  "vcAcceptFailed": "Impossible d'accepter l'appel : {msg}",
+  "vcReject": "Refuser",
+  "vcHangup": "Raccrocher",
+  "tskDeleteTask": "Supprimer la tache",
+  "csSyncFailed": "Erreur de synchronisation : {msg}",
+  "csScanCalendars": "Analyser les agendas",
+  "csConfigure": "Configurer",
+  "csMainCalendar": "Agenda principal"
 }

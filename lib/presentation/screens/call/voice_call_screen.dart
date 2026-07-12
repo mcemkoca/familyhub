@@ -134,7 +134,7 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Arama kabul edilemedi: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context).vcAcceptFailed('$e'))),
         );
       }
     }
@@ -282,13 +282,13 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
           _roundButton(
             icon: Icons.call_end,
             color: AppColors.error,
-            label: 'Reddet',
+            label: AppLocalizations.of(context).vcReject,
             onTap: _rejectCall,
           ),
           _roundButton(
             icon: Icons.call,
             color: AppColors.green,
-            label: 'Kabul Et',
+            label: AppLocalizations.of(context).aisAccept,
             onTap: _acceptCall,
           ),
         ],
@@ -319,7 +319,7 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
         _roundButton(
           icon: Icons.call_end,
           color: AppColors.error,
-          label: 'Kapat',
+          label: AppLocalizations.of(context).vcHangup,
           size: 72,
           onTap: _endCall,
         ),

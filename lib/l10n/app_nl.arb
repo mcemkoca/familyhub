@@ -1905,5 +1905,13 @@
   "hapThinking": "Aan het denken…",
   "hapAskHint": "Vraag FamilyHub AI…",
   "flStandard": "Standaard",
-  "flStrobe": "Stroboscoop"
+  "flStrobe": "Stroboscoop",
+  "vcAcceptFailed": "Kan oproep niet accepteren: {msg}",
+  "vcReject": "Weigeren",
+  "vcHangup": "Ophangen",
+  "tskDeleteTask": "Taak verwijderen",
+  "csSyncFailed": "Synchronisatiefout: {msg}",
+  "csScanCalendars": "Agenda's scannen",
+  "csConfigure": "Configureren",
+  "csMainCalendar": "Hoofdagenda"
 }

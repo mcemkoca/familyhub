@@ -6040,4 +6040,32 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get flStrobe => 'Strobe';
+
+  @override
+  String vcAcceptFailed(Object msg) {
+    return 'Arama kabul edilemedi: $msg';
+  }
+
+  @override
+  String get vcReject => 'Reddet';
+
+  @override
+  String get vcHangup => 'Kapat';
+
+  @override
+  String get tskDeleteTask => 'Görevi Sil';
+
+  @override
+  String csSyncFailed(Object msg) {
+    return 'Senkronizasyon hatası: $msg';
+  }
+
+  @override
+  String get csScanCalendars => 'Takvimleri Tara';
+
+  @override
+  String get csConfigure => 'Ayarla';
+
+  @override
+  String get csMainCalendar => 'Ana takvim';
 }

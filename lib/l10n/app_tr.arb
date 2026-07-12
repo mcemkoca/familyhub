@@ -1960,5 +1960,15 @@
   "hapThinking": "Düşünüyor…",
   "hapAskHint": "FamilyHub AI'ya sor…",
   "flStandard": "Standart",
-  "flStrobe": "Strobe"
+  "flStrobe": "Strobe",
+  "vcAcceptFailed": "Arama kabul edilemedi: {msg}",
+  "@vcAcceptFailed": { "placeholders": { "msg": {} } },
+  "vcReject": "Reddet",
+  "vcHangup": "Kapat",
+  "tskDeleteTask": "Görevi Sil",
+  "csSyncFailed": "Senkronizasyon hatası: {msg}",
+  "@csSyncFailed": { "placeholders": { "msg": {} } },
+  "csScanCalendars": "Takvimleri Tara",
+  "csConfigure": "Ayarla",
+  "csMainCalendar": "Ana takvim"
 }

@@ -1905,5 +1905,13 @@
   "hapThinking": "Thinking…",
   "hapAskHint": "Ask FamilyHub AI…",
   "flStandard": "Standard",
-  "flStrobe": "Strobe"
+  "flStrobe": "Strobe",
+  "vcAcceptFailed": "Could not accept call: {msg}",
+  "vcReject": "Decline",
+  "vcHangup": "Hang up",
+  "tskDeleteTask": "Delete Task",
+  "csSyncFailed": "Sync error: {msg}",
+  "csScanCalendars": "Scan Calendars",
+  "csConfigure": "Configure",
+  "csMainCalendar": "Main calendar"
 }

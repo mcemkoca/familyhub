@@ -307,7 +307,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Görevi Sil'),
+        title: Text(AppLocalizations.of(context).tskDeleteTask),
         content: Text('"${task.title}" silinecek. Emin misiniz?'),
         actions: [
           TextButton(
@@ -316,7 +316,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Sil', style: TextStyle(color: AppColors.error)),
+            child: Text(AppLocalizations.of(context).budDelete, style: const TextStyle(color: AppColors.error)),
           ),
         ],
       ),
@@ -365,8 +365,8 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                 const SizedBox(height: 12),
                 TextField(
                   controller: _descController,
-                  decoration: const InputDecoration(
-                    labelText: 'Açıklama (opsiyonel)',
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context).budDescOptional,
                   ),
                 ),
                 const SizedBox(height: 12),

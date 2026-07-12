@@ -6025,4 +6025,32 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get flStrobe => 'Stroboscoop';
+
+  @override
+  String vcAcceptFailed(Object msg) {
+    return 'Kan oproep niet accepteren: $msg';
+  }
+
+  @override
+  String get vcReject => 'Weigeren';
+
+  @override
+  String get vcHangup => 'Ophangen';
+
+  @override
+  String get tskDeleteTask => 'Taak verwijderen';
+
+  @override
+  String csSyncFailed(Object msg) {
+    return 'Synchronisatiefout: $msg';
+  }
+
+  @override
+  String get csScanCalendars => 'Agenda\'s scannen';
+
+  @override
+  String get csConfigure => 'Configureren';
+
+  @override
+  String get csMainCalendar => 'Hoofdagenda';
 }

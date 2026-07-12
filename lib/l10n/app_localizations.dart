@@ -11393,6 +11393,54 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Strobe'**
   String get flStrobe;
+
+  /// No description provided for @vcAcceptFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Arama kabul edilemedi: {msg}'**
+  String vcAcceptFailed(Object msg);
+
+  /// No description provided for @vcReject.
+  ///
+  /// In tr, this message translates to:
+  /// **'Reddet'**
+  String get vcReject;
+
+  /// No description provided for @vcHangup.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kapat'**
+  String get vcHangup;
+
+  /// No description provided for @tskDeleteTask.
+  ///
+  /// In tr, this message translates to:
+  /// **'Görevi Sil'**
+  String get tskDeleteTask;
+
+  /// No description provided for @csSyncFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Senkronizasyon hatası: {msg}'**
+  String csSyncFailed(Object msg);
+
+  /// No description provided for @csScanCalendars.
+  ///
+  /// In tr, this message translates to:
+  /// **'Takvimleri Tara'**
+  String get csScanCalendars;
+
+  /// No description provided for @csConfigure.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ayarla'**
+  String get csConfigure;
+
+  /// No description provided for @csMainCalendar.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ana takvim'**
+  String get csMainCalendar;
 }
 
 class _AppLocalizationsDelegate

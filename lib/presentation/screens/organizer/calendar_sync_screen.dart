@@ -88,7 +88,7 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Senkronizasyon hatası: $e'), backgroundColor: Colors.red),
+          SnackBar(content: Text(AppLocalizations.of(context).csSyncFailed('$e')), backgroundColor: Colors.red),
         );
       }
     } finally {
@@ -146,7 +146,7 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: _loadRealCalendars,
-            tooltip: 'Takvimleri Tara',
+            tooltip: AppLocalizations.of(context).csScanCalendars,
           ),
         ],
       ),
@@ -483,7 +483,7 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
                     _buildActionButton(
                       icon: Icons.settings_outlined,
                       onTap: () => _showConnectionSettings(conn),
-                      tooltip: 'Ayarla',
+                      tooltip: AppLocalizations.of(context).csConfigure,
                     ),
                     const SizedBox(width: 4),
                     _buildActionButton(
@@ -866,7 +866,7 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
                 ),
               ),
               subtitle: c.isPrimary
-                  ? const Text('Ana takvim', style: TextStyle(fontSize: 12))
+                  ? Text(AppLocalizations.of(context).csMainCalendar, style: const TextStyle(fontSize: 12))
                   : null,
               controlAffinity: ListTileControlAffinity.leading,
               dense: true,

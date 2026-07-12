@@ -6021,4 +6021,32 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get flStrobe => 'Strobe';
+
+  @override
+  String vcAcceptFailed(Object msg) {
+    return 'Could not accept call: $msg';
+  }
+
+  @override
+  String get vcReject => 'Decline';
+
+  @override
+  String get vcHangup => 'Hang up';
+
+  @override
+  String get tskDeleteTask => 'Delete Task';
+
+  @override
+  String csSyncFailed(Object msg) {
+    return 'Sync error: $msg';
+  }
+
+  @override
+  String get csScanCalendars => 'Scan Calendars';
+
+  @override
+  String get csConfigure => 'Configure';
+
+  @override
+  String get csMainCalendar => 'Main calendar';
 }

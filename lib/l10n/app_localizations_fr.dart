@@ -6046,4 +6046,32 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get flStrobe => 'Stroboscope';
+
+  @override
+  String vcAcceptFailed(Object msg) {
+    return 'Impossible d\'accepter l\'appel : $msg';
+  }
+
+  @override
+  String get vcReject => 'Refuser';
+
+  @override
+  String get vcHangup => 'Raccrocher';
+
+  @override
+  String get tskDeleteTask => 'Supprimer la tache';
+
+  @override
+  String csSyncFailed(Object msg) {
+    return 'Erreur de synchronisation : $msg';
+  }
+
+  @override
+  String get csScanCalendars => 'Analyser les agendas';
+
+  @override
+  String get csConfigure => 'Configurer';
+
+  @override
+  String get csMainCalendar => 'Agenda principal';
 }
