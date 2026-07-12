@@ -1932,5 +1932,21 @@
   "invCopied": "Code gekopieerd",
   "invCopy": "Kopieren",
   "invShare": "Delen",
-  "accFamilyCode": "Gezinscode"
+  "accFamilyCode": "Gezinscode",
+  "devCatMotor": "Motoriek",
+  "devCatSocial": "Sociaal",
+  "devCatLanguage": "Taal",
+  "devCatVision": "Zicht",
+  "devCatCognitive": "Cognitief",
+  "devCatSelfcare": "Zelfzorg",
+  "devCatEmotional": "Emotioneel",
+  "devCatPhysical": "Lich. opv.",
+  "devCatReligion": "Religie",
+  "devCatAcademic": "Academisch",
+  "devCatDigital": "Digitaal",
+  "devCatScience": "Wetenschap",
+  "devCatMath": "Wiskunde",
+  "devCatMusic": "Muziek",
+  "devCatArt": "Tekenen",
+  "devCatTurkish": "Taal"
 }

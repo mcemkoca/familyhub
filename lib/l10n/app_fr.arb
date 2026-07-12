@@ -1932,5 +1932,21 @@
   "invCopied": "Code copie",
   "invCopy": "Copier",
   "invShare": "Partager",
-  "accFamilyCode": "Code famille"
+  "accFamilyCode": "Code famille",
+  "devCatMotor": "Moteur",
+  "devCatSocial": "Social",
+  "devCatLanguage": "Langage",
+  "devCatVision": "Vision",
+  "devCatCognitive": "Cognitif",
+  "devCatSelfcare": "Autonomie",
+  "devCatEmotional": "Emotionnel",
+  "devCatPhysical": "Ed. physique",
+  "devCatReligion": "Religion",
+  "devCatAcademic": "Academique",
+  "devCatDigital": "Numerique",
+  "devCatScience": "Sciences",
+  "devCatMath": "Maths",
+  "devCatMusic": "Musique",
+  "devCatArt": "Dessin",
+  "devCatTurkish": "Langue"
 }

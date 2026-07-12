@@ -11555,6 +11555,102 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Aile Kodu'**
   String get accFamilyCode;
+
+  /// No description provided for @devCatMotor.
+  ///
+  /// In tr, this message translates to:
+  /// **'Motor'**
+  String get devCatMotor;
+
+  /// No description provided for @devCatSocial.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sosyal'**
+  String get devCatSocial;
+
+  /// No description provided for @devCatLanguage.
+  ///
+  /// In tr, this message translates to:
+  /// **'Dil'**
+  String get devCatLanguage;
+
+  /// No description provided for @devCatVision.
+  ///
+  /// In tr, this message translates to:
+  /// **'Görme'**
+  String get devCatVision;
+
+  /// No description provided for @devCatCognitive.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bilişsel'**
+  String get devCatCognitive;
+
+  /// No description provided for @devCatSelfcare.
+  ///
+  /// In tr, this message translates to:
+  /// **'Özbakım'**
+  String get devCatSelfcare;
+
+  /// No description provided for @devCatEmotional.
+  ///
+  /// In tr, this message translates to:
+  /// **'Duygusal'**
+  String get devCatEmotional;
+
+  /// No description provided for @devCatPhysical.
+  ///
+  /// In tr, this message translates to:
+  /// **'Beden'**
+  String get devCatPhysical;
+
+  /// No description provided for @devCatReligion.
+  ///
+  /// In tr, this message translates to:
+  /// **'Din'**
+  String get devCatReligion;
+
+  /// No description provided for @devCatAcademic.
+  ///
+  /// In tr, this message translates to:
+  /// **'Akademik'**
+  String get devCatAcademic;
+
+  /// No description provided for @devCatDigital.
+  ///
+  /// In tr, this message translates to:
+  /// **'Dijital'**
+  String get devCatDigital;
+
+  /// No description provided for @devCatScience.
+  ///
+  /// In tr, this message translates to:
+  /// **'Fen'**
+  String get devCatScience;
+
+  /// No description provided for @devCatMath.
+  ///
+  /// In tr, this message translates to:
+  /// **'Matematik'**
+  String get devCatMath;
+
+  /// No description provided for @devCatMusic.
+  ///
+  /// In tr, this message translates to:
+  /// **'Müzik'**
+  String get devCatMusic;
+
+  /// No description provided for @devCatArt.
+  ///
+  /// In tr, this message translates to:
+  /// **'Resim'**
+  String get devCatArt;
+
+  /// No description provided for @devCatTurkish.
+  ///
+  /// In tr, this message translates to:
+  /// **'Türkçe'**
+  String get devCatTurkish;
 }
 
 class _AppLocalizationsDelegate

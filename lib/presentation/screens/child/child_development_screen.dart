@@ -11,6 +11,32 @@ import '../../../core/supabase_client.dart';
 import '../../../repositories/child_account_repository.dart';
 
 // ── WHO Milestone Data ──
+/// Gelişim/eğitim kategori etiketini aktif dile çevirir (veri değeri değişmez).
+String devCategoryLabel(BuildContext context, String cat) {
+  final t = AppLocalizations.of(context);
+  switch (cat) {
+    case 'Motor': return t.devCatMotor;
+    case 'Sosyal': return t.devCatSocial;
+    case 'Dil': return t.devCatLanguage;
+    case 'Görme': return t.devCatVision;
+    case 'Bilişsel': return t.devCatCognitive;
+    case 'Özbakım': return t.devCatSelfcare;
+    case 'Duygusal': return t.devCatEmotional;
+    case 'Beden': return t.devCatPhysical;
+    case 'Din': return t.devCatReligion;
+    case 'Akademik': return t.devCatAcademic;
+    case 'Dijital': return t.devCatDigital;
+    case 'Fen': return t.devCatScience;
+    case 'Matematik': return t.devCatMath;
+    case 'Müzik': return t.devCatMusic;
+    case 'Resim': return t.devCatArt;
+    case 'Türkçe': return t.devCatTurkish;
+    case 'Diğer': return t.evCatOther;
+    default: return cat;
+  }
+}
+
+
 
 const _milestonesByAge = {
   '0-3 ay': [
@@ -1205,7 +1231,7 @@ class _MilestoneTab extends ConsumerWidget {
                                 color: done
                                     ? const Color(0xFF06B6D4)
                                     : Colors.black87)),
-                        Text(m.$1,
+                        Text(devCategoryLabel(context, m.$1),
                             style: TextStyle(
                                 fontSize: 11,
                                 color: done

@@ -6120,4 +6120,52 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get accFamilyCode => 'Gezinscode';
+
+  @override
+  String get devCatMotor => 'Motoriek';
+
+  @override
+  String get devCatSocial => 'Sociaal';
+
+  @override
+  String get devCatLanguage => 'Taal';
+
+  @override
+  String get devCatVision => 'Zicht';
+
+  @override
+  String get devCatCognitive => 'Cognitief';
+
+  @override
+  String get devCatSelfcare => 'Zelfzorg';
+
+  @override
+  String get devCatEmotional => 'Emotioneel';
+
+  @override
+  String get devCatPhysical => 'Lich. opv.';
+
+  @override
+  String get devCatReligion => 'Religie';
+
+  @override
+  String get devCatAcademic => 'Academisch';
+
+  @override
+  String get devCatDigital => 'Digitaal';
+
+  @override
+  String get devCatScience => 'Wetenschap';
+
+  @override
+  String get devCatMath => 'Wiskunde';
+
+  @override
+  String get devCatMusic => 'Muziek';
+
+  @override
+  String get devCatArt => 'Tekenen';
+
+  @override
+  String get devCatTurkish => 'Taal';
 }

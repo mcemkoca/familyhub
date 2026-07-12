@@ -6135,4 +6135,52 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get accFamilyCode => 'Aile Kodu';
+
+  @override
+  String get devCatMotor => 'Motor';
+
+  @override
+  String get devCatSocial => 'Sosyal';
+
+  @override
+  String get devCatLanguage => 'Dil';
+
+  @override
+  String get devCatVision => 'Görme';
+
+  @override
+  String get devCatCognitive => 'Bilişsel';
+
+  @override
+  String get devCatSelfcare => 'Özbakım';
+
+  @override
+  String get devCatEmotional => 'Duygusal';
+
+  @override
+  String get devCatPhysical => 'Beden';
+
+  @override
+  String get devCatReligion => 'Din';
+
+  @override
+  String get devCatAcademic => 'Akademik';
+
+  @override
+  String get devCatDigital => 'Dijital';
+
+  @override
+  String get devCatScience => 'Fen';
+
+  @override
+  String get devCatMath => 'Matematik';
+
+  @override
+  String get devCatMusic => 'Müzik';
+
+  @override
+  String get devCatArt => 'Resim';
+
+  @override
+  String get devCatTurkish => 'Türkçe';
 }

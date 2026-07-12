@@ -1993,5 +1993,21 @@
   "invCopied": "Kod kopyalandı",
   "invCopy": "Kopyala",
   "invShare": "Paylaş",
-  "accFamilyCode": "Aile Kodu"
+  "accFamilyCode": "Aile Kodu",
+  "devCatMotor": "Motor",
+  "devCatSocial": "Sosyal",
+  "devCatLanguage": "Dil",
+  "devCatVision": "Görme",
+  "devCatCognitive": "Bilişsel",
+  "devCatSelfcare": "Özbakım",
+  "devCatEmotional": "Duygusal",
+  "devCatPhysical": "Beden",
+  "devCatReligion": "Din",
+  "devCatAcademic": "Akademik",
+  "devCatDigital": "Dijital",
+  "devCatScience": "Fen",
+  "devCatMath": "Matematik",
+  "devCatMusic": "Müzik",
+  "devCatArt": "Resim",
+  "devCatTurkish": "Türkçe"
 }

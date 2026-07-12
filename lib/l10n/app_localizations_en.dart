@@ -6115,4 +6115,52 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get accFamilyCode => 'Family Code';
+
+  @override
+  String get devCatMotor => 'Motor';
+
+  @override
+  String get devCatSocial => 'Social';
+
+  @override
+  String get devCatLanguage => 'Language';
+
+  @override
+  String get devCatVision => 'Vision';
+
+  @override
+  String get devCatCognitive => 'Cognitive';
+
+  @override
+  String get devCatSelfcare => 'Self-care';
+
+  @override
+  String get devCatEmotional => 'Emotional';
+
+  @override
+  String get devCatPhysical => 'Physical Ed.';
+
+  @override
+  String get devCatReligion => 'Religion';
+
+  @override
+  String get devCatAcademic => 'Academic';
+
+  @override
+  String get devCatDigital => 'Digital';
+
+  @override
+  String get devCatScience => 'Science';
+
+  @override
+  String get devCatMath => 'Maths';
+
+  @override
+  String get devCatMusic => 'Music';
+
+  @override
+  String get devCatArt => 'Art';
+
+  @override
+  String get devCatTurkish => 'Language Arts';
 }

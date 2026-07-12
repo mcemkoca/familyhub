@@ -6140,4 +6140,52 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get accFamilyCode => 'Code famille';
+
+  @override
+  String get devCatMotor => 'Moteur';
+
+  @override
+  String get devCatSocial => 'Social';
+
+  @override
+  String get devCatLanguage => 'Langage';
+
+  @override
+  String get devCatVision => 'Vision';
+
+  @override
+  String get devCatCognitive => 'Cognitif';
+
+  @override
+  String get devCatSelfcare => 'Autonomie';
+
+  @override
+  String get devCatEmotional => 'Emotionnel';
+
+  @override
+  String get devCatPhysical => 'Ed. physique';
+
+  @override
+  String get devCatReligion => 'Religion';
+
+  @override
+  String get devCatAcademic => 'Academique';
+
+  @override
+  String get devCatDigital => 'Numerique';
+
+  @override
+  String get devCatScience => 'Sciences';
+
+  @override
+  String get devCatMath => 'Maths';
+
+  @override
+  String get devCatMusic => 'Musique';
+
+  @override
+  String get devCatArt => 'Dessin';
+
+  @override
+  String get devCatTurkish => 'Langue';
 }
