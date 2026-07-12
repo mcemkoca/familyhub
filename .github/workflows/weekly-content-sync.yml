@@ -56,6 +56,11 @@ jobs:
           echo "Content sync henüz etkin değil (çeviri sağlayıcı/ağ gerektirir)."
           echo "Registry doğrulandı; içerik modeli + dedup testlerle korunuyor."
 
+      - name: ARB parity + otomatik çeviri (sağlayıcı varsa)
+        # Eksik anahtarları raporlar; ARB_TRANSLATE_API_KEY varsa doldurur.
+        # Anahtar yoksa yalnızca rapor (sahte çeviri üretmez).
+        run: dart run tool/arb_autofill.dart --report
+
       - name: Localization audit
         run: dart run tool/localization_audit.dart
 
