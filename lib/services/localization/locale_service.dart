@@ -41,7 +41,7 @@ class LocaleService {
       };
 
   static Locale localeForLabel(String label) => switch (label) {
-        'English' => const Locale('en', 'US'),
+        'English' => const Locale('en', 'GB'),
         'Nederlands' => const Locale('nl', 'NL'),
         'Français' => const Locale('fr', 'FR'),
         _ => const Locale('tr', 'TR'),

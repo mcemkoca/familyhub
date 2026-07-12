@@ -372,7 +372,7 @@ class _FamilyHubAppState extends ConsumerState<FamilyHubApp>
         ],
         supportedLocales: const [
           Locale('tr', 'TR'),
-          Locale('en', 'US'),
+          Locale('en', 'GB'),
           Locale('fr', 'BE'),
           Locale('nl', 'BE'),
         ],
