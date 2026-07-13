@@ -330,7 +330,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get turkish => 'Turks';
 
   @override
-  String get english => 'English';
+  String get english => 'Engels';
 
   @override
   String get theme => 'Thema';

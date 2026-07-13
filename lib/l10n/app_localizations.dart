@@ -741,7 +741,7 @@ abstract class AppLocalizations {
   /// No description provided for @english.
   ///
   /// In tr, this message translates to:
-  /// **'English'**
+  /// **'İngilizce'**
   String get english;
 
   /// No description provided for @theme.

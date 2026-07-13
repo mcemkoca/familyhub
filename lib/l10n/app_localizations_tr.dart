@@ -331,7 +331,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get turkish => 'Türkçe';
 
   @override
-  String get english => 'English';
+  String get english => 'İngilizce';
 
   @override
   String get theme => 'Tema';
