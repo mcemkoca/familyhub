@@ -2169,5 +2169,10 @@
   "priorityLow": "Laag",
   "priorityMedium": "Middel",
   "priorityHigh": "Hoog",
-  "taskTitleRequired": "Taaktitel is verplicht"
+  "taskTitleRequired": "Taaktitel is verplicht",
+  "subFilterActive": "Actief ({count})",
+  "subFilterInactive": "Inactief ({count})",
+  "subRenewal": "Verlenging: {date}",
+  "callEmergency112": "112 bellen",
+  "growthTracking": "Lengte / gewicht bijhouden"
 }

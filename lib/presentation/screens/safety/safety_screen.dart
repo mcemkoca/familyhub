@@ -112,7 +112,9 @@ class _SafetyScreenState extends State<SafetyScreen>
           _currentAddress = addr;
         });
       }
-    } catch (e) { debugPrint('Safety screen error: $e'); }
+    } catch (e) {
+      debugPrint('Safety screen error: $e');
+    }
   }
 
   @override
@@ -172,8 +174,10 @@ class _SafetyScreenState extends State<SafetyScreen>
     setState(() => _currentLocation = location);
 
     final user = AuthService.currentUser;
-    final userName = user?.userMetadata?['display_name'] as String? ?? defaultUser;
-    final familyId = AuthService.currentUser?.userMetadata?['family_id'] as String?;
+    final userName =
+        user?.userMetadata?['display_name'] as String? ?? defaultUser;
+    final familyId =
+        AuthService.currentUser?.userMetadata?['family_id'] as String?;
     if (familyId != null && familyId.isNotEmpty) {
       await EmergencyService.triggerSOS(
         familyId: familyId,
@@ -198,8 +202,9 @@ class _SafetyScreenState extends State<SafetyScreen>
         context: context,
         barrierDismissible: false,
         builder: (context) => AlertDialog(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
           title: Row(
             children: [
               const Icon(Icons.warning_amber_rounded, color: AppColors.error),
@@ -207,9 +212,7 @@ class _SafetyScreenState extends State<SafetyScreen>
               Text(AppLocalizations.of(context).sfEmergencyActive),
             ],
           ),
-          content: Text(
-            AppLocalizations.of(context).sfNotifSent,
-          ),
+          content: Text(AppLocalizations.of(context).sfNotifSent),
           actions: [
             TextButton(
               onPressed: () {
@@ -245,7 +248,9 @@ class _SafetyScreenState extends State<SafetyScreen>
     _toggleLocationSharing(force: false);
 
     final user = AuthService.currentUser;
-    final userName = user?.userMetadata?['display_name'] as String? ?? AppLocalizations.of(context).commonUser;
+    final userName =
+        user?.userMetadata?['display_name'] as String? ??
+        AppLocalizations.of(context).commonUser;
     await EmergencyService.sendSOSCancel(
       userName: userName,
       familyId: AuthService.currentUserId ?? '',
@@ -272,7 +277,9 @@ class _SafetyScreenState extends State<SafetyScreen>
             pos.longitude,
           );
           if (mounted) setState(() => _currentAddress = addr);
-        } catch (e) { debugPrint('Safety screen error: $e'); }
+        } catch (e) {
+          debugPrint('Safety screen error: $e');
+        }
       });
     } else {
       LocationService.stopLiveSharing();
@@ -286,7 +293,11 @@ class _SafetyScreenState extends State<SafetyScreen>
     final ok = await EmergencyService.callEmergency();
     if (!ok && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context).telefonUygulamasiAcilamiyor)),
+        SnackBar(
+          content: Text(
+            AppLocalizations.of(context).telefonUygulamasiAcilamiyor,
+          ),
+        ),
       );
     }
   }
@@ -311,17 +322,18 @@ class _SafetyScreenState extends State<SafetyScreen>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(AppLocalizations.of(context).safety,
-                      style: Theme.of(context)
-                          .textTheme
-                          .displayLarge
-                          ?.copyWith(fontSize: 32),
+                    Text(
+                      AppLocalizations.of(context).safety,
+                      style: Theme.of(
+                        context,
+                      ).textTheme.displayLarge?.copyWith(fontSize: 32),
                     ),
                     const SizedBox(height: 4),
-                    Text(AppLocalizations.of(context).ailenizinKorumaKalkani,
+                    Text(
+                      AppLocalizations.of(context).ailenizinKorumaKalkani,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: const Color(0xFF6B7280),
-                          ),
+                        color: const Color(0xFF6B7280),
+                      ),
                     ),
                   ],
                 ),
@@ -385,7 +397,9 @@ class _SafetyScreenState extends State<SafetyScreen>
                   borderRadius: BorderRadius.circular(16),
                   border: _locationSharing
                       ? Border.all(
-                          color: const Color(0xFF10B981).withAlpha(80), width: 1.5)
+                          color: const Color(0xFF10B981).withAlpha(80),
+                          width: 1.5,
+                        )
                       : null,
                   boxShadow: [
                     BoxShadow(
@@ -408,7 +422,8 @@ class _SafetyScreenState extends State<SafetyScreen>
                           size: 18,
                         ),
                         const SizedBox(width: 8),
-                        Text(AppLocalizations.of(context).canliKonum,
+                        Text(
+                          AppLocalizations.of(context).canliKonum,
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
@@ -430,7 +445,9 @@ class _SafetyScreenState extends State<SafetyScreen>
                         ),
                         const SizedBox(width: 6),
                         Text(
-                          _locationSharing ? AppLocalizations.of(context).commonActive : AppLocalizations.of(context).commonPassive,
+                          _locationSharing
+                              ? AppLocalizations.of(context).commonActive
+                              : AppLocalizations.of(context).commonPassive,
                           style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
@@ -465,7 +482,8 @@ class _SafetyScreenState extends State<SafetyScreen>
                         ],
                       )
                     else
-                      Text(AppLocalizations.of(context).konumAliniyor,
+                      Text(
+                        AppLocalizations.of(context).konumAliniyor,
                         style: const TextStyle(
                           fontSize: 13,
                           color: Color(0xFF6B7280),
@@ -482,7 +500,8 @@ class _SafetyScreenState extends State<SafetyScreen>
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-                child: Text(AppLocalizations.of(context).hizliIslemler,
+                child: Text(
+                  AppLocalizations.of(context).hizliIslemler,
                   style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
@@ -514,8 +533,10 @@ class _SafetyScreenState extends State<SafetyScreen>
                       icon: Icons.call,
                       iconBg: const Color(0xFF10B981).withAlpha(30),
                       iconColor: const Color(0xFF10B981),
-                      label: "112'yi Ara",
-                      description: AppLocalizations.of(context).acilCagriMerkezi,
+                      label: AppLocalizations.of(context).callEmergency112,
+                      description: AppLocalizations.of(
+                        context,
+                      ).acilCagriMerkezi,
                       danger: true,
                       onPress: _callEmergency,
                     ),
@@ -525,7 +546,9 @@ class _SafetyScreenState extends State<SafetyScreen>
                       iconBg: const Color(0xFF8B5CF6).withAlpha(30),
                       iconColor: const Color(0xFF7C3AED),
                       label: AppLocalizations.of(context).saglikKartim,
-                      description: AppLocalizations.of(context).alerjiVeIlacBilgileri,
+                      description: AppLocalizations.of(
+                        context,
+                      ).alerjiVeIlacBilgileri,
                       badge: AppLocalizations.of(context).setCurrent,
                       onPress: () => context.push(AppRoutes.healthCard),
                     ),
@@ -552,28 +575,36 @@ class _SafetyScreenState extends State<SafetyScreen>
                       icon: Icons.shield_outlined,
                       iconColor: const Color(0xFF6366F1),
                       label: AppLocalizations.of(context).guvenliBolgeler,
-                      description: AppLocalizations.of(context).evOkulIsIcinGeofence,
+                      description: AppLocalizations.of(
+                        context,
+                      ).evOkulIsIcinGeofence,
                       onTap: () => context.push(AppRoutes.safeZones),
                     ),
                     SafetyTool(
                       icon: Icons.timer_outlined,
                       iconColor: const Color(0xFF10B981),
                       label: AppLocalizations.of(context).guvenliVaris,
-                      description: AppLocalizations.of(context).belirliSuredeVarisKontrolu,
+                      description: AppLocalizations.of(
+                        context,
+                      ).belirliSuredeVarisKontrolu,
                       onTap: () => context.push(AppRoutes.safeArrival),
                     ),
                     SafetyTool(
                       icon: Icons.mic_none,
                       iconColor: const Color(0xFFF59E0B),
                       label: AppLocalizations.of(context).sfAmbientListen,
-                      description: AppLocalizations.of(context).acilDurumdaSesKaydi,
+                      description: AppLocalizations.of(
+                        context,
+                      ).acilDurumdaSesKaydi,
                       onTap: () => context.push(AppRoutes.ambientListening),
                     ),
                     SafetyTool(
                       icon: Icons.flashlight_on_outlined,
                       iconColor: const Color(0xFF8B5CF6),
                       label: AppLocalizations.of(context).sfFlashlight,
-                      description: AppLocalizations.of(context).telefonFeneriniAc,
+                      description: AppLocalizations.of(
+                        context,
+                      ).telefonFeneriniAc,
                       onTap: () => context.push(AppRoutes.flashlight),
                     ),
                   ],
@@ -582,9 +613,7 @@ class _SafetyScreenState extends State<SafetyScreen>
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 32)),
             // Bottom padding for safe area + nav
-            SliverToBoxAdapter(
-              child: SizedBox(height: safeBottom + 120),
-            ),
+            SliverToBoxAdapter(child: SizedBox(height: safeBottom + 120)),
           ],
         ),
       ),

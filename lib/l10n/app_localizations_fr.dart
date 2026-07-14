@@ -4902,7 +4902,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Aucun abonnement trouve\nAppuyez sur le bouton +';
 
   @override
-  String get subAddExpense => 'Ajouter une depense';
+  String get subAddExpense => 'Ajouter une dépense';
 
   @override
   String get subAddCountryTemplate => 'Ajouter un modele de depenses par pays';
@@ -6596,4 +6596,25 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get taskTitleRequired => 'Le titre de la tâche est requis';
+
+  @override
+  String subFilterActive(Object count) {
+    return 'Actif ($count)';
+  }
+
+  @override
+  String subFilterInactive(Object count) {
+    return 'Inactif ($count)';
+  }
+
+  @override
+  String subRenewal(Object date) {
+    return 'Renouvellement : $date';
+  }
+
+  @override
+  String get callEmergency112 => 'Appeler le 112';
+
+  @override
+  String get growthTracking => 'Suivi taille / poids';
 }

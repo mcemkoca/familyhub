@@ -4880,7 +4880,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get subNoSubscription => 'No subscriptions found\nTap the + button';
 
   @override
-  String get subAddExpense => 'Add Expense';
+  String get subAddExpense => 'Add expense';
 
   @override
   String get subAddCountryTemplate => 'Add country expense template';
@@ -6569,4 +6569,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get taskTitleRequired => 'Task title is required';
+
+  @override
+  String subFilterActive(Object count) {
+    return 'Active ($count)';
+  }
+
+  @override
+  String subFilterInactive(Object count) {
+    return 'Inactive ($count)';
+  }
+
+  @override
+  String subRenewal(Object date) {
+    return 'Renewal: $date';
+  }
+
+  @override
+  String get callEmergency112 => 'Call 112';
+
+  @override
+  String get growthTracking => 'Height / weight tracking';
 }

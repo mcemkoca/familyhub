@@ -2567,5 +2567,25 @@
   "priorityLow": "Düşük",
   "priorityMedium": "Orta",
   "priorityHigh": "Yüksek",
-  "taskTitleRequired": "Görev başlığı gerekli"
+  "taskTitleRequired": "Görev başlığı gerekli",
+  "subFilterActive": "Aktif ({count})",
+  "@subFilterActive": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "subFilterInactive": "Pasif ({count})",
+  "@subFilterInactive": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "subRenewal": "Yenileme: {date}",
+  "@subRenewal": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "callEmergency112": "112 Ara",
+  "growthTracking": "Boy / Kilo Takibi"
 }

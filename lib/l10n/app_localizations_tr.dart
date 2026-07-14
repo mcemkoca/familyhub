@@ -6590,4 +6590,25 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get taskTitleRequired => 'Görev başlığı gerekli';
+
+  @override
+  String subFilterActive(Object count) {
+    return 'Aktif ($count)';
+  }
+
+  @override
+  String subFilterInactive(Object count) {
+    return 'Pasif ($count)';
+  }
+
+  @override
+  String subRenewal(Object date) {
+    return 'Yenileme: $date';
+  }
+
+  @override
+  String get callEmergency112 => '112 Ara';
+
+  @override
+  String get growthTracking => 'Boy / Kilo Takibi';
 }

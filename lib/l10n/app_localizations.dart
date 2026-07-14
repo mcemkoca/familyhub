@@ -12371,6 +12371,36 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Görev başlığı gerekli'**
   String get taskTitleRequired;
+
+  /// No description provided for @subFilterActive.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aktif ({count})'**
+  String subFilterActive(Object count);
+
+  /// No description provided for @subFilterInactive.
+  ///
+  /// In tr, this message translates to:
+  /// **'Pasif ({count})'**
+  String subFilterInactive(Object count);
+
+  /// No description provided for @subRenewal.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yenileme: {date}'**
+  String subRenewal(Object date);
+
+  /// No description provided for @callEmergency112.
+  ///
+  /// In tr, this message translates to:
+  /// **'112 Ara'**
+  String get callEmergency112;
+
+  /// No description provided for @growthTracking.
+  ///
+  /// In tr, this message translates to:
+  /// **'Boy / Kilo Takibi'**
+  String get growthTracking;
 }
 
 class _AppLocalizationsDelegate

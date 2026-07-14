@@ -6575,4 +6575,25 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get taskTitleRequired => 'Taaktitel is verplicht';
+
+  @override
+  String subFilterActive(Object count) {
+    return 'Actief ($count)';
+  }
+
+  @override
+  String subFilterInactive(Object count) {
+    return 'Inactief ($count)';
+  }
+
+  @override
+  String subRenewal(Object date) {
+    return 'Verlenging: $date';
+  }
+
+  @override
+  String get callEmergency112 => '112 bellen';
+
+  @override
+  String get growthTracking => 'Lengte / gewicht bijhouden';
 }

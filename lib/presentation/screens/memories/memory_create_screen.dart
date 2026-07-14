@@ -7,18 +7,39 @@ class MemoryCreateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context).aniYaz), centerTitle: true),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context).aniYaz),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             TextField(
-              decoration: InputDecoration(labelText: AppLocalizations.of(context).baslik, filled: true, fillColor: const Color(0xFF13131A), border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none)),
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context).baslik,
+                filled: true,
+                fillColor: const Color(0xFF13131A),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide.none,
+                ),
+              ),
             ),
             const SizedBox(height: 16),
             TextField(
               maxLines: 6,
-              decoration: InputDecoration(labelText: AppLocalizations.of(context).bugunAilenleYasadiginGuzelBirAniYaz, filled: true, fillColor: const Color(0xFF13131A), border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none)),
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(
+                  context,
+                ).bugunAilenleYasadiginGuzelBirAniYaz,
+                filled: true,
+                fillColor: const Color(0xFF13131A),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide.none,
+                ),
+              ),
             ),
             const SizedBox(height: 24),
             SizedBox(
@@ -26,8 +47,19 @@ class MemoryCreateScreen extends StatelessWidget {
               height: 56,
               child: ElevatedButton(
                 onPressed: () => Navigator.pop(context),
-                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF8B5CF6), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
-                child: const Text('Kaydet', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF8B5CF6),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                child: Text(
+                  AppLocalizations.of(context).save,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
             ),
           ],

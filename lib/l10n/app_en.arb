@@ -1659,7 +1659,7 @@
   "subActive": "Active",
   "subCountryTemplate": "Country template",
   "subNoSubscription": "No subscriptions found\nTap the + button",
-  "subAddExpense": "Add Expense",
+  "subAddExpense": "Add expense",
   "subAddCountryTemplate": "Add country expense template",
   "subCommonExpenses": "Common Expenses",
   "subServiceName": "Service name",
@@ -2169,5 +2169,10 @@
   "priorityLow": "Low",
   "priorityMedium": "Medium",
   "priorityHigh": "High",
-  "taskTitleRequired": "Task title is required"
+  "taskTitleRequired": "Task title is required",
+  "subFilterActive": "Active ({count})",
+  "subFilterInactive": "Inactive ({count})",
+  "subRenewal": "Renewal: {date}",
+  "callEmergency112": "Call 112",
+  "growthTracking": "Height / weight tracking"
 }

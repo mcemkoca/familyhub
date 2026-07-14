@@ -48,10 +48,19 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
       context: context,
       builder: (_) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: Row(children: [const Icon(Icons.warning_amber_rounded, color: AppColors.red), const SizedBox(width: 8), Text(AppLocalizations.of(context).emergency)]),
+        title: Row(
+          children: [
+            const Icon(Icons.warning_amber_rounded, color: AppColors.red),
+            const SizedBox(width: 8),
+            Text(AppLocalizations.of(context).emergency),
+          ],
+        ),
         content: Text(AppLocalizations.of(context).emergencySent),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: Text(AppLocalizations.of(context).ok)),
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(AppLocalizations.of(context).ok),
+          ),
         ],
       ),
     );
@@ -62,7 +71,11 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
     final ok = await EmergencyService.callEmergency();
     if (!ok && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context).telefonUygulamasiAcilamiyor)),
+        SnackBar(
+          content: Text(
+            AppLocalizations.of(context).telefonUygulamasiAcilamiyor,
+          ),
+        ),
       );
     }
   }
@@ -70,7 +83,10 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context).emergency), centerTitle: true),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context).emergency),
+        centerTitle: true,
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -78,9 +94,17 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
             padding: const EdgeInsets.all(24),
             child: Column(
               children: [
-                Text(AppLocalizations.of(context).emTitle, style: Theme.of(context).textTheme.displaySmall),
+                Text(
+                  AppLocalizations.of(context).emTitle,
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
                 const SizedBox(height: 8),
-                Text(AppLocalizations.of(context).emergencyInfo, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: const Color(0xFF6B7280))),
+                Text(
+                  AppLocalizations.of(context).emergencyInfo,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: const Color(0xFF6B7280),
+                  ),
+                ),
               ],
             ),
           ),
@@ -96,13 +120,50 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    CircularProgressIndicator(value: _progress, strokeWidth: 8, backgroundColor: AppColors.red.withAlpha(30), valueColor: const AlwaysStoppedAnimation(AppColors.red)),
+                    CircularProgressIndicator(
+                      value: _progress,
+                      strokeWidth: 8,
+                      backgroundColor: AppColors.red.withAlpha(30),
+                      valueColor: const AlwaysStoppedAnimation(AppColors.red),
+                    ),
                     Center(
                       child: Container(
                         width: 180,
                         height: 180,
-                        decoration: const BoxDecoration(gradient: LinearGradient(colors: [AppColors.red, Color(0xFFFBBF24)], begin: Alignment.topLeft, end: Alignment.bottomRight), shape: BoxShape.circle, boxShadow: [BoxShadow(color: AppColors.red, blurRadius: 30, offset: Offset(0, 10))]),
-                        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [const Icon(Icons.sos, color: Colors.white, size: 48), const SizedBox(height: 8), Text(AppLocalizations.of(context).crashSos, style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold))]),
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [AppColors.red, Color(0xFFFBBF24)],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.red,
+                              blurRadius: 30,
+                              offset: Offset(0, 10),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.sos,
+                              color: Colors.white,
+                              size: 48,
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              AppLocalizations.of(context).crashSos,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -116,8 +177,17 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
             child: ElevatedButton.icon(
               onPressed: _call112,
               icon: const Icon(Icons.call, color: Colors.white),
-              label: const Text('112 Ara', style: TextStyle(fontSize: 18, color: Colors.white)),
-              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), padding: const EdgeInsets.symmetric(vertical: 16), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
+              label: Text(
+                AppLocalizations.of(context).callEmergency112,
+                style: const TextStyle(fontSize: 18, color: Colors.white),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF10B981),
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
             ),
           ),
         ],

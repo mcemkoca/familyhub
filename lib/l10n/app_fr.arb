@@ -1659,7 +1659,7 @@
   "subActive": "Actif",
   "subCountryTemplate": "Modele par pays",
   "subNoSubscription": "Aucun abonnement trouve\nAppuyez sur le bouton +",
-  "subAddExpense": "Ajouter une depense",
+  "subAddExpense": "Ajouter une dépense",
   "subAddCountryTemplate": "Ajouter un modele de depenses par pays",
   "subCommonExpenses": "Depenses courantes",
   "subServiceName": "Nom du service",
@@ -2169,5 +2169,10 @@
   "priorityLow": "Faible",
   "priorityMedium": "Moyen",
   "priorityHigh": "Élevé",
-  "taskTitleRequired": "Le titre de la tâche est requis"
+  "taskTitleRequired": "Le titre de la tâche est requis",
+  "subFilterActive": "Actif ({count})",
+  "subFilterInactive": "Inactif ({count})",
+  "subRenewal": "Renouvellement : {date}",
+  "callEmergency112": "Appeler le 112",
+  "growthTracking": "Suivi taille / poids"
 }
