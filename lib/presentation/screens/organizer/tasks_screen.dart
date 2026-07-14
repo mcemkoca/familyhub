@@ -89,7 +89,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
 
   void _addTask() async {
     if (_titleController.text.isEmpty) {
-      _showSnack('Görev başlığı boş olamaz');
+      _showSnack(AppLocalizations.of(context).taskTitleRequired);
       return;
     }
     try {
@@ -111,9 +111,9 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
       _dueDate = null;
       _assignedTo = '';
       Navigator.pop(context);
-      _showSnack('Görev eklendi');
+      _showSnack(AppLocalizations.of(context).gorevEklendi);
     } catch (e) {
-      _showSnack('Görev eklenirken hata: $e');
+      if (mounted) _showSnack(AppLocalizations.of(context).taskAddError('$e'));
     }
   }
 
@@ -196,8 +196,10 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                     ),
                     title: Text(
                       _editDueDate == null
-                          ? 'Bitiş Tarihi Seç'
-                          : 'Bitiş: ${_editDueDate!.day}/${_editDueDate!.month}/${_editDueDate!.year}',
+                          ? AppLocalizations.of(context).pickDueDate
+                          : AppLocalizations.of(context).dueLabel(
+                              '${_editDueDate!.day}/${_editDueDate!.month}/${_editDueDate!.year}',
+                            ),
                     ),
                     trailing: _editDueDate != null
                         ? IconButton(
@@ -242,7 +244,9 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                     child: ElevatedButton(
                       onPressed: () async {
                         if (_editController.text.isEmpty) {
-                          _showSnack('Görev başlığı boş olamaz');
+                          _showSnack(
+                            AppLocalizations.of(context).taskTitleRequired,
+                          );
                           return;
                         }
                         try {
@@ -262,9 +266,15 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                           await TaskRepository().updateTask(updatedTask);
                           if (!context.mounted) return;
                           Navigator.pop(context);
-                          _showSnack('Görev güncellendi');
+                          _showSnack(AppLocalizations.of(context).taskUpdated);
                         } catch (e) {
-                          _showSnack('Görev güncellenirken hata: $e');
+                          if (mounted) {
+                            _showSnack(
+                              AppLocalizations.of(
+                                context,
+                              ).taskUpdateError('$e'),
+                            );
+                          }
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -305,7 +315,9 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
       );
       await TaskRepository().updateTask(updated);
     } catch (e) {
-      _showSnack('Durum değiştirilirken hata: $e');
+      if (mounted) {
+        _showSnack(AppLocalizations.of(context).taskStatusError('$e'));
+      }
     }
   }
 
@@ -418,8 +430,10 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                     ),
                     title: Text(
                       _dueDate == null
-                          ? 'Bitiş Tarihi Seç (opsiyonel)'
-                          : 'Bitiş: ${_dueDate!.day}/${_dueDate!.month}/${_dueDate!.year}',
+                          ? AppLocalizations.of(context).pickDueDateOptional
+                          : AppLocalizations.of(context).dueLabel(
+                              '${_dueDate!.day}/${_dueDate!.month}/${_dueDate!.year}',
+                            ),
                     ),
                     trailing: _dueDate != null
                         ? IconButton(
@@ -435,8 +449,9 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                         firstDate: DateTime.now(),
                         lastDate: DateTime.now().add(const Duration(days: 365)),
                       );
-                      if (picked != null)
+                      if (picked != null) {
                         setModalState(() => _dueDate = picked);
+                      }
                     },
                   ),
                   if (members.isNotEmpty)

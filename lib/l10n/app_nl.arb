@@ -2218,5 +2218,19 @@
   "rtWeekly": "Wekelijks",
   "rtCustom": "Aangepast",
   "rtSeasonal": "Seizoensgebonden",
-  "rtEventBased": "Gebeurtenis"
+  "rtEventBased": "Gebeurtenis",
+  "taskAddError": "Fout bij toevoegen taak: {error}",
+  "taskUpdated": "Taak bijgewerkt",
+  "taskUpdateError": "Fout bij bijwerken taak: {error}",
+  "taskStatusError": "Fout bij statuswijziging: {error}",
+  "pickDueDate": "Einddatum kiezen",
+  "pickDueDateOptional": "Einddatum kiezen (optioneel)",
+  "dueLabel": "Einde: {date}",
+  "rtStarted": "{name} gestart!",
+  "rtRoutinesTitle": "Routines",
+  "rtStateScheduled": "Gepland",
+  "rtStateActive": "Actief",
+  "rtStatePaused": "Gepauzeerd",
+  "rtStateCompleted": "Voltooid",
+  "rtStateCancelled": "Geannuleerd"
 }

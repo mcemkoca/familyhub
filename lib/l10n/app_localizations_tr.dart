@@ -6770,4 +6770,56 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get rtEventBased => 'Etkinlik';
+
+  @override
+  String taskAddError(Object error) {
+    return 'Görev eklenirken hata: $error';
+  }
+
+  @override
+  String get taskUpdated => 'Görev güncellendi';
+
+  @override
+  String taskUpdateError(Object error) {
+    return 'Görev güncellenirken hata: $error';
+  }
+
+  @override
+  String taskStatusError(Object error) {
+    return 'Durum değiştirilirken hata: $error';
+  }
+
+  @override
+  String get pickDueDate => 'Bitiş Tarihi Seç';
+
+  @override
+  String get pickDueDateOptional => 'Bitiş Tarihi Seç (opsiyonel)';
+
+  @override
+  String dueLabel(Object date) {
+    return 'Bitiş: $date';
+  }
+
+  @override
+  String rtStarted(Object name) {
+    return '$name başlatıldı!';
+  }
+
+  @override
+  String get rtRoutinesTitle => 'Rutinler';
+
+  @override
+  String get rtStateScheduled => 'Planlandı';
+
+  @override
+  String get rtStateActive => 'Aktif';
+
+  @override
+  String get rtStatePaused => 'Duraklatıldı';
+
+  @override
+  String get rtStateCompleted => 'Tamamlandı';
+
+  @override
+  String get rtStateCancelled => 'İptal';
 }

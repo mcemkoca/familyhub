@@ -6776,4 +6776,56 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get rtEventBased => 'Événement';
+
+  @override
+  String taskAddError(Object error) {
+    return 'Erreur lors de l\'ajout de la tâche : $error';
+  }
+
+  @override
+  String get taskUpdated => 'Tâche mise à jour';
+
+  @override
+  String taskUpdateError(Object error) {
+    return 'Erreur lors de la mise à jour : $error';
+  }
+
+  @override
+  String taskStatusError(Object error) {
+    return 'Erreur lors du changement de statut : $error';
+  }
+
+  @override
+  String get pickDueDate => 'Choisir la date d\'échéance';
+
+  @override
+  String get pickDueDateOptional => 'Choisir la date d\'échéance (facultatif)';
+
+  @override
+  String dueLabel(Object date) {
+    return 'Échéance : $date';
+  }
+
+  @override
+  String rtStarted(Object name) {
+    return '$name démarré !';
+  }
+
+  @override
+  String get rtRoutinesTitle => 'Routines';
+
+  @override
+  String get rtStateScheduled => 'Planifié';
+
+  @override
+  String get rtStateActive => 'Actif';
+
+  @override
+  String get rtStatePaused => 'En pause';
+
+  @override
+  String get rtStateCompleted => 'Terminé';
+
+  @override
+  String get rtStateCancelled => 'Annulé';
 }

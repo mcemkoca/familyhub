@@ -6749,4 +6749,56 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get rtEventBased => 'Event';
+
+  @override
+  String taskAddError(Object error) {
+    return 'Error adding task: $error';
+  }
+
+  @override
+  String get taskUpdated => 'Task updated';
+
+  @override
+  String taskUpdateError(Object error) {
+    return 'Error updating task: $error';
+  }
+
+  @override
+  String taskStatusError(Object error) {
+    return 'Error changing status: $error';
+  }
+
+  @override
+  String get pickDueDate => 'Pick due date';
+
+  @override
+  String get pickDueDateOptional => 'Pick due date (optional)';
+
+  @override
+  String dueLabel(Object date) {
+    return 'Due: $date';
+  }
+
+  @override
+  String rtStarted(Object name) {
+    return '$name started!';
+  }
+
+  @override
+  String get rtRoutinesTitle => 'Routines';
+
+  @override
+  String get rtStateScheduled => 'Scheduled';
+
+  @override
+  String get rtStateActive => 'Active';
+
+  @override
+  String get rtStatePaused => 'Paused';
+
+  @override
+  String get rtStateCompleted => 'Completed';
+
+  @override
+  String get rtStateCancelled => 'Cancelled';
 }

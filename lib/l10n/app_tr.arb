@@ -2699,5 +2699,44 @@
   "rtWeekly": "Haftalık",
   "rtCustom": "Özel",
   "rtSeasonal": "Mevsimsel",
-  "rtEventBased": "Etkinlik"
+  "rtEventBased": "Etkinlik",
+  "taskAddError": "Görev eklenirken hata: {error}",
+  "@taskAddError": {
+    "placeholders": {
+      "error": {}
+    }
+  },
+  "taskUpdated": "Görev güncellendi",
+  "taskUpdateError": "Görev güncellenirken hata: {error}",
+  "@taskUpdateError": {
+    "placeholders": {
+      "error": {}
+    }
+  },
+  "taskStatusError": "Durum değiştirilirken hata: {error}",
+  "@taskStatusError": {
+    "placeholders": {
+      "error": {}
+    }
+  },
+  "pickDueDate": "Bitiş Tarihi Seç",
+  "pickDueDateOptional": "Bitiş Tarihi Seç (opsiyonel)",
+  "dueLabel": "Bitiş: {date}",
+  "@dueLabel": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "rtStarted": "{name} başlatıldı!",
+  "@rtStarted": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "rtRoutinesTitle": "Rutinler",
+  "rtStateScheduled": "Planlandı",
+  "rtStateActive": "Aktif",
+  "rtStatePaused": "Duraklatıldı",
+  "rtStateCompleted": "Tamamlandı",
+  "rtStateCancelled": "İptal"
 }

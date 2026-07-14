@@ -6755,4 +6755,56 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get rtEventBased => 'Gebeurtenis';
+
+  @override
+  String taskAddError(Object error) {
+    return 'Fout bij toevoegen taak: $error';
+  }
+
+  @override
+  String get taskUpdated => 'Taak bijgewerkt';
+
+  @override
+  String taskUpdateError(Object error) {
+    return 'Fout bij bijwerken taak: $error';
+  }
+
+  @override
+  String taskStatusError(Object error) {
+    return 'Fout bij statuswijziging: $error';
+  }
+
+  @override
+  String get pickDueDate => 'Einddatum kiezen';
+
+  @override
+  String get pickDueDateOptional => 'Einddatum kiezen (optioneel)';
+
+  @override
+  String dueLabel(Object date) {
+    return 'Einde: $date';
+  }
+
+  @override
+  String rtStarted(Object name) {
+    return '$name gestart!';
+  }
+
+  @override
+  String get rtRoutinesTitle => 'Routines';
+
+  @override
+  String get rtStateScheduled => 'Gepland';
+
+  @override
+  String get rtStateActive => 'Actief';
+
+  @override
+  String get rtStatePaused => 'Gepauzeerd';
+
+  @override
+  String get rtStateCompleted => 'Voltooid';
+
+  @override
+  String get rtStateCancelled => 'Geannuleerd';
 }

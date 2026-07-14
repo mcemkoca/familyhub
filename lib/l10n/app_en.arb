@@ -2218,5 +2218,19 @@
   "rtWeekly": "Weekly",
   "rtCustom": "Custom",
   "rtSeasonal": "Seasonal",
-  "rtEventBased": "Event"
+  "rtEventBased": "Event",
+  "taskAddError": "Error adding task: {error}",
+  "taskUpdated": "Task updated",
+  "taskUpdateError": "Error updating task: {error}",
+  "taskStatusError": "Error changing status: {error}",
+  "pickDueDate": "Pick due date",
+  "pickDueDateOptional": "Pick due date (optional)",
+  "dueLabel": "Due: {date}",
+  "rtStarted": "{name} started!",
+  "rtRoutinesTitle": "Routines",
+  "rtStateScheduled": "Scheduled",
+  "rtStateActive": "Active",
+  "rtStatePaused": "Paused",
+  "rtStateCompleted": "Completed",
+  "rtStateCancelled": "Cancelled"
 }

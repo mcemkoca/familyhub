@@ -12665,6 +12665,90 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Etkinlik'**
   String get rtEventBased;
+
+  /// No description provided for @taskAddError.
+  ///
+  /// In tr, this message translates to:
+  /// **'Görev eklenirken hata: {error}'**
+  String taskAddError(Object error);
+
+  /// No description provided for @taskUpdated.
+  ///
+  /// In tr, this message translates to:
+  /// **'Görev güncellendi'**
+  String get taskUpdated;
+
+  /// No description provided for @taskUpdateError.
+  ///
+  /// In tr, this message translates to:
+  /// **'Görev güncellenirken hata: {error}'**
+  String taskUpdateError(Object error);
+
+  /// No description provided for @taskStatusError.
+  ///
+  /// In tr, this message translates to:
+  /// **'Durum değiştirilirken hata: {error}'**
+  String taskStatusError(Object error);
+
+  /// No description provided for @pickDueDate.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bitiş Tarihi Seç'**
+  String get pickDueDate;
+
+  /// No description provided for @pickDueDateOptional.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bitiş Tarihi Seç (opsiyonel)'**
+  String get pickDueDateOptional;
+
+  /// No description provided for @dueLabel.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bitiş: {date}'**
+  String dueLabel(Object date);
+
+  /// No description provided for @rtStarted.
+  ///
+  /// In tr, this message translates to:
+  /// **'{name} başlatıldı!'**
+  String rtStarted(Object name);
+
+  /// No description provided for @rtRoutinesTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Rutinler'**
+  String get rtRoutinesTitle;
+
+  /// No description provided for @rtStateScheduled.
+  ///
+  /// In tr, this message translates to:
+  /// **'Planlandı'**
+  String get rtStateScheduled;
+
+  /// No description provided for @rtStateActive.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aktif'**
+  String get rtStateActive;
+
+  /// No description provided for @rtStatePaused.
+  ///
+  /// In tr, this message translates to:
+  /// **'Duraklatıldı'**
+  String get rtStatePaused;
+
+  /// No description provided for @rtStateCompleted.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tamamlandı'**
+  String get rtStateCompleted;
+
+  /// No description provided for @rtStateCancelled.
+  ///
+  /// In tr, this message translates to:
+  /// **'İptal'**
+  String get rtStateCancelled;
 }
 
 class _AppLocalizationsDelegate

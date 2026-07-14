@@ -94,9 +94,11 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
 
   void _startRoutine(Routine routine) {
     HapticFeedback.mediumImpact();
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text('${routine.name} başlatıldı!')));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(AppLocalizations.of(context).rtStarted(routine.name)),
+      ),
+    );
   }
 
   Color _parseColor(String hex) {
@@ -140,9 +142,12 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
             pinned: true,
             backgroundColor: const Color(0xFF1A1A2E),
             flexibleSpace: FlexibleSpaceBar(
-              title: const Text(
-                '🌅 Rutinler',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              title: Text(
+                '🌅 ${AppLocalizations.of(context).rtRoutinesTitle}',
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               background: Container(
                 decoration: BoxDecoration(
@@ -167,6 +172,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: _buildActiveRoutineCard(
+                  context,
                   _routines.firstWhere(
                     (r) => r.status.state == RoutineState.active,
                   ),
@@ -233,6 +239,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
   }
 
   Widget _buildActiveRoutineCard(
+    BuildContext context,
     Routine routine,
     bool isDark,
     Color textColor,
@@ -301,7 +308,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
                   ],
                 ),
               ),
-              _buildStatusBadge(routine.status.state),
+              _buildStatusBadge(context, routine.status.state),
             ],
           ),
           const SizedBox(height: 16),
@@ -497,7 +504,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
                         ],
                       ),
                     ),
-                    _buildStatusBadge(routine.status.state),
+                    _buildStatusBadge(context, routine.status.state),
                   ],
                 ),
                 const SizedBox(height: 12),
@@ -557,13 +564,14 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
     );
   }
 
-  Widget _buildStatusBadge(RoutineState state) {
+  Widget _buildStatusBadge(BuildContext context, RoutineState state) {
+    final l = AppLocalizations.of(context);
     final labels = {
-      RoutineState.scheduled: ('Planlandı', Colors.grey),
-      RoutineState.active: ('Aktif', Colors.green),
-      RoutineState.paused: ('Duraklatıldı', Colors.orange),
-      RoutineState.completed: ('Tamamlandı', Colors.blue),
-      RoutineState.cancelled: ('İptal', Colors.red),
+      RoutineState.scheduled: (l.rtStateScheduled, Colors.grey),
+      RoutineState.active: (l.rtStateActive, Colors.green),
+      RoutineState.paused: (l.rtStatePaused, Colors.orange),
+      RoutineState.completed: (l.rtStateCompleted, Colors.blue),
+      RoutineState.cancelled: (l.rtStateCancelled, Colors.red),
     };
     final label = labels[state]!;
     return Container(
