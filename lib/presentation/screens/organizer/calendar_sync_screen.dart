@@ -76,7 +76,9 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              '${externalEvents.length} etkinlik senkronize edildi',
+              AppLocalizations.of(
+                context,
+              ).csEventsSynced(externalEvents.length),
             ),
           ),
         );
@@ -109,7 +111,11 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
       final calendars = await CalendarSyncService.listCalendars();
       if (calendars.isNotEmpty && mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('${calendars.length} takvim bulundu')),
+          SnackBar(
+            content: Text(
+              AppLocalizations.of(context).csCalendarsFound(calendars.length),
+            ),
+          ),
         );
       }
     } catch (e) {
@@ -188,8 +194,8 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
             const SizedBox(height: 8),
             Text(
               wasChecked
-                  ? 'Takvim erişim izni gerekli. Ayarlardan izin verin.'
-                  : 'Takvimlerinizi senkronize etmek için takvim erişim izni vermeniz gerekiyor.',
+                  ? AppLocalizations.of(context).csPermNeededShort
+                  : AppLocalizations.of(context).csPermNeededBody,
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
             ),
@@ -304,7 +310,9 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
           ),
           const SizedBox(height: 14),
           Text(
-            '${_connections.where((c) => c.syncEnabled).length} aktif bağlantı',
+            AppLocalizations.of(context).csActiveConnections(
+              _connections.where((c) => c.syncEnabled).length,
+            ),
             style: TextStyle(color: Colors.white.withAlpha(180), fontSize: 13),
           ),
         ],
@@ -477,8 +485,8 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
               Expanded(
                 child: Text(
                   lastSync != null
-                      ? '🔄 Son senkronizasyon: ${_timeAgo(lastSync)}'
-                      : '🔄 Henüz senkronize edilmedi',
+                      ? '🔄 ${AppLocalizations.of(context).csLastSync(_timeAgo(context, lastSync))}'
+                      : '🔄 ${AppLocalizations.of(context).csNeverSynced}',
                   style: const TextStyle(
                     fontSize: 11,
                     color: Color(0xFF6B7280),
@@ -575,17 +583,17 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _statItem(
-                '📥 Eklenen',
+                '📥 ${AppLocalizations.of(context).csAdded}',
                 totalAdded.toString(),
                 const Color(0xFF10B981),
               ),
               _statItem(
-                '🔄 Güncellenen',
+                '🔄 ${AppLocalizations.of(context).csUpdated}',
                 totalUpdated.toString(),
                 const Color(0xFF6366F1),
               ),
               _statItem(
-                '🗑️ Silinen',
+                '🗑️ ${AppLocalizations.of(context).csDeleted}',
                 totalDeleted.toString(),
                 AppColors.error,
               ),
@@ -773,12 +781,13 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
     }
   }
 
-  String _timeAgo(DateTime date) {
+  String _timeAgo(BuildContext context, DateTime date) {
+    final l = AppLocalizations.of(context);
     final diff = DateTime.now().difference(date);
-    if (diff.inMinutes < 1) return 'Az önce';
-    if (diff.inMinutes < 60) return '${diff.inMinutes} dk önce';
-    if (diff.inHours < 24) return '${diff.inHours} saat önce';
-    return '${diff.inDays} gün önce';
+    if (diff.inMinutes < 1) return l.timeAgoJustNow;
+    if (diff.inMinutes < 60) return l.timeAgoMinutes(diff.inMinutes);
+    if (diff.inHours < 24) return l.timeAgoHours(diff.inHours);
+    return l.timeAgoDays(diff.inDays);
   }
 }
 
@@ -830,7 +839,9 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  '${_providerLabel(_conn.provider)} Ayarları',
+                  AppLocalizations.of(
+                    context,
+                  ).csProviderSettings(_providerLabel(_conn.provider)),
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
@@ -909,7 +920,7 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
                   setState(() => _conn = _conn.copyWith(syncDirection: v));
                 }
               },
-              title: Text(_directionLabel(d)),
+              title: Text(_directionLabel(context, d)),
               dense: true,
             ),
           ),
@@ -937,7 +948,7 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
                   setState(() => _conn = _conn.copyWith(conflictStrategy: v));
                 }
               },
-              title: Text(_conflictLabel(s)),
+              title: Text(_conflictLabel(context, s)),
               dense: true,
             ),
           ),
@@ -978,27 +989,29 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
     );
   }
 
-  String _directionLabel(SyncDirection d) {
+  String _directionLabel(BuildContext context, SyncDirection d) {
+    final l = AppLocalizations.of(context);
     switch (d) {
       case SyncDirection.toExternal:
-        return 'FamilyHub → Dışarı';
+        return l.csDirToExternal;
       case SyncDirection.fromExternal:
-        return 'Dışarı → FamilyHub';
+        return l.csDirFromExternal;
       case SyncDirection.bidirectional:
-        return 'Çift yönlü';
+        return l.csDirBidirectional;
     }
   }
 
-  String _conflictLabel(ConflictStrategy s) {
+  String _conflictLabel(BuildContext context, ConflictStrategy s) {
+    final l = AppLocalizations.of(context);
     switch (s) {
       case ConflictStrategy.lastWriteWins:
-        return 'Son yazan kazanır';
+        return l.csConflictLastWrite;
       case ConflictStrategy.manual:
-        return 'Her zaman sor';
+        return l.csConflictManual;
       case ConflictStrategy.merge:
-        return 'Birleştir';
+        return l.csConflictMerge;
       case ConflictStrategy.sourcePriority:
-        return 'Kaynak önceliği';
+        return l.csConflictSourcePriority;
     }
   }
 

@@ -12911,6 +12911,138 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Bisiklet'**
   String get battProfileCycling;
+
+  /// No description provided for @csDirToExternal.
+  ///
+  /// In tr, this message translates to:
+  /// **'FamilyHub → Dışarı'**
+  String get csDirToExternal;
+
+  /// No description provided for @csDirFromExternal.
+  ///
+  /// In tr, this message translates to:
+  /// **'Dışarı → FamilyHub'**
+  String get csDirFromExternal;
+
+  /// No description provided for @csDirBidirectional.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çift yönlü'**
+  String get csDirBidirectional;
+
+  /// No description provided for @csConflictLastWrite.
+  ///
+  /// In tr, this message translates to:
+  /// **'Son yazan kazanır'**
+  String get csConflictLastWrite;
+
+  /// No description provided for @csConflictManual.
+  ///
+  /// In tr, this message translates to:
+  /// **'Her zaman sor'**
+  String get csConflictManual;
+
+  /// No description provided for @csConflictMerge.
+  ///
+  /// In tr, this message translates to:
+  /// **'Birleştir'**
+  String get csConflictMerge;
+
+  /// No description provided for @csConflictSourcePriority.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kaynak önceliği'**
+  String get csConflictSourcePriority;
+
+  /// No description provided for @timeAgoJustNow.
+  ///
+  /// In tr, this message translates to:
+  /// **'Az önce'**
+  String get timeAgoJustNow;
+
+  /// No description provided for @timeAgoMinutes.
+  ///
+  /// In tr, this message translates to:
+  /// **'{n} dk önce'**
+  String timeAgoMinutes(Object n);
+
+  /// No description provided for @timeAgoHours.
+  ///
+  /// In tr, this message translates to:
+  /// **'{n} saat önce'**
+  String timeAgoHours(Object n);
+
+  /// No description provided for @timeAgoDays.
+  ///
+  /// In tr, this message translates to:
+  /// **'{n} gün önce'**
+  String timeAgoDays(Object n);
+
+  /// No description provided for @csActiveConnections.
+  ///
+  /// In tr, this message translates to:
+  /// **'{n} aktif bağlantı'**
+  String csActiveConnections(Object n);
+
+  /// No description provided for @csLastSync.
+  ///
+  /// In tr, this message translates to:
+  /// **'Son senkronizasyon: {time}'**
+  String csLastSync(Object time);
+
+  /// No description provided for @csNeverSynced.
+  ///
+  /// In tr, this message translates to:
+  /// **'Henüz senkronize edilmedi'**
+  String get csNeverSynced;
+
+  /// No description provided for @csAdded.
+  ///
+  /// In tr, this message translates to:
+  /// **'Eklenen'**
+  String get csAdded;
+
+  /// No description provided for @csUpdated.
+  ///
+  /// In tr, this message translates to:
+  /// **'Güncellenen'**
+  String get csUpdated;
+
+  /// No description provided for @csDeleted.
+  ///
+  /// In tr, this message translates to:
+  /// **'Silinen'**
+  String get csDeleted;
+
+  /// No description provided for @csEventsSynced.
+  ///
+  /// In tr, this message translates to:
+  /// **'{n} etkinlik senkronize edildi'**
+  String csEventsSynced(Object n);
+
+  /// No description provided for @csCalendarsFound.
+  ///
+  /// In tr, this message translates to:
+  /// **'{n} takvim bulundu'**
+  String csCalendarsFound(Object n);
+
+  /// No description provided for @csProviderSettings.
+  ///
+  /// In tr, this message translates to:
+  /// **'{provider} Ayarları'**
+  String csProviderSettings(Object provider);
+
+  /// No description provided for @csPermNeededShort.
+  ///
+  /// In tr, this message translates to:
+  /// **'Takvim erişim izni gerekli. Ayarlardan izin verin.'**
+  String get csPermNeededShort;
+
+  /// No description provided for @csPermNeededBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'Takvimlerinizi senkronize etmek için takvim erişim izni vermeniz gerekiyor.'**
+  String get csPermNeededBody;
 }
 
 class _AppLocalizationsDelegate

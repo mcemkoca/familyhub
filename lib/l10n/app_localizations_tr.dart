@@ -6903,4 +6903,88 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get battProfileCycling => 'Bisiklet';
+
+  @override
+  String get csDirToExternal => 'FamilyHub → Dışarı';
+
+  @override
+  String get csDirFromExternal => 'Dışarı → FamilyHub';
+
+  @override
+  String get csDirBidirectional => 'Çift yönlü';
+
+  @override
+  String get csConflictLastWrite => 'Son yazan kazanır';
+
+  @override
+  String get csConflictManual => 'Her zaman sor';
+
+  @override
+  String get csConflictMerge => 'Birleştir';
+
+  @override
+  String get csConflictSourcePriority => 'Kaynak önceliği';
+
+  @override
+  String get timeAgoJustNow => 'Az önce';
+
+  @override
+  String timeAgoMinutes(Object n) {
+    return '$n dk önce';
+  }
+
+  @override
+  String timeAgoHours(Object n) {
+    return '$n saat önce';
+  }
+
+  @override
+  String timeAgoDays(Object n) {
+    return '$n gün önce';
+  }
+
+  @override
+  String csActiveConnections(Object n) {
+    return '$n aktif bağlantı';
+  }
+
+  @override
+  String csLastSync(Object time) {
+    return 'Son senkronizasyon: $time';
+  }
+
+  @override
+  String get csNeverSynced => 'Henüz senkronize edilmedi';
+
+  @override
+  String get csAdded => 'Eklenen';
+
+  @override
+  String get csUpdated => 'Güncellenen';
+
+  @override
+  String get csDeleted => 'Silinen';
+
+  @override
+  String csEventsSynced(Object n) {
+    return '$n etkinlik senkronize edildi';
+  }
+
+  @override
+  String csCalendarsFound(Object n) {
+    return '$n takvim bulundu';
+  }
+
+  @override
+  String csProviderSettings(Object provider) {
+    return '$provider Ayarları';
+  }
+
+  @override
+  String get csPermNeededShort =>
+      'Takvim erişim izni gerekli. Ayarlardan izin verin.';
+
+  @override
+  String get csPermNeededBody =>
+      'Takvimlerinizi senkronize etmek için takvim erişim izni vermeniz gerekiyor.';
 }

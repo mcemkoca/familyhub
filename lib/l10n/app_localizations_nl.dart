@@ -6888,4 +6888,88 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get battProfileCycling => 'Fietsen';
+
+  @override
+  String get csDirToExternal => 'FamilyHub → Extern';
+
+  @override
+  String get csDirFromExternal => 'Extern → FamilyHub';
+
+  @override
+  String get csDirBidirectional => 'Tweerichting';
+
+  @override
+  String get csConflictLastWrite => 'Laatste wijziging wint';
+
+  @override
+  String get csConflictManual => 'Altijd vragen';
+
+  @override
+  String get csConflictMerge => 'Samenvoegen';
+
+  @override
+  String get csConflictSourcePriority => 'Bronprioriteit';
+
+  @override
+  String get timeAgoJustNow => 'Zojuist';
+
+  @override
+  String timeAgoMinutes(Object n) {
+    return '$n min geleden';
+  }
+
+  @override
+  String timeAgoHours(Object n) {
+    return '$n uur geleden';
+  }
+
+  @override
+  String timeAgoDays(Object n) {
+    return '$n dagen geleden';
+  }
+
+  @override
+  String csActiveConnections(Object n) {
+    return '$n actieve verbindingen';
+  }
+
+  @override
+  String csLastSync(Object time) {
+    return 'Laatste synchronisatie: $time';
+  }
+
+  @override
+  String get csNeverSynced => 'Nog niet gesynchroniseerd';
+
+  @override
+  String get csAdded => 'Toegevoegd';
+
+  @override
+  String get csUpdated => 'Bijgewerkt';
+
+  @override
+  String get csDeleted => 'Verwijderd';
+
+  @override
+  String csEventsSynced(Object n) {
+    return '$n evenementen gesynchroniseerd';
+  }
+
+  @override
+  String csCalendarsFound(Object n) {
+    return '$n agenda\'s gevonden';
+  }
+
+  @override
+  String csProviderSettings(Object provider) {
+    return '$provider instellingen';
+  }
+
+  @override
+  String get csPermNeededShort =>
+      'Agendatoegang vereist. Geef toestemming via instellingen.';
+
+  @override
+  String get csPermNeededBody =>
+      'Om je agenda\'s te synchroniseren moet je agendatoegang verlenen.';
 }

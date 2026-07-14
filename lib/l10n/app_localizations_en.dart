@@ -6882,4 +6882,88 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get battProfileCycling => 'Cycling';
+
+  @override
+  String get csDirToExternal => 'FamilyHub → External';
+
+  @override
+  String get csDirFromExternal => 'External → FamilyHub';
+
+  @override
+  String get csDirBidirectional => 'Bidirectional';
+
+  @override
+  String get csConflictLastWrite => 'Last write wins';
+
+  @override
+  String get csConflictManual => 'Always ask';
+
+  @override
+  String get csConflictMerge => 'Merge';
+
+  @override
+  String get csConflictSourcePriority => 'Source priority';
+
+  @override
+  String get timeAgoJustNow => 'Just now';
+
+  @override
+  String timeAgoMinutes(Object n) {
+    return '$n min ago';
+  }
+
+  @override
+  String timeAgoHours(Object n) {
+    return '$n h ago';
+  }
+
+  @override
+  String timeAgoDays(Object n) {
+    return '$n d ago';
+  }
+
+  @override
+  String csActiveConnections(Object n) {
+    return '$n active connections';
+  }
+
+  @override
+  String csLastSync(Object time) {
+    return 'Last sync: $time';
+  }
+
+  @override
+  String get csNeverSynced => 'Not yet synced';
+
+  @override
+  String get csAdded => 'Added';
+
+  @override
+  String get csUpdated => 'Updated';
+
+  @override
+  String get csDeleted => 'Deleted';
+
+  @override
+  String csEventsSynced(Object n) {
+    return '$n events synced';
+  }
+
+  @override
+  String csCalendarsFound(Object n) {
+    return '$n calendars found';
+  }
+
+  @override
+  String csProviderSettings(Object provider) {
+    return '$provider settings';
+  }
+
+  @override
+  String get csPermNeededShort =>
+      'Calendar access required. Grant it in settings.';
+
+  @override
+  String get csPermNeededBody =>
+      'To sync your calendars you need to grant calendar access.';
 }

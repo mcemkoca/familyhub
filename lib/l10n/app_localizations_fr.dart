@@ -6909,4 +6909,88 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get battProfileCycling => 'Vélo';
+
+  @override
+  String get csDirToExternal => 'FamilyHub → Externe';
+
+  @override
+  String get csDirFromExternal => 'Externe → FamilyHub';
+
+  @override
+  String get csDirBidirectional => 'Bidirectionnel';
+
+  @override
+  String get csConflictLastWrite => 'La dernière écriture gagne';
+
+  @override
+  String get csConflictManual => 'Toujours demander';
+
+  @override
+  String get csConflictMerge => 'Fusionner';
+
+  @override
+  String get csConflictSourcePriority => 'Priorité à la source';
+
+  @override
+  String get timeAgoJustNow => 'À l\'instant';
+
+  @override
+  String timeAgoMinutes(Object n) {
+    return 'il y a $n min';
+  }
+
+  @override
+  String timeAgoHours(Object n) {
+    return 'il y a $n h';
+  }
+
+  @override
+  String timeAgoDays(Object n) {
+    return 'il y a $n j';
+  }
+
+  @override
+  String csActiveConnections(Object n) {
+    return '$n connexions actives';
+  }
+
+  @override
+  String csLastSync(Object time) {
+    return 'Dernière synchro : $time';
+  }
+
+  @override
+  String get csNeverSynced => 'Pas encore synchronisé';
+
+  @override
+  String get csAdded => 'Ajoutés';
+
+  @override
+  String get csUpdated => 'Mis à jour';
+
+  @override
+  String get csDeleted => 'Supprimés';
+
+  @override
+  String csEventsSynced(Object n) {
+    return '$n événements synchronisés';
+  }
+
+  @override
+  String csCalendarsFound(Object n) {
+    return '$n calendriers trouvés';
+  }
+
+  @override
+  String csProviderSettings(Object provider) {
+    return 'Paramètres $provider';
+  }
+
+  @override
+  String get csPermNeededShort =>
+      'Accès au calendrier requis. Autorisez via les paramètres.';
+
+  @override
+  String get csPermNeededBody =>
+      'Pour synchroniser vos calendriers, vous devez autoriser l\'accès au calendrier.';
 }

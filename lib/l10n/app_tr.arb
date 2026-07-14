@@ -2765,5 +2765,67 @@
   "battProfileDriving": "Araç",
   "battProfileRunning": "Koşu",
   "battProfileEmergency": "Acil",
-  "battProfileCycling": "Bisiklet"
+  "battProfileCycling": "Bisiklet",
+  "csDirToExternal": "FamilyHub → Dışarı",
+  "csDirFromExternal": "Dışarı → FamilyHub",
+  "csDirBidirectional": "Çift yönlü",
+  "csConflictLastWrite": "Son yazan kazanır",
+  "csConflictManual": "Her zaman sor",
+  "csConflictMerge": "Birleştir",
+  "csConflictSourcePriority": "Kaynak önceliği",
+  "timeAgoJustNow": "Az önce",
+  "timeAgoMinutes": "{n} dk önce",
+  "@timeAgoMinutes": {
+    "placeholders": {
+      "n": {}
+    }
+  },
+  "timeAgoHours": "{n} saat önce",
+  "@timeAgoHours": {
+    "placeholders": {
+      "n": {}
+    }
+  },
+  "timeAgoDays": "{n} gün önce",
+  "@timeAgoDays": {
+    "placeholders": {
+      "n": {}
+    }
+  },
+  "csActiveConnections": "{n} aktif bağlantı",
+  "@csActiveConnections": {
+    "placeholders": {
+      "n": {}
+    }
+  },
+  "csLastSync": "Son senkronizasyon: {time}",
+  "@csLastSync": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "csNeverSynced": "Henüz senkronize edilmedi",
+  "csAdded": "Eklenen",
+  "csUpdated": "Güncellenen",
+  "csDeleted": "Silinen",
+  "csEventsSynced": "{n} etkinlik senkronize edildi",
+  "@csEventsSynced": {
+    "placeholders": {
+      "n": {}
+    }
+  },
+  "csCalendarsFound": "{n} takvim bulundu",
+  "@csCalendarsFound": {
+    "placeholders": {
+      "n": {}
+    }
+  },
+  "csProviderSettings": "{provider} Ayarları",
+  "@csProviderSettings": {
+    "placeholders": {
+      "provider": {}
+    }
+  },
+  "csPermNeededShort": "Takvim erişim izni gerekli. Ayarlardan izin verin.",
+  "csPermNeededBody": "Takvimlerinizi senkronize etmek için takvim erişim izni vermeniz gerekiyor."
 }
