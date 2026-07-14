@@ -6475,4 +6475,58 @@ class AppLocalizationsNl extends AppLocalizations {
   String chatOption(Object n) {
     return 'Optie $n';
   }
+
+  @override
+  String get authWelcomeTitle => 'Welkom bij FamilyHub';
+
+  @override
+  String get authWelcomeSubtitle => 'Samen staan jullie sterker';
+
+  @override
+  String get authFamilyBadge => 'Gezin';
+
+  @override
+  String get authChildLoginPin => 'Inloggen als kind met pincode';
+
+  @override
+  String get authCreateFamilyCta => 'Gezin aanmaken';
+
+  @override
+  String get authErrOffline =>
+      'Geen internetverbinding. Controleer je verbinding en probeer opnieuw.';
+
+  @override
+  String get authErrServerUnavailable =>
+      'De inlogservice is momenteel niet bereikbaar. Probeer het opnieuw.';
+
+  @override
+  String get authErrInvalidCredentials =>
+      'E-mailadres of wachtwoord is onjuist.';
+
+  @override
+  String get authErrEmailNotConfirmed =>
+      'Bevestig je e-mailadres om door te gaan.';
+
+  @override
+  String get authErrRateLimited =>
+      'Te veel inlogpogingen. Probeer het later opnieuw.';
+
+  @override
+  String get authErrConfiguration =>
+      'Aanmelden met Google is momenteel niet geconfigureerd. Meld je aan met e-mail.';
+
+  @override
+  String get authErrSessionMissing =>
+      'Je sessie is niet gevonden. Meld je opnieuw aan.';
+
+  @override
+  String get authErrUnknown => 'Aanmelden mislukt. Probeer het opnieuw.';
+
+  @override
+  String get authBiometricNotAvailable =>
+      'Biometrische verificatie wordt niet ondersteund';
+
+  @override
+  String get authBiometricNeedLoginFirst =>
+      'Meld je eerst aan met e-mail; daarna wordt de vingerafdruk actief';
 }

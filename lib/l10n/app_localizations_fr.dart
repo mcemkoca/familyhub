@@ -6496,4 +6496,58 @@ class AppLocalizationsFr extends AppLocalizations {
   String chatOption(Object n) {
     return 'Option $n';
   }
+
+  @override
+  String get authWelcomeTitle => 'Bienvenue sur FamilyHub';
+
+  @override
+  String get authWelcomeSubtitle => 'Ensemble, vous êtes plus forts';
+
+  @override
+  String get authFamilyBadge => 'Famille';
+
+  @override
+  String get authChildLoginPin => 'Connexion enfant avec un code PIN';
+
+  @override
+  String get authCreateFamilyCta => 'Créer une famille';
+
+  @override
+  String get authErrOffline =>
+      'Aucune connexion internet. Vérifiez votre connexion et réessayez.';
+
+  @override
+  String get authErrServerUnavailable =>
+      'Le service de connexion est momentanément indisponible. Réessayez.';
+
+  @override
+  String get authErrInvalidCredentials =>
+      'Adresse e-mail ou mot de passe incorrect.';
+
+  @override
+  String get authErrEmailNotConfirmed =>
+      'Confirmez votre adresse e-mail pour continuer.';
+
+  @override
+  String get authErrRateLimited =>
+      'Trop de tentatives de connexion. Réessayez plus tard.';
+
+  @override
+  String get authErrConfiguration =>
+      'La connexion avec Google n\'est pas configurée pour le moment. Connectez-vous par e-mail.';
+
+  @override
+  String get authErrSessionMissing =>
+      'Votre session est introuvable. Reconnectez-vous.';
+
+  @override
+  String get authErrUnknown => 'Échec de la connexion. Veuillez réessayer.';
+
+  @override
+  String get authBiometricNotAvailable =>
+      'L\'authentification biométrique n\'est pas prise en charge';
+
+  @override
+  String get authBiometricNeedLoginFirst =>
+      'Connectez-vous d\'abord par e-mail, l\'empreinte sera ensuite activée';
 }

@@ -12203,6 +12203,96 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Seçenek {n}'**
   String chatOption(Object n);
+
+  /// No description provided for @authWelcomeTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ailenize Hoş Geldiniz'**
+  String get authWelcomeTitle;
+
+  /// No description provided for @authWelcomeSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Birlikte daha güçlüsünüz'**
+  String get authWelcomeSubtitle;
+
+  /// No description provided for @authFamilyBadge.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile'**
+  String get authFamilyBadge;
+
+  /// No description provided for @authChildLoginPin.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çocuk Girişi (PIN ile)'**
+  String get authChildLoginPin;
+
+  /// No description provided for @authCreateFamilyCta.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile Kur'**
+  String get authCreateFamilyCta;
+
+  /// No description provided for @authErrOffline.
+  ///
+  /// In tr, this message translates to:
+  /// **'İnternet bağlantısı bulunamadı. Bağlantınızı kontrol edip tekrar deneyin.'**
+  String get authErrOffline;
+
+  /// No description provided for @authErrServerUnavailable.
+  ///
+  /// In tr, this message translates to:
+  /// **'Giriş servisine şu anda ulaşılamıyor. Lütfen tekrar deneyin.'**
+  String get authErrServerUnavailable;
+
+  /// No description provided for @authErrInvalidCredentials.
+  ///
+  /// In tr, this message translates to:
+  /// **'E-posta adresi veya parola hatalı.'**
+  String get authErrInvalidCredentials;
+
+  /// No description provided for @authErrEmailNotConfirmed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Devam etmek için e-posta adresinizi doğrulayın.'**
+  String get authErrEmailNotConfirmed;
+
+  /// No description provided for @authErrRateLimited.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çok fazla giriş denemesi yapıldı. Bir süre sonra tekrar deneyin.'**
+  String get authErrRateLimited;
+
+  /// No description provided for @authErrConfiguration.
+  ///
+  /// In tr, this message translates to:
+  /// **'Google ile giriş şu anda yapılandırılamadı. Lütfen e-posta ile giriş yapın.'**
+  String get authErrConfiguration;
+
+  /// No description provided for @authErrSessionMissing.
+  ///
+  /// In tr, this message translates to:
+  /// **'Oturumunuz bulunamadı. Lütfen tekrar giriş yapın.'**
+  String get authErrSessionMissing;
+
+  /// No description provided for @authErrUnknown.
+  ///
+  /// In tr, this message translates to:
+  /// **'Giriş yapılamadı. Lütfen tekrar deneyin.'**
+  String get authErrUnknown;
+
+  /// No description provided for @authBiometricNotAvailable.
+  ///
+  /// In tr, this message translates to:
+  /// **'Biyometrik kimlik doğrulama desteklenmiyor'**
+  String get authBiometricNotAvailable;
+
+  /// No description provided for @authBiometricNeedLoginFirst.
+  ///
+  /// In tr, this message translates to:
+  /// **'Önce e-posta ile giriş yapın, sonra parmak izi aktifleşir'**
+  String get authBiometricNeedLoginFirst;
 }
 
 class _AppLocalizationsDelegate

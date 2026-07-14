@@ -6491,4 +6491,57 @@ class AppLocalizationsTr extends AppLocalizations {
   String chatOption(Object n) {
     return 'Seçenek $n';
   }
+
+  @override
+  String get authWelcomeTitle => 'Ailenize Hoş Geldiniz';
+
+  @override
+  String get authWelcomeSubtitle => 'Birlikte daha güçlüsünüz';
+
+  @override
+  String get authFamilyBadge => 'Aile';
+
+  @override
+  String get authChildLoginPin => 'Çocuk Girişi (PIN ile)';
+
+  @override
+  String get authCreateFamilyCta => 'Aile Kur';
+
+  @override
+  String get authErrOffline =>
+      'İnternet bağlantısı bulunamadı. Bağlantınızı kontrol edip tekrar deneyin.';
+
+  @override
+  String get authErrServerUnavailable =>
+      'Giriş servisine şu anda ulaşılamıyor. Lütfen tekrar deneyin.';
+
+  @override
+  String get authErrInvalidCredentials => 'E-posta adresi veya parola hatalı.';
+
+  @override
+  String get authErrEmailNotConfirmed =>
+      'Devam etmek için e-posta adresinizi doğrulayın.';
+
+  @override
+  String get authErrRateLimited =>
+      'Çok fazla giriş denemesi yapıldı. Bir süre sonra tekrar deneyin.';
+
+  @override
+  String get authErrConfiguration =>
+      'Google ile giriş şu anda yapılandırılamadı. Lütfen e-posta ile giriş yapın.';
+
+  @override
+  String get authErrSessionMissing =>
+      'Oturumunuz bulunamadı. Lütfen tekrar giriş yapın.';
+
+  @override
+  String get authErrUnknown => 'Giriş yapılamadı. Lütfen tekrar deneyin.';
+
+  @override
+  String get authBiometricNotAvailable =>
+      'Biyometrik kimlik doğrulama desteklenmiyor';
+
+  @override
+  String get authBiometricNeedLoginFirst =>
+      'Önce e-posta ile giriş yapın, sonra parmak izi aktifleşir';
 }

@@ -842,12 +842,16 @@
   "saatFormati": "TIME FORMAT",
   "haftaninIlkGunu": "FIRST DAY OF WEEK",
   "olcuBirimi": "MEASUREMENT UNIT",
-  "sicaklikBirimi": "TEMPERATURE UNIT",
+  "sicaklikBirimi": "Temperature Unit",
   "sifirlama": "RESET",
   "ulkeBolge": "COUNTRY / REGION",
   "cihazDiliOtomatik": "Device Language (Automatic)",
   "sistemDili": "System language: {lang}",
-  "@sistemDili": { "placeholders": { "lang": {} } },
+  "@sistemDili": {
+    "placeholders": {
+      "lang": {}
+    }
+  },
   "kaydet": "Save",
   "kaydedildi": "Saved",
   "saat24": "24-hour",
@@ -888,14 +892,33 @@
   "shoppingKatEv": "Household",
   "shoppingKatDiger": "Other",
   "shoppingAdet": "{count, plural, =1{{count} pc} other{{count} pcs}}",
-  "@shoppingAdet": { "placeholders": { "count": { "type": "int" } } },
+  "@shoppingAdet": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingTamamlandiOran": "{done} / {total} completed",
-  "@shoppingTamamlandiOran": { "placeholders": { "done": {}, "total": {} } },
+  "@shoppingTamamlandiOran": {
+    "placeholders": {
+      "done": {},
+      "total": {}
+    }
+  },
   "shoppingGeriAl": "Undo",
   "shoppingSilindi": "\"{name}\" deleted",
-  "@shoppingSilindi": { "placeholders": { "name": {} } },
+  "@shoppingSilindi": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "shoppingZatenListede": "\"{name}\" is already on the list",
-  "@shoppingZatenListede": { "placeholders": { "name": {} } },
+  "@shoppingZatenListede": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "shoppingGecerliMiktar": "Enter a valid quantity (1 or more)",
   "shoppingYuklenemedi": "Your shopping list could not be loaded right now. Please try again.",
   "shoppingTekrarDene": "Try Again",
@@ -904,14 +927,27 @@
   "shoppingTipAiMarket": "AI Store List",
   "shoppingTipTarifeGore": "Add from Recipe",
   "shoppingMalzemeEklendi": "{count} ingredients added for {title}",
-  "@shoppingMalzemeEklendi": { "placeholders": { "title": {}, "count": {} } },
+  "@shoppingMalzemeEklendi": {
+    "placeholders": {
+      "title": {},
+      "count": {}
+    }
+  },
   "shoppingListeyeEklendi": "{name} added to the list",
-  "@shoppingListeyeEklendi": { "placeholders": { "name": {} } },
+  "@shoppingListeyeEklendi": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "shoppingTumUrunlerEklendi": "All items added to the list",
   "shoppingKonumAliniyor": "Getting location…",
   "shoppingKonumIzniYok": "Location permission denied. Please allow it in Settings.",
   "shoppingKonumBulundu": "Your location: {coords} — opening map",
-  "@shoppingKonumBulundu": { "placeholders": { "coords": {} } },
+  "@shoppingKonumBulundu": {
+    "placeholders": {
+      "coords": {}
+    }
+  },
   "shoppingKonumAlinamadi": "Could not get location. Please try again.",
   "shoppingAiHazirlaniyor": "Preparing AI store list…",
   "shoppingListeOlusturulamadi": "List could not be created. Check your internet connection.",
@@ -920,15 +956,28 @@
   "shoppingTumunuEkle": "Add All",
   "shoppingTarifeGoreBaslik": "Shopping by Recipe",
   "shoppingTarifSayisi": "{count} recipes",
-  "@shoppingTarifSayisi": { "placeholders": { "count": {} } },
+  "@shoppingTarifSayisi": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shoppingTarifAra": "Search recipes...",
   "shoppingTarifMeta": "{time} min · {count} ingredients",
-  "@shoppingTarifMeta": { "placeholders": { "time": {}, "count": {} } },
+  "@shoppingTarifMeta": {
+    "placeholders": {
+      "time": {},
+      "count": {}
+    }
+  },
   "shoppingFiyatGuncellenemedi": "Prices could not be updated (AI quota may be full)",
   "shoppingFiyatBasarisiz": "Price update failed",
   "shoppingFiyatlariGuncelle": "Update Prices (AI)",
   "shoppingGuncellendi": "Updated: {date}",
-  "@shoppingGuncellendi": { "placeholders": { "date": {} } },
+  "@shoppingGuncellendi": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "shoppingMarketKatalogu": "Store Catalog",
   "shoppingHaftaninFirsatlari": "This Week's Deals",
   "shoppingTumu": "All",
@@ -947,7 +996,11 @@
   "shoppingBirim": "Unit",
   "legalBenefitsTitle": "Legal Rights & Benefits",
   "legalBenefitsSubtitle": "{country} · rights and support for your family",
-  "@legalBenefitsSubtitle": { "placeholders": { "country": {} } },
+  "@legalBenefitsSubtitle": {
+    "placeholders": {
+      "country": {}
+    }
+  },
   "legalSearchHint": "Search rights or benefits...",
   "legalSavedOnly": "Saved",
   "legalAll": "All",
@@ -958,7 +1011,11 @@
   "legalExpired": "Expired",
   "legalStale": "Verification outdated",
   "legalLastVerified": "Last verified: {date}",
-  "@legalLastVerified": { "placeholders": { "date": {} } },
+  "@legalLastVerified": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "legalPossibleEligibility": "You may be eligible based on your profile. Verify the conditions from the official source.",
   "legalDisclaimer": "This information is for general guidance only, not legal advice. Rules may change; final eligibility is determined by the relevant institution.",
   "legalEmptyTitle": "No results found",
@@ -995,7 +1052,11 @@
   "privacyModChild": "Child",
   "privacyModLocation": "Location",
   "kitchenRecipeCount": "{count} recipes · weekly plan",
-  "@kitchenRecipeCount": { "placeholders": { "count": {} } },
+  "@kitchenRecipeCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "kitchenAddRecipe": "Recipe",
   "kitchenTabRecipes": "Recipes",
   "kitchenTabWeekly": "Weekly",
@@ -1012,7 +1073,11 @@
   "legalRemindIn30Days": "In 30 days",
   "legalReminderNotifTitle": "Legal benefit reminder",
   "legalReminderNotifBody": "{title} — check the latest info from the official source.",
-  "@legalReminderNotifBody": { "placeholders": { "title": {} } },
+  "@legalReminderNotifBody": {
+    "placeholders": {
+      "title": {}
+    }
+  },
   "familyIntelligenceTitle": "Family Intelligence",
   "familyIntelligenceSubtitle": "Today's priorities for your family",
   "fiPriorityCritical": "Critical",
@@ -1025,41 +1090,74 @@
   "fiEmptyDesc": "Your family data is up to date. New priorities will appear here.",
   "fiInsightOverdueTitle": "Overdue tasks",
   "fiInsightOverdueBody": "{count} tasks are overdue. Review them.",
-  "@fiInsightOverdueBody": { "placeholders": { "count": {} } },
+  "@fiInsightOverdueBody": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fiReasonOverdue": "There are tasks past their due date and not completed.",
   "fiInsightPaymentTitle": "Upcoming payment",
   "fiInsightPaymentBody": "A payment is due in {days} days.",
-  "@fiInsightPaymentBody": { "placeholders": { "days": {} } },
+  "@fiInsightPaymentBody": {
+    "placeholders": {
+      "days": {}
+    }
+  },
   "fiReasonPayment": "An upcoming payment date was found in your budget.",
   "fiInsightTodayEventsTitle": "Today's events",
   "fiInsightTodayEventsBody": "You have {count} events planned today.",
-  "@fiInsightTodayEventsBody": { "placeholders": { "count": {} } },
+  "@fiInsightTodayEventsBody": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fiReasonTodayEvents": "Your calendar has events for today.",
   "fiInsightShoppingTitle": "Shopping list",
   "fiInsightShoppingBody": "You have {count} pending items on your list.",
-  "@fiInsightShoppingBody": { "placeholders": { "count": {} } },
+  "@fiInsightShoppingBody": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fiReasonShopping": "Uncompleted shopping items have accumulated.",
   "fiInsightPendingTasksTitle": "Pending tasks",
   "fiInsightPendingTasksBody": "{count} tasks are waiting for you.",
-  "@fiInsightPendingTasksBody": { "placeholders": { "count": {} } },
+  "@fiInsightPendingTasksBody": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fiReasonPendingTasks": "You have tasks that are not completed yet.",
   "fiInsightAllClearTitle": "All clear",
   "fiInsightAllClearBody": "No pending tasks or shopping. Great job!",
   "fiReasonAllClear": "No overdue tasks, pending tasks or shopping items were found.",
   "fiInsightBusyDayTitle": "A busy day",
   "fiInsightBusyDayBody": "Today you have {events} events and {tasks} tasks. Consider sharing tasks.",
-  "@fiInsightBusyDayBody": { "placeholders": { "events": {}, "tasks": {} } },
+  "@fiInsightBusyDayBody": {
+    "placeholders": {
+      "events": {},
+      "tasks": {}
+    }
+  },
   "fiReasonBusyDay": "Today's event count and pending tasks are both high.",
   "fiInsightShareShoppingTitle": "Share shopping",
   "fiInsightShareShoppingBody": "You have {count} items on your list. You can share it with a family member.",
-  "@fiInsightShareShoppingBody": { "placeholders": { "count": {} } },
+  "@fiInsightShareShoppingBody": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fiReasonShareShopping": "The shopping list is full and there is more than one family member.",
   "fiNotifyTop": "Notify top priority",
   "fiNotified": "Notification sent",
   "fiDailySummary": "Daily summary notification",
   "fiDailySummaryDesc": "Notify the top priorities every day at your chosen time",
   "fiDailySummaryOn": "On · every day at {hour}:00",
-  "@fiDailySummaryOn": { "placeholders": { "hour": {} } },
+  "@fiDailySummaryOn": {
+    "placeholders": {
+      "hour": {}
+    }
+  },
   "fiDailySummaryNotifTitle": "Family Intelligence",
   "fiDailySummaryNotifBody": "Today's priorities are ready. Tap to see them.",
   "fiPickHour": "Hour",
@@ -1095,7 +1193,11 @@
   "fhaCancel": "Cancel",
   "fhaPreviewAddItems": "These items will be added to your shopping list:",
   "fhaAddedItems": "{count} items added to the list",
-  "@fhaAddedItems": { "placeholders": { "count": {} } },
+  "@fhaAddedItems": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fhaQuickAddItems": "Add suggested items",
   "fhaActionFailed": "The action could not be completed",
   "fhaActionUnsupported": "Use the related module for this action",
@@ -1286,7 +1388,6 @@
   "openstreetmapHaritasindanIstediginizNoktayiSecin": "Pick any point from the OpenStreetMap map",
   "haritayiAc": "Open Map",
   "konumSecilmezseSehirListesindenKullanilir": "If no location is picked, the city list is used",
-  "sicaklikBirimi": "Temperature Unit",
   "havaDurumuAlinamadi": "Couldn't get weather",
   "gunlukTahmin": "7-Day Forecast",
   "ruzgar": "Wind",
@@ -2040,5 +2141,20 @@
   "srToneUrgent": "Urgent",
   "srToneGentle": "Gentle",
   "chatPollQuestion": "Question (e.g. What's for dinner?)",
-  "chatOption": "Option {n}"
+  "chatOption": "Option {n}",
+  "authWelcomeTitle": "Welcome to FamilyHub",
+  "authWelcomeSubtitle": "Stronger together",
+  "authFamilyBadge": "Family",
+  "authChildLoginPin": "Child login with PIN",
+  "authCreateFamilyCta": "Create a family",
+  "authErrOffline": "No internet connection. Check your connection and try again.",
+  "authErrServerUnavailable": "The sign-in service is currently unavailable. Please try again.",
+  "authErrInvalidCredentials": "Incorrect email or password.",
+  "authErrEmailNotConfirmed": "Please verify your email address to continue.",
+  "authErrRateLimited": "Too many sign-in attempts. Please try again later.",
+  "authErrConfiguration": "Google sign-in isn't configured right now. Please sign in with email.",
+  "authErrSessionMissing": "Your session was not found. Please sign in again.",
+  "authErrUnknown": "Sign-in failed. Please try again.",
+  "authBiometricNotAvailable": "Biometric authentication is not supported",
+  "authBiometricNeedLoginFirst": "Sign in with email first, then fingerprint will be enabled"
 }

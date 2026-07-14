@@ -6470,4 +6470,57 @@ class AppLocalizationsEn extends AppLocalizations {
   String chatOption(Object n) {
     return 'Option $n';
   }
+
+  @override
+  String get authWelcomeTitle => 'Welcome to FamilyHub';
+
+  @override
+  String get authWelcomeSubtitle => 'Stronger together';
+
+  @override
+  String get authFamilyBadge => 'Family';
+
+  @override
+  String get authChildLoginPin => 'Child login with PIN';
+
+  @override
+  String get authCreateFamilyCta => 'Create a family';
+
+  @override
+  String get authErrOffline =>
+      'No internet connection. Check your connection and try again.';
+
+  @override
+  String get authErrServerUnavailable =>
+      'The sign-in service is currently unavailable. Please try again.';
+
+  @override
+  String get authErrInvalidCredentials => 'Incorrect email or password.';
+
+  @override
+  String get authErrEmailNotConfirmed =>
+      'Please verify your email address to continue.';
+
+  @override
+  String get authErrRateLimited =>
+      'Too many sign-in attempts. Please try again later.';
+
+  @override
+  String get authErrConfiguration =>
+      'Google sign-in isn\'t configured right now. Please sign in with email.';
+
+  @override
+  String get authErrSessionMissing =>
+      'Your session was not found. Please sign in again.';
+
+  @override
+  String get authErrUnknown => 'Sign-in failed. Please try again.';
+
+  @override
+  String get authBiometricNotAvailable =>
+      'Biometric authentication is not supported';
+
+  @override
+  String get authBiometricNeedLoginFirst =>
+      'Sign in with email first, then fingerprint will be enabled';
 }

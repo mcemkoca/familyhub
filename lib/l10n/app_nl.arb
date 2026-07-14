@@ -842,12 +842,16 @@
   "saatFormati": "TIJDNOTATIE",
   "haftaninIlkGunu": "EERSTE DAG VAN DE WEEK",
   "olcuBirimi": "MEETEENHEID",
-  "sicaklikBirimi": "TEMPERATUUREENHEID",
+  "sicaklikBirimi": "Temperatuureenheid",
   "sifirlama": "RESETTEN",
   "ulkeBolge": "LAND / REGIO",
   "cihazDiliOtomatik": "Apparaattaal (automatisch)",
   "sistemDili": "Systeemtaal: {lang}",
-  "@sistemDili": { "placeholders": { "lang": {} } },
+  "@sistemDili": {
+    "placeholders": {
+      "lang": {}
+    }
+  },
   "kaydet": "Opslaan",
   "kaydedildi": "Opgeslagen",
   "saat24": "24-uurs",
@@ -888,14 +892,33 @@
   "shoppingKatEv": "Huishouden",
   "shoppingKatDiger": "Overig",
   "shoppingAdet": "{count, plural, =1{{count} st} other{{count} st}}",
-  "@shoppingAdet": { "placeholders": { "count": { "type": "int" } } },
+  "@shoppingAdet": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingTamamlandiOran": "{done} / {total} voltooid",
-  "@shoppingTamamlandiOran": { "placeholders": { "done": {}, "total": {} } },
+  "@shoppingTamamlandiOran": {
+    "placeholders": {
+      "done": {},
+      "total": {}
+    }
+  },
   "shoppingGeriAl": "Ongedaan maken",
   "shoppingSilindi": "\"{name}\" verwijderd",
-  "@shoppingSilindi": { "placeholders": { "name": {} } },
+  "@shoppingSilindi": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "shoppingZatenListede": "\"{name}\" staat al op de lijst",
-  "@shoppingZatenListede": { "placeholders": { "name": {} } },
+  "@shoppingZatenListede": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "shoppingGecerliMiktar": "Voer een geldig aantal in (1 of meer)",
   "shoppingYuklenemedi": "Je boodschappenlijst kon nu niet worden geladen. Probeer het opnieuw.",
   "shoppingTekrarDene": "Opnieuw proberen",
@@ -904,14 +927,27 @@
   "shoppingTipAiMarket": "AI-winkellijst",
   "shoppingTipTarifeGore": "Toevoegen uit recept",
   "shoppingMalzemeEklendi": "{count} ingrediënten toegevoegd voor {title}",
-  "@shoppingMalzemeEklendi": { "placeholders": { "title": {}, "count": {} } },
+  "@shoppingMalzemeEklendi": {
+    "placeholders": {
+      "title": {},
+      "count": {}
+    }
+  },
   "shoppingListeyeEklendi": "{name} toegevoegd aan de lijst",
-  "@shoppingListeyeEklendi": { "placeholders": { "name": {} } },
+  "@shoppingListeyeEklendi": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "shoppingTumUrunlerEklendi": "Alle artikelen toegevoegd aan de lijst",
   "shoppingKonumAliniyor": "Locatie ophalen…",
   "shoppingKonumIzniYok": "Locatietoestemming geweigerd. Sta het toe in Instellingen.",
   "shoppingKonumBulundu": "Je locatie: {coords} — kaart openen",
-  "@shoppingKonumBulundu": { "placeholders": { "coords": {} } },
+  "@shoppingKonumBulundu": {
+    "placeholders": {
+      "coords": {}
+    }
+  },
   "shoppingKonumAlinamadi": "Kon locatie niet ophalen. Probeer het opnieuw.",
   "shoppingAiHazirlaniyor": "AI-winkellijst voorbereiden…",
   "shoppingListeOlusturulamadi": "Lijst kon niet worden gemaakt. Controleer je internetverbinding.",
@@ -920,15 +956,28 @@
   "shoppingTumunuEkle": "Alles toevoegen",
   "shoppingTarifeGoreBaslik": "Boodschappen per recept",
   "shoppingTarifSayisi": "{count} recepten",
-  "@shoppingTarifSayisi": { "placeholders": { "count": {} } },
+  "@shoppingTarifSayisi": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shoppingTarifAra": "Recepten zoeken...",
   "shoppingTarifMeta": "{time} min · {count} ingrediënten",
-  "@shoppingTarifMeta": { "placeholders": { "time": {}, "count": {} } },
+  "@shoppingTarifMeta": {
+    "placeholders": {
+      "time": {},
+      "count": {}
+    }
+  },
   "shoppingFiyatGuncellenemedi": "Prijzen konden niet worden bijgewerkt (AI-quotum mogelijk vol)",
   "shoppingFiyatBasarisiz": "Prijsupdate mislukt",
   "shoppingFiyatlariGuncelle": "Prijzen bijwerken (AI)",
   "shoppingGuncellendi": "Bijgewerkt: {date}",
-  "@shoppingGuncellendi": { "placeholders": { "date": {} } },
+  "@shoppingGuncellendi": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "shoppingMarketKatalogu": "Winkelcatalogus",
   "shoppingHaftaninFirsatlari": "Aanbiedingen van deze week",
   "shoppingTumu": "Alles",
@@ -947,7 +996,11 @@
   "shoppingBirim": "Eenheid",
   "legalBenefitsTitle": "Rechten en voordelen",
   "legalBenefitsSubtitle": "{country} · rechten en steun voor je gezin",
-  "@legalBenefitsSubtitle": { "placeholders": { "country": {} } },
+  "@legalBenefitsSubtitle": {
+    "placeholders": {
+      "country": {}
+    }
+  },
   "legalSearchHint": "Zoek een recht of voordeel...",
   "legalSavedOnly": "Opgeslagen",
   "legalAll": "Alles",
@@ -958,7 +1011,11 @@
   "legalExpired": "Verlopen",
   "legalStale": "Verificatie verouderd",
   "legalLastVerified": "Laatst geverifieerd: {date}",
-  "@legalLastVerified": { "placeholders": { "date": {} } },
+  "@legalLastVerified": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "legalPossibleEligibility": "Op basis van je profiel kom je mogelijk in aanmerking. Controleer de voorwaarden bij de officiële bron.",
   "legalDisclaimer": "Deze informatie is uitsluitend algemeen bedoeld en vormt geen juridisch advies. Regels kunnen wijzigen; de definitieve geschiktheid wordt bepaald door de betrokken instantie.",
   "legalEmptyTitle": "Geen resultaten",
@@ -995,7 +1052,11 @@
   "privacyModChild": "Kind",
   "privacyModLocation": "Locatie",
   "kitchenRecipeCount": "{count} recepten · weekplan",
-  "@kitchenRecipeCount": { "placeholders": { "count": {} } },
+  "@kitchenRecipeCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "kitchenAddRecipe": "Recept",
   "kitchenTabRecipes": "Recepten",
   "kitchenTabWeekly": "Wekelijks",
@@ -1012,7 +1073,11 @@
   "legalRemindIn30Days": "Over 30 dagen",
   "legalReminderNotifTitle": "Herinnering rechten",
   "legalReminderNotifBody": "{title} — controleer de actuele info bij de officiële bron.",
-  "@legalReminderNotifBody": { "placeholders": { "title": {} } },
+  "@legalReminderNotifBody": {
+    "placeholders": {
+      "title": {}
+    }
+  },
   "familyIntelligenceTitle": "Gezinsintelligentie",
   "familyIntelligenceSubtitle": "De prioriteiten van vandaag voor je gezin",
   "fiPriorityCritical": "Kritiek",
@@ -1025,41 +1090,74 @@
   "fiEmptyDesc": "Je gezinsgegevens zijn actueel. Nieuwe prioriteiten verschijnen hier.",
   "fiInsightOverdueTitle": "Achterstallige taken",
   "fiInsightOverdueBody": "{count} taken zijn achterstallig. Bekijk ze.",
-  "@fiInsightOverdueBody": { "placeholders": { "count": {} } },
+  "@fiInsightOverdueBody": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fiReasonOverdue": "Er zijn taken die hun einddatum voorbij zijn en niet voltooid.",
   "fiInsightPaymentTitle": "Aankomende betaling",
   "fiInsightPaymentBody": "Een betaling is over {days} dagen verschuldigd.",
-  "@fiInsightPaymentBody": { "placeholders": { "days": {} } },
+  "@fiInsightPaymentBody": {
+    "placeholders": {
+      "days": {}
+    }
+  },
   "fiReasonPayment": "Er is een aankomende betaaldatum in je budget gevonden.",
   "fiInsightTodayEventsTitle": "Evenementen vandaag",
   "fiInsightTodayEventsBody": "Je hebt vandaag {count} geplande evenementen.",
-  "@fiInsightTodayEventsBody": { "placeholders": { "count": {} } },
+  "@fiInsightTodayEventsBody": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fiReasonTodayEvents": "Je agenda heeft evenementen voor vandaag.",
   "fiInsightShoppingTitle": "Boodschappenlijst",
   "fiInsightShoppingBody": "Je hebt {count} openstaande items op je lijst.",
-  "@fiInsightShoppingBody": { "placeholders": { "count": {} } },
+  "@fiInsightShoppingBody": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fiReasonShopping": "Er zijn onvoltooide boodschappen opgestapeld.",
   "fiInsightPendingTasksTitle": "Openstaande taken",
   "fiInsightPendingTasksBody": "{count} taken wachten op je.",
-  "@fiInsightPendingTasksBody": { "placeholders": { "count": {} } },
+  "@fiInsightPendingTasksBody": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fiReasonPendingTasks": "Je hebt taken die nog niet voltooid zijn.",
   "fiInsightAllClearTitle": "Alles in orde",
   "fiInsightAllClearBody": "Geen openstaande taken of boodschappen. Goed bezig!",
   "fiReasonAllClear": "Geen achterstallige taken, openstaande taken of boodschappen gevonden.",
   "fiInsightBusyDayTitle": "Een drukke dag",
   "fiInsightBusyDayBody": "Vandaag heb je {events} evenementen en {tasks} taken. Overweeg taken te delen.",
-  "@fiInsightBusyDayBody": { "placeholders": { "events": {}, "tasks": {} } },
+  "@fiInsightBusyDayBody": {
+    "placeholders": {
+      "events": {},
+      "tasks": {}
+    }
+  },
   "fiReasonBusyDay": "Het aantal evenementen van vandaag en openstaande taken zijn beide hoog.",
   "fiInsightShareShoppingTitle": "Boodschappen delen",
   "fiInsightShareShoppingBody": "Je hebt {count} items op je lijst. Je kunt die met een gezinslid delen.",
-  "@fiInsightShareShoppingBody": { "placeholders": { "count": {} } },
+  "@fiInsightShareShoppingBody": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fiReasonShareShopping": "De boodschappenlijst is vol en er is meer dan één gezinslid.",
   "fiNotifyTop": "Topprioriteit melden",
   "fiNotified": "Melding verzonden",
   "fiDailySummary": "Dagelijkse samenvatting",
   "fiDailySummaryDesc": "Meld de topprioriteiten elke dag op het gekozen tijdstip",
   "fiDailySummaryOn": "Aan · elke dag om {hour}:00",
-  "@fiDailySummaryOn": { "placeholders": { "hour": {} } },
+  "@fiDailySummaryOn": {
+    "placeholders": {
+      "hour": {}
+    }
+  },
   "fiDailySummaryNotifTitle": "Gezinsintelligentie",
   "fiDailySummaryNotifBody": "De prioriteiten van vandaag staan klaar. Tik om ze te zien.",
   "fiPickHour": "Uur",
@@ -1095,7 +1193,11 @@
   "fhaCancel": "Annuleren",
   "fhaPreviewAddItems": "Deze items worden aan je boodschappenlijst toegevoegd:",
   "fhaAddedItems": "{count} items toegevoegd aan de lijst",
-  "@fhaAddedItems": { "placeholders": { "count": {} } },
+  "@fhaAddedItems": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fhaQuickAddItems": "Voorgestelde items toevoegen",
   "fhaActionFailed": "De actie kon niet worden voltooid",
   "fhaActionUnsupported": "Gebruik de betreffende module voor deze actie",
@@ -1286,7 +1388,6 @@
   "openstreetmapHaritasindanIstediginizNoktayiSecin": "Kies een punt op de OpenStreetMap-kaart",
   "haritayiAc": "Kaart openen",
   "konumSecilmezseSehirListesindenKullanilir": "Zonder keuze wordt de stedenlijst gebruikt",
-  "sicaklikBirimi": "Temperatuureenheid",
   "havaDurumuAlinamadi": "Weer niet beschikbaar",
   "gunlukTahmin": "7-daagse voorspelling",
   "ruzgar": "Wind",
@@ -2040,5 +2141,20 @@
   "srToneUrgent": "Urgent",
   "srToneGentle": "Zacht",
   "chatPollQuestion": "Vraag (bijv. Wat eten we vanavond?)",
-  "chatOption": "Optie {n}"
+  "chatOption": "Optie {n}",
+  "authWelcomeTitle": "Welkom bij FamilyHub",
+  "authWelcomeSubtitle": "Samen staan jullie sterker",
+  "authFamilyBadge": "Gezin",
+  "authChildLoginPin": "Inloggen als kind met pincode",
+  "authCreateFamilyCta": "Gezin aanmaken",
+  "authErrOffline": "Geen internetverbinding. Controleer je verbinding en probeer opnieuw.",
+  "authErrServerUnavailable": "De inlogservice is momenteel niet bereikbaar. Probeer het opnieuw.",
+  "authErrInvalidCredentials": "E-mailadres of wachtwoord is onjuist.",
+  "authErrEmailNotConfirmed": "Bevestig je e-mailadres om door te gaan.",
+  "authErrRateLimited": "Te veel inlogpogingen. Probeer het later opnieuw.",
+  "authErrConfiguration": "Aanmelden met Google is momenteel niet geconfigureerd. Meld je aan met e-mail.",
+  "authErrSessionMissing": "Je sessie is niet gevonden. Meld je opnieuw aan.",
+  "authErrUnknown": "Aanmelden mislukt. Probeer het opnieuw.",
+  "authBiometricNotAvailable": "Biometrische verificatie wordt niet ondersteund",
+  "authBiometricNeedLoginFirst": "Meld je eerst aan met e-mail; daarna wordt de vingerafdruk actief"
 }

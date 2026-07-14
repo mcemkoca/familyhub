@@ -842,12 +842,16 @@
   "saatFormati": "FORMAT DE L'HEURE",
   "haftaninIlkGunu": "PREMIER JOUR DE LA SEMAINE",
   "olcuBirimi": "UNITÉ DE MESURE",
-  "sicaklikBirimi": "UNITÉ DE TEMPÉRATURE",
+  "sicaklikBirimi": "Unite de temperature",
   "sifirlama": "RÉINITIALISER",
   "ulkeBolge": "PAYS / RÉGION",
   "cihazDiliOtomatik": "Langue de l'appareil (automatique)",
   "sistemDili": "Langue du système : {lang}",
-  "@sistemDili": { "placeholders": { "lang": {} } },
+  "@sistemDili": {
+    "placeholders": {
+      "lang": {}
+    }
+  },
   "kaydet": "Enregistrer",
   "kaydedildi": "Enregistré",
   "saat24": "24 heures",
@@ -888,14 +892,33 @@
   "shoppingKatEv": "Maison",
   "shoppingKatDiger": "Autre",
   "shoppingAdet": "{count, plural, =1{{count} pce} other{{count} pces}}",
-  "@shoppingAdet": { "placeholders": { "count": { "type": "int" } } },
+  "@shoppingAdet": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingTamamlandiOran": "{done} / {total} terminé",
-  "@shoppingTamamlandiOran": { "placeholders": { "done": {}, "total": {} } },
+  "@shoppingTamamlandiOran": {
+    "placeholders": {
+      "done": {},
+      "total": {}
+    }
+  },
   "shoppingGeriAl": "Annuler",
   "shoppingSilindi": "\"{name}\" supprimé",
-  "@shoppingSilindi": { "placeholders": { "name": {} } },
+  "@shoppingSilindi": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "shoppingZatenListede": "\"{name}\" est déjà sur la liste",
-  "@shoppingZatenListede": { "placeholders": { "name": {} } },
+  "@shoppingZatenListede": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "shoppingGecerliMiktar": "Entrez une quantité valide (1 ou plus)",
   "shoppingYuklenemedi": "Votre liste de courses n'a pas pu être chargée. Veuillez réessayer.",
   "shoppingTekrarDene": "Réessayer",
@@ -904,14 +927,27 @@
   "shoppingTipAiMarket": "Liste de magasin IA",
   "shoppingTipTarifeGore": "Ajouter depuis une recette",
   "shoppingMalzemeEklendi": "{count} ingrédients ajoutés pour {title}",
-  "@shoppingMalzemeEklendi": { "placeholders": { "title": {}, "count": {} } },
+  "@shoppingMalzemeEklendi": {
+    "placeholders": {
+      "title": {},
+      "count": {}
+    }
+  },
   "shoppingListeyeEklendi": "{name} ajouté à la liste",
-  "@shoppingListeyeEklendi": { "placeholders": { "name": {} } },
+  "@shoppingListeyeEklendi": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "shoppingTumUrunlerEklendi": "Tous les articles ajoutés à la liste",
   "shoppingKonumAliniyor": "Obtention de la position…",
   "shoppingKonumIzniYok": "Autorisation de localisation refusée. Autorisez-la dans les Réglages.",
   "shoppingKonumBulundu": "Votre position : {coords} — ouverture de la carte",
-  "@shoppingKonumBulundu": { "placeholders": { "coords": {} } },
+  "@shoppingKonumBulundu": {
+    "placeholders": {
+      "coords": {}
+    }
+  },
   "shoppingKonumAlinamadi": "Impossible d'obtenir la position. Veuillez réessayer.",
   "shoppingAiHazirlaniyor": "Préparation de la liste de magasin IA…",
   "shoppingListeOlusturulamadi": "Impossible de créer la liste. Vérifiez votre connexion Internet.",
@@ -920,15 +956,28 @@
   "shoppingTumunuEkle": "Tout ajouter",
   "shoppingTarifeGoreBaslik": "Courses par recette",
   "shoppingTarifSayisi": "{count} recettes",
-  "@shoppingTarifSayisi": { "placeholders": { "count": {} } },
+  "@shoppingTarifSayisi": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shoppingTarifAra": "Rechercher des recettes...",
   "shoppingTarifMeta": "{time} min · {count} ingrédients",
-  "@shoppingTarifMeta": { "placeholders": { "time": {}, "count": {} } },
+  "@shoppingTarifMeta": {
+    "placeholders": {
+      "time": {},
+      "count": {}
+    }
+  },
   "shoppingFiyatGuncellenemedi": "Impossible de mettre à jour les prix (quota IA peut-être atteint)",
   "shoppingFiyatBasarisiz": "Échec de la mise à jour des prix",
   "shoppingFiyatlariGuncelle": "Mettre à jour les prix (IA)",
   "shoppingGuncellendi": "Mis à jour : {date}",
-  "@shoppingGuncellendi": { "placeholders": { "date": {} } },
+  "@shoppingGuncellendi": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "shoppingMarketKatalogu": "Catalogue des magasins",
   "shoppingHaftaninFirsatlari": "Offres de la semaine",
   "shoppingTumu": "Tout",
@@ -947,7 +996,11 @@
   "shoppingBirim": "Unité",
   "legalBenefitsTitle": "Droits et avantages",
   "legalBenefitsSubtitle": "{country} · droits et aides pour votre famille",
-  "@legalBenefitsSubtitle": { "placeholders": { "country": {} } },
+  "@legalBenefitsSubtitle": {
+    "placeholders": {
+      "country": {}
+    }
+  },
   "legalSearchHint": "Rechercher un droit ou une aide...",
   "legalSavedOnly": "Enregistrés",
   "legalAll": "Tout",
@@ -958,7 +1011,11 @@
   "legalExpired": "Expiré",
   "legalStale": "Vérification obsolète",
   "legalLastVerified": "Dernière vérification : {date}",
-  "@legalLastVerified": { "placeholders": { "date": {} } },
+  "@legalLastVerified": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "legalPossibleEligibility": "Vous pourriez être éligible selon votre profil. Vérifiez les conditions à la source officielle.",
   "legalDisclaimer": "Ces informations sont fournies à titre indicatif et ne constituent pas un conseil juridique. Les règles peuvent changer ; l'éligibilité finale est déterminée par l'institution concernée.",
   "legalEmptyTitle": "Aucun résultat",
@@ -995,7 +1052,11 @@
   "privacyModChild": "Enfant",
   "privacyModLocation": "Localisation",
   "kitchenRecipeCount": "{count} recettes · plan hebdo",
-  "@kitchenRecipeCount": { "placeholders": { "count": {} } },
+  "@kitchenRecipeCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "kitchenAddRecipe": "Recette",
   "kitchenTabRecipes": "Recettes",
   "kitchenTabWeekly": "Hebdo",
@@ -1012,7 +1073,11 @@
   "legalRemindIn30Days": "Dans 30 jours",
   "legalReminderNotifTitle": "Rappel de droits",
   "legalReminderNotifBody": "{title} — vérifiez les informations à jour à la source officielle.",
-  "@legalReminderNotifBody": { "placeholders": { "title": {} } },
+  "@legalReminderNotifBody": {
+    "placeholders": {
+      "title": {}
+    }
+  },
   "familyIntelligenceTitle": "Intelligence familiale",
   "familyIntelligenceSubtitle": "Les priorités du jour pour votre famille",
   "fiPriorityCritical": "Critique",
@@ -1025,41 +1090,74 @@
   "fiEmptyDesc": "Vos données familiales sont à jour. Les nouvelles priorités apparaîtront ici.",
   "fiInsightOverdueTitle": "Tâches en retard",
   "fiInsightOverdueBody": "{count} tâches sont en retard. À revoir.",
-  "@fiInsightOverdueBody": { "placeholders": { "count": {} } },
+  "@fiInsightOverdueBody": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fiReasonOverdue": "Des tâches ont dépassé leur échéance sans être terminées.",
   "fiInsightPaymentTitle": "Paiement à venir",
   "fiInsightPaymentBody": "Un paiement est dû dans {days} jours.",
-  "@fiInsightPaymentBody": { "placeholders": { "days": {} } },
+  "@fiInsightPaymentBody": {
+    "placeholders": {
+      "days": {}
+    }
+  },
   "fiReasonPayment": "Une échéance de paiement à venir a été trouvée dans votre budget.",
   "fiInsightTodayEventsTitle": "Événements du jour",
   "fiInsightTodayEventsBody": "Vous avez {count} événements prévus aujourd'hui.",
-  "@fiInsightTodayEventsBody": { "placeholders": { "count": {} } },
+  "@fiInsightTodayEventsBody": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fiReasonTodayEvents": "Votre calendrier comporte des événements pour aujourd'hui.",
   "fiInsightShoppingTitle": "Liste de courses",
   "fiInsightShoppingBody": "Vous avez {count} articles en attente sur votre liste.",
-  "@fiInsightShoppingBody": { "placeholders": { "count": {} } },
+  "@fiInsightShoppingBody": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fiReasonShopping": "Des articles de courses non terminés se sont accumulés.",
   "fiInsightPendingTasksTitle": "Tâches en attente",
   "fiInsightPendingTasksBody": "{count} tâches vous attendent.",
-  "@fiInsightPendingTasksBody": { "placeholders": { "count": {} } },
+  "@fiInsightPendingTasksBody": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fiReasonPendingTasks": "Vous avez des tâches non encore terminées.",
   "fiInsightAllClearTitle": "Tout est en ordre",
   "fiInsightAllClearBody": "Aucune tâche ni course en attente. Bravo !",
   "fiReasonAllClear": "Aucune tâche en retard, tâche en attente ou article de courses trouvé.",
   "fiInsightBusyDayTitle": "Une journée chargée",
   "fiInsightBusyDayBody": "Aujourd'hui vous avez {events} événements et {tasks} tâches. Pensez à partager les tâches.",
-  "@fiInsightBusyDayBody": { "placeholders": { "events": {}, "tasks": {} } },
+  "@fiInsightBusyDayBody": {
+    "placeholders": {
+      "events": {},
+      "tasks": {}
+    }
+  },
   "fiReasonBusyDay": "Le nombre d'événements du jour et les tâches en attente sont tous deux élevés.",
   "fiInsightShareShoppingTitle": "Partager les courses",
   "fiInsightShareShoppingBody": "Vous avez {count} articles sur votre liste. Vous pouvez la partager avec un membre de la famille.",
-  "@fiInsightShareShoppingBody": { "placeholders": { "count": {} } },
+  "@fiInsightShareShoppingBody": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fiReasonShareShopping": "La liste de courses est pleine et il y a plus d'un membre dans la famille.",
   "fiNotifyTop": "Notifier la priorité",
   "fiNotified": "Notification envoyée",
   "fiDailySummary": "Résumé quotidien",
   "fiDailySummaryDesc": "Notifier les priorités chaque jour à l'heure choisie",
   "fiDailySummaryOn": "Activé · tous les jours à {hour}:00",
-  "@fiDailySummaryOn": { "placeholders": { "hour": {} } },
+  "@fiDailySummaryOn": {
+    "placeholders": {
+      "hour": {}
+    }
+  },
   "fiDailySummaryNotifTitle": "Intelligence familiale",
   "fiDailySummaryNotifBody": "Les priorités du jour sont prêtes. Touchez pour les voir.",
   "fiPickHour": "Heure",
@@ -1095,7 +1193,11 @@
   "fhaCancel": "Annuler",
   "fhaPreviewAddItems": "Ces articles seront ajoutés à votre liste de courses :",
   "fhaAddedItems": "{count} articles ajoutés à la liste",
-  "@fhaAddedItems": { "placeholders": { "count": {} } },
+  "@fhaAddedItems": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fhaQuickAddItems": "Ajouter les articles suggérés",
   "fhaActionFailed": "L'action n'a pas pu être effectuée",
   "fhaActionUnsupported": "Utilisez le module concerné pour cette action",
@@ -1286,7 +1388,6 @@
   "openstreetmapHaritasindanIstediginizNoktayiSecin": "Choisissez un point sur OpenStreetMap",
   "haritayiAc": "Ouvrir la carte",
   "konumSecilmezseSehirListesindenKullanilir": "Sans choix, la liste des villes est utilisee",
-  "sicaklikBirimi": "Unite de temperature",
   "havaDurumuAlinamadi": "Meteo indisponible",
   "gunlukTahmin": "Previsions 7 jours",
   "ruzgar": "Vent",
@@ -2040,5 +2141,20 @@
   "srToneUrgent": "Urgent",
   "srToneGentle": "Doux",
   "chatPollQuestion": "Question (ex. Que mange-t-on ce soir ?)",
-  "chatOption": "Option {n}"
+  "chatOption": "Option {n}",
+  "authWelcomeTitle": "Bienvenue sur FamilyHub",
+  "authWelcomeSubtitle": "Ensemble, vous êtes plus forts",
+  "authFamilyBadge": "Famille",
+  "authChildLoginPin": "Connexion enfant avec un code PIN",
+  "authCreateFamilyCta": "Créer une famille",
+  "authErrOffline": "Aucune connexion internet. Vérifiez votre connexion et réessayez.",
+  "authErrServerUnavailable": "Le service de connexion est momentanément indisponible. Réessayez.",
+  "authErrInvalidCredentials": "Adresse e-mail ou mot de passe incorrect.",
+  "authErrEmailNotConfirmed": "Confirmez votre adresse e-mail pour continuer.",
+  "authErrRateLimited": "Trop de tentatives de connexion. Réessayez plus tard.",
+  "authErrConfiguration": "La connexion avec Google n'est pas configurée pour le moment. Connectez-vous par e-mail.",
+  "authErrSessionMissing": "Votre session est introuvable. Reconnectez-vous.",
+  "authErrUnknown": "Échec de la connexion. Veuillez réessayer.",
+  "authBiometricNotAvailable": "L'authentification biométrique n'est pas prise en charge",
+  "authBiometricNeedLoginFirst": "Connectez-vous d'abord par e-mail, l'empreinte sera ensuite activée"
 }

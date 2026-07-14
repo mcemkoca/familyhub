@@ -134,21 +134,39 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
     if (!mounted) return;
     final failure = classifyAuthError(error);
     if (failure.isCancellation) return;
-    _showError(failure.userMessage);
+    _showError(_localizedAuthError(failure.kind));
+  }
+
+  /// AuthFailure türünü seçili dildeki kullanıcı mesajına çevirir. Teknik
+  /// exception metni veya sabit Türkçe ASLA gösterilmez.
+  String _localizedAuthError(AuthFailureKind kind) {
+    final l = AppLocalizations.of(context);
+    return switch (kind) {
+      AuthFailureKind.offline => l.authErrOffline,
+      AuthFailureKind.serverUnavailable => l.authErrServerUnavailable,
+      AuthFailureKind.invalidCredentials => l.authErrInvalidCredentials,
+      AuthFailureKind.emailNotConfirmed => l.authErrEmailNotConfirmed,
+      AuthFailureKind.rateLimited => l.authErrRateLimited,
+      AuthFailureKind.configurationError => l.authErrConfiguration,
+      AuthFailureKind.sessionMissing => l.authErrSessionMissing,
+      AuthFailureKind.cancelled => '',
+      AuthFailureKind.unknown => l.authErrUnknown,
+    };
   }
 
   Future<void> _biometricLogin() async {
+    final l = AppLocalizations.of(context);
     final available = await BiometricService.isAvailable();
     if (!available) {
-      _showError('Biyometrik kimlik doğrulama desteklenmiyor');
+      if (mounted) _showError(l.authBiometricNotAvailable);
       return;
     }
     final success = await BiometricService.authenticate();
     if (success && mounted) {
       if (AuthService.currentUser != null) {
-        context.go(AppRoutes.hub);
+        _goHubOnce();
       } else {
-        _showError('Önce e-posta ile giriş yapın, sonra parmak izi aktif olur');
+        _showError(l.authBiometricNeedLoginFirst);
       }
     }
   }
@@ -251,6 +269,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
   }
 
   Widget _buildHero() {
+    final l = AppLocalizations.of(context);
     return Column(
       children: [
         // FamilyHub Logo
@@ -276,9 +295,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
           ),
         ),
         const SizedBox(height: 16),
-        const Text(
-          'Ailenize Hoş Geldiniz',
-          style: TextStyle(
+        Text(
+          l.authWelcomeTitle,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 26,
             fontWeight: FontWeight.w900,
@@ -287,7 +307,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
         ),
         const SizedBox(height: 4),
         Text(
-          'Birlikte daha güçlüsünüz 💪',
+          '${l.authWelcomeSubtitle} 💪',
           style: TextStyle(
             color: Colors.white.withAlpha(200),
             fontSize: 14,
@@ -299,6 +319,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
   }
 
   Widget _buildCard(Size size, bool isDark) {
+    final l = AppLocalizations.of(context);
     final cardColor = isDark ? const Color(0xFF13131A) : Colors.white;
     final titleColor = isDark
         ? const Color(0xFFE5E7EB)
@@ -349,9 +370,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                     ),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: const Text(
-                    '👨‍👩‍👧‍👦 Aile',
-                    style: TextStyle(
+                  child: Text(
+                    '👨‍👩‍👧‍👦 ${l.authFamilyBadge}',
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 11,
                       fontWeight: FontWeight.w800,
@@ -404,7 +425,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
 
             // Login button
             _buildGradientButton(
-              label: _isLoading ? null : 'Giriş Yap',
+              label: _isLoading ? null : l.login,
               onTap: _isLoading ? null : _login,
               gradient: const LinearGradient(
                 colors: [
@@ -454,7 +475,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                   ? null
                   : AuthService.isGoogleSignInConfigured
                   ? _signInWithGoogle
-                  : () => _showError('Google Sign-In şu an kullanılamıyor.'),
+                  : () => _showError(l.authErrConfiguration),
               enabled: AuthService.isGoogleSignInConfigured,
               isDark: isDark,
             ),
@@ -493,14 +514,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                     width: 1.5,
                   ),
                 ),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('⭐', style: TextStyle(fontSize: 18)),
-                    SizedBox(width: 8),
+                    const Text('⭐', style: TextStyle(fontSize: 18)),
+                    const SizedBox(width: 8),
                     Text(
-                      'Çocuk Girişi (PIN ile)',
-                      style: TextStyle(
+                      l.authChildLoginPin,
+                      style: const TextStyle(
                         color: Color(0xFFF97316),
                         fontWeight: FontWeight.w800,
                         fontSize: 14,
@@ -525,11 +546,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                           ? const Color(0xFF9CA3AF)
                           : const Color(0xFF6B7280),
                     ),
-                    children: const [
-                      TextSpan(text: 'Hesabın yok mu? '),
+                    children: [
+                      TextSpan(text: '${l.noAccount} '),
                       TextSpan(
-                        text: 'Aile Kur →',
-                        style: TextStyle(
+                        text: '${l.authCreateFamilyCta} →',
+                        style: const TextStyle(
                           color: Color(0xFFC850C0),
                           fontWeight: FontWeight.w800,
                         ),

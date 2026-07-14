@@ -842,12 +842,16 @@
   "saatFormati": "SAAT FORMATI",
   "haftaninIlkGunu": "HAFTANIN İLK GÜNÜ",
   "olcuBirimi": "ÖLÇÜ BİRİMİ",
-  "sicaklikBirimi": "SICAKLIK BİRİMİ",
+  "sicaklikBirimi": "Sıcaklık Birimi",
   "sifirlama": "SIFIRLAMA",
   "ulkeBolge": "ÜLKE / BÖLGE",
   "cihazDiliOtomatik": "Cihaz Dili (Otomatik)",
   "sistemDili": "Sistem dili: {lang}",
-  "@sistemDili": { "placeholders": { "lang": {} } },
+  "@sistemDili": {
+    "placeholders": {
+      "lang": {}
+    }
+  },
   "kaydet": "Kaydet",
   "kaydedildi": "Kaydedildi",
   "saat24": "24 saat",
@@ -888,14 +892,33 @@
   "shoppingKatEv": "Ev",
   "shoppingKatDiger": "Diğer",
   "shoppingAdet": "{count, plural, =1{{count} adet} other{{count} adet}}",
-  "@shoppingAdet": { "placeholders": { "count": { "type": "int" } } },
+  "@shoppingAdet": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingTamamlandiOran": "{done} / {total} tamamlandı",
-  "@shoppingTamamlandiOran": { "placeholders": { "done": {}, "total": {} } },
+  "@shoppingTamamlandiOran": {
+    "placeholders": {
+      "done": {},
+      "total": {}
+    }
+  },
   "shoppingGeriAl": "Geri al",
   "shoppingSilindi": "\"{name}\" silindi",
-  "@shoppingSilindi": { "placeholders": { "name": {} } },
+  "@shoppingSilindi": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "shoppingZatenListede": "\"{name}\" zaten listede",
-  "@shoppingZatenListede": { "placeholders": { "name": {} } },
+  "@shoppingZatenListede": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "shoppingGecerliMiktar": "Geçerli bir miktar girin (1 veya üzeri)",
   "shoppingYuklenemedi": "Alışveriş listeniz şu anda yüklenemedi. Lütfen tekrar deneyin.",
   "shoppingTekrarDene": "Tekrar Dene",
@@ -904,14 +927,27 @@
   "shoppingTipAiMarket": "AI Market Listesi",
   "shoppingTipTarifeGore": "Tarife Göre Ekle",
   "shoppingMalzemeEklendi": "{title} için {count} malzeme eklendi",
-  "@shoppingMalzemeEklendi": { "placeholders": { "title": {}, "count": {} } },
+  "@shoppingMalzemeEklendi": {
+    "placeholders": {
+      "title": {},
+      "count": {}
+    }
+  },
   "shoppingListeyeEklendi": "{name} listeye eklendi",
-  "@shoppingListeyeEklendi": { "placeholders": { "name": {} } },
+  "@shoppingListeyeEklendi": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "shoppingTumUrunlerEklendi": "Tüm ürünler listeye eklendi",
   "shoppingKonumAliniyor": "Konum alınıyor…",
   "shoppingKonumIzniYok": "Konum izni verilmedi. Ayarlardan izin verin.",
   "shoppingKonumBulundu": "Konumun: {coords} — harita açılıyor",
-  "@shoppingKonumBulundu": { "placeholders": { "coords": {} } },
+  "@shoppingKonumBulundu": {
+    "placeholders": {
+      "coords": {}
+    }
+  },
   "shoppingKonumAlinamadi": "Konum alınamadı. Lütfen tekrar deneyin.",
   "shoppingAiHazirlaniyor": "AI market listesi hazırlanıyor…",
   "shoppingListeOlusturulamadi": "Liste oluşturulamadı. İnternet bağlantısını kontrol edin.",
@@ -920,15 +956,28 @@
   "shoppingTumunuEkle": "Tümünü Ekle",
   "shoppingTarifeGoreBaslik": "Tarife Göre Alışveriş",
   "shoppingTarifSayisi": "{count} tarif",
-  "@shoppingTarifSayisi": { "placeholders": { "count": {} } },
+  "@shoppingTarifSayisi": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shoppingTarifAra": "Tarif ara...",
   "shoppingTarifMeta": "{time} dk · {count} malzeme",
-  "@shoppingTarifMeta": { "placeholders": { "time": {}, "count": {} } },
+  "@shoppingTarifMeta": {
+    "placeholders": {
+      "time": {},
+      "count": {}
+    }
+  },
   "shoppingFiyatGuncellenemedi": "Fiyat güncellenemedi (AI kotası dolu olabilir)",
   "shoppingFiyatBasarisiz": "Fiyat güncelleme başarısız",
   "shoppingFiyatlariGuncelle": "Fiyatları Güncelle (AI)",
   "shoppingGuncellendi": "Güncellendi: {date}",
-  "@shoppingGuncellendi": { "placeholders": { "date": {} } },
+  "@shoppingGuncellendi": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "shoppingMarketKatalogu": "Market Kataloğu",
   "shoppingHaftaninFirsatlari": "Bu Haftanın Fırsatları",
   "shoppingTumu": "Tümü",
@@ -947,7 +996,11 @@
   "shoppingBirim": "Birim",
   "legalBenefitsTitle": "Yasal Haklar ve Avantajlar",
   "legalBenefitsSubtitle": "{country} · ailenizi ilgilendiren haklar ve destekler",
-  "@legalBenefitsSubtitle": { "placeholders": { "country": {} } },
+  "@legalBenefitsSubtitle": {
+    "placeholders": {
+      "country": {}
+    }
+  },
   "legalSearchHint": "Hak veya avantaj ara...",
   "legalSavedOnly": "Kaydedilenler",
   "legalAll": "Tümü",
@@ -958,7 +1011,11 @@
   "legalExpired": "Süresi geçmiş",
   "legalStale": "Doğrulama tarihi eski",
   "legalLastVerified": "Son doğrulama: {date}",
-  "@legalLastVerified": { "placeholders": { "date": {} } },
+  "@legalLastVerified": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "legalPossibleEligibility": "Profilinize göre uygun olabilirsiniz. Şartları resmî kaynaktan doğrulayın.",
   "legalDisclaimer": "Bu bilgiler genel bilgilendirme amaçlıdır, hukuki danışmanlık değildir. Kurallar değişebilir; nihai uygunluk ilgili kurum tarafından belirlenir.",
   "legalEmptyTitle": "Sonuç bulunamadı",
@@ -995,7 +1052,11 @@
   "privacyModChild": "Çocuk",
   "privacyModLocation": "Konum",
   "kitchenRecipeCount": "{count} tarif · haftalık plan",
-  "@kitchenRecipeCount": { "placeholders": { "count": {} } },
+  "@kitchenRecipeCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "kitchenAddRecipe": "Tarif",
   "kitchenTabRecipes": "Tarifler",
   "kitchenTabWeekly": "Haftalık",
@@ -1012,7 +1073,11 @@
   "legalRemindIn30Days": "30 gün sonra",
   "legalReminderNotifTitle": "Yasal hak hatırlatması",
   "legalReminderNotifBody": "{title} — resmî kaynaktan güncel bilgileri kontrol et.",
-  "@legalReminderNotifBody": { "placeholders": { "title": {} } },
+  "@legalReminderNotifBody": {
+    "placeholders": {
+      "title": {}
+    }
+  },
   "familyIntelligenceTitle": "Aile Zekası",
   "familyIntelligenceSubtitle": "Ailen için bugünün öncelikleri",
   "fiPriorityCritical": "Kritik",
@@ -1025,41 +1090,74 @@
   "fiEmptyDesc": "Aile verilerin güncel. Yeni öncelikler burada görünecek.",
   "fiInsightOverdueTitle": "Geciken görevler",
   "fiInsightOverdueBody": "{count} görevin süresi geçmiş. Gözden geçir.",
-  "@fiInsightOverdueBody": { "placeholders": { "count": {} } },
+  "@fiInsightOverdueBody": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fiReasonOverdue": "Bitiş tarihi geçmiş ve tamamlanmamış görevler var.",
   "fiInsightPaymentTitle": "Yaklaşan ödeme",
   "fiInsightPaymentBody": "{days} gün içinde bir ödeme var.",
-  "@fiInsightPaymentBody": { "placeholders": { "days": {} } },
+  "@fiInsightPaymentBody": {
+    "placeholders": {
+      "days": {}
+    }
+  },
   "fiReasonPayment": "Bütçende yaklaşan bir ödeme tarihi bulundu.",
   "fiInsightTodayEventsTitle": "Bugünkü etkinlikler",
   "fiInsightTodayEventsBody": "Bugün {count} planlı etkinliğin var.",
-  "@fiInsightTodayEventsBody": { "placeholders": { "count": {} } },
+  "@fiInsightTodayEventsBody": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fiReasonTodayEvents": "Takviminde bugüne ait etkinlikler var.",
   "fiInsightShoppingTitle": "Alışveriş listesi",
   "fiInsightShoppingBody": "Listende {count} bekleyen ürün var.",
-  "@fiInsightShoppingBody": { "placeholders": { "count": {} } },
+  "@fiInsightShoppingBody": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fiReasonShopping": "Tamamlanmamış alışveriş öğeleri birikmiş.",
   "fiInsightPendingTasksTitle": "Bekleyen görevler",
   "fiInsightPendingTasksBody": "{count} görevin seni bekliyor.",
-  "@fiInsightPendingTasksBody": { "placeholders": { "count": {} } },
+  "@fiInsightPendingTasksBody": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fiReasonPendingTasks": "Henüz tamamlanmamış görevlerin var.",
   "fiInsightAllClearTitle": "Her şey yolunda",
   "fiInsightAllClearBody": "Bekleyen görev veya alışveriş yok. Harika!",
   "fiReasonAllClear": "Geciken görev, bekleyen görev ve alışveriş öğesi bulunmadı.",
   "fiInsightBusyDayTitle": "Yoğun bir gün",
   "fiInsightBusyDayBody": "Bugün {events} etkinlik ve {tasks} görev var. Görevleri paylaşmayı düşün.",
-  "@fiInsightBusyDayBody": { "placeholders": { "events": {}, "tasks": {} } },
+  "@fiInsightBusyDayBody": {
+    "placeholders": {
+      "events": {},
+      "tasks": {}
+    }
+  },
   "fiReasonBusyDay": "Bugünkü etkinlik sayısı ve bekleyen görevler birlikte yüksek.",
   "fiInsightShareShoppingTitle": "Alışverişi paylaş",
   "fiInsightShareShoppingBody": "Listende {count} ürün var. Bir aile üyesiyle paylaşabilirsin.",
-  "@fiInsightShareShoppingBody": { "placeholders": { "count": {} } },
+  "@fiInsightShareShoppingBody": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fiReasonShareShopping": "Alışveriş listesi dolu ve ailede birden fazla üye var.",
   "fiNotifyTop": "Öne çıkanı bildir",
   "fiNotified": "Bildirim gönderildi",
   "fiDailySummary": "Günlük özet bildirimi",
   "fiDailySummaryDesc": "Her gün belirlediğin saatte öne çıkanları bildir",
   "fiDailySummaryOn": "Açık · her gün {hour}:00",
-  "@fiDailySummaryOn": { "placeholders": { "hour": {} } },
+  "@fiDailySummaryOn": {
+    "placeholders": {
+      "hour": {}
+    }
+  },
   "fiDailySummaryNotifTitle": "Aile Zekası",
   "fiDailySummaryNotifBody": "Bugünün öncelikleri hazır. Görmek için dokun.",
   "fiPickHour": "Saat",
@@ -1095,7 +1193,11 @@
   "fhaCancel": "İptal",
   "fhaPreviewAddItems": "Şu ürünler alışveriş listene eklenecek:",
   "fhaAddedItems": "{count} ürün listeye eklendi",
-  "@fhaAddedItems": { "placeholders": { "count": {} } },
+  "@fhaAddedItems": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "fhaQuickAddItems": "Önerilen ürünleri ekle",
   "fhaActionFailed": "İşlem yapılamadı",
   "fhaActionUnsupported": "Bu işlem için ilgili modülü kullan",
@@ -1286,7 +1388,6 @@
   "openstreetmapHaritasindanIstediginizNoktayiSecin": "OpenStreetMap haritasından istediğiniz noktayı seçin",
   "haritayiAc": "Haritayı Aç",
   "konumSecilmezseSehirListesindenKullanilir": "Konum seçilmezse şehir listesinden kullanılır",
-  "sicaklikBirimi": "Sıcaklık Birimi",
   "havaDurumuAlinamadi": "Hava durumu alınamadı",
   "gunlukTahmin": "7 Günlük Tahmin",
   "ruzgar": "Rüzgar",
@@ -1372,9 +1473,17 @@
   "planFeatGuest": "Misafir erişimi & roller",
   "planFeatUnlimitedHistory": "Sınırsız geçmiş",
   "planFeatStorage": "{size} depolama",
-  "@planFeatStorage": { "placeholders": { "size": {} } },
+  "@planFeatStorage": {
+    "placeholders": {
+      "size": {}
+    }
+  },
   "planFeatHistory": "{days} gün geçmiş",
-  "@planFeatHistory": { "placeholders": { "days": {} } },
+  "@planFeatHistory": {
+    "placeholders": {
+      "days": {}
+    }
+  },
   "plansTitle": "Planlar",
   "plansMonthly": "Aylık",
   "plansYearly": "Yıllık",
@@ -1383,12 +1492,24 @@
   "plansCurrent": "MEVCUT",
   "plansComingSoon": "Satın alma yakında etkinleşecek.",
   "plansSave": "%{percent} tasarruf",
-  "@plansSave": { "placeholders": { "percent": {} } },
+  "@plansSave": {
+    "placeholders": {
+      "percent": {}
+    }
+  },
   "plansChoose": "{plan} seç",
-  "@plansChoose": { "placeholders": { "plan": {} } },
+  "@plansChoose": {
+    "placeholders": {
+      "plan": {}
+    }
+  },
   "gateTitle": "Bu özellik kilitli",
   "gateBody": "Bu özellik {plan} planında açılır.",
-  "@gateBody": { "placeholders": { "plan": {} } },
+  "@gateBody": {
+    "placeholders": {
+      "plan": {}
+    }
+  },
   "gatePerMonth": "/ay",
   "gatePerYear": "/yıl",
   "gateSeePlans": "Planları gör",
@@ -1454,11 +1575,19 @@
   "cdHeightCm": "Boy (cm)",
   "cdWeightKg": "Kilo (kg)",
   "cdDevGroup": "Gelişim grubu: {group}",
-  "@cdDevGroup": { "placeholders": { "group": {} } },
+  "@cdDevGroup": {
+    "placeholders": {
+      "group": {}
+    }
+  },
   "cdCompleted": "tamamlandı",
   "cdStepGrowsTree": "Her tamamlanan basamak ağacı büyütür",
   "cdWeeklyPlanFor": "AI ile {name}'e Özel Haftalık Plan",
-  "@cdWeeklyPlanFor": { "placeholders": { "name": {} } },
+  "@cdWeeklyPlanFor": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "cdNoLessons": "Henüz ders eklenmedi\n+ ile ekleyin",
   "cdNoGrade": "Not girilmedi",
   "cdAvg": "ort.",
@@ -1496,7 +1625,11 @@
   "fhHospitalClinic": "Hastane / Klinik",
   "fhSaveAppointment": "Randevuyu Kaydet",
   "fhStartDate": "Başlangıç: {date}",
-  "@fhStartDate": { "placeholders": { "date": {} } },
+  "@fhStartDate": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "fhComplete": "Tamamla",
   "eduTitle": "Aile Eğitimi",
   "eduSearchHint": "Aktivite ara...",
@@ -1525,7 +1658,11 @@
   "eduGenFailed": "İçerik üretilemedi (bağlantı/kota). Tekrar deneyin.",
   "eduSteps": "Adımlar",
   "eduParentTip": "Ebeveyn ipucu: {tip}",
-  "@eduParentTip": { "placeholders": { "tip": {} } },
+  "@eduParentTip": {
+    "placeholders": {
+      "tip": {}
+    }
+  },
   "kitRecipe": "Tarif",
   "kitNoRecipe": "Tarif bulunamadı",
   "kitCreateWeeklyPlan": "Haftalık Plan Oluştur",
@@ -1572,22 +1709,42 @@
   "subCommonExpenses": "Sık Kullanılan Giderler",
   "subServiceName": "Servis adı",
   "subAmount": "Tutar ({cur})",
-  "@subAmount": { "placeholders": { "cur": {} } },
+  "@subAmount": {
+    "placeholders": {
+      "cur": {}
+    }
+  },
   "subAddSubscription": "Abonelik Ekle",
   "srError": "Hata: {msg}",
-  "@srError": { "placeholders": { "msg": {} } },
+  "@srError": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "srBasicInfo": "Temel Bilgiler",
   "srLatitude": "Enlem",
   "srLongitude": "Boylam",
   "srGeofenceRadius": "Geofence Yarıçapı: {m}m",
-  "@srGeofenceRadius": { "placeholders": { "m": {} } },
+  "@srGeofenceRadius": {
+    "placeholders": {
+      "m": {}
+    }
+  },
   "srProximity": "Yaklaşma Mesafesi: {m}m",
-  "@srProximity": { "placeholders": { "m": {} } },
+  "@srProximity": {
+    "placeholders": {
+      "m": {}
+    }
+  },
   "srTime": "Saat",
   "srAnd": "AND",
   "srOr": "OR",
   "srInterruptibility": "Rahatsız Edilebilirlik: {pct}%",
-  "@srInterruptibility": { "placeholders": { "pct": {} } },
+  "@srInterruptibility": {
+    "placeholders": {
+      "pct": {}
+    }
+  },
   "srTone": "Ton",
   "srSmartChoice": "Akıllı seçim (AI önerir)",
   "budIncome": "Gelir",
@@ -1600,7 +1757,11 @@
   "budCategory": "Kategori",
   "budDescOptional": "Açıklama (opsiyonel)",
   "budAiSuggestion": "AI önerisi: {cat}",
-  "@budAiSuggestion": { "placeholders": { "cat": {} } },
+  "@budAiSuggestion": {
+    "placeholders": {
+      "cat": {}
+    }
+  },
   "budSuggestCategory": "AI ile kategori öner",
   "budEnterValidAmount": "Geçerli bir tutar girin",
   "crashTest": "Test Et",
@@ -1634,17 +1795,33 @@
   "fdTitle": "Aile Detayları",
   "fdPhotoUpdated": "Aile fotoğrafı güncellendi",
   "fdPhotoFailed": "Fotoğraf yüklenemedi: {msg}",
-  "@fdPhotoFailed": { "placeholders": { "msg": {} } },
+  "@fdPhotoFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "fdInfoSaved": "Aile bilgileri kaydedildi",
   "fdSaveFailed": "Kaydedilemedi: {msg}",
-  "@fdSaveFailed": { "placeholders": { "msg": {} } },
+  "@fdSaveFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "fdDeleteMemoryConfirm": "Bu anı silmek istediğinize emin misiniz?",
   "fdMemoryDeleted": "Anı silindi",
   "fdDeleteFailed": "Silinemedi: {msg}",
-  "@fdDeleteFailed": { "placeholders": { "msg": {} } },
+  "@fdDeleteFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "fdAddMemory": "Anı Ekle",
   "fdAddFailed": "Eklenemedi: {msg}",
-  "@fdAddFailed": { "placeholders": { "msg": {} } },
+  "@fdAddFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "fdDetailOptional": "Detay (isteğe bağlı)",
   "hcUpdated": "Sağlık kartı güncellendi",
   "hcHealthInfo": "SAĞLIK BİLGİLERİ",
@@ -1656,9 +1833,17 @@
   "hcExtraNotes": "EK NOTLAR",
   "hcNotes": "Notlar",
   "peTitle": "Profil Düzenle: {label}",
-  "@peTitle": { "placeholders": { "label": {} } },
+  "@peTitle": {
+    "placeholders": {
+      "label": {}
+    }
+  },
   "peColor": "Renk: {color}",
-  "@peColor": { "placeholders": { "color": {} } },
+  "@peColor": {
+    "placeholders": {
+      "color": {}
+    }
+  },
   "peHigh": "Yüksek (10m)",
   "peMedium": "Orta (50m)",
   "peLow": "Düşük (100m+)",
@@ -1694,11 +1879,19 @@
   "docInfo": "Belge Bilgileri",
   "docName": "Belge Adı",
   "docUploadFailed": "Yükleme hatası: {msg}",
-  "@docUploadFailed": { "placeholders": { "msg": {} } },
+  "@docUploadFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "docDeleteDoc": "Belgeyi Sil",
   "docVault": "Evrak Kasası",
   "galSyncFailed": "Senkron hatası: {msg}",
-  "@galSyncFailed": { "placeholders": { "msg": {} } },
+  "@galSyncFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "galDeleteConfirm": "Bu medya silinecek. Emin misiniz?",
   "galPickMulti": "Galeriden Seç (Çoklu)",
   "galSyncDevice": "Cihaz Galerisini Senkronla",
@@ -1712,7 +1905,11 @@
   "sfAmbientListen": "Ortam Dinleme",
   "sfFlashlight": "Fener",
   "conImportFailed": "İçe aktarma hatası: {msg}",
-  "@conImportFailed": { "placeholders": { "msg": {} } },
+  "@conImportFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "conEmail": "E-posta",
   "conTitle": "Aile Rehberi",
   "conSearchHint": "Ara...",
@@ -1727,15 +1924,31 @@
   "szZoneName": "Bölge adı",
   "szZoneNameHint": "Örn: Ev, Okul, İş",
   "szRadius": "Yarıçap: {m} m",
-  "@szRadius": { "placeholders": { "m": {} } },
+  "@szRadius": {
+    "placeholders": {
+      "m": {}
+    }
+  },
   "szEnterName": "Lütfen bölge adı girin",
   "szNoLocation": "Konum alınamadı. GPS açık olmalı.",
   "szDiameter": "Çap: {m}m",
-  "@szDiameter": { "placeholders": { "m": {} } },
+  "@szDiameter": {
+    "placeholders": {
+      "m": {}
+    }
+  },
   "szDistance": "Mesafe: {d}",
-  "@szDistance": { "placeholders": { "d": {} } },
+  "@szDistance": {
+    "placeholders": {
+      "d": {}
+    }
+  },
   "fssEta": "ETA: {eta}",
-  "@fssEta": { "placeholders": { "eta": {} } },
+  "@fssEta": {
+    "placeholders": {
+      "eta": {}
+    }
+  },
   "fssMap": "Harita",
   "fssSendReminder": "Hatırlatıcı Gönder",
   "fssSpeed": "Hız",
@@ -1750,7 +1963,11 @@
   "obsHint": "Bugün ne fark ettiniz?",
   "obsMaxFiles": "Maks. 5 dosya • JPG, PNG, MP4",
   "cmDeleteFailed": "Silme başarısız: {msg}",
-  "@cmDeleteFailed": { "placeholders": { "msg": {} } },
+  "@cmDeleteFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "cmTapToAddMember": "Aile üyesi eklemek için aşağıya dokun",
   "cmBaby": "Bebek",
   "cmPermissions": "İzinler",
@@ -1761,26 +1978,54 @@
   "cmPinRepeat": "PIN Tekrar",
   "rtNewRoutine": "Yeni Rutin",
   "rtNow": "Şu an: {step}",
-  "@rtNow": { "placeholders": { "step": {} } },
+  "@rtNow": {
+    "placeholders": {
+      "step": {}
+    }
+  },
   "rtContinue": "Devam Et",
   "rtApply": "Uygula",
   "rtDeleteRoutine": "Rutini Sil",
   "cbSignInFailed": "Giriş hatası: {msg}",
-  "@cbSignInFailed": { "placeholders": { "msg": {} } },
+  "@cbSignInFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "cbDisconnectFailed": "Bağlantı kesme hatası: {msg}",
-  "@cbDisconnectFailed": { "placeholders": { "msg": {} } },
+  "@cbDisconnectFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "cbBackupFailed": "Yedekleme hatası: {msg}",
-  "@cbBackupFailed": { "placeholders": { "msg": {} } },
+  "@cbBackupFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "cbRestoreFailed": "Geri yükleme hatası: {msg}",
-  "@cbRestoreFailed": { "placeholders": { "msg": {} } },
+  "@cbRestoreFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "cbBackupDeleted": "Yedek silindi",
   "cbDeleteFailed": "Silme hatası: {msg}",
-  "@cbDeleteFailed": { "placeholders": { "msg": {} } },
+  "@cbDeleteFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "cbTitle": "Google Drive Yedekleme",
   "hMoodQuestion": "Bugün kendini nasıl hissediyorsun?",
   "hTodaySuggestion": "Bugünün Önerisi",
   "hdWelcome": "Hoş geldin {name}",
-  "@hdWelcome": { "placeholders": { "name": {} } },
+  "@hdWelcome": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "hdJourneyStart": "Sağlık yolculuğun burada başlıyor.",
   "hdDailySummary": "Günlük Sağlık Özeti",
   "hdArticles": "Sağlık Makaleleri",
@@ -1795,7 +2040,11 @@
   "hwSubtitle": "Anne için kişisel sağlık alanı",
   "hwCycleTracking": "Döngü Takibi",
   "hwCycleDay": "Adet döneminin {day}. günündesin.",
-  "@hwCycleDay": { "placeholders": { "day": {} } },
+  "@hwCycleDay": {
+    "placeholders": {
+      "day": {}
+    }
+  },
   "hwTapToChangeStart": "Başlangıç tarihini değiştirmek için dokun",
   "hwSymptomTracking": "Semptom Takibi",
   "sosTriggerWord": "Trigger word analizi",
@@ -1804,9 +2053,18 @@
   "ltBalanced": "Dengeli",
   "ltAccuracy": "Hassas",
   "stLockFailed": "Kilitleme başarısız: {msg}",
-  "@stLockFailed": { "placeholders": { "msg": {} } },
+  "@stLockFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "stDuration": "Süre: {h}s {m}d",
-  "@stDuration": { "placeholders": { "h": {}, "m": {} } },
+  "@stDuration": {
+    "placeholders": {
+      "h": {},
+      "m": {}
+    }
+  },
   "stReasonOptional": "Neden (isteğe bağlı)",
   "stLock": "Kilitle",
   "apAa": "Aa",
@@ -1821,9 +2079,18 @@
   "sgFinish": "Bitir",
   "sgTitle": "Duyusal Keşif",
   "sgTodayGame": "Bugünün oyunu: {game}",
-  "@sgTodayGame": { "placeholders": { "game": {} } },
+  "@sgTodayGame": {
+    "placeholders": {
+      "game": {}
+    }
+  },
   "sgRound": "Tur {r}/{total}",
-  "@sgRound": { "placeholders": { "r": {}, "total": {} } },
+  "@sgRound": {
+    "placeholders": {
+      "r": {},
+      "total": {}
+    }
+  },
   "sgFindThis": "Bunu bul:",
   "wtTitle": "Hava Durumu",
   "wtCelsius": "Celsius (°C)",
@@ -1834,7 +2101,11 @@
   "aisShared": "Aile grubuna paylaşıldı",
   "aisMissing": "Eksik",
   "aisTurn": "Sıra: {who}",
-  "@aisTurn": { "placeholders": { "who": {} } },
+  "@aisTurn": {
+    "placeholders": {
+      "who": {}
+    }
+  },
   "aisCommentHint": "Bu öneri hakkında düşünceleriniz...",
   "aisCommentSaved": "Yorum kaydedildi",
   "aisAccept": "Kabul Et",
@@ -1884,17 +2155,37 @@
   "fmnRole": "Rol",
   "fmnEnterName": "Lütfen ad girin",
   "fmnRoleUpdateFailed": "Rol güncellenemedi: {msg}",
-  "@fmnRoleUpdateFailed": { "placeholders": { "msg": {} } },
+  "@fmnRoleUpdateFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "fmnOpFailed": "İşlem başarısız: {msg}",
-  "@fmnOpFailed": { "placeholders": { "msg": {} } },
+  "@fmnOpFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "hsAllergyHint": "Örn: yer fıstığı, polen, antibiyotik (virgülle ayırın)",
   "hsConditionHint": "Örn: astım, diyabet (virgülle ayırın)",
   "catEarned": "Kazanılan Rozetler ({n})",
-  "@catEarned": { "placeholders": { "n": {} } },
+  "@catEarned": {
+    "placeholders": {
+      "n": {}
+    }
+  },
   "catPending": "Kazanılmayı Bekleyen ({n})",
-  "@catPending": { "placeholders": { "n": {} } },
+  "@catPending": {
+    "placeholders": {
+      "n": {}
+    }
+  },
   "catLevel": "Seviye {n} • Kahraman",
-  "@catLevel": { "placeholders": { "n": {} } },
+  "@catLevel": {
+    "placeholders": {
+      "n": {}
+    }
+  },
   "catNextLevel": "Sonraki seviyeye:",
   "catOk": "Tamam",
   "hbAllUpToDate": "Her şey güncel",
@@ -1902,17 +2193,33 @@
   "stgSubtitle": "FamilyHub'ınızı yönetin",
   "stgNotifDesc": "Etkinlik, görev, acil durum, sohbet ve konum bildirimleri",
   "stgMemberCount": "{n} Üye",
-  "@stgMemberCount": { "placeholders": { "n": {} } },
+  "@stgMemberCount": {
+    "placeholders": {
+      "n": {}
+    }
+  },
   "stgClear": "Temizle",
   "stgLeftFamily": "Aileden ayrıldınız.",
   "stgLeaveFailed": "Ayrılma hatası: {msg}",
-  "@stgLeaveFailed": { "placeholders": { "msg": {} } },
+  "@stgLeaveFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "stgAllDeleted": "Tüm veriler silindi.",
   "stgDeleteFailed": "Silme hatası: {msg}",
-  "@stgDeleteFailed": { "placeholders": { "msg": {} } },
+  "@stgDeleteFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "stgCacheCleared": "Önbellek temizlendi.",
   "stgClearFailed": "Temizleme hatası: {msg}",
-  "@stgClearFailed": { "placeholders": { "msg": {} } },
+  "@stgClearFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "regEmailHint": "E-posta adresiniz",
   "regFamilyCodeHint": "Aile Kodu (Örn: FH-123456)",
   "regFamilyNameHint": "Aile Adı (Örn: Yılmaz Ailesi)",
@@ -1928,7 +2235,11 @@
   "stTime": "Hikaye Zamanı",
   "stDailySub": "Bugünün 4 görselli hikayesi",
   "stPageRead": "{n} sayfa · Oku",
-  "@stPageRead": { "placeholders": { "n": {} } },
+  "@stPageRead": {
+    "placeholders": {
+      "n": {}
+    }
+  },
   "stIllustrated": "Görselli hikaye",
   "stLesson": "Hikayeden Ders",
   "chatPickGif": "GIF Seç",
@@ -1936,7 +2247,11 @@
   "chatYesterday": "Dün",
   "ambMicRequired": "Mikrofon izni gerekli",
   "ambRecordSaved": "Kayıt kaydedildi: {name}",
-  "@ambRecordSaved": { "placeholders": { "name": {} } },
+  "@ambRecordSaved": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "ambManualButton": "Manuel Buton",
   "masViewProfile": "Profili Görüntüle",
   "masHealthCard": "Sağlık Kartı",
@@ -1944,9 +2259,17 @@
   "masLeaveFamily": "Aileden Ayrıl",
   "masRemoveMember": "Üyeyi Çıkar",
   "fpRoleUpdated": "Rol güncellendi: {role}",
-  "@fpRoleUpdated": { "placeholders": { "role": {} } },
+  "@fpRoleUpdated": {
+    "placeholders": {
+      "role": {}
+    }
+  },
   "fpPermUpdateFailed": "Yetki güncellenemedi: {msg}",
-  "@fpPermUpdateFailed": { "placeholders": { "msg": {} } },
+  "@fpPermUpdateFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "chlAnotherSuggestion": "Başka Öneri",
   "chlTodayMeal": "Bugünün Yemeği",
   "chlHousework": "Ev İşleri",
@@ -1962,25 +2285,45 @@
   "flStandard": "Standart",
   "flStrobe": "Strobe",
   "vcAcceptFailed": "Arama kabul edilemedi: {msg}",
-  "@vcAcceptFailed": { "placeholders": { "msg": {} } },
+  "@vcAcceptFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "vcReject": "Reddet",
   "vcHangup": "Kapat",
   "tskDeleteTask": "Görevi Sil",
   "csSyncFailed": "Senkronizasyon hatası: {msg}",
-  "@csSyncFailed": { "placeholders": { "msg": {} } },
+  "@csSyncFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "csScanCalendars": "Takvimleri Tara",
   "csConfigure": "Ayarla",
   "csMainCalendar": "Ana takvim",
   "secBiometricError": "Biyometrik hata: {msg}",
-  "@secBiometricError": { "placeholders": { "msg": {} } },
+  "@secBiometricError": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "secNewPasswordRepeat": "Yeni Şifre (Tekrar)",
   "secAccountDeleteFailed": "Hesap silme hatası: {msg}",
-  "@secAccountDeleteFailed": { "placeholders": { "msg": {} } },
+  "@secAccountDeleteFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "secBioEnabled": "Biyometrik giriş etkinleştirildi",
   "secBioDisabled": "Biyometrik giriş devre dışı bırakıldı",
   "cstLocationDenied": "Konum izni kalıcı reddedildi.",
   "cstShareFailed": "Konum paylaşılamadı: {msg}",
-  "@cstShareFailed": { "placeholders": { "msg": {} } },
+  "@cstShareFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "abProcessing": "İşleniyor...",
   "pgUpgrade": "Premium'a Yükselt",
   "pgNotNow": "Şimdi Değil",
@@ -1988,7 +2331,11 @@
   "pgActive": "Premium aktif! 🎉",
   "pgRequired": "Premium Gerekli",
   "pgFeatureLabel": "{feature} Özelliği",
-  "@pgFeatureLabel": { "placeholders": { "feature": {} } },
+  "@pgFeatureLabel": {
+    "placeholders": {
+      "feature": {}
+    }
+  },
   "pgUpgradeDesc": "Bu özelliği kullanmak için Premium'a yükseltin.",
   "invCopied": "Kod kopyalandı",
   "invCopy": "Kopyala",
@@ -2016,7 +2363,11 @@
   "szsHome": "Ev",
   "szsSchool": "Okul",
   "szsRadius": "Yarıçap: {m}m",
-  "@szsRadius": { "placeholders": { "m": {} } },
+  "@szsRadius": {
+    "placeholders": {
+      "m": {}
+    }
+  },
   "atLow": "Düşük",
   "atMedium": "Orta",
   "atHigh": "Yüksek",
@@ -2029,19 +2380,31 @@
   "cdbBadges": "Rozetler",
   "cdaTitle": "Beceri Değerlendirme",
   "cdaProgress": "İlerlemeniz: %{pct}",
-  "@cdaProgress": { "placeholders": { "pct": {} } },
+  "@cdaProgress": {
+    "placeholders": {
+      "pct": {}
+    }
+  },
   "cdaViewSources": "Kaynakları gör",
   "elLeaving": "Uygulamadan Ayrılıyorsunuz",
   "ccSaving": "Kaydediliyor...",
   "ccMsgHint": "Mesaj yaz...",
   "privExportFailed": "Veri dışa aktarma başarısız: {msg}",
-  "@privExportFailed": { "placeholders": { "msg": {} } },
+  "@privExportFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "saAttempt": "Deneme: 1/3",
   "steMsgHint": "Sesli mesaj metni...",
   "llMapView": "Harita Görünümü",
   "llRefresh": "Yenile",
   "famRemoveFailed": "Üye çıkarılamadı: {msg}",
-  "@famRemoveFailed": { "placeholders": { "msg": {} } },
+  "@famRemoveFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "famInvite": "Davet Et",
   "commonActive": "Aktif",
   "commonPassive": "Pasif",
@@ -2054,46 +2417,86 @@
   "srExit": "Çıkınca",
   "srApproach": "Yaklaşınca",
   "eduAgeYears": "{age} yaş",
-  "@eduAgeYears": { "placeholders": { "age": {} } },
+  "@eduAgeYears": {
+    "placeholders": {
+      "age": {}
+    }
+  },
   "sfCall112": "112 Ara",
   "commonClose": "Kapat",
   "pmPayFailed": "Ödeme başarısız: {msg}",
-  "@pmPayFailed": { "placeholders": { "msg": {} } },
+  "@pmPayFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "pmPlans": "Premium Planlar",
   "jfJoined": "Aileye başarıyla katıldınız!",
   "icCreateFailed": "Davet kodu oluşturulamadı: {msg}",
-  "@icCreateFailed": { "placeholders": { "msg": {} } },
+  "@icCreateFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "icTitle": "Davet Kodu",
   "actTitle": "Son Aktiviteler",
   "moodTitle": "Aile Ruh Hali",
   "ccCallFailed": "Arama başlatılamadı: {msg}",
-  "@ccCallFailed": { "placeholders": { "msg": {} } },
+  "@ccCallFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "sqAnswer1": "Cevap 1",
   "sqAnswer2": "Cevap 2",
   "sarDestination": "Hedef",
   "cctSendFailed": "Mesaj gönderilemedi: {msg}",
-  "@cctSendFailed": { "placeholders": { "msg": {} } },
+  "@cctSendFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "pcEdit": "Düzenle",
   "fmsTitle": "Ailenin Ruh Hali",
   "cpsOfflinePlan": "Çevrimdışı plan hazırlandı (AI'ya ulaşılamadı).",
   "cpsTitle": "Haftalık Gelişim Planı",
   "cpsSubtitle": "{name} için kişiselleştirilmiş plan",
-  "@cpsSubtitle": { "placeholders": { "name": {} } },
+  "@cpsSubtitle": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "cpsCreating": "Oluşturuluyor...",
   "cpsCreate": "Planı Oluştur",
   "fpEmailAddr": "E-posta Adresi",
   "srSaveFailed": "Atama kaydedilemedi: {msg}",
-  "@srSaveFailed": { "placeholders": { "msg": {} } },
+  "@srSaveFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "srRejectFailed": "Reddetme kaydedilemedi: {msg}",
-  "@srRejectFailed": { "placeholders": { "msg": {} } },
+  "@srRejectFailed": {
+    "placeholders": {
+      "msg": {}
+    }
+  },
   "srPoints": "puan",
   "srApprove": "Onayla",
   "srdApplied": "Uygulandı: {s}",
-  "@srdApplied": { "placeholders": { "s": {} } },
+  "@srdApplied": {
+    "placeholders": {
+      "s": {}
+    }
+  },
   "hcsBloodType": "Kan Grubu",
   "sicTitle": "Akıllı Uyarılar",
   "cadScore": "Gelişim skoru: %{score}",
-  "@cadScore": { "placeholders": { "score": {} } },
+  "@cadScore": {
+    "placeholders": {
+      "score": {}
+    }
+  },
   "cadAiPreparing": "AI öneriler hazırlanıyor…",
   "srReminderBody": "Hatırlatma zamanı!",
   "srExitHome": "Evden çıkınca",
@@ -2116,5 +2519,24 @@
   "srToneGentle": "Nazik",
   "chatPollQuestion": "Soru (ör. Akşam ne yiyelim?)",
   "chatOption": "Seçenek {n}",
-  "@chatOption": { "placeholders": { "n": {} } }
+  "@chatOption": {
+    "placeholders": {
+      "n": {}
+    }
+  },
+  "authWelcomeTitle": "Ailenize Hoş Geldiniz",
+  "authWelcomeSubtitle": "Birlikte daha güçlüsünüz",
+  "authFamilyBadge": "Aile",
+  "authChildLoginPin": "Çocuk Girişi (PIN ile)",
+  "authCreateFamilyCta": "Aile Kur",
+  "authErrOffline": "İnternet bağlantısı bulunamadı. Bağlantınızı kontrol edip tekrar deneyin.",
+  "authErrServerUnavailable": "Giriş servisine şu anda ulaşılamıyor. Lütfen tekrar deneyin.",
+  "authErrInvalidCredentials": "E-posta adresi veya parola hatalı.",
+  "authErrEmailNotConfirmed": "Devam etmek için e-posta adresinizi doğrulayın.",
+  "authErrRateLimited": "Çok fazla giriş denemesi yapıldı. Bir süre sonra tekrar deneyin.",
+  "authErrConfiguration": "Google ile giriş şu anda yapılandırılamadı. Lütfen e-posta ile giriş yapın.",
+  "authErrSessionMissing": "Oturumunuz bulunamadı. Lütfen tekrar giriş yapın.",
+  "authErrUnknown": "Giriş yapılamadı. Lütfen tekrar deneyin.",
+  "authBiometricNotAvailable": "Biyometrik kimlik doğrulama desteklenmiyor",
+  "authBiometricNeedLoginFirst": "Önce e-posta ile giriş yapın, sonra parmak izi aktifleşir"
 }
