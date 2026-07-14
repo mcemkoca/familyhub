@@ -6834,4 +6834,52 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get crashUserOk => 'User said \"I\'m okay\"';
+
+  @override
+  String get battChartTitle => 'BATTERY USAGE (7 days)';
+
+  @override
+  String get battHigh => 'High';
+
+  @override
+  String get battLow => 'Low';
+
+  @override
+  String get dowMon => 'Monday';
+
+  @override
+  String get dowTue => 'Tuesday';
+
+  @override
+  String get dowWed => 'Wednesday';
+
+  @override
+  String get dowThu => 'Thursday';
+
+  @override
+  String get dowFri => 'Friday';
+
+  @override
+  String get dowSat => 'Saturday';
+
+  @override
+  String get dowSun => 'Sunday';
+
+  @override
+  String get battProfileStationary => 'Stationary';
+
+  @override
+  String get battProfileWalking => 'Walking';
+
+  @override
+  String get battProfileDriving => 'Driving';
+
+  @override
+  String get battProfileRunning => 'Running';
+
+  @override
+  String get battProfileEmergency => 'Emergency';
+
+  @override
+  String get battProfileCycling => 'Cycling';
 }

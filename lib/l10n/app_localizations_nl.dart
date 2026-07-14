@@ -6840,4 +6840,52 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get crashUserOk => 'Gebruiker zei \"Ik ben oké\"';
+
+  @override
+  String get battChartTitle => 'BATTERIJVERBRUIK (7 dagen)';
+
+  @override
+  String get battHigh => 'Hoog';
+
+  @override
+  String get battLow => 'Laag';
+
+  @override
+  String get dowMon => 'Maandag';
+
+  @override
+  String get dowTue => 'Dinsdag';
+
+  @override
+  String get dowWed => 'Woensdag';
+
+  @override
+  String get dowThu => 'Donderdag';
+
+  @override
+  String get dowFri => 'Vrijdag';
+
+  @override
+  String get dowSat => 'Zaterdag';
+
+  @override
+  String get dowSun => 'Zondag';
+
+  @override
+  String get battProfileStationary => 'Stilstaand';
+
+  @override
+  String get battProfileWalking => 'Wandelen';
+
+  @override
+  String get battProfileDriving => 'Auto';
+
+  @override
+  String get battProfileRunning => 'Rennen';
+
+  @override
+  String get battProfileEmergency => 'Noodgeval';
+
+  @override
+  String get battProfileCycling => 'Fietsen';
 }

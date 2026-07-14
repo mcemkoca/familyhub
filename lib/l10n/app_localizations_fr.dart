@@ -6861,4 +6861,52 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get crashUserOk => 'L\'utilisateur a dit « Je vais bien »';
+
+  @override
+  String get battChartTitle => 'CONSOMMATION BATTERIE (7 jours)';
+
+  @override
+  String get battHigh => 'Élevé';
+
+  @override
+  String get battLow => 'Faible';
+
+  @override
+  String get dowMon => 'Lundi';
+
+  @override
+  String get dowTue => 'Mardi';
+
+  @override
+  String get dowWed => 'Mercredi';
+
+  @override
+  String get dowThu => 'Jeudi';
+
+  @override
+  String get dowFri => 'Vendredi';
+
+  @override
+  String get dowSat => 'Samedi';
+
+  @override
+  String get dowSun => 'Dimanche';
+
+  @override
+  String get battProfileStationary => 'Stationnaire';
+
+  @override
+  String get battProfileWalking => 'Marche';
+
+  @override
+  String get battProfileDriving => 'Voiture';
+
+  @override
+  String get battProfileRunning => 'Course';
+
+  @override
+  String get battProfileEmergency => 'Urgence';
+
+  @override
+  String get battProfileCycling => 'Vélo';
 }

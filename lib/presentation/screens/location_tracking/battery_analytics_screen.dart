@@ -29,26 +29,34 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
         children: [
           // Battery consumption
           _section(
-            'BATARYA TÜKETİMİ (7 Gün)',
+            AppLocalizations.of(context).battChartTitle,
             children: [
               Text(
                 AppLocalizations.of(context).gunlukOrtalama18,
                 style: const TextStyle(fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 12),
-              _dayBar('Pazartesi', 0.16),
-              _dayBar('Salı', 0.20, highlight: true),
-              _dayBar('Çarşamba', 0.14),
-              _dayBar('Perşembe', 0.16),
-              _dayBar('Cuma', 0.22, highlight: true),
-              _dayBar('Cumartesi', 0.12, good: true),
-              _dayBar('Pazar', 0.14),
+              _dayBar(AppLocalizations.of(context).dowMon, 0.16),
+              _dayBar(
+                AppLocalizations.of(context).dowTue,
+                0.20,
+                highlight: true,
+              ),
+              _dayBar(AppLocalizations.of(context).dowWed, 0.14),
+              _dayBar(AppLocalizations.of(context).dowThu, 0.16),
+              _dayBar(
+                AppLocalizations.of(context).dowFri,
+                0.22,
+                highlight: true,
+              ),
+              _dayBar(AppLocalizations.of(context).dowSat, 0.12, good: true),
+              _dayBar(AppLocalizations.of(context).dowSun, 0.14),
               const SizedBox(height: 8),
               Row(
                 children: [
-                  _legend(Colors.red, 'Yüksek'),
+                  _legend(Colors.red, AppLocalizations.of(context).battHigh),
                   const SizedBox(width: 12),
-                  _legend(Colors.green, 'Düşük'),
+                  _legend(Colors.green, AppLocalizations.of(context).battLow),
                 ],
               ),
             ],
@@ -58,12 +66,36 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
           _section(
             AppLocalizations.of(context).profilKullanimi,
             children: [
-              _profileBar('Durağan', 0.45, Colors.grey),
-              _profileBar('Yürüyüş', 0.25, Colors.blue),
-              _profileBar('Araç', 0.15, Colors.orange),
-              _profileBar('Koşu', 0.08, Colors.teal),
-              _profileBar('Acil', 0.05, Colors.red),
-              _profileBar('Bisiklet', 0.02, Colors.purple),
+              _profileBar(
+                AppLocalizations.of(context).battProfileStationary,
+                0.45,
+                Colors.grey,
+              ),
+              _profileBar(
+                AppLocalizations.of(context).battProfileWalking,
+                0.25,
+                Colors.blue,
+              ),
+              _profileBar(
+                AppLocalizations.of(context).battProfileDriving,
+                0.15,
+                Colors.orange,
+              ),
+              _profileBar(
+                AppLocalizations.of(context).battProfileRunning,
+                0.08,
+                Colors.teal,
+              ),
+              _profileBar(
+                AppLocalizations.of(context).battProfileEmergency,
+                0.05,
+                Colors.red,
+              ),
+              _profileBar(
+                AppLocalizations.of(context).battProfileCycling,
+                0.02,
+                Colors.purple,
+              ),
               const SizedBox(height: 8),
               ElevatedButton.icon(
                 onPressed: () {},

@@ -6855,4 +6855,52 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get crashUserOk => 'Kullanıcı \"İyiyim\" dedi';
+
+  @override
+  String get battChartTitle => 'BATARYA TÜKETİMİ (7 Gün)';
+
+  @override
+  String get battHigh => 'Yüksek';
+
+  @override
+  String get battLow => 'Düşük';
+
+  @override
+  String get dowMon => 'Pazartesi';
+
+  @override
+  String get dowTue => 'Salı';
+
+  @override
+  String get dowWed => 'Çarşamba';
+
+  @override
+  String get dowThu => 'Perşembe';
+
+  @override
+  String get dowFri => 'Cuma';
+
+  @override
+  String get dowSat => 'Cumartesi';
+
+  @override
+  String get dowSun => 'Pazar';
+
+  @override
+  String get battProfileStationary => 'Durağan';
+
+  @override
+  String get battProfileWalking => 'Yürüyüş';
+
+  @override
+  String get battProfileDriving => 'Araç';
+
+  @override
+  String get battProfileRunning => 'Koşu';
+
+  @override
+  String get battProfileEmergency => 'Acil';
+
+  @override
+  String get battProfileCycling => 'Bisiklet';
 }

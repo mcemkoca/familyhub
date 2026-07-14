@@ -12815,6 +12815,102 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Kullanıcı \"İyiyim\" dedi'**
   String get crashUserOk;
+
+  /// No description provided for @battChartTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'BATARYA TÜKETİMİ (7 Gün)'**
+  String get battChartTitle;
+
+  /// No description provided for @battHigh.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yüksek'**
+  String get battHigh;
+
+  /// No description provided for @battLow.
+  ///
+  /// In tr, this message translates to:
+  /// **'Düşük'**
+  String get battLow;
+
+  /// No description provided for @dowMon.
+  ///
+  /// In tr, this message translates to:
+  /// **'Pazartesi'**
+  String get dowMon;
+
+  /// No description provided for @dowTue.
+  ///
+  /// In tr, this message translates to:
+  /// **'Salı'**
+  String get dowTue;
+
+  /// No description provided for @dowWed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çarşamba'**
+  String get dowWed;
+
+  /// No description provided for @dowThu.
+  ///
+  /// In tr, this message translates to:
+  /// **'Perşembe'**
+  String get dowThu;
+
+  /// No description provided for @dowFri.
+  ///
+  /// In tr, this message translates to:
+  /// **'Cuma'**
+  String get dowFri;
+
+  /// No description provided for @dowSat.
+  ///
+  /// In tr, this message translates to:
+  /// **'Cumartesi'**
+  String get dowSat;
+
+  /// No description provided for @dowSun.
+  ///
+  /// In tr, this message translates to:
+  /// **'Pazar'**
+  String get dowSun;
+
+  /// No description provided for @battProfileStationary.
+  ///
+  /// In tr, this message translates to:
+  /// **'Durağan'**
+  String get battProfileStationary;
+
+  /// No description provided for @battProfileWalking.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yürüyüş'**
+  String get battProfileWalking;
+
+  /// No description provided for @battProfileDriving.
+  ///
+  /// In tr, this message translates to:
+  /// **'Araç'**
+  String get battProfileDriving;
+
+  /// No description provided for @battProfileRunning.
+  ///
+  /// In tr, this message translates to:
+  /// **'Koşu'**
+  String get battProfileRunning;
+
+  /// No description provided for @battProfileEmergency.
+  ///
+  /// In tr, this message translates to:
+  /// **'Acil'**
+  String get battProfileEmergency;
+
+  /// No description provided for @battProfileCycling.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bisiklet'**
+  String get battProfileCycling;
 }
 
 class _AppLocalizationsDelegate

@@ -2243,5 +2243,21 @@
   "crashPending": "Pending",
   "crash112Called": "112 called",
   "crash112NotCalled": "112 not called (user cancelled)",
-  "crashUserOk": "User said \"I'm okay\""
+  "crashUserOk": "User said \"I'm okay\"",
+  "battChartTitle": "BATTERY USAGE (7 days)",
+  "battHigh": "High",
+  "battLow": "Low",
+  "dowMon": "Monday",
+  "dowTue": "Tuesday",
+  "dowWed": "Wednesday",
+  "dowThu": "Thursday",
+  "dowFri": "Friday",
+  "dowSat": "Saturday",
+  "dowSun": "Sunday",
+  "battProfileStationary": "Stationary",
+  "battProfileWalking": "Walking",
+  "battProfileDriving": "Driving",
+  "battProfileRunning": "Running",
+  "battProfileEmergency": "Emergency",
+  "battProfileCycling": "Cycling"
 }

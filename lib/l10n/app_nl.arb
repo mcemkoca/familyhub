@@ -2243,5 +2243,21 @@
   "crashPending": "In afwachting",
   "crash112Called": "112 gebeld",
   "crash112NotCalled": "112 niet gebeld (gebruiker geannuleerd)",
-  "crashUserOk": "Gebruiker zei \"Ik ben oké\""
+  "crashUserOk": "Gebruiker zei \"Ik ben oké\"",
+  "battChartTitle": "BATTERIJVERBRUIK (7 dagen)",
+  "battHigh": "Hoog",
+  "battLow": "Laag",
+  "dowMon": "Maandag",
+  "dowTue": "Dinsdag",
+  "dowWed": "Woensdag",
+  "dowThu": "Donderdag",
+  "dowFri": "Vrijdag",
+  "dowSat": "Zaterdag",
+  "dowSun": "Zondag",
+  "battProfileStationary": "Stilstaand",
+  "battProfileWalking": "Wandelen",
+  "battProfileDriving": "Auto",
+  "battProfileRunning": "Rennen",
+  "battProfileEmergency": "Noodgeval",
+  "battProfileCycling": "Fietsen"
 }

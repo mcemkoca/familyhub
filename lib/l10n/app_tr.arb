@@ -2749,5 +2749,21 @@
   "crashPending": "Bekleyen",
   "crash112Called": "112 arandı",
   "crash112NotCalled": "112 aranmadı (kullanıcı iptal etti)",
-  "crashUserOk": "Kullanıcı \"İyiyim\" dedi"
+  "crashUserOk": "Kullanıcı \"İyiyim\" dedi",
+  "battChartTitle": "BATARYA TÜKETİMİ (7 Gün)",
+  "battHigh": "Yüksek",
+  "battLow": "Düşük",
+  "dowMon": "Pazartesi",
+  "dowTue": "Salı",
+  "dowWed": "Çarşamba",
+  "dowThu": "Perşembe",
+  "dowFri": "Cuma",
+  "dowSat": "Cumartesi",
+  "dowSun": "Pazar",
+  "battProfileStationary": "Durağan",
+  "battProfileWalking": "Yürüyüş",
+  "battProfileDriving": "Araç",
+  "battProfileRunning": "Koşu",
+  "battProfileEmergency": "Acil",
+  "battProfileCycling": "Bisiklet"
 }
