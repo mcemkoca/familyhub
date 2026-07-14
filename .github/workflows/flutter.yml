@@ -35,6 +35,9 @@ jobs:
       - name: Localization audit (ARB tutarlılığı)
         run: dart run tool/localization_audit.dart
 
+      - name: i18n Türkçe-sızıntı tarama (nl/fr/en'de Türkçe yasak)
+        run: dart run tool/i18n_leak_scan.dart
+
       - name: Hard-coded metin ratchet (gerileme önleyici)
         # Mevcut taban 145; YENİ hard-coded metin eklenince CI kırılır.
         # Taban düştükçe eşik de düşürülmelidir (yalnızca aşağı yönlü).

@@ -1,0 +1,7 @@
+# i18n Türkçe-sızıntı allowlist.
+# Biçim: <locale>:<key>   <gerekçe>
+# Yalnızca MARKA / ÖZEL AD / RESMİ KURUM / TEKNİK değerler için — çevrilmemiş
+# sistem metnini gizlemek için KULLANILMAZ.
+# Örnek:
+#   nl:appTitle   FamilyHub markası, çevrilmez
+# (Şu an gerçek sızıntı yok; liste boş.)
