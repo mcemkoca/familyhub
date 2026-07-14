@@ -8,6 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import '../core/errors.dart';
 import '../core/supabase_client.dart';
 import '../domain/models/user_model.dart';
+import 'auth/auth_error_mapper.dart';
 import 'fcm_service.dart';
 import 'hive_service.dart';
 
@@ -19,10 +20,25 @@ class AuthService {
 
   static SupabaseClient? get client => SupabaseConfig.safeClient;
 
-  static const _googleWebClientId =
-      '631270363894-2c8m0ea0ub83u01ne379cpvc5mp6221d.apps.googleusercontent.com';
+  // Google native sign-in için Supabase'e verilecek WEB (server) Client ID.
+  // Bu değer, google-services.json ile AYNI Google Cloud projesine ait olmalı.
+  // Derleme sırasında override edilebilir:
+  //   --dart-define=GOOGLE_SERVER_CLIENT_ID=<web-client-id>
+  // Boş/uyumsuz bırakılırsa native Google girişi DEVELOPER_ERROR verir.
+  static const _googleWebClientId = String.fromEnvironment(
+    'GOOGLE_SERVER_CLIENT_ID',
+    defaultValue:
+        '631270363894-2c8m0ea0ub83u01ne379cpvc5mp6221d.apps.googleusercontent.com',
+  );
 
-  static bool get isGoogleSignInConfigured => true;
+  static bool get isGoogleSignInConfigured => _googleWebClientId.isNotEmpty;
+
+  // Tek GoogleSignIn örneği — birden fazla initialize etmek native tarafta
+  // tutarsız duruma yol açar.
+  static final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: const ['email', 'profile'],
+    serverClientId: _googleWebClientId,
+  );
 
   static User? get currentUser => client?.auth.currentUser;
 
@@ -37,19 +53,33 @@ class AuthService {
   static Future<void> initAuthListener() async {
     if (_authListenerInitialized) return;
     _authListenerInitialized = true;
-    _authSub = client?.auth.onAuthStateChange.listen((event) async {
-      switch (event.event) {
-        case AuthChangeEvent.signedIn:
-        case AuthChangeEvent.tokenRefreshed:
-          await _persistSession(event.session);
-          break;
-        case AuthChangeEvent.signedOut:
-          await _secureStorage.delete(key: _sessionKey);
-          break;
-        default:
-          break;
-      }
-    });
+    _authSub = client?.auth.onAuthStateChange.listen(
+      (event) async {
+        switch (event.event) {
+          case AuthChangeEvent.signedIn:
+          case AuthChangeEvent.tokenRefreshed:
+            await _persistSession(event.session);
+            break;
+          case AuthChangeEvent.signedOut:
+            await _secureStorage.delete(key: _sessionKey);
+            break;
+          default:
+            break;
+        }
+      },
+      // Geçici ağ/refresh hatası uygulamayı crash ETTİRMEMELİ ve kullanıcıyı
+      // OTOMATİK LOGOUT ETMEMELİ. Yalnızca kesin süresi dolmuş/geçersiz
+      // token durumunda yerel oturum temizlenir; onu SDK signedOut event'i
+      // üzerinden zaten ele alıyoruz. Burada sadece güvenli logluyoruz.
+      onError: (Object error, StackTrace stackTrace) {
+        logAuthError(
+          operation: 'onAuthStateChange',
+          error: error,
+          stackTrace: stackTrace,
+        );
+      },
+      cancelOnError: false,
+    );
   }
 
   static Future<void> restoreSession() async {
@@ -128,10 +158,7 @@ class AuthService {
       try {
         final familyResponse = await supabase
             .from('families')
-            .insert({
-              'name': familyName.trim(),
-              'created_by': userId,
-            })
+            .insert({'name': familyName.trim(), 'created_by': userId})
             .select('id')
             .single();
         familyId = familyResponse['id'] as String?;
@@ -149,9 +176,10 @@ class AuthService {
           'role': 'admin',
           'display_name': name.trim(),
         });
-        await supabase.from('profiles').update({
-          'family_id': familyId,
-        }).eq('id', userId);
+        await supabase
+            .from('profiles')
+            .update({'family_id': familyId})
+            .eq('id', userId);
       } catch (e) {
         throw AppAuthException('Aile üyeliği oluşturulamadı: $e');
       }
@@ -179,8 +207,9 @@ class AuthService {
       if (existing != null && existing.isNotEmpty) return existing;
 
       final name = (profile?['display_name'] as String?)?.trim();
-      final familyName =
-          (name != null && name.isNotEmpty) ? '$name Ailesi' : 'Ailem';
+      final familyName = (name != null && name.isNotEmpty)
+          ? '$name Ailesi'
+          : 'Ailem';
 
       final fam = await supabase
           .from('families')
@@ -197,7 +226,8 @@ class AuthService {
       });
       await supabase
           .from('profiles')
-          .update({'family_id': familyId}).eq('id', userId);
+          .update({'family_id': familyId})
+          .eq('id', userId);
       return familyId;
     } catch (e) {
       return null;
@@ -211,13 +241,31 @@ class AuthService {
     final supabase = client;
     if (supabase == null) throw AppAuthException('Sunucu bağlantısı kurulmadı');
 
-    final response = await supabase.auth.signInWithPassword(
-      email: email.trim(),
-      password: password,
+    final cleanEmail = email.trim().toLowerCase();
+    if (cleanEmail.isEmpty || password.isEmpty) {
+      throw const AuthFailure(
+        AuthFailureKind.invalidCredentials,
+        'E-posta ve parola boş bırakılamaz.',
+        code: 'empty_input',
+      );
+    }
+
+    // Yalnızca geçici ağ/TLS/timeout/5xx durumlarında en fazla 2 kontrollü
+    // retry. Yanlış parola / rate-limit / doğrulanmamış e-posta retry EDİLMEZ.
+    final response = await retryAuth(
+      () => supabase.auth.signInWithPassword(
+        email: cleanEmail,
+        password: password,
+      ),
+      operation: 'signInWithPassword',
     );
 
     if (response.session == null) {
-      throw AppAuthException('E-posta veya şifre hatalı');
+      throw const AuthFailure(
+        AuthFailureKind.invalidCredentials,
+        'E-posta adresi veya parola hatalı.',
+        code: 'no_session',
+      );
     }
 
     await _persistSession(response.session);
@@ -272,7 +320,7 @@ class AuthService {
     _authListenerInitialized = false;
     // Sign out from all auth providers
     try {
-      await GoogleSignIn().signOut();
+      await _googleSignIn.signOut();
     } catch (e) {
       debugPrint('Google signOut error: $e');
     }
@@ -294,36 +342,67 @@ class AuthService {
 
   static Future<AuthResponse> signInWithGoogle() async {
     if (!isGoogleSignInConfigured) {
-      throw AppAuthException(
-        'Google Sign-In şu an yapılandırılmamış. '
-        'Lütfen e-posta ve şifre ile giriş yapın.',
+      throw const AuthFailure(
+        AuthFailureKind.configurationError,
+        'Google ile giriş şu anda yapılandırılamadı. Lütfen e-posta ile giriş yapın.',
+        code: 'no_server_client_id',
       );
     }
-    final googleSignIn = GoogleSignIn(
-      scopes: ['email', 'profile'],
-      serverClientId: _googleWebClientId,
-    );
-    final account = await googleSignIn.signIn();
+
+    // 1) Native hesap seçimi. İptal (null) sessizce ele alınır; DEVELOPER_ERROR
+    //    veya ağ hatası classifyAuthError tarafından sınıflandırılır.
+    //    PlatformException RETRY EDİLMEZ — yapılandırma hatası gizlenmemeli.
+    final GoogleSignInAccount? account;
+    try {
+      account = await _googleSignIn.signIn();
+    } catch (e) {
+      throw classifyAuthError(e);
+    }
     if (account == null) {
-      throw AppAuthException('Google girişi iptal edildi');
+      // Kullanıcı iptal etti — kırmızı hata gösterme.
+      throw const AuthFailure(
+        AuthFailureKind.cancelled,
+        '',
+        code: 'user_cancelled',
+      );
     }
 
-    final auth = await account.authentication;
+    final GoogleSignInAuthentication auth;
+    try {
+      auth = await account.authentication;
+    } catch (e) {
+      throw classifyAuthError(e);
+    }
     final idToken = auth.idToken;
+    final accessToken = auth.accessToken;
     if (idToken == null) {
-      throw AppAuthException('Google kimlik doğrulama başarısız');
+      // idToken null ≈ serverClientId (Web Client ID) yanlış/eksik → yapılandırma.
+      throw const AuthFailure(
+        AuthFailureKind.configurationError,
+        'Google ile giriş tamamlanamadı. Lütfen tekrar deneyin veya e-posta ile girin.',
+        code: 'null_id_token',
+      );
     }
 
     final supabase = client;
     if (supabase == null) throw AppAuthException('Sunucu bağlantısı kurulmadı');
 
-    final response = await supabase.auth.signInWithIdToken(
-      provider: OAuthProvider.google,
-      idToken: idToken,
+    // 2) Token değişimi geçici ağ hatasında en fazla 2 kez retry edilir.
+    final response = await retryAuth(
+      () => supabase.auth.signInWithIdToken(
+        provider: OAuthProvider.google,
+        idToken: idToken,
+        accessToken: accessToken,
+      ),
+      operation: 'signInWithIdToken(google)',
     );
 
     if (response.user == null) {
-      throw AppAuthException('Giriş başarısız oldu');
+      throw const AuthFailure(
+        AuthFailureKind.unknown,
+        'Giriş yapılamadı. Lütfen tekrar deneyin.',
+        code: 'no_user',
+      );
     }
 
     await syncUserPostLogin(response);
@@ -340,8 +419,8 @@ class AuthService {
 
     final userId = user.id;
     final email = user.email ?? '';
-    final displayName = user.userMetadata?['display_name'] as String? ??
-        email.split('@').first;
+    final displayName =
+        user.userMetadata?['display_name'] as String? ?? email.split('@').first;
     final avatarUrl = user.userMetadata?['avatar_url'] as String?;
 
     // 1. Upsert profile in Supabase (canonical source of truth)
@@ -361,7 +440,9 @@ class AuthService {
     try {
       final user = supabase.auth.currentUser;
       final identities = user?.identities ?? [];
-      debugPrint('User identities: ${identities.map((i) => i.provider).toList()}');
+      debugPrint(
+        'User identities: ${identities.map((i) => i.provider).toList()}',
+      );
     } catch (e) {
       debugPrint('Identity check error: $e');
     }
@@ -373,10 +454,13 @@ class AuthService {
     try {
       final fcmToken = FcmService.token;
       if (fcmToken != null && fcmToken.isNotEmpty) {
-        await supabase.from('profiles').update({
-          'fcm_token': fcmToken,
-          'updated_at': DateTime.now().toIso8601String(),
-        }).eq('id', userId);
+        await supabase
+            .from('profiles')
+            .update({
+              'fcm_token': fcmToken,
+              'updated_at': DateTime.now().toIso8601String(),
+            })
+            .eq('id', userId);
       }
     } catch (e) {
       debugPrint('FCM token sync error: $e');
@@ -420,9 +504,12 @@ class AuthService {
     if (dateOfBirth != null) updates['date_of_birth'] = dateOfBirth;
     if (bloodType != null) updates['blood_type'] = bloodType;
     if (allergies != null) updates['allergies'] = allergies;
-    if (chronicConditions != null) updates['chronic_conditions'] = chronicConditions;
-    if (emergencyContact != null) updates['emergency_contact'] = emergencyContact;
-    if (preferredLanguage != null) updates['preferred_language'] = preferredLanguage;
+    if (chronicConditions != null)
+      updates['chronic_conditions'] = chronicConditions;
+    if (emergencyContact != null)
+      updates['emergency_contact'] = emergencyContact;
+    if (preferredLanguage != null)
+      updates['preferred_language'] = preferredLanguage;
     if (themePreference != null) updates['theme_preference'] = themePreference;
     if (accentColor != null) updates['accent_color'] = accentColor;
 
@@ -467,7 +554,10 @@ class AuthService {
     }
   }
 
-  static Future<void> updatePassword(String currentPassword, String newPassword) async {
+  static Future<void> updatePassword(
+    String currentPassword,
+    String newPassword,
+  ) async {
     final supabase = client;
     final user = currentUser;
     if (supabase == null || user == null) {
@@ -499,7 +589,9 @@ class AuthService {
 
   // ── Security Questions ───────────────────────────────────────────
 
-  static Future<Map<String, dynamic>?> getSecurityQuestionsByEmail(String email) async {
+  static Future<Map<String, dynamic>?> getSecurityQuestionsByEmail(
+    String email,
+  ) async {
     final supabase = client;
     if (supabase == null) throw AppAuthException('Sunucu bağlantısı kurulmadı');
 
@@ -521,11 +613,14 @@ class AuthService {
     if (supabase == null) throw AppAuthException('Sunucu bağlantısı kurulmadı');
 
     try {
-      final result = await supabase.rpc('verify_security_answers', params: {
-        'p_email': email.trim(),
-        'p_answer1': answer1.trim(),
-        'p_answer2': answer2.trim(),
-      });
+      final result = await supabase.rpc(
+        'verify_security_answers',
+        params: {
+          'p_email': email.trim(),
+          'p_answer1': answer1.trim(),
+          'p_answer2': answer2.trim(),
+        },
+      );
       return result == true;
     } catch (_) {
       return false;
@@ -559,13 +654,16 @@ class AuthService {
     }
 
     try {
-      await supabase.rpc('update_security_questions', params: {
-        'p_user_id': userId,
-        'p_question1': question1.trim(),
-        'p_answer1': answer1.trim(),
-        'p_question2': question2.trim(),
-        'p_answer2': answer2.trim(),
-      });
+      await supabase.rpc(
+        'update_security_questions',
+        params: {
+          'p_user_id': userId,
+          'p_question1': question1.trim(),
+          'p_answer1': answer1.trim(),
+          'p_question2': question2.trim(),
+          'p_answer2': answer2.trim(),
+        },
+      );
     } catch (e) {
       throw AppAuthException('Güvenlik soruları kaydedilemedi: $e');
     }
@@ -587,10 +685,7 @@ class AuthService {
     try {
       final response = await supabase.functions.invoke(
         'reset-password-secure',
-        body: {
-          'email': email.trim(),
-          'newPassword': newPassword,
-        },
+        body: {'email': email.trim(), 'newPassword': newPassword},
       );
       if (response.status != 200) {
         throw AppAuthException(

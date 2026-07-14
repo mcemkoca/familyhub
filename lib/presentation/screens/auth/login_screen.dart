@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../config/routes.dart';
 import '../../../core/validation/input_validator.dart';
 import '../../../services/auth_service.dart';
+import '../../../services/auth/auth_error_mapper.dart';
 import '../../../services/biometric_service.dart';
 import '../../../services/localization/locale_service.dart';
 import '../../providers/app_providers.dart';
@@ -24,6 +25,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
   final _emailFocus = FocusNode();
   final _passwordFocus = FocusNode();
   bool _isLoading = false;
+  bool _navigated = false;
   bool _obscurePassword = true;
   late AnimationController _animController;
   late Animation<double> _cardSlide;
@@ -39,9 +41,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
     _cardSlide = Tween<double>(begin: 60, end: 0).animate(
       CurvedAnimation(parent: _animController, curve: Curves.easeOutCubic),
     );
-    _cardOpacity = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(parent: _animController, curve: Curves.easeOut),
-    );
+    _cardOpacity = Tween<double>(
+      begin: 0,
+      end: 1,
+    ).animate(CurvedAnimation(parent: _animController, curve: Curves.easeOut));
     _animController.forward();
   }
 
@@ -55,45 +58,74 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
   }
 
   Future<void> _login() async {
+    // Devam eden bir giriş varken (e-posta VEYA Google) ikinci istek başlatma.
+    if (_isLoading) return;
     HapticFeedback.mediumImpact();
     final email = _emailController.text.trim();
     final password = _passwordController.text;
 
     final emailError = InputValidator.validateEmail(email);
-    if (emailError != null) { _showError(emailError); return; }
+    if (emailError != null) {
+      _showError(emailError);
+      return;
+    }
     final passwordError = InputValidator.validatePassword(password);
-    if (passwordError != null) { _showError(passwordError); return; }
+    if (passwordError != null) {
+      _showError(passwordError);
+      return;
+    }
 
     setState(() => _isLoading = true);
     try {
       await AuthService.signIn(email: email, password: password);
       await AuthService.ensureFamily();
       await _applyBackendLocale();
-      if (mounted) context.go(AppRoutes.hub);
+      _goHubOnce();
     } catch (e) {
-      if (mounted) _showError(e.toString().replaceAll('Exception: ', ''));
+      _handleAuthError(e);
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
   }
 
   Future<void> _signInWithGoogle() async {
+    if (_isLoading) return;
     setState(() => _isLoading = true);
     try {
       await AuthService.signInWithGoogle();
       await AuthService.ensureFamily();
       await _applyBackendLocale();
-      if (mounted) context.go(AppRoutes.hub);
+      _goHubOnce();
     } catch (e) {
-      if (mounted) _showError(e.toString().replaceAll('Exception: ', ''));
+      _handleAuthError(e);
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
   }
 
+  /// Tek seferlik navigasyon — auth listener ile login callback aynı anda iki
+  /// kez yönlendirmesin.
+  void _goHubOnce() {
+    if (_navigated || !mounted) return;
+    _navigated = true;
+    context.go(AppRoutes.hub);
+  }
+
+  /// Auth hatasını kullanıcı-dostu mesaja çevirir. Kullanıcı iptali kırmızı
+  /// hata olarak GÖSTERİLMEZ — sessizce normal duruma dönülür.
+  void _handleAuthError(Object error) {
+    if (!mounted) return;
+    final failure = classifyAuthError(error);
+    if (failure.isCancellation) return;
+    _showError(failure.userMessage);
+  }
+
   Future<void> _biometricLogin() async {
     final available = await BiometricService.isAvailable();
-    if (!available) { _showError('Biyometrik kimlik doğrulama desteklenmiyor'); return; }
+    if (!available) {
+      _showError('Biyometrik kimlik doğrulama desteklenmiyor');
+      return;
+    }
     final success = await BiometricService.authenticate();
     if (success && mounted) {
       if (AuthService.currentUser != null) {
@@ -107,11 +139,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
   void _showError(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Row(children: [
-          const Icon(Icons.warning_rounded, color: Colors.white, size: 18),
-          const SizedBox(width: 8),
-          Expanded(child: Text(message)),
-        ]),
+        content: Row(
+          children: [
+            const Icon(Icons.warning_rounded, color: Colors.white, size: 18),
+            const SizedBox(width: 8),
+            Expanded(child: Text(message)),
+          ],
+        ),
         backgroundColor: const Color(0xFFEF4444),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -133,7 +167,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
   @override
   Widget build(BuildContext context) {
     ref.listen(authUserProvider, (previous, next) {
-      if (next == true && mounted) context.go(AppRoutes.hub);
+      if (next == true) _goHubOnce();
     });
 
     final size = MediaQuery.sizeOf(context);
@@ -148,7 +182,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
             height: size.height * 0.48,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [Color(0xFFFF9A56), Color(0xFFFF6B95), Color(0xFFC850C0)],
+                colors: [
+                  Color(0xFFFF9A56),
+                  Color(0xFFFF6B95),
+                  Color(0xFFC850C0),
+                ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -245,7 +283,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
 
   Widget _buildCard(Size size, bool isDark) {
     final cardColor = isDark ? const Color(0xFF13131A) : Colors.white;
-    final titleColor = isDark ? const Color(0xFFE5E7EB) : const Color(0xFF1F2937);
+    final titleColor = isDark
+        ? const Color(0xFFE5E7EB)
+        : const Color(0xFF1F2937);
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
@@ -273,7 +313,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(AppLocalizations.of(context).login,
+                Text(
+                  AppLocalizations.of(context).login,
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.w900,
@@ -281,18 +322,24 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 5,
+                  ),
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(
                       colors: [Color(0xFFFF9A56), Color(0xFFFF6B95)],
                     ),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: const Text('👨‍👩‍👧‍👦 Aile',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w800)),
+                  child: const Text(
+                    '👨‍👩‍👧‍👦 Aile',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -319,14 +366,21 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: _isLoading ? null : () => context.push(AppRoutes.forgotPassword),
+                onPressed: _isLoading
+                    ? null
+                    : () => context.push(AppRoutes.forgotPassword),
                 style: TextButton.styleFrom(
                   foregroundColor: const Color(0xFFFF6B95),
                   padding: EdgeInsets.zero,
                   minimumSize: const Size(0, 32),
                 ),
-                child: Text(AppLocalizations.of(context).sifremiunuttum1,
-                    style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
+                child: Text(
+                  AppLocalizations.of(context).sifremiunuttum1,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 13,
+                  ),
+                ),
               ),
             ),
             const SizedBox(height: 16),
@@ -336,7 +390,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
               label: _isLoading ? null : 'Giriş Yap',
               onTap: _isLoading ? null : _login,
               gradient: const LinearGradient(
-                colors: [Color(0xFFFF9A56), Color(0xFFFF6B95), Color(0xFFC850C0)],
+                colors: [
+                  Color(0xFFFF9A56),
+                  Color(0xFFFF6B95),
+                  Color(0xFFC850C0),
+                ],
               ),
               shadowColor: const Color(0xFFFF6B95).withAlpha(100),
             ),
@@ -348,11 +406,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                 const Expanded(child: Divider()),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: Text(AppLocalizations.of(context).regOr,
-                      style: TextStyle(
-                          fontSize: 12,
-                          color: isDark ? const Color(0xFF6B7280) : const Color(0xFF9CA3AF),
-                          fontWeight: FontWeight.w600)),
+                  child: Text(
+                    AppLocalizations.of(context).regOr,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: isDark
+                          ? const Color(0xFF6B7280)
+                          : const Color(0xFF9CA3AF),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
                 const Expanded(child: Divider()),
               ],
@@ -362,13 +425,19 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
             // Google sign in
             _buildSocialButton(
               label: AppLocalizations.of(context).googleIleGirisYap,
-              icon: const Text('G',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: Color(0xFF4285F4))),
+              icon: const Text(
+                'G',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w900,
+                  color: Color(0xFF4285F4),
+                ),
+              ),
               onTap: _isLoading
                   ? null
                   : AuthService.isGoogleSignInConfigured
-                      ? _signInWithGoogle
-                      : () => _showError('Google Sign-In şu an kullanılamıyor.'),
+                  ? _signInWithGoogle
+                  : () => _showError('Google Sign-In şu an kullanılamıyor.'),
               enabled: AuthService.isGoogleSignInConfigured,
               isDark: isDark,
             ),
@@ -377,7 +446,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
             // Biometric
             _buildSocialButton(
               label: AppLocalizations.of(context).parmakIziIleGiris,
-              icon: const Icon(Icons.fingerprint, size: 20, color: Color(0xFF8B5CF6)),
+              icon: const Icon(
+                Icons.fingerprint,
+                size: 20,
+                color: Color(0xFF8B5CF6),
+              ),
               onTap: _isLoading ? null : _biometricLogin,
               enabled: true,
               isDark: isDark,
@@ -386,14 +459,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
 
             // Child login
             GestureDetector(
-              onTap: _isLoading ? null : () => context.push(AppRoutes.childLogin),
+              onTap: _isLoading
+                  ? null
+                  : () => context.push(AppRoutes.childLogin),
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 decoration: BoxDecoration(
-                  color: isDark ? const Color(0xFF1C1007) : const Color(0xFFFFF7ED),
+                  color: isDark
+                      ? const Color(0xFF1C1007)
+                      : const Color(0xFFFFF7ED),
                   borderRadius: BorderRadius.circular(14),
                   border: Border.all(
-                    color: isDark ? const Color(0xFF7C3A00) : const Color(0xFFFED7AA),
+                    color: isDark
+                        ? const Color(0xFF7C3A00)
+                        : const Color(0xFFFED7AA),
                     width: 1.5,
                   ),
                 ),
@@ -425,7 +504,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                   text: TextSpan(
                     style: TextStyle(
                       fontSize: 14,
-                      color: isDark ? const Color(0xFF9CA3AF) : const Color(0xFF6B7280),
+                      color: isDark
+                          ? const Color(0xFF9CA3AF)
+                          : const Color(0xFF6B7280),
                     ),
                     children: const [
                       TextSpan(text: 'Hesabın yok mu? '),
@@ -459,7 +540,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
     bool isDark = false,
   }) {
     final fieldBg = isDark ? const Color(0xFF0A0A0F) : const Color(0xFFF9FAFB);
-    final borderColor = isDark ? const Color(0x1EFFFFFF) : const Color(0xFFE5E7EB);
+    final borderColor = isDark
+        ? const Color(0x1EFFFFFF)
+        : const Color(0xFFE5E7EB);
     return Container(
       decoration: BoxDecoration(
         color: fieldBg,
@@ -479,12 +562,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
           prefixText: '$emoji  ',
           prefixStyle: const TextStyle(fontSize: 16),
           border: InputBorder.none,
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          labelStyle:
-              const TextStyle(color: Color(0xFF9CA3AF), fontSize: 14),
-          floatingLabelStyle:
-              const TextStyle(color: Color(0xFFFF6B95), fontSize: 12),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 14,
+          ),
+          labelStyle: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 14),
+          floatingLabelStyle: const TextStyle(
+            color: Color(0xFFFF6B95),
+            fontSize: 12,
+          ),
         ),
       ),
     );
@@ -492,7 +578,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
 
   Widget _buildPasswordField({bool isDark = false}) {
     final fieldBg = isDark ? const Color(0xFF0A0A0F) : const Color(0xFFF9FAFB);
-    final borderColor = isDark ? const Color(0x1EFFFFFF) : const Color(0xFFE5E7EB);
+    final borderColor = isDark
+        ? const Color(0x1EFFFFFF)
+        : const Color(0xFFE5E7EB);
     return Container(
       decoration: BoxDecoration(
         color: fieldBg,
@@ -510,12 +598,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
           prefixText: '🔒  ',
           prefixStyle: const TextStyle(fontSize: 16),
           border: InputBorder.none,
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          labelStyle:
-              const TextStyle(color: Color(0xFF9CA3AF), fontSize: 14),
-          floatingLabelStyle:
-              const TextStyle(color: Color(0xFFFF6B95), fontSize: 12),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 14,
+          ),
+          labelStyle: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 14),
+          floatingLabelStyle: const TextStyle(
+            color: Color(0xFFFF6B95),
+            fontSize: 12,
+          ),
           suffixIcon: IconButton(
             icon: Icon(
               _obscurePassword ? Icons.visibility_off : Icons.visibility,
@@ -543,12 +634,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
         height: 54,
         decoration: BoxDecoration(
           gradient: onTap == null
-              ? const LinearGradient(colors: [Color(0xFFD1D5DB), Color(0xFF9CA3AF)])
+              ? const LinearGradient(
+                  colors: [Color(0xFFD1D5DB), Color(0xFF9CA3AF)],
+                )
               : gradient,
           borderRadius: BorderRadius.circular(16),
           boxShadow: onTap == null
               ? []
-              : [BoxShadow(color: shadowColor, blurRadius: 16, offset: const Offset(0, 6))],
+              : [
+                  BoxShadow(
+                    color: shadowColor,
+                    blurRadius: 16,
+                    offset: const Offset(0, 6),
+                  ),
+                ],
         ),
         child: Center(
           child: label == null
@@ -556,7 +655,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                   width: 22,
                   height: 22,
                   child: CircularProgressIndicator(
-                      color: Colors.white, strokeWidth: 2),
+                    color: Colors.white,
+                    strokeWidth: 2,
+                  ),
                 )
               : Text(
                   label,
@@ -580,8 +681,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
     bool isDark = false,
   }) {
     final btnBg = isDark ? const Color(0xFF1A1A2E) : Colors.white;
-    final borderColor = isDark ? const Color(0x1EFFFFFF) : const Color(0xFFE5E7EB);
-    final textColor = isDark ? const Color(0xFFE5E7EB) : const Color(0xFF374151);
+    final borderColor = isDark
+        ? const Color(0x1EFFFFFF)
+        : const Color(0xFFE5E7EB);
+    final textColor = isDark
+        ? const Color(0xFFE5E7EB)
+        : const Color(0xFF374151);
     return Opacity(
       opacity: enabled ? 1.0 : 0.4,
       child: GestureDetector(
@@ -594,9 +699,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
             border: Border.all(color: borderColor, width: 1.5),
             boxShadow: [
               BoxShadow(
-                  color: Colors.black.withAlpha(isDark ? 20 : 8),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2)),
+                color: Colors.black.withAlpha(isDark ? 20 : 8),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
             ],
           ),
           child: Row(

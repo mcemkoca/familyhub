@@ -18,7 +18,9 @@ class SupabaseConfig {
   static SupabaseClient get client {
     final safe = safeClient;
     if (safe != null) return safe;
-    throw StateError('Supabase not initialized — call Supabase.initialize() first');
+    throw StateError(
+      'Supabase not initialized — call Supabase.initialize() first',
+    );
   }
 
   static GoTrueClient get auth => client.auth;
@@ -46,12 +48,17 @@ class SupabaseConfig {
   /// Initializes auth state listener to clear cached client on sign-out.
   static void initializeListener() {
     _authSub?.cancel();
-    _authSub = Supabase.instance.client.auth.onAuthStateChange.listen((data) {
-      final AuthChangeEvent event = data.event;
-      if (event == AuthChangeEvent.signedOut) {
-        _client = null;
-      }
-    });
+    _authSub = Supabase.instance.client.auth.onAuthStateChange.listen(
+      (data) {
+        final AuthChangeEvent event = data.event;
+        if (event == AuthChangeEvent.signedOut) {
+          _client = null;
+        }
+      },
+      // Geçici auth/refresh hatası crash veya zorunlu logout üretmemeli.
+      onError: (Object _, StackTrace _) {},
+      cancelOnError: false,
+    );
   }
 
   /// Disposes the auth listener. Call during app shutdown or tests.
