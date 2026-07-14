@@ -92,15 +92,32 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
     if (_isLoading) return;
     setState(() => _isLoading = true);
     try {
+      // Tarayıcı tabanlı OAuth: tarayıcı açılır, kullanıcı onaylayınca deep-link
+      // ile döner ve session onAuthStateChange üzerinden gelir. Navigasyonu
+      // authUserProvider dinleyicisi (_onAuthenticated) üstlenir; burada
+      // beklemiyoruz. Kullanıcı tarayıcıyı iptal ederse session oluşmaz.
       await AuthService.signInWithGoogle();
-      await AuthService.ensureFamily();
-      await _applyBackendLocale();
-      _goHubOnce();
     } catch (e) {
       _handleAuthError(e);
     } finally {
+      // Tarayıcı açıldı; session dönüşünü dinleyici bekleyecek. Butonu tekrar
+      // aktive et ki kullanıcı gerekirse yeniden deneyebilsin.
       if (mounted) setState(() => _isLoading = false);
     }
+  }
+
+  /// Herhangi bir yolla (e-posta VEYA Google OAuth dönüşü) oturum açıldığında
+  /// aile bootstrap + dil + tek-seferlik navigasyon. Idempotent: e-posta akışı
+  /// zaten navigasyonu yaptıysa erken döner.
+  Future<void> _onAuthenticated() async {
+    if (_navigated || !mounted) return;
+    try {
+      await AuthService.ensureFamily();
+      await _applyBackendLocale();
+    } catch (_) {
+      // Bootstrap best-effort; oturum yine de geçerli, hub'a geçilir.
+    }
+    _goHubOnce();
   }
 
   /// Tek seferlik navigasyon — auth listener ile login callback aynı anda iki
@@ -167,7 +184,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
   @override
   Widget build(BuildContext context) {
     ref.listen(authUserProvider, (previous, next) {
-      if (next == true) _goHubOnce();
+      if (next == true) _onAuthenticated();
     });
 
     final size = MediaQuery.sizeOf(context);

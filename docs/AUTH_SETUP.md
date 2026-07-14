@@ -23,7 +23,27 @@ yapılamaz.
   kaynaklı. Kodda retry/sınıflandırma yoktu → tek geçici hatada giriş başarısız
   görünüyordu. Artık en fazla 2 kontrollü retry (500ms / 1500ms) uygulanıyor.
 
-## Konsol adımları (Google Sign-In için ZORUNLU)
+## GÜNCEL: Google artık tarayıcı-tabanlı Supabase OAuth kullanıyor
+
+`signInWithGoogle` native `google_sign_in` yerine **Supabase `signInWithOAuth`**
+akışına geçirildi. Bu, **SHA-1 / Android OAuth Client kaydı GEREKTİRMEZ** ve
+`google-services.json`'daki boş `oauth_client` sorununu tamamen atlar.
+
+Çalışması için gereken **tek** yapılandırma (Supabase + Google Cloud Console):
+1. **Supabase Dashboard → Authentication → Providers → Google**: etkinleştir;
+   Google Cloud'dan alınan **Web** Client ID + Client Secret'ı gir.
+2. **Supabase Dashboard → Authentication → URL Configuration → Redirect URLs**:
+   `com.miro.familyhub://login-callback` ekle (kodla birebir aynı).
+3. **Google Cloud Console → Credentials → Web OAuth Client → Authorized redirect
+   URIs**: Supabase callback'i ekle:
+   `https://hgzwfkhxralceriwsqzk.supabase.co/auth/v1/callback`.
+
+AndroidManifest'teki `com.miro.familyhub://login-callback` intent-filter zaten
+mevcut. Bu üç adım tamamlanınca Google girişi çalışır; SHA kaydına gerek yoktur.
+
+---
+
+## (Alternatif / eski) Native google_sign_in için konsol adımları
 
 ### A. SHA parmak izlerini al
 ```bash

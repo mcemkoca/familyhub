@@ -340,73 +340,47 @@ class AuthService {
     SupabaseConfig.disposeListener();
   }
 
-  static Future<AuthResponse> signInWithGoogle() async {
-    if (!isGoogleSignInConfigured) {
-      throw const AuthFailure(
-        AuthFailureKind.configurationError,
-        'Google ile giriş şu anda yapılandırılamadı. Lütfen e-posta ile giriş yapın.',
-        code: 'no_server_client_id',
-      );
-    }
+  /// Uygulamaya dönüşteki OAuth redirect şeması. AndroidManifest'teki
+  /// intent-filter ve Supabase Dashboard → Auth → URL Configuration →
+  /// Redirect URLs ile BİREBİR aynı olmalıdır.
+  static const googleRedirectScheme = 'com.miro.familyhub://login-callback';
 
-    // 1) Native hesap seçimi. İptal (null) sessizce ele alınır; DEVELOPER_ERROR
-    //    veya ağ hatası classifyAuthError tarafından sınıflandırılır.
-    //    PlatformException RETRY EDİLMEZ — yapılandırma hatası gizlenmemeli.
-    final GoogleSignInAccount? account;
-    try {
-      account = await _googleSignIn.signIn();
-    } catch (e) {
-      throw classifyAuthError(e);
-    }
-    if (account == null) {
-      // Kullanıcı iptal etti — kırmızı hata gösterme.
-      throw const AuthFailure(
-        AuthFailureKind.cancelled,
-        '',
-        code: 'user_cancelled',
-      );
-    }
-
-    final GoogleSignInAuthentication auth;
-    try {
-      auth = await account.authentication;
-    } catch (e) {
-      throw classifyAuthError(e);
-    }
-    final idToken = auth.idToken;
-    final accessToken = auth.accessToken;
-    if (idToken == null) {
-      // idToken null ≈ serverClientId (Web Client ID) yanlış/eksik → yapılandırma.
-      throw const AuthFailure(
-        AuthFailureKind.configurationError,
-        'Google ile giriş tamamlanamadı. Lütfen tekrar deneyin veya e-posta ile girin.',
-        code: 'null_id_token',
-      );
-    }
-
+  /// Google ile giriş — **tarayıcı tabanlı Supabase OAuth** akışı.
+  ///
+  /// Native `google_sign_in`'in aksine SHA-1/Android OAuth Client KAYDI
+  /// GEREKTİRMEZ; yalnızca Supabase Dashboard'da Google provider'ın etkin
+  /// olması ve redirect URL'in tanımlı olması yeterlidir. Böylece
+  /// `google-services.json`'daki boş `oauth_client` / DEVELOPER_ERROR sorunu
+  /// tamamen atlanır.
+  ///
+  /// Akış asenkrondur: tarayıcı açılır, kullanıcı onaylar, deep-link ile
+  /// uygulamaya döner ve session `onAuthStateChange` (signedIn) üzerinden
+  /// tamamlanır. Bu yüzden burada AuthResponse döndürülmez; navigasyonu
+  /// login ekranındaki auth dinleyicisi üstlenir.
+  ///
+  /// Dönüş: tarayıcı başarıyla açıldıysa `true`. Kullanıcı tarayıcıyı iptal
+  /// ederse session hiç oluşmaz (sessizce login ekranında kalınır).
+  static Future<bool> signInWithGoogle() async {
     final supabase = client;
-    if (supabase == null) throw AppAuthException('Sunucu bağlantısı kurulmadı');
-
-    // 2) Token değişimi geçici ağ hatasında en fazla 2 kez retry edilir.
-    final response = await retryAuth(
-      () => supabase.auth.signInWithIdToken(
-        provider: OAuthProvider.google,
-        idToken: idToken,
-        accessToken: accessToken,
-      ),
-      operation: 'signInWithIdToken(google)',
-    );
-
-    if (response.user == null) {
+    if (supabase == null) {
       throw const AuthFailure(
-        AuthFailureKind.unknown,
-        'Giriş yapılamadı. Lütfen tekrar deneyin.',
-        code: 'no_user',
+        AuthFailureKind.configurationError,
+        'Sunucu bağlantısı kurulmadı. Lütfen tekrar deneyin.',
+        code: 'no_client',
       );
     }
 
-    await syncUserPostLogin(response);
-    return response;
+    try {
+      // Harici tarayıcı, redirect'in uygulamaya geri dönmesi için en güvenilir
+      // moddur (in-app WebView bazı cihazlarda deep-link'i yakalayamaz).
+      return await supabase.auth.signInWithOAuth(
+        OAuthProvider.google,
+        redirectTo: googleRedirectScheme,
+        authScreenLaunchMode: LaunchMode.externalApplication,
+      );
+    } catch (e) {
+      throw classifyAuthError(e);
+    }
   }
 
   /// Synchronizes user profile, local cache, and FCM token after any login.
@@ -504,12 +478,15 @@ class AuthService {
     if (dateOfBirth != null) updates['date_of_birth'] = dateOfBirth;
     if (bloodType != null) updates['blood_type'] = bloodType;
     if (allergies != null) updates['allergies'] = allergies;
-    if (chronicConditions != null)
+    if (chronicConditions != null) {
       updates['chronic_conditions'] = chronicConditions;
-    if (emergencyContact != null)
+    }
+    if (emergencyContact != null) {
       updates['emergency_contact'] = emergencyContact;
-    if (preferredLanguage != null)
+    }
+    if (preferredLanguage != null) {
       updates['preferred_language'] = preferredLanguage;
+    }
     if (themePreference != null) updates['theme_preference'] = themePreference;
     if (accentColor != null) updates['accent_color'] = accentColor;
 
