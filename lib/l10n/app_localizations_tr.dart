@@ -7016,4 +7016,47 @@ class AppLocalizationsTr extends AppLocalizations {
   String childDeleteConfirm(Object name) {
     return '$name adlı çocuk hesabını silmek istediğinize emin misiniz?';
   }
+
+  @override
+  String get haTitle => 'Sağlık Makaleleri';
+
+  @override
+  String get haSubtitle =>
+      'Sağlıklı bir yaşam için doğru bilgi, her gün seninle.';
+
+  @override
+  String get haSeeAll => 'Tüm Makaleleri Gör';
+
+  @override
+  String get haBrowseAll => 'Sağlıkla ilgili tüm içeriklere göz atın.';
+
+  @override
+  String get haArticleBadge => 'Sağlık Makalesi';
+
+  @override
+  String get haCatCurrent => 'Güncel';
+
+  @override
+  String get haCatForYou => 'Senin için';
+
+  @override
+  String get haCatPopular => 'Popüler';
+
+  @override
+  String get haCatChild => 'Çocuk';
+
+  @override
+  String get haCatWomen => 'Kadın';
+
+  @override
+  String get haCatFamily => 'Aile';
+
+  @override
+  String get haDateToday => 'Bugün';
+
+  @override
+  String get commonRefresh => 'Yenile';
+
+  @override
+  String get commonRefreshing => 'Yenileniyor…';
 }

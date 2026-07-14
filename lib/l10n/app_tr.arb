@@ -2841,5 +2841,19 @@
     "placeholders": {
       "name": {}
     }
-  }
+  },
+  "haTitle": "Sağlık Makaleleri",
+  "haSubtitle": "Sağlıklı bir yaşam için doğru bilgi, her gün seninle.",
+  "haSeeAll": "Tüm Makaleleri Gör",
+  "haBrowseAll": "Sağlıkla ilgili tüm içeriklere göz atın.",
+  "haArticleBadge": "Sağlık Makalesi",
+  "haCatCurrent": "Güncel",
+  "haCatForYou": "Senin için",
+  "haCatPopular": "Popüler",
+  "haCatChild": "Çocuk",
+  "haCatWomen": "Kadın",
+  "haCatFamily": "Aile",
+  "haDateToday": "Bugün",
+  "commonRefresh": "Yenile",
+  "commonRefreshing": "Yenileniyor…"
 }

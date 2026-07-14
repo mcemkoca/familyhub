@@ -2290,5 +2290,19 @@
   "colorPurple": "Paars",
   "colorRed": "Rood",
   "colorPink": "Roze",
-  "childDeleteConfirm": "Weet je zeker dat je het kinderaccount van {name} wilt verwijderen?"
+  "childDeleteConfirm": "Weet je zeker dat je het kinderaccount van {name} wilt verwijderen?",
+  "haTitle": "Gezondheidsartikelen",
+  "haSubtitle": "Betrouwbare info voor een gezond leven, elke dag.",
+  "haSeeAll": "Alle artikelen bekijken",
+  "haBrowseAll": "Blader door alle gezondheidsinhoud.",
+  "haArticleBadge": "Gezondheidsartikel",
+  "haCatCurrent": "Actueel",
+  "haCatForYou": "Voor jou",
+  "haCatPopular": "Populair",
+  "haCatChild": "Kind",
+  "haCatWomen": "Vrouw",
+  "haCatFamily": "Gezin",
+  "haDateToday": "Vandaag",
+  "commonRefresh": "Vernieuwen",
+  "commonRefreshing": "Vernieuwen…"
 }

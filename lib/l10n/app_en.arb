@@ -2290,5 +2290,19 @@
   "colorPurple": "Purple",
   "colorRed": "Red",
   "colorPink": "Pink",
-  "childDeleteConfirm": "Are you sure you want to delete {name}'s child account?"
+  "childDeleteConfirm": "Are you sure you want to delete {name}'s child account?",
+  "haTitle": "Health Articles",
+  "haSubtitle": "Reliable info for a healthy life, every day.",
+  "haSeeAll": "See all articles",
+  "haBrowseAll": "Browse all health content.",
+  "haArticleBadge": "Health article",
+  "haCatCurrent": "Latest",
+  "haCatForYou": "For you",
+  "haCatPopular": "Popular",
+  "haCatChild": "Child",
+  "haCatWomen": "Women",
+  "haCatFamily": "Family",
+  "haDateToday": "Today",
+  "commonRefresh": "Refresh",
+  "commonRefreshing": "Refreshing…"
 }

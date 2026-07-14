@@ -13097,6 +13097,90 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'{name} adlı çocuk hesabını silmek istediğinize emin misiniz?'**
   String childDeleteConfirm(Object name);
+
+  /// No description provided for @haTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sağlık Makaleleri'**
+  String get haTitle;
+
+  /// No description provided for @haSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sağlıklı bir yaşam için doğru bilgi, her gün seninle.'**
+  String get haSubtitle;
+
+  /// No description provided for @haSeeAll.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tüm Makaleleri Gör'**
+  String get haSeeAll;
+
+  /// No description provided for @haBrowseAll.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sağlıkla ilgili tüm içeriklere göz atın.'**
+  String get haBrowseAll;
+
+  /// No description provided for @haArticleBadge.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sağlık Makalesi'**
+  String get haArticleBadge;
+
+  /// No description provided for @haCatCurrent.
+  ///
+  /// In tr, this message translates to:
+  /// **'Güncel'**
+  String get haCatCurrent;
+
+  /// No description provided for @haCatForYou.
+  ///
+  /// In tr, this message translates to:
+  /// **'Senin için'**
+  String get haCatForYou;
+
+  /// No description provided for @haCatPopular.
+  ///
+  /// In tr, this message translates to:
+  /// **'Popüler'**
+  String get haCatPopular;
+
+  /// No description provided for @haCatChild.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çocuk'**
+  String get haCatChild;
+
+  /// No description provided for @haCatWomen.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kadın'**
+  String get haCatWomen;
+
+  /// No description provided for @haCatFamily.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile'**
+  String get haCatFamily;
+
+  /// No description provided for @haDateToday.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugün'**
+  String get haDateToday;
+
+  /// No description provided for @commonRefresh.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yenile'**
+  String get commonRefresh;
+
+  /// No description provided for @commonRefreshing.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yenileniyor…'**
+  String get commonRefreshing;
 }
 
 class _AppLocalizationsDelegate

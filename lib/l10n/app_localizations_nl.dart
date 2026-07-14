@@ -7001,4 +7001,46 @@ class AppLocalizationsNl extends AppLocalizations {
   String childDeleteConfirm(Object name) {
     return 'Weet je zeker dat je het kinderaccount van $name wilt verwijderen?';
   }
+
+  @override
+  String get haTitle => 'Gezondheidsartikelen';
+
+  @override
+  String get haSubtitle => 'Betrouwbare info voor een gezond leven, elke dag.';
+
+  @override
+  String get haSeeAll => 'Alle artikelen bekijken';
+
+  @override
+  String get haBrowseAll => 'Blader door alle gezondheidsinhoud.';
+
+  @override
+  String get haArticleBadge => 'Gezondheidsartikel';
+
+  @override
+  String get haCatCurrent => 'Actueel';
+
+  @override
+  String get haCatForYou => 'Voor jou';
+
+  @override
+  String get haCatPopular => 'Populair';
+
+  @override
+  String get haCatChild => 'Kind';
+
+  @override
+  String get haCatWomen => 'Vrouw';
+
+  @override
+  String get haCatFamily => 'Gezin';
+
+  @override
+  String get haDateToday => 'Vandaag';
+
+  @override
+  String get commonRefresh => 'Vernieuwen';
+
+  @override
+  String get commonRefreshing => 'Vernieuwen…';
 }

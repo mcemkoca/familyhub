@@ -7022,4 +7022,46 @@ class AppLocalizationsFr extends AppLocalizations {
   String childDeleteConfirm(Object name) {
     return 'Voulez-vous vraiment supprimer le compte enfant de $name ?';
   }
+
+  @override
+  String get haTitle => 'Articles santé';
+
+  @override
+  String get haSubtitle => 'Des infos fiables pour une vie saine, chaque jour.';
+
+  @override
+  String get haSeeAll => 'Voir tous les articles';
+
+  @override
+  String get haBrowseAll => 'Parcourez tout le contenu santé.';
+
+  @override
+  String get haArticleBadge => 'Article santé';
+
+  @override
+  String get haCatCurrent => 'Actualité';
+
+  @override
+  String get haCatForYou => 'Pour vous';
+
+  @override
+  String get haCatPopular => 'Populaire';
+
+  @override
+  String get haCatChild => 'Enfant';
+
+  @override
+  String get haCatWomen => 'Femme';
+
+  @override
+  String get haCatFamily => 'Famille';
+
+  @override
+  String get haDateToday => 'Aujourd\'hui';
+
+  @override
+  String get commonRefresh => 'Actualiser';
+
+  @override
+  String get commonRefreshing => 'Actualisation…';
 }
