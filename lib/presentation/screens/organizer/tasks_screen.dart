@@ -150,79 +150,89 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(AppLocalizations.of(context).goreviDuzenle,
+                  Text(
+                    AppLocalizations.of(context).goreviDuzenle,
                     style: Theme.of(context).textTheme.displaySmall,
                   ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: _editController,
-                  autofocus: true,
-                  decoration: InputDecoration(labelText: AppLocalizations.of(context).taskTitle),
-                ),
-                const SizedBox(height: 12),
-                TextField(
-                  controller: _editDescController,
-                  decoration: InputDecoration(labelText: AppLocalizations.of(context).description),
-                ),
-                const SizedBox(height: 12),
-                Wrap(
-                  spacing: 8,
-                  children: _priorities.map((p) {
-                    final selected = _selectedPriority == p['key'];
-                    return ChoiceChip(
-                      label: Text(p['label'] as String),
-                      selected: selected,
-                      onSelected: (_) => setModalState(
-                        () => _selectedPriority = p['key'] as String,
-                      ),
-                      selectedColor: (p['color'] as Color).withAlpha(30),
-                      checkmarkColor: p['color'] as Color,
-                    );
-                  }).toList(),
-                ),
-                const SizedBox(height: 12),
-                ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  leading: const Icon(
-                    Icons.calendar_today,
-                    color: Color(0xFF6366F1),
+                  const SizedBox(height: 16),
+                  TextField(
+                    controller: _editController,
+                    autofocus: true,
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context).taskTitle,
+                    ),
                   ),
-                  title: Text(
-                    _editDueDate == null
-                        ? 'Bitiş Tarihi Seç'
-                        : 'Bitiş: ${_editDueDate!.day}/${_editDueDate!.month}/${_editDueDate!.year}',
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: _editDescController,
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context).description,
+                    ),
                   ),
-                  trailing: _editDueDate != null
-                      ? IconButton(
-                          icon: const Icon(Icons.clear, size: 18),
-                          onPressed: () =>
-                              setModalState(() => _editDueDate = null),
-                        )
-                      : null,
-                  onTap: () async {
-                    final picked = await showDatePicker(
-                      context: context,
-                      initialDate: _editDueDate ?? DateTime.now(),
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime.now().add(const Duration(days: 365)),
-                    );
-                    if (picked != null) {
-                      setModalState(() => _editDueDate = picked);
-                    }
-                  },
-                ),
-                if (members.isNotEmpty)
-                  DropdownButtonFormField<String>(
-                    initialValue: _editAssignedTo.isEmpty
-                        ? null
-                        : _editAssignedTo,
-                    decoration: InputDecoration(labelText: AppLocalizations.of(context).atananKisi),
-                    items: members.map((m) {
-                      return DropdownMenuItem(value: m.id, child: Text(m.name));
+                  const SizedBox(height: 12),
+                  Wrap(
+                    spacing: 8,
+                    children: _priorities.map((p) {
+                      final selected = _selectedPriority == p['key'];
+                      return ChoiceChip(
+                        label: Text(p['label'] as String),
+                        selected: selected,
+                        onSelected: (_) => setModalState(
+                          () => _selectedPriority = p['key'] as String,
+                        ),
+                        selectedColor: (p['color'] as Color).withAlpha(30),
+                        checkmarkColor: p['color'] as Color,
+                      );
                     }).toList(),
-                    onChanged: (v) =>
-                        setModalState(() => _editAssignedTo = v ?? ''),
                   ),
+                  const SizedBox(height: 12),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: const Icon(
+                      Icons.calendar_today,
+                      color: Color(0xFF6366F1),
+                    ),
+                    title: Text(
+                      _editDueDate == null
+                          ? 'Bitiş Tarihi Seç'
+                          : 'Bitiş: ${_editDueDate!.day}/${_editDueDate!.month}/${_editDueDate!.year}',
+                    ),
+                    trailing: _editDueDate != null
+                        ? IconButton(
+                            icon: const Icon(Icons.clear, size: 18),
+                            onPressed: () =>
+                                setModalState(() => _editDueDate = null),
+                          )
+                        : null,
+                    onTap: () async {
+                      final picked = await showDatePicker(
+                        context: context,
+                        initialDate: _editDueDate ?? DateTime.now(),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime.now().add(const Duration(days: 365)),
+                      );
+                      if (picked != null) {
+                        setModalState(() => _editDueDate = picked);
+                      }
+                    },
+                  ),
+                  if (members.isNotEmpty)
+                    DropdownButtonFormField<String>(
+                      initialValue: _editAssignedTo.isEmpty
+                          ? null
+                          : _editAssignedTo,
+                      decoration: InputDecoration(
+                        labelText: AppLocalizations.of(context).atananKisi,
+                      ),
+                      items: members.map((m) {
+                        return DropdownMenuItem(
+                          value: m.id,
+                          child: Text(m.name),
+                        );
+                      }).toList(),
+                      onChanged: (v) =>
+                          setModalState(() => _editAssignedTo = v ?? ''),
+                    ),
                   const SizedBox(height: 24),
                   SizedBox(
                     width: double.infinity,
@@ -287,7 +297,9 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
         status: task.status == TaskStatus.completed
             ? TaskStatus.pending
             : TaskStatus.completed,
-        completedAt: task.status == TaskStatus.completed ? null : DateTime.now(),
+        completedAt: task.status == TaskStatus.completed
+            ? null
+            : DateTime.now(),
       );
       await TaskRepository().updateTask(updated);
     } catch (e) {
@@ -308,7 +320,9 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
       context: context,
       builder: (_) => AlertDialog(
         title: Text(AppLocalizations.of(context).tskDeleteTask),
-        content: Text('"${task.title}" silinecek. Emin misiniz?'),
+        content: Text(
+          AppLocalizations.of(context).confirmDeleteNamed(task.title),
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -316,7 +330,10 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: Text(AppLocalizations.of(context).budDelete, style: const TextStyle(color: AppColors.error)),
+            child: Text(
+              AppLocalizations.of(context).budDelete,
+              style: const TextStyle(color: AppColors.error),
+            ),
           ),
         ],
       ),
@@ -353,76 +370,86 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(AppLocalizations.of(context).yeniGorev,
+                  Text(
+                    AppLocalizations.of(context).yeniGorev,
                     style: Theme.of(context).textTheme.displaySmall,
                   ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: _titleController,
-                  autofocus: true,
-                  decoration: InputDecoration(labelText: AppLocalizations.of(context).taskTitle),
-                ),
-                const SizedBox(height: 12),
-                TextField(
-                  controller: _descController,
-                  decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context).budDescOptional,
+                  const SizedBox(height: 16),
+                  TextField(
+                    controller: _titleController,
+                    autofocus: true,
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context).taskTitle,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 12),
-                Wrap(
-                  spacing: 8,
-                  children: _priorities.map((p) {
-                    final selected = _selectedPriority == p['key'];
-                    return ChoiceChip(
-                      label: Text(p['label'] as String),
-                      selected: selected,
-                      onSelected: (_) => setModalState(
-                        () => _selectedPriority = p['key'] as String,
-                      ),
-                      selectedColor: (p['color'] as Color).withAlpha(30),
-                      checkmarkColor: p['color'] as Color,
-                    );
-                  }).toList(),
-                ),
-                const SizedBox(height: 12),
-                ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  leading: const Icon(
-                    Icons.calendar_today,
-                    color: Color(0xFF6366F1),
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: _descController,
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context).budDescOptional,
+                    ),
                   ),
-                  title: Text(
-                    _dueDate == null
-                        ? 'Bitiş Tarihi Seç (opsiyonel)'
-                        : 'Bitiş: ${_dueDate!.day}/${_dueDate!.month}/${_dueDate!.year}',
-                  ),
-                  trailing: _dueDate != null
-                      ? IconButton(
-                          icon: const Icon(Icons.clear, size: 18),
-                          onPressed: () => setModalState(() => _dueDate = null),
-                        )
-                      : null,
-                  onTap: () async {
-                    final picked = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime.now().add(const Duration(days: 365)),
-                    );
-                    if (picked != null) setModalState(() => _dueDate = picked);
-                  },
-                ),
-                if (members.isNotEmpty)
-                  DropdownButtonFormField<String>(
-                    initialValue: _assignedTo.isEmpty ? null : _assignedTo,
-                    decoration: InputDecoration(labelText: AppLocalizations.of(context).atananKisi),
-                    items: members.map((m) {
-                      return DropdownMenuItem(value: m.id, child: Text(m.name));
+                  const SizedBox(height: 12),
+                  Wrap(
+                    spacing: 8,
+                    children: _priorities.map((p) {
+                      final selected = _selectedPriority == p['key'];
+                      return ChoiceChip(
+                        label: Text(p['label'] as String),
+                        selected: selected,
+                        onSelected: (_) => setModalState(
+                          () => _selectedPriority = p['key'] as String,
+                        ),
+                        selectedColor: (p['color'] as Color).withAlpha(30),
+                        checkmarkColor: p['color'] as Color,
+                      );
                     }).toList(),
-                    onChanged: (v) =>
-                        setModalState(() => _assignedTo = v ?? ''),
                   ),
+                  const SizedBox(height: 12),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: const Icon(
+                      Icons.calendar_today,
+                      color: Color(0xFF6366F1),
+                    ),
+                    title: Text(
+                      _dueDate == null
+                          ? 'Bitiş Tarihi Seç (opsiyonel)'
+                          : 'Bitiş: ${_dueDate!.day}/${_dueDate!.month}/${_dueDate!.year}',
+                    ),
+                    trailing: _dueDate != null
+                        ? IconButton(
+                            icon: const Icon(Icons.clear, size: 18),
+                            onPressed: () =>
+                                setModalState(() => _dueDate = null),
+                          )
+                        : null,
+                    onTap: () async {
+                      final picked = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime.now().add(const Duration(days: 365)),
+                      );
+                      if (picked != null)
+                        setModalState(() => _dueDate = picked);
+                    },
+                  ),
+                  if (members.isNotEmpty)
+                    DropdownButtonFormField<String>(
+                      initialValue: _assignedTo.isEmpty ? null : _assignedTo,
+                      decoration: InputDecoration(
+                        labelText: AppLocalizations.of(context).atananKisi,
+                      ),
+                      items: members.map((m) {
+                        return DropdownMenuItem(
+                          value: m.id,
+                          child: Text(m.name),
+                        );
+                      }).toList(),
+                      onChanged: (v) =>
+                          setModalState(() => _assignedTo = v ?? ''),
+                    ),
                   const SizedBox(height: 24),
                   SizedBox(
                     width: double.infinity,
@@ -505,9 +532,14 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.task_alt, size: 64, color: Color(0xFF9CA3AF)),
+                      const Icon(
+                        Icons.task_alt,
+                        size: 64,
+                        color: Color(0xFF9CA3AF),
+                      ),
                       const SizedBox(height: 16),
-                      Text(AppLocalizations.of(context).henuzGorevYok,
+                      Text(
+                        AppLocalizations.of(context).henuzGorevYok,
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -517,7 +549,10 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                       const SizedBox(height: 8),
                       const Text(
                         'Yeni görev eklemek için + butonuna basın',
-                        style: TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Color(0xFF6B7280),
+                        ),
                       ),
                     ],
                   ),
@@ -560,7 +595,9 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                             color: Theme.of(context).colorScheme.surface,
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(
-                              color: Theme.of(context).brightness == Brightness.dark
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
                                   ? Colors.white.withAlpha(20)
                                   : const Color(0xFFF3F4F6),
                             ),
@@ -601,7 +638,9 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                                 decoration: isCompleted
                                     ? TextDecoration.lineThrough
                                     : null,
-                                color: isCompleted ? const Color(0xFF6B7280) : null,
+                                color: isCompleted
+                                    ? const Color(0xFF6B7280)
+                                    : null,
                               ),
                             ),
                             subtitle: Row(

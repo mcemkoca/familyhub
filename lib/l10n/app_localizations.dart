@@ -12617,6 +12617,12 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Listende {count} bekleyen ürün var.'**
   String insightShoppingTimeMsg(Object count);
+
+  /// No description provided for @confirmDeleteNamed.
+  ///
+  /// In tr, this message translates to:
+  /// **'\"{name}\" silinecek. Emin misiniz?'**
+  String confirmDeleteNamed(Object name);
 }
 
 class _AppLocalizationsDelegate

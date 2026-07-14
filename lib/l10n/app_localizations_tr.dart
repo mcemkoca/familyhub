@@ -6744,4 +6744,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String insightShoppingTimeMsg(Object count) {
     return 'Listende $count bekleyen ürün var.';
   }
+
+  @override
+  String confirmDeleteNamed(Object name) {
+    return '\"$name\" silinecek. Emin misiniz?';
+  }
 }

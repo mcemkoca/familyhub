@@ -94,9 +94,9 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
 
   void _startRoutine(Routine routine) {
     HapticFeedback.mediumImpact();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('${routine.name} başlatıldı!')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('${routine.name} başlatıldı!')));
   }
 
   Color _parseColor(String hex) {
@@ -109,12 +109,18 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
 
   String _typeLabel(RoutineType type) {
     switch (type) {
-      case RoutineType.morning: return 'Sabah';
-      case RoutineType.evening: return 'Akşam';
-      case RoutineType.weekly: return 'Haftalık';
-      case RoutineType.custom: return 'Özel';
-      case RoutineType.seasonal: return 'Mevsimsel';
-      case RoutineType.eventBased: return 'Etkinlik';
+      case RoutineType.morning:
+        return 'Sabah';
+      case RoutineType.evening:
+        return 'Akşam';
+      case RoutineType.weekly:
+        return 'Haftalık';
+      case RoutineType.custom:
+        return 'Özel';
+      case RoutineType.seasonal:
+        return 'Mevsimsel';
+      case RoutineType.eventBased:
+        return 'Etkinlik';
     }
   }
 
@@ -160,8 +166,11 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: _buildActiveRoutineCard(
-                  _routines.firstWhere((r) => r.status.state == RoutineState.active),
-                  isDark, textColor,
+                  _routines.firstWhere(
+                    (r) => r.status.state == RoutineState.active,
+                  ),
+                  isDark,
+                  textColor,
                 ),
               ),
             ),
@@ -181,8 +190,13 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(AppLocalizations.of(context).gunlukRutinler,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: textColor),
+              child: Text(
+                AppLocalizations.of(context).gunlukRutinler,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: textColor,
+                ),
               ),
             ),
           ),
@@ -195,7 +209,8 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
           else
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                (context, index) => _buildRoutineCard(_routines[index], isDark, textColor),
+                (context, index) =>
+                    _buildRoutineCard(_routines[index], isDark, textColor),
                 childCount: _routines.length,
               ),
             ),
@@ -212,10 +227,16 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
     );
   }
 
-  Widget _buildActiveRoutineCard(Routine routine, bool isDark, Color textColor) {
+  Widget _buildActiveRoutineCard(
+    Routine routine,
+    bool isDark,
+    Color textColor,
+  ) {
     final color = _parseColor(routine.color);
     final currentStep = RoutineService.getCurrentStep(routine);
-    final completed = routine.steps.where((s) => s.status == StepStatus.completed).length;
+    final completed = routine.steps
+        .where((s) => s.status == StepStatus.completed)
+        .length;
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -227,7 +248,11 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
         ),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
-          BoxShadow(color: color.withAlpha(76), blurRadius: 15, offset: const Offset(0, 6)),
+          BoxShadow(
+            color: color.withAlpha(76),
+            blurRadius: 15,
+            offset: const Offset(0, 6),
+          ),
         ],
       ),
       child: Column(
@@ -237,16 +262,37 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
             children: [
               Container(
                 padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(color: Colors.white.withAlpha(51), borderRadius: BorderRadius.circular(12)),
-                child: Icon(_getIcon(routine.icon), color: Colors.white, size: 28),
+                decoration: BoxDecoration(
+                  color: Colors.white.withAlpha(51),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  _getIcon(routine.icon),
+                  color: Colors.white,
+                  size: 28,
+                ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(AppLocalizations.of(context).aktifRutin, style: TextStyle(fontSize: 11, color: Colors.white.withAlpha(204), fontWeight: FontWeight.w600)),
-                    Text(routine.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
+                    Text(
+                      AppLocalizations.of(context).aktifRutin,
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Colors.white.withAlpha(204),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      routine.name,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -267,9 +313,18 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('$completed/${routine.steps.length} adım | ${routine.estimatedTotalDuration} dk', style: TextStyle(color: Colors.white.withAlpha(230))),
+              Text(
+                '$completed/${routine.steps.length} adım | ${routine.estimatedTotalDuration} dk',
+                style: TextStyle(color: Colors.white.withAlpha(230)),
+              ),
               if (currentStep != null)
-                Text(AppLocalizations.of(context).rtNow(currentStep.title), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+                Text(
+                  AppLocalizations.of(context).rtNow(currentStep.title),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
             ],
           ),
           const SizedBox(height: 12),
@@ -283,7 +338,9 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: color,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                 ),
               ),
@@ -300,7 +357,13 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
       decoration: BoxDecoration(
         color: const Color(0xFFE5E7EB),
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withAlpha(13), blurRadius: 10, offset: const Offset(0, 4))],
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withAlpha(13),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -309,29 +372,59 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
             children: [
               Icon(Icons.auto_awesome, color: Colors.purple[400]),
               const SizedBox(width: 8),
-              Text(AppLocalizations.of(context).aiOnerileri, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: textColor)),
+              Text(
+                AppLocalizations.of(context).aiOnerileri,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: textColor,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 12),
-          ..._aiSuggestions.map((s) => Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: Row(
-              children: [
-                Text(s['type'] == 'new_routine' ? '💡' : s['type'] == 'modify_routine' ? '⚡' : '🔄', style: const TextStyle(fontSize: 20)),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(s['reason'] as String, style: const TextStyle(fontWeight: FontWeight.w600)),
-                      Text('%${((s['confidence'] as double) * 100).toInt()} güven', style: TextStyle(fontSize: 12, color: Colors.grey[500])),
-                    ],
+          ..._aiSuggestions.map(
+            (s) => Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Row(
+                children: [
+                  Text(
+                    s['type'] == 'new_routine'
+                        ? '💡'
+                        : s['type'] == 'modify_routine'
+                        ? '⚡'
+                        : '🔄',
+                    style: const TextStyle(fontSize: 20),
                   ),
-                ),
-                TextButton(onPressed: () { HapticFeedback.lightImpact(); }, child: Text(AppLocalizations.of(context).rtApply)),
-              ],
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          s['reason'] as String,
+                          style: const TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          '%${((s['confidence'] as double) * 100).toInt()} güven',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey[500],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      HapticFeedback.lightImpact();
+                    },
+                    child: Text(AppLocalizations.of(context).rtApply),
+                  ),
+                ],
+              ),
             ),
-          )),
+          ),
         ],
       ),
     );
@@ -339,7 +432,9 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
 
   Widget _buildRoutineCard(Routine routine, bool isDark, Color textColor) {
     final color = _parseColor(routine.color);
-    final completed = routine.steps.where((s) => s.status == StepStatus.completed).length;
+    final completed = routine.steps
+        .where((s) => s.status == StepStatus.completed)
+        .length;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
@@ -359,17 +454,36 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
                   children: [
                     Container(
                       padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(color: color.withAlpha(26), borderRadius: BorderRadius.circular(10)),
-                      child: Icon(_getIcon(routine.icon), color: color, size: 22),
+                      decoration: BoxDecoration(
+                        color: color.withAlpha(26),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Icon(
+                        _getIcon(routine.icon),
+                        color: color,
+                        size: 22,
+                      ),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(routine.name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: textColor)),
-                          Text('${routine.estimatedTotalDuration} dk | ${routine.steps.length} adım | ${_typeLabel(routine.type)}',
-                              style: TextStyle(fontSize: 12, color: Colors.grey[500])),
+                          Text(
+                            routine.name,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: textColor,
+                            ),
+                          ),
+                          Text(
+                            '${routine.estimatedTotalDuration} dk | ${routine.steps.length} adım | ${_typeLabel(routine.type)}',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey[500],
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -390,9 +504,15 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
                 else
                   Row(
                     children: [
-                      _buildBadge('📊 $completed/${routine.steps.length}', color),
+                      _buildBadge(
+                        '📊 $completed/${routine.steps.length}',
+                        color,
+                      ),
                       const SizedBox(width: 8),
-                      _buildBadge('🔔 ${routine.recurrence.pattern.name}', Colors.blue),
+                      _buildBadge(
+                        '🔔 ${routine.recurrence.pattern.name}',
+                        Colors.blue,
+                      ),
                     ],
                   ),
                 const SizedBox(height: 12),
@@ -405,9 +525,16 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
                         icon: const Icon(Icons.play_arrow, size: 18),
                         label: Text(AppLocalizations.of(context).baslat),
                       ),
-                    IconButton(icon: const Icon(Icons.edit, size: 18), onPressed: () => _navigateToDetail(routine)),
                     IconButton(
-                      icon: const Icon(Icons.delete, size: 18, color: Colors.red),
+                      icon: const Icon(Icons.edit, size: 18),
+                      onPressed: () => _navigateToDetail(routine),
+                    ),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.delete,
+                        size: 18,
+                        color: Colors.red,
+                      ),
                       onPressed: () => _deleteRoutine(routine),
                     ),
                   ],
@@ -431,27 +558,53 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
     final label = labels[state]!;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(color: label.$2.withAlpha(26), borderRadius: BorderRadius.circular(8)),
-      child: Text(label.$1, style: TextStyle(fontSize: 11, color: label.$2, fontWeight: FontWeight.w600)),
+      decoration: BoxDecoration(
+        color: label.$2.withAlpha(26),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Text(
+        label.$1,
+        style: TextStyle(
+          fontSize: 11,
+          color: label.$2,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
     );
   }
 
   Widget _buildBadge(String text, Color color) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(color: color.withAlpha(26), borderRadius: BorderRadius.circular(8)),
-      child: Text(text, style: TextStyle(fontSize: 11, color: color, fontWeight: FontWeight.w600)),
+      decoration: BoxDecoration(
+        color: color.withAlpha(26),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 11,
+          color: color,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
     );
   }
 
   IconData _getIcon(String icon) {
     switch (icon) {
-      case 'sunrise': return Icons.wb_sunny;
-      case 'moon': return Icons.nightlight_round;
-      case 'broom': return Icons.cleaning_services;
-      case 'heart': return Icons.favorite;
-      case 'book': return Icons.menu_book;
-      default: return Icons.schedule;
+      case 'sunrise':
+        return Icons.wb_sunny;
+      case 'moon':
+        return Icons.nightlight_round;
+      case 'broom':
+        return Icons.cleaning_services;
+      case 'heart':
+        return Icons.favorite;
+      case 'book':
+        return Icons.menu_book;
+      default:
+        return Icons.schedule;
     }
   }
 
@@ -460,16 +613,24 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(AppLocalizations.of(context).rtDeleteRoutine),
-        content: Text('"${routine.name}" silinecek. Emin misiniz?'),
+        content: Text(
+          AppLocalizations.of(context).confirmDeleteNamed(routine.name),
+        ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(AppLocalizations.of(context).cancel)),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: Text(AppLocalizations.of(context).cancel),
+          ),
           TextButton(
             onPressed: () {
               setState(() => _routines.removeWhere((r) => r.id == routine.id));
               Navigator.pop(ctx);
               HapticFeedback.mediumImpact();
             },
-            child: Text(AppLocalizations.of(context).budDelete, style: const TextStyle(color: Colors.red)),
+            child: Text(
+              AppLocalizations.of(context).budDelete,
+              style: const TextStyle(color: Colors.red),
+            ),
           ),
         ],
       ),

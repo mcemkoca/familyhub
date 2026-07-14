@@ -6729,4 +6729,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String insightShoppingTimeMsg(Object count) {
     return 'Je hebt $count openstaande items op je lijst.';
   }
+
+  @override
+  String confirmDeleteNamed(Object name) {
+    return '\"$name\" wordt verwijderd. Weet je het zeker?';
+  }
 }

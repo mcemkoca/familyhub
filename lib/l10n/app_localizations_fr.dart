@@ -6750,4 +6750,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String insightShoppingTimeMsg(Object count) {
     return 'Vous avez $count articles en attente sur votre liste.';
   }
+
+  @override
+  String confirmDeleteNamed(Object name) {
+    return '« $name » sera supprimé. Êtes-vous sûr ?';
+  }
 }

@@ -25,9 +25,7 @@ class CrashHistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context).kazaGecmisi),
-      ),
+      appBar: AppBar(title: Text(AppLocalizations.of(context).kazaGecmisi)),
       body: FutureBuilder<String?>(
         future: _getFamilyId(),
         builder: (context, familySnapshot) {
@@ -36,7 +34,9 @@ class CrashHistoryScreen extends StatelessWidget {
           }
           final familyId = familySnapshot.data;
           if (familyId == null) {
-            return Center(child: Text(AppLocalizations.of(context).aileBilgisiBulunamadi));
+            return Center(
+              child: Text(AppLocalizations.of(context).aileBilgisiBulunamadi),
+            );
           }
           return StreamBuilder<List<CrashEvent>>(
             // Realtime: aile kaza olayları anında yansır.
@@ -45,7 +45,10 @@ class CrashHistoryScreen extends StatelessWidget {
               // Hata durumunda sonsuz spinner yerine boş listeyle devam et.
               if (snapshot.hasError) {
                 return Center(
-                    child: Text(AppLocalizations.of(context).aileBilgisiBulunamadi));
+                  child: Text(
+                    AppLocalizations.of(context).aileBilgisiBulunamadi,
+                  ),
+                );
               }
               if (!snapshot.hasData) {
                 return const Center(child: CircularProgressIndicator());
@@ -53,7 +56,13 @@ class CrashHistoryScreen extends StatelessWidget {
               final events = snapshot.data!;
               final total = events.length;
               final falseAlarms = events.where((e) => e.isFalsePositive).length;
-              final realCrashes = events.where((e) => !e.isFalsePositive && e.response.status == CrashResponseStatus.autoSos).length;
+              final realCrashes = events
+                  .where(
+                    (e) =>
+                        !e.isFalsePositive &&
+                        e.response.status == CrashResponseStatus.autoSos,
+                  )
+                  .length;
 
               return ListView(
                 padding: const EdgeInsets.all(16),
@@ -70,19 +79,31 @@ class CrashHistoryScreen extends StatelessWidget {
                       children: [
                         const Text(
                           'TOPLAM OLAYLAR',
-                          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const SizedBox(height: 12),
                         _statRow('Tespit edilen', '$total'),
-                        _statRow('Yanlış alarm', '$falseAlarms (%${total > 0 ? (falseAlarms / total * 100).round() : 0})'),
+                        _statRow(
+                          'Yanlış alarm',
+                          '$falseAlarms (%${total > 0 ? (falseAlarms / total * 100).round() : 0})',
+                        ),
                         _statRow('Gerçek kaza', '$realCrashes'),
                         const Divider(color: Colors.white24, height: 20),
-                        Text(AppLocalizations.of(context).son30Gun0Olay, style: const TextStyle(color: Colors.white70)),
+                        Text(
+                          AppLocalizations.of(context).son30Gun0Olay,
+                          style: const TextStyle(color: Colors.white70),
+                        ),
                         const SizedBox(height: 8),
                         ElevatedButton.icon(
                           onPressed: () {},
                           icon: const Icon(Icons.bar_chart),
-                          label: Text(AppLocalizations.of(context).detayliIstatistik),
+                          label: Text(
+                            AppLocalizations.of(context).detayliIstatistik,
+                          ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blue.shade800,
                             foregroundColor: Colors.white,
@@ -94,32 +115,37 @@ class CrashHistoryScreen extends StatelessWidget {
 
                   const SizedBox(height: 20),
 
-          Text(AppLocalizations.of(context).olayListesi,
-            style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 12),
+                  Text(
+                    AppLocalizations.of(context).olayListesi,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
 
-          ...events.map((e) => _buildEventCard(context, e)),
+                  ...events.map((e) => _buildEventCard(context, e)),
 
-          const SizedBox(height: 24),
-          ElevatedButton.icon(
-            onPressed: () {},
-            icon: const Icon(Icons.download),
-            label: Text(AppLocalizations.of(context).tumRaporlariIndir),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF6B7280),
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 14),
-            ),
-          ),
-            ],
+                  const SizedBox(height: 24),
+                  ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(Icons.download),
+                    label: Text(AppLocalizations.of(context).tumRaporlariIndir),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF6B7280),
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                    ),
+                  ),
+                ],
+              );
+            },
           );
         },
-      );
-    },
-  ),
-);
-}
+      ),
+    );
+  }
 
   Widget _statRow(String label, String value) {
     return Padding(
@@ -128,7 +154,13 @@ class CrashHistoryScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(label, style: const TextStyle(color: Colors.white70)),
-          Text(value, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+          Text(
+            value,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
         ],
       ),
     );
@@ -136,10 +168,17 @@ class CrashHistoryScreen extends StatelessWidget {
 
   Widget _buildEventCard(BuildContext context, CrashEvent event) {
     final isFalseAlarm = event.isFalsePositive;
-    final isRealCrash = !isFalseAlarm && event.response.status == CrashResponseStatus.autoSos;
-    final color = isFalseAlarm ? Colors.green : (isRealCrash ? Colors.red : Colors.orange);
-    final icon = isFalseAlarm ? Icons.check_circle : (isRealCrash ? Icons.emergency : Icons.warning);
-    final label = isFalseAlarm ? 'Yanlış alarm' : (isRealCrash ? 'GERÇEK KAZA' : 'Bekleyen');
+    final isRealCrash =
+        !isFalseAlarm && event.response.status == CrashResponseStatus.autoSos;
+    final color = isFalseAlarm
+        ? Colors.green
+        : (isRealCrash ? Colors.red : Colors.orange);
+    final icon = isFalseAlarm
+        ? Icons.check_circle
+        : (isRealCrash ? Icons.emergency : Icons.warning);
+    final label = isFalseAlarm
+        ? 'Yanlış alarm'
+        : (isRealCrash ? 'GERÇEK KAZA' : 'Bekleyen');
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
@@ -159,7 +198,11 @@ class CrashHistoryScreen extends StatelessWidget {
               Expanded(
                 child: Text(
                   '${_fmtDate(event.detection.timestamp)} - $label',
-                  style: TextStyle(color: color, fontWeight: FontWeight.bold, fontSize: 14),
+                  style: TextStyle(
+                    color: color,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
                 ),
               ),
             ],
@@ -179,7 +222,11 @@ class CrashHistoryScreen extends StatelessWidget {
                 if (event.outcome?.emergencyServicesCalled ?? false)
                   _responseRow(Icons.phone, '112 arandı')
                 else
-                  _responseRow(Icons.cancel, '112 aranmadı (kullanıcı iptal etti)', ok: false),
+                  _responseRow(
+                    Icons.cancel,
+                    '112 aranmadı (kullanıcı iptal etti)',
+                    ok: false,
+                  ),
               ],
             ),
           if (isFalseAlarm)
@@ -190,7 +237,7 @@ class CrashHistoryScreen extends StatelessWidget {
               TextButton.icon(
                 onPressed: () {},
                 icon: const Icon(Icons.article, size: 18),
-                label: const Text('Detay'),
+                label: Text(AppLocalizations.of(context).commonDetail),
               ),
               if (isRealCrash)
                 TextButton.icon(
@@ -201,7 +248,11 @@ class CrashHistoryScreen extends StatelessWidget {
               const Spacer(),
               IconButton(
                 onPressed: () {},
-                icon: const Icon(Icons.delete, color: Colors.redAccent, size: 20),
+                icon: const Icon(
+                  Icons.delete,
+                  color: Colors.redAccent,
+                  size: 20,
+                ),
               ),
             ],
           ),
@@ -217,7 +268,10 @@ class CrashHistoryScreen extends StatelessWidget {
         children: [
           Icon(icon, color: ok ? Colors.green : Colors.orange, size: 16),
           const SizedBox(width: 8),
-          Text(text, style: const TextStyle(color: Colors.white70, fontSize: 12)),
+          Text(
+            text,
+            style: const TextStyle(color: Colors.white70, fontSize: 12),
+          ),
         ],
       ),
     );
@@ -227,7 +281,6 @@ class CrashHistoryScreen extends StatelessWidget {
     return '${dt.day.toString().padLeft(2, '0')}.${dt.month.toString().padLeft(2, '0')}.${dt.year} ${_fmtTime(dt)}';
   }
 
-  String _fmtTime(DateTime dt) => '${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
-
-
+  String _fmtTime(DateTime dt) =>
+      '${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
 }

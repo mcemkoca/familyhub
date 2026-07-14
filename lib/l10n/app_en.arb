@@ -2210,5 +2210,6 @@
   "insightShoppingEmptyTitle": "Your shopping list is empty",
   "insightShoppingEmptyMsg": "Quickly create a shopping list with the AI grocery list.",
   "insightShoppingTimeTitle": "Time to shop",
-  "insightShoppingTimeMsg": "You have {count} pending items on your list."
+  "insightShoppingTimeMsg": "You have {count} pending items on your list.",
+  "confirmDeleteNamed": "\"{name}\" will be deleted. Are you sure?"
 }

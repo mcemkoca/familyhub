@@ -2210,5 +2210,6 @@
   "insightShoppingEmptyTitle": "Je boodschappenlijst is leeg",
   "insightShoppingEmptyMsg": "Met de AI-boodschappenlijst maak je snel een lijst.",
   "insightShoppingTimeTitle": "Tijd om te winkelen",
-  "insightShoppingTimeMsg": "Je hebt {count} openstaande items op je lijst."
+  "insightShoppingTimeMsg": "Je hebt {count} openstaande items op je lijst.",
+  "confirmDeleteNamed": "\"{name}\" wordt verwijderd. Weet je het zeker?"
 }

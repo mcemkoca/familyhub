@@ -6723,4 +6723,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String insightShoppingTimeMsg(Object count) {
     return 'You have $count pending items on your list.';
   }
+
+  @override
+  String confirmDeleteNamed(Object name) {
+    return '\"$name\" will be deleted. Are you sure?';
+  }
 }

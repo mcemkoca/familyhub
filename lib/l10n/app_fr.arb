@@ -2210,5 +2210,6 @@
   "insightShoppingEmptyTitle": "Votre liste de courses est vide",
   "insightShoppingEmptyMsg": "Avec la liste de courses IA, créez rapidement une liste.",
   "insightShoppingTimeTitle": "C'est l'heure des courses",
-  "insightShoppingTimeMsg": "Vous avez {count} articles en attente sur votre liste."
+  "insightShoppingTimeMsg": "Vous avez {count} articles en attente sur votre liste.",
+  "confirmDeleteNamed": "« {name} » sera supprimé. Êtes-vous sûr ?"
 }
