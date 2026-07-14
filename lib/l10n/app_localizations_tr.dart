@@ -6749,4 +6749,25 @@ class AppLocalizationsTr extends AppLocalizations {
   String confirmDeleteNamed(Object name) {
     return '\"$name\" silinecek. Emin misiniz?';
   }
+
+  @override
+  String get priorityUrgent => 'Acil';
+
+  @override
+  String get rtMorning => 'Sabah';
+
+  @override
+  String get rtEvening => 'Akşam';
+
+  @override
+  String get rtWeekly => 'Haftalık';
+
+  @override
+  String get rtCustom => 'Özel';
+
+  @override
+  String get rtSeasonal => 'Mevsimsel';
+
+  @override
+  String get rtEventBased => 'Etkinlik';
 }

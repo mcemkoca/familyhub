@@ -12623,6 +12623,48 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'\"{name}\" silinecek. Emin misiniz?'**
   String confirmDeleteNamed(Object name);
+
+  /// No description provided for @priorityUrgent.
+  ///
+  /// In tr, this message translates to:
+  /// **'Acil'**
+  String get priorityUrgent;
+
+  /// No description provided for @rtMorning.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sabah'**
+  String get rtMorning;
+
+  /// No description provided for @rtEvening.
+  ///
+  /// In tr, this message translates to:
+  /// **'Akşam'**
+  String get rtEvening;
+
+  /// No description provided for @rtWeekly.
+  ///
+  /// In tr, this message translates to:
+  /// **'Haftalık'**
+  String get rtWeekly;
+
+  /// No description provided for @rtCustom.
+  ///
+  /// In tr, this message translates to:
+  /// **'Özel'**
+  String get rtCustom;
+
+  /// No description provided for @rtSeasonal.
+  ///
+  /// In tr, this message translates to:
+  /// **'Mevsimsel'**
+  String get rtSeasonal;
+
+  /// No description provided for @rtEventBased.
+  ///
+  /// In tr, this message translates to:
+  /// **'Etkinlik'**
+  String get rtEventBased;
 }
 
 class _AppLocalizationsDelegate

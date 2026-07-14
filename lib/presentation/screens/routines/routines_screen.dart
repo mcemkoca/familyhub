@@ -107,20 +107,21 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
     }
   }
 
-  String _typeLabel(RoutineType type) {
+  String _typeLabel(BuildContext context, RoutineType type) {
+    final l = AppLocalizations.of(context);
     switch (type) {
       case RoutineType.morning:
-        return 'Sabah';
+        return l.rtMorning;
       case RoutineType.evening:
-        return 'Akşam';
+        return l.rtEvening;
       case RoutineType.weekly:
-        return 'Haftalık';
+        return l.rtWeekly;
       case RoutineType.custom:
-        return 'Özel';
+        return l.rtCustom;
       case RoutineType.seasonal:
-        return 'Mevsimsel';
+        return l.rtSeasonal;
       case RoutineType.eventBased:
-        return 'Etkinlik';
+        return l.rtEventBased;
     }
   }
 
@@ -209,8 +210,12 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
           else
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                (context, index) =>
-                    _buildRoutineCard(_routines[index], isDark, textColor),
+                (context, index) => _buildRoutineCard(
+                  context,
+                  _routines[index],
+                  isDark,
+                  textColor,
+                ),
                 childCount: _routines.length,
               ),
             ),
@@ -430,7 +435,12 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
     );
   }
 
-  Widget _buildRoutineCard(Routine routine, bool isDark, Color textColor) {
+  Widget _buildRoutineCard(
+    BuildContext context,
+    Routine routine,
+    bool isDark,
+    Color textColor,
+  ) {
     final color = _parseColor(routine.color);
     final completed = routine.steps
         .where((s) => s.status == StepStatus.completed)
@@ -478,7 +488,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
                             ),
                           ),
                           Text(
-                            '${routine.estimatedTotalDuration} dk | ${routine.steps.length} adım | ${_typeLabel(routine.type)}',
+                            '${routine.estimatedTotalDuration} dk | ${routine.steps.length} adım | ${_typeLabel(context, routine.type)}',
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.grey[500],

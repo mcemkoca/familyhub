@@ -2211,5 +2211,12 @@
   "insightShoppingEmptyMsg": "Met de AI-boodschappenlijst maak je snel een lijst.",
   "insightShoppingTimeTitle": "Tijd om te winkelen",
   "insightShoppingTimeMsg": "Je hebt {count} openstaande items op je lijst.",
-  "confirmDeleteNamed": "\"{name}\" wordt verwijderd. Weet je het zeker?"
+  "confirmDeleteNamed": "\"{name}\" wordt verwijderd. Weet je het zeker?",
+  "priorityUrgent": "Urgent",
+  "rtMorning": "Ochtend",
+  "rtEvening": "Avond",
+  "rtWeekly": "Wekelijks",
+  "rtCustom": "Aangepast",
+  "rtSeasonal": "Seizoensgebonden",
+  "rtEventBased": "Gebeurtenis"
 }

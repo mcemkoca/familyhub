@@ -2692,5 +2692,12 @@
     "placeholders": {
       "name": {}
     }
-  }
+  },
+  "priorityUrgent": "Acil",
+  "rtMorning": "Sabah",
+  "rtEvening": "Akşam",
+  "rtWeekly": "Haftalık",
+  "rtCustom": "Özel",
+  "rtSeasonal": "Mevsimsel",
+  "rtEventBased": "Etkinlik"
 }

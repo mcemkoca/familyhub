@@ -6728,4 +6728,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String confirmDeleteNamed(Object name) {
     return '\"$name\" will be deleted. Are you sure?';
   }
+
+  @override
+  String get priorityUrgent => 'Urgent';
+
+  @override
+  String get rtMorning => 'Morning';
+
+  @override
+  String get rtEvening => 'Evening';
+
+  @override
+  String get rtWeekly => 'Weekly';
+
+  @override
+  String get rtCustom => 'Custom';
+
+  @override
+  String get rtSeasonal => 'Seasonal';
+
+  @override
+  String get rtEventBased => 'Event';
 }

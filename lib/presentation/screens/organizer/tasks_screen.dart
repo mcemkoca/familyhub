@@ -34,10 +34,10 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
   String _editAssignedTo = '';
 
   final _priorities = [
-    {'key': 'low', 'label': 'Düşük', 'color': AppColors.green},
-    {'key': 'medium', 'label': 'Orta', 'color': AppColors.blue},
-    {'key': 'high', 'label': 'Yüksek', 'color': AppColors.orange},
-    {'key': 'urgent', 'label': 'Acil', 'color': AppColors.red},
+    {'key': 'low', 'color': AppColors.green},
+    {'key': 'medium', 'color': AppColors.blue},
+    {'key': 'high', 'color': AppColors.orange},
+    {'key': 'urgent', 'color': AppColors.red},
   ];
 
   Future<String?> _getFamilyId() async {
@@ -175,7 +175,9 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                     children: _priorities.map((p) {
                       final selected = _selectedPriority == p['key'];
                       return ChoiceChip(
-                        label: Text(p['label'] as String),
+                        label: Text(
+                          _priorityLabel(context, p['key'] as String),
+                        ),
                         selected: selected,
                         onSelected: (_) => setModalState(
                           () => _selectedPriority = p['key'] as String,
@@ -395,7 +397,9 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                     children: _priorities.map((p) {
                       final selected = _selectedPriority == p['key'];
                       return ChoiceChip(
-                        label: Text(p['label'] as String),
+                        label: Text(
+                          _priorityLabel(context, p['key'] as String),
+                        ),
                         selected: selected,
                         onSelected: (_) => setModalState(
                           () => _selectedPriority = p['key'] as String,
@@ -495,16 +499,17 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
     }
   }
 
-  String _priorityLabel(String p) {
+  String _priorityLabel(BuildContext context, String p) {
+    final l = AppLocalizations.of(context);
     switch (p) {
       case 'urgent':
-        return 'Acil';
+        return l.priorityUrgent;
       case 'high':
-        return 'Yüksek';
+        return l.priorityHigh;
       case 'low':
-        return 'Düşük';
+        return l.priorityLow;
       default:
-        return 'Orta';
+        return l.priorityMedium;
     }
   }
 
@@ -655,7 +660,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                                   ),
                                 ),
                                 Text(
-                                  _priorityLabel(task.priority),
+                                  _priorityLabel(context, task.priority),
                                   style: const TextStyle(fontSize: 11),
                                 ),
                               ],

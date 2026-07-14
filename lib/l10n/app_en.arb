@@ -2211,5 +2211,12 @@
   "insightShoppingEmptyMsg": "Quickly create a shopping list with the AI grocery list.",
   "insightShoppingTimeTitle": "Time to shop",
   "insightShoppingTimeMsg": "You have {count} pending items on your list.",
-  "confirmDeleteNamed": "\"{name}\" will be deleted. Are you sure?"
+  "confirmDeleteNamed": "\"{name}\" will be deleted. Are you sure?",
+  "priorityUrgent": "Urgent",
+  "rtMorning": "Morning",
+  "rtEvening": "Evening",
+  "rtWeekly": "Weekly",
+  "rtCustom": "Custom",
+  "rtSeasonal": "Seasonal",
+  "rtEventBased": "Event"
 }
