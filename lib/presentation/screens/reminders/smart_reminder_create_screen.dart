@@ -77,9 +77,9 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
   Future<void> _save() async {
     final reminderBody = AppLocalizations.of(context).srReminderBody;
     if (_titleController.text.trim().isEmpty) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).baslikGirilmeli)));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context).baslikGirilmeli)),
+      );
       return;
     }
 
@@ -151,7 +151,9 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
     if (familyId == null) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context).aileBilgisiBulunamadi)),
+        SnackBar(
+          content: Text(AppLocalizations.of(context).aileBilgisiBulunamadi),
+        ),
       );
       return;
     }
@@ -192,16 +194,18 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
         );
       }
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).hatirlaticiOlusturuldu)));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(AppLocalizations.of(context).hatirlaticiOlusturuldu),
+          ),
+        );
         context.pop();
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).srError('$e'))));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(AppLocalizations.of(context).srError('$e'))),
+        );
       }
     }
   }
@@ -239,7 +243,10 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
             : const Color(0xFFF8F9FA),
         foregroundColor: textColor,
         actions: [
-          TextButton(onPressed: _testReminder, child: const Text('🧪 Test Et')),
+          TextButton(
+            onPressed: _testReminder,
+            child: Text('🧪 ${AppLocalizations.of(context).remTest}'),
+          ),
           TextButton(
             onPressed: _save,
             child: const Text(
@@ -296,7 +303,10 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(AppLocalizations.of(context).srBasicInfo, style: _sectionStyle(textColor)),
+          Text(
+            AppLocalizations.of(context).srBasicInfo,
+            style: _sectionStyle(textColor),
+          ),
           const SizedBox(height: 12),
           TextField(
             controller: _titleController,
@@ -327,13 +337,20 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('🎯 Tetikleyiciler (Context)', style: _sectionStyle(textColor)),
+          Text(
+            '🎯 ${AppLocalizations.of(context).remTriggers}',
+            style: _sectionStyle(textColor),
+          ),
           const SizedBox(height: 12),
 
           // Location
           SwitchListTile(
-            title: const Text('📍 Lokasyon'),
-            subtitle: Text(_locationEnabled ? AppLocalizations.of(context).commonActive : AppLocalizations.of(context).commonPassive),
+            title: Text('📍 ${AppLocalizations.of(context).remLocationLabel}'),
+            subtitle: Text(
+              _locationEnabled
+                  ? AppLocalizations.of(context).commonActive
+                  : AppLocalizations.of(context).commonPassive,
+            ),
             value: _locationEnabled,
             onChanged: (v) => setState(() => _locationEnabled = v),
           ),
@@ -344,7 +361,9 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
                 children: [
                   DropdownButtonFormField<LocationTriggerType>(
                     initialValue: _locationType,
-                    decoration: InputDecoration(labelText: AppLocalizations.of(context).tur),
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context).tur,
+                    ),
                     items: LocationTriggerType.values.map((t) {
                       return DropdownMenuItem(
                         value: t,
@@ -356,7 +375,9 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
                   const SizedBox(height: 8),
                   TextField(
                     controller: _locationNameController,
-                    decoration: InputDecoration(labelText: AppLocalizations.of(context).yerAdi),
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context).yerAdi,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Row(
@@ -364,7 +385,9 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
                       Expanded(
                         child: TextField(
                           controller: _latController,
-                          decoration: InputDecoration(labelText: AppLocalizations.of(context).srLatitude),
+                          decoration: InputDecoration(
+                            labelText: AppLocalizations.of(context).srLatitude,
+                          ),
                           keyboardType: TextInputType.number,
                         ),
                       ),
@@ -381,7 +404,11 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
                     ],
                   ),
                   const SizedBox(height: 8),
-                  Text(AppLocalizations.of(context).srGeofenceRadius(_radius.toInt())),
+                  Text(
+                    AppLocalizations.of(
+                      context,
+                    ).srGeofenceRadius(_radius.toInt()),
+                  ),
                   Slider(
                     value: _radius,
                     min: 50,
@@ -389,7 +416,11 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
                     divisions: 19,
                     onChanged: (v) => setState(() => _radius = v),
                   ),
-                  Text(AppLocalizations.of(context).srProximity(_proximity.toInt())),
+                  Text(
+                    AppLocalizations.of(
+                      context,
+                    ).srProximity(_proximity.toInt()),
+                  ),
                   Slider(
                     value: _proximity,
                     min: 100,
@@ -406,8 +437,12 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
 
           // Time
           SwitchListTile(
-            title: const Text('⏰ Zaman'),
-            subtitle: Text(_timeEnabled ? AppLocalizations.of(context).commonActive : AppLocalizations.of(context).commonPassive),
+            title: Text('⏰ ${AppLocalizations.of(context).remTimeLabel}'),
+            subtitle: Text(
+              _timeEnabled
+                  ? AppLocalizations.of(context).commonActive
+                  : AppLocalizations.of(context).commonPassive,
+            ),
             value: _timeEnabled,
             onChanged: (v) => setState(() => _timeEnabled = v),
           ),
@@ -418,7 +453,9 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
                 children: [
                   DropdownButtonFormField<TimeTriggerType>(
                     initialValue: _timeType,
-                    decoration: InputDecoration(labelText: AppLocalizations.of(context).tur),
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context).tur,
+                    ),
                     items: TimeTriggerType.values.map((t) {
                       return DropdownMenuItem(
                         value: t,
@@ -472,7 +509,11 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
           // Behavior
           SwitchListTile(
             title: Text(AppLocalizations.of(context).davranis),
-            subtitle: Text(_behaviorEnabled ? AppLocalizations.of(context).commonActive : AppLocalizations.of(context).commonPassive),
+            subtitle: Text(
+              _behaviorEnabled
+                  ? AppLocalizations.of(context).commonActive
+                  : AppLocalizations.of(context).commonPassive,
+            ),
             value: _behaviorEnabled,
             onChanged: (v) => setState(() => _behaviorEnabled = v),
           ),
@@ -481,7 +522,9 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
               padding: const EdgeInsets.only(left: 16, right: 16, bottom: 12),
               child: DropdownButtonFormField<BehaviorTriggerType>(
                 initialValue: _behaviorType,
-                decoration: InputDecoration(labelText: AppLocalizations.of(context).davranisTuru),
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context).davranisTuru,
+                ),
                 items: BehaviorTriggerType.values.map((t) {
                   return DropdownMenuItem(
                     value: t,
@@ -533,7 +576,10 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(AppLocalizations.of(context).baglamHassasiyeti, style: _sectionStyle(textColor)),
+          Text(
+            AppLocalizations.of(context).baglamHassasiyeti,
+            style: _sectionStyle(textColor),
+          ),
           const SizedBox(height: 12),
           SwitchListTile(
             title: Text(AppLocalizations.of(context).sessizSaatlereSaygiGoster),
@@ -551,7 +597,11 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(AppLocalizations.of(context).srInterruptibility(_interruptibility.toInt())),
+                Text(
+                  AppLocalizations.of(
+                    context,
+                  ).srInterruptibility(_interruptibility.toInt()),
+                ),
                 Slider(
                   value: _interruptibility,
                   min: 0,
@@ -573,7 +623,10 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(AppLocalizations.of(context).kisisellestirme, style: _sectionStyle(textColor)),
+          Text(
+            AppLocalizations.of(context).kisisellestirme,
+            style: _sectionStyle(textColor),
+          ),
           const SizedBox(height: 12),
           Text(AppLocalizations.of(context).srTone),
           Wrap(
@@ -604,11 +657,16 @@ class _SmartReminderCreateScreenState extends State<SmartReminderCreateScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(AppLocalizations.of(context).hedefKisiler, style: _sectionStyle(textColor)),
+          Text(
+            AppLocalizations.of(context).hedefKisiler,
+            style: _sectionStyle(textColor),
+          ),
           const SizedBox(height: 12),
           RadioListTile<TargetAudienceType>(
             title: Text(AppLocalizations.of(context).srSmartChoice),
-            subtitle: Text(AppLocalizations.of(context).enYakinMusaitUygunYetkinlik),
+            subtitle: Text(
+              AppLocalizations.of(context).enYakinMusaitUygunYetkinlik,
+            ),
             value: TargetAudienceType.smartSelect,
             groupValue: _targetType,
             onChanged: (v) => setState(() => _targetType = v!),
@@ -746,7 +804,8 @@ class _TestPreviewSheet extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          Text(AppLocalizations.of(context).bildirimOnizleme,
+          Text(
+            AppLocalizations.of(context).bildirimOnizleme,
             style: Theme.of(context).textTheme.titleLarge,
           ),
           const SizedBox(height: 16),
@@ -772,10 +831,15 @@ class _TestPreviewSheet extends StatelessWidget {
                 const SizedBox(height: 12),
                 Row(
                   children: [
-                    TextButton(onPressed: () {}, child: const Text('✅ Tamam')),
                     TextButton(
                       onPressed: () {},
-                      child: const Text('⏰ 10dk Ertele'),
+                      child: Text('✅ ${AppLocalizations.of(context).ok}'),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        '⏰ ${AppLocalizations.of(context).remSnooze10}',
+                      ),
                     ),
                   ],
                 ),

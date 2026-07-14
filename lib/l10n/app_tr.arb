@@ -2603,5 +2603,18 @@
     "placeholders": {
       "name": {}
     }
+  },
+  "remTest": "Test Et",
+  "remTriggers": "Tetikleyiciler (Context)",
+  "remLocationLabel": "Lokasyon",
+  "remTimeLabel": "Zaman",
+  "remSnooze10": "10dk Ertele",
+  "eduTimeUp": "Süre doldu! Aktivite tamamlandı",
+  "eduActivityAdded": "Aktiviteniz eklendi",
+  "kitchenRecipeAdded": "\"{title}\" tarif kutuna eklendi",
+  "@kitchenRecipeAdded": {
+    "placeholders": {
+      "title": {}
+    }
   }
 }

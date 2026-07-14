@@ -6618,4 +6618,30 @@ class AppLocalizationsNl extends AppLocalizations {
   String childAddGrowth(Object name) {
     return 'Groeimeting — $name';
   }
+
+  @override
+  String get remTest => 'Testen';
+
+  @override
+  String get remTriggers => 'Triggers (context)';
+
+  @override
+  String get remLocationLabel => 'Locatie';
+
+  @override
+  String get remTimeLabel => 'Tijd';
+
+  @override
+  String get remSnooze10 => '10 min uitstellen';
+
+  @override
+  String get eduTimeUp => 'Tijd is om! Activiteit voltooid';
+
+  @override
+  String get eduActivityAdded => 'Je activiteit is toegevoegd';
+
+  @override
+  String kitchenRecipeAdded(Object title) {
+    return '\"$title\" is toegevoegd aan je receptenbox';
+  }
 }

@@ -39,8 +39,9 @@ class _EducationScreenState extends State<EducationScreen>
 
   Future<void> _loadActivities() async {
     try {
-      final raw =
-          await rootBundle.loadString('assets/data/content/education.json');
+      final raw = await rootBundle.loadString(
+        'assets/data/content/education.json',
+      );
       final list = (jsonDecode(raw) as List).cast<Map<String, dynamic>>();
       final custom = _loadCustom();
       setState(() {
@@ -103,12 +104,12 @@ class _EducationScreenState extends State<EducationScreen>
                   : TabBarView(
                       controller: _tabController,
                       children: [
-                        _ActivitiesTab(
-                            activities: _activities, isDark: isDark),
+                        _ActivitiesTab(activities: _activities, isDark: isDark),
                         _ParentGuideTab(
-                            activities: _activities, isDark: isDark),
-                        _ProgressTab(
-                            activities: _activities, isDark: isDark),
+                          activities: _activities,
+                          isDark: isDark,
+                        ),
+                        _ProgressTab(activities: _activities, isDark: isDark),
                       ],
                     ),
             ),
@@ -132,13 +133,18 @@ class _EducationScreenState extends State<EducationScreen>
         borderRadius: BorderRadius.circular(22),
         border: Border.all(color: violet.withAlpha(50), width: 0.5),
         boxShadow: [
-          BoxShadow(color: violet.withAlpha(40), blurRadius: 20, offset: const Offset(0, 6)),
+          BoxShadow(
+            color: violet.withAlpha(40),
+            blurRadius: 20,
+            offset: const Offset(0, 6),
+          ),
         ],
       ),
       child: Row(
         children: [
           Container(
-            width: 50, height: 50,
+            width: 50,
+            height: 50,
             decoration: BoxDecoration(
               gradient: const LinearGradient(
                 colors: [Color(0xFF8B5CF6), Color(0xFF7C3AED)],
@@ -146,19 +152,37 @@ class _EducationScreenState extends State<EducationScreen>
                 end: Alignment.bottomRight,
               ),
               borderRadius: BorderRadius.circular(16),
-              boxShadow: [BoxShadow(color: violet.withAlpha(80), blurRadius: 10)],
+              boxShadow: [
+                BoxShadow(color: violet.withAlpha(80), blurRadius: 10),
+              ],
             ),
-            child: const Icon(Icons.menu_book_outlined, color: Colors.white, size: 24),
+            child: const Icon(
+              Icons.menu_book_outlined,
+              color: Colors.white,
+              size: 24,
+            ),
           ),
           const SizedBox(width: 14),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(AppLocalizations.of(context).eduTitle,
-                    style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 19, color: Colors.white)),
-                Text('${_activities.length} aktivite · rehber · takip',
-                    style: TextStyle(fontSize: 11, color: Colors.white.withAlpha(120), fontWeight: FontWeight.w500)),
+                Text(
+                  AppLocalizations.of(context).eduTitle,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w900,
+                    fontSize: 19,
+                    color: Colors.white,
+                  ),
+                ),
+                Text(
+                  '${_activities.length} aktivite · rehber · takip',
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: Colors.white.withAlpha(120),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ],
             ),
           ),
@@ -173,11 +197,16 @@ class _EducationScreenState extends State<EducationScreen>
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                      color: const Color(0xFF6366F1).withAlpha(90),
-                      blurRadius: 8),
+                    color: const Color(0xFF6366F1).withAlpha(90),
+                    blurRadius: 8,
+                  ),
                 ],
               ),
-              child: const Icon(Icons.auto_awesome, color: Colors.white, size: 20),
+              child: const Icon(
+                Icons.auto_awesome,
+                color: Colors.white,
+                size: 20,
+              ),
             ),
           ),
           const SizedBox(width: 8),
@@ -189,7 +218,9 @@ class _EducationScreenState extends State<EducationScreen>
               decoration: BoxDecoration(
                 color: violet,
                 borderRadius: BorderRadius.circular(12),
-                boxShadow: [BoxShadow(color: violet.withAlpha(90), blurRadius: 8)],
+                boxShadow: [
+                  BoxShadow(color: violet.withAlpha(90), blurRadius: 8),
+                ],
               ),
               child: const Icon(Icons.add, color: Colors.white, size: 22),
             ),
@@ -218,7 +249,10 @@ class _EducationScreenState extends State<EducationScreen>
         indicatorWeight: 2,
         dividerColor: Colors.transparent,
         labelStyle: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700),
-        unselectedLabelStyle: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500),
+        unselectedLabelStyle: const TextStyle(
+          fontSize: 11,
+          fontWeight: FontWeight.w500,
+        ),
         tabs: const [
           Tab(icon: Icon(Icons.apps, size: 16), text: 'Aktiviteler'),
           Tab(icon: Icon(Icons.menu_book, size: 16), text: 'Rehber'),
@@ -272,15 +306,16 @@ class _ActivitiesTabState extends State<_ActivitiesTab> {
   List<Map<String, dynamic>> get _filtered {
     return widget.activities.where((a) {
       final cat = (a['category'] as String?)?.toLowerCase() ?? '';
-      final matchCat =
-          _selectedCategory == 'tümü' || cat == _selectedCategory;
-      final matchSearch = _searchQuery.isEmpty ||
-          (a['title'] as String?)
-                  ?.toLowerCase()
-                  .contains(_searchQuery.toLowerCase()) ==
+      final matchCat = _selectedCategory == 'tümü' || cat == _selectedCategory;
+      final matchSearch =
+          _searchQuery.isEmpty ||
+          (a['title'] as String?)?.toLowerCase().contains(
+                _searchQuery.toLowerCase(),
+              ) ==
               true;
       final ageGroup = a['age_group'] as Map<String, dynamic>?;
-      final matchAge = _ageFilter == null ||
+      final matchAge =
+          _ageFilter == null ||
           ((ageGroup?['min'] as int? ?? 0) <= _ageFilter! &&
               (ageGroup?['max'] as int? ?? 18) >= _ageFilter!);
       return matchCat && matchSearch && matchAge;
@@ -301,19 +336,20 @@ class _ActivitiesTabState extends State<_ActivitiesTab> {
               Expanded(
                 child: TextField(
                   onChanged: (v) => setState(() => _searchQuery = v),
-                  style: const TextStyle(
-                      color: Color(0xFFE5E7EB)),
+                  style: const TextStyle(color: Color(0xFFE5E7EB)),
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context).eduSearchHint,
                     prefixIcon: const Icon(Icons.search, size: 18),
                     filled: true,
-                    fillColor:
-                        const Color(0xFF13131A),
+                    fillColor: const Color(0xFF13131A),
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide.none),
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
                     contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 14, vertical: 10),
+                      horizontal: 14,
+                      vertical: 10,
+                    ),
                   ),
                 ),
               ),
@@ -343,37 +379,45 @@ class _ActivitiesTabState extends State<_ActivitiesTab> {
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 160),
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 10, vertical: 6),
+                    horizontal: 10,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: active
                         ? const Color(0xFF8B5CF6)
                         : (const Color(0xFF13131A)),
                     borderRadius: BorderRadius.circular(18),
                     border: Border.all(
-                        color: active
-                            ? const Color(0xFF8B5CF6)
-                            : (widget.isDark
+                      color: active
+                          ? const Color(0xFF8B5CF6)
+                          : (widget.isDark
                                 ? const Color(0x1EFFFFFF)
-                                : const Color(0x1EFFFFFF))),
+                                : const Color(0x1EFFFFFF)),
+                    ),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(icon,
-                          size: 12,
+                      Icon(
+                        icon,
+                        size: 12,
+                        color: active
+                            ? Colors.white
+                            : (const Color(0xFF6B7280)),
+                      ),
+                      const SizedBox(width: 5),
+                      Text(
+                        label,
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: active
+                              ? FontWeight.w700
+                              : FontWeight.w500,
                           color: active
                               ? Colors.white
-                              : (const Color(0xFF6B7280))),
-                      const SizedBox(width: 5),
-                      Text(label,
-                          style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: active
-                                  ? FontWeight.w700
-                                  : FontWeight.w500,
-                              color: active
-                                  ? Colors.white
-                                  : (const Color(0xFF6B7280)))),
+                              : (const Color(0xFF6B7280)),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -386,9 +430,10 @@ class _ActivitiesTabState extends State<_ActivitiesTab> {
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
           child: Row(
             children: [
-              Text('${filtered.length} aktivite bulundu',
-                  style: const TextStyle(
-                      fontSize: 12, color: Color(0xFF6B7280))),
+              Text(
+                '${filtered.length} aktivite bulundu',
+                style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+              ),
             ],
           ),
         ),
@@ -398,8 +443,11 @@ class _ActivitiesTabState extends State<_ActivitiesTab> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(Icons.search_off,
-                          size: 64, color: Color(0xFF6B7280)),
+                      const Icon(
+                        Icons.search_off,
+                        size: 64,
+                        color: Color(0xFF6B7280),
+                      ),
                       const SizedBox(height: 12),
                       Text(AppLocalizations.of(context).eduNoActivity),
                     ],
@@ -430,8 +478,11 @@ class _AgeFilterButton extends StatelessWidget {
   final int? age;
   final bool isDark;
   final ValueChanged<int?> onChanged;
-  const _AgeFilterButton(
-      {required this.age, required this.isDark, required this.onChanged});
+  const _AgeFilterButton({
+    required this.age,
+    required this.isDark,
+    required this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -448,13 +499,15 @@ class _AgeFilterButton extends StatelessWidget {
               },
               child: Text(AppLocalizations.of(context).tumu),
             ),
-            ...[3, 5, 7, 9, 11, 13, 15, 17].map((a) => SimpleDialogOption(
-                  onPressed: () {
-                    onChanged(a);
-                    Navigator.pop(context);
-                  },
-                  child: Text('$a yaş'),
-                )),
+            ...[3, 5, 7, 9, 11, 13, 15, 17].map(
+              (a) => SimpleDialogOption(
+                onPressed: () {
+                  onChanged(a);
+                  Navigator.pop(context);
+                },
+                child: Text('$a yaş'),
+              ),
+            ),
           ],
         ),
       ),
@@ -466,22 +519,30 @@ class _AgeFilterButton extends StatelessWidget {
               : (const Color(0xFF13131A)),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-              color: age != null
-                  ? const Color(0xFF8B5CF6)
-                  : (const Color(0x1EFFFFFF))),
+            color: age != null
+                ? const Color(0xFF8B5CF6)
+                : (const Color(0x1EFFFFFF)),
+          ),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.person,
-                size: 16,
-                color: age != null ? Colors.white : const Color(0xFF6B7280)),
+            Icon(
+              Icons.person,
+              size: 16,
+              color: age != null ? Colors.white : const Color(0xFF6B7280),
+            ),
             const SizedBox(width: 4),
-            Text(age != null ? AppLocalizations.of(context).eduAgeYears(age!) : AppLocalizations.of(context).eduAge,
-                style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w700,
-                    color: age != null ? Colors.white : const Color(0xFF6B7280))),
+            Text(
+              age != null
+                  ? AppLocalizations.of(context).eduAgeYears(age!)
+                  : AppLocalizations.of(context).eduAge,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+                color: age != null ? Colors.white : const Color(0xFF6B7280),
+              ),
+            ),
           ],
         ),
       ),
@@ -494,26 +555,65 @@ class _AgeFilterButton extends StatelessWidget {
 class _ParentGuideTab extends StatelessWidget {
   final List<Map<String, dynamic>> activities;
   final bool isDark;
-  const _ParentGuideTab(
-      {required this.activities, required this.isDark});
+  const _ParentGuideTab({required this.activities, required this.isDark});
 
   static const _guides = [
-    (Icons.psychology, '🧠', 'Bilişsel Gelişim', Color(0xFF8B5CF6),
-        'Çocuğun düşünme ve problem çözme becerilerini nasıl desteklersiniz?'),
-    (Icons.favorite, '❤️', 'Duygusal Zeka', Color(0xFFEC4899),
-        'Empati, öz-düzenleme ve sosyal becerileri geliştirme yolları.'),
-    (Icons.science, '🔬', 'STEM Eğitimi', Color(0xFF06B6D4),
-        'Günlük hayatta fen, teknoloji, mühendislik ve matematik.'),
-    (Icons.palette, '🎨', 'Sanat & Yaratıcılık', Color(0xFFF97316),
-        'Yaratıcı ifadeyi teşvik etmenin pratik yolları.'),
-    (Icons.music_note, '🎵', 'Müzik Eğitimi', Color(0xFF10B981),
-        'Ritim, melodi ve müzikle çocuk gelişimi.'),
-    (Icons.sports, '⚽', 'Fiziksel Gelişim', Color(0xFFF59E0B),
-        'Hareket, spor ve motor beceri gelişimi.'),
-    (Icons.book, '📖', 'Okuma Alışkanlığı', Color(0xFF3B82F6),
-        'Kitap sevgisini erken yaşta aşılamanın yolları.'),
-    (Icons.language, '🌍', 'Dil Öğrenimi', Color(0xFF6366F1),
-        'İkinci dil öğrenimini eğlenceli hale getirme.'),
+    (
+      Icons.psychology,
+      '🧠',
+      'Bilişsel Gelişim',
+      Color(0xFF8B5CF6),
+      'Çocuğun düşünme ve problem çözme becerilerini nasıl desteklersiniz?',
+    ),
+    (
+      Icons.favorite,
+      '❤️',
+      'Duygusal Zeka',
+      Color(0xFFEC4899),
+      'Empati, öz-düzenleme ve sosyal becerileri geliştirme yolları.',
+    ),
+    (
+      Icons.science,
+      '🔬',
+      'STEM Eğitimi',
+      Color(0xFF06B6D4),
+      'Günlük hayatta fen, teknoloji, mühendislik ve matematik.',
+    ),
+    (
+      Icons.palette,
+      '🎨',
+      'Sanat & Yaratıcılık',
+      Color(0xFFF97316),
+      'Yaratıcı ifadeyi teşvik etmenin pratik yolları.',
+    ),
+    (
+      Icons.music_note,
+      '🎵',
+      'Müzik Eğitimi',
+      Color(0xFF10B981),
+      'Ritim, melodi ve müzikle çocuk gelişimi.',
+    ),
+    (
+      Icons.sports,
+      '⚽',
+      'Fiziksel Gelişim',
+      Color(0xFFF59E0B),
+      'Hareket, spor ve motor beceri gelişimi.',
+    ),
+    (
+      Icons.book,
+      '📖',
+      'Okuma Alışkanlığı',
+      Color(0xFF3B82F6),
+      'Kitap sevgisini erken yaşta aşılamanın yolları.',
+    ),
+    (
+      Icons.language,
+      '🌍',
+      'Dil Öğrenimi',
+      Color(0xFF6366F1),
+      'İkinci dil öğrenimini eğlenceli hale getirme.',
+    ),
   ];
 
   // Rehber zengin içerikleri — bölümler + ipuçları + video araması
@@ -522,88 +622,189 @@ class _ParentGuideTab extends StatelessWidget {
       'intro':
           'Bilişsel gelişim; çocuğun düşünme, hatırlama, problem çözme ve dikkat becerilerini kapsar. Günlük küçük etkileşimler bu becerileri güçlü şekilde destekler.',
       'sections': [
-        ['Meraki besleyin', 'Çocuğun "neden?" sorularını ciddiye alın. Cevabı hemen vermek yerine "sen ne düşünüyorsun?" diye sorun. Bu, akıl yürütmeyi tetikler.'],
-        ['Oyunla öğretin', 'Bulmaca, eşleştirme ve sıralama oyunları hafızayı ve mantığı geliştirir. Günde 15-20 dakika yeterlidir.'],
-        ['Seçim yaptırın', 'Küçük günlük seçimler (hangi kıyafet, hangi kitap) karar verme ve sonuç değerlendirme becerisi kazandırır.'],
+        [
+          'Meraki besleyin',
+          'Çocuğun "neden?" sorularını ciddiye alın. Cevabı hemen vermek yerine "sen ne düşünüyorsun?" diye sorun. Bu, akıl yürütmeyi tetikler.',
+        ],
+        [
+          'Oyunla öğretin',
+          'Bulmaca, eşleştirme ve sıralama oyunları hafızayı ve mantığı geliştirir. Günde 15-20 dakika yeterlidir.',
+        ],
+        [
+          'Seçim yaptırın',
+          'Küçük günlük seçimler (hangi kıyafet, hangi kitap) karar verme ve sonuç değerlendirme becerisi kazandırır.',
+        ],
       ],
-      'tips': ['Ekran süresini sınırlayın.', 'Bol bol sesli kitap okuyun.', 'Hataları öğrenme fırsatı olarak görün.'],
+      'tips': [
+        'Ekran süresini sınırlayın.',
+        'Bol bol sesli kitap okuyun.',
+        'Hataları öğrenme fırsatı olarak görün.',
+      ],
       'video': 'çocuklarda bilişsel gelişim ebeveyn',
     },
     'Duygusal Zeka': {
       'intro':
           'Duygusal zeka; duyguları tanıma, ifade etme ve yönetme becerisidir. Empati ve sosyal ilişkilerin temelidir.',
       'sections': [
-        ['Duyguları adlandırın', 'Çocuk üzgün ya da kızgınken "şu an kızgın hissediyorsun" diyerek duyguyu adlandırın. Bu, duygu farkındalığını artırır.'],
-        ['Model olun', 'Kendi duygunuzu sağlıklı ifade edin: "Yorgunum, biraz dinlenmem lazım". Çocuk sizi izleyerek öğrenir.'],
-        ['Sakinleşme köşesi', 'Öfke anında birlikte derin nefes alın. Bir "sakin köşe" oluşturmak öz-düzenlemeyi kolaylaştırır.'],
+        [
+          'Duyguları adlandırın',
+          'Çocuk üzgün ya da kızgınken "şu an kızgın hissediyorsun" diyerek duyguyu adlandırın. Bu, duygu farkındalığını artırır.',
+        ],
+        [
+          'Model olun',
+          'Kendi duygunuzu sağlıklı ifade edin: "Yorgunum, biraz dinlenmem lazım". Çocuk sizi izleyerek öğrenir.',
+        ],
+        [
+          'Sakinleşme köşesi',
+          'Öfke anında birlikte derin nefes alın. Bir "sakin köşe" oluşturmak öz-düzenlemeyi kolaylaştırır.',
+        ],
       ],
-      'tips': ['Hiçbir duyguyu "kötü" damgalamayın.', 'Dinlerken göz teması kurun.', 'Empatiyi hikayelerle pekiştirin.'],
+      'tips': [
+        'Hiçbir duyguyu "kötü" damgalamayın.',
+        'Dinlerken göz teması kurun.',
+        'Empatiyi hikayelerle pekiştirin.',
+      ],
       'video': 'çocuklarda duygusal zeka geliştirme',
     },
     'STEM Eğitimi': {
       'intro':
           'STEM (Fen, Teknoloji, Mühendislik, Matematik) günlük hayatın içindedir. Mutfak, bahçe ve oyunlar doğal birer laboratuvardır.',
       'sections': [
-        ['Mutfakta bilim', 'Yemek yaparken ölçme, karıştırma ve hâl değişimlerini konuşun. Kabartma tozu-sirke deneyi klasiktir.'],
-        ['Yapı-inşa oyunları', 'Legolar ve bloklar mühendislik ve geometri sezgisi kazandırır. "En yüksek kuleyi yap" gibi hedefler koyun.'],
-        ['Kodlamaya giriş', 'ScratchJr veya Code.org ile 5+ yaş için ücretsiz, eğlenceli kodlama başlangıcı yapılabilir.'],
+        [
+          'Mutfakta bilim',
+          'Yemek yaparken ölçme, karıştırma ve hâl değişimlerini konuşun. Kabartma tozu-sirke deneyi klasiktir.',
+        ],
+        [
+          'Yapı-inşa oyunları',
+          'Legolar ve bloklar mühendislik ve geometri sezgisi kazandırır. "En yüksek kuleyi yap" gibi hedefler koyun.',
+        ],
+        [
+          'Kodlamaya giriş',
+          'ScratchJr veya Code.org ile 5+ yaş için ücretsiz, eğlenceli kodlama başlangıcı yapılabilir.',
+        ],
       ],
-      'tips': ['Önce tahmin ettirin, sonra deneyin.', 'Hata = veri; tekrar deneyin.', 'Güvenlik önce.'],
+      'tips': [
+        'Önce tahmin ettirin, sonra deneyin.',
+        'Hata = veri; tekrar deneyin.',
+        'Güvenlik önce.',
+      ],
       'video': 'evde çocuklarla STEM etkinlikleri',
     },
     'Sanat & Yaratıcılık': {
       'intro':
           'Sanat; hayal gücünü, ince motor becerileri ve öz-ifadeyi geliştirir. Sonuç değil süreç önemlidir.',
       'sections': [
-        ['Serbest bırakın', 'Boyama ve hamur çalışmalarında kurallar az olsun. "Doğru" bir sonuç beklemeyin.'],
-        ['Malzeme çeşitliliği', 'Parmak boyası, sünger, doğal nesneler farklı dokular ve deneyimler sunar.'],
-        ['Sergileyin', 'Eserleri bir yere asın. Bu, çocuğun özgüvenini ve motivasyonunu artırır.'],
+        [
+          'Serbest bırakın',
+          'Boyama ve hamur çalışmalarında kurallar az olsun. "Doğru" bir sonuç beklemeyin.',
+        ],
+        [
+          'Malzeme çeşitliliği',
+          'Parmak boyası, sünger, doğal nesneler farklı dokular ve deneyimler sunar.',
+        ],
+        [
+          'Sergileyin',
+          'Eserleri bir yere asın. Bu, çocuğun özgüvenini ve motivasyonunu artırır.',
+        ],
       ],
-      'tips': ['"Güzel olmamış" demeyin.', 'Çabayı övün, sonucu değil.', 'Önlük ile rahat bırakın.'],
+      'tips': [
+        '"Güzel olmamış" demeyin.',
+        'Çabayı övün, sonucu değil.',
+        'Önlük ile rahat bırakın.',
+      ],
       'video': 'çocuklar için yaratıcı sanat etkinlikleri',
     },
     'Müzik Eğitimi': {
       'intro':
           'Müzik; ritim duygusu, işitsel algı, dil ve duygusal ifadeyi destekler. Nota bilgisi şart değildir.',
       'sections': [
-        ['Ritim tutun', 'Şarkılarla el çırpın, ev yapımı davul çalın. Tempo duygusu böyle gelişir.'],
-        ['Ses keşfi', 'Yüksek-alçak, hızlı-yavaş sesleri ayırt ettirin. Bu işitsel dikkati güçlendirir.'],
-        ['Aile konseri', 'Basit bir "konser" düzenleyin; sahne özgüveni ve keyif kazandırır.'],
+        [
+          'Ritim tutun',
+          'Şarkılarla el çırpın, ev yapımı davul çalın. Tempo duygusu böyle gelişir.',
+        ],
+        [
+          'Ses keşfi',
+          'Yüksek-alçak, hızlı-yavaş sesleri ayırt ettirin. Bu işitsel dikkati güçlendirir.',
+        ],
+        [
+          'Aile konseri',
+          'Basit bir "konser" düzenleyin; sahne özgüveni ve keyif kazandırır.',
+        ],
       ],
-      'tips': ['Her sesi "farklı" görün, "yanlış" değil.', 'Günlük kısa tekrar etkilidir.', 'Zorlamayın, keyif esas.'],
+      'tips': [
+        'Her sesi "farklı" görün, "yanlış" değil.',
+        'Günlük kısa tekrar etkilidir.',
+        'Zorlamayın, keyif esas.',
+      ],
       'video': 'çocuklar için müzik etkinlikleri ritim',
     },
     'Fiziksel Gelişim': {
       'intro':
           'Hareket; motor beceri, denge, koordinasyon ve sağlıklı gelişimin temelidir. Günde en az 60 dakika aktif oyun önerilir.',
       'sections': [
-        ['Isınma-oyun-soğuma', 'Aktiviteye ısınmayla başlayın, oyunla sürdürün, esnemeyle bitirin.'],
-        ['Kaba motor', 'Koşma, zıplama, tırmanma büyük kasları geliştirir. Parklar ideal.'],
-        ['İnce motor', 'Top yakalama, ip atlama el-göz koordinasyonunu güçlendirir.'],
+        [
+          'Isınma-oyun-soğuma',
+          'Aktiviteye ısınmayla başlayın, oyunla sürdürün, esnemeyle bitirin.',
+        ],
+        [
+          'Kaba motor',
+          'Koşma, zıplama, tırmanma büyük kasları geliştirir. Parklar ideal.',
+        ],
+        [
+          'İnce motor',
+          'Top yakalama, ip atlama el-göz koordinasyonunu güçlendirir.',
+        ],
       ],
-      'tips': ['Yarış değil gelişim odaklı olun.', 'Su tüketimini unutmayın.', 'Gözetim şart.'],
+      'tips': [
+        'Yarış değil gelişim odaklı olun.',
+        'Su tüketimini unutmayın.',
+        'Gözetim şart.',
+      ],
       'video': 'çocuklar için fiziksel aktivite oyunları',
     },
     'Okuma Alışkanlığı': {
       'intro':
           'Erken okuma sevgisi; kelime dağarcığı, hayal gücü ve akademik başarının en güçlü yordayıcısıdır.',
       'sections': [
-        ['Rutin oluşturun', 'Her gün aynı saatte 15 dakika okuma zamanı belirleyin. Tutarlılık alışkanlık yaratır.'],
-        ['Canlandırarak okuyun', 'Sesleri, karakterleri canlandırın. "Sence sonra ne olacak?" diye sorun.'],
+        [
+          'Rutin oluşturun',
+          'Her gün aynı saatte 15 dakika okuma zamanı belirleyin. Tutarlılık alışkanlık yaratır.',
+        ],
+        [
+          'Canlandırarak okuyun',
+          'Sesleri, karakterleri canlandırın. "Sence sonra ne olacak?" diye sorun.',
+        ],
         ['Örnek olun', 'Sizi kitap okurken gören çocuk okumayı değerli görür.'],
       ],
-      'tips': ['Zorla değil, keyifle.', 'Kütüphaneye birlikte gidin.', 'Resimli kitaplarla başlayın.'],
+      'tips': [
+        'Zorla değil, keyifle.',
+        'Kütüphaneye birlikte gidin.',
+        'Resimli kitaplarla başlayın.',
+      ],
       'video': 'çocuklarda okuma alışkanlığı kazandırma',
     },
     'Dil Öğrenimi': {
       'intro':
           'Erken yaşta ikinci dil; beyin esnekliği sayesinde doğal ve kalıcı öğrenilir. Baskı değil, maruz kalma önemlidir.',
       'sections': [
-        ['Günlük maruz kalma', 'Şarkılar, kısa çizgi filmler ve etiketlerle dili günlük hayata sokun.'],
-        ['Oyunla pekiştirin', 'Kelime kartları ve hareketli oyunlar kalıcılığı artırır.'],
-        ['Hataya hoşgörü', 'Hataları düzeltirken sabırlı olun; iletişim cesaretini kırmayın.'],
+        [
+          'Günlük maruz kalma',
+          'Şarkılar, kısa çizgi filmler ve etiketlerle dili günlük hayata sokun.',
+        ],
+        [
+          'Oyunla pekiştirin',
+          'Kelime kartları ve hareketli oyunlar kalıcılığı artırır.',
+        ],
+        [
+          'Hataya hoşgörü',
+          'Hataları düzeltirken sabırlı olun; iletişim cesaretini kırmayın.',
+        ],
       ],
-      'tips': ['Günlük kısa tekrar > uzun ders.', 'Telaffuzu şarkıyla öğretin.', 'İlerlemeyi kutlayın.'],
+      'tips': [
+        'Günlük kısa tekrar > uzun ders.',
+        'Telaffuzu şarkıyla öğretin.',
+        'İlerlemeyi kutlayın.',
+      ],
       'video': 'çocuklara ikinci dil öğretme yöntemleri',
     },
   };
@@ -617,11 +818,13 @@ class _ParentGuideTab extends StatelessWidget {
       itemBuilder: (context, i) {
         final (icon, _, title, color, desc) = _guides[i];
         final related = activities
-            .where((a) =>
-                (a['title'] as String?)
-                    ?.toLowerCase()
-                    .contains(title.split(' ').first.toLowerCase()) ==
-                true)
+            .where(
+              (a) =>
+                  (a['title'] as String?)?.toLowerCase().contains(
+                    title.split(' ').first.toLowerCase(),
+                  ) ==
+                  true,
+            )
             .take(3)
             .toList();
 
@@ -634,9 +837,10 @@ class _ParentGuideTab extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.black.withAlpha(20),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2))
+                  color: Colors.black.withAlpha(20),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
               ],
             ),
             child: Row(
@@ -655,19 +859,25 @@ class _ParentGuideTab extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(title,
-                          style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700,
-                              color: Color(0xFFE5E7EB))),
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xFFE5E7EB),
+                        ),
+                      ),
                       const SizedBox(height: 4),
-                      Text(desc,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              fontSize: 12,
-                              color: Color(0xFF6B7280),
-                              height: 1.3)),
+                      Text(
+                        desc,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Color(0xFF6B7280),
+                          height: 1.3,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -680,8 +890,13 @@ class _ParentGuideTab extends StatelessWidget {
     );
   }
 
-  void _showGuideDetail(BuildContext context, String title, String desc,
-      Color color, List<Map<String, dynamic>> related) {
+  void _showGuideDetail(
+    BuildContext context,
+    String title,
+    String desc,
+    Color color,
+    List<Map<String, dynamic>> related,
+  ) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -693,8 +908,7 @@ class _ParentGuideTab extends StatelessWidget {
         builder: (_, ctrl) => Container(
           decoration: const BoxDecoration(
             color: Color(0xFF13131A),
-            borderRadius:
-                BorderRadius.vertical(top: Radius.circular(24)),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
           ),
           child: ListView(
             controller: ctrl,
@@ -706,8 +920,9 @@ class _ParentGuideTab extends StatelessWidget {
                   height: 4,
                   margin: const EdgeInsets.only(bottom: 16),
                   decoration: BoxDecoration(
-                      color: const Color(0x1EFFFFFF),
-                      borderRadius: BorderRadius.circular(2)),
+                    color: const Color(0x1EFFFFFF),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
                 ),
               ),
               Container(
@@ -719,17 +934,23 @@ class _ParentGuideTab extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title,
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w800,
-                            color: color)),
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                        color: color,
+                      ),
+                    ),
                     const SizedBox(height: 8),
-                    Text(desc,
-                        style: const TextStyle(
-                            fontSize: 14,
-                            height: 1.5,
-                            color: Color(0xFFE5E7EB))),
+                    Text(
+                      desc,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        height: 1.5,
+                        color: Color(0xFFE5E7EB),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -746,46 +967,60 @@ class _ParentGuideTab extends StatelessWidget {
                   const SizedBox(height: 16),
                   _ActivityImageBanner(keyword: title, title: title),
                   const SizedBox(height: 16),
-                  Text(intro,
-                      style: const TextStyle(
-                          fontSize: 14.5,
-                          height: 1.55,
-                          color: Color(0xFFD1D5DB))),
+                  Text(
+                    intro,
+                    style: const TextStyle(
+                      fontSize: 14.5,
+                      height: 1.55,
+                      color: Color(0xFFD1D5DB),
+                    ),
+                  ),
                   const SizedBox(height: 18),
-                  ...sections.map((s) => Padding(
-                        padding: const EdgeInsets.only(bottom: 14),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  width: 6, height: 6,
-                                  decoration: BoxDecoration(
-                                      color: color, shape: BoxShape.circle),
+                  ...sections.map(
+                    (s) => Padding(
+                      padding: const EdgeInsets.only(bottom: 14),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                width: 6,
+                                height: 6,
+                                decoration: BoxDecoration(
+                                  color: color,
+                                  shape: BoxShape.circle,
                                 ),
-                                const SizedBox(width: 8),
-                                Expanded(
-                                  child: Text(s[0].toString(),
-                                      style: const TextStyle(
-                                          fontSize: 15.5,
-                                          fontWeight: FontWeight.w800,
-                                          color: Colors.white)),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 6),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 14),
-                              child: Text(s[1].toString(),
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: Text(
+                                  s[0].toString(),
                                   style: const TextStyle(
-                                      fontSize: 14,
-                                      height: 1.55,
-                                      color: Color(0xFF9CA3AF))),
+                                    fontSize: 15.5,
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 6),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 14),
+                            child: Text(
+                              s[1].toString(),
+                              style: const TextStyle(
+                                fontSize: 14,
+                                height: 1.55,
+                                color: Color(0xFF9CA3AF),
+                              ),
                             ),
-                          ],
-                        ),
-                      )),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   if (tips.isNotEmpty) ...[
                     const SizedBox(height: 6),
                     Container(
@@ -797,35 +1032,45 @@ class _ParentGuideTab extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(children: [
-                            Icon(Icons.lightbulb, color: color, size: 18),
-                            const SizedBox(width: 6),
-                            Text(AppLocalizations.of(context).eduPracticalTips,
+                          Row(
+                            children: [
+                              Icon(Icons.lightbulb, color: color, size: 18),
+                              const SizedBox(width: 6),
+                              Text(
+                                AppLocalizations.of(context).eduPracticalTips,
                                 style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w800,
-                                    color: Colors.white)),
-                          ]),
-                          const SizedBox(height: 8),
-                          ...tips.map((t) => Padding(
-                                padding: const EdgeInsets.only(bottom: 6),
-                                child: Row(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                  children: [
-                                    const Text('• ',
-                                        style: TextStyle(
-                                            color: Color(0xFF9CA3AF))),
-                                    Expanded(
-                                      child: Text(t,
-                                          style: const TextStyle(
-                                              fontSize: 13.5,
-                                              height: 1.4,
-                                              color: Color(0xFFD1D5DB))),
-                                    ),
-                                  ],
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.white,
                                 ),
-                              )),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          ...tips.map(
+                            (t) => Padding(
+                              padding: const EdgeInsets.only(bottom: 6),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    '• ',
+                                    style: TextStyle(color: Color(0xFF9CA3AF)),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      t,
+                                      style: const TextStyle(
+                                        fontSize: 13.5,
+                                        height: 1.4,
+                                        color: Color(0xFFD1D5DB),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -840,27 +1085,39 @@ class _ParentGuideTab extends StatelessWidget {
                       ),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 14),
+                          horizontal: 16,
+                          vertical: 14,
+                        ),
                         decoration: BoxDecoration(
                           color: const Color(0xFFFF0000).withAlpha(30),
                           borderRadius: BorderRadius.circular(14),
                           border: Border.all(
-                              color: const Color(0xFFFF0000).withAlpha(90)),
+                            color: const Color(0xFFFF0000).withAlpha(90),
+                          ),
                         ),
                         child: Row(
                           children: [
-                            const Icon(Icons.play_circle_fill,
-                                color: Color(0xFFFF3B30), size: 24),
+                            const Icon(
+                              Icons.play_circle_fill,
+                              color: Color(0xFFFF3B30),
+                              size: 24,
+                            ),
                             const SizedBox(width: 10),
                             Expanded(
-                              child: Text(AppLocalizations.of(context).eduWatchYoutube,
-                                  style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.white)),
+                              child: Text(
+                                AppLocalizations.of(context).eduWatchYoutube,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
-                            const Icon(Icons.open_in_new,
-                                color: Color(0xFF9CA3AF), size: 16),
+                            const Icon(
+                              Icons.open_in_new,
+                              color: Color(0xFF9CA3AF),
+                              size: 16,
+                            ),
                           ],
                         ),
                       ),
@@ -870,28 +1127,37 @@ class _ParentGuideTab extends StatelessWidget {
               })(),
               if (related.isNotEmpty) ...[
                 const SizedBox(height: 20),
-                Text(AppLocalizations.of(context).eduRelatedActivities,
-                    style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFFE5E7EB))),
+                Text(
+                  AppLocalizations.of(context).eduRelatedActivities,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFFE5E7EB),
+                  ),
+                ),
                 const SizedBox(height: 10),
-                ...related.map((a) => Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                            color: isDark
-                                ? const Color(0xFF0A0A0F)
-                                : const Color(0xFF0A0A0F),
-                            borderRadius: BorderRadius.circular(12)),
-                        child: Text((a['title'] ?? '').toString(),
-                            style: const TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xFFE5E7EB))),
+                ...related.map(
+                  (a) => Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: isDark
+                            ? const Color(0xFF0A0A0F)
+                            : const Color(0xFF0A0A0F),
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                    )),
+                      child: Text(
+                        (a['title'] ?? '').toString(),
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFFE5E7EB),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ],
           ),
@@ -930,8 +1196,9 @@ class _ProgressTabState extends State<_ProgressTab> {
     final done = _completed.length;
 
     // Ağaç ilerlemesi: tamamlanan aktivite oranı (görsel ödül için ölçekli)
-    final treeProgress =
-        total == 0 ? 0.0 : (done / (total * 0.25)).clamp(0.0, 1.0);
+    final treeProgress = total == 0
+        ? 0.0
+        : (done / (total * 0.25)).clamp(0.0, 1.0);
 
     return ListView(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
@@ -950,14 +1217,19 @@ class _ProgressTabState extends State<_ProgressTab> {
           ),
           child: Column(
             children: [
-              Text(AppLocalizations.of(context).eduLearningTree,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w800)),
+              Text(
+                AppLocalizations.of(context).eduLearningTree,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
               const SizedBox(height: 4),
-              Text(AppLocalizations.of(context).eduTreeGrows,
-                  style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 12)),
+              Text(
+                AppLocalizations.of(context).eduTreeGrows,
+                style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 12),
+              ),
               const SizedBox(height: 8),
               GrowingTree(progress: treeProgress, size: 200),
             ],
@@ -969,32 +1241,39 @@ class _ProgressTabState extends State<_ProgressTab> {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             gradient: const LinearGradient(
-                colors: [Color(0xFF8B5CF6), Color(0xFF6366F1)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight),
+              colors: [Color(0xFF8B5CF6), Color(0xFF6366F1)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
             borderRadius: BorderRadius.circular(16),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(AppLocalizations.of(context).eduOverallProgress,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 16)),
+              Text(
+                AppLocalizations.of(context).eduOverallProgress,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 16,
+                ),
+              ),
               const SizedBox(height: 8),
               Row(
                 children: [
-                  Text('$done / $total aktivite tamamlandı',
-                      style: const TextStyle(
-                          color: Colors.white70, fontSize: 13)),
+                  Text(
+                    '$done / $total aktivite tamamlandı',
+                    style: const TextStyle(color: Colors.white70, fontSize: 13),
+                  ),
                   const Spacer(),
                   Text(
-                      '${total > 0 ? (done * 100 ~/ total) : 0}%',
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 18)),
+                    '${total > 0 ? (done * 100 ~/ total) : 0}%',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 18,
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: 8),
@@ -1003,8 +1282,7 @@ class _ProgressTabState extends State<_ProgressTab> {
                 child: LinearProgressIndicator(
                   value: total > 0 ? done / total : 0,
                   backgroundColor: Colors.white.withAlpha(40),
-                  valueColor:
-                      const AlwaysStoppedAnimation(Colors.white),
+                  valueColor: const AlwaysStoppedAnimation(Colors.white),
                   minHeight: 8,
                 ),
               ),
@@ -1018,8 +1296,9 @@ class _ProgressTabState extends State<_ProgressTab> {
           final areaActs = widget.activities
               .where((a) => a['category'] == key)
               .toList();
-          final areaDone =
-              areaActs.where((a) => _completed.contains(a['id'])).length;
+          final areaDone = areaActs
+              .where((a) => _completed.contains(a['id']))
+              .length;
           final areaTotal = areaActs.length;
 
           return Padding(
@@ -1031,10 +1310,10 @@ class _ProgressTabState extends State<_ProgressTab> {
                 borderRadius: BorderRadius.circular(14),
                 boxShadow: [
                   BoxShadow(
-                      color:
-                          Colors.black.withAlpha(20),
-                      blurRadius: 6,
-                      offset: const Offset(0, 2))
+                    color: Colors.black.withAlpha(20),
+                    blurRadius: 6,
+                    offset: const Offset(0, 2),
+                  ),
                 ],
               ),
               child: Column(
@@ -1046,26 +1325,34 @@ class _ProgressTabState extends State<_ProgressTab> {
                         width: 10,
                         height: 10,
                         decoration: BoxDecoration(
-                            color: color, shape: BoxShape.circle),
+                          color: color,
+                          shape: BoxShape.circle,
+                        ),
                       ),
                       const SizedBox(width: 8),
-                      Text(label,
-                          style: const TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w700,
-                              color: Color(0xFFE5E7EB))),
+                      Text(
+                        label,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xFFE5E7EB),
+                        ),
+                      ),
                       const Spacer(),
-                      Text('$areaDone / $areaTotal',
-                          style: const TextStyle(
-                              fontSize: 12, color: Color(0xFF6B7280))),
+                      Text(
+                        '$areaDone / $areaTotal',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Color(0xFF6B7280),
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 8),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(4),
                     child: LinearProgressIndicator(
-                      value:
-                          areaTotal > 0 ? areaDone / areaTotal : 0,
+                      value: areaTotal > 0 ? areaDone / areaTotal : 0,
                       backgroundColor: color.withAlpha(30),
                       valueColor: AlwaysStoppedAnimation(color),
                       minHeight: 6,
@@ -1092,34 +1379,41 @@ class _ProgressTabState extends State<_ProgressTab> {
                           child: Row(
                             children: [
                               AnimatedContainer(
-                                duration:
-                                    const Duration(milliseconds: 160),
+                                duration: const Duration(milliseconds: 160),
                                 width: 20,
                                 height: 20,
                                 decoration: BoxDecoration(
-                                    color: done ? color : Colors.transparent,
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                        color: done
-                                            ? color
-                                            : const Color(0x1EFFFFFF),
-                                        width: 2)),
+                                  color: done ? color : Colors.transparent,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: done
+                                        ? color
+                                        : const Color(0x1EFFFFFF),
+                                    width: 2,
+                                  ),
+                                ),
                                 child: done
-                                    ? const Icon(Icons.check,
-                                        size: 12, color: Colors.white)
+                                    ? const Icon(
+                                        Icons.check,
+                                        size: 12,
+                                        color: Colors.white,
+                                      )
                                     : null,
                               ),
                               const SizedBox(width: 8),
                               Expanded(
-                                child: Text((a['title'] ?? '').toString(),
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        decoration: done
-                                            ? TextDecoration.lineThrough
-                                            : null,
-                                        color: done
-                                            ? const Color(0xFF6B7280)
-                                            : (const Color(0xFFE5E7EB)))),
+                                child: Text(
+                                  (a['title'] ?? '').toString(),
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    decoration: done
+                                        ? TextDecoration.lineThrough
+                                        : null,
+                                    color: done
+                                        ? const Color(0xFF6B7280)
+                                        : (const Color(0xFFE5E7EB)),
+                                  ),
+                                ),
                               ),
                             ],
                           ),
@@ -1143,8 +1437,11 @@ class _ActivityCard extends StatelessWidget {
   final Map<String, dynamic> activity;
   final bool isDark;
   final VoidCallback onTap;
-  const _ActivityCard(
-      {required this.activity, required this.isDark, required this.onTap});
+  const _ActivityCard({
+    required this.activity,
+    required this.isDark,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1163,9 +1460,10 @@ class _ActivityCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-                color: Colors.black.withAlpha(20),
-                blurRadius: 8,
-                offset: const Offset(0, 2))
+              color: Colors.black.withAlpha(20),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
           ],
         ),
         child: Row(
@@ -1175,9 +1473,10 @@ class _ActivityCard extends StatelessWidget {
               height: 50,
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
-                    colors: [Color(0xFF8B5CF6), Color(0xFF6366F1)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight),
+                  colors: [Color(0xFF8B5CF6), Color(0xFF6366F1)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
                 borderRadius: BorderRadius.circular(14),
               ),
               child: const Icon(Icons.school, color: Colors.white, size: 24),
@@ -1187,39 +1486,56 @@ class _ActivityCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text((activity['title'] ?? '').toString(),
-                      style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                          color: Color(0xFFE5E7EB)),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis),
+                  Text(
+                    (activity['title'] ?? '').toString(),
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFFE5E7EB),
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                   const SizedBox(height: 5),
                   Wrap(
                     spacing: 5,
                     children: [
-                      _Chip(label: '$ageMin-$ageMax yaş',
-                          color: const Color(0xFF8B5CF6)),
+                      _Chip(
+                        label: '$ageMin-$ageMax yaş',
+                        color: const Color(0xFF8B5CF6),
+                      ),
                       if (activity['duration'] != null)
-                        _Chip(label: activity['duration'].toString(),
-                            color: const Color(0xFF6366F1)),
+                        _Chip(
+                          label: activity['duration'].toString(),
+                          color: const Color(0xFF6366F1),
+                        ),
                     ],
                   ),
                   const SizedBox(height: 4),
                   Row(
                     children: [
-                      const Icon(Icons.star_rounded,
-                          size: 13, color: Color(0xFFF59E0B)),
+                      const Icon(
+                        Icons.star_rounded,
+                        size: 13,
+                        color: Color(0xFFF59E0B),
+                      ),
                       const SizedBox(width: 2),
-                      Text(rating.toStringAsFixed(1),
-                          style: const TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF6B7280))),
+                      Text(
+                        rating.toStringAsFixed(1),
+                        style: const TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF6B7280),
+                        ),
+                      ),
                       const SizedBox(width: 6),
-                      Text('${activity['review_count'] ?? 0} değerlendirme',
-                          style: const TextStyle(
-                              fontSize: 11, color: Color(0xFF6B7280))),
+                      Text(
+                        '${activity['review_count'] ?? 0} değerlendirme',
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: Color(0xFF6B7280),
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -1243,11 +1559,17 @@ class _Chip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
       decoration: BoxDecoration(
-          color: color.withAlpha(25),
-          borderRadius: BorderRadius.circular(6)),
-      child: Text(label,
-          style: TextStyle(
-              fontSize: 10, fontWeight: FontWeight.w700, color: color)),
+        color: color.withAlpha(25),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          fontSize: 10,
+          fontWeight: FontWeight.w700,
+          color: color,
+        ),
+      ),
     );
   }
 }
@@ -1263,9 +1585,8 @@ class ActivityDetailSheet extends StatelessWidget {
     final tips = (activity['parent_tips'] as List?)?.cast<String>() ?? [];
     final objectives =
         (activity['learning_objectives'] as List?)?.cast<String>() ?? [];
-    final materials = (activity['materials'] as List?)
-            ?.cast<Map<String, dynamic>>() ??
-        [];
+    final materials =
+        (activity['materials'] as List?)?.cast<Map<String, dynamic>>() ?? [];
     final ageGroup = activity['age_group'] as Map<String, dynamic>? ?? {};
 
     return DraggableScrollableSheet(
@@ -1275,8 +1596,7 @@ class ActivityDetailSheet extends StatelessWidget {
       builder: (_, controller) => Container(
         decoration: const BoxDecoration(
           color: Color(0xFF13131A),
-          borderRadius:
-              BorderRadius.vertical(top: Radius.circular(28)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
         ),
         child: ListView(
           controller: controller,
@@ -1288,8 +1608,9 @@ class ActivityDetailSheet extends StatelessWidget {
                 height: 4,
                 margin: const EdgeInsets.only(bottom: 16),
                 decoration: BoxDecoration(
-                    color: const Color(0x1EFFFFFF),
-                    borderRadius: BorderRadius.circular(2)),
+                  color: const Color(0x1EFFFFFF),
+                  borderRadius: BorderRadius.circular(2),
+                ),
               ),
             ),
             // ── Görsel banner (internetten, kırılırsa gradient'e düşer) ──
@@ -1303,9 +1624,10 @@ class ActivityDetailSheet extends StatelessWidget {
               padding: const EdgeInsets.all(18),
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
-                    colors: [Color(0xFF8B5CF6), Color(0xFF6366F1)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight),
+                  colors: [Color(0xFF8B5CF6), Color(0xFF6366F1)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
                 borderRadius: BorderRadius.circular(18),
               ),
               child: Column(
@@ -1313,18 +1635,20 @@ class ActivityDetailSheet extends StatelessWidget {
                 children: [
                   const Icon(Icons.school, color: Colors.white, size: 32),
                   const SizedBox(height: 10),
-                  Text((activity['title'] ?? '').toString(),
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w800)),
+                  Text(
+                    (activity['title'] ?? '').toString(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
                   const SizedBox(height: 8),
                   Wrap(
                     spacing: 8,
                     runSpacing: 4,
                     children: [
-                      _DetailChip(
-                          '${ageGroup['min']}-${ageGroup['max']} yaş'),
+                      _DetailChip('${ageGroup['min']}-${ageGroup['max']} yaş'),
                       if (activity['duration'] != null)
                         _DetailChip(activity['duration'].toString()),
                       if (activity['frequency'] != null)
@@ -1336,7 +1660,9 @@ class ActivityDetailSheet extends StatelessWidget {
             ),
             const SizedBox(height: 14),
             // ── Kronometre (aktivite süresine göre geri sayım) ──
-            _ActivityTimer(durationText: (activity['duration'] ?? '').toString()),
+            _ActivityTimer(
+              durationText: (activity['duration'] ?? '').toString(),
+            ),
             const SizedBox(height: 18),
             if (objectives.isNotEmpty) ...[
               _SectionTitle('Hedefler', Icons.flag, isDark),
@@ -1353,70 +1679,88 @@ class ActivityDetailSheet extends StatelessWidget {
             if (steps.isNotEmpty) ...[
               _SectionTitle('Nasıl Yapılır?', Icons.list_alt, isDark),
               const SizedBox(height: 8),
-              ...steps.asMap().entries.map((e) => Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 30,
-                          height: 30,
-                          decoration: BoxDecoration(
-                            gradient: const LinearGradient(colors: [
-                              Color(0xFF8B5CF6),
-                              Color(0xFF6366F1)
-                            ]),
-                            borderRadius: BorderRadius.circular(9),
+              ...steps.asMap().entries.map(
+                (e) => Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 30,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [Color(0xFF8B5CF6), Color(0xFF6366F1)],
                           ),
-                          child: Center(
-                            child: Text('${e.key + 1}',
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 12)),
+                          borderRadius: BorderRadius.circular(9),
+                        ),
+                        child: Center(
+                          child: Text(
+                            '${e.key + 1}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 12,
+                            ),
                           ),
                         ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: Text(e.value,
-                              style: const TextStyle(
-                                  fontSize: 13,
-                                  height: 1.5,
-                                  color: Color(0xFFE5E7EB))),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          e.value,
+                          style: const TextStyle(
+                            fontSize: 13,
+                            height: 1.5,
+                            color: Color(0xFFE5E7EB),
+                          ),
                         ),
-                      ],
-                    ),
-                  )),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               const SizedBox(height: 8),
             ],
             if (tips.isNotEmpty) ...[
               _SectionTitle('Ebeveyn İpuçları', Icons.lightbulb, isDark),
               const SizedBox(height: 8),
-              ...tips.map((t) => Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: const Color(0xFFF59E0B).withAlpha(20),
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                              color: const Color(0xFFF59E0B).withAlpha(60))),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Icon(Icons.lightbulb_outline,
-                              size: 14, color: Color(0xFFF59E0B)),
-                          const SizedBox(width: 6),
-                          Expanded(
-                              child: Text(t,
-                                  style: const TextStyle(
-                                      fontSize: 12,
-                                      height: 1.4,
-                                      color: Color(0xFFE5E7EB)))),
-                        ],
+              ...tips.map(
+                (t) => Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF59E0B).withAlpha(20),
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: const Color(0xFFF59E0B).withAlpha(60),
                       ),
                     ),
-                  )),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Icon(
+                          Icons.lightbulb_outline,
+                          size: 14,
+                          color: Color(0xFFF59E0B),
+                        ),
+                        const SizedBox(width: 6),
+                        Expanded(
+                          child: Text(
+                            t,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              height: 1.4,
+                              color: Color(0xFFE5E7EB),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ],
             const SizedBox(height: 20),
           ],
@@ -1432,17 +1776,20 @@ class _DetailChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        padding:
-            const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-        decoration: BoxDecoration(
-            color: Colors.white.withAlpha(40),
-            borderRadius: BorderRadius.circular(8)),
-        child: Text(label,
-            style: const TextStyle(
-                color: Colors.white,
-                fontSize: 11,
-                fontWeight: FontWeight.w600)),
-      );
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+    decoration: BoxDecoration(
+      color: Colors.white.withAlpha(40),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    child: Text(
+      label,
+      style: const TextStyle(
+        color: Colors.white,
+        fontSize: 11,
+        fontWeight: FontWeight.w600,
+      ),
+    ),
+  );
 }
 
 class _SectionTitle extends StatelessWidget {
@@ -1453,16 +1800,19 @@ class _SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Row(
-        children: [
-          Icon(icon, size: 16, color: const Color(0xFF8B5CF6)),
-          const SizedBox(width: 6),
-          Text(title,
-              style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                  color: Color(0xFFE5E7EB))),
-        ],
-      );
+    children: [
+      Icon(icon, size: 16, color: const Color(0xFF8B5CF6)),
+      const SizedBox(width: 6),
+      Text(
+        title,
+        style: const TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w700,
+          color: Color(0xFFE5E7EB),
+        ),
+      ),
+    ],
+  );
 }
 
 class _Bullet extends StatelessWidget {
@@ -1472,27 +1822,33 @@ class _Bullet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(bottom: 5),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 5),
-              width: 5,
-              height: 5,
-              decoration: const BoxDecoration(
-                  color: Color(0xFF8B5CF6), shape: BoxShape.circle),
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-                child: Text(text,
-                    style: const TextStyle(
-                        fontSize: 13,
-                        height: 1.4,
-                        color: Color(0xFFE5E7EB)))),
-          ],
+    padding: const EdgeInsets.only(bottom: 5),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(top: 5),
+          width: 5,
+          height: 5,
+          decoration: const BoxDecoration(
+            color: Color(0xFF8B5CF6),
+            shape: BoxShape.circle,
+          ),
         ),
-      );
+        const SizedBox(width: 8),
+        Expanded(
+          child: Text(
+            text,
+            style: const TextStyle(
+              fontSize: 13,
+              height: 1.4,
+              color: Color(0xFFE5E7EB),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }
 
 class _MaterialRow extends StatelessWidget {
@@ -1502,21 +1858,24 @@ class _MaterialRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(bottom: 6),
-        child: Row(
-          children: [
-            const Icon(Icons.check_circle_outline,
-                size: 14, color: Color(0xFF8B5CF6)),
-            const SizedBox(width: 6),
-            Expanded(
-              child: Text('${material['name']} — ${material['purpose']}',
-                  style: const TextStyle(
-                      fontSize: 12,
-                      color: Color(0xFFE5E7EB))),
-            ),
-          ],
+    padding: const EdgeInsets.only(bottom: 6),
+    child: Row(
+      children: [
+        const Icon(
+          Icons.check_circle_outline,
+          size: 14,
+          color: Color(0xFF8B5CF6),
         ),
-      );
+        const SizedBox(width: 6),
+        Expanded(
+          child: Text(
+            '${material['name']} — ${material['purpose']}',
+            style: const TextStyle(fontSize: 12, color: Color(0xFFE5E7EB)),
+          ),
+        ),
+      ],
+    ),
+  );
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1530,27 +1889,48 @@ class _ActivityImageBanner extends StatelessWidget {
   String _slug(String s) {
     // Konuya özel görsel anahtarları (başlık + kategori bazlı)
     final map = {
-      'matematik': 'mathematics,numbers', 'sayı': 'numbers,counting',
-      'renk': 'colorful,paint', 'okuma': 'child,reading,book',
-      'kitap': 'child,books', 'deney': 'science,experiment,kids',
-      'bilim': 'science,laboratory', 'robotik': 'robot,coding',
-      'kod': 'coding,computer', 'dijital': 'computer,kids',
-      'internet': 'laptop,child', 'ngilizce': 'english,alphabet',
-      'dil': 'language,learning', 'müzik': 'music,instruments',
-      'muzik': 'music,kids', 'enstrüman': 'guitar,piano',
-      'yüzme': 'swimming,pool', 'yuzme': 'swimming',
-      'spor': 'kids,sport,football', 'empati': 'family,hug,children',
-      'duygu': 'emotion,child', 'öfke': 'calm,meditation',
-      'mindfulness': 'meditation,calm', 'kumbara': 'coins,savings',
-      'birikim': 'money,piggybank', 'finans': 'coins,money',
-      'geri dönüşüm': 'recycling,green', 'çevre': 'nature,green,kids',
-      'doğa': 'nature,forest', 'resim': 'painting,art,kids',
-      'heykel': 'sculpture,clay', 'sanat': 'art,children,painting',
-      'boya': 'paint,colorful', 'hafıza': 'puzzle,memory,cards',
-      'odak': 'focus,puzzle', 'dikkat': 'puzzle,kids',
-      'yaz': 'writing,notebook,child', 'yaratıcı': 'creative,art,kids',
-      'tartışma': 'discussion,kids', 'münazara': 'debate,speaking',
-      'liderlik': 'teamwork,children', 'problem': 'puzzle,thinking',
+      'matematik': 'mathematics,numbers',
+      'sayı': 'numbers,counting',
+      'renk': 'colorful,paint',
+      'okuma': 'child,reading,book',
+      'kitap': 'child,books',
+      'deney': 'science,experiment,kids',
+      'bilim': 'science,laboratory',
+      'robotik': 'robot,coding',
+      'kod': 'coding,computer',
+      'dijital': 'computer,kids',
+      'internet': 'laptop,child',
+      'ngilizce': 'english,alphabet',
+      'dil': 'language,learning',
+      'müzik': 'music,instruments',
+      'muzik': 'music,kids',
+      'enstrüman': 'guitar,piano',
+      'yüzme': 'swimming,pool',
+      'yuzme': 'swimming',
+      'spor': 'kids,sport,football',
+      'empati': 'family,hug,children',
+      'duygu': 'emotion,child',
+      'öfke': 'calm,meditation',
+      'mindfulness': 'meditation,calm',
+      'kumbara': 'coins,savings',
+      'birikim': 'money,piggybank',
+      'finans': 'coins,money',
+      'geri dönüşüm': 'recycling,green',
+      'çevre': 'nature,green,kids',
+      'doğa': 'nature,forest',
+      'resim': 'painting,art,kids',
+      'heykel': 'sculpture,clay',
+      'sanat': 'art,children,painting',
+      'boya': 'paint,colorful',
+      'hafıza': 'puzzle,memory,cards',
+      'odak': 'focus,puzzle',
+      'dikkat': 'puzzle,kids',
+      'yaz': 'writing,notebook,child',
+      'yaratıcı': 'creative,art,kids',
+      'tartışma': 'discussion,kids',
+      'münazara': 'debate,speaking',
+      'liderlik': 'teamwork,children',
+      'problem': 'puzzle,thinking',
       'eleştirel': 'thinking,puzzle',
     };
     final k = keyword.toLowerCase();
@@ -1594,9 +1974,13 @@ class _ActivityImageBanner extends StatelessWidget {
       child: Center(
         child: loading
             ? const SizedBox(
-                width: 26, height: 26,
+                width: 26,
+                height: 26,
                 child: CircularProgressIndicator(
-                    strokeWidth: 2.5, color: Colors.white70))
+                  strokeWidth: 2.5,
+                  color: Colors.white70,
+                ),
+              )
             : const Icon(Icons.auto_stories, color: Colors.white70, size: 46),
       ),
     );
@@ -1656,8 +2040,8 @@ class _ActivityTimerState extends State<_ActivityTimer> {
         });
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('⏰ Süre doldu! Aktivite tamamlandı 🎉'),
+            SnackBar(
+              content: Text('⏰ ${AppLocalizations.of(context).eduTimeUp} 🎉'),
               behavior: SnackBarBehavior.floating,
             ),
           );
@@ -1710,8 +2094,11 @@ class _ActivityTimerState extends State<_ActivityTimer> {
                     valueColor: const AlwaysStoppedAnimation(Color(0xFF8B5CF6)),
                   ),
                 ),
-                const Icon(Icons.timer_outlined,
-                    color: Color(0xFF8B5CF6), size: 22),
+                const Icon(
+                  Icons.timer_outlined,
+                  color: Color(0xFF8B5CF6),
+                  size: 22,
+                ),
               ],
             ),
           ),
@@ -1720,18 +2107,24 @@ class _ActivityTimerState extends State<_ActivityTimer> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(AppLocalizations.of(context).eduStopwatch,
-                    style: const TextStyle(
-                        color: Color(0xFF9CA3AF),
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600)),
+                Text(
+                  AppLocalizations.of(context).eduStopwatch,
+                  style: const TextStyle(
+                    color: Color(0xFF9CA3AF),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
                 const SizedBox(height: 2),
-                Text(_fmt,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 28,
-                        fontWeight: FontWeight.w800,
-                        fontFeatures: [FontFeature.tabularFigures()])),
+                Text(
+                  _fmt,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontWeight: FontWeight.w800,
+                    fontFeatures: [FontFeature.tabularFigures()],
+                  ),
+                ),
               ],
             ),
           ),
@@ -1746,11 +2139,15 @@ class _ActivityTimerState extends State<_ActivityTimer> {
               height: 52,
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                    colors: [Color(0xFF8B5CF6), Color(0xFF6366F1)]),
+                  colors: [Color(0xFF8B5CF6), Color(0xFF6366F1)],
+                ),
                 shape: BoxShape.circle,
               ),
-              child: Icon(_running ? Icons.pause : Icons.play_arrow,
-                  color: Colors.white, size: 28),
+              child: Icon(
+                _running ? Icons.pause : Icons.play_arrow,
+                color: Colors.white,
+                size: 28,
+              ),
             ),
           ),
         ],
@@ -1802,16 +2199,25 @@ class _AddActivitySheetState extends State<_AddActivitySheet> {
 
   void _save() {
     if (_title.text.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
           content: Text(AppLocalizations.of(context).eduEnterTitle),
-          behavior: SnackBarBehavior.floating));
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
       return;
     }
     final mats = _materials.text
         .split('\n')
         .map((e) => e.trim())
         .where((e) => e.isNotEmpty)
-        .map((e) => {'name': e, 'purpose': 'Aktivite için gerekli', 'alternative': ''})
+        .map(
+          (e) => {
+            'name': e,
+            'purpose': 'Aktivite için gerekli',
+            'alternative': '',
+          },
+        )
         .toList();
     final steps = _steps.text
         .split('\n')
@@ -1836,20 +2242,24 @@ class _AddActivitySheetState extends State<_AddActivitySheet> {
     };
     widget.onSave(activity);
     Navigator.pop(context);
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('✅ Aktiviteniz eklendi'),
-        behavior: SnackBarBehavior.floating));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('✅ ${AppLocalizations.of(context).eduActivityAdded}'),
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
   }
 
   InputDecoration _dec(String hint) => InputDecoration(
-        hintText: hint,
-        hintStyle: const TextStyle(color: Color(0xFF6B7280)),
-        filled: true,
-        fillColor: const Color(0xFF1A1A24),
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide.none),
-      );
+    hintText: hint,
+    hintStyle: const TextStyle(color: Color(0xFF6B7280)),
+    filled: true,
+    fillColor: const Color(0xFF1A1A24),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide.none,
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -1866,38 +2276,58 @@ class _AddActivitySheetState extends State<_AddActivitySheet> {
         child: ListView(
           controller: controller,
           padding: EdgeInsets.fromLTRB(
-              20, 16, 20, MediaQuery.of(context).viewInsets.bottom + 20),
+            20,
+            16,
+            20,
+            MediaQuery.of(context).viewInsets.bottom + 20,
+          ),
           children: [
             Center(
               child: Container(
-                width: 40, height: 4,
+                width: 40,
+                height: 4,
                 margin: const EdgeInsets.only(bottom: 18),
                 decoration: BoxDecoration(
-                    color: const Color(0x1EFFFFFF),
-                    borderRadius: BorderRadius.circular(2)),
+                  color: const Color(0x1EFFFFFF),
+                  borderRadius: BorderRadius.circular(2),
+                ),
               ),
             ),
-            Text(AppLocalizations.of(context).eduAddActivity,
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w800)),
+            Text(
+              AppLocalizations.of(context).eduAddActivity,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
             const SizedBox(height: 4),
-            Text(AppLocalizations.of(context).eduCreateOwn,
-                style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
+            Text(
+              AppLocalizations.of(context).eduCreateOwn,
+              style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13),
+            ),
             const SizedBox(height: 18),
-            Text(AppLocalizations.of(context).baslik,
-                style: const TextStyle(
-                    color: Color(0xFFC7CBD4), fontWeight: FontWeight.w600)),
+            Text(
+              AppLocalizations.of(context).baslik,
+              style: const TextStyle(
+                color: Color(0xFFC7CBD4),
+                fontWeight: FontWeight.w600,
+              ),
+            ),
             const SizedBox(height: 6),
             TextField(
-                controller: _title,
-                style: const TextStyle(color: Colors.white),
-                decoration: _dec('Örn: Legolarla Şekil Yapma')),
+              controller: _title,
+              style: const TextStyle(color: Colors.white),
+              decoration: _dec('Örn: Legolarla Şekil Yapma'),
+            ),
             const SizedBox(height: 14),
-            Text(AppLocalizations.of(context).eduCategory,
-                style: const TextStyle(
-                    color: Color(0xFFC7CBD4), fontWeight: FontWeight.w600)),
+            Text(
+              AppLocalizations.of(context).eduCategory,
+              style: const TextStyle(
+                color: Color(0xFFC7CBD4),
+                fontWeight: FontWeight.w600,
+              ),
+            ),
             const SizedBox(height: 6),
             Wrap(
               spacing: 8,
@@ -1908,18 +2338,23 @@ class _AddActivitySheetState extends State<_AddActivitySheet> {
                   onTap: () => setState(() => _category = c.$1),
                   child: Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 8),
+                      horizontal: 12,
+                      vertical: 8,
+                    ),
                     decoration: BoxDecoration(
                       color: sel
                           ? const Color(0xFF8B5CF6)
                           : const Color(0xFF1A1A24),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Text(c.$2,
-                        style: TextStyle(
-                            color: sel ? Colors.white : const Color(0xFF9CA3AF),
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600)),
+                    child: Text(
+                      c.$2,
+                      style: TextStyle(
+                        color: sel ? Colors.white : const Color(0xFF9CA3AF),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
                 );
               }).toList(),
@@ -1931,24 +2366,31 @@ class _AddActivitySheetState extends State<_AddActivitySheet> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(AppLocalizations.of(context).eduAgeRange,
-                          style: const TextStyle(
-                              color: Color(0xFFC7CBD4),
-                              fontWeight: FontWeight.w600)),
+                      Text(
+                        AppLocalizations.of(context).eduAgeRange,
+                        style: const TextStyle(
+                          color: Color(0xFFC7CBD4),
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                       const SizedBox(height: 6),
                       Row(
                         children: [
                           _AgeStepper(
-                              value: _minAge,
-                              onChanged: (v) => setState(() => _minAge = v)),
+                            value: _minAge,
+                            onChanged: (v) => setState(() => _minAge = v),
+                          ),
                           const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8),
-                            child: Text('—',
-                                style: TextStyle(color: Color(0xFF9CA3AF))),
+                            child: Text(
+                              '—',
+                              style: TextStyle(color: Color(0xFF9CA3AF)),
+                            ),
                           ),
                           _AgeStepper(
-                              value: _maxAge,
-                              onChanged: (v) => setState(() => _maxAge = v)),
+                            value: _maxAge,
+                            onChanged: (v) => setState(() => _maxAge = v),
+                          ),
                         ],
                       ),
                     ],
@@ -1959,40 +2401,54 @@ class _AddActivitySheetState extends State<_AddActivitySheet> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(AppLocalizations.of(context).eduDuration,
-                          style: const TextStyle(
-                              color: Color(0xFFC7CBD4),
-                              fontWeight: FontWeight.w600)),
+                      Text(
+                        AppLocalizations.of(context).eduDuration,
+                        style: const TextStyle(
+                          color: Color(0xFFC7CBD4),
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                       const SizedBox(height: 6),
                       TextField(
-                          controller: _duration,
-                          style: const TextStyle(color: Colors.white),
-                          decoration: _dec('20 dk')),
+                        controller: _duration,
+                        style: const TextStyle(color: Colors.white),
+                        decoration: _dec('20 dk'),
+                      ),
                     ],
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 14),
-            Text(AppLocalizations.of(context).eduMaterials,
-                style: const TextStyle(
-                    color: Color(0xFFC7CBD4), fontWeight: FontWeight.w600)),
+            Text(
+              AppLocalizations.of(context).eduMaterials,
+              style: const TextStyle(
+                color: Color(0xFFC7CBD4),
+                fontWeight: FontWeight.w600,
+              ),
+            ),
             const SizedBox(height: 6),
             TextField(
-                controller: _materials,
-                maxLines: 4,
-                style: const TextStyle(color: Colors.white),
-                decoration: _dec('Legolar\nRenkli kağıt\nMakas')),
+              controller: _materials,
+              maxLines: 4,
+              style: const TextStyle(color: Colors.white),
+              decoration: _dec('Legolar\nRenkli kağıt\nMakas'),
+            ),
             const SizedBox(height: 14),
-            Text(AppLocalizations.of(context).eduHowTo,
-                style: const TextStyle(
-                    color: Color(0xFFC7CBD4), fontWeight: FontWeight.w600)),
+            Text(
+              AppLocalizations.of(context).eduHowTo,
+              style: const TextStyle(
+                color: Color(0xFFC7CBD4),
+                fontWeight: FontWeight.w600,
+              ),
+            ),
             const SizedBox(height: 6),
             TextField(
-                controller: _steps,
-                maxLines: 5,
-                style: const TextStyle(color: Colors.white),
-                decoration: _dec('Malzemeleri hazırlayın\nÇocuğa gösterin')),
+              controller: _steps,
+              maxLines: 5,
+              style: const TextStyle(color: Colors.white),
+              decoration: _dec('Malzemeleri hazırlayın\nÇocuğa gösterin'),
+            ),
             const SizedBox(height: 22),
             SizedBox(
               width: double.infinity,
@@ -2002,13 +2458,17 @@ class _AddActivitySheetState extends State<_AddActivitySheet> {
                   backgroundColor: const Color(0xFF8B5CF6),
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14)),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
                 ),
-                child: Text(AppLocalizations.of(context).save,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700)),
+                child: Text(
+                  AppLocalizations.of(context).save,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
               ),
             ),
           ],
@@ -2027,8 +2487,9 @@ class _AgeStepper extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: const Color(0xFF1A1A24),
-          borderRadius: BorderRadius.circular(10)),
+        color: const Color(0xFF1A1A24),
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -2037,9 +2498,13 @@ class _AgeStepper extends StatelessWidget {
             onPressed: value > 1 ? () => onChanged(value - 1) : null,
             icon: const Icon(Icons.remove, size: 16, color: Color(0xFF9CA3AF)),
           ),
-          Text('$value',
-              style: const TextStyle(
-                  color: Colors.white, fontWeight: FontWeight.w700)),
+          Text(
+            '$value',
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
           IconButton(
             visualDensity: VisualDensity.compact,
             onPressed: value < 18 ? () => onChanged(value + 1) : null,
@@ -2146,8 +2611,9 @@ class _AiLessonSheetState extends State<_AiLessonSheet> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                    color: Colors.white.withAlpha(40),
-                    borderRadius: BorderRadius.circular(2)),
+                  color: Colors.white.withAlpha(40),
+                  borderRadius: BorderRadius.circular(2),
+                ),
               ),
             ),
             const SizedBox(height: 16),
@@ -2155,17 +2621,21 @@ class _AiLessonSheetState extends State<_AiLessonSheet> {
               children: [
                 const Icon(Icons.auto_awesome, color: Color(0xFF6366F1)),
                 const SizedBox(width: 8),
-                Text(AppLocalizations.of(context).eduGenerateAI,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 17,
-                        fontWeight: FontWeight.w800)),
+                Text(
+                  AppLocalizations.of(context).eduGenerateAI,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 6),
             const Text(
-                'Bir konu yazın; yaşa uygun ders/görev kartını AI üretsin.',
-                style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
+              'Bir konu yazın; yaşa uygun ders/görev kartını AI üretsin.',
+              style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13),
+            ),
             const SizedBox(height: 16),
             TextField(
               controller: _topicCtrl,
@@ -2185,12 +2655,18 @@ class _AiLessonSheetState extends State<_AiLessonSheet> {
             const SizedBox(height: 14),
             Row(
               children: [
-                Text(AppLocalizations.of(context).eduAge,
-                    style: const TextStyle(
-                        color: Color(0xFFD1D5DB),
-                        fontWeight: FontWeight.w600)),
+                Text(
+                  AppLocalizations.of(context).eduAge,
+                  style: const TextStyle(
+                    color: Color(0xFFD1D5DB),
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
                 const SizedBox(width: 12),
-                _AgeStepper(value: _age, onChanged: (v) => setState(() => _age = v)),
+                _AgeStepper(
+                  value: _age,
+                  onChanged: (v) => setState(() => _age = v),
+                ),
                 const Spacer(),
               ],
             ),
@@ -2204,9 +2680,10 @@ class _AiLessonSheetState extends State<_AiLessonSheet> {
                   selected: sel,
                   onSelected: (_) => setState(() => _difficulty = d.$1),
                   labelStyle: TextStyle(
-                      color: sel ? Colors.white : const Color(0xFF9CA3AF),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600),
+                    color: sel ? Colors.white : const Color(0xFF9CA3AF),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
                   backgroundColor: const Color(0xFF1A1A24),
                   selectedColor: const Color(0xFF6366F1),
                   side: BorderSide.none,
@@ -2222,26 +2699,36 @@ class _AiLessonSheetState extends State<_AiLessonSheet> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF6366F1),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14)),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
                 ),
                 icon: _loading
                     ? const SizedBox(
                         width: 18,
                         height: 18,
                         child: CircularProgressIndicator(
-                            color: Colors.white, strokeWidth: 2))
+                          color: Colors.white,
+                          strokeWidth: 2,
+                        ),
+                      )
                     : const Icon(Icons.auto_awesome, color: Colors.white),
-                label: Text(_loading ? 'Üretiliyor...' : 'Üret',
-                    style: const TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.w700)),
+                label: Text(
+                  _loading ? 'Üretiliyor...' : 'Üret',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
               ),
             ),
             const SizedBox(height: 18),
             if (_requested && !_loading && _card == null)
               Padding(
                 padding: const EdgeInsets.only(top: 8),
-                child: Text(AppLocalizations.of(context).eduGenFailed,
-                    style: const TextStyle(color: Color(0xFF9CA3AF))),
+                child: Text(
+                  AppLocalizations.of(context).eduGenFailed,
+                  style: const TextStyle(color: Color(0xFF9CA3AF)),
+                ),
               ),
             if (_card != null) _buildCard(_card!),
           ],
@@ -2277,15 +2764,20 @@ class _AiLessonSheetState extends State<_AiLessonSheet> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text((c['title'] ?? 'Ders').toString(),
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 17,
-                  fontWeight: FontWeight.w800)),
+          Text(
+            (c['title'] ?? 'Ders').toString(),
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 17,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
           if ((c['subtitle'] ?? '').toString().isNotEmpty) ...[
             const SizedBox(height: 4),
-            Text(c['subtitle'].toString(),
-                style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
+            Text(
+              c['subtitle'].toString(),
+              style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13),
+            ),
           ],
           const SizedBox(height: 10),
           Wrap(
@@ -2299,39 +2791,54 @@ class _AiLessonSheetState extends State<_AiLessonSheet> {
           ),
           if (steps.isNotEmpty) ...[
             const SizedBox(height: 14),
-            Text(AppLocalizations.of(context).eduSteps,
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 14)),
+            Text(
+              AppLocalizations.of(context).eduSteps,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: 14,
+              ),
+            ),
             const SizedBox(height: 6),
-            ...List.generate(steps.length, (i) => Padding(
-                  padding: const EdgeInsets.only(bottom: 6),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 20,
-                        height: 20,
-                        alignment: Alignment.center,
-                        decoration: const BoxDecoration(
-                            color: Color(0xFF6366F1), shape: BoxShape.circle),
-                        child: Text('${i + 1}',
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 11,
-                                fontWeight: FontWeight.w700)),
+            ...List.generate(
+              steps.length,
+              (i) => Padding(
+                padding: const EdgeInsets.only(bottom: 6),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 20,
+                      height: 20,
+                      alignment: Alignment.center,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFF6366F1),
+                        shape: BoxShape.circle,
                       ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                          child: Text(steps[i],
-                              style: const TextStyle(
-                                  color: Color(0xFFD1D5DB),
-                                  fontSize: 13,
-                                  height: 1.35))),
-                    ],
-                  ),
-                )),
+                      child: Text(
+                        '${i + 1}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        steps[i],
+                        style: const TextStyle(
+                          color: Color(0xFFD1D5DB),
+                          fontSize: 13,
+                          height: 1.35,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
           if (parentTip.isNotEmpty) ...[
             const SizedBox(height: 12),
@@ -2344,26 +2851,36 @@ class _AiLessonSheetState extends State<_AiLessonSheet> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Icon(Icons.lightbulb_outline,
-                      size: 16, color: Color(0xFF6366F1)),
+                  const Icon(
+                    Icons.lightbulb_outline,
+                    size: 16,
+                    color: Color(0xFF6366F1),
+                  ),
                   const SizedBox(width: 8),
                   Expanded(
-                      child: Text(AppLocalizations.of(context).eduParentTip(parentTip),
-                          style: const TextStyle(
-                              color: Color(0xFFC7D2FE),
-                              fontSize: 12.5,
-                              height: 1.4))),
+                    child: Text(
+                      AppLocalizations.of(context).eduParentTip(parentTip),
+                      style: const TextStyle(
+                        color: Color(0xFFC7D2FE),
+                        fontSize: 12.5,
+                        height: 1.4,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
           ],
           if (question.isNotEmpty) ...[
             const SizedBox(height: 10),
-            Text('💬 $question',
-                style: const TextStyle(
-                    color: Color(0xFF9CA3AF),
-                    fontSize: 12.5,
-                    fontStyle: FontStyle.italic)),
+            Text(
+              '💬 $question',
+              style: const TextStyle(
+                color: Color(0xFF9CA3AF),
+                fontSize: 12.5,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
           ],
         ],
       ),
@@ -2371,22 +2888,25 @@ class _AiLessonSheetState extends State<_AiLessonSheet> {
   }
 
   Widget _pill(IconData ic, String text) => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-        decoration: BoxDecoration(
-          color: const Color(0xFF13131A),
-          borderRadius: BorderRadius.circular(10),
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+    decoration: BoxDecoration(
+      color: const Color(0xFF13131A),
+      borderRadius: BorderRadius.circular(10),
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(ic, size: 13, color: const Color(0xFF6366F1)),
+        const SizedBox(width: 5),
+        Text(
+          text,
+          style: const TextStyle(
+            color: Color(0xFFD1D5DB),
+            fontSize: 11.5,
+            fontWeight: FontWeight.w600,
+          ),
         ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(ic, size: 13, color: const Color(0xFF6366F1)),
-            const SizedBox(width: 5),
-            Text(text,
-                style: const TextStyle(
-                    color: Color(0xFFD1D5DB),
-                    fontSize: 11.5,
-                    fontWeight: FontWeight.w600)),
-          ],
-        ),
-      );
+      ],
+    ),
+  );
 }

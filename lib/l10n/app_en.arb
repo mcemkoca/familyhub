@@ -2180,5 +2180,13 @@
   "childCreateProfile": "Create child profile",
   "childAddLesson": "Add lesson",
   "childAddHomework": "Add homework — {name}",
-  "childAddGrowth": "Growth measurement — {name}"
+  "childAddGrowth": "Growth measurement — {name}",
+  "remTest": "Test",
+  "remTriggers": "Triggers (context)",
+  "remLocationLabel": "Location",
+  "remTimeLabel": "Time",
+  "remSnooze10": "Snooze 10 min",
+  "eduTimeUp": "Time's up! Activity completed",
+  "eduActivityAdded": "Your activity was added",
+  "kitchenRecipeAdded": "\"{title}\" was added to your recipe box"
 }

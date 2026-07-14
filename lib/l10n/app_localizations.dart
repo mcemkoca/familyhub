@@ -12437,6 +12437,54 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Büyüme Ölçümü — {name}'**
   String childAddGrowth(Object name);
+
+  /// No description provided for @remTest.
+  ///
+  /// In tr, this message translates to:
+  /// **'Test Et'**
+  String get remTest;
+
+  /// No description provided for @remTriggers.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tetikleyiciler (Context)'**
+  String get remTriggers;
+
+  /// No description provided for @remLocationLabel.
+  ///
+  /// In tr, this message translates to:
+  /// **'Lokasyon'**
+  String get remLocationLabel;
+
+  /// No description provided for @remTimeLabel.
+  ///
+  /// In tr, this message translates to:
+  /// **'Zaman'**
+  String get remTimeLabel;
+
+  /// No description provided for @remSnooze10.
+  ///
+  /// In tr, this message translates to:
+  /// **'10dk Ertele'**
+  String get remSnooze10;
+
+  /// No description provided for @eduTimeUp.
+  ///
+  /// In tr, this message translates to:
+  /// **'Süre doldu! Aktivite tamamlandı'**
+  String get eduTimeUp;
+
+  /// No description provided for @eduActivityAdded.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aktiviteniz eklendi'**
+  String get eduActivityAdded;
+
+  /// No description provided for @kitchenRecipeAdded.
+  ///
+  /// In tr, this message translates to:
+  /// **'\"{title}\" tarif kutuna eklendi'**
+  String kitchenRecipeAdded(Object title);
 }
 
 class _AppLocalizationsDelegate

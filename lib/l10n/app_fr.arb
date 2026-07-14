@@ -2180,5 +2180,13 @@
   "childCreateProfile": "Créer un profil enfant",
   "childAddLesson": "Ajouter un cours",
   "childAddHomework": "Ajouter un devoir — {name}",
-  "childAddGrowth": "Mesure de croissance — {name}"
+  "childAddGrowth": "Mesure de croissance — {name}",
+  "remTest": "Tester",
+  "remTriggers": "Déclencheurs (contexte)",
+  "remLocationLabel": "Emplacement",
+  "remTimeLabel": "Heure",
+  "remSnooze10": "Reporter 10 min",
+  "eduTimeUp": "Temps écoulé ! Activité terminée",
+  "eduActivityAdded": "Votre activité a été ajoutée",
+  "kitchenRecipeAdded": "« {title} » a été ajouté à votre boîte à recettes"
 }

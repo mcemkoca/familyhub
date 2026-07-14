@@ -6612,4 +6612,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String childAddGrowth(Object name) {
     return 'Growth measurement — $name';
   }
+
+  @override
+  String get remTest => 'Test';
+
+  @override
+  String get remTriggers => 'Triggers (context)';
+
+  @override
+  String get remLocationLabel => 'Location';
+
+  @override
+  String get remTimeLabel => 'Time';
+
+  @override
+  String get remSnooze10 => 'Snooze 10 min';
+
+  @override
+  String get eduTimeUp => 'Time\'s up! Activity completed';
+
+  @override
+  String get eduActivityAdded => 'Your activity was added';
+
+  @override
+  String kitchenRecipeAdded(Object title) {
+    return '\"$title\" was added to your recipe box';
+  }
 }

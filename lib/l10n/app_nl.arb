@@ -2180,5 +2180,13 @@
   "childCreateProfile": "Kinderprofiel aanmaken",
   "childAddLesson": "Les toevoegen",
   "childAddHomework": "Huiswerk toevoegen — {name}",
-  "childAddGrowth": "Groeimeting — {name}"
+  "childAddGrowth": "Groeimeting — {name}",
+  "remTest": "Testen",
+  "remTriggers": "Triggers (context)",
+  "remLocationLabel": "Locatie",
+  "remTimeLabel": "Tijd",
+  "remSnooze10": "10 min uitstellen",
+  "eduTimeUp": "Tijd is om! Activiteit voltooid",
+  "eduActivityAdded": "Je activiteit is toegevoegd",
+  "kitchenRecipeAdded": "\"{title}\" is toegevoegd aan je receptenbox"
 }

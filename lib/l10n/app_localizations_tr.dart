@@ -6633,4 +6633,30 @@ class AppLocalizationsTr extends AppLocalizations {
   String childAddGrowth(Object name) {
     return 'Büyüme Ölçümü — $name';
   }
+
+  @override
+  String get remTest => 'Test Et';
+
+  @override
+  String get remTriggers => 'Tetikleyiciler (Context)';
+
+  @override
+  String get remLocationLabel => 'Lokasyon';
+
+  @override
+  String get remTimeLabel => 'Zaman';
+
+  @override
+  String get remSnooze10 => '10dk Ertele';
+
+  @override
+  String get eduTimeUp => 'Süre doldu! Aktivite tamamlandı';
+
+  @override
+  String get eduActivityAdded => 'Aktiviteniz eklendi';
+
+  @override
+  String kitchenRecipeAdded(Object title) {
+    return '\"$title\" tarif kutuna eklendi';
+  }
 }
