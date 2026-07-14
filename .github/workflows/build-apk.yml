@@ -24,12 +24,20 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Create dummy .env for code generation
+      # GERÇEK Supabase kimlik bilgileri (anon key PUBLIC — istemcide zaten
+      # gömülü). Secret varsa onu, yoksa repodaki gerçek public değerleri
+      # kullan. Placeholder KULLANMA — yoksa APK "giriş servisine ulaşılamıyor"
+      # verir (placeholder.supabase.co çözülemez).
+      - name: Create .env for code generation
         run: |
-          cat > .env << 'EOF'
-          SUPABASE_URL=https://placeholder.supabase.co
-          SUPABASE_ANON_KEY=placeholder_anon_key
-          STRIPE_PUBLISHABLE_KEY=pk_test_placeholder
+          SUPA_URL="${{ secrets.SUPABASE_URL }}"
+          SUPA_KEY="${{ secrets.SUPABASE_ANON_KEY }}"
+          if [ -z "$SUPA_URL" ]; then SUPA_URL="https://hgzwfkhxralceriwsqzk.supabase.co"; fi
+          if [ -z "$SUPA_KEY" ]; then SUPA_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhnendma2h4cmFsY2VyaXdzcXprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMwNjA0MjgsImV4cCI6MjA5ODYzNjQyOH0.y20aK6goMaXMDl5Nb41nBOi2omItcnzdPOHZQRFV7Bk"; fi
+          cat > .env << EOF
+          SUPABASE_URL=$SUPA_URL
+          SUPABASE_ANON_KEY=$SUPA_KEY
+          STRIPE_PUBLISHABLE_KEY=${{ secrets.STRIPE_PUBLISHABLE_KEY }}
           EOF
 
       - name: Generate code (build_runner)

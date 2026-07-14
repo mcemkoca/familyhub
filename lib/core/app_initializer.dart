@@ -178,7 +178,7 @@ class AppInitializer {
           debug: false,
         ),
         'Supabase',
-        ms: 5000,
+        ms: 15000,
       );
       await _safeInit(
         AuthService.restoreSession,
