@@ -6801,4 +6801,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get rtStateCancelled => 'Cancelled';
+
+  @override
+  String get calSyncTitle => 'Calendar sync';
+
+  @override
+  String get calSyncEvery15 => 'Every 15 minutes';
+
+  @override
+  String get crashTotalEvents => 'TOTAL EVENTS';
+
+  @override
+  String get crashDetected => 'Detected';
+
+  @override
+  String get crashFalseAlarm => 'False alarm';
+
+  @override
+  String get crashRealCrash => 'Real crash';
+
+  @override
+  String get crashRealCrashUpper => 'REAL CRASH';
+
+  @override
+  String get crashPending => 'Pending';
+
+  @override
+  String get crash112Called => '112 called';
+
+  @override
+  String get crash112NotCalled => '112 not called (user cancelled)';
+
+  @override
+  String get crashUserOk => 'User said \"I\'m okay\"';
 }

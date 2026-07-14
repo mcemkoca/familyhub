@@ -2738,5 +2738,16 @@
   "rtStateActive": "Aktif",
   "rtStatePaused": "Duraklatıldı",
   "rtStateCompleted": "Tamamlandı",
-  "rtStateCancelled": "İptal"
+  "rtStateCancelled": "İptal",
+  "calSyncTitle": "Takvim Senkronizasyonu",
+  "calSyncEvery15": "15 dakikada bir",
+  "crashTotalEvents": "TOPLAM OLAYLAR",
+  "crashDetected": "Tespit edilen",
+  "crashFalseAlarm": "Yanlış alarm",
+  "crashRealCrash": "Gerçek kaza",
+  "crashRealCrashUpper": "GERÇEK KAZA",
+  "crashPending": "Bekleyen",
+  "crash112Called": "112 arandı",
+  "crash112NotCalled": "112 aranmadı (kullanıcı iptal etti)",
+  "crashUserOk": "Kullanıcı \"İyiyim\" dedi"
 }

@@ -74,7 +74,11 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
       );
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('${externalEvents.length} etkinlik senkronize edildi')),
+          SnackBar(
+            content: Text(
+              '${externalEvents.length} etkinlik senkronize edildi',
+            ),
+          ),
         );
       }
       setState(() {
@@ -88,7 +92,10 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context).csSyncFailed('$e')), backgroundColor: Colors.red),
+          SnackBar(
+            content: Text(AppLocalizations.of(context).csSyncFailed('$e')),
+            backgroundColor: Colors.red,
+          ),
         );
       }
     } finally {
@@ -133,11 +140,10 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
       appBar: AppBar(
-        title: const Text('📅 Takvim Senkronizasyonu'),
+        title: Text('📅 ${AppLocalizations.of(context).calSyncTitle}'),
         centerTitle: true,
         backgroundColor: const Color(0xFF0A0A0F),
         foregroundColor: const Color(0xFFE5E7EB),
@@ -171,7 +177,8 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
               color: AppColors.error.withAlpha(80),
             ),
             const SizedBox(height: 16),
-            Text(AppLocalizations.of(context).takvimErisimIzniGerekli,
+            Text(
+              AppLocalizations.of(context).takvimErisimIzniGerekli,
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
@@ -184,10 +191,7 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
                   ? 'Takvim erişim izni gerekli. Ayarlardan izin verin.'
                   : 'Takvimlerinizi senkronize etmek için takvim erişim izni vermeniz gerekiyor.',
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 14,
-                color: Color(0xFF6B7280),
-              ),
+              style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
             ),
             const SizedBox(height: 20),
             if (wasChecked)
@@ -198,7 +202,10 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF6366F1),
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
                 ),
               )
             else
@@ -209,7 +216,10 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF6366F1),
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
                 ),
               ),
           ],
@@ -319,7 +329,8 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(AppLocalizations.of(context).bagliTakvimler,
+          Text(
+            AppLocalizations.of(context).bagliTakvimler,
             style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w700,
@@ -342,17 +353,11 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
       alignment: Alignment.center,
       child: Column(
         children: [
-          const Icon(
-            Icons.link_off,
-            size: 40,
-            color: Color(0xFF6B7280),
-          ),
+          const Icon(Icons.link_off, size: 40, color: Color(0xFF6B7280)),
           const SizedBox(height: 10),
-          Text(AppLocalizations.of(context).henuzTakvimBaglantisiYok,
-            style: const TextStyle(
-              fontSize: 14,
-              color: Color(0xFF6B7280),
-            ),
+          Text(
+            AppLocalizations.of(context).henuzTakvimBaglantisiYok,
+            style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
           ),
         ],
       ),
@@ -418,7 +423,9 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
                 width: 8,
                 height: 8,
                 decoration: BoxDecoration(
-                  color: isConnected ? const Color(0xFF10B981) : const Color(0xFF9CA3AF),
+                  color: isConnected
+                      ? const Color(0xFF10B981)
+                      : const Color(0xFF9CA3AF),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -428,7 +435,9 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
-                  color: isConnected ? const Color(0xFF10B981) : const Color(0xFF9CA3AF),
+                  color: isConnected
+                      ? const Color(0xFF10B981)
+                      : const Color(0xFF9CA3AF),
                 ),
               ),
             ],
@@ -553,7 +562,8 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(AppLocalizations.of(context).senkronizasyonIstatistikleri,
+          Text(
+            AppLocalizations.of(context).senkronizasyonIstatistikleri,
             style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w700,
@@ -564,7 +574,11 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _statItem('📥 Eklenen', totalAdded.toString(), const Color(0xFF10B981)),
+              _statItem(
+                '📥 Eklenen',
+                totalAdded.toString(),
+                const Color(0xFF10B981),
+              ),
               _statItem(
                 '🔄 Güncellenen',
                 totalUpdated.toString(),
@@ -585,10 +599,7 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
             children: [
               Text(
                 'Toplam: ${totalAdded + totalUpdated + totalDeleted} etkinlik',
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: Color(0xFF6B7280),
-                ),
+                style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
               ),
               const Text(
                 'Son hata: Yok',
@@ -617,7 +628,10 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
           ),
         ),
         const SizedBox(height: 2),
-        Text(label, style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280)),
+        ),
       ],
     );
   }
@@ -651,7 +665,7 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
           _buildSettingTile(
             icon: Icons.schedule,
             title: AppLocalizations.of(context).senkronizasyonSikligi,
-            subtitle: '15 dakikada bir',
+            subtitle: AppLocalizations.of(context).calSyncEvery15,
             isDark: isDark,
           ),
           _buildSettingTile(
@@ -795,7 +809,6 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom + 20,
@@ -860,13 +873,13 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
               },
               title: Text(
                 c.name,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Color(0xFFE5E7EB),
-                ),
+                style: const TextStyle(fontSize: 14, color: Color(0xFFE5E7EB)),
               ),
               subtitle: c.isPrimary
-                  ? Text(AppLocalizations.of(context).csMainCalendar, style: const TextStyle(fontSize: 12))
+                  ? Text(
+                      AppLocalizations.of(context).csMainCalendar,
+                      style: const TextStyle(fontSize: 12),
+                    )
                   : null,
               controlAffinity: ListTileControlAffinity.leading,
               dense: true,
@@ -878,7 +891,8 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
           const SizedBox(height: 10),
 
           // Senkronizasyon yönü
-          Text(AppLocalizations.of(context).senkronizasyonyonu1,
+          Text(
+            AppLocalizations.of(context).senkronizasyonyonu1,
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w700,
@@ -905,7 +919,8 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
           const SizedBox(height: 10),
 
           // Çakışma stratejisi
-          Text(AppLocalizations.of(context).cakismacozumu1,
+          Text(
+            AppLocalizations.of(context).cakismacozumu1,
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w700,
@@ -953,7 +968,8 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
               Navigator.pop(context);
             },
             icon: const Icon(Icons.link_off, color: AppColors.error),
-            label: Text(AppLocalizations.of(context).baglantiyiKes,
+            label: Text(
+              AppLocalizations.of(context).baglantiyiKes,
               style: const TextStyle(color: AppColors.error),
             ),
           ),

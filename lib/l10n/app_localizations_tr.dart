@@ -6822,4 +6822,37 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get rtStateCancelled => 'İptal';
+
+  @override
+  String get calSyncTitle => 'Takvim Senkronizasyonu';
+
+  @override
+  String get calSyncEvery15 => '15 dakikada bir';
+
+  @override
+  String get crashTotalEvents => 'TOPLAM OLAYLAR';
+
+  @override
+  String get crashDetected => 'Tespit edilen';
+
+  @override
+  String get crashFalseAlarm => 'Yanlış alarm';
+
+  @override
+  String get crashRealCrash => 'Gerçek kaza';
+
+  @override
+  String get crashRealCrashUpper => 'GERÇEK KAZA';
+
+  @override
+  String get crashPending => 'Bekleyen';
+
+  @override
+  String get crash112Called => '112 arandı';
+
+  @override
+  String get crash112NotCalled => '112 aranmadı (kullanıcı iptal etti)';
+
+  @override
+  String get crashUserOk => 'Kullanıcı \"İyiyim\" dedi';
 }

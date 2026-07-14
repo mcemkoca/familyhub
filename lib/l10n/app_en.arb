@@ -2232,5 +2232,16 @@
   "rtStateActive": "Active",
   "rtStatePaused": "Paused",
   "rtStateCompleted": "Completed",
-  "rtStateCancelled": "Cancelled"
+  "rtStateCancelled": "Cancelled",
+  "calSyncTitle": "Calendar sync",
+  "calSyncEvery15": "Every 15 minutes",
+  "crashTotalEvents": "TOTAL EVENTS",
+  "crashDetected": "Detected",
+  "crashFalseAlarm": "False alarm",
+  "crashRealCrash": "Real crash",
+  "crashRealCrashUpper": "REAL CRASH",
+  "crashPending": "Pending",
+  "crash112Called": "112 called",
+  "crash112NotCalled": "112 not called (user cancelled)",
+  "crashUserOk": "User said \"I'm okay\""
 }

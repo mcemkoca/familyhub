@@ -12749,6 +12749,72 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'İptal'**
   String get rtStateCancelled;
+
+  /// No description provided for @calSyncTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Takvim Senkronizasyonu'**
+  String get calSyncTitle;
+
+  /// No description provided for @calSyncEvery15.
+  ///
+  /// In tr, this message translates to:
+  /// **'15 dakikada bir'**
+  String get calSyncEvery15;
+
+  /// No description provided for @crashTotalEvents.
+  ///
+  /// In tr, this message translates to:
+  /// **'TOPLAM OLAYLAR'**
+  String get crashTotalEvents;
+
+  /// No description provided for @crashDetected.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tespit edilen'**
+  String get crashDetected;
+
+  /// No description provided for @crashFalseAlarm.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yanlış alarm'**
+  String get crashFalseAlarm;
+
+  /// No description provided for @crashRealCrash.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gerçek kaza'**
+  String get crashRealCrash;
+
+  /// No description provided for @crashRealCrashUpper.
+  ///
+  /// In tr, this message translates to:
+  /// **'GERÇEK KAZA'**
+  String get crashRealCrashUpper;
+
+  /// No description provided for @crashPending.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bekleyen'**
+  String get crashPending;
+
+  /// No description provided for @crash112Called.
+  ///
+  /// In tr, this message translates to:
+  /// **'112 arandı'**
+  String get crash112Called;
+
+  /// No description provided for @crash112NotCalled.
+  ///
+  /// In tr, this message translates to:
+  /// **'112 aranmadı (kullanıcı iptal etti)'**
+  String get crash112NotCalled;
+
+  /// No description provided for @crashUserOk.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kullanıcı \"İyiyim\" dedi'**
+  String get crashUserOk;
 }
 
 class _AppLocalizationsDelegate

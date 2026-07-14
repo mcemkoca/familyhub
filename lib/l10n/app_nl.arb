@@ -2232,5 +2232,16 @@
   "rtStateActive": "Actief",
   "rtStatePaused": "Gepauzeerd",
   "rtStateCompleted": "Voltooid",
-  "rtStateCancelled": "Geannuleerd"
+  "rtStateCancelled": "Geannuleerd",
+  "calSyncTitle": "Agendasynchronisatie",
+  "calSyncEvery15": "Elke 15 minuten",
+  "crashTotalEvents": "TOTAAL GEBEURTENISSEN",
+  "crashDetected": "Gedetecteerd",
+  "crashFalseAlarm": "Vals alarm",
+  "crashRealCrash": "Echt ongeval",
+  "crashRealCrashUpper": "ECHT ONGEVAL",
+  "crashPending": "In afwachting",
+  "crash112Called": "112 gebeld",
+  "crash112NotCalled": "112 niet gebeld (gebruiker geannuleerd)",
+  "crashUserOk": "Gebruiker zei \"Ik ben oké\""
 }

@@ -6828,4 +6828,37 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get rtStateCancelled => 'Annulé';
+
+  @override
+  String get calSyncTitle => 'Synchronisation du calendrier';
+
+  @override
+  String get calSyncEvery15 => 'Toutes les 15 minutes';
+
+  @override
+  String get crashTotalEvents => 'TOTAL DES ÉVÉNEMENTS';
+
+  @override
+  String get crashDetected => 'Détectés';
+
+  @override
+  String get crashFalseAlarm => 'Fausse alerte';
+
+  @override
+  String get crashRealCrash => 'Accident réel';
+
+  @override
+  String get crashRealCrashUpper => 'ACCIDENT RÉEL';
+
+  @override
+  String get crashPending => 'En attente';
+
+  @override
+  String get crash112Called => '112 appelé';
+
+  @override
+  String get crash112NotCalled => '112 non appelé (annulé par l\'utilisateur)';
+
+  @override
+  String get crashUserOk => 'L\'utilisateur a dit « Je vais bien »';
 }

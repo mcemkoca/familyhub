@@ -6807,4 +6807,37 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get rtStateCancelled => 'Geannuleerd';
+
+  @override
+  String get calSyncTitle => 'Agendasynchronisatie';
+
+  @override
+  String get calSyncEvery15 => 'Elke 15 minuten';
+
+  @override
+  String get crashTotalEvents => 'TOTAAL GEBEURTENISSEN';
+
+  @override
+  String get crashDetected => 'Gedetecteerd';
+
+  @override
+  String get crashFalseAlarm => 'Vals alarm';
+
+  @override
+  String get crashRealCrash => 'Echt ongeval';
+
+  @override
+  String get crashRealCrashUpper => 'ECHT ONGEVAL';
+
+  @override
+  String get crashPending => 'In afwachting';
+
+  @override
+  String get crash112Called => '112 gebeld';
+
+  @override
+  String get crash112NotCalled => '112 niet gebeld (gebruiker geannuleerd)';
+
+  @override
+  String get crashUserOk => 'Gebruiker zei \"Ik ben oké\"';
 }

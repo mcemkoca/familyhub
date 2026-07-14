@@ -2232,5 +2232,16 @@
   "rtStateActive": "Actif",
   "rtStatePaused": "En pause",
   "rtStateCompleted": "Terminé",
-  "rtStateCancelled": "Annulé"
+  "rtStateCancelled": "Annulé",
+  "calSyncTitle": "Synchronisation du calendrier",
+  "calSyncEvery15": "Toutes les 15 minutes",
+  "crashTotalEvents": "TOTAL DES ÉVÉNEMENTS",
+  "crashDetected": "Détectés",
+  "crashFalseAlarm": "Fausse alerte",
+  "crashRealCrash": "Accident réel",
+  "crashRealCrashUpper": "ACCIDENT RÉEL",
+  "crashPending": "En attente",
+  "crash112Called": "112 appelé",
+  "crash112NotCalled": "112 non appelé (annulé par l'utilisateur)",
+  "crashUserOk": "L'utilisateur a dit « Je vais bien »"
 }

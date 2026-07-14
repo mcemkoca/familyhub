@@ -77,21 +77,27 @@ class CrashHistoryScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'TOPLAM OLAYLAR',
-                          style: TextStyle(
+                        Text(
+                          AppLocalizations.of(context).crashTotalEvents,
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         const SizedBox(height: 12),
-                        _statRow('Tespit edilen', '$total'),
                         _statRow(
-                          'Yanlış alarm',
+                          AppLocalizations.of(context).crashDetected,
+                          '$total',
+                        ),
+                        _statRow(
+                          AppLocalizations.of(context).crashFalseAlarm,
                           '$falseAlarms (%${total > 0 ? (falseAlarms / total * 100).round() : 0})',
                         ),
-                        _statRow('Gerçek kaza', '$realCrashes'),
+                        _statRow(
+                          AppLocalizations.of(context).crashRealCrash,
+                          '$realCrashes',
+                        ),
                         const Divider(color: Colors.white24, height: 20),
                         Text(
                           AppLocalizations.of(context).son30Gun0Olay,
@@ -176,9 +182,10 @@ class CrashHistoryScreen extends StatelessWidget {
     final icon = isFalseAlarm
         ? Icons.check_circle
         : (isRealCrash ? Icons.emergency : Icons.warning);
+    final l = AppLocalizations.of(context);
     final label = isFalseAlarm
-        ? 'Yanlış alarm'
-        : (isRealCrash ? 'GERÇEK KAZA' : 'Bekleyen');
+        ? l.crashFalseAlarm
+        : (isRealCrash ? l.crashRealCrashUpper : l.crashPending);
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
@@ -220,17 +227,23 @@ class CrashHistoryScreen extends StatelessWidget {
                 _responseRow(Icons.emergency, 'SOS tetiklendi'),
                 _responseRow(Icons.check_circle, 'Aile bilgilendirildi'),
                 if (event.outcome?.emergencyServicesCalled ?? false)
-                  _responseRow(Icons.phone, '112 arandı')
+                  _responseRow(
+                    Icons.phone,
+                    AppLocalizations.of(context).crash112Called,
+                  )
                 else
                   _responseRow(
                     Icons.cancel,
-                    '112 aranmadı (kullanıcı iptal etti)',
+                    AppLocalizations.of(context).crash112NotCalled,
                     ok: false,
                   ),
               ],
             ),
           if (isFalseAlarm)
-            _responseRow(Icons.check_circle, 'Kullanıcı "İyiyim" dedi'),
+            _responseRow(
+              Icons.check_circle,
+              AppLocalizations.of(context).crashUserOk,
+            ),
           const SizedBox(height: 10),
           Row(
             children: [
