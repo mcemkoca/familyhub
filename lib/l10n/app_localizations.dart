@@ -12401,6 +12401,42 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Boy / Kilo Takibi'**
   String get growthTracking;
+
+  /// No description provided for @childDevTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çocuk Gelişimi & Okul'**
+  String get childDevTitle;
+
+  /// No description provided for @childAddChild.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çocuk Ekle'**
+  String get childAddChild;
+
+  /// No description provided for @childCreateProfile.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çocuk Profili Oluştur'**
+  String get childCreateProfile;
+
+  /// No description provided for @childAddLesson.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ders Ekle'**
+  String get childAddLesson;
+
+  /// No description provided for @childAddHomework.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ödev Ekle — {name}'**
+  String childAddHomework(Object name);
+
+  /// No description provided for @childAddGrowth.
+  ///
+  /// In tr, this message translates to:
+  /// **'Büyüme Ölçümü — {name}'**
+  String childAddGrowth(Object name);
 }
 
 class _AppLocalizationsDelegate

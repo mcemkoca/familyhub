@@ -2587,5 +2587,21 @@
     }
   },
   "callEmergency112": "112 Ara",
-  "growthTracking": "Boy / Kilo Takibi"
+  "growthTracking": "Boy / Kilo Takibi",
+  "childDevTitle": "Çocuk Gelişimi & Okul",
+  "childAddChild": "Çocuk Ekle",
+  "childCreateProfile": "Çocuk Profili Oluştur",
+  "childAddLesson": "Ders Ekle",
+  "childAddHomework": "Ödev Ekle — {name}",
+  "@childAddHomework": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "childAddGrowth": "Büyüme Ölçümü — {name}",
+  "@childAddGrowth": {
+    "placeholders": {
+      "name": {}
+    }
+  }
 }

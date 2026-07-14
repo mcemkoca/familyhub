@@ -6590,4 +6590,26 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get growthTracking => 'Height / weight tracking';
+
+  @override
+  String get childDevTitle => 'Child Development & School';
+
+  @override
+  String get childAddChild => 'Add child';
+
+  @override
+  String get childCreateProfile => 'Create child profile';
+
+  @override
+  String get childAddLesson => 'Add lesson';
+
+  @override
+  String childAddHomework(Object name) {
+    return 'Add homework — $name';
+  }
+
+  @override
+  String childAddGrowth(Object name) {
+    return 'Growth measurement — $name';
+  }
 }

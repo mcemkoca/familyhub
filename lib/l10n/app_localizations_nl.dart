@@ -6596,4 +6596,26 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get growthTracking => 'Lengte / gewicht bijhouden';
+
+  @override
+  String get childDevTitle => 'Kinderontwikkeling & School';
+
+  @override
+  String get childAddChild => 'Kind toevoegen';
+
+  @override
+  String get childCreateProfile => 'Kinderprofiel aanmaken';
+
+  @override
+  String get childAddLesson => 'Les toevoegen';
+
+  @override
+  String childAddHomework(Object name) {
+    return 'Huiswerk toevoegen — $name';
+  }
+
+  @override
+  String childAddGrowth(Object name) {
+    return 'Groeimeting — $name';
+  }
 }

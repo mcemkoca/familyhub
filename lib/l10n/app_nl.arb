@@ -2174,5 +2174,11 @@
   "subFilterInactive": "Inactief ({count})",
   "subRenewal": "Verlenging: {date}",
   "callEmergency112": "112 bellen",
-  "growthTracking": "Lengte / gewicht bijhouden"
+  "growthTracking": "Lengte / gewicht bijhouden",
+  "childDevTitle": "Kinderontwikkeling & School",
+  "childAddChild": "Kind toevoegen",
+  "childCreateProfile": "Kinderprofiel aanmaken",
+  "childAddLesson": "Les toevoegen",
+  "childAddHomework": "Huiswerk toevoegen — {name}",
+  "childAddGrowth": "Groeimeting — {name}"
 }

@@ -6617,4 +6617,26 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get growthTracking => 'Suivi taille / poids';
+
+  @override
+  String get childDevTitle => 'Développement de l\'enfant & École';
+
+  @override
+  String get childAddChild => 'Ajouter un enfant';
+
+  @override
+  String get childCreateProfile => 'Créer un profil enfant';
+
+  @override
+  String get childAddLesson => 'Ajouter un cours';
+
+  @override
+  String childAddHomework(Object name) {
+    return 'Ajouter un devoir — $name';
+  }
+
+  @override
+  String childAddGrowth(Object name) {
+    return 'Mesure de croissance — $name';
+  }
 }

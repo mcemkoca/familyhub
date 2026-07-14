@@ -6611,4 +6611,26 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get growthTracking => 'Boy / Kilo Takibi';
+
+  @override
+  String get childDevTitle => 'Çocuk Gelişimi & Okul';
+
+  @override
+  String get childAddChild => 'Çocuk Ekle';
+
+  @override
+  String get childCreateProfile => 'Çocuk Profili Oluştur';
+
+  @override
+  String get childAddLesson => 'Ders Ekle';
+
+  @override
+  String childAddHomework(Object name) {
+    return 'Ödev Ekle — $name';
+  }
+
+  @override
+  String childAddGrowth(Object name) {
+    return 'Büyüme Ölçümü — $name';
+  }
 }

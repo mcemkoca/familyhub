@@ -15,28 +15,44 @@ import '../../../repositories/child_account_repository.dart';
 String devCategoryLabel(BuildContext context, String cat) {
   final t = AppLocalizations.of(context);
   switch (cat) {
-    case 'Motor': return t.devCatMotor;
-    case 'Sosyal': return t.devCatSocial;
-    case 'Dil': return t.devCatLanguage;
-    case 'Görme': return t.devCatVision;
-    case 'Bilişsel': return t.devCatCognitive;
-    case 'Özbakım': return t.devCatSelfcare;
-    case 'Duygusal': return t.devCatEmotional;
-    case 'Beden': return t.devCatPhysical;
-    case 'Din': return t.devCatReligion;
-    case 'Akademik': return t.devCatAcademic;
-    case 'Dijital': return t.devCatDigital;
-    case 'Fen': return t.devCatScience;
-    case 'Matematik': return t.devCatMath;
-    case 'Müzik': return t.devCatMusic;
-    case 'Resim': return t.devCatArt;
-    case 'Türkçe': return t.devCatTurkish;
-    case 'Diğer': return t.evCatOther;
-    default: return cat;
+    case 'Motor':
+      return t.devCatMotor;
+    case 'Sosyal':
+      return t.devCatSocial;
+    case 'Dil':
+      return t.devCatLanguage;
+    case 'Görme':
+      return t.devCatVision;
+    case 'Bilişsel':
+      return t.devCatCognitive;
+    case 'Özbakım':
+      return t.devCatSelfcare;
+    case 'Duygusal':
+      return t.devCatEmotional;
+    case 'Beden':
+      return t.devCatPhysical;
+    case 'Din':
+      return t.devCatReligion;
+    case 'Akademik':
+      return t.devCatAcademic;
+    case 'Dijital':
+      return t.devCatDigital;
+    case 'Fen':
+      return t.devCatScience;
+    case 'Matematik':
+      return t.devCatMath;
+    case 'Müzik':
+      return t.devCatMusic;
+    case 'Resim':
+      return t.devCatArt;
+    case 'Türkçe':
+      return t.devCatTurkish;
+    case 'Diğer':
+      return t.evCatOther;
+    default:
+      return cat;
   }
 }
-
-
 
 const _milestonesByAge = {
   '0-3 ay': [
@@ -125,9 +141,8 @@ class _ChildDevHive {
   static const _box = 'child_development';
   static const _childrenKey = 'children';
 
-  static Future<Box<dynamic>> get box async => Hive.isBoxOpen(_box)
-      ? Hive.box(_box)
-      : await Hive.openBox(_box);
+  static Future<Box<dynamic>> get box async =>
+      Hive.isBoxOpen(_box) ? Hive.box(_box) : await Hive.openBox(_box);
 
   static Future<void> save(String key, dynamic v) async {
     final b = await box;
@@ -170,8 +185,7 @@ class ChildProfile {
 
   int get ageMonths {
     final now = DateTime.now();
-    return (now.year - birthDate.year) * 12 +
-        (now.month - birthDate.month);
+    return (now.year - birthDate.year) * 12 + (now.month - birthDate.month);
   }
 
   String get ageLabel {
@@ -200,37 +214,38 @@ class ChildProfile {
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'emoji': emoji,
-        'birthDate': birthDate.toIso8601String(),
-        'schoolName': schoolName,
-        'grade': grade,
-        'completedMilestones': completedMilestones,
-        'subjects': subjects.map((s) => s.toJson()).toList(),
-        'homework': homework.map((h) => h.toJson()).toList(),
-        'growthLog': growthLog.map((g) => g.toJson()).toList(),
-      };
+    'id': id,
+    'name': name,
+    'emoji': emoji,
+    'birthDate': birthDate.toIso8601String(),
+    'schoolName': schoolName,
+    'grade': grade,
+    'completedMilestones': completedMilestones,
+    'subjects': subjects.map((s) => s.toJson()).toList(),
+    'homework': homework.map((h) => h.toJson()).toList(),
+    'growthLog': growthLog.map((g) => g.toJson()).toList(),
+  };
 
   factory ChildProfile.fromJson(Map<String, dynamic> j) => ChildProfile(
-        id: j['id'] as String,
-        name: j['name'] as String,
-        emoji: j['emoji'] as String? ?? '👶',
-        birthDate: DateTime.parse(j['birthDate'] as String),
-        schoolName: j['schoolName'] as String?,
-        grade: j['grade'] as String?,
-        completedMilestones:
-            List<String>.from(j['completedMilestones'] as List? ?? []),
-        subjects: (j['subjects'] as List? ?? [])
-            .map((e) => SchoolSubject.fromJson(e as Map<String, dynamic>))
-            .toList(),
-        homework: (j['homework'] as List? ?? [])
-            .map((e) => HomeworkEntry.fromJson(e as Map<String, dynamic>))
-            .toList(),
-        growthLog: (j['growthLog'] as List? ?? [])
-            .map((e) => GrowthEntry.fromJson(e as Map<String, dynamic>))
-            .toList(),
-      );
+    id: j['id'] as String,
+    name: j['name'] as String,
+    emoji: j['emoji'] as String? ?? '👶',
+    birthDate: DateTime.parse(j['birthDate'] as String),
+    schoolName: j['schoolName'] as String?,
+    grade: j['grade'] as String?,
+    completedMilestones: List<String>.from(
+      j['completedMilestones'] as List? ?? [],
+    ),
+    subjects: (j['subjects'] as List? ?? [])
+        .map((e) => SchoolSubject.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    homework: (j['homework'] as List? ?? [])
+        .map((e) => HomeworkEntry.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    growthLog: (j['growthLog'] as List? ?? [])
+        .map((e) => GrowthEntry.fromJson(e as Map<String, dynamic>))
+        .toList(),
+  );
 
   ChildProfile copyWith({
     List<String>? completedMilestones,
@@ -239,20 +254,18 @@ class ChildProfile {
     List<GrowthEntry>? growthLog,
     String? schoolName,
     String? grade,
-  }) =>
-      ChildProfile(
-        id: id,
-        name: name,
-        emoji: emoji,
-        birthDate: birthDate,
-        schoolName: schoolName ?? this.schoolName,
-        grade: grade ?? this.grade,
-        completedMilestones:
-            completedMilestones ?? this.completedMilestones,
-        subjects: subjects ?? this.subjects,
-        homework: homework ?? this.homework,
-        growthLog: growthLog ?? this.growthLog,
-      );
+  }) => ChildProfile(
+    id: id,
+    name: name,
+    emoji: emoji,
+    birthDate: birthDate,
+    schoolName: schoolName ?? this.schoolName,
+    grade: grade ?? this.grade,
+    completedMilestones: completedMilestones ?? this.completedMilestones,
+    subjects: subjects ?? this.subjects,
+    homework: homework ?? this.homework,
+    growthLog: growthLog ?? this.growthLog,
+  );
 }
 
 class SchoolSubject {
@@ -274,20 +287,20 @@ class SchoolSubject {
       grades.isEmpty ? 0 : grades.reduce((a, b) => a + b) / grades.length;
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'emoji': emoji,
-        'grades': grades,
-        'notes': notes,
-      };
+    'id': id,
+    'name': name,
+    'emoji': emoji,
+    'grades': grades,
+    'notes': notes,
+  };
 
   factory SchoolSubject.fromJson(Map<String, dynamic> j) => SchoolSubject(
-        id: j['id'] as String,
-        name: j['name'] as String,
-        emoji: j['emoji'] as String? ?? '📚',
-        grades: List<int>.from(j['grades'] as List? ?? []),
-        notes: j['notes'] as String? ?? '',
-      );
+    id: j['id'] as String,
+    name: j['name'] as String,
+    emoji: j['emoji'] as String? ?? '📚',
+    grades: List<int>.from(j['grades'] as List? ?? []),
+    notes: j['notes'] as String? ?? '',
+  );
 }
 
 class HomeworkEntry {
@@ -306,20 +319,20 @@ class HomeworkEntry {
   });
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'subject': subject,
-        'description': description,
-        'dueDate': dueDate,
-        'completed': completed,
-      };
+    'id': id,
+    'subject': subject,
+    'description': description,
+    'dueDate': dueDate,
+    'completed': completed,
+  };
 
   factory HomeworkEntry.fromJson(Map<String, dynamic> j) => HomeworkEntry(
-        id: j['id'] as String,
-        subject: j['subject'] as String,
-        description: j['description'] as String,
-        dueDate: j['dueDate'] as String,
-        completed: j['completed'] as bool? ?? false,
-      );
+    id: j['id'] as String,
+    subject: j['subject'] as String,
+    description: j['description'] as String,
+    dueDate: j['dueDate'] as String,
+    completed: j['completed'] as bool? ?? false,
+  );
 }
 
 class GrowthEntry {
@@ -329,22 +342,25 @@ class GrowthEntry {
 
   const GrowthEntry({required this.date, this.height, this.weight});
 
-  Map<String, dynamic> toJson() =>
-      {'date': date, 'height': height, 'weight': weight};
+  Map<String, dynamic> toJson() => {
+    'date': date,
+    'height': height,
+    'weight': weight,
+  };
 
   factory GrowthEntry.fromJson(Map<String, dynamic> j) => GrowthEntry(
-        date: j['date'] as String,
-        height: (j['height'] as num?)?.toDouble(),
-        weight: (j['weight'] as num?)?.toDouble(),
-      );
+    date: j['date'] as String,
+    height: (j['height'] as num?)?.toDouble(),
+    weight: (j['weight'] as num?)?.toDouble(),
+  );
 }
 
 // ── Provider ──
 
 final childDevProvider =
     StateNotifierProvider<ChildDevNotifier, List<ChildProfile>>(
-  (ref) => ChildDevNotifier(),
-);
+      (ref) => ChildDevNotifier(),
+    );
 
 class ChildDevNotifier extends StateNotifier<List<ChildProfile>> {
   ChildDevNotifier() : super([]) {
@@ -355,8 +371,11 @@ class ChildDevNotifier extends StateNotifier<List<ChildProfile>> {
     final data = await _ChildDevHive.load(_ChildDevHive._childrenKey);
     final list = <ChildProfile>[];
     if (data != null) {
-      list.addAll((data as List)
-          .map((e) => ChildProfile.fromJson(e as Map<String, dynamic>)));
+      list.addAll(
+        (data as List).map(
+          (e) => ChildProfile.fromJson(e as Map<String, dynamic>),
+        ),
+      );
     }
     // Köprü: "Çocuk Hesapları"nda (ChildAccountRepository) eklenmiş ama gelişim
     // listesinde olmayan çocukları içe aktar — böylece hesap ekliyken "çocuk
@@ -379,21 +398,26 @@ class ChildDevNotifier extends StateNotifier<List<ChildProfile>> {
         final fid = p?['family_id'] as String?;
         if (fid != null && fid.isNotEmpty) familyId = fid;
       }
-      final accounts =
-          await ChildAccountRepository().getChildrenForFamily(familyId);
+      final accounts = await ChildAccountRepository().getChildrenForFamily(
+        familyId,
+      );
       final now = DateTime.now();
       for (final a in accounts) {
-        final exists = list.any((c) =>
-            c.id == a.id ||
-            c.name.toLowerCase().trim() == a.name.toLowerCase().trim());
+        final exists = list.any(
+          (c) =>
+              c.id == a.id ||
+              c.name.toLowerCase().trim() == a.name.toLowerCase().trim(),
+        );
         if (!exists) {
           final age = a.age ?? 6;
-          list.add(ChildProfile(
-            id: a.id,
-            name: a.name,
-            emoji: '🧒',
-            birthDate: DateTime(now.year - age, now.month, now.day),
-          ));
+          list.add(
+            ChildProfile(
+              id: a.id,
+              name: a.name,
+              emoji: '🧒',
+              birthDate: DateTime(now.year - age, now.month, now.day),
+            ),
+          );
         }
       }
     } catch (_) {
@@ -403,8 +427,9 @@ class ChildDevNotifier extends StateNotifier<List<ChildProfile>> {
 
   Future<void> _persist() async {
     await _ChildDevHive.save(
-        _ChildDevHive._childrenKey,
-        state.map((c) => c.toJson()).toList());
+      _ChildDevHive._childrenKey,
+      state.map((c) => c.toJson()).toList(),
+    );
   }
 
   Future<void> addChild(ChildProfile child) async {
@@ -469,8 +494,7 @@ class ChildDevNotifier extends StateNotifier<List<ChildProfile>> {
     await _persist();
   }
 
-  Future<void> addGrade(
-      String childId, String subjectId, int grade) async {
+  Future<void> addGrade(String childId, String subjectId, int grade) async {
     state = state.map((c) {
       if (c.id != childId) return c;
       return c.copyWith(
@@ -500,8 +524,7 @@ class ChildDevelopmentScreen extends ConsumerStatefulWidget {
       _ChildDevelopmentScreenState();
 }
 
-class _ChildDevelopmentScreenState
-    extends ConsumerState<ChildDevelopmentScreen>
+class _ChildDevelopmentScreenState extends ConsumerState<ChildDevelopmentScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tab;
   int _selectedChild = 0;
@@ -545,25 +568,30 @@ class _ChildDevelopmentScreenState
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const SizedBox(height: 8),
-                      const Text('🌱 Çocuk Gelişimi & Okul',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w900)),
-                      Text(AppLocalizations.of(context).cdSubtitle,
-                          style: const TextStyle(
-                              color: Colors.white70, fontSize: 12)),
+                      Text(
+                        '🌱 ${AppLocalizations.of(context).childDevTitle}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      Text(
+                        AppLocalizations.of(context).cdSubtitle,
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 12,
+                        ),
+                      ),
                       const SizedBox(height: 12),
                       // Child selector
                       SizedBox(
                         height: 54,
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: 16),
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
                           itemCount: children.length + 1,
-                          separatorBuilder: (_, _) =>
-                              const SizedBox(width: 8),
+                          separatorBuilder: (_, _) => const SizedBox(width: 8),
                           itemBuilder: (_, i) {
                             if (i == children.length) {
                               return GestureDetector(
@@ -575,24 +603,26 @@ class _ChildDevelopmentScreenState
                                     color: Colors.white.withAlpha(30),
                                     shape: BoxShape.circle,
                                     border: Border.all(
-                                        color: Colors.white.withAlpha(80),
-                                        width: 1.5),
+                                      color: Colors.white.withAlpha(80),
+                                      width: 1.5,
+                                    ),
                                   ),
-                                  child: const Icon(Icons.add,
-                                      color: Colors.white, size: 20),
+                                  child: const Icon(
+                                    Icons.add,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
                                 ),
                               );
                             }
                             final c = children[i];
                             final sel = _selectedChild == i;
                             return GestureDetector(
-                              onTap: () =>
-                                  setState(() => _selectedChild = i),
+                              onTap: () => setState(() => _selectedChild = i),
                               child: Column(
                                 children: [
                                   AnimatedContainer(
-                                    duration:
-                                        const Duration(milliseconds: 150),
+                                    duration: const Duration(milliseconds: 150),
                                     width: 44,
                                     height: 44,
                                     decoration: BoxDecoration(
@@ -601,22 +631,30 @@ class _ChildDevelopmentScreenState
                                           : Colors.white.withAlpha(30),
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                          color: Colors.white
-                                              .withAlpha(sel ? 255 : 80),
-                                          width: 2),
+                                        color: Colors.white.withAlpha(
+                                          sel ? 255 : 80,
+                                        ),
+                                        width: 2,
+                                      ),
                                     ),
                                     child: Center(
-                                        child: Text(c.emoji,
-                                            style: const TextStyle(
-                                                fontSize: 22))),
+                                      child: Text(
+                                        c.emoji,
+                                        style: const TextStyle(fontSize: 22),
+                                      ),
+                                    ),
                                   ),
                                   const SizedBox(height: 2),
-                                  Text(c.ageLabel,
-                                      style: TextStyle(
-                                          color: Colors.white
-                                              .withAlpha(sel ? 255 : 160),
-                                          fontSize: 9,
-                                          fontWeight: FontWeight.w700)),
+                                  Text(
+                                    c.ageLabel,
+                                    style: TextStyle(
+                                      color: Colors.white.withAlpha(
+                                        sel ? 255 : 160,
+                                      ),
+                                      fontSize: 9,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
                                 ],
                               ),
                             );
@@ -635,8 +673,10 @@ class _ChildDevelopmentScreenState
               indicatorColor: Colors.white,
               labelColor: Colors.white,
               unselectedLabelColor: Colors.white60,
-              labelStyle:
-                  const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+              labelStyle: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+              ),
               tabs: const [
                 Tab(text: '🌱 Gelişim'),
                 Tab(text: '📚 Dersler'),
@@ -654,24 +694,31 @@ class _ChildDevelopmentScreenState
                   children: [
                     const Text('👶', style: TextStyle(fontSize: 48)),
                     const SizedBox(height: 12),
-                    Text(AppLocalizations.of(context).cdAddProfile,
-                        style: const TextStyle(color: Color(0xFF9CA3AF))),
+                    Text(
+                      AppLocalizations.of(context).cdAddProfile,
+                      style: const TextStyle(color: Color(0xFF9CA3AF)),
+                    ),
                     const SizedBox(height: 16),
                     GestureDetector(
                       onTap: _showAddChildSheet,
                       child: Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 24, vertical: 12),
+                          horizontal: 24,
+                          vertical: 12,
+                        ),
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
                             colors: [Color(0xFF06B6D4), Color(0xFF0891B2)],
                           ),
                           borderRadius: BorderRadius.circular(14),
                         ),
-                        child: const Text('+ Çocuk Ekle',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w800)),
+                        child: Text(
+                          '+ ${AppLocalizations.of(context).childAddChild}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -699,27 +746,41 @@ class _ChildDevelopmentScreenState
               onPressed: () => _addItem(child),
               backgroundColor: const Color(0xFF06B6D4),
               icon: const Icon(Icons.add, color: Colors.white),
-              label: Text(_fabLabel(),
-                  style: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w700)),
+              label: Text(
+                _fabLabel(),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
             ),
     );
   }
 
   String _fabLabel() {
     switch (_tab.index) {
-      case 1: return 'Ders Ekle';
-      case 2: return 'Ödev Ekle';
-      case 3: return 'Ölçüm Ekle';
-      default: return 'Güncelle';
+      case 1:
+        return 'Ders Ekle';
+      case 2:
+        return 'Ödev Ekle';
+      case 3:
+        return 'Ölçüm Ekle';
+      default:
+        return 'Güncelle';
     }
   }
 
   void _addItem(ChildProfile child) {
     switch (_tab.index) {
-      case 1: _showAddSubjectSheet(child); break;
-      case 2: _showAddHomeworkSheet(child); break;
-      case 3: _showAddGrowthSheet(child); break;
+      case 1:
+        _showAddSubjectSheet(child);
+        break;
+      case 2:
+        _showAddHomeworkSheet(child);
+        break;
+      case 3:
+        _showAddGrowthSheet(child);
+        break;
     }
   }
 
@@ -727,8 +788,7 @@ class _ChildDevelopmentScreenState
     final nameCtrl = TextEditingController();
     final schoolCtrl = TextEditingController();
     String emoji = '👧';
-    DateTime birthDate =
-        DateTime.now().subtract(const Duration(days: 365 * 5));
+    DateTime birthDate = DateTime.now().subtract(const Duration(days: 365 * 5));
     final emojis = ['👧', '👦', '🧒', '👶'];
 
     showModalBottomSheet(
@@ -737,7 +797,7 @@ class _ChildDevelopmentScreenState
       backgroundColor: Colors.transparent,
       builder: (_) => StatefulBuilder(
         builder: (ctx, setSt) => _DevSheet(
-          title: '👶 Çocuk Profili Oluştur',
+          title: '👶 ${AppLocalizations.of(context).childCreateProfile}',
           child: Column(
             children: [
               Wrap(
@@ -762,38 +822,49 @@ class _ChildDevelopmentScreenState
                         ),
                       ),
                       child: Center(
-                          child:
-                              Text(e, style: const TextStyle(fontSize: 26))),
+                        child: Text(e, style: const TextStyle(fontSize: 26)),
+                      ),
                     ),
                   );
                 }).toList(),
               ),
               const SizedBox(height: 14),
-              _DevField(controller: nameCtrl, label: AppLocalizations.of(context).cdChildName),
+              _DevField(
+                controller: nameCtrl,
+                label: AppLocalizations.of(context).cdChildName,
+              ),
               const SizedBox(height: 10),
               GestureDetector(
                 onTap: () async {
                   final d = await showDatePicker(
                     context: ctx,
                     initialDate: birthDate,
-                    firstDate: DateTime.now()
-                        .subtract(const Duration(days: 365 * 14)),
+                    firstDate: DateTime.now().subtract(
+                      const Duration(days: 365 * 14),
+                    ),
                     lastDate: DateTime.now(),
                   );
                   if (d != null) setSt(() => birthDate = d);
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 14, vertical: 13),
+                    horizontal: 14,
+                    vertical: 13,
+                  ),
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: const Color(0xFF06B6D4), width: 1.5),
+                      color: const Color(0xFF06B6D4),
+                      width: 1.5,
+                    ),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.cake,
-                          color: Color(0xFF06B6D4), size: 18),
+                      const Icon(
+                        Icons.cake,
+                        color: Color(0xFF06B6D4),
+                        size: 18,
+                      ),
                       const SizedBox(width: 8),
                       Text(
                         'Doğum tarihi: ${DateFormat('dd MMMM yyyy', 'tr').format(birthDate)}',
@@ -805,18 +876,19 @@ class _ChildDevelopmentScreenState
               ),
               const SizedBox(height: 10),
               _DevField(
-                  controller: schoolCtrl,
-                  label: AppLocalizations.of(context).cdSchoolName),
+                controller: schoolCtrl,
+                label: AppLocalizations.of(context).cdSchoolName,
+              ),
               const SizedBox(height: 16),
               _DevBtn(
                 label: AppLocalizations.of(context).cdCreateProfile,
                 onTap: () {
                   if (nameCtrl.text.trim().isEmpty) return;
-                  ref.read(childDevProvider.notifier).addChild(
+                  ref
+                      .read(childDevProvider.notifier)
+                      .addChild(
                         ChildProfile(
-                          id: DateTime.now()
-                              .millisecondsSinceEpoch
-                              .toString(),
+                          id: DateTime.now().millisecondsSinceEpoch.toString(),
                           name: nameCtrl.text.trim(),
                           emoji: emoji,
                           birthDate: birthDate,
@@ -839,9 +911,16 @@ class _ChildDevelopmentScreenState
     final nameCtrl = TextEditingController();
     String emoji = '📚';
     const subjectEmojis = [
-      ('Türkçe', '📖'), ('Matematik', '➕'), ('Fen', '🔬'),
-      ('Sosyal', '🌍'), ('İngilizce', '🇬🇧'), ('Müzik', '🎵'),
-      ('Beden', '⚽'), ('Resim', '🎨'), ('Din', '📿'), ('Diğer', '📚'),
+      ('Türkçe', '📖'),
+      ('Matematik', '➕'),
+      ('Fen', '🔬'),
+      ('Sosyal', '🌍'),
+      ('İngilizce', '🇬🇧'),
+      ('Müzik', '🎵'),
+      ('Beden', '⚽'),
+      ('Resim', '🎨'),
+      ('Din', '📿'),
+      ('Diğer', '📚'),
     ];
 
     showModalBottomSheet(
@@ -850,15 +929,18 @@ class _ChildDevelopmentScreenState
       backgroundColor: Colors.transparent,
       builder: (_) => StatefulBuilder(
         builder: (ctx, setSt) => _DevSheet(
-          title: '📚 Ders Ekle',
+          title: '📚 ${AppLocalizations.of(context).childAddLesson}',
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(AppLocalizations.of(context).cdPickOrWriteLesson,
-                  style: const TextStyle(
-                      fontSize: 12,
-                      color: Color(0xFF6B7280),
-                      fontWeight: FontWeight.w600)),
+              Text(
+                AppLocalizations.of(context).cdPickOrWriteLesson,
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Color(0xFF6B7280),
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
               const SizedBox(height: 8),
               Wrap(
                 spacing: 6,
@@ -874,7 +956,9 @@ class _ChildDevelopmentScreenState
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 6),
+                        horizontal: 10,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
                         color: nameCtrl.text == name
                             ? const Color(0xFF06B6D4).withAlpha(20)
@@ -886,27 +970,33 @@ class _ChildDevelopmentScreenState
                               : Colors.transparent,
                         ),
                       ),
-                      child: Text('$em $name',
-                          style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600)),
+                      child: Text(
+                        '$em $name',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
                   );
                 }).toList(),
               ),
               const SizedBox(height: 10),
-              _DevField(controller: nameCtrl, label: AppLocalizations.of(context).cdLessonName),
+              _DevField(
+                controller: nameCtrl,
+                label: AppLocalizations.of(context).cdLessonName,
+              ),
               const SizedBox(height: 14),
               _DevBtn(
                 label: AppLocalizations.of(context).cdAddLesson,
                 onTap: () {
                   if (nameCtrl.text.trim().isEmpty) return;
-                  ref.read(childDevProvider.notifier).addSubject(
+                  ref
+                      .read(childDevProvider.notifier)
+                      .addSubject(
                         child.id,
                         SchoolSubject(
-                          id: DateTime.now()
-                              .millisecondsSinceEpoch
-                              .toString(),
+                          id: DateTime.now().millisecondsSinceEpoch.toString(),
                           name: nameCtrl.text.trim(),
                           emoji: emoji,
                         ),
@@ -932,11 +1022,14 @@ class _ChildDevelopmentScreenState
       backgroundColor: Colors.transparent,
       builder: (_) => StatefulBuilder(
         builder: (ctx, setSt) => _DevSheet(
-          title: '📝 Ödev Ekle — ${child.name}',
+          title:
+              '📝 ${AppLocalizations.of(context).childAddHomework(child.name)}',
           child: Column(
             children: [
               _DevField(
-                  controller: subjectCtrl, label: AppLocalizations.of(context).cdLessonName),
+                controller: subjectCtrl,
+                label: AppLocalizations.of(context).cdLessonName,
+              ),
               const SizedBox(height: 10),
               _DevField(
                 controller: descCtrl,
@@ -950,23 +1043,29 @@ class _ChildDevelopmentScreenState
                     context: ctx,
                     initialDate: dueDate,
                     firstDate: DateTime.now(),
-                    lastDate:
-                        DateTime.now().add(const Duration(days: 90)),
+                    lastDate: DateTime.now().add(const Duration(days: 90)),
                   );
                   if (d != null) setSt(() => dueDate = d);
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 14, vertical: 13),
+                    horizontal: 14,
+                    vertical: 13,
+                  ),
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: const Color(0xFF06B6D4), width: 1.5),
+                      color: const Color(0xFF06B6D4),
+                      width: 1.5,
+                    ),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.event,
-                          color: Color(0xFF06B6D4), size: 18),
+                      const Icon(
+                        Icons.event,
+                        color: Color(0xFF06B6D4),
+                        size: 18,
+                      ),
                       const SizedBox(width: 8),
                       Text(
                         'Teslim: ${DateFormat('dd MMMM', 'tr').format(dueDate)}',
@@ -981,16 +1080,15 @@ class _ChildDevelopmentScreenState
                 label: AppLocalizations.of(context).cdSaveHomework,
                 onTap: () {
                   if (subjectCtrl.text.trim().isEmpty) return;
-                  ref.read(childDevProvider.notifier).addHomework(
+                  ref
+                      .read(childDevProvider.notifier)
+                      .addHomework(
                         child.id,
                         HomeworkEntry(
-                          id: DateTime.now()
-                              .millisecondsSinceEpoch
-                              .toString(),
+                          id: DateTime.now().millisecondsSinceEpoch.toString(),
                           subject: subjectCtrl.text.trim(),
                           description: descCtrl.text.trim(),
-                          dueDate:
-                              DateFormat('dd.MM.yyyy').format(dueDate),
+                          dueDate: DateFormat('dd.MM.yyyy').format(dueDate),
                         ),
                       );
                   Navigator.pop(ctx);
@@ -1011,7 +1109,7 @@ class _ChildDevelopmentScreenState
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (_) => _DevSheet(
-        title: '📏 Büyüme Ölçümü — ${child.name}',
+        title: '📏 ${AppLocalizations.of(context).childAddGrowth(child.name)}',
         child: Column(
           children: [
             _DevField(
@@ -1032,11 +1130,12 @@ class _ChildDevelopmentScreenState
                 final h = double.tryParse(heightCtrl.text);
                 final w = double.tryParse(weightCtrl.text);
                 if (h == null && w == null) return;
-                ref.read(childDevProvider.notifier).addGrowthEntry(
+                ref
+                    .read(childDevProvider.notifier)
+                    .addGrowthEntry(
                       child.id,
                       GrowthEntry(
-                        date: DateFormat('dd.MM.yyyy')
-                            .format(DateTime.now()),
+                        date: DateFormat('dd.MM.yyyy').format(DateTime.now()),
                         height: h,
                         weight: w,
                       ),
@@ -1066,8 +1165,9 @@ class _MilestoneTab extends ConsumerWidget {
     final group = fresh.devGroup;
     final milestones = _milestonesByAge[group] ?? [];
 
-    final completed =
-        milestones.where((m) => fresh.completedMilestones.contains('$group-${m.$2}')).length;
+    final completed = milestones
+        .where((m) => fresh.completedMilestones.contains('$group-${m.$2}'))
+        .length;
 
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -1089,30 +1189,45 @@ class _MilestoneTab extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(fresh.name,
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w900,
-                            fontSize: 18)),
-                    Text(fresh.ageLabel,
-                        style: const TextStyle(
-                            color: Colors.white70, fontSize: 13)),
-                    Text(AppLocalizations.of(context).cdDevGroup(group),
-                        style: const TextStyle(
-                            color: Colors.white70, fontSize: 12)),
+                    Text(
+                      fresh.name,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 18,
+                      ),
+                    ),
+                    Text(
+                      fresh.ageLabel,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 13,
+                      ),
+                    ),
+                    Text(
+                      AppLocalizations.of(context).cdDevGroup(group),
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 12,
+                      ),
+                    ),
                   ],
                 ),
               ),
               Column(
                 children: [
-                  Text('$completed/${milestones.length}',
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 22)),
-                  Text(AppLocalizations.of(context).cdCompleted,
-                      style: const TextStyle(
-                          color: Colors.white70, fontSize: 10)),
+                  Text(
+                    '$completed/${milestones.length}',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 22,
+                    ),
+                  ),
+                  Text(
+                    AppLocalizations.of(context).cdCompleted,
+                    style: const TextStyle(color: Colors.white70, fontSize: 10),
+                  ),
                 ],
               ),
             ],
@@ -1124,9 +1239,7 @@ class _MilestoneTab extends ConsumerWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: LinearProgressIndicator(
-            value: milestones.isEmpty
-                ? 0
-                : completed / milestones.length,
+            value: milestones.isEmpty ? 0 : completed / milestones.length,
             backgroundColor: Colors.grey.withAlpha(30),
             valueColor: const AlwaysStoppedAnimation(Color(0xFF06B6D4)),
             minHeight: 8,
@@ -1148,18 +1261,24 @@ class _MilestoneTab extends ConsumerWidget {
           ),
           child: Column(
             children: [
-              Text('${fresh.name}\'in Gelişim Ağacı',
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w800)),
+              Text(
+                '${fresh.name}\'in Gelişim Ağacı',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
               const SizedBox(height: 2),
-              Text(AppLocalizations.of(context).cdStepGrowsTree,
-                  style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 11)),
+              Text(
+                AppLocalizations.of(context).cdStepGrowsTree,
+                style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 11),
+              ),
               const SizedBox(height: 8),
               GrowingTree(
-                progress:
-                    milestones.isEmpty ? 0 : completed / milestones.length,
+                progress: milestones.isEmpty
+                    ? 0
+                    : completed / milestones.length,
                 size: 190,
               ),
             ],
@@ -1181,20 +1300,26 @@ class _MilestoneTab extends ConsumerWidget {
               backgroundColor: const Color(0xFF8B5CF6),
               padding: const EdgeInsets.symmetric(vertical: 14),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14)),
+                borderRadius: BorderRadius.circular(14),
+              ),
             ),
             icon: const Icon(Icons.auto_awesome, color: Colors.white, size: 18),
-            label: Text(AppLocalizations.of(context).cdWeeklyPlanFor(fresh.name),
-                style: const TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.w700)),
+            label: Text(
+              AppLocalizations.of(context).cdWeeklyPlanFor(fresh.name),
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 16),
 
         // Current group milestones
-        Text('$group Gelişim Basamakları',
-            style: const TextStyle(
-                fontWeight: FontWeight.w800, fontSize: 14)),
+        Text(
+          '$group Gelişim Basamakları',
+          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
+        ),
         const SizedBox(height: 8),
         ...milestones.map((m) {
           final key = '$group-${m.$2}';
@@ -1225,19 +1350,24 @@ class _MilestoneTab extends ConsumerWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(m.$2,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                color: done
-                                    ? const Color(0xFF06B6D4)
-                                    : Colors.black87)),
-                        Text(devCategoryLabel(context, m.$1),
-                            style: TextStyle(
-                                fontSize: 11,
-                                color: done
-                                    ? const Color(0xFF06B6D4)
-                                        .withAlpha(160)
-                                    : const Color(0xFF9CA3AF))),
+                        Text(
+                          m.$2,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: done
+                                ? const Color(0xFF06B6D4)
+                                : Colors.black87,
+                          ),
+                        ),
+                        Text(
+                          devCategoryLabel(context, m.$1),
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: done
+                                ? const Color(0xFF06B6D4).withAlpha(160)
+                                : const Color(0xFF9CA3AF),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -1258,8 +1388,7 @@ class _MilestoneTab extends ConsumerWidget {
                       ),
                     ),
                     child: done
-                        ? const Icon(Icons.check,
-                            color: Colors.white, size: 14)
+                        ? const Icon(Icons.check, color: Colors.white, size: 14)
                         : null,
                   ),
                 ],
@@ -1295,9 +1424,11 @@ class _SchoolTab extends ConsumerWidget {
           children: [
             const Text('📚', style: TextStyle(fontSize: 48)),
             const SizedBox(height: 12),
-            Text(AppLocalizations.of(context).cdNoLessons,
-                textAlign: TextAlign.center,
-                style: const TextStyle(color: Color(0xFF9CA3AF))),
+            Text(
+              AppLocalizations.of(context).cdNoLessons,
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Color(0xFF9CA3AF)),
+            ),
           ],
         ),
       );
@@ -1312,16 +1443,16 @@ class _SchoolTab extends ConsumerWidget {
             decoration: BoxDecoration(
               color: const Color(0xFF06B6D4).withAlpha(10),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                  color: const Color(0xFF06B6D4).withAlpha(40)),
+              border: Border.all(color: const Color(0xFF06B6D4).withAlpha(40)),
             ),
             child: Row(
               children: [
                 const Text('🏫', style: TextStyle(fontSize: 24)),
                 const SizedBox(width: 10),
-                Text(fresh.schoolName!,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w700)),
+                Text(
+                  fresh.schoolName!,
+                  style: const TextStyle(fontWeight: FontWeight.w700),
+                ),
               ],
             ),
           ),
@@ -1345,20 +1476,25 @@ class _SchoolTab extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(s.name,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w800)),
+                      Text(
+                        s.name,
+                        style: const TextStyle(fontWeight: FontWeight.w800),
+                      ),
                       if (s.grades.isEmpty)
-                        Text(AppLocalizations.of(context).cdNoGrade,
-                            style: const TextStyle(
-                                fontSize: 11,
-                                color: Color(0xFF9CA3AF)))
+                        Text(
+                          AppLocalizations.of(context).cdNoGrade,
+                          style: const TextStyle(
+                            fontSize: 11,
+                            color: Color(0xFF9CA3AF),
+                          ),
+                        )
                       else
                         Text(
                           s.grades.map((g) => g.toString()).join(' · '),
                           style: const TextStyle(
-                              fontSize: 11,
-                              color: Color(0xFF6B7280)),
+                            fontSize: 11,
+                            color: Color(0xFF6B7280),
+                          ),
                         ),
                     ],
                   ),
@@ -1374,10 +1510,10 @@ class _SchoolTab extends ConsumerWidget {
                           color: _gradeColor(avg),
                         ),
                       ),
-                      Text(AppLocalizations.of(context).cdAvg,
-                          style: TextStyle(
-                              fontSize: 9,
-                              color: _gradeColor(avg))),
+                      Text(
+                        AppLocalizations.of(context).cdAvg,
+                        style: TextStyle(fontSize: 9, color: _gradeColor(avg)),
+                      ),
                     ],
                   ),
                   const SizedBox(width: 8),
@@ -1392,8 +1528,11 @@ class _SchoolTab extends ConsumerWidget {
                       color: const Color(0xFF06B6D4).withAlpha(20),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: const Icon(Icons.add,
-                        color: Color(0xFF06B6D4), size: 18),
+                    child: const Icon(
+                      Icons.add,
+                      color: Color(0xFF06B6D4),
+                      size: 18,
+                    ),
                   ),
                 ),
               ],
@@ -1405,7 +1544,11 @@ class _SchoolTab extends ConsumerWidget {
   }
 
   void _addGrade(
-      BuildContext context, WidgetRef ref, String childId, SchoolSubject s) {
+    BuildContext context,
+    WidgetRef ref,
+    String childId,
+    SchoolSubject s,
+  ) {
     final ctrl = TextEditingController();
     showDialog(
       context: context,
@@ -1435,9 +1578,12 @@ class _SchoolTab extends ConsumerWidget {
               Navigator.pop(context);
             },
             style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF06B6D4)),
-            child: Text(AppLocalizations.of(context).save,
-                style: const TextStyle(color: Colors.white)),
+              backgroundColor: const Color(0xFF06B6D4),
+            ),
+            child: Text(
+              AppLocalizations.of(context).save,
+              style: const TextStyle(color: Colors.white),
+            ),
           ),
         ],
       ),
@@ -1455,8 +1601,7 @@ class _HomeworkTab extends ConsumerWidget {
         .watch(childDevProvider)
         .firstWhere((c) => c.id == child.id, orElse: () => child);
 
-    final pending =
-        fresh.homework.where((h) => !h.completed).toList();
+    final pending = fresh.homework.where((h) => !h.completed).toList();
     final done = fresh.homework.where((h) => h.completed).toList();
 
     if (fresh.homework.isEmpty) {
@@ -1466,8 +1611,10 @@ class _HomeworkTab extends ConsumerWidget {
           children: [
             const Text('📝', style: TextStyle(fontSize: 48)),
             const SizedBox(height: 12),
-            Text(AppLocalizations.of(context).cdNoHomework,
-                style: const TextStyle(color: Color(0xFF9CA3AF))),
+            Text(
+              AppLocalizations.of(context).cdNoHomework,
+              style: const TextStyle(color: Color(0xFF9CA3AF)),
+            ),
           ],
         ),
       );
@@ -1478,20 +1625,12 @@ class _HomeworkTab extends ConsumerWidget {
       children: [
         if (pending.isNotEmpty) ...[
           _Label('Bekleyen Ödevler (${pending.length})'),
-          ...pending.map((h) => _HwTile(
-                hw: h,
-                childId: fresh.id,
-                ref: ref,
-              )),
+          ...pending.map((h) => _HwTile(hw: h, childId: fresh.id, ref: ref)),
         ],
         if (done.isNotEmpty) ...[
           const SizedBox(height: 8),
           _Label('Tamamlanan (${done.length})'),
-          ...done.map((h) => _HwTile(
-                hw: h,
-                childId: fresh.id,
-                ref: ref,
-              )),
+          ...done.map((h) => _HwTile(hw: h, childId: fresh.id, ref: ref)),
         ],
       ],
     );
@@ -1502,8 +1641,7 @@ class _HwTile extends StatelessWidget {
   final HomeworkEntry hw;
   final String childId;
   final WidgetRef ref;
-  const _HwTile(
-      {required this.hw, required this.childId, required this.ref});
+  const _HwTile({required this.hw, required this.childId, required this.ref});
 
   @override
   Widget build(BuildContext context) {
@@ -1541,8 +1679,7 @@ class _HwTile extends StatelessWidget {
                 ),
               ),
               child: hw.completed
-                  ? const Icon(Icons.check,
-                      color: Colors.white, size: 13)
+                  ? const Icon(Icons.check, color: Colors.white, size: 13)
                   : null,
             ),
             const SizedBox(width: 10),
@@ -1550,26 +1687,32 @@ class _HwTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(hw.subject,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w800,
-                          color:
-                              hw.completed ? Colors.grey : Colors.black87)),
+                  Text(
+                    hw.subject,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      color: hw.completed ? Colors.grey : Colors.black87,
+                    ),
+                  ),
                   if (hw.description.isNotEmpty)
-                    Text(hw.description,
-                        style: const TextStyle(
-                            fontSize: 12,
-                            color: Color(0xFF6B7280))),
+                    Text(
+                      hw.description,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Color(0xFF6B7280),
+                      ),
+                    ),
                 ],
               ),
             ),
-            Text('📅 ${hw.dueDate}',
-                style: TextStyle(
-                    fontSize: 10,
-                    color: hw.completed
-                        ? Colors.grey
-                        : Colors.orange.shade700,
-                    fontWeight: FontWeight.w600)),
+            Text(
+              '📅 ${hw.dueDate}',
+              style: TextStyle(
+                fontSize: 10,
+                color: hw.completed ? Colors.grey : Colors.orange.shade700,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ],
         ),
       ),
@@ -1596,18 +1739,28 @@ class _GrowthTab extends ConsumerWidget {
           children: [
             const Text('📏', style: TextStyle(fontSize: 48)),
             const SizedBox(height: 12),
-            Text(AppLocalizations.of(context).cdNoMeasurements,
-                textAlign: TextAlign.center,
-                style: const TextStyle(color: Color(0xFF9CA3AF))),
+            Text(
+              AppLocalizations.of(context).cdNoMeasurements,
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Color(0xFF9CA3AF)),
+            ),
           ],
         ),
       );
     }
 
-    final lastHeight =
-        log.firstWhere((g) => g.height != null, orElse: () => const GrowthEntry(date: '')).height;
-    final lastWeight =
-        log.firstWhere((g) => g.weight != null, orElse: () => const GrowthEntry(date: '')).weight;
+    final lastHeight = log
+        .firstWhere(
+          (g) => g.height != null,
+          orElse: () => const GrowthEntry(date: ''),
+        )
+        .height;
+    final lastWeight = log
+        .firstWhere(
+          (g) => g.weight != null,
+          orElse: () => const GrowthEntry(date: ''),
+        )
+        .weight;
 
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -1640,33 +1793,40 @@ class _GrowthTab extends ConsumerWidget {
         ),
         const SizedBox(height: 16),
         const _Label('Ölçüm Geçmişi'),
-        ...log.map((g) => Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.grey.withAlpha(8),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.grey.withAlpha(30)),
-              ),
-              child: Row(
-                children: [
-                  const Text('📅', style: TextStyle(fontSize: 18)),
-                  const SizedBox(width: 8),
-                  Text(g.date,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w700)),
-                  const Spacer(),
-                  if (g.height != null)
-                    Text('📏 ${g.height!.toStringAsFixed(1)} cm',
-                        style: const TextStyle(fontSize: 12)),
-                  if (g.height != null && g.weight != null)
-                    const SizedBox(width: 12),
-                  if (g.weight != null)
-                    Text('⚖️ ${g.weight!.toStringAsFixed(1)} kg',
-                        style: const TextStyle(fontSize: 12)),
-                ],
-              ),
-            )),
+        ...log.map(
+          (g) => Container(
+            margin: const EdgeInsets.only(bottom: 8),
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.grey.withAlpha(8),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.grey.withAlpha(30)),
+            ),
+            child: Row(
+              children: [
+                const Text('📅', style: TextStyle(fontSize: 18)),
+                const SizedBox(width: 8),
+                Text(
+                  g.date,
+                  style: const TextStyle(fontWeight: FontWeight.w700),
+                ),
+                const Spacer(),
+                if (g.height != null)
+                  Text(
+                    '📏 ${g.height!.toStringAsFixed(1)} cm',
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                if (g.height != null && g.weight != null)
+                  const SizedBox(width: 12),
+                if (g.weight != null)
+                  Text(
+                    '⚖️ ${g.weight!.toStringAsFixed(1)} kg',
+                    style: const TextStyle(fontSize: 12),
+                  ),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -1677,11 +1837,12 @@ class _GrowthCard extends StatelessWidget {
   final String label;
   final String value;
   final Color color;
-  const _GrowthCard(
-      {required this.emoji,
-      required this.label,
-      required this.value,
-      required this.color});
+  const _GrowthCard({
+    required this.emoji,
+    required this.label,
+    required this.value,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1696,14 +1857,18 @@ class _GrowthCard extends StatelessWidget {
         children: [
           Text(emoji, style: const TextStyle(fontSize: 28)),
           const SizedBox(height: 4),
-          Text(value,
-              style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 18,
-                  color: color)),
-          Text(label,
-              style: const TextStyle(
-                  fontSize: 11, color: Color(0xFF9CA3AF))),
+          Text(
+            value,
+            style: TextStyle(
+              fontWeight: FontWeight.w900,
+              fontSize: 18,
+              color: color,
+            ),
+          ),
+          Text(
+            label,
+            style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+          ),
         ],
       ),
     );
@@ -1721,7 +1886,8 @@ class _DevSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom),
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
       child: Container(
         decoration: const BoxDecoration(
           color: Color(0xFF13131A),
@@ -1734,7 +1900,8 @@ class _DevSheet extends StatelessWidget {
           children: [
             Center(
               child: Container(
-                width: 36, height: 4,
+                width: 36,
+                height: 4,
                 decoration: BoxDecoration(
                   color: Colors.white.withAlpha(40),
                   borderRadius: BorderRadius.circular(2),
@@ -1742,10 +1909,14 @@ class _DevSheet extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 14),
-            Text(title,
-                style: const TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.w900,
-                    color: Colors.white)),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w900,
+                color: Colors.white,
+              ),
+            ),
             const SizedBox(height: 16),
             child,
           ],
@@ -1780,17 +1951,21 @@ class _DevField extends StatelessWidget {
         filled: true,
         fillColor: const Color(0xFF1A1A24),
         border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Color(0x22FFFFFF))),
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Color(0x22FFFFFF)),
+        ),
         enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Color(0x22FFFFFF))),
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Color(0x22FFFFFF)),
+        ),
         focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(
-                color: Color(0xFF06B6D4), width: 1.5)),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Color(0xFF06B6D4), width: 1.5),
+        ),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 14,
+          vertical: 12,
+        ),
       ),
     );
   }
@@ -1821,11 +1996,14 @@ class _DevBtn extends StatelessWidget {
           ],
         ),
         child: Center(
-          child: Text(label,
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 15)),
+          child: Text(
+            label,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w800,
+              fontSize: 15,
+            ),
+          ),
         ),
       ),
     );
@@ -1840,11 +2018,14 @@ class _Label extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
-      child: Text(text,
-          style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w800,
-              color: Color(0xFF6B7280))),
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w800,
+          color: Color(0xFF6B7280),
+        ),
+      ),
     );
   }
 }
@@ -1868,17 +2049,27 @@ class _AiPlanSheetState extends State<_AiPlanSheet> {
   final _interestsCtrl = TextEditingController();
 
   static const _focusOptions = [
-    'genel gelişim', 'dil gelişimi', 'matematik', 'sosyal-duygusal',
-    'motor beceriler', 'sorumluluk', 'okuma alışkanlığı', 'okul başarısı',
+    'genel gelişim',
+    'dil gelişimi',
+    'matematik',
+    'sosyal-duygusal',
+    'motor beceriler',
+    'sorumluluk',
+    'okuma alışkanlığı',
+    'okul başarısı',
   ];
 
   String get _lang {
     final l = HiveService.getSetting('language') ?? 'Türkçe';
     switch (l) {
-      case 'English': return 'en';
-      case 'Français': return 'fr';
-      case 'Nederlands': return 'nl';
-      default: return 'tr';
+      case 'English':
+        return 'en';
+      case 'Français':
+        return 'fr';
+      case 'Nederlands':
+        return 'nl';
+      default:
+        return 'tr';
     }
   }
 
@@ -1895,7 +2086,10 @@ class _AiPlanSheetState extends State<_AiPlanSheet> {
   }
 
   Future<void> _generate() async {
-    setState(() { _loading = true; _error = false; });
+    setState(() {
+      _loading = true;
+      _error = false;
+    });
     final ageYears = (widget.child.ageMonths ~/ 12).clamp(1, 18);
     final plan = await PedagogyEngine.generateWeeklyPlan(
       childName: widget.child.name,
@@ -1930,10 +2124,12 @@ class _AiPlanSheetState extends State<_AiPlanSheet> {
           children: [
             const SizedBox(height: 10),
             Container(
-              width: 40, height: 4,
+              width: 40,
+              height: 4,
               decoration: BoxDecoration(
-                  color: Colors.white.withAlpha(40),
-                  borderRadius: BorderRadius.circular(2)),
+                color: Colors.white.withAlpha(40),
+                borderRadius: BorderRadius.circular(2),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 14, 20, 8),
@@ -1942,11 +2138,14 @@ class _AiPlanSheetState extends State<_AiPlanSheet> {
                   const Icon(Icons.auto_awesome, color: Color(0xFF8B5CF6)),
                   const SizedBox(width: 8),
                   Expanded(
-                    child: Text('${widget.child.name} · AI Haftalık Plan',
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w800)),
+                    child: Text(
+                      '${widget.child.name} · AI Haftalık Plan',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
                   ),
                   IconButton(
                     onPressed: _loading ? null : _generate,
@@ -1960,8 +2159,8 @@ class _AiPlanSheetState extends State<_AiPlanSheet> {
               child: _loading
                   ? _buildLoading()
                   : _error
-                      ? _buildError()
-                      : _buildPlan(ctrl),
+                  ? _buildError()
+                  : _buildPlan(ctrl),
             ),
           ],
         ),
@@ -1970,46 +2169,58 @@ class _AiPlanSheetState extends State<_AiPlanSheet> {
   }
 
   Widget _buildLoading() => Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const CircularProgressIndicator(color: Color(0xFF8B5CF6)),
-            const SizedBox(height: 16),
-            Text(AppLocalizations.of(context).cdGeneratingPlan,
-                style: const TextStyle(color: Color(0xFF9CA3AF))),
-          ],
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const CircularProgressIndicator(color: Color(0xFF8B5CF6)),
+        const SizedBox(height: 16),
+        Text(
+          AppLocalizations.of(context).cdGeneratingPlan,
+          style: const TextStyle(color: Color(0xFF9CA3AF)),
         ),
-      );
+      ],
+    ),
+  );
 
   Widget _buildError() => Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(Icons.cloud_off, color: Color(0xFF6B7280), size: 48),
-            const SizedBox(height: 12),
-            Text(AppLocalizations.of(context).cdPlanFailed,
-                style: const TextStyle(color: Color(0xFF9CA3AF))),
-            const SizedBox(height: 12),
-            ElevatedButton(
-              onPressed: _generate,
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF8B5CF6)),
-              child: Text(AppLocalizations.of(context).cdRetry,
-                  style: const TextStyle(color: Colors.white)),
-            ),
-          ],
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Icon(Icons.cloud_off, color: Color(0xFF6B7280), size: 48),
+        const SizedBox(height: 12),
+        Text(
+          AppLocalizations.of(context).cdPlanFailed,
+          style: const TextStyle(color: Color(0xFF9CA3AF)),
         ),
-      );
+        const SizedBox(height: 12),
+        ElevatedButton(
+          onPressed: _generate,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF8B5CF6),
+          ),
+          child: Text(
+            AppLocalizations.of(context).cdRetry,
+            style: const TextStyle(color: Colors.white),
+          ),
+        ),
+      ],
+    ),
+  );
 
   Widget _buildPlan(ScrollController ctrl) {
     final p = _plan!;
     final days = (p['days'] as List?) ?? [];
     // parent_checklist bazen string dizisi, bazen {item/text}-nesne dizisi gelir.
     final checklist = ((p['parent_checklist'] as List?) ?? [])
-        .map((e) => e is Map
-            ? (e['item'] ?? e['text'] ?? e['description'] ?? e.values.join(' '))
-                .toString()
-            : e.toString())
+        .map(
+          (e) => e is Map
+              ? (e['item'] ??
+                        e['text'] ??
+                        e['description'] ??
+                        e.values.join(' '))
+                    .toString()
+              : e.toString(),
+        )
         .toList();
     return ListView(
       controller: ctrl,
@@ -2027,20 +2238,24 @@ class _AiPlanSheetState extends State<_AiPlanSheet> {
                 _generate();
               },
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: sel
                       ? const Color(0xFF8B5CF6)
                       : const Color(0xFF1A1A24),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Text(f,
-                    style: TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                        color:
-                            sel ? Colors.white : const Color(0xFF9CA3AF))),
+                child: Text(
+                  f,
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                    color: sel ? Colors.white : const Color(0xFF9CA3AF),
+                  ),
+                ),
               ),
             );
           }).toList(),
@@ -2051,21 +2266,30 @@ class _AiPlanSheetState extends State<_AiPlanSheet> {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             gradient: const LinearGradient(
-                colors: [Color(0xFF8B5CF6), Color(0xFF6366F1)]),
+              colors: [Color(0xFF8B5CF6), Color(0xFF6366F1)],
+            ),
             borderRadius: BorderRadius.circular(16),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text((p['week_theme'] ?? 'Haftalık Plan').toString(),
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800)),
+              Text(
+                (p['week_theme'] ?? 'Haftalık Plan').toString(),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
               const SizedBox(height: 6),
-              Text((p['weekly_goal'] ?? '').toString(),
-                  style: const TextStyle(
-                      color: Colors.white70, fontSize: 13, height: 1.4)),
+              Text(
+                (p['weekly_goal'] ?? '').toString(),
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 13,
+                  height: 1.4,
+                ),
+              ),
             ],
           ),
         ),
@@ -2073,27 +2297,40 @@ class _AiPlanSheetState extends State<_AiPlanSheet> {
         ...days.map((d) => _dayCard(d as Map<String, dynamic>)),
         if (checklist.isNotEmpty) ...[
           const SizedBox(height: 8),
-          Text(AppLocalizations.of(context).cdParentChecklist,
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w800)),
+          Text(
+            AppLocalizations.of(context).cdParentChecklist,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 15,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
           const SizedBox(height: 8),
-          ...checklist.map((c) => Padding(
-                padding: const EdgeInsets.only(bottom: 6),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Icon(Icons.check_box_outline_blank,
-                        size: 16, color: Color(0xFF8B5CF6)),
-                    const SizedBox(width: 8),
-                    Expanded(
-                        child: Text(c,
-                            style: const TextStyle(
-                                color: Color(0xFFD1D5DB), fontSize: 13))),
-                  ],
-                ),
-              )),
+          ...checklist.map(
+            (c) => Padding(
+              padding: const EdgeInsets.only(bottom: 6),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(
+                    Icons.check_box_outline_blank,
+                    size: 16,
+                    color: Color(0xFF8B5CF6),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      c,
+                      style: const TextStyle(
+                        color: Color(0xFFD1D5DB),
+                        fontSize: 13,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
         if (p['end_of_week_review'] != null) ...[
           const SizedBox(height: 12),
@@ -2103,9 +2340,14 @@ class _AiPlanSheetState extends State<_AiPlanSheet> {
               color: const Color(0xFF1A1A24),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Text('📋 ${p['end_of_week_review']}',
-                style: const TextStyle(
-                    color: Color(0xFF9CA3AF), fontSize: 12.5, height: 1.4)),
+            child: Text(
+              '📋 ${p['end_of_week_review']}',
+              style: const TextStyle(
+                color: Color(0xFF9CA3AF),
+                fontSize: 12.5,
+                height: 1.4,
+              ),
+            ),
           ),
         ],
       ],
@@ -2113,8 +2355,12 @@ class _AiPlanSheetState extends State<_AiPlanSheet> {
   }
 
   static const _dayTr = {
-    'Monday': 'Pazartesi', 'Tuesday': 'Salı', 'Wednesday': 'Çarşamba',
-    'Thursday': 'Perşembe', 'Friday': 'Cuma', 'Saturday': 'Cumartesi',
+    'Monday': 'Pazartesi',
+    'Tuesday': 'Salı',
+    'Wednesday': 'Çarşamba',
+    'Thursday': 'Perşembe',
+    'Friday': 'Cuma',
+    'Saturday': 'Cumartesi',
     'Sunday': 'Pazar',
   };
 
@@ -2126,7 +2372,13 @@ class _AiPlanSheetState extends State<_AiPlanSheet> {
     final family = (d['family_activity'] ?? '').toString();
     final reflection = (d['reflection_question'] ?? '').toString();
 
-    Widget row(IconData ic, Color c, String label, String? title, String? desc) {
+    Widget row(
+      IconData ic,
+      Color c,
+      String label,
+      String? title,
+      String? desc,
+    ) {
       if (title == null || title.isEmpty) return const SizedBox.shrink();
       return Padding(
         padding: const EdgeInsets.only(top: 8),
@@ -2139,17 +2391,23 @@ class _AiPlanSheetState extends State<_AiPlanSheet> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('$label: $title',
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600)),
+                  Text(
+                    '$label: $title',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   if (desc != null && desc.isNotEmpty)
-                    Text(desc,
-                        style: const TextStyle(
-                            color: Color(0xFF9CA3AF),
-                            fontSize: 12,
-                            height: 1.35)),
+                    Text(
+                      desc,
+                      style: const TextStyle(
+                        color: Color(0xFF9CA3AF),
+                        fontSize: 12,
+                        height: 1.35,
+                      ),
+                    ),
                 ],
               ),
             ),
@@ -2169,24 +2427,51 @@ class _AiPlanSheetState extends State<_AiPlanSheet> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(_dayTr[day] ?? day,
-              style: const TextStyle(
-                  color: Color(0xFF8B5CF6),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w800)),
-          row(Icons.school, const Color(0xFF06B6D4), 'Ders',
-              lesson?['title']?.toString(), lesson?['description']?.toString()),
-          row(Icons.edit_note, const Color(0xFFF59E0B), 'Ödev',
-              homework?['title']?.toString(),
-              homework?['description']?.toString()),
-          row(Icons.star, const Color(0xFF10B981), 'Görev',
-              task?['title']?.toString(), task?['description']?.toString()),
+          Text(
+            _dayTr[day] ?? day,
+            style: const TextStyle(
+              color: Color(0xFF8B5CF6),
+              fontSize: 14,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          row(
+            Icons.school,
+            const Color(0xFF06B6D4),
+            'Ders',
+            lesson?['title']?.toString(),
+            lesson?['description']?.toString(),
+          ),
+          row(
+            Icons.edit_note,
+            const Color(0xFFF59E0B),
+            'Ödev',
+            homework?['title']?.toString(),
+            homework?['description']?.toString(),
+          ),
+          row(
+            Icons.star,
+            const Color(0xFF10B981),
+            'Görev',
+            task?['title']?.toString(),
+            task?['description']?.toString(),
+          ),
           if (family.isNotEmpty)
-            row(Icons.family_restroom, const Color(0xFFEC4899),
-                'Aile', family, null),
+            row(
+              Icons.family_restroom,
+              const Color(0xFFEC4899),
+              'Aile',
+              family,
+              null,
+            ),
           if (reflection.isNotEmpty)
-            row(Icons.help_outline, const Color(0xFF9CA3AF), 'Soru',
-                reflection, null),
+            row(
+              Icons.help_outline,
+              const Color(0xFF9CA3AF),
+              'Soru',
+              reflection,
+              null,
+            ),
         ],
       ),
     );

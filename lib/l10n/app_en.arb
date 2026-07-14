@@ -2174,5 +2174,11 @@
   "subFilterInactive": "Inactive ({count})",
   "subRenewal": "Renewal: {date}",
   "callEmergency112": "Call 112",
-  "growthTracking": "Height / weight tracking"
+  "growthTracking": "Height / weight tracking",
+  "childDevTitle": "Child Development & School",
+  "childAddChild": "Add child",
+  "childCreateProfile": "Create child profile",
+  "childAddLesson": "Add lesson",
+  "childAddHomework": "Add homework — {name}",
+  "childAddGrowth": "Growth measurement — {name}"
 }
