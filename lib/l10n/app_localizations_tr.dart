@@ -6695,4 +6695,53 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get commonDetail => 'Detay';
+
+  @override
+  String get insightSpendingHighTitle => 'Harcamalar gelire yaklaştı';
+
+  @override
+  String insightSpendingHighMsg(Object expense, Object income, Object percent) {
+    return 'Bu ay giderin (€$expense) gelirinin (€$income) yaklaşık %$percent kadarına ulaştı.';
+  }
+
+  @override
+  String get insightSavingTitle => 'Tasarruf yolundasın';
+
+  @override
+  String insightSavingMsg(Object percent) {
+    return 'Bu ay gelirinin yaklaşık %$percent kadarını biriktiriyorsun. Harika!';
+  }
+
+  @override
+  String get insightFixedTitle => 'Aylık sabit giderin';
+
+  @override
+  String insightFixedMsg(Object count, Object total) {
+    return '$count abonelik/gider · toplam ≈€$total/ay.';
+  }
+
+  @override
+  String insightChildAssessTitle(Object name) {
+    return '$name için değerlendirme';
+  }
+
+  @override
+  String insightChildAssessMsg(Object name) {
+    return '$name için beceri değerlendirmesi henüz yapılmadı. Gelişimi takip etmek için başlayın.';
+  }
+
+  @override
+  String get insightShoppingEmptyTitle => 'Alışveriş listen boş';
+
+  @override
+  String get insightShoppingEmptyMsg =>
+      'AI market listesiyle hızlıca bir alışveriş listesi oluşturabilirsin.';
+
+  @override
+  String get insightShoppingTimeTitle => 'Alışveriş zamanı';
+
+  @override
+  String insightShoppingTimeMsg(Object count) {
+    return 'Listende $count bekleyen ürün var.';
+  }
 }

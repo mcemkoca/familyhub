@@ -6701,4 +6701,53 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get commonDetail => 'Détail';
+
+  @override
+  String get insightSpendingHighTitle => 'Les dépenses approchent le revenu';
+
+  @override
+  String insightSpendingHighMsg(Object expense, Object income, Object percent) {
+    return 'Ce mois-ci, vos dépenses (€$expense) ont atteint environ $percent% de vos revenus (€$income).';
+  }
+
+  @override
+  String get insightSavingTitle => 'Vous êtes sur la voie de l\'épargne';
+
+  @override
+  String insightSavingMsg(Object percent) {
+    return 'Ce mois-ci, vous économisez environ $percent% de vos revenus. Bravo !';
+  }
+
+  @override
+  String get insightFixedTitle => 'Vos charges fixes mensuelles';
+
+  @override
+  String insightFixedMsg(Object count, Object total) {
+    return '$count abonnements/dépenses · total ≈€$total/mois.';
+  }
+
+  @override
+  String insightChildAssessTitle(Object name) {
+    return 'Évaluation pour $name';
+  }
+
+  @override
+  String insightChildAssessMsg(Object name) {
+    return 'L\'évaluation des compétences de $name n\'a pas encore été faite. Commencez pour suivre le développement.';
+  }
+
+  @override
+  String get insightShoppingEmptyTitle => 'Votre liste de courses est vide';
+
+  @override
+  String get insightShoppingEmptyMsg =>
+      'Avec la liste de courses IA, créez rapidement une liste.';
+
+  @override
+  String get insightShoppingTimeTitle => 'C\'est l\'heure des courses';
+
+  @override
+  String insightShoppingTimeMsg(Object count) {
+    return 'Vous avez $count articles en attente sur votre liste.';
+  }
 }

@@ -6680,4 +6680,53 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get commonDetail => 'Details';
+
+  @override
+  String get insightSpendingHighTitle => 'Uitgaven naderen inkomen';
+
+  @override
+  String insightSpendingHighMsg(Object expense, Object income, Object percent) {
+    return 'Deze maand bereikten je uitgaven (€$expense) ongeveer $percent% van je inkomen (€$income).';
+  }
+
+  @override
+  String get insightSavingTitle => 'Je bent aan het sparen';
+
+  @override
+  String insightSavingMsg(Object percent) {
+    return 'Deze maand spaar je ongeveer $percent% van je inkomen. Goed bezig!';
+  }
+
+  @override
+  String get insightFixedTitle => 'Je vaste maandlasten';
+
+  @override
+  String insightFixedMsg(Object count, Object total) {
+    return '$count abonnementen/uitgaven · totaal ≈€$total/maand.';
+  }
+
+  @override
+  String insightChildAssessTitle(Object name) {
+    return 'Beoordeling voor $name';
+  }
+
+  @override
+  String insightChildAssessMsg(Object name) {
+    return 'De vaardigheidsbeoordeling voor $name is nog niet gedaan. Begin om de ontwikkeling te volgen.';
+  }
+
+  @override
+  String get insightShoppingEmptyTitle => 'Je boodschappenlijst is leeg';
+
+  @override
+  String get insightShoppingEmptyMsg =>
+      'Met de AI-boodschappenlijst maak je snel een lijst.';
+
+  @override
+  String get insightShoppingTimeTitle => 'Tijd om te winkelen';
+
+  @override
+  String insightShoppingTimeMsg(Object count) {
+    return 'Je hebt $count openstaande items op je lijst.';
+  }
 }

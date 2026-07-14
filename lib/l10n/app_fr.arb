@@ -2198,5 +2198,17 @@
   "healthActive": "Actif",
   "batteryTarget": "Objectif : {target}",
   "commonApply": "Appliquer",
-  "commonDetail": "Détail"
+  "commonDetail": "Détail",
+  "insightSpendingHighTitle": "Les dépenses approchent le revenu",
+  "insightSpendingHighMsg": "Ce mois-ci, vos dépenses (€{expense}) ont atteint environ {percent}% de vos revenus (€{income}).",
+  "insightSavingTitle": "Vous êtes sur la voie de l'épargne",
+  "insightSavingMsg": "Ce mois-ci, vous économisez environ {percent}% de vos revenus. Bravo !",
+  "insightFixedTitle": "Vos charges fixes mensuelles",
+  "insightFixedMsg": "{count} abonnements/dépenses · total ≈€{total}/mois.",
+  "insightChildAssessTitle": "Évaluation pour {name}",
+  "insightChildAssessMsg": "L'évaluation des compétences de {name} n'a pas encore été faite. Commencez pour suivre le développement.",
+  "insightShoppingEmptyTitle": "Votre liste de courses est vide",
+  "insightShoppingEmptyMsg": "Avec la liste de courses IA, créez rapidement une liste.",
+  "insightShoppingTimeTitle": "C'est l'heure des courses",
+  "insightShoppingTimeMsg": "Vous avez {count} articles en attente sur votre liste."
 }

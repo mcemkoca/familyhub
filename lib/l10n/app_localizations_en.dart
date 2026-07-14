@@ -6674,4 +6674,53 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get commonDetail => 'Detail';
+
+  @override
+  String get insightSpendingHighTitle => 'Spending is nearing income';
+
+  @override
+  String insightSpendingHighMsg(Object expense, Object income, Object percent) {
+    return 'This month your spending (€$expense) reached about $percent% of your income (€$income).';
+  }
+
+  @override
+  String get insightSavingTitle => 'You\'re on track to save';
+
+  @override
+  String insightSavingMsg(Object percent) {
+    return 'This month you\'re saving about $percent% of your income. Great!';
+  }
+
+  @override
+  String get insightFixedTitle => 'Your fixed monthly expenses';
+
+  @override
+  String insightFixedMsg(Object count, Object total) {
+    return '$count subscriptions/expenses · total ≈€$total/month.';
+  }
+
+  @override
+  String insightChildAssessTitle(Object name) {
+    return 'Assessment for $name';
+  }
+
+  @override
+  String insightChildAssessMsg(Object name) {
+    return 'The skill assessment for $name hasn\'t been done yet. Start to track development.';
+  }
+
+  @override
+  String get insightShoppingEmptyTitle => 'Your shopping list is empty';
+
+  @override
+  String get insightShoppingEmptyMsg =>
+      'Quickly create a shopping list with the AI grocery list.';
+
+  @override
+  String get insightShoppingTimeTitle => 'Time to shop';
+
+  @override
+  String insightShoppingTimeMsg(Object count) {
+    return 'You have $count pending items on your list.';
+  }
 }

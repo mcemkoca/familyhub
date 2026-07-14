@@ -2198,5 +2198,17 @@
   "healthActive": "Active",
   "batteryTarget": "Target: {target}",
   "commonApply": "Apply",
-  "commonDetail": "Detail"
+  "commonDetail": "Detail",
+  "insightSpendingHighTitle": "Spending is nearing income",
+  "insightSpendingHighMsg": "This month your spending (€{expense}) reached about {percent}% of your income (€{income}).",
+  "insightSavingTitle": "You're on track to save",
+  "insightSavingMsg": "This month you're saving about {percent}% of your income. Great!",
+  "insightFixedTitle": "Your fixed monthly expenses",
+  "insightFixedMsg": "{count} subscriptions/expenses · total ≈€{total}/month.",
+  "insightChildAssessTitle": "Assessment for {name}",
+  "insightChildAssessMsg": "The skill assessment for {name} hasn't been done yet. Start to track development.",
+  "insightShoppingEmptyTitle": "Your shopping list is empty",
+  "insightShoppingEmptyMsg": "Quickly create a shopping list with the AI grocery list.",
+  "insightShoppingTimeTitle": "Time to shop",
+  "insightShoppingTimeMsg": "You have {count} pending items on your list."
 }

@@ -2641,5 +2641,50 @@
     }
   },
   "commonApply": "Uygula",
-  "commonDetail": "Detay"
+  "commonDetail": "Detay",
+  "insightSpendingHighTitle": "Harcamalar gelire yaklaştı",
+  "insightSpendingHighMsg": "Bu ay giderin (€{expense}) gelirinin (€{income}) yaklaşık %{percent} kadarına ulaştı.",
+  "@insightSpendingHighMsg": {
+    "placeholders": {
+      "expense": {},
+      "income": {},
+      "percent": {}
+    }
+  },
+  "insightSavingTitle": "Tasarruf yolundasın",
+  "insightSavingMsg": "Bu ay gelirinin yaklaşık %{percent} kadarını biriktiriyorsun. Harika!",
+  "@insightSavingMsg": {
+    "placeholders": {
+      "percent": {}
+    }
+  },
+  "insightFixedTitle": "Aylık sabit giderin",
+  "insightFixedMsg": "{count} abonelik/gider · toplam ≈€{total}/ay.",
+  "@insightFixedMsg": {
+    "placeholders": {
+      "count": {},
+      "total": {}
+    }
+  },
+  "insightChildAssessTitle": "{name} için değerlendirme",
+  "@insightChildAssessTitle": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "insightChildAssessMsg": "{name} için beceri değerlendirmesi henüz yapılmadı. Gelişimi takip etmek için başlayın.",
+  "@insightChildAssessMsg": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "insightShoppingEmptyTitle": "Alışveriş listen boş",
+  "insightShoppingEmptyMsg": "AI market listesiyle hızlıca bir alışveriş listesi oluşturabilirsin.",
+  "insightShoppingTimeTitle": "Alışveriş zamanı",
+  "insightShoppingTimeMsg": "Listende {count} bekleyen ürün var.",
+  "@insightShoppingTimeMsg": {
+    "placeholders": {
+      "count": {}
+    }
+  }
 }

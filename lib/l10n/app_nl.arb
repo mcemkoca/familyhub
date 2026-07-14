@@ -2198,5 +2198,17 @@
   "healthActive": "Actief",
   "batteryTarget": "Doel: {target}",
   "commonApply": "Toepassen",
-  "commonDetail": "Details"
+  "commonDetail": "Details",
+  "insightSpendingHighTitle": "Uitgaven naderen inkomen",
+  "insightSpendingHighMsg": "Deze maand bereikten je uitgaven (€{expense}) ongeveer {percent}% van je inkomen (€{income}).",
+  "insightSavingTitle": "Je bent aan het sparen",
+  "insightSavingMsg": "Deze maand spaar je ongeveer {percent}% van je inkomen. Goed bezig!",
+  "insightFixedTitle": "Je vaste maandlasten",
+  "insightFixedMsg": "{count} abonnementen/uitgaven · totaal ≈€{total}/maand.",
+  "insightChildAssessTitle": "Beoordeling voor {name}",
+  "insightChildAssessMsg": "De vaardigheidsbeoordeling voor {name} is nog niet gedaan. Begin om de ontwikkeling te volgen.",
+  "insightShoppingEmptyTitle": "Je boodschappenlijst is leeg",
+  "insightShoppingEmptyMsg": "Met de AI-boodschappenlijst maak je snel een lijst.",
+  "insightShoppingTimeTitle": "Tijd om te winkelen",
+  "insightShoppingTimeMsg": "Je hebt {count} openstaande items op je lijst."
 }

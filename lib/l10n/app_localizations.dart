@@ -12545,6 +12545,78 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Detay'**
   String get commonDetail;
+
+  /// No description provided for @insightSpendingHighTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Harcamalar gelire yaklaştı'**
+  String get insightSpendingHighTitle;
+
+  /// No description provided for @insightSpendingHighMsg.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu ay giderin (€{expense}) gelirinin (€{income}) yaklaşık %{percent} kadarına ulaştı.'**
+  String insightSpendingHighMsg(Object expense, Object income, Object percent);
+
+  /// No description provided for @insightSavingTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tasarruf yolundasın'**
+  String get insightSavingTitle;
+
+  /// No description provided for @insightSavingMsg.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu ay gelirinin yaklaşık %{percent} kadarını biriktiriyorsun. Harika!'**
+  String insightSavingMsg(Object percent);
+
+  /// No description provided for @insightFixedTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aylık sabit giderin'**
+  String get insightFixedTitle;
+
+  /// No description provided for @insightFixedMsg.
+  ///
+  /// In tr, this message translates to:
+  /// **'{count} abonelik/gider · toplam ≈€{total}/ay.'**
+  String insightFixedMsg(Object count, Object total);
+
+  /// No description provided for @insightChildAssessTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'{name} için değerlendirme'**
+  String insightChildAssessTitle(Object name);
+
+  /// No description provided for @insightChildAssessMsg.
+  ///
+  /// In tr, this message translates to:
+  /// **'{name} için beceri değerlendirmesi henüz yapılmadı. Gelişimi takip etmek için başlayın.'**
+  String insightChildAssessMsg(Object name);
+
+  /// No description provided for @insightShoppingEmptyTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alışveriş listen boş'**
+  String get insightShoppingEmptyTitle;
+
+  /// No description provided for @insightShoppingEmptyMsg.
+  ///
+  /// In tr, this message translates to:
+  /// **'AI market listesiyle hızlıca bir alışveriş listesi oluşturabilirsin.'**
+  String get insightShoppingEmptyMsg;
+
+  /// No description provided for @insightShoppingTimeTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alışveriş zamanı'**
+  String get insightShoppingTimeTitle;
+
+  /// No description provided for @insightShoppingTimeMsg.
+  ///
+  /// In tr, this message translates to:
+  /// **'Listende {count} bekleyen ürün var.'**
+  String insightShoppingTimeMsg(Object count);
 }
 
 class _AppLocalizationsDelegate
