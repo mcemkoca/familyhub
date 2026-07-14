@@ -6544,4 +6544,50 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get authBiometricNeedLoginFirst =>
       'Önce e-posta ile giriş yapın, sonra parmak izi aktifleşir';
+
+  @override
+  String get devColorGameWin =>
+      'Harika iş çıkardın! Yarın yeni renkler seni bekliyor.';
+
+  @override
+  String get commonPlayAgain => 'Tekrar Oyna';
+
+  @override
+  String get commonFinish => 'Bitir';
+
+  @override
+  String get devColorGameTitle => 'Renkleri Eşleştir';
+
+  @override
+  String devColorGameToday(Object theme) {
+    return 'Bugünün oyunu: $theme';
+  }
+
+  @override
+  String devColorGameRound(Object current, Object total) {
+    return 'Tur $current/$total';
+  }
+
+  @override
+  String get devColorGameFindColor => 'Bu rengi bul:';
+
+  @override
+  String devStoryLabel(Object index) {
+    return 'Hikaye $index';
+  }
+
+  @override
+  String get devStoryReadOnline => 'İnternetten devamını oku';
+
+  @override
+  String get priorityLow => 'Düşük';
+
+  @override
+  String get priorityMedium => 'Orta';
+
+  @override
+  String get priorityHigh => 'Yüksek';
+
+  @override
+  String get taskTitleRequired => 'Görev başlığı gerekli';
 }

@@ -12293,6 +12293,84 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Önce e-posta ile giriş yapın, sonra parmak izi aktifleşir'**
   String get authBiometricNeedLoginFirst;
+
+  /// No description provided for @devColorGameWin.
+  ///
+  /// In tr, this message translates to:
+  /// **'Harika iş çıkardın! Yarın yeni renkler seni bekliyor.'**
+  String get devColorGameWin;
+
+  /// No description provided for @commonPlayAgain.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tekrar Oyna'**
+  String get commonPlayAgain;
+
+  /// No description provided for @commonFinish.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bitir'**
+  String get commonFinish;
+
+  /// No description provided for @devColorGameTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Renkleri Eşleştir'**
+  String get devColorGameTitle;
+
+  /// No description provided for @devColorGameToday.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugünün oyunu: {theme}'**
+  String devColorGameToday(Object theme);
+
+  /// No description provided for @devColorGameRound.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tur {current}/{total}'**
+  String devColorGameRound(Object current, Object total);
+
+  /// No description provided for @devColorGameFindColor.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu rengi bul:'**
+  String get devColorGameFindColor;
+
+  /// No description provided for @devStoryLabel.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hikaye {index}'**
+  String devStoryLabel(Object index);
+
+  /// No description provided for @devStoryReadOnline.
+  ///
+  /// In tr, this message translates to:
+  /// **'İnternetten devamını oku'**
+  String get devStoryReadOnline;
+
+  /// No description provided for @priorityLow.
+  ///
+  /// In tr, this message translates to:
+  /// **'Düşük'**
+  String get priorityLow;
+
+  /// No description provided for @priorityMedium.
+  ///
+  /// In tr, this message translates to:
+  /// **'Orta'**
+  String get priorityMedium;
+
+  /// No description provided for @priorityHigh.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yüksek'**
+  String get priorityHigh;
+
+  /// No description provided for @taskTitleRequired.
+  ///
+  /// In tr, this message translates to:
+  /// **'Görev başlığı gerekli'**
+  String get taskTitleRequired;
 }
 
 class _AppLocalizationsDelegate

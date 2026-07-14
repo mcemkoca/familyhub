@@ -6523,4 +6523,50 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get authBiometricNeedLoginFirst =>
       'Sign in with email first, then fingerprint will be enabled';
+
+  @override
+  String get devColorGameWin =>
+      'Great job! New colors are waiting for you tomorrow.';
+
+  @override
+  String get commonPlayAgain => 'Play again';
+
+  @override
+  String get commonFinish => 'Finish';
+
+  @override
+  String get devColorGameTitle => 'Match the colors';
+
+  @override
+  String devColorGameToday(Object theme) {
+    return 'Today\'s game: $theme';
+  }
+
+  @override
+  String devColorGameRound(Object current, Object total) {
+    return 'Round $current/$total';
+  }
+
+  @override
+  String get devColorGameFindColor => 'Find this color:';
+
+  @override
+  String devStoryLabel(Object index) {
+    return 'Story $index';
+  }
+
+  @override
+  String get devStoryReadOnline => 'Read more online';
+
+  @override
+  String get priorityLow => 'Low';
+
+  @override
+  String get priorityMedium => 'Medium';
+
+  @override
+  String get priorityHigh => 'High';
+
+  @override
+  String get taskTitleRequired => 'Task title is required';
 }

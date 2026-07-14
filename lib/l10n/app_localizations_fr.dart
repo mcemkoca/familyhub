@@ -6550,4 +6550,50 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get authBiometricNeedLoginFirst =>
       'Connectez-vous d\'abord par e-mail, l\'empreinte sera ensuite activée';
+
+  @override
+  String get devColorGameWin =>
+      'Bravo ! De nouvelles couleurs t\'attendent demain.';
+
+  @override
+  String get commonPlayAgain => 'Rejouer';
+
+  @override
+  String get commonFinish => 'Terminer';
+
+  @override
+  String get devColorGameTitle => 'Associe les couleurs';
+
+  @override
+  String devColorGameToday(Object theme) {
+    return 'Jeu du jour : $theme';
+  }
+
+  @override
+  String devColorGameRound(Object current, Object total) {
+    return 'Tour $current/$total';
+  }
+
+  @override
+  String get devColorGameFindColor => 'Trouve cette couleur :';
+
+  @override
+  String devStoryLabel(Object index) {
+    return 'Histoire $index';
+  }
+
+  @override
+  String get devStoryReadOnline => 'Lire la suite en ligne';
+
+  @override
+  String get priorityLow => 'Faible';
+
+  @override
+  String get priorityMedium => 'Moyen';
+
+  @override
+  String get priorityHigh => 'Élevé';
+
+  @override
+  String get taskTitleRequired => 'Le titre de la tâche est requis';
 }

@@ -2538,5 +2538,34 @@
   "authErrSessionMissing": "Oturumunuz bulunamadı. Lütfen tekrar giriş yapın.",
   "authErrUnknown": "Giriş yapılamadı. Lütfen tekrar deneyin.",
   "authBiometricNotAvailable": "Biyometrik kimlik doğrulama desteklenmiyor",
-  "authBiometricNeedLoginFirst": "Önce e-posta ile giriş yapın, sonra parmak izi aktifleşir"
+  "authBiometricNeedLoginFirst": "Önce e-posta ile giriş yapın, sonra parmak izi aktifleşir",
+  "devColorGameWin": "Harika iş çıkardın! Yarın yeni renkler seni bekliyor.",
+  "commonPlayAgain": "Tekrar Oyna",
+  "commonFinish": "Bitir",
+  "devColorGameTitle": "Renkleri Eşleştir",
+  "devColorGameToday": "Bugünün oyunu: {theme}",
+  "@devColorGameToday": {
+    "placeholders": {
+      "theme": {}
+    }
+  },
+  "devColorGameRound": "Tur {current}/{total}",
+  "@devColorGameRound": {
+    "placeholders": {
+      "current": {},
+      "total": {}
+    }
+  },
+  "devColorGameFindColor": "Bu rengi bul:",
+  "devStoryLabel": "Hikaye {index}",
+  "@devStoryLabel": {
+    "placeholders": {
+      "index": {}
+    }
+  },
+  "devStoryReadOnline": "İnternetten devamını oku",
+  "priorityLow": "Düşük",
+  "priorityMedium": "Orta",
+  "priorityHigh": "Yüksek",
+  "taskTitleRequired": "Görev başlığı gerekli"
 }

@@ -2156,5 +2156,18 @@
   "authErrSessionMissing": "Je sessie is niet gevonden. Meld je opnieuw aan.",
   "authErrUnknown": "Aanmelden mislukt. Probeer het opnieuw.",
   "authBiometricNotAvailable": "Biometrische verificatie wordt niet ondersteund",
-  "authBiometricNeedLoginFirst": "Meld je eerst aan met e-mail; daarna wordt de vingerafdruk actief"
+  "authBiometricNeedLoginFirst": "Meld je eerst aan met e-mail; daarna wordt de vingerafdruk actief",
+  "devColorGameWin": "Goed gedaan! Morgen wachten er nieuwe kleuren op je.",
+  "commonPlayAgain": "Opnieuw spelen",
+  "commonFinish": "Voltooien",
+  "devColorGameTitle": "Kleuren matchen",
+  "devColorGameToday": "Spel van vandaag: {theme}",
+  "devColorGameRound": "Ronde {current}/{total}",
+  "devColorGameFindColor": "Zoek deze kleur:",
+  "devStoryLabel": "Verhaal {index}",
+  "devStoryReadOnline": "Lees verder online",
+  "priorityLow": "Laag",
+  "priorityMedium": "Middel",
+  "priorityHigh": "Hoog",
+  "taskTitleRequired": "Taaktitel is verplicht"
 }

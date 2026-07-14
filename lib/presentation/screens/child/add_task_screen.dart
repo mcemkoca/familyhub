@@ -27,16 +27,16 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   final SpeechToText _speech = SpeechToText();
   bool _isListening = false;
 
-  final List<({String label, String value, Color color})> _priorities = [
-    (label: 'Düşük', value: 'low', color: Colors.green),
-    (label: 'Orta', value: 'medium', color: Colors.orange),
-    (label: 'Yüksek', value: 'high', color: Colors.red),
+  final List<({String value, Color color})> _priorities = [
+    (value: 'low', color: Colors.green),
+    (value: 'medium', color: Colors.orange),
+    (value: 'high', color: Colors.red),
   ];
 
   Future<void> _save() async {
     final title = _titleCtrl.text.trim();
     if (title.isEmpty) {
-      _showError('Görev başlığı gerekli');
+      _showError(AppLocalizations.of(context).taskTitleRequired);
       return;
     }
 
@@ -160,7 +160,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Başlık
-            Text(AppLocalizations.of(context).taskTitle,
+            Text(
+              AppLocalizations.of(context).taskTitle,
               style: const TextStyle(
                 color: Color(0xFF9CA3AF),
                 fontSize: 14,
@@ -199,7 +200,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     width: 48,
                     height: 48,
                     decoration: BoxDecoration(
-                      color: _isListening ? Colors.red : const Color(0xFF3B82F6),
+                      color: _isListening
+                          ? Colors.red
+                          : const Color(0xFF3B82F6),
                       borderRadius: BorderRadius.circular(14),
                     ),
                     child: Icon(
@@ -245,7 +248,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             const SizedBox(height: 24),
 
             // Öncelik
-            Text(AppLocalizations.of(context).priority,
+            Text(
+              AppLocalizations.of(context).priority,
               style: const TextStyle(
                 color: Color(0xFF9CA3AF),
                 fontSize: 14,
@@ -289,9 +293,13 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                 Text(
                                   switch (p.value) {
                                     'low' => AppLocalizations.of(context).atLow,
-                                    'medium' => AppLocalizations.of(context).atMedium,
-                                    'high' => AppLocalizations.of(context).atHigh,
-                                    _ => p.label,
+                                    'medium' => AppLocalizations.of(
+                                      context,
+                                    ).atMedium,
+                                    'high' => AppLocalizations.of(
+                                      context,
+                                    ).atHigh,
+                                    _ => p.value,
                                   },
                                   style: TextStyle(
                                     color: _priority == p.value
@@ -397,7 +405,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 onPressed: _isLoading ? null : _save,
                 child: _isLoading
                     ? const CircularProgressIndicator(color: Colors.white)
-                    : Text(AppLocalizations.of(context).gorevEkle,
+                    : Text(
+                        AppLocalizations.of(context).gorevEkle,
                         style: const TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.w700,

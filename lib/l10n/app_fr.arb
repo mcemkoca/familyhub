@@ -2156,5 +2156,18 @@
   "authErrSessionMissing": "Votre session est introuvable. Reconnectez-vous.",
   "authErrUnknown": "Échec de la connexion. Veuillez réessayer.",
   "authBiometricNotAvailable": "L'authentification biométrique n'est pas prise en charge",
-  "authBiometricNeedLoginFirst": "Connectez-vous d'abord par e-mail, l'empreinte sera ensuite activée"
+  "authBiometricNeedLoginFirst": "Connectez-vous d'abord par e-mail, l'empreinte sera ensuite activée",
+  "devColorGameWin": "Bravo ! De nouvelles couleurs t'attendent demain.",
+  "commonPlayAgain": "Rejouer",
+  "commonFinish": "Terminer",
+  "devColorGameTitle": "Associe les couleurs",
+  "devColorGameToday": "Jeu du jour : {theme}",
+  "devColorGameRound": "Tour {current}/{total}",
+  "devColorGameFindColor": "Trouve cette couleur :",
+  "devStoryLabel": "Histoire {index}",
+  "devStoryReadOnline": "Lire la suite en ligne",
+  "priorityLow": "Faible",
+  "priorityMedium": "Moyen",
+  "priorityHigh": "Élevé",
+  "taskTitleRequired": "Le titre de la tâche est requis"
 }

@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'child_dev_content.dart' show DevHeader;
 
 /// Renkleri Eşleştirme — günlük rotasyonlu, interaktif renk oyunu.
@@ -126,6 +127,7 @@ class _ColorGameScreenState extends State<ColorGameScreen> {
   }
 
   void _showResult() {
+    final l = AppLocalizations.of(context);
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -139,18 +141,25 @@ class _ColorGameScreenState extends State<ColorGameScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(_score >= _totalRounds * 0.7 ? '🎉' : '👍',
-                style: const TextStyle(fontSize: 56)),
+            Text(
+              _score >= _totalRounds * 0.7 ? '🎉' : '👍',
+              style: const TextStyle(fontSize: 56),
+            ),
             const SizedBox(height: 12),
-            Text('$_score / $_totalRounds doğru',
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.w800)),
+            Text(
+              '$_score / $_totalRounds doğru',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
             const SizedBox(height: 8),
-            const Text('Harika iş çıkardın! Yarın yeni renkler seni bekliyor.',
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 14)),
+            Text(
+              l.devColorGameWin,
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 14),
+            ),
             const SizedBox(height: 20),
             Row(
               children: [
@@ -169,7 +178,7 @@ class _ColorGameScreenState extends State<ColorGameScreen> {
                       side: const BorderSide(color: Color(0xFF8B5CF6)),
                       padding: const EdgeInsets.symmetric(vertical: 14),
                     ),
-                    child: const Text('Tekrar Oyna'),
+                    child: Text(l.commonPlayAgain),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -183,8 +192,10 @@ class _ColorGameScreenState extends State<ColorGameScreen> {
                       backgroundColor: const Color(0xFF8B5CF6),
                       padding: const EdgeInsets.symmetric(vertical: 14),
                     ),
-                    child: const Text('Bitir',
-                        style: TextStyle(color: Colors.white)),
+                    child: Text(
+                      l.commonFinish,
+                      style: const TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
               ],
@@ -197,40 +208,58 @@ class _ColorGameScreenState extends State<ColorGameScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
       body: SafeArea(
         child: Column(
           children: [
             DevHeader(
-              title: 'Renkleri Eşleştir',
-              subtitle: 'Bugünün oyunu: ${_theme.$1}',
+              title: l.devColorGameTitle,
+              subtitle: l.devColorGameToday(_theme.$1),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
-                  Text('Tur ${_round + 1}/$_totalRounds',
-                      style: const TextStyle(
-                          color: Color(0xFF9CA3AF),
-                          fontWeight: FontWeight.w600)),
+                  Text(
+                    l.devColorGameRound(_round + 1, _totalRounds),
+                    style: const TextStyle(
+                      color: Color(0xFF9CA3AF),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   const Spacer(),
-                  Row(children: [
-                    const Icon(Icons.star, color: Color(0xFFEAB308), size: 18),
-                    const SizedBox(width: 4),
-                    Text('$_score',
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.star,
+                        color: Color(0xFFEAB308),
+                        size: 18,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        '$_score',
                         style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 16)),
-                  ]),
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
             const SizedBox(height: 24),
             // Hedef
-            Text('Bu rengi bul:',
-                style: TextStyle(color: Colors.white.withAlpha(200), fontSize: 15)),
+            Text(
+              l.devColorGameFindColor,
+              style: TextStyle(
+                color: Colors.white.withAlpha(200),
+                fontSize: 15,
+              ),
+            ),
             const SizedBox(height: 12),
             Container(
               width: 120,
@@ -239,16 +268,22 @@ class _ColorGameScreenState extends State<ColorGameScreen> {
                 color: _target.color,
                 borderRadius: BorderRadius.circular(28),
                 boxShadow: [
-                  BoxShadow(color: _target.color.withAlpha(120), blurRadius: 20),
+                  BoxShadow(
+                    color: _target.color.withAlpha(120),
+                    blurRadius: 20,
+                  ),
                 ],
               ),
             ),
             const SizedBox(height: 12),
-            Text(_target.name,
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w900)),
+            Text(
+              _target.name,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 22,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
             const Spacer(),
             // Seçenekler
             Padding(
@@ -274,18 +309,24 @@ class _ColorGameScreenState extends State<ColorGameScreen> {
                           color: correct
                               ? Colors.white
                               : wrong
-                                  ? Colors.red
-                                  : Colors.transparent,
+                              ? Colors.red
+                              : Colors.transparent,
                           width: 4,
                         ),
                       ),
                       child: correct
-                          ? const Icon(Icons.check_circle,
-                              color: Colors.white, size: 40)
+                          ? const Icon(
+                              Icons.check_circle,
+                              color: Colors.white,
+                              size: 40,
+                            )
                           : wrong
-                              ? const Icon(Icons.cancel,
-                                  color: Colors.white, size: 40)
-                              : null,
+                          ? const Icon(
+                              Icons.cancel,
+                              color: Colors.white,
+                              size: 40,
+                            )
+                          : null,
                     ),
                   );
                 }),

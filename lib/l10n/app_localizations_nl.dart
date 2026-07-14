@@ -6529,4 +6529,50 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get authBiometricNeedLoginFirst =>
       'Meld je eerst aan met e-mail; daarna wordt de vingerafdruk actief';
+
+  @override
+  String get devColorGameWin =>
+      'Goed gedaan! Morgen wachten er nieuwe kleuren op je.';
+
+  @override
+  String get commonPlayAgain => 'Opnieuw spelen';
+
+  @override
+  String get commonFinish => 'Voltooien';
+
+  @override
+  String get devColorGameTitle => 'Kleuren matchen';
+
+  @override
+  String devColorGameToday(Object theme) {
+    return 'Spel van vandaag: $theme';
+  }
+
+  @override
+  String devColorGameRound(Object current, Object total) {
+    return 'Ronde $current/$total';
+  }
+
+  @override
+  String get devColorGameFindColor => 'Zoek deze kleur:';
+
+  @override
+  String devStoryLabel(Object index) {
+    return 'Verhaal $index';
+  }
+
+  @override
+  String get devStoryReadOnline => 'Lees verder online';
+
+  @override
+  String get priorityLow => 'Laag';
+
+  @override
+  String get priorityMedium => 'Middel';
+
+  @override
+  String get priorityHigh => 'Hoog';
+
+  @override
+  String get taskTitleRequired => 'Taaktitel is verplicht';
 }

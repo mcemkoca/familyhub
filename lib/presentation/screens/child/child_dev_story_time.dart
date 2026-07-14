@@ -66,10 +66,13 @@ class StoryTimeScreen extends StatelessWidget {
             Positioned(
               right: -10,
               bottom: -18,
-              child: Text(s.emoji,
-                  style: TextStyle(
-                      fontSize: 120,
-                      color: Colors.white.withAlpha(40))),
+              child: Text(
+                s.emoji,
+                style: TextStyle(
+                  fontSize: 120,
+                  color: Colors.white.withAlpha(40),
+                ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(18),
@@ -80,36 +83,52 @@ class StoryTimeScreen extends StatelessWidget {
                     children: [
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 4),
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.black.withAlpha(40),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Text('Hikaye ${index + 1}',
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 11,
-                                fontWeight: FontWeight.w700)),
+                        child: Text(
+                          AppLocalizations.of(context).devStoryLabel(index + 1),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
                       ),
                     ],
                   ),
                   const Spacer(),
-                  Text(s.titleOf(loc),
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w900)),
+                  Text(
+                    s.titleOf(loc),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
                   const SizedBox(height: 4),
                   Row(
                     children: [
-                      const Icon(Icons.menu_book,
-                          size: 14, color: Colors.white70),
+                      const Icon(
+                        Icons.menu_book,
+                        size: 14,
+                        color: Colors.white70,
+                      ),
                       const SizedBox(width: 6),
-                      Text(AppLocalizations.of(context).stPageRead(s.pagesOf(loc).length),
-                          style: const TextStyle(
-                              color: Colors.white70,
-                              fontSize: 12.5,
-                              fontWeight: FontWeight.w600)),
+                      Text(
+                        AppLocalizations.of(
+                          context,
+                        ).stPageRead(s.pagesOf(loc).length),
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 12.5,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -152,7 +171,10 @@ class _StoryReaderScreenState extends State<StoryReaderScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            DevHeader(title: s.titleOf(loc), subtitle: AppLocalizations.of(context).stIllustrated),
+            DevHeader(
+              title: s.titleOf(loc),
+              subtitle: AppLocalizations.of(context).stIllustrated,
+            ),
             // Sayfa göstergesi
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -191,21 +213,40 @@ class _StoryReaderScreenState extends State<StoryReaderScreen> {
               child: Row(
                 children: [
                   if (_page > 0)
-                    _navBtn('Geri', Icons.arrow_back, () {
-                      _controller.previousPage(
+                    _navBtn(
+                      'Geri',
+                      Icons.arrow_back,
+                      () {
+                        _controller.previousPage(
                           duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeOut);
-                    }, filled: false, color: s.gradient.first),
+                          curve: Curves.easeOut,
+                        );
+                      },
+                      filled: false,
+                      color: s.gradient.first,
+                    ),
                   const Spacer(),
                   if (_page < totalPages - 1)
-                    _navBtn('İleri', Icons.arrow_forward, () {
-                      _controller.nextPage(
+                    _navBtn(
+                      'İleri',
+                      Icons.arrow_forward,
+                      () {
+                        _controller.nextPage(
                           duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeOut);
-                    }, filled: true, color: s.gradient.first)
+                          curve: Curves.easeOut,
+                        );
+                      },
+                      filled: true,
+                      color: s.gradient.first,
+                    )
                   else
-                    _navBtn('Bitir', Icons.check, () => Navigator.pop(context),
-                        filled: true, color: s.gradient.first),
+                    _navBtn(
+                      'Bitir',
+                      Icons.check,
+                      () => Navigator.pop(context),
+                      filled: true,
+                      color: s.gradient.first,
+                    ),
                 ],
               ),
             ),
@@ -233,14 +274,20 @@ class _StoryReaderScreenState extends State<StoryReaderScreen> {
               borderRadius: BorderRadius.circular(24),
             ),
             child: Center(
-                child: Text(s.emoji, style: const TextStyle(fontSize: 110))),
+              child: Text(s.emoji, style: const TextStyle(fontSize: 110)),
+            ),
           ),
           const SizedBox(height: 22),
           Expanded(
             child: SingleChildScrollView(
-              child: Text(text,
-                  style: const TextStyle(
-                      color: Color(0xFFE5E7EB), fontSize: 18, height: 1.6)),
+              child: Text(
+                text,
+                style: const TextStyle(
+                  color: Color(0xFFE5E7EB),
+                  fontSize: 18,
+                  height: 1.6,
+                ),
+              ),
             ),
           ),
         ],
@@ -264,16 +311,24 @@ class _StoryReaderScreenState extends State<StoryReaderScreen> {
             child: const Icon(Icons.lightbulb, color: Colors.white, size: 44),
           ),
           const SizedBox(height: 20),
-          Text(AppLocalizations.of(context).stLesson,
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w800)),
+          Text(
+            AppLocalizations.of(context).stLesson,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
           const SizedBox(height: 12),
-          Text(s.moralOf(Localizations.localeOf(context).languageCode),
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                  color: Color(0xFFD1D5DB), fontSize: 16, height: 1.5)),
+          Text(
+            s.moralOf(Localizations.localeOf(context).languageCode),
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: Color(0xFFD1D5DB),
+              fontSize: 16,
+              height: 1.5,
+            ),
+          ),
           const SizedBox(height: 24),
           if (s.readMoreUrl != null)
             OutlinedButton.icon(
@@ -282,18 +337,24 @@ class _StoryReaderScreenState extends State<StoryReaderScreen> {
                 foregroundColor: s.gradient.first,
                 side: BorderSide(color: s.gradient.first),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14)),
+                  borderRadius: BorderRadius.circular(14),
+                ),
               ),
               icon: const Icon(Icons.open_in_new, size: 18),
-              label: const Text('İnternetten devamını oku'),
+              label: Text(AppLocalizations.of(context).devStoryReadOnline),
             ),
         ],
       ),
     );
   }
 
-  Widget _navBtn(String label, IconData icon, VoidCallback onTap,
-      {required bool filled, required Color color}) {
+  Widget _navBtn(
+    String label,
+    IconData icon,
+    VoidCallback onTap, {
+    required bool filled,
+    required Color color,
+  }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -307,10 +368,13 @@ class _StoryReaderScreenState extends State<StoryReaderScreen> {
           children: [
             if (!filled) Icon(icon, size: 16, color: color),
             if (!filled) const SizedBox(width: 6),
-            Text(label,
-                style: TextStyle(
-                    color: filled ? Colors.white : color,
-                    fontWeight: FontWeight.w700)),
+            Text(
+              label,
+              style: TextStyle(
+                color: filled ? Colors.white : color,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
             if (filled) const SizedBox(width: 6),
             if (filled) Icon(icon, size: 16, color: Colors.white),
           ],

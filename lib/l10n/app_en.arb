@@ -2156,5 +2156,18 @@
   "authErrSessionMissing": "Your session was not found. Please sign in again.",
   "authErrUnknown": "Sign-in failed. Please try again.",
   "authBiometricNotAvailable": "Biometric authentication is not supported",
-  "authBiometricNeedLoginFirst": "Sign in with email first, then fingerprint will be enabled"
+  "authBiometricNeedLoginFirst": "Sign in with email first, then fingerprint will be enabled",
+  "devColorGameWin": "Great job! New colors are waiting for you tomorrow.",
+  "commonPlayAgain": "Play again",
+  "commonFinish": "Finish",
+  "devColorGameTitle": "Match the colors",
+  "devColorGameToday": "Today's game: {theme}",
+  "devColorGameRound": "Round {current}/{total}",
+  "devColorGameFindColor": "Find this color:",
+  "devStoryLabel": "Story {index}",
+  "devStoryReadOnline": "Read more online",
+  "priorityLow": "Low",
+  "priorityMedium": "Medium",
+  "priorityHigh": "High",
+  "taskTitleRequired": "Task title is required"
 }
