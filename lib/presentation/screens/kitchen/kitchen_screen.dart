@@ -38,11 +38,12 @@ class _RecipeThumbState extends State<_RecipeThumb> {
     final t = (widget.recipe['title'] ?? '').toString();
     final c = (widget.recipe['category'] ?? '').toString();
     final url = await MealImageService.fetchThumb(t, c);
-    if (mounted)
+    if (mounted) {
       setState(() {
         _url = url;
         _loading = false;
       });
+    }
   }
 
   Widget _fallback() => Container(

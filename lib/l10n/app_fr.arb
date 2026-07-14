@@ -2281,5 +2281,7 @@
   "csCalendarsFound": "{n} calendriers trouvés",
   "csProviderSettings": "Paramètres {provider}",
   "csPermNeededShort": "Accès au calendrier requis. Autorisez via les paramètres.",
-  "csPermNeededBody": "Pour synchroniser vos calendriers, vous devez autoriser l'accès au calendrier."
+  "csPermNeededBody": "Pour synchroniser vos calendriers, vous devez autoriser l'accès au calendrier.",
+  "childPermissions": "Autorisations",
+  "budgetTapToEdit": "Appuyez pour modifier"
 }

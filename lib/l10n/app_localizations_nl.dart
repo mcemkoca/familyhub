@@ -6972,4 +6972,10 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get csPermNeededBody =>
       'Om je agenda\'s te synchroniseren moet je agendatoegang verlenen.';
+
+  @override
+  String get childPermissions => 'Machtigingen';
+
+  @override
+  String get budgetTapToEdit => 'Tik om te bewerken';
 }

@@ -2281,5 +2281,7 @@
   "csCalendarsFound": "{n} calendars found",
   "csProviderSettings": "{provider} settings",
   "csPermNeededShort": "Calendar access required. Grant it in settings.",
-  "csPermNeededBody": "To sync your calendars you need to grant calendar access."
+  "csPermNeededBody": "To sync your calendars you need to grant calendar access.",
+  "childPermissions": "Permissions",
+  "budgetTapToEdit": "Tap to edit"
 }

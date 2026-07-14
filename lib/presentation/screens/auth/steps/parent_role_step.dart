@@ -30,7 +30,9 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
     HapticFeedback.mediumImpact();
     widget.onSaved({
       'role': _role,
-      'display_name': _displayNameController.text.trim().isEmpty ? null : _displayNameController.text.trim(),
+      'display_name': _displayNameController.text.trim().isEmpty
+          ? null
+          : _displayNameController.text.trim(),
       'color': '#${_selectedColor.toARGB32().toRadixString(16).substring(2)}',
     });
   }
@@ -43,13 +45,13 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
 
   @override
   Widget build(BuildContext context) {
-
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(AppLocalizations.of(context).aileRolu,
+          Text(
+            AppLocalizations.of(context).aileRolu,
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -57,14 +59,13 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
             ),
           ),
           const SizedBox(height: 4),
-          Text(AppLocalizations.of(context).ailedekiRolunuzuVeGorunumunuzuSecin,
-            style: const TextStyle(
-              fontSize: 14,
-              color: Color(0xFF6B7280),
-            ),
+          Text(
+            AppLocalizations.of(context).ailedekiRolunuzuVeGorunumunuzuSecin,
+            style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
           ),
           const SizedBox(height: 24),
-          Text(AppLocalizations.of(context).rolunuz,
+          Text(
+            AppLocalizations.of(context).rolunuz,
             style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
@@ -85,7 +86,7 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
               const SizedBox(width: 12),
               Expanded(
                 child: _RoleChip(
-                  label: 'Ebeveyn',
+                  label: AppLocalizations.of(context).roleParent,
                   icon: Icons.people,
                   selected: _role == 'parent',
                   onTap: () => setState(() => _role = 'parent'),
@@ -109,7 +110,8 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
             ),
           ),
           const SizedBox(height: 24),
-          Text(AppLocalizations.of(context).renkSecimi,
+          Text(
+            AppLocalizations.of(context).renkSecimi,
             style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
@@ -139,11 +141,20 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
                           width: 3,
                         ),
                         boxShadow: selected
-                            ? [BoxShadow(color: color.withAlpha(80), blurRadius: 12)]
+                            ? [
+                                BoxShadow(
+                                  color: color.withAlpha(80),
+                                  blurRadius: 12,
+                                ),
+                              ]
                             : null,
                       ),
                       child: selected
-                          ? const Icon(Icons.check, color: Colors.white, size: 20)
+                          ? const Icon(
+                              Icons.check,
+                              color: Colors.white,
+                              size: 20,
+                            )
                           : null,
                     ),
                     const SizedBox(height: 4),
@@ -172,7 +183,13 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
-              child: Text(AppLocalizations.of(context).next, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+              child: Text(
+                AppLocalizations.of(context).next,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ),
           ),
         ],
@@ -214,14 +231,18 @@ class _RoleChip extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: selected ? const Color(0xFF6366F1) : (const Color(0xFF6B7280)),
+              color: selected
+                  ? const Color(0xFF6366F1)
+                  : (const Color(0xFF6B7280)),
             ),
             const SizedBox(height: 8),
             Text(
               label,
               style: TextStyle(
                 fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
-                color: selected ? const Color(0xFF6366F1) : (const Color(0xFF6B7280)),
+                color: selected
+                    ? const Color(0xFF6366F1)
+                    : (const Color(0xFF6B7280)),
               ),
             ),
           ],

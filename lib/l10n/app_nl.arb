@@ -2281,5 +2281,7 @@
   "csCalendarsFound": "{n} agenda's gevonden",
   "csProviderSettings": "{provider} instellingen",
   "csPermNeededShort": "Agendatoegang vereist. Geef toestemming via instellingen.",
-  "csPermNeededBody": "Om je agenda's te synchroniseren moet je agendatoegang verlenen."
+  "csPermNeededBody": "Om je agenda's te synchroniseren moet je agendatoegang verlenen.",
+  "childPermissions": "Machtigingen",
+  "budgetTapToEdit": "Tik om te bewerken"
 }

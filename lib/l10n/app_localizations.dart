@@ -13043,6 +13043,18 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Takvimlerinizi senkronize etmek için takvim erişim izni vermeniz gerekiyor.'**
   String get csPermNeededBody;
+
+  /// No description provided for @childPermissions.
+  ///
+  /// In tr, this message translates to:
+  /// **'İzinler'**
+  String get childPermissions;
+
+  /// No description provided for @budgetTapToEdit.
+  ///
+  /// In tr, this message translates to:
+  /// **'Düzenlemek için dokun'**
+  String get budgetTapToEdit;
 }
 
 class _AppLocalizationsDelegate

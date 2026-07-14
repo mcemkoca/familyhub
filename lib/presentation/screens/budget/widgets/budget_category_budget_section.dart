@@ -1,6 +1,5 @@
 part of '../budget_screen.dart';
 
-
 class _CategoryBudgetSection extends StatelessWidget {
   final List<Transaction> transactions;
   final List<_Cat> categories;
@@ -17,7 +16,9 @@ class _CategoryBudgetSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final catTotals = <String, double>{};
-    for (final t in transactions.where((t) => t.type == TransactionType.expense)) {
+    for (final t in transactions.where(
+      (t) => t.type == TransactionType.expense,
+    )) {
       catTotals[t.category] = (catTotals[t.category] ?? 0) + t.amount;
     }
 
@@ -36,15 +37,21 @@ class _CategoryBudgetSection extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(AppLocalizations.of(context).kategoriButceleri,
+                Text(
+                  AppLocalizations.of(context).kategoriButceleri,
                   style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
                 ),
-                Text('Düzenlemek için dokun',
-                    style: TextStyle(
-                        fontSize: 11.5, color: Colors.white.withAlpha(120))),
+                Text(
+                  AppLocalizations.of(context).budgetTapToEdit,
+                  style: TextStyle(
+                    fontSize: 11.5,
+                    color: Colors.white.withAlpha(120),
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 12),
@@ -88,8 +95,12 @@ class _CategoryBudgetSection extends StatelessWidget {
                                   '${NumberFormat.currency(symbol: '€', decimalDigits: 0).format(spent)} / ${NumberFormat.currency(symbol: '€', decimalDigits: 0).format(limit)}',
                                   style: TextStyle(
                                     fontSize: 11,
-                                    color: isOver ? AppColors.error : const Color(0xFF6B7280),
-                                    fontWeight: isOver ? FontWeight.bold : FontWeight.normal,
+                                    color: isOver
+                                        ? AppColors.error
+                                        : const Color(0xFF6B7280),
+                                    fontWeight: isOver
+                                        ? FontWeight.bold
+                                        : FontWeight.normal,
                                   ),
                                 ),
                               ],
@@ -120,4 +131,3 @@ class _CategoryBudgetSection extends StatelessWidget {
     );
   }
 }
-

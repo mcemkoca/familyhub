@@ -2827,5 +2827,7 @@
     }
   },
   "csPermNeededShort": "Takvim erişim izni gerekli. Ayarlardan izin verin.",
-  "csPermNeededBody": "Takvimlerinizi senkronize etmek için takvim erişim izni vermeniz gerekiyor."
+  "csPermNeededBody": "Takvimlerinizi senkronize etmek için takvim erişim izni vermeniz gerekiyor.",
+  "childPermissions": "İzinler",
+  "budgetTapToEdit": "Düzenlemek için dokun"
 }

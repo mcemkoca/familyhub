@@ -6987,4 +6987,10 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get csPermNeededBody =>
       'Takvimlerinizi senkronize etmek için takvim erişim izni vermeniz gerekiyor.';
+
+  @override
+  String get childPermissions => 'İzinler';
+
+  @override
+  String get budgetTapToEdit => 'Düzenlemek için dokun';
 }

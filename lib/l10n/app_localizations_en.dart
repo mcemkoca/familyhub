@@ -6966,4 +6966,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get csPermNeededBody =>
       'To sync your calendars you need to grant calendar access.';
+
+  @override
+  String get childPermissions => 'Permissions';
+
+  @override
+  String get budgetTapToEdit => 'Tap to edit';
 }
