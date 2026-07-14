@@ -2188,5 +2188,15 @@
   "remSnooze10": "Snooze 10 min",
   "eduTimeUp": "Time's up! Activity completed",
   "eduActivityAdded": "Your activity was added",
-  "kitchenRecipeAdded": "\"{title}\" was added to your recipe box"
+  "kitchenRecipeAdded": "\"{title}\" was added to your recipe box",
+  "healthDoctorAppt": "Doctor appointment",
+  "healthAddMember": "Add family member",
+  "healthAddMedication": "Add medication — {name}",
+  "healthAddVitamin": "Add vitamin/supplement",
+  "healthAddReport": "Add report / document",
+  "healthAddAppt": "Add appointment — {name}",
+  "healthActive": "Active",
+  "batteryTarget": "Target: {target}",
+  "commonApply": "Apply",
+  "commonDetail": "Detail"
 }

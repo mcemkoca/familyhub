@@ -6644,4 +6644,40 @@ class AppLocalizationsNl extends AppLocalizations {
   String kitchenRecipeAdded(Object title) {
     return '\"$title\" is toegevoegd aan je receptenbox';
   }
+
+  @override
+  String get healthDoctorAppt => 'Doktersafspraak';
+
+  @override
+  String get healthAddMember => 'Gezinslid toevoegen';
+
+  @override
+  String healthAddMedication(Object name) {
+    return 'Medicijn toevoegen — $name';
+  }
+
+  @override
+  String get healthAddVitamin => 'Vitamine/supplement toevoegen';
+
+  @override
+  String get healthAddReport => 'Rapport / document toevoegen';
+
+  @override
+  String healthAddAppt(Object name) {
+    return 'Afspraak toevoegen — $name';
+  }
+
+  @override
+  String get healthActive => 'Actief';
+
+  @override
+  String batteryTarget(Object target) {
+    return 'Doel: $target';
+  }
+
+  @override
+  String get commonApply => 'Toepassen';
+
+  @override
+  String get commonDetail => 'Details';
 }

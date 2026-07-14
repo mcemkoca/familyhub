@@ -6638,4 +6638,40 @@ class AppLocalizationsEn extends AppLocalizations {
   String kitchenRecipeAdded(Object title) {
     return '\"$title\" was added to your recipe box';
   }
+
+  @override
+  String get healthDoctorAppt => 'Doctor appointment';
+
+  @override
+  String get healthAddMember => 'Add family member';
+
+  @override
+  String healthAddMedication(Object name) {
+    return 'Add medication — $name';
+  }
+
+  @override
+  String get healthAddVitamin => 'Add vitamin/supplement';
+
+  @override
+  String get healthAddReport => 'Add report / document';
+
+  @override
+  String healthAddAppt(Object name) {
+    return 'Add appointment — $name';
+  }
+
+  @override
+  String get healthActive => 'Active';
+
+  @override
+  String batteryTarget(Object target) {
+    return 'Target: $target';
+  }
+
+  @override
+  String get commonApply => 'Apply';
+
+  @override
+  String get commonDetail => 'Detail';
 }

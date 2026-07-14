@@ -2616,5 +2616,30 @@
     "placeholders": {
       "title": {}
     }
-  }
+  },
+  "healthDoctorAppt": "Doktor Randevusu",
+  "healthAddMember": "Aile Üyesi Ekle",
+  "healthAddMedication": "İlaç Ekle — {name}",
+  "@healthAddMedication": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "healthAddVitamin": "Vitamin/Takviye Ekle",
+  "healthAddReport": "Rapor / Belge Ekle",
+  "healthAddAppt": "Randevu Ekle — {name}",
+  "@healthAddAppt": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "healthActive": "Aktif",
+  "batteryTarget": "Hedef: {target}",
+  "@batteryTarget": {
+    "placeholders": {
+      "target": {}
+    }
+  },
+  "commonApply": "Uygula",
+  "commonDetail": "Detay"
 }

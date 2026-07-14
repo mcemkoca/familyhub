@@ -12485,6 +12485,66 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'\"{title}\" tarif kutuna eklendi'**
   String kitchenRecipeAdded(Object title);
+
+  /// No description provided for @healthDoctorAppt.
+  ///
+  /// In tr, this message translates to:
+  /// **'Doktor Randevusu'**
+  String get healthDoctorAppt;
+
+  /// No description provided for @healthAddMember.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile Üyesi Ekle'**
+  String get healthAddMember;
+
+  /// No description provided for @healthAddMedication.
+  ///
+  /// In tr, this message translates to:
+  /// **'İlaç Ekle — {name}'**
+  String healthAddMedication(Object name);
+
+  /// No description provided for @healthAddVitamin.
+  ///
+  /// In tr, this message translates to:
+  /// **'Vitamin/Takviye Ekle'**
+  String get healthAddVitamin;
+
+  /// No description provided for @healthAddReport.
+  ///
+  /// In tr, this message translates to:
+  /// **'Rapor / Belge Ekle'**
+  String get healthAddReport;
+
+  /// No description provided for @healthAddAppt.
+  ///
+  /// In tr, this message translates to:
+  /// **'Randevu Ekle — {name}'**
+  String healthAddAppt(Object name);
+
+  /// No description provided for @healthActive.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aktif'**
+  String get healthActive;
+
+  /// No description provided for @batteryTarget.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hedef: {target}'**
+  String batteryTarget(Object target);
+
+  /// No description provided for @commonApply.
+  ///
+  /// In tr, this message translates to:
+  /// **'Uygula'**
+  String get commonApply;
+
+  /// No description provided for @commonDetail.
+  ///
+  /// In tr, this message translates to:
+  /// **'Detay'**
+  String get commonDetail;
 }
 
 class _AppLocalizationsDelegate

@@ -6665,4 +6665,40 @@ class AppLocalizationsFr extends AppLocalizations {
   String kitchenRecipeAdded(Object title) {
     return '« $title » a été ajouté à votre boîte à recettes';
   }
+
+  @override
+  String get healthDoctorAppt => 'Rendez-vous médical';
+
+  @override
+  String get healthAddMember => 'Ajouter un membre';
+
+  @override
+  String healthAddMedication(Object name) {
+    return 'Ajouter un médicament — $name';
+  }
+
+  @override
+  String get healthAddVitamin => 'Ajouter vitamine/complément';
+
+  @override
+  String get healthAddReport => 'Ajouter rapport / document';
+
+  @override
+  String healthAddAppt(Object name) {
+    return 'Ajouter un rendez-vous — $name';
+  }
+
+  @override
+  String get healthActive => 'Actif';
+
+  @override
+  String batteryTarget(Object target) {
+    return 'Objectif : $target';
+  }
+
+  @override
+  String get commonApply => 'Appliquer';
+
+  @override
+  String get commonDetail => 'Détail';
 }

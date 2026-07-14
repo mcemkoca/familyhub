@@ -2188,5 +2188,15 @@
   "remSnooze10": "10 min uitstellen",
   "eduTimeUp": "Tijd is om! Activiteit voltooid",
   "eduActivityAdded": "Je activiteit is toegevoegd",
-  "kitchenRecipeAdded": "\"{title}\" is toegevoegd aan je receptenbox"
+  "kitchenRecipeAdded": "\"{title}\" is toegevoegd aan je receptenbox",
+  "healthDoctorAppt": "Doktersafspraak",
+  "healthAddMember": "Gezinslid toevoegen",
+  "healthAddMedication": "Medicijn toevoegen — {name}",
+  "healthAddVitamin": "Vitamine/supplement toevoegen",
+  "healthAddReport": "Rapport / document toevoegen",
+  "healthAddAppt": "Afspraak toevoegen — {name}",
+  "healthActive": "Actief",
+  "batteryTarget": "Doel: {target}",
+  "commonApply": "Toepassen",
+  "commonDetail": "Details"
 }

@@ -2188,5 +2188,15 @@
   "remSnooze10": "Reporter 10 min",
   "eduTimeUp": "Temps écoulé ! Activité terminée",
   "eduActivityAdded": "Votre activité a été ajoutée",
-  "kitchenRecipeAdded": "« {title} » a été ajouté à votre boîte à recettes"
+  "kitchenRecipeAdded": "« {title} » a été ajouté à votre boîte à recettes",
+  "healthDoctorAppt": "Rendez-vous médical",
+  "healthAddMember": "Ajouter un membre",
+  "healthAddMedication": "Ajouter un médicament — {name}",
+  "healthAddVitamin": "Ajouter vitamine/complément",
+  "healthAddReport": "Ajouter rapport / document",
+  "healthAddAppt": "Ajouter un rendez-vous — {name}",
+  "healthActive": "Actif",
+  "batteryTarget": "Objectif : {target}",
+  "commonApply": "Appliquer",
+  "commonDetail": "Détail"
 }

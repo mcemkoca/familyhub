@@ -28,58 +28,83 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
         padding: const EdgeInsets.all(16),
         children: [
           // Battery consumption
-          _section('BATARYA TÜKETİMİ (7 Gün)', children: [
-            Text(AppLocalizations.of(context).gunlukOrtalama18, style: const TextStyle(fontWeight: FontWeight.w600)),
-            const SizedBox(height: 12),
-            _dayBar('Pazartesi', 0.16),
-            _dayBar('Salı', 0.20, highlight: true),
-            _dayBar('Çarşamba', 0.14),
-            _dayBar('Perşembe', 0.16),
-            _dayBar('Cuma', 0.22, highlight: true),
-            _dayBar('Cumartesi', 0.12, good: true),
-            _dayBar('Pazar', 0.14),
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                _legend(Colors.red, 'Yüksek'),
-                const SizedBox(width: 12),
-                _legend(Colors.green, 'Düşük'),
-              ],
-            ),
-          ]),
+          _section(
+            'BATARYA TÜKETİMİ (7 Gün)',
+            children: [
+              Text(
+                AppLocalizations.of(context).gunlukOrtalama18,
+                style: const TextStyle(fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(height: 12),
+              _dayBar('Pazartesi', 0.16),
+              _dayBar('Salı', 0.20, highlight: true),
+              _dayBar('Çarşamba', 0.14),
+              _dayBar('Perşembe', 0.16),
+              _dayBar('Cuma', 0.22, highlight: true),
+              _dayBar('Cumartesi', 0.12, good: true),
+              _dayBar('Pazar', 0.14),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  _legend(Colors.red, 'Yüksek'),
+                  const SizedBox(width: 12),
+                  _legend(Colors.green, 'Düşük'),
+                ],
+              ),
+            ],
+          ),
 
           // Profile usage
-          _section(AppLocalizations.of(context).profilKullanimi, children: [
-            _profileBar('Durağan', 0.45, Colors.grey),
-            _profileBar('Yürüyüş', 0.25, Colors.blue),
-            _profileBar('Araç', 0.15, Colors.orange),
-            _profileBar('Koşu', 0.08, Colors.teal),
-            _profileBar('Acil', 0.05, Colors.red),
-            _profileBar('Bisiklet', 0.02, Colors.purple),
-            const SizedBox(height: 8),
-            ElevatedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.track_changes),
-              label: Text(AppLocalizations.of(context).baOptimize),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green.shade700,
-                foregroundColor: Colors.white,
+          _section(
+            AppLocalizations.of(context).profilKullanimi,
+            children: [
+              _profileBar('Durağan', 0.45, Colors.grey),
+              _profileBar('Yürüyüş', 0.25, Colors.blue),
+              _profileBar('Araç', 0.15, Colors.orange),
+              _profileBar('Koşu', 0.08, Colors.teal),
+              _profileBar('Acil', 0.05, Colors.red),
+              _profileBar('Bisiklet', 0.02, Colors.purple),
+              const SizedBox(height: 8),
+              ElevatedButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.track_changes),
+                label: Text(AppLocalizations.of(context).baOptimize),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green.shade700,
+                  foregroundColor: Colors.white,
+                ),
               ),
-            ),
-          ]),
+            ],
+          ),
 
           // Efficiency metrics
-          _section(AppLocalizations.of(context).verimlilikMetrikleri, children: [
-            _metricRow('Konum/Batarya', '2.5 nokta/%', target: '3.0+'),
-            _metricRow(AppLocalizations.of(context).baAvgAccuracy, '35m', target: '<50m'),
-            _metricRow(AppLocalizations.of(context).baOptimalRatio, '%68', target: '%80+'),
-            _metricRow(AppLocalizations.of(context).baWrongSwitch, '12/gün', target: '<5/gün'),
-          ]),
+          _section(
+            AppLocalizations.of(context).verimlilikMetrikleri,
+            children: [
+              _metricRow('Konum/Batarya', '2.5 nokta/%', target: '3.0+'),
+              _metricRow(
+                AppLocalizations.of(context).baAvgAccuracy,
+                '35m',
+                target: '<50m',
+              ),
+              _metricRow(
+                AppLocalizations.of(context).baOptimalRatio,
+                '%68',
+                target: '%80+',
+              ),
+              _metricRow(
+                AppLocalizations.of(context).baWrongSwitch,
+                '12/gün',
+                target: '<5/gün',
+              ),
+            ],
+          ),
 
           // AI suggestions
-          _section(AppLocalizations.of(context).aiOptimizasyonOnerileri, children: [
-            ...suggestions.map((s) => _suggestionCard(s)),
-          ]),
+          _section(
+            AppLocalizations.of(context).aiOptimizasyonOnerileri,
+            children: [...suggestions.map((s) => _suggestionCard(s))],
+          ),
 
           const SizedBox(height: 16),
           Row(
@@ -125,7 +150,14 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+          Text(
+            title,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           const SizedBox(height: 12),
           ...children,
         ],
@@ -133,13 +165,24 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
     );
   }
 
-  Widget _dayBar(String day, double value, {bool highlight = false, bool good = false}) {
+  Widget _dayBar(
+    String day,
+    double value, {
+    bool highlight = false,
+    bool good = false,
+  }) {
     final color = highlight ? Colors.red : (good ? Colors.green : Colors.blue);
     return Padding(
       padding: const EdgeInsets.only(bottom: 6),
       child: Row(
         children: [
-          SizedBox(width: 80, child: Text(day, style: const TextStyle(color: Colors.white70, fontSize: 13))),
+          SizedBox(
+            width: 80,
+            child: Text(
+              day,
+              style: const TextStyle(color: Colors.white70, fontSize: 13),
+            ),
+          ),
           Expanded(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(4),
@@ -152,7 +195,14 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
             ),
           ),
           const SizedBox(width: 8),
-          Text('${(value * 100).toInt()}%', style: TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.bold)),
+          Text(
+            '${(value * 100).toInt()}%',
+            style: TextStyle(
+              color: color,
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     );
@@ -163,7 +213,10 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
       children: [
         CircleAvatar(radius: 6, backgroundColor: color),
         const SizedBox(width: 6),
-        Text(label, style: const TextStyle(color: Colors.white70, fontSize: 12)),
+        Text(
+          label,
+          style: const TextStyle(color: Colors.white70, fontSize: 12),
+        ),
       ],
     );
   }
@@ -173,7 +226,13 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
       padding: const EdgeInsets.only(bottom: 6),
       child: Row(
         children: [
-          SizedBox(width: 80, child: Text(label, style: const TextStyle(color: Colors.white70, fontSize: 13))),
+          SizedBox(
+            width: 80,
+            child: Text(
+              label,
+              style: const TextStyle(color: Colors.white70, fontSize: 13),
+            ),
+          ),
           Expanded(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(4),
@@ -186,7 +245,14 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
             ),
           ),
           const SizedBox(width: 8),
-          Text('${(value * 100).toInt()}%', style: TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.bold)),
+          Text(
+            '${(value * 100).toInt()}%',
+            style: TextStyle(
+              color: color,
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     );
@@ -203,11 +269,23 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
               children: [
                 Text(label, style: const TextStyle(color: Colors.white70)),
                 if (target != null)
-                  Text('Hedef: $target', style: const TextStyle(color: Color(0xFF6B7280), fontSize: 12)),
+                  Text(
+                    AppLocalizations.of(context).batteryTarget(target),
+                    style: const TextStyle(
+                      color: Color(0xFF6B7280),
+                      fontSize: 12,
+                    ),
+                  ),
               ],
             ),
           ),
-          Text(value, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+          Text(
+            value,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     );
@@ -232,7 +310,11 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
               Expanded(
                 child: Text(
                   s.description,
-                  style: const TextStyle(color: Colors.white, fontSize: 13, height: 1.4),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 13,
+                    height: 1.4,
+                  ),
                 ),
               ),
             ],
@@ -247,11 +329,11 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
               const Spacer(),
               TextButton(
                 onPressed: () {},
-                child: const Text('Uygula'),
+                child: Text(AppLocalizations.of(context).commonApply),
               ),
               TextButton(
                 onPressed: () {},
-                child: const Text('Detay'),
+                child: Text(AppLocalizations.of(context).commonDetail),
               ),
             ],
           ),

@@ -6659,4 +6659,40 @@ class AppLocalizationsTr extends AppLocalizations {
   String kitchenRecipeAdded(Object title) {
     return '\"$title\" tarif kutuna eklendi';
   }
+
+  @override
+  String get healthDoctorAppt => 'Doktor Randevusu';
+
+  @override
+  String get healthAddMember => 'Aile Üyesi Ekle';
+
+  @override
+  String healthAddMedication(Object name) {
+    return 'İlaç Ekle — $name';
+  }
+
+  @override
+  String get healthAddVitamin => 'Vitamin/Takviye Ekle';
+
+  @override
+  String get healthAddReport => 'Rapor / Belge Ekle';
+
+  @override
+  String healthAddAppt(Object name) {
+    return 'Randevu Ekle — $name';
+  }
+
+  @override
+  String get healthActive => 'Aktif';
+
+  @override
+  String batteryTarget(Object target) {
+    return 'Hedef: $target';
+  }
+
+  @override
+  String get commonApply => 'Uygula';
+
+  @override
+  String get commonDetail => 'Detay';
 }
