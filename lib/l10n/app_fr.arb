@@ -2283,5 +2283,12 @@
   "csPermNeededShort": "Accès au calendrier requis. Autorisez via les paramètres.",
   "csPermNeededBody": "Pour synchroniser vos calendriers, vous devez autoriser l'accès au calendrier.",
   "childPermissions": "Autorisations",
-  "budgetTapToEdit": "Appuyez pour modifier"
+  "budgetTapToEdit": "Appuyez pour modifier",
+  "colorBlue": "Bleu",
+  "colorGreen": "Vert",
+  "colorOrange": "Orange",
+  "colorPurple": "Violet",
+  "colorRed": "Rouge",
+  "colorPink": "Rose",
+  "childDeleteConfirm": "Voulez-vous vraiment supprimer le compte enfant de {name} ?"
 }

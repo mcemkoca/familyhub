@@ -6978,4 +6978,27 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get budgetTapToEdit => 'Tik om te bewerken';
+
+  @override
+  String get colorBlue => 'Blauw';
+
+  @override
+  String get colorGreen => 'Groen';
+
+  @override
+  String get colorOrange => 'Oranje';
+
+  @override
+  String get colorPurple => 'Paars';
+
+  @override
+  String get colorRed => 'Rood';
+
+  @override
+  String get colorPink => 'Roze';
+
+  @override
+  String childDeleteConfirm(Object name) {
+    return 'Weet je zeker dat je het kinderaccount van $name wilt verwijderen?';
+  }
 }

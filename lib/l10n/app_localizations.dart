@@ -13055,6 +13055,48 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Düzenlemek için dokun'**
   String get budgetTapToEdit;
+
+  /// No description provided for @colorBlue.
+  ///
+  /// In tr, this message translates to:
+  /// **'Mavi'**
+  String get colorBlue;
+
+  /// No description provided for @colorGreen.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yeşil'**
+  String get colorGreen;
+
+  /// No description provided for @colorOrange.
+  ///
+  /// In tr, this message translates to:
+  /// **'Turuncu'**
+  String get colorOrange;
+
+  /// No description provided for @colorPurple.
+  ///
+  /// In tr, this message translates to:
+  /// **'Mor'**
+  String get colorPurple;
+
+  /// No description provided for @colorRed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kırmızı'**
+  String get colorRed;
+
+  /// No description provided for @colorPink.
+  ///
+  /// In tr, this message translates to:
+  /// **'Pembe'**
+  String get colorPink;
+
+  /// No description provided for @childDeleteConfirm.
+  ///
+  /// In tr, this message translates to:
+  /// **'{name} adlı çocuk hesabını silmek istediğinize emin misiniz?'**
+  String childDeleteConfirm(Object name);
 }
 
 class _AppLocalizationsDelegate

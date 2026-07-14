@@ -2283,5 +2283,12 @@
   "csPermNeededShort": "Agendatoegang vereist. Geef toestemming via instellingen.",
   "csPermNeededBody": "Om je agenda's te synchroniseren moet je agendatoegang verlenen.",
   "childPermissions": "Machtigingen",
-  "budgetTapToEdit": "Tik om te bewerken"
+  "budgetTapToEdit": "Tik om te bewerken",
+  "colorBlue": "Blauw",
+  "colorGreen": "Groen",
+  "colorOrange": "Oranje",
+  "colorPurple": "Paars",
+  "colorRed": "Rood",
+  "colorPink": "Roze",
+  "childDeleteConfirm": "Weet je zeker dat je het kinderaccount van {name} wilt verwijderen?"
 }

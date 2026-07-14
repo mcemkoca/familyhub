@@ -6993,4 +6993,27 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get budgetTapToEdit => 'Düzenlemek için dokun';
+
+  @override
+  String get colorBlue => 'Mavi';
+
+  @override
+  String get colorGreen => 'Yeşil';
+
+  @override
+  String get colorOrange => 'Turuncu';
+
+  @override
+  String get colorPurple => 'Mor';
+
+  @override
+  String get colorRed => 'Kırmızı';
+
+  @override
+  String get colorPink => 'Pembe';
+
+  @override
+  String childDeleteConfirm(Object name) {
+    return '$name adlı çocuk hesabını silmek istediğinize emin misiniz?';
+  }
 }

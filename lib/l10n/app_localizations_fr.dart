@@ -6999,4 +6999,27 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get budgetTapToEdit => 'Appuyez pour modifier';
+
+  @override
+  String get colorBlue => 'Bleu';
+
+  @override
+  String get colorGreen => 'Vert';
+
+  @override
+  String get colorOrange => 'Orange';
+
+  @override
+  String get colorPurple => 'Violet';
+
+  @override
+  String get colorRed => 'Rouge';
+
+  @override
+  String get colorPink => 'Rose';
+
+  @override
+  String childDeleteConfirm(Object name) {
+    return 'Voulez-vous vraiment supprimer le compte enfant de $name ?';
+  }
 }

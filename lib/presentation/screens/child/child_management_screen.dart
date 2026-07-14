@@ -99,7 +99,7 @@ class _ChildManagementScreenState extends ConsumerState<ChildManagementScreen> {
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context).cocukHesabiniSil),
         content: Text(
-          '${child.name} adlı çocuk hesabını silmek istediğinize emin misiniz?',
+          AppLocalizations.of(context).childDeleteConfirm(child.name),
         ),
         actions: [
           TextButton(

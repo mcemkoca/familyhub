@@ -2283,5 +2283,12 @@
   "csPermNeededShort": "Calendar access required. Grant it in settings.",
   "csPermNeededBody": "To sync your calendars you need to grant calendar access.",
   "childPermissions": "Permissions",
-  "budgetTapToEdit": "Tap to edit"
+  "budgetTapToEdit": "Tap to edit",
+  "colorBlue": "Blue",
+  "colorGreen": "Green",
+  "colorOrange": "Orange",
+  "colorPurple": "Purple",
+  "colorRed": "Red",
+  "colorPink": "Pink",
+  "childDeleteConfirm": "Are you sure you want to delete {name}'s child account?"
 }

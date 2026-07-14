@@ -6972,4 +6972,27 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get budgetTapToEdit => 'Tap to edit';
+
+  @override
+  String get colorBlue => 'Blue';
+
+  @override
+  String get colorGreen => 'Green';
+
+  @override
+  String get colorOrange => 'Orange';
+
+  @override
+  String get colorPurple => 'Purple';
+
+  @override
+  String get colorRed => 'Red';
+
+  @override
+  String get colorPink => 'Pink';
+
+  @override
+  String childDeleteConfirm(Object name) {
+    return 'Are you sure you want to delete $name\'s child account?';
+  }
 }

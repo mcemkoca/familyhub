@@ -2829,5 +2829,17 @@
   "csPermNeededShort": "Takvim erişim izni gerekli. Ayarlardan izin verin.",
   "csPermNeededBody": "Takvimlerinizi senkronize etmek için takvim erişim izni vermeniz gerekiyor.",
   "childPermissions": "İzinler",
-  "budgetTapToEdit": "Düzenlemek için dokun"
+  "budgetTapToEdit": "Düzenlemek için dokun",
+  "colorBlue": "Mavi",
+  "colorGreen": "Yeşil",
+  "colorOrange": "Turuncu",
+  "colorPurple": "Mor",
+  "colorRed": "Kırmızı",
+  "colorPink": "Pembe",
+  "childDeleteConfirm": "{name} adlı çocuk hesabını silmek istediğinize emin misiniz?",
+  "@childDeleteConfirm": {
+    "placeholders": {
+      "name": {}
+    }
+  }
 }

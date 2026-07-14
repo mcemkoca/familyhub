@@ -18,13 +18,33 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
   Color _selectedColor = const Color(0xFF6366F1);
 
   final _colors = [
-    {'color': const Color(0xFF6366F1), 'name': 'Mavi', 'hex': '2563EB'},
-    {'color': AppColors.green, 'name': 'Yeşil', 'hex': '10B981'},
-    {'color': AppColors.orange, 'name': 'Turuncu', 'hex': 'F97316'},
-    {'color': const Color(0xFF8B5CF6), 'name': 'Mor', 'hex': '8B5CF6'},
-    {'color': AppColors.red, 'name': 'Kırmızı', 'hex': 'EF4444'},
-    {'color': const Color(0xFFEC4899), 'name': 'Pembe', 'hex': 'EC4899'},
+    {'color': const Color(0xFF6366F1), 'name': 'blue', 'hex': '2563EB'},
+    {'color': AppColors.green, 'name': 'green', 'hex': '10B981'},
+    {'color': AppColors.orange, 'name': 'orange', 'hex': 'F97316'},
+    {'color': const Color(0xFF8B5CF6), 'name': 'purple', 'hex': '8B5CF6'},
+    {'color': AppColors.red, 'name': 'red', 'hex': 'EF4444'},
+    {'color': const Color(0xFFEC4899), 'name': 'pink', 'hex': 'EC4899'},
   ];
+
+  String _colorName(BuildContext context, String key) {
+    final l = AppLocalizations.of(context);
+    switch (key) {
+      case 'blue':
+        return l.colorBlue;
+      case 'green':
+        return l.colorGreen;
+      case 'orange':
+        return l.colorOrange;
+      case 'purple':
+        return l.colorPurple;
+      case 'red':
+        return l.colorRed;
+      case 'pink':
+        return l.colorPink;
+      default:
+        return key;
+    }
+  }
 
   void _save() {
     HapticFeedback.mediumImpact();
@@ -159,7 +179,7 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      c['name'] as String,
+                      _colorName(context, c['name'] as String),
                       style: const TextStyle(
                         fontSize: 11,
                         color: Color(0xFF6B7280),
