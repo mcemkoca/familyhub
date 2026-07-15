@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import '../../../services/content/content_localizer.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../config/constants.dart';
@@ -141,8 +142,10 @@ class _KitchenScreenState extends State<KitchenScreen>
       final raw = await rootBundle.loadString(
         'assets/data/content/recipes.json',
       );
-      final list = (jsonDecode(raw) as List).cast<Map<String, dynamic>>();
-      final custom = _loadCustom();
+      if (!mounted) return;
+      final lang = Localizations.localeOf(context).languageCode;
+      final list = normalizeContentList(jsonDecode(raw) as List, lang);
+      final custom = normalizeContentList(_loadCustomRaw(), lang);
       setState(() {
         _recipes = [...custom, ...list];
         _filtered = _recipes;
@@ -178,6 +181,16 @@ class _KitchenScreenState extends State<KitchenScreen>
   Future<void> _saveWeeklyPlan() async {
     // null değerleri de yaz (temizlenen günler korunsun).
     await HiveService.setSetting(_weeklyPlanKey, jsonEncode(_weeklyPlan));
+  }
+
+  List<dynamic> _loadCustomRaw() {
+    try {
+      final raw = HiveService.getSetting(_customKey);
+      if (raw == null || raw.isEmpty) return const [];
+      return jsonDecode(raw) as List;
+    } catch (_) {
+      return const [];
+    }
   }
 
   List<Map<String, dynamic>> _loadCustom() {

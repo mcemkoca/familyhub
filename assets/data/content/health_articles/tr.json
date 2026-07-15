@@ -1,0 +1,80 @@
+[
+  {
+    "id": "immunity", "category": "aile", "categoryLabel": "Bağışıklık",
+    "color": "22C55E", "emoji": "🥗", "dateLabel": "Bugün",
+    "imageUrl": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500&q=60",
+    "title": "Bağışıklık Sistemini Güçlendiren 10 Alışkanlık",
+    "summary": "Günlük yaşamda uygulayabileceğiniz basit ama etkili yöntemler.",
+    "body": [
+      "Bağışıklık sistemi, vücudun hastalıklara karşı ilk savunma hattıdır. Güçlü bir bağışıklık için günlük alışkanlıklar büyük fark yaratır.",
+      "1) Renkli sebze ve meyve tüketin (C ve A vitamini).\n2) Günde 7-8 saat düzenli uyuyun.\n3) Düzenli fiziksel aktivite yapın.\n4) Yeterli su için.\n5) Stresi yönetin (nefes, mola).",
+      "6) İşlenmiş şekeri azaltın.\n7) El hijyenine dikkat edin.\n8) Güneşten D vitamini alın.\n9) Probiyotik gıdalar tüketin.\n10) Sigara ve alkolden kaçının.",
+      "Not: Bu içerik bilgilendirme amaçlıdır. Sağlık sorunlarında bir hekime danışın."
+    ]
+  },
+  {
+    "id": "child_fever", "category": "cocuk", "categoryLabel": "Çocuk Sağlığı",
+    "color": "3B82F6", "emoji": "🤒", "dateLabel": "Dün",
+    "imageUrl": "https://images.unsplash.com/photo-1584515933487-779824d29309?w=500&q=60",
+    "title": "Çocuklarda Ateş: Ne Zaman Endişelenmeli?",
+    "summary": "Ateşin nedenleri, doğru ölçüm yöntemi ve ne zaman doktora.",
+    "body": [
+      "Ateş, vücudun enfeksiyonla savaştığının bir işaretidir ve çoğu zaman zararsızdır. Önemli olan çocuğun genel durumunu izlemektir.",
+      "Doğru ölçüm: Küçük çocuklarda koltuk altı veya kulaktan güvenilir termometre ile ölçün. 38°C üzeri ateş olarak kabul edilir.",
+      "Doktora başvurun: 3 aydan küçük bebekte herhangi bir ateş, 39°C üzeri düşmeyen ateş, nefes güçlüğü, döküntü, aşırı halsizlik veya havale durumunda VAKIT KAYBETMEYİN.",
+      "Bu içerik bilgilendirme amaçlıdır; teşhis koymaz. Endişe durumunda çocuk doktoruna danışın."
+    ]
+  },
+  {
+    "id": "menstrual", "category": "kadin", "categoryLabel": "Kadın Sağlığı",
+    "color": "EC4899", "emoji": "🌸", "dateLabel": "3 gün önce",
+    "imageUrl": "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=500&q=60",
+    "title": "Adet Döngüsü Hakkında Bilmeniz Gerekenler",
+    "summary": "Adet döngüsünün aşamaları, belirtiler ve dikkat edilmesi gerekenler.",
+    "body": [
+      "Adet döngüsü ortalama 28 gündür ancak 21-35 gün arası normaldir. Döngü dört evreden oluşur: adet, foliküler, yumurtlama ve luteal.",
+      "Yumurtlama genellikle döngünün 14. günü civarında olur ve en doğurgan dönemdir. Bu dönemi takip etmek planlama için faydalıdır.",
+      "Düzensizlik, aşırı ağrı veya çok yoğun kanama varsa bir kadın hastalıkları uzmanına danışın.",
+      "Bu içerik bilgilendirme amaçlıdır ve tıbbi tavsiye yerine geçmez."
+    ]
+  },
+  {
+    "id": "vitamin_d", "category": "aile", "categoryLabel": "Beslenme",
+    "color": "F59E0B", "emoji": "☀️", "dateLabel": "3 gün önce",
+    "imageUrl": "https://images.unsplash.com/photo-1550572017-edd951b55104?w=500&q=60",
+    "title": "D Vitamini Eksikliği Belirtileri",
+    "summary": "Vücudunuzun D vitamini eksikliği sinyallerini nasıl anlarsınız?",
+    "body": [
+      "D vitamini kemik sağlığı, bağışıklık ve kas fonksiyonu için gereklidir. Eksikliği yaygındır, özellikle güneşe az maruz kalanlarda.",
+      "Belirtiler: sürekli yorgunluk, kemik/kas ağrısı, sık hastalanma, saç dökülmesi ve moral düşüklüğü olabilir.",
+      "Öneriler: güneşten (günde 15-20 dk), yağlı balık, yumurta sarısı ve takviyelerden alınabilir. Takviyeden önce hekime danışın.",
+      "Bu içerik bilgilendirme amaçlıdır. Kan testi ve tedavi için hekiminize başvurun."
+    ]
+  },
+  {
+    "id": "sleep", "category": "aile", "categoryLabel": "Uyku",
+    "color": "8B5CF6", "emoji": "🌙", "dateLabel": "4 gün önce",
+    "imageUrl": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=500&q=60",
+    "title": "Kaliteli Uyku İçin 7 İpucu",
+    "summary": "Daha iyi uyumak ve dinç uyanmak için pratik öneriler.",
+    "body": [
+      "Kaliteli uyku, fiziksel ve zihinsel sağlığın temelidir. Yetişkinler için günde 7-9 saat önerilir.",
+      "1) Her gün aynı saatte yatıp kalkın.\n2) Yatmadan 1 saat önce ekranları bırakın.\n3) Odayı karanlık ve serin tutun.\n4) Akşam kafeini azaltın.",
+      "5) Yatmadan ağır yemekten kaçının.\n6) Gün içinde hareketli olun.\n7) Rahatlatıcı bir rutin oluşturun (kitap, nefes).",
+      "Uyku sorunları sürüyorsa bir uzmana danışın."
+    ]
+  },
+  {
+    "id": "child_nutrition", "category": "cocuk", "categoryLabel": "Çocuk Beslenmesi",
+    "color": "14B8A6", "emoji": "🍎", "dateLabel": "5 gün önce",
+    "imageUrl": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&q=60",
+    "title": "Çocuklarda Sağlıklı Beslenme Alışkanlıkları",
+    "summary": "Seçici yiyen çocuklar için pratik ve dengeli beslenme önerileri.",
+    "body": [
+      "Çocuklukta kazanılan beslenme alışkanlıkları ömür boyu sürer. Renkli ve çeşitli bir tabak sunmak önemlidir.",
+      "Öneriler: öğünleri birlikte yiyin, yeni yiyecekleri baskı yapmadan tekrar tekrar sunun, şekerli atıştırmalıkları sınırlayın.",
+      "Çocuğu yemeğe zorlamak ters etki yapabilir; örnek olun ve sabırlı olun.",
+      "Büyüme/beslenme endişesinde çocuk doktoruna danışın."
+    ]
+  }
+]

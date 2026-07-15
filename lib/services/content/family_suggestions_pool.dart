@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../../domain/models/ai_suggestion.dart';
+import 'content_localizer.dart';
+import '../localization/locale_service.dart';
 
 /// 10 kategoride toplam 1000+ aile önerisi havuzu.
 /// Asset JSON'larını yükler, Hive cache'ler, kategorilere göre filtreler.
@@ -61,7 +63,9 @@ class FamilySuggestionsPool {
     if (cached != null && cached.isNotEmpty) {
       try {
         // ignore: unnecessary_cast
-        final list = List<Map<String, dynamic>>.from(jsonDecode(cached as String) as List<dynamic>);
+        final list = List<Map<String, dynamic>>.from(
+          jsonDecode(cached as String) as List<dynamic>,
+        );
         _all.addAll(list.map((e) => _fromJson(e)));
         _initialized = true;
         return;
@@ -71,13 +75,16 @@ class FamilySuggestionsPool {
     }
 
     // Load from assets
+    final lang = LocaleService.resolveInitialLocale().languageCode;
     for (final path in _assetPaths) {
       try {
         final raw = await rootBundle.loadString(path);
         final data = jsonDecode(raw) as Map<String, dynamic>;
         final suggestions = data['suggestions'] as List<dynamic>;
         for (final s in suggestions) {
-          _all.add(_fromJson(s as Map<String, dynamic>));
+          _all.add(
+            _fromJson(normalizeContent(s, lang) as Map<String, dynamic>),
+          );
         }
       } catch (e) {
         debugPrint('FamilySuggestionsPool: Error loading $path: $e');
@@ -88,7 +95,9 @@ class FamilySuggestionsPool {
     try {
       final encoded = jsonEncode(_all.map((s) => s.toJson()).toList());
       await box.put(_cacheKey, encoded);
-    } catch (e) { debugPrint('Suggestions pool error: $e'); }
+    } catch (e) {
+      debugPrint('Suggestions pool error: $e');
+    }
 
     _initialized = true;
   }
@@ -208,5 +217,3 @@ class FamilySuggestionsPool {
     );
   }
 }
-
-

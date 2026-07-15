@@ -1,92 +1,1800 @@
 {
-  "module": "future_planning",
-  "version": "2.0",
-  "language": "tr",
-  "region": "BE",
-  "generated_at": "2026-05-03T00:00:00Z",
-  "education_pathways_belgium": {
-    "primary": {
-      "ages": "6-12",
-      "options": [
-        "Devlet okulu (ücretsiz)",
-        "Özel okul (subsidized, ~100-500 EUR/yıl)",
-        "International school (~15,000-30,000 EUR/yıl)"
-      ],
-      "language_choices": {
-        "flanders": "Flamanca eğitim (Hollandaca)",
-        "wallonia": "Fransızca eğitim",
-        "brussels": "Flamanca veya Fransızca seçeneği",
-        "german_community": "Almanca eğitim (Doğu Belçika)"
-      },
-      "savings_target": {
-        "university_prep": "15,000-25,000 EUR (12 yıl birikim)",
-        "international_path": "100,000+ EUR"
-      }
-    },
-    "secondary": {
-      "ages": "12-18",
-      "tracks": [
-        "ASO (General Academic) - Üniversite yolu",
-        "TSO (Technical) - Teknik üniversite/çalışma",
-        "BSO (Vocational) - Meslek eğitimi",
-        "KSO (Artistic) - Sanat eğitimi"
-      ]
-    }
-  },
-  "emergency_plan_template": {
-    "contacts": [
-      {"name": "Acil Servis", "number": "112", "role": "Ambulans, itfaiye, polis"},
-      {"name": "Zehir Danışma", "number": "070/245.245", "role": "Çocuk zehirlenmeleri"},
-      {"name": "Aile Doktoru", "number": "[Eklenecek]", "role": "Genel sağlık"},
-      {"name": "Yakın Aile Üyesi", "number": "[Eklenecek]", "role": "Acil durum kontağı"}
+    "module": "future_planning",
+    "version": "3.0",
+    "language": "tr",
+    "default_language": "tr",
+    "supported_languages": [
+        "tr",
+        "en",
+        "nl",
+        "fr"
     ],
-    "documents_to_keep": [
-      "Pasaportlar ve kimlik kartları",
-      "Doğum belgeleri",
-      "Sağlık sigorta kartları",
-      "Aile doktoru iletişim bilgileri",
-      "Alerji ve ilaç listesi",
-      "Banka hesap bilgileri (güvenli yerde)"
+    "region": "BE",
+    "generated_at": "2026-07-15T00:00:00Z",
+    "content_revision": 1,
+    "remote_update": {
+        "enabled": true,
+        "frequency": "weekly",
+        "check_interval_hours": 168,
+        "mode": "review_before_publish",
+        "cache_policy": "etag_last_modified",
+        "storage": "hive",
+        "storage_key": "future_planning_weekly",
+        "keep_revision_count": 12,
+        "merge_strategy": "source_priority_then_newest_reviewed",
+        "updatable_fields": [
+            "weekly_planning_catalog",
+            "education_updates",
+            "benefit_deadlines",
+            "emergency_contacts"
+        ],
+        "protected_fields": [
+            "module",
+            "version",
+            "default_language",
+            "supported_languages",
+            "emergency_plan_template.contacts"
+        ],
+        "allowed_hosts": [
+            "www.belgium.be",
+            "www.health.belgium.be",
+            "www.vlaanderen.be",
+            "www.enseignement.be",
+            "www.kindengezin.be"
+        ],
+        "validation": {
+            "required_languages": [
+                "tr",
+                "en",
+                "nl",
+                "fr"
+            ],
+            "reject_partial_translations": true,
+            "require_https": true,
+            "require_known_source": true,
+            "require_human_review": true,
+            "require_unique_ids": true,
+            "on_failure": "keep_last_valid_revision"
+        },
+        "workflow": [
+            "check_source_headers",
+            "download_to_staging",
+            "extract_candidate_changes",
+            "validate_schema",
+            "show_diff",
+            "human_review",
+            "save_revision",
+            "publish_atomically"
+        ]
+    },
+    "update_history": {
+        "last_checked_at": null,
+        "last_successful_update_at": null,
+        "active_revision": 1,
+        "saved_revisions": []
+    },
+    "education_pathways_belgium": {
+        "primary": {
+            "ages": "6-12",
+            "options": [
+                "Devlet okulu (ücretsiz)",
+                "Özel okul (subsidized, ~100-500 EUR/yıl)",
+                "International school (~15,000-30,000 EUR/yıl)"
+            ],
+            "language_choices": {
+                "flanders": "Flamanca eğitim (Hollandaca)",
+                "wallonia": "Fransızca eğitim",
+                "brussels": "Flamanca veya Fransızca seçeneği",
+                "german_community": "Almanca eğitim (Doğu Belçika)"
+            },
+            "savings_target": {
+                "university_prep": "15,000-25,000 EUR (12 yıl birikim)",
+                "international_path": "100,000+ EUR"
+            }
+        },
+        "secondary": {
+            "ages": "12-18",
+            "tracks": [
+                "ASO (General Academic) - Üniversite yolu",
+                "TSO (Technical) - Teknik üniversite/çalışma",
+                "BSO (Vocational) - Meslek eğitimi",
+                "KSO (Artistic) - Sanat eğitimi"
+            ]
+        },
+        "higher_education": {
+            "ages": "18+",
+            "options": [
+                "Üniversite: akademik lisans ve yüksek lisans yolları",
+                "University college / hogeschool: mesleki lisans programları",
+                "Dual learning ve iş temelli eğitim seçenekleri",
+                "Mesleki yeterlilik ve yetişkin eğitimi"
+            ],
+            "planning_steps": [
+                "Program dili ve kabul koşullarını en az 18 ay önce karşılaştırın",
+                "Öğrenim ücreti, ulaşım, barınma ve materyal bütçesini ayrı hesaplayın",
+                "Burs ve studietoelage koşullarını her akademik yıl yeniden kontrol edin",
+                "Diploma tanıma koşullarını hedef ülke için doğrulayın"
+            ]
+        }
+    },
+    "emergency_plan_template": {
+        "contacts": [
+            {
+                "name": "Acil Servis",
+                "number": "112",
+                "role": "Ambulans, itfaiye, polis"
+            },
+            {
+                "name": "Zehir Danışma",
+                "number": "070/245.245",
+                "role": "Çocuk zehirlenmeleri"
+            },
+            {
+                "name": "Acil Polis",
+                "number": "101",
+                "role": "Belçika'da acil polis yardımı"
+            },
+            {
+                "name": "Nöbetçi Doktor",
+                "number": "1733",
+                "role": "Çalışma saatleri dışında nöbetçi aile hekimi"
+            },
+            {
+                "name": "Child Focus",
+                "number": "116 000",
+                "role": "Kayıp veya tehlikedeki çocuklar"
+            },
+            {
+                "name": "Aile Doktoru",
+                "number": "[Eklenecek]",
+                "role": "Genel sağlık"
+            },
+            {
+                "name": "Yakın Aile Üyesi",
+                "number": "[Eklenecek]",
+                "role": "Acil durum kontağı"
+            }
+        ],
+        "documents_to_keep": [
+            "Pasaportlar ve kimlik kartları",
+            "Doğum belgeleri",
+            "Sağlık sigorta kartları",
+            "Aile doktoru iletişim bilgileri",
+            "Alerji ve ilaç listesi",
+            "Banka hesap bilgileri (güvenli yerde)"
+        ],
+        "financial_buffer": {
+            "recommended": "6 aylık giderler",
+            "for_families": "9-12 aylık giderler (çocuklu aileler için)"
+        }
+    },
+    "goal_setting_framework": {
+        "short_term": {
+            "horizon": "0-1 yıl",
+            "examples": [
+                "Çocuğun okula uyum süreci",
+                "Aile tatili planlaması",
+                "Bütçe disiplini oturtma",
+                "Evde düzen sistemleri kurma"
+            ]
+        },
+        "medium_term": {
+            "horizon": "1-5 yıl",
+            "examples": [
+                "Çocuğun dil gelişimi (2. dil hedefi)",
+                "Ev alımı / taşınma planı",
+                "Ebeveyn kariyer gelişimi",
+                "Aile sağlık sigortası optimizasyonu"
+            ]
+        },
+        "long_term": {
+            "horizon": "5-20 yıl",
+            "examples": [
+                "Çocukların üniversite eğitimi fonu",
+                "Emeklilik planlaması",
+                "Çok dilli aile kültürü sürdürme",
+                "Aile mirası / değer aktarımı"
+            ]
+        }
+    },
+    "legal_checklist_belgium": [
+        "Vatandaşlık/residence permit güncel mi?",
+        "Çocukların kayıt belgeleri tam mı?",
+        "Vasiyetname hazırlandı mı?",
+        "Vekaletname (acil durumlar için) tanımlandı mı?",
+        "Eğitim sigortası (studietoelage) başvurusu yapıldı mı?"
     ],
-    "financial_buffer": {
-      "recommended": "6 aylık giderler",
-      "for_families": "9-12 aylık giderler (çocuklu aileler için)"
+    "family_future_domains": [
+        {
+            "id": "education",
+            "title": "Eğitim planlaması",
+            "review_frequency": "quarterly",
+            "checkpoints": [
+                "Okul ve dil seçenekleri",
+                "Destek ve burs başvuruları",
+                "Eğitim bütçesi",
+                "Çocuğun ilgi ve güçlü yönleri"
+            ]
+        },
+        {
+            "id": "financial_resilience",
+            "title": "Finansal dayanıklılık",
+            "review_frequency": "monthly",
+            "checkpoints": [
+                "Acil durum fonu",
+                "Sigorta kapsamı",
+                "Borç ve ödeme planı",
+                "Uzun vadeli birikim"
+            ]
+        },
+        {
+            "id": "health_and_care",
+            "title": "Sağlık ve bakım sürekliliği",
+            "review_frequency": "quarterly",
+            "checkpoints": [
+                "Aile doktoru bilgileri",
+                "İlaç ve alerji listesi",
+                "Bakım verecek kişiler",
+                "Sağlık belgeleri"
+            ]
+        },
+        {
+            "id": "housing_and_mobility",
+            "title": "Konut ve hareketlilik",
+            "review_frequency": "semiannual",
+            "checkpoints": [
+                "Konut ihtiyacı",
+                "İşe ve okula ulaşım",
+                "Taşınma bütçesi",
+                "Mahalle hizmetleri"
+            ]
+        },
+        {
+            "id": "legal_and_digital",
+            "title": "Hukuki ve dijital hazırlık",
+            "review_frequency": "annual",
+            "checkpoints": [
+                "Kimlik ve ikamet belgeleri",
+                "Vasiyet ve vekalet",
+                "Dijital hesap envanteri",
+                "Güvenli belge yedeği"
+            ]
+        }
+    ],
+    "weekly_planning_catalog": [
+        {
+            "id": "week_goal_review",
+            "category": "goals",
+            "duration_minutes": 20,
+            "title": "Aile hedef kontrolü",
+            "description": "Bir kısa ve bir uzun vadeli hedefin ilerlemesini gözden geçirin.",
+            "action_steps": [
+                "Tamamlanan adımı kaydedin",
+                "Bir sonraki küçük adımı seçin",
+                "Sorumlu kişiyi ve tarihi belirleyin"
+            ]
+        },
+        {
+            "id": "week_document_check",
+            "category": "legal",
+            "duration_minutes": 15,
+            "title": "Belge güncellik kontrolü",
+            "description": "Bu hafta bir önemli aile belgesinin tarihini ve güvenli yedeğini kontrol edin.",
+            "action_steps": [
+                "Belgeyi seçin",
+                "Son geçerlilik tarihini kaydedin",
+                "Şifreli veya fiziksel yedeği doğrulayın"
+            ]
+        },
+        {
+            "id": "week_education_scan",
+            "category": "education",
+            "duration_minutes": 25,
+            "title": "Eğitim fırsatı taraması",
+            "description": "Çocuğun yaşına uygun bir okul, burs, dil veya öğrenme fırsatını araştırın.",
+            "action_steps": [
+                "Yalnızca resmi kaynağı açın",
+                "Koşul ve son tarihi kaydedin",
+                "Aile planıyla uyumunu değerlendirin"
+            ]
+        },
+        {
+            "id": "week_emergency_drill",
+            "category": "safety",
+            "duration_minutes": 20,
+            "title": "Acil durum mini provası",
+            "description": "Bir acil durumda kimin aranacağını ve nerede buluşulacağını yaşa uygun biçimde prova edin.",
+            "action_steps": [
+                "Tek bir senaryo seçin",
+                "İletişim sırasını uygulayın",
+                "Eksik bilgiyi plana ekleyin"
+            ]
+        },
+        {
+            "id": "week_budget_projection",
+            "category": "finance",
+            "duration_minutes": 25,
+            "title": "Gelecek gider projeksiyonu",
+            "description": "Önümüzdeki üç ay içindeki büyük bir gideri tahmin edip birikim adımı oluşturun.",
+            "action_steps": [
+                "Tahmini tutarı yazın",
+                "Kalan hafta sayısını hesaplayın",
+                "Haftalık birikim hedefini belirleyin"
+            ]
+        },
+        {
+            "id": "week_insurance_review",
+            "category": "finance",
+            "duration_minutes": 20,
+            "title": "Sigorta kapsamı incelemesi",
+            "description": "Bir poliçenin kapsamını, iletişim bilgilerini ve istisnalarını kontrol edin.",
+            "action_steps": [
+                "Poliçeyi bulun",
+                "Kapsam ve muafiyeti not edin",
+                "Gerekirse danışılacak soruyu kaydedin"
+            ]
+        },
+        {
+            "id": "week_family_skill",
+            "category": "resilience",
+            "duration_minutes": 30,
+            "title": "Aile becerisi haftası",
+            "description": "Gelecekte yararlı olacak tek bir pratik beceriyi ailece çalışın.",
+            "action_steps": [
+                "Beceriyi seçin",
+                "Kısa uygulama yapın",
+                "Bir sonraki tekrar tarihini belirleyin"
+            ]
+        },
+        {
+            "id": "week_digital_legacy",
+            "category": "digital",
+            "duration_minutes": 20,
+            "title": "Dijital düzen ve miras",
+            "description": "Bir dijital hesabı güvenlik, erişim ve aile devamlılığı açısından gözden geçirin.",
+            "action_steps": [
+                "Hesabı seçin",
+                "İki aşamalı doğrulamayı kontrol edin",
+                "Kurtarma yöntemini güvenli yerde kaydedin"
+            ]
+        },
+        {
+            "id": "week_health_file",
+            "category": "health",
+            "duration_minutes": 15,
+            "title": "Aile sağlık dosyası",
+            "description": "Bir aile üyesinin ilaç, alerji veya doktor bilgisini doğrulayın.",
+            "action_steps": [
+                "Tek bir kaydı seçin",
+                "Bilgiyi doğrulayın",
+                "Acil durum kopyasını güncelleyin"
+            ]
+        },
+        {
+            "id": "week_home_future",
+            "category": "housing",
+            "duration_minutes": 25,
+            "title": "Gelecekteki ev ihtiyacı",
+            "description": "Ailenin önümüzdeki iki yıldaki konut veya mahalle ihtiyacını tek başlıkta değerlendirin.",
+            "action_steps": [
+                "İhtiyacı tanımlayın",
+                "Olmazsa olmazı belirleyin",
+                "Araştırılacak bir sonraki bilgiyi yazın"
+            ]
+        },
+        {
+            "id": "week_career_learning",
+            "category": "career",
+            "duration_minutes": 25,
+            "title": "Ebeveyn kariyer adımı",
+            "description": "Bir ebeveyn için öğrenme, ağ kurma veya kariyer gelişimi adımı seçin.",
+            "action_steps": [
+                "Hedefi seçin",
+                "30 dakikalık adımı belirleyin",
+                "Takvime kaydedin"
+            ]
+        },
+        {
+            "id": "week_values_talk",
+            "category": "family",
+            "duration_minutes": 20,
+            "title": "Aile değerleri konuşması",
+            "description": "Bu hafta önemli bir aile değerini ve günlük hayattaki karşılığını konuşun.",
+            "action_steps": [
+                "Bir değer seçin",
+                "Herkesten örnek isteyin",
+                "Bir ortak davranış belirleyin"
+            ]
+        }
+    ],
+    "source_registry": [
+        {
+            "id": "belgium_education",
+            "authority": "Belgium.be",
+            "url": "https://www.belgium.be/en/education",
+            "scope": [
+                "education_pathways_belgium",
+                "education_updates"
+            ],
+            "priority": 1,
+            "update_method": "reviewed_extraction"
+        },
+        {
+            "id": "belgium_emergency",
+            "authority": "FPS Public Health Belgium",
+            "url": "https://www.health.belgium.be/en/health/emergency-care",
+            "scope": [
+                "emergency_contacts"
+            ],
+            "priority": 1,
+            "update_method": "reviewed_extraction"
+        },
+        {
+            "id": "flanders_study_grant",
+            "authority": "Vlaanderen.be",
+            "url": "https://www.vlaanderen.be/onderwijs-en-vorming/studietoelage",
+            "scope": [
+                "benefit_deadlines",
+                "education_updates"
+            ],
+            "priority": 1,
+            "update_method": "reviewed_extraction"
+        },
+        {
+            "id": "french_community_education",
+            "authority": "Fédération Wallonie-Bruxelles",
+            "url": "https://www.enseignement.be/",
+            "scope": [
+                "education_updates"
+            ],
+            "priority": 1,
+            "update_method": "reviewed_extraction"
+        }
+    ],
+    "i18n": {
+        "tr": {
+            "education_pathways_belgium": {
+                "primary": {
+                    "ages": "6-12",
+                    "options": [
+                        "Devlet okulu (ücretsiz)",
+                        "Özel okul (subsidized, ~100-500 EUR/yıl)",
+                        "International school (~15,000-30,000 EUR/yıl)"
+                    ],
+                    "language_choices": {
+                        "flanders": "Flamanca eğitim (Hollandaca)",
+                        "wallonia": "Fransızca eğitim",
+                        "brussels": "Flamanca veya Fransızca seçeneği",
+                        "german_community": "Almanca eğitim (Doğu Belçika)"
+                    },
+                    "savings_target": {
+                        "university_prep": "15,000-25,000 EUR (12 yıl birikim)",
+                        "international_path": "100,000+ EUR"
+                    }
+                },
+                "secondary": {
+                    "ages": "12-18",
+                    "tracks": [
+                        "ASO (General Academic) - Üniversite yolu",
+                        "TSO (Technical) - Teknik üniversite/çalışma",
+                        "BSO (Vocational) - Meslek eğitimi",
+                        "KSO (Artistic) - Sanat eğitimi"
+                    ]
+                },
+                "higher_education": {
+                    "ages": "18+",
+                    "options": [
+                        "Üniversite: akademik lisans ve yüksek lisans yolları",
+                        "University college / hogeschool: mesleki lisans programları",
+                        "Dual learning ve iş temelli eğitim seçenekleri",
+                        "Mesleki yeterlilik ve yetişkin eğitimi"
+                    ],
+                    "planning_steps": [
+                        "Program dili ve kabul koşullarını en az 18 ay önce karşılaştırın",
+                        "Öğrenim ücreti, ulaşım, barınma ve materyal bütçesini ayrı hesaplayın",
+                        "Burs ve studietoelage koşullarını her akademik yıl yeniden kontrol edin",
+                        "Diploma tanıma koşullarını hedef ülke için doğrulayın"
+                    ]
+                }
+            },
+            "emergency_plan_template": {
+                "contacts": [
+                    {
+                        "name": "Acil Servis",
+                        "number": "112",
+                        "role": "Ambulans, itfaiye, polis"
+                    },
+                    {
+                        "name": "Zehir Danışma",
+                        "number": "070/245.245",
+                        "role": "Çocuk zehirlenmeleri"
+                    },
+                    {
+                        "name": "Acil Polis",
+                        "number": "101",
+                        "role": "Belçika'da acil polis yardımı"
+                    },
+                    {
+                        "name": "Nöbetçi Doktor",
+                        "number": "1733",
+                        "role": "Çalışma saatleri dışında nöbetçi aile hekimi"
+                    },
+                    {
+                        "name": "Child Focus",
+                        "number": "116 000",
+                        "role": "Kayıp veya tehlikedeki çocuklar"
+                    },
+                    {
+                        "name": "Aile Doktoru",
+                        "number": "[Eklenecek]",
+                        "role": "Genel sağlık"
+                    },
+                    {
+                        "name": "Yakın Aile Üyesi",
+                        "number": "[Eklenecek]",
+                        "role": "Acil durum kontağı"
+                    }
+                ],
+                "documents_to_keep": [
+                    "Pasaportlar ve kimlik kartları",
+                    "Doğum belgeleri",
+                    "Sağlık sigorta kartları",
+                    "Aile doktoru iletişim bilgileri",
+                    "Alerji ve ilaç listesi",
+                    "Banka hesap bilgileri (güvenli yerde)"
+                ],
+                "financial_buffer": {
+                    "recommended": "6 aylık giderler",
+                    "for_families": "9-12 aylık giderler (çocuklu aileler için)"
+                }
+            },
+            "goal_setting_framework": {
+                "short_term": {
+                    "horizon": "0-1 yıl",
+                    "examples": [
+                        "Çocuğun okula uyum süreci",
+                        "Aile tatili planlaması",
+                        "Bütçe disiplini oturtma",
+                        "Evde düzen sistemleri kurma"
+                    ]
+                },
+                "medium_term": {
+                    "horizon": "1-5 yıl",
+                    "examples": [
+                        "Çocuğun dil gelişimi (2. dil hedefi)",
+                        "Ev alımı / taşınma planı",
+                        "Ebeveyn kariyer gelişimi",
+                        "Aile sağlık sigortası optimizasyonu"
+                    ]
+                },
+                "long_term": {
+                    "horizon": "5-20 yıl",
+                    "examples": [
+                        "Çocukların üniversite eğitimi fonu",
+                        "Emeklilik planlaması",
+                        "Çok dilli aile kültürü sürdürme",
+                        "Aile mirası / değer aktarımı"
+                    ]
+                }
+            },
+            "legal_checklist_belgium": [
+                "Vatandaşlık/residence permit güncel mi?",
+                "Çocukların kayıt belgeleri tam mı?",
+                "Vasiyetname hazırlandı mı?",
+                "Vekaletname (acil durumlar için) tanımlandı mı?",
+                "Eğitim sigortası (studietoelage) başvurusu yapıldı mı?"
+            ],
+            "family_future_domains": [
+                {
+                    "id": "education",
+                    "title": "Eğitim planlaması",
+                    "review_frequency": "quarterly",
+                    "checkpoints": [
+                        "Okul ve dil seçenekleri",
+                        "Destek ve burs başvuruları",
+                        "Eğitim bütçesi",
+                        "Çocuğun ilgi ve güçlü yönleri"
+                    ]
+                },
+                {
+                    "id": "financial_resilience",
+                    "title": "Finansal dayanıklılık",
+                    "review_frequency": "monthly",
+                    "checkpoints": [
+                        "Acil durum fonu",
+                        "Sigorta kapsamı",
+                        "Borç ve ödeme planı",
+                        "Uzun vadeli birikim"
+                    ]
+                },
+                {
+                    "id": "health_and_care",
+                    "title": "Sağlık ve bakım sürekliliği",
+                    "review_frequency": "quarterly",
+                    "checkpoints": [
+                        "Aile doktoru bilgileri",
+                        "İlaç ve alerji listesi",
+                        "Bakım verecek kişiler",
+                        "Sağlık belgeleri"
+                    ]
+                },
+                {
+                    "id": "housing_and_mobility",
+                    "title": "Konut ve hareketlilik",
+                    "review_frequency": "semiannual",
+                    "checkpoints": [
+                        "Konut ihtiyacı",
+                        "İşe ve okula ulaşım",
+                        "Taşınma bütçesi",
+                        "Mahalle hizmetleri"
+                    ]
+                },
+                {
+                    "id": "legal_and_digital",
+                    "title": "Hukuki ve dijital hazırlık",
+                    "review_frequency": "annual",
+                    "checkpoints": [
+                        "Kimlik ve ikamet belgeleri",
+                        "Vasiyet ve vekalet",
+                        "Dijital hesap envanteri",
+                        "Güvenli belge yedeği"
+                    ]
+                }
+            ],
+            "weekly_planning_catalog": [
+                {
+                    "id": "week_goal_review",
+                    "category": "goals",
+                    "duration_minutes": 20,
+                    "title": "Aile hedef kontrolü",
+                    "description": "Bir kısa ve bir uzun vadeli hedefin ilerlemesini gözden geçirin.",
+                    "action_steps": [
+                        "Tamamlanan adımı kaydedin",
+                        "Bir sonraki küçük adımı seçin",
+                        "Sorumlu kişiyi ve tarihi belirleyin"
+                    ]
+                },
+                {
+                    "id": "week_document_check",
+                    "category": "legal",
+                    "duration_minutes": 15,
+                    "title": "Belge güncellik kontrolü",
+                    "description": "Bu hafta bir önemli aile belgesinin tarihini ve güvenli yedeğini kontrol edin.",
+                    "action_steps": [
+                        "Belgeyi seçin",
+                        "Son geçerlilik tarihini kaydedin",
+                        "Şifreli veya fiziksel yedeği doğrulayın"
+                    ]
+                },
+                {
+                    "id": "week_education_scan",
+                    "category": "education",
+                    "duration_minutes": 25,
+                    "title": "Eğitim fırsatı taraması",
+                    "description": "Çocuğun yaşına uygun bir okul, burs, dil veya öğrenme fırsatını araştırın.",
+                    "action_steps": [
+                        "Yalnızca resmi kaynağı açın",
+                        "Koşul ve son tarihi kaydedin",
+                        "Aile planıyla uyumunu değerlendirin"
+                    ]
+                },
+                {
+                    "id": "week_emergency_drill",
+                    "category": "safety",
+                    "duration_minutes": 20,
+                    "title": "Acil durum mini provası",
+                    "description": "Bir acil durumda kimin aranacağını ve nerede buluşulacağını yaşa uygun biçimde prova edin.",
+                    "action_steps": [
+                        "Tek bir senaryo seçin",
+                        "İletişim sırasını uygulayın",
+                        "Eksik bilgiyi plana ekleyin"
+                    ]
+                },
+                {
+                    "id": "week_budget_projection",
+                    "category": "finance",
+                    "duration_minutes": 25,
+                    "title": "Gelecek gider projeksiyonu",
+                    "description": "Önümüzdeki üç ay içindeki büyük bir gideri tahmin edip birikim adımı oluşturun.",
+                    "action_steps": [
+                        "Tahmini tutarı yazın",
+                        "Kalan hafta sayısını hesaplayın",
+                        "Haftalık birikim hedefini belirleyin"
+                    ]
+                },
+                {
+                    "id": "week_insurance_review",
+                    "category": "finance",
+                    "duration_minutes": 20,
+                    "title": "Sigorta kapsamı incelemesi",
+                    "description": "Bir poliçenin kapsamını, iletişim bilgilerini ve istisnalarını kontrol edin.",
+                    "action_steps": [
+                        "Poliçeyi bulun",
+                        "Kapsam ve muafiyeti not edin",
+                        "Gerekirse danışılacak soruyu kaydedin"
+                    ]
+                },
+                {
+                    "id": "week_family_skill",
+                    "category": "resilience",
+                    "duration_minutes": 30,
+                    "title": "Aile becerisi haftası",
+                    "description": "Gelecekte yararlı olacak tek bir pratik beceriyi ailece çalışın.",
+                    "action_steps": [
+                        "Beceriyi seçin",
+                        "Kısa uygulama yapın",
+                        "Bir sonraki tekrar tarihini belirleyin"
+                    ]
+                },
+                {
+                    "id": "week_digital_legacy",
+                    "category": "digital",
+                    "duration_minutes": 20,
+                    "title": "Dijital düzen ve miras",
+                    "description": "Bir dijital hesabı güvenlik, erişim ve aile devamlılığı açısından gözden geçirin.",
+                    "action_steps": [
+                        "Hesabı seçin",
+                        "İki aşamalı doğrulamayı kontrol edin",
+                        "Kurtarma yöntemini güvenli yerde kaydedin"
+                    ]
+                },
+                {
+                    "id": "week_health_file",
+                    "category": "health",
+                    "duration_minutes": 15,
+                    "title": "Aile sağlık dosyası",
+                    "description": "Bir aile üyesinin ilaç, alerji veya doktor bilgisini doğrulayın.",
+                    "action_steps": [
+                        "Tek bir kaydı seçin",
+                        "Bilgiyi doğrulayın",
+                        "Acil durum kopyasını güncelleyin"
+                    ]
+                },
+                {
+                    "id": "week_home_future",
+                    "category": "housing",
+                    "duration_minutes": 25,
+                    "title": "Gelecekteki ev ihtiyacı",
+                    "description": "Ailenin önümüzdeki iki yıldaki konut veya mahalle ihtiyacını tek başlıkta değerlendirin.",
+                    "action_steps": [
+                        "İhtiyacı tanımlayın",
+                        "Olmazsa olmazı belirleyin",
+                        "Araştırılacak bir sonraki bilgiyi yazın"
+                    ]
+                },
+                {
+                    "id": "week_career_learning",
+                    "category": "career",
+                    "duration_minutes": 25,
+                    "title": "Ebeveyn kariyer adımı",
+                    "description": "Bir ebeveyn için öğrenme, ağ kurma veya kariyer gelişimi adımı seçin.",
+                    "action_steps": [
+                        "Hedefi seçin",
+                        "30 dakikalık adımı belirleyin",
+                        "Takvime kaydedin"
+                    ]
+                },
+                {
+                    "id": "week_values_talk",
+                    "category": "family",
+                    "duration_minutes": 20,
+                    "title": "Aile değerleri konuşması",
+                    "description": "Bu hafta önemli bir aile değerini ve günlük hayattaki karşılığını konuşun.",
+                    "action_steps": [
+                        "Bir değer seçin",
+                        "Herkesten örnek isteyin",
+                        "Bir ortak davranış belirleyin"
+                    ]
+                }
+            ]
+        },
+        "en": {
+            "education_pathways_belgium": {
+                "primary": {
+                    "ages": "6-12",
+                    "options": [
+                        "Public school (free)",
+                        "Private school (subsidized, ~100-500 EUR/year)",
+                        "International school (~15,000-30,000 EUR/year)"
+                    ],
+                    "language_choices": {
+                        "flanders": "Education in Flemish (Dutch)",
+                        "wallonia": "education in french",
+                        "brussels": "Flemish or French option",
+                        "german_community": "Education in German (Eastern Belgium)"
+                    },
+                    "savings_target": {
+                        "university_prep": "15,000-25,000 EUR (12 years of savings)",
+                        "international_path": "100,000+ EUR"
+                    }
+                },
+                "secondary": {
+                    "ages": "12-18",
+                    "tracks": [
+                        "ASO (General Academic) - University path",
+                        "TSO (Technical) - Technical university/study",
+                        "BSO (Vocational) - Vocational training",
+                        "KSO (Artistic) - Art education"
+                    ]
+                },
+                "higher_education": {
+                    "ages": "18+",
+                    "options": [
+                        "University: academic undergraduate and graduate pathways",
+                        "University college / hogeschool: professional degree programs",
+                        "Dual learning and work-based training options",
+                        "Vocational qualification and adult education"
+                    ],
+                    "planning_steps": [
+                        "Compare program language and admission requirements at least 18 months in advance",
+                        "Calculate tuition fee, transportation, accommodation and material budget separately",
+                        "Check scholarship and studietoelage conditions every academic year",
+                        "Verify diploma recognition conditions for destination country"
+                    ]
+                }
+            },
+            "emergency_plan_template": {
+                "contacts": [
+                    {
+                        "name": "emergency room",
+                        "number": "112",
+                        "role": "Ambulance, fire brigade, police"
+                    },
+                    {
+                        "name": "Poison Advisory",
+                        "number": "070/245.245",
+                        "role": "Child poisonings"
+                    },
+                    {
+                        "name": "Emergency Police",
+                        "number": "101",
+                        "role": "Emergency police assistance in Belgium"
+                    },
+                    {
+                        "name": "Doctor on Duty",
+                        "number": "1733",
+                        "role": "Family physician on duty outside working hours"
+                    },
+                    {
+                        "name": "Child Focus",
+                        "number": "116 000",
+                        "role": "Missing or endangered children"
+                    },
+                    {
+                        "name": "Family Doctor",
+                        "number": "[To be added]",
+                        "role": "general health"
+                    },
+                    {
+                        "name": "Close Family Member",
+                        "number": "[To be added]",
+                        "role": "emergency contact"
+                    }
+                ],
+                "documents_to_keep": [
+                    "Passports and ID cards",
+                    "birth certificates",
+                    "Health insurance cards",
+                    "Family doctor contact information",
+                    "Allergy and medication list",
+                    "Bank account information (in a safe place)"
+                ],
+                "financial_buffer": {
+                    "recommended": "6 months expenses",
+                    "for_families": "9-12 months expenses (for families with children)"
+                }
+            },
+            "goal_setting_framework": {
+                "short_term": {
+                    "horizon": "0-1 year",
+                    "examples": [
+                        "The child's adaptation process to school",
+                        "Family vacation planning",
+                        "Establishing budget discipline",
+                        "Establishing order systems at home"
+                    ]
+                },
+                "medium_term": {
+                    "horizon": "1-5 years",
+                    "examples": [
+                        "Child's language development (2nd language goal)",
+                        "Home purchase / moving plan",
+                        "Parental career development",
+                        "Family health insurance optimization"
+                    ]
+                },
+                "long_term": {
+                    "horizon": "5-20 years",
+                    "examples": [
+                        "Children's university education fund",
+                        "retirement planning",
+                        "Maintaining a multilingual family culture",
+                        "Family legacy / value transfer"
+                    ]
+                }
+            },
+            "legal_checklist_belgium": [
+                "Is the citizenship/residence permit up to date?",
+                "Are the children's registration documents complete?",
+                "Has a will been prepared?",
+                "Has power of attorney (for emergencies) been defined?",
+                "Has an application for education insurance (studietoelage) been made?"
+            ],
+            "family_future_domains": [
+                {
+                    "id": "education",
+                    "title": "Educational planning",
+                    "review_frequency": "quarterly",
+                    "checkpoints": [
+                        "School and language options",
+                        "Support and scholarship applications",
+                        "Education budget",
+                        "Child's interests and strengths"
+                    ]
+                },
+                {
+                    "id": "financial_resilience",
+                    "title": "Financial resilience",
+                    "review_frequency": "monthly",
+                    "checkpoints": [
+                        "emergency fund",
+                        "Insurance coverage",
+                        "Debt and payment plan",
+                        "Long term savings"
+                    ]
+                },
+                {
+                    "id": "health_and_care",
+                    "title": "Health and care continuity",
+                    "review_frequency": "quarterly",
+                    "checkpoints": [
+                        "Family doctor information",
+                        "Medication and allergy list",
+                        "People who will provide care",
+                        "Health documents"
+                    ]
+                },
+                {
+                    "id": "housing_and_mobility",
+                    "title": "Housing and mobility",
+                    "review_frequency": "semiannual",
+                    "checkpoints": [
+                        "housing need",
+                        "Transportation to work and school",
+                        "moving budget",
+                        "neighborhood services"
+                    ]
+                },
+                {
+                    "id": "legal_and_digital",
+                    "title": "Legal and digital preparation",
+                    "review_frequency": "annual",
+                    "checkpoints": [
+                        "Identity and residence documents",
+                        "Will and power of attorney",
+                        "Digital account inventory",
+                        "Secure document backup"
+                    ]
+                }
+            ],
+            "weekly_planning_catalog": [
+                {
+                    "id": "week_goal_review",
+                    "category": "goals",
+                    "duration_minutes": 20,
+                    "title": "Family target control",
+                    "description": "Review the progress of one short-term and one long-term goal.",
+                    "action_steps": [
+                        "Save the completed step",
+                        "Choose the next small step",
+                        "Determine responsible person and date"
+                    ]
+                },
+                {
+                    "id": "week_document_check",
+                    "category": "legal",
+                    "duration_minutes": 15,
+                    "title": "Document freshness check",
+                    "description": "Check the date and secure backup of an important family document this week.",
+                    "action_steps": [
+                        "Select the document",
+                        "Save the expiry date",
+                        "Verify encrypted or physical backup"
+                    ]
+                },
+                {
+                    "id": "week_education_scan",
+                    "category": "education",
+                    "duration_minutes": 25,
+                    "title": "Educational opportunity screening",
+                    "description": "Look for a school, scholarship, language or learning opportunity appropriate to the child's age.",
+                    "action_steps": [
+                        "Only open the official source",
+                        "Record condition and deadline",
+                        "Evaluate compatibility with family plan"
+                    ]
+                },
+                {
+                    "id": "week_emergency_drill",
+                    "category": "safety",
+                    "duration_minutes": 20,
+                    "title": "Emergency mini rehearsal",
+                    "description": "Rehearse in an age-appropriate manner who to call and where to meet in case of an emergency.",
+                    "action_steps": [
+                        "Choose a single scenario",
+                        "Follow the communication order",
+                        "Add missing information to the plan"
+                    ]
+                },
+                {
+                    "id": "week_budget_projection",
+                    "category": "finance",
+                    "duration_minutes": 25,
+                    "title": "Future expense projection",
+                    "description": "Anticipate a major expense in the next three months and create a savings step.",
+                    "action_steps": [
+                        "Type the estimated amount",
+                        "Calculate the number of weeks remaining",
+                        "Set a weekly savings goal"
+                    ]
+                },
+                {
+                    "id": "week_insurance_review",
+                    "category": "finance",
+                    "duration_minutes": 20,
+                    "title": "Insurance coverage review",
+                    "description": "Check a policy's coverage, contact information and exclusions.",
+                    "action_steps": [
+                        "Find the policy",
+                        "Note coverage and exemption",
+                        "Save the question to be consulted if necessary"
+                    ]
+                },
+                {
+                    "id": "week_family_skill",
+                    "category": "resilience",
+                    "duration_minutes": 30,
+                    "title": "family skills week",
+                    "description": "As a family, practice one practical skill that will be useful in the future.",
+                    "action_steps": [
+                        "Choose skill",
+                        "Make a short application",
+                        "Set the next repeat date"
+                    ]
+                },
+                {
+                    "id": "week_digital_legacy",
+                    "category": "digital",
+                    "duration_minutes": 20,
+                    "title": "Digital order and legacy",
+                    "description": "Review a digital account for security, access and family continuity.",
+                    "action_steps": [
+                        "Select account",
+                        "Check two-step verification",
+                        "Save the recovery method in safe place"
+                    ]
+                },
+                {
+                    "id": "week_health_file",
+                    "category": "health",
+                    "duration_minutes": 15,
+                    "title": "Family health file",
+                    "description": "Verify a family member's medication, allergy, or doctor information.",
+                    "action_steps": [
+                        "Select a single record",
+                        "Verify information",
+                        "Update emergency copy"
+                    ]
+                },
+                {
+                    "id": "week_home_future",
+                    "category": "housing",
+                    "duration_minutes": 25,
+                    "title": "future housing needs",
+                    "description": "Evaluate the family's housing or neighborhood needs in the next two years under one heading.",
+                    "action_steps": [
+                        "Identify the need",
+                        "Identify the must-haves",
+                        "Type the next piece of information to research"
+                    ]
+                },
+                {
+                    "id": "week_career_learning",
+                    "category": "career",
+                    "duration_minutes": 25,
+                    "title": "Parent career move",
+                    "description": "Choose a learning, networking or career development step for a parent.",
+                    "action_steps": [
+                        "Select destination",
+                        "Set the 30 minute step",
+                        "Save to calendar"
+                    ]
+                },
+                {
+                    "id": "week_values_talk",
+                    "category": "family",
+                    "duration_minutes": 20,
+                    "title": "family values speech",
+                    "description": "This week, talk about an important family value and its equivalent in daily life.",
+                    "action_steps": [
+                        "Choose a value",
+                        "Ask for examples from everyone",
+                        "Identify a common behavior"
+                    ]
+                }
+            ]
+        },
+        "nl": {
+            "education_pathways_belgium": {
+                "primary": {
+                    "ages": "6-12",
+                    "options": [
+                        "Openbare school (gratis)",
+                        "Privéschool (gesubsidieerd, ~100-500 EUR/jaar)",
+                        "Internationale school (~15.000-30.000 EUR/jaar)"
+                    ],
+                    "language_choices": {
+                        "flanders": "Onderwijs in het Vlaams (Nederlands)",
+                        "wallonia": "onderwijs in het frans",
+                        "brussels": "Vlaamse of Franse optie",
+                        "german_community": "Onderwijs in het Duits (Oost-België)"
+                    },
+                    "savings_target": {
+                        "university_prep": "15.000-25.000 EUR (12 jaar sparen)",
+                        "international_path": "100.000+ EUR"
+                    }
+                },
+                "secondary": {
+                    "ages": "12-18",
+                    "tracks": [
+                        "ASO (Algemeen Academisch) - Universitair traject",
+                        "TSO (Technisch) - Technische universiteit/studie",
+                        "BSO (Beroepsonderwijs) - Beroepsopleiding",
+                        "KSO (Artistiek) - Kunsteducatie"
+                    ]
+                },
+                "higher_education": {
+                    "ages": "18+",
+                    "options": [
+                        "Universiteit: academische bachelor- en mastertrajecten",
+                        "University college / hogeschool: professionele opleidingen",
+                        "Mogelijkheden voor duaal leren en werkplekleren",
+                        "Beroepskwalificatie en volwasseneneducatie"
+                    ],
+                    "planning_steps": [
+                        "Vergelijk de programmataal en toelatingseisen minimaal 18 maanden van tevoren",
+                        "Bereken collegegeld, vervoer, huisvesting en materiaalbudget apart",
+                        "Controleer elk studiejaar de beurs- en studietoelagevoorwaarden",
+                        "Controleer de voorwaarden voor diplomaerkenning voor het land van bestemming"
+                    ]
+                }
+            },
+            "emergency_plan_template": {
+                "contacts": [
+                    {
+                        "name": "spoedeisende hulp",
+                        "number": "112",
+                        "role": "Ambulance, brandweer, politie"
+                    },
+                    {
+                        "name": "Vergifadvies",
+                        "number": "070/245.245",
+                        "role": "Vergiftigingen bij kinderen"
+                    },
+                    {
+                        "name": "Noodpolitie",
+                        "number": "101",
+                        "role": "Spoedeisende politiehulp in België"
+                    },
+                    {
+                        "name": "Dokter van dienst",
+                        "number": "1733",
+                        "role": "Huisarts van dienst buiten werktijd"
+                    },
+                    {
+                        "name": "Kindfocus",
+                        "number": "116 000",
+                        "role": "Vermiste of bedreigde kinderen"
+                    },
+                    {
+                        "name": "Huisarts",
+                        "number": "[Toe te voegen]",
+                        "role": "algemene gezondheid"
+                    },
+                    {
+                        "name": "Naast familielid",
+                        "number": "[Toe te voegen]",
+                        "role": "contactpersoon voor noodgevallen"
+                    }
+                ],
+                "documents_to_keep": [
+                    "Paspoorten en identiteitskaarten",
+                    "geboorteakten",
+                    "Zorgverzekeringskaarten",
+                    "Contactgegevens huisarts",
+                    "Allergie- en medicatielijst",
+                    "Bankrekeninggegevens (op een veilige plaats)"
+                ],
+                "financial_buffer": {
+                    "recommended": "6 maanden kosten",
+                    "for_families": "9-12 maanden uitgaven (voor gezinnen met kinderen)"
+                }
+            },
+            "goal_setting_framework": {
+                "short_term": {
+                    "horizon": "0-1 jaar",
+                    "examples": [
+                        "Het aanpassingsproces van het kind aan school",
+                        "Familie vakantieplanning",
+                        "Het instellen van begrotingsdiscipline",
+                        "Thuis bestelsystemen opzetten"
+                    ]
+                },
+                "medium_term": {
+                    "horizon": "1-5 jaar",
+                    "examples": [
+                        "Taalontwikkeling van het kind (2e taaldoel)",
+                        "Aankoop/verhuisplan woning",
+                        "Ouderlijke loopbaanontwikkeling",
+                        "Optimalisatie van de familiale ziektekostenverzekering"
+                    ]
+                },
+                "long_term": {
+                    "horizon": "5-20 jaar",
+                    "examples": [
+                        "Universitair onderwijsfonds voor kinderen",
+                        "pensioenplanning",
+                        "Het handhaven van een meertalige familiecultuur",
+                        "Familie-erfenis/waardeoverdracht"
+                    ]
+                }
+            },
+            "legal_checklist_belgium": [
+                "Is het staatsburgerschap/verblijfsvergunning actueel?",
+                "Zijn de inschrijvingsdocumenten van de kinderen compleet?",
+                "Is er een testament opgemaakt?",
+                "Is er een volmacht (voor noodgevallen) gedefinieerd?",
+                "Is er een studietoelage aangevraagd?"
+            ],
+            "family_future_domains": [
+                {
+                    "id": "education",
+                    "title": "Educatieve planning",
+                    "review_frequency": "quarterly",
+                    "checkpoints": [
+                        "School- en taalopties",
+                        "Ondersteuning en beursaanvragen",
+                        "Onderwijsbegroting",
+                        "De interesses en sterke punten van het kind"
+                    ]
+                },
+                {
+                    "id": "financial_resilience",
+                    "title": "Financiële veerkracht",
+                    "review_frequency": "monthly",
+                    "checkpoints": [
+                        "noodfonds",
+                        "Verzekeringsdekking",
+                        "Schulden- en betalingsplan",
+                        "Lange termijn besparingen"
+                    ]
+                },
+                {
+                    "id": "health_and_care",
+                    "title": "Continuïteit van de gezondheidszorg en de zorg",
+                    "review_frequency": "quarterly",
+                    "checkpoints": [
+                        "Huisartsinformatie",
+                        "Medicatie- en allergielijst",
+                        "Mensen die zorg gaan verlenen",
+                        "Gezondheidsdocumenten"
+                    ]
+                },
+                {
+                    "id": "housing_and_mobility",
+                    "title": "Huisvesting en mobiliteit",
+                    "review_frequency": "semiannual",
+                    "checkpoints": [
+                        "huisvestingsbehoefte",
+                        "Vervoer naar werk en school",
+                        "bewegende begroting",
+                        "buurtdiensten"
+                    ]
+                },
+                {
+                    "id": "legal_and_digital",
+                    "title": "Juridische en digitale voorbereiding",
+                    "review_frequency": "annual",
+                    "checkpoints": [
+                        "Identiteits- en verblijfsdocumenten",
+                        "Testament en volmacht",
+                        "Digitale accountinventaris",
+                        "Veilige documentback-up"
+                    ]
+                }
+            ],
+            "weekly_planning_catalog": [
+                {
+                    "id": "week_goal_review",
+                    "category": "goals",
+                    "duration_minutes": 20,
+                    "title": "Controle van gezinsdoelen",
+                    "description": "Beoordeel de voortgang van één kortetermijndoel en één langetermijndoelstelling.",
+                    "action_steps": [
+                        "Sla de voltooide stap op",
+                        "Kies de volgende kleine stap",
+                        "Bepaal de verantwoordelijke persoon en datum"
+                    ]
+                },
+                {
+                    "id": "week_document_check",
+                    "category": "legal",
+                    "duration_minutes": 15,
+                    "title": "Controle op de versheid van documenten",
+                    "description": "Controleer deze week de datum en maak een veilige back-up van een belangrijk familiedocument.",
+                    "action_steps": [
+                        "Selecteer het document",
+                        "Bewaar de vervaldatum",
+                        "Controleer gecodeerde of fysieke back-up"
+                    ]
+                },
+                {
+                    "id": "week_education_scan",
+                    "category": "education",
+                    "duration_minutes": 25,
+                    "title": "Screening van onderwijskansen",
+                    "description": "Zoek naar een school, studiebeurs, taal of leermogelijkheid die past bij de leeftijd van het kind.",
+                    "action_steps": [
+                        "Open alleen de officiële bron",
+                        "Conditie en deadline vastleggen",
+                        "Evalueer de compatibiliteit met het gezinsabonnement"
+                    ]
+                },
+                {
+                    "id": "week_emergency_drill",
+                    "category": "safety",
+                    "duration_minutes": 20,
+                    "title": "Mini-repetitie voor noodgevallen",
+                    "description": "Oefen op een voor de leeftijd passende manier wie u moet bellen en waar u elkaar kunt ontmoeten in geval van nood.",
+                    "action_steps": [
+                        "Kies één scenario",
+                        "Volg de communicatievolgorde",
+                        "Voeg ontbrekende informatie toe aan het plan"
+                    ]
+                },
+                {
+                    "id": "week_budget_projection",
+                    "category": "finance",
+                    "duration_minutes": 25,
+                    "title": "Toekomstige kostenprojectie",
+                    "description": "Anticipeer op een grote uitgave in de komende drie maanden en creëer een besparingsstap.",
+                    "action_steps": [
+                        "Typ het geschatte bedrag",
+                        "Bereken het aantal resterende weken",
+                        "Stel een wekelijks spaardoel in"
+                    ]
+                },
+                {
+                    "id": "week_insurance_review",
+                    "category": "finance",
+                    "duration_minutes": 20,
+                    "title": "Beoordeling van de verzekeringsdekking",
+                    "description": "Controleer de dekking, contactgegevens en uitsluitingen van een polis.",
+                    "action_steps": [
+                        "Zoek het beleid",
+                        "Let op dekking en vrijstelling",
+                        "Bewaar de te raadplegen vraag indien nodig"
+                    ]
+                },
+                {
+                    "id": "week_family_skill",
+                    "category": "resilience",
+                    "duration_minutes": 30,
+                    "title": "week van gezinsvaardigheden",
+                    "description": "Oefen als gezin één praktische vaardigheid die in de toekomst van pas zal komen.",
+                    "action_steps": [
+                        "Kies vaardigheid",
+                        "Maak een korte aanvraag",
+                        "Stel de volgende herhalingsdatum in"
+                    ]
+                },
+                {
+                    "id": "week_digital_legacy",
+                    "category": "digital",
+                    "duration_minutes": 20,
+                    "title": "Digitale orde en erfenis",
+                    "description": "Controleer een digitaal account op veiligheid, toegang en gezinscontinuïteit.",
+                    "action_steps": [
+                        "Selecteer rekening",
+                        "Controleer de tweestapsverificatie",
+                        "Bewaar de herstelmethode op een veilige plaats"
+                    ]
+                },
+                {
+                    "id": "week_health_file",
+                    "category": "health",
+                    "duration_minutes": 15,
+                    "title": "Familiegezondheidsdossier",
+                    "description": "Controleer de medicatie-, allergie- of doktersgegevens van een familielid.",
+                    "action_steps": [
+                        "Selecteer één record",
+                        "Controleer informatie",
+                        "Noodkopie bijwerken"
+                    ]
+                },
+                {
+                    "id": "week_home_future",
+                    "category": "housing",
+                    "duration_minutes": 25,
+                    "title": "toekomstige huisvestingsbehoeften",
+                    "description": "Evalueer de huisvestings- of buurtbehoeften van het gezin in de komende twee jaar onder één noemer.",
+                    "action_steps": [
+                        "Identificeer de behoefte",
+                        "Identificeer de must-haves",
+                        "Typ het volgende stukje informatie dat u wilt onderzoeken"
+                    ]
+                },
+                {
+                    "id": "week_career_learning",
+                    "category": "career",
+                    "duration_minutes": 25,
+                    "title": "De carrièrestap van ouders",
+                    "description": "Kies een leer-, netwerk- of loopbaanontwikkelingsstap voor een ouder.",
+                    "action_steps": [
+                        "Selecteer bestemming",
+                        "Stel de stap van 30 minuten in",
+                        "Opslaan in kalender"
+                    ]
+                },
+                {
+                    "id": "week_values_talk",
+                    "category": "family",
+                    "duration_minutes": 20,
+                    "title": "familie waarden spraak",
+                    "description": "Praat deze week over een belangrijke gezinswaarde en het equivalent daarvan in het dagelijks leven.",
+                    "action_steps": [
+                        "Kies een waarde",
+                        "Vraag iedereen om voorbeelden",
+                        "Identificeer een veelvoorkomend gedrag"
+                    ]
+                }
+            ]
+        },
+        "fr": {
+            "education_pathways_belgium": {
+                "primary": {
+                    "ages": "6-12",
+                    "options": [
+                        "École publique (gratuite)",
+                        "École privée (subventionnée, ~100-500 EUR/an)",
+                        "École internationale (~15 000-30 000 EUR/an)"
+                    ],
+                    "language_choices": {
+                        "flanders": "Éducation en flamand (néerlandais)",
+                        "wallonia": "l'éducation en français",
+                        "brussels": "Option flamande ou française",
+                        "german_community": "Enseignement en allemand (Belgique orientale)"
+                    },
+                    "savings_target": {
+                        "university_prep": "15 000-25 000 EUR (12 ans d'économies)",
+                        "international_path": "100 000+ EUR"
+                    }
+                },
+                "secondary": {
+                    "ages": "12-18",
+                    "tracks": [
+                        "ASO (Académique Général) - Parcours universitaire",
+                        "TSO (Technique) - Université/études techniques",
+                        "BSO (Professionnel) - Formation professionnelle",
+                        "KSO (Artistique) - Éducation artistique"
+                    ]
+                },
+                "higher_education": {
+                    "ages": "18+",
+                    "options": [
+                        "Université : parcours académiques de premier cycle et des cycles supérieurs",
+                        "Collège universitaire / hogeschool : programmes menant à un diplôme professionnel",
+                        "Possibilités de double apprentissage et de formation en alternance",
+                        "Qualification professionnelle et formation des adultes"
+                    ],
+                    "planning_steps": [
+                        "Comparez la langue du programme et les conditions d'admission au moins 18 mois à l'avance",
+                        "Calculer séparément les frais de scolarité, le transport, l'hébergement et le budget matériel",
+                        "Vérifier les conditions de bourses et d'études chaque année universitaire",
+                        "Vérifier les conditions de reconnaissance des diplômes pour le pays de destination"
+                    ]
+                }
+            },
+            "emergency_plan_template": {
+                "contacts": [
+                    {
+                        "name": "salle d'urgence",
+                        "number": "112",
+                        "role": "Ambulance, pompiers, police"
+                    },
+                    {
+                        "name": "Avis antipoison",
+                        "number": "070/245.245",
+                        "role": "Intoxications chez les enfants"
+                    },
+                    {
+                        "name": "Police d'urgence",
+                        "number": "101",
+                        "role": "Assistance policière d'urgence en Belgique"
+                    },
+                    {
+                        "name": "Médecin de garde",
+                        "number": "1733",
+                        "role": "Médecin de famille de garde en dehors des heures de travail"
+                    },
+                    {
+                        "name": "Focus sur l'enfant",
+                        "number": "116 000",
+                        "role": "Enfants disparus ou en danger"
+                    },
+                    {
+                        "name": "Médecin de famille",
+                        "number": "[À ajouter]",
+                        "role": "état de santé général"
+                    },
+                    {
+                        "name": "Membre de la famille proche",
+                        "number": "[À ajouter]",
+                        "role": "contact d'urgence"
+                    }
+                ],
+                "documents_to_keep": [
+                    "Passeports et cartes d'identité",
+                    "actes de naissance",
+                    "Cartes d'assurance maladie",
+                    "Coordonnées du médecin de famille",
+                    "Liste des allergies et des médicaments",
+                    "Informations sur le compte bancaire (dans un endroit sûr)"
+                ],
+                "financial_buffer": {
+                    "recommended": "6 mois de dépenses",
+                    "for_families": "Dépenses de 9 à 12 mois (pour les familles avec enfants)"
+                }
+            },
+            "goal_setting_framework": {
+                "short_term": {
+                    "horizon": "0-1 an",
+                    "examples": [
+                        "Le processus d'adaptation de l'enfant à l'école",
+                        "Planification des vacances en famille",
+                        "Établir une discipline budgétaire",
+                        "Établir des systèmes de commande à la maison"
+                    ]
+                },
+                "medium_term": {
+                    "horizon": "1-5 ans",
+                    "examples": [
+                        "Développement du langage de l'enfant (2e objectif linguistique)",
+                        "Achat de maison / projet de déménagement",
+                        "Développement de carrière parentale",
+                        "Optimisation de l'assurance maladie familiale"
+                    ]
+                },
+                "long_term": {
+                    "horizon": "5-20 ans",
+                    "examples": [
+                        "Fonds d'éducation universitaire pour enfants",
+                        "planification de la retraite",
+                        "Maintenir une culture familiale multilingue",
+                        "Héritage familial / transfert de valeur"
+                    ]
+                }
+            },
+            "legal_checklist_belgium": [
+                "Le permis de citoyenneté/de séjour est-il à jour ?",
+                "Les dossiers d'inscription des enfants sont-ils complets ?",
+                "Un testament a-t-il été préparé ?",
+                "Une procuration (en cas d’urgence) a-t-elle été définie ?",
+                "Une demande d'assurance scolaire (studietoelage) a-t-elle été déposée ?"
+            ],
+            "family_future_domains": [
+                {
+                    "id": "education",
+                    "title": "Planification de l'éducation",
+                    "review_frequency": "quarterly",
+                    "checkpoints": [
+                        "Options scolaires et linguistiques",
+                        "Demandes de soutien et de bourses",
+                        "Budget de l'éducation",
+                        "Intérêts et points forts de l'enfant"
+                    ]
+                },
+                {
+                    "id": "financial_resilience",
+                    "title": "Résilience financière",
+                    "review_frequency": "monthly",
+                    "checkpoints": [
+                        "fonds d'urgence",
+                        "Couverture d'assurance",
+                        "Dette et plan de paiement",
+                        "Économies à long terme"
+                    ]
+                },
+                {
+                    "id": "health_and_care",
+                    "title": "Continuité de la santé et des soins",
+                    "review_frequency": "quarterly",
+                    "checkpoints": [
+                        "Informations sur le médecin de famille",
+                        "Liste des médicaments et allergies",
+                        "Les personnes qui prodigueront des soins",
+                        "Documents de santé"
+                    ]
+                },
+                {
+                    "id": "housing_and_mobility",
+                    "title": "Logement et mobilité",
+                    "review_frequency": "semiannual",
+                    "checkpoints": [
+                        "besoin de logement",
+                        "Transport au travail et à l'école",
+                        "budget de déménagement",
+                        "services de quartier"
+                    ]
+                },
+                {
+                    "id": "legal_and_digital",
+                    "title": "Préparation juridique et numérique",
+                    "review_frequency": "annual",
+                    "checkpoints": [
+                        "Documents d'identité et de séjour",
+                        "Testament et procuration",
+                        "Inventaire des comptes numériques",
+                        "Sauvegarde sécurisée des documents"
+                    ]
+                }
+            ],
+            "weekly_planning_catalog": [
+                {
+                    "id": "week_goal_review",
+                    "category": "goals",
+                    "duration_minutes": 20,
+                    "title": "Contrôle des cibles familiales",
+                    "description": "Passez en revue les progrès d’un objectif à court terme et d’un objectif à long terme.",
+                    "action_steps": [
+                        "Enregistrez l'étape terminée",
+                        "Choisissez la prochaine petite étape",
+                        "Déterminer la personne responsable et la date"
+                    ]
+                },
+                {
+                    "id": "week_document_check",
+                    "category": "legal",
+                    "duration_minutes": 15,
+                    "title": "Contrôle de fraîcheur des documents",
+                    "description": "Vérifiez la date et la sauvegarde sécurisée d’un document familial important cette semaine.",
+                    "action_steps": [
+                        "Sélectionnez le document",
+                        "Enregistrez la date d'expiration",
+                        "Vérifier la sauvegarde chiffrée ou physique"
+                    ]
+                },
+                {
+                    "id": "week_education_scan",
+                    "category": "education",
+                    "duration_minutes": 25,
+                    "title": "Sélection des opportunités éducatives",
+                    "description": "Recherchez une école, une bourse, une langue ou une opportunité d'apprentissage adaptée à l'âge de l'enfant.",
+                    "action_steps": [
+                        "Ouvrez uniquement la source officielle",
+                        "État du dossier et date limite",
+                        "Évaluer la compatibilité avec le forfait familial"
+                    ]
+                },
+                {
+                    "id": "week_emergency_drill",
+                    "category": "safety",
+                    "duration_minutes": 20,
+                    "title": "Mini répétition d'urgence",
+                    "description": "Répétez en fonction de votre âge qui appeler et où se rencontrer en cas d'urgence.",
+                    "action_steps": [
+                        "Choisissez un seul scénario",
+                        "Suivre l'ordre de communication",
+                        "Ajouter les informations manquantes au plan"
+                    ]
+                },
+                {
+                    "id": "week_budget_projection",
+                    "category": "finance",
+                    "duration_minutes": 25,
+                    "title": "Projection des dépenses futures",
+                    "description": "Anticipez une dépense importante dans les trois prochains mois et créez une étape d'économies.",
+                    "action_steps": [
+                        "Tapez le montant estimé",
+                        "Calculer le nombre de semaines restantes",
+                        "Fixez-vous un objectif d’épargne hebdomadaire"
+                    ]
+                },
+                {
+                    "id": "week_insurance_review",
+                    "category": "finance",
+                    "duration_minutes": 20,
+                    "title": "Examen de la couverture d'assurance",
+                    "description": "Vérifiez la couverture, les coordonnées et les exclusions d’une police.",
+                    "action_steps": [
+                        "Trouver la politique",
+                        "Couverture et exemption des notes",
+                        "Enregistrez la question pour être consultée si nécessaire"
+                    ]
+                },
+                {
+                    "id": "week_family_skill",
+                    "category": "resilience",
+                    "duration_minutes": 30,
+                    "title": "semaine des compétences familiales",
+                    "description": "En famille, mettez en pratique une compétence pratique qui vous sera utile à l’avenir.",
+                    "action_steps": [
+                        "Choisissez la compétence",
+                        "Faire une courte candidature",
+                        "Définir la prochaine date de répétition"
+                    ]
+                },
+                {
+                    "id": "week_digital_legacy",
+                    "category": "digital",
+                    "duration_minutes": 20,
+                    "title": "Ordre numérique et héritage",
+                    "description": "Examinez un compte numérique pour en vérifier la sécurité, l’accès et la continuité familiale.",
+                    "action_steps": [
+                        "Sélectionnez un compte",
+                        "Vérifier la vérification en deux étapes",
+                        "Enregistrez la méthode de récupération dans un endroit sûr"
+                    ]
+                },
+                {
+                    "id": "week_health_file",
+                    "category": "health",
+                    "duration_minutes": 15,
+                    "title": "Dossier de santé familiale",
+                    "description": "Vérifiez les médicaments, les allergies ou les informations médicales d'un membre de la famille.",
+                    "action_steps": [
+                        "Sélectionnez un seul enregistrement",
+                        "Vérifier les informations",
+                        "Mettre à jour la copie d'urgence"
+                    ]
+                },
+                {
+                    "id": "week_home_future",
+                    "category": "housing",
+                    "duration_minutes": 25,
+                    "title": "besoins futurs en matière de logement",
+                    "description": "Évaluez les besoins de la famille en matière de logement ou de quartier au cours des deux prochaines années sous une seule rubrique.",
+                    "action_steps": [
+                        "Identifier le besoin",
+                        "Identifiez les incontournables",
+                        "Tapez la prochaine information à rechercher"
+                    ]
+                },
+                {
+                    "id": "week_career_learning",
+                    "category": "career",
+                    "duration_minutes": 25,
+                    "title": "Changement de carrière des parents",
+                    "description": "Choisissez une étape d’apprentissage, de réseautage ou de développement de carrière pour un parent.",
+                    "action_steps": [
+                        "Sélectionnez une destination",
+                        "Réglez le pas de 30 minutes",
+                        "Enregistrer dans le calendrier"
+                    ]
+                },
+                {
+                    "id": "week_values_talk",
+                    "category": "family",
+                    "duration_minutes": 20,
+                    "title": "discours sur les valeurs familiales",
+                    "description": "Cette semaine, parlez d’une valeur familiale importante et de son équivalent dans la vie quotidienne.",
+                    "action_steps": [
+                        "Choisissez une valeur",
+                        "Demandez des exemples à tout le monde",
+                        "Identifier un comportement courant"
+                    ]
+                }
+            ]
+        }
     }
-  },
-  "goal_setting_framework": {
-    "short_term": {
-      "horizon": "0-1 yıl",
-      "examples": [
-        "Çocuğun okula uyum süreci",
-        "Aile tatili planlaması",
-        "Bütçe disiplini oturtma",
-        "Evde düzen sistemleri kurma"
-      ]
-    },
-    "medium_term": {
-      "horizon": "1-5 yıl",
-      "examples": [
-        "Çocuğun dil gelişimi (2. dil hedefi)",
-        "Ev alımı / taşınma planı",
-        "Ebeveyn kariyer gelişimi",
-        "Aile sağlık sigortası optimizasyonu"
-      ]
-    },
-    "long_term": {
-      "horizon": "5-20 yıl",
-      "examples": [
-        "Çocukların üniversite eğitimi fonu",
-        "Emeklilik planlaması",
-        "Çok dilli aile kültürü sürdürme",
-        "Aile mirası / değer aktarımı"
-      ]
-    }
-  },
-  "legal_checklist_belgium": [
-    "Vatandaşlık/residence permit güncel mi?",
-    "Çocukların kayıt belgeleri tam mı?",
-    "Vasiyetname hazırlandı mı?",
-    "Vekaletname (acil durumlar için) tanımlandı mı?",
-    "Eğitim sigortası (studietoelage) başvurusu yapıldı mı?"
-  ]
 }

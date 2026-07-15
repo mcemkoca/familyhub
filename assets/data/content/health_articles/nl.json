@@ -1,0 +1,80 @@
+[
+  {
+    "id": "immunity", "category": "aile", "categoryLabel": "Immuniteit",
+    "color": "22C55E", "emoji": "🥗", "dateLabel": "Vandaag",
+    "imageUrl": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500&q=60",
+    "title": "10 gewoonten die je immuunsysteem versterken",
+    "summary": "Eenvoudige maar effectieve tips voor elke dag.",
+    "body": [
+      "Het immuunsysteem is de eerste verdedigingslinie van het lichaam tegen ziekten. Dagelijkse gewoonten maken een groot verschil voor een sterke afweer.",
+      "1) Eet kleurrijke groenten en fruit (vitamine C en A).\n2) Slaap 7-8 uur per nacht.\n3) Beweeg regelmatig.\n4) Drink voldoende water.\n5) Beheer stress (ademhaling, pauzes).",
+      "6) Beperk bewerkte suiker.\n7) Let op handhygiëne.\n8) Haal vitamine D uit zonlicht.\n9) Eet probiotische voeding.\n10) Vermijd roken en alcohol.",
+      "Let op: deze inhoud is louter informatief. Raadpleeg bij gezondheidsklachten een arts."
+    ]
+  },
+  {
+    "id": "child_fever", "category": "cocuk", "categoryLabel": "Kindergezondheid",
+    "color": "3B82F6", "emoji": "🤒", "dateLabel": "Gisteren",
+    "imageUrl": "https://images.unsplash.com/photo-1584515933487-779824d29309?w=500&q=60",
+    "title": "Koorts bij kinderen: wanneer maak je je zorgen?",
+    "summary": "Oorzaken van koorts, correct meten en wanneer naar de dokter.",
+    "body": [
+      "Koorts is een teken dat het lichaam een infectie bestrijdt en is meestal onschadelijk. Het belangrijkste is de algemene toestand van het kind in de gaten te houden.",
+      "Correct meten: meet bij jonge kinderen onder de oksel of in het oor met een betrouwbare thermometer. Vanaf 38 °C spreken we van koorts.",
+      "Raadpleeg een arts: WACHT NIET bij koorts bij een baby jonger dan 3 maanden, koorts boven 39 °C die niet zakt, ademhalingsmoeilijkheden, huiduitslag, extreme slapte of stuipen.",
+      "Deze inhoud is informatief en stelt geen diagnose. Raadpleeg bij twijfel de kinderarts."
+    ]
+  },
+  {
+    "id": "menstrual", "category": "kadin", "categoryLabel": "Vrouwengezondheid",
+    "color": "EC4899", "emoji": "🌸", "dateLabel": "3 dagen geleden",
+    "imageUrl": "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=500&q=60",
+    "title": "Wat je moet weten over de menstruatiecyclus",
+    "summary": "De fasen van de cyclus, symptomen en aandachtspunten.",
+    "body": [
+      "De menstruatiecyclus duurt gemiddeld 28 dagen, maar 21-35 dagen is normaal. De cyclus bestaat uit vier fasen: menstruatie, folliculair, ovulatie en luteaal.",
+      "De eisprong vindt meestal rond dag 14 plaats en is de meest vruchtbare periode. Deze periode volgen is nuttig voor planning.",
+      "Raadpleeg een gynaecoloog bij onregelmatigheid, hevige pijn of zeer zwaar bloedverlies.",
+      "Deze inhoud is informatief en vervangt geen medisch advies."
+    ]
+  },
+  {
+    "id": "vitamin_d", "category": "aile", "categoryLabel": "Voeding",
+    "color": "F59E0B", "emoji": "☀️", "dateLabel": "3 dagen geleden",
+    "imageUrl": "https://images.unsplash.com/photo-1550572017-edd951b55104?w=500&q=60",
+    "title": "Tekenen van een vitamine D-tekort",
+    "summary": "Hoe herken je de signalen van een vitamine D-tekort?",
+    "body": [
+      "Vitamine D is essentieel voor botten, immuniteit en spierfunctie. Een tekort komt vaak voor, vooral bij weinig blootstelling aan zon.",
+      "Symptomen: aanhoudende vermoeidheid, bot-/spierpijn, vaak ziek zijn, haaruitval en een sombere stemming.",
+      "Aanbevelingen: uit zonlicht (15-20 min per dag), vette vis, eigeel en supplementen. Raadpleeg een arts voor je supplementen neemt.",
+      "Deze inhoud is informatief. Raadpleeg je arts voor een bloedtest en behandeling."
+    ]
+  },
+  {
+    "id": "sleep", "category": "aile", "categoryLabel": "Slaap",
+    "color": "8B5CF6", "emoji": "🌙", "dateLabel": "4 dagen geleden",
+    "imageUrl": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=500&q=60",
+    "title": "7 tips voor een goede nachtrust",
+    "summary": "Praktische tips om beter te slapen en uitgerust wakker te worden.",
+    "body": [
+      "Een goede nachtrust is de basis van je fysieke en mentale gezondheid. Voor volwassenen worden 7-9 uur per nacht aanbevolen.",
+      "1) Ga elke dag op hetzelfde uur slapen en op.\n2) Leg schermen 1 uur voor het slapen weg.\n3) Houd de kamer donker en koel.\n4) Beperk cafeïne 's avonds.",
+      "5) Vermijd zware maaltijden voor het slapen.\n6) Beweeg overdag.\n7) Bouw een rustgevende routine op (lezen, ademhaling).",
+      "Raadpleeg een specialist als de slaapproblemen aanhouden."
+    ]
+  },
+  {
+    "id": "child_nutrition", "category": "cocuk", "categoryLabel": "Kindervoeding",
+    "color": "14B8A6", "emoji": "🍎", "dateLabel": "5 dagen geleden",
+    "imageUrl": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&q=60",
+    "title": "Gezonde eetgewoonten bij kinderen",
+    "summary": "Praktische, evenwichtige tips voor kieskeurige eters.",
+    "body": [
+      "Eetgewoonten die je in de kindertijd aanleert, blijven een leven lang. Een kleurrijk en gevarieerd bord aanbieden is belangrijk.",
+      "Tips: eet samen, bied nieuwe voeding zonder druk herhaaldelijk aan en beperk suikerrijke snacks.",
+      "Een kind dwingen om te eten kan averechts werken; geef het goede voorbeeld en wees geduldig.",
+      "Raadpleeg de kinderarts bij zorgen over groei of voeding."
+    ]
+  }
+]

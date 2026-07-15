@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import '../../../services/content/content_localizer.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import '../../../services/hive_service.dart';
@@ -42,14 +43,26 @@ class _EducationScreenState extends State<EducationScreen>
       final raw = await rootBundle.loadString(
         'assets/data/content/education.json',
       );
-      final list = (jsonDecode(raw) as List).cast<Map<String, dynamic>>();
-      final custom = _loadCustom();
+      if (!mounted) return;
+      final lang = Localizations.localeOf(context).languageCode;
+      final list = normalizeContentList(jsonDecode(raw) as List, lang);
+      final custom = normalizeContentList(_loadCustomRaw(), lang);
       setState(() {
         _activities = [...custom, ...list];
         _loading = false;
       });
     } catch (_) {
       setState(() => _loading = false);
+    }
+  }
+
+  List<dynamic> _loadCustomRaw() {
+    try {
+      final raw = HiveService.getSetting('custom_edu_activities');
+      if (raw == null || raw.isEmpty) return const [];
+      return jsonDecode(raw) as List;
+    } catch (_) {
+      return const [];
     }
   }
 

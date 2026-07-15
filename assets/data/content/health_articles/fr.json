@@ -1,0 +1,80 @@
+[
+  {
+    "id": "immunity", "category": "aile", "categoryLabel": "Immunité",
+    "color": "22C55E", "emoji": "🥗", "dateLabel": "Aujourd'hui",
+    "imageUrl": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500&q=60",
+    "title": "10 habitudes qui renforcent le système immunitaire",
+    "summary": "Des méthodes simples mais efficaces pour le quotidien.",
+    "body": [
+      "Le système immunitaire est la première ligne de défense du corps contre les maladies. Des habitudes quotidiennes font une grande différence pour une bonne immunité.",
+      "1) Mangez des fruits et légumes colorés (vitamines C et A).\n2) Dormez 7 à 8 heures par nuit.\n3) Pratiquez une activité physique régulière.\n4) Buvez suffisamment d'eau.\n5) Gérez le stress (respiration, pauses).",
+      "6) Réduisez le sucre transformé.\n7) Soignez l'hygiène des mains.\n8) Prenez de la vitamine D au soleil.\n9) Consommez des aliments probiotiques.\n10) Évitez le tabac et l'alcool.",
+      "Remarque : ce contenu est informatif. En cas de problème de santé, consultez un médecin."
+    ]
+  },
+  {
+    "id": "child_fever", "category": "cocuk", "categoryLabel": "Santé de l'enfant",
+    "color": "3B82F6", "emoji": "🤒", "dateLabel": "Hier",
+    "imageUrl": "https://images.unsplash.com/photo-1584515933487-779824d29309?w=500&q=60",
+    "title": "Fièvre chez l'enfant : quand s'inquiéter ?",
+    "summary": "Causes de la fièvre, mesure correcte et quand consulter.",
+    "body": [
+      "La fièvre est un signe que le corps combat une infection et elle est le plus souvent bénigne. L'essentiel est de surveiller l'état général de l'enfant.",
+      "Mesure correcte : chez le jeune enfant, mesurez sous l'aisselle ou dans l'oreille avec un thermomètre fiable. On parle de fièvre au-delà de 38 °C.",
+      "Consultez un médecin : NE TARDEZ PAS en cas de fièvre chez un bébé de moins de 3 mois, de fièvre supérieure à 39 °C qui ne baisse pas, de difficultés respiratoires, d'éruption cutanée, de grande faiblesse ou de convulsions.",
+      "Ce contenu est informatif et ne pose pas de diagnostic. En cas de doute, consultez le pédiatre."
+    ]
+  },
+  {
+    "id": "menstrual", "category": "kadin", "categoryLabel": "Santé de la femme",
+    "color": "EC4899", "emoji": "🌸", "dateLabel": "Il y a 3 jours",
+    "imageUrl": "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=500&q=60",
+    "title": "Ce qu'il faut savoir sur le cycle menstruel",
+    "summary": "Les phases du cycle, les symptômes et les points d'attention.",
+    "body": [
+      "Le cycle menstruel dure en moyenne 28 jours, mais 21 à 35 jours est normal. Le cycle comporte quatre phases : menstruation, folliculaire, ovulation et lutéale.",
+      "L'ovulation a généralement lieu vers le 14e jour du cycle et correspond à la période la plus fertile. Suivre cette période est utile pour la planification.",
+      "Consultez un gynécologue en cas d'irrégularité, de douleurs intenses ou de saignements très abondants.",
+      "Ce contenu est informatif et ne remplace pas un avis médical."
+    ]
+  },
+  {
+    "id": "vitamin_d", "category": "aile", "categoryLabel": "Nutrition",
+    "color": "F59E0B", "emoji": "☀️", "dateLabel": "Il y a 3 jours",
+    "imageUrl": "https://images.unsplash.com/photo-1550572017-edd951b55104?w=500&q=60",
+    "title": "Signes d'une carence en vitamine D",
+    "summary": "Comment reconnaître les signaux d'une carence en vitamine D ?",
+    "body": [
+      "La vitamine D est essentielle à la santé des os, à l'immunité et à la fonction musculaire. La carence est fréquente, surtout en cas de faible exposition au soleil.",
+      "Symptômes : fatigue persistante, douleurs osseuses/musculaires, infections fréquentes, chute de cheveux et baisse de moral.",
+      "Recommandations : soleil (15-20 min par jour), poissons gras, jaune d'œuf et compléments. Consultez un médecin avant toute supplémentation.",
+      "Ce contenu est informatif. Consultez votre médecin pour une analyse de sang et un traitement."
+    ]
+  },
+  {
+    "id": "sleep", "category": "aile", "categoryLabel": "Sommeil",
+    "color": "8B5CF6", "emoji": "🌙", "dateLabel": "Il y a 4 jours",
+    "imageUrl": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=500&q=60",
+    "title": "7 conseils pour un sommeil de qualité",
+    "summary": "Des conseils pratiques pour mieux dormir et se réveiller reposé.",
+    "body": [
+      "Un sommeil de qualité est le fondement de la santé physique et mentale. On recommande 7 à 9 heures par nuit pour les adultes.",
+      "1) Couchez-vous et levez-vous à la même heure.\n2) Éteignez les écrans 1 heure avant de dormir.\n3) Gardez la chambre sombre et fraîche.\n4) Réduisez la caféine le soir.",
+      "5) Évitez les repas lourds avant de dormir.\n6) Bougez pendant la journée.\n7) Instaurez une routine apaisante (lecture, respiration).",
+      "Consultez un spécialiste si les troubles du sommeil persistent."
+    ]
+  },
+  {
+    "id": "child_nutrition", "category": "cocuk", "categoryLabel": "Nutrition enfant",
+    "color": "14B8A6", "emoji": "🍎", "dateLabel": "Il y a 5 jours",
+    "imageUrl": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&q=60",
+    "title": "De bonnes habitudes alimentaires chez l'enfant",
+    "summary": "Des conseils pratiques et équilibrés pour les enfants difficiles.",
+    "body": [
+      "Les habitudes alimentaires acquises dans l'enfance durent toute la vie. Proposer une assiette colorée et variée est important.",
+      "Conseils : mangez ensemble, proposez à nouveau les nouveaux aliments sans forcer et limitez les collations sucrées.",
+      "Forcer un enfant à manger peut être contre-productif ; montrez l'exemple et soyez patient.",
+      "En cas d'inquiétude sur la croissance ou l'alimentation, consultez le pédiatre."
+    ]
+  }
+]

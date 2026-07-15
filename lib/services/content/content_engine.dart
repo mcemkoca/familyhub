@@ -5,7 +5,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 import '../../core/analytics/analytics_service.dart';
 import 'ai_content_service.dart';
 import 'content_cache_service.dart';
+import 'content_localizer.dart';
 import 'content_models.dart';
+import 'household_task_content_service.dart';
+import '../localization/locale_service.dart';
 
 /// Loads, caches, and serves FamilyHub seed content data.
 ///
@@ -33,6 +36,7 @@ class ContentEngine {
   /// Initialize the engine: load from cache or seed assets.
   static Future<void> initialize() async {
     await ContentCacheService.instance.initialize();
+    await HouseholdTaskContentService.instance.initialize();
     await _instance._loadAll();
   }
 
@@ -90,9 +94,10 @@ class ContentEngine {
 
     _initialized = true;
 
-    AnalyticsService.track('content_engine_initialized', properties: {
-      'modules_loaded': 5,
-    });
+    AnalyticsService.track(
+      'content_engine_initialized',
+      properties: {'modules_loaded': 5},
+    );
   }
 
   Future<T?> _loadModule<T>({
@@ -102,6 +107,10 @@ class ContentEngine {
     required T Function(Map<String, dynamic>) parser,
   }) async {
     final cacheKey = '$_keyPrefix$moduleKey';
+    // Çok-dilli içerik alanlarını ({tr,nl,fr,en}) aktif dile indirger.
+    final lang = LocaleService.resolveInitialLocale().languageCode;
+    Map<String, dynamic> loc(Map<String, dynamic> j) =>
+        normalizeContent(j, lang) as Map<String, dynamic>;
 
     // 1. Try cache with stale check
     final cached = box.get(cacheKey);
@@ -113,7 +122,7 @@ class ContentEngine {
       if (!isStale) {
         try {
           final json = jsonDecode(cached) as Map<String, dynamic>;
-          return parser(json);
+          return parser(loc(json));
         } catch (_) {
           // Cache corrupted, fall through
         }
@@ -133,12 +142,12 @@ class ContentEngine {
         content: json,
       );
 
-      return parser(json);
+      return parser(loc(json));
     } catch (e) {
-      AnalyticsService.track('content_load_error', properties: {
-        'module': moduleKey,
-        'error': e.toString(),
-      });
+      AnalyticsService.track(
+        'content_load_error',
+        properties: {'module': moduleKey, 'error': e.toString()},
+      );
       return null;
     }
   }
@@ -161,6 +170,14 @@ class ContentEngine {
     return recipes[index];
   }
 
+  Recipe? dailyRecipeLocalized({String language = 'tr'}) {
+    final localized = _mealPlanning?.localized(language);
+    final recipes = localized?['recipes'];
+    if (recipes is! List || recipes.isEmpty) return dailyRecipe;
+    final index = (DateTime.now().day + _recipeOffset) % recipes.length;
+    return Recipe.fromJson(Map<String, dynamic>.from(recipes[index] as Map));
+  }
+
   void nextRecipe() => _recipeOffset++;
   void prevRecipe() => _recipeOffset = (_recipeOffset - 1).clamp(0, 1000);
 
@@ -168,18 +185,89 @@ class ContentEngine {
   DailyMeals? get todayMeals {
     final template = _mealPlanning?.weeklyTemplate;
     if (template == null) return null;
-    final dayNames = ['pazar', 'pazartesi', 'sali', 'carsamba', 'persembe', 'cuma', 'cumartesi'];
+    final dayNames = [
+      'pazar',
+      'pazartesi',
+      'sali',
+      'carsamba',
+      'persembe',
+      'cuma',
+      'cumartesi',
+    ];
     final dayName = dayNames[DateTime.now().weekday % 7];
     return template[dayName];
   }
 
-  /// Returns a random activity appropriate for the given age group.
-  Activity? getRandomActivity(String ageGroup) {
+  DailyMeals? todayMealsLocalized({String language = 'tr'}) {
+    final localized = _mealPlanning?.localized(language);
+    final template = localized?['weekly_template'];
+    if (template is! Map) return todayMeals;
+    final dayNames = [
+      'pazar',
+      'pazartesi',
+      'sali',
+      'carsamba',
+      'persembe',
+      'cuma',
+      'cumartesi',
+    ];
+    final dayName = dayNames[DateTime.now().weekday % 7];
+    final meals = template[dayName];
+    if (meals is! Map) return todayMeals;
+    return DailyMeals.fromJson(Map<String, dynamic>.from(meals));
+  }
+
+  /// Returns this week's localized activity for an age group.
+  /// The same family receives a stable result throughout the ISO week.
+  Activity? getWeeklyActivity(String ageGroup, {String language = 'tr'}) {
+    final data = _childDev;
+    final templates = data?.weeklyActivityCatalog[ageGroup];
+    final variants = data?.weeklyActivityVariants;
+    if (templates == null ||
+        templates.isEmpty ||
+        variants == null ||
+        variants.isEmpty) {
+      return null;
+    }
+
+    const supported = {'tr', 'en', 'nl', 'fr'};
+    final locale = supported.contains(language) ? language : 'tr';
+    final week = _isoWeekNumber(DateTime.now());
+    final ageOffset = data!.ageGroups.keys
+        .toList()
+        .indexOf(ageGroup)
+        .clamp(0, 100)
+        .toInt();
+    final template = templates[(week - 1 + ageOffset) % templates.length];
+    final variantIndex =
+        ((week - 1) ~/ templates.length + ageOffset) % variants.length;
+
+    return template.localize(
+      language: locale,
+      variant: variants[variantIndex],
+      ageGroup: ageGroup,
+    );
+  }
+
+  /// Backwards-compatible API; now rotates weekly instead of daily.
+  Activity? getRandomActivity(String ageGroup, {String language = 'tr'}) {
+    final weekly = getWeeklyActivity(ageGroup, language: language);
+    if (weekly != null) return weekly;
     final group = _childDev?.ageGroups[ageGroup];
     final activities = group?.activities;
     if (activities == null || activities.isEmpty) return null;
-    final index = DateTime.now().day % activities.length;
+    final index = (_isoWeekNumber(DateTime.now()) - 1) % activities.length;
     return activities[index];
+  }
+
+  int _isoWeekNumber(DateTime date) {
+    final day = DateTime.utc(date.year, date.month, date.day);
+    final thursday = day.add(Duration(days: 4 - day.weekday));
+    final firstThursday = DateTime.utc(thursday.year, 1, 4);
+    final firstWeekThursday = firstThursday.add(
+      Duration(days: 4 - firstThursday.weekday),
+    );
+    return 1 + thursday.difference(firstWeekThursday).inDays ~/ 7;
   }
 
   /// Returns today's featured activity from a rotating age group.
@@ -237,9 +325,34 @@ class ContentEngine {
   String? get todayCleaningTask {
     final schedule = _household?.weeklySchedule;
     if (schedule == null) return null;
-    final dayNames = ['pazar', 'pazartesi', 'sali', 'carsamba', 'persembe', 'cuma', 'cumartesi'];
+    final dayNames = [
+      'pazar',
+      'pazartesi',
+      'sali',
+      'carsamba',
+      'persembe',
+      'cuma',
+      'cumartesi',
+    ];
     final dayName = dayNames[(DateTime.now().weekday + _taskOffset) % 7];
     return schedule[dayName];
+  }
+
+  String? todayCleaningTaskLocalized({String language = 'tr'}) {
+    final localized = _household?.localized(language);
+    final schedule = localized?['weekly_schedule'];
+    if (schedule is! Map) return todayCleaningTask;
+    final dayNames = [
+      'pazar',
+      'pazartesi',
+      'sali',
+      'carsamba',
+      'persembe',
+      'cuma',
+      'cumartesi',
+    ];
+    final dayName = dayNames[(DateTime.now().weekday + _taskOffset) % 7];
+    return schedule[dayName] as String?;
   }
 
   void nextTask() => _taskOffset++;
@@ -248,6 +361,61 @@ class ContentEngine {
   /// Returns emergency contacts list.
   List<EmergencyContact> get emergencyContacts {
     return _futurePlanning?.emergencyPlan.contacts ?? [];
+  }
+
+  /// Returns one stable, localized planning task for the current ISO week.
+  Map<String, dynamic>? getWeeklyFuturePlanningItem({String language = 'tr'}) {
+    final localized = _futurePlanning?.localized(language);
+    final items = localized?['weekly_planning_catalog'];
+    if (items is! List || items.isEmpty) return null;
+    final week = _isoWeekNumber(DateTime.now());
+    return Map<String, dynamic>.from(items[(week - 1) % items.length] as Map);
+  }
+
+  /// Validates and persists a reviewed weekly future-planning payload.
+  /// Invalid or partially translated data never replaces the active revision.
+  Future<bool> saveFuturePlanningUpdate(Map<String, dynamic> payload) async {
+    const languages = {'tr', 'en', 'nl', 'fr'};
+    try {
+      if (payload['module'] != 'future_planning' ||
+          payload['education_pathways_belgium'] is! Map ||
+          payload['emergency_plan_template'] is! Map ||
+          payload['goal_setting_framework'] is! Map ||
+          payload['legal_checklist_belgium'] is! List ||
+          payload['weekly_planning_catalog'] is! List) {
+        return false;
+      }
+
+      final translations = payload['i18n'];
+      if (translations is! Map ||
+          languages.any((language) => translations[language] is! Map)) {
+        return false;
+      }
+
+      final parsed = FuturePlanningData.fromJson(payload);
+      final raw = jsonEncode(payload);
+      final box = Hive.isBoxOpen(_boxName)
+          ? Hive.box<String>(_boxName)
+          : await Hive.openBox<String>(_boxName);
+      await box.put('${_keyPrefix}future_planning', raw);
+      await ContentCacheService.instance.put(
+        module: 'future_planning',
+        contentKey: 'seed',
+        content: payload,
+      );
+      final revision =
+          (payload['content_revision'] as num?)?.toInt() ??
+          DateTime.now().millisecondsSinceEpoch;
+      await ContentCacheService.instance.put(
+        module: 'future_planning',
+        contentKey: 'revision_$revision',
+        content: payload,
+      );
+      _futurePlanning = parsed;
+      return true;
+    } catch (_) {
+      return false;
+    }
   }
 
   /// Clears all cached content (forces reload from assets on next init).
@@ -287,23 +455,26 @@ class ContentEngine {
         specialRequests: specialRequests,
       );
 
-      AnalyticsService.track('ai_personalized_generated', properties: {
-        'family_type': familyType,
-        'region': region,
-      });
+      AnalyticsService.track(
+        'ai_personalized_generated',
+        properties: {'family_type': familyType, 'region': region},
+      );
 
       return result;
     } on AIContentException catch (e) {
       debugPrint('AIContentService error: $e');
-      AnalyticsService.track('ai_personalized_error', properties: {
-        'error': e.toString(),
-      });
+      AnalyticsService.track(
+        'ai_personalized_error',
+        properties: {'error': e.toString()},
+      );
       return null;
     }
   }
 
   /// Refreshes a module via AI (fallback when assets are outdated).
-  static Future<Map<String, dynamic>?> refreshModuleFromAI(String moduleName) async {
+  static Future<Map<String, dynamic>?> refreshModuleFromAI(
+    String moduleName,
+  ) async {
     try {
       final result = await AIContentService.instance.refreshModule(moduleName);
 
@@ -314,17 +485,18 @@ class ContentEngine {
         content: result,
       );
 
-      AnalyticsService.track('ai_module_refreshed', properties: {
-        'module': moduleName,
-      });
+      AnalyticsService.track(
+        'ai_module_refreshed',
+        properties: {'module': moduleName},
+      );
 
       return result;
     } on AIContentException catch (e) {
       debugPrint('AIContentService error: $e');
-      AnalyticsService.track('ai_module_refresh_error', properties: {
-        'module': moduleName,
-        'error': e.toString(),
-      });
+      AnalyticsService.track(
+        'ai_module_refresh_error',
+        properties: {'module': moduleName, 'error': e.toString()},
+      );
       return null;
     }
   }
