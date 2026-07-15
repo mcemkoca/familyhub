@@ -90,10 +90,10 @@ class ContentCacheService {
   ///
   /// Invalidation rules:
   /// - meal_planning: 30 days (monthly refresh)
-  /// - child_development: 365 days (static, yearly check)
+  /// - child_development: 7 days (matches the V2 remote-update contract)
   /// - budget: 90 days (quarterly, economic data updates)
   /// - household: 90 days
-  /// - future_planning: 180 days
+  /// - future_planning: 7 days (weekly remote-source review)
   /// - default: 30 days
   bool isStale({
     required String module,
@@ -112,10 +112,10 @@ class ContentCacheService {
 
     final maxAgeDays = switch (module) {
       'meal_planning' => 30,
-      'child_development' => 365,
+      'child_development' => 7,
       'budget' => 90,
       'household' => 90,
-      'future_planning' => 180,
+      'future_planning' => 7,
       _ => 30,
     };
 
