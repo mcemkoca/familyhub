@@ -20,6 +20,29 @@ dynamic normalizeContent(dynamic value, String lang) {
   if (value is Map) {
     final keys = value.keys.map((k) => k.toString()).toSet();
 
+    // 0) i18n alt-objesi deseni: `{..., "i18n": {"tr": {...}, "en": {...}}}`.
+    //    Aktif dilin alt-objesi üst alanların ÜZERİNE yazılır (title/ingredients/
+    //    steps yerelleşir). `X_label` alanı varsa temel `X` display alanına
+    //    kopyalanır (ör. difficulty_label → difficulty). Filtre anahtarları
+    //    (category) temel değeriyle kalır.
+    if (value['i18n'] is Map) {
+      final i18n = value['i18n'] as Map;
+      final loc = i18n[lang] ?? i18n['en'] ?? i18n['tr'];
+      if (loc is Map) {
+        final merged = <String, dynamic>{};
+        value.forEach((k, v) {
+          if (k.toString() != 'i18n') merged[k.toString()] = v;
+        });
+        loc.forEach((k, v) => merged[k.toString()] = v);
+        // *_label → temel display alanı (category filtresi hariç).
+        for (final base in const ['difficulty', 'unit', 'timing', 'status']) {
+          final lbl = merged['${base}_label'];
+          if (lbl != null) merged[base] = lbl;
+        }
+        return normalizeContent(merged, lang);
+      }
+    }
+
     // 1) Saf dil-map'i → aktif dildeki metin.
     if (keys.isNotEmpty && keys.every(_langCodes.contains)) {
       return _pickLang(value, lang);
