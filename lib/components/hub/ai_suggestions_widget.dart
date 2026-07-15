@@ -22,7 +22,6 @@ import '../../services/hive_service.dart';
 import '../../presentation/screens/insights/family_report_screen.dart'
     show familyReportScoresProvider;
 
-
 /// AI-powered smart suggestions widget for the Hub screen.
 /// Phase 2: Rich cards with badges, nutrition info, steps, alternatives,
 /// postpone, share, comment, and progress tracking.
@@ -40,8 +39,8 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
   List<AISuggestion> _suggestions = [];
   bool _loading = false;
   String? _error;
-  bool _expanded = false; // varsayılan kapalı — butonlar görünsün, tek tıkla açılır
-
+  bool _expanded =
+      false; // varsayılan kapalı — butonlar görünsün, tek tıkla açılır
 
   @override
   void initState() {
@@ -75,19 +74,24 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
       List<AISuggestion> familySuggestions = [];
       if (HiveService.getFamilySuggestionsEnabled()) {
         try {
-          final enabledCats = HiveService.getFamilySuggestionsCategories().toSet();
+          final enabledCats = HiveService.getFamilySuggestionsCategories()
+              .toSet();
           final perDay = HiveService.getFamilySuggestionsPerDay();
           // Get child's age for age-filtered suggestions
           int? childAge;
           try {
             if (resolvedFamilyId != null) {
-              final children = await ChildAccountRepository().getChildrenForFamily(resolvedFamilyId);
+              final children = await ChildAccountRepository()
+                  .getChildrenForFamily(resolvedFamilyId);
               if (children.isNotEmpty) {
                 final active = children.where((c) => c.isActive).toList();
-                childAge = (active.isNotEmpty ? active.first : children.first).age;
+                childAge =
+                    (active.isNotEmpty ? active.first : children.first).age;
               }
             }
-          } catch (e) { debugPrint('AI suggestions error: $e'); }
+          } catch (e) {
+            debugPrint('AI suggestions error: $e');
+          }
           familySuggestions = FamilySuggestionsPool.instance.pickDaily(
             date: today,
             enabledCategories: enabledCats,
@@ -95,7 +99,9 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
             count: perDay,
             childAge: childAge,
           );
-        } catch (e) { debugPrint('AI suggestions error: $e'); }
+        } catch (e) {
+          debugPrint('AI suggestions error: $e');
+        }
       }
 
       // Also load AI suggestions as bonus
@@ -108,7 +114,13 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
             final repo = HubRepository();
             hubData = resolvedFamilyId != null
                 ? await repo.getTodaySummary(resolvedFamilyId)
-                : const TodaySummary(eventCount: 0, taskCount: 0, unreadMessages: 0, onlineMembers: 0, totalMembers: 0);
+                : const TodaySummary(
+                    eventCount: 0,
+                    taskCount: 0,
+                    unreadMessages: 0,
+                    onlineMembers: 0,
+                    totalMembers: 0,
+                  );
           } catch (e) {
             hubData = const TodaySummary(
               eventCount: 0,
@@ -120,8 +132,10 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
           }
           // Aile Karnesi skorlarını prompt'a besle — öneriler en zayıf alanı hedefler.
           final reportScores = ref.read(familyReportScoresProvider);
-          final prompt = AIPrompts.buildHubPrompt(hubData,
-              reportScores: reportScores.isEmpty ? null : reportScores);
+          final prompt = AIPrompts.buildHubPrompt(
+            hubData,
+            reportScores: reportScores.isEmpty ? null : reportScores,
+          );
           final response = await AIEngine.generate(
             prompt: prompt,
             systemPrompt: AIPrompts.hubSystemPrompt,
@@ -136,14 +150,22 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
               if (raw is Map<String, dynamic>) {
                 aiSuggestions.add(AISuggestion.fromJson(raw));
               }
-            } catch (e) { debugPrint('AI suggestions error: $e'); }
+            } catch (e) {
+              debugPrint('AI suggestions error: $e');
+            }
           }
-        } catch (e) { debugPrint('AI suggestions error: $e'); }
+        } catch (e) {
+          debugPrint('AI suggestions error: $e');
+        }
       }
 
       // Merge: Karne-bazlı AI önerileri önce (en zayıf alanı hedefler),
       // ardından günlük havuz ve aile havuzu.
-      final all = <AISuggestion>[...aiSuggestions, ...daily, ...familySuggestions];
+      final all = <AISuggestion>[
+        ...aiSuggestions,
+        ...daily,
+        ...familySuggestions,
+      ];
       final newIds = all.map((s) => s.id).toList();
 
       // Save shown IDs
@@ -174,7 +196,10 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
           _loading = false;
         });
       }
-      AnalyticsService.track('ai_suggestions_error', properties: {'error': e.toString()});
+      AnalyticsService.track(
+        'ai_suggestions_error',
+        properties: {'error': e.toString()},
+      );
     }
   }
 
@@ -221,7 +246,9 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
         suggestions.map((s) => s.toJson()).toList(),
         provider: provider,
       );
-    } catch (e) { debugPrint('AI suggestions error: $e'); }
+    } catch (e) {
+      debugPrint('AI suggestions error: $e');
+    }
   }
 
   void _showDetailModal(AISuggestion suggestion) {
@@ -249,18 +276,22 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
 
   void _addToShoppingList(List<Ingredient> missing) {
     final newItems = missing
-        .map((i) => ShoppingItem(
-              id: 'ai_${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(1000)}',
-              name: i.name,
-              quantity: i.amount,
-              requestedBy: 'AI Öneri',
-            ))
+        .map(
+          (i) => ShoppingItem(
+            id: 'ai_${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(1000)}',
+            name: i.name,
+            quantity: i.amount,
+            requestedBy: 'AI Öneri',
+          ),
+        )
         .toList();
     ref.read(shoppingItemsProvider.notifier).addItems(newItems);
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('${newItems.length} ürün alışveriş listesine eklendi'),
+        content: Text(
+          AppLocalizations.of(context).sugAddedToShopping(newItems.length),
+        ),
         backgroundColor: const Color(0xFF10B981),
         behavior: SnackBarBehavior.floating,
       ),
@@ -291,7 +322,7 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
     });
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('$minutes dakika sonra hatırlatılacak'),
+        content: Text(AppLocalizations.of(context).sugRemindIn(minutes)),
         behavior: SnackBarBehavior.floating,
       ),
     );
@@ -368,17 +399,18 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
                 Padding(
                   padding: const EdgeInsets.all(AppSpacing.lg),
                   child: Text(
-                    'Alternatif Öneriler',
+                    AppLocalizations.of(context).sugAlternatives,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 Expanded(
                   child: ListView.builder(
                     controller: scrollController,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: AppSpacing.lg),
+                      horizontal: AppSpacing.lg,
+                    ),
                     itemCount: suggestion.alternativeOptions.length,
                     itemBuilder: (context, index) {
                       final alt = suggestion.alternativeOptions[index];
@@ -387,8 +419,7 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
                         color: const Color(0xFF13131A),
                         elevation: 0,
                         shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(AppRadius.medium),
+                          borderRadius: BorderRadius.circular(AppRadius.medium),
                           side: BorderSide(
                             color: isDark
                                 ? const Color(0x1EFFFFFF)
@@ -418,7 +449,11 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
                             Navigator.pop(context);
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text('"${alt.title}" seçildi'),
+                                content: Text(
+                                  AppLocalizations.of(
+                                    context,
+                                  ).sugSelected(alt.title),
+                                ),
                                 behavior: SnackBarBehavior.floating,
                               ),
                             );
@@ -439,7 +474,6 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
       child: Column(
@@ -471,10 +505,12 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
         margin: const EdgeInsets.only(top: 10),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-            const Color(0xFF6366F1).withAlpha(30),
-            const Color(0xFFEC4899).withAlpha(24),
-          ]),
+          gradient: LinearGradient(
+            colors: [
+              const Color(0xFF6366F1).withAlpha(30),
+              const Color(0xFFEC4899).withAlpha(24),
+            ],
+          ),
           borderRadius: BorderRadius.circular(14),
           border: Border.all(color: const Color(0xFF6366F1).withAlpha(60)),
         ),
@@ -484,7 +520,7 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
             const SizedBox(width: 10),
             Expanded(
               child: Text(
-                '$count kişisel öneri hazır — göstermek için dokun',
+                AppLocalizations.of(context).sugReadyTap(count),
                 style: const TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
@@ -492,8 +528,10 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
                 ),
               ),
             ),
-            const Icon(Icons.keyboard_arrow_down_rounded,
-                color: Color(0xFF8B5CF6)),
+            const Icon(
+              Icons.keyboard_arrow_down_rounded,
+              color: Color(0xFF8B5CF6),
+            ),
           ],
         ),
       ),
@@ -507,10 +545,7 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
       spacing: 12,
       runSpacing: 12,
       children: _suggestions.take(8).map((s) {
-        return SizedBox(
-          width: width,
-          child: _buildSuggestionCard(s, isDark),
-        );
+        return SizedBox(width: width, child: _buildSuggestionCard(s, isDark));
       }).toList(),
     );
   }
@@ -526,8 +561,10 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
             child: Row(
               children: [
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(
                       colors: [Color(0xFF6366F1), Color(0xFFEC4899)],
@@ -553,18 +590,20 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  'Günlük Öneriler',
+                  AppLocalizations.of(context).sugDaily,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
                 ),
                 const SizedBox(width: 4),
                 AnimatedRotation(
                   turns: _expanded ? 0.5 : 0,
                   duration: const Duration(milliseconds: 200),
-                  child: const Icon(Icons.keyboard_arrow_down_rounded,
-                      color: Color(0xFF8B5CF6)),
+                  child: const Icon(
+                    Icons.keyboard_arrow_down_rounded,
+                    color: Color(0xFF8B5CF6),
+                  ),
                 ),
               ],
             ),
@@ -591,8 +630,11 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
         // Bağımsız FamilyHub AI bölümünü aç.
         IconButton(
           onPressed: () => context.push(AppRoutes.familyHubAI),
-          icon: const Icon(Icons.open_in_full_rounded,
-              size: 18, color: Color(0xFF8B5CF6)),
+          icon: const Icon(
+            Icons.open_in_full_rounded,
+            size: 18,
+            color: Color(0xFF8B5CF6),
+          ),
           tooltip: AppLocalizations.of(context).familyHubAITitle,
           visualDensity: VisualDensity.compact,
         ),
@@ -603,15 +645,13 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
   Widget _buildSuggestionCard(AISuggestion s, bool isDark) {
     final color = _getColorForType(s.type);
     final icon = _getIconForType(s.type);
-    final categoryLabel = _getCategoryLabel(s.type);
+    final categoryLabel = _getCategoryLabel(context, s.type);
 
     return Container(
       decoration: BoxDecoration(
         color: const Color(0xFF13131A),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: const Color(0x1EFFFFFF),
-        ),
+        border: Border.all(color: const Color(0x1EFFFFFF)),
       ),
       child: InkWell(
         onTap: () => _showDetailModal(s),
@@ -651,11 +691,7 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
                       color: color.withAlpha(40),
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(
-                      Icons.arrow_forward,
-                      color: color,
-                      size: 16,
-                    ),
+                    child: Icon(Icons.arrow_forward, color: color, size: 16),
                   ),
                 ],
               ),
@@ -667,7 +703,9 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
-                  color: isDark ? const Color(0xFFE5E7EB) : const Color(0xFF111827),
+                  color: isDark
+                      ? const Color(0xFFE5E7EB)
+                      : const Color(0xFF111827),
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -716,7 +754,9 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
                     Icon(Icons.calendar_today, size: 14, color: color),
                     const SizedBox(width: 4),
                     Text(
-                      '${s.minAge}-${s.maxAge} yaş',
+                      AppLocalizations.of(
+                        context,
+                      ).sugAgeRange(s.minAge ?? 0, s.maxAge ?? 0),
                       style: const TextStyle(
                         fontSize: 12,
                         color: Color(0xFF6B7280),
@@ -742,28 +782,27 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
     );
   }
 
-  String _getCategoryLabel(String type) {
+  String _getCategoryLabel(BuildContext context, String type) {
+    final l = AppLocalizations.of(context);
     switch (type) {
       case 'recipe':
-        return 'Bugünün Yemeği';
+        return l.sugCatMeal;
       case 'education':
-        return 'Çocuk Gelişimi';
+        return l.sugCatChildDev;
       case 'finance':
-        return 'Tasarruf Önerileri';
+        return l.sugCatSaving;
       case 'chore':
-        return 'Ev İşleri';
+        return l.sugCatChores;
       case 'health':
-        return 'Sağlık';
+        return l.sugCatHealth;
       case 'social':
-        return 'Sosyal';
+        return l.sugCatSocial;
       case 'safety':
-        return 'Güvenlik';
+        return l.sugCatSafety;
       default:
-        return 'Öneri';
+        return l.sugCatGeneric;
     }
   }
-
-
 
   Widget _buildSkeleton() {
     final baseColor = const Color(0xFF13131A);
@@ -835,10 +874,10 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
         children: [
           const Icon(Icons.error_outline, color: AppColors.error, size: 20),
           const SizedBox(width: AppSpacing.sm),
-          const Expanded(
+          Expanded(
             child: Text(
-              'Öneriler yüklenirken bir hata oluştu. Tekrar deneyin.',
-              style: TextStyle(color: AppColors.error, fontSize: 13),
+              AppLocalizations.of(context).sugError,
+              style: const TextStyle(color: AppColors.error, fontSize: 13),
             ),
           ),
           TextButton(
@@ -856,24 +895,19 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
       decoration: BoxDecoration(
         color: const Color(0xFF13131A),
         borderRadius: BorderRadius.circular(AppRadius.medium),
-        border: Border.all(
-          color: const Color(0x1EFFFFFF),
-        ),
+        border: Border.all(color: const Color(0x1EFFFFFF)),
       ),
-      child: const Row(
+      child: Row(
         children: [
-          Icon(
+          const Icon(
             Icons.lightbulb_outline,
             color: Color(0xFF6B7280),
             size: 20,
           ),
-          SizedBox(width: AppSpacing.sm),
+          const SizedBox(width: AppSpacing.sm),
           Text(
-            'Henüz öneri yok. Yenilemeyi deneyin.',
-            style: TextStyle(
-              color: Color(0xFF6B7280),
-              fontSize: 13,
-            ),
+            AppLocalizations.of(context).sugEmpty,
+            style: const TextStyle(color: Color(0xFF6B7280), fontSize: 13),
           ),
         ],
       ),
@@ -1002,8 +1036,7 @@ class _SuggestionDetailSheet extends StatefulWidget {
   });
 
   @override
-  State<_SuggestionDetailSheet> createState() =>
-      _SuggestionDetailSheetState();
+  State<_SuggestionDetailSheet> createState() => _SuggestionDetailSheetState();
 }
 
 class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
@@ -1027,8 +1060,9 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
   @override
   Widget build(BuildContext context) {
     final color = _sheetColorForType(widget.suggestion.type);
-    final missing =
-        widget.suggestion.ingredients.where((i) => !i.inStock).toList();
+    final missing = widget.suggestion.ingredients
+        .where((i) => !i.inStock)
+        .toList();
 
     return DraggableScrollableSheet(
       initialChildSize: 0.85,
@@ -1083,33 +1117,33 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                             children: [
                               Text(
                                 widget.suggestion.title,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    ?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                style: Theme.of(context).textTheme.titleLarge
+                                    ?.copyWith(fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(height: 4),
                               Wrap(
                                 spacing: 6,
                                 children: [
-                                  if (widget.suggestion.durationMinutes !=
-                                      null)
+                                  if (widget.suggestion.durationMinutes != null)
                                     _buildMetaChip(
-                                        '⏱️ ${widget.suggestion.durationMinutes} dk',
-                                        isDark),
+                                      '⏱️ ${widget.suggestion.durationMinutes} dk',
+                                      isDark,
+                                    ),
                                   if (widget.suggestion.calories != null)
                                     _buildMetaChip(
-                                        '🔥 ${widget.suggestion.calories} kcal',
-                                        isDark),
+                                      '🔥 ${widget.suggestion.calories} kcal',
+                                      isDark,
+                                    ),
                                   if (widget.suggestion.difficulty != null)
                                     _buildMetaChip(
-                                        '📊 ${widget.suggestion.difficulty}',
-                                        isDark),
+                                      '📊 ${widget.suggestion.difficulty}',
+                                      isDark,
+                                    ),
                                   if (widget.suggestion.badge != null)
                                     _buildBadgeChip(
-                                        widget.suggestion.badge!, color),
+                                      widget.suggestion.badge!,
+                                      color,
+                                    ),
                                 ],
                               ),
                             ],
@@ -1123,16 +1157,19 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                     Text(
                       widget.suggestion.description,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: const Color(0xFF6B7280),
-                            height: 1.6,
-                          ),
+                        color: const Color(0xFF6B7280),
+                        height: 1.6,
+                      ),
                     ),
                     const SizedBox(height: AppSpacing.lg),
 
                     // Nutrition info
                     if (widget.suggestion.nutritionInfo?.hasAnyValue ==
                         true) ...[
-                      _buildSectionTitle(context, '🥗 Besin Değerleri'),
+                      _buildSectionTitle(
+                        context,
+                        '🥗 ${AppLocalizations.of(context).sugNutrition}',
+                      ),
                       const SizedBox(height: AppSpacing.sm),
                       Container(
                         padding: const EdgeInsets.all(AppSpacing.md),
@@ -1140,8 +1177,7 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                           color: isDark
                               ? const Color(0xFF13131A)
                               : const Color(0xFF13131A),
-                          borderRadius:
-                              BorderRadius.circular(AppRadius.medium),
+                          borderRadius: BorderRadius.circular(AppRadius.medium),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -1149,26 +1185,28 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                             if (widget.suggestion.nutritionInfo!.protein !=
                                 null)
                               _buildNutrientColumn(
-                                  'Protein',
-                                  '${widget.suggestion.nutritionInfo!.protein!.toStringAsFixed(0)}g',
-                                  AppColors.green),
-                            if (widget.suggestion.nutritionInfo!.carbs !=
-                                null)
+                                'Protein',
+                                '${widget.suggestion.nutritionInfo!.protein!.toStringAsFixed(0)}g',
+                                AppColors.green,
+                              ),
+                            if (widget.suggestion.nutritionInfo!.carbs != null)
                               _buildNutrientColumn(
-                                  'Karbonhidrat',
-                                  '${widget.suggestion.nutritionInfo!.carbs!.toStringAsFixed(0)}g',
-                                  AppColors.orange),
+                                'Karbonhidrat',
+                                '${widget.suggestion.nutritionInfo!.carbs!.toStringAsFixed(0)}g',
+                                AppColors.orange,
+                              ),
                             if (widget.suggestion.nutritionInfo!.fat != null)
                               _buildNutrientColumn(
-                                  'Yağ',
-                                  '${widget.suggestion.nutritionInfo!.fat!.toStringAsFixed(0)}g',
-                                  const Color(0xFFEC4899)),
-                            if (widget.suggestion.nutritionInfo!.fiber !=
-                                null)
+                                AppLocalizations.of(context).sugFat,
+                                '${widget.suggestion.nutritionInfo!.fat!.toStringAsFixed(0)}g',
+                                const Color(0xFFEC4899),
+                              ),
+                            if (widget.suggestion.nutritionInfo!.fiber != null)
                               _buildNutrientColumn(
-                                  'Lif',
-                                  '${widget.suggestion.nutritionInfo!.fiber!.toStringAsFixed(0)}g',
-                                  const Color(0xFF6366F1)),
+                                'Lif',
+                                '${widget.suggestion.nutritionInfo!.fiber!.toStringAsFixed(0)}g',
+                                const Color(0xFF6366F1),
+                              ),
                           ],
                         ),
                       ),
@@ -1177,7 +1215,10 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
 
                     // Ingredients / Materials
                     if (widget.suggestion.ingredients.isNotEmpty) ...[
-                      _buildSectionTitle(context, '📋 Malzemeler'),
+                      _buildSectionTitle(
+                        context,
+                        '📋 ${AppLocalizations.of(context).sugIngredients}',
+                      ),
                       const SizedBox(height: AppSpacing.sm),
                       ...widget.suggestion.ingredients.map((i) {
                         return ListTile(
@@ -1193,10 +1234,13 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                           subtitle: Text(i.amount),
                           trailing: !i.inStock
                               ? Chip(
-                                  label: Text(AppLocalizations.of(context).aisMissing,
-                                      style: const TextStyle(fontSize: 10)),
-                                  backgroundColor:
-                                      AppColors.error.withAlpha(20),
+                                  label: Text(
+                                    AppLocalizations.of(context).aisMissing,
+                                    style: const TextStyle(fontSize: 10),
+                                  ),
+                                  backgroundColor: AppColors.error.withAlpha(
+                                    20,
+                                  ),
                                   side: BorderSide.none,
                                 )
                               : null,
@@ -1204,8 +1248,7 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                       }),
                       if (missing.isNotEmpty)
                         Padding(
-                          padding:
-                              const EdgeInsets.only(top: AppSpacing.sm),
+                          padding: const EdgeInsets.only(top: AppSpacing.sm),
                           child: SizedBox(
                             width: double.infinity,
                             child: ElevatedButton.icon(
@@ -1213,10 +1256,10 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                                 widget.onAddToShoppingList(missing);
                                 Navigator.pop(context);
                               },
-                              icon: const Icon(Icons.shopping_cart,
-                                  size: 18),
+                              icon: const Icon(Icons.shopping_cart, size: 18),
                               label: Text(
-                                  '${missing.length} eksik malzemeyi listeye ekle'),
+                                '${missing.length} eksik malzemeyi listeye ekle',
+                              ),
                             ),
                           ),
                         ),
@@ -1225,14 +1268,18 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
 
                     // Steps
                     if (widget.suggestion.steps?.isNotEmpty == true) ...[
-                      _buildSectionTitle(context, '🔢 Adımlar'),
+                      _buildSectionTitle(
+                        context,
+                        '🔢 ${AppLocalizations.of(context).sugSteps}',
+                      ),
                       const SizedBox(height: AppSpacing.sm),
-                      ...(widget.suggestion.steps ?? []).asMap().entries.map((e) {
+                      ...(widget.suggestion.steps ?? []).asMap().entries.map((
+                        e,
+                      ) {
                         final idx = e.key + 1;
                         final step = e.value;
                         return Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: AppSpacing.sm),
+                          padding: const EdgeInsets.only(bottom: AppSpacing.sm),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -1275,17 +1322,18 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
 
                     // Tips
                     if (widget.suggestion.tips.isNotEmpty) ...[
-                      _buildSectionTitle(context, '💡 AI İpuçları'),
+                      _buildSectionTitle(
+                        context,
+                        '💡 ${AppLocalizations.of(context).sugAiTips}',
+                      ),
                       const SizedBox(height: AppSpacing.sm),
                       ...widget.suggestion.tips.map((tip) {
                         return Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: AppSpacing.sm),
+                          padding: const EdgeInsets.only(bottom: AppSpacing.sm),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Icon(Icons.lightbulb,
-                                  color: color, size: 18),
+                              Icon(Icons.lightbulb, color: color, size: 18),
                               const SizedBox(width: AppSpacing.sm),
                               Expanded(
                                 child: Text(
@@ -1315,8 +1363,7 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                           color: isDark
                               ? const Color(0xFF13131A)
                               : const Color(0xFF13131A),
-                          borderRadius:
-                              BorderRadius.circular(AppRadius.medium),
+                          borderRadius: BorderRadius.circular(AppRadius.medium),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1326,7 +1373,11 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                                 children: [
                                   const Icon(Icons.person, size: 18),
                                   const SizedBox(width: AppSpacing.sm),
-                                  Text(AppLocalizations.of(context).aisTurn(widget.suggestion.assignedTo ?? '')),
+                                  Text(
+                                    AppLocalizations.of(context).aisTurn(
+                                      widget.suggestion.assignedTo ?? '',
+                                    ),
+                                  ),
                                 ],
                               ),
                             if (widget.suggestion.lastDone != null) ...[
@@ -1336,7 +1387,10 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                                   const Icon(Icons.history, size: 18),
                                   const SizedBox(width: AppSpacing.sm),
                                   Text(
-                                      'Son yapılma: ${widget.suggestion.lastDone}'),
+                                    AppLocalizations.of(context).sugLastDone(
+                                      '${widget.suggestion.lastDone}',
+                                    ),
+                                  ),
                                 ],
                               ),
                             ],
@@ -1347,7 +1401,8 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                                   const Icon(Icons.wb_sunny, size: 18),
                                   const SizedBox(width: AppSpacing.sm),
                                   Text(
-                                      'Hava: ${widget.suggestion.weatherContext}'),
+                                    'Hava: ${widget.suggestion.weatherContext}',
+                                  ),
                                 ],
                               ),
                             ],
@@ -1358,7 +1413,8 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                                   const Icon(Icons.euro, size: 18),
                                   const SizedBox(width: AppSpacing.sm),
                                   Text(
-                                      'Tahmini maliyet: ${widget.suggestion.estimatedCost}'),
+                                    'Tahmini maliyet: ${widget.suggestion.estimatedCost}',
+                                  ),
                                 ],
                               ),
                             ],
@@ -1369,7 +1425,10 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                     const SizedBox(height: AppSpacing.lg),
 
                     // Progress slider
-                    _buildSectionTitle(context, '📊 İlerleme'),
+                    _buildSectionTitle(
+                      context,
+                      '📊 ${AppLocalizations.of(context).sugProgress}',
+                    ),
                     const SizedBox(height: AppSpacing.sm),
                     Row(
                       children: [
@@ -1392,9 +1451,7 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                         ),
                         Text(
                           '%$_currentProgress',
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium
+                          style: Theme.of(context).textTheme.titleMedium
                               ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -1402,27 +1459,34 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                     const SizedBox(height: AppSpacing.lg),
 
                     // Comment input
-                    _buildSectionTitle(context, '💬 Yorum Ekle'),
+                    _buildSectionTitle(
+                      context,
+                      '💬 ${AppLocalizations.of(context).sugAddComment}',
+                    ),
                     const SizedBox(height: AppSpacing.sm),
                     TextField(
                       controller: _commentController,
                       decoration: InputDecoration(
                         hintText: AppLocalizations.of(context).aisCommentHint,
                         border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.circular(AppRadius.medium),
+                          borderRadius: BorderRadius.circular(AppRadius.medium),
                         ),
                         suffixIcon: IconButton(
                           icon: const Icon(Icons.send),
                           onPressed: () {
                             if (_commentController.text.trim().isNotEmpty) {
                               widget.onAddComment(
-                                  _commentController.text.trim());
+                                _commentController.text.trim(),
+                              );
                               _commentController.clear();
                               FocusScope.of(context).unfocus();
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text(AppLocalizations.of(context).aisCommentSaved),
+                                  content: Text(
+                                    AppLocalizations.of(
+                                      context,
+                                    ).aisCommentSaved,
+                                  ),
                                   behavior: SnackBarBehavior.floating,
                                 ),
                               );
@@ -1438,8 +1502,7 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                         padding: const EdgeInsets.all(AppSpacing.md),
                         decoration: BoxDecoration(
                           color: color.withAlpha(15),
-                          borderRadius:
-                              BorderRadius.circular(AppRadius.small),
+                          borderRadius: BorderRadius.circular(AppRadius.small),
                         ),
                         child: Text(
                           widget.suggestion.userComment!,
@@ -1479,7 +1542,9 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                               _showPostponePicker();
                             },
                             icon: const Icon(Icons.snooze),
-                            label: Text(AppLocalizations.of(context).aisPostpone),
+                            label: Text(
+                              AppLocalizations.of(context).aisPostpone,
+                            ),
                           ),
                         ),
                         const SizedBox(width: AppSpacing.sm),
@@ -1503,8 +1568,7 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                         Expanded(
                           child: OutlinedButton.icon(
                             onPressed: () {
-                              widget.onToggleFavorite(
-                                  widget.suggestion.id);
+                              widget.onToggleFavorite(widget.suggestion.id);
                               Navigator.pop(context);
                             },
                             icon: Icon(
@@ -1517,7 +1581,9 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                             ),
                             label: Text(
                               widget.suggestion.isFavorite
-                                  ? 'Favorilerden Çıkar'
+                                  ? AppLocalizations.of(
+                                      context,
+                                    ).sugRemoveFavorite
                                   : 'Favorilere Ekle',
                             ),
                           ),
@@ -1531,7 +1597,9 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                                 widget.onShowAlternatives!();
                               },
                               icon: const Icon(Icons.swap_horiz),
-                              label: Text(AppLocalizations.of(context).degistir),
+                              label: Text(
+                                AppLocalizations.of(context).degistir,
+                              ),
                             ),
                           )
                         else
@@ -1542,7 +1610,9 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                                 Navigator.pop(context);
                               },
                               icon: const Icon(Icons.hide_source),
-                              label: Text(AppLocalizations.of(context).aisShowLess),
+                              label: Text(
+                                AppLocalizations.of(context).aisShowLess,
+                              ),
                             ),
                           ),
                       ],
@@ -1589,10 +1659,10 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
                 Padding(
                   padding: const EdgeInsets.all(AppSpacing.lg),
                   child: Text(
-                    'Ne zaman hatırlatayım?',
+                    AppLocalizations.of(context).sugWhenRemind,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 ...options.asMap().entries.map((e) {
@@ -1618,9 +1688,9 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
   Widget _buildSectionTitle(BuildContext context, String title) {
     return Text(
       title,
-      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+      style: Theme.of(
+        context,
+      ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
     );
   }
 
@@ -1630,16 +1700,11 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
       decoration: BoxDecoration(
         color: const Color(0xFF13131A),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: const Color(0x1EFFFFFF),
-        ),
+        border: Border.all(color: const Color(0x1EFFFFFF)),
       ),
       child: Text(
         label,
-        style: const TextStyle(
-          fontSize: 12,
-          color: Color(0xFF6B7280),
-        ),
+        style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
       ),
     );
   }
@@ -1674,10 +1739,7 @@ class _SuggestionDetailSheetState extends State<_SuggestionDetailSheet> {
           ),
         ),
         const SizedBox(height: 2),
-        Text(
-          label,
-          style: const TextStyle(fontSize: 11),
-        ),
+        Text(label, style: const TextStyle(fontSize: 11)),
       ],
     );
   }

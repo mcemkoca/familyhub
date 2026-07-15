@@ -7127,4 +7127,98 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get hubFamilyHubAI => 'FamilyHub AI';
+
+  @override
+  String get sugDaily => 'Daily Suggestions';
+
+  @override
+  String sugReadyTap(Object count) {
+    return '$count personal suggestions ready — tap to show';
+  }
+
+  @override
+  String get sugAlternatives => 'Alternative suggestions';
+
+  @override
+  String sugAgeRange(Object min, Object max) {
+    return 'ages $min-$max';
+  }
+
+  @override
+  String get sugCatMeal => 'Today\'s Meal';
+
+  @override
+  String get sugCatChildDev => 'Child Development';
+
+  @override
+  String get sugCatSaving => 'Saving Tips';
+
+  @override
+  String get sugCatChores => 'Household Chores';
+
+  @override
+  String get sugCatHealth => 'Health';
+
+  @override
+  String get sugCatSafety => 'Safety';
+
+  @override
+  String get sugCatGeneric => 'Suggestion';
+
+  @override
+  String get sugError =>
+      'An error occurred while loading suggestions. Please try again.';
+
+  @override
+  String get sugEmpty => 'No suggestions yet. Try refreshing.';
+
+  @override
+  String get sugNutrition => 'Nutrition Facts';
+
+  @override
+  String get sugIngredients => 'Ingredients';
+
+  @override
+  String get sugSteps => 'Steps';
+
+  @override
+  String get sugAiTips => 'AI Tips';
+
+  @override
+  String get sugFat => 'Fat';
+
+  @override
+  String sugAddedToShopping(Object count) {
+    return '$count items added to the shopping list';
+  }
+
+  @override
+  String sugRemindIn(Object minutes) {
+    return 'Reminder in $minutes minutes';
+  }
+
+  @override
+  String sugSelected(Object title) {
+    return '\"$title\" selected';
+  }
+
+  @override
+  String get sugCatSocial => 'Social';
+
+  @override
+  String get sugProgress => 'Progress';
+
+  @override
+  String get sugAddComment => 'Add Comment';
+
+  @override
+  String get sugRemoveFavorite => 'Remove from favorites';
+
+  @override
+  String get sugWhenRemind => 'When to remind you?';
+
+  @override
+  String sugLastDone(Object date) {
+    return 'Last done: $date';
+  }
 }

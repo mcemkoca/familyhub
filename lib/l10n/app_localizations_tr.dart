@@ -7150,4 +7150,98 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get hubFamilyHubAI => 'FamilyHub AI';
+
+  @override
+  String get sugDaily => 'Günlük Öneriler';
+
+  @override
+  String sugReadyTap(Object count) {
+    return '$count kişisel öneri hazır — göstermek için dokun';
+  }
+
+  @override
+  String get sugAlternatives => 'Alternatif Öneriler';
+
+  @override
+  String sugAgeRange(Object min, Object max) {
+    return '$min-$max yaş';
+  }
+
+  @override
+  String get sugCatMeal => 'Bugünün Yemeği';
+
+  @override
+  String get sugCatChildDev => 'Çocuk Gelişimi';
+
+  @override
+  String get sugCatSaving => 'Tasarruf Önerileri';
+
+  @override
+  String get sugCatChores => 'Ev İşleri';
+
+  @override
+  String get sugCatHealth => 'Sağlık';
+
+  @override
+  String get sugCatSafety => 'Güvenlik';
+
+  @override
+  String get sugCatGeneric => 'Öneri';
+
+  @override
+  String get sugError =>
+      'Öneriler yüklenirken bir hata oluştu. Tekrar deneyin.';
+
+  @override
+  String get sugEmpty => 'Henüz öneri yok. Yenilemeyi deneyin.';
+
+  @override
+  String get sugNutrition => 'Besin Değerleri';
+
+  @override
+  String get sugIngredients => 'Malzemeler';
+
+  @override
+  String get sugSteps => 'Adımlar';
+
+  @override
+  String get sugAiTips => 'AI İpuçları';
+
+  @override
+  String get sugFat => 'Yağ';
+
+  @override
+  String sugAddedToShopping(Object count) {
+    return '$count ürün alışveriş listesine eklendi';
+  }
+
+  @override
+  String sugRemindIn(Object minutes) {
+    return '$minutes dakika sonra hatırlatılacak';
+  }
+
+  @override
+  String sugSelected(Object title) {
+    return '\"$title\" seçildi';
+  }
+
+  @override
+  String get sugCatSocial => 'Sosyal';
+
+  @override
+  String get sugProgress => 'İlerleme';
+
+  @override
+  String get sugAddComment => 'Yorum Ekle';
+
+  @override
+  String get sugRemoveFavorite => 'Favorilerden Çıkar';
+
+  @override
+  String get sugWhenRemind => 'Ne zaman hatırlatayım?';
+
+  @override
+  String sugLastDone(Object date) {
+    return 'Son yapılma: $date';
+  }
 }

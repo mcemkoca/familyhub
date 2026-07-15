@@ -2900,5 +2900,63 @@
   "hubAI": "AI",
   "hubLegal": "Yasal Haklar",
   "hubIntelligence": "Aile Zekası",
-  "hubFamilyHubAI": "FamilyHub AI"
+  "hubFamilyHubAI": "FamilyHub AI",
+  "sugDaily": "Günlük Öneriler",
+  "sugReadyTap": "{count} kişisel öneri hazır — göstermek için dokun",
+  "@sugReadyTap": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "sugAlternatives": "Alternatif Öneriler",
+  "sugAgeRange": "{min}-{max} yaş",
+  "@sugAgeRange": {
+    "placeholders": {
+      "min": {},
+      "max": {}
+    }
+  },
+  "sugCatMeal": "Bugünün Yemeği",
+  "sugCatChildDev": "Çocuk Gelişimi",
+  "sugCatSaving": "Tasarruf Önerileri",
+  "sugCatChores": "Ev İşleri",
+  "sugCatHealth": "Sağlık",
+  "sugCatSafety": "Güvenlik",
+  "sugCatGeneric": "Öneri",
+  "sugError": "Öneriler yüklenirken bir hata oluştu. Tekrar deneyin.",
+  "sugEmpty": "Henüz öneri yok. Yenilemeyi deneyin.",
+  "sugNutrition": "Besin Değerleri",
+  "sugIngredients": "Malzemeler",
+  "sugSteps": "Adımlar",
+  "sugAiTips": "AI İpuçları",
+  "sugFat": "Yağ",
+  "sugAddedToShopping": "{count} ürün alışveriş listesine eklendi",
+  "@sugAddedToShopping": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "sugRemindIn": "{minutes} dakika sonra hatırlatılacak",
+  "@sugRemindIn": {
+    "placeholders": {
+      "minutes": {}
+    }
+  },
+  "sugSelected": "\"{title}\" seçildi",
+  "@sugSelected": {
+    "placeholders": {
+      "title": {}
+    }
+  },
+  "sugCatSocial": "Sosyal",
+  "sugProgress": "İlerleme",
+  "sugAddComment": "Yorum Ekle",
+  "sugRemoveFavorite": "Favorilerden Çıkar",
+  "sugWhenRemind": "Ne zaman hatırlatayım?",
+  "sugLastDone": "Son yapılma: {date}",
+  "@sugLastDone": {
+    "placeholders": {
+      "date": {}
+    }
+  }
 }

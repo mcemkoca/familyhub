@@ -7134,4 +7134,98 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get hubFamilyHubAI => 'FamilyHub AI';
+
+  @override
+  String get sugDaily => 'Dagelijkse suggesties';
+
+  @override
+  String sugReadyTap(Object count) {
+    return '$count persoonlijke suggesties klaar — tik om te tonen';
+  }
+
+  @override
+  String get sugAlternatives => 'Alternatieve suggesties';
+
+  @override
+  String sugAgeRange(Object min, Object max) {
+    return '$min-$max jaar';
+  }
+
+  @override
+  String get sugCatMeal => 'Gerecht van vandaag';
+
+  @override
+  String get sugCatChildDev => 'Kinderontwikkeling';
+
+  @override
+  String get sugCatSaving => 'Bespaartips';
+
+  @override
+  String get sugCatChores => 'Huishoudelijke taken';
+
+  @override
+  String get sugCatHealth => 'Gezondheid';
+
+  @override
+  String get sugCatSafety => 'Veiligheid';
+
+  @override
+  String get sugCatGeneric => 'Suggestie';
+
+  @override
+  String get sugError =>
+      'Er is een fout opgetreden bij het laden van de suggesties. Probeer opnieuw.';
+
+  @override
+  String get sugEmpty => 'Nog geen suggesties. Probeer te vernieuwen.';
+
+  @override
+  String get sugNutrition => 'Voedingswaarden';
+
+  @override
+  String get sugIngredients => 'Ingrediënten';
+
+  @override
+  String get sugSteps => 'Stappen';
+
+  @override
+  String get sugAiTips => 'AI-tips';
+
+  @override
+  String get sugFat => 'Vet';
+
+  @override
+  String sugAddedToShopping(Object count) {
+    return '$count items toegevoegd aan de boodschappenlijst';
+  }
+
+  @override
+  String sugRemindIn(Object minutes) {
+    return 'Over $minutes minuten herinnerd';
+  }
+
+  @override
+  String sugSelected(Object title) {
+    return '\"$title\" geselecteerd';
+  }
+
+  @override
+  String get sugCatSocial => 'Sociaal';
+
+  @override
+  String get sugProgress => 'Voortgang';
+
+  @override
+  String get sugAddComment => 'Opmerking toevoegen';
+
+  @override
+  String get sugRemoveFavorite => 'Uit favorieten verwijderen';
+
+  @override
+  String get sugWhenRemind => 'Wanneer herinneren?';
+
+  @override
+  String sugLastDone(Object date) {
+    return 'Laatst gedaan: $date';
+  }
 }

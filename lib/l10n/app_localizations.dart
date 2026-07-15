@@ -13349,6 +13349,168 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'FamilyHub AI'**
   String get hubFamilyHubAI;
+
+  /// No description provided for @sugDaily.
+  ///
+  /// In tr, this message translates to:
+  /// **'Günlük Öneriler'**
+  String get sugDaily;
+
+  /// No description provided for @sugReadyTap.
+  ///
+  /// In tr, this message translates to:
+  /// **'{count} kişisel öneri hazır — göstermek için dokun'**
+  String sugReadyTap(Object count);
+
+  /// No description provided for @sugAlternatives.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alternatif Öneriler'**
+  String get sugAlternatives;
+
+  /// No description provided for @sugAgeRange.
+  ///
+  /// In tr, this message translates to:
+  /// **'{min}-{max} yaş'**
+  String sugAgeRange(Object min, Object max);
+
+  /// No description provided for @sugCatMeal.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugünün Yemeği'**
+  String get sugCatMeal;
+
+  /// No description provided for @sugCatChildDev.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çocuk Gelişimi'**
+  String get sugCatChildDev;
+
+  /// No description provided for @sugCatSaving.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tasarruf Önerileri'**
+  String get sugCatSaving;
+
+  /// No description provided for @sugCatChores.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ev İşleri'**
+  String get sugCatChores;
+
+  /// No description provided for @sugCatHealth.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sağlık'**
+  String get sugCatHealth;
+
+  /// No description provided for @sugCatSafety.
+  ///
+  /// In tr, this message translates to:
+  /// **'Güvenlik'**
+  String get sugCatSafety;
+
+  /// No description provided for @sugCatGeneric.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öneri'**
+  String get sugCatGeneric;
+
+  /// No description provided for @sugError.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öneriler yüklenirken bir hata oluştu. Tekrar deneyin.'**
+  String get sugError;
+
+  /// No description provided for @sugEmpty.
+  ///
+  /// In tr, this message translates to:
+  /// **'Henüz öneri yok. Yenilemeyi deneyin.'**
+  String get sugEmpty;
+
+  /// No description provided for @sugNutrition.
+  ///
+  /// In tr, this message translates to:
+  /// **'Besin Değerleri'**
+  String get sugNutrition;
+
+  /// No description provided for @sugIngredients.
+  ///
+  /// In tr, this message translates to:
+  /// **'Malzemeler'**
+  String get sugIngredients;
+
+  /// No description provided for @sugSteps.
+  ///
+  /// In tr, this message translates to:
+  /// **'Adımlar'**
+  String get sugSteps;
+
+  /// No description provided for @sugAiTips.
+  ///
+  /// In tr, this message translates to:
+  /// **'AI İpuçları'**
+  String get sugAiTips;
+
+  /// No description provided for @sugFat.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yağ'**
+  String get sugFat;
+
+  /// No description provided for @sugAddedToShopping.
+  ///
+  /// In tr, this message translates to:
+  /// **'{count} ürün alışveriş listesine eklendi'**
+  String sugAddedToShopping(Object count);
+
+  /// No description provided for @sugRemindIn.
+  ///
+  /// In tr, this message translates to:
+  /// **'{minutes} dakika sonra hatırlatılacak'**
+  String sugRemindIn(Object minutes);
+
+  /// No description provided for @sugSelected.
+  ///
+  /// In tr, this message translates to:
+  /// **'\"{title}\" seçildi'**
+  String sugSelected(Object title);
+
+  /// No description provided for @sugCatSocial.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sosyal'**
+  String get sugCatSocial;
+
+  /// No description provided for @sugProgress.
+  ///
+  /// In tr, this message translates to:
+  /// **'İlerleme'**
+  String get sugProgress;
+
+  /// No description provided for @sugAddComment.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yorum Ekle'**
+  String get sugAddComment;
+
+  /// No description provided for @sugRemoveFavorite.
+  ///
+  /// In tr, this message translates to:
+  /// **'Favorilerden Çıkar'**
+  String get sugRemoveFavorite;
+
+  /// No description provided for @sugWhenRemind.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ne zaman hatırlatayım?'**
+  String get sugWhenRemind;
+
+  /// No description provided for @sugLastDone.
+  ///
+  /// In tr, this message translates to:
+  /// **'Son yapılma: {date}'**
+  String sugLastDone(Object date);
 }
 
 class _AppLocalizationsDelegate
