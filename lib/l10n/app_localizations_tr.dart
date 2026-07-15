@@ -7059,4 +7059,95 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get commonRefreshing => 'Yenileniyor…';
+
+  @override
+  String get greetMorning => 'Günaydın';
+
+  @override
+  String get greetDay => 'İyi günler';
+
+  @override
+  String get greetEvening => 'İyi akşamlar';
+
+  @override
+  String get greetNight => 'İyi geceler';
+
+  @override
+  String briefingSummary(Object greeting, Object family, Object day) {
+    return '$greeting! $family için güzel bir $day. Bugünü planlamak için harika bir zaman.';
+  }
+
+  @override
+  String get briefingAddEvent => 'Takvime bir etkinlik ekle';
+
+  @override
+  String briefingReviewEvents(Object count) {
+    return '$count etkinliğini gözden geçir';
+  }
+
+  @override
+  String get briefingCreateTask => 'Aileye bir görev oluştur';
+
+  @override
+  String briefingCompleteTasks(Object count) {
+    return '$count görevini tamamla';
+  }
+
+  @override
+  String get briefingUpdateShopping => 'Alışveriş listeni güncelle';
+
+  @override
+  String get hubQuickAccess => 'HIZLI ERİŞİM';
+
+  @override
+  String get hubLocating => 'Konum alınıyor…';
+
+  @override
+  String get hubOffline =>
+      'Çevrimdışısın — değişiklikler bağlanınca senkronlanacak';
+
+  @override
+  String get hubShopping => 'Alışveriş';
+
+  @override
+  String get hubKitchen => 'Mutfak';
+
+  @override
+  String get hubChild => 'Çocuk';
+
+  @override
+  String get hubDevelopment => 'Gelişim';
+
+  @override
+  String get hubHealth => 'Sağlık';
+
+  @override
+  String get hubLocationTile => 'Konum';
+
+  @override
+  String get hubEmergency => 'Acil';
+
+  @override
+  String get hubBudget => 'Bütçe';
+
+  @override
+  String get hubExpenses => 'Ev Giderleri';
+
+  @override
+  String get hubGallery => 'Galeri';
+
+  @override
+  String get hubEducation => 'Eğitim';
+
+  @override
+  String get hubAI => 'AI';
+
+  @override
+  String get hubLegal => 'Yasal Haklar';
+
+  @override
+  String get hubIntelligence => 'Aile Zekası';
+
+  @override
+  String get hubFamilyHubAI => 'FamilyHub AI';
 }

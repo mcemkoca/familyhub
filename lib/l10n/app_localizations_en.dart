@@ -7037,4 +7037,94 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get commonRefreshing => 'Refreshing…';
+
+  @override
+  String get greetMorning => 'Good morning';
+
+  @override
+  String get greetDay => 'Good day';
+
+  @override
+  String get greetEvening => 'Good evening';
+
+  @override
+  String get greetNight => 'Good night';
+
+  @override
+  String briefingSummary(Object greeting, Object family, Object day) {
+    return '$greeting! A lovely $day for $family. A great time to plan your day.';
+  }
+
+  @override
+  String get briefingAddEvent => 'Add an event to the calendar';
+
+  @override
+  String briefingReviewEvents(Object count) {
+    return 'Review your $count events';
+  }
+
+  @override
+  String get briefingCreateTask => 'Create a task for the family';
+
+  @override
+  String briefingCompleteTasks(Object count) {
+    return 'Complete your $count tasks';
+  }
+
+  @override
+  String get briefingUpdateShopping => 'Update your shopping list';
+
+  @override
+  String get hubQuickAccess => 'QUICK ACCESS';
+
+  @override
+  String get hubLocating => 'Getting location…';
+
+  @override
+  String get hubOffline => 'You\'re offline — changes will sync once connected';
+
+  @override
+  String get hubShopping => 'Shopping';
+
+  @override
+  String get hubKitchen => 'Kitchen';
+
+  @override
+  String get hubChild => 'Child';
+
+  @override
+  String get hubDevelopment => 'Development';
+
+  @override
+  String get hubHealth => 'Health';
+
+  @override
+  String get hubLocationTile => 'Location';
+
+  @override
+  String get hubEmergency => 'Emergency';
+
+  @override
+  String get hubBudget => 'Budget';
+
+  @override
+  String get hubExpenses => 'Home Expenses';
+
+  @override
+  String get hubGallery => 'Gallery';
+
+  @override
+  String get hubEducation => 'Education';
+
+  @override
+  String get hubAI => 'AI';
+
+  @override
+  String get hubLegal => 'Legal Rights';
+
+  @override
+  String get hubIntelligence => 'Family Intelligence';
+
+  @override
+  String get hubFamilyHubAI => 'FamilyHub AI';
 }

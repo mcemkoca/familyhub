@@ -21,8 +21,10 @@ class DailyBriefingCard extends ConsumerStatefulWidget {
 }
 
 class _DailyBriefingCardState extends ConsumerState<DailyBriefingCard> {
-  late bool _expanded =
-      HiveService.getBoolSetting('briefing_expanded', defaultValue: true);
+  late bool _expanded = HiveService.getBoolSetting(
+    'briefing_expanded',
+    defaultValue: true,
+  );
 
   void _toggle() {
     setState(() => _expanded = !_expanded);
@@ -33,7 +35,9 @@ class _DailyBriefingCardState extends ConsumerState<DailyBriefingCard> {
   void _openAction(String action) {
     final a = action.toLowerCase();
     String route;
-    if (a.contains('alışver') || a.contains('market') || a.contains('malzeme')) {
+    if (a.contains('alışver') ||
+        a.contains('market') ||
+        a.contains('malzeme')) {
       route = AppRoutes.shopping;
     } else if (a.contains('görev') || a.contains('yapılacak')) {
       route = AppRoutes.tasks;
@@ -71,6 +75,8 @@ class _DailyBriefingCardState extends ConsumerState<DailyBriefingCard> {
   @override
   Widget build(BuildContext context) {
     final ref = this.ref;
+    final l = AppLocalizations.of(context);
+    final lang = Localizations.localeOf(context).languageCode;
     final familyName = HiveService.getSetting('family_name') ?? 'Ailem';
     final members = ref.watch(familyMembersProvider);
     final weatherAsync = ref.watch(weatherProvider);
@@ -82,24 +88,24 @@ class _DailyBriefingCardState extends ConsumerState<DailyBriefingCard> {
     final tasks = ref.watch(myTasksProvider).valueOrNull ?? const [];
 
     final now = DateTime.now();
-    final dayName = DateFormat('EEEE', 'tr').format(now);
+    final dayName = DateFormat('EEEE', lang).format(now);
     final h = now.hour;
     final greeting = h < 6
-        ? 'İyi geceler'
+        ? l.greetNight
         : h < 11
-            ? 'Günaydın'
-            : h < 18
-                ? 'İyi günler'
-                : h < 22
-                    ? 'İyi akşamlar'
-                    : 'İyi geceler';
+        ? l.greetMorning
+        : h < 18
+        ? l.greetDay
+        : h < 22
+        ? l.greetEvening
+        : l.greetNight;
     // Günün dilimi — hem prompt tonunu hem de önbellek anahtarını ayırır ki
     // sabah/öğle/akşam brifingleri farklı olsun (ve yanlış selamla kalmasın).
     final partOfDay = h < 11
         ? 'sabah'
         : h < 18
-            ? 'öğleden sonra'
-            : 'akşam';
+        ? 'öğleden sonra'
+        : 'akşam';
     final weatherStr = weather != null
         ? '${weather.temperature.round()}°C, ${WeatherService.weatherDescription(weather.weatherCode)}'
         : 'bilinmiyor';
@@ -130,53 +136,78 @@ class _DailyBriefingCardState extends ConsumerState<DailyBriefingCard> {
                     height: 34,
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
-                          colors: [Color(0xFF8B5CF6), Color(0xFF6366F1)]),
+                        colors: [Color(0xFF8B5CF6), Color(0xFF6366F1)],
+                      ),
                       borderRadius: BorderRadius.circular(11),
                     ),
-                    child: const Icon(Icons.auto_awesome_rounded,
-                        color: Colors.white, size: 19),
+                    child: const Icon(
+                      Icons.auto_awesome_rounded,
+                      color: Colors.white,
+                      size: 19,
+                    ),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(AppLocalizations.of(context).familyIntelligenceTitle,
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w800)),
-                        Text('$greeting · $dayName',
-                            style: const TextStyle(
-                                color: Color(0xFF9CA3AF), fontSize: 12)),
+                        Text(
+                          AppLocalizations.of(context).familyIntelligenceTitle,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        Text(
+                          '$greeting · $dayName',
+                          style: const TextStyle(
+                            color: Color(0xFF9CA3AF),
+                            fontSize: 12,
+                          ),
+                        ),
                       ],
                     ),
                   ),
                   IconButton(
-                    onPressed: () =>
-                        context.push(AppRoutes.familyIntelligence),
-                    icon: const Icon(Icons.open_in_full_rounded,
-                        color: Color(0xFF8B5CF6), size: 18),
-                    tooltip: AppLocalizations.of(context).familyIntelligenceTitle,
+                    onPressed: () => context.push(AppRoutes.familyIntelligence),
+                    icon: const Icon(
+                      Icons.open_in_full_rounded,
+                      color: Color(0xFF8B5CF6),
+                      size: 18,
+                    ),
+                    tooltip: AppLocalizations.of(
+                      context,
+                    ).familyIntelligenceTitle,
                     padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
+                    constraints: const BoxConstraints(
+                      minWidth: 40,
+                      minHeight: 40,
+                    ),
                   ),
                   AnimatedRotation(
                     turns: _expanded ? 0.5 : 0,
                     duration: const Duration(milliseconds: 200),
-                    child: const Icon(Icons.keyboard_arrow_down_rounded,
-                        color: Color(0xFF9CA3AF), size: 24),
+                    child: const Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      color: Color(0xFF9CA3AF),
+                      size: 24,
+                    ),
                   ),
                 ],
               ),
             ),
             // ── Canlı hava uyarısı (önbelleksiz — weatherProvider'dan anlık) ──
-            if (_expanded && weather != null &&
+            if (_expanded &&
+                weather != null &&
                 WeatherService.weatherWarning(weather) != null) ...[
               const SizedBox(height: 12),
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 decoration: BoxDecoration(
                   color: const Color(0xFFF59E0B).withAlpha(28),
                   borderRadius: BorderRadius.circular(12),
@@ -184,17 +215,21 @@ class _DailyBriefingCardState extends ConsumerState<DailyBriefingCard> {
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.warning_amber_rounded,
-                        size: 18, color: Color(0xFFFBBF24)),
+                    const Icon(
+                      Icons.warning_amber_rounded,
+                      size: 18,
+                      color: Color(0xFFFBBF24),
+                    ),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         WeatherService.weatherWarning(weather)!,
                         style: const TextStyle(
-                            color: Color(0xFFFDE68A),
-                            fontSize: 12.5,
-                            height: 1.35,
-                            fontWeight: FontWeight.w600),
+                          color: Color(0xFFFDE68A),
+                          fontSize: 12.5,
+                          height: 1.35,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ],
@@ -205,23 +240,33 @@ class _DailyBriefingCardState extends ConsumerState<DailyBriefingCard> {
               const SizedBox.shrink()
             else if (!weatherSettled) ...[
               const SizedBox(height: 12),
-              Row(children: [
-                const SizedBox(
+              Row(
+                children: [
+                  const SizedBox(
                     width: 16,
                     height: 16,
                     child: CircularProgressIndicator(
-                        strokeWidth: 2, color: Color(0xFF8B5CF6))),
-                const SizedBox(width: 10),
-                Text(AppLocalizations.of(context).fiPreparingDay,
+                      strokeWidth: 2,
+                      color: Color(0xFF8B5CF6),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    AppLocalizations.of(context).fiPreparingDay,
                     style: const TextStyle(
-                        color: Color(0xFF9CA3AF), fontSize: 13)),
-              ]),
+                      color: Color(0xFF9CA3AF),
+                      fontSize: 13,
+                    ),
+                  ),
+                ],
+              ),
             ] else ...[
-            const SizedBox(height: 12),
-            FutureBuilder<List<Map<String, dynamic>>>(
-              future: AiContentService.dailyList(
-                topic: 'daily_briefing_v3_$partOfDay',
-                prompt: '''
+              const SizedBox(height: 12),
+              FutureBuilder<List<Map<String, dynamic>>>(
+                future: AiContentService.dailyList(
+                  topic: 'daily_briefing_v3_${partOfDay}_$lang',
+                  prompt:
+                      '''
 Bir aile uygulaması için bugünün ($partOfDay) kişiselleştirilmiş brifingini üret.
 Selamlama tam olarak "$greeting" tonunda olsun (günün saatine uygun).
 Aile: $familyName (${members.length} üye).
@@ -229,116 +274,147 @@ Gün: $dayName. Hava (referans, sadece öneri için): $weatherStr.
 Bugün planlı etkinlik: ${events.length}, bekleyen görev: ${tasks.length}.
 Sıcak, kısa bir günlük özet (2 cümle) ve 3 uygulanabilir öneri yaz.
 Sadece JSON döndür: {"items":[{"summary":"...","actions":["...","...","..."]}]}
-Türkçe, samimi bir dille. Havaya UYGUN öneri ekle (ör. yağmurluysa şemsiye) ama
+${switch (lang) {
+                        'nl' => 'Hollandaca (Nederlands)',
+                        'fr' => 'Fransızca (Français)',
+                        'en' => 'İngilizce (English)',
+                        _ => 'Türkçe',
+                      }} dilinde, samimi bir dille. Havaya UYGUN öneri ekle (ör. yağmurluysa şemsiye) ama
 metinde KESİN SICAKLIK DERECESİ (ör. "23°C") YAZMA — kullanıcı gerçek sıcaklığı
 zaten üstteki hava rozetinde görüyor; sayı yazarsan tutarsız görünür.''',
-                listKey: 'items',
-                fallback: [
-                  {
-                    'summary':
-                        '$greeting! $familyName için güzel bir $dayName. '
-                            'Bugünü planlamak için harika bir zaman.',
-                    'actions': [
-                      if (events.isEmpty)
-                        'Takvime bir etkinlik ekle'
-                      else
-                        '${events.length} etkinliğini gözden geçir',
-                      if (tasks.isNotEmpty)
-                        '${tasks.length} görevini tamamla'
-                      else
-                        'Aileye bir görev oluştur',
-                      'Alışveriş listeni güncelle',
-                    ],
-                  }
-                ],
-                maxTokens: 500,
-              ),
-              builder: (context, snap) {
-                if (snap.connectionState == ConnectionState.waiting) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: Row(
-                      children: [
-                        const SizedBox(
-                          width: 16,
-                          height: 16,
-                          child: CircularProgressIndicator(
-                              strokeWidth: 2, color: Color(0xFF8B5CF6)),
-                        ),
-                        const SizedBox(width: 10),
-                        Text(AppLocalizations.of(context).fiPreparingDay,
-                            style: const TextStyle(
-                                color: Color(0xFF9CA3AF), fontSize: 13)),
+                  listKey: 'items',
+                  fallback: [
+                    {
+                      'summary': l.briefingSummary(
+                        greeting,
+                        familyName,
+                        dayName,
+                      ),
+                      'actions': [
+                        if (events.isEmpty)
+                          l.briefingAddEvent
+                        else
+                          l.briefingReviewEvents(events.length),
+                        if (tasks.isNotEmpty)
+                          l.briefingCompleteTasks(tasks.length)
+                        else
+                          l.briefingCreateTask,
+                        l.briefingUpdateShopping,
                       ],
-                    ),
-                  );
-                }
-                final data = (snap.data != null && snap.data!.isNotEmpty)
-                    ? snap.data!.first
-                    : const <String, dynamic>{};
-                final summary = data['summary']?.toString() ?? '';
-                final actions = (data['actions'] as List?)
-                        ?.map((e) => e.toString())
-                        .where((e) => e.isNotEmpty)
-                        .toList() ??
-                    const [];
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (summary.isNotEmpty)
-                      Text(summary,
+                    },
+                  ],
+                  maxTokens: 500,
+                ),
+                builder: (context, snap) {
+                  if (snap.connectionState == ConnectionState.waiting) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: Color(0xFF8B5CF6),
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Text(
+                            AppLocalizations.of(context).fiPreparingDay,
+                            style: const TextStyle(
+                              color: Color(0xFF9CA3AF),
+                              fontSize: 13,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                  final data = (snap.data != null && snap.data!.isNotEmpty)
+                      ? snap.data!.first
+                      : const <String, dynamic>{};
+                  final summary = data['summary']?.toString() ?? '';
+                  final actions =
+                      (data['actions'] as List?)
+                          ?.map((e) => e.toString())
+                          .where((e) => e.isNotEmpty)
+                          .toList() ??
+                      const [];
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (summary.isNotEmpty)
+                        Text(
+                          summary,
                           style: const TextStyle(
-                              color: Color(0xFFE5E7EB),
-                              fontSize: 13.5,
-                              height: 1.5)),
-                    if (actions.isNotEmpty) ...[
-                      const SizedBox(height: 12),
-                      for (final a in actions)
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () => _openAction(a),
-                              borderRadius: BorderRadius.circular(14),
-                              child: Container(
-                                width: double.infinity,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 10),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF8B5CF6).withAlpha(28),
-                                  borderRadius: BorderRadius.circular(14),
-                                  border: Border.all(
-                                      color: const Color(0x338B5CF6)),
-                                ),
-                                child: Row(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.center,
-                                  children: [
-                                    const Icon(Icons.bolt_rounded,
-                                        size: 15, color: Color(0xFFA5B4FC)),
-                                    const SizedBox(width: 8),
-                                    Expanded(
-                                      child: Text(a,
-                                          style: const TextStyle(
-                                              color: Color(0xFFD1D5DB),
-                                              fontSize: 12.5,
-                                              height: 1.35,
-                                              fontWeight: FontWeight.w600)),
+                            color: Color(0xFFE5E7EB),
+                            fontSize: 13.5,
+                            height: 1.5,
+                          ),
+                        ),
+                      if (actions.isNotEmpty) ...[
+                        const SizedBox(height: 12),
+                        for (final a in actions)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 8),
+                            child: Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                onTap: () => _openAction(a),
+                                borderRadius: BorderRadius.circular(14),
+                                child: Container(
+                                  width: double.infinity,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                    vertical: 10,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: const Color(
+                                      0xFF8B5CF6,
+                                    ).withAlpha(28),
+                                    borderRadius: BorderRadius.circular(14),
+                                    border: Border.all(
+                                      color: const Color(0x338B5CF6),
                                     ),
-                                    const Icon(Icons.chevron_right_rounded,
-                                        size: 18, color: Color(0xFF8B8FA3)),
-                                  ],
+                                  ),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      const Icon(
+                                        Icons.bolt_rounded,
+                                        size: 15,
+                                        color: Color(0xFFA5B4FC),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Expanded(
+                                        child: Text(
+                                          a,
+                                          style: const TextStyle(
+                                            color: Color(0xFFD1D5DB),
+                                            fontSize: 12.5,
+                                            height: 1.35,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                      const Icon(
+                                        Icons.chevron_right_rounded,
+                                        size: 18,
+                                        color: Color(0xFF8B8FA3),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
+                      ],
                     ],
-                  ],
-                );
-              },
-            ),
+                  );
+                },
+              ),
             ],
           ],
         ),

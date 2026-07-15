@@ -2855,5 +2855,50 @@
   "haCatFamily": "Aile",
   "haDateToday": "Bugün",
   "commonRefresh": "Yenile",
-  "commonRefreshing": "Yenileniyor…"
+  "commonRefreshing": "Yenileniyor…",
+  "greetMorning": "Günaydın",
+  "greetDay": "İyi günler",
+  "greetEvening": "İyi akşamlar",
+  "greetNight": "İyi geceler",
+  "briefingSummary": "{greeting}! {family} için güzel bir {day}. Bugünü planlamak için harika bir zaman.",
+  "@briefingSummary": {
+    "placeholders": {
+      "greeting": {},
+      "family": {},
+      "day": {}
+    }
+  },
+  "briefingAddEvent": "Takvime bir etkinlik ekle",
+  "briefingReviewEvents": "{count} etkinliğini gözden geçir",
+  "@briefingReviewEvents": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "briefingCreateTask": "Aileye bir görev oluştur",
+  "briefingCompleteTasks": "{count} görevini tamamla",
+  "@briefingCompleteTasks": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "briefingUpdateShopping": "Alışveriş listeni güncelle",
+  "hubQuickAccess": "HIZLI ERİŞİM",
+  "hubLocating": "Konum alınıyor…",
+  "hubOffline": "Çevrimdışısın — değişiklikler bağlanınca senkronlanacak",
+  "hubShopping": "Alışveriş",
+  "hubKitchen": "Mutfak",
+  "hubChild": "Çocuk",
+  "hubDevelopment": "Gelişim",
+  "hubHealth": "Sağlık",
+  "hubLocationTile": "Konum",
+  "hubEmergency": "Acil",
+  "hubBudget": "Bütçe",
+  "hubExpenses": "Ev Giderleri",
+  "hubGallery": "Galeri",
+  "hubEducation": "Eğitim",
+  "hubAI": "AI",
+  "hubLegal": "Yasal Haklar",
+  "hubIntelligence": "Aile Zekası",
+  "hubFamilyHubAI": "FamilyHub AI"
 }

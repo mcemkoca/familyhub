@@ -13181,6 +13181,174 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Yenileniyor…'**
   String get commonRefreshing;
+
+  /// No description provided for @greetMorning.
+  ///
+  /// In tr, this message translates to:
+  /// **'Günaydın'**
+  String get greetMorning;
+
+  /// No description provided for @greetDay.
+  ///
+  /// In tr, this message translates to:
+  /// **'İyi günler'**
+  String get greetDay;
+
+  /// No description provided for @greetEvening.
+  ///
+  /// In tr, this message translates to:
+  /// **'İyi akşamlar'**
+  String get greetEvening;
+
+  /// No description provided for @greetNight.
+  ///
+  /// In tr, this message translates to:
+  /// **'İyi geceler'**
+  String get greetNight;
+
+  /// No description provided for @briefingSummary.
+  ///
+  /// In tr, this message translates to:
+  /// **'{greeting}! {family} için güzel bir {day}. Bugünü planlamak için harika bir zaman.'**
+  String briefingSummary(Object greeting, Object family, Object day);
+
+  /// No description provided for @briefingAddEvent.
+  ///
+  /// In tr, this message translates to:
+  /// **'Takvime bir etkinlik ekle'**
+  String get briefingAddEvent;
+
+  /// No description provided for @briefingReviewEvents.
+  ///
+  /// In tr, this message translates to:
+  /// **'{count} etkinliğini gözden geçir'**
+  String briefingReviewEvents(Object count);
+
+  /// No description provided for @briefingCreateTask.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aileye bir görev oluştur'**
+  String get briefingCreateTask;
+
+  /// No description provided for @briefingCompleteTasks.
+  ///
+  /// In tr, this message translates to:
+  /// **'{count} görevini tamamla'**
+  String briefingCompleteTasks(Object count);
+
+  /// No description provided for @briefingUpdateShopping.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alışveriş listeni güncelle'**
+  String get briefingUpdateShopping;
+
+  /// No description provided for @hubQuickAccess.
+  ///
+  /// In tr, this message translates to:
+  /// **'HIZLI ERİŞİM'**
+  String get hubQuickAccess;
+
+  /// No description provided for @hubLocating.
+  ///
+  /// In tr, this message translates to:
+  /// **'Konum alınıyor…'**
+  String get hubLocating;
+
+  /// No description provided for @hubOffline.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çevrimdışısın — değişiklikler bağlanınca senkronlanacak'**
+  String get hubOffline;
+
+  /// No description provided for @hubShopping.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alışveriş'**
+  String get hubShopping;
+
+  /// No description provided for @hubKitchen.
+  ///
+  /// In tr, this message translates to:
+  /// **'Mutfak'**
+  String get hubKitchen;
+
+  /// No description provided for @hubChild.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çocuk'**
+  String get hubChild;
+
+  /// No description provided for @hubDevelopment.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gelişim'**
+  String get hubDevelopment;
+
+  /// No description provided for @hubHealth.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sağlık'**
+  String get hubHealth;
+
+  /// No description provided for @hubLocationTile.
+  ///
+  /// In tr, this message translates to:
+  /// **'Konum'**
+  String get hubLocationTile;
+
+  /// No description provided for @hubEmergency.
+  ///
+  /// In tr, this message translates to:
+  /// **'Acil'**
+  String get hubEmergency;
+
+  /// No description provided for @hubBudget.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bütçe'**
+  String get hubBudget;
+
+  /// No description provided for @hubExpenses.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ev Giderleri'**
+  String get hubExpenses;
+
+  /// No description provided for @hubGallery.
+  ///
+  /// In tr, this message translates to:
+  /// **'Galeri'**
+  String get hubGallery;
+
+  /// No description provided for @hubEducation.
+  ///
+  /// In tr, this message translates to:
+  /// **'Eğitim'**
+  String get hubEducation;
+
+  /// No description provided for @hubAI.
+  ///
+  /// In tr, this message translates to:
+  /// **'AI'**
+  String get hubAI;
+
+  /// No description provided for @hubLegal.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yasal Haklar'**
+  String get hubLegal;
+
+  /// No description provided for @hubIntelligence.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aile Zekası'**
+  String get hubIntelligence;
+
+  /// No description provided for @hubFamilyHubAI.
+  ///
+  /// In tr, this message translates to:
+  /// **'FamilyHub AI'**
+  String get hubFamilyHubAI;
 }
 
 class _AppLocalizationsDelegate

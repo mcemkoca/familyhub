@@ -7064,4 +7064,95 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get commonRefreshing => 'Actualisation…';
+
+  @override
+  String get greetMorning => 'Bonjour';
+
+  @override
+  String get greetDay => 'Bonne journée';
+
+  @override
+  String get greetEvening => 'Bonsoir';
+
+  @override
+  String get greetNight => 'Bonne nuit';
+
+  @override
+  String briefingSummary(Object greeting, Object family, Object day) {
+    return '$greeting ! Une belle $day pour $family. Le moment idéal pour planifier votre journée.';
+  }
+
+  @override
+  String get briefingAddEvent => 'Ajouter un événement au calendrier';
+
+  @override
+  String briefingReviewEvents(Object count) {
+    return 'Passez en revue vos $count événements';
+  }
+
+  @override
+  String get briefingCreateTask => 'Créer une tâche pour la famille';
+
+  @override
+  String briefingCompleteTasks(Object count) {
+    return 'Terminez vos $count tâches';
+  }
+
+  @override
+  String get briefingUpdateShopping => 'Mettez à jour votre liste de courses';
+
+  @override
+  String get hubQuickAccess => 'ACCÈS RAPIDE';
+
+  @override
+  String get hubLocating => 'Localisation…';
+
+  @override
+  String get hubOffline =>
+      'Vous êtes hors ligne — les modifications seront synchronisées une fois connecté';
+
+  @override
+  String get hubShopping => 'Courses';
+
+  @override
+  String get hubKitchen => 'Cuisine';
+
+  @override
+  String get hubChild => 'Enfant';
+
+  @override
+  String get hubDevelopment => 'Développement';
+
+  @override
+  String get hubHealth => 'Santé';
+
+  @override
+  String get hubLocationTile => 'Localisation';
+
+  @override
+  String get hubEmergency => 'Urgence';
+
+  @override
+  String get hubBudget => 'Budget';
+
+  @override
+  String get hubExpenses => 'Dépenses';
+
+  @override
+  String get hubGallery => 'Galerie';
+
+  @override
+  String get hubEducation => 'Éducation';
+
+  @override
+  String get hubAI => 'IA';
+
+  @override
+  String get hubLegal => 'Droits légaux';
+
+  @override
+  String get hubIntelligence => 'Intelligence familiale';
+
+  @override
+  String get hubFamilyHubAI => 'FamilyHub AI';
 }

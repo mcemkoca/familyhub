@@ -42,15 +42,62 @@ class _HubNotif {
 }
 
 // ─── Quick-access feature model ───────────────────────────────────────────────
+
+/// Quick-access tile anahtarını aktif dildeki etikete çevirir.
+String hubFeatureLabel(BuildContext context, String key) {
+  final l = AppLocalizations.of(context);
+  switch (key) {
+    case 'shopping':
+      return l.hubShopping;
+    case 'kitchen':
+      return l.hubKitchen;
+    case 'child':
+      return l.hubChild;
+    case 'development':
+      return l.hubDevelopment;
+    case 'health':
+      return l.hubHealth;
+    case 'location':
+      return l.hubLocationTile;
+    case 'emergency':
+      return l.hubEmergency;
+    case 'budget':
+      return l.hubBudget;
+    case 'expenses':
+      return l.hubExpenses;
+    case 'gallery':
+      return l.hubGallery;
+    case 'education':
+      return l.hubEducation;
+    case 'ai':
+      return l.hubAI;
+    case 'legal':
+      return l.hubLegal;
+    case 'intelligence':
+      return l.hubIntelligence;
+    case 'familyhubai':
+      return l.hubFamilyHubAI;
+    default:
+      return key;
+  }
+}
+
 class _Feature {
   final IconData icon;
   final String label;
   final List<Color> gradient;
   final Color shadow;
   final String route;
-  final String? asset; // premium PNG tile (varsa gradient+ikon yerine kullanılır)
-  const _Feature(this.icon, this.label, this.gradient, this.shadow, this.route,
-      {this.asset});
+  final String?
+  asset; // premium PNG tile (varsa gradient+ikon yerine kullanılır)
+  const _Feature(
+    this.icon,
+    this.label,
+    this.gradient,
+    this.shadow,
+    this.route, {
+    this.asset,
+  });
 }
 
 // ─── Hub Screen ───────────────────────────────────────────────────────────────
@@ -62,7 +109,6 @@ class HubScreen extends ConsumerStatefulWidget {
 
 class _HubScreenState extends ConsumerState<HubScreen>
     with TickerProviderStateMixin {
-
   // notification ticker
   int _notifIdx = 0;
   bool _notifExpanded = false;
@@ -73,24 +119,125 @@ class _HubScreenState extends ConsumerState<HubScreen>
 
   // sample notifications (will come from Supabase / FCM in production)
 
-
   static final _features = <_Feature>[
-    const _Feature(Icons.shopping_bag_rounded,     'Alışveriş',   [Color(0xFF10B981), Color(0xFF059669)], Color(0xFF064E3B), AppRoutes.shopping, asset: 'assets/icons/tiles/shopping.png'),
-    const _Feature(Icons.ramen_dining_rounded,     'Mutfak',      [Color(0xFFF59E0B), Color(0xFFD97706)], Color(0xFF78350F), AppRoutes.kitchen, asset: 'assets/icons/tiles/kitchen.png'),
-    const _Feature(Icons.child_care_rounded,       'Çocuk',       [Color(0xFF06B6D4), Color(0xFF0891B2)], Color(0xFF164E63), AppRoutes.childManagement, asset: 'assets/icons/tiles/child.png'),
-    const _Feature(Icons.emoji_nature_rounded,     'Gelişim',     [Color(0xFFF43F5E), Color(0xFFE11D48)], Color(0xFF881337), AppRoutes.childDevelopment, asset: 'assets/icons/tiles/growth.png'),
-    const _Feature(Icons.favorite_rounded,         'Sağlık',      [Color(0xFF14B8A6), Color(0xFF0D9488)], Color(0xFF134E4A), AppRoutes.familyHealth, asset: 'assets/icons/tiles/health.png'),
-    const _Feature(Icons.location_on_rounded,      'Konum',       [Color(0xFF3B82F6), Color(0xFF2563EB)], Color(0xFF1E3A8A), AppRoutes.familyMap, asset: 'assets/icons/tiles/location.png'),
-    const _Feature(Icons.emergency_rounded,        'Acil',        [Color(0xFFEF4444), Color(0xFFDC2626)], Color(0xFF7F1D1D), AppRoutes.emergency, asset: 'assets/icons/tiles/emergency.png'),
-    const _Feature(Icons.savings_rounded,          'Bütçe',       [Color(0xFFA855F7), Color(0xFF9333EA)], Color(0xFF581C87), AppRoutes.budget, asset: 'assets/icons/tiles/budget.png'),
-    const _Feature(Icons.receipt_long_rounded,     'Ev Giderleri',[Color(0xFF6366F1), Color(0xFF4F46E5)], Color(0xFF312E81), AppRoutes.subscriptions, asset: 'assets/icons/tiles/expenses.png'),
-    const _Feature(Icons.collections_rounded,      'Galeri',      [Color(0xFFEC4899), Color(0xFFDB2777)], Color(0xFF831843), AppRoutes.gallery, asset: 'assets/icons/tiles/gallery.png'),
-    const _Feature(Icons.school_rounded,           'Eğitim',      [Color(0xFF8B5CF6), Color(0xFF7C3AED)], Color(0xFF4C1D95), AppRoutes.education, asset: 'assets/icons/tiles/education.png'),
-    const _Feature(Icons.auto_awesome_rounded,     'AI',          [Color(0xFF4776E6), Color(0xFF2D3A8C)], Color(0xFF1E1B4B), AppRoutes.aiAssistant, asset: 'assets/icons/tiles/ai.png'),
+    const _Feature(
+      Icons.shopping_bag_rounded,
+      'shopping',
+      [Color(0xFF10B981), Color(0xFF059669)],
+      Color(0xFF064E3B),
+      AppRoutes.shopping,
+      asset: 'assets/icons/tiles/shopping.png',
+    ),
+    const _Feature(
+      Icons.ramen_dining_rounded,
+      'kitchen',
+      [Color(0xFFF59E0B), Color(0xFFD97706)],
+      Color(0xFF78350F),
+      AppRoutes.kitchen,
+      asset: 'assets/icons/tiles/kitchen.png',
+    ),
+    const _Feature(
+      Icons.child_care_rounded,
+      'child',
+      [Color(0xFF06B6D4), Color(0xFF0891B2)],
+      Color(0xFF164E63),
+      AppRoutes.childManagement,
+      asset: 'assets/icons/tiles/child.png',
+    ),
+    const _Feature(
+      Icons.emoji_nature_rounded,
+      'development',
+      [Color(0xFFF43F5E), Color(0xFFE11D48)],
+      Color(0xFF881337),
+      AppRoutes.childDevelopment,
+      asset: 'assets/icons/tiles/growth.png',
+    ),
+    const _Feature(
+      Icons.favorite_rounded,
+      'health',
+      [Color(0xFF14B8A6), Color(0xFF0D9488)],
+      Color(0xFF134E4A),
+      AppRoutes.familyHealth,
+      asset: 'assets/icons/tiles/health.png',
+    ),
+    const _Feature(
+      Icons.location_on_rounded,
+      'location',
+      [Color(0xFF3B82F6), Color(0xFF2563EB)],
+      Color(0xFF1E3A8A),
+      AppRoutes.familyMap,
+      asset: 'assets/icons/tiles/location.png',
+    ),
+    const _Feature(
+      Icons.emergency_rounded,
+      'emergency',
+      [Color(0xFFEF4444), Color(0xFFDC2626)],
+      Color(0xFF7F1D1D),
+      AppRoutes.emergency,
+      asset: 'assets/icons/tiles/emergency.png',
+    ),
+    const _Feature(
+      Icons.savings_rounded,
+      'budget',
+      [Color(0xFFA855F7), Color(0xFF9333EA)],
+      Color(0xFF581C87),
+      AppRoutes.budget,
+      asset: 'assets/icons/tiles/budget.png',
+    ),
+    const _Feature(
+      Icons.receipt_long_rounded,
+      'expenses',
+      [Color(0xFF6366F1), Color(0xFF4F46E5)],
+      Color(0xFF312E81),
+      AppRoutes.subscriptions,
+      asset: 'assets/icons/tiles/expenses.png',
+    ),
+    const _Feature(
+      Icons.collections_rounded,
+      'gallery',
+      [Color(0xFFEC4899), Color(0xFFDB2777)],
+      Color(0xFF831843),
+      AppRoutes.gallery,
+      asset: 'assets/icons/tiles/gallery.png',
+    ),
+    const _Feature(
+      Icons.school_rounded,
+      'education',
+      [Color(0xFF8B5CF6), Color(0xFF7C3AED)],
+      Color(0xFF4C1D95),
+      AppRoutes.education,
+      asset: 'assets/icons/tiles/education.png',
+    ),
+    const _Feature(
+      Icons.auto_awesome_rounded,
+      'ai',
+      [Color(0xFF4776E6), Color(0xFF2D3A8C)],
+      Color(0xFF1E1B4B),
+      AppRoutes.aiAssistant,
+      asset: 'assets/icons/tiles/ai.png',
+    ),
     // Yeni bağımsız modüller — asset yok, gradient+ikon fallback.
-    const _Feature(Icons.gavel_rounded,            'Yasal Haklar', [Color(0xFF10B981), Color(0xFF059669)], Color(0xFF064E3B), AppRoutes.legalBenefits),
-    const _Feature(Icons.auto_awesome_mosaic_rounded, 'Aile Zekası', [Color(0xFF8B5CF6), Color(0xFF6366F1)], Color(0xFF3730A3), AppRoutes.familyIntelligence),
-    const _Feature(Icons.smart_toy_rounded,        'FamilyHub AI', [Color(0xFFEC4899), Color(0xFF8B5CF6)], Color(0xFF831843), AppRoutes.familyHubAI),
+    const _Feature(
+      Icons.gavel_rounded,
+      'legal',
+      [Color(0xFF10B981), Color(0xFF059669)],
+      Color(0xFF064E3B),
+      AppRoutes.legalBenefits,
+    ),
+    const _Feature(
+      Icons.auto_awesome_mosaic_rounded,
+      'intelligence',
+      [Color(0xFF8B5CF6), Color(0xFF6366F1)],
+      Color(0xFF3730A3),
+      AppRoutes.familyIntelligence,
+    ),
+    const _Feature(
+      Icons.smart_toy_rounded,
+      'familyhubai',
+      [Color(0xFFEC4899), Color(0xFF8B5CF6)],
+      Color(0xFF831843),
+      AppRoutes.familyHubAI,
+    ),
   ];
 
   @override
@@ -158,11 +305,14 @@ class _HubScreenState extends ConsumerState<HubScreen>
       case MemberRole.child:
       case MemberRole.baby:
         // Kids see only tasks, education, and chat
-        return _features.where((f) =>
-          f.route == AppRoutes.childManagement ||
-          f.route == AppRoutes.childDevelopment ||
-          f.route == AppRoutes.education,
-        ).toList();
+        return _features
+            .where(
+              (f) =>
+                  f.route == AppRoutes.childManagement ||
+                  f.route == AppRoutes.childDevelopment ||
+                  f.route == AppRoutes.education,
+            )
+            .toList();
       case MemberRole.elder:
         // Elders: health-first ordering, no child management
         final priority = [
@@ -175,21 +325,26 @@ class _HubScreenState extends ConsumerState<HubScreen>
         ];
         return [
           ..._features.where((f) => priority.contains(f.route)),
-          ..._features.where((f) => !priority.contains(f.route) &&
-              f.route != AppRoutes.childManagement &&
-              f.route != AppRoutes.childDevelopment),
+          ..._features.where(
+            (f) =>
+                !priority.contains(f.route) &&
+                f.route != AppRoutes.childManagement &&
+                f.route != AppRoutes.childDevelopment,
+          ),
         ];
       case MemberRole.guest:
         // Guests: shared shopping and gallery only
-        return _features.where((f) =>
-          f.route == AppRoutes.shopping ||
-          f.route == AppRoutes.gallery,
-        ).toList();
+        return _features
+            .where(
+              (f) =>
+                  f.route == AppRoutes.shopping || f.route == AppRoutes.gallery,
+            )
+            .toList();
       case MemberRole.teen:
         // Teens: everything except child management tools
-        return _features.where((f) =>
-          f.route != AppRoutes.childManagement,
-        ).toList();
+        return _features
+            .where((f) => f.route != AppRoutes.childManagement)
+            .toList();
       case MemberRole.admin:
       case MemberRole.parent:
         return _features;
@@ -213,31 +368,37 @@ class _HubScreenState extends ConsumerState<HubScreen>
 
     final list = <_HubNotif>[];
     for (final e in events.take(4)) {
-      list.add(_HubNotif(
-        icon: Icons.calendar_today_outlined,
-        color: const Color(0xFF6366F1),
-        title: e.title,
-        source: 'Takvim · ${rel(e.start)}',
-        time: hhmm(e.start),
-      ));
+      list.add(
+        _HubNotif(
+          icon: Icons.calendar_today_outlined,
+          color: const Color(0xFF6366F1),
+          title: e.title,
+          source: 'Takvim · ${rel(e.start)}',
+          time: hhmm(e.start),
+        ),
+      );
     }
     for (final t in tasks.take(4)) {
-      list.add(_HubNotif(
-        icon: Icons.check_circle_outline,
-        color: const Color(0xFF10B981),
-        title: t.title,
-        source: t.dueDate != null ? 'Görev · ${rel(t.dueDate!)}' : 'Görev',
-        time: t.dueDate != null ? hhmm(t.dueDate!) : '',
-      ));
+      list.add(
+        _HubNotif(
+          icon: Icons.check_circle_outline,
+          color: const Color(0xFF10B981),
+          title: t.title,
+          source: t.dueDate != null ? 'Görev · ${rel(t.dueDate!)}' : 'Görev',
+          time: t.dueDate != null ? hhmm(t.dueDate!) : '',
+        ),
+      );
     }
     if (list.isEmpty) {
-      list.add(_HubNotif(
-        icon: Icons.notifications_none_rounded,
-        color: const Color(0xFF6B7280),
-        title: AppLocalizations.of(context).hbNoNotifications,
-        source: AppLocalizations.of(context).hbAllUpToDate,
-        time: '',
-      ));
+      list.add(
+        _HubNotif(
+          icon: Icons.notifications_none_rounded,
+          color: const Color(0xFF6B7280),
+          title: AppLocalizations.of(context).hbNoNotifications,
+          source: AppLocalizations.of(context).hbAllUpToDate,
+          time: '',
+        ),
+      );
     }
     return list;
   }
@@ -287,7 +448,9 @@ class _HubScreenState extends ConsumerState<HubScreen>
                   shape: BoxShape.circle,
                   gradient: RadialGradient(
                     colors: [
-                      const Color(0xFFFF6B8B).withAlpha(70), // sıcak pembe-mercan
+                      const Color(
+                        0xFFFF6B8B,
+                      ).withAlpha(70), // sıcak pembe-mercan
                       const Color(0xFFFF6B8B).withAlpha(0),
                     ],
                   ),
@@ -333,62 +496,71 @@ class _HubScreenState extends ConsumerState<HubScreen>
             SafeArea(
               bottom: false,
               child: RefreshIndicator(
-          onRefresh: _refresh,
-          color: const Color(0xFF6366F1),
-          backgroundColor: const Color(0xFF1A1A2E),
-          child: CustomScrollView(
-            slivers: [
-              // ── Çevrimdışı rozeti ────────────────────────────────────────
-              if (ref.watch(connectivityProvider).valueOrNull == false)
-                const SliverToBoxAdapter(child: _OfflineBanner()),
+                onRefresh: _refresh,
+                color: const Color(0xFF6366F1),
+                backgroundColor: const Color(0xFF1A1A2E),
+                child: CustomScrollView(
+                  slivers: [
+                    // ── Çevrimdışı rozeti ────────────────────────────────────────
+                    if (ref.watch(connectivityProvider).valueOrNull == false)
+                      const SliverToBoxAdapter(child: _OfflineBanner()),
 
-              // ── Ticker notification bar ──────────────────────────────────
-              SliverToBoxAdapter(child: _NotifTicker(
-                notifs: _liveNotifs,
-                currentIdx: _notifIdx.clamp(0, _liveNotifs.length - 1),
-                expanded: _notifExpanded,
-                fade: _tickerFade,
-                onTap: () => setState(() => _notifExpanded = !_notifExpanded),
-                onDismiss: (i) => setState(() {}),
-              )),
+                    // ── Ticker notification bar ──────────────────────────────────
+                    SliverToBoxAdapter(
+                      child: _NotifTicker(
+                        notifs: _liveNotifs,
+                        currentIdx: _notifIdx.clamp(0, _liveNotifs.length - 1),
+                        expanded: _notifExpanded,
+                        fade: _tickerFade,
+                        onTap: () =>
+                            setState(() => _notifExpanded = !_notifExpanded),
+                        onDismiss: (i) => setState(() {}),
+                      ),
+                    ),
 
-              // ── Cover + profiles ─────────────────────────────────────────
-              SliverToBoxAdapter(child: _CoverSection(members: members)),
+                    // ── Cover + profiles ─────────────────────────────────────────
+                    SliverToBoxAdapter(child: _CoverSection(members: members)),
 
-              // ── Günlük Zeka Özeti (hub'ın beyni) ─────────────────────────
-              const SliverToBoxAdapter(child: DailyBriefingCard()),
+                    // ── Günlük Zeka Özeti (hub'ın beyni) ─────────────────────────
+                    const SliverToBoxAdapter(child: DailyBriefingCard()),
 
-              // ── Akıllı Uyarılar (gerçek veriden içgörüler) ───────────────
-              const SliverToBoxAdapter(child: SmartInsightsCard()),
+                    // ── Akıllı Uyarılar (gerçek veriden içgörüler) ───────────────
+                    const SliverToBoxAdapter(child: SmartInsightsCard()),
 
-              // ── Günlük Öneriler (eski Keşfet'in yerinde, collapse) ────────
-              if (HiveService.getBoolSetting('hub_show_smart_card',
-                  defaultValue: true))
-                const SliverToBoxAdapter(child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12),
-                  child: AISuggestionsWidget(),
-                )),
+                    // ── Günlük Öneriler (eski Keşfet'in yerinde, collapse) ────────
+                    if (HiveService.getBoolSetting(
+                      'hub_show_smart_card',
+                      defaultValue: true,
+                    ))
+                      const SliverToBoxAdapter(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 12),
+                          child: AISuggestionsWidget(),
+                        ),
+                      ),
 
-              // ── Ailenin ruh hali (mood_entries — gerçek, realtime) ──────
-              const SliverToBoxAdapter(child: FamilyMoodStrip()),
+                    // ── Ailenin ruh hali (mood_entries — gerçek, realtime) ──────
+                    const SliverToBoxAdapter(child: FamilyMoodStrip()),
 
-              // ── Yasal Haklar & Avantajlar (ülkeye göre, AI/realtime) ─────
-              const SliverToBoxAdapter(child: LegalBenefitsCard()),
+                    // ── Yasal Haklar & Avantajlar (ülkeye göre, AI/realtime) ─────
+                    const SliverToBoxAdapter(child: LegalBenefitsCard()),
 
-              // ── Quick access grid (butonlar hemen gorunsun) ──────────────
-              SliverToBoxAdapter(child: _QuickGrid(features: visibleFeatures)),
+                    // ── Quick access grid (butonlar hemen gorunsun) ──────────────
+                    SliverToBoxAdapter(
+                      child: _QuickGrid(features: visibleFeatures),
+                    ),
 
-              // ── Hub gömülü mini AI sohbet paneli ──────────────────────────
-              const SliverToBoxAdapter(child: HubAiPanel()),
+                    // ── Hub gömülü mini AI sohbet paneli ──────────────────────────
+                    const SliverToBoxAdapter(child: HubAiPanel()),
 
-              // ── Stat strip ───────────────────────────────────────────────
-              const SliverToBoxAdapter(child: _StatStrip()),
+                    // ── Stat strip ───────────────────────────────────────────────
+                    const SliverToBoxAdapter(child: _StatStrip()),
 
-              const SliverToBoxAdapter(child: SizedBox(height: 32)),
-            ],
-          ),
-        ),
-        ),
+                    const SliverToBoxAdapter(child: SizedBox(height: 32)),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -429,7 +601,8 @@ class _NotifTicker extends StatelessWidget {
               children: [
                 // colored icon
                 Container(
-                  width: 22, height: 22,
+                  width: 22,
+                  height: 22,
                   decoration: BoxDecoration(
                     color: notif.color,
                     borderRadius: BorderRadius.circular(7),
@@ -456,22 +629,28 @@ class _NotifTicker extends StatelessWidget {
                 const SizedBox(width: 8),
                 // dots
                 Row(
-                  children: List.generate(notifs.length, (i) => Container(
-                    width: i == currentIdx ? 14 : 4,
-                    height: 4,
-                    margin: const EdgeInsets.only(right: 3),
-                    decoration: BoxDecoration(
-                      color: i == currentIdx
-                          ? const Color(0xFF6366F1)
-                          : Colors.white.withAlpha(40),
-                      borderRadius: BorderRadius.circular(2),
+                  children: List.generate(
+                    notifs.length,
+                    (i) => Container(
+                      width: i == currentIdx ? 14 : 4,
+                      height: 4,
+                      margin: const EdgeInsets.only(right: 3),
+                      decoration: BoxDecoration(
+                        color: i == currentIdx
+                            ? const Color(0xFF6366F1)
+                            : Colors.white.withAlpha(40),
+                        borderRadius: BorderRadius.circular(2),
+                      ),
                     ),
-                  )),
+                  ),
                 ),
                 const SizedBox(width: 6),
                 // count badge
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 7,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
                     color: const Color(0xFF6366F1).withAlpha(50),
                     borderRadius: BorderRadius.circular(8),
@@ -489,8 +668,11 @@ class _NotifTicker extends StatelessWidget {
                 AnimatedRotation(
                   turns: expanded ? 0.5 : 0,
                   duration: const Duration(milliseconds: 250),
-                  child: const Icon(Icons.keyboard_arrow_down,
-                      size: 16, color: Color(0xFF6B7280)),
+                  child: const Icon(
+                    Icons.keyboard_arrow_down,
+                    size: 16,
+                    color: Color(0xFF6B7280),
+                  ),
                 ),
               ],
             ),
@@ -520,24 +702,33 @@ class _NotifTicker extends StatelessWidget {
                         child: Container(
                           margin: const EdgeInsets.only(bottom: 6),
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 10),
+                            horizontal: 12,
+                            vertical: 10,
+                          ),
                           decoration: BoxDecoration(
                             color: n.color.withAlpha(15),
                             borderRadius: BorderRadius.circular(14),
                             border: Border(
                               left: BorderSide(color: n.color, width: 3),
                               top: BorderSide(
-                                  color: n.color.withAlpha(40), width: 0.5),
+                                color: n.color.withAlpha(40),
+                                width: 0.5,
+                              ),
                               right: BorderSide(
-                                  color: n.color.withAlpha(40), width: 0.5),
+                                color: n.color.withAlpha(40),
+                                width: 0.5,
+                              ),
                               bottom: BorderSide(
-                                  color: n.color.withAlpha(40), width: 0.5),
+                                color: n.color.withAlpha(40),
+                                width: 0.5,
+                              ),
                             ),
                           ),
                           child: Row(
                             children: [
                               Container(
-                                width: 30, height: 30,
+                                width: 30,
+                                height: 30,
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [n.color, n.color.withAlpha(180)],
@@ -546,31 +737,44 @@ class _NotifTicker extends StatelessWidget {
                                   ),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                child: Icon(n.icon, size: 15, color: Colors.white),
+                                child: Icon(
+                                  n.icon,
+                                  size: 15,
+                                  color: Colors.white,
+                                ),
                               ),
                               const SizedBox(width: 10),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(n.title,
-                                        style: const TextStyle(
-                                            fontSize: 11,
-                                            fontWeight: FontWeight.w700,
-                                            color: Color(0xFFE5E7EB))),
+                                    Text(
+                                      n.title,
+                                      style: const TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w700,
+                                        color: Color(0xFFE5E7EB),
+                                      ),
+                                    ),
                                     const SizedBox(height: 2),
-                                    Text(n.source,
-                                        style: const TextStyle(
-                                            fontSize: 9,
-                                            color: Color(0xFF6B7280))),
+                                    Text(
+                                      n.source,
+                                      style: const TextStyle(
+                                        fontSize: 9,
+                                        color: Color(0xFF6B7280),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
-                              Text(n.time,
-                                  style: const TextStyle(
-                                      fontSize: 9,
-                                      color: Color(0xFF6B7280),
-                                      fontWeight: FontWeight.w600)),
+                              Text(
+                                n.time,
+                                style: const TextStyle(
+                                  fontSize: 9,
+                                  color: Color(0xFF6B7280),
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -591,9 +795,11 @@ class _NotifTicker extends StatelessWidget {
 // ─── Cover Section ────────────────────────────────────────────────────────────
 /// Aile kapak fotoğrafı: yerel dosya yolu veya uzak URL. Yerel kopya
 /// öncelikli — Supabase yüklemesi başarısız olsa (403) bile fotoğraf görünür.
-final coverPhotoProvider = StateProvider<String?>((ref) =>
-    HiveService.getSetting('cover_photo_local') ??
-    HiveService.getSetting('cover_photo_url'));
+final coverPhotoProvider = StateProvider<String?>(
+  (ref) =>
+      HiveService.getSetting('cover_photo_local') ??
+      HiveService.getSetting('cover_photo_url'),
+);
 
 class _CoverSection extends ConsumerWidget {
   final List<FamilyMember> members;
@@ -658,12 +864,15 @@ class _CoverSection extends ConsumerWidget {
 
             // top row: logo + weather + edit
             Positioned(
-              top: 12, left: 12, right: 12,
+              top: 12,
+              left: 12,
+              right: 12,
               child: Row(
                 children: [
                   // logo
                   Container(
-                    width: 30, height: 30,
+                    width: 30,
+                    height: 30,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(9),
@@ -694,8 +903,7 @@ class _CoverSection extends ConsumerWidget {
                   const Spacer(),
                   // weather
                   weatherAsync.when(
-                    data: (w) => _WeatherPill(
-                        temp: w.temperature.round()),
+                    data: (w) => _WeatherPill(temp: w.temperature.round()),
                     loading: () => const SizedBox.shrink(),
                     error: (_, _) => const SizedBox.shrink(),
                   ),
@@ -705,23 +913,33 @@ class _CoverSection extends ConsumerWidget {
                     onTap: () => _pickCoverPhoto(context, ref),
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 5),
+                        horizontal: 8,
+                        vertical: 5,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.black.withAlpha(80),
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
-                            color: Colors.white.withAlpha(40), width: 0.5),
+                          color: Colors.white.withAlpha(40),
+                          width: 0.5,
+                        ),
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.camera_alt_outlined,
-                              size: 11, color: Color(0xFF9CA3AF)),
+                          const Icon(
+                            Icons.camera_alt_outlined,
+                            size: 11,
+                            color: Color(0xFF9CA3AF),
+                          ),
                           const SizedBox(width: 3),
-                          Text(AppLocalizations.of(context).image,
-                              style: const TextStyle(
-                                  fontSize: 9,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xFF9CA3AF))),
+                          Text(
+                            AppLocalizations.of(context).image,
+                            style: const TextStyle(
+                              fontSize: 9,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xFF9CA3AF),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -732,7 +950,9 @@ class _CoverSection extends ConsumerWidget {
 
             // bottom: family name + location + member profiles
             Positioned(
-              bottom: 12, left: 12, right: 12,
+              bottom: 12,
+              left: 12,
+              right: 12,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -764,8 +984,10 @@ class _CoverSection extends ConsumerWidget {
     final coverUpdatedMsg = AppLocalizations.of(context).hbCoverUpdated;
     final coverFailedMsg = AppLocalizations.of(context).hbCoverFailed;
     final picker = ImagePicker();
-    final picked =
-        await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
+    final picked = await picker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 80,
+    );
     if (picked == null) return;
 
     // 1) Önce yerel kopyayı kaydet → fotoğraf anında görünür (403 olsa bile).
@@ -804,7 +1026,9 @@ class _CoverSection extends ConsumerWidget {
       final bytes = await File(picked.path).readAsBytes();
       final ext = picked.path.split('.').last;
       final path = 'cover_photos/$userId/cover.$ext';
-      await client.storage.from('family-assets').uploadBinary(
+      await client.storage
+          .from('family-assets')
+          .uploadBinary(
             path,
             bytes,
             fileOptions: FileOptions(contentType: 'image/$ext', upsert: true),
@@ -812,7 +1036,8 @@ class _CoverSection extends ConsumerWidget {
       final url = client.storage.from('family-assets').getPublicUrl(path);
       await client
           .from('profiles')
-          .update({'cover_photo_url': url}).eq('id', userId);
+          .update({'cover_photo_url': url})
+          .eq('id', userId);
       await HiveService.setSetting('cover_photo_url', url);
     } catch (_) {
       // Bulut senkronu başarısız (ör. 403 / bucket yok) — yerel görsel geçerli.
@@ -847,6 +1072,7 @@ class _OrbPainter extends CustomPainter {
     p.color = const Color(0xFF06B6D4).withAlpha(60);
     canvas.drawCircle(Offset(size.width * 0.5, size.height * 0.5), 40, p);
   }
+
   @override
   bool shouldRepaint(_) => false;
 }
@@ -867,13 +1093,20 @@ class _WeatherPill extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.wb_sunny_outlined, size: 12, color: Color(0xFFFBBF24)),
+          const Icon(
+            Icons.wb_sunny_outlined,
+            size: 12,
+            color: Color(0xFFFBBF24),
+          ),
           const SizedBox(width: 4),
-          Text('$temp°',
-              style: const TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white)),
+          Text(
+            '$temp°',
+            style: const TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.w700,
+              color: Colors.white,
+            ),
+          ),
         ],
       ),
     );
@@ -889,17 +1122,22 @@ class _OfflineBanner extends StatelessWidget {
       width: double.infinity,
       color: const Color(0xFFF59E0B).withAlpha(38),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: const Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.cloud_off_rounded, size: 15, color: Color(0xFFF59E0B)),
-          SizedBox(width: 8),
+          const Icon(
+            Icons.cloud_off_rounded,
+            size: 15,
+            color: Color(0xFFF59E0B),
+          ),
+          const SizedBox(width: 8),
           Text(
-            'Çevrimdışısın — değişiklikler bağlanınca senkronlanacak',
-            style: TextStyle(
-                color: Color(0xFFF59E0B),
-                fontSize: 12,
-                fontWeight: FontWeight.w600),
+            AppLocalizations.of(context).hubOffline,
+            style: const TextStyle(
+              color: Color(0xFFF59E0B),
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ],
       ),
@@ -915,12 +1153,15 @@ class _LocationRow extends ConsumerWidget {
     final locationModel = resolved ?? HiveService.getLocation();
     final city = locationModel != null && locationModel.city.isNotEmpty
         ? locationModel.city
-        : 'Konum alınıyor…';
+        : AppLocalizations.of(context).hubLocating;
     final country = locationModel?.country ?? '';
     return Row(
       children: [
-        const Icon(Icons.location_on_outlined,
-            size: 11, color: Color(0xFF818CF8)),
+        const Icon(
+          Icons.location_on_outlined,
+          size: 11,
+          color: Color(0xFF818CF8),
+        ),
         const SizedBox(width: 3),
         Text(
           country.isNotEmpty ? '$city, $country' : city,
@@ -938,9 +1179,7 @@ class _MemberProfiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final show = members.isEmpty
-        ? <FamilyMember>[]
-        : members.take(5).toList();
+    final show = members.isEmpty ? <FamilyMember>[] : members.take(5).toList();
 
     return Row(
       children: [
@@ -955,12 +1194,13 @@ class _MemberProfiles extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                  color: Colors.white.withAlpha(40), width: 1.5,
-                  strokeAlign: BorderSide.strokeAlignInside),
+                color: Colors.white.withAlpha(40),
+                width: 1.5,
+                strokeAlign: BorderSide.strokeAlignInside,
+              ),
               color: Colors.white.withAlpha(15),
             ),
-            child: const Icon(Icons.add,
-                size: 18, color: Color(0xFF6B7280)),
+            child: const Icon(Icons.add, size: 18, color: Color(0xFF6B7280)),
           ),
         ),
       ],
@@ -982,11 +1222,10 @@ class _ProfileAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final idx = member.name.codeUnits.fold(0, (a, b) => a + b) % _gradients.length;
+    final idx =
+        member.name.codeUnits.fold(0, (a, b) => a + b) % _gradients.length;
     final colors = _gradients[idx];
-    final initial = member.name.isNotEmpty
-        ? member.name[0].toUpperCase()
-        : '?';
+    final initial = member.name.isNotEmpty ? member.name[0].toUpperCase() : '?';
 
     return GestureDetector(
       onTap: () => context.push(AppRoutes.family),
@@ -1011,10 +1250,12 @@ class _ProfileAvatar extends StatelessWidget {
                   width: 2,
                 ),
                 boxShadow: member.isOnline
-                    ? [BoxShadow(
-                        color: const Color(0xFF22C55E).withAlpha(80),
-                        blurRadius: 8,
-                      )]
+                    ? [
+                        BoxShadow(
+                          color: const Color(0xFF22C55E).withAlpha(80),
+                          blurRadius: 8,
+                        ),
+                      ]
                     : null,
               ),
               child: member.avatarUrl != null && member.avatarUrl!.isNotEmpty
@@ -1023,34 +1264,41 @@ class _ProfileAvatar extends StatelessWidget {
                         imageUrl: member.avatarUrl!,
                         fit: BoxFit.cover,
                         errorWidget: (_, _, _) => Center(
-                          child: Text(initial,
-                              style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w800,
-                                  color: Colors.white)),
+                          child: Text(
+                            initial,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
                     )
                   : Center(
-                      child: Text(initial,
-                          style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w800,
-                              color: Colors.white)),
+                      child: Text(
+                        initial,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
             ),
             // online/offline dot
             Positioned(
-              right: 0, bottom: 0,
+              right: 0,
+              bottom: 0,
               child: Container(
-                width: 12, height: 12,
+                width: 12,
+                height: 12,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: member.isOnline
                       ? const Color(0xFF22C55E)
                       : const Color(0xFF4B5563),
-                  border: Border.all(
-                      color: const Color(0xFF0A0A0F), width: 2),
+                  border: Border.all(color: const Color(0xFF0A0A0F), width: 2),
                 ),
               ),
             ),
@@ -1082,7 +1330,8 @@ class _QuickGrid extends StatelessWidget {
           Row(
             children: [
               Container(
-                width: 6, height: 6,
+                width: 6,
+                height: 6,
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   gradient: LinearGradient(
@@ -1091,9 +1340,9 @@ class _QuickGrid extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 6),
-              const Text(
-                'HIZLI ERİŞİM',
-                style: TextStyle(
+              Text(
+                AppLocalizations.of(context).hubQuickAccess,
+                style: const TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
                   color: Color(0xFF6B7280),
@@ -1170,68 +1419,78 @@ class _FeatureTileState extends State<_FeatureTile> {
                 ),
               )
             else
-            Container(
-              width: 92, height: 92,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: f.gradient,
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.circular(22),
-                boxShadow: [
-                  BoxShadow(
-                    color: f.shadow.withAlpha(_pressed ? 60 : 100),
-                    blurRadius: _pressed ? 6 : 14,
-                    offset: Offset(0, _pressed ? 2 : 5),
+              Container(
+                width: 92,
+                height: 92,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: f.gradient,
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
                   ),
-                  BoxShadow(
-                    color: f.gradient[0].withAlpha(_pressed ? 30 : 60),
-                    blurRadius: 0,
-                    offset: Offset(0, _pressed ? 1 : 4),
+                  borderRadius: BorderRadius.circular(22),
+                  boxShadow: [
+                    BoxShadow(
+                      color: f.shadow.withAlpha(_pressed ? 60 : 100),
+                      blurRadius: _pressed ? 6 : 14,
+                      offset: Offset(0, _pressed ? 2 : 5),
+                    ),
+                    BoxShadow(
+                      color: f.gradient[0].withAlpha(_pressed ? 30 : 60),
+                      blurRadius: 0,
+                      offset: Offset(0, _pressed ? 1 : 4),
+                    ),
+                  ],
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Colors.black.withAlpha(60),
+                      width: 2,
+                    ),
                   ),
-                ],
-                border: Border(
-                  bottom: BorderSide(
-                      color: Colors.black.withAlpha(60), width: 2),
                 ),
-              ),
-              child: Stack(
-                children: [
-                  // gloss
-                  Positioned(
-                    top: 0, left: 0, right: 0,
-                    height: 38,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(22)),
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.white.withAlpha(45),
-                            Colors.transparent,
-                          ],
+                child: Stack(
+                  children: [
+                    // gloss
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: 38,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(22),
+                          ),
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Colors.white.withAlpha(45),
+                              Colors.transparent,
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Center(
-                    child: Icon(f.icon, size: 42, color: Colors.white,
+                    Center(
+                      child: Icon(
+                        f.icon,
+                        size: 42,
+                        color: Colors.white,
                         shadows: [
                           Shadow(
                             color: Colors.black.withAlpha(100),
                             blurRadius: 6,
                           ),
-                        ]),
-                  ),
-                ],
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
             const SizedBox(height: 8),
             Text(
-              f.label,
+              hubFeatureLabel(context, f.label),
               style: const TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
@@ -1259,12 +1518,21 @@ class _StatStrip extends ConsumerWidget {
       padding: const EdgeInsets.fromLTRB(12, 10, 12, 0),
       child: Row(
         children: [
-          _StatCard(value: '$taskCount', label: AppLocalizations.of(context).hbTodayTask),
+          _StatCard(
+            value: '$taskCount',
+            label: AppLocalizations.of(context).hbTodayTask,
+          ),
           const SizedBox(width: 8),
-          _StatCard(value: '🔥 7', label: AppLocalizations.of(context).hbDayStreak),
+          _StatCard(
+            value: '🔥 7',
+            label: AppLocalizations.of(context).hbDayStreak,
+          ),
           const SizedBox(width: 8),
-          _StatCard(value: '3', label: AppLocalizations.of(context).hbOnline,
-              accent: const Color(0xFF22C55E)),
+          _StatCard(
+            value: '3',
+            label: AppLocalizations.of(context).hbOnline,
+            accent: const Color(0xFF22C55E),
+          ),
         ],
       ),
     );
@@ -1290,20 +1558,24 @@ class _StatCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(value,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w800,
-                  color: accent ?? Colors.white,
-                )),
+            Text(
+              value,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w800,
+                color: accent ?? Colors.white,
+              ),
+            ),
             const SizedBox(height: 2),
-            Text(label,
-                style: const TextStyle(
-                  fontSize: 8,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF6B7280),
-                  letterSpacing: 0.4,
-                )),
+            Text(
+              label,
+              style: const TextStyle(
+                fontSize: 8,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF6B7280),
+                letterSpacing: 0.4,
+              ),
+            ),
           ],
         ),
       ),
