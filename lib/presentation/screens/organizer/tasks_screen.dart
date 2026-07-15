@@ -103,15 +103,23 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
         priority: _selectedPriority,
         dueDate: _dueDate,
       );
-      await TaskRepository().createTask(newTask, familyId);
+      final created = await TaskRepository().createTask(newTask, familyId);
       if (!mounted) return;
+      // Yeni görevi ANINDA listeye ekle. Yerel ailede realtime abonelik yok;
+      // eskiden liste yenilenmediği için "ekleme yapılmıyor" görünüyordu.
+      final current = ref.read(tasksProvider);
+      if (!current.any((t) => t.id == created.id)) {
+        final updated = [created, ...current];
+        ref.read(tasksProvider.notifier).state = updated;
+        await HiveService.saveTasks(updated);
+      }
       _titleController.clear();
       _descController.clear();
       _selectedPriority = 'medium';
       _dueDate = null;
       _assignedTo = '';
-      Navigator.pop(context);
-      _showSnack(AppLocalizations.of(context).gorevEklendi);
+      if (mounted) Navigator.pop(context);
+      if (mounted) _showSnack(AppLocalizations.of(context).gorevEklendi);
     } catch (e) {
       if (mounted) _showSnack(AppLocalizations.of(context).taskAddError('$e'));
     }
