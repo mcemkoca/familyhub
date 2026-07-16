@@ -123,7 +123,10 @@ class SmartReminderBackgroundService {
         _reminderBodyKey: body,
       },
       existingWorkPolicy: ExistingWorkPolicy.replace,
-      constraints: Constraints(networkType: NetworkType.connected),
+      // Zaman-kritik hatırlatma: yalnızca yerel bildirim gösterir, ağ GEREKMEZ.
+      // NetworkType.connected olsaydı cihaz çevrimdışıyken hatırlatma
+      // gecikir/ateşlenmezdi (spec §8 güvenilirlik). notRequired → tam zamanında.
+      constraints: Constraints(networkType: NetworkType.notRequired),
     );
   }
 
