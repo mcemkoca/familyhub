@@ -80,6 +80,7 @@ import '../presentation/screens/streak/streak_screen.dart';
 import '../presentation/screens/main_shell.dart';
 import '../presentation/screens/health/health_dashboard.dart';
 import '../features/vaccinations/presentation/vaccination_screen.dart';
+import '../features/health_records/presentation/health_records_screen.dart';
 import '../presentation/screens/budget/subscription_screen.dart';
 import '../features/subscription/presentation/plans_screen.dart';
 import '../presentation/screens/child/child_dev_dashboard.dart';
@@ -182,6 +183,7 @@ class AppRoutes {
   static const String familyMap = '/family-map';
   static const String familyHealth = '/family-health';
   static const String vaccinations = '/health/vaccinations';
+  static const String healthRecords = '/health/records';
   static const String subscriptions = '/subscriptions';
   static const String plans = '/plans';
   static const String childDevelopment = '/child-development';
@@ -371,6 +373,7 @@ final router = GoRouter(
     GoRoute(path: AppRoutes.documents, builder: (context, state) => const DocumentsScreen()),
     GoRoute(path: AppRoutes.familyHealth, builder: (context, state) => const HealthDashboard()),
     GoRoute(path: AppRoutes.vaccinations, builder: (context, state) => const VaccinationScreen()),
+    GoRoute(path: AppRoutes.healthRecords, builder: (context, state) => const HealthRecordsScreen()),
     GoRoute(path: AppRoutes.subscriptions, builder: (context, state) => const SubscriptionScreen()),
     GoRoute(path: AppRoutes.plans, builder: (context, state) => const PlansScreen()),
     GoRoute(path: AppRoutes.childDevelopment, builder: (context, state) => const ChildDevelopmentHome()),

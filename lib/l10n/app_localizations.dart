@@ -5954,6 +5954,108 @@ abstract class AppLocalizations {
   /// **'Yapıldı işaretini kaldır'**
   String get vaccMarkUndone;
 
+  /// No description provided for @hrTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sağlık Kayıtları'**
+  String get hrTitle;
+
+  /// No description provided for @hrAdd.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kayıt ekle'**
+  String get hrAdd;
+
+  /// No description provided for @hrAll.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tümü'**
+  String get hrAll;
+
+  /// No description provided for @hrEmpty.
+  ///
+  /// In tr, this message translates to:
+  /// **'Henüz sağlık kaydı yok. İlk kaydı eklemek için + düğmesine dokunun.'**
+  String get hrEmpty;
+
+  /// No description provided for @hrError.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kayıtlar yüklenemedi.'**
+  String get hrError;
+
+  /// No description provided for @hrNewRecord.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yeni Sağlık Kaydı'**
+  String get hrNewRecord;
+
+  /// No description provided for @hrRecTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Başlık'**
+  String get hrRecTitle;
+
+  /// No description provided for @hrType.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kayıt türü'**
+  String get hrType;
+
+  /// No description provided for @hrMember.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kime ait?'**
+  String get hrMember;
+
+  /// No description provided for @hrSelf.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kendim'**
+  String get hrSelf;
+
+  /// No description provided for @hrDoctor.
+  ///
+  /// In tr, this message translates to:
+  /// **'Doktor'**
+  String get hrDoctor;
+
+  /// No description provided for @hrInstitution.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kurum'**
+  String get hrInstitution;
+
+  /// No description provided for @hrDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Açıklama'**
+  String get hrDesc;
+
+  /// No description provided for @hrSave.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kaydet'**
+  String get hrSave;
+
+  /// No description provided for @hrSaveFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kaydedilemedi. Bağlantıyı kontrol edin.'**
+  String get hrSaveFailed;
+
+  /// No description provided for @hrDeleted.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kayıt silindi'**
+  String get hrDeleted;
+
+  /// No description provided for @hrDeleteTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kaydı sil?'**
+  String get hrDeleteTitle;
+
   /// No description provided for @legalRemind.
   ///
   /// In tr, this message translates to:

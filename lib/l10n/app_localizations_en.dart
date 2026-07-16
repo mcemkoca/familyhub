@@ -3069,6 +3069,57 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vaccMarkUndone => 'Remove done mark';
 
   @override
+  String get hrTitle => 'Health Records';
+
+  @override
+  String get hrAdd => 'Add record';
+
+  @override
+  String get hrAll => 'All';
+
+  @override
+  String get hrEmpty => 'No health records yet. Tap + to add the first one.';
+
+  @override
+  String get hrError => 'Could not load records.';
+
+  @override
+  String get hrNewRecord => 'New Health Record';
+
+  @override
+  String get hrRecTitle => 'Title';
+
+  @override
+  String get hrType => 'Record type';
+
+  @override
+  String get hrMember => 'Who is it for?';
+
+  @override
+  String get hrSelf => 'Myself';
+
+  @override
+  String get hrDoctor => 'Doctor';
+
+  @override
+  String get hrInstitution => 'Institution';
+
+  @override
+  String get hrDesc => 'Description';
+
+  @override
+  String get hrSave => 'Save';
+
+  @override
+  String get hrSaveFailed => 'Could not save. Check your connection.';
+
+  @override
+  String get hrDeleted => 'Record deleted';
+
+  @override
+  String get hrDeleteTitle => 'Delete record?';
+
+  @override
   String get legalRemind => 'Remind';
 
   @override

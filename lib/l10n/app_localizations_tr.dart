@@ -3086,6 +3086,58 @@ class AppLocalizationsTr extends AppLocalizations {
   String get vaccMarkUndone => 'Yapıldı işaretini kaldır';
 
   @override
+  String get hrTitle => 'Sağlık Kayıtları';
+
+  @override
+  String get hrAdd => 'Kayıt ekle';
+
+  @override
+  String get hrAll => 'Tümü';
+
+  @override
+  String get hrEmpty =>
+      'Henüz sağlık kaydı yok. İlk kaydı eklemek için + düğmesine dokunun.';
+
+  @override
+  String get hrError => 'Kayıtlar yüklenemedi.';
+
+  @override
+  String get hrNewRecord => 'Yeni Sağlık Kaydı';
+
+  @override
+  String get hrRecTitle => 'Başlık';
+
+  @override
+  String get hrType => 'Kayıt türü';
+
+  @override
+  String get hrMember => 'Kime ait?';
+
+  @override
+  String get hrSelf => 'Kendim';
+
+  @override
+  String get hrDoctor => 'Doktor';
+
+  @override
+  String get hrInstitution => 'Kurum';
+
+  @override
+  String get hrDesc => 'Açıklama';
+
+  @override
+  String get hrSave => 'Kaydet';
+
+  @override
+  String get hrSaveFailed => 'Kaydedilemedi. Bağlantıyı kontrol edin.';
+
+  @override
+  String get hrDeleted => 'Kayıt silindi';
+
+  @override
+  String get hrDeleteTitle => 'Kaydı sil?';
+
+  @override
   String get legalRemind => 'Hatırlat';
 
   @override

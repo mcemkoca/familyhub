@@ -3081,6 +3081,59 @@ class AppLocalizationsFr extends AppLocalizations {
   String get vaccMarkUndone => 'Retirer la marque';
 
   @override
+  String get hrTitle => 'Dossiers de santé';
+
+  @override
+  String get hrAdd => 'Ajouter un dossier';
+
+  @override
+  String get hrAll => 'Tous';
+
+  @override
+  String get hrEmpty =>
+      'Aucun dossier de santé. Appuyez sur + pour ajouter le premier.';
+
+  @override
+  String get hrError => 'Impossible de charger les dossiers.';
+
+  @override
+  String get hrNewRecord => 'Nouveau dossier de santé';
+
+  @override
+  String get hrRecTitle => 'Titre';
+
+  @override
+  String get hrType => 'Type de dossier';
+
+  @override
+  String get hrMember => 'Pour qui ?';
+
+  @override
+  String get hrSelf => 'Moi-même';
+
+  @override
+  String get hrDoctor => 'Médecin';
+
+  @override
+  String get hrInstitution => 'Établissement';
+
+  @override
+  String get hrDesc => 'Description';
+
+  @override
+  String get hrSave => 'Enregistrer';
+
+  @override
+  String get hrSaveFailed =>
+      'Échec de l\'enregistrement. Vérifiez votre connexion.';
+
+  @override
+  String get hrDeleted => 'Dossier supprimé';
+
+  @override
+  String get hrDeleteTitle => 'Supprimer le dossier ?';
+
+  @override
   String get legalRemind => 'Rappeler';
 
   @override

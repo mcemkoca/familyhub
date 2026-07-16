@@ -3069,6 +3069,58 @@ class AppLocalizationsNl extends AppLocalizations {
   String get vaccMarkUndone => 'Markering verwijderen';
 
   @override
+  String get hrTitle => 'Gezondheidsdossiers';
+
+  @override
+  String get hrAdd => 'Dossier toevoegen';
+
+  @override
+  String get hrAll => 'Alle';
+
+  @override
+  String get hrEmpty =>
+      'Nog geen gezondheidsdossiers. Tik op + om het eerste toe te voegen.';
+
+  @override
+  String get hrError => 'Dossiers konden niet geladen worden.';
+
+  @override
+  String get hrNewRecord => 'Nieuw gezondheidsdossier';
+
+  @override
+  String get hrRecTitle => 'Titel';
+
+  @override
+  String get hrType => 'Type dossier';
+
+  @override
+  String get hrMember => 'Voor wie?';
+
+  @override
+  String get hrSelf => 'Mezelf';
+
+  @override
+  String get hrDoctor => 'Arts';
+
+  @override
+  String get hrInstitution => 'Instelling';
+
+  @override
+  String get hrDesc => 'Beschrijving';
+
+  @override
+  String get hrSave => 'Opslaan';
+
+  @override
+  String get hrSaveFailed => 'Opslaan mislukt. Controleer je verbinding.';
+
+  @override
+  String get hrDeleted => 'Dossier verwijderd';
+
+  @override
+  String get hrDeleteTitle => 'Dossier verwijderen?';
+
+  @override
   String get legalRemind => 'Herinner';
 
   @override
