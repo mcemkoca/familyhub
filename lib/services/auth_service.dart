@@ -21,24 +21,31 @@ class AuthService {
   static SupabaseClient? get client => SupabaseConfig.safeClient;
 
   static String get _languageCode {
-    final savedLanguage = HiveService.getSetting('language');
-    final useDevice = HiveService.getBoolSetting(
-      'useDeviceLanguage',
-      defaultValue: false,
-    );
-    if (useDevice || savedLanguage == null || savedLanguage.isEmpty) {
-      for (final locale in WidgetsBinding.instance.platformDispatcher.locales) {
-        if (const {'tr', 'en', 'nl', 'fr'}.contains(locale.languageCode)) {
-          return locale.languageCode;
+    // Hata mesajı üretimi Hive/binding hazır olmadan çağrılabilir (ör. testte
+    // veya erken başlatmada); dil çözümü asla çökmemeli → güvenli 'tr' fallback.
+    try {
+      final savedLanguage = HiveService.getSetting('language');
+      final useDevice = HiveService.getBoolSetting(
+        'useDeviceLanguage',
+        defaultValue: false,
+      );
+      if (useDevice || savedLanguage == null || savedLanguage.isEmpty) {
+        for (final locale
+            in WidgetsBinding.instance.platformDispatcher.locales) {
+          if (const {'tr', 'en', 'nl', 'fr'}.contains(locale.languageCode)) {
+            return locale.languageCode;
+          }
         }
       }
+      return switch (savedLanguage) {
+        'English' => 'en',
+        'Nederlands' => 'nl',
+        'Français' => 'fr',
+        _ => 'tr',
+      };
+    } catch (_) {
+      return 'tr';
     }
-    return switch (savedLanguage) {
-      'English' => 'en',
-      'Nederlands' => 'nl',
-      'Français' => 'fr',
-      _ => 'tr',
-    };
   }
 
   static String _text(Map<String, String> values) =>
