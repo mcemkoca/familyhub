@@ -22,9 +22,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          # Flutter uygulaması: Dart CodeQL'de desteklenmiyor. Android sarmalayıcı
+          # Kotlin/Java içeriği build-mode:none ile taranır (autobuild Flutter
+          # toolchain'i olmadan Gradle'ı build edemez → configuration error).
+          # Ruby matrisi kaldırıldı: repoda hiç Ruby yok.
           - language: java-kotlin
-            build-mode: autobuild
-          - language: ruby
             build-mode: none
 
     steps:
