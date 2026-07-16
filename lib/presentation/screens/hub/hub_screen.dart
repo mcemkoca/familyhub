@@ -75,8 +75,6 @@ String hubFeatureLabel(BuildContext context, String key) {
       return l.hubLegal;
     case 'intelligence':
       return l.hubIntelligence;
-    case 'familyhubai':
-      return l.hubFamilyHubAI;
     default:
       return key;
   }
@@ -224,19 +222,14 @@ class _HubScreenState extends ConsumerState<HubScreen>
       Color(0xFF064E3B),
       AppRoutes.legalBenefits,
     ),
+    // Tek AI merkezi: Aile Zekâsı. Eski "FamilyHub AI" tile'ı kaldırıldı
+    // (spec §4.3); /familyhub-ai route'u artık buraya yönlendiriyor.
     const _Feature(
       Icons.auto_awesome_mosaic_rounded,
       'intelligence',
       [Color(0xFF8B5CF6), Color(0xFF6366F1)],
       Color(0xFF3730A3),
       AppRoutes.familyIntelligence,
-    ),
-    const _Feature(
-      Icons.smart_toy_rounded,
-      'familyhubai',
-      [Color(0xFFEC4899), Color(0xFF8B5CF6)],
-      Color(0xFF831843),
-      AppRoutes.familyHubAI,
     ),
   ];
 
