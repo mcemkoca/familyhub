@@ -3063,6 +3063,29 @@ class AppLocalizationsTr extends AppLocalizations {
   String get legalRegionOther => 'Diğer';
 
   @override
+  String get vaccTitle => 'Aşı Takvimi';
+
+  @override
+  String get vaccSubtitle =>
+      'Kişiye göre aşı takvimini seçin. Kaynak: resmî aşı programı.';
+
+  @override
+  String get vaccEmpty => 'Bu ülke için aşı takvimi bulunamadı.';
+
+  @override
+  String get vaccSources => 'Resmî kaynaklar';
+
+  @override
+  String get vaccDisclaimer =>
+      'Bu bilgi geneldir; tıbbi tavsiye değildir. Kesin tarih, doz ve uygunluk için resmî aşı kaydınıza (Vaccinnet/ONE) ve hekiminize başvurun.';
+
+  @override
+  String get vaccMarkDone => 'Yapıldı olarak işaretle';
+
+  @override
+  String get vaccMarkUndone => 'Yapıldı işaretini kaldır';
+
+  @override
   String get legalRemind => 'Hatırlat';
 
   @override

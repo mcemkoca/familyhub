@@ -3046,6 +3046,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String get legalRegionOther => 'Other';
 
   @override
+  String get vaccTitle => 'Vaccination Schedule';
+
+  @override
+  String get vaccSubtitle =>
+      'Choose the vaccination schedule per person. Source: official vaccination programme.';
+
+  @override
+  String get vaccEmpty => 'No vaccination schedule found for this country.';
+
+  @override
+  String get vaccSources => 'Official sources';
+
+  @override
+  String get vaccDisclaimer =>
+      'This information is general and not medical advice. Check your official vaccination record (Vaccinnet/ONE) and your doctor for exact dates, doses and eligibility.';
+
+  @override
+  String get vaccMarkDone => 'Mark as done';
+
+  @override
+  String get vaccMarkUndone => 'Remove done mark';
+
+  @override
   String get legalRemind => 'Remind';
 
   @override

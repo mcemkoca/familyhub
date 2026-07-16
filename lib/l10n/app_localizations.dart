@@ -5912,6 +5912,48 @@ abstract class AppLocalizations {
   /// **'Diğer'**
   String get legalRegionOther;
 
+  /// No description provided for @vaccTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aşı Takvimi'**
+  String get vaccTitle;
+
+  /// No description provided for @vaccSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kişiye göre aşı takvimini seçin. Kaynak: resmî aşı programı.'**
+  String get vaccSubtitle;
+
+  /// No description provided for @vaccEmpty.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu ülke için aşı takvimi bulunamadı.'**
+  String get vaccEmpty;
+
+  /// No description provided for @vaccSources.
+  ///
+  /// In tr, this message translates to:
+  /// **'Resmî kaynaklar'**
+  String get vaccSources;
+
+  /// No description provided for @vaccDisclaimer.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu bilgi geneldir; tıbbi tavsiye değildir. Kesin tarih, doz ve uygunluk için resmî aşı kaydınıza (Vaccinnet/ONE) ve hekiminize başvurun.'**
+  String get vaccDisclaimer;
+
+  /// No description provided for @vaccMarkDone.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yapıldı olarak işaretle'**
+  String get vaccMarkDone;
+
+  /// No description provided for @vaccMarkUndone.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yapıldı işaretini kaldır'**
+  String get vaccMarkUndone;
+
   /// No description provided for @legalRemind.
   ///
   /// In tr, this message translates to:

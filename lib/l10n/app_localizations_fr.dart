@@ -3058,6 +3058,29 @@ class AppLocalizationsFr extends AppLocalizations {
   String get legalRegionOther => 'Autre';
 
   @override
+  String get vaccTitle => 'Calendrier vaccinal';
+
+  @override
+  String get vaccSubtitle =>
+      'Choisissez le calendrier vaccinal par personne. Source : programme vaccinal officiel.';
+
+  @override
+  String get vaccEmpty => 'Aucun calendrier vaccinal trouvé pour ce pays.';
+
+  @override
+  String get vaccSources => 'Sources officielles';
+
+  @override
+  String get vaccDisclaimer =>
+      'Ces informations sont générales et ne constituent pas un avis médical. Consultez votre dossier vaccinal officiel (Vaccinnet/ONE) et votre médecin pour les dates, doses et l\'éligibilité exactes.';
+
+  @override
+  String get vaccMarkDone => 'Marquer comme fait';
+
+  @override
+  String get vaccMarkUndone => 'Retirer la marque';
+
+  @override
   String get legalRemind => 'Rappeler';
 
   @override

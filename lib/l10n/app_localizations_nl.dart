@@ -3046,6 +3046,29 @@ class AppLocalizationsNl extends AppLocalizations {
   String get legalRegionOther => 'Overig';
 
   @override
+  String get vaccTitle => 'Vaccinatieschema';
+
+  @override
+  String get vaccSubtitle =>
+      'Kies het vaccinatieschema per persoon. Bron: officieel vaccinatieprogramma.';
+
+  @override
+  String get vaccEmpty => 'Geen vaccinatieschema gevonden voor dit land.';
+
+  @override
+  String get vaccSources => 'Officiële bronnen';
+
+  @override
+  String get vaccDisclaimer =>
+      'Deze informatie is algemeen en geen medisch advies. Raadpleeg je officiële vaccinatiedossier (Vaccinnet/ONE) en je arts voor exacte data, dosissen en geschiktheid.';
+
+  @override
+  String get vaccMarkDone => 'Als gedaan markeren';
+
+  @override
+  String get vaccMarkUndone => 'Markering verwijderen';
+
+  @override
   String get legalRemind => 'Herinner';
 
   @override

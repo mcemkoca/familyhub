@@ -134,6 +134,7 @@ flutter:
     - assets/data/suggestions/digital_balance.json
     - assets/data/legal/be.json
     - assets/data/daily_suggestions.json
+    - assets/data/health/vaccinations_be.json
     - assets/images/google_logo.svg
     # Icons
     - assets/icons/
