@@ -107,10 +107,11 @@ class HealthStore {
   /// Haftalık AI (internet) sağlık ipuçları havuzundan bugünün ipucunu döner.
   /// Gemini/çevrimdışı başarısızsa yerel [dailyTip] havuzuna düşer.
   static Future<String> aiDailyTip() async {
-    final list = await AiContentService.weeklyList(
+    // GÜNLÜK öneri → dailyList (haftalık cache "hiç yenilenmiyor" sorununu çözer).
+    final list = await AiContentService.dailyList(
       topic: 'health_tips',
       prompt:
-          'Belçika\'da yaşayan bir aile için bu haftaya özel 7 kısa, güncel ve '
+          'Belçika\'da yaşayan bir aile için BUGÜNE özel 5 kısa, güncel ve '
           'uygulanabilir sağlık ipucu üret. Beslenme, hareket, uyku, stres ve '
           'mevsimsel sağlık konularını kapsasın. Sadece JSON döndür: '
           '{"items":[{"tip":"..."}]}. Her ipucu tek cümle, Türkçe, başına uygun '

@@ -84,12 +84,14 @@ class AiContentService {
     }
 
     try {
+      // Üst-sınır timeout: AIEngine çoklu-sağlayıcı + retry ile uzayabilir;
+      // bu olmadan ekran "yenileniyor"da takılı kalır. Aşınca fallback döner.
       final res = await AIEngine.generate(
         prompt: prompt,
         format: AIResponseFormat.json,
         maxTokens: maxTokens,
         temperature: 0.7,
-      );
+      ).timeout(const Duration(seconds: 18));
       final parsed = _parseList(res.content, listKey);
       if (parsed.isNotEmpty) {
         await HiveService.setSetting(cacheKey, jsonEncode({listKey: parsed}));
