@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../child/child_development_screen.dart' show childDevProvider;
+import '../../providers/child_context_provider.dart';
 import 'health_store.dart';
 
 /// Ekran 4 — Çocuk Sağlığı (büyüme, aşı, kontroller).
@@ -16,9 +17,15 @@ class _CocukSaglikScreenState extends ConsumerState<CocukSaglikScreen> {
   @override
   Widget build(BuildContext context) {
     final children = ref.watch(childDevProvider);
-    final name = children.isNotEmpty ? children.first.name : 'Çocuk';
-    final ageLabel = children.isNotEmpty ? children.first.ageLabel : '';
-    final childId = children.isNotEmpty ? children.first.id : 'default';
+    // Aktif çocuğu merkezi context'ten seç (ilk çocuk yerine paylaşımlı seçim).
+    final activeId = ref.watch(activeChildIdProvider);
+    final active = children.isEmpty
+        ? null
+        : children.firstWhere((c) => c.id == activeId,
+            orElse: () => children.first);
+    final name = active?.name ?? 'Çocuk';
+    final ageLabel = active?.ageLabel ?? '';
+    final childId = active?.id ?? 'default';
     final g = HealthStore.childGrowth(childId);
 
     return Scaffold(
