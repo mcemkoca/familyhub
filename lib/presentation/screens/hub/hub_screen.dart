@@ -21,7 +21,6 @@ import '../../../components/hub/ai_suggestions_widget.dart';
 import '../../../components/hub/hub_ai_panel.dart';
 import '../../../components/hub/daily_briefing_card.dart';
 import '../../../components/hub/smart_insights_card.dart';
-import '../../../components/hub/legal_benefits_card.dart';
 import '../../../components/hub/family_mood_strip.dart';
 import '../../../services/location_tracking_service.dart';
 
@@ -535,8 +534,9 @@ class _HubScreenState extends ConsumerState<HubScreen>
                     // ── Ailenin ruh hali (mood_entries — gerçek, realtime) ──────
                     const SliverToBoxAdapter(child: FamilyMoodStrip()),
 
-                    // ── Yasal Haklar & Avantajlar (ülkeye göre, AI/realtime) ─────
-                    const SliverToBoxAdapter(child: LegalBenefitsCard()),
+                    // Yasal Haklar artık home'u dolduran büyük kart DEĞİL (spec §17);
+                    // "Yasal Haklar" bölümüne hızlı erişim ızgarasındaki tile'dan
+                    // ulaşılır (bağımsız ana bölüm).
 
                     // ── Quick access grid (butonlar hemen gorunsun) ──────────────
                     SliverToBoxAdapter(
