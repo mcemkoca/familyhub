@@ -6,6 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:hive_flutter/hive_flutter.dart';
 import '../../domain/entities.dart';
 import '../../repositories/hub_repository.dart';
+import '../../repositories/family_streak_repository.dart';
+import '../../repositories/child_streak_repository.dart' show StreakStats;
 import '../../repositories/shopping_repository.dart';
 import '../../repositories/calendar_repository.dart';
 import '../../repositories/budget_repository.dart';
@@ -75,6 +77,21 @@ final familyIdProvider = FutureProvider<String?>((ref) async {
   }
 
   return null;
+});
+
+/// Aile geneli streak istatistikleri (gerçek `tasks` verisinden hesaplanır).
+final familyStreakProvider = FutureProvider<StreakStats>((ref) async {
+  final familyId = await ref.watch(familyIdProvider.future);
+  if (familyId == null || familyId.isEmpty) {
+    return const StreakStats(
+      currentStreak: 0,
+      bestStreak: 0,
+      totalCompleted: 0,
+      weeklyView: {},
+      lastCompleted: null,
+    );
+  }
+  return FamilyStreakRepository().getStreakStats(familyId);
 });
 
 final onboardingCompletedProvider = StateProvider<bool>((ref) => false);

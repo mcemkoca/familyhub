@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
 import '../core/utils/repository_mixin.dart';
+import '../core/streak_calculator.dart';
 import '../domain/entities.dart';
 
 class ChildStreakRepository with RepositoryErrorHandler {
@@ -117,68 +118,14 @@ class ChildStreakRepository with RepositoryErrorHandler {
     );
   }
 
-  int _calculateCurrentStreak(List<DateTime> dates) {
-    if (dates.isEmpty) return 0;
+  // Streak hesaplama artık paylaşılan saf util'de (core/streak_calculator.dart).
+  int _calculateCurrentStreak(List<DateTime> dates) =>
+      calculateCurrentStreak(dates);
 
-    final today = DateTime.now();
-    final todayDate = DateTime(today.year, today.month, today.day);
+  int _calculateBestStreak(List<DateTime> dates) => calculateBestStreak(dates);
 
-    int streak = 0;
-    DateTime expectedDate = todayDate;
-
-    for (final date in dates) {
-      if (date == expectedDate ||
-          date == expectedDate.subtract(const Duration(days: 1))) {
-        streak++;
-        expectedDate = date.subtract(const Duration(days: 1));
-      } else if (date.isBefore(
-        expectedDate.subtract(const Duration(days: 1)),
-      )) {
-        break;
-      }
-    }
-
-    return streak;
-  }
-
-  int _calculateBestStreak(List<DateTime> dates) {
-    if (dates.isEmpty) return 0;
-
-    dates.sort((a, b) => a.compareTo(b)); // Eski → Yeni
-
-    int best = 0;
-    int current = 1;
-
-    for (int i = 1; i < dates.length; i++) {
-      final diff = dates[i].difference(dates[i - 1]).inDays;
-      if (diff == 1) {
-        current++;
-      } else if (diff > 1) {
-        best = current > best ? current : best;
-        current = 1;
-      }
-    }
-
-    return current > best ? current : best;
-  }
-
-  Map<int, bool> _buildWeeklyView(List<DateTime> dates) {
-    // 1=Mon, 7=Sun
-    final now = DateTime.now();
-    final result = <int, bool>{};
-
-    // Bu haftanın başlangıcı (Pazartesi)
-    final monday = now.subtract(Duration(days: now.weekday - 1));
-
-    for (int i = 0; i < 7; i++) {
-      final day = DateTime(monday.year, monday.month, monday.day + i);
-      result[day.weekday] = dates.any(
-        (d) => d.year == day.year && d.month == day.month && d.day == day.day,
-      );
-    }
-
-    return result;
-  }
+  Map<int, bool> _buildWeeklyView(List<DateTime> dates) =>
+      buildWeeklyView(dates);
 }
 
 class StreakStats {

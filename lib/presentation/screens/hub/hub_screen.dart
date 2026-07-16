@@ -1506,6 +1506,10 @@ class _StatStrip extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tasksAsync = ref.watch(myTasksProvider);
     final taskCount = tasksAsync.valueOrNull?.length ?? 0;
+    // Gerçek aile streak'i (tasks tamamlanma tarihlerinden). Sahte '7' kaldırıldı.
+    final streak = ref.watch(familyStreakProvider).valueOrNull?.currentStreak;
+    // Çevrim içi üye sayısı gerçek presence verisi olmadan gösterilmiyor
+    // (sahte sabit yerine görünmez). Presence eklenince buraya bağlanacak.
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 10, 12, 0),
@@ -1517,14 +1521,8 @@ class _StatStrip extends ConsumerWidget {
           ),
           const SizedBox(width: 8),
           _StatCard(
-            value: '🔥 7',
+            value: streak == null ? '🔥 –' : '🔥 $streak',
             label: AppLocalizations.of(context).hbDayStreak,
-          ),
-          const SizedBox(width: 8),
-          _StatCard(
-            value: '3',
-            label: AppLocalizations.of(context).hbOnline,
-            accent: const Color(0xFF22C55E),
           ),
         ],
       ),
@@ -1535,8 +1533,7 @@ class _StatStrip extends ConsumerWidget {
 class _StatCard extends StatelessWidget {
   final String value;
   final String label;
-  final Color? accent;
-  const _StatCard({required this.value, required this.label, this.accent});
+  const _StatCard({required this.value, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -1553,10 +1550,10 @@ class _StatCard extends StatelessWidget {
           children: [
             Text(
               value,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w800,
-                color: accent ?? Colors.white,
+                color: Colors.white,
               ),
             ),
             const SizedBox(height: 2),
