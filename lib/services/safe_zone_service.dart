@@ -5,10 +5,15 @@ import '../core/supabase_client.dart';
 import '../domain/models/safety_models.dart';
 import 'auth_service.dart';
 import 'hive_service.dart';
+import 'localization/locale_service.dart';
 
 /// Safe zone (geofence) management with distance-based checks.
 /// Buluttan senkronlanır; oturum/aile yoksa yerel (Hive) olarak saklanır.
 class SafeZoneService {
+  static String get _defaultZoneName {
+    final lang = LocaleService.resolveInitialLocale().languageCode;
+    return const {'tr': 'Bölge', 'en': 'Zone', 'nl': 'Zone', 'fr': 'Zone'}[lang] ?? 'Bölge';
+  }
   static List<SafeZone> _zones = [];
   static bool _initialized = false;
 
@@ -31,7 +36,7 @@ class SafeZoneService {
         final r = e as Map<String, dynamic>;
         return SafeZone(
           id: r['id'] as String? ?? '',
-          name: r['name'] as String? ?? 'Bölge',
+          name: r['name'] as String? ?? _defaultZoneName,
           type: _parseType(r['type'] as String?),
           latitude: (r['latitude'] as num?)?.toDouble() ?? 0.0,
           longitude: (r['longitude'] as num?)?.toDouble() ?? 0.0,
@@ -71,7 +76,7 @@ class SafeZoneService {
         final r = row as Map<String, dynamic>;
         return SafeZone(
           id: r['id'] as String? ?? '',
-          name: r['name'] as String? ?? 'Bölge',
+          name: r['name'] as String? ?? _defaultZoneName,
           type: _parseType(r['type'] as String?),
           latitude: (r['latitude'] as num?)?.toDouble() ?? 0.0,
           longitude: (r['longitude'] as num?)?.toDouble() ?? 0.0,

@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../core/analytics/analytics_service.dart';
+import '../localization/locale_service.dart';
 
 class SocialSharing {
+  static String _text(Map<String, String> values) { final lang = LocaleService.resolveInitialLocale().languageCode; return values[lang] ?? values['tr']!; }
   static Future<void> shareText(String text, {String? subject}) async {
     await SharePlus.instance.share(
       ShareParams(text: text, subject: subject),
@@ -14,12 +16,12 @@ class SocialSharing {
   }
 
   static Future<void> shareAchievement(String achievement, String userName) async {
-    final text = '''
-🏆 $userName FamilyHub'da "$achievement" başarımını kazandı!
-
-Ailenizi organize etmek için siz de katılın:
-https://familyhub.app/join
-''';
+    final text = _text({
+      'tr': '🏆 $userName, FamilyHub’da “$achievement” başarımını kazandı!\n\nAilenizi organize etmek için siz de katılın:\nhttps://familyhub.app/join',
+      'en': '🏆 $userName earned the “$achievement” achievement on FamilyHub!\n\nJoin to organize your family:\nhttps://familyhub.app/join',
+      'nl': '🏆 $userName heeft de prestatie ‘$achievement’ behaald op FamilyHub!\n\nDoe mee om je gezin te organiseren:\nhttps://familyhub.app/join',
+      'fr': '🏆 $userName a obtenu le succès « $achievement » sur FamilyHub !\n\nRejoignez-nous pour organiser votre famille :\nhttps://familyhub.app/join',
+    });
     await SharePlus.instance.share(ShareParams(text: text));
 
     AnalyticsService.track('share_achievement', properties: {
@@ -44,7 +46,7 @@ https://familyhub.app/join
       ShareParams(
         files: [XFile.fromData(bytes, mimeType: 'image/png', name: 'event_card.png')],
         text: '$title - $date #FamilyHub',
-        subject: 'Aile etkinliği',
+        subject: _text(const {'tr': 'Aile etkinliği', 'en': 'Family event', 'nl': 'Gezinsactiviteit', 'fr': 'Événement familial'}),
       ),
     );
 

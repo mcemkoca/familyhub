@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:record/record.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'localization/locale_service.dart';
 
 class VoiceMessageService {
   static final AudioRecorder _recorder = AudioRecorder();
@@ -25,7 +26,13 @@ class VoiceMessageService {
 
     final hasPermission = await _requestPermission();
     if (!hasPermission) {
-      throw Exception('Mikrofon izni gerekiyor');
+      final lang = LocaleService.resolveInitialLocale().languageCode;
+      throw Exception(const {
+        'tr': 'Mikrofon izni gerekiyor',
+        'en': 'Microphone permission is required',
+        'nl': 'Microfoontoestemming is vereist',
+        'fr': 'L’autorisation du microphone est requise',
+      }[lang] ?? 'Mikrofon izni gerekiyor');
     }
 
     final dir = await getTemporaryDirectory();

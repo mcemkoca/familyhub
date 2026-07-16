@@ -3,8 +3,14 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/errors.dart';
 import '../core/supabase_client.dart';
 import '../domain/models/profile_model.dart';
+import 'localization/locale_service.dart';
 
 class ProfileService {
+  static String _text(Map<String, String> values) {
+    final lang = LocaleService.resolveInitialLocale().languageCode;
+    return values[lang] ?? values['tr']!;
+  }
+  static String get _notSignedIn => _text(const {'tr': 'Oturum açık değil', 'en': 'You are not signed in', 'nl': 'Je bent niet ingelogd', 'fr': 'Vous n’êtes pas connecté'});
   final SupabaseClient _supabase;
   final Box<dynamic> _userBox;
 
@@ -13,7 +19,7 @@ class ProfileService {
   /// Factory: mevcut Supabase client ve Hive userBox ile instance oluşturur.
   static Future<ProfileService> create() async {
     final client = SupabaseConfig.safeClient;
-    if (client == null) throw Exception('Supabase bağlantısı yok');
+    if (client == null) throw Exception(_text(const {'tr': 'Sunucu bağlantısı kurulamadı', 'en': 'Could not connect to the server', 'nl': 'Kan geen verbinding maken met de server', 'fr': 'Impossible de se connecter au serveur'}));
     final box = await Hive.openBox<dynamic>('userBox');
     return ProfileService(client, box);
   }
@@ -34,7 +40,7 @@ class ProfileService {
 
     // 2. Supabase sorgusu
     final userId = _supabase.auth.currentUser?.id;
-    if (userId == null) throw AppAuthException('Oturum açık değil');
+    if (userId == null) throw AppAuthException(_notSignedIn);
 
     final profileResponse = await _supabase
         .from('profiles')
@@ -46,7 +52,7 @@ class ProfileService {
         .maybeSingle();
 
     if (profileResponse == null) {
-      throw AppAuthException('Profil bulunamadı');
+      throw AppAuthException(_text(const {'tr': 'Profil bulunamadı', 'en': 'Profile not found', 'nl': 'Profiel niet gevonden', 'fr': 'Profil introuvable'}));
     }
 
     // family_id ve role family_members üzerinden çek (profiles'ta olmayabilir)
@@ -84,7 +90,7 @@ class ProfileService {
 
   Future<void> updateProfile({String? fullName, String? avatarUrl}) async {
     final userId = _supabase.auth.currentUser?.id;
-    if (userId == null) throw AppAuthException('Oturum açık değil');
+    if (userId == null) throw AppAuthException(_notSignedIn);
 
     final updates = <String, dynamic>{
       'updated_at': DateTime.now().toIso8601String(),

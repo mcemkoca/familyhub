@@ -5,6 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
 import '../domain/models/family_info.dart';
 import '../domain/models/family_member_model.dart';
+import 'localization/locale_service.dart';
 
 class FamilyService {
   final SupabaseClient _supabase;
@@ -12,9 +13,19 @@ class FamilyService {
 
   FamilyService(this._supabase, this._membersBox);
 
+  static String _text(Map<String, String> values) {
+    final language = LocaleService.resolveInitialLocale().languageCode;
+    return values[language] ?? values['tr']!;
+  }
+
   static Future<FamilyService> create() async {
     final client = SupabaseConfig.safeClient;
-    if (client == null) throw Exception('Supabase bağlantısı yok');
+    if (client == null) {
+      throw Exception(_text(const {
+        'tr': 'Sunucu bağlantısı kurulamadı', 'en': 'Could not connect to the server',
+        'nl': 'Kan geen verbinding maken met de server', 'fr': 'Impossible de se connecter au serveur',
+      }));
+    }
     final box = await Hive.openBox<dynamic>('membersBox');
     return FamilyService(client, box);
   }
@@ -85,7 +96,12 @@ class FamilyService {
   }) async {
     // PIN 4 haneli, sadece rakam kontrolü
     if (!RegExp(r'^\d{4}\$').hasMatch(pin)) {
-      throw const FormatException('PIN 4 haneli rakam olmalı');
+      throw FormatException(_text(const {
+        'tr': 'PIN 4 haneli bir sayı olmalı',
+        'en': 'The PIN must be a 4-digit number',
+        'nl': 'De pincode moet uit 4 cijfers bestaan',
+        'fr': 'Le code PIN doit comporter 4 chiffres',
+      }));
     }
 
     await _supabase.from('child_accounts').insert({

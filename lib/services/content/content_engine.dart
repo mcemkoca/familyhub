@@ -170,7 +170,8 @@ class ContentEngine {
     return recipes[index];
   }
 
-  Recipe? dailyRecipeLocalized({String language = 'tr'}) {
+  Recipe? dailyRecipeLocalized({String? language}) {
+    language ??= LocaleService.resolveInitialLocale().languageCode;
     final localized = _mealPlanning?.localized(language);
     final recipes = localized?['recipes'];
     if (recipes is! List || recipes.isEmpty) return dailyRecipe;
@@ -198,7 +199,8 @@ class ContentEngine {
     return template[dayName];
   }
 
-  DailyMeals? todayMealsLocalized({String language = 'tr'}) {
+  DailyMeals? todayMealsLocalized({String? language}) {
+    language ??= LocaleService.resolveInitialLocale().languageCode;
     final localized = _mealPlanning?.localized(language);
     final template = localized?['weekly_template'];
     if (template is! Map) return todayMeals;
@@ -219,7 +221,8 @@ class ContentEngine {
 
   /// Returns this week's localized activity for an age group.
   /// The same family receives a stable result throughout the ISO week.
-  Activity? getWeeklyActivity(String ageGroup, {String language = 'tr'}) {
+  Activity? getWeeklyActivity(String ageGroup, {String? language}) {
+    language ??= LocaleService.resolveInitialLocale().languageCode;
     final data = _childDev;
     final templates = data?.weeklyActivityCatalog[ageGroup];
     final variants = data?.weeklyActivityVariants;
@@ -250,7 +253,8 @@ class ContentEngine {
   }
 
   /// Backwards-compatible API; now rotates weekly instead of daily.
-  Activity? getRandomActivity(String ageGroup, {String language = 'tr'}) {
+  Activity? getRandomActivity(String ageGroup, {String? language}) {
+    language ??= LocaleService.resolveInitialLocale().languageCode;
     final weekly = getWeeklyActivity(ageGroup, language: language);
     if (weekly != null) return weekly;
     final group = _childDev?.ageGroups[ageGroup];
@@ -289,14 +293,15 @@ class ContentEngine {
   }
 
   String _ageGroupDisplayName(String key) {
-    return switch (key) {
-      '0_12_months' => '0-12 Ay',
-      '1_2_years' => '1-2 Yaş',
-      '3_5_years' => '3-5 Yaş',
-      '6_8_years' => '6-8 Yaş',
-      '9_12_years' => '9-12 Yaş',
-      _ => key,
+    final language = LocaleService.resolveInitialLocale().languageCode;
+    final labels = <String, Map<String, String>>{
+      '0_12_months': {'tr': '0-12 Ay', 'en': '0–12 Months', 'nl': '0–12 maanden', 'fr': '0–12 mois'},
+      '1_2_years': {'tr': '1-2 Yaş', 'en': '1–2 Years', 'nl': '1–2 jaar', 'fr': '1–2 ans'},
+      '3_5_years': {'tr': '3-5 Yaş', 'en': '3–5 Years', 'nl': '3–5 jaar', 'fr': '3–5 ans'},
+      '6_8_years': {'tr': '6-8 Yaş', 'en': '6–8 Years', 'nl': '6–8 jaar', 'fr': '6–8 ans'},
+      '9_12_years': {'tr': '9-12 Yaş', 'en': '9–12 Years', 'nl': '9–12 jaar', 'fr': '9–12 ans'},
     };
+    return labels[key]?[language] ?? labels[key]?['tr'] ?? key;
   }
 
   /// Returns today's household tip.
@@ -338,7 +343,8 @@ class ContentEngine {
     return schedule[dayName];
   }
 
-  String? todayCleaningTaskLocalized({String language = 'tr'}) {
+  String? todayCleaningTaskLocalized({String? language}) {
+    language ??= LocaleService.resolveInitialLocale().languageCode;
     final localized = _household?.localized(language);
     final schedule = localized?['weekly_schedule'];
     if (schedule is! Map) return todayCleaningTask;
@@ -364,7 +370,8 @@ class ContentEngine {
   }
 
   /// Returns one stable, localized planning task for the current ISO week.
-  Map<String, dynamic>? getWeeklyFuturePlanningItem({String language = 'tr'}) {
+  Map<String, dynamic>? getWeeklyFuturePlanningItem({String? language}) {
+    language ??= LocaleService.resolveInitialLocale().languageCode;
     final localized = _futurePlanning?.localized(language);
     final items = localized?['weekly_planning_catalog'];
     if (items is! List || items.isEmpty) return null;

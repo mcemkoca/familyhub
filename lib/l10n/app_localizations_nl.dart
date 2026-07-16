@@ -3049,6 +3049,33 @@ class AppLocalizationsNl extends AppLocalizations {
   String get legalRemind => 'Herinner';
 
   @override
+  String get legalArtDetails => 'Details bekijken';
+
+  @override
+  String get legalArtOverview => 'Overzicht';
+
+  @override
+  String get legalArtWhoCanApply => 'Wie kan aanvragen?';
+
+  @override
+  String get legalArtConditions => 'Voorwaarden';
+
+  @override
+  String get legalArtBenefits => 'Voordelen';
+
+  @override
+  String get legalArtSteps => 'Aanvraagstappen';
+
+  @override
+  String get legalArtDocuments => 'Nodige documenten';
+
+  @override
+  String get legalArtWarnings => 'Belangrijke waarschuwingen';
+
+  @override
+  String get legalArtSources => 'Officiële bronnen';
+
+  @override
   String get kitchenTitle => 'Gezinskeuken';
 
   @override

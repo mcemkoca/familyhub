@@ -5918,6 +5918,60 @@ abstract class AppLocalizations {
   /// **'Hatırlat'**
   String get legalRemind;
 
+  /// No description provided for @legalArtDetails.
+  ///
+  /// In tr, this message translates to:
+  /// **'Detayları gör'**
+  String get legalArtDetails;
+
+  /// No description provided for @legalArtOverview.
+  ///
+  /// In tr, this message translates to:
+  /// **'Genel bakış'**
+  String get legalArtOverview;
+
+  /// No description provided for @legalArtWhoCanApply.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kimler başvurabilir?'**
+  String get legalArtWhoCanApply;
+
+  /// No description provided for @legalArtConditions.
+  ///
+  /// In tr, this message translates to:
+  /// **'Koşullar'**
+  String get legalArtConditions;
+
+  /// No description provided for @legalArtBenefits.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sağladığı avantajlar'**
+  String get legalArtBenefits;
+
+  /// No description provided for @legalArtSteps.
+  ///
+  /// In tr, this message translates to:
+  /// **'Başvuru adımları'**
+  String get legalArtSteps;
+
+  /// No description provided for @legalArtDocuments.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gerekli belgeler'**
+  String get legalArtDocuments;
+
+  /// No description provided for @legalArtWarnings.
+  ///
+  /// In tr, this message translates to:
+  /// **'Önemli uyarılar'**
+  String get legalArtWarnings;
+
+  /// No description provided for @legalArtSources.
+  ///
+  /// In tr, this message translates to:
+  /// **'Resmî kaynaklar'**
+  String get legalArtSources;
+
   /// No description provided for @kitchenTitle.
   ///
   /// In tr, this message translates to:

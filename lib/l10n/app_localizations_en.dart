@@ -3049,6 +3049,33 @@ class AppLocalizationsEn extends AppLocalizations {
   String get legalRemind => 'Remind';
 
   @override
+  String get legalArtDetails => 'View details';
+
+  @override
+  String get legalArtOverview => 'Overview';
+
+  @override
+  String get legalArtWhoCanApply => 'Who can apply?';
+
+  @override
+  String get legalArtConditions => 'Conditions';
+
+  @override
+  String get legalArtBenefits => 'Benefits';
+
+  @override
+  String get legalArtSteps => 'Application steps';
+
+  @override
+  String get legalArtDocuments => 'Required documents';
+
+  @override
+  String get legalArtWarnings => 'Important warnings';
+
+  @override
+  String get legalArtSources => 'Official sources';
+
+  @override
   String get kitchenTitle => 'Family Kitchen';
 
   @override

@@ -5,6 +5,7 @@ import 'package:photo_manager/photo_manager.dart';
 import '../core/supabase_client.dart';
 import '../repositories/gallery_repository.dart';
 import 'hive_service.dart';
+import 'localization/locale_service.dart';
 
 /// Cihaz galerisini aile bulut galerisiyle (Supabase) senkronlar.
 ///
@@ -63,10 +64,21 @@ class GallerySyncService {
   /// aile galerisine (Supabase) yükler. Yüklenen adet döner.
   static Future<int> syncRecentPhotos({int limit = 30}) async {
     final hasPermission = await requestPermission();
-    if (!hasPermission) throw Exception('Galeri izni gerekli');
+    if (!hasPermission) {
+      final lang = LocaleService.resolveInitialLocale().languageCode;
+      throw Exception(const {
+        'tr': 'Galeri izni gerekli',
+        'en': 'Gallery permission is required',
+        'nl': 'Toestemming voor de galerij is vereist',
+        'fr': 'L’autorisation d’accès à la galerie est requise',
+      }[lang] ?? 'Galeri izni gerekli');
+    }
 
     final familyId = await _getFamilyId();
-    if (familyId == null) throw Exception('Aile bulunamadı');
+    if (familyId == null) {
+      final lang = LocaleService.resolveInitialLocale().languageCode;
+      throw Exception(const {'tr': 'Aile bulunamadı', 'en': 'Family not found', 'nl': 'Gezin niet gevonden', 'fr': 'Famille introuvable'}[lang] ?? 'Aile bulunamadı');
+    }
 
     final albums = await PhotoManager.getAssetPathList(
       type: RequestType.image,

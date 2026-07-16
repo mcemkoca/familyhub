@@ -2,19 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'weather_service.dart';
+import 'localization/locale_service.dart';
 
 class LocationWeatherService {
+  static String _text(Map<String, String> values) {
+    final lang = LocaleService.resolveInitialLocale().languageCode;
+    return values[lang] ?? values['tr']!;
+  }
   static Future<WeatherData> getCurrentLocationWeather({bool celsius = true}) async {
     // 1. Konum izni kontrolü
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        throw LocationException('Konum izni reddedildi');
+        throw LocationException(_text(const {'tr': 'Konum izni reddedildi', 'en': 'Location permission was denied', 'nl': 'Locatietoestemming is geweigerd', 'fr': 'L’autorisation de localisation a été refusée'}));
       }
     }
     if (permission == LocationPermission.deniedForever) {
-      throw LocationException('Konum izni kalıcı olarak reddedildi. Ayarlardan etkinleştirin.');
+      throw LocationException(_text(const {'tr': 'Konum izni kalıcı olarak reddedildi. Ayarlardan etkinleştirin.', 'en': 'Location permission was permanently denied. Enable it in Settings.', 'nl': 'Locatietoestemming is permanent geweigerd. Schakel deze in via Instellingen.', 'fr': 'L’autorisation de localisation a été définitivement refusée. Activez-la dans les réglages.'}));
     }
 
     // 2. GPS konum al — timeout'lu (emülatör/kapalı GPS'te sonsuz beklemeyi önler).
@@ -30,14 +35,14 @@ class LocationWeatherService {
     } catch (_) {
       final last = await Geolocator.getLastKnownPosition();
       if (last == null) {
-        throw LocationException('Konum alınamadı (GPS zaman aşımı)');
+        throw LocationException(_text(const {'tr': 'Konum alınamadı (GPS zaman aşımı)', 'en': 'Could not get the location (GPS timed out)', 'nl': 'De locatie kon niet worden bepaald (GPS-time-out)', 'fr': 'Impossible d’obtenir la position (délai GPS dépassé)'}));
       }
       position = last;
     }
 
     // 3. Reverse geocoding (şehir adı için)
     // ignore: unused_local_variable
-    String city = 'Bilinmiyor';
+    String city = _unknown;
     try {
       final placemarks = await placemarkFromCoordinates(
         position.latitude,
@@ -48,7 +53,7 @@ class LocationWeatherService {
         city = placemark.locality ??
             placemark.subAdministrativeArea ??
             placemark.administrativeArea ??
-            'Bilinmiyor';
+            _unknown;
       }
     } catch (e) {
       // Geocoding başarısız olursa sessizce devam et
@@ -70,11 +75,13 @@ class LocationWeatherService {
       if (placemarks.isNotEmpty) {
         return placemarks.first.locality ??
             placemarks.first.subAdministrativeArea ??
-            'Bilinmiyor';
+            _unknown;
       }
     } catch (e) { debugPrint('Location weather error: $e'); }
-    return 'Bilinmiyor';
+    return _unknown;
   }
+
+  static String get _unknown => _text(const {'tr': 'Bilinmiyor', 'en': 'Unknown', 'nl': 'Onbekend', 'fr': 'Inconnu'});
 }
 
 class LocationException implements Exception {

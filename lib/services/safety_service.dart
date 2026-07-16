@@ -5,12 +5,18 @@ import 'package:flutter/material.dart';
 import '../config/constants.dart';
 import '../domain/models/safety_models.dart';
 import 'child_auth_service.dart';
+import 'localization/locale_service.dart';
 
 /// Real-time family safety service backed by Supabase.
 /// Reads actual family members, their latest locations from `geolocations`,
 /// and active SOS alerts from `sos_alerts`.
 class SafetyService {
   SafetyService._();
+
+  static String _text(Map<String, String> values) {
+    final lang = LocaleService.resolveInitialLocale().languageCode;
+    return values[lang] ?? values['tr']!;
+  }
 
   static final _client = SupabaseConfig.client;
   static StreamSubscription<dynamic>? _sosSub;
@@ -82,7 +88,7 @@ class SafetyService {
       for (final p in (profiles as List).cast<Map<String, dynamic>>()) {
         members.add({
           'id': p['id'] as String,
-          'name': p['display_name'] as String? ?? 'Üye',
+          'name': p['display_name'] as String? ?? _text(const {'tr': 'Üye', 'en': 'Member', 'nl': 'Lid', 'fr': 'Membre'}),
           'type': 'parent',
           'color': null,
         });
@@ -90,7 +96,7 @@ class SafetyService {
       for (final c in (children as List).cast<Map<String, dynamic>>()) {
         members.add({
           'id': c['id'] as String,
-          'name': c['name'] as String? ?? 'Çocuk',
+          'name': c['name'] as String? ?? _text(const {'tr': 'Çocuk', 'en': 'Child', 'nl': 'Kind', 'fr': 'Enfant'}),
           'type': 'child',
           'color': c['color'] as int?,
         });
@@ -231,8 +237,8 @@ class SafetyService {
                 type: AlertType.panic,
                 severity: AlertSeverity.critical,
                 memberId: row['sender_id'] as String? ?? '',
-                memberName: row['sender_name'] as String? ?? 'Bilinmeyen',
-                message: row['message'] as String? ?? 'Acil durum!',
+                memberName: row['sender_name'] as String? ?? _text(const {'tr': 'Bilinmeyen', 'en': 'Unknown', 'nl': 'Onbekend', 'fr': 'Inconnu'}),
+                message: row['message'] as String? ?? _text(const {'tr': 'Acil durum!', 'en': 'Emergency!', 'nl': 'Noodgeval!', 'fr': 'Urgence !'}),
                 timestamp:
                     DateTime.tryParse(row['created_at']?.toString() ?? '') ??
                     DateTime.now(),
@@ -267,9 +273,9 @@ class SafetyService {
   }
 
   static String _signalFromAccuracy(double? accuracy) {
-    if (accuracy == null || accuracy > 100) return 'Zayıf';
-    if (accuracy > 50) return 'Orta';
-    return 'Güçlü';
+    if (accuracy == null || accuracy > 100) return _text(const {'tr': 'Zayıf', 'en': 'Weak', 'nl': 'Zwak', 'fr': 'Faible'});
+    if (accuracy > 50) return _text(const {'tr': 'Orta', 'en': 'Moderate', 'nl': 'Gemiddeld', 'fr': 'Moyen'});
+    return _text(const {'tr': 'Güçlü', 'en': 'Strong', 'nl': 'Sterk', 'fr': 'Fort'});
   }
 
   static String _statusTextFromLocation(
@@ -280,15 +286,15 @@ class SafetyService {
     if (!isOnline) {
       if (lastSeen != null) {
         final diff = DateTime.now().difference(lastSeen);
-        if (diff.inDays > 0) return 'Son görülme: ${diff.inDays} gün';
-        if (diff.inHours > 0) return 'Son görülme: ${diff.inHours}s';
-        if (diff.inMinutes > 0) return 'Son görülme: ${diff.inMinutes} dk';
-        return 'Son görülme: az önce';
+        if (diff.inDays > 0) return _text({'tr': 'Son görülme: ${diff.inDays} gün önce', 'en': 'Last seen: ${diff.inDays} day${diff.inDays == 1 ? '' : 's'} ago', 'nl': 'Laatst gezien: ${diff.inDays} ${diff.inDays == 1 ? 'dag' : 'dagen'} geleden', 'fr': 'Vu pour la dernière fois : il y a ${diff.inDays} jour${diff.inDays == 1 ? '' : 's'}'});
+        if (diff.inHours > 0) return _text({'tr': 'Son görülme: ${diff.inHours} sa önce', 'en': 'Last seen: ${diff.inHours} hr ago', 'nl': 'Laatst gezien: ${diff.inHours} u geleden', 'fr': 'Vu pour la dernière fois : il y a ${diff.inHours} h'});
+        if (diff.inMinutes > 0) return _text({'tr': 'Son görülme: ${diff.inMinutes} dk önce', 'en': 'Last seen: ${diff.inMinutes} min ago', 'nl': 'Laatst gezien: ${diff.inMinutes} min geleden', 'fr': 'Vu pour la dernière fois : il y a ${diff.inMinutes} min'});
+        return _text(const {'tr': 'Son görülme: az önce', 'en': 'Last seen: just now', 'nl': 'Laatst gezien: zojuist', 'fr': 'Vu pour la dernière fois : à l’instant'});
       }
-      return 'Çevrimdışı';
+      return _text(const {'tr': 'Çevrimdışı', 'en': 'Offline', 'nl': 'Offline', 'fr': 'Hors ligne'});
     }
     if (address != null && address.isNotEmpty) return address;
-    return 'Aktif';
+    return _text(const {'tr': 'Aktif', 'en': 'Active', 'nl': 'Actief', 'fr': 'Actif'});
   }
 
   // ═══════════════════════════════════════════════════════════════════════════

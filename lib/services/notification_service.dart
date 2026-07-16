@@ -2,6 +2,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'hive_service.dart';
+import 'localization/locale_service.dart';
 
 typedef NotificationTapCallback = void Function(String? payload);
 
@@ -9,6 +10,24 @@ class NotificationService {
   static final _notifications = FlutterLocalNotificationsPlugin();
   static bool _initialized = false;
   static NotificationTapCallback? _onTap;
+
+  static String _text(Map<String, String> values) {
+    final lang = LocaleService.resolveInitialLocale().languageCode;
+    return values[lang] ?? values['tr']!;
+  }
+
+  static String get _channelName => _text(const {'tr': 'FamilyHub Bildirimleri', 'en': 'FamilyHub Notifications', 'nl': 'FamilyHub-meldingen', 'fr': 'Notifications FamilyHub'});
+  static String get _channelDescription => _text(const {'tr': 'Aile etkinlikleri, görevler ve acil durum bildirimleri', 'en': 'Family activities, tasks, and emergency notifications', 'nl': 'Gezinsactiviteiten, taken en noodmeldingen', 'fr': 'Activités familiales, tâches et notifications d’urgence'});
+
+  static NotificationDetails get _notificationDetails => NotificationDetails(
+        android: AndroidNotificationDetails(
+          'familyhub_channel', _channelName,
+          channelDescription: _channelDescription,
+          importance: Importance.high, priority: Priority.high,
+          icon: '@mipmap/ic_launcher',
+        ),
+        iOS: const DarwinNotificationDetails(presentAlert: true, presentBadge: true, presentSound: true),
+      );
 
   static void setOnTapCallback(NotificationTapCallback onTap) {
     _onTap = onTap;
@@ -42,10 +61,10 @@ class NotificationService {
     );
 
     // Create notification channel for Android
-    const androidChannel = AndroidNotificationChannel(
+    final androidChannel = AndroidNotificationChannel(
       'familyhub_channel',
-      'FamilyHub Bildirimleri',
-      description: 'Aile etkinlikleri, görevler ve acil durum bildirimleri',
+      _channelName,
+      description: _channelDescription,
       importance: Importance.high,
       playSound: true,
       enableVibration: true,
@@ -98,21 +117,7 @@ class NotificationService {
       DateTime.now().microsecondsSinceEpoch.remainder(2147483647),
       title,
       body,
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'familyhub_channel',
-          'FamilyHub Bildirimleri',
-          channelDescription: 'Aile etkinlikleri, görevler ve acil durum bildirimleri',
-          importance: Importance.high,
-          priority: Priority.high,
-          icon: '@mipmap/ic_launcher',
-        ),
-        iOS: DarwinNotificationDetails(
-          presentAlert: true,
-          presentBadge: true,
-          presentSound: true,
-        ),
-      ),
+      _notificationDetails,
       payload: payload,
     );
   }
@@ -129,17 +134,7 @@ class NotificationService {
       title,
       body,
       tz.TZDateTime.from(scheduledDate, tz.local),
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'familyhub_channel',
-          'FamilyHub Bildirimleri',
-          channelDescription: 'Aile etkinlikleri, görevler ve acil durum bildirimleri',
-          importance: Importance.high,
-          priority: Priority.high,
-          icon: '@mipmap/ic_launcher',
-        ),
-        iOS: DarwinNotificationDetails(),
-      ),
+      _notificationDetails,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
       payload: payload,
@@ -171,18 +166,7 @@ class NotificationService {
       title,
       body,
       nextInstanceOfTime(hour, minute),
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'familyhub_channel',
-          'FamilyHub Bildirimleri',
-          channelDescription:
-              'Aile etkinlikleri, görevler ve acil durum bildirimleri',
-          importance: Importance.high,
-          priority: Priority.high,
-          icon: '@mipmap/ic_launcher',
-        ),
-        iOS: DarwinNotificationDetails(),
-      ),
+      _notificationDetails,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,

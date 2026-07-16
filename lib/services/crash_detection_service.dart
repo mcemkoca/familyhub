@@ -15,6 +15,7 @@ import '../domain/models/crash_settings.dart';
 import '../services/health_card_service.dart';
 import '../services/hive_service.dart';
 import 'crash_detection_engine.dart';
+import 'localization/locale_service.dart';
 
 /// High-level service that wires the [CrashDetectionEngine] to
 /// notifications, audio alarms, vibration, and SOS actions.
@@ -23,6 +24,12 @@ class CrashDetectionService {
       CrashDetectionService._internal();
   factory CrashDetectionService() => _instance;
   CrashDetectionService._internal();
+
+  String get _languageCode =>
+      LocaleService.resolveInitialLocale().languageCode;
+
+  String _text(Map<String, String> values) =>
+      values[_languageCode] ?? values['tr']!;
 
   final CrashDetectionEngine _engine = CrashDetectionEngine();
   CrashDetectionSettings? _settings;
@@ -313,9 +320,14 @@ class CrashDetectionService {
     for (final phone in _allContactPhones(_settings)) {
       if (phone.isEmpty) continue;
 
-      final message = 'ACIL DURUM: Kaza tespit edildi. '
-          'Konum: ${event.sensorData.gps.latitude}, ${event.sensorData.gps.longitude}. '
-          'Lütfen yardım için ara veya konuma gel.';
+      final latitude = event.sensorData.gps.latitude;
+      final longitude = event.sensorData.gps.longitude;
+      final message = _text({
+        'tr': 'ACİL DURUM: Kaza tespit edildi. Konum: $latitude, $longitude. Lütfen yardım için arayın veya konuma gelin.',
+        'en': 'EMERGENCY: A crash was detected. Location: $latitude, $longitude. Please call to help or come to the location.',
+        'nl': 'NOODGEVAL: Er is een ongeval gedetecteerd. Locatie: $latitude, $longitude. Bel om te helpen of kom naar de locatie.',
+        'fr': 'URGENCE : Un accident a été détecté. Position : $latitude, $longitude. Appelez pour aider ou rendez-vous sur place.',
+      });
 
       // Launch SMS composer
       final smsUri = Uri(scheme: 'sms', path: phone, queryParameters: {'body': message});
@@ -365,14 +377,18 @@ class CrashDetectionService {
       final healthData = await HealthCardService.load();
       if (healthData == null) return;
 
-      final info = 'Sağlık Bilgileri:\n'
-          'Kan Grubu: ${healthData.bloodType}\n'
-          'Alerjiler: ${healthData.allergies.join(", ")}\n'
-          'İlaçlar: ${healthData.medications.map((m) => m.name).join(", ")}\n'
-          'Kronik Hastalıklar: ${healthData.chronicConditions.join(", ")}\n'
-          'Organ Bağışı: ${healthData.organDonor ? "Evet" : "Hayır"}\n'
-          'Acil Durum Kişisi: ${healthData.emergencyContactName} (${healthData.emergencyContactPhone})\n'
-          'Doktor: ${healthData.doctorName} (${healthData.doctorPhone})';
+      final allergies = healthData.allergies.join(', ');
+      final medications = healthData.medications.map((m) => m.name).join(', ');
+      final conditions = healthData.chronicConditions.join(', ');
+      final donor = healthData.organDonor
+          ? _text(const {'tr': 'Evet', 'en': 'Yes', 'nl': 'Ja', 'fr': 'Oui'})
+          : _text(const {'tr': 'Hayır', 'en': 'No', 'nl': 'Nee', 'fr': 'Non'});
+      final info = _text({
+        'tr': 'Sağlık Bilgileri:\nKan Grubu: ${healthData.bloodType}\nAlerjiler: $allergies\nİlaçlar: $medications\nKronik Hastalıklar: $conditions\nOrgan Bağışı: $donor\nAcil Durum Kişisi: ${healthData.emergencyContactName} (${healthData.emergencyContactPhone})\nDoktor: ${healthData.doctorName} (${healthData.doctorPhone})',
+        'en': 'Medical Information:\nBlood Type: ${healthData.bloodType}\nAllergies: $allergies\nMedications: $medications\nChronic Conditions: $conditions\nOrgan Donor: $donor\nEmergency Contact: ${healthData.emergencyContactName} (${healthData.emergencyContactPhone})\nDoctor: ${healthData.doctorName} (${healthData.doctorPhone})',
+        'nl': 'Medische gegevens:\nBloedgroep: ${healthData.bloodType}\nAllergieën: $allergies\nMedicijnen: $medications\nChronische aandoeningen: $conditions\nOrgaandonor: $donor\nContactpersoon voor noodgevallen: ${healthData.emergencyContactName} (${healthData.emergencyContactPhone})\nArts: ${healthData.doctorName} (${healthData.doctorPhone})',
+        'fr': 'Informations médicales :\nGroupe sanguin : ${healthData.bloodType}\nAllergies : $allergies\nMédicaments : $medications\nMaladies chroniques : $conditions\nDon d’organes : $donor\nContact d’urgence : ${healthData.emergencyContactName} (${healthData.emergencyContactPhone})\nMédecin : ${healthData.doctorName} (${healthData.doctorPhone})',
+      });
 
       // Share via SMS to emergency contacts (bulut + yerel)
       for (final phone in _allContactPhones(_settings)) {

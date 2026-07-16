@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../presentation/providers/app_providers.dart';
 import '../data/legal_benefits_repository.dart';
+import '../data/legal_article_repository.dart';
+import '../domain/legal_article.dart';
 import '../domain/legal_benefit.dart';
 
 /// Arama sorgusu (aksan/harf duyarsız filtre ekranda uygulanır).
@@ -47,6 +49,23 @@ final legalBenefitsListProvider = Provider<List<LegalBenefit>>((ref) {
     return 0;
   });
   return items;
+});
+
+/// Aktif ülke + dile göre zengin yasal makaleler (JSON içerik katmanı).
+/// Boşsa (dosya yok) UI yalnızca özet kartları gösterir.
+final legalArticlesProvider =
+    FutureProvider<List<LegalArticle>>((ref) async {
+  final country = ref.watch(countryProvider);
+  final lang = ref.watch(localeProvider).languageCode;
+  return LegalArticleRepository.instance.forCountry(country, lang);
+});
+
+/// id → makale hızlı arama haritası (özet karttan detaya geçiş için).
+final legalArticleByIdProvider =
+    Provider<Map<String, LegalArticle>>((ref) {
+  final async = ref.watch(legalArticlesProvider);
+  final list = async.asData?.value ?? const <LegalArticle>[];
+  return {for (final a in list) a.id: a};
 });
 
 String _stripAccents(String s) {

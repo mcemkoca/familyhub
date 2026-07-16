@@ -1,6 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
+import 'localization/locale_service.dart';
 
 class BackupService {
   final SupabaseClient _supabase;
@@ -9,9 +10,22 @@ class BackupService {
 
   BackupService(this._supabase, this._backupBox, this._settingsBox);
 
+  static String get _languageCode =>
+      LocaleService.resolveInitialLocale().languageCode;
+
+  static String _text(Map<String, String> values) =>
+      values[_languageCode] ?? values['tr']!;
+
   static Future<BackupService> create() async {
     final client = SupabaseConfig.safeClient;
-    if (client == null) throw Exception('Supabase bağlantısı yok');
+    if (client == null) {
+      throw Exception(_text(const {
+        'tr': 'Sunucu bağlantısı kurulamadı',
+        'en': 'Could not connect to the server',
+        'nl': 'Kan geen verbinding maken met de server',
+        'fr': 'Impossible de se connecter au serveur',
+      }));
+    }
     final backupBox = await Hive.openBox<dynamic>('backupBox');
     final settingsBox = await Hive.openBox<dynamic>('settingsBox');
     return BackupService(client, backupBox, settingsBox);
@@ -125,15 +139,50 @@ class BackupService {
         .limit(1)
         .maybeSingle();
 
-    if (backups == null) return 'Henüz yok';
+    if (backups == null) return _noBackupYet;
 
     final last = DateTime.tryParse(backups['created_at'].toString());
-    if (last == null) return 'Henüz yok';
+    if (last == null) return _noBackupYet;
 
     final diff = DateTime.now().difference(last);
-    if (diff.inMinutes < 1) return 'Az önce';
-    if (diff.inHours < 1) return '${diff.inMinutes} dk önce';
-    if (diff.inDays < 1) return '${diff.inHours} sa önce';
-    return '${diff.inDays} gün önce';
+    if (diff.inMinutes < 1) {
+      return _text(const {
+        'tr': 'Az önce',
+        'en': 'Just now',
+        'nl': 'Zojuist',
+        'fr': 'À l’instant',
+      });
+    }
+    if (diff.inHours < 1) return _minutesAgo(diff.inMinutes);
+    if (diff.inDays < 1) return _hoursAgo(diff.inHours);
+    return _daysAgo(diff.inDays);
   }
+
+  static String get _noBackupYet => _text(const {
+        'tr': 'Henüz yok',
+        'en': 'No backup yet',
+        'nl': 'Nog geen back-up',
+        'fr': 'Aucune sauvegarde pour le moment',
+      });
+
+  static String _minutesAgo(int minutes) => _text({
+        'tr': '$minutes dk önce',
+        'en': '$minutes min ago',
+        'nl': '$minutes min geleden',
+        'fr': 'Il y a $minutes min',
+      });
+
+  static String _hoursAgo(int hours) => _text({
+        'tr': '$hours sa önce',
+        'en': '$hours hr ago',
+        'nl': '$hours u geleden',
+        'fr': 'Il y a $hours h',
+      });
+
+  static String _daysAgo(int days) => _text({
+        'tr': '$days gün önce',
+        'en': '$days day${days == 1 ? '' : 's'} ago',
+        'nl': '$days ${days == 1 ? 'dag' : 'dagen'} geleden',
+        'fr': 'Il y a $days jour${days == 1 ? '' : 's'}',
+      });
 }

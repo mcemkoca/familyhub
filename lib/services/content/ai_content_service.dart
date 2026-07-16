@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import '../localization/locale_service.dart';
 
 /// OpenAI API integration for FamilyHub dynamic content generation.
 ///
@@ -16,6 +17,12 @@ class AIContentService {
 
   String? _apiKey;
   String? _masterPrompt;
+
+  String get _languageCode =>
+      LocaleService.resolveInitialLocale().languageCode;
+
+  String _text(Map<String, String> values) =>
+      values[_languageCode] ?? values['tr']!;
 
   /// Rate limiting: track last call timestamp
   DateTime? _lastCallTime;
@@ -54,14 +61,32 @@ class AIContentService {
     required String region,
     String? specialRequests,
   }) async {
-    final prompt = '''
-Aile profili: $familyType
+    final prompt = _text({
+      'tr': '''Aile profili: $familyType
 Çocuk yaşları: ${childrenAges.join(', ')}
 Bütçe: $budgetRange EUR
 Bölge: $region
 Özel istek: ${specialRequests ?? 'Yok'}
-Bu profile uygun içerik oluştur.
-'''; // Keep Turkish prompt as in original spec
+Bu profile uygun içerik oluştur.''',
+      'en': '''Family profile: $familyType
+Children’s ages: ${childrenAges.join(', ')}
+Budget: $budgetRange EUR
+Region: $region
+Special request: ${specialRequests ?? 'None'}
+Create suitable content for this profile.''',
+      'nl': '''Gezinsprofiel: $familyType
+Leeftijden van de kinderen: ${childrenAges.join(', ')}
+Budget: $budgetRange EUR
+Regio: $region
+Speciaal verzoek: ${specialRequests ?? 'Geen'}
+Maak geschikte inhoud voor dit profiel.''',
+      'fr': '''Profil familial : $familyType
+Âge des enfants : ${childrenAges.join(', ')}
+Budget : $budgetRange EUR
+Région : $region
+Demande particulière : ${specialRequests ?? 'Aucune'}
+Créez un contenu adapté à ce profil.''',
+    });
     return _chatCompletion([
       {'role': 'system', 'content': _masterPrompt ?? _defaultMasterPrompt},
       {'role': 'user', 'content': prompt},
@@ -74,7 +99,12 @@ Bu profile uygun içerik oluştur.
     List<Map<String, String>> messages,
   ) async {
     if (_apiKey == null || _apiKey!.isEmpty) {
-      throw AIContentException('OpenAI API key not configured. Call initialize() first.');
+      throw AIContentException(_text(const {
+        'tr': 'OpenAI API anahtarı yapılandırılmadı. Önce initialize() metodunu çağırın.',
+        'en': 'The OpenAI API key is not configured. Call initialize() first.',
+        'nl': 'De OpenAI API-sleutel is niet geconfigureerd. Roep eerst initialize() aan.',
+        'fr': 'La clé API OpenAI n’est pas configurée. Appelez d’abord initialize().',
+      }));
     }
 
     // Rate limiting
@@ -103,7 +133,10 @@ Bu profile uygun içerik oluştur.
 
       if (response.statusCode != 200) {
         throw AIContentException(
-          'OpenAI API error ${response.statusCode}: ${response.body}',
+          '${_text(const {
+            'tr': 'OpenAI API hatası', 'en': 'OpenAI API error',
+            'nl': 'OpenAI API-fout', 'fr': 'Erreur de l’API OpenAI',
+          })} ${response.statusCode}: ${response.body}',
         );
       }
 
@@ -111,24 +144,46 @@ Bu profile uygun içerik oluştur.
       // ignore: avoid_dynamic_calls
       final content = data['choices']?[0]?['message']?['content'] as String?;
       if (content == null || content.isEmpty) {
-        throw AIContentException('Empty response from OpenAI API');
+        throw AIContentException(_text(const {
+          'tr': 'OpenAI API boş yanıt döndürdü',
+          'en': 'The OpenAI API returned an empty response',
+          'nl': 'De OpenAI API heeft een leeg antwoord geretourneerd',
+          'fr': 'L’API OpenAI a renvoyé une réponse vide',
+        }));
       }
 
       return jsonDecode(content) as Map<String, dynamic>;
     } on FormatException catch (e) {
-      throw AIContentException('Invalid JSON in OpenAI response: $e');
+      throw AIContentException('${_text(const {
+        'tr': 'OpenAI yanıtındaki JSON geçersiz',
+        'en': 'Invalid JSON in the OpenAI response',
+        'nl': 'Ongeldige JSON in het OpenAI-antwoord',
+        'fr': 'JSON non valide dans la réponse OpenAI',
+      })}: $e');
     } catch (e) {
-      throw AIContentException('OpenAI request failed: $e');
+      throw AIContentException('${_text(const {
+        'tr': 'OpenAI isteği başarısız oldu',
+        'en': 'The OpenAI request failed',
+        'nl': 'Het OpenAI-verzoek is mislukt',
+        'fr': 'La requête OpenAI a échoué',
+      })}: $e');
     }
   }
 
-  static const String _defaultMasterPrompt = '''
-You are FamilyHub AI, a specialized content generator for Turkish families living in Belgium.
+  String get _defaultMasterPrompt => '''
+You are FamilyHub AI, a specialized content generator for families living in Belgium.
 You generate structured JSON content for family management modules.
 Always respond with valid JSON only.
 Supported modules: child_development, meal_planning, household, budget, future_planning.
-Language: Turkish (tr), Region: Belgium (BE).
-'''; // Safe fallback if no master prompt file is loaded
+Language: ${_languageName(_languageCode)} ($_languageCode), Region: Belgium (BE).
+''';
+
+  String _languageName(String code) => switch (code) {
+        'en' => 'English',
+        'nl' => 'Dutch',
+        'fr' => 'French',
+        _ => 'Turkish',
+      };
 }
 
 class AIContentException implements Exception {

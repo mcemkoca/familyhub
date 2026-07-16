@@ -3061,6 +3061,33 @@ class AppLocalizationsFr extends AppLocalizations {
   String get legalRemind => 'Rappeler';
 
   @override
+  String get legalArtDetails => 'Voir les détails';
+
+  @override
+  String get legalArtOverview => 'Aperçu';
+
+  @override
+  String get legalArtWhoCanApply => 'Qui peut demander ?';
+
+  @override
+  String get legalArtConditions => 'Conditions';
+
+  @override
+  String get legalArtBenefits => 'Avantages';
+
+  @override
+  String get legalArtSteps => 'Étapes de la demande';
+
+  @override
+  String get legalArtDocuments => 'Documents requis';
+
+  @override
+  String get legalArtWarnings => 'Avertissements importants';
+
+  @override
+  String get legalArtSources => 'Sources officielles';
+
+  @override
   String get kitchenTitle => 'Cuisine familiale';
 
   @override

@@ -132,6 +132,8 @@ flutter:
     - assets/data/suggestions/meal_nutrition.json
     - assets/data/suggestions/social_activities.json
     - assets/data/suggestions/digital_balance.json
+    - assets/data/legal/be.json
+    - assets/data/daily_suggestions.json
     - assets/images/google_logo.svg
     # Icons
     - assets/icons/

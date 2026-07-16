@@ -63,6 +63,10 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
       final today = DateTime.now();
       final shownIds = HiveService.getShownSuggestionIds();
 
+      // Havuzu aktif dile göre yükle (i18n) — pickDaily'den önce zorunlu.
+      final lang = ref.read(localeProvider).languageCode;
+      await DailySuggestionsPool.ensureLoaded(lang);
+
       // Pick daily suggestions from pool (no-repeat logic)
       final daily = DailySuggestionsPool.pickDaily(
         date: today,

@@ -2,8 +2,11 @@ import 'package:hive/hive.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
 import '../core/errors.dart';
+import 'localization/locale_service.dart';
 
 class WeatherPrefsService {
+  static String _text(Map<String, String> values) { final lang = LocaleService.resolveInitialLocale().languageCode; return values[lang] ?? values['tr']!; }
+  static String get _notSignedIn => _text(const {'tr': 'Oturum açık değil', 'en': 'You are not signed in', 'nl': 'Je bent niet ingelogd', 'fr': 'Vous n’êtes pas connecté'});
   final Box<dynamic> _weatherBox;
   final SupabaseClient _supabase;
 
@@ -11,7 +14,7 @@ class WeatherPrefsService {
 
   static Future<WeatherPrefsService> create() async {
     final client = SupabaseConfig.safeClient;
-    if (client == null) throw Exception('Supabase bağlantısı yok');
+    if (client == null) throw Exception(_text(const {'tr': 'Sunucu bağlantısı kurulamadı', 'en': 'Could not connect to the server', 'nl': 'Kan geen verbinding maken met de server', 'fr': 'Impossible de se connecter au serveur'}));
     final box = await Hive.openBox<dynamic>('weatherBox');
     return WeatherPrefsService(box, client);
   }
@@ -40,7 +43,7 @@ class WeatherPrefsService {
 
   Future<void> setCity(String city) async {
     final userId = _supabase.auth.currentUser?.id;
-    if (userId == null) throw AppAuthException('Oturum açık değil');
+    if (userId == null) throw AppAuthException(_notSignedIn);
 
     await _supabase.from('weather_prefs').upsert({
       'user_id': userId,
@@ -53,7 +56,7 @@ class WeatherPrefsService {
 
   Future<void> setUnit(bool useCelsius) async {
     final userId = _supabase.auth.currentUser?.id;
-    if (userId == null) throw AppAuthException('Oturum açık değil');
+    if (userId == null) throw AppAuthException(_notSignedIn);
 
     await _supabase.from('weather_prefs').upsert({
       'user_id': userId,

@@ -3,11 +3,25 @@ import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
 import '../features/security/domain/pin_hasher.dart';
+import 'localization/locale_service.dart';
 
 class BiometricService {
   static final LocalAuthentication _localAuth = LocalAuthentication();
   static const _secureStorage = FlutterSecureStorage();
   static const _pinHashKey = 'biometric_fallback_pin_hash';
+
+  static String get _languageCode =>
+      LocaleService.resolveInitialLocale().languageCode;
+
+  static String _text(Map<String, String> values) =>
+      values[_languageCode] ?? values['tr']!;
+
+  static String get _defaultAuthenticationReason => _text(const {
+        'tr': 'FamilyHub’a giriş yapmak için kimliğinizi doğrulayın',
+        'en': 'Verify your identity to sign in to FamilyHub',
+        'nl': 'Verifieer je identiteit om in te loggen bij FamilyHub',
+        'fr': 'Vérifiez votre identité pour vous connecter à FamilyHub',
+      });
 
   static Future<bool> isAvailable() async {
     try {
@@ -27,10 +41,10 @@ class BiometricService {
     }
   }
 
-  static Future<bool> authenticate({String reason = 'FamilyHub\'a giriş için biyometrik doğrulama'}) async {
+  static Future<bool> authenticate({String? reason}) async {
     try {
       return await _localAuth.authenticate(
-        localizedReason: reason,
+        localizedReason: reason ?? _defaultAuthenticationReason,
         biometricOnly: false,
         sensitiveTransaction: true,
         persistAcrossBackgrounding: true,

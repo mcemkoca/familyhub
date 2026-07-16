@@ -10,6 +10,7 @@ import '../application/legal_benefits_providers.dart';
 import '../data/legal_benefits_repository.dart';
 import '../data/legal_reminder_service.dart';
 import '../domain/legal_benefit.dart';
+import 'legal_article_detail_screen.dart';
 
 /// Yasal Haklar ve Avantajlar — bağımsız bölüm ekranı.
 /// Resmî kaynak bağlantısı, doğrulama tarihi, süre işareti ve hukuki disclaimer
@@ -171,6 +172,7 @@ class LegalBenefitsScreen extends ConsumerWidget {
   Widget _benefitCard(BuildContext context, WidgetRef ref, AppLocalizations t,
       LegalBenefit b, LegalBenefitsRepository repo) {
     final saved = repo.isSaved(b.id);
+    final article = ref.watch(legalArticleByIdProvider)[b.id];
     final dateStr = DateFormat.yMMMd(Localizations.localeOf(context).toString())
         .format(b.lastVerifiedAt);
     return Container(
@@ -274,6 +276,29 @@ class LegalBenefitsScreen extends ConsumerWidget {
               ),
             ],
           ),
+          // Zengin makale varsa detay ekranına geçiş.
+          if (article != null) ...[
+            const SizedBox(height: 4),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) =>
+                        LegalArticleDetailScreen(article: article),
+                  ),
+                ),
+                icon: const Icon(Icons.menu_book_outlined, size: 16),
+                label: Text(t.legalArtDetails,
+                    style: const TextStyle(
+                        fontSize: 12.5, fontWeight: FontWeight.w700)),
+                style: OutlinedButton.styleFrom(
+                    foregroundColor: const Color(0xFF818CF8),
+                    side: const BorderSide(color: Color(0x33818CF8)),
+                    padding: const EdgeInsets.symmetric(vertical: 8)),
+              ),
+            ),
+          ],
         ],
       ),
     );

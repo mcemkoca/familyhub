@@ -3066,6 +3066,33 @@ class AppLocalizationsTr extends AppLocalizations {
   String get legalRemind => 'Hatırlat';
 
   @override
+  String get legalArtDetails => 'Detayları gör';
+
+  @override
+  String get legalArtOverview => 'Genel bakış';
+
+  @override
+  String get legalArtWhoCanApply => 'Kimler başvurabilir?';
+
+  @override
+  String get legalArtConditions => 'Koşullar';
+
+  @override
+  String get legalArtBenefits => 'Sağladığı avantajlar';
+
+  @override
+  String get legalArtSteps => 'Başvuru adımları';
+
+  @override
+  String get legalArtDocuments => 'Gerekli belgeler';
+
+  @override
+  String get legalArtWarnings => 'Önemli uyarılar';
+
+  @override
+  String get legalArtSources => 'Resmî kaynaklar';
+
+  @override
   String get kitchenTitle => 'Aile Mutfağı';
 
   @override

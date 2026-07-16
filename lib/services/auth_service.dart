@@ -20,6 +20,33 @@ class AuthService {
 
   static SupabaseClient? get client => SupabaseConfig.safeClient;
 
+  static String get _languageCode {
+    final savedLanguage = HiveService.getSetting('language');
+    final useDevice = HiveService.getBoolSetting(
+      'useDeviceLanguage',
+      defaultValue: false,
+    );
+    if (useDevice || savedLanguage == null || savedLanguage.isEmpty) {
+      for (final locale in WidgetsBinding.instance.platformDispatcher.locales) {
+        if (const {'tr', 'en', 'nl', 'fr'}.contains(locale.languageCode)) {
+          return locale.languageCode;
+        }
+      }
+    }
+    return switch (savedLanguage) {
+      'English' => 'en',
+      'Nederlands' => 'nl',
+      'Français' => 'fr',
+      _ => 'tr',
+    };
+  }
+
+  static String _text(Map<String, String> values) =>
+      values[_languageCode] ?? values['tr']!;
+
+  static String _withDetail(Map<String, String> values, Object detail) =>
+      '${_text(values)}: $detail';
+
   // Google native sign-in için Supabase'e verilecek WEB (server) Client ID.
   // Bu değer, google-services.json ile AYNI Google Cloud projesine ait olmalı.
   // Derleme sırasında override edilebilir:
@@ -116,17 +143,32 @@ class AuthService {
     String? familyName,
   }) async {
     if (!email.contains('@')) {
-      throw AppAuthException('Geçerli bir e-posta adresi girin');
+      throw AppAuthException(_text(const {
+        'tr': 'Geçerli bir e-posta adresi girin',
+        'en': 'Enter a valid email address',
+        'nl': 'Voer een geldig e-mailadres in',
+        'fr': 'Saisissez une adresse e-mail valide',
+      }));
     }
     if (password.length < 8) {
-      throw AppAuthException('Şifre en az 8 karakter olmalı');
+      throw AppAuthException(_text(const {
+        'tr': 'Şifre en az 8 karakter olmalı',
+        'en': 'The password must be at least 8 characters',
+        'nl': 'Het wachtwoord moet minstens 8 tekens bevatten',
+        'fr': 'Le mot de passe doit comporter au moins 8 caractères',
+      }));
     }
     if (name.trim().length < 2) {
-      throw AppAuthException('İsim en az 2 karakter olmalı');
+      throw AppAuthException(_text(const {
+        'tr': 'İsim en az 2 karakter olmalı',
+        'en': 'The name must be at least 2 characters',
+        'nl': 'De naam moet minstens 2 tekens bevatten',
+        'fr': 'Le nom doit comporter au moins 2 caractères',
+      }));
     }
 
     final supabase = client;
-    if (supabase == null) throw AppAuthException('Sunucu bağlantısı kurulmadı');
+    if (supabase == null) throw AppAuthException(_serverUnavailable);
 
     final response = await supabase.auth.signUp(
       email: email.trim(),
@@ -135,7 +177,10 @@ class AuthService {
     );
 
     if (response.user == null) {
-      throw AppAuthException('Kayıt başarısız oldu');
+      throw AppAuthException(_text(const {
+        'tr': 'Kayıt başarısız oldu', 'en': 'Registration failed',
+        'nl': 'Registratie mislukt', 'fr': 'L’inscription a échoué',
+      }));
     }
 
     final userId = response.user!.id;
@@ -149,7 +194,11 @@ class AuthService {
         'created_at': DateTime.now().toIso8601String(),
       }, onConflict: 'id');
     } catch (e) {
-      throw AppAuthException('Profil oluşturulamadı: $e');
+      throw AppAuthException(_withDetail(const {
+        'tr': 'Profil oluşturulamadı', 'en': 'Could not create the profile',
+        'nl': 'Het profiel kon niet worden aangemaakt',
+        'fr': 'Le profil n’a pas pu être créé',
+      }, e));
     }
 
     // Create family if familyName provided
@@ -163,7 +212,11 @@ class AuthService {
             .single();
         familyId = familyResponse['id'] as String?;
       } catch (e) {
-        throw AppAuthException('Aile oluşturulamadı: $e');
+        throw AppAuthException(_withDetail(const {
+          'tr': 'Aile oluşturulamadı', 'en': 'Could not create the family',
+          'nl': 'Het gezin kon niet worden aangemaakt',
+          'fr': 'La famille n’a pas pu être créée',
+        }, e));
       }
     }
 
@@ -181,7 +234,12 @@ class AuthService {
             .update({'family_id': familyId})
             .eq('id', userId);
       } catch (e) {
-        throw AppAuthException('Aile üyeliği oluşturulamadı: $e');
+        throw AppAuthException(_withDetail(const {
+          'tr': 'Aile üyeliği oluşturulamadı',
+          'en': 'Could not create the family membership',
+          'nl': 'Het gezinslidmaatschap kon niet worden aangemaakt',
+          'fr': 'L’adhésion à la famille n’a pas pu être créée',
+        }, e));
       }
     }
 
@@ -208,8 +266,8 @@ class AuthService {
 
       final name = (profile?['display_name'] as String?)?.trim();
       final familyName = (name != null && name.isNotEmpty)
-          ? '$name Ailesi'
-          : 'Ailem';
+          ? _familyName(name)
+          : _myFamily;
 
       final fam = await supabase
           .from('families')
@@ -222,7 +280,7 @@ class AuthService {
         'family_id': familyId,
         'user_id': userId,
         'role': 'admin',
-        'display_name': name ?? 'Ben',
+        'display_name': name ?? _me,
       });
       await supabase
           .from('profiles')
@@ -239,13 +297,18 @@ class AuthService {
     required String password,
   }) async {
     final supabase = client;
-    if (supabase == null) throw AppAuthException('Sunucu bağlantısı kurulmadı');
+    if (supabase == null) throw AppAuthException(_serverUnavailable);
 
     final cleanEmail = email.trim().toLowerCase();
     if (cleanEmail.isEmpty || password.isEmpty) {
-      throw const AuthFailure(
+      throw AuthFailure(
         AuthFailureKind.invalidCredentials,
-        'E-posta ve parola boş bırakılamaz.',
+        _text(const {
+          'tr': 'E-posta ve parola boş bırakılamaz.',
+          'en': 'Email and password cannot be empty.',
+          'nl': 'E-mailadres en wachtwoord mogen niet leeg zijn.',
+          'fr': 'L’adresse e-mail et le mot de passe sont obligatoires.',
+        }),
         code: 'empty_input',
       );
     }
@@ -261,9 +324,9 @@ class AuthService {
     );
 
     if (response.session == null) {
-      throw const AuthFailure(
+      throw AuthFailure(
         AuthFailureKind.invalidCredentials,
-        'E-posta adresi veya parola hatalı.',
+        _invalidCredentials,
         code: 'no_session',
       );
     }
@@ -278,7 +341,7 @@ class AuthService {
     final supabase = client;
     final userId = currentUserId;
     if (supabase == null || userId == null) {
-      throw AppAuthException('Giriş yapmalısınız');
+      throw AppAuthException(_signInRequired);
     }
 
     try {
@@ -307,10 +370,17 @@ class AuthService {
         }
         return result.toString();
       }
-      throw AppAuthException('Geçersiz davet kodu');
+      throw AppAuthException(_text(const {
+        'tr': 'Geçersiz davet kodu', 'en': 'Invalid invite code',
+        'nl': 'Ongeldige uitnodigingscode', 'fr': 'Code d’invitation invalide',
+      }));
     } catch (e) {
       if (e is AppAuthException) rethrow;
-      throw AppAuthException('Aileye katılma başarısız: $e');
+      throw AppAuthException(_withDetail(const {
+        'tr': 'Aileye katılma başarısız', 'en': 'Could not join the family',
+        'nl': 'Deelname aan het gezin is mislukt',
+        'fr': 'Impossible de rejoindre la famille',
+      }, e));
     }
   }
 
@@ -363,9 +433,14 @@ class AuthService {
   static Future<bool> signInWithGoogle() async {
     final supabase = client;
     if (supabase == null) {
-      throw const AuthFailure(
+      throw AuthFailure(
         AuthFailureKind.configurationError,
-        'Sunucu bağlantısı kurulmadı. Lütfen tekrar deneyin.',
+        _text(const {
+          'tr': 'Sunucu bağlantısı kurulmadı. Lütfen tekrar deneyin.',
+          'en': 'Could not connect to the server. Please try again.',
+          'nl': 'Kan geen verbinding maken met de server. Probeer het opnieuw.',
+          'fr': 'Impossible de se connecter au serveur. Veuillez réessayer.',
+        }),
         code: 'no_client',
       );
     }
@@ -388,7 +463,10 @@ class AuthService {
     final supabase = client;
     final user = response.user;
     if (supabase == null || user == null) {
-      throw AppAuthException('Oturum bulunamadı');
+      throw AppAuthException(_text(const {
+        'tr': 'Oturum bulunamadı', 'en': 'Session not found',
+        'nl': 'Sessie niet gevonden', 'fr': 'Session introuvable',
+      }));
     }
 
     final userId = user.id;
@@ -464,7 +542,7 @@ class AuthService {
     final supabase = client;
     final userId = currentUserId;
     if (supabase == null || userId == null) {
-      throw AppAuthException('Giriş yapmalısınız');
+      throw AppAuthException(_signInRequired);
     }
 
     final updates = <String, dynamic>{
@@ -493,7 +571,11 @@ class AuthService {
     try {
       await supabase.from('profiles').update(updates).eq('id', userId);
     } catch (e) {
-      throw AppAuthException('Profil güncellenemedi: $e');
+      throw AppAuthException(_withDetail(const {
+        'tr': 'Profil güncellenemedi', 'en': 'Could not update the profile',
+        'nl': 'Het profiel kon niet worden bijgewerkt',
+        'fr': 'Le profil n’a pas pu être mis à jour',
+      }, e));
     }
 
     // Auth kullanıcı metadata'sını da güncelle — uygulamanın çoğu yeri avatarı/
@@ -538,7 +620,7 @@ class AuthService {
     final supabase = client;
     final user = currentUser;
     if (supabase == null || user == null) {
-      throw AppAuthException('Giriş yapmalısınız');
+      throw AppAuthException(_signInRequired);
     }
 
     // Re-authenticate with current password (Supabase requires recent login for password change)
@@ -548,19 +630,27 @@ class AuthService {
         password: currentPassword,
       );
     } catch (_) {
-      throw AppAuthException('Mevcut şifre hatalı');
+      throw AppAuthException(_text(const {
+        'tr': 'Mevcut şifre hatalı', 'en': 'The current password is incorrect',
+        'nl': 'Het huidige wachtwoord is onjuist',
+        'fr': 'Le mot de passe actuel est incorrect',
+      }));
     }
 
     try {
       await supabase.auth.updateUser(UserAttributes(password: newPassword));
     } catch (e) {
-      throw AppAuthException('Şifre güncellenemedi: $e');
+      throw AppAuthException(_withDetail(const {
+        'tr': 'Şifre güncellenemedi', 'en': 'Could not update the password',
+        'nl': 'Het wachtwoord kon niet worden bijgewerkt',
+        'fr': 'Le mot de passe n’a pas pu être mis à jour',
+      }, e));
     }
   }
 
   static Future<void> resetPassword(String email) async {
     final supabase = client;
-    if (supabase == null) throw AppAuthException('Sunucu bağlantısı kurulmadı');
+    if (supabase == null) throw AppAuthException(_serverUnavailable);
     await supabase.auth.resetPasswordForEmail(email.trim());
   }
 
@@ -570,7 +660,7 @@ class AuthService {
     String email,
   ) async {
     final supabase = client;
-    if (supabase == null) throw AppAuthException('Sunucu bağlantısı kurulmadı');
+    if (supabase == null) throw AppAuthException(_serverUnavailable);
 
     final response = await supabase
         .from('profiles')
@@ -587,7 +677,7 @@ class AuthService {
     String answer2,
   ) async {
     final supabase = client;
-    if (supabase == null) throw AppAuthException('Sunucu bağlantısı kurulmadı');
+    if (supabase == null) throw AppAuthException(_serverUnavailable);
 
     try {
       final result = await supabase.rpc(
@@ -608,7 +698,7 @@ class AuthService {
     final supabase = client;
     final userId = currentUserId;
     if (supabase == null || userId == null) {
-      throw AppAuthException('Giriş yapmalısınız');
+      throw AppAuthException(_signInRequired);
     }
 
     return await supabase
@@ -627,7 +717,7 @@ class AuthService {
     final supabase = client;
     final userId = currentUserId;
     if (supabase == null || userId == null) {
-      throw AppAuthException('Giriş yapmalısınız');
+      throw AppAuthException(_signInRequired);
     }
 
     try {
@@ -642,7 +732,12 @@ class AuthService {
         },
       );
     } catch (e) {
-      throw AppAuthException('Güvenlik soruları kaydedilemedi: $e');
+      throw AppAuthException(_withDetail(const {
+        'tr': 'Güvenlik soruları kaydedilemedi',
+        'en': 'Could not save the security questions',
+        'nl': 'De beveiligingsvragen konden niet worden opgeslagen',
+        'fr': 'Les questions de sécurité n’ont pas pu être enregistrées',
+      }, e));
     }
   }
 
@@ -655,7 +750,7 @@ class AuthService {
     String newPassword,
   ) async {
     final supabase = client;
-    if (supabase == null) throw AppAuthException('Sunucu bağlantısı kurulmadı');
+    if (supabase == null) throw AppAuthException(_serverUnavailable);
 
     // Edge Function is the only way to change a password without a session.
     // If it is not deployed, we fall back to the standard reset-email flow.
@@ -667,15 +762,25 @@ class AuthService {
       if (response.status != 200) {
         throw AppAuthException(
           // ignore: avoid_dynamic_calls
-          response.data?['error']?.toString() ?? 'Şifre değiştirilemedi',
+          response.data?['error']?.toString() ??
+              _text(const {
+                'tr': 'Şifre değiştirilemedi',
+                'en': 'The password could not be changed',
+                'nl': 'Het wachtwoord kon niet worden gewijzigd',
+                'fr': 'Le mot de passe n’a pas pu être modifié',
+              }),
         );
       }
     } on FunctionException catch (_) {
       // Edge Function not deployed → fallback to email link
       await supabase.auth.resetPasswordForEmail(email.trim());
       throw AppAuthException(
-        'Uygulama içi şifre değiştirme için Edge Function deploy edilmesi gerekiyor. '
-        'Şifre sıfırlama bağlantısı e-postanıza gönderildi.',
+        _text(const {
+          'tr': 'Uygulama içi şifre değiştirme için Edge Function kurulması gerekiyor. Şifre sıfırlama bağlantısı e-postanıza gönderildi.',
+          'en': 'The Edge Function must be deployed to change passwords in the app. A password reset link was sent to your email.',
+          'nl': 'De Edge Function moet worden geïmplementeerd om wachtwoorden in de app te wijzigen. Er is een resetlink naar je e-mailadres gestuurd.',
+          'fr': 'La fonction Edge doit être déployée pour modifier le mot de passe dans l’application. Un lien de réinitialisation a été envoyé à votre adresse e-mail.',
+        }),
       );
     }
   }
@@ -740,11 +845,47 @@ class AuthService {
   /// SubscriptionService.purchasePackage() instead.
   /// This method no longer allows free premium upgrades.
   static Future<void> upgradeToPremium() async {
-    throw AppAuthException(
-      'Premium aktifleştirme için ödeme yapmalısınız. '
-      'Lütfen ödeme ekranından devam edin.',
-    );
+    throw AppAuthException(_text(const {
+      'tr': 'Premium’u etkinleştirmek için ödeme yapmalısınız. Lütfen ödeme ekranından devam edin.',
+      'en': 'You must complete payment to activate Premium. Please continue from the payment screen.',
+      'nl': 'Je moet betalen om Premium te activeren. Ga verder via het betaalscherm.',
+      'fr': 'Vous devez effectuer le paiement pour activer Premium. Veuillez continuer depuis l’écran de paiement.',
+    }));
   }
+
+  static String get _serverUnavailable => _text(const {
+        'tr': 'Sunucu bağlantısı kurulmadı',
+        'en': 'Could not connect to the server',
+        'nl': 'Kan geen verbinding maken met de server',
+        'fr': 'Impossible de se connecter au serveur',
+      });
+
+  static String get _signInRequired => _text(const {
+        'tr': 'Giriş yapmalısınız', 'en': 'You must sign in',
+        'nl': 'Je moet inloggen', 'fr': 'Vous devez vous connecter',
+      });
+
+  static String get _invalidCredentials => _text(const {
+        'tr': 'E-posta adresi veya parola hatalı.',
+        'en': 'The email address or password is incorrect.',
+        'nl': 'Het e-mailadres of wachtwoord is onjuist.',
+        'fr': 'L’adresse e-mail ou le mot de passe est incorrect.',
+      });
+
+  static String get _myFamily => _text(const {
+        'tr': 'Ailem', 'en': 'My Family', 'nl': 'Mijn gezin', 'fr': 'Ma famille',
+      });
+
+  static String get _me => _text(const {
+        'tr': 'Ben', 'en': 'Me', 'nl': 'Ik', 'fr': 'Moi',
+      });
+
+  static String _familyName(String name) => _text({
+        'tr': '$name Ailesi',
+        'en': '$name Family',
+        'nl': 'Gezin $name',
+        'fr': 'Famille $name',
+      });
 
   static Future<void> _persistSession(Session? session) async {
     if (session != null) {

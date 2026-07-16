@@ -16,6 +16,7 @@ import '../core/supabase_client.dart';
 import '../domain/models/emergency_action.dart';
 import '../domain/models/emergency_template.dart';
 import '../repositories/emergency_action_repository.dart';
+import 'localization/locale_service.dart';
 
 /// High-level engine that orchestrates the entire emergency response pipeline.
 class EmergencyAutoActionsEngine {
@@ -23,6 +24,19 @@ class EmergencyAutoActionsEngine {
       EmergencyAutoActionsEngine._internal();
   factory EmergencyAutoActionsEngine() => _instance;
   EmergencyAutoActionsEngine._internal();
+
+  String get _languageCode =>
+      LocaleService.resolveInitialLocale().languageCode;
+
+  String _text(Map<String, String> values) =>
+      values[_languageCode] ?? values['tr']!;
+
+  String get _helpCall => _text(const {
+        'tr': 'Acil durum yardım çağrısı',
+        'en': 'Emergency assistance request',
+        'nl': 'Noodoproep',
+        'fr': 'Demande d’aide d’urgence',
+      });
 
   final FlutterTts _tts = FlutterTts();
   final AudioRecorder _recorder = AudioRecorder();
@@ -84,7 +98,7 @@ class EmergencyAutoActionsEngine {
       emergency: EmergencyDetails(
         severity: initialSeverity,
         category: category,
-        description: description ?? 'Acil durum yardım çağrısı',
+        description: description ?? _helpCall,
       ),
       autoActions: const AutoActions(),
       escalationChain: const EscalationChain(),
@@ -100,7 +114,7 @@ class EmergencyAutoActionsEngine {
     // 2b. Buluta yaz + aileye anlık push — best-effort (çevrimdışıysa akış sürer).
     //     Aile üyeleri emergency_actions'a realtime abone olduğunda anında görür.
     if (familyId != null && familyId.isNotEmpty) {
-      unawaited(_broadcastToFamily(action, description ?? 'Acil durum yardım çağrısı'));
+      unawaited(_broadcastToFamily(action, description ?? _helpCall));
     }
 
     // 3. Execute auto actions
@@ -209,7 +223,7 @@ class EmergencyAutoActionsEngine {
 
     final template = await _getTemplate(config.templateId);
     final messageText = _resolveTemplate(template.smsContent, {
-      'name': 'Kullanıcı',
+      'name': _text(const {'tr': 'Kullanıcı', 'en': 'User', 'nl': 'Gebruiker', 'fr': 'Utilisateur'}),
       'location':
           '${action.trigger.latitude ?? 0}, ${action.trigger.longitude ?? 0}',
       'time': _fmtTime(action.trigger.timestamp),
@@ -260,7 +274,7 @@ class EmergencyAutoActionsEngine {
   Future<void> _sendEmail(String email, String message) async {
     if (email.isEmpty) return;
     final uri = Uri(scheme: 'mailto', path: email, queryParameters: {
-      'subject': 'Acil Durum Yardım Çağrısı',
+      'subject': _helpCall,
       'body': message,
     });
     if (await canLaunchUrl(uri)) {
@@ -319,7 +333,7 @@ class EmergencyAutoActionsEngine {
         'family_id': familyId,
         'sender_id': userId,
         'message': message,
-        'title': '🆘 ACİL DURUM',
+        'title': _text(const {'tr': '🆘 ACİL DURUM', 'en': '🆘 EMERGENCY', 'nl': '🆘 NOODGEVAL', 'fr': '🆘 URGENCE'}),
       });
     } catch (e) {
       debugPrint('[Emergency] FCM push failed: $e');
@@ -355,7 +369,7 @@ class EmergencyAutoActionsEngine {
     if (config.autoDial) {
       await _autoDial(
         number,
-        config.messageText ?? 'Acil durum yardım çağrısı',
+        config.messageText ?? _helpCall,
       );
     } else {
       // Prepare manual call UI
@@ -372,6 +386,9 @@ class EmergencyAutoActionsEngine {
     await Future.delayed(const Duration(seconds: 5));
     await _tts.setSpeechRate(0.8);
     await _tts.setVolume(1.0);
+    await _tts.setLanguage(switch (_languageCode) {
+      'en' => 'en-GB', 'nl' => 'nl-NL', 'fr' => 'fr-FR', _ => 'tr-TR',
+    });
     await _tts.speak(message);
   }
 
@@ -493,11 +510,11 @@ class EmergencyAutoActionsEngine {
       case EscalationAction.call:
         // Auto-dial emergency number
         final number = step.recipients.isNotEmpty ? step.recipients.first : '112';
-        await _autoDial(number, 'Acil durum yardım çağrısı');
+        await _autoDial(number, _helpCall);
         break;
       case EscalationAction.alertServices:
         // Alert emergency services (112)
-        await _autoDial('112', 'Acil durum yardım çağrısı');
+        await _autoDial('112', _helpCall);
         break;
       case EscalationAction.soundAlarm:
         // Sound alarm is handled by CrashDetectionService
@@ -552,13 +569,31 @@ class EmergencyAutoActionsEngine {
     return false;
   }
 
-  static const _defaultTemplate = EmergencyTemplate(
+  EmergencyTemplate get _defaultTemplate => EmergencyTemplate(
     templateId: 'default',
-    name: 'Varsayılan',
-    smsContent: '🆘 ACİL: {name} yardım istiyor! Konum: {location} Saat: {time}',
-    pushContent: 'Yardım çağrısı! Konum: {location}',
-    voiceContent: 'Bu otomatik bir acil durum çağrısıdır. {name} yardım istiyor.',
-    emailContent: 'Acil durum yardım çağrısı. {name} konum: {location}',
+    name: _text(const {'tr': 'Varsayılan', 'en': 'Default', 'nl': 'Standaard', 'fr': 'Par défaut'}),
+    smsContent: _text(const {
+      'tr': '🆘 ACİL: {name} yardım istiyor! Konum: {location} Saat: {time}',
+      'en': '🆘 EMERGENCY: {name} needs help! Location: {location} Time: {time}',
+      'nl': '🆘 NOODGEVAL: {name} heeft hulp nodig! Locatie: {location} Tijd: {time}',
+      'fr': '🆘 URGENCE : {name} demande de l’aide ! Position : {location} Heure : {time}',
+    }),
+    pushContent: _text(const {
+      'tr': 'Yardım çağrısı! Konum: {location}', 'en': 'Help request! Location: {location}',
+      'nl': 'Hulpverzoek! Locatie: {location}', 'fr': 'Demande d’aide ! Position : {location}',
+    }),
+    voiceContent: _text(const {
+      'tr': 'Bu otomatik bir acil durum çağrısıdır. {name} yardım istiyor.',
+      'en': 'This is an automated emergency call. {name} needs help.',
+      'nl': 'Dit is een automatische noodoproep. {name} heeft hulp nodig.',
+      'fr': 'Ceci est un appel d’urgence automatique. {name} demande de l’aide.',
+    }),
+    emailContent: _text(const {
+      'tr': 'Acil durum yardım çağrısı. {name} konum: {location}',
+      'en': 'Emergency assistance request. {name}, location: {location}',
+      'nl': 'Noodoproep. {name}, locatie: {location}',
+      'fr': 'Demande d’aide d’urgence. {name}, position : {location}',
+    }),
   );
 
   Future<EmergencyTemplate> _getTemplate(String templateId) async {

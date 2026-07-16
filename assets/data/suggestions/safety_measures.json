@@ -1,1706 +1,4718 @@
 {
   "module": "safety_measures",
   "version": "1.0.0",
-  "language": "tr",
+  "default_language": "tr",
+  "language_order": [
+    "tr",
+    "en",
+    "nl",
+    "fr"
+  ],
+  "languages": {
+    "tr": "Türkçe",
+    "en": "English",
+    "nl": "Nederlands",
+    "fr": "Français"
+  },
   "region": "TR",
   "suggestions": [
     {
       "id": "sm001",
-      "title": "Acil Çıkış Planı",
-      "description": "Yangın tatbikatı, toplanma noktası.",
+      "title": {
+        "tr": "Acil Çıkış Planı",
+        "en": "Emergency Exit Plan",
+        "nl": "Nooduitgangsplan",
+        "fr": "Plan de sortie d'urgence"
+      },
+      "description": {
+        "tr": "Yangın tatbikatı, toplanma noktası.",
+        "en": "Fire drill, assembly point.",
+        "nl": "Brandoefening, verzamelpunt.",
+        "fr": "Exercice d'incendie, point de rassemblement."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "yangın"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "yangın",
+          "en": "fire",
+          "nl": "vuur",
+          "fr": "feu"
+        }
       ],
       "tips": [
-        "Yılda en az 2 kez tekrarlayın."
+        {
+          "tr": "Yılda en az 2 kez tekrarlayın.",
+          "en": "Repeat at least 2 times a year.",
+          "nl": "Herhaal minimaal 2 keer per jaar.",
+          "fr": "Répétez au moins 2 fois par an."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm002",
-      "title": "Bugün İlk Yardım Çantası",
-      "description": "Eksik malzemeleri not alın, tamamlayın.",
+      "title": {
+        "tr": "Bugün İlk Yardım Çantası",
+        "en": "First Aid Kit Today",
+        "nl": "EHBO-doos vandaag",
+        "fr": "Trousse de premiers secours aujourd'hui"
+      },
+      "description": {
+        "tr": "Eksik malzemeleri not alın, tamamlayın.",
+        "en": "List and replace any missing first-aid supplies.",
+        "nl": "Noteer ontbrekende EHBO-materialen en vul ze aan.",
+        "fr": "Notez et remplacez le matériel de premiers secours manquant."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "ilk yardım"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "ilk yardım",
+          "en": "first aid",
+          "nl": "eerste hulp",
+          "fr": "premiers secours"
+        }
       ],
       "tips": [
-        "Son kullanma tarihlerini kontrol edin."
+        {
+          "tr": "Son kullanma tarihlerini kontrol edin.",
+          "en": "Check expiration dates.",
+          "nl": "Controleer de vervaldata.",
+          "fr": "Vérifiez les dates de péremption."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm003",
-      "title": "Bu Ay Ev Güvenlik Taraması",
-      "description": "Priz kapakları, dolap kilidi kontrolü.",
+      "title": {
+        "tr": "Bu Ay Ev Güvenlik Taraması",
+        "en": "Home Safety Inspection This Month",
+        "nl": "Woningveiligheidscontrole deze maand",
+        "fr": "Inspection de sécurité du domicile ce mois-ci"
+      },
+      "description": {
+        "tr": "Priz kapakları, dolap kilidi kontrolü.",
+        "en": "Check outlet covers and cabinet locks.",
+        "nl": "Controleer stopcontactbeveiligingen en kastsloten.",
+        "fr": "Vérifiez les cache-prises et les verrous de placard."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 30,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "ev"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "ev",
+          "en": "house",
+          "nl": "huis",
+          "fr": "maison"
+        }
       ],
       "tips": [
-        "Çocukların ulaşabileceği her yeri kontrol edin."
+        {
+          "tr": "Çocukların ulaşabileceği her yeri kontrol edin.",
+          "en": "Check everywhere that children can reach.",
+          "nl": "Controleer overal waar kinderen bij kunnen.",
+          "fr": "Vérifiez partout où les enfants peuvent atteindre."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm004",
-      "title": "Ailece Acil İletişim Listesi",
-      "description": "Önemli numaraları yazın, buzdolabına yapıştırın.",
+      "title": {
+        "tr": "Ailece Acil İletişim Listesi",
+        "en": "Family Emergency Contact List",
+        "nl": "Lijst met contactpersonen voor noodgevallen voor gezinnen",
+        "fr": "Liste de contacts familiaux en cas d'urgence"
+      },
+      "description": {
+        "tr": "Önemli numaraları yazın, buzdolabına yapıştırın.",
+        "en": "Write down important phone numbers and post them on the refrigerator.",
+        "nl": "Noteer belangrijke telefoonnummers en hang ze op de koelkast.",
+        "fr": "Notez les numéros de téléphone importants et affichez-les sur le réfrigérateur."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 10,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "iletişim"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "iletişim",
+          "en": "contact",
+          "nl": "contact opnemen",
+          "fr": "contacter"
+        }
       ],
       "tips": [
-        "112, itfaiye, polis, komşu ekleyin."
+        {
+          "tr": "112, itfaiye, polis, komşu ekleyin.",
+          "en": "Include 112, the fire service, police, and a trusted neighbor.",
+          "nl": "Voeg 112, de brandweer, de politie en een vertrouwde buur toe.",
+          "fr": "Ajoutez le 112, les pompiers, la police et un voisin de confiance."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm005",
-      "title": "Hafta Sonu Bilgisayar Güvenliği",
-      "description": "Şifreleri güncelleyin, çocuklara anlatın.",
+      "title": {
+        "tr": "Hafta Sonu Bilgisayar Güvenliği",
+        "en": "Weekend Computer Security",
+        "nl": "Weekendcomputerbeveiliging",
+        "fr": "Sécurité informatique du week-end"
+      },
+      "description": {
+        "tr": "Şifreleri güncelleyin, çocuklara anlatın.",
+        "en": "Update passwords and teach children how to keep them secure.",
+        "nl": "Werk wachtwoorden bij en leer kinderen hoe ze die veilig houden.",
+        "fr": "Mettez à jour les mots de passe et apprenez aux enfants à les protéger."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 25,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "dijital"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "dijital",
+          "en": "digital",
+          "nl": "digitaal",
+          "fr": "numérique"
+        }
       ],
       "tips": [
-        "İki faktörlü doğrulama açın."
+        {
+          "tr": "İki faktörlü doğrulama açın.",
+          "en": "Turn on two-factor authentication.",
+          "nl": "Schakel tweefactorauthenticatie in.",
+          "fr": "Activez l'authentification à deux facteurs."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm006",
-      "title": "Deprem Çantası Kontrolü",
-      "description": "Su, konserve, battaniye, el feneri kontrolü.",
+      "title": {
+        "tr": "Deprem Çantası Kontrolü",
+        "en": "Emergency Kit Check",
+        "nl": "Noodpakket controleren",
+        "fr": "Vérification du kit d’urgence"
+      },
+      "description": {
+        "tr": "Su, konserve, battaniye, el feneri kontrolü.",
+        "en": "Check the water, canned food, blankets, and flashlights in the emergency kit.",
+        "nl": "Controleer het water, de conserven, dekens en zaklampen in het noodpakket.",
+        "fr": "Vérifiez l’eau, les conserves, les couvertures et les lampes de poche du kit d’urgence."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 25,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "deprem"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "deprem",
+          "en": "earthquake",
+          "nl": "aardbeving",
+          "fr": "tremblement de terre"
+        }
       ],
       "tips": [
-        "Her üye için ayrı çanta hazırlayın."
+        {
+          "tr": "Her üye için ayrı çanta hazırlayın.",
+          "en": "Prepare an emergency bag for each family member.",
+          "nl": "Maak voor elk gezinslid een noodtas klaar.",
+          "fr": "Préparez un sac d’urgence pour chaque membre de la famille."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm007",
-      "title": "Bugün Gaz Kaçağı Testi",
-      "description": "Kokulu sabun suyu ile bağlantı kontrolü.",
+      "title": {
+        "tr": "Bugün Gaz Kaçağı Testi",
+        "en": "Gas Leak Test Today",
+        "nl": "Gaslektest vandaag",
+        "fr": "Test de fuite de gaz aujourd'hui"
+      },
+      "description": {
+        "tr": "Kokulu sabun suyu ile bağlantı kontrolü.",
+        "en": "Check accessible connections with soapy water, following the appliance instructions.",
+        "nl": "Controleer toegankelijke aansluitingen met zeepsop volgens de instructies van het toestel.",
+        "fr": "Vérifiez les raccords accessibles avec de l’eau savonneuse, conformément aux instructions de l’appareil."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "gaz"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "gaz",
+          "en": "gas",
+          "nl": "gas",
+          "fr": "gaz"
+        }
       ],
       "tips": [
-        "Gaz dedektörü bulundurun."
+        {
+          "tr": "Gaz dedektörü bulundurun.",
+          "en": "Have a gas detector.",
+          "nl": "Zorg voor een gasdetector.",
+          "fr": "Ayez un détecteur de gaz."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm008",
-      "title": "Bu Ay Çocuk İnternet Güvenliği",
-      "description": "Ebeveyn kontrolü, güvenli arama ayarları.",
+      "title": {
+        "tr": "Bu Ay Çocuk İnternet Güvenliği",
+        "en": "Children's Internet Safety This Month",
+        "nl": "Internetveiligheid voor kinderen deze maand",
+        "fr": "La sécurité Internet des enfants ce mois-ci"
+      },
+      "description": {
+        "tr": "Ebeveyn kontrolü, güvenli arama ayarları.",
+        "en": "Parental control, safe search settings.",
+        "nl": "Ouderlijk toezicht, veilige zoekinstellingen.",
+        "fr": "Contrôle parental, paramètres de recherche sécurisés."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 25,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "internet"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "internet",
+          "en": "internet",
+          "nl": "internetten",
+          "fr": "Internet"
+        }
       ],
       "tips": [
-        "Ortak kullanım alanlarında internet erişimi."
+        {
+          "tr": "Ortak kullanım alanlarında internet erişimi.",
+          "en": "Keep children’s internet use in shared family spaces.",
+          "nl": "Laat kinderen internet gebruiken in gemeenschappelijke gezinsruimtes.",
+          "fr": "Faites utiliser Internet aux enfants dans les espaces familiaux communs."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm009",
-      "title": "Ailece Yangın Söndürücü Kontrolü",
-      "description": "Basınç göstergesi, son kullanma tarihi.",
+      "title": {
+        "tr": "Ailece Yangın Söndürücü Kontrolü",
+        "en": "Check the Fire Extinguisher as a Family",
+        "nl": "Controleer samen de brandblusser",
+        "fr": "Vérification de l’extincteur en famille"
+      },
+      "description": {
+        "tr": "Basınç göstergesi, son kullanma tarihi.",
+        "en": "Check the pressure gauge and service or expiration date.",
+        "nl": "Controleer de manometer en de onderhouds- of vervaldatum.",
+        "fr": "Vérifiez le manomètre et la date d’entretien ou d’expiration."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "yangın"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "yangın",
+          "en": "fire",
+          "nl": "vuur",
+          "fr": "feu"
+        }
       ],
       "tips": [
-        "Kullanımını öğrenin."
+        {
+          "tr": "Kullanımını öğrenin.",
+          "en": "Learn how to use it.",
+          "nl": "Leer hoe u het kunt gebruiken.",
+          "fr": "Apprenez à l'utiliser."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm010",
-      "title": "Hafta Sonu Aile GPS Paylaşımı",
-      "description": "Telefonda konum paylaşımı açık mı kontrol edin.",
+      "title": {
+        "tr": "Hafta Sonu Aile GPS Paylaşımı",
+        "en": "Weekend Family GPS Sharing",
+        "nl": "Weekend Familie GPS delen",
+        "fr": "Partage GPS familial le week-end"
+      },
+      "description": {
+        "tr": "Telefonda konum paylaşımı açık mı kontrol edin.",
+        "en": "Check if location sharing is turned on on the phone.",
+        "nl": "Controleer of locatie delen is ingeschakeld op de telefoon.",
+        "fr": "Vérifiez si le partage de position est activé sur le téléphone."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 10,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "konum"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "konum",
+          "en": "location",
+          "nl": "locatie",
+          "fr": "emplacement"
+        }
       ],
       "tips": [
-        "FamilyHub uygulamasını kullanın."
+        {
+          "tr": "FamilyHub uygulamasını kullanın.",
+          "en": "Use the FamilyHub app.",
+          "nl": "Gebruik de FamilyHub-app.",
+          "fr": "Utilisez l'application FamilyHub."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm011",
-      "title": "Kimlik Fotokopisi",
-      "description": "Herkesin kimlik fotokopisi ayrı yerde dursun.",
+      "title": {
+        "tr": "Kimlik Fotokopisi",
+        "en": "ID Photocopy",
+        "nl": "ID-fotokopie",
+        "fr": "Photocopie d'identité"
+      },
+      "description": {
+        "tr": "Herkesin kimlik fotokopisi ayrı yerde dursun.",
+        "en": "Keep everyone's ID photocopies in a separate place.",
+        "nl": "Bewaar de identiteitskopieën van iedereen op een aparte plaats.",
+        "fr": "Conservez les photocopies des pièces d'identité de chacun dans un endroit séparé."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "evrak"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "evrak",
+          "en": "paperwork",
+          "nl": "papierwerk",
+          "fr": "paperasse"
+        }
       ],
       "tips": [
-        "Dijital kopya da bulunsun."
+        {
+          "tr": "Dijital kopya da bulunsun.",
+          "en": "Have a digital copy available as well.",
+          "nl": "Houd ook een digitaal exemplaar bij de hand.",
+          "fr": "Ayez également une copie numérique à disposition."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm012",
-      "title": "Bugün Ev Alarm Sistemi Testi",
-      "description": "Sensör, kamera, alarm testi.",
+      "title": {
+        "tr": "Bugün Ev Alarm Sistemi Testi",
+        "en": "Home Alarm System Test Today",
+        "nl": "Test van het huisalarmsysteem vandaag",
+        "fr": "Test du système d'alarme domestique aujourd'hui"
+      },
+      "description": {
+        "tr": "Sensör, kamera, alarm testi.",
+        "en": "Sensor, camera, alarm test.",
+        "nl": "Sensor, camera, alarmtest.",
+        "fr": "Test capteur, caméra, alarme."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 25,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "alarm"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "alarm",
+          "en": "alarm",
+          "nl": "alarm",
+          "fr": "alarme"
+        }
       ],
       "tips": [
-        "Pilleri kontrol edin."
+        {
+          "tr": "Pilleri kontrol edin.",
+          "en": "Check the batteries.",
+          "nl": "Controleer de batterijen.",
+          "fr": "Vérifiez les piles."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm013",
-      "title": "Bu Ay Aile Şifre Protokolü",
-      "description": "Kapı şifresi, telefon şifresi değiştirme.",
+      "title": {
+        "tr": "Bu Ay Aile Şifre Protokolü",
+        "en": "Family Passcode Protocol This Month",
+        "nl": "Protocol voor gezinscodes deze maand",
+        "fr": "Protocole familial des codes d’accès ce mois-ci"
+      },
+      "description": {
+        "tr": "Kapı şifresi, telefon şifresi değiştirme.",
+        "en": "Changing door password and phone password.",
+        "nl": "Deurwachtwoord en telefoonwachtwoord wijzigen.",
+        "fr": "Modification du mot de passe de la porte et du mot de passe du téléphone."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "şifre"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "şifre",
+          "en": "password",
+          "nl": "wachtwoord",
+          "fr": "mot de passe"
+        }
       ],
       "tips": [
-        "Düzenli olarak değiştirin."
+        {
+          "tr": "Düzenli olarak değiştirin.",
+          "en": "Change regularly.",
+          "nl": "Regelmatig veranderen.",
+          "fr": "Changez régulièrement."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm014",
-      "title": "Ailece Bisiklet Kask Kontrolü",
-      "description": "Çocukların kaskı, dizliği, dirsekliği kontrolü.",
+      "title": {
+        "tr": "Ailece Bisiklet Kask Kontrolü",
+        "en": "Family Bicycle Helmet Check",
+        "nl": "Familie Fietshelm Check",
+        "fr": "Vérification du casque de vélo familial"
+      },
+      "description": {
+        "tr": "Çocukların kaskı, dizliği, dirsekliği kontrolü.",
+        "en": "Checking children's helmets, knee pads and elbow pads.",
+        "nl": "Controle van kinderhelmen, kniebeschermers en elleboogbeschermers.",
+        "fr": "Vérification des casques, genouillères et coudières des enfants."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "spor"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "spor",
+          "en": "sports",
+          "nl": "sporten",
+          "fr": "sport"
+        }
       ],
       "tips": [
-        "Kaskın iç etiketini kontrol edin."
+        {
+          "tr": "Kaskın iç etiketini kontrol edin.",
+          "en": "Check the helmet's inner label.",
+          "nl": "Controleer het binnenlabel van de helm.",
+          "fr": "Vérifiez l'étiquette intérieure du casque."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm015",
-      "title": "Hafta Sonu Ev İlaç Dolabı Kontrolü",
-      "description": "Son kullanma tarihleri, bozulanlar.",
+      "title": {
+        "tr": "Hafta Sonu Ev İlaç Dolabı Kontrolü",
+        "en": "Home Medicine Cabinet Check This Weekend",
+        "nl": "Medicijnkastje thuis dit weekend controleren",
+        "fr": "Vérification de l’armoire à pharmacie ce week-end"
+      },
+      "description": {
+        "tr": "Son kullanma tarihleri, bozulanlar.",
+        "en": "Check expiration dates and remove damaged or expired medicines.",
+        "nl": "Controleer de vervaldatums en verwijder beschadigde of verlopen geneesmiddelen.",
+        "fr": "Vérifiez les dates de péremption et retirez les médicaments endommagés ou périmés."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 25,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "sağlık"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "sağlık",
+          "en": "health",
+          "nl": "gezondheid",
+          "fr": "santé"
+        }
       ],
       "tips": [
-        "Çocukların ulaşamayacağı yerde saklayın."
+        {
+          "tr": "Çocukların ulaşamayacağı yerde saklayın.",
+          "en": "Keep out of reach of children.",
+          "nl": "Buiten bereik van kinderen houden.",
+          "fr": "Tenir hors de portée des enfants."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm016",
-      "title": "Aile Güvenlik Şifresi",
-      "description": "SOS kod kelimesi belirleyin.",
+      "title": {
+        "tr": "Aile Güvenlik Şifresi",
+        "en": "Family Safety Code Word",
+        "nl": "Veilig codewoord voor het gezin",
+        "fr": "Mot-code de sécurité familial"
+      },
+      "description": {
+        "tr": "SOS kod kelimesi belirleyin.",
+        "en": "Set an SOS code word.",
+        "nl": "Stel een SOS-codewoord in.",
+        "fr": "Définissez un mot de code SOS."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 10,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "acil"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "acil",
+          "en": "urgent",
+          "nl": "dringend",
+          "fr": "urgent"
+        }
       ],
       "tips": [
-        "Tüm aile bilsin."
+        {
+          "tr": "Tüm aile bilsin.",
+          "en": "Let the whole family know.",
+          "nl": "Laat het de hele familie weten.",
+          "fr": "Faites-le savoir à toute la famille."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm017",
-      "title": "Bugün Duman Dedektörü Testi",
-      "description": "Pil kontrolü, test butonuna basın.",
+      "title": {
+        "tr": "Bugün Duman Dedektörü Testi",
+        "en": "Smoke Detector Test Today",
+        "nl": "Rookmeldertest vandaag",
+        "fr": "Test du détecteur de fumée aujourd'hui"
+      },
+      "description": {
+        "tr": "Pil kontrolü, test butonuna basın.",
+        "en": "Check the battery and press the test button.",
+        "nl": "Controleer de batterij en druk op de testknop.",
+        "fr": "Vérifiez la pile et appuyez sur le bouton de test."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "yangın"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "yangın",
+          "en": "fire",
+          "nl": "vuur",
+          "fr": "feu"
+        }
       ],
       "tips": [
-        "Her katta bulundurun."
+        {
+          "tr": "Her katta bulundurun.",
+          "en": "Install smoke alarms on every floor.",
+          "nl": "Installeer rookmelders op elke verdieping.",
+          "fr": "Installez des détecteurs de fumée à chaque étage."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm018",
-      "title": "Bu Ay Çocuk Kaçırma Eğitimi",
-      "description": "Yabancıyla konuşmama, güvenli yetişkin.",
+      "title": {
+        "tr": "Bu Ay Çocuk Kaçırma Eğitimi",
+        "en": "Child Personal Safety Practice This Month",
+        "nl": "Oefenen met persoonlijke veiligheid voor kinderen deze maand",
+        "fr": "Exercice de sécurité personnelle des enfants ce mois-ci"
+      },
+      "description": {
+        "tr": "Yabancıyla konuşmama, güvenli yetişkin.",
+        "en": "Teach stranger safety and how to identify a trusted adult.",
+        "nl": "Leer kinderen veilig omgaan met vreemden en een vertrouwde volwassene herkennen.",
+        "fr": "Apprenez aux enfants la prudence avec les inconnus et à reconnaître un adulte de confiance."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 30,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "çocuk"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "çocuk",
+          "en": "child",
+          "nl": "kind",
+          "fr": "enfant"
+        }
       ],
       "tips": [
-        "Rol yaparak öğretin."
+        {
+          "tr": "Rol yaparak öğretin.",
+          "en": "Teach through role play.",
+          "nl": "Geef les door middel van rollenspellen.",
+          "fr": "Enseigner à travers des jeux de rôle."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm019",
-      "title": "Ailece Ev Anahtar Yedekleme",
-      "description": "Yedek anahtar komşuda veya kasada.",
+      "title": {
+        "tr": "Ailece Ev Anahtar Yedekleme",
+        "en": "Plan Secure Spare Keys as a Family",
+        "nl": "Plan samen veilige reservesleutels",
+        "fr": "Organiser les doubles de clés en toute sécurité en famille"
+      },
+      "description": {
+        "tr": "Yedek anahtar komşuda veya kasada.",
+        "en": "Keep a spare key with a trusted neighbor or in a secure key safe.",
+        "nl": "Bewaar een reservesleutel bij een vertrouwde buur of in een beveiligd sleutelkluisje.",
+        "fr": "Confiez un double à un voisin de confiance ou placez-le dans un coffre à clés sécurisé."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 10,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "anahtar"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "anahtar",
+          "en": "key",
+          "nl": "sleutel",
+          "fr": "clé"
+        }
       ],
       "tips": [
-        "Birkaç yerde yedek bulundurun."
+        {
+          "tr": "Birkaç yerde yedek bulundurun.",
+          "en": "Keep spare keys only in secure, agreed locations.",
+          "nl": "Bewaar reservesleutels alleen op veilige, afgesproken plaatsen.",
+          "fr": "Conservez les doubles uniquement dans des endroits sûrs et convenus."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm020",
-      "title": "Hafta Sonu Aile Afet Planı",
-      "description": "Deprem, yangın, sel için aile planı.",
+      "title": {
+        "tr": "Hafta Sonu Aile Afet Planı",
+        "en": "Weekend Family Disaster Plan",
+        "nl": "Weekend Familierampenplan",
+        "fr": "Plan de catastrophe familial du week-end"
+      },
+      "description": {
+        "tr": "Deprem, yangın, sel için aile planı.",
+        "en": "Family plan for earthquake, fire, flood.",
+        "nl": "Familieplan voor aardbeving, brand, overstroming.",
+        "fr": "Plan familial en cas de tremblement de terre, incendie, inondation."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 35,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "afet"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "afet",
+          "en": "disaster",
+          "nl": "ramp",
+          "fr": "catastrophe"
+        }
       ],
       "tips": [
-        "Toplanma noktası belirleyin."
+        {
+          "tr": "Toplanma noktası belirleyin.",
+          "en": "Set a meeting point.",
+          "nl": "Stel een ontmoetingspunt in.",
+          "fr": "Fixez un point de rendez-vous."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm021",
-      "title": "Acil Çıkış Planı",
-      "description": "Yangın tatbikatı, toplanma noktası.",
+      "title": {
+        "tr": "Acil Çıkış Planı",
+        "en": "Emergency Exit Plan",
+        "nl": "Nooduitgangsplan",
+        "fr": "Plan de sortie d'urgence"
+      },
+      "description": {
+        "tr": "Yangın tatbikatı, toplanma noktası.",
+        "en": "Fire drill, assembly point.",
+        "nl": "Brandoefening, verzamelpunt.",
+        "fr": "Exercice d'incendie, point de rassemblement."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 25,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "yangın"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "yangın",
+          "en": "fire",
+          "nl": "vuur",
+          "fr": "feu"
+        }
       ],
       "tips": [
-        "Yılda en az 2 kez tekrarlayın."
+        {
+          "tr": "Yılda en az 2 kez tekrarlayın.",
+          "en": "Repeat at least 2 times a year.",
+          "nl": "Herhaal minimaal 2 keer per jaar.",
+          "fr": "Répétez au moins 2 fois par an."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm022",
-      "title": "Bugün İlk Yardım Çantası",
-      "description": "Eksik malzemeleri not alın, tamamlayın.",
+      "title": {
+        "tr": "Bugün İlk Yardım Çantası",
+        "en": "First Aid Kit Today",
+        "nl": "EHBO-doos vandaag",
+        "fr": "Trousse de premiers secours aujourd'hui"
+      },
+      "description": {
+        "tr": "Eksik malzemeleri not alın, tamamlayın.",
+        "en": "List and replace any missing first-aid supplies.",
+        "nl": "Noteer ontbrekende EHBO-materialen en vul ze aan.",
+        "fr": "Notez et remplacez le matériel de premiers secours manquant."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 10,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "ilk yardım"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "ilk yardım",
+          "en": "first aid",
+          "nl": "eerste hulp",
+          "fr": "premiers secours"
+        }
       ],
       "tips": [
-        "Son kullanma tarihlerini kontrol edin."
+        {
+          "tr": "Son kullanma tarihlerini kontrol edin.",
+          "en": "Check expiration dates.",
+          "nl": "Controleer de vervaldata.",
+          "fr": "Vérifiez les dates de péremption."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm023",
-      "title": "Bu Ay Ev Güvenlik Taraması",
-      "description": "Priz kapakları, dolap kilidi kontrolü.",
+      "title": {
+        "tr": "Bu Ay Ev Güvenlik Taraması",
+        "en": "Home Safety Inspection This Month",
+        "nl": "Woningveiligheidscontrole deze maand",
+        "fr": "Inspection de sécurité du domicile ce mois-ci"
+      },
+      "description": {
+        "tr": "Priz kapakları, dolap kilidi kontrolü.",
+        "en": "Check outlet covers and cabinet locks.",
+        "nl": "Controleer stopcontactbeveiligingen en kastsloten.",
+        "fr": "Vérifiez les cache-prises et les verrous de placard."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 25,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "ev"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "ev",
+          "en": "house",
+          "nl": "huis",
+          "fr": "maison"
+        }
       ],
       "tips": [
-        "Çocukların ulaşabileceği her yeri kontrol edin."
+        {
+          "tr": "Çocukların ulaşabileceği her yeri kontrol edin.",
+          "en": "Check everywhere that children can reach.",
+          "nl": "Controleer overal waar kinderen bij kunnen.",
+          "fr": "Vérifiez partout où les enfants peuvent atteindre."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm024",
-      "title": "Ailece Acil İletişim Listesi",
-      "description": "Önemli numaraları yazın, buzdolabına yapıştırın.",
+      "title": {
+        "tr": "Ailece Acil İletişim Listesi",
+        "en": "Family Emergency Contact List",
+        "nl": "Lijst met contactpersonen voor noodgevallen voor gezinnen",
+        "fr": "Liste de contacts familiaux en cas d'urgence"
+      },
+      "description": {
+        "tr": "Önemli numaraları yazın, buzdolabına yapıştırın.",
+        "en": "Write down important phone numbers and post them on the refrigerator.",
+        "nl": "Noteer belangrijke telefoonnummers en hang ze op de koelkast.",
+        "fr": "Notez les numéros de téléphone importants et affichez-les sur le réfrigérateur."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "iletişim"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "iletişim",
+          "en": "contact",
+          "nl": "contact opnemen",
+          "fr": "contacter"
+        }
       ],
       "tips": [
-        "112, itfaiye, polis, komşu ekleyin."
+        {
+          "tr": "112, itfaiye, polis, komşu ekleyin.",
+          "en": "Include 112, the fire service, police, and a trusted neighbor.",
+          "nl": "Voeg 112, de brandweer, de politie en een vertrouwde buur toe.",
+          "fr": "Ajoutez le 112, les pompiers, la police et un voisin de confiance."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm025",
-      "title": "Hafta Sonu Bilgisayar Güvenliği",
-      "description": "Şifreleri güncelleyin, çocuklara anlatın.",
+      "title": {
+        "tr": "Hafta Sonu Bilgisayar Güvenliği",
+        "en": "Weekend Computer Security",
+        "nl": "Weekendcomputerbeveiliging",
+        "fr": "Sécurité informatique du week-end"
+      },
+      "description": {
+        "tr": "Şifreleri güncelleyin, çocuklara anlatın.",
+        "en": "Update passwords and teach children how to keep them secure.",
+        "nl": "Werk wachtwoorden bij en leer kinderen hoe ze die veilig houden.",
+        "fr": "Mettez à jour les mots de passe et apprenez aux enfants à les protéger."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "dijital"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "dijital",
+          "en": "digital",
+          "nl": "digitaal",
+          "fr": "numérique"
+        }
       ],
       "tips": [
-        "İki faktörlü doğrulama açın."
+        {
+          "tr": "İki faktörlü doğrulama açın.",
+          "en": "Turn on two-factor authentication.",
+          "nl": "Schakel tweefactorauthenticatie in.",
+          "fr": "Activez l'authentification à deux facteurs."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm026",
-      "title": "Deprem Çantası Kontrolü",
-      "description": "Su, konserve, battaniye, el feneri kontrolü.",
+      "title": {
+        "tr": "Deprem Çantası Kontrolü",
+        "en": "Emergency Kit Check",
+        "nl": "Noodpakket controleren",
+        "fr": "Vérification du kit d’urgence"
+      },
+      "description": {
+        "tr": "Su, konserve, battaniye, el feneri kontrolü.",
+        "en": "Check the water, canned food, blankets, and flashlights in the emergency kit.",
+        "nl": "Controleer het water, de conserven, dekens en zaklampen in het noodpakket.",
+        "fr": "Vérifiez l’eau, les conserves, les couvertures et les lampes de poche du kit d’urgence."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "deprem"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "deprem",
+          "en": "earthquake",
+          "nl": "aardbeving",
+          "fr": "tremblement de terre"
+        }
       ],
       "tips": [
-        "Her üye için ayrı çanta hazırlayın."
+        {
+          "tr": "Her üye için ayrı çanta hazırlayın.",
+          "en": "Prepare an emergency bag for each family member.",
+          "nl": "Maak voor elk gezinslid een noodtas klaar.",
+          "fr": "Préparez un sac d’urgence pour chaque membre de la famille."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm027",
-      "title": "Bugün Gaz Kaçağı Testi",
-      "description": "Kokulu sabun suyu ile bağlantı kontrolü.",
+      "title": {
+        "tr": "Bugün Gaz Kaçağı Testi",
+        "en": "Gas Leak Test Today",
+        "nl": "Gaslektest vandaag",
+        "fr": "Test de fuite de gaz aujourd'hui"
+      },
+      "description": {
+        "tr": "Kokulu sabun suyu ile bağlantı kontrolü.",
+        "en": "Check accessible connections with soapy water, following the appliance instructions.",
+        "nl": "Controleer toegankelijke aansluitingen met zeepsop volgens de instructies van het toestel.",
+        "fr": "Vérifiez les raccords accessibles avec de l’eau savonneuse, conformément aux instructions de l’appareil."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 25,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "gaz"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "gaz",
+          "en": "gas",
+          "nl": "gas",
+          "fr": "gaz"
+        }
       ],
       "tips": [
-        "Gaz dedektörü bulundurun."
+        {
+          "tr": "Gaz dedektörü bulundurun.",
+          "en": "Have a gas detector.",
+          "nl": "Zorg voor een gasdetector.",
+          "fr": "Ayez un détecteur de gaz."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm028",
-      "title": "Bu Ay Çocuk İnternet Güvenliği",
-      "description": "Ebeveyn kontrolü, güvenli arama ayarları.",
+      "title": {
+        "tr": "Bu Ay Çocuk İnternet Güvenliği",
+        "en": "Children's Internet Safety This Month",
+        "nl": "Internetveiligheid voor kinderen deze maand",
+        "fr": "La sécurité Internet des enfants ce mois-ci"
+      },
+      "description": {
+        "tr": "Ebeveyn kontrolü, güvenli arama ayarları.",
+        "en": "Parental control, safe search settings.",
+        "nl": "Ouderlijk toezicht, veilige zoekinstellingen.",
+        "fr": "Contrôle parental, paramètres de recherche sécurisés."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "internet"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "internet",
+          "en": "internet",
+          "nl": "internetten",
+          "fr": "Internet"
+        }
       ],
       "tips": [
-        "Ortak kullanım alanlarında internet erişimi."
+        {
+          "tr": "Ortak kullanım alanlarında internet erişimi.",
+          "en": "Keep children’s internet use in shared family spaces.",
+          "nl": "Laat kinderen internet gebruiken in gemeenschappelijke gezinsruimtes.",
+          "fr": "Faites utiliser Internet aux enfants dans les espaces familiaux communs."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm029",
-      "title": "Ailece Yangın Söndürücü Kontrolü",
-      "description": "Basınç göstergesi, son kullanma tarihi.",
+      "title": {
+        "tr": "Ailece Yangın Söndürücü Kontrolü",
+        "en": "Check the Fire Extinguisher as a Family",
+        "nl": "Controleer samen de brandblusser",
+        "fr": "Vérification de l’extincteur en famille"
+      },
+      "description": {
+        "tr": "Basınç göstergesi, son kullanma tarihi.",
+        "en": "Check the pressure gauge and service or expiration date.",
+        "nl": "Controleer de manometer en de onderhouds- of vervaldatum.",
+        "fr": "Vérifiez le manomètre et la date d’entretien ou d’expiration."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "yangın"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "yangın",
+          "en": "fire",
+          "nl": "vuur",
+          "fr": "feu"
+        }
       ],
       "tips": [
-        "Kullanımını öğrenin."
+        {
+          "tr": "Kullanımını öğrenin.",
+          "en": "Learn how to use it.",
+          "nl": "Leer hoe u het kunt gebruiken.",
+          "fr": "Apprenez à l'utiliser."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm030",
-      "title": "Hafta Sonu Aile GPS Paylaşımı",
-      "description": "Telefonda konum paylaşımı açık mı kontrol edin.",
+      "title": {
+        "tr": "Hafta Sonu Aile GPS Paylaşımı",
+        "en": "Weekend Family GPS Sharing",
+        "nl": "Weekend Familie GPS delen",
+        "fr": "Partage GPS familial le week-end"
+      },
+      "description": {
+        "tr": "Telefonda konum paylaşımı açık mı kontrol edin.",
+        "en": "Check if location sharing is turned on on the phone.",
+        "nl": "Controleer of locatie delen is ingeschakeld op de telefoon.",
+        "fr": "Vérifiez si le partage de position est activé sur le téléphone."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "konum"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "konum",
+          "en": "location",
+          "nl": "locatie",
+          "fr": "emplacement"
+        }
       ],
       "tips": [
-        "FamilyHub uygulamasını kullanın."
+        {
+          "tr": "FamilyHub uygulamasını kullanın.",
+          "en": "Use the FamilyHub app.",
+          "nl": "Gebruik de FamilyHub-app.",
+          "fr": "Utilisez l'application FamilyHub."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm031",
-      "title": "Kimlik Fotokopisi",
-      "description": "Herkesin kimlik fotokopisi ayrı yerde dursun.",
+      "title": {
+        "tr": "Kimlik Fotokopisi",
+        "en": "ID Photocopy",
+        "nl": "ID-fotokopie",
+        "fr": "Photocopie d'identité"
+      },
+      "description": {
+        "tr": "Herkesin kimlik fotokopisi ayrı yerde dursun.",
+        "en": "Keep everyone's ID photocopies in a separate place.",
+        "nl": "Bewaar de identiteitskopieën van iedereen op een aparte plaats.",
+        "fr": "Conservez les photocopies des pièces d'identité de chacun dans un endroit séparé."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "evrak"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "evrak",
+          "en": "paperwork",
+          "nl": "papierwerk",
+          "fr": "paperasse"
+        }
       ],
       "tips": [
-        "Dijital kopya da bulunsun."
+        {
+          "tr": "Dijital kopya da bulunsun.",
+          "en": "Have a digital copy available as well.",
+          "nl": "Houd ook een digitaal exemplaar bij de hand.",
+          "fr": "Ayez également une copie numérique à disposition."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm032",
-      "title": "Bugün Ev Alarm Sistemi Testi",
-      "description": "Sensör, kamera, alarm testi.",
+      "title": {
+        "tr": "Bugün Ev Alarm Sistemi Testi",
+        "en": "Home Alarm System Test Today",
+        "nl": "Test van het huisalarmsysteem vandaag",
+        "fr": "Test du système d'alarme domestique aujourd'hui"
+      },
+      "description": {
+        "tr": "Sensör, kamera, alarm testi.",
+        "en": "Sensor, camera, alarm test.",
+        "nl": "Sensor, camera, alarmtest.",
+        "fr": "Test capteur, caméra, alarme."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "alarm"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "alarm",
+          "en": "alarm",
+          "nl": "alarm",
+          "fr": "alarme"
+        }
       ],
       "tips": [
-        "Pilleri kontrol edin."
+        {
+          "tr": "Pilleri kontrol edin.",
+          "en": "Check the batteries.",
+          "nl": "Controleer de batterijen.",
+          "fr": "Vérifiez les piles."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm033",
-      "title": "Bu Ay Aile Şifre Protokolü",
-      "description": "Kapı şifresi, telefon şifresi değiştirme.",
+      "title": {
+        "tr": "Bu Ay Aile Şifre Protokolü",
+        "en": "Family Passcode Protocol This Month",
+        "nl": "Protocol voor gezinscodes deze maand",
+        "fr": "Protocole familial des codes d’accès ce mois-ci"
+      },
+      "description": {
+        "tr": "Kapı şifresi, telefon şifresi değiştirme.",
+        "en": "Changing door password and phone password.",
+        "nl": "Deurwachtwoord en telefoonwachtwoord wijzigen.",
+        "fr": "Modification du mot de passe de la porte et du mot de passe du téléphone."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 25,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "şifre"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "şifre",
+          "en": "password",
+          "nl": "wachtwoord",
+          "fr": "mot de passe"
+        }
       ],
       "tips": [
-        "Düzenli olarak değiştirin."
+        {
+          "tr": "Düzenli olarak değiştirin.",
+          "en": "Change regularly.",
+          "nl": "Regelmatig veranderen.",
+          "fr": "Changez régulièrement."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm034",
-      "title": "Ailece Bisiklet Kask Kontrolü",
-      "description": "Çocukların kaskı, dizliği, dirsekliği kontrolü.",
+      "title": {
+        "tr": "Ailece Bisiklet Kask Kontrolü",
+        "en": "Family Bicycle Helmet Check",
+        "nl": "Familie Fietshelm Check",
+        "fr": "Vérification du casque de vélo familial"
+      },
+      "description": {
+        "tr": "Çocukların kaskı, dizliği, dirsekliği kontrolü.",
+        "en": "Checking children's helmets, knee pads and elbow pads.",
+        "nl": "Controle van kinderhelmen, kniebeschermers en elleboogbeschermers.",
+        "fr": "Vérification des casques, genouillères et coudières des enfants."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 10,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "spor"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "spor",
+          "en": "sports",
+          "nl": "sporten",
+          "fr": "sport"
+        }
       ],
       "tips": [
-        "Kaskın iç etiketini kontrol edin."
+        {
+          "tr": "Kaskın iç etiketini kontrol edin.",
+          "en": "Check the helmet's inner label.",
+          "nl": "Controleer het binnenlabel van de helm.",
+          "fr": "Vérifiez l'étiquette intérieure du casque."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm035",
-      "title": "Hafta Sonu Ev İlaç Dolabı Kontrolü",
-      "description": "Son kullanma tarihleri, bozulanlar.",
+      "title": {
+        "tr": "Hafta Sonu Ev İlaç Dolabı Kontrolü",
+        "en": "Home Medicine Cabinet Check This Weekend",
+        "nl": "Medicijnkastje thuis dit weekend controleren",
+        "fr": "Vérification de l’armoire à pharmacie ce week-end"
+      },
+      "description": {
+        "tr": "Son kullanma tarihleri, bozulanlar.",
+        "en": "Check expiration dates and remove damaged or expired medicines.",
+        "nl": "Controleer de vervaldatums en verwijder beschadigde of verlopen geneesmiddelen.",
+        "fr": "Vérifiez les dates de péremption et retirez les médicaments endommagés ou périmés."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "sağlık"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "sağlık",
+          "en": "health",
+          "nl": "gezondheid",
+          "fr": "santé"
+        }
       ],
       "tips": [
-        "Çocukların ulaşamayacağı yerde saklayın."
+        {
+          "tr": "Çocukların ulaşamayacağı yerde saklayın.",
+          "en": "Keep out of reach of children.",
+          "nl": "Buiten bereik van kinderen houden.",
+          "fr": "Tenir hors de portée des enfants."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm036",
-      "title": "Aile Güvenlik Şifresi",
-      "description": "SOS kod kelimesi belirleyin.",
+      "title": {
+        "tr": "Aile Güvenlik Şifresi",
+        "en": "Family Safety Code Word",
+        "nl": "Veilig codewoord voor het gezin",
+        "fr": "Mot-code de sécurité familial"
+      },
+      "description": {
+        "tr": "SOS kod kelimesi belirleyin.",
+        "en": "Set an SOS code word.",
+        "nl": "Stel een SOS-codewoord in.",
+        "fr": "Définissez un mot de code SOS."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "acil"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "acil",
+          "en": "urgent",
+          "nl": "dringend",
+          "fr": "urgent"
+        }
       ],
       "tips": [
-        "Tüm aile bilsin."
+        {
+          "tr": "Tüm aile bilsin.",
+          "en": "Let the whole family know.",
+          "nl": "Laat het de hele familie weten.",
+          "fr": "Faites-le savoir à toute la famille."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm037",
-      "title": "Bugün Duman Dedektörü Testi",
-      "description": "Pil kontrolü, test butonuna basın.",
+      "title": {
+        "tr": "Bugün Duman Dedektörü Testi",
+        "en": "Smoke Detector Test Today",
+        "nl": "Rookmeldertest vandaag",
+        "fr": "Test du détecteur de fumée aujourd'hui"
+      },
+      "description": {
+        "tr": "Pil kontrolü, test butonuna basın.",
+        "en": "Check the battery and press the test button.",
+        "nl": "Controleer de batterij en druk op de testknop.",
+        "fr": "Vérifiez la pile et appuyez sur le bouton de test."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 10,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "yangın"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "yangın",
+          "en": "fire",
+          "nl": "vuur",
+          "fr": "feu"
+        }
       ],
       "tips": [
-        "Her katta bulundurun."
+        {
+          "tr": "Her katta bulundurun.",
+          "en": "Install smoke alarms on every floor.",
+          "nl": "Installeer rookmelders op elke verdieping.",
+          "fr": "Installez des détecteurs de fumée à chaque étage."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm038",
-      "title": "Bu Ay Çocuk Kaçırma Eğitimi",
-      "description": "Yabancıyla konuşmama, güvenli yetişkin.",
+      "title": {
+        "tr": "Bu Ay Çocuk Kaçırma Eğitimi",
+        "en": "Child Personal Safety Practice This Month",
+        "nl": "Oefenen met persoonlijke veiligheid voor kinderen deze maand",
+        "fr": "Exercice de sécurité personnelle des enfants ce mois-ci"
+      },
+      "description": {
+        "tr": "Yabancıyla konuşmama, güvenli yetişkin.",
+        "en": "Teach stranger safety and how to identify a trusted adult.",
+        "nl": "Leer kinderen veilig omgaan met vreemden en een vertrouwde volwassene herkennen.",
+        "fr": "Apprenez aux enfants la prudence avec les inconnus et à reconnaître un adulte de confiance."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 25,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "çocuk"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "çocuk",
+          "en": "child",
+          "nl": "kind",
+          "fr": "enfant"
+        }
       ],
       "tips": [
-        "Rol yaparak öğretin."
+        {
+          "tr": "Rol yaparak öğretin.",
+          "en": "Teach through role play.",
+          "nl": "Geef les door middel van rollenspellen.",
+          "fr": "Enseigner à travers des jeux de rôle."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm039",
-      "title": "Ailece Ev Anahtar Yedekleme",
-      "description": "Yedek anahtar komşuda veya kasada.",
+      "title": {
+        "tr": "Ailece Ev Anahtar Yedekleme",
+        "en": "Plan Secure Spare Keys as a Family",
+        "nl": "Plan samen veilige reservesleutels",
+        "fr": "Organiser les doubles de clés en toute sécurité en famille"
+      },
+      "description": {
+        "tr": "Yedek anahtar komşuda veya kasada.",
+        "en": "Keep a spare key with a trusted neighbor or in a secure key safe.",
+        "nl": "Bewaar een reservesleutel bij een vertrouwde buur of in een beveiligd sleutelkluisje.",
+        "fr": "Confiez un double à un voisin de confiance ou placez-le dans un coffre à clés sécurisé."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "anahtar"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "anahtar",
+          "en": "key",
+          "nl": "sleutel",
+          "fr": "clé"
+        }
       ],
       "tips": [
-        "Birkaç yerde yedek bulundurun."
+        {
+          "tr": "Birkaç yerde yedek bulundurun.",
+          "en": "Keep spare keys only in secure, agreed locations.",
+          "nl": "Bewaar reservesleutels alleen op veilige, afgesproken plaatsen.",
+          "fr": "Conservez les doubles uniquement dans des endroits sûrs et convenus."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm040",
-      "title": "Hafta Sonu Aile Afet Planı",
-      "description": "Deprem, yangın, sel için aile planı.",
+      "title": {
+        "tr": "Hafta Sonu Aile Afet Planı",
+        "en": "Weekend Family Disaster Plan",
+        "nl": "Weekend Familierampenplan",
+        "fr": "Plan de catastrophe familial du week-end"
+      },
+      "description": {
+        "tr": "Deprem, yangın, sel için aile planı.",
+        "en": "Family plan for earthquake, fire, flood.",
+        "nl": "Familieplan voor aardbeving, brand, overstroming.",
+        "fr": "Plan familial en cas de tremblement de terre, incendie, inondation."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 30,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "afet"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "afet",
+          "en": "disaster",
+          "nl": "ramp",
+          "fr": "catastrophe"
+        }
       ],
       "tips": [
-        "Toplanma noktası belirleyin."
+        {
+          "tr": "Toplanma noktası belirleyin.",
+          "en": "Set a meeting point.",
+          "nl": "Stel een ontmoetingspunt in.",
+          "fr": "Fixez un point de rendez-vous."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm041",
-      "title": "Acil Çıkış Planı",
-      "description": "Yangın tatbikatı, toplanma noktası.",
+      "title": {
+        "tr": "Acil Çıkış Planı",
+        "en": "Emergency Exit Plan",
+        "nl": "Nooduitgangsplan",
+        "fr": "Plan de sortie d'urgence"
+      },
+      "description": {
+        "tr": "Yangın tatbikatı, toplanma noktası.",
+        "en": "Fire drill, assembly point.",
+        "nl": "Brandoefening, verzamelpunt.",
+        "fr": "Exercice d'incendie, point de rassemblement."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "yangın"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "yangın",
+          "en": "fire",
+          "nl": "vuur",
+          "fr": "feu"
+        }
       ],
       "tips": [
-        "Yılda en az 2 kez tekrarlayın."
+        {
+          "tr": "Yılda en az 2 kez tekrarlayın.",
+          "en": "Repeat at least 2 times a year.",
+          "nl": "Herhaal minimaal 2 keer per jaar.",
+          "fr": "Répétez au moins 2 fois par an."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm042",
-      "title": "Bugün İlk Yardım Çantası",
-      "description": "Eksik malzemeleri not alın, tamamlayın.",
+      "title": {
+        "tr": "Bugün İlk Yardım Çantası",
+        "en": "First Aid Kit Today",
+        "nl": "EHBO-doos vandaag",
+        "fr": "Trousse de premiers secours aujourd'hui"
+      },
+      "description": {
+        "tr": "Eksik malzemeleri not alın, tamamlayın.",
+        "en": "List and replace any missing first-aid supplies.",
+        "nl": "Noteer ontbrekende EHBO-materialen en vul ze aan.",
+        "fr": "Notez et remplacez le matériel de premiers secours manquant."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "ilk yardım"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "ilk yardım",
+          "en": "first aid",
+          "nl": "eerste hulp",
+          "fr": "premiers secours"
+        }
       ],
       "tips": [
-        "Son kullanma tarihlerini kontrol edin."
+        {
+          "tr": "Son kullanma tarihlerini kontrol edin.",
+          "en": "Check expiration dates.",
+          "nl": "Controleer de vervaldata.",
+          "fr": "Vérifiez les dates de péremption."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm043",
-      "title": "Bu Ay Ev Güvenlik Taraması",
-      "description": "Priz kapakları, dolap kilidi kontrolü.",
+      "title": {
+        "tr": "Bu Ay Ev Güvenlik Taraması",
+        "en": "Home Safety Inspection This Month",
+        "nl": "Woningveiligheidscontrole deze maand",
+        "fr": "Inspection de sécurité du domicile ce mois-ci"
+      },
+      "description": {
+        "tr": "Priz kapakları, dolap kilidi kontrolü.",
+        "en": "Check outlet covers and cabinet locks.",
+        "nl": "Controleer stopcontactbeveiligingen en kastsloten.",
+        "fr": "Vérifiez les cache-prises et les verrous de placard."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "ev"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "ev",
+          "en": "house",
+          "nl": "huis",
+          "fr": "maison"
+        }
       ],
       "tips": [
-        "Çocukların ulaşabileceği her yeri kontrol edin."
+        {
+          "tr": "Çocukların ulaşabileceği her yeri kontrol edin.",
+          "en": "Check everywhere that children can reach.",
+          "nl": "Controleer overal waar kinderen bij kunnen.",
+          "fr": "Vérifiez partout où les enfants peuvent atteindre."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm044",
-      "title": "Ailece Acil İletişim Listesi",
-      "description": "Önemli numaraları yazın, buzdolabına yapıştırın.",
+      "title": {
+        "tr": "Ailece Acil İletişim Listesi",
+        "en": "Family Emergency Contact List",
+        "nl": "Lijst met contactpersonen voor noodgevallen voor gezinnen",
+        "fr": "Liste de contacts familiaux en cas d'urgence"
+      },
+      "description": {
+        "tr": "Önemli numaraları yazın, buzdolabına yapıştırın.",
+        "en": "Write down important phone numbers and post them on the refrigerator.",
+        "nl": "Noteer belangrijke telefoonnummers en hang ze op de koelkast.",
+        "fr": "Notez les numéros de téléphone importants et affichez-les sur le réfrigérateur."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "iletişim"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "iletişim",
+          "en": "contact",
+          "nl": "contact opnemen",
+          "fr": "contacter"
+        }
       ],
       "tips": [
-        "112, itfaiye, polis, komşu ekleyin."
+        {
+          "tr": "112, itfaiye, polis, komşu ekleyin.",
+          "en": "Include 112, the fire service, police, and a trusted neighbor.",
+          "nl": "Voeg 112, de brandweer, de politie en een vertrouwde buur toe.",
+          "fr": "Ajoutez le 112, les pompiers, la police et un voisin de confiance."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm045",
-      "title": "Hafta Sonu Bilgisayar Güvenliği",
-      "description": "Şifreleri güncelleyin, çocuklara anlatın.",
+      "title": {
+        "tr": "Hafta Sonu Bilgisayar Güvenliği",
+        "en": "Weekend Computer Security",
+        "nl": "Weekendcomputerbeveiliging",
+        "fr": "Sécurité informatique du week-end"
+      },
+      "description": {
+        "tr": "Şifreleri güncelleyin, çocuklara anlatın.",
+        "en": "Update passwords and teach children how to keep them secure.",
+        "nl": "Werk wachtwoorden bij en leer kinderen hoe ze die veilig houden.",
+        "fr": "Mettez à jour les mots de passe et apprenez aux enfants à les protéger."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 30,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "dijital"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "dijital",
+          "en": "digital",
+          "nl": "digitaal",
+          "fr": "numérique"
+        }
       ],
       "tips": [
-        "İki faktörlü doğrulama açın."
+        {
+          "tr": "İki faktörlü doğrulama açın.",
+          "en": "Turn on two-factor authentication.",
+          "nl": "Schakel tweefactorauthenticatie in.",
+          "fr": "Activez l'authentification à deux facteurs."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm046",
-      "title": "Deprem Çantası Kontrolü",
-      "description": "Su, konserve, battaniye, el feneri kontrolü.",
+      "title": {
+        "tr": "Deprem Çantası Kontrolü",
+        "en": "Emergency Kit Check",
+        "nl": "Noodpakket controleren",
+        "fr": "Vérification du kit d’urgence"
+      },
+      "description": {
+        "tr": "Su, konserve, battaniye, el feneri kontrolü.",
+        "en": "Check the water, canned food, blankets, and flashlights in the emergency kit.",
+        "nl": "Controleer het water, de conserven, dekens en zaklampen in het noodpakket.",
+        "fr": "Vérifiez l’eau, les conserves, les couvertures et les lampes de poche du kit d’urgence."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "deprem"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "deprem",
+          "en": "earthquake",
+          "nl": "aardbeving",
+          "fr": "tremblement de terre"
+        }
       ],
       "tips": [
-        "Her üye için ayrı çanta hazırlayın."
+        {
+          "tr": "Her üye için ayrı çanta hazırlayın.",
+          "en": "Prepare an emergency bag for each family member.",
+          "nl": "Maak voor elk gezinslid een noodtas klaar.",
+          "fr": "Préparez un sac d’urgence pour chaque membre de la famille."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm047",
-      "title": "Bugün Gaz Kaçağı Testi",
-      "description": "Kokulu sabun suyu ile bağlantı kontrolü.",
+      "title": {
+        "tr": "Bugün Gaz Kaçağı Testi",
+        "en": "Gas Leak Test Today",
+        "nl": "Gaslektest vandaag",
+        "fr": "Test de fuite de gaz aujourd'hui"
+      },
+      "description": {
+        "tr": "Kokulu sabun suyu ile bağlantı kontrolü.",
+        "en": "Check accessible connections with soapy water, following the appliance instructions.",
+        "nl": "Controleer toegankelijke aansluitingen met zeepsop volgens de instructies van het toestel.",
+        "fr": "Vérifiez les raccords accessibles avec de l’eau savonneuse, conformément aux instructions de l’appareil."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "gaz"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "gaz",
+          "en": "gas",
+          "nl": "gas",
+          "fr": "gaz"
+        }
       ],
       "tips": [
-        "Gaz dedektörü bulundurun."
+        {
+          "tr": "Gaz dedektörü bulundurun.",
+          "en": "Have a gas detector.",
+          "nl": "Zorg voor een gasdetector.",
+          "fr": "Ayez un détecteur de gaz."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm048",
-      "title": "Bu Ay Çocuk İnternet Güvenliği",
-      "description": "Ebeveyn kontrolü, güvenli arama ayarları.",
+      "title": {
+        "tr": "Bu Ay Çocuk İnternet Güvenliği",
+        "en": "Children's Internet Safety This Month",
+        "nl": "Internetveiligheid voor kinderen deze maand",
+        "fr": "La sécurité Internet des enfants ce mois-ci"
+      },
+      "description": {
+        "tr": "Ebeveyn kontrolü, güvenli arama ayarları.",
+        "en": "Parental control, safe search settings.",
+        "nl": "Ouderlijk toezicht, veilige zoekinstellingen.",
+        "fr": "Contrôle parental, paramètres de recherche sécurisés."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 30,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "internet"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "internet",
+          "en": "internet",
+          "nl": "internetten",
+          "fr": "Internet"
+        }
       ],
       "tips": [
-        "Ortak kullanım alanlarında internet erişimi."
+        {
+          "tr": "Ortak kullanım alanlarında internet erişimi.",
+          "en": "Keep children’s internet use in shared family spaces.",
+          "nl": "Laat kinderen internet gebruiken in gemeenschappelijke gezinsruimtes.",
+          "fr": "Faites utiliser Internet aux enfants dans les espaces familiaux communs."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm049",
-      "title": "Ailece Yangın Söndürücü Kontrolü",
-      "description": "Basınç göstergesi, son kullanma tarihi.",
+      "title": {
+        "tr": "Ailece Yangın Söndürücü Kontrolü",
+        "en": "Check the Fire Extinguisher as a Family",
+        "nl": "Controleer samen de brandblusser",
+        "fr": "Vérification de l’extincteur en famille"
+      },
+      "description": {
+        "tr": "Basınç göstergesi, son kullanma tarihi.",
+        "en": "Check the pressure gauge and service or expiration date.",
+        "nl": "Controleer de manometer en de onderhouds- of vervaldatum.",
+        "fr": "Vérifiez le manomètre et la date d’entretien ou d’expiration."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 10,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "yangın"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "yangın",
+          "en": "fire",
+          "nl": "vuur",
+          "fr": "feu"
+        }
       ],
       "tips": [
-        "Kullanımını öğrenin."
+        {
+          "tr": "Kullanımını öğrenin.",
+          "en": "Learn how to use it.",
+          "nl": "Leer hoe u het kunt gebruiken.",
+          "fr": "Apprenez à l'utiliser."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm050",
-      "title": "Hafta Sonu Aile GPS Paylaşımı",
-      "description": "Telefonda konum paylaşımı açık mı kontrol edin.",
+      "title": {
+        "tr": "Hafta Sonu Aile GPS Paylaşımı",
+        "en": "Weekend Family GPS Sharing",
+        "nl": "Weekend Familie GPS delen",
+        "fr": "Partage GPS familial le week-end"
+      },
+      "description": {
+        "tr": "Telefonda konum paylaşımı açık mı kontrol edin.",
+        "en": "Check if location sharing is turned on on the phone.",
+        "nl": "Controleer of locatie delen is ingeschakeld op de telefoon.",
+        "fr": "Vérifiez si le partage de position est activé sur le téléphone."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "konum"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "konum",
+          "en": "location",
+          "nl": "locatie",
+          "fr": "emplacement"
+        }
       ],
       "tips": [
-        "FamilyHub uygulamasını kullanın."
+        {
+          "tr": "FamilyHub uygulamasını kullanın.",
+          "en": "Use the FamilyHub app.",
+          "nl": "Gebruik de FamilyHub-app.",
+          "fr": "Utilisez l'application FamilyHub."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm051",
-      "title": "Kimlik Fotokopisi",
-      "description": "Herkesin kimlik fotokopisi ayrı yerde dursun.",
+      "title": {
+        "tr": "Kimlik Fotokopisi",
+        "en": "ID Photocopy",
+        "nl": "ID-fotokopie",
+        "fr": "Photocopie d'identité"
+      },
+      "description": {
+        "tr": "Herkesin kimlik fotokopisi ayrı yerde dursun.",
+        "en": "Keep everyone's ID photocopies in a separate place.",
+        "nl": "Bewaar de identiteitskopieën van iedereen op een aparte plaats.",
+        "fr": "Conservez les photocopies des pièces d'identité de chacun dans un endroit séparé."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 25,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "evrak"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "evrak",
+          "en": "paperwork",
+          "nl": "papierwerk",
+          "fr": "paperasse"
+        }
       ],
       "tips": [
-        "Dijital kopya da bulunsun."
+        {
+          "tr": "Dijital kopya da bulunsun.",
+          "en": "Have a digital copy available as well.",
+          "nl": "Houd ook een digitaal exemplaar bij de hand.",
+          "fr": "Ayez également une copie numérique à disposition."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm052",
-      "title": "Bugün Ev Alarm Sistemi Testi",
-      "description": "Sensör, kamera, alarm testi.",
+      "title": {
+        "tr": "Bugün Ev Alarm Sistemi Testi",
+        "en": "Home Alarm System Test Today",
+        "nl": "Test van het huisalarmsysteem vandaag",
+        "fr": "Test du système d'alarme domestique aujourd'hui"
+      },
+      "description": {
+        "tr": "Sensör, kamera, alarm testi.",
+        "en": "Sensor, camera, alarm test.",
+        "nl": "Sensor, camera, alarmtest.",
+        "fr": "Test capteur, caméra, alarme."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "alarm"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "alarm",
+          "en": "alarm",
+          "nl": "alarm",
+          "fr": "alarme"
+        }
       ],
       "tips": [
-        "Pilleri kontrol edin."
+        {
+          "tr": "Pilleri kontrol edin.",
+          "en": "Check the batteries.",
+          "nl": "Controleer de batterijen.",
+          "fr": "Vérifiez les piles."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm053",
-      "title": "Bu Ay Aile Şifre Protokolü",
-      "description": "Kapı şifresi, telefon şifresi değiştirme.",
+      "title": {
+        "tr": "Bu Ay Aile Şifre Protokolü",
+        "en": "Family Passcode Protocol This Month",
+        "nl": "Protocol voor gezinscodes deze maand",
+        "fr": "Protocole familial des codes d’accès ce mois-ci"
+      },
+      "description": {
+        "tr": "Kapı şifresi, telefon şifresi değiştirme.",
+        "en": "Changing door password and phone password.",
+        "nl": "Deurwachtwoord en telefoonwachtwoord wijzigen.",
+        "fr": "Modification du mot de passe de la porte et du mot de passe du téléphone."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "şifre"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "şifre",
+          "en": "password",
+          "nl": "wachtwoord",
+          "fr": "mot de passe"
+        }
       ],
       "tips": [
-        "Düzenli olarak değiştirin."
+        {
+          "tr": "Düzenli olarak değiştirin.",
+          "en": "Change regularly.",
+          "nl": "Regelmatig veranderen.",
+          "fr": "Changez régulièrement."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm054",
-      "title": "Ailece Bisiklet Kask Kontrolü",
-      "description": "Çocukların kaskı, dizliği, dirsekliği kontrolü.",
+      "title": {
+        "tr": "Ailece Bisiklet Kask Kontrolü",
+        "en": "Family Bicycle Helmet Check",
+        "nl": "Familie Fietshelm Check",
+        "fr": "Vérification du casque de vélo familial"
+      },
+      "description": {
+        "tr": "Çocukların kaskı, dizliği, dirsekliği kontrolü.",
+        "en": "Checking children's helmets, knee pads and elbow pads.",
+        "nl": "Controle van kinderhelmen, kniebeschermers en elleboogbeschermers.",
+        "fr": "Vérification des casques, genouillères et coudières des enfants."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "spor"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "spor",
+          "en": "sports",
+          "nl": "sporten",
+          "fr": "sport"
+        }
       ],
       "tips": [
-        "Kaskın iç etiketini kontrol edin."
+        {
+          "tr": "Kaskın iç etiketini kontrol edin.",
+          "en": "Check the helmet's inner label.",
+          "nl": "Controleer het binnenlabel van de helm.",
+          "fr": "Vérifiez l'étiquette intérieure du casque."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm055",
-      "title": "Hafta Sonu Ev İlaç Dolabı Kontrolü",
-      "description": "Son kullanma tarihleri, bozulanlar.",
+      "title": {
+        "tr": "Hafta Sonu Ev İlaç Dolabı Kontrolü",
+        "en": "Home Medicine Cabinet Check This Weekend",
+        "nl": "Medicijnkastje thuis dit weekend controleren",
+        "fr": "Vérification de l’armoire à pharmacie ce week-end"
+      },
+      "description": {
+        "tr": "Son kullanma tarihleri, bozulanlar.",
+        "en": "Check expiration dates and remove damaged or expired medicines.",
+        "nl": "Controleer de vervaldatums en verwijder beschadigde of verlopen geneesmiddelen.",
+        "fr": "Vérifiez les dates de péremption et retirez les médicaments endommagés ou périmés."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "sağlık"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "sağlık",
+          "en": "health",
+          "nl": "gezondheid",
+          "fr": "santé"
+        }
       ],
       "tips": [
-        "Çocukların ulaşamayacağı yerde saklayın."
+        {
+          "tr": "Çocukların ulaşamayacağı yerde saklayın.",
+          "en": "Keep out of reach of children.",
+          "nl": "Buiten bereik van kinderen houden.",
+          "fr": "Tenir hors de portée des enfants."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm056",
-      "title": "Aile Güvenlik Şifresi",
-      "description": "SOS kod kelimesi belirleyin.",
+      "title": {
+        "tr": "Aile Güvenlik Şifresi",
+        "en": "Family Safety Code Word",
+        "nl": "Veilig codewoord voor het gezin",
+        "fr": "Mot-code de sécurité familial"
+      },
+      "description": {
+        "tr": "SOS kod kelimesi belirleyin.",
+        "en": "Set an SOS code word.",
+        "nl": "Stel een SOS-codewoord in.",
+        "fr": "Définissez un mot de code SOS."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "acil"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "acil",
+          "en": "urgent",
+          "nl": "dringend",
+          "fr": "urgent"
+        }
       ],
       "tips": [
-        "Tüm aile bilsin."
+        {
+          "tr": "Tüm aile bilsin.",
+          "en": "Let the whole family know.",
+          "nl": "Laat het de hele familie weten.",
+          "fr": "Faites-le savoir à toute la famille."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm057",
-      "title": "Bugün Duman Dedektörü Testi",
-      "description": "Pil kontrolü, test butonuna basın.",
+      "title": {
+        "tr": "Bugün Duman Dedektörü Testi",
+        "en": "Smoke Detector Test Today",
+        "nl": "Rookmeldertest vandaag",
+        "fr": "Test du détecteur de fumée aujourd'hui"
+      },
+      "description": {
+        "tr": "Pil kontrolü, test butonuna basın.",
+        "en": "Check the battery and press the test button.",
+        "nl": "Controleer de batterij en druk op de testknop.",
+        "fr": "Vérifiez la pile et appuyez sur le bouton de test."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "yangın"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "yangın",
+          "en": "fire",
+          "nl": "vuur",
+          "fr": "feu"
+        }
       ],
       "tips": [
-        "Her katta bulundurun."
+        {
+          "tr": "Her katta bulundurun.",
+          "en": "Install smoke alarms on every floor.",
+          "nl": "Installeer rookmelders op elke verdieping.",
+          "fr": "Installez des détecteurs de fumée à chaque étage."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm058",
-      "title": "Bu Ay Çocuk Kaçırma Eğitimi",
-      "description": "Yabancıyla konuşmama, güvenli yetişkin.",
+      "title": {
+        "tr": "Bu Ay Çocuk Kaçırma Eğitimi",
+        "en": "Child Personal Safety Practice This Month",
+        "nl": "Oefenen met persoonlijke veiligheid voor kinderen deze maand",
+        "fr": "Exercice de sécurité personnelle des enfants ce mois-ci"
+      },
+      "description": {
+        "tr": "Yabancıyla konuşmama, güvenli yetişkin.",
+        "en": "Teach stranger safety and how to identify a trusted adult.",
+        "nl": "Leer kinderen veilig omgaan met vreemden en een vertrouwde volwassene herkennen.",
+        "fr": "Apprenez aux enfants la prudence avec les inconnus et à reconnaître un adulte de confiance."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "çocuk"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "çocuk",
+          "en": "child",
+          "nl": "kind",
+          "fr": "enfant"
+        }
       ],
       "tips": [
-        "Rol yaparak öğretin."
+        {
+          "tr": "Rol yaparak öğretin.",
+          "en": "Teach through role play.",
+          "nl": "Geef les door middel van rollenspellen.",
+          "fr": "Enseigner à travers des jeux de rôle."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm059",
-      "title": "Ailece Ev Anahtar Yedekleme",
-      "description": "Yedek anahtar komşuda veya kasada.",
+      "title": {
+        "tr": "Ailece Ev Anahtar Yedekleme",
+        "en": "Plan Secure Spare Keys as a Family",
+        "nl": "Plan samen veilige reservesleutels",
+        "fr": "Organiser les doubles de clés en toute sécurité en famille"
+      },
+      "description": {
+        "tr": "Yedek anahtar komşuda veya kasada.",
+        "en": "Keep a spare key with a trusted neighbor or in a secure key safe.",
+        "nl": "Bewaar een reservesleutel bij een vertrouwde buur of in een beveiligd sleutelkluisje.",
+        "fr": "Confiez un double à un voisin de confiance ou placez-le dans un coffre à clés sécurisé."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "anahtar"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "anahtar",
+          "en": "key",
+          "nl": "sleutel",
+          "fr": "clé"
+        }
       ],
       "tips": [
-        "Birkaç yerde yedek bulundurun."
+        {
+          "tr": "Birkaç yerde yedek bulundurun.",
+          "en": "Keep spare keys only in secure, agreed locations.",
+          "nl": "Bewaar reservesleutels alleen op veilige, afgesproken plaatsen.",
+          "fr": "Conservez les doubles uniquement dans des endroits sûrs et convenus."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm060",
-      "title": "Hafta Sonu Aile Afet Planı",
-      "description": "Deprem, yangın, sel için aile planı.",
+      "title": {
+        "tr": "Hafta Sonu Aile Afet Planı",
+        "en": "Weekend Family Disaster Plan",
+        "nl": "Weekend Familierampenplan",
+        "fr": "Plan de catastrophe familial du week-end"
+      },
+      "description": {
+        "tr": "Deprem, yangın, sel için aile planı.",
+        "en": "Family plan for earthquake, fire, flood.",
+        "nl": "Familieplan voor aardbeving, brand, overstroming.",
+        "fr": "Plan familial en cas de tremblement de terre, incendie, inondation."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 40,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "afet"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "afet",
+          "en": "disaster",
+          "nl": "ramp",
+          "fr": "catastrophe"
+        }
       ],
       "tips": [
-        "Toplanma noktası belirleyin."
+        {
+          "tr": "Toplanma noktası belirleyin.",
+          "en": "Set a meeting point.",
+          "nl": "Stel een ontmoetingspunt in.",
+          "fr": "Fixez un point de rendez-vous."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm061",
-      "title": "Acil Çıkış Planı",
-      "description": "Yangın tatbikatı, toplanma noktası.",
+      "title": {
+        "tr": "Acil Çıkış Planı",
+        "en": "Emergency Exit Plan",
+        "nl": "Nooduitgangsplan",
+        "fr": "Plan de sortie d'urgence"
+      },
+      "description": {
+        "tr": "Yangın tatbikatı, toplanma noktası.",
+        "en": "Fire drill, assembly point.",
+        "nl": "Brandoefening, verzamelpunt.",
+        "fr": "Exercice d'incendie, point de rassemblement."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "yangın"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "yangın",
+          "en": "fire",
+          "nl": "vuur",
+          "fr": "feu"
+        }
       ],
       "tips": [
-        "Yılda en az 2 kez tekrarlayın."
+        {
+          "tr": "Yılda en az 2 kez tekrarlayın.",
+          "en": "Repeat at least 2 times a year.",
+          "nl": "Herhaal minimaal 2 keer per jaar.",
+          "fr": "Répétez au moins 2 fois par an."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm062",
-      "title": "Bugün İlk Yardım Çantası",
-      "description": "Eksik malzemeleri not alın, tamamlayın.",
+      "title": {
+        "tr": "Bugün İlk Yardım Çantası",
+        "en": "First Aid Kit Today",
+        "nl": "EHBO-doos vandaag",
+        "fr": "Trousse de premiers secours aujourd'hui"
+      },
+      "description": {
+        "tr": "Eksik malzemeleri not alın, tamamlayın.",
+        "en": "List and replace any missing first-aid supplies.",
+        "nl": "Noteer ontbrekende EHBO-materialen en vul ze aan.",
+        "fr": "Notez et remplacez le matériel de premiers secours manquant."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "ilk yardım"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "ilk yardım",
+          "en": "first aid",
+          "nl": "eerste hulp",
+          "fr": "premiers secours"
+        }
       ],
       "tips": [
-        "Son kullanma tarihlerini kontrol edin."
+        {
+          "tr": "Son kullanma tarihlerini kontrol edin.",
+          "en": "Check expiration dates.",
+          "nl": "Controleer de vervaldata.",
+          "fr": "Vérifiez les dates de péremption."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm063",
-      "title": "Bu Ay Ev Güvenlik Taraması",
-      "description": "Priz kapakları, dolap kilidi kontrolü.",
+      "title": {
+        "tr": "Bu Ay Ev Güvenlik Taraması",
+        "en": "Home Safety Inspection This Month",
+        "nl": "Woningveiligheidscontrole deze maand",
+        "fr": "Inspection de sécurité du domicile ce mois-ci"
+      },
+      "description": {
+        "tr": "Priz kapakları, dolap kilidi kontrolü.",
+        "en": "Check outlet covers and cabinet locks.",
+        "nl": "Controleer stopcontactbeveiligingen en kastsloten.",
+        "fr": "Vérifiez les cache-prises et les verrous de placard."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 30,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "ev"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "ev",
+          "en": "house",
+          "nl": "huis",
+          "fr": "maison"
+        }
       ],
       "tips": [
-        "Çocukların ulaşabileceği her yeri kontrol edin."
+        {
+          "tr": "Çocukların ulaşabileceği her yeri kontrol edin.",
+          "en": "Check everywhere that children can reach.",
+          "nl": "Controleer overal waar kinderen bij kunnen.",
+          "fr": "Vérifiez partout où les enfants peuvent atteindre."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm064",
-      "title": "Ailece Acil İletişim Listesi",
-      "description": "Önemli numaraları yazın, buzdolabına yapıştırın.",
+      "title": {
+        "tr": "Ailece Acil İletişim Listesi",
+        "en": "Family Emergency Contact List",
+        "nl": "Lijst met contactpersonen voor noodgevallen voor gezinnen",
+        "fr": "Liste de contacts familiaux en cas d'urgence"
+      },
+      "description": {
+        "tr": "Önemli numaraları yazın, buzdolabına yapıştırın.",
+        "en": "Write down important phone numbers and post them on the refrigerator.",
+        "nl": "Noteer belangrijke telefoonnummers en hang ze op de koelkast.",
+        "fr": "Notez les numéros de téléphone importants et affichez-les sur le réfrigérateur."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 10,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "iletişim"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "iletişim",
+          "en": "contact",
+          "nl": "contact opnemen",
+          "fr": "contacter"
+        }
       ],
       "tips": [
-        "112, itfaiye, polis, komşu ekleyin."
+        {
+          "tr": "112, itfaiye, polis, komşu ekleyin.",
+          "en": "Include 112, the fire service, police, and a trusted neighbor.",
+          "nl": "Voeg 112, de brandweer, de politie en een vertrouwde buur toe.",
+          "fr": "Ajoutez le 112, les pompiers, la police et un voisin de confiance."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm065",
-      "title": "Hafta Sonu Bilgisayar Güvenliği",
-      "description": "Şifreleri güncelleyin, çocuklara anlatın.",
+      "title": {
+        "tr": "Hafta Sonu Bilgisayar Güvenliği",
+        "en": "Weekend Computer Security",
+        "nl": "Weekendcomputerbeveiliging",
+        "fr": "Sécurité informatique du week-end"
+      },
+      "description": {
+        "tr": "Şifreleri güncelleyin, çocuklara anlatın.",
+        "en": "Update passwords and teach children how to keep them secure.",
+        "nl": "Werk wachtwoorden bij en leer kinderen hoe ze die veilig houden.",
+        "fr": "Mettez à jour les mots de passe et apprenez aux enfants à les protéger."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 25,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "dijital"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "dijital",
+          "en": "digital",
+          "nl": "digitaal",
+          "fr": "numérique"
+        }
       ],
       "tips": [
-        "İki faktörlü doğrulama açın."
+        {
+          "tr": "İki faktörlü doğrulama açın.",
+          "en": "Turn on two-factor authentication.",
+          "nl": "Schakel tweefactorauthenticatie in.",
+          "fr": "Activez l'authentification à deux facteurs."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm066",
-      "title": "Deprem Çantası Kontrolü",
-      "description": "Su, konserve, battaniye, el feneri kontrolü.",
+      "title": {
+        "tr": "Deprem Çantası Kontrolü",
+        "en": "Emergency Kit Check",
+        "nl": "Noodpakket controleren",
+        "fr": "Vérification du kit d’urgence"
+      },
+      "description": {
+        "tr": "Su, konserve, battaniye, el feneri kontrolü.",
+        "en": "Check the water, canned food, blankets, and flashlights in the emergency kit.",
+        "nl": "Controleer het water, de conserven, dekens en zaklampen in het noodpakket.",
+        "fr": "Vérifiez l’eau, les conserves, les couvertures et les lampes de poche du kit d’urgence."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 25,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "deprem"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "deprem",
+          "en": "earthquake",
+          "nl": "aardbeving",
+          "fr": "tremblement de terre"
+        }
       ],
       "tips": [
-        "Her üye için ayrı çanta hazırlayın."
+        {
+          "tr": "Her üye için ayrı çanta hazırlayın.",
+          "en": "Prepare an emergency bag for each family member.",
+          "nl": "Maak voor elk gezinslid een noodtas klaar.",
+          "fr": "Préparez un sac d’urgence pour chaque membre de la famille."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm067",
-      "title": "Bugün Gaz Kaçağı Testi",
-      "description": "Kokulu sabun suyu ile bağlantı kontrolü.",
+      "title": {
+        "tr": "Bugün Gaz Kaçağı Testi",
+        "en": "Gas Leak Test Today",
+        "nl": "Gaslektest vandaag",
+        "fr": "Test de fuite de gaz aujourd'hui"
+      },
+      "description": {
+        "tr": "Kokulu sabun suyu ile bağlantı kontrolü.",
+        "en": "Check accessible connections with soapy water, following the appliance instructions.",
+        "nl": "Controleer toegankelijke aansluitingen met zeepsop volgens de instructies van het toestel.",
+        "fr": "Vérifiez les raccords accessibles avec de l’eau savonneuse, conformément aux instructions de l’appareil."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "gaz"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "gaz",
+          "en": "gas",
+          "nl": "gas",
+          "fr": "gaz"
+        }
       ],
       "tips": [
-        "Gaz dedektörü bulundurun."
+        {
+          "tr": "Gaz dedektörü bulundurun.",
+          "en": "Have a gas detector.",
+          "nl": "Zorg voor een gasdetector.",
+          "fr": "Ayez un détecteur de gaz."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm068",
-      "title": "Bu Ay Çocuk İnternet Güvenliği",
-      "description": "Ebeveyn kontrolü, güvenli arama ayarları.",
+      "title": {
+        "tr": "Bu Ay Çocuk İnternet Güvenliği",
+        "en": "Children's Internet Safety This Month",
+        "nl": "Internetveiligheid voor kinderen deze maand",
+        "fr": "La sécurité Internet des enfants ce mois-ci"
+      },
+      "description": {
+        "tr": "Ebeveyn kontrolü, güvenli arama ayarları.",
+        "en": "Parental control, safe search settings.",
+        "nl": "Ouderlijk toezicht, veilige zoekinstellingen.",
+        "fr": "Contrôle parental, paramètres de recherche sécurisés."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 25,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "internet"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "internet",
+          "en": "internet",
+          "nl": "internetten",
+          "fr": "Internet"
+        }
       ],
       "tips": [
-        "Ortak kullanım alanlarında internet erişimi."
+        {
+          "tr": "Ortak kullanım alanlarında internet erişimi.",
+          "en": "Keep children’s internet use in shared family spaces.",
+          "nl": "Laat kinderen internet gebruiken in gemeenschappelijke gezinsruimtes.",
+          "fr": "Faites utiliser Internet aux enfants dans les espaces familiaux communs."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm069",
-      "title": "Ailece Yangın Söndürücü Kontrolü",
-      "description": "Basınç göstergesi, son kullanma tarihi.",
+      "title": {
+        "tr": "Ailece Yangın Söndürücü Kontrolü",
+        "en": "Check the Fire Extinguisher as a Family",
+        "nl": "Controleer samen de brandblusser",
+        "fr": "Vérification de l’extincteur en famille"
+      },
+      "description": {
+        "tr": "Basınç göstergesi, son kullanma tarihi.",
+        "en": "Check the pressure gauge and service or expiration date.",
+        "nl": "Controleer de manometer en de onderhouds- of vervaldatum.",
+        "fr": "Vérifiez le manomètre et la date d’entretien ou d’expiration."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "yangın"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "yangın",
+          "en": "fire",
+          "nl": "vuur",
+          "fr": "feu"
+        }
       ],
       "tips": [
-        "Kullanımını öğrenin."
+        {
+          "tr": "Kullanımını öğrenin.",
+          "en": "Learn how to use it.",
+          "nl": "Leer hoe u het kunt gebruiken.",
+          "fr": "Apprenez à l'utiliser."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm070",
-      "title": "Hafta Sonu Aile GPS Paylaşımı",
-      "description": "Telefonda konum paylaşımı açık mı kontrol edin.",
+      "title": {
+        "tr": "Hafta Sonu Aile GPS Paylaşımı",
+        "en": "Weekend Family GPS Sharing",
+        "nl": "Weekend Familie GPS delen",
+        "fr": "Partage GPS familial le week-end"
+      },
+      "description": {
+        "tr": "Telefonda konum paylaşımı açık mı kontrol edin.",
+        "en": "Check if location sharing is turned on on the phone.",
+        "nl": "Controleer of locatie delen is ingeschakeld op de telefoon.",
+        "fr": "Vérifiez si le partage de position est activé sur le téléphone."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 10,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "konum"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "konum",
+          "en": "location",
+          "nl": "locatie",
+          "fr": "emplacement"
+        }
       ],
       "tips": [
-        "FamilyHub uygulamasını kullanın."
+        {
+          "tr": "FamilyHub uygulamasını kullanın.",
+          "en": "Use the FamilyHub app.",
+          "nl": "Gebruik de FamilyHub-app.",
+          "fr": "Utilisez l'application FamilyHub."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm071",
-      "title": "Kimlik Fotokopisi",
-      "description": "Herkesin kimlik fotokopisi ayrı yerde dursun.",
+      "title": {
+        "tr": "Kimlik Fotokopisi",
+        "en": "ID Photocopy",
+        "nl": "ID-fotokopie",
+        "fr": "Photocopie d'identité"
+      },
+      "description": {
+        "tr": "Herkesin kimlik fotokopisi ayrı yerde dursun.",
+        "en": "Keep everyone's ID photocopies in a separate place.",
+        "nl": "Bewaar de identiteitskopieën van iedereen op een aparte plaats.",
+        "fr": "Conservez les photocopies des pièces d'identité de chacun dans un endroit séparé."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "evrak"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "evrak",
+          "en": "paperwork",
+          "nl": "papierwerk",
+          "fr": "paperasse"
+        }
       ],
       "tips": [
-        "Dijital kopya da bulunsun."
+        {
+          "tr": "Dijital kopya da bulunsun.",
+          "en": "Have a digital copy available as well.",
+          "nl": "Houd ook een digitaal exemplaar bij de hand.",
+          "fr": "Ayez également une copie numérique à disposition."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm072",
-      "title": "Bugün Ev Alarm Sistemi Testi",
-      "description": "Sensör, kamera, alarm testi.",
+      "title": {
+        "tr": "Bugün Ev Alarm Sistemi Testi",
+        "en": "Home Alarm System Test Today",
+        "nl": "Test van het huisalarmsysteem vandaag",
+        "fr": "Test du système d'alarme domestique aujourd'hui"
+      },
+      "description": {
+        "tr": "Sensör, kamera, alarm testi.",
+        "en": "Sensor, camera, alarm test.",
+        "nl": "Sensor, camera, alarmtest.",
+        "fr": "Test capteur, caméra, alarme."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 25,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "alarm"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "alarm",
+          "en": "alarm",
+          "nl": "alarm",
+          "fr": "alarme"
+        }
       ],
       "tips": [
-        "Pilleri kontrol edin."
+        {
+          "tr": "Pilleri kontrol edin.",
+          "en": "Check the batteries.",
+          "nl": "Controleer de batterijen.",
+          "fr": "Vérifiez les piles."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm073",
-      "title": "Bu Ay Aile Şifre Protokolü",
-      "description": "Kapı şifresi, telefon şifresi değiştirme.",
+      "title": {
+        "tr": "Bu Ay Aile Şifre Protokolü",
+        "en": "Family Passcode Protocol This Month",
+        "nl": "Protocol voor gezinscodes deze maand",
+        "fr": "Protocole familial des codes d’accès ce mois-ci"
+      },
+      "description": {
+        "tr": "Kapı şifresi, telefon şifresi değiştirme.",
+        "en": "Changing door password and phone password.",
+        "nl": "Deurwachtwoord en telefoonwachtwoord wijzigen.",
+        "fr": "Modification du mot de passe de la porte et du mot de passe du téléphone."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "şifre"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "şifre",
+          "en": "password",
+          "nl": "wachtwoord",
+          "fr": "mot de passe"
+        }
       ],
       "tips": [
-        "Düzenli olarak değiştirin."
+        {
+          "tr": "Düzenli olarak değiştirin.",
+          "en": "Change regularly.",
+          "nl": "Regelmatig veranderen.",
+          "fr": "Changez régulièrement."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm074",
-      "title": "Ailece Bisiklet Kask Kontrolü",
-      "description": "Çocukların kaskı, dizliği, dirsekliği kontrolü.",
+      "title": {
+        "tr": "Ailece Bisiklet Kask Kontrolü",
+        "en": "Family Bicycle Helmet Check",
+        "nl": "Familie Fietshelm Check",
+        "fr": "Vérification du casque de vélo familial"
+      },
+      "description": {
+        "tr": "Çocukların kaskı, dizliği, dirsekliği kontrolü.",
+        "en": "Checking children's helmets, knee pads and elbow pads.",
+        "nl": "Controle van kinderhelmen, kniebeschermers en elleboogbeschermers.",
+        "fr": "Vérification des casques, genouillères et coudières des enfants."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "spor"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "spor",
+          "en": "sports",
+          "nl": "sporten",
+          "fr": "sport"
+        }
       ],
       "tips": [
-        "Kaskın iç etiketini kontrol edin."
+        {
+          "tr": "Kaskın iç etiketini kontrol edin.",
+          "en": "Check the helmet's inner label.",
+          "nl": "Controleer het binnenlabel van de helm.",
+          "fr": "Vérifiez l'étiquette intérieure du casque."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm075",
-      "title": "Hafta Sonu Ev İlaç Dolabı Kontrolü",
-      "description": "Son kullanma tarihleri, bozulanlar.",
+      "title": {
+        "tr": "Hafta Sonu Ev İlaç Dolabı Kontrolü",
+        "en": "Home Medicine Cabinet Check This Weekend",
+        "nl": "Medicijnkastje thuis dit weekend controleren",
+        "fr": "Vérification de l’armoire à pharmacie ce week-end"
+      },
+      "description": {
+        "tr": "Son kullanma tarihleri, bozulanlar.",
+        "en": "Check expiration dates and remove damaged or expired medicines.",
+        "nl": "Controleer de vervaldatums en verwijder beschadigde of verlopen geneesmiddelen.",
+        "fr": "Vérifiez les dates de péremption et retirez les médicaments endommagés ou périmés."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 25,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "sağlık"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "sağlık",
+          "en": "health",
+          "nl": "gezondheid",
+          "fr": "santé"
+        }
       ],
       "tips": [
-        "Çocukların ulaşamayacağı yerde saklayın."
+        {
+          "tr": "Çocukların ulaşamayacağı yerde saklayın.",
+          "en": "Keep out of reach of children.",
+          "nl": "Buiten bereik van kinderen houden.",
+          "fr": "Tenir hors de portée des enfants."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm076",
-      "title": "Aile Güvenlik Şifresi",
-      "description": "SOS kod kelimesi belirleyin.",
+      "title": {
+        "tr": "Aile Güvenlik Şifresi",
+        "en": "Family Safety Code Word",
+        "nl": "Veilig codewoord voor het gezin",
+        "fr": "Mot-code de sécurité familial"
+      },
+      "description": {
+        "tr": "SOS kod kelimesi belirleyin.",
+        "en": "Set an SOS code word.",
+        "nl": "Stel een SOS-codewoord in.",
+        "fr": "Définissez un mot de code SOS."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 10,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "acil"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "acil",
+          "en": "urgent",
+          "nl": "dringend",
+          "fr": "urgent"
+        }
       ],
       "tips": [
-        "Tüm aile bilsin."
+        {
+          "tr": "Tüm aile bilsin.",
+          "en": "Let the whole family know.",
+          "nl": "Laat het de hele familie weten.",
+          "fr": "Faites-le savoir à toute la famille."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm077",
-      "title": "Bugün Duman Dedektörü Testi",
-      "description": "Pil kontrolü, test butonuna basın.",
+      "title": {
+        "tr": "Bugün Duman Dedektörü Testi",
+        "en": "Smoke Detector Test Today",
+        "nl": "Rookmeldertest vandaag",
+        "fr": "Test du détecteur de fumée aujourd'hui"
+      },
+      "description": {
+        "tr": "Pil kontrolü, test butonuna basın.",
+        "en": "Check the battery and press the test button.",
+        "nl": "Controleer de batterij en druk op de testknop.",
+        "fr": "Vérifiez la pile et appuyez sur le bouton de test."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "yangın"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "yangın",
+          "en": "fire",
+          "nl": "vuur",
+          "fr": "feu"
+        }
       ],
       "tips": [
-        "Her katta bulundurun."
+        {
+          "tr": "Her katta bulundurun.",
+          "en": "Install smoke alarms on every floor.",
+          "nl": "Installeer rookmelders op elke verdieping.",
+          "fr": "Installez des détecteurs de fumée à chaque étage."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm078",
-      "title": "Bu Ay Çocuk Kaçırma Eğitimi",
-      "description": "Yabancıyla konuşmama, güvenli yetişkin.",
+      "title": {
+        "tr": "Bu Ay Çocuk Kaçırma Eğitimi",
+        "en": "Child Personal Safety Practice This Month",
+        "nl": "Oefenen met persoonlijke veiligheid voor kinderen deze maand",
+        "fr": "Exercice de sécurité personnelle des enfants ce mois-ci"
+      },
+      "description": {
+        "tr": "Yabancıyla konuşmama, güvenli yetişkin.",
+        "en": "Teach stranger safety and how to identify a trusted adult.",
+        "nl": "Leer kinderen veilig omgaan met vreemden en een vertrouwde volwassene herkennen.",
+        "fr": "Apprenez aux enfants la prudence avec les inconnus et à reconnaître un adulte de confiance."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 30,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "çocuk"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "çocuk",
+          "en": "child",
+          "nl": "kind",
+          "fr": "enfant"
+        }
       ],
       "tips": [
-        "Rol yaparak öğretin."
+        {
+          "tr": "Rol yaparak öğretin.",
+          "en": "Teach through role play.",
+          "nl": "Geef les door middel van rollenspellen.",
+          "fr": "Enseigner à travers des jeux de rôle."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm079",
-      "title": "Ailece Ev Anahtar Yedekleme",
-      "description": "Yedek anahtar komşuda veya kasada.",
+      "title": {
+        "tr": "Ailece Ev Anahtar Yedekleme",
+        "en": "Plan Secure Spare Keys as a Family",
+        "nl": "Plan samen veilige reservesleutels",
+        "fr": "Organiser les doubles de clés en toute sécurité en famille"
+      },
+      "description": {
+        "tr": "Yedek anahtar komşuda veya kasada.",
+        "en": "Keep a spare key with a trusted neighbor or in a secure key safe.",
+        "nl": "Bewaar een reservesleutel bij een vertrouwde buur of in een beveiligd sleutelkluisje.",
+        "fr": "Confiez un double à un voisin de confiance ou placez-le dans un coffre à clés sécurisé."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 10,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "anahtar"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "anahtar",
+          "en": "key",
+          "nl": "sleutel",
+          "fr": "clé"
+        }
       ],
       "tips": [
-        "Birkaç yerde yedek bulundurun."
+        {
+          "tr": "Birkaç yerde yedek bulundurun.",
+          "en": "Keep spare keys only in secure, agreed locations.",
+          "nl": "Bewaar reservesleutels alleen op veilige, afgesproken plaatsen.",
+          "fr": "Conservez les doubles uniquement dans des endroits sûrs et convenus."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm080",
-      "title": "Hafta Sonu Aile Afet Planı",
-      "description": "Deprem, yangın, sel için aile planı.",
+      "title": {
+        "tr": "Hafta Sonu Aile Afet Planı",
+        "en": "Weekend Family Disaster Plan",
+        "nl": "Weekend Familierampenplan",
+        "fr": "Plan de catastrophe familial du week-end"
+      },
+      "description": {
+        "tr": "Deprem, yangın, sel için aile planı.",
+        "en": "Family plan for earthquake, fire, flood.",
+        "nl": "Familieplan voor aardbeving, brand, overstroming.",
+        "fr": "Plan familial en cas de tremblement de terre, incendie, inondation."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 35,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "afet"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "afet",
+          "en": "disaster",
+          "nl": "ramp",
+          "fr": "catastrophe"
+        }
       ],
       "tips": [
-        "Toplanma noktası belirleyin."
+        {
+          "tr": "Toplanma noktası belirleyin.",
+          "en": "Set a meeting point.",
+          "nl": "Stel een ontmoetingspunt in.",
+          "fr": "Fixez un point de rendez-vous."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm081",
-      "title": "Acil Çıkış Planı",
-      "description": "Yangın tatbikatı, toplanma noktası.",
+      "title": {
+        "tr": "Acil Çıkış Planı",
+        "en": "Emergency Exit Plan",
+        "nl": "Nooduitgangsplan",
+        "fr": "Plan de sortie d'urgence"
+      },
+      "description": {
+        "tr": "Yangın tatbikatı, toplanma noktası.",
+        "en": "Fire drill, assembly point.",
+        "nl": "Brandoefening, verzamelpunt.",
+        "fr": "Exercice d'incendie, point de rassemblement."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 25,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "yangın"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "yangın",
+          "en": "fire",
+          "nl": "vuur",
+          "fr": "feu"
+        }
       ],
       "tips": [
-        "Yılda en az 2 kez tekrarlayın."
+        {
+          "tr": "Yılda en az 2 kez tekrarlayın.",
+          "en": "Repeat at least 2 times a year.",
+          "nl": "Herhaal minimaal 2 keer per jaar.",
+          "fr": "Répétez au moins 2 fois par an."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm082",
-      "title": "Bugün İlk Yardım Çantası",
-      "description": "Eksik malzemeleri not alın, tamamlayın.",
+      "title": {
+        "tr": "Bugün İlk Yardım Çantası",
+        "en": "First Aid Kit Today",
+        "nl": "EHBO-doos vandaag",
+        "fr": "Trousse de premiers secours aujourd'hui"
+      },
+      "description": {
+        "tr": "Eksik malzemeleri not alın, tamamlayın.",
+        "en": "List and replace any missing first-aid supplies.",
+        "nl": "Noteer ontbrekende EHBO-materialen en vul ze aan.",
+        "fr": "Notez et remplacez le matériel de premiers secours manquant."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 10,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "ilk yardım"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "ilk yardım",
+          "en": "first aid",
+          "nl": "eerste hulp",
+          "fr": "premiers secours"
+        }
       ],
       "tips": [
-        "Son kullanma tarihlerini kontrol edin."
+        {
+          "tr": "Son kullanma tarihlerini kontrol edin.",
+          "en": "Check expiration dates.",
+          "nl": "Controleer de vervaldata.",
+          "fr": "Vérifiez les dates de péremption."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm083",
-      "title": "Bu Ay Ev Güvenlik Taraması",
-      "description": "Priz kapakları, dolap kilidi kontrolü.",
+      "title": {
+        "tr": "Bu Ay Ev Güvenlik Taraması",
+        "en": "Home Safety Inspection This Month",
+        "nl": "Woningveiligheidscontrole deze maand",
+        "fr": "Inspection de sécurité du domicile ce mois-ci"
+      },
+      "description": {
+        "tr": "Priz kapakları, dolap kilidi kontrolü.",
+        "en": "Check outlet covers and cabinet locks.",
+        "nl": "Controleer stopcontactbeveiligingen en kastsloten.",
+        "fr": "Vérifiez les cache-prises et les verrous de placard."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 25,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "ev"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "ev",
+          "en": "house",
+          "nl": "huis",
+          "fr": "maison"
+        }
       ],
       "tips": [
-        "Çocukların ulaşabileceği her yeri kontrol edin."
+        {
+          "tr": "Çocukların ulaşabileceği her yeri kontrol edin.",
+          "en": "Check everywhere that children can reach.",
+          "nl": "Controleer overal waar kinderen bij kunnen.",
+          "fr": "Vérifiez partout où les enfants peuvent atteindre."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm084",
-      "title": "Ailece Acil İletişim Listesi",
-      "description": "Önemli numaraları yazın, buzdolabına yapıştırın.",
+      "title": {
+        "tr": "Ailece Acil İletişim Listesi",
+        "en": "Family Emergency Contact List",
+        "nl": "Lijst met contactpersonen voor noodgevallen voor gezinnen",
+        "fr": "Liste de contacts familiaux en cas d'urgence"
+      },
+      "description": {
+        "tr": "Önemli numaraları yazın, buzdolabına yapıştırın.",
+        "en": "Write down important phone numbers and post them on the refrigerator.",
+        "nl": "Noteer belangrijke telefoonnummers en hang ze op de koelkast.",
+        "fr": "Notez les numéros de téléphone importants et affichez-les sur le réfrigérateur."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "iletişim"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "iletişim",
+          "en": "contact",
+          "nl": "contact opnemen",
+          "fr": "contacter"
+        }
       ],
       "tips": [
-        "112, itfaiye, polis, komşu ekleyin."
+        {
+          "tr": "112, itfaiye, polis, komşu ekleyin.",
+          "en": "Include 112, the fire service, police, and a trusted neighbor.",
+          "nl": "Voeg 112, de brandweer, de politie en een vertrouwde buur toe.",
+          "fr": "Ajoutez le 112, les pompiers, la police et un voisin de confiance."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm085",
-      "title": "Hafta Sonu Bilgisayar Güvenliği",
-      "description": "Şifreleri güncelleyin, çocuklara anlatın.",
+      "title": {
+        "tr": "Hafta Sonu Bilgisayar Güvenliği",
+        "en": "Weekend Computer Security",
+        "nl": "Weekendcomputerbeveiliging",
+        "fr": "Sécurité informatique du week-end"
+      },
+      "description": {
+        "tr": "Şifreleri güncelleyin, çocuklara anlatın.",
+        "en": "Update passwords and teach children how to keep them secure.",
+        "nl": "Werk wachtwoorden bij en leer kinderen hoe ze die veilig houden.",
+        "fr": "Mettez à jour les mots de passe et apprenez aux enfants à les protéger."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "dijital"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "dijital",
+          "en": "digital",
+          "nl": "digitaal",
+          "fr": "numérique"
+        }
       ],
       "tips": [
-        "İki faktörlü doğrulama açın."
+        {
+          "tr": "İki faktörlü doğrulama açın.",
+          "en": "Turn on two-factor authentication.",
+          "nl": "Schakel tweefactorauthenticatie in.",
+          "fr": "Activez l'authentification à deux facteurs."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm086",
-      "title": "Deprem Çantası Kontrolü",
-      "description": "Su, konserve, battaniye, el feneri kontrolü.",
+      "title": {
+        "tr": "Deprem Çantası Kontrolü",
+        "en": "Emergency Kit Check",
+        "nl": "Noodpakket controleren",
+        "fr": "Vérification du kit d’urgence"
+      },
+      "description": {
+        "tr": "Su, konserve, battaniye, el feneri kontrolü.",
+        "en": "Check the water, canned food, blankets, and flashlights in the emergency kit.",
+        "nl": "Controleer het water, de conserven, dekens en zaklampen in het noodpakket.",
+        "fr": "Vérifiez l’eau, les conserves, les couvertures et les lampes de poche du kit d’urgence."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "deprem"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "deprem",
+          "en": "earthquake",
+          "nl": "aardbeving",
+          "fr": "tremblement de terre"
+        }
       ],
       "tips": [
-        "Her üye için ayrı çanta hazırlayın."
+        {
+          "tr": "Her üye için ayrı çanta hazırlayın.",
+          "en": "Prepare an emergency bag for each family member.",
+          "nl": "Maak voor elk gezinslid een noodtas klaar.",
+          "fr": "Préparez un sac d’urgence pour chaque membre de la famille."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm087",
-      "title": "Bugün Gaz Kaçağı Testi",
-      "description": "Kokulu sabun suyu ile bağlantı kontrolü.",
+      "title": {
+        "tr": "Bugün Gaz Kaçağı Testi",
+        "en": "Gas Leak Test Today",
+        "nl": "Gaslektest vandaag",
+        "fr": "Test de fuite de gaz aujourd'hui"
+      },
+      "description": {
+        "tr": "Kokulu sabun suyu ile bağlantı kontrolü.",
+        "en": "Check accessible connections with soapy water, following the appliance instructions.",
+        "nl": "Controleer toegankelijke aansluitingen met zeepsop volgens de instructies van het toestel.",
+        "fr": "Vérifiez les raccords accessibles avec de l’eau savonneuse, conformément aux instructions de l’appareil."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 25,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "gaz"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "gaz",
+          "en": "gas",
+          "nl": "gas",
+          "fr": "gaz"
+        }
       ],
       "tips": [
-        "Gaz dedektörü bulundurun."
+        {
+          "tr": "Gaz dedektörü bulundurun.",
+          "en": "Have a gas detector.",
+          "nl": "Zorg voor een gasdetector.",
+          "fr": "Ayez un détecteur de gaz."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm088",
-      "title": "Bu Ay Çocuk İnternet Güvenliği",
-      "description": "Ebeveyn kontrolü, güvenli arama ayarları.",
+      "title": {
+        "tr": "Bu Ay Çocuk İnternet Güvenliği",
+        "en": "Children's Internet Safety This Month",
+        "nl": "Internetveiligheid voor kinderen deze maand",
+        "fr": "La sécurité Internet des enfants ce mois-ci"
+      },
+      "description": {
+        "tr": "Ebeveyn kontrolü, güvenli arama ayarları.",
+        "en": "Parental control, safe search settings.",
+        "nl": "Ouderlijk toezicht, veilige zoekinstellingen.",
+        "fr": "Contrôle parental, paramètres de recherche sécurisés."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "internet"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "internet",
+          "en": "internet",
+          "nl": "internetten",
+          "fr": "Internet"
+        }
       ],
       "tips": [
-        "Ortak kullanım alanlarında internet erişimi."
+        {
+          "tr": "Ortak kullanım alanlarında internet erişimi.",
+          "en": "Keep children’s internet use in shared family spaces.",
+          "nl": "Laat kinderen internet gebruiken in gemeenschappelijke gezinsruimtes.",
+          "fr": "Faites utiliser Internet aux enfants dans les espaces familiaux communs."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm089",
-      "title": "Ailece Yangın Söndürücü Kontrolü",
-      "description": "Basınç göstergesi, son kullanma tarihi.",
+      "title": {
+        "tr": "Ailece Yangın Söndürücü Kontrolü",
+        "en": "Check the Fire Extinguisher as a Family",
+        "nl": "Controleer samen de brandblusser",
+        "fr": "Vérification de l’extincteur en famille"
+      },
+      "description": {
+        "tr": "Basınç göstergesi, son kullanma tarihi.",
+        "en": "Check the pressure gauge and service or expiration date.",
+        "nl": "Controleer de manometer en de onderhouds- of vervaldatum.",
+        "fr": "Vérifiez le manomètre et la date d’entretien ou d’expiration."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "yangın"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "yangın",
+          "en": "fire",
+          "nl": "vuur",
+          "fr": "feu"
+        }
       ],
       "tips": [
-        "Kullanımını öğrenin."
+        {
+          "tr": "Kullanımını öğrenin.",
+          "en": "Learn how to use it.",
+          "nl": "Leer hoe u het kunt gebruiken.",
+          "fr": "Apprenez à l'utiliser."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm090",
-      "title": "Hafta Sonu Aile GPS Paylaşımı",
-      "description": "Telefonda konum paylaşımı açık mı kontrol edin.",
+      "title": {
+        "tr": "Hafta Sonu Aile GPS Paylaşımı",
+        "en": "Weekend Family GPS Sharing",
+        "nl": "Weekend Familie GPS delen",
+        "fr": "Partage GPS familial le week-end"
+      },
+      "description": {
+        "tr": "Telefonda konum paylaşımı açık mı kontrol edin.",
+        "en": "Check if location sharing is turned on on the phone.",
+        "nl": "Controleer of locatie delen is ingeschakeld op de telefoon.",
+        "fr": "Vérifiez si le partage de position est activé sur le téléphone."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "konum"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "konum",
+          "en": "location",
+          "nl": "locatie",
+          "fr": "emplacement"
+        }
       ],
       "tips": [
-        "FamilyHub uygulamasını kullanın."
+        {
+          "tr": "FamilyHub uygulamasını kullanın.",
+          "en": "Use the FamilyHub app.",
+          "nl": "Gebruik de FamilyHub-app.",
+          "fr": "Utilisez l'application FamilyHub."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm091",
-      "title": "Kimlik Fotokopisi",
-      "description": "Herkesin kimlik fotokopisi ayrı yerde dursun.",
+      "title": {
+        "tr": "Kimlik Fotokopisi",
+        "en": "ID Photocopy",
+        "nl": "ID-fotokopie",
+        "fr": "Photocopie d'identité"
+      },
+      "description": {
+        "tr": "Herkesin kimlik fotokopisi ayrı yerde dursun.",
+        "en": "Keep everyone's ID photocopies in a separate place.",
+        "nl": "Bewaar de identiteitskopieën van iedereen op een aparte plaats.",
+        "fr": "Conservez les photocopies des pièces d'identité de chacun dans un endroit séparé."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 15,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "evrak"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "evrak",
+          "en": "paperwork",
+          "nl": "papierwerk",
+          "fr": "paperasse"
+        }
       ],
       "tips": [
-        "Dijital kopya da bulunsun."
+        {
+          "tr": "Dijital kopya da bulunsun.",
+          "en": "Have a digital copy available as well.",
+          "nl": "Houd ook een digitaal exemplaar bij de hand.",
+          "fr": "Ayez également une copie numérique à disposition."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm092",
-      "title": "Bugün Ev Alarm Sistemi Testi",
-      "description": "Sensör, kamera, alarm testi.",
+      "title": {
+        "tr": "Bugün Ev Alarm Sistemi Testi",
+        "en": "Home Alarm System Test Today",
+        "nl": "Test van het huisalarmsysteem vandaag",
+        "fr": "Test du système d'alarme domestique aujourd'hui"
+      },
+      "description": {
+        "tr": "Sensör, kamera, alarm testi.",
+        "en": "Sensor, camera, alarm test.",
+        "nl": "Sensor, camera, alarmtest.",
+        "fr": "Test capteur, caméra, alarme."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "alarm"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "alarm",
+          "en": "alarm",
+          "nl": "alarm",
+          "fr": "alarme"
+        }
       ],
       "tips": [
-        "Pilleri kontrol edin."
+        {
+          "tr": "Pilleri kontrol edin.",
+          "en": "Check the batteries.",
+          "nl": "Controleer de batterijen.",
+          "fr": "Vérifiez les piles."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm093",
-      "title": "Bu Ay Aile Şifre Protokolü",
-      "description": "Kapı şifresi, telefon şifresi değiştirme.",
+      "title": {
+        "tr": "Bu Ay Aile Şifre Protokolü",
+        "en": "Family Passcode Protocol This Month",
+        "nl": "Protocol voor gezinscodes deze maand",
+        "fr": "Protocole familial des codes d’accès ce mois-ci"
+      },
+      "description": {
+        "tr": "Kapı şifresi, telefon şifresi değiştirme.",
+        "en": "Changing door password and phone password.",
+        "nl": "Deurwachtwoord en telefoonwachtwoord wijzigen.",
+        "fr": "Modification du mot de passe de la porte et du mot de passe du téléphone."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 25,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "şifre"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "şifre",
+          "en": "password",
+          "nl": "wachtwoord",
+          "fr": "mot de passe"
+        }
       ],
       "tips": [
-        "Düzenli olarak değiştirin."
+        {
+          "tr": "Düzenli olarak değiştirin.",
+          "en": "Change regularly.",
+          "nl": "Regelmatig veranderen.",
+          "fr": "Changez régulièrement."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm094",
-      "title": "Ailece Bisiklet Kask Kontrolü",
-      "description": "Çocukların kaskı, dizliği, dirsekliği kontrolü.",
+      "title": {
+        "tr": "Ailece Bisiklet Kask Kontrolü",
+        "en": "Family Bicycle Helmet Check",
+        "nl": "Familie Fietshelm Check",
+        "fr": "Vérification du casque de vélo familial"
+      },
+      "description": {
+        "tr": "Çocukların kaskı, dizliği, dirsekliği kontrolü.",
+        "en": "Checking children's helmets, knee pads and elbow pads.",
+        "nl": "Controle van kinderhelmen, kniebeschermers en elleboogbeschermers.",
+        "fr": "Vérification des casques, genouillères et coudières des enfants."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 10,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "spor"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "spor",
+          "en": "sports",
+          "nl": "sporten",
+          "fr": "sport"
+        }
       ],
       "tips": [
-        "Kaskın iç etiketini kontrol edin."
+        {
+          "tr": "Kaskın iç etiketini kontrol edin.",
+          "en": "Check the helmet's inner label.",
+          "nl": "Controleer het binnenlabel van de helm.",
+          "fr": "Vérifiez l'étiquette intérieure du casque."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm095",
-      "title": "Hafta Sonu Ev İlaç Dolabı Kontrolü",
-      "description": "Son kullanma tarihleri, bozulanlar.",
+      "title": {
+        "tr": "Hafta Sonu Ev İlaç Dolabı Kontrolü",
+        "en": "Home Medicine Cabinet Check This Weekend",
+        "nl": "Medicijnkastje thuis dit weekend controleren",
+        "fr": "Vérification de l’armoire à pharmacie ce week-end"
+      },
+      "description": {
+        "tr": "Son kullanma tarihleri, bozulanlar.",
+        "en": "Check expiration dates and remove damaged or expired medicines.",
+        "nl": "Controleer de vervaldatums en verwijder beschadigde of verlopen geneesmiddelen.",
+        "fr": "Vérifiez les dates de péremption et retirez les médicaments endommagés ou périmés."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "sağlık"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "sağlık",
+          "en": "health",
+          "nl": "gezondheid",
+          "fr": "santé"
+        }
       ],
       "tips": [
-        "Çocukların ulaşamayacağı yerde saklayın."
+        {
+          "tr": "Çocukların ulaşamayacağı yerde saklayın.",
+          "en": "Keep out of reach of children.",
+          "nl": "Buiten bereik van kinderen houden.",
+          "fr": "Tenir hors de portée des enfants."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm096",
-      "title": "Aile Güvenlik Şifresi",
-      "description": "SOS kod kelimesi belirleyin.",
+      "title": {
+        "tr": "Aile Güvenlik Şifresi",
+        "en": "Family Safety Code Word",
+        "nl": "Veilig codewoord voor het gezin",
+        "fr": "Mot-code de sécurité familial"
+      },
+      "description": {
+        "tr": "SOS kod kelimesi belirleyin.",
+        "en": "Set an SOS code word.",
+        "nl": "Stel een SOS-codewoord in.",
+        "fr": "Définissez un mot de code SOS."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "acil"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "acil",
+          "en": "urgent",
+          "nl": "dringend",
+          "fr": "urgent"
+        }
       ],
       "tips": [
-        "Tüm aile bilsin."
+        {
+          "tr": "Tüm aile bilsin.",
+          "en": "Let the whole family know.",
+          "nl": "Laat het de hele familie weten.",
+          "fr": "Faites-le savoir à toute la famille."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm097",
-      "title": "Bugün Duman Dedektörü Testi",
-      "description": "Pil kontrolü, test butonuna basın.",
+      "title": {
+        "tr": "Bugün Duman Dedektörü Testi",
+        "en": "Smoke Detector Test Today",
+        "nl": "Rookmeldertest vandaag",
+        "fr": "Test du détecteur de fumée aujourd'hui"
+      },
+      "description": {
+        "tr": "Pil kontrolü, test butonuna basın.",
+        "en": "Check the battery and press the test button.",
+        "nl": "Controleer de batterij en druk op de testknop.",
+        "fr": "Vérifiez la pile et appuyez sur le bouton de test."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 10,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "yangın"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "yangın",
+          "en": "fire",
+          "nl": "vuur",
+          "fr": "feu"
+        }
       ],
       "tips": [
-        "Her katta bulundurun."
+        {
+          "tr": "Her katta bulundurun.",
+          "en": "Install smoke alarms on every floor.",
+          "nl": "Installeer rookmelders op elke verdieping.",
+          "fr": "Installez des détecteurs de fumée à chaque étage."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm098",
-      "title": "Bu Ay Çocuk Kaçırma Eğitimi",
-      "description": "Yabancıyla konuşmama, güvenli yetişkin.",
+      "title": {
+        "tr": "Bu Ay Çocuk Kaçırma Eğitimi",
+        "en": "Child Personal Safety Practice This Month",
+        "nl": "Oefenen met persoonlijke veiligheid voor kinderen deze maand",
+        "fr": "Exercice de sécurité personnelle des enfants ce mois-ci"
+      },
+      "description": {
+        "tr": "Yabancıyla konuşmama, güvenli yetişkin.",
+        "en": "Teach stranger safety and how to identify a trusted adult.",
+        "nl": "Leer kinderen veilig omgaan met vreemden en een vertrouwde volwassene herkennen.",
+        "fr": "Apprenez aux enfants la prudence avec les inconnus et à reconnaître un adulte de confiance."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 25,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "çocuk"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "çocuk",
+          "en": "child",
+          "nl": "kind",
+          "fr": "enfant"
+        }
       ],
       "tips": [
-        "Rol yaparak öğretin."
+        {
+          "tr": "Rol yaparak öğretin.",
+          "en": "Teach through role play.",
+          "nl": "Geef les door middel van rollenspellen.",
+          "fr": "Enseigner à travers des jeux de rôle."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm099",
-      "title": "Ailece Ev Anahtar Yedekleme",
-      "description": "Yedek anahtar komşuda veya kasada.",
+      "title": {
+        "tr": "Ailece Ev Anahtar Yedekleme",
+        "en": "Plan Secure Spare Keys as a Family",
+        "nl": "Plan samen veilige reservesleutels",
+        "fr": "Organiser les doubles de clés en toute sécurité en famille"
+      },
+      "description": {
+        "tr": "Yedek anahtar komşuda veya kasada.",
+        "en": "Keep a spare key with a trusted neighbor or in a secure key safe.",
+        "nl": "Bewaar een reservesleutel bij een vertrouwde buur of in een beveiligd sleutelkluisje.",
+        "fr": "Confiez un double à un voisin de confiance ou placez-le dans un coffre à clés sécurisé."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 20,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "anahtar"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "anahtar",
+          "en": "key",
+          "nl": "sleutel",
+          "fr": "clé"
+        }
       ],
       "tips": [
-        "Birkaç yerde yedek bulundurun."
+        {
+          "tr": "Birkaç yerde yedek bulundurun.",
+          "en": "Keep spare keys only in secure, agreed locations.",
+          "nl": "Bewaar reservesleutels alleen op veilige, afgesproken plaatsen.",
+          "fr": "Conservez les doubles uniquement dans des endroits sûrs et convenus."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sm100",
-      "title": "Hafta Sonu Aile Afet Planı",
-      "description": "Deprem, yangın, sel için aile planı.",
+      "title": {
+        "tr": "Hafta Sonu Aile Afet Planı",
+        "en": "Weekend Family Disaster Plan",
+        "nl": "Weekend Familierampenplan",
+        "fr": "Plan de catastrophe familial du week-end"
+      },
+      "description": {
+        "tr": "Deprem, yangın, sel için aile planı.",
+        "en": "Family plan for earthquake, fire, flood.",
+        "nl": "Familieplan voor aardbeving, brand, overstroming.",
+        "fr": "Plan familial en cas de tremblement de terre, incendie, inondation."
+      },
       "category": "safety",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 30,
       "participants": 4,
       "tags": [
-        "güvenlik",
-        "afet"
+        {
+          "tr": "güvenlik",
+          "en": "security",
+          "nl": "veiligheid",
+          "fr": "sécurité"
+        },
+        {
+          "tr": "afet",
+          "en": "disaster",
+          "nl": "ramp",
+          "fr": "catastrophe"
+        }
       ],
       "tips": [
-        "Toplanma noktası belirleyin."
+        {
+          "tr": "Toplanma noktası belirleyin.",
+          "en": "Set a meeting point.",
+          "nl": "Stel een ontmoetingspunt in.",
+          "fr": "Fixez un point de rendez-vous."
+        }
       ],
       "action_type": "show_detail"
     }

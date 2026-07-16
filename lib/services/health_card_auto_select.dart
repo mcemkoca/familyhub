@@ -1,20 +1,20 @@
 import '../domain/models/family_member_model.dart';
 
 class EmergencyContactAutoSelect {
-  /// Öncelik sırası: Eş > Anne > Baba > Çocuk > Kardeş > Dost
-  static final List<String> _priorityOrder = [
-    'eş',
-    'anne',
-    'baba',
-    'çocuk',
-    'kardeş',
-    'dost',
+  /// Priority: spouse > mother > father > child > sibling > friend.
+  static const List<Set<String>> _priorityOrder = [
+    {'eş', 'es', 'spouse', 'partner', 'echtgenoot', 'echtgenote', 'conjoint', 'conjointe'},
+    {'anne', 'mother', 'mom', 'mum', 'moeder', 'mère'},
+    {'baba', 'father', 'dad', 'vader', 'père'},
+    {'çocuk', 'cocuk', 'child', 'kind', 'enfant'},
+    {'kardeş', 'kardes', 'sibling', 'brother', 'sister', 'broer', 'zus', 'frère', 'sœur'},
+    {'dost', 'arkadaş', 'arkadas', 'friend', 'vriend', 'vriendin', 'ami', 'amie'},
   ];
 
   static EmergencyContactResult autoSelect(List<FamilyMemberModel> members) {
-    for (final relation in _priorityOrder) {
+    for (final aliases in _priorityOrder) {
       final match = members.firstWhere(
-        (m) => m.relation?.toLowerCase() == relation,
+        (m) => aliases.contains(m.relation?.trim().toLowerCase()),
         orElse: () => FamilyMemberModel(
           id: '',
           name: '',
@@ -26,7 +26,7 @@ class EmergencyContactAutoSelect {
       if (match.id.isNotEmpty) {
         return EmergencyContactResult(
           name: match.name,
-          relation: match.relation ?? relation,
+          relation: match.relation ?? aliases.first,
           phone: match.phone ?? '',
           isAutoSelected: true,
         );

@@ -1,10 +1,15 @@
 import 'dart:convert';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'localization/locale_service.dart';
 
 /// Connectivity-aware offline fallback service for Hub data.
 /// Uses Hive for local caching when offline.
 class HubOfflineService {
+  static String get _offlineError {
+    final lang = LocaleService.resolveInitialLocale().languageCode;
+    return const {'tr': 'İnternet bağlantısı yok ve önbellekte veri yok', 'en': 'There is no internet connection and no cached data', 'nl': 'Er is geen internetverbinding en er zijn geen gegevens in de cache', 'fr': 'Aucune connexion Internet et aucune donnée en cache'}[lang] ?? 'İnternet bağlantısı yok ve önbellekte veri yok';
+  }
   static final _connectivity = Connectivity();
   static late Box<String> _cacheBox;
 
@@ -46,7 +51,7 @@ class HubOfflineService {
             // Cache corrupted, return default
           }
         }
-        throw Exception('İnternet bağlantısı yok ve önbellekte veri yok');
+        throw Exception(_offlineError);
       }
     } else {
       // Offline: read from cache
@@ -58,7 +63,7 @@ class HubOfflineService {
           // Cache corrupted
         }
       }
-      throw Exception('İnternet bağlantısı yok ve önbellekte veri yok');
+      throw Exception(_offlineError);
     }
   }
 

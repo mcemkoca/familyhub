@@ -1,6 +1,7 @@
 import 'dart:async';
 import '../core/supabase_client.dart';
 import 'child_auth_service.dart';
+import 'localization/locale_service.dart';
 import 'notification_service.dart';
 
 /// Çocuk ↔ Ebeveyn arası cross-bildirim servisi
@@ -8,6 +9,12 @@ import 'notification_service.dart';
 class ChildNotificationService {
   static final List<StreamSubscription<dynamic>> _subscriptions = [];
   static bool _initialized = false;
+
+  static String get _languageCode =>
+      LocaleService.resolveInitialLocale().languageCode;
+
+  static String _text(Map<String, String> values) =>
+      values[_languageCode] ?? values['tr']!;
 
   /// Bildirim servisini başlat (çocuk login olduktan sonra çağrılır)
   static Future<void> initialize() async {
@@ -98,7 +105,9 @@ class ChildNotificationService {
   static final Set<String> _knownDevLogIds = {};
 
   static void _handleNewTasks(List<Map<String, dynamic>> data) {
-    final childName = ChildAuthService.currentSession?.childName ?? 'Çocuk';
+    final childName = ChildAuthService.currentSession?.childName ?? _text(const {
+      'tr': 'Çocuk', 'en': 'Child', 'nl': 'Kind', 'fr': 'Enfant',
+    });
     for (final item in data) {
       final id = item['id']?.toString() ?? '';
       if (_knownTaskIds.contains(id)) continue;
@@ -108,15 +117,33 @@ class ChildNotificationService {
       if (status == 'completed') {
         // Çocuk tamamladı → ebeveyne bildirim
         NotificationService.showInstantNotification(
-          title: '🎉 $childName bir görev tamamladı!',
-          body: '"${item['title']}" görevi tamamlandı.',
+          title: _text({
+            'tr': '🎉 $childName bir görev tamamladı!',
+            'en': '🎉 $childName completed a task!',
+            'nl': '🎉 $childName heeft een taak voltooid!',
+            'fr': '🎉 $childName a terminé une tâche !',
+          }),
+          body: _text({
+            'tr': '"${item['title']}" görevi tamamlandı.',
+            'en': 'The task “${item['title']}” was completed.',
+            'nl': 'De taak ‘${item['title']}’ is voltooid.',
+            'fr': 'La tâche « ${item['title']} » est terminée.',
+          }),
           payload: 'task:$id',
         );
       } else if (status == 'pending') {
         // Yeni görev atandı → çocuğa bildirim
         NotificationService.showInstantNotification(
-          title: '✅ Yeni görevin var!',
-          body: '"${item['title']}" görevi sana atandı.',
+          title: _text(const {
+            'tr': '✅ Yeni görevin var!', 'en': '✅ You have a new task!',
+            'nl': '✅ Je hebt een nieuwe taak!', 'fr': '✅ Tu as une nouvelle tâche !',
+          }),
+          body: _text({
+            'tr': '"${item['title']}" görevi sana atandı.',
+            'en': 'The task “${item['title']}” was assigned to you.',
+            'nl': 'De taak ‘${item['title']}’ is aan jou toegewezen.',
+            'fr': 'La tâche « ${item['title']} » t’a été attribuée.',
+          }),
           payload: 'task:$id',
         );
       }
@@ -134,9 +161,16 @@ class ChildNotificationService {
       // Kendi mesajımı bildirme
       if (senderId == childId) continue;
 
-      final senderName = item['sender_name']?.toString() ?? 'Birisi';
+      final senderName = item['sender_name']?.toString() ?? _text(const {
+        'tr': 'Birisi', 'en': 'Someone', 'nl': 'Iemand', 'fr': 'Quelqu’un',
+      });
       NotificationService.showInstantNotification(
-        title: '💬 $senderName mesaj gönderdi',
+        title: _text({
+          'tr': '💬 $senderName mesaj gönderdi',
+          'en': '💬 $senderName sent a message',
+          'nl': '💬 $senderName heeft een bericht gestuurd',
+          'fr': '💬 $senderName a envoyé un message',
+        }),
         body: item['content']?.toString() ?? '',
         payload: 'chat:$id',
       );
@@ -152,7 +186,10 @@ class ChildNotificationService {
       final status = item['status']?.toString() ?? '';
       if (status == 'pending') {
         NotificationService.showInstantNotification(
-          title: '📚 Yeni ödevin var!',
+          title: _text(const {
+            'tr': '📚 Yeni ödevin var!', 'en': '📚 You have new homework!',
+            'nl': '📚 Je hebt nieuw huiswerk!', 'fr': '📚 Tu as un nouveau devoir !',
+          }),
           body: '${item['subject']}: ${item['title']}',
           payload: 'homework:$id',
         );
@@ -167,9 +204,18 @@ class ChildNotificationService {
       _knownScheduleIds.add(id);
 
       NotificationService.showInstantNotification(
-        title: '📅 Ders programın güncellendi',
-        body:
-            '${item['subject']} eklendi: ${item['start_time']}-${item['end_time']}',
+        title: _text(const {
+          'tr': '📅 Ders programın güncellendi',
+          'en': '📅 Your class schedule was updated',
+          'nl': '📅 Je lesrooster is bijgewerkt',
+          'fr': '📅 Ton emploi du temps a été mis à jour',
+        }),
+        body: _text({
+          'tr': '${item['subject']} eklendi: ${item['start_time']}-${item['end_time']}',
+          'en': '${item['subject']} was added: ${item['start_time']}–${item['end_time']}',
+          'nl': '${item['subject']} is toegevoegd: ${item['start_time']}–${item['end_time']}',
+          'fr': '${item['subject']} a été ajouté : ${item['start_time']}–${item['end_time']}',
+        }),
         payload: 'schedule:$id',
       );
     }
@@ -182,17 +228,20 @@ class ChildNotificationService {
       _knownDevLogIds.add(id);
 
       final logType = item['log_type']?.toString() ?? '';
-      final typeNames = {
-        'height': 'Boy',
-        'weight': 'Kilo',
-        'mood': 'Ruh hali',
-        'milestone': 'Kazanım',
-        'note': 'Not',
+      final typeNames = <String, Map<String, String>>{
+        'height': {'tr': 'Boy', 'en': 'Height', 'nl': 'Lengte', 'fr': 'Taille'},
+        'weight': {'tr': 'Kilo', 'en': 'Weight', 'nl': 'Gewicht', 'fr': 'Poids'},
+        'mood': {'tr': 'Ruh hali', 'en': 'Mood', 'nl': 'Stemming', 'fr': 'Humeur'},
+        'milestone': {'tr': 'Kazanım', 'en': 'Milestone', 'nl': 'Mijlpaal', 'fr': 'Étape importante'},
+        'note': {'tr': 'Not', 'en': 'Note', 'nl': 'Notitie', 'fr': 'Note'},
       };
       NotificationService.showInstantNotification(
-        title: '📈 Yeni gelişim kaydı',
+        title: _text(const {
+          'tr': '📈 Yeni gelişim kaydı', 'en': '📈 New development record',
+          'nl': '📈 Nieuwe ontwikkelingsregistratie', 'fr': '📈 Nouveau suivi du développement',
+        }),
         body:
-            '${typeNames[logType] ?? logType}: ${item['value']} ${item['unit'] ?? ''}',
+            '${typeNames[logType] == null ? logType : _text(typeNames[logType]!)}: ${item['value']} ${item['unit'] ?? ''}',
         payload: 'devlog:$id',
       );
     }

@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:workmanager/workmanager.dart';
+import 'dart:ui' show PlatformDispatcher;
 
 import '../core/supabase_client.dart';
 import '../repositories/smart_reminder_repository.dart';
 import '../services/auth_service.dart';
+import 'localization/locale_service.dart';
 
 const String _smartReminderTask = 'familyhub.smart_reminder';
 const String _reminderIdKey = 'reminder_id';
 const String _reminderTitleKey = 'reminder_title';
 const String _reminderBodyKey = 'reminder_body';
+
+String _deviceText(Map<String, String> values) {
+  final lang = PlatformDispatcher.instance.locale.languageCode;
+  return values[lang] ?? values['tr']!;
+}
 
 /// Background callback dispatcher for Workmanager.
 /// Must be a top-level or static function annotated with @pragma('vm:entry-point').
@@ -19,7 +26,7 @@ void _callbackDispatcher() {
     if (task == _smartReminderTask) {
       final reminderId = inputData?[_reminderIdKey] as String?;
       final title = inputData?[_reminderTitleKey] as String? ?? 'FamilyHub';
-      final body = inputData?[_reminderBodyKey] as String? ?? 'Hatırlatma zamanı!';
+      final body = inputData?[_reminderBodyKey] as String? ?? _deviceText(const {'tr': 'Hatırlatma zamanı!', 'en': 'Time for your reminder!', 'nl': 'Tijd voor je herinnering!', 'fr': 'C’est l’heure de votre rappel !'});
 
       if (reminderId != null) {
         await _showBackgroundNotification(title: title, body: body);
@@ -60,14 +67,14 @@ Future<void> _showBackgroundNotification({
   );
   await notifications.initialize(initSettings);
 
-  const androidDetails = AndroidNotificationDetails(
+  final androidDetails = AndroidNotificationDetails(
     'familyhub_channel',
-    'FamilyHub Bildirimleri',
-    channelDescription: 'Aile etkinlikleri, görevler ve acil durum bildirimleri',
+    _deviceText(const {'tr': 'FamilyHub Bildirimleri', 'en': 'FamilyHub Notifications', 'nl': 'FamilyHub-meldingen', 'fr': 'Notifications FamilyHub'}),
+    channelDescription: _deviceText(const {'tr': 'Aile etkinlikleri, görevler ve acil durum bildirimleri', 'en': 'Family activities, tasks, and emergency notifications', 'nl': 'Gezinsactiviteiten, taken en noodmeldingen', 'fr': 'Activités familiales, tâches et notifications d’urgence'}),
     importance: Importance.high,
     priority: Priority.high,
   );
-  const details = NotificationDetails(android: androidDetails, iOS: DarwinNotificationDetails());
+  final details = NotificationDetails(android: androidDetails, iOS: const DarwinNotificationDetails());
 
   await notifications.show(
     DateTime.now().millisecond,
@@ -79,6 +86,11 @@ Future<void> _showBackgroundNotification({
 
 class SmartReminderBackgroundService {
   static bool _initialized = false;
+
+  static String _text(Map<String, String> values) {
+    final lang = LocaleService.resolveInitialLocale().languageCode;
+    return values[lang] ?? values['tr']!;
+  }
 
   /// Initializes Workmanager and syncs active reminders from Supabase.
   static Future<void> initialize() async {
@@ -163,7 +175,7 @@ class SmartReminderBackgroundService {
             id: reminder.id,
             when: triggerTime,
             title: reminder.title,
-            body: reminder.description ?? 'Hatırlatma zamanı!',
+            body: reminder.description ?? _text(const {'tr': 'Hatırlatma zamanı!', 'en': 'Time for your reminder!', 'nl': 'Tijd voor je herinnering!', 'fr': 'C’est l’heure de votre rappel !'}),
           );
         }
       }

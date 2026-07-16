@@ -1,0 +1,246 @@
+{
+  "countryCode": "BE",
+  "version": 1,
+  "note": "İçerik bilgilendirme amaçlıdır; kişisel hukuki danışmanlık değildir. Kesin tutar, tarih ve uygunluk için resmî kaynağa başvurun. Çeviriler elle hazırlanmıştır.",
+  "articles": [
+    {
+      "id": "be_groeipakket",
+      "slug": "groeipakket-vlaanderen",
+      "category": "childBenefits",
+      "regionCodes": ["BE-VLG"],
+      "jurisdictionLevel": "regional",
+      "riskLevel": "high",
+      "status": "published",
+      "lastVerifiedAt": "2026-01-15",
+      "sources": [
+        {"authority": "Groeipakket (Vlaanderen)", "title": "Groeipakket — resmî portal", "url": "https://www.groeipakket.be/", "trustLevel": 1},
+        {"authority": "Vlaamse overheid", "title": "Opgroeien / Kind en Gezin", "url": "https://www.kindengezin.be/", "trustLevel": 1}
+      ],
+      "i18n": {
+        "tr": {
+          "title": "Groeipakket (Flaman Çocuk Yardımı)",
+          "summary": "Flaman Bölgesi'nde her çocuk için aylık büyüme paketi ve doğum başlangıç ödemesi.",
+          "plainExplanation": "Flaman Bölgesi'nde yaşayan ailelere her çocuk için düzenli aylık ödeme yapılır. Ödeme, çocuğun doğumundan itibaren başlar ve genellikle 18 yaşına (öğrenim sürüyorsa daha uzun) kadar sürer. Tutar; çocuk sayısı, doğum tarihi ve ailenin durumuna göre değişir.",
+          "whoCanApply": "Flaman Bölgesi'nde ikamet eden, çocuğu olan aileler.",
+          "conditions": ["Çocuğun Flaman Bölgesi'nde ikamet etmesi", "Yaş/öğrenim koşullarının karşılanması", "Bazı ek ödemeler için gelir sınırı"],
+          "benefits": ["Aylık temel ödeme (her çocuk)", "Doğumda başlangıç ödemesi (Startbedrag)", "Gelire bağlı sosyal ek ödemeler", "Okul ödeneği"],
+          "applicationSteps": ["Genellikle bir ödeme kuruluşu (uitbetaler) üzerinden otomatik başlar", "Bir ödeme kuruluşu seçin veya mevcut kuruluşunuzu kullanın", "Gerekli belgeleri sağlayın", "Ödemeler banka hesabınıza yatar"],
+          "requiredDocuments": ["Çocuğun doğum belgesi/kaydı", "İkamet bilgisi", "Banka hesap bilgisi"],
+          "importantWarnings": ["Tutarlar ve ek ödemeler resmî kurum tarafından belirlenir — güncel miktar için Groeipakket portalına bakın.", "Taşınma veya aile durumu değişiminde bildirim gereklidir."]
+        },
+        "nl": {
+          "title": "Groeipakket (Vlaamse kinderbijslag)",
+          "summary": "Maandelijks groeipakket en startbedrag voor elk kind in het Vlaamse Gewest.",
+          "plainExplanation": "Gezinnen die in het Vlaamse Gewest wonen, krijgen voor elk kind een regelmatige maandelijkse uitkering. De betaling start bij de geboorte en loopt meestal tot 18 jaar (langer bij studies). Het bedrag hangt af van het aantal kinderen, de geboortedatum en de gezinssituatie.",
+          "whoCanApply": "Gezinnen met kinderen die in het Vlaamse Gewest wonen.",
+          "conditions": ["Kind woont in het Vlaamse Gewest", "Voldoen aan leeftijds-/studievoorwaarden", "Inkomensgrens voor bepaalde toeslagen"],
+          "benefits": ["Maandelijks basisbedrag (per kind)", "Startbedrag bij geboorte", "Sociale toeslagen op basis van inkomen", "Schooltoeslag"],
+          "applicationSteps": ["Start meestal automatisch via een uitbetaler", "Kies een uitbetaler of gebruik je huidige", "Bezorg de nodige documenten", "Betalingen komen op je rekening"],
+          "requiredDocuments": ["Geboorteakte/registratie van het kind", "Woonplaatsgegevens", "Rekeningnummer"],
+          "importantWarnings": ["Bedragen en toeslagen worden door de bevoegde instantie vastgelegd — raadpleeg het Groeipakket-portaal voor actuele bedragen.", "Meld verhuizingen of wijzigingen in de gezinssituatie."]
+        },
+        "fr": {
+          "title": "Groeipakket (allocations familiales flamandes)",
+          "summary": "Paquet de croissance mensuel et prime de naissance pour chaque enfant en Région flamande.",
+          "plainExplanation": "Les familles qui résident en Région flamande reçoivent une allocation mensuelle régulière pour chaque enfant. Le versement débute à la naissance et se poursuit généralement jusqu'à 18 ans (plus longtemps en cas d'études). Le montant dépend du nombre d'enfants, de la date de naissance et de la situation familiale.",
+          "whoCanApply": "Les familles avec enfants résidant en Région flamande.",
+          "conditions": ["L'enfant réside en Région flamande", "Respecter les conditions d'âge/d'études", "Plafond de revenus pour certains suppléments"],
+          "benefits": ["Montant de base mensuel (par enfant)", "Prime de départ à la naissance", "Suppléments sociaux selon les revenus", "Allocation scolaire"],
+          "applicationSteps": ["Débute généralement automatiquement via un organisme payeur", "Choisissez un organisme payeur ou gardez le vôtre", "Fournissez les documents requis", "Les paiements arrivent sur votre compte"],
+          "requiredDocuments": ["Acte/enregistrement de naissance de l'enfant", "Données de résidence", "Numéro de compte"],
+          "importantWarnings": ["Les montants et suppléments sont fixés par l'autorité compétente — consultez le portail Groeipakket pour les montants actuels.", "Signalez tout déménagement ou changement de situation familiale."]
+        },
+        "en": {
+          "title": "Groeipakket (Flemish child benefit)",
+          "summary": "Monthly growth package and birth grant for each child in the Flemish Region.",
+          "plainExplanation": "Families living in the Flemish Region receive a regular monthly payment for each child. Payment starts at birth and usually continues until age 18 (longer if the child studies). The amount depends on the number of children, the birth date and the family situation.",
+          "whoCanApply": "Families with children who live in the Flemish Region.",
+          "conditions": ["Child lives in the Flemish Region", "Meet age/study conditions", "Income threshold for certain supplements"],
+          "benefits": ["Monthly base amount (per child)", "Start amount at birth", "Income-based social supplements", "School allowance"],
+          "applicationSteps": ["Usually starts automatically through a payment fund (uitbetaler)", "Choose a payment fund or keep your current one", "Provide the required documents", "Payments arrive in your account"],
+          "requiredDocuments": ["Child's birth certificate/registration", "Residence details", "Bank account number"],
+          "importantWarnings": ["Amounts and supplements are set by the competent authority — check the Groeipakket portal for current figures.", "Report moves or changes in family situation."]
+        }
+      }
+    },
+    {
+      "id": "be_geboorteverlof",
+      "slug": "geboorteverlof-belgie",
+      "category": "parentalLeave",
+      "regionCodes": ["BE-VLG", "BE-WAL", "BE-BRU"],
+      "jurisdictionLevel": "federal",
+      "riskLevel": "high",
+      "status": "published",
+      "lastVerifiedAt": "2026-01-15",
+      "sources": [
+        {"authority": "FOD Werkgelegenheid / SPF Emploi", "title": "Geboorteverlof / Congé de naissance", "url": "https://werk.belgie.be/", "trustLevel": 1},
+        {"authority": "RVA / ONEM", "title": "Uitkeringen / Allocations", "url": "https://www.rva.be/", "trustLevel": 1}
+      ],
+      "i18n": {
+        "tr": {
+          "title": "Doğum İzni (Geboorteverlof / eş-ebeveyn)",
+          "summary": "Çocuğun doğumunda çalışan eş/ikinci ebeveyn için ücretli izin hakkı.",
+          "plainExplanation": "Belçika'da çalışan bir eş veya ikinci ebeveyn, çocuğun doğumu üzerine belirli sayıda gün ücretli izin kullanabilir. İznin bir kısmı işveren, bir kısmı sosyal güvenlik tarafından karşılanır. İzin, doğumdan sonra belirli bir süre içinde kullanılmalıdır.",
+          "whoCanApply": "Çocuğun doğumunda çalışan eş/ikinci ebeveyn (bordrolu çalışanlar).",
+          "conditions": ["Bordrolu çalışan olmak", "Ebeveynlik bağının bulunması", "İznin yasal süre içinde kullanılması"],
+          "benefits": ["Doğum sonrası ücretli izin günleri", "İlk günler işveren, sonrası sosyal güvenlik ödemesi"],
+          "applicationSteps": ["İşvereninize doğumu bildirin ve izin talep edin", "Gerekli belgeleri (doğum belgesi) sunun", "Ödeme kuruluşuna başvuru gerekiyorsa yapın"],
+          "requiredDocuments": ["Çocuğun doğum belgesi", "İş sözleşmesi/çalışan bilgisi"],
+          "importantWarnings": ["İzin gün sayısı ve ödeme oranı yasa ile belirlenir ve değişebilir — güncel süre için resmî kaynağa bakın.", "İzin belirli bir süre içinde kullanılmazsa hakkınız düşebilir."]
+        },
+        "nl": {
+          "title": "Geboorteverlof (mede-ouder)",
+          "summary": "Betaald verlof voor de werkende partner/mede-ouder bij de geboorte van een kind.",
+          "plainExplanation": "In België kan een werkende partner of mede-ouder een aantal dagen betaald verlof opnemen bij de geboorte van een kind. Een deel wordt door de werkgever betaald, een deel door de sociale zekerheid. Het verlof moet binnen een bepaalde termijn na de geboorte worden opgenomen.",
+          "whoCanApply": "Werkende partner/mede-ouder bij de geboorte (werknemers).",
+          "conditions": ["Werknemer zijn", "Ouderschapsband hebben", "Verlof binnen de wettelijke termijn opnemen"],
+          "benefits": ["Betaalde verlofdagen na de geboorte", "Eerste dagen werkgever, daarna sociale zekerheid"],
+          "applicationSteps": ["Meld de geboorte bij je werkgever en vraag verlof aan", "Bezorg de nodige documenten (geboorteakte)", "Dien indien nodig een aanvraag in bij de uitbetaler"],
+          "requiredDocuments": ["Geboorteakte van het kind", "Arbeidsgegevens"],
+          "importantWarnings": ["Het aantal dagen en de vergoeding worden wettelijk bepaald en kunnen wijzigen — raadpleeg de officiële bron.", "Als je het verlof niet binnen de termijn opneemt, kan je recht vervallen."]
+        },
+        "fr": {
+          "title": "Congé de naissance (coparent)",
+          "summary": "Congé payé pour le/la partenaire ou coparent qui travaille, à la naissance d'un enfant.",
+          "plainExplanation": "En Belgique, un partenaire ou coparent qui travaille peut prendre un certain nombre de jours de congé payé à la naissance d'un enfant. Une partie est payée par l'employeur, une partie par la sécurité sociale. Le congé doit être pris dans un certain délai après la naissance.",
+          "whoCanApply": "Partenaire/coparent salarié à la naissance de l'enfant.",
+          "conditions": ["Être salarié", "Avoir un lien de parenté", "Prendre le congé dans le délai légal"],
+          "benefits": ["Jours de congé payés après la naissance", "Premiers jours par l'employeur, ensuite sécurité sociale"],
+          "applicationSteps": ["Signalez la naissance à votre employeur et demandez le congé", "Fournissez les documents requis (acte de naissance)", "Introduisez une demande auprès de l'organisme payeur si nécessaire"],
+          "requiredDocuments": ["Acte de naissance de l'enfant", "Données professionnelles"],
+          "importantWarnings": ["Le nombre de jours et l'indemnité sont fixés par la loi et peuvent changer — consultez la source officielle.", "Si vous ne prenez pas le congé dans le délai, votre droit peut expirer."]
+        },
+        "en": {
+          "title": "Birth Leave (co-parent)",
+          "summary": "Paid leave for the working partner/co-parent at the birth of a child.",
+          "plainExplanation": "In Belgium, a working partner or co-parent can take a number of days of paid leave at the birth of a child. Part is paid by the employer, part by social security. The leave must be taken within a certain period after the birth.",
+          "whoCanApply": "Employed partner/co-parent at the child's birth.",
+          "conditions": ["Be an employee", "Have a parental link", "Take the leave within the legal period"],
+          "benefits": ["Paid leave days after the birth", "First days by the employer, then social security"],
+          "applicationSteps": ["Notify your employer of the birth and request leave", "Provide the required documents (birth certificate)", "File a claim with the payment body if needed"],
+          "requiredDocuments": ["Child's birth certificate", "Employment details"],
+          "importantWarnings": ["The number of days and the allowance are set by law and may change — check the official source.", "If you don't take the leave within the deadline, your right may lapse."]
+        }
+      }
+    },
+    {
+      "id": "be_ouderschapsverlof",
+      "slug": "ouderschapsverlof-belgie",
+      "category": "parentalLeave",
+      "regionCodes": ["BE-VLG", "BE-WAL", "BE-BRU"],
+      "jurisdictionLevel": "federal",
+      "riskLevel": "high",
+      "status": "published",
+      "lastVerifiedAt": "2026-01-15",
+      "sources": [
+        {"authority": "RVA / ONEM", "title": "Ouderschapsverlof / Congé parental", "url": "https://www.rva.be/", "trustLevel": 1},
+        {"authority": "FOD Werkgelegenheid / SPF Emploi", "title": "Thematisch verlof", "url": "https://werk.belgie.be/", "trustLevel": 1}
+      ],
+      "i18n": {
+        "tr": {
+          "title": "Ebeveyn İzni (Ouderschapsverlof)",
+          "summary": "Çocuğa bakmak için çalışmayı geçici azaltma/durdurma ve ödenek hakkı.",
+          "plainExplanation": "Ebeveyn izni, çalışanların çocuklarına bakmak için işlerini geçici olarak tam gün, yarı gün veya beşte bir oranında azaltmasına izin verir. Bu süre boyunca sosyal güvenlik (RVA/ONEM) bir ödenek öder. İzin çocuk belirli bir yaşa gelene kadar kullanılabilir.",
+          "whoCanApply": "Belirli kıdem/istihdam koşullarını sağlayan çalışan ebeveynler.",
+          "conditions": ["İşverende belirli süre çalışmış olmak", "Çocuğun yaş sınırını aşmamış olması", "Talebi zamanında yapmak"],
+          "benefits": ["Tam/yarı/beşte bir oranında izin", "RVA/ONEM ödeneği", "İş güvencesinin korunması"],
+          "applicationSteps": ["İşvereninize yazılı talepte bulunun (yasal önbildirim süresine uyun)", "RVA/ONEM'e ödenek başvurusu yapın", "Onay sonrası izni başlatın"],
+          "requiredDocuments": ["İşveren onayı/başvuru formu", "Çocuğun kimlik/doğum bilgisi"],
+          "importantWarnings": ["Süre, oran ve ödenek yasa ile belirlenir ve değişebilir — güncel bilgi için RVA/ONEM'e bakın.", "Önbildirim ve başvuru sürelerine uymazsanız hakkınız gecikebilir."]
+        },
+        "nl": {
+          "title": "Ouderschapsverlof",
+          "summary": "Tijdelijk minder of niet werken om voor je kind te zorgen, met een uitkering.",
+          "plainExplanation": "Ouderschapsverlof laat werknemers toe hun werk tijdelijk volledig, halftijds of met een vijfde te verminderen om voor hun kind te zorgen. Tijdens die periode betaalt de sociale zekerheid (RVA/ONEM) een uitkering. Het verlof kan opgenomen worden tot een bepaalde leeftijd van het kind.",
+          "whoCanApply": "Werknemers die aan bepaalde anciënniteits-/tewerkstellingsvoorwaarden voldoen.",
+          "conditions": ["Een bepaalde periode bij de werkgever gewerkt hebben", "Kind onder de leeftijdsgrens", "Tijdig aanvragen"],
+          "benefits": ["Volledig/halftijds/1-5de verlof", "RVA/ONEM-uitkering", "Behoud van werkzekerheid"],
+          "applicationSteps": ["Dien een schriftelijke aanvraag in bij je werkgever (respecteer de opzegtermijn)", "Vraag de uitkering aan bij RVA/ONEM", "Start het verlof na goedkeuring"],
+          "requiredDocuments": ["Goedkeuring werkgever/aanvraagformulier", "Identiteits-/geboortegegevens van het kind"],
+          "importantWarnings": ["Duur, breuk en uitkering worden wettelijk bepaald en kunnen wijzigen — raadpleeg RVA/ONEM.", "Als je de termijnen niet respecteert, kan je recht vertragen."]
+        },
+        "fr": {
+          "title": "Congé parental (Ouderschapsverlof)",
+          "summary": "Réduire ou suspendre temporairement le travail pour s'occuper de son enfant, avec une allocation.",
+          "plainExplanation": "Le congé parental permet aux travailleurs de réduire temporairement leur travail à temps plein, à mi-temps ou d'un cinquième pour s'occuper de leur enfant. Pendant cette période, la sécurité sociale (ONEM) verse une allocation. Le congé peut être pris jusqu'à un certain âge de l'enfant.",
+          "whoCanApply": "Travailleurs qui remplissent certaines conditions d'ancienneté/d'emploi.",
+          "conditions": ["Avoir travaillé une certaine période chez l'employeur", "Enfant sous la limite d'âge", "Demander à temps"],
+          "benefits": ["Congé complet/mi-temps/1-5e", "Allocation ONEM", "Maintien de la sécurité d'emploi"],
+          "applicationSteps": ["Introduisez une demande écrite auprès de votre employeur (respectez le préavis)", "Demandez l'allocation à l'ONEM", "Commencez le congé après approbation"],
+          "requiredDocuments": ["Accord de l'employeur/formulaire de demande", "Données d'identité/naissance de l'enfant"],
+          "importantWarnings": ["La durée, la fraction et l'allocation sont fixées par la loi et peuvent changer — consultez l'ONEM.", "Si vous ne respectez pas les délais, votre droit peut être retardé."]
+        },
+        "en": {
+          "title": "Parental Leave (Ouderschapsverlof)",
+          "summary": "Temporarily reduce or stop work to care for your child, with an allowance.",
+          "plainExplanation": "Parental leave lets employees temporarily reduce their work full-time, half-time or by one fifth to care for their child. During that period, social security (RVA/ONEM) pays an allowance. The leave can be taken until a certain age of the child.",
+          "whoCanApply": "Employees who meet certain seniority/employment conditions.",
+          "conditions": ["Worked a certain period with the employer", "Child under the age limit", "Apply on time"],
+          "benefits": ["Full/half/one-fifth leave", "RVA/ONEM allowance", "Job protection maintained"],
+          "applicationSteps": ["Submit a written request to your employer (respect the notice period)", "Apply for the allowance at RVA/ONEM", "Start the leave after approval"],
+          "requiredDocuments": ["Employer approval/application form", "Child's identity/birth details"],
+          "importantWarnings": ["Duration, fraction and allowance are set by law and may change — check RVA/ONEM.", "If you don't respect the deadlines, your right may be delayed."]
+        }
+      }
+    },
+    {
+      "id": "be_verhoogde_tegemoetkoming",
+      "slug": "verhoogde-tegemoetkoming-belgie",
+      "category": "healthRights",
+      "regionCodes": ["BE-VLG", "BE-WAL", "BE-BRU"],
+      "jurisdictionLevel": "federal",
+      "riskLevel": "high",
+      "status": "published",
+      "lastVerifiedAt": "2026-01-15",
+      "sources": [
+        {"authority": "RIZIV / INAMI", "title": "Verhoogde tegemoetkoming / Intervention majorée", "url": "https://www.riziv.fgov.be/", "trustLevel": 1}
+      ],
+      "i18n": {
+        "tr": {
+          "title": "Artırılmış Geri Ödeme (Verhoogde Tegemoetkoming)",
+          "summary": "Düşük gelirli aileler için sağlık masraflarında daha yüksek geri ödeme.",
+          "plainExplanation": "Artırılmış geri ödeme, düşük gelirli kişilerin doktor, ilaç ve hastane masraflarında daha az ödeme yapmasını sağlar. Hastalık sigortası fonu (mutualiteit) üzerinden verilir. Bazı durumlarda otomatik tanınır, bazı durumlarda gelir incelemesi gerekir.",
+          "whoCanApply": "Gelir sınırının altındaki kişiler/aileler ve belirli sosyal statüdeki kişiler.",
+          "conditions": ["Gelirin belirlenen sınırın altında olması", "Hastalık sigortası fonuna kayıtlı olmak"],
+          "benefits": ["Sağlık masraflarında daha yüksek geri ödeme", "Bazı hizmetlerde üçüncü-taraf ödeme kolaylığı"],
+          "applicationSteps": ["Hastalık sigortası fonunuza (mutualiteit) başvurun", "Gelir belgelerinizi sunun", "Onay sonrası hak otomatik uygulanır"],
+          "requiredDocuments": ["Gelir/kazanç belgeleri", "Kimlik ve sigorta fonu bilgisi"],
+          "importantWarnings": ["Gelir sınırları resmî kurum tarafından belirlenir — güncel eşik için RIZIV/INAMI veya sigorta fonunuza bakın."]
+        },
+        "nl": {
+          "title": "Verhoogde tegemoetkoming",
+          "summary": "Hogere terugbetaling van medische kosten voor gezinnen met een laag inkomen.",
+          "plainExplanation": "De verhoogde tegemoetkoming zorgt ervoor dat mensen met een laag inkomen minder betalen voor dokter, medicijnen en ziekenhuis. Ze wordt toegekend via het ziekenfonds (mutualiteit). Soms automatisch, soms na een inkomensonderzoek.",
+          "whoCanApply": "Personen/gezinnen onder de inkomensgrens en mensen met een bepaald sociaal statuut.",
+          "conditions": ["Inkomen onder de vastgelegde grens", "Aangesloten bij een ziekenfonds"],
+          "benefits": ["Hogere terugbetaling van medische kosten", "Derdebetalersregeling bij bepaalde zorg"],
+          "applicationSteps": ["Vraag het aan bij je ziekenfonds (mutualiteit)", "Bezorg je inkomensbewijzen", "Na goedkeuring wordt het recht automatisch toegepast"],
+          "requiredDocuments": ["Inkomensbewijzen", "Identiteit en ziekenfondsgegevens"],
+          "importantWarnings": ["De inkomensgrenzen worden door de bevoegde instantie bepaald — raadpleeg RIZIV/INAMI of je ziekenfonds voor de actuele drempel."]
+        },
+        "fr": {
+          "title": "Intervention majorée (Verhoogde tegemoetkoming)",
+          "summary": "Remboursement plus élevé des frais médicaux pour les familles à faibles revenus.",
+          "plainExplanation": "L'intervention majorée permet aux personnes à faibles revenus de payer moins pour le médecin, les médicaments et l'hôpital. Elle est accordée via la mutualité. Parfois automatiquement, parfois après un examen des revenus.",
+          "whoCanApply": "Personnes/familles sous le plafond de revenus et personnes ayant un certain statut social.",
+          "conditions": ["Revenu sous le plafond fixé", "Être affilié à une mutualité"],
+          "benefits": ["Remboursement plus élevé des frais médicaux", "Régime du tiers payant pour certains soins"],
+          "applicationSteps": ["Demandez-la à votre mutualité", "Fournissez vos preuves de revenus", "Après approbation, le droit s'applique automatiquement"],
+          "requiredDocuments": ["Preuves de revenus", "Identité et données de la mutualité"],
+          "importantWarnings": ["Les plafonds de revenus sont fixés par l'autorité compétente — consultez l'INAMI ou votre mutualité pour le seuil actuel."]
+        },
+        "en": {
+          "title": "Increased Reimbursement (Verhoogde tegemoetkoming)",
+          "summary": "Higher reimbursement of medical costs for low-income families.",
+          "plainExplanation": "The increased reimbursement lets people on a low income pay less for the doctor, medicines and hospital. It is granted via the health insurance fund (mutualiteit). Sometimes automatically, sometimes after an income check.",
+          "whoCanApply": "People/families below the income threshold and people with a certain social status.",
+          "conditions": ["Income below the set threshold", "Affiliated with a health insurance fund"],
+          "benefits": ["Higher reimbursement of medical costs", "Third-party payer scheme for certain care"],
+          "applicationSteps": ["Apply at your health insurance fund (mutualiteit)", "Provide your income proofs", "After approval, the right applies automatically"],
+          "requiredDocuments": ["Income proofs", "Identity and health fund details"],
+          "importantWarnings": ["Income thresholds are set by the competent authority — check RIZIV/INAMI or your health fund for the current threshold."]
+        }
+      }
+    }
+  ]
+}

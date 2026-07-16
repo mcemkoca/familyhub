@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'hive_service.dart';
+import 'localization/locale_service.dart';
 
 /// Koca Ailesi başlangıç verisini (bir kez) yerel olarak kurar.
 /// - Aile adı: "Koca" → uygulamada "Koca Ailesi" görünür.
@@ -12,16 +13,22 @@ class KocaSeed {
   static const String _flag = 'koca_seeded_v1';
 
   /// Yerel olarak saklanan Koca aile üyeleri (ad, rol, yaş, çevrimiçi).
-  static const List<Map<String, dynamic>> members = [
-    {'name': 'Mustafa Koca', 'role': 'Baba', 'age': 40, 'online': true},
-    {'name': 'Hilal Şahbaz', 'role': 'Anne', 'age': 40, 'online': true},
-    {'name': 'Mirac Koca', 'role': 'Çocuk · 6 yaş', 'age': 6, 'online': false},
+  static String _text(Map<String, String> values) {
+    final lang = LocaleService.resolveInitialLocale().languageCode;
+    return values[lang] ?? values['tr']!;
+  }
+
+  static List<Map<String, dynamic>> get members => [
+    {'name': 'Mustafa Koca', 'role': _text(const {'tr': 'Baba', 'en': 'Father', 'nl': 'Vader', 'fr': 'Père'}), 'age': 40, 'online': true},
+    {'name': 'Hilal Şahbaz', 'role': _text(const {'tr': 'Anne', 'en': 'Mother', 'nl': 'Moeder', 'fr': 'Mère'}), 'age': 40, 'online': true},
+    {'name': 'Mirac Koca', 'role': _text(const {'tr': 'Çocuk · 6 yaş', 'en': 'Child · 6 years', 'nl': 'Kind · 6 jaar', 'fr': 'Enfant · 6 ans'}), 'age': 6, 'online': false},
   ];
 
   static Future<void> ensure() async {
     // Aile adı varsayılan/boşsa "Koca" yap (kullanıcı adını ezmeden, idempotent).
     final current = HiveService.getSetting('family_name');
-    if (current == null || current.trim().isEmpty || current == 'Ailem') {
+    const defaultFamilyNames = {'Ailem', 'My Family', 'Mijn gezin', 'Ma famille'};
+    if (current == null || current.trim().isEmpty || defaultFamilyNames.contains(current)) {
       await HiveService.setSetting('family_name', 'Koca');
     }
     // Üyeleri bir kez seed'le.

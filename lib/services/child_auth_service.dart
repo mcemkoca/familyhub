@@ -5,11 +5,25 @@ import '../core/supabase_client.dart';
 import '../core/errors.dart';
 import '../domain/models/child_session.dart';
 import '../repositories/child_account_repository.dart';
+import 'localization/locale_service.dart';
 
 class ChildAuthService {
   static const _secureStorage = FlutterSecureStorage();
   static const _childSessionKey = 'child_session';
   static const _childModeKey = 'child_mode_active';
+
+  static String get _languageCode =>
+      LocaleService.resolveInitialLocale().languageCode;
+
+  static String _text(Map<String, String> values) =>
+      values[_languageCode] ?? values['tr']!;
+
+  static String get _invalidPinOrAccount => _text(const {
+        'tr': 'PIN hatalı veya hesap bulunamadı',
+        'en': 'The PIN is incorrect or the account was not found',
+        'nl': 'De pincode is onjuist of het account is niet gevonden',
+        'fr': 'Le code PIN est incorrect ou le compte est introuvable',
+      });
 
   static ChildSession? _currentSession;
 
@@ -35,7 +49,14 @@ class ChildAuthService {
     required String pin,
   }) async {
     final supabase = SupabaseConfig.safeClient;
-    if (supabase == null) throw AppAuthException('Sunucu bağlantısı kurulmadı');
+    if (supabase == null) {
+      throw AppAuthException(_text(const {
+        'tr': 'Sunucu bağlantısı kurulamadı',
+        'en': 'Could not connect to the server',
+        'nl': 'Kan geen verbinding maken met de server',
+        'fr': 'Impossible de se connecter au serveur',
+      }));
+    }
 
     // Use RPC function to verify PIN and create session
     final response = await supabase.rpc(
@@ -48,7 +69,7 @@ class ChildAuthService {
     );
 
     if (response == null || (response as List).isEmpty) {
-      throw AppAuthException('PIN hatalı veya hesap bulunamadı');
+      throw AppAuthException(_invalidPinOrAccount);
     }
 
     final session = ChildSession.fromJson(
@@ -69,7 +90,7 @@ class ChildAuthService {
     required String familyId,
   }) async {
     if (!ChildAccountRepository().verifyLocalPin(childId, pin)) {
-      throw AppAuthException('PIN hatalı veya hesap bulunamadı');
+      throw AppAuthException(_invalidPinOrAccount);
     }
     final session = ChildSession(
       token: 'local_$childId',

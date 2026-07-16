@@ -5,6 +5,7 @@ import 'package:permission_handler/permission_handler.dart';
 import '../core/supabase_client.dart';
 import '../domain/models/call_session_model.dart';
 import 'auth_service.dart';
+import 'localization/locale_service.dart';
 
 class CallService {
   static RTCPeerConnection? _peerConnection;
@@ -15,6 +16,19 @@ class CallService {
       StreamController<CallSession>.broadcast();
   static final StreamController<bool> _remoteJoinedController =
       StreamController<bool>.broadcast();
+
+  static String get _languageCode =>
+      LocaleService.resolveInitialLocale().languageCode;
+
+  static String _text(Map<String, String> values) =>
+      values[_languageCode] ?? values['tr']!;
+
+  static String get _microphonePermissionRequired => _text(const {
+        'tr': 'Mikrofon izni gereklidir',
+        'en': 'Microphone permission is required',
+        'nl': 'Microfoontoestemming is vereist',
+        'fr': 'L’autorisation d’utiliser le microphone est requise',
+      });
 
   static Stream<CallSession> get incomingCallStream =>
       _incomingController.stream;
@@ -132,7 +146,7 @@ class CallService {
 
     final micGranted = await requestMicrophonePermission();
     if (!micGranted) {
-      throw CallException('Mikrofon izni gereklidir');
+      throw CallException(_microphonePermissionRequired);
     }
 
     // Find family_id
@@ -147,7 +161,12 @@ class CallService {
     } catch (e) { debugPrint('Call service error: $e'); }
 
     if (familyId == null || familyId.isEmpty) {
-      throw CallException('Aile bilgisi bulunamadı');
+      throw CallException(_text(const {
+        'tr': 'Aile bilgisi bulunamadı',
+        'en': 'Family information was not found',
+        'nl': 'Gezinsgegevens zijn niet gevonden',
+        'fr': 'Les informations sur la famille sont introuvables',
+      }));
     }
 
     // Create call session
@@ -201,7 +220,7 @@ class CallService {
 
     final micGranted = await requestMicrophonePermission();
     if (!micGranted) {
-      throw CallException('Mikrofon izni gereklidir');
+      throw CallException(_microphonePermissionRequired);
     }
 
     _currentSessionId = session.id;
