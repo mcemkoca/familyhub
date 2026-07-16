@@ -9,6 +9,7 @@ import '../../../services/ai/pedagogy_engine.dart';
 import '../../../services/hive_service.dart';
 import '../../../core/supabase_client.dart';
 import '../../../repositories/child_account_repository.dart';
+import '../../providers/child_context_provider.dart';
 
 // ── WHO Milestone Data ──
 /// Gelişim/eğitim kategori etiketini aktif dile çevirir (veri değeri değişmez).
@@ -544,9 +545,15 @@ class _ChildDevelopmentScreenState extends ConsumerState<ChildDevelopmentScreen>
   @override
   Widget build(BuildContext context) {
     final children = ref.watch(childDevProvider);
-    final child = children.isEmpty
-        ? null
-        : children[_selectedChild.clamp(0, children.length - 1)];
+    // Seçili çocuğu merkezi context'ten türet (bölümler arası paylaşımlı).
+    final activeChildId = ref.watch(activeChildIdProvider);
+    var selIndex = _selectedChild;
+    if (activeChildId != null) {
+      final found = children.indexWhere((c) => c.id == activeChildId);
+      if (found >= 0) selIndex = found;
+    }
+    selIndex = children.isEmpty ? 0 : selIndex.clamp(0, children.length - 1);
+    final child = children.isEmpty ? null : children[selIndex];
 
     return Scaffold(
       body: CustomScrollView(
@@ -616,9 +623,16 @@ class _ChildDevelopmentScreenState extends ConsumerState<ChildDevelopmentScreen>
                               );
                             }
                             final c = children[i];
-                            final sel = _selectedChild == i;
+                            final sel = selIndex == i;
                             return GestureDetector(
-                              onTap: () => setState(() => _selectedChild = i),
+                              onTap: () {
+                                setState(() => _selectedChild = i);
+                                // Seçimi merkezi context'e yaz → tüm bölümler
+                                // aynı çocuğu görür (kalıcı).
+                                ref
+                                    .read(activeChildIdProvider.notifier)
+                                    .select(c.id);
+                              },
                               child: Column(
                                 children: [
                                   AnimatedContainer(
