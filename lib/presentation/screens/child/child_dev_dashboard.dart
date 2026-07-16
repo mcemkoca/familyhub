@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../services/hive_service.dart';
 import 'child_development_screen.dart' show ChildProfile, childDevProvider;
+import '../../providers/child_context_provider.dart';
 import 'child_dev_content.dart';
 import 'child_dev_store.dart';
 import 'child_dev_observation.dart';
@@ -82,6 +83,12 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
   Widget build(BuildContext context) {
     final children = ref.watch(childDevProvider);
     if (children.isEmpty) return _emptyState();
+    // Aktif çocuğu merkezi context'ten türet (bölümler arası paylaşımlı seçim).
+    final activeId = ref.watch(activeChildIdProvider);
+    if (activeId != null) {
+      final found = children.indexWhere((c) => c.id == activeId);
+      if (found >= 0) _childIndex = found;
+    }
     final child = children[_childIndex.clamp(0, children.length - 1)];
     final group = child.devGroup;
     final overall = DevStore.overallScore(child.id, group);
@@ -171,8 +178,13 @@ class _ChildDevelopmentHomeState extends ConsumerState<ChildDevelopmentHome> {
         children: [
           GestureDetector(
             onTap: children.length > 1
-                ? () => setState(() =>
-                    _childIndex = (_childIndex + 1) % children.length)
+                ? () {
+                    final next = (_childIndex + 1) % children.length;
+                    setState(() => _childIndex = next);
+                    ref
+                        .read(activeChildIdProvider.notifier)
+                        .select(children[next].id);
+                  }
                 : null,
             child: Container(
               width: 64,
