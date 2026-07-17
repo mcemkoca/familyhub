@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import '../../core/supabase_client.dart';
+import '../../core/app_logger.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:hive_flutter/hive_flutter.dart';
 import '../../domain/entities.dart';
@@ -410,7 +411,16 @@ class CalendarNotifier extends StateNotifier<AsyncValue<List<CalendarEvent>>> {
       for (final m in mins) {
         await NotificationService.cancelNotification((base + m) % 2147483647);
       }
-    } catch (_) {}
+    } catch (e, st) {
+      // FH-03: iptal başarısız olursa SİLİNMİŞ etkinliğin alarmı yine çalar
+      // ("hayalet bildirim"). Kullanıcı akışı kesilmez (etkinlik zaten silindi)
+      // ama teşhis edilebilmesi için iz bırakılır.
+      AppLogger.logError(e,
+          module: 'calendar',
+          operation: 'cancelEventReminders',
+          stackTrace: st,
+          context: {'eventId': event.id});
+    }
   }
 }
 

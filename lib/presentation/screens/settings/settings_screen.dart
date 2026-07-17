@@ -5,7 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../../../config/routes.dart';
+import '../../../core/app_logger.dart';
+import '../../../../config/routes.dart';
 import '../../../core/supabase_client.dart';
 import '../../../repositories/backup_repository.dart';
 import '../../../services/auth_service.dart';
@@ -687,7 +688,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         for (final entity in cacheDir.listSync()) {
           try {
             await entity.delete(recursive: true);
-          } catch (_) {}
+          } catch (e) {
+            // Best-effort: kullanımdaki/kilitli dosya silinemez — diğerlerine
+            // devam edilir. Kısmi temizlik beklenen davranış.
+            AppLogger.logBestEffort(e,
+                module: 'settings', operation: 'clearCacheEntry');
+          }
         }
       }
       if (mounted) {
