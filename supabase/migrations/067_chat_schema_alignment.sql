@@ -16,7 +16,13 @@
 -- ============================================================================
 
 -- ── 1. messages: eksik kolonları ekle ──────────────────────────────────────
+-- Canlı şema migration 001'den farklı (text/type kolonları yoktu). Temel
+-- kolonları da güvenceye al — hepsi IF NOT EXISTS.
+alter table public.messages add column if not exists family_id uuid;
+alter table public.messages add column if not exists user_id uuid;
+alter table public.messages add column if not exists type text default 'text';
 alter table public.messages add column if not exists content text;
+alter table public.messages add column if not exists created_at timestamptz default now();
 alter table public.messages add column if not exists sender_name text;
 alter table public.messages add column if not exists sender_color text;
 alter table public.messages add column if not exists image_url text;
