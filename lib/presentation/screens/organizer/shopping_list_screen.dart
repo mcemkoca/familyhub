@@ -19,6 +19,7 @@ import 'package:share_plus/share_plus.dart';
 import '../../../features/export/data/shopping_csv_builder.dart';
 import '../../../features/subscription/domain/subscription_tier.dart';
 import '../../../features/subscription/presentation/feature_gate.dart';
+import '../../../core/app_logger.dart';
 
 // Quick AI-suggested common items (tokensiz)
 const _aiSuggestions = [
@@ -70,7 +71,11 @@ class _ShoppingListScreenState extends ConsumerState<ShoppingListScreen> {
       setState(() {
         _recipes = recipes;
       });
-    } catch (_) {}
+    } catch (e, st) {
+      // Asset yüklemesi/parse hatası paketleme sorunudur — tarif listesi
+      // sessizce boş kalırsa ekran bozuk görünür.
+      AppLogger.logError(e, module: 'kitchen', operation: 'loadRecipesAsset', stackTrace: st);
+    }
   }
 
   @override

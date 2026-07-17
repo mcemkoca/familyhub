@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart' show debugPrint, kDebugMode;
 import 'package:http/http.dart' as http;
 import '../../core/analytics/analytics_service.dart';
+import '../../core/app_logger.dart';
 
 /// Supported LLM providers with fallback chain:
 /// OpenAI → Anthropic → Google Gemini → Local (rule-based)
@@ -390,7 +391,10 @@ class AIEngine {
         final secs = double.parse(m.group(1)!).ceil() + 1;
         return Duration(seconds: secs.clamp(2, 12));
       }
-    } catch (_) {}
+    } catch (e) {
+      // Best-effort: gövde ayrıştırılamazsa aşağıdaki 6sn varsayılanı kullanılır.
+      AppLogger.logBestEffort(e, module: 'ai', operation: 'parseRetryDelay');
+    }
     return const Duration(seconds: 6);
   }
 

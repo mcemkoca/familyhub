@@ -8,6 +8,7 @@ import '../../widgets/settings/screen_header.dart';
 import '../../widgets/settings/settings_section.dart';
 import 'package:go_router/go_router.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../../core/app_logger.dart';
 
 class ScreenTimeSettingsScreen extends ConsumerStatefulWidget {
   const ScreenTimeSettingsScreen({super.key});
@@ -42,7 +43,10 @@ class _ScreenTimeSettingsScreenState
               .eq('id', userId)
               .maybeSingle();
           familyId = profile?['family_id'] as String?;
-        } catch (_) {}
+        } catch (e) {
+          // Best-effort: familyId null kalır, çağıran yerel moda düşer.
+          AppLogger.logBestEffort(e, module: 'settings', operation: 'lookupFamilyId');
+        }
       }
       familyId ??= ChildAccountRepository.localFamilyId;
 

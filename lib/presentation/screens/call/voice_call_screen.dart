@@ -6,6 +6,7 @@ import '../../../config/constants.dart';
 import '../../../domain/models/call_session_model.dart';
 import '../../../services/call_service.dart';
 import '../../../core/supabase_client.dart';
+import '../../../core/app_logger.dart';
 
 enum VoiceCallMode {
   outgoing,
@@ -91,7 +92,8 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
           _transitionToConnected();
         }
       },
-      onError: (_) {},
+      onError: (Object e) =>
+          AppLogger.logBestEffort(e, module: 'call', operation: 'callStatusStream'),
     );
   }
 

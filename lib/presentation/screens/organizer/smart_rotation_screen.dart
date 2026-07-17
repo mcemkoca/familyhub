@@ -9,6 +9,7 @@ import '../../../services/smart_rotation_service.dart';
 import '../../../services/koca_seed.dart';
 import '../../../services/hive_service.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../../core/app_logger.dart';
 
 class SmartRotationScreen extends StatefulWidget {
   final String? familyId;
@@ -56,7 +57,10 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
                 .eq('id', user.id)
                 .maybeSingle();
             familyId = profile?['family_id'] as String?;
-          } catch (_) {}
+          } catch (e) {
+            // Best-effort: familyId null kalır, çağıran yerel moda düşer.
+            AppLogger.logBestEffort(e, module: 'organizer', operation: 'lookupFamilyId');
+          }
         }
       }
 

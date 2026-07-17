@@ -12,6 +12,7 @@ import '../../../services/koca_seed.dart';
 import '../../providers/app_providers.dart' show localFamilyMembers;
 import '../../widgets/settings/screen_header.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../../core/app_logger.dart';
 
 class FamilyPermissionsScreen extends StatefulWidget {
   const FamilyPermissionsScreen({super.key});
@@ -79,7 +80,16 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
           _memberPermissions[k] =
               (v as Map<String, dynamic>).cast<String, bool>();
         });
-      } catch (_) {}
+      } catch (e, st) {
+        // Güvenlik: izin haritası sessizce boşalırsa ekran varsayılanları
+        // gösterir ve kaydetme, ayarlanmış kısıtlamaları silebilir.
+        AppLogger.logError(
+          e,
+          module: 'settings',
+          operation: 'loadMemberPermissions',
+          stackTrace: st,
+        );
+      }
     }
   }
 

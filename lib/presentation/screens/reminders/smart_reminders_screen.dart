@@ -10,6 +10,7 @@ import '../../../services/auth_service.dart';
 import '../../../services/smart_reminder_background_service.dart';
 import '../../../services/smart_reminder_service.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../../core/app_logger.dart';
 
 class SmartRemindersScreen extends StatefulWidget {
   const SmartRemindersScreen({super.key});
@@ -52,7 +53,8 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
     _sub?.cancel();
     _sub = SmartReminderRepository().watchReminders(familyId).listen((rems) {
       if (mounted) setState(() => _reminders = rems);
-    }, onError: (_) {});
+    }, onError: (Object e) =>
+        AppLogger.logBestEffort(e, module: 'reminders', operation: 'remindersRealtime'));
   }
 
   Future<String?> _getFamilyId() async {

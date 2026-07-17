@@ -8,6 +8,7 @@ import '../../../services/hive_service.dart';
 import '../../../domain/models/crash_settings.dart';
 import '../../../services/crash_detection_service.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../../core/app_logger.dart';
 
 class CrashSettingsScreen extends StatefulWidget {
   const CrashSettingsScreen({super.key});
@@ -55,7 +56,16 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
       _emergencyContacts = (jsonDecode(raw) as List)
           .map((e) => (e as Map).map((k, v) => MapEntry('$k', '$v')))
           .toList();
-    } catch (_) {}
+    } catch (e, st) {
+      // Sessizce boş kalırsa kullanıcı acil kişilerini silinmiş sanır ve
+      // üzerine yazar — kayıp kalıcı olur.
+      AppLogger.logError(
+        e,
+        module: 'safety',
+        operation: 'loadEmergencyContacts',
+        stackTrace: st,
+      );
+    }
   }
 
   Future<void> _saveContacts() async {

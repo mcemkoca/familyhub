@@ -16,6 +16,7 @@ import '../../../services/location_service.dart';
 import '../../providers/app_providers.dart';
 import '../../widgets/location_permission_prompt.dart';
 import '../call/call_contact_list_screen.dart';
+import '../../../core/app_logger.dart';
 
 class FamilyMapScreen extends ConsumerStatefulWidget {
   const FamilyMapScreen({super.key});
@@ -92,7 +93,11 @@ class _FamilyMapScreenState extends ConsumerState<FamilyMapScreen>
         setState(() => _myLocation = ll);
         try {
           _mapController.move(ll, 14);
-        } catch (_) {}
+        } catch (e) {
+          // Best-effort: harita henüz hazır değilse move atar; konum yine setState
+          // ile işaretlendi, sonraki frame'de doğru görünür.
+          AppLogger.logBestEffort(e, module: 'map', operation: 'moveCamera');
+        }
       }
     } catch (_) {
       // Konum alınamadı — varsayılan merkez kullanılır.

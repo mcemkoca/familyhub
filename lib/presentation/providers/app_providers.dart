@@ -156,15 +156,19 @@ final hubRealtimeSyncProvider = Provider.autoDispose<void>((ref) {
         .listen((_) {
           ref.invalidate(upcomingEventsProvider);
           ref.invalidate(todaySummaryProvider);
-        }, onError: (_) {}));
+        }, onError: (Object e) => AppLogger.logBestEffort(e,
+            module: 'sync', operation: 'eventsRealtime')));
     subs.add(client
         .from('tasks')
         .stream(primaryKey: ['id'])
         .listen((_) {
           ref.invalidate(myTasksProvider);
           ref.invalidate(todaySummaryProvider);
-        }, onError: (_) {}));
-  } catch (_) {}
+        }, onError: (Object e) => AppLogger.logBestEffort(e,
+            module: 'sync', operation: 'tasksRealtime')));
+  } catch (e) {
+    AppLogger.logBestEffort(e, module: 'sync', operation: 'subscribeTasksRealtime');
+  }
 
   ref.onDispose(() {
     for (final s in subs) {
@@ -699,9 +703,12 @@ class MoodNotifier extends StateNotifier<List<MoodEntry>> {
     try {
       _rt = MoodRepository().watchEntries().listen(
             (_) => _load(),
-            onError: (_) {},
+            onError: (Object e) => AppLogger.logBestEffort(e,
+                module: 'sync', operation: 'moodRealtime'),
           );
-    } catch (_) {}
+    } catch (e) {
+      AppLogger.logBestEffort(e, module: 'sync', operation: 'subscribeMoodRealtime');
+    }
   }
 
   @override

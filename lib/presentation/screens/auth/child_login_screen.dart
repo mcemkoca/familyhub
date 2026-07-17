@@ -8,6 +8,7 @@ import '../../../domain/models/child_account.dart';
 import '../../../repositories/child_account_repository.dart';
 import '../../providers/app_providers.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../../core/app_logger.dart';
 
 class ChildLoginScreen extends ConsumerStatefulWidget {
   const ChildLoginScreen({super.key});
@@ -53,7 +54,10 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
             .eq('user_id', userId)
             .maybeSingle();
         familyId = response?['family_id'] as String?;
-      } catch (_) {}
+      } catch (e) {
+        // Best-effort: aşağıdaki yerel familyId fallback'i devreye girer.
+        AppLogger.logBestEffort(e, module: 'auth', operation: 'lookupChildFamilyId');
+      }
       familyId ??= ChildAccountRepository.localFamilyId;
 
       final children = await _repo.getChildrenForFamily(familyId);

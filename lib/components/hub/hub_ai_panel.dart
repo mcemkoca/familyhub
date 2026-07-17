@@ -187,7 +187,10 @@ class _HubAiPanelState extends ConsumerState<HubAiPanel> {
             return '• $s';
           }).join('\n');
         }
-      } catch (_) {}
+      } catch (e) {
+        // Best-effort: biçimlendirme başarısızsa aşağıdaki düz metne düşer.
+        AppLogger.logBestEffort(e, module: 'ai', operation: 'formatSuggestions');
+      }
       return 'Öneriler hazır — ilgili bölümden inceleyebilirsin.';
     }
     return t;

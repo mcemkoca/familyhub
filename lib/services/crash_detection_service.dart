@@ -16,6 +16,7 @@ import '../services/health_card_service.dart';
 import '../services/hive_service.dart';
 import 'crash_detection_engine.dart';
 import 'localization/locale_service.dart';
+import '../core/app_logger.dart';
 
 /// High-level service that wires the [CrashDetectionEngine] to
 /// notifications, audio alarms, vibration, and SOS actions.
@@ -311,7 +312,16 @@ class CrashDetectionService {
           final p = (e as Map)['phone']?.toString() ?? '';
           if (p.isNotEmpty) phones.add(p);
         }
-      } catch (_) {}
+      } catch (e, st) {
+        // KRİTİK: bozuk kayıt sessizce yutulursa kaza anında acil kişilere
+        // HİÇ bildirim gitmez. Telefon numarası loglanmaz (AppLogger maskeler).
+        AppLogger.logError(
+          e,
+          module: 'safety',
+          operation: 'parseEmergencyContacts',
+          stackTrace: st,
+        );
+      }
     }
     return phones.toList();
   }

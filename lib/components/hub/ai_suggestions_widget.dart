@@ -21,6 +21,7 @@ import '../../services/content/family_suggestions_pool.dart';
 import '../../services/hive_service.dart';
 import '../../presentation/screens/insights/family_report_screen.dart'
     show familyReportScoresProvider;
+import '../../core/app_logger.dart';
 
 /// AI-powered smart suggestions widget for the Hub screen.
 /// Phase 2: Rich cards with badges, nutrition info, steps, alternatives,
@@ -229,7 +230,10 @@ class _AISuggestionsWidgetState extends ConsumerState<AISuggestionsWidget> {
           alreadyShownIds: const [],
           count: 4,
         );
-      } catch (_) {}
+      } catch (e) {
+        // Best-effort: seçim başarısızsa mevcut öneriler ekranda kalır.
+        AppLogger.logBestEffort(e, module: 'ai', operation: 'pickMoreSuggestions');
+      }
     }
     final all = [...daily, ...family]..shuffle();
     if (all.isEmpty) return;

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import '../services/hive_service.dart';
+import '../core/app_logger.dart';
 
 class MarketStore {
   final String id;
@@ -248,7 +249,10 @@ class MarketCatalog {
           final quote = MarketPriceQuote.fromJson(Map<String, dynamic>.from(item as Map));
           if (_isValidQuote(quote)) _quotes[_quoteId(quote.country, quote.productId)] = quote;
         }
-      } catch (_) {}
+      } catch (e) {
+        // Best-effort: bozuk önbellek yok sayılır, katalog varsayılanları kullanılır.
+        AppLogger.logBestEffort(e, module: 'content', operation: 'loadCachedQuotes');
+      }
     }
     final ts = HiveService.getSetting('market_price_updated_at');
     if (ts != null) lastPriceUpdate = DateTime.tryParse(ts);

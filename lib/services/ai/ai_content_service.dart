@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart' show debugPrint, kDebugMode;
 import '../hive_service.dart';
 import 'ai_engine.dart';
+import '../../core/app_logger.dart';
 
 /// Uygulamanın tüm bölümlerini internet/AI (Gemini) ile besleyen birleşik
 /// içerik motoru. Sonuçlar Hive'da önbelleğe alınır:
@@ -118,7 +119,10 @@ class AiContentService {
                 (e) => e.map((k, v) => MapEntry(k.toString(), v)))
             .toList();
       }
-    } catch (_) {}
+    } catch (e) {
+      // Best-effort: bozuk önbellek yok sayılır, boş liste ile yeniden üretilir.
+      AppLogger.logBestEffort(e, module: 'ai', operation: 'parseCachedContent');
+    }
     return const [];
   }
 

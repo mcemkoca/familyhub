@@ -13,6 +13,7 @@ import '../../providers/app_providers.dart';
 import '../../widgets/ds.dart';
 import '../../../services/ai/ai_engine.dart';
 import '../../../services/ai/ai_content_service.dart';
+import '../../../core/app_logger.dart';
 
 /// Tarife göre DOĞRU yemek fotoğrafı — TheMealDB'den adına göre çeker,
 /// bulunamazsa nötr gradient + ikon (yanlış görsel göstermez).
@@ -175,7 +176,15 @@ class _KitchenScreenState extends State<KitchenScreen>
         final v = map[day];
         if (v is String) _weeklyPlan[day] = v;
       }
-    } catch (_) {}
+    } catch (e, st) {
+      // Haftalık plan sessizce boş dönerse kullanıcı planını kaybetmiş sanır.
+      AppLogger.logError(
+        e,
+        module: 'kitchen',
+        operation: 'loadWeeklyPlan',
+        stackTrace: st,
+      );
+    }
   }
 
   Future<void> _saveWeeklyPlan() async {

@@ -9,6 +9,7 @@ import '../../../domain/models/child_account.dart';
 import '../../../repositories/child_account_repository.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 import '../../widgets/screen_background.dart';
+import '../../../core/app_logger.dart';
 
 class ChildManagementScreen extends ConsumerStatefulWidget {
   const ChildManagementScreen({super.key});
@@ -44,7 +45,8 @@ class _ChildManagementScreenState extends ConsumerState<ChildManagementScreen> {
     _childrenSub?.cancel();
     _childrenSub = _repo.watchChildren(familyId).listen((children) {
       if (mounted) setState(() => _children = children);
-    }, onError: (_) {});
+    }, onError: (Object e) =>
+        AppLogger.logBestEffort(e, module: 'child', operation: 'childrenRealtime'));
   }
 
   Future<void> _loadFamilyAndChildren() async {
