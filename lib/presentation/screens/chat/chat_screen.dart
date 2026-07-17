@@ -79,6 +79,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       _messagesSub = ChatRepository().watchMessages(familyId).listen(
         (messages) {
           ref.read(chatMessagesProvider.notifier).state = messages;
+          _markLatestRead(familyId, messages);
         },
         onError: (Object e) => AppLogger.logBestEffort(e,
             module: 'chat', operation: 'watchMessages'),
@@ -87,6 +88,24 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       AppLogger.logError(e,
           module: 'chat', operation: 'loadFamilyIdAndListen', stackTrace: st);
     }
+  }
+
+  String? _lastMarkedReadId;
+
+  /// Sohbet açıkken gelen son mesajı kullanıcı için "okundu" işaretler
+  /// (chat_read_states). Debounce: aynı mesaj ID'si iki kez yazılmaz ve
+  /// kullanıcının kendi mesajı okundu tetiklemez (spec §16).
+  void _markLatestRead(String familyId, List<ChatMessage> messages) {
+    if (messages.isEmpty) return;
+    final last = messages.last;
+    if (last.id.isEmpty || last.id == _lastMarkedReadId) return;
+    if (last.senderId == _myId) return; // kendi mesajım okundu sayılmaz
+    _lastMarkedReadId = last.id;
+    // Ekran foreground'da (bu widget mounted) olduğu için okundu sayılır.
+    ChatRepository()
+        .markRead(familyId: familyId, lastMessageId: last.id)
+        .catchError((Object e) => AppLogger.logBestEffort(e,
+            module: 'chat', operation: 'markRead'));
   }
 
   /// familyId'yi (önbellekten veya profilden) döndürür; yoksa null.
