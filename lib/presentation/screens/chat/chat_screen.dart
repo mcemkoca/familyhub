@@ -547,15 +547,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       messenger.showSnackBar(SnackBar(content: Text(t.chatNoFamily)));
       return;
     }
-    // Not: Anket OYLARI henüz kalıcı değil (poll oyları için tablo yok); ancak
-    // anket mesajının kendisi gerçek backend'e yazılır ki diğer üyeler görsün.
-    // Seçenekler metne gömülür (poll_options tablosu gelene kadar).
-    final body = '$question\n${options.map((o) => '• $o').join('\n')}';
     try {
-      await ChatRepository().sendMessage(
+      // Anket mesajı + kalıcı anket kaydı (chat_polls, migration 068).
+      await ChatRepository().createPoll(
         familyId: familyId,
-        content: body,
-        type: MessageType.poll,
+        question: question,
+        options: options,
       );
       WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
     } catch (e, st) {

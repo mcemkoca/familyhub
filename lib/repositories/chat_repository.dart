@@ -165,6 +165,68 @@ class ChatRepository with RepositoryErrorHandler {
     }, 'setPinned');
   }
 
+  /// Anket mesajı + kalıcı anket kaydı oluşturur (chat_polls).
+  /// Mesaj insert'i ile anket satırı aynı akışta bağlanır.
+  Future<void> createPoll({
+    required String familyId,
+    required String question,
+    required List<String> options,
+    bool allowMultiple = false,
+  }) async {
+    return handleRepositoryCall(() async {
+      final userId = AuthService.currentUserId;
+      if (userId == null) throw Exception('Giriş yapmalısınız');
+      final body = '$question\n${options.map((o) => '• $o').join('\n')}';
+      final msg = await sendMessage(
+        familyId: familyId,
+        content: body,
+        type: MessageType.poll,
+      );
+      await _client.from('chat_polls').insert({
+        'message_id': msg.id,
+        'family_id': familyId,
+        'created_by': userId,
+        'question': question,
+        'options': options,
+        'allow_multiple': allowMultiple,
+      });
+    }, 'createPoll');
+  }
+
+  /// Anket oyunu kalıcı yazar/kaldırır (chat_poll_votes, toggle).
+  Future<void> votePoll({
+    required String pollId,
+    required String familyId,
+    required int optionIndex,
+  }) async {
+    return handleRepositoryCall(() async {
+      final userId = AuthService.currentUserId;
+      if (userId == null) throw Exception('Giriş yapmalısınız');
+      final existing = await _client
+          .from('chat_poll_votes')
+          .select()
+          .eq('poll_id', pollId)
+          .eq('user_id', userId)
+          .eq('option_index', optionIndex)
+          .maybeSingle();
+      if (existing != null) {
+        await _client
+            .from('chat_poll_votes')
+            .delete()
+            .eq('poll_id', pollId)
+            .eq('user_id', userId)
+            .eq('option_index', optionIndex);
+      } else {
+        await _client.from('chat_poll_votes').insert({
+          'poll_id': pollId,
+          'family_id': familyId,
+          'user_id': userId,
+          'option_index': optionIndex,
+        });
+      }
+    }, 'votePoll');
+  }
+
   Future<void> deleteMessage(String id) async {
     return handleRepositoryCall(() async {
       await _client.from(_table).delete().eq('id', id);
