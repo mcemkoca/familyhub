@@ -14,8 +14,10 @@ import '../../../config/routes.dart';
 import '../../../core/app_logger.dart';
 import '../../../core/supabase_client.dart';
 import '../../../domain/entities.dart';
+import 'package:uuid/uuid.dart';
 import '../../../services/chat_storage_service.dart';
 import '../../../services/chat_presence_service.dart';
+import '../../../services/chat_outbox.dart';
 import '../../providers/app_providers.dart';
 import '../../../repositories/chat_repository.dart';
 import '../../../services/hive_service.dart';
@@ -93,6 +95,14 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       presence.connect(_myDisplayName);
       _presence = presence;
 
+      // Offline kuyruğu boşalt (yalnızca bu kullanıcının bekleyen mesajları).
+      final myId = _myId;
+      if (myId != null) {
+        ChatOutboxService.flush(myId).catchError((Object e) =>
+            AppLogger.logBestEffort(e,
+                module: 'chat', operation: 'outboxFlushOnOpen'));
+      }
+
       _messagesSub = ChatRepository().watchMessages(familyId).listen(
         (messages) {
           ref.read(chatMessagesProvider.notifier).state = messages;
@@ -139,7 +149,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     return _familyId;
   }
 
-  void _sendMessage(String text) async {
+  void _sendMessage(String text, {String? clientMessageId}) async {
     if (text.trim().isEmpty) return;
     final messenger = ScaffoldMessenger.of(context);
     final t = AppLocalizations.of(context);
@@ -151,6 +161,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     }
 
     final reply = _replyToMessage;
+    // Idempotency: retry aynı ID ile → backend uq_messages_client_id duplicate'i
+    // önler (offline kuyruk aynı ID'yi tekrar kullanır).
+    final clientId = clientMessageId ?? const Uuid().v4();
     try {
       // Mesaj yalnızca backend onayladıktan sonra listede görünür (realtime
       // stream ile gelir). Sahte "gönderildi" YOK.
@@ -160,22 +173,34 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         replyToId: reply?.id,
         replyToContent: reply?.content,
         replyToSender: reply?.senderName,
+        clientMessageId: clientId,
       );
       _replyToMessage = null;
+      await ChatOutboxService.remove(clientId); // kuyruktaysa temizle
       setState(() {});
       WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
     } catch (e, st) {
       // Backend başarısız → sahte local mesaj EKLEME. Hatayı göster, metni geri
-      // ver, kullanıcı tekrar denesin.
+      // ver. Kalıcı hata (RLS/yetki) değilse offline kuyruğa al.
       AppLogger.logError(e,
           module: 'chat', operation: 'sendMessage', stackTrace: st);
+      if (!isPermanentFailure(e.toString())) {
+        await ChatOutboxService.enqueue(OutboxMessage(
+          clientMessageId: clientId,
+          ownerId: _myId ?? '',
+          familyId: familyId,
+          content: text.trim(),
+          replyToId: reply?.id,
+          createdAtMs: DateTime.now().millisecondsSinceEpoch,
+        ));
+      }
       messenger.showSnackBar(SnackBar(
         content: Text(t.chatSendFailed),
         backgroundColor: const Color(0xFFB42318),
         action: SnackBarAction(
           label: t.retry,
           textColor: Colors.white,
-          onPressed: () => _sendMessage(text),
+          onPressed: () => _sendMessage(text, clientMessageId: clientId),
         ),
       ));
     }
