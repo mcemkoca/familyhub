@@ -2998,5 +2998,15 @@
     "placeholders": {
       "date": {}
     }
-  }
+  },
+  "chatNoFamily": "Önce bir aileye katılın",
+  "chatSendFailed": "Mesaj gönderilemedi",
+  "chatUploading": "Yükleniyor…",
+  "chatUploadFailed": "Dosya yüklenemedi",
+  "chatPhoto": "Fotoğraf",
+  "chatVoiceMessage": "Sesli mesaj",
+  "chatFileTooLarge": "Dosya çok büyük (en fazla 50 MB)",
+  "chatNoResults": "Sonuç bulunamadı",
+  "chatClearForMeDesc": "Bu cihazdaki yerel sohbet kopyası temizlenir. Aile mesajları korunur.",
+  "chatCleared": "Yerel sohbet temizlendi"
 }

@@ -7369,4 +7369,35 @@ class AppLocalizationsTr extends AppLocalizations {
   String sugLastDone(Object date) {
     return 'Son yapılma: $date';
   }
+
+  @override
+  String get chatNoFamily => 'Önce bir aileye katılın';
+
+  @override
+  String get chatSendFailed => 'Mesaj gönderilemedi';
+
+  @override
+  String get chatUploading => 'Yükleniyor…';
+
+  @override
+  String get chatUploadFailed => 'Dosya yüklenemedi';
+
+  @override
+  String get chatPhoto => 'Fotoğraf';
+
+  @override
+  String get chatVoiceMessage => 'Sesli mesaj';
+
+  @override
+  String get chatFileTooLarge => 'Dosya çok büyük (en fazla 50 MB)';
+
+  @override
+  String get chatNoResults => 'Sonuç bulunamadı';
+
+  @override
+  String get chatClearForMeDesc =>
+      'Bu cihazdaki yerel sohbet kopyası temizlenir. Aile mesajları korunur.';
+
+  @override
+  String get chatCleared => 'Yerel sohbet temizlendi';
 }

@@ -7345,4 +7345,35 @@ class AppLocalizationsEn extends AppLocalizations {
   String sugLastDone(Object date) {
     return 'Last done: $date';
   }
+
+  @override
+  String get chatNoFamily => 'Join a family first';
+
+  @override
+  String get chatSendFailed => 'Message could not be sent';
+
+  @override
+  String get chatUploading => 'Uploading…';
+
+  @override
+  String get chatUploadFailed => 'File could not be uploaded';
+
+  @override
+  String get chatPhoto => 'Photo';
+
+  @override
+  String get chatVoiceMessage => 'Voice message';
+
+  @override
+  String get chatFileTooLarge => 'File too large (max 50 MB)';
+
+  @override
+  String get chatNoResults => 'No results found';
+
+  @override
+  String get chatClearForMeDesc =>
+      'The local copy on this device is cleared. Family messages are kept.';
+
+  @override
+  String get chatCleared => 'Local chat cleared';
 }

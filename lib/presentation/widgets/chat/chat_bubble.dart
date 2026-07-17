@@ -4,6 +4,7 @@ import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../domain/entities.dart';
+import '../../../services/auth_service.dart';
 
 class ChatBubble extends StatelessWidget {
   final ChatMessage message;
@@ -129,7 +130,7 @@ class ChatBubble extends StatelessWidget {
                         _PollCard(
                           poll: message.poll!,
                           isMe: isMe,
-                          currentUserId: 'm1',
+                          currentUserId: AuthService.currentUserId ?? '',
                           onVote: onVote,
                         )
                       else

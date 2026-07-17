@@ -7353,4 +7353,35 @@ class AppLocalizationsNl extends AppLocalizations {
   String sugLastDone(Object date) {
     return 'Laatst gedaan: $date';
   }
+
+  @override
+  String get chatNoFamily => 'Sluit je eerst aan bij een gezin';
+
+  @override
+  String get chatSendFailed => 'Bericht kon niet worden verzonden';
+
+  @override
+  String get chatUploading => 'Uploaden…';
+
+  @override
+  String get chatUploadFailed => 'Bestand kon niet worden geüpload';
+
+  @override
+  String get chatPhoto => 'Foto';
+
+  @override
+  String get chatVoiceMessage => 'Spraakbericht';
+
+  @override
+  String get chatFileTooLarge => 'Bestand te groot (max 50 MB)';
+
+  @override
+  String get chatNoResults => 'Geen resultaten';
+
+  @override
+  String get chatClearForMeDesc =>
+      'De lokale kopie op dit apparaat wordt gewist. Gezinsberichten blijven behouden.';
+
+  @override
+  String get chatCleared => 'Lokale chat gewist';
 }

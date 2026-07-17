@@ -2399,5 +2399,15 @@
   "sugAddComment": "Add Comment",
   "sugRemoveFavorite": "Remove from favorites",
   "sugWhenRemind": "When to remind you?",
-  "sugLastDone": "Last done: {date}"
+  "sugLastDone": "Last done: {date}",
+  "chatNoFamily": "Join a family first",
+  "chatSendFailed": "Message could not be sent",
+  "chatUploading": "Uploading…",
+  "chatUploadFailed": "File could not be uploaded",
+  "chatPhoto": "Photo",
+  "chatVoiceMessage": "Voice message",
+  "chatFileTooLarge": "File too large (max 50 MB)",
+  "chatNoResults": "No results found",
+  "chatClearForMeDesc": "The local copy on this device is cleared. Family messages are kept.",
+  "chatCleared": "Local chat cleared"
 }

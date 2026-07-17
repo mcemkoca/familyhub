@@ -2399,5 +2399,15 @@
   "sugAddComment": "Ajouter un commentaire",
   "sugRemoveFavorite": "Retirer des favoris",
   "sugWhenRemind": "Quand vous rappeler ?",
-  "sugLastDone": "Dernière fois : {date}"
+  "sugLastDone": "Dernière fois : {date}",
+  "chatNoFamily": "Rejoignez d'abord une famille",
+  "chatSendFailed": "Le message n'a pas pu être envoyé",
+  "chatUploading": "Téléchargement…",
+  "chatUploadFailed": "Le fichier n'a pas pu être téléchargé",
+  "chatPhoto": "Photo",
+  "chatVoiceMessage": "Message vocal",
+  "chatFileTooLarge": "Fichier trop volumineux (max 50 Mo)",
+  "chatNoResults": "Aucun résultat",
+  "chatClearForMeDesc": "La copie locale sur cet appareil est effacée. Les messages de la famille sont conservés.",
+  "chatCleared": "Discussion locale effacée"
 }

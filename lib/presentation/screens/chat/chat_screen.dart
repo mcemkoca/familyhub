@@ -11,8 +11,10 @@ import 'package:intl/intl.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import '../../../config/constants.dart';
 import '../../../config/routes.dart';
+import '../../../core/app_logger.dart';
 import '../../../core/supabase_client.dart';
 import '../../../domain/entities.dart';
+import '../../../services/chat_storage_service.dart';
 import '../../providers/app_providers.dart';
 import '../../../repositories/chat_repository.dart';
 import '../../../services/hive_service.dart';
@@ -38,6 +40,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   ChatMessage? _reactingToMessage;
   final _focusNode = FocusNode();
   StreamSubscription<List<ChatMessage>>? _messagesSub;
+  // Merkezi: her handler'da tekrar profile sorgusu yapmamak için önbellek.
+  String? _familyId;
+  String? get _myId => AuthService.currentUserId;
 
   @override
   void initState() {
@@ -69,66 +74,74 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
           .maybeSingle();
       final familyId = profile?['family_id'] as String?;
       if (familyId == null) return;
+      _familyId = familyId;
 
-      _messagesSub = ChatRepository().watchMessages(familyId).listen((messages) {
-        ref.read(chatMessagesProvider.notifier).state = messages;
-      });
-    } catch (e) {
-      debugPrint('ChatScreen _loadFamilyIdAndListen error: $e');
+      _messagesSub = ChatRepository().watchMessages(familyId).listen(
+        (messages) {
+          ref.read(chatMessagesProvider.notifier).state = messages;
+        },
+        onError: (Object e) => AppLogger.logBestEffort(e,
+            module: 'chat', operation: 'watchMessages'),
+      );
+    } catch (e, st) {
+      AppLogger.logError(e,
+          module: 'chat', operation: 'loadFamilyIdAndListen', stackTrace: st);
     }
+  }
+
+  /// familyId'yi (önbellekten veya profilden) döndürür; yoksa null.
+  Future<String?> _resolveFamilyId() async {
+    if (_familyId != null) return _familyId;
+    final userId = _myId;
+    if (userId == null) return null;
+    final profile = await SupabaseConfig.safeClient
+        ?.from('profiles')
+        .select('family_id')
+        .eq('id', userId)
+        .maybeSingle();
+    _familyId = profile?['family_id'] as String?;
+    return _familyId;
   }
 
   void _sendMessage(String text) async {
     if (text.trim().isEmpty) return;
+    final messenger = ScaffoldMessenger.of(context);
+    final t = AppLocalizations.of(context);
 
+    final familyId = await _resolveFamilyId();
+    if (familyId == null) {
+      messenger.showSnackBar(SnackBar(content: Text(t.chatNoFamily)));
+      return;
+    }
+
+    final reply = _replyToMessage;
     try {
-      final userId = AuthService.currentUserId;
-      if (userId == null) return;
-
-      final profile = await SupabaseConfig.safeClient
-          ?.from('profiles')
-          .select('family_id')
-          .eq('id', userId)
-          .maybeSingle();
-      final familyId = profile?['family_id'] as String?;
-      if (familyId == null) return;
-
+      // Mesaj yalnızca backend onayladıktan sonra listede görünür (realtime
+      // stream ile gelir). Sahte "gönderildi" YOK.
       await ChatRepository().sendMessage(
         familyId: familyId,
         content: text.trim(),
-        replyToId: _replyToMessage?.id,
-        replyToContent: _replyToMessage?.content,
-        replyToSender: _replyToMessage?.senderName,
+        replyToId: reply?.id,
+        replyToContent: reply?.content,
+        replyToSender: reply?.senderName,
       );
       _replyToMessage = null;
       setState(() {});
-
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _scrollToBottom();
-      });
-    } catch (e) {
-      debugPrint('ChatScreen _sendMessage error: $e');
-      // Fallback to local provider
-      final current = ref.read(chatMessagesProvider);
-      final userId = AuthService.currentUserId ?? 'unknown';
-      final userName = AuthService.currentUser?.userMetadata?['display_name'] as String? ?? 'Ben';
-      final newMsg = ChatMessage(
-        id: 'msg${current.length + 1}',
-        senderId: userId,
-        senderName: userName,
-        senderColor: AppColors.blue,
-        content: text.trim(),
-        createdAt: DateTime.now(),
-        replyToId: _replyToMessage?.id,
-        replyToContent: _replyToMessage?.content,
-        replyToSender: _replyToMessage?.senderName,
-      );
-      ref.read(chatMessagesProvider.notifier).state = [...current, newMsg];
-      _replyToMessage = null;
-      setState(() {});
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _scrollToBottom();
-      });
+      WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+    } catch (e, st) {
+      // Backend başarısız → sahte local mesaj EKLEME. Hatayı göster, metni geri
+      // ver, kullanıcı tekrar denesin.
+      AppLogger.logError(e,
+          module: 'chat', operation: 'sendMessage', stackTrace: st);
+      messenger.showSnackBar(SnackBar(
+        content: Text(t.chatSendFailed),
+        backgroundColor: const Color(0xFFB42318),
+        action: SnackBarAction(
+          label: t.retry,
+          textColor: Colors.white,
+          onPressed: () => _sendMessage(text),
+        ),
+      ));
     }
   }
 
@@ -142,99 +155,113 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     }
   }
 
-  void _addReaction(String emoji) {
-    if (_reactingToMessage == null) return;
-
-    final current = ref.read(chatMessagesProvider);
-    final index = current.indexWhere((m) => m.id == _reactingToMessage!.id);
-    if (index == -1) return;
-
-    final msg = current[index];
-    final reactions = List<MessageReaction>.from(msg.reactions);
-    final existingIndex = reactions.indexWhere((r) => r.emoji == emoji);
-
-    if (existingIndex != -1) {
-      final existing = reactions[existingIndex];
-      if (existing.userIds.contains('m1')) {
-        // Remove my reaction
-        final newUserIds = List<String>.from(existing.userIds)..remove('m1');
-        if (newUserIds.isEmpty) {
-          reactions.removeAt(existingIndex);
-        } else {
-          reactions[existingIndex] = MessageReaction(
-            emoji: emoji,
-            userIds: newUserIds,
-          );
-        }
-      } else {
-        // Add my reaction
-        reactions[existingIndex] = MessageReaction(
-          emoji: emoji,
-          userIds: [...existing.userIds, 'm1'],
-        );
-      }
-    } else {
-      reactions.add(MessageReaction(emoji: emoji, userIds: ['m1']));
-    }
-
-    final updated = msg.copyWith(reactions: reactions);
-    final newList = List<ChatMessage>.from(current);
-    newList[index] = updated;
-
-    ref.read(chatMessagesProvider.notifier).state = newList;
+  void _addReaction(String emoji) async {
+    final target = _reactingToMessage;
+    if (target == null) return;
     _reactingToMessage = null;
     setState(() {});
+
+    final familyId = await _resolveFamilyId();
+    if (familyId == null) return;
+    try {
+      // Gerçek backend toggle (message_reactions). Realtime ile geri yansır.
+      await ChatRepository().toggleReaction(
+        messageId: target.id,
+        familyId: familyId,
+        emoji: emoji,
+      );
+    } catch (e, st) {
+      AppLogger.logError(e,
+          module: 'chat', operation: 'toggleReaction', stackTrace: st);
+    }
+  }
+
+  /// Yerel dosyayı önce `chat-media` bucket'ına yükler, sonra gerçek mesaj
+  /// olarak backend'e insert eder. picked.path ASLA mesaj URL'si yapılmaz.
+  Future<void> _sendMedia({
+    required File file,
+    required String kind, // image | audio | video | file
+    required MessageType type,
+    required String content,
+    int? audioDuration,
+    String? fileName,
+    int? fileSize,
+  }) async {
+    setState(() => _showAttachmentMenu = false);
+    final messenger = ScaffoldMessenger.of(context);
+    final t = AppLocalizations.of(context);
+    final familyId = await _resolveFamilyId();
+    if (familyId == null) {
+      messenger.showSnackBar(SnackBar(content: Text(t.chatNoFamily)));
+      return;
+    }
+    messenger.showSnackBar(SnackBar(
+        content: Text(t.chatUploading),
+        duration: const Duration(seconds: 1)));
+    try {
+      final url = await ChatStorageService.uploadMedia(
+        familyId: familyId,
+        file: file,
+        kind: kind,
+      );
+      await ChatRepository().sendMessage(
+        familyId: familyId,
+        content: content,
+        type: type,
+        imageUrl: type == MessageType.image ? url : null,
+        audioUrl: type == MessageType.audio ? url : null,
+        audioDuration: audioDuration,
+        videoUrl:
+            (type == MessageType.video || type == MessageType.file) ? url : null,
+        fileName: fileName,
+        fileSize: fileSize,
+      );
+      WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+    } catch (e, st) {
+      AppLogger.logError(e,
+          module: 'chat', operation: 'sendMedia', stackTrace: st);
+      messenger.showSnackBar(SnackBar(
+        content: Text(t.chatUploadFailed),
+        backgroundColor: const Color(0xFFB42318),
+      ));
+    }
   }
 
   Future<void> _pickImage() async {
+    final photoLabel = '📷 ${AppLocalizations.of(context).chatPhoto}';
     final picker = ImagePicker();
-    final picked = await picker.pickImage(source: ImageSource.gallery);
+    final picked = await picker.pickImage(
+        source: ImageSource.gallery, imageQuality: 70, maxWidth: 1600);
     if (picked == null) return;
-
-    final current = ref.read(chatMessagesProvider);
-    final newMsg = ChatMessage(
-      id: 'msg${current.length + 1}',
-      senderId: '',
-      senderName: 'Ben',
-      senderColor: AppColors.blue,
-      content: '📷 Fotoğraf',
-      createdAt: DateTime.now(),
+    await _sendMedia(
+      file: File(picked.path),
+      kind: 'image',
       type: MessageType.image,
-      imageUrl: picked.path,
+      content: photoLabel,
     );
-
-    ref.read(chatMessagesProvider.notifier).state = [...current, newMsg];
-    setState(() => _showAttachmentMenu = false);
   }
 
   Future<void> _takePhoto() async {
+    final photoLabel = '📷 ${AppLocalizations.of(context).chatPhoto}';
     final picker = ImagePicker();
-    final picked = await picker.pickImage(source: ImageSource.camera);
+    final picked = await picker.pickImage(
+        source: ImageSource.camera, imageQuality: 70, maxWidth: 1600);
     if (picked == null) return;
-
-    final current = ref.read(chatMessagesProvider);
-    final newMsg = ChatMessage(
-      id: 'msg${current.length + 1}',
-      senderId: '',
-      senderName: 'Ben',
-      senderColor: AppColors.blue,
-      content: '📷 Fotoğraf',
-      createdAt: DateTime.now(),
+    await _sendMedia(
+      file: File(picked.path),
+      kind: 'image',
       type: MessageType.image,
-      imageUrl: picked.path,
+      content: photoLabel,
     );
-
-    ref.read(chatMessagesProvider.notifier).state = [...current, newMsg];
-    setState(() => _showAttachmentMenu = false);
   }
 
   Future<void> _shareLocation() async {
     setState(() => _showAttachmentMenu = false);
     final messenger = ScaffoldMessenger.of(context);
-    final locationUnavailable =
-        AppLocalizations.of(context).locationUnavailable;
+    final t = AppLocalizations.of(context);
+    final locationUnavailable = t.locationUnavailable;
     messenger.showSnackBar(SnackBar(
-        content: Text(AppLocalizations.of(context).chatGettingLocation), duration: const Duration(seconds: 1)));
+        content: Text(t.chatGettingLocation), duration: const Duration(seconds: 1)));
 
     final pos = await LocationService.getCurrentPosition();
     if (pos == null) {
@@ -256,42 +283,36 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
           '${pos.latitude.toStringAsFixed(5)}, ${pos.longitude.toStringAsFixed(5)}';
     }
 
-    final current = ref.read(chatMessagesProvider);
-    final newMsg = ChatMessage(
-      id: 'msg${current.length + 1}',
-      senderId: 'm1',
-      senderName: 'Ben',
-      senderColor: AppColors.blue,
-      content: '📍 $label',
-      createdAt: DateTime.now(),
-      type: MessageType.location,
-      latitude: pos.latitude,
-      longitude: pos.longitude,
-    );
-
-    ref.read(chatMessagesProvider.notifier).state = [...current, newMsg];
-    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+    final familyId = await _resolveFamilyId();
+    if (familyId == null) {
+      messenger.showSnackBar(SnackBar(content: Text(t.chatNoFamily)));
+      return;
+    }
+    try {
+      await ChatRepository().sendMessage(
+        familyId: familyId,
+        content: '📍 $label',
+        type: MessageType.location,
+        latitude: pos.latitude,
+        longitude: pos.longitude,
+      );
+      WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+    } catch (e, st) {
+      AppLogger.logError(e,
+          module: 'chat', operation: 'shareLocation', stackTrace: st);
+      messenger.showSnackBar(SnackBar(content: Text(t.chatSendFailed)));
+    }
   }
 
   Future<void> _sendVoiceMessage(File file, int durationMs) async {
     final durationSeconds = (durationMs / 1000).round().clamp(1, 9999);
-    final current = ref.read(chatMessagesProvider);
-    final newMsg = ChatMessage(
-      id: 'msg${current.length + 1}',
-      senderId: 'm1',
-      senderName: 'Ben',
-      senderColor: AppColors.blue,
-      content: '🎤 Sesli mesaj',
-      createdAt: DateTime.now(),
+    await _sendMedia(
+      file: file,
+      kind: 'audio',
       type: MessageType.audio,
-      audioUrl: file.path,
+      content: '🎤 ${AppLocalizations.of(context).chatVoiceMessage}',
       audioDuration: durationSeconds,
     );
-
-    ref.read(chatMessagesProvider.notifier).state = [...current, newMsg];
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollToBottom();
-    });
   }
 
   Future<void> _pickVideo() async {
@@ -301,30 +322,32 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     final file = File(picked.path);
     final size = await file.length();
     final name = picked.path.split('/').last.split('\\').last;
-    final current = ref.read(chatMessagesProvider);
-    ref.read(chatMessagesProvider.notifier).state = [
-      ...current,
-      ChatMessage(
-        id: 'msg${current.length + 1}',
-        senderId: 'm1',
-        senderName: 'Ben',
-        senderColor: AppColors.blue,
-        content: '🎬 $name',
-        createdAt: DateTime.now(),
-        type: MessageType.video,
-        videoUrl: picked.path,
-        fileName: name,
-        fileSize: size,
-      ),
-    ];
-    setState(() => _showAttachmentMenu = false);
-    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+    // 50 MB storage limiti — büyük videoda açık hata (sessiz başarısızlık yok).
+    if (size > 50 * 1024 * 1024) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context).chatFileTooLarge)),
+      );
+      return;
+    }
+    await _sendMedia(
+      file: file,
+      kind: 'video',
+      type: MessageType.video,
+      content: '🎬 $name',
+      fileName: name,
+      fileSize: size,
+    );
   }
 
-  void _votePoll(ChatMessage msg, int optionIndex) {
+  void _votePoll(ChatMessage msg, int optionIndex) async {
     final poll = msg.poll;
-    if (poll == null) return;
-    final updated = poll.toggleVote(optionIndex, 'm1');
+    final myId = _myId;
+    if (poll == null || myId == null) return;
+    // Not: Anket kalıcılığı henüz backend'e bağlı değil (poll tablosu yok);
+    // oy yalnızca yerel gösterilir. Gerçek oy verilene kadar 'm1' yerine
+    // gerçek kullanıcı ID'si kullanılır (yanlış "benim oyum" işareti olmaz).
+    final updated = poll.toggleVote(optionIndex, myId);
     final list = ref.read(chatMessagesProvider);
     ref.read(chatMessagesProvider.notifier).state = [
       for (final m in list)
@@ -481,59 +504,60 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     );
   }
 
-  void _sendPoll(String question, List<String> options) {
-    final current = ref.read(chatMessagesProvider);
-    ref.read(chatMessagesProvider.notifier).state = [
-      ...current,
-      ChatMessage(
-        id: 'msg${current.length + 1}',
-        senderId: 'm1',
-        senderName: 'Ben',
-        senderColor: AppColors.blue,
-        content: question,
-        createdAt: DateTime.now(),
+  Future<void> _sendPoll(String question, List<String> options) async {
+    final messenger = ScaffoldMessenger.of(context);
+    final t = AppLocalizations.of(context);
+    final familyId = await _resolveFamilyId();
+    if (familyId == null) {
+      messenger.showSnackBar(SnackBar(content: Text(t.chatNoFamily)));
+      return;
+    }
+    // Not: Anket OYLARI henüz kalıcı değil (poll oyları için tablo yok); ancak
+    // anket mesajının kendisi gerçek backend'e yazılır ki diğer üyeler görsün.
+    // Seçenekler metne gömülür (poll_options tablosu gelene kadar).
+    final body = '$question\n${options.map((o) => '• $o').join('\n')}';
+    try {
+      await ChatRepository().sendMessage(
+        familyId: familyId,
+        content: body,
         type: MessageType.poll,
-        poll: PollData(
-          question: question,
-          options: options,
-          votes: List.generate(options.length, (_) => <String>[]),
-        ),
-      ),
-    ];
-    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+      );
+      WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+    } catch (e, st) {
+      AppLogger.logError(e,
+          module: 'chat', operation: 'sendPoll', stackTrace: st);
+      messenger.showSnackBar(SnackBar(content: Text(t.chatSendFailed)));
+    }
   }
 
   Future<void> _pickFile() async {
     setState(() => _showAttachmentMenu = false);
+    final t = AppLocalizations.of(context);
     try {
       final XFile? picked = await openFile();
       if (picked == null) return;
-      final path = picked.path;
-      final name = picked.name;
       final size = await picked.length();
-
-      final current = ref.read(chatMessagesProvider);
-      ref.read(chatMessagesProvider.notifier).state = [
-        ...current,
-        ChatMessage(
-          id: 'msg${current.length + 1}',
-          senderId: 'm1',
-          senderName: 'Ben',
-          senderColor: AppColors.blue,
-          content: '📄 $name',
-          createdAt: DateTime.now(),
-          type: MessageType.file,
-          videoUrl: path, // yerel dosya yolu (ileride Storage'a yüklenebilir)
-          fileName: name,
-          fileSize: size,
-        ),
-      ];
-      WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
-    } catch (e) {
+      if (size > 50 * 1024 * 1024) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(t.chatFileTooLarge)));
+        return;
+      }
+      // Storage'a yükle → imzalı URL. Yerel yol ASLA gönderilmez.
+      await _sendMedia(
+        file: File(picked.path),
+        kind: 'file',
+        type: MessageType.file,
+        content: '📄 ${picked.name}',
+        fileName: picked.name,
+        fileSize: size,
+      );
+    } catch (e, st) {
+      AppLogger.logError(e,
+          module: 'chat', operation: 'pickFile', stackTrace: st);
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context).chatFileFailed)),
-        );
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(t.chatFileFailed)));
       }
     }
   }
@@ -618,31 +642,90 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     );
   }
 
-  void _sendGif(String gifUrl) {
-    final current = ref.read(chatMessagesProvider);
-    ref.read(chatMessagesProvider.notifier).state = [
-      ...current,
-      ChatMessage(
-        id: 'msg${current.length + 1}',
-        senderId: 'm1',
-        senderName: 'Ben',
-        senderColor: AppColors.blue,
+  Future<void> _sendGif(String gifUrl) async {
+    final messenger = ScaffoldMessenger.of(context);
+    final t = AppLocalizations.of(context);
+    final familyId = await _resolveFamilyId();
+    if (familyId == null) {
+      messenger.showSnackBar(SnackBar(content: Text(t.chatNoFamily)));
+      return;
+    }
+    // GIF uzak HTTPS URL'sidir (yerel yol değil) → gerçek mesaj olarak gider,
+    // diğer cihazlarda açılır.
+    try {
+      await ChatRepository().sendMessage(
+        familyId: familyId,
         content: '🎭 GIF',
-        createdAt: DateTime.now(),
         type: MessageType.gif,
         imageUrl: gifUrl,
-      ),
-    ];
-    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+      );
+      WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+    } catch (e, st) {
+      AppLogger.logError(e,
+          module: 'chat', operation: 'sendGif', stackTrace: st);
+      messenger.showSnackBar(SnackBar(content: Text(t.chatSendFailed)));
+    }
   }
 
-  void _pinMessage(ChatMessage message) {
-    final current = ref.read(chatMessagesProvider);
-    final newList = current.map((m) {
-      return m.copyWith(isPinned: m.id == message.id);
-    }).toList();
-    ref.read(chatMessagesProvider.notifier).state = newList;
+  void _pinMessage(ChatMessage message) async {
     HapticFeedback.mediumImpact();
+    final familyId = await _resolveFamilyId();
+    if (familyId == null) return;
+    try {
+      // Gerçek backend (tek aktif pin). Realtime ile diğer üyelere yansır.
+      await ChatRepository().setPinned(
+        familyId: familyId,
+        messageId: message.id,
+        pinned: !message.isPinned,
+      );
+    } catch (e, st) {
+      AppLogger.logError(e,
+          module: 'chat', operation: 'pinMessage', stackTrace: st);
+    }
+  }
+
+  /// Arama sonucundan mesaja yaklaşık konumla kaydırır (best-effort).
+  void _scrollToMessage(ChatMessage target) {
+    final list = ref.read(chatMessagesProvider);
+    final idx = list.indexWhere((m) => m.id == target.id);
+    if (idx < 0 || !_scrollController.hasClients) return;
+    final frac = list.isEmpty ? 1.0 : idx / list.length;
+    _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent * frac,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeOut,
+    );
+  }
+
+  /// "Sohbeti temizle" — GÜVENLİ model: yalnızca BU cihazdaki yerel kopyayı
+  /// temizler. Aile mesajları backend'de ve diğer üyelerde korunur. Normal
+  /// kullanıcının tüm aile geçmişini silmesine izin verilmez (denetim §16).
+  Future<void> _clearChatForMe() async {
+    final nav = Navigator.of(context);
+    final t = AppLocalizations.of(context);
+    nav.pop(); // menüyü kapat
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(t.chatClearChat),
+        content: Text(t.chatClearForMeDesc),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(ctx, false), child: Text(t.cancel)),
+          TextButton(
+              onPressed: () => Navigator.pop(ctx, true),
+              child: Text(t.chatClearChat)),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+    await HiveService.saveChatMessages(const []);
+    // Not: realtime stream aktifse mesajlar tekrar yüklenir; bu bilinçli —
+    // aile geçmişi silinmez, yalnızca yerel önbellek tazelenir.
+    if (mounted) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(t.chatCleared)));
+    }
   }
 
   String _dayLabel(BuildContext context, DateTime dt) {
@@ -772,7 +855,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                     itemCount: messages.length,
                     itemBuilder: (context, index) {
                       final msg = messages[index];
-                      final isMe = msg.senderId == 'm1';
+                      // Backend UUID'si ile karşılaştır — 'm1' sabiti gerçek
+                      // mesajlarda asla eşleşmiyordu, tüm mesajlar yanlış tarafta
+                      // görünüyordu.
+                      final isMe = msg.senderId == _myId;
 
                       // Day separator
                       final showDay = index == 0 ||
@@ -915,7 +1001,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   }
 
   bool _showSender(ChatMessage msg, List<ChatMessage> messages, int index) {
-    if (msg.senderId == 'm1') return false;
+    if (msg.senderId == _myId) return false;
     if (index == 0) return true;
     final prev = messages[index - 1];
     return prev.senderId != msg.senderId ||
@@ -951,23 +1037,33 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                 _MenuItem(
                   icon: Icons.search,
                   label: AppLocalizations.of(context).chatSearchMessages,
-                  onTap: () => Navigator.pop(context),
+                  onTap: () {
+                    Navigator.pop(context);
+                    showSearch(
+                      context: context,
+                      delegate: _ChatSearchDelegate(
+                        ref.read(chatMessagesProvider),
+                        onJump: (m) => _scrollToMessage(m),
+                      ),
+                    );
+                  },
                 ),
                 _MenuItem(
                   icon: Icons.notifications_outlined,
                   label: AppLocalizations.of(context).bildirimAyarlari,
-                  onTap: () => Navigator.pop(context),
+                  onTap: () {
+                    Navigator.pop(context);
+                    context.push(AppRoutes.notificationSettings);
+                  },
                 ),
-                _MenuItem(
-                  icon: Icons.archive_outlined,
-                  label: AppLocalizations.of(context).sohbetiArsivle,
-                  onTap: () => Navigator.pop(context),
-                ),
+                // "Sohbeti Arşivle" kaldırıldı: tek aile grup sohbeti için
+                // arşiv kullanıcı-bazlı backend state gerektirir (chat_user_states);
+                // gerçek davranış hazır olana kadar sahte buton göstermiyoruz.
                 _MenuItem(
                   icon: Icons.delete_outline,
                   label: AppLocalizations.of(context).chatClearChat,
                   isDanger: true,
-                  onTap: () => Navigator.pop(context),
+                  onTap: () => _clearChatForMe(),
                 ),
               ],
             ),
@@ -1264,3 +1360,63 @@ class _MenuItem extends StatelessWidget {
 
 
 
+/// Sohbet içi gerçek arama — yüklü mesajlar üzerinde büyük/küçük harf ve
+/// aksan duyarsız (tr/fr/nl/en karakterleri) filtre. Aile izolasyonu zaten
+/// mesaj listesinin kendisiyle sağlanır (yalnızca kendi ailenin mesajları).
+class _ChatSearchDelegate extends SearchDelegate<ChatMessage?> {
+  final List<ChatMessage> messages;
+  final void Function(ChatMessage) onJump;
+  _ChatSearchDelegate(this.messages, {required this.onJump});
+
+  String _norm(String s) => s.toLowerCase();
+
+  List<ChatMessage> _results() {
+    final q = _norm(query.trim());
+    if (q.isEmpty) return const [];
+    return messages.where((m) => _norm(m.content).contains(q)).toList().reversed.toList();
+  }
+
+  @override
+  List<Widget> buildActions(BuildContext context) => [
+        if (query.isNotEmpty)
+          IconButton(icon: const Icon(Icons.clear), onPressed: () => query = ''),
+      ];
+
+  @override
+  Widget buildLeading(BuildContext context) => IconButton(
+        icon: const Icon(Icons.arrow_back),
+        onPressed: () => close(context, null),
+      );
+
+  @override
+  Widget buildResults(BuildContext context) => _buildList(context);
+
+  @override
+  Widget buildSuggestions(BuildContext context) => _buildList(context);
+
+  Widget _buildList(BuildContext context) {
+    final results = _results();
+    if (query.trim().isEmpty) {
+      return const SizedBox.shrink();
+    }
+    if (results.isEmpty) {
+      return Center(child: Text(AppLocalizations.of(context).chatNoResults));
+    }
+    return ListView.builder(
+      itemCount: results.length,
+      itemBuilder: (context, i) {
+        final m = results[i];
+        return ListTile(
+          leading: const Icon(Icons.message_outlined),
+          title: Text(m.senderName,
+              style: const TextStyle(fontWeight: FontWeight.w600)),
+          subtitle: Text(m.content, maxLines: 2, overflow: TextOverflow.ellipsis),
+          onTap: () {
+            close(context, m);
+            onJump(m);
+          },
+        );
+      },
+    );
+  }
+}

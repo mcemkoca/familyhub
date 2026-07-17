@@ -13751,6 +13751,66 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Son yapılma: {date}'**
   String sugLastDone(Object date);
+
+  /// No description provided for @chatNoFamily.
+  ///
+  /// In tr, this message translates to:
+  /// **'Önce bir aileye katılın'**
+  String get chatNoFamily;
+
+  /// No description provided for @chatSendFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Mesaj gönderilemedi'**
+  String get chatSendFailed;
+
+  /// No description provided for @chatUploading.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yükleniyor…'**
+  String get chatUploading;
+
+  /// No description provided for @chatUploadFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Dosya yüklenemedi'**
+  String get chatUploadFailed;
+
+  /// No description provided for @chatPhoto.
+  ///
+  /// In tr, this message translates to:
+  /// **'Fotoğraf'**
+  String get chatPhoto;
+
+  /// No description provided for @chatVoiceMessage.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sesli mesaj'**
+  String get chatVoiceMessage;
+
+  /// No description provided for @chatFileTooLarge.
+  ///
+  /// In tr, this message translates to:
+  /// **'Dosya çok büyük (en fazla 50 MB)'**
+  String get chatFileTooLarge;
+
+  /// No description provided for @chatNoResults.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sonuç bulunamadı'**
+  String get chatNoResults;
+
+  /// No description provided for @chatClearForMeDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu cihazdaki yerel sohbet kopyası temizlenir. Aile mesajları korunur.'**
+  String get chatClearForMeDesc;
+
+  /// No description provided for @chatCleared.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yerel sohbet temizlendi'**
+  String get chatCleared;
 }
 
 class _AppLocalizationsDelegate

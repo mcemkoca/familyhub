@@ -2399,5 +2399,15 @@
   "sugAddComment": "Opmerking toevoegen",
   "sugRemoveFavorite": "Uit favorieten verwijderen",
   "sugWhenRemind": "Wanneer herinneren?",
-  "sugLastDone": "Laatst gedaan: {date}"
+  "sugLastDone": "Laatst gedaan: {date}",
+  "chatNoFamily": "Sluit je eerst aan bij een gezin",
+  "chatSendFailed": "Bericht kon niet worden verzonden",
+  "chatUploading": "Uploaden…",
+  "chatUploadFailed": "Bestand kon niet worden geüpload",
+  "chatPhoto": "Foto",
+  "chatVoiceMessage": "Spraakbericht",
+  "chatFileTooLarge": "Bestand te groot (max 50 MB)",
+  "chatNoResults": "Geen resultaten",
+  "chatClearForMeDesc": "De lokale kopie op dit apparaat wordt gewist. Gezinsberichten blijven behouden.",
+  "chatCleared": "Lokale chat gewist"
 }
