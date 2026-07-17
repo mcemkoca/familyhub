@@ -13811,6 +13811,24 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Yerel sohbet temizlendi'**
   String get chatCleared;
+
+  /// No description provided for @chatTypingOne.
+  ///
+  /// In tr, this message translates to:
+  /// **'{name} yazıyor…'**
+  String chatTypingOne(String name);
+
+  /// No description provided for @chatTypingTwo.
+  ///
+  /// In tr, this message translates to:
+  /// **'{a} ve {b} yazıyor…'**
+  String chatTypingTwo(String a, String b);
+
+  /// No description provided for @chatTypingMany.
+  ///
+  /// In tr, this message translates to:
+  /// **'Birkaç kişi yazıyor…'**
+  String get chatTypingMany;
 }
 
 class _AppLocalizationsDelegate

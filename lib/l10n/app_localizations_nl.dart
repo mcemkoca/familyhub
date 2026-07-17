@@ -7384,4 +7384,17 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get chatCleared => 'Lokale chat gewist';
+
+  @override
+  String chatTypingOne(String name) {
+    return '$name is aan het typen…';
+  }
+
+  @override
+  String chatTypingTwo(String a, String b) {
+    return '$a en $b zijn aan het typen…';
+  }
+
+  @override
+  String get chatTypingMany => 'Meerdere mensen typen…';
 }

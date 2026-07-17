@@ -2409,5 +2409,8 @@
   "chatFileTooLarge": "Bestand te groot (max 50 MB)",
   "chatNoResults": "Geen resultaten",
   "chatClearForMeDesc": "De lokale kopie op dit apparaat wordt gewist. Gezinsberichten blijven behouden.",
-  "chatCleared": "Lokale chat gewist"
+  "chatCleared": "Lokale chat gewist",
+  "chatTypingOne": "{name} is aan het typen…",
+  "chatTypingTwo": "{a} en {b} zijn aan het typen…",
+  "chatTypingMany": "Meerdere mensen typen…"
 }

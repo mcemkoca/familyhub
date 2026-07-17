@@ -2409,5 +2409,8 @@
   "chatFileTooLarge": "Fichier trop volumineux (max 50 Mo)",
   "chatNoResults": "Aucun résultat",
   "chatClearForMeDesc": "La copie locale sur cet appareil est effacée. Les messages de la famille sont conservés.",
-  "chatCleared": "Discussion locale effacée"
+  "chatCleared": "Discussion locale effacée",
+  "chatTypingOne": "{name} écrit…",
+  "chatTypingTwo": "{a} et {b} écrivent…",
+  "chatTypingMany": "Plusieurs personnes écrivent…"
 }

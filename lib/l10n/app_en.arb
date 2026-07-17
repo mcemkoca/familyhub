@@ -2409,5 +2409,8 @@
   "chatFileTooLarge": "File too large (max 50 MB)",
   "chatNoResults": "No results found",
   "chatClearForMeDesc": "The local copy on this device is cleared. Family messages are kept.",
-  "chatCleared": "Local chat cleared"
+  "chatCleared": "Local chat cleared",
+  "chatTypingOne": "{name} is typing…",
+  "chatTypingTwo": "{a} and {b} are typing…",
+  "chatTypingMany": "Several people are typing…"
 }

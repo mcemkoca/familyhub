@@ -15,6 +15,7 @@ import '../../../core/app_logger.dart';
 import '../../../core/supabase_client.dart';
 import '../../../domain/entities.dart';
 import '../../../services/chat_storage_service.dart';
+import '../../../services/chat_presence_service.dart';
 import '../../providers/app_providers.dart';
 import '../../../repositories/chat_repository.dart';
 import '../../../services/hive_service.dart';
@@ -43,6 +44,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   // Merkezi: her handler'da tekrar profile sorgusu yapmamak için önbellek.
   String? _familyId;
   String? get _myId => AuthService.currentUserId;
+  ChatPresenceService? _presence;
+  List<TypingUser> _typingUsers = const [];
+
+  String get _myDisplayName =>
+      AuthService.currentUser?.userMetadata?['display_name']?.toString() ??
+      'Kullanıcı';
 
   @override
   void initState() {
@@ -58,6 +65,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   @override
   void dispose() {
     _messagesSub?.cancel();
+    _presence?.dispose();
     _scrollController.dispose();
     _focusNode.dispose();
     super.dispose();
@@ -75,6 +83,14 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       final familyId = profile?['family_id'] as String?;
       if (familyId == null) return;
       _familyId = familyId;
+
+      // Typing + presence (ephemeral, DB'ye yazılmaz).
+      final presence = ChatPresenceService(familyId);
+      presence.typingUsers.listen((users) {
+        if (mounted) setState(() => _typingUsers = users);
+      });
+      presence.connect(_myDisplayName);
+      _presence = presence;
 
       _messagesSub = ChatRepository().watchMessages(familyId).listen(
         (messages) {
@@ -747,6 +763,15 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     }
   }
 
+  String _typingLabel(BuildContext context, List<TypingUser> users) {
+    final t = AppLocalizations.of(context);
+    if (users.length == 1) return t.chatTypingOne(users.first.displayName);
+    if (users.length == 2) {
+      return t.chatTypingTwo(users[0].displayName, users[1].displayName);
+    }
+    return t.chatTypingMany;
+  }
+
   String _dayLabel(BuildContext context, DateTime dt) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
@@ -934,9 +959,38 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                   ),
                 ),
               ),
+              // "X yazıyor…" satırı (typing indicator)
+              if (_typingUsers.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 2, 16, 2),
+                  child: Row(
+                    children: [
+                      const SizedBox(
+                        width: 14,
+                        height: 14,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          _typingLabel(context, _typingUsers),
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontStyle: FontStyle.italic,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onSurface
+                                .withAlpha(160),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               // Composer
               ChatComposer(
                 onSend: _sendMessage,
+                onTyping: (_) => _presence?.notifyTyping(_myDisplayName),
                 onSendVoice: _sendVoiceMessage,
                 onAttachment: () {
                   setState(() {

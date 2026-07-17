@@ -7400,4 +7400,17 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get chatCleared => 'Yerel sohbet temizlendi';
+
+  @override
+  String chatTypingOne(String name) {
+    return '$name yazıyor…';
+  }
+
+  @override
+  String chatTypingTwo(String a, String b) {
+    return '$a ve $b yazıyor…';
+  }
+
+  @override
+  String get chatTypingMany => 'Birkaç kişi yazıyor…';
 }

@@ -7376,4 +7376,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatCleared => 'Local chat cleared';
+
+  @override
+  String chatTypingOne(String name) {
+    return '$name is typing…';
+  }
+
+  @override
+  String chatTypingTwo(String a, String b) {
+    return '$a and $b are typing…';
+  }
+
+  @override
+  String get chatTypingMany => 'Several people are typing…';
 }

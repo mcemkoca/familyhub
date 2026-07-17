@@ -7407,4 +7407,17 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatCleared => 'Discussion locale effacée';
+
+  @override
+  String chatTypingOne(String name) {
+    return '$name écrit…';
+  }
+
+  @override
+  String chatTypingTwo(String a, String b) {
+    return '$a et $b écrivent…';
+  }
+
+  @override
+  String get chatTypingMany => 'Plusieurs personnes écrivent…';
 }

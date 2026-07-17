@@ -3008,5 +3008,25 @@
   "chatFileTooLarge": "Dosya çok büyük (en fazla 50 MB)",
   "chatNoResults": "Sonuç bulunamadı",
   "chatClearForMeDesc": "Bu cihazdaki yerel sohbet kopyası temizlenir. Aile mesajları korunur.",
-  "chatCleared": "Yerel sohbet temizlendi"
+  "chatCleared": "Yerel sohbet temizlendi",
+  "chatTypingOne": "{name} yazıyor…",
+  "@chatTypingOne": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatTypingTwo": "{a} ve {b} yazıyor…",
+  "@chatTypingTwo": {
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
+  },
+  "chatTypingMany": "Birkaç kişi yazıyor…"
 }
