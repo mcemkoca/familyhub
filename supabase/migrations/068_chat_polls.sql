@@ -9,8 +9,8 @@
 create table if not exists public.chat_polls (
   id uuid primary key default gen_random_uuid(),
   message_id uuid not null references public.messages(id) on delete cascade,
-  family_id uuid not null references public.families(id) on delete cascade,
-  created_by uuid not null references public.profiles(id) on delete cascade,
+  family_id uuid not null,
+  created_by uuid not null,
   question text not null,
   options jsonb not null,          -- ["Seçenek 1","Seçenek 2",...]
   allow_multiple boolean not null default false,
@@ -23,8 +23,8 @@ create index if not exists idx_chat_polls_family on public.chat_polls(family_id)
 -- ── votes: kullanıcı başına oy (option_index) ──────────────────────────────
 create table if not exists public.chat_poll_votes (
   poll_id uuid not null references public.chat_polls(id) on delete cascade,
-  family_id uuid not null references public.families(id) on delete cascade,
-  user_id uuid not null references public.profiles(id) on delete cascade,
+  family_id uuid not null,
+  user_id uuid not null,
   option_index int not null,
   created_at timestamptz not null default now(),
   primary key (poll_id, user_id, option_index)
@@ -37,25 +37,21 @@ alter table public.chat_poll_votes enable row level security;
 
 drop policy if exists "polls_select" on public.chat_polls;
 create policy "polls_select" on public.chat_polls for select to authenticated
-  using (family_id in (select family_id from public.profiles
-                       where id = auth.uid() and family_id is not null));
+  using (family_id in (select family_id from public.family_members where user_id = auth.uid()));
 
 drop policy if exists "polls_insert" on public.chat_polls;
 create policy "polls_insert" on public.chat_polls for insert to authenticated
   with check (created_by = auth.uid()
-    and family_id in (select family_id from public.profiles
-                      where id = auth.uid() and family_id is not null));
+    and family_id in (select family_id from public.family_members where user_id = auth.uid()));
 
 drop policy if exists "poll_votes_select" on public.chat_poll_votes;
 create policy "poll_votes_select" on public.chat_poll_votes for select to authenticated
-  using (family_id in (select family_id from public.profiles
-                       where id = auth.uid() and family_id is not null));
+  using (family_id in (select family_id from public.family_members where user_id = auth.uid()));
 
 drop policy if exists "poll_votes_insert" on public.chat_poll_votes;
 create policy "poll_votes_insert" on public.chat_poll_votes for insert to authenticated
   with check (user_id = auth.uid()
-    and family_id in (select family_id from public.profiles
-                      where id = auth.uid() and family_id is not null));
+    and family_id in (select family_id from public.family_members where user_id = auth.uid()));
 
 drop policy if exists "poll_votes_delete" on public.chat_poll_votes;
 create policy "poll_votes_delete" on public.chat_poll_votes for delete to authenticated

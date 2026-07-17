@@ -75,12 +75,13 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     try {
       final userId = AuthService.currentUserId;
       if (userId == null) return;
-      final profile = await SupabaseConfig.safeClient
-          ?.from('profiles')
+      // Üyelik family_members'ta (profiles'ta family_id yok — canlı şema).
+      final row = await SupabaseConfig.safeClient
+          ?.from('family_members')
           .select('family_id')
-          .eq('id', userId)
+          .eq('user_id', userId)
           .maybeSingle();
-      final familyId = profile?['family_id'] as String?;
+      final familyId = row?['family_id'] as String?;
       if (familyId == null) return;
       _familyId = familyId;
 
@@ -129,12 +130,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     if (_familyId != null) return _familyId;
     final userId = _myId;
     if (userId == null) return null;
-    final profile = await SupabaseConfig.safeClient
-        ?.from('profiles')
+    final row = await SupabaseConfig.safeClient
+        ?.from('family_members')
         .select('family_id')
-        .eq('id', userId)
+        .eq('user_id', userId)
         .maybeSingle();
-    _familyId = profile?['family_id'] as String?;
+    _familyId = row?['family_id'] as String?;
     return _familyId;
   }
 

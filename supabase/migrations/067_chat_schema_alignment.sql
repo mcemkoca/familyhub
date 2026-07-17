@@ -82,8 +82,7 @@ create policy "messages_insert_v3"
   with check (
     sender_id = auth.uid()          -- canlı kolon: sender_id (user_id değil)
     and family_id in (
-      select family_id from public.profiles
-      where id = auth.uid() and family_id is not null
+      select family_id from public.family_members where user_id = auth.uid()
     )
   );
 
@@ -111,8 +110,8 @@ create unique index if not exists uq_messages_client_id
 create table if not exists public.message_reactions (
   id uuid default gen_random_uuid() primary key,
   message_id uuid not null references public.messages(id) on delete cascade,
-  family_id uuid not null references public.families(id) on delete cascade,
-  user_id uuid not null references public.profiles(id) on delete cascade,
+  family_id uuid not null,
+  user_id uuid not null,
   emoji text not null,
   created_at timestamptz default now(),
   unique(message_id, user_id, emoji)
@@ -126,8 +125,7 @@ drop policy if exists "reactions_select" on public.message_reactions;
 create policy "reactions_select"
   on public.message_reactions for select to authenticated
   using (
-    family_id in (select family_id from public.profiles
-                  where id = auth.uid() and family_id is not null)
+    family_id in (select family_id from public.family_members where user_id = auth.uid())
   );
 
 drop policy if exists "reactions_insert" on public.message_reactions;
@@ -135,8 +133,7 @@ create policy "reactions_insert"
   on public.message_reactions for insert to authenticated
   with check (
     user_id = auth.uid()
-    and family_id in (select family_id from public.profiles
-                      where id = auth.uid() and family_id is not null)
+    and family_id in (select family_id from public.family_members where user_id = auth.uid())
   );
 
 drop policy if exists "reactions_delete" on public.message_reactions;
@@ -148,8 +145,8 @@ create policy "reactions_delete"
 -- Tek messages.is_read boolean grup sohbeti için yetersizdi (kimin okuduğu
 -- bilinmiyordu). Conversation-level model: her üye için son okunan mesaj.
 create table if not exists public.chat_read_states (
-  family_id uuid not null references public.families(id) on delete cascade,
-  user_id uuid not null references public.profiles(id) on delete cascade,
+  family_id uuid not null,
+  user_id uuid not null,
   last_read_message_id uuid references public.messages(id) on delete set null,
   last_read_at timestamptz default now(),
   primary key (family_id, user_id)
@@ -161,8 +158,7 @@ drop policy if exists "read_states_select" on public.chat_read_states;
 create policy "read_states_select"
   on public.chat_read_states for select to authenticated
   using (
-    family_id in (select family_id from public.profiles
-                  where id = auth.uid() and family_id is not null)
+    family_id in (select family_id from public.family_members where user_id = auth.uid())
   );
 
 drop policy if exists "read_states_upsert" on public.chat_read_states;
@@ -188,8 +184,7 @@ create policy "chat_media_select"
   using (
     bucket_id = 'chat-media'
     and (storage.foldername(name))[2] in (
-      select family_id::text from public.profiles
-      where id = auth.uid() and family_id is not null
+      select family_id::text from public.family_members where user_id = auth.uid()
     )
   );
 
@@ -199,8 +194,7 @@ create policy "chat_media_insert"
   with check (
     bucket_id = 'chat-media'
     and (storage.foldername(name))[2] in (
-      select family_id::text from public.profiles
-      where id = auth.uid() and family_id is not null
+      select family_id::text from public.family_members where user_id = auth.uid()
     )
   );
 
@@ -210,8 +204,7 @@ create policy "chat_media_delete"
   using (
     bucket_id = 'chat-media'
     and (storage.foldername(name))[2] in (
-      select family_id::text from public.profiles
-      where id = auth.uid() and family_id is not null
+      select family_id::text from public.family_members where user_id = auth.uid()
     )
   );
 
