@@ -50,6 +50,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   List<TypingUser> _typingUsers = const [];
   StreamSubscription<List<Map<String, dynamic>>>? _readStatesSub;
   List<Map<String, dynamic>> _readStates = const [];
+  StreamSubscription<List<Map<String, dynamic>>>? _pollVotesSub;
+  final Map<String, String> _pollIdByMessage = {}; // messageId → pollId
+  bool _pollsHydrating = false;
 
   String get _myDisplayName =>
       AuthService.currentUser?.userMetadata?['display_name']?.toString() ??
@@ -70,6 +73,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   void dispose() {
     _messagesSub?.cancel();
     _readStatesSub?.cancel();
+    _pollVotesSub?.cancel();
     _presence?.dispose();
     _scrollController.dispose();
     _focusNode.dispose();
@@ -110,6 +114,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         (messages) {
           ref.read(chatMessagesProvider.notifier).state = messages;
           _markLatestRead(familyId, messages);
+          _hydratePolls(messages);
         },
         onError: (Object e) => AppLogger.logBestEffort(e,
             module: 'chat', operation: 'watchMessages'),
@@ -122,6 +127,13 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         },
         onError: (Object e) => AppLogger.logBestEffort(e,
             module: 'chat', operation: 'watchReadStates'),
+      );
+
+      // Poll oyları realtime → değişince ilgili anketleri yeniden hidrat et.
+      _pollVotesSub = ChatRepository().watchPollVotes(familyId).listen(
+        (_) => _hydratePolls(ref.read(chatMessagesProvider), force: true),
+        onError: (Object e) => AppLogger.logBestEffort(e,
+            module: 'chat', operation: 'watchPollVotes'),
       );
     } catch (e, st) {
       AppLogger.logError(e,
@@ -413,19 +425,77 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     );
   }
 
+  /// Poll mesajlarını backend'den hidrat eder (seçenekler + oylar + benim oyum).
+  /// Toplu (loadPolls, N+1 yok). [force] realtime oy değişiminde yeniden yükler.
+  Future<void> _hydratePolls(List<ChatMessage> messages,
+      {bool force = false}) async {
+    if (_pollsHydrating) return;
+    final pollMsgIds = messages
+        .where((m) => m.type == MessageType.poll)
+        .map((m) => m.id)
+        .where((id) => id.isNotEmpty)
+        .toList();
+    if (pollMsgIds.isEmpty) return;
+    // force değilse yalnızca henüz hidrat edilmemiş anketleri yükle.
+    final need = force
+        ? pollMsgIds
+        : pollMsgIds.where((id) => !_pollIdByMessage.containsKey(id)).toList();
+    if (need.isEmpty) return;
+    _pollsHydrating = true;
+    try {
+      final map = await ChatRepository().loadPolls(need);
+      if (!mounted || map.isEmpty) return;
+      final current = ref.read(chatMessagesProvider);
+      ref.read(chatMessagesProvider.notifier).state = [
+        for (final m in current)
+          if (map.containsKey(m.id))
+            m.copyWith(poll: map[m.id]!.data)
+          else
+            m,
+      ];
+      for (final e in map.entries) {
+        _pollIdByMessage[e.key] = e.value.pollId;
+      }
+      setState(() {});
+    } catch (e, st) {
+      AppLogger.logError(e,
+          module: 'chat', operation: 'hydratePolls', stackTrace: st);
+    } finally {
+      _pollsHydrating = false;
+    }
+  }
+
   void _votePoll(ChatMessage msg, int optionIndex) async {
     final poll = msg.poll;
     final myId = _myId;
-    if (poll == null || myId == null) return;
-    // Not: Anket kalıcılığı henüz backend'e bağlı değil (poll tablosu yok);
-    // oy yalnızca yerel gösterilir. Gerçek oy verilene kadar 'm1' yerine
-    // gerçek kullanıcı ID'si kullanılır (yanlış "benim oyum" işareti olmaz).
-    final updated = poll.toggleVote(optionIndex, myId);
-    final list = ref.read(chatMessagesProvider);
+    final familyId = _familyId;
+    final pollId = _pollIdByMessage[msg.id];
+    if (poll == null || myId == null || familyId == null || pollId == null) {
+      return;
+    }
+    // Optimistic: hemen yerel güncelle; backend başarısızsa geri al.
+    final optimistic = poll.toggleVote(optionIndex, myId);
+    final before = ref.read(chatMessagesProvider);
     ref.read(chatMessagesProvider.notifier).state = [
-      for (final m in list)
-        if (m.id == msg.id) m.copyWith(poll: updated) else m,
+      for (final m in before)
+        if (m.id == msg.id) m.copyWith(poll: optimistic) else m,
     ];
+    try {
+      await ChatRepository().votePoll(
+        pollId: pollId,
+        familyId: familyId,
+        optionIndex: optionIndex,
+      );
+      // Kesin sonucu backend'den tazele (realtime da tetikler).
+      await _hydratePolls(ref.read(chatMessagesProvider), force: true);
+    } catch (e, st) {
+      // Rollback.
+      AppLogger.logError(e,
+          module: 'chat', operation: 'votePoll', stackTrace: st);
+      if (mounted) {
+        ref.read(chatMessagesProvider.notifier).state = before;
+      }
+    }
   }
 
   void _createPoll() {

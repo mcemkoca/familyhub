@@ -128,6 +128,73 @@ class ChatRepository with RepositoryErrorHandler {
     }, 'toggleReaction');
   }
 
+  /// Poll mesajları için seçenekleri + oyları TOPLU yükler (N+1 yok).
+  /// Dönen: {messageId: (pollId, PollData)}. poll_id → oy grupları eşleştirilir.
+  Future<Map<String, ({String pollId, PollData data})>> loadPolls(
+      List<String> messageIds) async {
+    if (messageIds.isEmpty) return const {};
+    return handleRepositoryCall(() async {
+      final polls = await _client
+          .from('chat_polls')
+          .select('id, message_id, question, options, allow_multiple')
+          .inFilter('message_id', messageIds);
+      final pollRows = (polls as List).cast<Map<String, dynamic>>();
+      if (pollRows.isEmpty) {
+        return <String, ({String pollId, PollData data})>{};
+      }
+
+      final pollIds =
+          pollRows.map((p) => p['id'].toString()).toList(growable: false);
+      final votes = await _client
+          .from('chat_poll_votes')
+          .select('poll_id, user_id, option_index')
+          .inFilter('poll_id', pollIds);
+      final voteRows = (votes as List).cast<Map<String, dynamic>>();
+
+      final result = <String, ({String pollId, PollData data})>{};
+      for (final p in pollRows) {
+        final pollId = p['id'].toString();
+        final messageId = p['message_id'].toString();
+        final options = ((p['options'] as List?) ?? const [])
+            .map((e) => e.toString())
+            .toList();
+        final perOption =
+            List<List<String>>.generate(options.length, (_) => <String>[]);
+        for (final v in voteRows) {
+          if (v['poll_id'].toString() != pollId) continue;
+          final idx = (v['option_index'] as num?)?.toInt() ?? -1;
+          final uid = v['user_id']?.toString();
+          if (idx >= 0 && idx < perOption.length && uid != null) {
+            perOption[idx].add(uid);
+          }
+        }
+        result[messageId] = (
+          pollId: pollId,
+          data: PollData(
+            question: p['question']?.toString() ?? '',
+            options: options,
+            votes: perOption,
+            multiple: p['allow_multiple'] == true,
+          ),
+        );
+      }
+      return result;
+    }, 'loadPolls');
+  }
+
+  /// Poll oylarını canlı izler (realtime UI için).
+  Stream<List<Map<String, dynamic>>> watchPollVotes(String familyId) {
+    try {
+      return _client
+          .from('chat_poll_votes')
+          .stream(primaryKey: ['poll_id', 'user_id', 'option_index'])
+          .eq('family_id', familyId)
+          .map((rows) => rows.cast<Map<String, dynamic>>());
+    } catch (e) {
+      return Stream.value(const []);
+    }
+  }
+
   /// Sohbeti bu kullanıcı için "okundu" işaretle (conversation-level).
   Future<void> markRead({
     required String familyId,
