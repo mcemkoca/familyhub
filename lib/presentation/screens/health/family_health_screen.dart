@@ -6,6 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:file_selector/file_selector.dart';
 import '../../../services/notification_service.dart';
+import '../../../core/app_logger.dart';
 
 // ── Hive models (lightweight, no codegen needed — stored as JSON strings) ──
 
@@ -397,7 +398,15 @@ class FamilyHealthNotifier extends StateNotifier<List<FamilyMemberHealth>> {
         scheduledDate: when,
         payload: 'appointment:${a.id}',
       );
-    } catch (_) {}
+    } catch (e, st) {
+      // FH-03: sessizce yutma — hatırlatma kurulamadıysa iz bırak (teşhis
+      // edilebilir olsun). Kullanıcı akışı kesilmez; randevu yine kaydedilir.
+      AppLogger.logError(e,
+          module: 'health',
+          operation: 'scheduleAppointmentReminder',
+          stackTrace: st,
+          context: {'appointmentId': a.id});
+    }
   }
 
   Future<void> completeAppointment(

@@ -3058,6 +3058,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get legalRegionOther => 'Autre';
 
   @override
+  String get reminderScheduleFailed =>
+      'Impossible de programmer le rappel. Vérifiez l\'autorisation de notification et votre connexion.';
+
+  @override
   String get vaccTitle => 'Calendrier vaccinal';
 
   @override

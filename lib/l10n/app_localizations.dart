@@ -5912,6 +5912,12 @@ abstract class AppLocalizations {
   /// **'Diğer'**
   String get legalRegionOther;
 
+  /// No description provided for @reminderScheduleFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hatırlatma kurulamadı. Bildirim izni ve bağlantıyı kontrol edin.'**
+  String get reminderScheduleFailed;
+
   /// No description provided for @vaccTitle.
   ///
   /// In tr, this message translates to:

@@ -3046,6 +3046,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get legalRegionOther => 'Overig';
 
   @override
+  String get reminderScheduleFailed =>
+      'Herinnering kon niet worden ingesteld. Controleer meldingsrechten en je verbinding.';
+
+  @override
   String get vaccTitle => 'Vaccinatieschema';
 
   @override

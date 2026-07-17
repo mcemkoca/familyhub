@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 import '../../../services/notification_service.dart';
+import '../../../core/app_logger.dart';
 
 /// İlaç Hatırlatma — tam ekran hatırlatma bildirimi.
 class MedicineReminderScreen extends StatelessWidget {
@@ -126,6 +127,10 @@ class MedicineReminderScreen extends StatelessWidget {
                     final navigator = Navigator.of(context);
                     final medTimeTitle = AppLocalizations.of(context).medTime;
                     final snoozeMsg = AppLocalizations.of(context).mrSnoozeMsg;
+                    final failMsg =
+                        AppLocalizations.of(context).reminderScheduleFailed;
+                    // FH-03: alarm gerçekten kurulmadan BAŞARI gösterme.
+                    var scheduled = false;
                     try {
                       await NotificationService.requestPermission();
                       await NotificationService.scheduleNotification(
@@ -136,11 +141,20 @@ class MedicineReminderScreen extends StatelessWidget {
                             DateTime.now().add(const Duration(minutes: 15)),
                         payload: 'medicine_reminder',
                       );
-                    } catch (_) {}
-                    messenger.showSnackBar(
-                      SnackBar(content: Text(snoozeMsg)),
-                    );
-                    navigator.pop();
+                      scheduled = true;
+                    } catch (e, st) {
+                      AppLogger.logError(e,
+                          module: 'health',
+                          operation: 'snoozeMedicineReminder',
+                          stackTrace: st);
+                    }
+                    messenger.showSnackBar(SnackBar(
+                      content: Text(scheduled ? snoozeMsg : failMsg),
+                      backgroundColor:
+                          scheduled ? null : const Color(0xFFB42318),
+                    ));
+                    // Hata varsa ekranı kapatma — kullanıcı tekrar deneyebilsin.
+                    if (scheduled) navigator.pop();
                   },
                   icon: const Icon(Icons.snooze_rounded,
                       color: Color(0xFF14B8A6)),

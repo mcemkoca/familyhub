@@ -1038,6 +1038,7 @@
   "legalRegionBrussels": "Brussel-Hoofdstad",
   "legalRegionMunicipality": "Gemeente",
   "legalRegionOther": "Overig",
+  "reminderScheduleFailed": "Herinnering kon niet worden ingesteld. Controleer meldingsrechten en je verbinding.",
   "vaccTitle": "Vaccinatieschema",
   "vaccSubtitle": "Kies het vaccinatieschema per persoon. Bron: officieel vaccinatieprogramma.",
   "vaccEmpty": "Geen vaccinatieschema gevonden voor dit land.",

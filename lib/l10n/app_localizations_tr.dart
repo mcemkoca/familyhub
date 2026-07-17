@@ -3063,6 +3063,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get legalRegionOther => 'Diğer';
 
   @override
+  String get reminderScheduleFailed =>
+      'Hatırlatma kurulamadı. Bildirim izni ve bağlantıyı kontrol edin.';
+
+  @override
   String get vaccTitle => 'Aşı Takvimi';
 
   @override

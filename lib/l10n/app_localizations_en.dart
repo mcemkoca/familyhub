@@ -3046,6 +3046,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get legalRegionOther => 'Other';
 
   @override
+  String get reminderScheduleFailed =>
+      'Could not set the reminder. Check notification permission and your connection.';
+
+  @override
   String get vaccTitle => 'Vaccination Schedule';
 
   @override
