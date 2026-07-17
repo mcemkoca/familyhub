@@ -9,6 +9,7 @@ import '../../../repositories/routine_repository.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/routine_service.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../../core/app_logger.dart';
 
 class RoutinesScreen extends StatefulWidget {
   const RoutinesScreen({super.key});
@@ -48,7 +49,8 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
             ? RoutineService.generateSuggestions(routines.first)
             : [];
       });
-    }, onError: (_) {});
+    }, onError: (Object e) =>
+        AppLogger.logBestEffort(e, module: 'routines', operation: 'routinesRealtime'));
   }
 
   Future<String?> _getFamilyId() async {
