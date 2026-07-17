@@ -303,9 +303,15 @@ class CalendarNotifier extends StateNotifier<AsyncValue<List<CalendarEvent>>> {
     try {
       _rt = CalendarRepository().watchEvents().listen(
             (_) => _reloadSilent(),
-            onError: (_) {},
+            onError: (Object e) => AppLogger.logBestEffort(e,
+                    module: 'calendar', operation: 'realtimeStream'),
           );
-    } catch (_) {}
+    } catch (e) {
+      // Best-effort: realtime kurulamazsa ekran manuel yenileme ile
+      // calisir (veri kaybi yok). Sessiz kalmamasi icin iz birakilir.
+      AppLogger.logBestEffort(e,
+          module: 'calendar', operation: 'subscribeRealtime');
+    }
   }
 
   Future<void> _reloadSilent() async {
@@ -313,7 +319,12 @@ class CalendarNotifier extends StateNotifier<AsyncValue<List<CalendarEvent>>> {
       final events = await CalendarRepository().getEvents();
       if (mounted) state = AsyncValue.data(events);
       _refreshDependents();
-    } catch (_) {}
+    } catch (e) {
+      // Best-effort: sessiz yenileme basarisizsa MEVCUT veri korunur
+      // (kullaniciya hata gosterilmez, sahte basari da yok).
+      AppLogger.logBestEffort(e,
+          module: 'calendar', operation: 'reloadSilent');
+    }
   }
 
   @override
@@ -445,16 +456,27 @@ class ShoppingNotifier extends StateNotifier<AsyncValue<List<ShoppingItem>>> {
     try {
       _rt = ShoppingRepository().watchItems().listen(
             (_) => _reloadSilent(),
-            onError: (_) {},
+            onError: (Object e) => AppLogger.logBestEffort(e,
+                    module: 'shopping', operation: 'realtimeStream'),
           );
-    } catch (_) {}
+    } catch (e) {
+      // Best-effort: realtime kurulamazsa ekran manuel yenileme ile
+      // calisir (veri kaybi yok). Sessiz kalmamasi icin iz birakilir.
+      AppLogger.logBestEffort(e,
+          module: 'shopping', operation: 'subscribeRealtime');
+    }
   }
 
   Future<void> _reloadSilent() async {
     try {
       final items = await ShoppingRepository().getItems();
       if (mounted) state = AsyncValue.data(items);
-    } catch (_) {}
+    } catch (e) {
+      // Best-effort: sessiz yenileme basarisizsa MEVCUT veri korunur
+      // (kullaniciya hata gosterilmez, sahte basari da yok).
+      AppLogger.logBestEffort(e,
+          module: 'shopping', operation: 'reloadSilent');
+    }
   }
 
   @override
@@ -550,16 +572,27 @@ class BudgetNotifier extends StateNotifier<AsyncValue<List<Transaction>>> {
     try {
       _rt = BudgetRepository().watchTransactions().listen(
             (_) => _reloadSilent(),
-            onError: (_) {},
+            onError: (Object e) => AppLogger.logBestEffort(e,
+                    module: 'budget', operation: 'realtimeStream'),
           );
-    } catch (_) {}
+    } catch (e) {
+      // Best-effort: realtime kurulamazsa ekran manuel yenileme ile
+      // calisir (veri kaybi yok). Sessiz kalmamasi icin iz birakilir.
+      AppLogger.logBestEffort(e,
+          module: 'budget', operation: 'subscribeRealtime');
+    }
   }
 
   Future<void> _reloadSilent() async {
     try {
       final txs = await BudgetRepository().getTransactions();
       if (mounted) state = AsyncValue.data(txs);
-    } catch (_) {}
+    } catch (e) {
+      // Best-effort: sessiz yenileme basarisizsa MEVCUT veri korunur
+      // (kullaniciya hata gosterilmez, sahte basari da yok).
+      AppLogger.logBestEffort(e,
+          module: 'budget', operation: 'reloadSilent');
+    }
   }
 
   @override
