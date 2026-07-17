@@ -5918,6 +5918,12 @@ abstract class AppLocalizations {
   /// **'Hatırlatma kurulamadı. Bildirim izni ve bağlantıyı kontrol edin.'**
   String get reminderScheduleFailed;
 
+  /// No description provided for @mediaPickFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Medya seçilemedi. Galeri/kamera izinlerini kontrol edin.'**
+  String get mediaPickFailed;
+
   /// No description provided for @vaccTitle.
   ///
   /// In tr, this message translates to:

@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'child_development_screen.dart' show ChildProfile;
 import 'child_dev_content.dart';
 import 'child_dev_store.dart';
+import '../../../core/app_logger.dart';
 
 /// Ekran 2 — Gelişim Gözlemi Ekle.
 class ObservationInputScreen extends StatefulWidget {
@@ -43,6 +44,8 @@ class _ObservationInputScreenState extends State<ObservationInputScreen> {
   }
 
   Future<void> _pickMedia() async {
+    final messenger = ScaffoldMessenger.of(context);
+    final failMsg = AppLocalizations.of(context).mediaPickFailed;
     try {
       final files = await ImagePicker().pickMultipleMedia(imageQuality: 80);
       if (files.isEmpty) return;
@@ -51,7 +54,19 @@ class _ObservationInputScreenState extends State<ObservationInputScreen> {
           _media.add(f.path);
         }
       });
-    } catch (_) {}
+    } catch (e, st) {
+      // FH-03: sessizce yutma — izin reddi/picker hatasında kullanıcı butona
+      // basıp hiçbir şey olmadığını görüyordu ("çalışmayan buton").
+      AppLogger.logError(e,
+          module: 'child_development',
+          operation: 'pickObservationMedia',
+          stackTrace: st);
+      if (!mounted) return;
+      messenger.showSnackBar(SnackBar(
+        content: Text(failMsg),
+        backgroundColor: const Color(0xFFB42318),
+      ));
+    }
   }
 
   Future<void> _save() async {

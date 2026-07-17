@@ -3050,6 +3050,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Could not set the reminder. Check notification permission and your connection.';
 
   @override
+  String get mediaPickFailed =>
+      'Could not pick media. Check gallery/camera permissions.';
+
+  @override
   String get vaccTitle => 'Vaccination Schedule';
 
   @override

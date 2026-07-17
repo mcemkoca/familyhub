@@ -3062,6 +3062,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Impossible de programmer le rappel. Vérifiez l\'autorisation de notification et votre connexion.';
 
   @override
+  String get mediaPickFailed =>
+      'Impossible de sélectionner le média. Vérifiez les autorisations galerie/caméra.';
+
+  @override
   String get vaccTitle => 'Calendrier vaccinal';
 
   @override

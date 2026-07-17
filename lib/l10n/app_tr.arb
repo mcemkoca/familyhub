@@ -1039,6 +1039,7 @@
   "legalRegionMunicipality": "Belediye",
   "legalRegionOther": "Diğer",
   "reminderScheduleFailed": "Hatırlatma kurulamadı. Bildirim izni ve bağlantıyı kontrol edin.",
+  "mediaPickFailed": "Medya seçilemedi. Galeri/kamera izinlerini kontrol edin.",
   "vaccTitle": "Aşı Takvimi",
   "vaccSubtitle": "Kişiye göre aşı takvimini seçin. Kaynak: resmî aşı programı.",
   "vaccEmpty": "Bu ülke için aşı takvimi bulunamadı.",

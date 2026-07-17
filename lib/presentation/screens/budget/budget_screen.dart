@@ -10,6 +10,7 @@ import '../../../config/constants.dart';
 import '../../../domain/entities.dart';
 import '../../providers/app_providers.dart';
 import '../../../services/ai/ai_engine.dart';
+import '../../../core/app_logger.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
 part 'widgets/budget_summary_card.dart';
@@ -551,7 +552,12 @@ Sadece JSON döndür: {"suggestions": ["...", "..."]}. Her öneri tek cümle, T�
             .where((e) => e.isNotEmpty)
             .toList();
       }
-    } catch (_) {}
+    } catch (e) {
+      // Best-effort: AI öneri JSON'u bozuksa öneri GÖSTERİLMEZ (boş liste).
+      // Kullanıcı akışı etkilenmez, sahte başarı yok — ama iz bırakılır.
+      AppLogger.logBestEffort(e,
+          module: 'budget', operation: 'parseAiSuggestions');
+    }
     return const [];
   }
 
@@ -571,7 +577,12 @@ ${categories.join(', ')}''';
       for (final c in categories) {
         if (answer.contains(c.toLowerCase())) return c;
       }
-    } catch (_) {}
+    } catch (e) {
+      // Best-effort: AI kategori öneremezse kullanıcı kendisi seçer (null).
+      // Akış bozulmaz, sahte başarı yok — iz bırakılır.
+      AppLogger.logBestEffort(e,
+          module: 'budget', operation: 'suggestCategory');
+    }
     return null;
   }
 

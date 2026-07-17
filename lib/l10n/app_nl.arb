@@ -1039,6 +1039,7 @@
   "legalRegionMunicipality": "Gemeente",
   "legalRegionOther": "Overig",
   "reminderScheduleFailed": "Herinnering kon niet worden ingesteld. Controleer meldingsrechten en je verbinding.",
+  "mediaPickFailed": "Media kon niet worden gekozen. Controleer galerij-/camerarechten.",
   "vaccTitle": "Vaccinatieschema",
   "vaccSubtitle": "Kies het vaccinatieschema per persoon. Bron: officieel vaccinatieprogramma.",
   "vaccEmpty": "Geen vaccinatieschema gevonden voor dit land.",

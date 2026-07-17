@@ -3050,6 +3050,10 @@ class AppLocalizationsNl extends AppLocalizations {
       'Herinnering kon niet worden ingesteld. Controleer meldingsrechten en je verbinding.';
 
   @override
+  String get mediaPickFailed =>
+      'Media kon niet worden gekozen. Controleer galerij-/camerarechten.';
+
+  @override
   String get vaccTitle => 'Vaccinatieschema';
 
   @override

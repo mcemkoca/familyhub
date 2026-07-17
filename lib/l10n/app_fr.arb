@@ -1039,6 +1039,7 @@
   "legalRegionMunicipality": "Commune",
   "legalRegionOther": "Autre",
   "reminderScheduleFailed": "Impossible de programmer le rappel. Vérifiez l'autorisation de notification et votre connexion.",
+  "mediaPickFailed": "Impossible de sélectionner le média. Vérifiez les autorisations galerie/caméra.",
   "vaccTitle": "Calendrier vaccinal",
   "vaccSubtitle": "Choisissez le calendrier vaccinal par personne. Source : programme vaccinal officiel.",
   "vaccEmpty": "Aucun calendrier vaccinal trouvé pour ce pays.",

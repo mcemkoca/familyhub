@@ -3067,6 +3067,10 @@ class AppLocalizationsTr extends AppLocalizations {
       'Hatırlatma kurulamadı. Bildirim izni ve bağlantıyı kontrol edin.';
 
   @override
+  String get mediaPickFailed =>
+      'Medya seçilemedi. Galeri/kamera izinlerini kontrol edin.';
+
+  @override
   String get vaccTitle => 'Aşı Takvimi';
 
   @override

@@ -1039,6 +1039,7 @@
   "legalRegionMunicipality": "Municipality",
   "legalRegionOther": "Other",
   "reminderScheduleFailed": "Could not set the reminder. Check notification permission and your connection.",
+  "mediaPickFailed": "Could not pick media. Check gallery/camera permissions.",
   "vaccTitle": "Vaccination Schedule",
   "vaccSubtitle": "Choose the vaccination schedule per person. Source: official vaccination programme.",
   "vaccEmpty": "No vaccination schedule found for this country.",
