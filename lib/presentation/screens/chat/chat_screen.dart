@@ -48,6 +48,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   String? get _myId => AuthService.currentUserId;
   ChatPresenceService? _presence;
   List<TypingUser> _typingUsers = const [];
+  StreamSubscription<List<Map<String, dynamic>>>? _readStatesSub;
+  List<Map<String, dynamic>> _readStates = const [];
 
   String get _myDisplayName =>
       AuthService.currentUser?.userMetadata?['display_name']?.toString() ??
@@ -67,6 +69,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   @override
   void dispose() {
     _messagesSub?.cancel();
+    _readStatesSub?.cancel();
     _presence?.dispose();
     _scrollController.dispose();
     _focusNode.dispose();
@@ -110,6 +113,15 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         },
         onError: (Object e) => AppLogger.logBestEffort(e,
             module: 'chat', operation: 'watchMessages'),
+      );
+
+      // Okundu durumları (gönderici mesajlarında tik hesabı için).
+      _readStatesSub = ChatRepository().watchReadStates(familyId).listen(
+        (states) {
+          if (mounted) setState(() => _readStates = states);
+        },
+        onError: (Object e) => AppLogger.logBestEffort(e,
+            module: 'chat', operation: 'watchReadStates'),
       );
     } catch (e, st) {
       AppLogger.logError(e,
@@ -963,6 +975,14 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                               child: ChatBubble(
                                 message: msg,
                                 isMe: isMe,
+                                readCountOverride: isMe
+                                    ? computeReadCount(
+                                        messageSenderId: msg.senderId,
+                                        messageCreatedAt: msg.createdAt,
+                                        readStates: _readStates,
+                                        myId: _myId ?? '',
+                                      )
+                                    : null,
                                 showSender: _showSender(msg, messages, index),
                                 onReply: () => setState(
                                   () => _replyToMessage = msg,

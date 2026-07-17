@@ -243,6 +243,21 @@ class ChatRepository with RepositoryErrorHandler {
     }, 'updateMessage');
   }
 
+  /// Ailenin okundu durumlarını (chat_read_states) canlı izler.
+  /// Her satır: {user_id, last_read_at}. Gönderici mesajlarının "okundu"
+  /// durumu bundan hesaplanır (toplu — N+1 yok).
+  Stream<List<Map<String, dynamic>>> watchReadStates(String familyId) {
+    try {
+      return _client
+          .from('chat_read_states')
+          .stream(primaryKey: ['family_id', 'user_id'])
+          .eq('family_id', familyId)
+          .map((rows) => rows.cast<Map<String, dynamic>>());
+    } catch (e) {
+      return Stream.value(const []);
+    }
+  }
+
   Stream<List<ChatMessage>> watchMessages(String familyId) {
     try {
       return _client
@@ -295,4 +310,29 @@ class ChatRepository with RepositoryErrorHandler {
 
   // ignore: unused_element
   Color _parseColor(dynamic value) => const Color(0xFF3B82F6);
+}
+
+/// Bir mesajı KAÇ BAŞKA üyenin okuduğunu hesaplar (saf, test edilebilir).
+///
+/// Kural: bir üyenin `last_read_at`'i mesajın `created_at`'inden büyük/eşitse
+/// o mesajı okumuş sayılır. Gönderenin kendi okuması sayılmaz ([myId] hariç).
+/// [readStates]: [{user_id, last_read_at}] listesi.
+int computeReadCount({
+  required String messageSenderId,
+  required DateTime messageCreatedAt,
+  required List<Map<String, dynamic>> readStates,
+  required String myId,
+}) {
+  var count = 0;
+  for (final r in readStates) {
+    final uid = r['user_id']?.toString();
+    if (uid == null || uid == myId) continue; // kendi okuması sayılmaz
+    if (uid == messageSenderId) continue; // gönderenin kendisi sayılmaz
+    final lastReadRaw = r['last_read_at'];
+    if (lastReadRaw == null) continue;
+    final lastRead = DateTime.tryParse(lastReadRaw.toString());
+    if (lastRead == null) continue;
+    if (!lastRead.isBefore(messageCreatedAt)) count++; // >= createdAt
+  }
+  return count;
 }

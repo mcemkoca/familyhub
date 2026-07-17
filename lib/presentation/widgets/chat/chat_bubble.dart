@@ -13,6 +13,9 @@ class ChatBubble extends StatelessWidget {
   final VoidCallback? onReply;
   final VoidCallback? onReact;
   final void Function(int optionIndex)? onVote;
+  /// Gerçek okundu sayısı (chat_read_states'ten hesaplanır). null → mesaj
+  /// modelindeki readCount'a düşer (geriye-uyum).
+  final int? readCountOverride;
 
   const ChatBubble({
     super.key,
@@ -22,6 +25,7 @@ class ChatBubble extends StatelessWidget {
     this.onReply,
     this.onReact,
     this.onVote,
+    this.readCountOverride,
   });
 
   @override
@@ -160,7 +164,9 @@ class ChatBubble extends StatelessWidget {
                           ),
                           if (isMe) ...[
                             const SizedBox(width: 4),
-                            _ReadStatus(readCount: message.readCount),
+                            _ReadStatus(
+                                readCount:
+                                    readCountOverride ?? message.readCount),
                           ],
                         ],
                       ),
