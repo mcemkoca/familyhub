@@ -105,9 +105,13 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       // Offline kuyruğu boşalt (yalnızca bu kullanıcının bekleyen mesajları).
       final myId = _myId;
       if (myId != null) {
-        ChatOutboxService.flush(myId).catchError((Object e) =>
-            AppLogger.logBestEffort(e,
-                module: 'chat', operation: 'outboxFlushOnOpen'));
+        ChatOutboxService.flush(myId).catchError(
+          (Object e) => AppLogger.logBestEffort(
+            e,
+            module: 'chat',
+            operation: 'outboxFlushOnOpen',
+          ),
+        );
       }
 
       _messagesSub = ChatRepository().watchMessages(familyId).listen(
@@ -116,8 +120,11 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
           _markLatestRead(familyId, messages);
           _hydratePolls(messages);
         },
-        onError: (Object e) => AppLogger.logBestEffort(e,
-            module: 'chat', operation: 'watchMessages'),
+        onError: (Object e) => AppLogger.logBestEffort(
+          e,
+          module: 'chat',
+          operation: 'watchMessages',
+        ),
       );
 
       // Okundu durumları (gönderici mesajlarında tik hesabı için).
@@ -125,19 +132,31 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         (states) {
           if (mounted) setState(() => _readStates = states);
         },
-        onError: (Object e) => AppLogger.logBestEffort(e,
-            module: 'chat', operation: 'watchReadStates'),
+        onError: (Object e) => AppLogger.logBestEffort(
+          e,
+          module: 'chat',
+          operation: 'watchReadStates',
+        ),
       );
 
       // Poll oyları realtime → değişince ilgili anketleri yeniden hidrat et.
-      _pollVotesSub = ChatRepository().watchPollVotes(familyId).listen(
-        (_) => _hydratePolls(ref.read(chatMessagesProvider), force: true),
-        onError: (Object e) => AppLogger.logBestEffort(e,
-            module: 'chat', operation: 'watchPollVotes'),
-      );
+      _pollVotesSub = ChatRepository()
+          .watchPollVotes(familyId)
+          .listen(
+            (_) => _hydratePolls(ref.read(chatMessagesProvider), force: true),
+            onError: (Object e) => AppLogger.logBestEffort(
+              e,
+              module: 'chat',
+              operation: 'watchPollVotes',
+            ),
+          );
     } catch (e, st) {
-      AppLogger.logError(e,
-          module: 'chat', operation: 'loadFamilyIdAndListen', stackTrace: st);
+      AppLogger.logError(
+        e,
+        module: 'chat',
+        operation: 'loadFamilyIdAndListen',
+        stackTrace: st,
+      );
     }
   }
 
@@ -155,8 +174,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     // Ekran foreground'da (bu widget mounted) olduğu için okundu sayılır.
     ChatRepository()
         .markRead(familyId: familyId, lastMessageId: last.id)
-        .catchError((Object e) => AppLogger.logBestEffort(e,
-            module: 'chat', operation: 'markRead'));
+        .catchError(
+          (Object e) =>
+              AppLogger.logBestEffort(e, module: 'chat', operation: 'markRead'),
+        );
   }
 
   /// familyId'yi (önbellekten veya profilden) döndürür; yoksa null.
@@ -206,27 +227,35 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     } catch (e, st) {
       // Backend başarısız → sahte local mesaj EKLEME. Hatayı göster, metni geri
       // ver. Kalıcı hata (RLS/yetki) değilse offline kuyruğa al.
-      AppLogger.logError(e,
-          module: 'chat', operation: 'sendMessage', stackTrace: st);
+      AppLogger.logError(
+        e,
+        module: 'chat',
+        operation: 'sendMessage',
+        stackTrace: st,
+      );
       if (!isPermanentFailure(e.toString())) {
-        await ChatOutboxService.enqueue(OutboxMessage(
-          clientMessageId: clientId,
-          ownerId: _myId ?? '',
-          familyId: familyId,
-          content: text.trim(),
-          replyToId: reply?.id,
-          createdAtMs: DateTime.now().millisecondsSinceEpoch,
-        ));
+        await ChatOutboxService.enqueue(
+          OutboxMessage(
+            clientMessageId: clientId,
+            ownerId: _myId ?? '',
+            familyId: familyId,
+            content: text.trim(),
+            replyToId: reply?.id,
+            createdAtMs: DateTime.now().millisecondsSinceEpoch,
+          ),
+        );
       }
-      messenger.showSnackBar(SnackBar(
-        content: Text(t.chatSendFailed),
-        backgroundColor: const Color(0xFFB42318),
-        action: SnackBarAction(
-          label: t.retry,
-          textColor: Colors.white,
-          onPressed: () => _sendMessage(text, clientMessageId: clientId),
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(t.chatSendFailed),
+          backgroundColor: const Color(0xFFB42318),
+          action: SnackBarAction(
+            label: t.retry,
+            textColor: Colors.white,
+            onPressed: () => _sendMessage(text, clientMessageId: clientId),
+          ),
         ),
-      ));
+      );
     }
   }
 
@@ -256,8 +285,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         emoji: emoji,
       );
     } catch (e, st) {
-      AppLogger.logError(e,
-          module: 'chat', operation: 'toggleReaction', stackTrace: st);
+      AppLogger.logError(
+        e,
+        module: 'chat',
+        operation: 'toggleReaction',
+        stackTrace: st,
+      );
     }
   }
 
@@ -280,9 +313,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       messenger.showSnackBar(SnackBar(content: Text(t.chatNoFamily)));
       return;
     }
-    messenger.showSnackBar(SnackBar(
+    messenger.showSnackBar(
+      SnackBar(
         content: Text(t.chatUploading),
-        duration: const Duration(seconds: 1)));
+        duration: const Duration(seconds: 1),
+      ),
+    );
     try {
       final url = await ChatStorageService.uploadMedia(
         familyId: familyId,
@@ -296,19 +332,26 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         imageUrl: type == MessageType.image ? url : null,
         audioUrl: type == MessageType.audio ? url : null,
         audioDuration: audioDuration,
-        videoUrl:
-            (type == MessageType.video || type == MessageType.file) ? url : null,
+        videoUrl: (type == MessageType.video || type == MessageType.file)
+            ? url
+            : null,
         fileName: fileName,
         fileSize: fileSize,
       );
       WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
     } catch (e, st) {
-      AppLogger.logError(e,
-          module: 'chat', operation: 'sendMedia', stackTrace: st);
-      messenger.showSnackBar(SnackBar(
-        content: Text(t.chatUploadFailed),
-        backgroundColor: const Color(0xFFB42318),
-      ));
+      AppLogger.logError(
+        e,
+        module: 'chat',
+        operation: 'sendMedia',
+        stackTrace: st,
+      );
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(t.chatUploadFailed),
+          backgroundColor: const Color(0xFFB42318),
+        ),
+      );
     }
   }
 
@@ -316,7 +359,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     final photoLabel = '📷 ${AppLocalizations.of(context).chatPhoto}';
     final picker = ImagePicker();
     final picked = await picker.pickImage(
-        source: ImageSource.gallery, imageQuality: 70, maxWidth: 1600);
+      source: ImageSource.gallery,
+      imageQuality: 70,
+      maxWidth: 1600,
+    );
     if (picked == null) return;
     await _sendMedia(
       file: File(picked.path),
@@ -330,7 +376,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     final photoLabel = '📷 ${AppLocalizations.of(context).chatPhoto}';
     final picker = ImagePicker();
     final picked = await picker.pickImage(
-        source: ImageSource.camera, imageQuality: 70, maxWidth: 1600);
+      source: ImageSource.camera,
+      imageQuality: 70,
+      maxWidth: 1600,
+    );
     if (picked == null) return;
     await _sendMedia(
       file: File(picked.path),
@@ -345,8 +394,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     final messenger = ScaffoldMessenger.of(context);
     final t = AppLocalizations.of(context);
     final locationUnavailable = t.locationUnavailable;
-    messenger.showSnackBar(SnackBar(
-        content: Text(t.chatGettingLocation), duration: const Duration(seconds: 1)));
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(t.chatGettingLocation),
+        duration: const Duration(seconds: 1),
+      ),
+    );
 
     final pos = await LocationService.getCurrentPosition();
     if (pos == null) {
@@ -356,13 +409,15 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     // Gerçek adresi çöz (başarısızsa koordinat metnini kullan).
     String label;
     try {
-      final addr =
-          await LocationService.getAddressFromCoords(pos.latitude, pos.longitude);
+      final addr = await LocationService.getAddressFromCoords(
+        pos.latitude,
+        pos.longitude,
+      );
       label = (addr != null && addr.fullAddress.isNotEmpty)
           ? addr.fullAddress
           : (addr?.city.isNotEmpty == true
-              ? addr!.city
-              : '${pos.latitude.toStringAsFixed(5)}, ${pos.longitude.toStringAsFixed(5)}');
+                ? addr!.city
+                : '${pos.latitude.toStringAsFixed(5)}, ${pos.longitude.toStringAsFixed(5)}');
     } catch (_) {
       label =
           '${pos.latitude.toStringAsFixed(5)}, ${pos.longitude.toStringAsFixed(5)}';
@@ -383,8 +438,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       );
       WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
     } catch (e, st) {
-      AppLogger.logError(e,
-          module: 'chat', operation: 'shareLocation', stackTrace: st);
+      AppLogger.logError(
+        e,
+        module: 'chat',
+        operation: 'shareLocation',
+        stackTrace: st,
+      );
       messenger.showSnackBar(SnackBar(content: Text(t.chatSendFailed)));
     }
   }
@@ -427,8 +486,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
 
   /// Poll mesajlarını backend'den hidrat eder (seçenekler + oylar + benim oyum).
   /// Toplu (loadPolls, N+1 yok). [force] realtime oy değişiminde yeniden yükler.
-  Future<void> _hydratePolls(List<ChatMessage> messages,
-      {bool force = false}) async {
+  Future<void> _hydratePolls(
+    List<ChatMessage> messages, {
+    bool force = false,
+  }) async {
     if (_pollsHydrating) return;
     final pollMsgIds = messages
         .where((m) => m.type == MessageType.poll)
@@ -448,18 +509,19 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       final current = ref.read(chatMessagesProvider);
       ref.read(chatMessagesProvider.notifier).state = [
         for (final m in current)
-          if (map.containsKey(m.id))
-            m.copyWith(poll: map[m.id]!.data)
-          else
-            m,
+          if (map.containsKey(m.id)) m.copyWith(poll: map[m.id]!.data) else m,
       ];
       for (final e in map.entries) {
         _pollIdByMessage[e.key] = e.value.pollId;
       }
       setState(() {});
     } catch (e, st) {
-      AppLogger.logError(e,
-          module: 'chat', operation: 'hydratePolls', stackTrace: st);
+      AppLogger.logError(
+        e,
+        module: 'chat',
+        operation: 'hydratePolls',
+        stackTrace: st,
+      );
     } finally {
       _pollsHydrating = false;
     }
@@ -490,8 +552,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       await _hydratePolls(ref.read(chatMessagesProvider), force: true);
     } catch (e, st) {
       // Rollback.
-      AppLogger.logError(e,
-          module: 'chat', operation: 'votePoll', stackTrace: st);
+      AppLogger.logError(
+        e,
+        module: 'chat',
+        operation: 'votePoll',
+        stackTrace: st,
+      );
       if (mounted) {
         ref.read(chatMessagesProvider.notifier).state = before;
       }
@@ -516,26 +582,30 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         return StatefulBuilder(
           builder: (ctx, setSheet) {
             InputDecoration deco(String hint) => InputDecoration(
-                  hintText: hint,
-                  hintStyle: TextStyle(color: onSurface.withAlpha(90)),
-                  filled: true,
-                  fillColor: onSurface.withAlpha(12),
-                  contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 14, vertical: 12),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
-                  ),
-                );
+              hintText: hint,
+              hintStyle: TextStyle(color: onSurface.withAlpha(90)),
+              filled: true,
+              fillColor: onSurface.withAlpha(12),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 14,
+                vertical: 12,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
+            );
             return Padding(
               padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(ctx).viewInsets.bottom),
+                bottom: MediaQuery.of(ctx).viewInsets.bottom,
+              ),
               child: Container(
                 padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
                 decoration: BoxDecoration(
                   color: surface,
                   borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(24)),
+                    top: Radius.circular(24),
+                  ),
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -554,14 +624,20 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                     ),
                     Row(
                       children: [
-                        const Icon(Icons.poll_rounded,
-                            color: Color(0xFF8B5CF6), size: 22),
+                        const Icon(
+                          Icons.poll_rounded,
+                          color: Color(0xFF8B5CF6),
+                          size: 22,
+                        ),
                         const SizedBox(width: 8),
-                        Text(AppLocalizations.of(context).chatCreatePoll,
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w800,
-                                color: onSurface)),
+                        Text(
+                          AppLocalizations.of(context).chatCreatePoll,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w800,
+                            color: onSurface,
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 16),
@@ -569,7 +645,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                       controller: questionCtrl,
                       style: TextStyle(color: onSurface),
                       textCapitalization: TextCapitalization.sentences,
-                      decoration: deco(AppLocalizations.of(context).chatPollQuestion),
+                      decoration: deco(
+                        AppLocalizations.of(context).chatPollQuestion,
+                      ),
                     ),
                     const SizedBox(height: 12),
                     for (int i = 0; i < optionCtrls.length; i++)
@@ -583,27 +661,39 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                                 style: TextStyle(color: onSurface),
                                 textCapitalization:
                                     TextCapitalization.sentences,
-                                decoration: deco(AppLocalizations.of(context).chatOption(i + 1)),
+                                decoration: deco(
+                                  AppLocalizations.of(
+                                    context,
+                                  ).chatOption(i + 1),
+                                ),
                               ),
                             ),
                             if (optionCtrls.length > 2)
                               IconButton(
-                                icon: Icon(Icons.close_rounded,
-                                    color: onSurface.withAlpha(120)),
-                                onPressed: () => setSheet(
-                                    () => optionCtrls.removeAt(i)),
+                                icon: Icon(
+                                  Icons.close_rounded,
+                                  color: onSurface.withAlpha(120),
+                                ),
+                                onPressed: () =>
+                                    setSheet(() => optionCtrls.removeAt(i)),
                               ),
                           ],
                         ),
                       ),
                     if (optionCtrls.length < 6)
                       TextButton.icon(
-                        onPressed: () => setSheet(() =>
-                            optionCtrls.add(TextEditingController())),
-                        icon: const Icon(Icons.add_rounded,
-                            size: 18, color: Color(0xFF8B5CF6)),
-                        label: Text(AppLocalizations.of(context).chatAddOption,
-                            style: const TextStyle(color: Color(0xFF8B5CF6))),
+                        onPressed: () => setSheet(
+                          () => optionCtrls.add(TextEditingController()),
+                        ),
+                        icon: const Icon(
+                          Icons.add_rounded,
+                          size: 18,
+                          color: Color(0xFF8B5CF6),
+                        ),
+                        label: Text(
+                          AppLocalizations.of(context).chatAddOption,
+                          style: const TextStyle(color: Color(0xFF8B5CF6)),
+                        ),
                       ),
                     const SizedBox(height: 8),
                     SizedBox(
@@ -613,7 +703,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                           backgroundColor: const Color(0xFF8B5CF6),
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(14)),
+                            borderRadius: BorderRadius.circular(14),
+                          ),
                         ),
                         onPressed: () {
                           final q = questionCtrl.text.trim();
@@ -624,17 +715,21 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                           if (q.isEmpty || opts.length < 2) {
                             ScaffoldMessenger.of(ctx).showSnackBar(
                               const SnackBar(
-                                  content: Text(
-                                      'Soru ve en az 2 seçenek girin')),
+                                content: Text('Soru ve en az 2 seçenek girin'),
+                              ),
                             );
                             return;
                           }
                           Navigator.pop(ctx);
                           _sendPoll(q, opts);
                         },
-                        child: Text(AppLocalizations.of(context).chatSendPoll,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 15)),
+                        child: Text(
+                          AppLocalizations.of(context).chatSendPoll,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 15,
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -664,8 +759,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       );
       WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
     } catch (e, st) {
-      AppLogger.logError(e,
-          module: 'chat', operation: 'sendPoll', stackTrace: st);
+      AppLogger.logError(
+        e,
+        module: 'chat',
+        operation: 'sendPoll',
+        stackTrace: st,
+      );
       messenger.showSnackBar(SnackBar(content: Text(t.chatSendFailed)));
     }
   }
@@ -679,8 +778,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       final size = await picked.length();
       if (size > 50 * 1024 * 1024) {
         if (!mounted) return;
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(t.chatFileTooLarge)));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(t.chatFileTooLarge)));
         return;
       }
       // Storage'a yükle → imzalı URL. Yerel yol ASLA gönderilmez.
@@ -693,11 +793,16 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         fileSize: size,
       );
     } catch (e, st) {
-      AppLogger.logError(e,
-          module: 'chat', operation: 'pickFile', stackTrace: st);
+      AppLogger.logError(
+        e,
+        module: 'chat',
+        operation: 'pickFile',
+        stackTrace: st,
+      );
       if (mounted) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(t.chatFileFailed)));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(t.chatFileFailed)));
       }
     }
   }
@@ -733,7 +838,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             children: [
               Container(
                 margin: const EdgeInsets.only(top: 12, bottom: 8),
-                width: 40, height: 4,
+                width: 40,
+                height: 4,
                 decoration: BoxDecoration(
                   color: Theme.of(ctx).colorScheme.onSurface.withAlpha(40),
                   borderRadius: BorderRadius.circular(2),
@@ -743,14 +849,19 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                 padding: const EdgeInsets.all(16),
                 child: Text(
                   AppLocalizations.of(context).chatPickGif,
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
               Expanded(
                 child: GridView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3, mainAxisSpacing: 4, crossAxisSpacing: 4,
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 4,
+                    crossAxisSpacing: 4,
                   ),
                   itemCount: gifs.length,
                   itemBuilder: (_, i) => GestureDetector(
@@ -768,7 +879,11 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                             : const Center(child: CircularProgressIndicator()),
                         errorBuilder: (_, _, _) => Container(
                           color: const Color(0xFF9CA3AF),
-                          child: const Icon(Icons.gif, size: 32, color: Colors.grey),
+                          child: const Icon(
+                            Icons.gif,
+                            size: 32,
+                            color: Colors.grey,
+                          ),
                         ),
                       ),
                     ),
@@ -801,8 +916,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       );
       WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
     } catch (e, st) {
-      AppLogger.logError(e,
-          module: 'chat', operation: 'sendGif', stackTrace: st);
+      AppLogger.logError(
+        e,
+        module: 'chat',
+        operation: 'sendGif',
+        stackTrace: st,
+      );
       messenger.showSnackBar(SnackBar(content: Text(t.chatSendFailed)));
     }
   }
@@ -819,8 +938,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         pinned: !message.isPinned,
       );
     } catch (e, st) {
-      AppLogger.logError(e,
-          module: 'chat', operation: 'pinMessage', stackTrace: st);
+      AppLogger.logError(
+        e,
+        module: 'chat',
+        operation: 'pinMessage',
+        stackTrace: st,
+      );
     }
   }
 
@@ -851,10 +974,13 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         content: Text(t.chatClearForMeDesc),
         actions: [
           TextButton(
-              onPressed: () => Navigator.pop(ctx, false), child: Text(t.cancel)),
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(t.cancel),
+          ),
           TextButton(
-              onPressed: () => Navigator.pop(ctx, true),
-              child: Text(t.chatClearChat)),
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text(t.chatClearChat),
+          ),
         ],
       ),
     );
@@ -863,8 +989,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     // Not: realtime stream aktifse mesajlar tekrar yüklenir; bu bilinçli —
     // aile geçmişi silinmez, yalnızca yerel önbellek tazelenir.
     if (mounted) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(t.chatCleared)));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(t.chatCleared)));
     }
   }
 
@@ -884,8 +1011,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     final messageDay = DateTime(dt.year, dt.month, dt.day);
 
     if (messageDay == today) return AppLocalizations.of(context).chatToday;
-    if (messageDay == yesterday) return AppLocalizations.of(context).chatYesterday;
-    return DateFormat('d MMMM', Localizations.localeOf(context).toString()).format(dt);
+    if (messageDay == yesterday)
+      return AppLocalizations.of(context).chatYesterday;
+    return DateFormat(
+      'd MMMM',
+      Localizations.localeOf(context).toString(),
+    ).format(dt);
   }
 
   @override
@@ -981,9 +1112,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               if (pinnedMessage != null)
                 _PinnedMessageBar(
                   message: pinnedMessage,
-                  onUnpin: () => _pinMessage(
-                    pinnedMessage.copyWith(isPinned: false),
-                  ),
+                  onUnpin: () =>
+                      _pinMessage(pinnedMessage.copyWith(isPinned: false)),
                 ),
               // Messages
               Expanded(
@@ -1010,7 +1140,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                       final isMe = msg.senderId == _myId;
 
                       // Day separator
-                      final showDay = index == 0 ||
+                      final showDay =
+                          index == 0 ||
                           !_sameDay(
                             msg.createdAt,
                             messages[index - 1].createdAt,
@@ -1019,7 +1150,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                       return Column(
                         children: [
                           if (showDay)
-                            _DaySeparator(label: _dayLabel(context, msg.createdAt)),
+                            _DaySeparator(
+                              label: _dayLabel(context, msg.createdAt),
+                            ),
                           Padding(
                             padding: const EdgeInsets.only(bottom: 4),
                             child: Dismissible(
@@ -1027,9 +1160,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                               direction: isMe
                                   ? DismissDirection.endToStart
                                   : DismissDirection.startToEnd,
-                              onDismissed: (_) => setState(
-                                () => _replyToMessage = msg,
-                              ),
+                              onDismissed: (_) =>
+                                  setState(() => _replyToMessage = msg),
                               background: Container(
                                 alignment: isMe
                                     ? Alignment.centerRight
@@ -1054,12 +1186,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                                       )
                                     : null,
                                 showSender: _showSender(msg, messages, index),
-                                onReply: () => setState(
-                                  () => _replyToMessage = msg,
-                                ),
-                                onReact: () => setState(
-                                  () => _reactingToMessage = msg,
-                                ),
+                                onReply: () =>
+                                    setState(() => _replyToMessage = msg),
+                                onReact: () =>
+                                    setState(() => _reactingToMessage = msg),
                                 onVote: msg.type == MessageType.poll
                                     ? (i) => _votePoll(msg, i)
                                     : null,
@@ -1090,10 +1220,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                           style: TextStyle(
                             fontSize: 12,
                             fontStyle: FontStyle.italic,
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onSurface
-                                .withAlpha(160),
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onSurface.withAlpha(160),
                           ),
                         ),
                       ),
@@ -1203,9 +1332,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surface,
-            borderRadius: const BorderRadius.vertical(
-              top: Radius.circular(24),
-            ),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
           ),
           child: SafeArea(
             child: Column(
@@ -1215,7 +1342,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                   width: 40,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.onSurface.withAlpha(40),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withAlpha(40),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -1272,7 +1401,9 @@ class _DaySeparator extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 16),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceContainerHighest.withAlpha(120),
+          color: Theme.of(
+            context,
+          ).colorScheme.surfaceContainerHighest.withAlpha(120),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Text(
@@ -1302,9 +1433,7 @@ class _PinnedMessageBar extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFF6366F1).withAlpha(30),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: const Color(0xFF6366F1).withAlpha(50),
-        ),
+        border: Border.all(color: const Color(0xFF6366F1).withAlpha(50)),
       ),
       child: Row(
         children: [
@@ -1329,7 +1458,9 @@ class _PinnedMessageBar extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 13,
-                    color: Theme.of(context).colorScheme.onSurface.withAlpha(200),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withAlpha(200),
                   ),
                 ),
               ],
@@ -1392,7 +1523,9 @@ class _AttachmentMenu extends StatelessWidget {
                       width: 40,
                       height: 4,
                       decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.onSurface.withAlpha(40),
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSurface.withAlpha(40),
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -1544,8 +1677,6 @@ class _MenuItem extends StatelessWidget {
   }
 }
 
-
-
 /// Sohbet içi gerçek arama — yüklü mesajlar üzerinde büyük/küçük harf ve
 /// aksan duyarsız (tr/fr/nl/en karakterleri) filtre. Aile izolasyonu zaten
 /// mesaj listesinin kendisiyle sağlanır (yalnızca kendi ailenin mesajları).
@@ -1559,20 +1690,24 @@ class _ChatSearchDelegate extends SearchDelegate<ChatMessage?> {
   List<ChatMessage> _results() {
     final q = _norm(query.trim());
     if (q.isEmpty) return const [];
-    return messages.where((m) => _norm(m.content).contains(q)).toList().reversed.toList();
+    return messages
+        .where((m) => _norm(m.content).contains(q))
+        .toList()
+        .reversed
+        .toList();
   }
 
   @override
   List<Widget> buildActions(BuildContext context) => [
-        if (query.isNotEmpty)
-          IconButton(icon: const Icon(Icons.clear), onPressed: () => query = ''),
-      ];
+    if (query.isNotEmpty)
+      IconButton(icon: const Icon(Icons.clear), onPressed: () => query = ''),
+  ];
 
   @override
   Widget buildLeading(BuildContext context) => IconButton(
-        icon: const Icon(Icons.arrow_back),
-        onPressed: () => close(context, null),
-      );
+    icon: const Icon(Icons.arrow_back),
+    onPressed: () => close(context, null),
+  );
 
   @override
   Widget buildResults(BuildContext context) => _buildList(context);
@@ -1594,9 +1729,15 @@ class _ChatSearchDelegate extends SearchDelegate<ChatMessage?> {
         final m = results[i];
         return ListTile(
           leading: const Icon(Icons.message_outlined),
-          title: Text(m.senderName,
-              style: const TextStyle(fontWeight: FontWeight.w600)),
-          subtitle: Text(m.content, maxLines: 2, overflow: TextOverflow.ellipsis),
+          title: Text(
+            m.senderName,
+            style: const TextStyle(fontWeight: FontWeight.w600),
+          ),
+          subtitle: Text(
+            m.content,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
           onTap: () {
             close(context, m);
             onJump(m);

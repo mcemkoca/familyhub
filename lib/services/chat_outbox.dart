@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:familyhub/services/hive_service.dart' show HiveService;
-import 'package:familyhub/repositories/chat_repository.dart' show ChatRepository;
+import 'package:familyhub/repositories/chat_repository.dart'
+    show ChatRepository;
 import 'package:familyhub/domain/entities.dart' show MessageType;
 import 'package:familyhub/core/app_logger.dart' show AppLogger;
 
@@ -63,35 +64,35 @@ class OutboxMessage {
   }
 
   Map<String, dynamic> toJson() => {
-        'clientMessageId': clientMessageId,
-        'ownerId': ownerId,
-        'familyId': familyId,
-        'content': content,
-        'type': type,
-        'replyToId': replyToId,
-        'retryCount': retryCount,
-        'createdAtMs': createdAtMs,
-        'nextRetryAtMs': nextRetryAtMs,
-        'state': state.name,
-        'lastError': lastError,
-      };
+    'clientMessageId': clientMessageId,
+    'ownerId': ownerId,
+    'familyId': familyId,
+    'content': content,
+    'type': type,
+    'replyToId': replyToId,
+    'retryCount': retryCount,
+    'createdAtMs': createdAtMs,
+    'nextRetryAtMs': nextRetryAtMs,
+    'state': state.name,
+    'lastError': lastError,
+  };
 
   factory OutboxMessage.fromJson(Map<String, dynamic> j) => OutboxMessage(
-        clientMessageId: j['clientMessageId'] as String,
-        ownerId: j['ownerId'] as String? ?? '',
-        familyId: j['familyId'] as String? ?? '',
-        content: j['content'] as String? ?? '',
-        type: j['type'] as String? ?? 'text',
-        replyToId: j['replyToId'] as String?,
-        retryCount: (j['retryCount'] as num?)?.toInt() ?? 0,
-        createdAtMs: (j['createdAtMs'] as num?)?.toInt() ?? 0,
-        nextRetryAtMs: (j['nextRetryAtMs'] as num?)?.toInt() ?? 0,
-        state: OutboxState.values.firstWhere(
-          (s) => s.name == j['state'],
-          orElse: () => OutboxState.pending,
-        ),
-        lastError: j['lastError'] as String?,
-      );
+    clientMessageId: j['clientMessageId'] as String,
+    ownerId: j['ownerId'] as String? ?? '',
+    familyId: j['familyId'] as String? ?? '',
+    content: j['content'] as String? ?? '',
+    type: j['type'] as String? ?? 'text',
+    replyToId: j['replyToId'] as String?,
+    retryCount: (j['retryCount'] as num?)?.toInt() ?? 0,
+    createdAtMs: (j['createdAtMs'] as num?)?.toInt() ?? 0,
+    nextRetryAtMs: (j['nextRetryAtMs'] as num?)?.toInt() ?? 0,
+    state: OutboxState.values.firstWhere(
+      (s) => s.name == j['state'],
+      orElse: () => OutboxState.pending,
+    ),
+    lastError: j['lastError'] as String?,
+  );
 
   static String encodeList(List<OutboxMessage> list) =>
       jsonEncode(list.map((e) => e.toJson()).toList());
@@ -166,7 +167,8 @@ class ChatOutboxService {
   }
 
   static Future<void> remove(String clientMessageId) async {
-    final list = _all()..removeWhere((e) => e.clientMessageId == clientMessageId);
+    final list = _all()
+      ..removeWhere((e) => e.clientMessageId == clientMessageId);
     await _save(list);
   }
 
@@ -193,15 +195,19 @@ class ChatOutboxService {
         } catch (e) {
           if (isPermanentFailure(e.toString())) {
             // Kalıcı hata → sonsuz retry yapma, failed işaretle.
-            await _update(m.copyWith(
-                state: OutboxState.failed, lastError: e.toString()));
+            await _update(
+              m.copyWith(state: OutboxState.failed, lastError: e.toString()),
+            );
           } else {
             final next = nowMs + backoffSeconds(m.retryCount) * 1000;
-            await _update(m.copyWith(
+            await _update(
+              m.copyWith(
                 retryCount: m.retryCount + 1,
                 nextRetryAtMs: next,
                 state: OutboxState.pending,
-                lastError: e.toString()));
+                lastError: e.toString(),
+              ),
+            );
           }
           AppLogger.logBestEffort(e, module: 'chat', operation: 'outboxFlush');
         }

@@ -18,7 +18,8 @@ import 'app_providers.dart';
 
 /// Aktif ailedeki çocuk hesapları (familyId değişince yeniden yüklenir).
 final familyChildrenProvider = FutureProvider<List<ChildAccount>>((ref) async {
-  final familyId = await ref.watch(familyIdProvider.future) ??
+  final familyId =
+      await ref.watch(familyIdProvider.future) ??
       ChildAccountRepository.localFamilyId;
   return ChildAccountRepository().getChildrenForFamily(familyId);
 });
@@ -26,8 +27,8 @@ final familyChildrenProvider = FutureProvider<List<ChildAccount>>((ref) async {
 /// Seçili çocuk id'si — kullanıcı-izole, kalıcı (Hive). null → "ilk çocuk".
 final activeChildIdProvider =
     StateNotifierProvider<ActiveChildIdNotifier, String?>((ref) {
-  return ActiveChildIdNotifier();
-});
+      return ActiveChildIdNotifier();
+    });
 
 class ActiveChildIdNotifier extends StateNotifier<String?> {
   ActiveChildIdNotifier() : super(_read());
@@ -58,19 +59,33 @@ class ActiveChildIdNotifier extends StateNotifier<String?> {
   }
 }
 
-/// Çözülmüş aktif çocuk. Seçili id yoksa/geçersizse ilk çocuğa düşer,
-/// hiç çocuk yoksa null (ekran "çocuk seç/ekle" akışını gösterebilir).
-final activeChildProvider = Provider<ChildAccount?>((ref) {
-  final children = ref.watch(familyChildrenProvider).asData?.value ??
-      const <ChildAccount>[];
+/// Aktif çocuğu seçen SAF fonksiyon (test edilebilir).
+///
+/// Kurallar (spec FH-08 §8):
+///  - hiç çocuk yoksa null (ekran empty state gösterir),
+///  - geçerli persisted seçim korunur,
+///  - geçersiz/eski seçim (silinmiş veya başka aileye ait) → ilk çocuğa düşer,
+///  - tek çocuk varsa o seçilir.
+ChildAccount? resolveActiveChild(
+  List<ChildAccount> children,
+  String? selectedId,
+) {
   if (children.isEmpty) return null;
-  final selectedId = ref.watch(activeChildIdProvider);
   if (selectedId != null) {
     for (final c in children) {
       if (c.id == selectedId) return c;
     }
   }
-  return children.first; // geçersiz/eski seçim → ilk çocuk
+  return children.first; // geçersiz/eski seçim → güvenli fallback
+}
+
+/// Çözülmüş aktif çocuk. Seçili id yoksa/geçersizse ilk çocuğa düşer,
+/// hiç çocuk yoksa null (ekran "çocuk seç/ekle" akışını gösterebilir).
+final activeChildProvider = Provider<ChildAccount?>((ref) {
+  final children =
+      ref.watch(familyChildrenProvider).asData?.value ?? const <ChildAccount>[];
+  final selectedId = ref.watch(activeChildIdProvider);
+  return resolveActiveChild(children, selectedId);
 });
 
 /// Ailede en az bir çocuk var mı? (onboarding/"çocuk ekle" akışları için.)

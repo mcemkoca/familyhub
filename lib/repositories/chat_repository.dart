@@ -23,7 +23,9 @@ class ChatRepository with RepositoryErrorHandler {
           .select('*')
           .eq('family_id', familyId)
           .order('created_at', ascending: true);
-      return (response as List).map((e) => _fromJson(e as Map<String, dynamic>)).toList();
+      return (response as List)
+          .map((e) => _fromJson(e as Map<String, dynamic>))
+          .toList();
     }, 'getMessages');
   }
 
@@ -131,7 +133,8 @@ class ChatRepository with RepositoryErrorHandler {
   /// Poll mesajları için seçenekleri + oyları TOPLU yükler (N+1 yok).
   /// Dönen: {messageId: (pollId, PollData)}. poll_id → oy grupları eşleştirilir.
   Future<Map<String, ({String pollId, PollData data})>> loadPolls(
-      List<String> messageIds) async {
+    List<String> messageIds,
+  ) async {
     if (messageIds.isEmpty) return const {};
     return handleRepositoryCall(() async {
       final polls = await _client
@@ -143,8 +146,9 @@ class ChatRepository with RepositoryErrorHandler {
         return <String, ({String pollId, PollData data})>{};
       }
 
-      final pollIds =
-          pollRows.map((p) => p['id'].toString()).toList(growable: false);
+      final pollIds = pollRows
+          .map((p) => p['id'].toString())
+          .toList(growable: false);
       final votes = await _client
           .from('chat_poll_votes')
           .select('poll_id, user_id, option_index')
@@ -158,8 +162,10 @@ class ChatRepository with RepositoryErrorHandler {
         final options = ((p['options'] as List?) ?? const [])
             .map((e) => e.toString())
             .toList();
-        final perOption =
-            List<List<String>>.generate(options.length, (_) => <String>[]);
+        final perOption = List<List<String>>.generate(
+          options.length,
+          (_) => <String>[],
+        );
         for (final v in voteRows) {
           if (v['poll_id'].toString() != pollId) continue;
           final idx = (v['option_index'] as num?)?.toInt() ?? -1;
@@ -228,7 +234,8 @@ class ChatRepository with RepositoryErrorHandler {
       }
       await _client
           .from(_table)
-          .update({'is_pinned': pinned}).eq('id', messageId);
+          .update({'is_pinned': pinned})
+          .eq('id', messageId);
     }, 'setPinned');
   }
 
@@ -302,11 +309,14 @@ class ChatRepository with RepositoryErrorHandler {
 
   Future<void> updateMessage(String id, String content) async {
     return handleRepositoryCall(() async {
-      await _client.from(_table).update({
-        'content': content,
-        'is_edited': true,
-        'edited_at': DateTime.now().toUtc().toIso8601String(),
-      }).eq('id', id);
+      await _client
+          .from(_table)
+          .update({
+            'content': content,
+            'is_edited': true,
+            'edited_at': DateTime.now().toUtc().toIso8601String(),
+          })
+          .eq('id', id);
     }, 'updateMessage');
   }
 
@@ -335,7 +345,9 @@ class ChatRepository with RepositoryErrorHandler {
           .map((data) => data.map((e) => _fromJson(e)).toList());
     } catch (e) {
       debugPrint('ChatRepository.watchMessages error: $e');
-      return Stream.error(RepositoryException('Beklenmeyen hata [watchMessages]: $e'));
+      return Stream.error(
+        RepositoryException('Beklenmeyen hata [watchMessages]: $e'),
+      );
     }
   }
 
