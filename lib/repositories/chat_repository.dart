@@ -71,7 +71,7 @@ class ChatRepository with RepositoryErrorHandler {
           .from(_table)
           .insert({
             'family_id': familyId,
-            'user_id': userId,
+            'sender_id': userId, // canlı kolon: sender_id (user_id değil)
             'sender_name': name,
             'content': content,
             'type': typeStr,
@@ -83,7 +83,7 @@ class ChatRepository with RepositoryErrorHandler {
             'file_size': fileSize,
             'latitude': latitude,
             'longitude': longitude,
-            'reply_to_id': replyToId,
+            'reply_to': replyToId, // canlı kolon: reply_to (reply_to_id değil)
             'reply_to_content': replyToContent,
             'reply_to_sender': replyToSender,
             'client_message_id': clientMessageId,
@@ -235,7 +235,11 @@ class ChatRepository with RepositoryErrorHandler {
 
   Future<void> updateMessage(String id, String content) async {
     return handleRepositoryCall(() async {
-      await _client.from(_table).update({'content': content}).eq('id', id);
+      await _client.from(_table).update({
+        'content': content,
+        'is_edited': true,
+        'edited_at': DateTime.now().toUtc().toIso8601String(),
+      }).eq('id', id);
     }, 'updateMessage');
   }
 
@@ -269,7 +273,7 @@ class ChatRepository with RepositoryErrorHandler {
 
     return ChatMessage(
       id: json['id']?.toString() ?? '',
-      senderId: json['user_id']?.toString() ?? '',
+      senderId: json['sender_id']?.toString() ?? '',
       senderName: json['sender_name']?.toString() ?? 'Kullanıcı',
       senderColor: _parseColor(json['sender_color']),
       content: (json['content'] as String?) ?? '',
@@ -281,7 +285,7 @@ class ChatRepository with RepositoryErrorHandler {
       imageUrl: json['image_url']?.toString(),
       audioUrl: json['audio_url']?.toString(),
       audioDuration: json['audio_duration'] as int?,
-      replyToId: json['reply_to_id']?.toString(),
+      replyToId: json['reply_to']?.toString(),
       replyToContent: json['reply_to_content']?.toString(),
       replyToSender: json['reply_to_sender']?.toString(),
       isPinned: (json['is_pinned'] as bool?) ?? false,

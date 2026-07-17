@@ -18,11 +18,13 @@
 -- ── 1. messages: eksik kolonları ekle ──────────────────────────────────────
 -- Canlı şema migration 001'den farklı (text/type kolonları yoktu). Temel
 -- kolonları da güvenceye al — hepsi IF NOT EXISTS.
-alter table public.messages add column if not exists family_id uuid;
-alter table public.messages add column if not exists user_id uuid;
+--
+-- CANONICAL SÖZLEŞME = CANLI ŞEMA. Canlı messages tablosu şunlara SAHİP:
+--   id, family_id, sender_id, content, reply_to, is_edited, edited_at, created_at
+-- Bu yüzden `sender_id`/`reply_to`/`content`'i AYNEN kullanırız (duplikasyon yok).
+-- Repository de bunlara yazacak (user_id/reply_to_id DEĞİL).
+-- Yalnızca GERÇEKTEN eksik olan tip/medya/durum kolonlarını ekleriz:
 alter table public.messages add column if not exists type text default 'text';
-alter table public.messages add column if not exists content text;
-alter table public.messages add column if not exists created_at timestamptz default now();
 alter table public.messages add column if not exists sender_name text;
 alter table public.messages add column if not exists sender_color text;
 alter table public.messages add column if not exists image_url text;
@@ -36,28 +38,14 @@ alter table public.messages add column if not exists longitude double precision;
 alter table public.messages add column if not exists is_read boolean default false;
 alter table public.messages add column if not exists is_pinned boolean default false;
 alter table public.messages add column if not exists read_count int default 0;
-alter table public.messages add column if not exists reply_to_id uuid;
+-- reply_to (uuid) canlıda ZATEN var; yanıt önizlemesi için ek metin alanları:
 alter table public.messages add column if not exists reply_to_content text;
 alter table public.messages add column if not exists reply_to_sender text;
 -- Offline idempotency: aynı client mesajı iki kez insert edilirse tek satır kalır.
 alter table public.messages add column if not exists client_message_id text;
-alter table public.messages add column if not exists edited_at timestamptz;
 alter table public.messages add column if not exists deleted_at timestamptz;
-
--- Eski satırlarda content boşsa legacy `text` kolonundan doldur (veri kaybı yok).
--- KOŞULLU: canlı şemada `text` kolonu olmayabilir (migration 001'den farklı).
--- Kolon yoksa backfill atlanır — hata vermez.
-do $$
-begin
-  if exists (
-    select 1 from information_schema.columns
-    where table_schema = 'public' and table_name = 'messages'
-      and column_name = 'text'
-  ) then
-    execute 'update public.messages set content = text
-             where content is null and text is not null';
-  end if;
-end $$;
+-- Not: content, family_id, sender_id, reply_to, is_edited, edited_at, created_at
+-- canlıda mevcut → EKLENMEZ. Backfill gerekmez (content NOT NULL zaten dolu).
 
 -- ── 2. type CHECK kısıtını genişlet ─────────────────────────────────────────
 -- Eski kısıt gif/video/file/poll/event/system değerlerini reddediyordu.
@@ -92,7 +80,7 @@ drop policy if exists "Messages insert" on public.messages;
 create policy "messages_insert_v3"
   on public.messages for insert to authenticated
   with check (
-    user_id = auth.uid()
+    sender_id = auth.uid()          -- canlı kolon: sender_id (user_id değil)
     and family_id in (
       select family_id from public.profiles
       where id = auth.uid() and family_id is not null
@@ -103,7 +91,18 @@ create policy "messages_insert_v3"
 create index if not exists idx_messages_family_created
   on public.messages(family_id, created_at desc);
 create index if not exists idx_messages_reply_to
-  on public.messages(reply_to_id);
+  on public.messages(reply_to);
+
+-- UPDATE/DELETE: yalnızca kendi mesajı (canlı kolon sender_id). Idempotent.
+drop policy if exists "messages_update" on public.messages;
+drop policy if exists "messages_update_v3" on public.messages;
+create policy "messages_update_v3" on public.messages for update to authenticated
+  using (sender_id = auth.uid());
+
+drop policy if exists "messages_delete" on public.messages;
+drop policy if exists "messages_delete_v3" on public.messages;
+create policy "messages_delete_v3" on public.messages for delete to authenticated
+  using (sender_id = auth.uid());
 create unique index if not exists uq_messages_client_id
   on public.messages(family_id, client_message_id)
   where client_message_id is not null;
