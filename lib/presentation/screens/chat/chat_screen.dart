@@ -1011,8 +1011,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     final messageDay = DateTime(dt.year, dt.month, dt.day);
 
     if (messageDay == today) return AppLocalizations.of(context).chatToday;
-    if (messageDay == yesterday)
+    if (messageDay == yesterday) {
       return AppLocalizations.of(context).chatYesterday;
+    }
     return DateFormat(
       'd MMMM',
       Localizations.localeOf(context).toString(),
