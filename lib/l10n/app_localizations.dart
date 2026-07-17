@@ -5924,6 +5924,36 @@ abstract class AppLocalizations {
   /// **'Medya seçilemedi. Galeri/kamera izinlerini kontrol edin.'**
   String get mediaPickFailed;
 
+  /// No description provided for @aiActionConfirmTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu işlemi onaylıyor musun?'**
+  String get aiActionConfirmTitle;
+
+  /// No description provided for @aiActionConfirm.
+  ///
+  /// In tr, this message translates to:
+  /// **'Onayla'**
+  String get aiActionConfirm;
+
+  /// No description provided for @aiActionDone.
+  ///
+  /// In tr, this message translates to:
+  /// **'İşlem tamamlandı.'**
+  String get aiActionDone;
+
+  /// No description provided for @aiActionFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'İşlem YAPILAMADI. Bağlantı veya yetki hatası.'**
+  String get aiActionFailed;
+
+  /// No description provided for @aiActionInvalid.
+  ///
+  /// In tr, this message translates to:
+  /// **'İstek anlaşılamadı, işlem yapılmadı.'**
+  String get aiActionInvalid;
+
   /// No description provided for @vaccTitle.
   ///
   /// In tr, this message translates to:

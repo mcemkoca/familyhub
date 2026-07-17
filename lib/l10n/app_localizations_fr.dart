@@ -3066,6 +3066,22 @@ class AppLocalizationsFr extends AppLocalizations {
       'Impossible de sélectionner le média. Vérifiez les autorisations galerie/caméra.';
 
   @override
+  String get aiActionConfirmTitle => 'Confirmer cette action ?';
+
+  @override
+  String get aiActionConfirm => 'Confirmer';
+
+  @override
+  String get aiActionDone => 'Action terminée.';
+
+  @override
+  String get aiActionFailed =>
+      'Action ECHOUEE. Erreur de connexion ou de droits.';
+
+  @override
+  String get aiActionInvalid => 'Demande peu claire — rien n\'a ete fait.';
+
+  @override
   String get vaccTitle => 'Calendrier vaccinal';
 
   @override

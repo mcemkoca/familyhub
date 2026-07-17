@@ -1,31 +1,48 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import '../../config/routes.dart';
+import '../../core/app_logger.dart';
 import '../../services/ai/ai_engine.dart';
+import '../../features/familyhub_ai/domain/ai_action.dart';
+import '../../features/familyhub_ai/domain/ai_action_parser.dart';
+import '../../features/familyhub_ai/application/ai_action_executor.dart';
 
 /// Hub'da gömülü kompakt AI sohbet paneli.
-/// Kullanıcı hızlıca soru sorar; Gemini (AIEngine) yanıtlar. Tam sohbet için
-/// AI Asistan ekranına yönlendirir.
-class HubAiPanel extends StatefulWidget {
+/// Kullanıcı soru sorar veya İŞLEM ister; model structured action döndürürse
+/// (FH-04) doğrulanır, riskliyse onay istenir, executor GERÇEK repository
+/// çağrısı yapar ve sonuç backend'e göre bildirilir — sahte başarı YOK.
+class HubAiPanel extends ConsumerStatefulWidget {
   const HubAiPanel({super.key});
 
   @override
-  State<HubAiPanel> createState() => _HubAiPanelState();
+  ConsumerState<HubAiPanel> createState() => _HubAiPanelState();
 }
 
-class _HubAiPanelState extends State<HubAiPanel> {
+class _HubAiPanelState extends ConsumerState<HubAiPanel> {
   final _input = TextEditingController();
   String? _answer;
   bool _loading = false;
+  // Idempotency: aynı mesaj işlenirken ikinci kez çalıştırılmaz (§8 duplicate).
+  String? _inFlightKey;
 
   static const _systemPrompt =
       'Sen FamilyHub aile uygulamasının yardımcı yapay zekâsısın. Türkçe, kısa '
       've pratik yanıt ver (en fazla 4-5 cümle). Aile, çocuk gelişimi, mutfak/'
       'tarif, bütçe/gider, planlama ve organizasyon konularında yardımcı ol. '
-      'Uygun olduğunda kullanıcıya uygulamadaki ilgili bölümü öner. Teşhis '
-      'koyma; sağlık konusunda gerekiyorsa uzmana danışmayı öner.';
+      'Teşhis koyma; sağlık konusunda gerekiyorsa uzmana danışmayı öner.\n\n'
+      'KULLANICI BİR İŞLEM İSTERSE (liste/görev/hatırlatma/etkinlik), SADECE '
+      'şu JSON formatında yanıt ver:\n'
+      '{"reply":"kısa açıklama","action":{"type":"<tür>","payload":{...}}}\n'
+      'İzinli türler ve payload:\n'
+      '- addShoppingItems: {"items":["süt","ekmek"]}\n'
+      '- createReminder: {"title":"...","days":1}\n'
+      '- createTask: {"title":"...","description":"..."}\n'
+      '- createCalendarEvent: {"title":"...","date":"2026-07-24T15:30:00"}\n'
+      'ASLA family_id/user_id/child_id gönderme. İşlem istenmiyorsa düz metin '
+      'yanıt ver (JSON kullanma).';
 
   static const _chips = [
     'Bugün ne pişirsem?',
@@ -43,6 +60,9 @@ class _HubAiPanelState extends State<HubAiPanel> {
   Future<void> _ask([String? preset]) async {
     final q = (preset ?? _input.text).trim();
     if (q.isEmpty || _loading) return;
+    // §8 idempotency: aynı mesaj işlenirken tekrar çalıştırma (double-submit).
+    if (_inFlightKey == q) return;
+    _inFlightKey = q;
     FocusScope.of(context).unfocus();
     setState(() {
       _loading = true;
@@ -57,17 +77,96 @@ class _HubAiPanelState extends State<HubAiPanel> {
         temperature: 0.6,
       );
       if (!mounted) return;
+
+      // FH-04: structured action varsa doğrula → onayla → GERÇEKTEN çalıştır.
+      final parsed = parseAiResponse(res.content);
+      final action = parsed.action;
+      if (action == null) {
+        setState(() {
+          _answer = _prettify(parsed.reply);
+          _loading = false;
+        });
+        return;
+      }
+
+      // Riskli aksiyonlarda runtime onayı (silme/görev/hatırlatma/etkinlik).
+      if (action.requiresConfirmation) {
+        final ok = await _confirmAction(action, parsed.reply);
+        if (!mounted) return;
+        if (ok != true) {
+          setState(() {
+            _answer = parsed.reply;
+            _loading = false;
+          });
+          return;
+        }
+      }
+
+      final result =
+          await const AIActionExecutor().execute(action, ref, context);
+      if (!mounted) return;
+      final t = AppLocalizations.of(context);
+      // Sonuç GERÇEK backend dönüşüne göre — sahte "tamamlandı" YOK (§4.4).
+      final msg = switch (result) {
+        AIExecResult.done => '${parsed.reply}\n\n✅ ${t.aiActionDone}',
+        AIExecResult.failed => '⚠️ ${t.aiActionFailed}',
+        AIExecResult.invalid => '⚠️ ${t.aiActionInvalid}',
+        AIExecResult.unsupported => parsed.reply,
+      };
       setState(() {
-        _answer = _prettify(res.content);
+        _answer = msg;
         _loading = false;
       });
-    } catch (_) {
+    } catch (e, st) {
+      AppLogger.logError(e,
+          module: 'ai', operation: 'hubPanelAsk', stackTrace: st);
       if (!mounted) return;
       setState(() {
         _answer = 'Şu an yanıt veremedim. Lütfen tekrar deneyin.';
         _loading = false;
       });
+    } finally {
+      _inFlightKey = null;
     }
+  }
+
+  /// Aksiyon önizlemesi + onay (kritik işlem onaysız yapılmaz).
+  Future<bool?> _confirmAction(AIAction action, String reply) {
+    final t = AppLocalizations.of(context);
+    final items = action.payload['items'];
+    final title = action.payload['title']?.toString();
+    return showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: const Color(0xFF13131A),
+        title: Text(t.aiActionConfirmTitle,
+            style: const TextStyle(color: Colors.white, fontSize: 16)),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(reply,
+                style: const TextStyle(color: Color(0xFFD1D5DB), fontSize: 13)),
+            const SizedBox(height: 10),
+            if (title != null)
+              Text('• $title',
+                  style: const TextStyle(color: Colors.white, fontSize: 13)),
+            if (items is List)
+              ...items.map((e) => Text('• $e',
+                  style: const TextStyle(color: Colors.white, fontSize: 13))),
+          ],
+        ),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: Text(t.cancel)),
+          TextButton(
+              onPressed: () => Navigator.pop(ctx, true),
+              child: Text(t.aiActionConfirm,
+                  style: const TextStyle(fontWeight: FontWeight.w700))),
+        ],
+      ),
+    );
   }
 
   // Yanıt JSON (öneri fallback'i) ise okunaklı metne çevirir.

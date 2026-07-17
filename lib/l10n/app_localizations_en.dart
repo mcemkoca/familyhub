@@ -3054,6 +3054,21 @@ class AppLocalizationsEn extends AppLocalizations {
       'Could not pick media. Check gallery/camera permissions.';
 
   @override
+  String get aiActionConfirmTitle => 'Confirm this action?';
+
+  @override
+  String get aiActionConfirm => 'Confirm';
+
+  @override
+  String get aiActionDone => 'Action completed.';
+
+  @override
+  String get aiActionFailed => 'Action FAILED. Connection or permission error.';
+
+  @override
+  String get aiActionInvalid => 'Request unclear — nothing was done.';
+
+  @override
   String get vaccTitle => 'Vaccination Schedule';
 
   @override

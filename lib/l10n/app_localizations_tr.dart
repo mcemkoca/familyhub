@@ -3071,6 +3071,21 @@ class AppLocalizationsTr extends AppLocalizations {
       'Medya seçilemedi. Galeri/kamera izinlerini kontrol edin.';
 
   @override
+  String get aiActionConfirmTitle => 'Bu işlemi onaylıyor musun?';
+
+  @override
+  String get aiActionConfirm => 'Onayla';
+
+  @override
+  String get aiActionDone => 'İşlem tamamlandı.';
+
+  @override
+  String get aiActionFailed => 'İşlem YAPILAMADI. Bağlantı veya yetki hatası.';
+
+  @override
+  String get aiActionInvalid => 'İstek anlaşılamadı, işlem yapılmadı.';
+
+  @override
   String get vaccTitle => 'Aşı Takvimi';
 
   @override

@@ -3054,6 +3054,21 @@ class AppLocalizationsNl extends AppLocalizations {
       'Media kon niet worden gekozen. Controleer galerij-/camerarechten.';
 
   @override
+  String get aiActionConfirmTitle => 'Deze actie bevestigen?';
+
+  @override
+  String get aiActionConfirm => 'Bevestigen';
+
+  @override
+  String get aiActionDone => 'Actie voltooid.';
+
+  @override
+  String get aiActionFailed => 'Actie MISLUKT. Verbindings- of rechtenfout.';
+
+  @override
+  String get aiActionInvalid => 'Verzoek onduidelijk — er is niets gedaan.';
+
+  @override
   String get vaccTitle => 'Vaccinatieschema';
 
   @override
