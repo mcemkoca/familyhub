@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
+import '../core/app_logger.dart';
 import '../core/supabase_client.dart';
 import '../domain/models/safety_models.dart';
 import 'auth_service.dart';
@@ -44,7 +45,16 @@ class SafeZoneService {
           address: r['address'] as String?,
         );
       }).toList();
-    } catch (_) {}
+    } catch (e, st) {
+      // Sessizce yutulamaz: bölgeler yüklenmezse geofence uyarıları HİÇ
+      // çalışmaz ve kullanıcı korunduğunu sanır (spec §11).
+      AppLogger.logError(
+        e,
+        module: 'safety',
+        operation: 'loadSafeZones',
+        stackTrace: st,
+      );
+    }
   }
 
   static Future<void> _saveLocal() async {

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/services.dart';
+import '../../core/app_logger.dart';
 import '../localization/locale_service.dart';
 
 /// Tokensiz yerel AI servisi.
@@ -27,12 +28,28 @@ class LocalAIService {
       final recipeRaw =
           await rootBundle.loadString('assets/data/content/recipes.json');
       _recipes = (jsonDecode(recipeRaw) as List).cast<Map<String, dynamic>>();
-    } catch (_) {}
+    } catch (e, st) {
+      // Asset eksik/bozuksa yerel AI sessizce boş döner — bu bir paketleme
+      // hatasıdır, kullanıcı hatası değil. Görünür olmalı.
+      AppLogger.logError(
+        e,
+        module: 'ai',
+        operation: 'loadRecipesAsset',
+        stackTrace: st,
+      );
+    }
     try {
       final eduRaw =
           await rootBundle.loadString('assets/data/content/education.json');
       _activities = (jsonDecode(eduRaw) as List).cast<Map<String, dynamic>>();
-    } catch (_) {}
+    } catch (e, st) {
+      AppLogger.logError(
+        e,
+        module: 'ai',
+        operation: 'loadEducationAsset',
+        stackTrace: st,
+      );
+    }
     _loaded = true;
   }
 

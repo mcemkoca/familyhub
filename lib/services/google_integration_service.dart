@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart' show debugPrint, kDebugMode;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:googleapis/calendar/v3.dart' as gcal;
 import 'package:extension_google_sign_in_as_googleapis_auth/extension_google_sign_in_as_googleapis_auth.dart';
+import '../core/app_logger.dart';
 
 /// Google ürünleriyle (Takvim, Fotoğraflar) doğrudan bağlantı.
 ///
@@ -59,7 +60,10 @@ class GoogleIntegrationService {
     if (!isConfigured) return;
     try {
       await _google().signOut();
-    } catch (_) {}
+    } catch (e) {
+      // Best-effort: Google oturumu kapanmasa da yerel oturum temizlenir.
+      AppLogger.logBestEffort(e, module: 'auth', operation: 'googleSignOut');
+    }
   }
 
   static Future<bool> isSignedIn() async {

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import '../../core/app_logger.dart';
 
 /// TheMealDB (ücretsiz, API anahtarsız) üzerinden yemek adına göre
 /// GERÇEK ve DOĞRU fotoğraf çeker. Bulunamazsa null döner (yanlış görsel yok).
@@ -175,7 +176,11 @@ class MealImageService {
           return (meals.first as Map?)?['strMealThumb'] as String?;
         }
       }
-    } catch (_) {}
+    } catch (e) {
+      // Best-effort: harici API (ağ/timeout). null dönünce çağıran Wikipedia'ya,
+      // sonra yerel fallback görsele düşer — kullanıcı etkilenmez.
+      AppLogger.logBestEffort(e, module: 'content', operation: 'fetchMealDbImage');
+    }
     return null;
   }
 
@@ -198,7 +203,10 @@ class MealImageService {
           return thumb?['source'] as String?;
         }
       }
-    } catch (_) {}
+    } catch (e) {
+      // Best-effort: yerel fallback görsel garantili (bkz. son çare).
+      AppLogger.logBestEffort(e, module: 'content', operation: 'fetchWikipediaImage');
+    }
     return null;
   }
 
