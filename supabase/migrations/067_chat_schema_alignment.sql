@@ -39,8 +39,19 @@ alter table public.messages add column if not exists edited_at timestamptz;
 alter table public.messages add column if not exists deleted_at timestamptz;
 
 -- Eski satırlarda content boşsa legacy `text` kolonundan doldur (veri kaybı yok).
-update public.messages set content = text
-  where content is null and text is not null;
+-- KOŞULLU: canlı şemada `text` kolonu olmayabilir (migration 001'den farklı).
+-- Kolon yoksa backfill atlanır — hata vermez.
+do $$
+begin
+  if exists (
+    select 1 from information_schema.columns
+    where table_schema = 'public' and table_name = 'messages'
+      and column_name = 'text'
+  ) then
+    execute 'update public.messages set content = text
+             where content is null and text is not null';
+  end if;
+end $$;
 
 -- ── 2. type CHECK kısıtını genişlet ─────────────────────────────────────────
 -- Eski kısıt gif/video/file/poll/event/system değerlerini reddediyordu.
