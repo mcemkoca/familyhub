@@ -39,10 +39,11 @@ class AIResponse {
 
 /// Production-ready multi-provider LLM engine with automatic fallback.
 ///
-/// API keys are injected via `--dart-define` at build time:
+/// OpenAI/Anthropic anahtarları `--dart-define` ile verilir. GEMINI ise artık
+/// istemcide TUTULMAZ: istekler `family-ai` Supabase Edge Function üzerinden
+/// geçer ve GEMINI_API_KEY yalnızca sunucuda (Supabase secret) bulunur.
 ///   --dart-define=OPENAI_API_KEY=sk-...
 ///   --dart-define=ANTHROPIC_API_KEY=sk-ant-...
-///   --dart-define=GEMINI_API_KEY=AIza...
 class AIEngine {
   AIEngine._();
 
