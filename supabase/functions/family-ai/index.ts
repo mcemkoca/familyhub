@@ -84,11 +84,16 @@ serve(async (req) => {
   let lastBody = ''
   for (const model of MODELS) {
     try {
+      // Key `X-goog-api-key` HEADER'ında gönderilir — hem yeni format (AQ.…)
+      // hem eski format (AIza…) anahtarları bu header ile çalışır.
       const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${geminiKey}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
         {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'X-goog-api-key': geminiKey,
+          },
           body: JSON.stringify(request),
           signal: AbortSignal.timeout(30000),
         },
