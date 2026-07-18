@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart' show debugPrint, kDebugMode;
 import 'package:http/http.dart' as http;
 import '../../core/analytics/analytics_service.dart';
-import '../../core/app_logger.dart';
+import '../../core/supabase_client.dart';
 
 /// Supported LLM providers with fallback chain:
 /// OpenAI → Anthropic → Google Gemini → Local (rule-based)
@@ -50,30 +50,10 @@ class AIEngine {
   static const String _anthropicKey = String.fromEnvironment(
     'ANTHROPIC_API_KEY',
   );
-  // Gemini anahtarı: PROD'da --dart-define=GEMINI_API_KEY=... ile verilmeli.
-  // ÖNERİLEN üretim mimarisi: istekleri anahtarı sunucuda tutan bir proxy'den
-  // (ör. Supabase Edge Function) geçirmek; böylece anahtar APK'ya hiç girmez.
-  static const String _geminiKeyEnv = String.fromEnvironment('GEMINI_API_KEY');
-  // Yalnızca GELİŞTİRME (debug) kolaylığı için gömülü anahtar.
-  // Release derlemelerde KULLANILMAZ (aşağıdaki kDebugMode koşulu) — böylece
-  // yayınlanan APK'da canlı olarak kullanılmaz; dart-define ya da proxy şarttır.
-  static const String _geminiKeyDevFallback =
-      'AQ.Ab8RN6LPYfXYg6UktuoFIiaAkrN_lBZ_VoPC15gnU0wS0Z5iwQ';
-  static String get _geminiKey {
-    if (_geminiKeyEnv.isNotEmpty) return _geminiKeyEnv;
-    return kDebugMode ? _geminiKeyDevFallback : '';
-  }
-
-  static const Duration _timeout = Duration(seconds: 10);
-
-  /// Sırayla denenecek Gemini modelleri. Her modelin ücretsiz katmanda AYRI
-  /// kotası olduğundan, biri 429 (kota) verirse sıradakine geçilir.
-  static const List<String> _geminiModels = [
-    'gemini-2.5-flash',
-    'gemini-2.5-flash-lite',
-    'gemini-flash-latest',
-    'gemini-2.0-flash',
-  ];
+  // Gemini artık İSTEMCİDEN DOĞRUDAN çağrılmaz. İstekler `family-ai` Supabase
+  // Edge Function'ı üzerinden geçer; GEMINI_API_KEY yalnızca sunucuda (Supabase
+  // secret) tutulur ve APK'ye hiç girmez. Gömülü/dart-define key KALDIRILDI.
+  static const Duration _timeout = Duration(seconds: 30);
 
   /// Primary entry-point: tries providers in fallback chain.
   static Future<AIResponse> generate({
@@ -142,8 +122,9 @@ class AIEngine {
       }
     }
 
-    // Fallback to Gemini
-    if (_geminiKey.isNotEmpty) {
+    // Fallback to Gemini (family-ai Edge Function üzerinden — key sunucuda).
+    // Oturum yoksa geçit çağrılamaz → doğrudan local fallback'e düşülür.
+    if (SupabaseConfig.safeClient?.auth.currentSession != null) {
       try {
         final response = await _callGemini(
           prompt: prompt,
@@ -327,47 +308,34 @@ class AIEngine {
       },
     };
 
-    // Her modelin AYRI ücretsiz kotası var. Biri 429 (kota dolu) verirse
-    // sıradaki modele geç — böylece günlük limit bir modelde bitse bile
-    // asistan çalışmaya devam eder.
-    http.Response? response;
-    for (final model in _geminiModels) {
-      final uri = Uri.parse(
-        'https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent?key=$_geminiKey',
-      );
-      var quotaHit = false;
-      for (var attempt = 0; attempt < 2; attempt++) {
-        response = await http
-            .post(uri,
-                headers: {'Content-Type': 'application/json'},
-                body: jsonEncode(body))
-            .timeout(_timeout);
-        if (response.statusCode == 429) {
-          quotaHit = true;
-          // Kısa bir kez bekleyip aynı modeli tekrar dene; yine 429 ise
-          // sıradaki modele geç.
-          if (attempt == 0) {
-            final delay = _parseRetryDelay(response.body);
-            if (delay.inSeconds <= 8) {
-              await Future.delayed(delay);
-              continue;
-            }
-          }
-          break;
-        }
-        quotaHit = false;
-        break;
+    // Gemini'yi DOĞRUDAN çağırmak yerine `family-ai` Edge Function'ına yolla.
+    // Fonksiyon JWT + aile üyeliği doğrular, key'i sunucuda ekler, model
+    // yönlendirmesini (429 → sıradaki model) sunucuda yapar ve HAM Gemini
+    // yanıtını ({candidates:...}) döndürür — parse mantığı değişmez.
+    final client = SupabaseConfig.safeClient;
+    if (client == null) {
+      throw _ProviderException('Gemini', 0, 'Sunucu bağlantısı yok');
+    }
+
+    final Map<String, dynamic> data;
+    try {
+      final res = await client.functions
+          .invoke('family-ai', body: {'request': body})
+          .timeout(_timeout);
+      if (res.status != 200) {
+        throw _ProviderException(
+            'Gemini', res.status, res.data?.toString() ?? 'gateway error');
       }
-      if (response != null && response.statusCode == 200) break;
-      if (!quotaHit) break; // 429 dışı hata → model değiştirmek fayda etmez
+      final decoded = res.data;
+      data = decoded is Map<String, dynamic>
+          ? decoded
+          : jsonDecode(decoded.toString()) as Map<String, dynamic>;
+    } on _ProviderException {
+      rethrow;
+    } catch (e) {
+      throw _ProviderException('Gemini', 0, e.toString());
     }
 
-    if (response == null || response.statusCode != 200) {
-      throw _ProviderException(
-          'Gemini', response?.statusCode ?? 0, response?.body ?? 'no response');
-    }
-
-    final data = jsonDecode(response.body) as Map<String, dynamic>;
     final candidates = data['candidates'] as List<dynamic>?;
     if (candidates == null || candidates.isEmpty) {
       throw _ProviderException('Gemini', 200, 'Empty candidates');
@@ -382,21 +350,8 @@ class AIEngine {
     return text;
   }
 
-  // 429 yanıt gövdesinden önerilen bekleme süresini çıkarır (varsayılan 6 sn,
-  // en çok 12 sn).
-  static Duration _parseRetryDelay(String body) {
-    try {
-      final m = RegExp(r'retry in ([0-9]+(?:\.[0-9]+)?)s').firstMatch(body);
-      if (m != null) {
-        final secs = double.parse(m.group(1)!).ceil() + 1;
-        return Duration(seconds: secs.clamp(2, 12));
-      }
-    } catch (e) {
-      // Best-effort: gövde ayrıştırılamazsa aşağıdaki 6sn varsayılanı kullanılır.
-      AppLogger.logBestEffort(e, module: 'ai', operation: 'parseRetryDelay');
-    }
-    return const Duration(seconds: 6);
-  }
+  // Not: 429 kota yönetimi ve model yönlendirmesi artık `family-ai` Edge
+  // Function'ında (sunucu tarafı) yapılıyor.
 
   // ── Local rule-based fallback ─────────────────────────────────────────
 
