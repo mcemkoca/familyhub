@@ -1,6 +1,10 @@
 import 'dart:convert';
+import '../../core/app_logger.dart';
 import '../../domain/entities.dart';
+import '../../features/context_memory/domain/memory_prompt_composer.dart';
+import '../../features/context_memory/infrastructure/memory_repository.dart';
 import '../../repositories/shopping_repository.dart';
+import '../auth_service.dart';
 import 'ai_engine.dart';
 
 /// Intent types the AI assistant can detect and execute.
@@ -79,6 +83,24 @@ class AIAssistantService {
       'shopping_items alanı alışveriş listesine eklenecek malzemeleri listele. '
       'Yanıt HER ZAMAN geçerli JSON olsun.';
 
+  /// Sistem talimatına kullanıcının izinli bağlamını ekler (Context Memory).
+  ///
+  /// Hata durumunda temel talimat KORUNUR — memory sorunu AI'ı bozmaz.
+  String _withMemoryContext(String basePrompt, String userText) {
+    try {
+      final userId = AuthService.currentUserId;
+      if (userId == null) return basePrompt;
+      final packet = MemoryContextService().buildPacket(
+        userId: userId,
+        query: userText,
+      );
+      return composeSystemPrompt(basePrompt: basePrompt, packet: packet);
+    } catch (e) {
+      AppLogger.logBestEffort(e, module: 'ai', operation: 'memoryContext');
+      return basePrompt;
+    }
+  }
+
   /// Processes a natural-language command and executes cross-module actions.
   Future<AICommandResult> processCommand(String userText) async {
     final intent = _detectIntent(userText);
@@ -86,11 +108,15 @@ class AIAssistantService {
     // Build a context-aware prompt
     final prompt = _buildPrompt(userText, intent);
 
+    // Context Memory: kullanıcının izin verdiği bağlamı ekle. Kayıt yoksa
+    // veya oturum yoksa sistem talimatı AYNEN kalır (davranış değişmez).
+    final systemPrompt = _withMemoryContext(_systemPrompt, userText);
+
     AIResponse aiResponse;
     try {
       aiResponse = await AIEngine.generate(
         prompt: prompt,
-        systemPrompt: _systemPrompt,
+        systemPrompt: systemPrompt,
         format: AIResponseFormat.json,
         maxTokens: 1500,
         temperature: 0.4,
