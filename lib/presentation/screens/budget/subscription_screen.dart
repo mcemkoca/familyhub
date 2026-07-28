@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import '../../../services/hive_service.dart';
+import '../../../services/auth_service.dart';
 
 String get _cur => HiveService.getSetting('currencySymbol') ?? '€';
 
@@ -93,7 +94,13 @@ class SubscriptionNotifier extends StateNotifier<List<Subscription>> {
   }
 
   static const _boxName = 'subscriptions';
-  static const _key = 'list';
+
+  /// Kullanıcı-izole anahtar: aynı cihazda hesap değişince ÖNCEKİ kullanıcının
+  /// abonelikleri görünmemeli. Sabit 'list' anahtarı bu sızıntıya yol açıyordu.
+  static String get _key {
+    final uid = AuthService.currentUserId;
+    return (uid == null || uid.isEmpty) ? 'list_anon' : 'list_$uid';
+  }
 
   Future<Box<dynamic>> get _box async => Hive.isBoxOpen(_boxName)
       ? Hive.box(_boxName)
@@ -497,14 +504,14 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                     color: const Color(0xFF6772E5).withAlpha(40),
                   ),
                 ),
-                child: const Row(
+                child: Row(
                   children: [
-                    Text('💳', style: TextStyle(fontSize: 20)),
-                    SizedBox(width: 10),
+                    const Text('💳', style: TextStyle(fontSize: 20)),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: Text(
-                        'Stripe ödeme sistemi yakında aktif olacak — aboneliklerinizi buradan yönetebileceksiniz.',
-                        style: TextStyle(
+                        AppLocalizations.of(context).subStripeSoon,
+                        style: const TextStyle(
                           fontSize: 13,
                           color: Color(0xFF6772E5),
                           fontWeight: FontWeight.w600,

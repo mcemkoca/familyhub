@@ -7435,4 +7435,8 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get srdLoadFailed => 'Impossible de charger le rappel.';
+
+  @override
+  String get subStripeSoon =>
+      'Les paiements Stripe seront bientôt activés — vous gérerez vos abonnements ici.';
 }

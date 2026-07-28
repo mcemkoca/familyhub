@@ -2416,5 +2416,6 @@
   "csNoCalendars": "Could not access device calendars. Check calendar permission.",
   "baNoSuggestions": "No optimization suggestions right now.",
   "srdNoDataYet": "Not enough data yet. This fills in as the reminder triggers.",
-  "srdLoadFailed": "Could not load the reminder."
+  "srdLoadFailed": "Could not load the reminder.",
+  "subStripeSoon": "Stripe payments will be enabled soon — you will manage your subscriptions here."
 }

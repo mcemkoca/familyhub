@@ -2416,5 +2416,6 @@
   "csNoCalendars": "Impossible d'accéder aux calendriers. Vérifiez l'autorisation.",
   "baNoSuggestions": "Aucune suggestion d'optimisation pour le moment.",
   "srdNoDataYet": "Pas encore assez de données. Cette section se remplira au fil des rappels.",
-  "srdLoadFailed": "Impossible de charger le rappel."
+  "srdLoadFailed": "Impossible de charger le rappel.",
+  "subStripeSoon": "Les paiements Stripe seront bientôt activés — vous gérerez vos abonnements ici."
 }

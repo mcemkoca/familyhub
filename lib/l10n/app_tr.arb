@@ -3032,5 +3032,6 @@
   "csNoCalendars": "Cihaz takvimlerine erişilemedi. Takvim iznini kontrol edin.",
   "baNoSuggestions": "Şu anda optimizasyon önerisi yok.",
   "srdNoDataYet": "Henüz yeterli veri yok. Hatırlatıcı tetiklendikçe burası dolar.",
-  "srdLoadFailed": "Hatırlatıcı yüklenemedi."
+  "srdLoadFailed": "Hatırlatıcı yüklenemedi.",
+  "subStripeSoon": "Stripe ödeme sistemi yakında aktif olacak — aboneliklerinizi buradan yönetebileceksiniz."
 }

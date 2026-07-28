@@ -7427,4 +7427,8 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get srdLoadFailed => 'Hatırlatıcı yüklenemedi.';
+
+  @override
+  String get subStripeSoon =>
+      'Stripe ödeme sistemi yakında aktif olacak — aboneliklerinizi buradan yönetebileceksiniz.';
 }

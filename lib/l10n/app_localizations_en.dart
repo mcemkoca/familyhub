@@ -7403,4 +7403,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get srdLoadFailed => 'Could not load the reminder.';
+
+  @override
+  String get subStripeSoon =>
+      'Stripe payments will be enabled soon — you will manage your subscriptions here.';
 }

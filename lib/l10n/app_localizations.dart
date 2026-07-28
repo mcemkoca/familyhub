@@ -13853,6 +13853,12 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Hatırlatıcı yüklenemedi.'**
   String get srdLoadFailed;
+
+  /// No description provided for @subStripeSoon.
+  ///
+  /// In tr, this message translates to:
+  /// **'Stripe ödeme sistemi yakında aktif olacak — aboneliklerinizi buradan yönetebileceksiniz.'**
+  String get subStripeSoon;
 }
 
 class _AppLocalizationsDelegate

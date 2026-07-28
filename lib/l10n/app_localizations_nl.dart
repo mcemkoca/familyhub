@@ -7411,4 +7411,8 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get srdLoadFailed => 'Kan de herinnering niet laden.';
+
+  @override
+  String get subStripeSoon =>
+      'Stripe-betalingen worden binnenkort geactiveerd — je beheert je abonnementen hier.';
 }
