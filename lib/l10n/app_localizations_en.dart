@@ -7414,4 +7414,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get sosEscalationNote =>
       'These steps follow your settings above. Disabled steps will not run in an emergency.';
+
+  @override
+  String get settingsSaveFailed => 'Could not save settings.';
 }

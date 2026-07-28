@@ -2419,5 +2419,6 @@
   "srdLoadFailed": "Could not load the reminder.",
   "subStripeSoon": "Stripe payments will be enabled soon — you will manage your subscriptions here.",
   "sosSettingsSaveFailed": "Could not save SOS settings.",
-  "sosEscalationNote": "These steps follow your settings above. Disabled steps will not run in an emergency."
+  "sosEscalationNote": "These steps follow your settings above. Disabled steps will not run in an emergency.",
+  "settingsSaveFailed": "Could not save settings."
 }

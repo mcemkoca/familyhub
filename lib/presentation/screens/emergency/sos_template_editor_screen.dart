@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../../core/settings_store.dart';
 
 class SosTemplateEditorScreen extends StatefulWidget {
   const SosTemplateEditorScreen({super.key});
@@ -169,8 +170,40 @@ class _SosTemplateEditorScreenState extends State<SosTemplateEditorScreen> {
     );
   }
 
-  void _save() {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).sablonKaydedildi)));
+  static const _storeName = 'sos_templates';
+
+  /// Şablonları GERÇEKTEN kaydeder (önceden yalnızca mesaj gösteriliyordu).
+  Future<void> _save() async {
+    final messenger = ScaffoldMessenger.of(context);
+    final okMsg = AppLocalizations.of(context).sablonKaydedildi;
+    final failMsg = AppLocalizations.of(context).settingsSaveFailed;
+    final ok = await SettingsStore.save(_storeName, {
+      'sms': _smsCtrl.text,
+      'pushTitle': _pushTitleCtrl.text,
+      'pushBody': _pushBodyCtrl.text,
+      'voice': _voiceCtrl.text,
+    });
+    messenger.showSnackBar(SnackBar(
+      content: Text(ok ? okMsg : failMsg),
+      backgroundColor: ok ? null : const Color(0xFFB42318),
+    ));
+  }
+
+  void _loadTemplates() {
+    final j = SettingsStore.load(_storeName);
+    if (j.isEmpty) return;
+    setState(() {
+      _smsCtrl.text = j['sms'] as String? ?? _smsCtrl.text;
+      _pushTitleCtrl.text = j['pushTitle'] as String? ?? _pushTitleCtrl.text;
+      _pushBodyCtrl.text = j['pushBody'] as String? ?? _pushBodyCtrl.text;
+      _voiceCtrl.text = j['voice'] as String? ?? _voiceCtrl.text;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadTemplates();
   }
 
   void _reset() {

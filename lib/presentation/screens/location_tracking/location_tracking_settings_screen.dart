@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import '../../../domain/models/location_tracking.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../../core/settings_store.dart';
 
 class LocationTrackingSettingsScreen extends StatefulWidget {
   const LocationTrackingSettingsScreen({super.key});
@@ -211,9 +212,45 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
     });
   }
 
-  void _save() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(AppLocalizations.of(context).crashSettingsSaved)),
-    );
+  static const _storeName = 'location_tracking_settings';
+
+  /// Ayarları GERÇEKTEN kaydeder (önceden yalnızca mesaj gösteriliyordu).
+  Future<void> _save() async {
+    final messenger = ScaffoldMessenger.of(context);
+    final okMsg = AppLocalizations.of(context).crashSettingsSaved;
+    final failMsg = AppLocalizations.of(context).settingsSaveFailed;
+    final ok = await SettingsStore.save(_storeName, {
+      'enabled': _enabled,
+      'adaptiveBrightness': _adaptiveBrightness,
+      'backgroundRefresh': _backgroundRefresh,
+      'networkBatching': _networkBatching,
+      'locationCache': _locationCache,
+      'motionCoProcessor': _motionCoProcessor,
+      'geofenceOptimization': _geofenceOptimization,
+    });
+    messenger.showSnackBar(SnackBar(
+      content: Text(ok ? okMsg : failMsg),
+      backgroundColor: ok ? null : const Color(0xFFB42318),
+    ));
+  }
+
+  void _loadSettings() {
+    final j = SettingsStore.load(_storeName);
+    if (j.isEmpty) return;
+    setState(() {
+      _enabled = j['enabled'] as bool? ?? _enabled;
+      _adaptiveBrightness = j['adaptiveBrightness'] as bool? ?? _adaptiveBrightness;
+      _backgroundRefresh = j['backgroundRefresh'] as bool? ?? _backgroundRefresh;
+      _networkBatching = j['networkBatching'] as bool? ?? _networkBatching;
+      _locationCache = j['locationCache'] as bool? ?? _locationCache;
+      _motionCoProcessor = j['motionCoProcessor'] as bool? ?? _motionCoProcessor;
+      _geofenceOptimization = j['geofenceOptimization'] as bool? ?? _geofenceOptimization;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSettings();
   }
 }

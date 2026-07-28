@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../../core/settings_store.dart';
 
 class ProfileEditorScreen extends StatefulWidget {
   const ProfileEditorScreen({super.key});
@@ -269,10 +270,54 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
     );
   }
 
-  void _save() {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).peSaved)));
+  static const _storeName = 'location_profile';
+
+  /// Profili GERÇEKTEN kaydeder (önceden yalnızca mesaj gösteriliyordu).
+  Future<void> _save() async {
+    final messenger = ScaffoldMessenger.of(context);
+    final okMsg = AppLocalizations.of(context).peSaved;
+    final failMsg = AppLocalizations.of(context).settingsSaveFailed;
+    final ok = await SettingsStore.save(_storeName, {
+      'updateInterval': _updateInterval,
+      'distanceFilter': _distanceFilter,
+      'accuracy': _accuracy,
+      'limitGpsTime': _limitGpsTime,
+      'maxGpsSearch': _maxGpsSearch,
+      'quickFix': _quickFix,
+      'motionTrigger': _motionTrigger,
+      'transitionType': _transitionType,
+      'speedThreshold': _speedThreshold,
+      'stabilizationDelay': _stabilizationDelay,
+      'exitDuration': _exitDuration,
+    });
+    messenger.showSnackBar(SnackBar(
+      content: Text(ok ? okMsg : failMsg),
+      backgroundColor: ok ? null : const Color(0xFFB42318),
+    ));
+  }
+
+  void _loadProfile() {
+    final j = SettingsStore.load(_storeName);
+    if (j.isEmpty) return;
+    setState(() {
+      _updateInterval = (j['updateInterval'] as num?)?.toInt() ?? _updateInterval;
+      _distanceFilter = (j['distanceFilter'] as num?)?.toInt() ?? _distanceFilter;
+      _accuracy = j['accuracy'] as String? ?? _accuracy;
+      _limitGpsTime = j['limitGpsTime'] as bool? ?? _limitGpsTime;
+      _maxGpsSearch = (j['maxGpsSearch'] as num?)?.toInt() ?? _maxGpsSearch;
+      _quickFix = j['quickFix'] as bool? ?? _quickFix;
+      _motionTrigger = j['motionTrigger'] as bool? ?? _motionTrigger;
+      _transitionType = j['transitionType'] as String? ?? _transitionType;
+      _speedThreshold = (j['speedThreshold'] as num?)?.toInt() ?? _speedThreshold;
+      _stabilizationDelay = (j['stabilizationDelay'] as num?)?.toInt() ?? _stabilizationDelay;
+      _exitDuration = (j['exitDuration'] as num?)?.toInt() ?? _exitDuration;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadProfile();
   }
 
   void _reset() {

@@ -3035,5 +3035,6 @@
   "srdLoadFailed": "Hatırlatıcı yüklenemedi.",
   "subStripeSoon": "Stripe ödeme sistemi yakında aktif olacak — aboneliklerinizi buradan yönetebileceksiniz.",
   "sosSettingsSaveFailed": "SOS ayarları kaydedilemedi.",
-  "sosEscalationNote": "Bu adımlar yukarıdaki ayarlarınıza göre belirlenir. Kapalı adımlar acil durumda çalışmaz."
+  "sosEscalationNote": "Bu adımlar yukarıdaki ayarlarınıza göre belirlenir. Kapalı adımlar acil durumda çalışmaz.",
+  "settingsSaveFailed": "Ayarlar kaydedilemedi."
 }

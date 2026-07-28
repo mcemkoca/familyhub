@@ -7447,4 +7447,7 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get sosEscalationNote =>
       'Ces étapes suivent vos réglages ci-dessus. Les étapes désactivées ne s’exécuteront pas.';
+
+  @override
+  String get settingsSaveFailed => 'Impossible d’enregistrer les réglages.';
 }

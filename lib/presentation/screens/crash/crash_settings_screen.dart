@@ -9,6 +9,7 @@ import '../../../domain/models/crash_settings.dart';
 import '../../../services/crash_detection_service.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 import '../../../core/app_logger.dart';
+import '../../../core/settings_store.dart';
 
 class CrashSettingsScreen extends StatefulWidget {
   const CrashSettingsScreen({super.key});
@@ -47,6 +48,7 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
   void initState() {
     super.initState();
     _loadContacts();
+    _loadSettings();
   }
 
   void _loadContacts() {
@@ -484,10 +486,77 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
     );
   }
 
-  void _saveSettings() {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).crashSettingsSaved)));
+  static const _storeName = 'crash_settings';
+
+  /// Kaza tespiti ayarlarını GERÇEKTEN kaydeder.
+  ///
+  /// Önceden hiçbir şey saklanmadan "kaydedildi" deniyordu; kullanıcı
+  /// hassasiyet/112-arama/konum-paylaşımı tercihlerinin geçerli olduğunu
+  /// sanıyordu ama ekran her açılışta varsayılana dönüyordu.
+  Future<void> _saveSettings() async {
+    final messenger = ScaffoldMessenger.of(context);
+    final okMsg = AppLocalizations.of(context).crashSettingsSaved;
+    final failMsg = AppLocalizations.of(context).settingsSaveFailed;
+
+    final ok = await SettingsStore.save(_storeName, {
+      'enabled': _enabled,
+      'sensitivity': _sensitivity.name,
+      'minImpactG': _minImpactGCtrl.text,
+      'speedChange': _speedChangeCtrl.text,
+      'rollover': _rolloverCtrl.text,
+      'confirmation': _confirmationCtrl.text,
+      'autoCallEmergency': _autoCallEmergency,
+      'autoNotifyFamily': _autoNotifyFamily,
+      'autoNotifyContacts': _autoNotifyContacts,
+      'shareLocation': _shareLocation,
+      'shareMedicalInfo': _shareMedicalInfo,
+      'soundAlert': _soundAlert,
+      'soundType': _soundType,
+      'vibration': _vibration,
+      'vibrationPattern': _vibrationPattern.name,
+      'screenFlash': _screenFlash,
+      'maxVolume': _maxVolume,
+      'bypassDnd': _bypassDnd,
+    });
+
+    messenger.showSnackBar(SnackBar(
+      content: Text(ok ? okMsg : failMsg),
+      backgroundColor: ok ? null : const Color(0xFFB42318),
+    ));
+  }
+
+  /// Kayıtlı ayarları geri yükler (yoksa varsayılanlar korunur).
+  void _loadSettings() {
+    final j = SettingsStore.load(_storeName);
+    if (j.isEmpty) return;
+    setState(() {
+      _enabled = j['enabled'] as bool? ?? _enabled;
+      _sensitivity = CrashSensitivity.values.firstWhere(
+          (e) => e.name == j['sensitivity'],
+          orElse: () => _sensitivity);
+      _minImpactGCtrl.text = j['minImpactG'] as String? ?? _minImpactGCtrl.text;
+      _speedChangeCtrl.text =
+          j['speedChange'] as String? ?? _speedChangeCtrl.text;
+      _rolloverCtrl.text = j['rollover'] as String? ?? _rolloverCtrl.text;
+      _confirmationCtrl.text =
+          j['confirmation'] as String? ?? _confirmationCtrl.text;
+      _autoCallEmergency =
+          j['autoCallEmergency'] as bool? ?? _autoCallEmergency;
+      _autoNotifyFamily = j['autoNotifyFamily'] as bool? ?? _autoNotifyFamily;
+      _autoNotifyContacts =
+          j['autoNotifyContacts'] as bool? ?? _autoNotifyContacts;
+      _shareLocation = j['shareLocation'] as bool? ?? _shareLocation;
+      _shareMedicalInfo = j['shareMedicalInfo'] as bool? ?? _shareMedicalInfo;
+      _soundAlert = j['soundAlert'] as bool? ?? _soundAlert;
+      _soundType = j['soundType'] as String? ?? _soundType;
+      _vibration = j['vibration'] as bool? ?? _vibration;
+      _vibrationPattern = VibrationPattern.values.firstWhere(
+          (e) => e.name == j['vibrationPattern'],
+          orElse: () => _vibrationPattern);
+      _screenFlash = j['screenFlash'] as bool? ?? _screenFlash;
+      _maxVolume = j['maxVolume'] as bool? ?? _maxVolume;
+      _bypassDnd = j['bypassDnd'] as bool? ?? _bypassDnd;
+    });
   }
 
   void _showTestDialog() {

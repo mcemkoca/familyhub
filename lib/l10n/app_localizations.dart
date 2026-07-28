@@ -13871,6 +13871,12 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Bu adımlar yukarıdaki ayarlarınıza göre belirlenir. Kapalı adımlar acil durumda çalışmaz.'**
   String get sosEscalationNote;
+
+  /// No description provided for @settingsSaveFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ayarlar kaydedilemedi.'**
+  String get settingsSaveFailed;
 }
 
 class _AppLocalizationsDelegate

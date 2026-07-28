@@ -7422,4 +7422,7 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get sosEscalationNote =>
       'Deze stappen volgen je instellingen hierboven. Uitgeschakelde stappen worden niet uitgevoerd.';
+
+  @override
+  String get settingsSaveFailed => 'Kan instellingen niet opslaan.';
 }

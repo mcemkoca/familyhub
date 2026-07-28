@@ -2419,5 +2419,6 @@
   "srdLoadFailed": "Kan de herinnering niet laden.",
   "subStripeSoon": "Stripe-betalingen worden binnenkort geactiveerd — je beheert je abonnementen hier.",
   "sosSettingsSaveFailed": "Kan SOS-instellingen niet opslaan.",
-  "sosEscalationNote": "Deze stappen volgen je instellingen hierboven. Uitgeschakelde stappen worden niet uitgevoerd."
+  "sosEscalationNote": "Deze stappen volgen je instellingen hierboven. Uitgeschakelde stappen worden niet uitgevoerd.",
+  "settingsSaveFailed": "Kan instellingen niet opslaan."
 }

@@ -7438,4 +7438,7 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get sosEscalationNote =>
       'Bu adımlar yukarıdaki ayarlarınıza göre belirlenir. Kapalı adımlar acil durumda çalışmaz.';
+
+  @override
+  String get settingsSaveFailed => 'Ayarlar kaydedilemedi.';
 }
