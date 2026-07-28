@@ -13859,6 +13859,18 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Stripe ödeme sistemi yakında aktif olacak — aboneliklerinizi buradan yönetebileceksiniz.'**
   String get subStripeSoon;
+
+  /// No description provided for @sosSettingsSaveFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'SOS ayarları kaydedilemedi.'**
+  String get sosSettingsSaveFailed;
+
+  /// No description provided for @sosEscalationNote.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu adımlar yukarıdaki ayarlarınıza göre belirlenir. Kapalı adımlar acil durumda çalışmaz.'**
+  String get sosEscalationNote;
 }
 
 class _AppLocalizationsDelegate

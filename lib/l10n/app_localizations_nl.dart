@@ -7415,4 +7415,11 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get subStripeSoon =>
       'Stripe-betalingen worden binnenkort geactiveerd — je beheert je abonnementen hier.';
+
+  @override
+  String get sosSettingsSaveFailed => 'Kan SOS-instellingen niet opslaan.';
+
+  @override
+  String get sosEscalationNote =>
+      'Deze stappen volgen je instellingen hierboven. Uitgeschakelde stappen worden niet uitgevoerd.';
 }

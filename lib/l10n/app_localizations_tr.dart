@@ -7431,4 +7431,11 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get subStripeSoon =>
       'Stripe ödeme sistemi yakında aktif olacak — aboneliklerinizi buradan yönetebileceksiniz.';
+
+  @override
+  String get sosSettingsSaveFailed => 'SOS ayarları kaydedilemedi.';
+
+  @override
+  String get sosEscalationNote =>
+      'Bu adımlar yukarıdaki ayarlarınıza göre belirlenir. Kapalı adımlar acil durumda çalışmaz.';
 }

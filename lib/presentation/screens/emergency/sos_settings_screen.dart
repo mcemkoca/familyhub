@@ -3,6 +3,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import 'dart:convert';
+import '../../../core/app_logger.dart';
+import '../../../services/auth_service.dart';
+import '../../../services/hive_service.dart';
 
 class SosSettingsScreen extends StatefulWidget {
   const SosSettingsScreen({super.key});
@@ -42,13 +46,103 @@ class _SosSettingsScreenState extends State<SosSettingsScreen> {
   bool _autoUpload = true;
   bool _triggerWords = true;
 
+  /// Kullanıcı-izole anahtar: aynı cihazda hesap değişince önceki kullanıcının
+  /// SOS tercihleri yeni kullanıcıya uygulanmamalı.
+  static String get _settingsKey {
+    final uid = AuthService.currentUserId;
+    return (uid == null || uid.isEmpty)
+        ? 'sos_settings_anon'
+        : 'sos_settings_$uid';
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _load();
+  }
+
+  void _load() {
+    try {
+      final raw = HiveService.getSetting(_settingsKey);
+      if (raw == null || raw.isEmpty) return;
+      final j = jsonDecode(raw) as Map<String, dynamic>;
+      setState(() {
+        _panicButton = j['panicButton'] as bool? ?? _panicButton;
+        _voiceCommand = j['voiceCommand'] as bool? ?? _voiceCommand;
+        _crashDetection = j['crashDetection'] as bool? ?? _crashDetection;
+        _inactivity = j['inactivity'] as bool? ?? _inactivity;
+        _inactivityMinutes =
+            (j['inactivityMinutes'] as num?)?.toInt() ?? _inactivityMinutes;
+        _healthEmergency = j['healthEmergency'] as bool? ?? _healthEmergency;
+        _smartWatch = j['smartWatch'] as bool? ?? _smartWatch;
+        _falseAlarmPrevention =
+            j['falseAlarmPrevention'] as bool? ?? _falseAlarmPrevention;
+        _confirmationSeconds =
+            (j['confirmationSeconds'] as num?)?.toInt() ?? _confirmationSeconds;
+        _smsEnabled = j['smsEnabled'] as bool? ?? _smsEnabled;
+        _pushEnabled = j['pushEnabled'] as bool? ?? _pushEnabled;
+        _whatsappEnabled = j['whatsappEnabled'] as bool? ?? _whatsappEnabled;
+        _emailEnabled = j['emailEnabled'] as bool? ?? _emailEnabled;
+        _telegramEnabled = j['telegramEnabled'] as bool? ?? _telegramEnabled;
+        _autoCall112 = j['autoCall112'] as bool? ?? _autoCall112;
+        _autoCallFamily = j['autoCallFamily'] as bool? ?? _autoCallFamily;
+        _autoPlayMessage = j['autoPlayMessage'] as bool? ?? _autoPlayMessage;
+        _locationShare = j['locationShare'] as bool? ?? _locationShare;
+        _locationFrequency =
+            (j['locationFrequency'] as num?)?.toInt() ?? _locationFrequency;
+        _locationDuration =
+            (j['locationDuration'] as num?)?.toInt() ?? _locationDuration;
+        _includeRoute = j['includeRoute'] as bool? ?? _includeRoute;
+        _audioRecording = j['audioRecording'] as bool? ?? _audioRecording;
+        _recordingDuration =
+            (j['recordingDuration'] as num?)?.toInt() ?? _recordingDuration;
+        _autoUpload = j['autoUpload'] as bool? ?? _autoUpload;
+        _triggerWords = j['triggerWords'] as bool? ?? _triggerWords;
+      });
+    } catch (e) {
+      // Bozuk kayıt varsayılanları bozmamalı.
+      AppLogger.logBestEffort(e,
+          module: 'emergency', operation: 'loadSosSettings');
+    }
+  }
+
+  Map<String, dynamic> _toJson() => {
+        'panicButton': _panicButton,
+        'voiceCommand': _voiceCommand,
+        'crashDetection': _crashDetection,
+        'inactivity': _inactivity,
+        'inactivityMinutes': _inactivityMinutes,
+        'healthEmergency': _healthEmergency,
+        'smartWatch': _smartWatch,
+        'falseAlarmPrevention': _falseAlarmPrevention,
+        'confirmationSeconds': _confirmationSeconds,
+        'smsEnabled': _smsEnabled,
+        'pushEnabled': _pushEnabled,
+        'whatsappEnabled': _whatsappEnabled,
+        'emailEnabled': _emailEnabled,
+        'telegramEnabled': _telegramEnabled,
+        'autoCall112': _autoCall112,
+        'autoCallFamily': _autoCallFamily,
+        'autoPlayMessage': _autoPlayMessage,
+        'locationShare': _locationShare,
+        'locationFrequency': _locationFrequency,
+        'locationDuration': _locationDuration,
+        'includeRoute': _includeRoute,
+        'audioRecording': _audioRecording,
+        'recordingDuration': _recordingDuration,
+        'autoUpload': _autoUpload,
+        'triggerWords': _triggerWords,
+      };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).sosAyarlari),
         actions: [
-          IconButton(icon: const Icon(Icons.science), onPressed: () {}),
+          // Not: "test" (science) ikonu KALDIRILDI — test SOS akışı yok,
+          // buton tıklanıp hiçbir şey yapmıyordu. Acil durum ekranında
+          // çalışmayan bir test butonu güven kırıcıdır.
           IconButton(icon: const Icon(Icons.save), onPressed: _save),
         ],
       ),
@@ -217,20 +311,19 @@ class _SosSettingsScreenState extends State<SosSettingsScreen> {
             ],
           ]),
 
+          // Yükseltme zinciri: adımlar YUKARIDAKİ ayarlardan türetilir
+          // (düzenlenebilir liste değil). Önceden hardcoded 4 adım + çalışmayan
+          // "Adım Ekle/Düzenle/Sil" butonları vardı; kullanıcı acil durumda
+          // işleyeceğini sandığı bir zinciri yapılandırdığını sanıyordu.
           _section(AppLocalizations.of(context).yukseltmeZinciri, [
-            _escalationStep('1. [0 dk] Aile bildirimi', true),
-            _escalationStep('2. [3 dk] Acil kontaklar', true),
-            _escalationStep('3. [5 dk] 112 arama', false),
-            _escalationStep('4. [10 dk] Komşu alert', false),
+            _escalationStep('1. [0 dk] Aile bildirimi', _autoCallFamily),
+            _escalationStep('2. [3 dk] Acil kontaklar', _smsEnabled),
+            _escalationStep('3. [5 dk] 112 arama', _autoCall112),
+            _escalationStep('4. [anlık] Konum paylaşımı', _locationShare),
             const SizedBox(height: 8),
-            ElevatedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.add),
-              label: Text(AppLocalizations.of(context).adimEkle),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue.shade800,
-                foregroundColor: Colors.white,
-              ),
+            Text(
+              AppLocalizations.of(context).sosEscalationNote,
+              style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 12),
             ),
           ]),
 
@@ -318,22 +411,33 @@ class _SosSettingsScreenState extends State<SosSettingsScreen> {
               ),
             ),
           ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.edit, size: 18, color: Colors.white54),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.delete, size: 18, color: Colors.redAccent),
-          ),
+          // Not: "Düzenle/Sil" butonları KALDIRILDI — adımlar sabit değil,
+          // yukarıdaki ayarlardan türetiliyor; butonlar hiçbir şey yapmıyordu.
         ],
       ),
     );
   }
 
-  void _save() {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).sosAyarlariKaydedildi)));
+  /// Ayarları GERÇEKTEN kaydeder.
+  ///
+  /// Önceden yalnızca "kaydedildi" mesajı gösteriliyordu; hiçbir ayar
+  /// saklanmıyordu. Acil durum modülünde bu kritik bir sahte başarıydı —
+  /// kullanıcı panik butonu/tetikleyici tercihlerinin geçerli olduğunu
+  /// sanıyordu ama ekran her açılışta varsayılana dönüyordu.
+  Future<void> _save() async {
+    final messenger = ScaffoldMessenger.of(context);
+    final okMsg = AppLocalizations.of(context).sosAyarlariKaydedildi;
+    final failMsg = AppLocalizations.of(context).sosSettingsSaveFailed;
+    try {
+      await HiveService.setSetting(_settingsKey, jsonEncode(_toJson()));
+      messenger.showSnackBar(SnackBar(content: Text(okMsg)));
+    } catch (e, st) {
+      AppLogger.logError(e,
+          module: 'emergency', operation: 'saveSosSettings', stackTrace: st);
+      messenger.showSnackBar(SnackBar(
+        content: Text(failMsg),
+        backgroundColor: const Color(0xFFB42318),
+      ));
+    }
   }
 }

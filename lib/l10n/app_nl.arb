@@ -2417,5 +2417,7 @@
   "baNoSuggestions": "Momenteel geen optimalisatiesuggesties.",
   "srdNoDataYet": "Nog niet genoeg gegevens. Dit vult zich als de herinnering afgaat.",
   "srdLoadFailed": "Kan de herinnering niet laden.",
-  "subStripeSoon": "Stripe-betalingen worden binnenkort geactiveerd — je beheert je abonnementen hier."
+  "subStripeSoon": "Stripe-betalingen worden binnenkort geactiveerd — je beheert je abonnementen hier.",
+  "sosSettingsSaveFailed": "Kan SOS-instellingen niet opslaan.",
+  "sosEscalationNote": "Deze stappen volgen je instellingen hierboven. Uitgeschakelde stappen worden niet uitgevoerd."
 }

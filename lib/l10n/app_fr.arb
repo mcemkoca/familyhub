@@ -2417,5 +2417,7 @@
   "baNoSuggestions": "Aucune suggestion d'optimisation pour le moment.",
   "srdNoDataYet": "Pas encore assez de données. Cette section se remplira au fil des rappels.",
   "srdLoadFailed": "Impossible de charger le rappel.",
-  "subStripeSoon": "Les paiements Stripe seront bientôt activés — vous gérerez vos abonnements ici."
+  "subStripeSoon": "Les paiements Stripe seront bientôt activés — vous gérerez vos abonnements ici.",
+  "sosSettingsSaveFailed": "Impossible d’enregistrer les réglages SOS.",
+  "sosEscalationNote": "Ces étapes suivent vos réglages ci-dessus. Les étapes désactivées ne s’exécuteront pas."
 }

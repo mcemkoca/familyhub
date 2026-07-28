@@ -7439,4 +7439,12 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get subStripeSoon =>
       'Les paiements Stripe seront bientôt activés — vous gérerez vos abonnements ici.';
+
+  @override
+  String get sosSettingsSaveFailed =>
+      'Impossible d’enregistrer les réglages SOS.';
+
+  @override
+  String get sosEscalationNote =>
+      'Ces étapes suivent vos réglages ci-dessus. Les étapes désactivées ne s’exécuteront pas.';
 }

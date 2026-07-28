@@ -2417,5 +2417,7 @@
   "baNoSuggestions": "No optimization suggestions right now.",
   "srdNoDataYet": "Not enough data yet. This fills in as the reminder triggers.",
   "srdLoadFailed": "Could not load the reminder.",
-  "subStripeSoon": "Stripe payments will be enabled soon — you will manage your subscriptions here."
+  "subStripeSoon": "Stripe payments will be enabled soon — you will manage your subscriptions here.",
+  "sosSettingsSaveFailed": "Could not save SOS settings.",
+  "sosEscalationNote": "These steps follow your settings above. Disabled steps will not run in an emergency."
 }

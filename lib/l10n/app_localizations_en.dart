@@ -7407,4 +7407,11 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get subStripeSoon =>
       'Stripe payments will be enabled soon — you will manage your subscriptions here.';
+
+  @override
+  String get sosSettingsSaveFailed => 'Could not save SOS settings.';
+
+  @override
+  String get sosEscalationNote =>
+      'These steps follow your settings above. Disabled steps will not run in an emergency.';
 }
