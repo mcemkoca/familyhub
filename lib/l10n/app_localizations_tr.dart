@@ -7420,4 +7420,11 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get baNoSuggestions => 'Şu anda optimizasyon önerisi yok.';
+
+  @override
+  String get srdNoDataYet =>
+      'Henüz yeterli veri yok. Hatırlatıcı tetiklendikçe burası dolar.';
+
+  @override
+  String get srdLoadFailed => 'Hatırlatıcı yüklenemedi.';
 }

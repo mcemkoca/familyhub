@@ -3030,5 +3030,7 @@
   },
   "chatTypingMany": "Birkaç kişi yazıyor…",
   "csNoCalendars": "Cihaz takvimlerine erişilemedi. Takvim iznini kontrol edin.",
-  "baNoSuggestions": "Şu anda optimizasyon önerisi yok."
+  "baNoSuggestions": "Şu anda optimizasyon önerisi yok.",
+  "srdNoDataYet": "Henüz yeterli veri yok. Hatırlatıcı tetiklendikçe burası dolar.",
+  "srdLoadFailed": "Hatırlatıcı yüklenemedi."
 }

@@ -2414,5 +2414,7 @@
   "chatTypingTwo": "{a} en {b} zijn aan het typen…",
   "chatTypingMany": "Meerdere mensen typen…",
   "csNoCalendars": "Geen toegang tot agenda’s. Controleer de agendamachtiging.",
-  "baNoSuggestions": "Momenteel geen optimalisatiesuggesties."
+  "baNoSuggestions": "Momenteel geen optimalisatiesuggesties.",
+  "srdNoDataYet": "Nog niet genoeg gegevens. Dit vult zich als de herinnering afgaat.",
+  "srdLoadFailed": "Kan de herinnering niet laden."
 }

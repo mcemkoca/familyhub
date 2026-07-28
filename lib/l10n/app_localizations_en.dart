@@ -7396,4 +7396,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get baNoSuggestions => 'No optimization suggestions right now.';
+
+  @override
+  String get srdNoDataYet =>
+      'Not enough data yet. This fills in as the reminder triggers.';
+
+  @override
+  String get srdLoadFailed => 'Could not load the reminder.';
 }

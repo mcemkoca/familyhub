@@ -829,19 +829,25 @@ class _TestPreviewSheet extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(displayBody, style: const TextStyle(fontSize: 14)),
                 const SizedBox(height: 12),
-                Row(
-                  children: [
-                    TextButton(
-                      onPressed: () {},
-                      child: Text('✅ ${AppLocalizations.of(context).ok}'),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        '⏰ ${AppLocalizations.of(context).remSnooze10}',
+                // ÖNİZLEME: gerçek bildirimin nasıl görüneceğini gösterir.
+                // Butonlar bilinçli olarak PASİF — burada tıklanacak bir
+                // hatırlatıcı yok; gerçek aksiyonlar bildirim gelince çalışır.
+                Opacity(
+                  opacity: 0.55,
+                  child: Row(
+                    children: [
+                      TextButton(
+                        onPressed: null,
+                        child: Text('✅ ${AppLocalizations.of(context).ok}'),
                       ),
-                    ),
-                  ],
+                      TextButton(
+                        onPressed: null,
+                        child: Text(
+                          '⏰ ${AppLocalizations.of(context).remSnooze10}',
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

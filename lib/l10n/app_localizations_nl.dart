@@ -7404,4 +7404,11 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get baNoSuggestions => 'Momenteel geen optimalisatiesuggesties.';
+
+  @override
+  String get srdNoDataYet =>
+      'Nog niet genoeg gegevens. Dit vult zich als de herinnering afgaat.';
+
+  @override
+  String get srdLoadFailed => 'Kan de herinnering niet laden.';
 }

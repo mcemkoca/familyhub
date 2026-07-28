@@ -2414,5 +2414,7 @@
   "chatTypingTwo": "{a} and {b} are typing…",
   "chatTypingMany": "Several people are typing…",
   "csNoCalendars": "Could not access device calendars. Check calendar permission.",
-  "baNoSuggestions": "No optimization suggestions right now."
+  "baNoSuggestions": "No optimization suggestions right now.",
+  "srdNoDataYet": "Not enough data yet. This fills in as the reminder triggers.",
+  "srdLoadFailed": "Could not load the reminder."
 }

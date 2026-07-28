@@ -7428,4 +7428,11 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get baNoSuggestions =>
       'Aucune suggestion d\'optimisation pour le moment.';
+
+  @override
+  String get srdNoDataYet =>
+      'Pas encore assez de données. Cette section se remplira au fil des rappels.';
+
+  @override
+  String get srdLoadFailed => 'Impossible de charger le rappel.';
 }

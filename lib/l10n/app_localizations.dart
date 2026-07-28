@@ -13841,6 +13841,18 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Şu anda optimizasyon önerisi yok.'**
   String get baNoSuggestions;
+
+  /// No description provided for @srdNoDataYet.
+  ///
+  /// In tr, this message translates to:
+  /// **'Henüz yeterli veri yok. Hatırlatıcı tetiklendikçe burası dolar.'**
+  String get srdNoDataYet;
+
+  /// No description provided for @srdLoadFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hatırlatıcı yüklenemedi.'**
+  String get srdLoadFailed;
 }
 
 class _AppLocalizationsDelegate

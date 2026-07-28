@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '../../../domain/models/smart_reminder.dart';
 import '../../../repositories/smart_reminder_repository.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../../core/app_logger.dart';
 
 class SmartReminderDetailScreen extends StatefulWidget {
   final String reminderId;
@@ -19,7 +19,6 @@ class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
   SmartReminder? _reminder;
   bool _loading = true;
 
-  final Map<String, dynamic> _analytics = {};
   final Map<String, int> _timeDistribution = {};
   final Map<String, int> _locationDistribution = {};
 
@@ -33,17 +32,14 @@ class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
     setState(() => _loading = true);
     try {
       _reminder = await SmartReminderRepository().getById(widget.reminderId);
-    } catch (e) {
+    } catch (e, st) {
+      // Sessizce null bırakılırsa aşağıdaki `_reminder!` çöker; hatayı
+      // görünür kıl ve kullanıcıya bilgi ver.
+      AppLogger.logError(e,
+          module: 'reminders', operation: 'loadReminder', stackTrace: st);
       _reminder = null;
     }
-    setState(() => _loading = false);
-  }
-
-  void _applyOptimization(String suggestion) {
-    HapticFeedback.mediumImpact();
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).srdApplied(suggestion))));
+    if (mounted) setState(() => _loading = false);
   }
 
   @override
@@ -54,7 +50,39 @@ class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
-    final r = _reminder!;
+    // Yükleme başarısızsa `_reminder!` CRASH ederdi — güvenli hata ekranı.
+    final loaded = _reminder;
+    if (loaded == null) {
+      return Scaffold(
+        backgroundColor: const Color(0xFF0A0A0F),
+        appBar: AppBar(
+          backgroundColor: const Color(0xFF1A1A2E),
+          foregroundColor: textColor,
+        ),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.error_outline,
+                    size: 40, color: Color(0xFF6B7280)),
+                const SizedBox(height: 12),
+                Text(AppLocalizations.of(context).srdLoadFailed,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: Color(0xFF9CA3AF))),
+                const SizedBox(height: 12),
+                TextButton(
+                  onPressed: _loadReminder,
+                  child: Text(AppLocalizations.of(context).retry),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+    final r = loaded;
 
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0F),
@@ -86,32 +114,39 @@ class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
               child: _buildLocationDistributionCard(isDark, textColor),
             ),
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 16)),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: _buildAiSuggestionsCard(isDark, textColor),
-            ),
-          ),
+          // Not: hardcoded "AI öneri" kartı kaldırıldı — öneriler sabit
+          // metindi ve "Uygula" hiçbir şey yapmadan "Uygulandı" diyordu.
           const SliverToBoxAdapter(child: SizedBox(height: 100)),
         ],
       ),
     );
   }
 
+  /// İstatistikler GERÇEK hatırlatıcı durumundan okunur.
+  ///
+  /// Önceden hiç doldurulmayan `_analytics` map'inden okunuyordu → her metrik
+  /// sıfır görünüyordu; "Ort. Cevap Süresi 3.2 dk" ise hardcoded'dı.
   Widget _buildStatsCard(bool isDark, Color textColor) {
-    final total = _analytics['total_triggers'] as int? ?? 0;
-    final completions = _analytics['completions'] as int? ?? 0;
-    final snoozes = _analytics['snoozes'] as int? ?? 0;
-    final dismisses = _analytics['dismisses'] as int? ?? 0;
-    final rate = _analytics['completion_rate'] as double? ?? 0;
+    final st = _reminder?.status;
+    final total = st?.triggerCount ?? 0;
+    final rate = st?.completionRate ?? 0;
+    // Tamamlanan sayısı orandan türetilir (ayrı sayaç modelde yok).
+    final completions = (total * rate / 100).round();
+
+    String fmt(DateTime? d) => d == null
+        ? '—'
+        : '${d.day.toString().padLeft(2, '0')}.'
+            '${d.month.toString().padLeft(2, '0')} '
+            '${d.hour.toString().padLeft(2, '0')}:'
+            '${d.minute.toString().padLeft(2, '0')}';
 
     return _Card(
       isDark: isDark,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(AppLocalizations.of(context).basariMetrikleri, style: _sectionStyle(textColor)),
+          Text(AppLocalizations.of(context).basariMetrikleri,
+              style: _sectionStyle(textColor)),
           const SizedBox(height: 16),
           _buildMetricRow(
             'Tetiklenme',
@@ -125,18 +160,6 @@ class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
             Icons.check_circle,
             Colors.green,
           ),
-          _buildMetricRow(
-            'Erteleme',
-            '$snoozes kez',
-            Icons.snooze,
-            Colors.blue,
-          ),
-          _buildMetricRow(
-            'Yoksayma',
-            '$dismisses kez',
-            Icons.cancel,
-            Colors.grey,
-          ),
           const Divider(height: 32),
           _buildMetricRow(
             'Başarı Oranı',
@@ -145,10 +168,16 @@ class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
             Colors.purple,
           ),
           _buildMetricRow(
-            'Ort. Cevap Süresi',
-            '3.2 dk',
-            Icons.timer,
+            'Son Tetiklenme',
+            fmt(st?.lastTriggered),
+            Icons.history,
             Colors.teal,
+          ),
+          _buildMetricRow(
+            'Sıradaki',
+            fmt(st?.nextScheduled),
+            Icons.schedule,
+            Colors.blue,
           ),
         ],
       ),
@@ -187,6 +216,9 @@ class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
         children: [
           Text(AppLocalizations.of(context).zamanDagilimi, style: _sectionStyle(textColor)),
           const SizedBox(height: 16),
+          if (_timeDistribution.isEmpty)
+            Text(AppLocalizations.of(context).srdNoDataYet,
+                style: const TextStyle(color: Color(0xFF6B7280), fontSize: 12)),
           ..._timeDistribution.entries.map((e) {
             final pct = e.value / maxVal;
             return Padding(
@@ -244,6 +276,9 @@ class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
         children: [
           Text(AppLocalizations.of(context).lokasyonDagilimi, style: _sectionStyle(textColor)),
           const SizedBox(height: 16),
+          if (_locationDistribution.isEmpty)
+            Text(AppLocalizations.of(context).srdNoDataYet,
+                style: const TextStyle(color: Color(0xFF6B7280), fontSize: 12)),
           ..._locationDistribution.entries.map((e) {
             final pct = e.value / maxVal;
             return Padding(
@@ -291,58 +326,6 @@ class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
     );
   }
 
-  Widget _buildAiSuggestionsCard(bool isDark, Color textColor) {
-    final suggestions = [
-      _AiOptSuggestion(
-        text: '17:00-19:00 arası başarı %95, akıllı pencereyi daralt',
-        icon: Icons.schedule,
-      ),
-      _AiOptSuggestion(
-        text: 'A101 dışında başarı düşük, sadece A101\'e odaklan',
-        icon: Icons.location_on,
-      ),
-      _AiOptSuggestion(
-        text: 'Erteleme oranı yüksek, nazik ton deneyin',
-        icon: Icons.mood,
-      ),
-    ];
-
-    return _Card(
-      isDark: isDark,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(AppLocalizations.of(context).aiOgrenmeOnerileri, style: _sectionStyle(textColor)),
-          const SizedBox(height: 16),
-          ...suggestions.map(
-            (s) => Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: Row(
-                children: [
-                  Icon(s.icon, color: Colors.purple[400]),
-                  const SizedBox(width: 12),
-                  Expanded(child: Text(s.text)),
-                  TextButton(
-                    onPressed: () => _applyOptimization(s.text),
-                    child: Text(AppLocalizations.of(context).rtApply),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 8),
-          SizedBox(
-            width: double.infinity,
-            child: OutlinedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.refresh),
-              label: Text(AppLocalizations.of(context).modeliYenidenEgit),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   TextStyle _sectionStyle(Color textColor) {
     return TextStyle(
@@ -353,11 +336,6 @@ class _SmartReminderDetailScreenState extends State<SmartReminderDetailScreen> {
   }
 }
 
-class _AiOptSuggestion {
-  final String text;
-  final IconData icon;
-  _AiOptSuggestion({required this.text, required this.icon});
-}
 
 class _Card extends StatelessWidget {
   final bool isDark;
