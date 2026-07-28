@@ -25,15 +25,9 @@ class _MonthlyProgressCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: const Color(0xFF13131A),
           borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade200,
-              blurRadius: 12,
-              offset: const Offset(0, 4),
-            ),
-          ],
+          border: Border.all(color: const Color(0xFF262631)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,9 +35,11 @@ class _MonthlyProgressCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'Aylık Harcama',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                Text(AppLocalizations.of(context).aylikHarcama,
+                  style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white),
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -75,7 +71,7 @@ class _MonthlyProgressCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               child: LinearProgressIndicator(
                 value: percent,
-                backgroundColor: Colors.grey.shade100,
+                backgroundColor: const Color(0xFF262631),
                 valueColor: AlwaysStoppedAnimation(
                   percent > 0.9
                       ? AppColors.error
@@ -91,18 +87,18 @@ class _MonthlyProgressCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  NumberFormat.currency(symbol: '₺', decimalDigits: 0).format(totalExpense),
-                  style: TextStyle(
+                  NumberFormat.currency(symbol: '€', decimalDigits: 0).format(totalExpense),
+                  style: const TextStyle(
                     fontSize: 13,
-                    color: Colors.grey.shade600,
+                    color: Color(0xFF6B7280),
                   ),
                 ),
                 Text(
-                  'Kalan: ${NumberFormat.currency(symbol: '₺', decimalDigits: 0).format(remaining)}',
+                  'Kalan: ${NumberFormat.currency(symbol: '€', decimalDigits: 0).format(remaining)}',
                   style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.dark,
+                    color: Color(0xFFE5E7EB),
                   ),
                 ),
               ],

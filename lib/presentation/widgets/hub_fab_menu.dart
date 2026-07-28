@@ -10,11 +10,11 @@ class HubFABMenu extends StatelessWidget {
   const HubFABMenu({super.key, required this.isOpen, required this.onClose});
 
   final List<Map<String, dynamic>> _items = const [
-    {'icon': Icons.shopping_cart_outlined, 'label': 'Alışveriş', 'color': AppColors.softMint,  'route': AppRoutes.shopping},
-    {'icon': Icons.account_balance_wallet_outlined, 'label': 'Bütçe',     'color': AppColors.cobalt,   'route': AppRoutes.budget},
-    {'icon': Icons.photo_library_outlined,          'label': 'Galeri',    'color': AppColors.purple,   'route': AppRoutes.gallery},
+    {'icon': Icons.shopping_cart_outlined, 'label': 'Alışveriş', 'color': Color(0xFF10B981),  'route': AppRoutes.shopping},
+    {'icon': Icons.account_balance_wallet_outlined, 'label': 'Bütçe',     'color': Color(0xFF6366F1),   'route': AppRoutes.budget},
+    {'icon': Icons.photo_library_outlined,          'label': 'Galeri',    'color': Color(0xFF8B5CF6),   'route': AppRoutes.gallery},
     {'icon': Icons.location_on_outlined,            'label': 'Konum',     'color': AppColors.orange,   'route': AppRoutes.location},
-    {'icon': Icons.child_care,                      'label': 'Çocuk',     'color': AppColors.pink,     'route': AppRoutes.childManagement},
+    {'icon': Icons.child_care,                      'label': 'Çocuk',     'color': Color(0xFFEC4899),     'route': AppRoutes.childManagement},
     {'icon': Icons.warning_amber,                   'label': 'Acil',      'color': AppColors.error,    'route': AppRoutes.emergency},
   ];
 

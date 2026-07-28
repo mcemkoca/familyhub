@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import '../../../services/battery_aware_location_tracker.dart';
+import '../../../services/location_tracking_service.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
 class LiveLocationScreen extends StatefulWidget {
@@ -24,6 +25,18 @@ class _LiveLocationScreenState extends State<LiveLocationScreen> {
 
   void _onLocationUpdate() {
     if (mounted) setState(() {});
+  }
+
+  Future<void> _shareNow() async {
+    final ok = await LocationTrackingService.shareCurrentLocation();
+    if (mounted) {
+      setState(() {});
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content:
+                Text(ok ? 'Konum aileyle paylaşıldı' : 'Konum alınamadı')),
+      );
+    }
   }
 
   void _onProfileUpdate() {
@@ -48,7 +61,7 @@ class _LiveLocationScreenState extends State<LiveLocationScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
-            onPressed: () {},
+            onPressed: _shareNow,
           ),
         ],
       ),
@@ -62,15 +75,15 @@ class _LiveLocationScreenState extends State<LiveLocationScreen> {
               color: const Color(0xFF16213E),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: const Center(
+            child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.map, size: 48, color: Colors.white38),
-                  SizedBox(height: 8),
-                  Text('Harita Görünümü', style: TextStyle(color: Colors.white38)),
-                  SizedBox(height: 4),
-                  Text('🟢 Aktif rota gösteriliyor', style: TextStyle(color: Colors.green, fontSize: 12)),
+                  const Icon(Icons.map, size: 48, color: Colors.white38),
+                  const SizedBox(height: 8),
+                  Text(AppLocalizations.of(context).llMapView, style: const TextStyle(color: Colors.white38)),
+                  const SizedBox(height: 4),
+                  const Text('🟢 Aktif rota gösteriliyor', style: TextStyle(color: Colors.green, fontSize: 12)),
                 ],
               ),
             ),
@@ -119,9 +132,8 @@ class _LiveLocationScreenState extends State<LiveLocationScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'GÜN İÇİ ÖZET',
-                  style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                Text(AppLocalizations.of(context).gunIciOzet,
+                  style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 12),
                 _statRow('Toplam mesafe', '8.5 km'),
@@ -148,9 +160,9 @@ class _LiveLocationScreenState extends State<LiveLocationScreen> {
             children: [
               Expanded(
                 child: ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: _shareNow,
                   icon: const Icon(Icons.refresh),
-                  label: const Text('Yenile'),
+                  label: Text(AppLocalizations.of(context).llRefresh),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue.shade700,
                     foregroundColor: Colors.white,
@@ -160,7 +172,7 @@ class _LiveLocationScreenState extends State<LiveLocationScreen> {
               const SizedBox(width: 12),
               Expanded(
                 child: ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: _shareNow,
                   icon: const Icon(Icons.share_location),
                   label: Text(AppLocalizations.of(context).konumPaylas),
                   style: ElevatedButton.styleFrom(
@@ -203,7 +215,7 @@ class _LiveLocationScreenState extends State<LiveLocationScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(color: Colors.grey.shade400)),
+          Text(label, style: const TextStyle(color: Color(0xFF9CA3AF))),
           Text(value, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
         ],
       ),

@@ -1,14 +1,15 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/supabase_client.dart';
-import '../../../config/constants.dart';
 import '../../../config/routes.dart';
 import '../../../domain/models/routine.dart';
 import '../../../repositories/routine_repository.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/routine_service.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../../core/app_logger.dart';
 
 class RoutinesScreen extends StatefulWidget {
   const RoutinesScreen({super.key});
@@ -18,14 +19,38 @@ class RoutinesScreen extends StatefulWidget {
 }
 
 class _RoutinesScreenState extends State<RoutinesScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   List<Routine> _routines = [];
   List<Map<String, dynamic>> _aiSuggestions = [];
   bool _loading = false;
+  StreamSubscription<List<Routine>>? _sub;
 
   @override
   void initState() {
     super.initState();
     _loadRealData();
+  }
+
+  @override
+  void dispose() {
+    _sub?.cancel();
+    super.dispose();
+  }
+
+  /// Realtime abonelik — başka üye/cihaz rutin ekleyince ekran anında güncellenir.
+  void _subscribeRealtime(String familyId) {
+    _sub?.cancel();
+    _sub = RoutineRepository().watchRoutines(familyId).listen((routines) {
+      if (!mounted) return;
+      setState(() {
+        _routines = routines;
+        _aiSuggestions = routines.isNotEmpty
+            ? RoutineService.generateSuggestions(routines.first)
+            : [];
+      });
+    }, onError: (Object e) =>
+        AppLogger.logBestEffort(e, module: 'routines', operation: 'routinesRealtime'));
   }
 
   Future<String?> _getFamilyId() async {
@@ -51,6 +76,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
             : [];
         _loading = false;
       });
+      _subscribeRealtime(familyId);
     } else {
       setState(() => _loading = false);
     }
@@ -71,7 +97,9 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
   void _startRoutine(Routine routine) {
     HapticFeedback.mediumImpact();
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('${routine.name} başlatıldı!')),
+      SnackBar(
+        content: Text(AppLocalizations.of(context).rtStarted(routine.name)),
+      ),
     );
   }
 
@@ -83,22 +111,28 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
     }
   }
 
-  String _typeLabel(RoutineType type) {
+  String _typeLabel(BuildContext context, RoutineType type) {
+    final l = AppLocalizations.of(context);
     switch (type) {
-      case RoutineType.morning: return 'Sabah';
-      case RoutineType.evening: return 'Akşam';
-      case RoutineType.weekly: return 'Haftalık';
-      case RoutineType.custom: return 'Özel';
-      case RoutineType.seasonal: return 'Mevsimsel';
-      case RoutineType.eventBased: return 'Etkinlik';
+      case RoutineType.morning:
+        return l.rtMorning;
+      case RoutineType.evening:
+        return l.rtEvening;
+      case RoutineType.weekly:
+        return l.rtWeekly;
+      case RoutineType.custom:
+        return l.rtCustom;
+      case RoutineType.seasonal:
+        return l.rtSeasonal;
+      case RoutineType.eventBased:
+        return l.rtEventBased;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bgColor = isDark ? AppColors.darkBackground : AppColors.background;
-    final textColor = isDark ? Colors.white : Colors.black87;
+    final bgColor = const Color(0xFF0A0A0F);
+    final textColor = const Color(0xFFE5E7EB);
 
     return Scaffold(
       backgroundColor: bgColor,
@@ -108,11 +142,14 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
             expandedHeight: 120,
             floating: true,
             pinned: true,
-            backgroundColor: isDark ? const Color(0xFF1A1A2E) : const Color(0xFFF8F9FA),
+            backgroundColor: const Color(0xFF1A1A2E),
             flexibleSpace: FlexibleSpaceBar(
-              title: const Text(
-                '🌅 Rutinler',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              title: Text(
+                '🌅 ${AppLocalizations.of(context).rtRoutinesTitle}',
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               background: Container(
                 decoration: BoxDecoration(
@@ -137,8 +174,12 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: _buildActiveRoutineCard(
-                  _routines.firstWhere((r) => r.status.state == RoutineState.active),
-                  isDark, textColor,
+                  context,
+                  _routines.firstWhere(
+                    (r) => r.status.state == RoutineState.active,
+                  ),
+                  isDark,
+                  textColor,
                 ),
               ),
             ),
@@ -159,8 +200,12 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                'Günlük Rutinler',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: textColor),
+                AppLocalizations.of(context).gunlukRutinler,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: textColor,
+                ),
               ),
             ),
           ),
@@ -173,7 +218,12 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
           else
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                (context, index) => _buildRoutineCard(_routines[index], isDark, textColor),
+                (context, index) => _buildRoutineCard(
+                  context,
+                  _routines[index],
+                  isDark,
+                  textColor,
+                ),
                 childCount: _routines.length,
               ),
             ),
@@ -184,16 +234,23 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _navigateToCreate,
         icon: const Icon(Icons.add),
-        label: const Text('Yeni Rutin'),
-        backgroundColor: AppColors.cobalt,
+        label: Text(AppLocalizations.of(context).rtNewRoutine),
+        backgroundColor: const Color(0xFF6366F1),
       ),
     );
   }
 
-  Widget _buildActiveRoutineCard(Routine routine, bool isDark, Color textColor) {
+  Widget _buildActiveRoutineCard(
+    BuildContext context,
+    Routine routine,
+    bool isDark,
+    Color textColor,
+  ) {
     final color = _parseColor(routine.color);
     final currentStep = RoutineService.getCurrentStep(routine);
-    final completed = routine.steps.where((s) => s.status == StepStatus.completed).length;
+    final completed = routine.steps
+        .where((s) => s.status == StepStatus.completed)
+        .length;
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -205,7 +262,11 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
         ),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
-          BoxShadow(color: color.withAlpha(76), blurRadius: 15, offset: const Offset(0, 6)),
+          BoxShadow(
+            color: color.withAlpha(76),
+            blurRadius: 15,
+            offset: const Offset(0, 6),
+          ),
         ],
       ),
       child: Column(
@@ -215,20 +276,41 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
             children: [
               Container(
                 padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(color: Colors.white.withAlpha(51), borderRadius: BorderRadius.circular(12)),
-                child: Icon(_getIcon(routine.icon), color: Colors.white, size: 28),
+                decoration: BoxDecoration(
+                  color: Colors.white.withAlpha(51),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  _getIcon(routine.icon),
+                  color: Colors.white,
+                  size: 28,
+                ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('AKTİF RUTİN', style: TextStyle(fontSize: 11, color: Colors.white.withAlpha(204), fontWeight: FontWeight.w600)),
-                    Text(routine.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
+                    Text(
+                      AppLocalizations.of(context).aktifRutin,
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Colors.white.withAlpha(204),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      routine.name,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
                   ],
                 ),
               ),
-              _buildStatusBadge(routine.status.state),
+              _buildStatusBadge(context, routine.status.state),
             ],
           ),
           const SizedBox(height: 16),
@@ -245,9 +327,18 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('$completed/${routine.steps.length} adım | ${routine.estimatedTotalDuration} dk', style: TextStyle(color: Colors.white.withAlpha(230))),
+              Text(
+                '$completed/${routine.steps.length} adım | ${routine.estimatedTotalDuration} dk',
+                style: TextStyle(color: Colors.white.withAlpha(230)),
+              ),
               if (currentStep != null)
-                Text('Şu an: ${currentStep.title}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+                Text(
+                  AppLocalizations.of(context).rtNow(currentStep.title),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
             ],
           ),
           const SizedBox(height: 12),
@@ -257,11 +348,13 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
                 child: ElevatedButton.icon(
                   onPressed: () => _navigateToDetail(routine),
                   icon: const Icon(Icons.play_arrow),
-                  label: const Text('Devam Et'),
+                  label: Text(AppLocalizations.of(context).rtContinue),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: color,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                 ),
               ),
@@ -276,9 +369,15 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF16213E) : Colors.white,
+        color: const Color(0xFFE5E7EB),
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withAlpha(13), blurRadius: 10, offset: const Offset(0, 4))],
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withAlpha(13),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -287,44 +386,81 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
             children: [
               Icon(Icons.auto_awesome, color: Colors.purple[400]),
               const SizedBox(width: 8),
-              Text('AI Önerileri', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: textColor)),
+              Text(
+                AppLocalizations.of(context).aiOnerileri,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: textColor,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 12),
-          ..._aiSuggestions.map((s) => Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: Row(
-              children: [
-                Text(s['type'] == 'new_routine' ? '💡' : s['type'] == 'modify_routine' ? '⚡' : '🔄', style: const TextStyle(fontSize: 20)),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(s['reason'] as String, style: const TextStyle(fontWeight: FontWeight.w600)),
-                      Text('%${((s['confidence'] as double) * 100).toInt()} güven', style: TextStyle(fontSize: 12, color: Colors.grey[500])),
-                    ],
+          ..._aiSuggestions.map(
+            (s) => Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Row(
+                children: [
+                  Text(
+                    s['type'] == 'new_routine'
+                        ? '💡'
+                        : s['type'] == 'modify_routine'
+                        ? '⚡'
+                        : '🔄',
+                    style: const TextStyle(fontSize: 20),
                   ),
-                ),
-                TextButton(onPressed: () { HapticFeedback.lightImpact(); }, child: const Text('Uygula')),
-              ],
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          s['reason'] as String,
+                          style: const TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          '%${((s['confidence'] as double) * 100).toInt()} güven',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey[500],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      HapticFeedback.lightImpact();
+                    },
+                    child: Text(AppLocalizations.of(context).rtApply),
+                  ),
+                ],
+              ),
             ),
-          )),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildRoutineCard(Routine routine, bool isDark, Color textColor) {
+  Widget _buildRoutineCard(
+    BuildContext context,
+    Routine routine,
+    bool isDark,
+    Color textColor,
+  ) {
     final color = _parseColor(routine.color);
-    final completed = routine.steps.where((s) => s.status == StepStatus.completed).length;
+    final completed = routine.steps
+        .where((s) => s.status == StepStatus.completed)
+        .length;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       child: Card(
         elevation: 2,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        color: isDark ? const Color(0xFF16213E) : Colors.white,
+        color: const Color(0xFFE5E7EB),
         child: InkWell(
           onTap: () => _navigateToDetail(routine),
           borderRadius: BorderRadius.circular(16),
@@ -337,21 +473,40 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
                   children: [
                     Container(
                       padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(color: color.withAlpha(26), borderRadius: BorderRadius.circular(10)),
-                      child: Icon(_getIcon(routine.icon), color: color, size: 22),
+                      decoration: BoxDecoration(
+                        color: color.withAlpha(26),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Icon(
+                        _getIcon(routine.icon),
+                        color: color,
+                        size: 22,
+                      ),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(routine.name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: textColor)),
-                          Text('${routine.estimatedTotalDuration} dk | ${routine.steps.length} adım | ${_typeLabel(routine.type)}',
-                              style: TextStyle(fontSize: 12, color: Colors.grey[500])),
+                          Text(
+                            routine.name,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: textColor,
+                            ),
+                          ),
+                          Text(
+                            '${routine.estimatedTotalDuration} dk | ${routine.steps.length} adım | ${_typeLabel(context, routine.type)}',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey[500],
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                    _buildStatusBadge(routine.status.state),
+                    _buildStatusBadge(context, routine.status.state),
                   ],
                 ),
                 const SizedBox(height: 12),
@@ -368,9 +523,15 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
                 else
                   Row(
                     children: [
-                      _buildBadge('📊 $completed/${routine.steps.length}', color),
+                      _buildBadge(
+                        '📊 $completed/${routine.steps.length}',
+                        color,
+                      ),
                       const SizedBox(width: 8),
-                      _buildBadge('🔔 ${routine.recurrence.pattern.name}', Colors.blue),
+                      _buildBadge(
+                        '🔔 ${routine.recurrence.pattern.name}',
+                        Colors.blue,
+                      ),
                     ],
                   ),
                 const SizedBox(height: 12),
@@ -383,9 +544,16 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
                         icon: const Icon(Icons.play_arrow, size: 18),
                         label: Text(AppLocalizations.of(context).baslat),
                       ),
-                    IconButton(icon: const Icon(Icons.edit, size: 18), onPressed: () => _navigateToDetail(routine)),
                     IconButton(
-                      icon: const Icon(Icons.delete, size: 18, color: Colors.red),
+                      icon: const Icon(Icons.edit, size: 18),
+                      onPressed: () => _navigateToDetail(routine),
+                    ),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.delete,
+                        size: 18,
+                        color: Colors.red,
+                      ),
                       onPressed: () => _deleteRoutine(routine),
                     ),
                   ],
@@ -398,38 +566,65 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
     );
   }
 
-  Widget _buildStatusBadge(RoutineState state) {
+  Widget _buildStatusBadge(BuildContext context, RoutineState state) {
+    final l = AppLocalizations.of(context);
     final labels = {
-      RoutineState.scheduled: ('Planlandı', Colors.grey),
-      RoutineState.active: ('Aktif', Colors.green),
-      RoutineState.paused: ('Duraklatıldı', Colors.orange),
-      RoutineState.completed: ('Tamamlandı', Colors.blue),
-      RoutineState.cancelled: ('İptal', Colors.red),
+      RoutineState.scheduled: (l.rtStateScheduled, Colors.grey),
+      RoutineState.active: (l.rtStateActive, Colors.green),
+      RoutineState.paused: (l.rtStatePaused, Colors.orange),
+      RoutineState.completed: (l.rtStateCompleted, Colors.blue),
+      RoutineState.cancelled: (l.rtStateCancelled, Colors.red),
     };
     final label = labels[state]!;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(color: label.$2.withAlpha(26), borderRadius: BorderRadius.circular(8)),
-      child: Text(label.$1, style: TextStyle(fontSize: 11, color: label.$2, fontWeight: FontWeight.w600)),
+      decoration: BoxDecoration(
+        color: label.$2.withAlpha(26),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Text(
+        label.$1,
+        style: TextStyle(
+          fontSize: 11,
+          color: label.$2,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
     );
   }
 
   Widget _buildBadge(String text, Color color) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(color: color.withAlpha(26), borderRadius: BorderRadius.circular(8)),
-      child: Text(text, style: TextStyle(fontSize: 11, color: color, fontWeight: FontWeight.w600)),
+      decoration: BoxDecoration(
+        color: color.withAlpha(26),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 11,
+          color: color,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
     );
   }
 
   IconData _getIcon(String icon) {
     switch (icon) {
-      case 'sunrise': return Icons.wb_sunny;
-      case 'moon': return Icons.nightlight_round;
-      case 'broom': return Icons.cleaning_services;
-      case 'heart': return Icons.favorite;
-      case 'book': return Icons.menu_book;
-      default: return Icons.schedule;
+      case 'sunrise':
+        return Icons.wb_sunny;
+      case 'moon':
+        return Icons.nightlight_round;
+      case 'broom':
+        return Icons.cleaning_services;
+      case 'heart':
+        return Icons.favorite;
+      case 'book':
+        return Icons.menu_book;
+      default:
+        return Icons.schedule;
     }
   }
 
@@ -437,17 +632,25 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Rutini Sil'),
-        content: Text('"${routine.name}" silinecek. Emin misiniz?'),
+        title: Text(AppLocalizations.of(context).rtDeleteRoutine),
+        content: Text(
+          AppLocalizations.of(context).confirmDeleteNamed(routine.name),
+        ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(AppLocalizations.of(context).cancel)),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: Text(AppLocalizations.of(context).cancel),
+          ),
           TextButton(
             onPressed: () {
               setState(() => _routines.removeWhere((r) => r.id == routine.id));
               Navigator.pop(ctx);
               HapticFeedback.mediumImpact();
             },
-            child: const Text('Sil', style: TextStyle(color: Colors.red)),
+            child: Text(
+              AppLocalizations.of(context).budDelete,
+              style: const TextStyle(color: Colors.red),
+            ),
           ),
         ],
       ),

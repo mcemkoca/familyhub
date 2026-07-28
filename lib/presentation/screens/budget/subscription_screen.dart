@@ -1,9 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
+import '../../../services/hive_service.dart';
+import '../../../services/auth_service.dart';
+
+String get _cur => HiveService.getSetting('currencySymbol') ?? '€';
 
 // ── Model ──
 
@@ -38,51 +42,51 @@ class Subscription {
       cycle == BillingCycle.monthly ? amount : amount / 12;
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'emoji': emoji,
-        'amount': amount,
-        'cycle': cycle.index,
-        'nextBilling': nextBilling,
-        'category': category,
-        'sharedWith': sharedWith,
-        'color': color,
-        'active': active,
-      };
+    'id': id,
+    'name': name,
+    'emoji': emoji,
+    'amount': amount,
+    'cycle': cycle.index,
+    'nextBilling': nextBilling,
+    'category': category,
+    'sharedWith': sharedWith,
+    'color': color,
+    'active': active,
+  };
 
   factory Subscription.fromJson(Map<String, dynamic> j) => Subscription(
-        id: j['id'] as String,
-        name: j['name'] as String,
-        emoji: j['emoji'] as String? ?? '📱',
-        amount: (j['amount'] as num).toDouble(),
-        cycle: BillingCycle.values[j['cycle'] as int? ?? 0],
-        nextBilling: j['nextBilling'] as String,
-        category: j['category'] as String,
-        sharedWith: List<String>.from(j['sharedWith'] as List? ?? []),
-        color: j['color'] as String? ?? '#6C63FF',
-        active: j['active'] as bool? ?? true,
-      );
+    id: j['id'] as String,
+    name: j['name'] as String,
+    emoji: j['emoji'] as String? ?? '📱',
+    amount: (j['amount'] as num).toDouble(),
+    cycle: BillingCycle.values[j['cycle'] as int? ?? 0],
+    nextBilling: j['nextBilling'] as String,
+    category: j['category'] as String,
+    sharedWith: List<String>.from(j['sharedWith'] as List? ?? []),
+    color: j['color'] as String? ?? '#6C63FF',
+    active: j['active'] as bool? ?? true,
+  );
 
   Subscription copyWith({bool? active}) => Subscription(
-        id: id,
-        name: name,
-        emoji: emoji,
-        amount: amount,
-        cycle: cycle,
-        nextBilling: nextBilling,
-        category: category,
-        sharedWith: sharedWith,
-        color: color,
-        active: active ?? this.active,
-      );
+    id: id,
+    name: name,
+    emoji: emoji,
+    amount: amount,
+    cycle: cycle,
+    nextBilling: nextBilling,
+    category: category,
+    sharedWith: sharedWith,
+    color: color,
+    active: active ?? this.active,
+  );
 }
 
 // ── Provider ──
 
 final subscriptionProvider =
     StateNotifierProvider<SubscriptionNotifier, List<Subscription>>(
-  (ref) => SubscriptionNotifier(),
-);
+      (ref) => SubscriptionNotifier(),
+    );
 
 class SubscriptionNotifier extends StateNotifier<List<Subscription>> {
   SubscriptionNotifier() : super([]) {
@@ -90,9 +94,15 @@ class SubscriptionNotifier extends StateNotifier<List<Subscription>> {
   }
 
   static const _boxName = 'subscriptions';
-  static const _key = 'list';
 
-  Future<Box> get _box async => Hive.isBoxOpen(_boxName)
+  /// Kullanıcı-izole anahtar: aynı cihazda hesap değişince ÖNCEKİ kullanıcının
+  /// abonelikleri görünmemeli. Sabit 'list' anahtarı bu sızıntıya yol açıyordu.
+  static String get _key {
+    final uid = AuthService.currentUserId;
+    return (uid == null || uid.isEmpty) ? 'list_anon' : 'list_$uid';
+  }
+
+  Future<Box<dynamic>> get _box async => Hive.isBoxOpen(_boxName)
       ? Hive.box(_boxName)
       : await Hive.openBox(_boxName);
 
@@ -133,25 +143,104 @@ class SubscriptionNotifier extends StateNotifier<List<Subscription>> {
 // ── Predefined popular services ──
 
 const _popularServices = [
+  ('Kira', '🏠', 'Kira', '#6366F1'),
+  ('Elektrik', '⚡', 'Elektrik', '#F59E0B'),
+  ('Su', '💧', 'Su', '#06B6D4'),
+  ('Doğalgaz', '🔥', 'Doğalgaz', '#EF4444'),
+  ('İnternet', '🌐', 'İnternet', '#3B82F6'),
+  ('Telefon', '📱', 'Telefon', '#F97316'),
+  ('Sigorta', '🏥', 'Sigorta', '#10B981'),
+  ('Aidat', '🏢', 'Diğer', '#8B5CF6'),
   ('Netflix', '🎬', 'Eğlence', '#E50914'),
   ('Spotify', '🎵', 'Müzik', '#1DB954'),
-  ('YouTube Premium', '📺', 'Eğlence', '#FF0000'),
-  ('Apple TV+', '🍎', 'Eğlence', '#000000'),
-  ('Disney+', '🏰', 'Eğlence', '#113CCF'),
-  ('Amazon Prime', '📦', 'Alışveriş', '#FF9900'),
-  ('iCloud', '☁️', 'Depolama', '#007AFF'),
-  ('Google One', '🔵', 'Depolama', '#4285F4'),
-  ('Microsoft 365', '💼', 'Üretkenlik', '#0078D4'),
-  ('Canva Pro', '🎨', 'Tasarım', '#8B3DFF'),
-  ('ChatGPT Plus', '🤖', 'AI', '#10A37F'),
-  ('Duolingo Plus', '🦜', 'Eğitim', '#58CC02'),
-  ('Diğer', '📱', 'Diğer', '#6C63FF'),
+  ('Okul/Kreş', '🎒', 'Eğitim', '#EC4899'),
+  ('Diğer', '🧾', 'Diğer', '#6C63FF'),
 ];
 
 const _categories = [
-  'Tümü', 'Eğlence', 'Müzik', 'Depolama', 'Üretkenlik',
-  'Alışveriş', 'Eğitim', 'AI', 'Tasarım', 'Diğer'
+  'Tümü',
+  'Kira',
+  'Elektrik',
+  'Su',
+  'Doğalgaz',
+  'İnternet',
+  'Telefon',
+  'Sigorta',
+  'Eğlence',
+  'Müzik',
+  'Depolama',
+  'Eğitim',
+  'Diğer',
 ];
+
+// ── Ülke bazlı tipik hane giderleri (aylık ortalama, yerel para/EUR) ──
+// name, emoji, kategori, aylık tutar, renk
+const _countryExpenses = {
+  'BE': (
+    'Belçika 🇧🇪',
+    [
+      ('Kira', '🏠', 'Kira', 1100.0, '#6366F1'),
+      ('Elektrik (Engie)', '⚡', 'Elektrik', 95.0, '#F59E0B'),
+      ('Su (Vivaqua)', '💧', 'Su', 35.0, '#06B6D4'),
+      ('Doğalgaz', '🔥', 'Doğalgaz', 110.0, '#EF4444'),
+      ('İnternet (Proximus)', '🌐', 'İnternet', 55.0, '#3B82F6'),
+      ('Telefon (Orange)', '📱', 'Telefon', 20.0, '#F97316'),
+      ('Sağlık sigortası', '🏥', 'Sigorta', 130.0, '#10B981'),
+      ('Netflix', '🎬', 'Eğlence', 13.0, '#E50914'),
+    ],
+  ),
+  'TR': (
+    'Türkiye 🇹🇷',
+    [
+      ('Kira', '🏠', 'Kira', 15000.0, '#6366F1'),
+      ('Elektrik', '⚡', 'Elektrik', 900.0, '#F59E0B'),
+      ('Su', '💧', 'Su', 300.0, '#06B6D4'),
+      ('Doğalgaz', '🔥', 'Doğalgaz', 1200.0, '#EF4444'),
+      ('İnternet (Türk Telekom)', '🌐', 'İnternet', 450.0, '#3B82F6'),
+      ('Telefon', '📱', 'Telefon', 350.0, '#F97316'),
+      ('DASK/Sigorta', '🏥', 'Sigorta', 500.0, '#10B981'),
+      ('Netflix', '🎬', 'Eğlence', 200.0, '#E50914'),
+    ],
+  ),
+  'NL': (
+    'Hollanda 🇳🇱',
+    [
+      ('Kira (Huur)', '🏠', 'Kira', 1250.0, '#6366F1'),
+      ('Elektrik+Gaz (Vattenfall)', '⚡', 'Elektrik', 180.0, '#F59E0B'),
+      ('Su (Vitens)', '💧', 'Su', 30.0, '#06B6D4'),
+      ('İnternet (Ziggo)', '🌐', 'İnternet', 50.0, '#3B82F6'),
+      ('Telefon (KPN)', '📱', 'Telefon', 22.0, '#F97316'),
+      ('Zorgverzekering', '🏥', 'Sigorta', 140.0, '#10B981'),
+      ('Spotify', '🎵', 'Müzik', 11.0, '#1DB954'),
+    ],
+  ),
+  'FR': (
+    'Fransa 🇫🇷',
+    [
+      ('Kira (Loyer)', '🏠', 'Kira', 1000.0, '#6366F1'),
+      ('Elektrik (EDF)', '⚡', 'Elektrik', 90.0, '#F59E0B'),
+      ('Su', '💧', 'Su', 35.0, '#06B6D4'),
+      ('Doğalgaz (Engie)', '🔥', 'Doğalgaz', 100.0, '#EF4444'),
+      ('İnternet (Orange)', '🌐', 'İnternet', 40.0, '#3B82F6'),
+      ('Telefon (SFR)', '📱', 'Telefon', 20.0, '#F97316'),
+      ('Mutuelle santé', '🏥', 'Sigorta', 60.0, '#10B981'),
+      ('Netflix', '🎬', 'Eğlence', 14.0, '#E50914'),
+    ],
+  ),
+  'DE': (
+    'Almanya 🇩🇪',
+    [
+      ('Kira (Miete)', '🏠', 'Kira', 1050.0, '#6366F1'),
+      ('Elektrik (E.ON)', '⚡', 'Elektrik', 110.0, '#F59E0B'),
+      ('Su', '💧', 'Su', 40.0, '#06B6D4'),
+      ('Doğalgaz', '🔥', 'Doğalgaz', 95.0, '#EF4444'),
+      ('İnternet (Telekom)', '🌐', 'İnternet', 45.0, '#3B82F6'),
+      ('Telefon (Vodafone)', '📱', 'Telefon', 25.0, '#F97316'),
+      ('Krankenversicherung', '🏥', 'Sigorta', 200.0, '#10B981'),
+      ('Disney+', '🏰', 'Eğlence', 9.0, '#113CCF'),
+    ],
+  ),
+};
 
 // ── Screen ──
 
@@ -178,8 +267,10 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
     }).toList();
 
     final activeSubs = allSubs.where((s) => s.active).toList();
-    final totalMonthly =
-        activeSubs.fold<double>(0, (sum, s) => sum + s.monthlyAmount);
+    final totalMonthly = activeSubs.fold<double>(
+      0,
+      (sum, s) => sum + s.monthlyAmount,
+    );
     final totalYearly = totalMonthly * 12;
 
     const indigo = Color(0xFF6366F1);
@@ -189,7 +280,7 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
         slivers: [
           // Header
           SliverAppBar(
-            expandedHeight: 200,
+            expandedHeight: 214,
             pinned: true,
             backgroundColor: const Color(0xFF0A0A0F),
             surfaceTintColor: Colors.transparent,
@@ -201,7 +292,9 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  border: Border(bottom: BorderSide(color: indigo.withAlpha(30), width: 0.5)),
+                  border: Border(
+                    bottom: BorderSide(color: indigo.withAlpha(30), width: 0.5),
+                  ),
                 ),
                 child: SafeArea(
                   child: Padding(
@@ -213,25 +306,46 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                         Row(
                           children: [
                             Container(
-                              width: 42, height: 42,
+                              width: 42,
+                              height: 42,
                               decoration: BoxDecoration(
                                 gradient: const LinearGradient(
-                                  colors: [Color(0xFF6366F1), Color(0xFF4F46E5)],
+                                  colors: [
+                                    Color(0xFF6366F1),
+                                    Color(0xFF4F46E5),
+                                  ],
                                   begin: Alignment.topLeft,
                                   end: Alignment.bottomRight,
                                 ),
                                 borderRadius: BorderRadius.circular(13),
                               ),
-                              child: const Icon(Icons.subscriptions_outlined, color: Colors.white, size: 20),
+                              child: const Icon(
+                                Icons.subscriptions_outlined,
+                                color: Colors.white,
+                                size: 20,
+                              ),
                             ),
                             const SizedBox(width: 12),
-                            const Column(
+                            Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Abonelik Takibi',
-                                    style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900)),
-                                Text('Tüm dijital abonelikleriniz',
-                                    style: TextStyle(color: Color(0xFF6B7280), fontSize: 12)),
+                                Text(
+                                  AppLocalizations.of(context).subHomeExpenses,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                                Text(
+                                  AppLocalizations.of(
+                                    context,
+                                  ).subHomeExpensesSub,
+                                  style: const TextStyle(
+                                    color: Color(0xFF6B7280),
+                                    fontSize: 12,
+                                  ),
+                                ),
                               ],
                             ),
                           ],
@@ -240,11 +354,30 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                         // Summary cards
                         Row(
                           children: [
-                            Expanded(child: _SummaryCard(label: 'Aylık', value: '₺${totalMonthly.toStringAsFixed(0)}', icon: '📅')),
+                            Expanded(
+                              child: _SummaryCard(
+                                label: AppLocalizations.of(context).subMonthly,
+                                value:
+                                    '$_cur${totalMonthly.toStringAsFixed(0)}',
+                                icon: '📅',
+                              ),
+                            ),
                             const SizedBox(width: 10),
-                            Expanded(child: _SummaryCard(label: 'Yıllık', value: '₺${totalYearly.toStringAsFixed(0)}', icon: '📆')),
+                            Expanded(
+                              child: _SummaryCard(
+                                label: AppLocalizations.of(context).subYearly,
+                                value: '$_cur${totalYearly.toStringAsFixed(0)}',
+                                icon: '📆',
+                              ),
+                            ),
                             const SizedBox(width: 10),
-                            Expanded(child: _SummaryCard(label: 'Aktif', value: '${activeSubs.length}', icon: '✅')),
+                            Expanded(
+                              child: _SummaryCard(
+                                label: AppLocalizations.of(context).subActive,
+                                value: '${activeSubs.length}',
+                                icon: '✅',
+                              ),
+                            ),
                           ],
                         ),
                       ],
@@ -265,15 +398,52 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                   Row(
                     children: [
                       _ToggleChip(
-                        label: '✅ Aktif (${allSubs.where((s) => s.active).length})',
+                        label:
+                            '✅ ${AppLocalizations.of(context).subFilterActive(allSubs.where((s) => s.active).length)}',
                         active: _showActive,
                         onTap: () => setState(() => _showActive = true),
                       ),
                       const SizedBox(width: 8),
                       _ToggleChip(
-                        label: '⏸ Pasif (${allSubs.where((s) => !s.active).length})',
+                        label:
+                            '⏸ ${AppLocalizations.of(context).subFilterInactive(allSubs.where((s) => !s.active).length)}',
                         active: !_showActive,
                         onTap: () => setState(() => _showActive = false),
+                      ),
+                      const Spacer(),
+                      GestureDetector(
+                        onTap: _showCountryPresets,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 7,
+                          ),
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              colors: [Color(0xFF6366F1), Color(0xFF8B5CF6)],
+                            ),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(
+                                Icons.public,
+                                size: 14,
+                                color: Colors.white,
+                              ),
+                              const SizedBox(width: 5),
+                              Text(
+                                AppLocalizations.of(context).subCountryTemplate,
+                                style: const TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -289,24 +459,28 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                         final cat = _categories[i];
                         final sel = _selectedCategory == cat;
                         return GestureDetector(
-                          onTap: () =>
-                              setState(() => _selectedCategory = cat),
+                          onTap: () => setState(() => _selectedCategory = cat),
                           child: Container(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 4),
+                              horizontal: 12,
+                              vertical: 4,
+                            ),
                             decoration: BoxDecoration(
                               color: sel
                                   ? const Color(0xFF667EEA)
                                   : Colors.grey.withAlpha(20),
                               borderRadius: BorderRadius.circular(16),
                             ),
-                            child: Text(cat,
-                                style: TextStyle(
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w700,
-                                    color: sel
-                                        ? Colors.white
-                                        : const Color(0xFF6B7280))),
+                            child: Text(
+                              cat,
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w700,
+                                color: sel
+                                    ? Colors.white
+                                    : const Color(0xFF6B7280),
+                              ),
+                            ),
                           ),
                         );
                       },
@@ -327,19 +501,21 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                   color: const Color(0xFF6772E5).withAlpha(12),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                      color: const Color(0xFF6772E5).withAlpha(40)),
+                    color: const Color(0xFF6772E5).withAlpha(40),
+                  ),
                 ),
-                child: const Row(
+                child: Row(
                   children: [
-                    Text('💳', style: TextStyle(fontSize: 20)),
-                    SizedBox(width: 10),
+                    const Text('💳', style: TextStyle(fontSize: 20)),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: Text(
-                        'Stripe ödeme sistemi yakında aktif olacak — aboneliklerinizi buradan yönetebileceksiniz.',
-                        style: TextStyle(
-                            fontSize: 11,
-                            color: Color(0xFF6772E5),
-                            fontWeight: FontWeight.w600),
+                        AppLocalizations.of(context).subStripeSoon,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: Color(0xFF6772E5),
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ],
@@ -350,16 +526,18 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
 
           // Subscription list
           filtered.isEmpty
-              ? const SliverFillRemaining(
+              ? SliverFillRemaining(
                   child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('📱', style: TextStyle(fontSize: 48)),
-                        SizedBox(height: 12),
-                        Text('Abonelik bulunamadı\n+ butonuna dokun',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: Color(0xFF9CA3AF))),
+                        const Text('📱', style: TextStyle(fontSize: 48)),
+                        const SizedBox(height: 12),
+                        Text(
+                          AppLocalizations.of(context).subNoSubscription,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(color: Color(0xFF9CA3AF)),
+                        ),
                       ],
                     ),
                   ),
@@ -386,9 +564,110 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
         onPressed: _showAddSheet,
         backgroundColor: const Color(0xFF667EEA),
         icon: const Icon(Icons.add, color: Colors.white),
-        label: const Text('Abonelik Ekle',
-            style:
-                TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
+        label: Text(
+          AppLocalizations.of(context).subAddExpense,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showCountryPresets() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (_) => Container(
+        decoration: const BoxDecoration(
+          color: Color(0xFF13131A),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        ),
+        child: SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 12),
+              Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Colors.white.withAlpha(40),
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(18),
+                child: Text(
+                  AppLocalizations.of(context).subAddCountryTemplate,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(18, 0, 18, 12),
+                child: Text(
+                  'Seçtiğin ülkenin tipik hane giderleri listeye eklenir. Tutarları sonradan düzenleyebilirsin.',
+                  style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 13),
+                ),
+              ),
+              ..._countryExpenses.entries.map((e) {
+                final (label, items) = e.value;
+                final total = items.fold<double>(0, (s, x) => s + x.$4);
+                return ListTile(
+                  title: Text(
+                    label,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '${items.length} gider · ~${total.toStringAsFixed(0)} / ay',
+                    style: const TextStyle(color: Color(0xFF6B7280)),
+                  ),
+                  trailing: const Icon(
+                    Icons.add_circle,
+                    color: Color(0xFF8B5CF6),
+                  ),
+                  onTap: () {
+                    final notifier = ref.read(subscriptionProvider.notifier);
+                    final now = DateTime.now();
+                    final next = DateFormat(
+                      'yyyy-MM-dd',
+                    ).format(DateTime(now.year, now.month + 1, 1));
+                    for (final x in items) {
+                      notifier.add(
+                        Subscription(
+                          id: 'exp_${DateTime.now().microsecondsSinceEpoch}_${x.$1.hashCode}',
+                          name: x.$1,
+                          emoji: x.$2,
+                          amount: x.$4,
+                          cycle: BillingCycle.monthly,
+                          nextBilling: next,
+                          category: x.$3,
+                          color: x.$5,
+                        ),
+                      );
+                    }
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('$label giderleri eklendi'),
+                        behavior: SnackBarBehavior.floating,
+                      ),
+                    );
+                  },
+                );
+              }),
+              const SizedBox(height: 12),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -409,12 +688,12 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
       builder: (_) => StatefulBuilder(
         builder: (ctx, setSt) => Padding(
           padding: EdgeInsets.only(
-              bottom: MediaQuery.of(ctx).viewInsets.bottom),
+            bottom: MediaQuery.of(ctx).viewInsets.bottom,
+          ),
           child: Container(
             decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius:
-                  BorderRadius.vertical(top: Radius.circular(24)),
+              color: Color(0xFF13131A),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
             ),
             padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
             child: Column(
@@ -423,36 +702,43 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
               children: [
                 Center(
                   child: Container(
-                    width: 36, height: 4,
+                    width: 36,
+                    height: 4,
                     decoration: BoxDecoration(
-                      color: Colors.grey.withAlpha(60),
+                      color: Colors.white.withAlpha(40),
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
                 ),
                 const SizedBox(height: 14),
-                const Text('📱 Abonelik Ekle',
-                    style: TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.w900)),
+                Text(
+                  '🧾 ${AppLocalizations.of(context).subAddExpense}',
+                  style: const TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w900,
+                    color: Colors.white,
+                  ),
+                ),
                 const SizedBox(height: 14),
 
-                // Popular services grid
-                const Text('Popüler Servisler',
-                    style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFF6B7280))),
+                // Popular presets grid
+                Text(
+                  AppLocalizations.of(context).subCommonExpenses,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF9CA3AF),
+                  ),
+                ),
                 const SizedBox(height: 8),
                 SizedBox(
                   height: 80,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: _popularServices.length,
-                    separatorBuilder: (_, _) =>
-                        const SizedBox(width: 8),
+                    separatorBuilder: (_, _) => const SizedBox(width: 8),
                     itemBuilder: (_, i) {
-                      final (name, emoji, cat, color) =
-                          _popularServices[i];
+                      final (name, emoji, cat, color) = _popularServices[i];
                       final sel = selectedPreset == i;
                       return GestureDetector(
                         onTap: () {
@@ -484,8 +770,7 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(emoji,
-                                  style: const TextStyle(fontSize: 22)),
+                              Text(emoji, style: const TextStyle(fontSize: 22)),
                               const SizedBox(height: 4),
                               Text(
                                 name,
@@ -493,11 +778,12 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                    fontSize: 9,
-                                    fontWeight: FontWeight.w700,
-                                    color: sel
-                                        ? const Color(0xFF667EEA)
-                                        : const Color(0xFF6B7280)),
+                                  fontSize: 11.5,
+                                  fontWeight: FontWeight.w700,
+                                  color: sel
+                                      ? const Color(0xFF667EEA)
+                                      : const Color(0xFF6B7280),
+                                ),
                               ),
                             ],
                           ),
@@ -511,7 +797,9 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
 
                 // Name field
                 _InputField(
-                    controller: nameCtrl, label: 'Servis adı'),
+                  controller: nameCtrl,
+                  label: AppLocalizations.of(context).subServiceName,
+                ),
                 const SizedBox(height: 10),
 
                 // Amount + cycle row
@@ -520,7 +808,7 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                     Expanded(
                       child: _InputField(
                         controller: amountCtrl,
-                        label: 'Ücret (₺)',
+                        label: AppLocalizations.of(context).subAmount(_cur),
                         keyboard: TextInputType.number,
                       ),
                     ),
@@ -535,16 +823,16 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           _CycleBtn(
-                            label: 'Aylık',
+                            label: AppLocalizations.of(context).subMonthly,
                             active: cycle == BillingCycle.monthly,
-                            onTap: () => setSt(
-                                () => cycle = BillingCycle.monthly),
+                            onTap: () =>
+                                setSt(() => cycle = BillingCycle.monthly),
                           ),
                           _CycleBtn(
-                            label: 'Yıllık',
+                            label: AppLocalizations.of(context).subYearly,
                             active: cycle == BillingCycle.yearly,
-                            onTap: () => setSt(
-                                () => cycle = BillingCycle.yearly),
+                            onTap: () =>
+                                setSt(() => cycle = BillingCycle.yearly),
                           ),
                         ],
                       ),
@@ -559,18 +847,34 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                   onTap: () {
                     final name = nameCtrl.text.trim();
                     final amount =
-                        double.tryParse(amountCtrl.text) ?? 0;
-                    if (name.isEmpty || amount <= 0) return;
+                        double.tryParse(
+                          amountCtrl.text.trim().replaceAll(',', '.'),
+                        ) ??
+                        0;
+                    if (name.isEmpty || amount <= 0) {
+                      ScaffoldMessenger.of(ctx).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            'Lütfen servis adı ve geçerli bir tutar girin',
+                          ),
+                        ),
+                      );
+                      return;
+                    }
 
                     final nextBilling = DateFormat('dd.MM.yyyy').format(
-                        DateTime.now().add(cycle == BillingCycle.monthly
+                      DateTime.now().add(
+                        cycle == BillingCycle.monthly
                             ? const Duration(days: 30)
-                            : const Duration(days: 365)));
+                            : const Duration(days: 365),
+                      ),
+                    );
 
-                    ref.read(subscriptionProvider.notifier).add(
+                    ref
+                        .read(subscriptionProvider.notifier)
+                        .add(
                           Subscription(
-                            id: DateTime.now()
-                                .millisecondsSinceEpoch
+                            id: DateTime.now().millisecondsSinceEpoch
                                 .toString(),
                             name: name,
                             emoji: selectedEmoji,
@@ -592,19 +896,21 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
                       borderRadius: BorderRadius.circular(14),
                       boxShadow: [
                         BoxShadow(
-                          color:
-                              const Color(0xFF667EEA).withAlpha(60),
+                          color: const Color(0xFF667EEA).withAlpha(60),
                           blurRadius: 12,
                           offset: const Offset(0, 4),
                         ),
                       ],
                     ),
-                    child: const Center(
-                      child: Text('Abonelik Ekle',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 15)),
+                    child: Center(
+                      child: Text(
+                        AppLocalizations.of(context).subAddSubscription,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 15,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -623,8 +929,11 @@ class _SubCard extends StatelessWidget {
   final Subscription sub;
   final VoidCallback onToggle;
   final VoidCallback onDelete;
-  const _SubCard(
-      {required this.sub, required this.onToggle, required this.onDelete});
+  const _SubCard({
+    required this.sub,
+    required this.onToggle,
+    required this.onDelete,
+  });
 
   Color get _color {
     try {
@@ -677,36 +986,43 @@ class _SubCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: Center(
-                    child: Text(sub.emoji,
-                        style: const TextStyle(fontSize: 24))),
+                  child: Text(sub.emoji, style: const TextStyle(fontSize: 24)),
+                ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(sub.name,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w800,
-                            color: sub.active
-                                ? Colors.black87
-                                : Colors.grey)),
+                    Text(
+                      sub.name,
+                      style: TextStyle(
+                        fontSize: 15.5,
+                        fontWeight: FontWeight.w800,
+                        color: sub.active
+                            ? Colors.white
+                            : const Color(0xFF9CA3AF),
+                      ),
+                    ),
                     Row(
                       children: [
                         Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 6, vertical: 2),
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
                           decoration: BoxDecoration(
                             color: _color.withAlpha(20),
                             borderRadius: BorderRadius.circular(6),
                           ),
-                          child: Text(sub.category,
-                              style: TextStyle(
-                                  fontSize: 9,
-                                  fontWeight: FontWeight.w700,
-                                  color: sub.active
-                                      ? _color
-                                      : Colors.grey)),
+                          child: Text(
+                            sub.category,
+                            style: TextStyle(
+                              fontSize: 11.5,
+                              fontWeight: FontWeight.w700,
+                              color: sub.active ? _color : Colors.grey,
+                            ),
+                          ),
                         ),
                         const SizedBox(width: 6),
                         Text(
@@ -714,15 +1030,19 @@ class _SubCard extends StatelessWidget {
                               ? 'Aylık'
                               : 'Yıllık',
                           style: const TextStyle(
-                              fontSize: 10,
-                              color: Color(0xFF9CA3AF)),
+                            fontSize: 12.5,
+                            color: Color(0xFF9CA3AF),
+                          ),
                         ),
                       ],
                     ),
-                    Text('📅 Yenileme: ${sub.nextBilling}',
-                        style: const TextStyle(
-                            fontSize: 10,
-                            color: Color(0xFF9CA3AF))),
+                    Text(
+                      '📅 ${AppLocalizations.of(context).subRenewal(sub.nextBilling)}',
+                      style: const TextStyle(
+                        fontSize: 12.5,
+                        color: Color(0xFF9CA3AF),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -730,34 +1050,36 @@ class _SubCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    '₺${sub.amount.toStringAsFixed(0)}',
+                    '$_cur${sub.amount.toStringAsFixed(0)}',
                     style: TextStyle(
-                        fontWeight: FontWeight.w900,
-                        fontSize: 16,
-                        color:
-                            sub.active ? _color : Colors.grey),
+                      fontWeight: FontWeight.w900,
+                      fontSize: 16,
+                      color: sub.active ? _color : Colors.grey,
+                    ),
                   ),
                   Text(
-                    sub.cycle == BillingCycle.monthly
-                        ? '/ay'
-                        : '/yıl',
+                    sub.cycle == BillingCycle.monthly ? '/ay' : '/yıl',
                     style: const TextStyle(
-                        fontSize: 10,
-                        color: Color(0xFF9CA3AF)),
+                      fontSize: 12.5,
+                      color: Color(0xFF9CA3AF),
+                    ),
                   ),
                   if (sub.active)
                     Text(
-                      '≈₺${sub.monthlyAmount.toStringAsFixed(0)}/ay',
+                      '≈€${sub.monthlyAmount.toStringAsFixed(0)}/ay',
                       style: const TextStyle(
-                          fontSize: 9,
-                          color: Color(0xFFB0B7C0)),
+                        fontSize: 11.5,
+                        color: Color(0xFFB0B7C0),
+                      ),
                     ),
                   const SizedBox(height: 4),
                   GestureDetector(
                     onTap: onToggle,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 3),
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
                       decoration: BoxDecoration(
                         color: sub.active
                             ? Colors.green.withAlpha(20)
@@ -767,11 +1089,10 @@ class _SubCard extends StatelessWidget {
                       child: Text(
                         sub.active ? '✓ Aktif' : 'Pasif',
                         style: TextStyle(
-                            fontSize: 9,
-                            fontWeight: FontWeight.w700,
-                            color: sub.active
-                                ? Colors.green
-                                : Colors.grey),
+                          fontSize: 11.5,
+                          fontWeight: FontWeight.w700,
+                          color: sub.active ? Colors.green : Colors.grey,
+                        ),
                       ),
                     ),
                   ),
@@ -789,8 +1110,11 @@ class _SummaryCard extends StatelessWidget {
   final String label;
   final String value;
   final String icon;
-  const _SummaryCard(
-      {required this.label, required this.value, required this.icon});
+  const _SummaryCard({
+    required this.label,
+    required this.value,
+    required this.icon,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -799,23 +1123,28 @@ class _SummaryCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white.withAlpha(20),
         borderRadius: BorderRadius.circular(12),
-        border:
-            Border.all(color: Colors.white.withAlpha(40)),
+        border: Border.all(color: Colors.white.withAlpha(40)),
       ),
       child: Column(
         children: [
           Text(icon, style: const TextStyle(fontSize: 18)),
           const SizedBox(height: 2),
-          Text(value,
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w900,
-                  fontSize: 13)),
-          Text(label,
-              style: const TextStyle(
-                  color: Colors.white70,
-                  fontSize: 9,
-                  fontWeight: FontWeight.w600)),
+          Text(
+            value,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w900,
+              fontSize: 13,
+            ),
+          ),
+          Text(
+            label,
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 11.5,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
         ],
       ),
     );
@@ -826,8 +1155,11 @@ class _ToggleChip extends StatelessWidget {
   final String label;
   final bool active;
   final VoidCallback onTap;
-  const _ToggleChip(
-      {required this.label, required this.active, required this.onTap});
+  const _ToggleChip({
+    required this.label,
+    required this.active,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -836,16 +1168,17 @@ class _ToggleChip extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: active
-              ? const Color(0xFF667EEA)
-              : Colors.grey.withAlpha(20),
+          color: active ? const Color(0xFF667EEA) : Colors.grey.withAlpha(20),
           borderRadius: BorderRadius.circular(20),
         ),
-        child: Text(label,
-            style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w700,
-                color: active ? Colors.white : const Color(0xFF6B7280))),
+        child: Text(
+          label,
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w700,
+            color: active ? Colors.white : const Color(0xFF6B7280),
+          ),
+        ),
       ),
     );
   }
@@ -866,25 +1199,28 @@ class _InputField extends StatelessWidget {
     return TextField(
       controller: controller,
       keyboardType: keyboard,
+      style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
         labelText: label,
+        labelStyle: const TextStyle(color: Color(0xFF9CA3AF)),
         filled: true,
-        fillColor: const Color(0xFFF9FAFB),
+        fillColor: const Color(0xFF1A1A24),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Color(0xFFE5E7EB)),
+          borderSide: const BorderSide(color: Color(0x22FFFFFF)),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Color(0xFFE5E7EB)),
+          borderSide: const BorderSide(color: Color(0x22FFFFFF)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide:
-              const BorderSide(color: Color(0xFF667EEA), width: 1.5),
+          borderSide: const BorderSide(color: Color(0xFF667EEA), width: 1.5),
         ),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 14,
+          vertical: 12,
+        ),
       ),
     );
   }
@@ -894,8 +1230,11 @@ class _CycleBtn extends StatelessWidget {
   final String label;
   final bool active;
   final VoidCallback onTap;
-  const _CycleBtn(
-      {required this.label, required this.active, required this.onTap});
+  const _CycleBtn({
+    required this.label,
+    required this.active,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -908,11 +1247,14 @@ class _CycleBtn extends StatelessWidget {
           color: active ? const Color(0xFF667EEA) : Colors.transparent,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Text(label,
-            style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w700,
-                color: active ? Colors.white : const Color(0xFF9CA3AF))),
+        child: Text(
+          label,
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w700,
+            color: active ? Colors.white : const Color(0xFF9CA3AF),
+          ),
+        ),
       ),
     );
   }

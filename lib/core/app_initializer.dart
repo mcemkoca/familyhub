@@ -13,6 +13,7 @@ import '../domain/entities.dart';
 import '../presentation/providers/app_providers.dart';
 import '../services/notification_service.dart';
 import '../services/hive_service.dart';
+import '../services/koca_seed.dart';
 import '../services/auth_service.dart';
 import '../services/billing/subscription_service.dart';
 import '../services/content/content_engine.dart';
@@ -85,7 +86,7 @@ class AppInitializer {
   static Future<void> _initAndRunApp() async {
     var result = const AppInitResult(
       themeMode: ThemeMode.light,
-      accentColor: AppColors.cobalt,
+      accentColor: Color(0xFF6366F1),
       fontScale: 1.0,
       savedTasks: [],
       savedChatMessages: [],
@@ -104,7 +105,7 @@ class AppInitializer {
 
   static Future<AppInitResult> _loadCoreData() async {
     ThemeMode themeMode = ThemeMode.light;
-    Color accentColor = AppColors.cobalt;
+    Color accentColor = const Color(0xFF6366F1);
     double fontScale = 1.0;
     List<Task> savedTasks = [];
     List<ChatMessage> savedChatMessages = [];
@@ -119,6 +120,9 @@ class AppInitializer {
     await _safeInit(Hive.initFlutter, 'Hive', ms: 2000);
     await _safeInit(HiveService.init, 'HiveService', ms: 2000);
 
+    // Koca Ailesi başlangıç verisini (bir kez) kur.
+    await _safeInit(KocaSeed.ensure, 'KocaSeed');
+
     // Load settings immediately so app can open
     final savedTheme = HiveService.getSetting('themeMode') ?? 'system';
     themeMode = switch (savedTheme) {
@@ -130,9 +134,9 @@ class AppInitializer {
     accentColor = switch (savedAccent) {
       'green' => AppColors.green,
       'orange' => AppColors.orange,
-      'purple' => AppColors.purple,
+      'purple' => const Color(0xFF8B5CF6),
       'red' => AppColors.red,
-      _ => AppColors.cobalt,
+      _ => const Color(0xFF6366F1),
     };
     fontScale = HiveService.getDoubleSetting('fontScale') ?? 1.0;
 
@@ -174,7 +178,7 @@ class AppInitializer {
           debug: false,
         ),
         'Supabase',
-        ms: 5000,
+        ms: 15000,
       );
       await _safeInit(
         AuthService.restoreSession,
@@ -214,9 +218,9 @@ class AppInitializer {
               accentColor = switch (pAccent) {
                 'green' => AppColors.green,
                 'orange' => AppColors.orange,
-                'purple' => AppColors.purple,
+                'purple' => const Color(0xFF8B5CF6),
                 'red' => AppColors.red,
-                _ => AppColors.cobalt,
+                _ => const Color(0xFF6366F1),
               };
             }
           }

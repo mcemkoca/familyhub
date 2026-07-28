@@ -1,6 +1,5 @@
 part of '../budget_screen.dart';
 
-
 class _CategoryBudgetSection extends StatelessWidget {
   final List<Transaction> transactions;
   final List<_Cat> categories;
@@ -17,7 +16,9 @@ class _CategoryBudgetSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final catTotals = <String, double>{};
-    for (final t in transactions.where((t) => t.type == TransactionType.expense)) {
+    for (final t in transactions.where(
+      (t) => t.type == TransactionType.expense,
+    )) {
       catTotals[t.category] = (catTotals[t.category] ?? 0) + t.amount;
     }
 
@@ -26,15 +27,9 @@ class _CategoryBudgetSection extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: const Color(0xFF13131A),
           borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade200,
-              blurRadius: 12,
-              offset: const Offset(0, 4),
-            ),
-          ],
+          border: Border.all(color: const Color(0xFF262631)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,14 +37,20 @@ class _CategoryBudgetSection extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'Kategori Bütçeleri',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                Text(
+                  AppLocalizations.of(context).kategoriButceleri,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
                 ),
-                TextButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.edit, size: 16),
-                  label: const Text('Düzenle', style: TextStyle(fontSize: 12)),
+                Text(
+                  AppLocalizations.of(context).budgetTapToEdit,
+                  style: TextStyle(
+                    fontSize: 11.5,
+                    color: Colors.white.withAlpha(120),
+                  ),
                 ),
               ],
             ),
@@ -91,11 +92,15 @@ class _CategoryBudgetSection extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  '${NumberFormat.currency(symbol: '₺', decimalDigits: 0).format(spent)} / ${NumberFormat.currency(symbol: '₺', decimalDigits: 0).format(limit)}',
+                                  '${NumberFormat.currency(symbol: '€', decimalDigits: 0).format(spent)} / ${NumberFormat.currency(symbol: '€', decimalDigits: 0).format(limit)}',
                                   style: TextStyle(
                                     fontSize: 11,
-                                    color: isOver ? AppColors.error : Colors.grey.shade500,
-                                    fontWeight: isOver ? FontWeight.bold : FontWeight.normal,
+                                    color: isOver
+                                        ? AppColors.error
+                                        : const Color(0xFF6B7280),
+                                    fontWeight: isOver
+                                        ? FontWeight.bold
+                                        : FontWeight.normal,
                                   ),
                                 ),
                               ],
@@ -105,7 +110,7 @@ class _CategoryBudgetSection extends StatelessWidget {
                               borderRadius: BorderRadius.circular(4),
                               child: LinearProgressIndicator(
                                 value: pct,
-                                backgroundColor: Colors.grey.shade100,
+                                backgroundColor: const Color(0xFF262631),
                                 valueColor: AlwaysStoppedAnimation(
                                   isOver ? AppColors.error : cat.color,
                                 ),
@@ -126,4 +131,3 @@ class _CategoryBudgetSection extends StatelessWidget {
     );
   }
 }
-

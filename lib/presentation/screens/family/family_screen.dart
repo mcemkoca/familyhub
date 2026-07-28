@@ -24,6 +24,8 @@ class FamilyScreen extends ConsumerStatefulWidget {
 }
 
 class _FamilyScreenState extends ConsumerState<FamilyScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   FamilyMember? _selectedMember;
   bool _showActionSheet = false;
   bool _showInvite = false;
@@ -113,7 +115,7 @@ class _FamilyScreenState extends ConsumerState<FamilyScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Rol güncellenemedi: $e'),
+            content: Text(AppLocalizations.of(context).fmnRoleUpdateFailed('$e')),
             backgroundColor: AppColors.error,
           ),
         );
@@ -173,7 +175,7 @@ class _FamilyScreenState extends ConsumerState<FamilyScreen> {
                 if (mounted && context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('Üye çıkarılamadı: $e'),
+                      content: Text(AppLocalizations.of(context).famRemoveFailed('$e')),
                       backgroundColor: AppColors.error,
                     ),
                   );
@@ -206,7 +208,6 @@ class _FamilyScreenState extends ConsumerState<FamilyScreen> {
   @override
   Widget build(BuildContext context) {
     final members = ref.watch(familyMembersProvider);
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final safeBottom = MediaQuery.of(context).viewPadding.bottom;
 
     final onlineCount = members.where((m) => m.isOnline).length;
@@ -224,7 +225,7 @@ class _FamilyScreenState extends ConsumerState<FamilyScreen> {
       });
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       body: SafeArea(
         bottom: false,
         child: Stack(
@@ -248,14 +249,12 @@ class _FamilyScreenState extends ConsumerState<FamilyScreen> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          '${members.length} üye · Ailem',
+                          '${members.length} üye Â· Ailem',
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium
                               ?.copyWith(
-                                color: isDark
-                                    ? AppColors.darkTextSecondary
-                                    : AppColors.slate,
+                                color: const Color(0xFF6B7280),
                               ),
                         ),
                       ],
@@ -276,13 +275,11 @@ class _FamilyScreenState extends ConsumerState<FamilyScreen> {
                       child: Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: isDark ? AppColors.darkCard : Colors.white,
+                          color: const Color(0x1AFFFFFF),
                           borderRadius: BorderRadius.circular(16),
                           boxShadow: [
                             BoxShadow(
-                              color: isDark
-                                  ? Colors.black.withAlpha(15)
-                                  : Colors.black.withAlpha(5),
+                              color: Colors.black.withAlpha(20),
                               blurRadius: 12,
                               offset: const Offset(0, 2),
                             ),
@@ -294,7 +291,7 @@ class _FamilyScreenState extends ConsumerState<FamilyScreen> {
                               width: 56,
                               height: 56,
                               decoration: BoxDecoration(
-                                color: AppColors.cobalt.withAlpha(isDark ? 30 : 15),
+                                color: const Color(0xFF6366F1).withAlpha(30),
                                 borderRadius: BorderRadius.circular(14),
                                 image: _familyInfo?.photoUrl != null
                                     ? DecorationImage(
@@ -306,7 +303,7 @@ class _FamilyScreenState extends ConsumerState<FamilyScreen> {
                               child: _familyInfo?.photoUrl == null
                                   ? const Icon(
                                       Icons.family_restroom,
-                                      color: AppColors.cobalt,
+                                      color: Color(0xFF6366F1),
                                       size: 28,
                                     )
                                   : null,
@@ -318,12 +315,10 @@ class _FamilyScreenState extends ConsumerState<FamilyScreen> {
                                 children: [
                                   Text(
                                     _familyInfo?.name ?? 'Ailem',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w700,
-                                      color: isDark
-                                          ? AppColors.darkTextPrimary
-                                          : AppColors.dark,
+                                      color: Color(0xFFE5E7EB),
                                     ),
                                   ),
                                   if (_familyInfo?.description?.isNotEmpty == true)
@@ -331,11 +326,9 @@ class _FamilyScreenState extends ConsumerState<FamilyScreen> {
                                       _familyInfo!.description!,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 13,
-                                        color: isDark
-                                            ? AppColors.darkTextSecondary
-                                            : AppColors.slate,
+                                        color: Color(0xFF6B7280),
                                       ),
                                     )
                                   else
@@ -344,18 +337,16 @@ class _FamilyScreenState extends ConsumerState<FamilyScreen> {
                                       style: TextStyle(
                                         fontSize: 13,
                                         color: isDark
-                                            ? AppColors.darkTextSecondary
-                                            : AppColors.lightGray,
+                                            ? const Color(0xFF6B7280)
+                                            : const Color(0xFF9CA3AF),
                                       ),
                                     ),
                                   if (_familyInfo?.foundedDate != null)
                                     Text(
                                       'Kuruluş: ${DateFormat('dd.MM.yyyy').format(_familyInfo!.foundedDate!)}',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 12,
-                                        color: isDark
-                                            ? AppColors.darkTextSecondary
-                                            : AppColors.slate,
+                                        color: Color(0xFF6B7280),
                                       ),
                                     ),
                                 ],
@@ -364,8 +355,8 @@ class _FamilyScreenState extends ConsumerState<FamilyScreen> {
                             Icon(
                               Icons.chevron_right,
                               color: isDark
-                                  ? AppColors.darkTextSecondary
-                                  : AppColors.lightGray,
+                                  ? const Color(0xFF6B7280)
+                                  : const Color(0xFF9CA3AF),
                             ),
                           ],
                         ),
@@ -379,13 +370,11 @@ class _FamilyScreenState extends ConsumerState<FamilyScreen> {
                     margin: const EdgeInsets.symmetric(horizontal: 16),
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: isDark ? AppColors.darkCard : Colors.white,
+                      color: const Color(0x1AFFFFFF),
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
-                          color: isDark
-                              ? Colors.black.withAlpha(15)
-                              : Colors.black.withAlpha(5),
+                          color: Colors.black.withAlpha(20),
                           blurRadius: 12,
                           offset: const Offset(0, 2),
                         ),
@@ -396,26 +385,26 @@ class _FamilyScreenState extends ConsumerState<FamilyScreen> {
                         _StatItem(
                           icon: Icons.people,
                           value: '${members.length}',
-                          label: 'Üye',
-                          color: AppColors.cobalt,
+                          label: AppLocalizations.of(context).uye,
+                          color: const Color(0xFF6366F1),
                         ),
                         _StatItem(
                           icon: Icons.circle,
                           value: '$onlineCount',
-                          label: 'Çevrimiçi',
-                          color: AppColors.success,
+                          label: AppLocalizations.of(context).online,
+                          color: const Color(0xFF10B981),
                         ),
                         _StatItem(
                           icon: Icons.shield,
                           value: '$adminCount',
-                          label: 'Yönetici',
-                          color: AppColors.purple,
+                          label: AppLocalizations.of(context).admin,
+                          color: const Color(0xFF6366F1),
                         ),
                         _StatItem(
                           icon: Icons.child_care,
                           value: '$childCount',
-                          label: 'Çocuk',
-                          color: AppColors.warning,
+                          label: AppLocalizations.of(context).child,
+                          color: const Color(0xFFF59E0B),
                         ),
                       ],
                     ),
@@ -475,9 +464,9 @@ class _FamilyScreenState extends ConsumerState<FamilyScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => setState(() => _showInvite = true),
-        backgroundColor: AppColors.purple,
+        backgroundColor: const Color(0xFF6366F1),
         icon: const Icon(Icons.person_add, color: Colors.white),
-        label: const Text('Davet Et', style: TextStyle(color: Colors.white)),
+        label: Text(AppLocalizations.of(context).famInvite, style: const TextStyle(color: Colors.white)),
       ),
     );
   }
@@ -498,7 +487,6 @@ class _StatItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Expanded(
       child: Column(
         children: [
@@ -506,7 +494,7 @@ class _StatItem extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: color.withAlpha(isDark ? 25 : 15),
+              color: color.withAlpha(25),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(icon, color: color, size: 20),
@@ -514,20 +502,18 @@ class _StatItem extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             value,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w700,
-              color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+              color: Color(0xFFE5E7EB),
             ),
           ),
           const SizedBox(height: 2),
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 11,
-              color: isDark
-                  ? AppColors.darkTextSecondary
-                  : AppColors.slate,
+              color: Color(0xFF6B7280),
             ),
           ),
         ],
@@ -535,3 +521,4 @@ class _StatItem extends StatelessWidget {
     );
   }
 }
+

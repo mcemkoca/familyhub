@@ -134,27 +134,6 @@ class HubRepository with RepositoryErrorHandler {
     }
   }
 
-  Stream<List<HubEvent>> watchUpcomingEvents(String familyId) {
-    try {
-      return _safeClient!
-          .from('events')
-          .stream(primaryKey: ['id'])
-          .order('start_time')
-          .limit(20)
-          .map(
-            (data) => data
-                .where((e) => e['family_id'] == familyId)
-                .map((e) => HubEvent.fromJson(e))
-                .toList(),
-          );
-    } catch (e) {
-      debugPrint('HubRepository.watchUpcomingEvents error: $e');
-      return Stream.error(
-        RepositoryException('Beklenmeyen hata [watchUpcomingEvents]: $e'),
-      );
-    }
-  }
-
   // ==================== MY TASKS ====================
 
   Future<List<HubTask>> getMyTasks(String familyId) async {
@@ -204,24 +183,6 @@ class HubRepository with RepositoryErrorHandler {
 
   // ==================== FAMILY MOOD ====================
 
-  Future<void> shareMood({
-    required String familyId,
-    required String emoji,
-    String? note,
-    int? energyLevel,
-  }) async {
-    return handleRepositoryCall(() async {
-      _checkAuth();
-      await _safeClient!.from('family_moods').insert({
-        'family_id': familyId,
-        'user_id': _userId,
-        'mood_emoji': emoji,
-        'mood_note': note,
-        'energy_level': energyLevel,
-      });
-    }, 'shareMood');
-  }
-
   Future<List<FamilyMood>> getRecentMoods(
     String familyId, {
     int limit = 5,
@@ -242,27 +203,6 @@ class HubRepository with RepositoryErrorHandler {
     } catch (e) {
       debugPrint('HubRepository: getRecentMoods error: $e');
       return [];
-    }
-  }
-
-  Stream<List<FamilyMood>> watchFamilyMoods(String familyId) {
-    try {
-      return _safeClient!
-          .from('family_moods')
-          .stream(primaryKey: ['id'])
-          .order('created_at', ascending: false)
-          .limit(20)
-          .map(
-            (data) => data
-                .where((e) => e['family_id'] == familyId)
-                .map((e) => FamilyMood.fromJson(e))
-                .toList(),
-          );
-    } catch (e) {
-      debugPrint('HubRepository.watchFamilyMoods error: $e');
-      return Stream.error(
-        RepositoryException('Beklenmeyen hata [watchFamilyMoods]: $e'),
-      );
     }
   }
 
@@ -391,7 +331,7 @@ class HubRepository with RepositoryErrorHandler {
         'suggestions': suggestions,
         'provider': provider,
         'created_at': DateTime.now().toIso8601String(),
-      });
+      }, onConflict: 'family_id');
     } catch (_) {
       // Cache failure is non-critical
     }

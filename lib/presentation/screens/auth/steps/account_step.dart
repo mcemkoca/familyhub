@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import '../../../../config/constants.dart';
 import '../../../../core/validation/input_validator.dart';
@@ -106,27 +107,25 @@ class _AccountStepState extends State<AccountStep> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Hesap ve Aile',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+              color: Color(0xFFE5E7EB),
             ),
           ),
           const SizedBox(height: 4),
-            Text(
-            'FamilyHub hesabınızı oluşturun',
-            style: TextStyle(
+            Text(AppLocalizations.of(context).familyhubHesabiniziOlusturun,
+            style: const TextStyle(
               fontSize: 14,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: Color(0xFF6B7280),
             ),
           ),
           const SizedBox(height: 24),
@@ -134,7 +133,7 @@ class _AccountStepState extends State<AccountStep> {
           Container(
             padding: const EdgeInsets.all(4),
             decoration: BoxDecoration(
-              color: isDark ? AppColors.darkCard : const Color(0xFFF3F4F6),
+              color: const Color(0xFF13131A),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
@@ -146,7 +145,7 @@ class _AccountStepState extends State<AccountStep> {
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       decoration: BoxDecoration(
                         color: !_hasFamilyCode
-                            ? (isDark ? AppColors.darkBackground : Colors.white)
+                            ? (const Color(0xFF0A0A0F))
                             : Colors.transparent,
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -155,7 +154,7 @@ class _AccountStepState extends State<AccountStep> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          color: !_hasFamilyCode ? AppColors.cobalt : AppColors.gray,
+                          color: !_hasFamilyCode ? const Color(0xFF6366F1) : const Color(0xFF6B7280),
                         ),
                       ),
                     ),
@@ -168,16 +167,15 @@ class _AccountStepState extends State<AccountStep> {
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       decoration: BoxDecoration(
                         color: _hasFamilyCode
-                            ? (isDark ? AppColors.darkBackground : Colors.white)
+                            ? (const Color(0xFF0A0A0F))
                             : Colors.transparent,
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Text(
-                        'Aileye Katıl',
+                      child: Text(AppLocalizations.of(context).aileyeKatil,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          color: _hasFamilyCode ? AppColors.cobalt : AppColors.gray,
+                          color: _hasFamilyCode ? const Color(0xFF6366F1) : const Color(0xFF6B7280),
                         ),
                       ),
                     ),
@@ -189,14 +187,14 @@ class _AccountStepState extends State<AccountStep> {
           const SizedBox(height: 20),
           _buildTextField(
             controller: _nameController,
-            label: 'Ad Soyad',
+            label: AppLocalizations.of(context).hcFullName,
             icon: Icons.person_outline,
             textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: 16),
           _buildTextField(
             controller: _emailController,
-            label: 'E-posta',
+            label: AppLocalizations.of(context).conEmail,
             icon: Icons.email_outlined,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
@@ -204,26 +202,26 @@ class _AccountStepState extends State<AccountStep> {
           const SizedBox(height: 16),
           _buildTextField(
             controller: _passwordController,
-            label: 'Şifre',
+            label: AppLocalizations.of(context).password,
             icon: Icons.lock_outline,
             obscureText: true,
             textInputAction: TextInputAction.done,
-            helperText: 'En az 8 karakter, büyük/küçük harf, rakam ve özel karakter',
+            helperText: AppLocalizations.of(context).enAz8KarakterBuyukkucukHarfRakamVeOzelKarakter,
           ),
           const SizedBox(height: 16),
           if (_hasFamilyCode)
             _buildTextField(
               controller: _familyCodeController,
-              label: 'Aile Kodu',
+              label: AppLocalizations.of(context).accFamilyCode,
               icon: Icons.key_outlined,
-              hintText: 'Örn: FH-123456',
+              hintText: AppLocalizations.of(context).ornFh123456,
             )
           else
             _buildTextField(
               controller: _familyNameController,
-              label: 'Aile Adı',
+              label: AppLocalizations.of(context).aileAdi,
               icon: Icons.home_outlined,
-              hintText: 'Örn: Yılmaz Ailesi',
+              hintText: AppLocalizations.of(context).ornYilmazAilesi,
             ),
           const SizedBox(height: 16),
           Row(
@@ -231,16 +229,15 @@ class _AccountStepState extends State<AccountStep> {
               Checkbox(
                 value: _acceptedTerms,
                 onChanged: (v) => setState(() => _acceptedTerms = v ?? false),
-                activeColor: AppColors.cobalt,
+                activeColor: const Color(0xFF6366F1),
               ),
               Expanded(
                 child: GestureDetector(
                   onTap: () => setState(() => _acceptedTerms = !_acceptedTerms),
-                  child: Text(
-                    'Kullanım koşullarını ve gizlilik politikasını okudum ve kabul ediyorum.',
-                    style: TextStyle(
+                  child: Text(AppLocalizations.of(context).kullanimKosullariniVeGizlilikPolitikasiniOkudumVeKabulEdiyorum,
+                    style: const TextStyle(
                       fontSize: 13,
-                      color: isDark ? AppColors.darkTextSecondary : AppColors.gray,
+                      color: Color(0xFF6B7280),
                     ),
                   ),
                 ),
@@ -254,7 +251,7 @@ class _AccountStepState extends State<AccountStep> {
             child: ElevatedButton(
               onPressed: _isLoading ? null : _createAccount,
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.cobalt,
+                backgroundColor: const Color(0xFF6366F1),
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
@@ -266,7 +263,7 @@ class _AccountStepState extends State<AccountStep> {
                       height: 24,
                       child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
                     )
-                  : const Text('Hesap Oluştur', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                  : Text(AppLocalizations.of(context).hesapOlustur, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             ),
           ),
         ],
@@ -284,7 +281,6 @@ class _AccountStepState extends State<AccountStep> {
     String? helperText,
     TextInputAction? textInputAction,
   }) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return TextField(
       controller: controller,
       keyboardType: keyboardType,
@@ -296,7 +292,7 @@ class _AccountStepState extends State<AccountStep> {
         helperText: helperText,
         prefixIcon: Icon(icon),
         filled: true,
-        fillColor: isDark ? AppColors.darkCard : const Color(0xFFF8FAFC),
+        fillColor: const Color(0xFF13131A),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,

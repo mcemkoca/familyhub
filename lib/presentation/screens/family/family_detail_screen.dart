@@ -21,6 +21,8 @@ class FamilyDetailScreen extends StatefulWidget {
 }
 
 class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   FamilyInfo? _familyInfo;
   List<FamilyHistory> _history = [];
   bool _isLoading = true;
@@ -112,14 +114,14 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Aile fotoğrafı güncellendi')),
+          SnackBar(content: Text(AppLocalizations.of(context).fdPhotoUpdated)),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Fotoğraf yüklenemedi: $e'),
+            content: Text(AppLocalizations.of(context).fdPhotoFailed('$e')),
             backgroundColor: AppColors.error,
           ),
         );
@@ -151,7 +153,7 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
           _isSaving = false;
         });
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Aile bilgileri kaydedildi')),
+          SnackBar(content: Text(AppLocalizations.of(context).fdInfoSaved)),
         );
       }
     } catch (e) {
@@ -159,7 +161,7 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
         setState(() => _isSaving = false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Kaydedilemedi: $e'),
+            content: Text(AppLocalizations.of(context).fdSaveFailed('$e')),
             backgroundColor: AppColors.error,
           ),
         );
@@ -197,7 +199,7 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context).delete),
-        content: const Text('Bu anı silmek istediğinize emin misiniz?'),
+        content: Text(AppLocalizations.of(context).fdDeleteMemoryConfirm),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -222,14 +224,14 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
       await _loadData();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Anı silindi')),
+          SnackBar(content: Text(AppLocalizations.of(context).fdMemoryDeleted)),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Silinemedi: $e'),
+            content: Text(AppLocalizations.of(context).fdDeleteFailed('$e')),
             backgroundColor: AppColors.error,
           ),
         );
@@ -252,14 +254,13 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = isDark ? AppColors.darkBackground : AppColors.cloudWhite;
+    final bg = const Color(0xFF0A0A0F);
 
     if (_isLoading) {
       return Scaffold(
         backgroundColor: bg,
         appBar: ScreenHeader(
-          title: 'Aile Detayları',
+          title: AppLocalizations.of(context).fdTitle,
           showBack: true,
           onBack: () => Navigator.pop(context),
         ),
@@ -271,7 +272,7 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
       return Scaffold(
         backgroundColor: bg,
         appBar: ScreenHeader(
-          title: 'Aile Detayları',
+          title: AppLocalizations.of(context).fdTitle,
           showBack: true,
           onBack: () => Navigator.pop(context),
         ),
@@ -284,7 +285,7 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
     return Scaffold(
       backgroundColor: bg,
       appBar: ScreenHeader(
-        title: 'Aile Detayları',
+        title: AppLocalizations.of(context).fdTitle,
         showBack: true,
         onBack: () => Navigator.pop(context),
         rightAction: _isEditing
@@ -296,13 +297,13 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
                         height: 16,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
-                          color: AppColors.cobalt,
+                          color: Color(0xFF6366F1),
                         ),
                       )
                     : const Text(
                         'Kaydet',
                         style: TextStyle(
-                          color: AppColors.cobalt,
+                          color: Color(0xFF6366F1),
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -310,10 +311,9 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
             : (_isAdminOrParent
                 ? TextButton(
                     onPressed: () => setState(() => _isEditing = true),
-                    child: const Text(
-                      'Düzenle',
-                      style: TextStyle(
-                        color: AppColors.cobalt,
+                    child: Text(AppLocalizations.of(context).edit,
+                      style: const TextStyle(
+                        color: Color(0xFF6366F1),
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -336,12 +336,12 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
                   _buildInfoCard(isDark),
                   const SizedBox(height: 24),
                   // History Header
-                  Text(
+                  const Text(
                     'AİLE TARİHÇESİ',
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w700,
-                      color: isDark ? AppColors.slateLight : AppColors.slate,
+                      color: Color(0xFF9CA3AF),
                       letterSpacing: 0.5,
                     ),
                   ),
@@ -376,9 +376,9 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _addHistory,
-        backgroundColor: AppColors.cobalt,
+        backgroundColor: const Color(0xFF6366F1),
         icon: const Icon(Icons.add, color: Colors.white),
-        label: const Text('Anı Ekle', style: TextStyle(color: Colors.white)),
+        label: Text(AppLocalizations.of(context).fdAddMemory, style: const TextStyle(color: Colors.white)),
       ),
     );
   }
@@ -392,7 +392,7 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
             width: double.infinity,
             height: 200,
             decoration: BoxDecoration(
-              color: isDark ? AppColors.darkCard : const Color(0xFFE2E8F0),
+              color: const Color(0xFF13131A),
               borderRadius: BorderRadius.circular(20),
               image: _photoUrl != null
                   ? DecorationImage(
@@ -409,16 +409,16 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
                         Icons.photo_outlined,
                         size: 48,
                         color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.lightGray,
+                            ? const Color(0xFF6B7280)
+                            : const Color(0xFF9CA3AF),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         'Aile Fotoğrafı',
                         style: TextStyle(
                           color: isDark
-                              ? AppColors.darkTextSecondary
-                              : AppColors.lightGray,
+                              ? const Color(0xFF6B7280)
+                              : const Color(0xFF9CA3AF),
                         ),
                       ),
                     ],
@@ -435,14 +435,13 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
                   color: Colors.black.withAlpha(160),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const Row(
+                child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.camera_alt, color: Colors.white, size: 16),
-                    SizedBox(width: 6),
-                    Text(
-                      'Değiştir',
-                      style: TextStyle(color: Colors.white, fontSize: 13),
+                    const Icon(Icons.camera_alt, color: Colors.white, size: 16),
+                    const SizedBox(width: 6),
+                    Text(AppLocalizations.of(context).degistir,
+                      style: const TextStyle(color: Colors.white, fontSize: 13),
                     ),
                   ],
                 ),
@@ -458,11 +457,11 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
       return Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: isDark ? AppColors.darkCard : Colors.white,
+          color: const Color(0xFF13131A),
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: isDark ? Colors.black.withAlpha(20) : Colors.black.withAlpha(5),
+              color: Colors.black.withAlpha(20),
               blurRadius: 12,
               offset: const Offset(0, 2),
             ),
@@ -471,13 +470,13 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
         child: Column(
           children: [
             _buildTextField(
-              label: 'Aile Adı',
+              label: AppLocalizations.of(context).aileAdi,
               controller: _nameController,
               icon: Icons.family_restroom_outlined,
             ),
             const SizedBox(height: 12),
             _buildTextField(
-              label: 'Açıklama',
+              label: AppLocalizations.of(context).description,
               controller: _descriptionController,
               icon: Icons.notes_outlined,
               maxLines: 3,
@@ -489,29 +488,27 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
               child: Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  color: isDark ? AppColors.darkBackground : const Color(0xFFF8FAFC),
+                  color: const Color(0xFF0A0A0F),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.calendar_today_outlined,
                       size: 20,
-                      color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                      color: Color(0xFF6B7280),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Kuruluş Tarihi',
                             style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w500,
-                              color: isDark
-                                  ? AppColors.darkTextSecondary
-                                  : AppColors.slate,
+                              color: Color(0xFF6B7280),
                             ),
                           ),
                           const SizedBox(height: 4),
@@ -519,11 +516,9 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
                             _foundedDate != null
                                 ? DateFormat('dd MMMM yyyy', 'tr').format(_foundedDate!)
                                 : 'Seçilmedi',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 15,
-                              color: isDark
-                                  ? AppColors.darkTextPrimary
-                                  : AppColors.dark,
+                              color: Color(0xFFE5E7EB),
                             ),
                           ),
                         ],
@@ -541,11 +536,11 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkCard : Colors.white,
+        color: const Color(0xFF13131A),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: isDark ? Colors.black.withAlpha(20) : Colors.black.withAlpha(5),
+            color: Colors.black.withAlpha(20),
             blurRadius: 12,
             offset: const Offset(0, 2),
           ),
@@ -556,19 +551,19 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
         children: [
           Text(
             _familyInfo!.name,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w700,
-              color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+              color: Color(0xFFE5E7EB),
             ),
           ),
           if (_familyInfo!.description?.isNotEmpty == true) ...[
             const SizedBox(height: 8),
             Text(
               _familyInfo!.description!,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
-                color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                color: Color(0xFF6B7280),
               ),
             ),
           ],
@@ -576,17 +571,17 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
             const SizedBox(height: 12),
             Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.calendar_today_outlined,
                   size: 16,
-                  color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                  color: Color(0xFF6B7280),
                 ),
                 const SizedBox(width: 8),
                 Text(
                   'Kuruluş: ${DateFormat('dd MMMM yyyy', 'tr').format(_familyInfo!.foundedDate!)}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 13,
-                    color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                    color: Color(0xFF6B7280),
                   ),
                 ),
               ],
@@ -595,17 +590,17 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
           const SizedBox(height: 12),
           Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.people_outline,
                 size: 16,
-                color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                color: Color(0xFF6B7280),
               ),
               const SizedBox(width: 8),
               Text(
                 '${_history.length} anı kaydedildi',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 13,
-                  color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                  color: Color(0xFF6B7280),
                 ),
               ),
             ],
@@ -621,16 +616,15 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
     required IconData icon,
     int maxLines = 1,
   }) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w500,
-            color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+            color: Color(0xFF6B7280),
           ),
         ),
         const SizedBox(height: 8),
@@ -641,10 +635,10 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
             prefixIcon: Icon(
               icon,
               size: 20,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: const Color(0xFF6B7280),
             ),
             filled: true,
-            fillColor: isDark ? AppColors.darkBackground : const Color(0xFFF8FAFC),
+            fillColor: const Color(0xFF0A0A0F),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide.none,
@@ -654,8 +648,8 @@ class _FamilyDetailScreenState extends State<FamilyDetailScreen> {
               vertical: 14,
             ),
           ),
-          style: TextStyle(
-            color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+          style: const TextStyle(
+            color: Color(0xFFE5E7EB),
           ),
         ),
       ],
@@ -675,11 +669,11 @@ class _HistoryCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkCard : Colors.white,
+        color: const Color(0xFF13131A),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: isDark ? Colors.black.withAlpha(15) : Colors.black.withAlpha(5),
+            color: Colors.black.withAlpha(20),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -706,7 +700,7 @@ class _HistoryCard extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                       decoration: BoxDecoration(
-                        color: history.typeColor.withAlpha(isDark ? 30 : 15),
+                        color: history.typeColor.withAlpha(30),
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
@@ -726,8 +720,8 @@ class _HistoryCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12,
                         color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.lightGray,
+                            ? const Color(0xFF6B7280)
+                            : const Color(0xFF9CA3AF),
                       ),
                     ),
                     if (onDelete != null) ...[
@@ -738,8 +732,8 @@ class _HistoryCard extends StatelessWidget {
                           Icons.delete_outline,
                           size: 18,
                           color: isDark
-                              ? AppColors.darkTextSecondary
-                              : AppColors.lightGray,
+                              ? const Color(0xFF6B7280)
+                              : const Color(0xFF9CA3AF),
                         ),
                       ),
                     ],
@@ -748,21 +742,19 @@ class _HistoryCard extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   history.title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
-                    color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                    color: Color(0xFFE5E7EB),
                   ),
                 ),
                 if (history.content?.isNotEmpty == true) ...[
                   const SizedBox(height: 4),
                   Text(
                     history.content!,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 13,
-                      color: isDark
-                          ? AppColors.darkTextSecondary
-                          : AppColors.slate,
+                      color: Color(0xFF6B7280),
                     ),
                   ),
                 ],
@@ -780,36 +772,35 @@ class _EmptyHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       padding: const EdgeInsets.all(32),
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkCard : Colors.white,
+        color: const Color(0xFF13131A),
         borderRadius: BorderRadius.circular(16),
       ),
-      child: Column(
+      child: const Column(
         children: [
           Icon(
             Icons.history_outlined,
             size: 48,
-            color: isDark ? AppColors.darkTextSecondary : AppColors.lightGray,
+            color: Color(0xFF6B7280),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Text(
             'Henüz bir aile anısı eklenmemiş',
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w500,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: Color(0xFF6B7280),
             ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4),
           Text(
             'Tatiller, doğum günleri veya özel anları ekleyin',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 13,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.lightGray,
+              color: Color(0xFF6B7280),
             ),
           ),
         ],
@@ -874,7 +865,7 @@ class _AddHistorySheetState extends State<_AddHistorySheet> {
         setState(() => _saving = false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Eklenemedi: $e'),
+            content: Text(AppLocalizations.of(context).fdAddFailed('$e')),
             backgroundColor: AppColors.error,
           ),
         );
@@ -891,19 +882,19 @@ class _AddHistorySheetState extends State<_AddHistorySheet> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final bottom = MediaQuery.of(context).viewInsets.bottom;
 
     return Container(
       padding: EdgeInsets.only(bottom: bottom + 16),
-      decoration: BoxDecoration(
-        color: isDark ? AppColors.darkBackground : Colors.white,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+      decoration: const BoxDecoration(
+        color: Color(0xFF0A0A0F),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
-          child: Column(
+          child: SingleChildScrollView(
+            child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -912,34 +903,34 @@ class _AddHistorySheetState extends State<_AddHistorySheet> {
                   width: 40,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: isDark ? AppColors.darkCard : const Color(0xFFE2E8F0),
+                    color: const Color(0xFF13131A),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
               ),
               const SizedBox(height: 16),
-              Text(
+              const Text(
                 'Anı Ekle',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
-                  color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                  color: Color(0xFFE5E7EB),
                 ),
               ),
               const SizedBox(height: 16),
               TextField(
                 controller: _titleController,
                 decoration: InputDecoration(
-                  labelText: 'Başlık',
+                  labelText: AppLocalizations.of(context).baslik,
                   filled: true,
-                  fillColor: isDark ? AppColors.darkCard : const Color(0xFFF8FAFC),
+                  fillColor: const Color(0xFF13131A),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide.none,
                   ),
                 ),
-                style: TextStyle(
-                  color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                style: const TextStyle(
+                  color: Color(0xFFE5E7EB),
                 ),
               ),
               const SizedBox(height: 12),
@@ -947,16 +938,16 @@ class _AddHistorySheetState extends State<_AddHistorySheet> {
                 controller: _contentController,
                 maxLines: 3,
                 decoration: InputDecoration(
-                  labelText: 'Detay (isteğe bağlı)',
+                  labelText: AppLocalizations.of(context).fdDetailOptional,
                   filled: true,
-                  fillColor: isDark ? AppColors.darkCard : const Color(0xFFF8FAFC),
+                  fillColor: const Color(0xFF13131A),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide.none,
                   ),
                 ),
-                style: TextStyle(
-                  color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                style: const TextStyle(
+                  color: Color(0xFFE5E7EB),
                 ),
               ),
               const SizedBox(height: 12),
@@ -966,22 +957,22 @@ class _AddHistorySheetState extends State<_AddHistorySheet> {
                 child: Container(
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: isDark ? AppColors.darkCard : const Color(0xFFF8FAFC),
+                    color: const Color(0xFF13131A),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.calendar_today_outlined,
                         size: 20,
-                        color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                        color: Color(0xFF6B7280),
                       ),
                       const SizedBox(width: 12),
                       Text(
                         DateFormat('dd MMMM yyyy', 'tr').format(_eventDate),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 15,
-                          color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                          color: Color(0xFFE5E7EB),
                         ),
                       ),
                     ],
@@ -997,11 +988,11 @@ class _AddHistorySheetState extends State<_AddHistorySheet> {
                   return ChoiceChip(
                     label: Text(type.$2),
                     selected: selected,
-                    selectedColor: AppColors.cobalt,
+                    selectedColor: const Color(0xFF6366F1),
                     labelStyle: TextStyle(
                       color: selected
                           ? Colors.white
-                          : (isDark ? AppColors.darkTextPrimary : AppColors.dark),
+                          : (const Color(0xFFE5E7EB)),
                     ),
                     onSelected: (_) => setState(() => _type = type.$1),
                   );
@@ -1014,7 +1005,7 @@ class _AddHistorySheetState extends State<_AddHistorySheet> {
                 child: ElevatedButton(
                   onPressed: _saving ? null : _save,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.cobalt,
+                    backgroundColor: const Color(0xFF6366F1),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
@@ -1039,6 +1030,7 @@ class _AddHistorySheetState extends State<_AddHistorySheet> {
                 ),
               ),
             ],
+          ),
           ),
         ),
       ),

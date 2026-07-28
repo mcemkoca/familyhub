@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import '../../../domain/models/crash_event.dart';
 import '../../../services/crash_detection_service.dart';
+import '../../../services/location_tracking_service.dart';
+import '../call/call_contact_list_screen.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
 class CrashConfirmationScreen extends StatefulWidget {
@@ -74,11 +76,16 @@ class _CrashConfirmationScreenState extends State<CrashConfirmationScreen>
                 children: [
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        _service.silenceAlarm();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Alarm susturuldu')),
+                        );
+                      },
                       icon: const Icon(Icons.volume_off),
                       label: Text(AppLocalizations.of(context).alarmiKapat),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey.shade800,
+                        backgroundColor: const Color(0xFF374151),
                         foregroundColor: Colors.white,
                       ),
                     ),
@@ -86,7 +93,18 @@ class _CrashConfirmationScreenState extends State<CrashConfirmationScreen>
                   const SizedBox(width: 12),
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () async {
+                        final ok = await LocationTrackingService
+                            .shareCurrentLocation();
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                content: Text(ok
+                                    ? 'Konum aileyle paylaşıldı'
+                                    : 'Konum alınamadı')),
+                          );
+                        }
+                      },
                       icon: const Icon(Icons.my_location),
                       label: Text(AppLocalizations.of(context).konumGuncelle),
                       style: ElevatedButton.styleFrom(
@@ -126,9 +144,8 @@ class _CrashConfirmationScreenState extends State<CrashConfirmationScreen>
             ),
           ),
           const SizedBox(height: 8),
-          const Text(
-            'KAZA TESPİT EDİLDİ',
-            style: TextStyle(
+          Text(AppLocalizations.of(context).kazaTespitEdildi,
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 26,
               fontWeight: FontWeight.bold,
@@ -149,7 +166,7 @@ class _CrashConfirmationScreenState extends State<CrashConfirmationScreen>
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.grey.shade900,
+        color: const Color(0xFF374151),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.red.shade800),
       ),
@@ -218,14 +235,13 @@ class _CrashConfirmationScreenState extends State<CrashConfirmationScreen>
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.grey.shade900,
+        color: const Color(0xFF374151),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
         children: [
-          const Text(
-            'GERİ SAYIM',
-            style: TextStyle(
+          Text(AppLocalizations.of(context).geriSayim,
+            style: const TextStyle(
               color: Colors.white70,
               fontSize: 13,
               fontWeight: FontWeight.w600,
@@ -237,7 +253,7 @@ class _CrashConfirmationScreenState extends State<CrashConfirmationScreen>
             child: LinearProgressIndicator(
               value: progress,
               minHeight: 12,
-              backgroundColor: Colors.grey.shade800,
+              backgroundColor: const Color(0xFF374151),
               valueColor: AlwaysStoppedAnimation(
                 progress > 0.7 ? Colors.red : Colors.orange,
               ),
@@ -252,8 +268,7 @@ class _CrashConfirmationScreenState extends State<CrashConfirmationScreen>
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text(
-            'SOS otomatik başlayacak...',
+          Text(AppLocalizations.of(context).sosOtomatikBaslayacak,
             style: TextStyle(
               color: Colors.white.withAlpha(153),
               fontSize: 13,
@@ -282,7 +297,10 @@ class _CrashConfirmationScreenState extends State<CrashConfirmationScreen>
           () => _service.respondNeedHelp(),
         ),
         const SizedBox(height: 12),
-        _btn('AİLEYİ ARA', Icons.phone, Colors.blue.shade800, () {}),
+        _btn('AİLEYİ ARA', Icons.phone, Colors.blue.shade800, () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => const CallContactListScreen()));
+        }),
       ],
     );
   }

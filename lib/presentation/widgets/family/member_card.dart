@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../../config/constants.dart';
 import '../../../domain/entities.dart';
 
@@ -17,7 +18,7 @@ class MemberCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final roleConfig = _roleConfig(member.role);
+    final roleConfig = _roleConfig(context, member.role);
     final statusText = member.isOnline
         ? 'Çevrimiçi'
         : _formatLastSeen(member.lastSeen);
@@ -26,13 +27,11 @@ class MemberCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkCard : Colors.white,
+        color: const Color(0xFF13131A),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: isDark
-                ? Colors.black.withAlpha(15)
-                : Colors.black.withAlpha(5),
+            color: Colors.black.withAlpha(20),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -72,17 +71,17 @@ class MemberCard extends StatelessWidget {
                     height: 14,
                     decoration: BoxDecoration(
                       color: member.isOnline
-                          ? AppColors.success
-                          : AppColors.lightGray,
+                          ? const Color(0xFF10B981)
+                          : const Color(0xFF9CA3AF),
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: isDark ? AppColors.darkCard : Colors.white,
+                        color: const Color(0xFF13131A),
                         width: 2,
                       ),
                       boxShadow: member.isOnline
                           ? [
                               BoxShadow(
-                                color: AppColors.success.withAlpha(100),
+                                color: const Color(0xFF10B981).withAlpha(100),
                                 blurRadius: 6,
                               ),
                             ]
@@ -102,12 +101,10 @@ class MemberCard extends StatelessWidget {
                     children: [
                       Text(
                         member.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.w600,
-                          color: isDark
-                              ? AppColors.darkTextPrimary
-                              : AppColors.dark,
+                          color: Color(0xFFE5E7EB),
                         ),
                       ),
                       if (isMe) ...[
@@ -118,7 +115,7 @@ class MemberCard extends StatelessWidget {
                             vertical: 2,
                           ),
                           decoration: BoxDecoration(
-                            color: AppColors.cobalt.withAlpha(15),
+                            color: const Color(0xFF6366F1).withAlpha(15),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Text(
@@ -126,7 +123,7 @@ class MemberCard extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.w600,
-                              color: AppColors.cobalt,
+                              color: Color(0xFF6366F1),
                             ),
                           ),
                         ),
@@ -140,7 +137,7 @@ class MemberCard extends StatelessWidget {
                       vertical: 3,
                     ),
                     decoration: BoxDecoration(
-                      color: roleConfig.color.withAlpha(isDark ? 25 : 15),
+                      color: roleConfig.color.withAlpha(25),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Text(
@@ -162,10 +159,10 @@ class MemberCard extends StatelessWidget {
                             : Icons.access_time,
                         size: 10,
                         color: member.isOnline
-                            ? AppColors.success
+                            ? const Color(0xFF10B981)
                             : (isDark
-                                ? AppColors.darkTextSecondary
-                                : AppColors.lightGray),
+                                ? const Color(0xFF6B7280)
+                                : const Color(0xFF9CA3AF)),
                       ),
                       const SizedBox(width: 6),
                       Text(
@@ -173,10 +170,8 @@ class MemberCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 13,
                           color: member.isOnline
-                              ? AppColors.success
-                              : (isDark
-                                  ? AppColors.darkTextSecondary
-                                  : AppColors.slate),
+                              ? const Color(0xFF10B981)
+                              : (const Color(0xFF6B7280)),
                         ),
                       ),
                     ],
@@ -185,9 +180,9 @@ class MemberCard extends StatelessWidget {
               ),
             ),
             // More
-            Icon(
+            const Icon(
               Icons.more_vert,
-              color: isDark ? AppColors.darkBorder : AppColors.lightGray,
+              color: Color(0x1EFFFFFF),
               size: 20,
             ),
           ],
@@ -196,22 +191,22 @@ class MemberCard extends StatelessWidget {
     );
   }
 
-  _RoleConfig _roleConfig(MemberRole role) {
+  _RoleConfig _roleConfig(BuildContext context, MemberRole role) {
     return switch (role) {
       MemberRole.admin =>
-        _RoleConfig(label: 'Yönetici', color: AppColors.cobalt),
+        _RoleConfig(label: AppLocalizations.of(context).roleAdmin, color: const Color(0xFF6366F1)),
       MemberRole.parent =>
-        _RoleConfig(label: 'Ebeveyn', color: AppColors.pink),
+        _RoleConfig(label: AppLocalizations.of(context).roleParent, color: const Color(0xFFEC4899)),
       MemberRole.teen =>
-        _RoleConfig(label: 'Genç', color: AppColors.warning),
+        _RoleConfig(label: AppLocalizations.of(context).roleTeen, color: const Color(0xFFF59E0B)),
       MemberRole.child =>
-        _RoleConfig(label: 'Çocuk', color: AppColors.success),
+        _RoleConfig(label: AppLocalizations.of(context).roleChild, color: const Color(0xFF10B981)),
       MemberRole.elder =>
-        _RoleConfig(label: 'Büyük', color: AppColors.purple),
+        _RoleConfig(label: AppLocalizations.of(context).roleElder, color: const Color(0xFF8B5CF6)),
       MemberRole.guest =>
-        _RoleConfig(label: 'Misafir', color: AppColors.slate),
+        _RoleConfig(label: AppLocalizations.of(context).roleGuest, color: const Color(0xFF6B7280)),
       MemberRole.baby =>
-        _RoleConfig(label: 'Bebek', color: AppColors.cyan),
+        _RoleConfig(label: AppLocalizations.of(context).cmBaby, color: AppColors.cyan),
     };
   }
 

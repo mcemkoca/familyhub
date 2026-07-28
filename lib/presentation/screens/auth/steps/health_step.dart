@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
-import '../../../../config/constants.dart';
 
 class HealthStep extends StatefulWidget {
   final Function(Map<String, dynamic> data) onSaved;
@@ -61,36 +61,34 @@ class _HealthStepState extends State<HealthStep> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Sağlık Bilgileri',
-            style: TextStyle(
+          Text(AppLocalizations.of(context).healthInfo,
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+              color: Color(0xFFE5E7EB),
             ),
           ),
           const SizedBox(height: 4),
-          Text(
+          const Text(
             'Acil durumlar için sağlık bilgilerinizi ekleyin (isteğe bağlı)',
             style: TextStyle(
               fontSize: 14,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: Color(0xFF6B7280),
             ),
           ),
           const SizedBox(height: 24),
-          Text(
+          const Text(
             'Kan Grubu',
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: Color(0xFF6B7280),
             ),
           ),
           const SizedBox(height: 12),
@@ -102,9 +100,9 @@ class _HealthStepState extends State<HealthStep> {
               return ChoiceChip(
                 label: Text(type),
                 selected: selected,
-                selectedColor: AppColors.cobalt,
+                selectedColor: const Color(0xFF6366F1),
                 labelStyle: TextStyle(
-                  color: selected ? Colors.white : (isDark ? AppColors.darkTextPrimary : AppColors.dark),
+                  color: selected ? Colors.white : (const Color(0xFFE5E7EB)),
                 ),
                 onSelected: (_) => setState(() => _bloodType = type),
               );
@@ -113,45 +111,44 @@ class _HealthStepState extends State<HealthStep> {
           const SizedBox(height: 24),
           _buildTextField(
             controller: _allergiesController,
-            label: 'Alerjiler',
+            label: AppLocalizations.of(context).hcAllergies,
             icon: Icons.healing_outlined,
-            hintText: 'Örn: yer fıstığı, polen, antibiyotik (virgülle ayırın)',
+            hintText: AppLocalizations.of(context).hsAllergyHint,
           ),
           const SizedBox(height: 16),
           _buildTextField(
             controller: _conditionsController,
-            label: 'Kronik Hastalıklar',
+            label: AppLocalizations.of(context).chronicConditions,
             icon: Icons.medical_services_outlined,
-            hintText: 'Örn: astım, diyabet (virgülle ayırın)',
+            hintText: AppLocalizations.of(context).hsConditionHint,
           ),
           const SizedBox(height: 24),
-          Text(
-            'Acil Durumda Aranacak Kişi',
-            style: TextStyle(
+          Text(AppLocalizations.of(context).acilDurumdaAranacakKisi,
+            style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: Color(0xFF6B7280),
             ),
           ),
           const SizedBox(height: 12),
           _buildTextField(
             controller: _emergencyNameController,
-            label: 'Ad Soyad',
+            label: AppLocalizations.of(context).hcFullName,
             icon: Icons.person_outline,
           ),
           const SizedBox(height: 12),
           _buildTextField(
             controller: _emergencyPhoneController,
-            label: 'Telefon',
+            label: AppLocalizations.of(context).crashPhone,
             icon: Icons.phone_outlined,
             keyboardType: TextInputType.phone,
           ),
           const SizedBox(height: 12),
           _buildTextField(
             controller: _emergencyRelationController,
-            label: 'Yakınlık Derecesi',
+            label: AppLocalizations.of(context).yakinlikDerecesi,
             icon: Icons.people_outline,
-            hintText: 'Örn: Eş, Anne, Baba',
+            hintText: AppLocalizations.of(context).ornEsAnneBaba,
           ),
           const SizedBox(height: 32),
           SizedBox(
@@ -160,7 +157,7 @@ class _HealthStepState extends State<HealthStep> {
             child: ElevatedButton(
               onPressed: widget.isLoading ? null : _save,
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.cobalt,
+                backgroundColor: const Color(0xFF6366F1),
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
@@ -172,7 +169,7 @@ class _HealthStepState extends State<HealthStep> {
                       height: 24,
                       child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
                     )
-                  : const Text('Tamamla', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                  : Text(AppLocalizations.of(context).fhComplete, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             ),
           ),
         ],
@@ -187,7 +184,6 @@ class _HealthStepState extends State<HealthStep> {
     TextInputType? keyboardType,
     String? hintText,
   }) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return TextField(
       controller: controller,
       keyboardType: keyboardType,
@@ -196,7 +192,7 @@ class _HealthStepState extends State<HealthStep> {
         hintText: hintText,
         prefixIcon: Icon(icon),
         filled: true,
-        fillColor: isDark ? AppColors.darkCard : const Color(0xFFF8FAFC),
+        fillColor: const Color(0xFF13131A),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,

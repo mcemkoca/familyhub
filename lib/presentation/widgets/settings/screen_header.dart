@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../config/constants.dart';
 import 'package:go_router/go_router.dart';
 
 class ScreenHeader extends StatelessWidget implements PreferredSizeWidget {
@@ -22,9 +21,7 @@ class ScreenHeader extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = backgroundColor ??
-        (isDark ? AppColors.darkBackground : Colors.white);
+    final bg = backgroundColor ?? Theme.of(context).scaffoldBackgroundColor;
     final safeTop = MediaQuery.of(context).viewPadding.top;
 
     return Container(
@@ -37,9 +34,7 @@ class ScreenHeader extends StatelessWidget implements PreferredSizeWidget {
           color: bg,
           border: Border(
             bottom: BorderSide(
-              color: isDark
-                  ? AppColors.darkBorder.withAlpha(80)
-                  : const Color(0xFFF1F5F9),
+              color: Theme.of(context).dividerColor,
               width: 1,
             ),
           ),
@@ -57,7 +52,7 @@ class ScreenHeader extends StatelessWidget implements PreferredSizeWidget {
                   child: Icon(
                     Icons.arrow_back_ios_new,
                     size: 20,
-                    color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
               )
@@ -72,7 +67,7 @@ class ScreenHeader extends StatelessWidget implements PreferredSizeWidget {
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w600,
-                      color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
@@ -82,9 +77,7 @@ class ScreenHeader extends StatelessWidget implements PreferredSizeWidget {
                       subtitle!,
                       style: TextStyle(
                         fontSize: 12,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.slate,
+                        color: Theme.of(context).colorScheme.onSurface.withAlpha(150),
                       ),
                       textAlign: TextAlign.center,
                     ),

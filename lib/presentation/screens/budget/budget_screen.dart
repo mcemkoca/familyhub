@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math' show max;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +9,8 @@ import 'package:intl/intl.dart';
 import '../../../config/constants.dart';
 import '../../../domain/entities.dart';
 import '../../providers/app_providers.dart';
+import '../../../services/ai/ai_engine.dart';
+import '../../../core/app_logger.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
 part 'widgets/budget_summary_card.dart';
@@ -77,10 +80,10 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
     final budgetAsync = ref.watch(budgetProvider);
 
     return Scaffold(
-      backgroundColor: AppColors.darkBackground,
+      backgroundColor: const Color(0xFF0A0A0F),
       body: transactionsAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => Center(child: Text('Hata: $e')),
+        error: (e, _) => Center(child: Text(AppLocalizations.of(context).srError('$e'))),
         data: (transactions) {
           final totalIncome = transactions
               .where((t) => t.type == TransactionType.income)
@@ -96,7 +99,7 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
               SliverAppBar(
                 expandedHeight: 160,
                 pinned: true,
-                backgroundColor: AppColors.darkBackground,
+                backgroundColor: const Color(0xFF0A0A0F),
                 surfaceTintColor: Colors.transparent,
                 flexibleSpace: FlexibleSpaceBar(
                   background: Container(
@@ -117,9 +120,8 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
-                                    'Aile Bütçesi',
-                                    style: TextStyle(
+                                  Text(AppLocalizations.of(context).aileButcesi,
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 24,
                                       fontWeight: FontWeight.bold,
@@ -154,7 +156,6 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                     ),
                   ),
                 ),
-                backgroundColor: AppColors.darkBackground,
               ),
 
               // Summary Cards
@@ -164,7 +165,7 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                   child: Row(
                     children: [
                       _SummaryCard(
-                        label: 'Gelir',
+                        label: AppLocalizations.of(context).budIncome,
                         amount: totalIncome,
                         icon: Icons.arrow_downward,
                         color: AppColors.green,
@@ -173,7 +174,7 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                       ),
                       const SizedBox(width: 10),
                       _SummaryCard(
-                        label: 'Gider',
+                        label: AppLocalizations.of(context).budExpense,
                         amount: totalExpense,
                         icon: Icons.arrow_upward,
                         color: AppColors.error,
@@ -182,10 +183,10 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                       ),
                       const SizedBox(width: 10),
                       _SummaryCard(
-                        label: 'Bakiye',
+                        label: AppLocalizations.of(context).budBalance,
                         amount: balance,
                         icon: Icons.account_balance_wallet,
-                        color: AppColors.cobalt,
+                        color: const Color(0xFF6366F1),
                         delay: 0.2,
                         animController: _animController,
                       ),
@@ -236,9 +237,8 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        'İşlemler',
-                        style: TextStyle(
+                      Text(AppLocalizations.of(context).islemler,
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
@@ -287,10 +287,10 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                 padding: const EdgeInsets.fromLTRB(20, 12, 20, 4),
                 child: Text(
                   key,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: Colors.grey.shade600,
+                    color: Color(0xFF6B7280),
                   ),
                 ),
               ),
@@ -360,6 +360,20 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
       suggestions.add('💡 Daha fazla veri toplandıkça kişiselleştirilmiş öneriler sunacağız.');
     }
 
+    // Gemini için özet veri.
+    final catBreakdown = sortedCats
+        .take(6)
+        .map((e) =>
+            '${e.key}: ${NumberFormat.currency(symbol: '€', decimalDigits: 0).format(e.value)}')
+        .join(', ');
+    final aiFuture = _fetchBudgetInsights(
+      totalIncome: totalIncome,
+      totalExpense: totalExpense,
+      catBreakdown: catBreakdown,
+      txCount: expenseTxs.length,
+      localFallback: suggestions,
+    );
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -379,7 +393,7 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
+                  color: const Color(0xFF9CA3AF),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -390,16 +404,15 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                 Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: AppColors.purple.withAlpha(30),
+                    color: const Color(0xFF8B5CF6).withAlpha(30),
                     borderRadius: BorderRadius.circular(14),
                   ),
-                  child: const Icon(Icons.auto_awesome, color: AppColors.purple),
+                  child: const Icon(Icons.auto_awesome, color: Color(0xFF8B5CF6)),
                 ),
                 const SizedBox(width: 12),
-                const Expanded(
-                  child: Text(
-                    'AI Bütçe Analizi',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                Expanded(
+                  child: Text(AppLocalizations.of(context).aiButceAnalizi,
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
@@ -407,32 +420,170 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
             const SizedBox(height: 20),
             _AIStatRow('Toplam Gelir', totalIncome, AppColors.green),
             _AIStatRow('Toplam Gider', totalExpense, AppColors.error),
-            _AIStatRow('Net Bakiye', totalIncome - totalExpense, AppColors.cobalt),
+            _AIStatRow('Net Bakiye', totalIncome - totalExpense, const Color(0xFF6366F1)),
             const SizedBox(height: 8),
-            _AIStatRow('En Yüksek Kategori', null, AppColors.purple,
-                textValue: '$topCategory (${NumberFormat.currency(symbol: '₺', decimalDigits: 0).format(topAmount)})'),
+            _AIStatRow('Ay Sonu Gider Tahmini', _projectMonthEndExpense(expenseTxs),
+                const Color(0xFFF59E0B)),
+            const SizedBox(height: 8),
+            _AIStatRow('En Yüksek Kategori', null, const Color(0xFF8B5CF6),
+                textValue: '$topCategory (${NumberFormat.currency(symbol: '€', decimalDigits: 0).format(topAmount)})'),
             const Divider(height: 32),
-            const Text(
-              '💡 AI Önerileri',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            Row(
+              children: [
+                Text(AppLocalizations.of(context).aionerileri1,
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                ),
+                const SizedBox(width: 8),
+                const Icon(Icons.auto_awesome, size: 15, color: Color(0xFF8B5CF6)),
+              ],
             ),
             const SizedBox(height: 12),
-            ...suggestions.map((s) => Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: AppColors.cobalt.withAlpha(15),
-                      borderRadius: BorderRadius.circular(12),
+            FutureBuilder<List<String>>(
+              future: aiFuture,
+              builder: (context, snap) {
+                if (snap.connectionState == ConnectionState.waiting) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 18,
+                          height: 18,
+                          child: CircularProgressIndicator(
+                              strokeWidth: 2, color: Color(0xFF8B5CF6)),
+                        ),
+                        const SizedBox(width: 12),
+                        Text(AppLocalizations.of(context).budAnalyzing,
+                            style: const TextStyle(
+                                fontSize: 14, color: Color(0xFF9CA3AF))),
+                      ],
                     ),
-                    child: Text(s, style: const TextStyle(fontSize: 14, height: 1.4)),
-                  ),
-                )),
+                  );
+                }
+                final tips = (snap.data == null || snap.data!.isEmpty)
+                    ? suggestions
+                    : snap.data!;
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: tips
+                      .map((s) => Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF6366F1).withAlpha(15),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(s,
+                                  style: const TextStyle(
+                                      fontSize: 14, height: 1.4)),
+                            ),
+                          ))
+                      .toList(),
+                );
+              },
+            ),
             const SizedBox(height: 16),
           ],
         ),
       ),
     );
+  }
+
+  /// Bu ayki harcama hızından ay sonu toplam gider tahminini hesaplar.
+  double _projectMonthEndExpense(List<Transaction> expenseTxs) {
+    final now = DateTime.now();
+    final monthExpense = expenseTxs
+        .where((t) => t.createdAt.year == now.year && t.createdAt.month == now.month)
+        .fold<double>(0, (s, t) => s + t.amount);
+    final daysInMonth = DateTime(now.year, now.month + 1, 0).day;
+    final dayOfMonth = now.day;
+    if (dayOfMonth == 0 || monthExpense == 0) return monthExpense;
+    return (monthExpense / dayOfMonth) * daysInMonth;
+  }
+
+  /// Gemini'den kişiselleştirilmiş bütçe önerileri çeker. Başarısız olursa
+  /// kural tabanlı [localFallback] listesi döner.
+  Future<List<String>> _fetchBudgetInsights({
+    required double totalIncome,
+    required double totalExpense,
+    required String catBreakdown,
+    required int txCount,
+    required List<String> localFallback,
+  }) async {
+    final net = totalIncome - totalExpense;
+    final prompt = '''
+Bir Belçika'da yaşayan ailenin aylık bütçesini analiz et. Para birimi Euro.
+Toplam gelir: €${totalIncome.toStringAsFixed(0)}
+Toplam gider: €${totalExpense.toStringAsFixed(0)}
+Net bakiye: €${net.toStringAsFixed(0)}
+İşlem sayısı: $txCount
+Kategori dağılımı: ${catBreakdown.isEmpty ? 'veri yok' : catBreakdown}
+
+Bu verilere göre 3-4 kısa, uygulanabilir tasarruf/bütçe önerisi ver.
+Sadece JSON döndür: {"suggestions": ["...", "..."]}. Her öneri tek cümle, Türkçe, başına uygun bir emoji koy.''';
+
+    try {
+      final res = await AIEngine.generate(
+        prompt: prompt,
+        format: AIResponseFormat.json,
+        maxTokens: 500,
+        temperature: 0.6,
+      );
+      final parsed = _parseSuggestions(res.content);
+      return parsed.isEmpty ? localFallback : parsed;
+    } catch (_) {
+      return localFallback;
+    }
+  }
+
+  List<String> _parseSuggestions(String raw) {
+    try {
+      var s = raw.trim();
+      final start = s.indexOf('{');
+      final end = s.lastIndexOf('}');
+      if (start >= 0 && end > start) s = s.substring(start, end + 1);
+      final obj = jsonDecode(s);
+      final list = obj is Map ? obj['suggestions'] : null;
+      if (list is List) {
+        return list
+            .map((e) => e.toString().trim())
+            .where((e) => e.isNotEmpty)
+            .toList();
+      }
+    } catch (e) {
+      // Best-effort: AI öneri JSON'u bozuksa öneri GÖSTERİLMEZ (boş liste).
+      // Kullanıcı akışı etkilenmez, sahte başarı yok — ama iz bırakılır.
+      AppLogger.logBestEffort(e,
+          module: 'budget', operation: 'parseAiSuggestions');
+    }
+    return const [];
+  }
+
+  /// Açıklama metninden Gemini ile en uygun kategoriyi seçer.
+  Future<String?> _suggestCategory(String desc, List<String> categories) async {
+    final prompt = '''
+Bir harcama açıklaması: "$desc"
+Aşağıdaki kategorilerden EN uygun olanı seç ve SADECE kategori adını yaz:
+${categories.join(', ')}''';
+    try {
+      final res = await AIEngine.generate(
+        prompt: prompt,
+        maxTokens: 30,
+        temperature: 0.2,
+      );
+      final answer = res.content.trim().toLowerCase();
+      for (final c in categories) {
+        if (answer.contains(c.toLowerCase())) return c;
+      }
+    } catch (e) {
+      // Best-effort: AI kategori öneremezse kullanıcı kendisi seçer (null).
+      // Akış bozulmaz, sahte başarı yok — iz bırakılır.
+      AppLogger.logBestEffort(e,
+          module: 'budget', operation: 'suggestCategory');
+    }
+    return null;
   }
 
   void _showLimitEditor(BuildContext context, _Cat category) {
@@ -446,9 +597,9 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
         content: TextField(
           controller: controller,
           keyboardType: TextInputType.number,
-          decoration: const InputDecoration(
-            labelText: 'Aylık Limit (₺)',
-            prefixIcon: Icon(Icons.payments_outlined),
+          decoration: InputDecoration(
+            labelText: AppLocalizations.of(context).budMonthlyLimit,
+            prefixIcon: const Icon(Icons.payments_outlined),
           ),
         ),
         actions: [
@@ -463,7 +614,7 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
               Navigator.pop(ctx);
             },
             style: ElevatedButton.styleFrom(backgroundColor: AppColors.green),
-            child: const Text('Kaydet', style: TextStyle(color: Colors.white)),
+            child: Text(AppLocalizations.of(context).save, style: const TextStyle(color: Colors.white)),
           ),
         ],
       ),
@@ -483,12 +634,12 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
       context: context,
       builder: (_) => AlertDialog(
         title: Text(AppLocalizations.of(context).islemiSil),
-        content: Text('${tr.category} - ${NumberFormat.currency(symbol: '₺').format(tr.amount)} silinecek. Emin misiniz?'),
+        content: Text('${tr.category} - ${NumberFormat.currency(symbol: '€').format(tr.amount)} silinecek. Emin misiniz?'),
         actions: [
           TextButton(onPressed: () => Navigator.pop(context, false), child: Text(AppLocalizations.of(context).cancel)),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Sil', style: TextStyle(color: AppColors.error)),
+            child: Text(AppLocalizations.of(context).budDelete, style: const TextStyle(color: AppColors.error)),
           ),
         ],
       ),
@@ -518,16 +669,16 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
       builder: (ctx) {
         return StatefulBuilder(
           builder: (ctx, setModalState) {
-            final isDark = Theme.of(ctx).brightness == Brightness.dark;
             return Padding(
               padding: EdgeInsets.only(bottom: MediaQuery.of(ctx).viewInsets.bottom),
               child: Container(
-                decoration: BoxDecoration(
-                  color: isDark ? AppColors.darkCard : Colors.white,
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+                decoration: const BoxDecoration(
+                  color: Color(0xFF13131A),
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
                 ),
                 padding: const EdgeInsets.all(24),
-                child: Column(
+                child: SingleChildScrollView(
+                  child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -536,7 +687,7 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                         width: 40,
                         height: 4,
                         decoration: BoxDecoration(
-                          color: isDark ? AppColors.darkBorder : AppColors.border,
+                          color: const Color(0x1EFFFFFF),
                           borderRadius: BorderRadius.circular(2),
                         ),
                       ),
@@ -544,10 +695,10 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                     const SizedBox(height: 20),
                     Text(
                       isEdit ? 'İşlemi Düzenle' : 'Yeni İşlem Ekle',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                        color: Color(0xFFE5E7EB),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -555,7 +706,7 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                     // Income / Expense toggle
                     Container(
                       decoration: BoxDecoration(
-                        color: isDark ? Colors.grey.shade800 : Colors.grey.shade100,
+                        color: const Color(0xFF1F2937),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
@@ -639,16 +790,16 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                       keyboardType: TextInputType.number,
                       style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                       decoration: InputDecoration(
-                        labelText: 'Tutar',
-                        prefixText: '₺ ',
-                        prefixStyle: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: AppColors.dark),
+                        labelText: AppLocalizations.of(context).budAmount,
+                        prefixText: '€ ',
+                        prefixStyle: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Color(0xFFE5E7EB)),
                         border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                       ),
                     ),
                     const SizedBox(height: 16),
 
                     // Category Grid
-                    const Text('Kategori', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                    Text(AppLocalizations.of(context).budCategory, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
                     const SizedBox(height: 8),
                     Wrap(
                       spacing: 8,
@@ -662,10 +813,10 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                           onSelected: (_) => setModalState(() => selectedCategory = cat.name),
                           selectedColor: cat.color,
                           labelStyle: TextStyle(
-                            color: isSelected ? Colors.white : AppColors.dark,
+                            color: isSelected ? Colors.white : const Color(0xFFE5E7EB),
                             fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
                           ),
-                          backgroundColor: isDark ? Colors.grey.shade800 : Colors.grey.shade100,
+                          backgroundColor: const Color(0xFF1F2937),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                         );
                       }).toList(),
@@ -727,12 +878,45 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                     TextField(
                       controller: descController,
                       decoration: InputDecoration(
-                        labelText: 'Açıklama (opsiyonel)',
+                        labelText: AppLocalizations.of(context).budDescOptional,
                         prefixIcon: const Icon(Icons.notes_outlined),
                         border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 8),
+
+                    // AI kategori önerisi
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: TextButton.icon(
+                        onPressed: () async {
+                          final text = descController.text.trim();
+                          if (text.isEmpty) {
+                            ScaffoldMessenger.of(ctx).showSnackBar(
+                              const SnackBar(
+                                  content: Text(
+                                      'Önce açıklama yazın, AI kategoriyi bulsun.')),
+                            );
+                            return;
+                          }
+                          final cat = await _suggestCategory(
+                              text, _categories.map((c) => c.name).toList());
+                          if (cat != null) {
+                            setModalState(() => selectedCategory = cat);
+                            if (ctx.mounted) {
+                              ScaffoldMessenger.of(ctx).showSnackBar(
+                                SnackBar(content: Text(AppLocalizations.of(context).budAiSuggestion(cat))),
+                              );
+                            }
+                          }
+                        },
+                        icon: const Icon(Icons.auto_awesome,
+                            size: 18, color: Color(0xFF8B5CF6)),
+                        label: Text(AppLocalizations.of(context).budSuggestCategory,
+                            style: const TextStyle(color: Color(0xFF8B5CF6))),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
 
                     // Save Button
                     SizedBox(
@@ -743,7 +927,14 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                           final amount = double.tryParse(
                                   amountController.text.replaceAll(',', '.')) ??
                               0;
-                          if (amount <= 0) return;
+                          if (amount <= 0) {
+                            ScaffoldMessenger.of(ctx).showSnackBar(
+                              SnackBar(
+                                  content:
+                                      Text(AppLocalizations.of(context).budEnterValidAmount)),
+                            );
+                            return;
+                          }
                           final tx = Transaction(
                             id: isEdit
                                 ? existing.id
@@ -779,6 +970,7 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                       ),
                     ),
                   ],
+                ),
                 ),
               ),
             );

@@ -7,7 +7,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
+import '../core/supabase_client.dart';
 import '../domain/models/location_tracking.dart';
+import 'localization/locale_service.dart';
 
 /// Callback when profile changes
 typedef ProfileChangeCallback = void Function(String profileName, MotionProfileConfig config);
@@ -18,6 +20,12 @@ class BatteryAwareLocationTracker {
   static final BatteryAwareLocationTracker _instance = BatteryAwareLocationTracker._internal();
   factory BatteryAwareLocationTracker() => _instance;
   BatteryAwareLocationTracker._internal();
+
+  String get _languageCode =>
+      LocaleService.resolveInitialLocale().languageCode;
+
+  String _text(Map<String, String> values) =>
+      values[_languageCode] ?? values['tr']!;
 
   // ── State ──
   String _currentProfileName = 'balanced';
@@ -230,7 +238,8 @@ class BatteryAwareLocationTracker {
     try {
       final accuracy = _accuracyFromString(config.accuracy);
       final pos = await Geolocator.getCurrentPosition(
-        locationSettings: LocationSettings(accuracy: accuracy),
+        locationSettings: LocationSettings(
+            accuracy: accuracy, timeLimit: const Duration(seconds: 10)),
       );
       _processLocation(pos, profileName, config);
     } catch (e) {
@@ -261,11 +270,30 @@ class BatteryAwareLocationTracker {
     final batch = List<LocationPoint>.from(_locationBatch);
     _locationBatch.clear();
 
-    // Build segment summary
-    // ignore: unused_local_variable
     final segment = _buildSegment(batch);
+    await _uploadSegment(segment);
+  }
 
-    // TODO: Upload to Supabase via repository
+  Future<void> _uploadSegment(LocationSegment segment) async {
+    try {
+      final client = SupabaseConfig.safeClient;
+      final userId = client?.auth.currentUser?.id;
+      if (client == null || userId == null) return;
+
+      await client.from('location_segments').insert({
+        'user_id': userId,
+        'start_time': segment.startTime.toIso8601String(),
+        'end_time': segment.endTime.toIso8601String(),
+        'distance': segment.distance,
+        'duration_seconds': segment.duration.inSeconds,
+        'average_speed': segment.averageSpeed,
+        'max_speed': segment.maxSpeed,
+        'transport_mode': segment.transportMode,
+        'confidence': segment.confidence,
+      });
+    } catch (e) {
+      debugPrint('[LocationTracker] Segment upload failed: $e');
+    }
   }
 
   LocationSegment _buildSegment(List<LocationPoint> points) {
@@ -363,13 +391,33 @@ class BatteryAwareLocationTracker {
 
     String recommendation;
     if (predictedLevel < 10) {
-      recommendation = 'Kritik! Profili düşür veya şarj edin.';
+      recommendation = _text(const {
+        'tr': 'Kritik! Daha düşük bir profile geçin veya cihazı şarj edin.',
+        'en': 'Critical! Switch to a lower profile or charge the device.',
+        'nl': 'Kritiek! Schakel over naar een lager profiel of laad het apparaat op.',
+        'fr': 'Niveau critique ! Passez à un profil inférieur ou rechargez l’appareil.',
+      });
     } else if (predictedLevel < 20) {
-      recommendation = 'Düşük batarya. Ultra low power modu önerilir.';
+      recommendation = _text(const {
+        'tr': 'Batarya düşük. Ultra düşük güç modu önerilir.',
+        'en': 'Battery is low. Ultra-low-power mode is recommended.',
+        'nl': 'De batterij is bijna leeg. De ultra-energiebesparende modus wordt aanbevolen.',
+        'fr': 'La batterie est faible. Le mode ultra basse consommation est recommandé.',
+      });
     } else if (predictedLevel < 50) {
-      recommendation = 'Batarya orta seviyede. Mevcut profil uygun.';
+      recommendation = _text(const {
+        'tr': 'Batarya orta seviyede. Mevcut profil uygun.',
+        'en': 'Battery level is moderate. The current profile is suitable.',
+        'nl': 'Het batterijniveau is gemiddeld. Het huidige profiel is geschikt.',
+        'fr': 'Le niveau de batterie est moyen. Le profil actuel est adapté.',
+      });
     } else {
-      recommendation = 'Batarya yeterli. Yüksek accuracy kullanılabilir.';
+      recommendation = _text(const {
+        'tr': 'Batarya yeterli. Yüksek doğruluk kullanılabilir.',
+        'en': 'Battery level is sufficient. High accuracy can be used.',
+        'nl': 'Het batterijniveau is voldoende. Hoge nauwkeurigheid kan worden gebruikt.',
+        'fr': 'Le niveau de batterie est suffisant. La haute précision peut être utilisée.',
+      });
     }
 
     return BatteryPrediction(
@@ -384,23 +432,38 @@ class BatteryAwareLocationTracker {
   List<OptimizationSuggestion> generateOptimizationSuggestions() {
     final suggestions = <OptimizationSuggestion>[];
 
-    suggestions.add(const OptimizationSuggestion(
+    suggestions.add(OptimizationSuggestion(
       type: 'profile_optimization',
-      description: 'Profil geçişleriniz optimize edilebilir. Daha az sıklıkla değişim önerilir.',
+      description: _text(const {
+        'tr': 'Profil geçişleriniz optimize edilebilir. Daha seyrek geçiş yapılması önerilir.',
+        'en': 'Your profile switches can be optimized. Switching less frequently is recommended.',
+        'nl': 'Je profielwisselingen kunnen worden geoptimaliseerd. Minder vaak wisselen wordt aanbevolen.',
+        'fr': 'Les changements de profil peuvent être optimisés. Il est conseillé de changer moins souvent.',
+      }),
       potentialSaving: 15,
       confidence: 0.8,
     ));
 
-    suggestions.add(const OptimizationSuggestion(
+    suggestions.add(OptimizationSuggestion(
       type: 'geofence_optimization',
-      description: 'Geofence bölgeleriniz genişletilebilir. Daha az GPS kullanımı sağlar.',
+      description: _text(const {
+        'tr': 'Güvenli bölge sınırlarınız genişletilebilir. Bu, GPS kullanımını azaltır.',
+        'en': 'Your geofence areas can be expanded to reduce GPS usage.',
+        'nl': 'Je geofence-zones kunnen worden vergroot om het GPS-gebruik te verminderen.',
+        'fr': 'Vos zones géographiques peuvent être agrandies afin de réduire l’utilisation du GPS.',
+      }),
       potentialSaving: 10,
       confidence: 0.75,
     ));
 
-    suggestions.add(const OptimizationSuggestion(
+    suggestions.add(OptimizationSuggestion(
       type: 'time_rule',
-      description: 'Uyku saatiniz tespit edildi. 22:00-06:00 arası ultra low power önerilir.',
+      description: _text(const {
+        'tr': 'Uyku saatleriniz tespit edildi. 22:00–06:00 arasında ultra düşük güç modu önerilir.',
+        'en': 'Your sleep hours were detected. Ultra-low-power mode is recommended between 22:00 and 06:00.',
+        'nl': 'Je slaapuren zijn gedetecteerd. De ultra-energiebesparende modus wordt aanbevolen tussen 22.00 en 06.00 uur.',
+        'fr': 'Vos heures de sommeil ont été détectées. Le mode ultra basse consommation est recommandé entre 22 h et 6 h.',
+      }),
       potentialSaving: 20,
       confidence: 0.9,
     ));

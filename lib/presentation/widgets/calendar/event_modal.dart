@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -28,6 +29,8 @@ class EventModal extends ConsumerStatefulWidget {
 }
 
 class _EventModalState extends ConsumerState<EventModal> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   late final TextEditingController _titleCtrl;
   late final TextEditingController _locationCtrl;
   late final TextEditingController _descCtrl;
@@ -95,7 +98,7 @@ class _EventModalState extends ConsumerState<EventModal> {
         data: Theme.of(context).copyWith(
           colorScheme: Theme.of(
             context,
-          ).colorScheme.copyWith(primary: AppColors.cobalt),
+          ).colorScheme.copyWith(primary: const Color(0xFF6366F1)),
         ),
         child: child!,
       ),
@@ -133,7 +136,7 @@ class _EventModalState extends ConsumerState<EventModal> {
         data: Theme.of(context).copyWith(
           colorScheme: Theme.of(
             context,
-          ).colorScheme.copyWith(primary: AppColors.cobalt),
+          ).colorScheme.copyWith(primary: const Color(0xFF6366F1)),
         ),
         child: child!,
       ),
@@ -167,7 +170,7 @@ class _EventModalState extends ConsumerState<EventModal> {
     if (_titleCtrl.text.trim().isEmpty) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('Başlık zorunlu')));
+      ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).evTitleRequired)));
       return;
     }
     HapticFeedback.mediumImpact();
@@ -211,14 +214,14 @@ class _EventModalState extends ConsumerState<EventModal> {
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Text('Etkinliği Sil'),
+        title: Text(AppLocalizations.of(context).evDeleteEvent),
         content: const Text(
           'Bu etkinlik kalıcı olarak silinecek. Emin misiniz?',
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('İptal'),
+            child: Text(AppLocalizations.of(context).cancel),
           ),
           ElevatedButton(
             onPressed: () {
@@ -230,7 +233,7 @@ class _EventModalState extends ConsumerState<EventModal> {
               backgroundColor: AppColors.error,
               foregroundColor: Colors.white,
             ),
-            child: const Text('Sil'),
+            child: Text(AppLocalizations.of(context).budDelete),
           ),
         ],
       ),
@@ -239,7 +242,6 @@ class _EventModalState extends ConsumerState<EventModal> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final members = ref.watch(familyMembersProvider);
     final isEditing = widget.event != null;
 
@@ -253,11 +255,11 @@ class _EventModalState extends ConsumerState<EventModal> {
             onTap: () {},
             child: Container(
               constraints: BoxConstraints(
-                maxHeight: MediaQuery.of(context).size.height * 0.88,
+                maxHeight: MediaQuery.sizeOf(context).height * 0.88,
               ),
-              decoration: BoxDecoration(
-                color: isDark ? AppColors.darkCard : Colors.white,
-                borderRadius: const BorderRadius.vertical(
+              decoration: const BoxDecoration(
+                color: Color(0xFF13131A),
+                borderRadius: BorderRadius.vertical(
                   top: Radius.circular(24),
                 ),
               ),
@@ -270,7 +272,7 @@ class _EventModalState extends ConsumerState<EventModal> {
                     height: 4,
                     margin: const EdgeInsets.only(top: 12, bottom: 8),
                     decoration: BoxDecoration(
-                      color: isDark ? AppColors.darkBorder : AppColors.border,
+                      color: const Color(0x1EFFFFFF),
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -281,12 +283,10 @@ class _EventModalState extends ConsumerState<EventModal> {
                       children: [
                         Text(
                           isEditing ? 'Etkinliği Düzenle' : 'Yeni Etkinlik',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
-                            color: isDark
-                                ? AppColors.darkTextPrimary
-                                : AppColors.dark,
+                            color: Color(0xFFE5E7EB),
                           ),
                         ),
                         const Spacer(),
@@ -313,19 +313,17 @@ class _EventModalState extends ConsumerState<EventModal> {
                           _sectionLabel('Başlık'),
                           TextField(
                             controller: _titleCtrl,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
-                              color: isDark
-                                  ? AppColors.darkTextPrimary
-                                  : AppColors.dark,
+                              color: Color(0xFFE5E7EB),
                             ),
                             decoration: InputDecoration(
-                              hintText: 'Etkinlik başlığı...',
+                              hintText: AppLocalizations.of(context).evTitleHint,
                               hintStyle: TextStyle(
                                 color: isDark
-                                    ? AppColors.darkTextSecondary
-                                    : AppColors.lightGray,
+                                    ? const Color(0xFF6B7280)
+                                    : const Color(0xFF9CA3AF),
                               ),
                               border: InputBorder.none,
                               contentPadding: EdgeInsets.zero,
@@ -347,15 +345,15 @@ class _EventModalState extends ConsumerState<EventModal> {
                                 onSelected: (_) =>
                                     setState(() => _category = cat),
                                 selectedColor: color.withAlpha(
-                                  isDark ? 40 : 25,
+                                  40,
                                 ),
                                 backgroundColor: isDark
-                                    ? AppColors.darkBackground
+                                    ? const Color(0xFF0A0A0F)
                                     : const Color(0xFFF1F5F9),
                                 labelStyle: TextStyle(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600,
-                                  color: isSelected ? color : AppColors.slate,
+                                  color: isSelected ? color : const Color(0xFF6B7280),
                                 ),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
@@ -373,7 +371,7 @@ class _EventModalState extends ConsumerState<EventModal> {
                           _sectionLabel('Tarih ve Saat'),
                           const SizedBox(height: 8),
                           _DateTimeRow(
-                            label: 'Başlangıç',
+                            label: AppLocalizations.of(context).medStart,
                             date: _start,
                             onDateTap: () => _pickDate(true),
                             onTimeTap: () => _pickTime(true),
@@ -381,7 +379,7 @@ class _EventModalState extends ConsumerState<EventModal> {
                           ),
                           const SizedBox(height: 8),
                           _DateTimeRow(
-                            label: 'Bitiş',
+                            label: AppLocalizations.of(context).evEnd,
                             date: _end,
                             onDateTap: () => _pickDate(false),
                             onTimeTap: () => _pickTime(false),
@@ -390,20 +388,18 @@ class _EventModalState extends ConsumerState<EventModal> {
                           const SizedBox(height: 8),
                           Row(
                             children: [
-                              Text(
+                              const Text(
                                 'Tüm Gün',
                                 style: TextStyle(
                                   fontSize: 15,
-                                  color: isDark
-                                      ? AppColors.darkTextPrimary
-                                      : AppColors.dark,
+                                  color: Color(0xFFE5E7EB),
                                 ),
                               ),
                               const Spacer(),
-                              Switch.adaptive(
+                              Switch(
                                 value: _isAllDay,
                                 onChanged: (v) => setState(() => _isAllDay = v),
-                                activeTrackColor: AppColors.cobalt,
+                                activeTrackColor: const Color(0xFF6366F1),
                               ),
                             ],
                           ),
@@ -412,27 +408,25 @@ class _EventModalState extends ConsumerState<EventModal> {
                           _sectionLabel('Konum'),
                           TextField(
                             controller: _locationCtrl,
-                            style: TextStyle(
-                              color: isDark
-                                  ? AppColors.darkTextPrimary
-                                  : AppColors.dark,
+                            style: const TextStyle(
+                              color: Color(0xFFE5E7EB),
                             ),
                             decoration: InputDecoration(
-                              hintText: 'Konum ekle...',
+                              hintText: AppLocalizations.of(context).evLocationHint,
                               hintStyle: TextStyle(
                                 color: isDark
-                                    ? AppColors.darkTextSecondary
-                                    : AppColors.lightGray,
+                                    ? const Color(0xFF6B7280)
+                                    : const Color(0xFF9CA3AF),
                               ),
                               prefixIcon: Icon(
                                 Icons.location_on_outlined,
                                 color: isDark
-                                    ? AppColors.darkTextSecondary
-                                    : AppColors.lightGray,
+                                    ? const Color(0xFF6B7280)
+                                    : const Color(0xFF9CA3AF),
                               ),
                               filled: true,
                               fillColor: isDark
-                                  ? AppColors.darkBackground
+                                  ? const Color(0xFF0A0A0F)
                                   : const Color(0xFFF8FAFC),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
@@ -446,21 +440,19 @@ class _EventModalState extends ConsumerState<EventModal> {
                           TextField(
                             controller: _descCtrl,
                             maxLines: 3,
-                            style: TextStyle(
-                              color: isDark
-                                  ? AppColors.darkTextPrimary
-                                  : AppColors.dark,
+                            style: const TextStyle(
+                              color: Color(0xFFE5E7EB),
                             ),
                             decoration: InputDecoration(
-                              hintText: 'Açıklama ekle...',
+                              hintText: AppLocalizations.of(context).evDescHint,
                               hintStyle: TextStyle(
                                 color: isDark
-                                    ? AppColors.darkTextSecondary
-                                    : AppColors.lightGray,
+                                    ? const Color(0xFF6B7280)
+                                    : const Color(0xFF9CA3AF),
                               ),
                               filled: true,
                               fillColor: isDark
-                                  ? AppColors.darkBackground
+                                  ? const Color(0xFF0A0A0F)
                                   : const Color(0xFFF8FAFC),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
@@ -490,10 +482,10 @@ class _EventModalState extends ConsumerState<EventModal> {
                                   });
                                 },
                                 selectedColor: m.color.withAlpha(
-                                  isDark ? 40 : 25,
+                                  40,
                                 ),
                                 backgroundColor: isDark
-                                    ? AppColors.darkBackground
+                                    ? const Color(0xFF0A0A0F)
                                     : const Color(0xFFF1F5F9),
                                 labelStyle: TextStyle(
                                   fontSize: 13,
@@ -502,9 +494,7 @@ class _EventModalState extends ConsumerState<EventModal> {
                                       : FontWeight.w400,
                                   color: isSelected
                                       ? m.color
-                                      : (isDark
-                                            ? AppColors.darkTextSecondary
-                                            : AppColors.slate),
+                                      : (const Color(0xFF6B7280)),
                                 ),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
@@ -547,24 +537,24 @@ class _EventModalState extends ConsumerState<EventModal> {
                                     }
                                   });
                                 },
-                                selectedColor: AppColors.cobalt.withAlpha(
-                                  isDark ? 40 : 25,
+                                selectedColor: const Color(0xFF6366F1).withAlpha(
+                                  40,
                                 ),
                                 backgroundColor: isDark
-                                    ? AppColors.darkBackground
+                                    ? const Color(0xFF0A0A0F)
                                     : const Color(0xFFF1F5F9),
                                 labelStyle: TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
                                   color: isSelected
-                                      ? AppColors.cobalt
-                                      : AppColors.slate,
+                                      ? const Color(0xFF6366F1)
+                                      : const Color(0xFF6B7280),
                                 ),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
                                   side: BorderSide(
                                     color: isSelected
-                                        ? AppColors.cobalt.withAlpha(80)
+                                        ? const Color(0xFF6366F1).withAlpha(80)
                                         : Colors.transparent,
                                   ),
                                 ),
@@ -585,24 +575,24 @@ class _EventModalState extends ConsumerState<EventModal> {
                                 selected: isSelected,
                                 onSelected: (_) =>
                                     setState(() => _recurrence = rec),
-                                selectedColor: AppColors.cobalt.withAlpha(
-                                  isDark ? 40 : 25,
+                                selectedColor: const Color(0xFF6366F1).withAlpha(
+                                  40,
                                 ),
                                 backgroundColor: isDark
-                                    ? AppColors.darkBackground
+                                    ? const Color(0xFF0A0A0F)
                                     : const Color(0xFFF1F5F9),
                                 labelStyle: TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
                                   color: isSelected
-                                      ? AppColors.cobalt
-                                      : AppColors.slate,
+                                      ? const Color(0xFF6366F1)
+                                      : const Color(0xFF6B7280),
                                 ),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
                                   side: BorderSide(
                                     color: isSelected
-                                        ? AppColors.cobalt.withAlpha(80)
+                                        ? const Color(0xFF6366F1).withAlpha(80)
                                         : Colors.transparent,
                                   ),
                                 ),
@@ -617,7 +607,7 @@ class _EventModalState extends ConsumerState<EventModal> {
                             child: ElevatedButton(
                               onPressed: _handleSave,
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.cobalt,
+                                backgroundColor: const Color(0xFF6366F1),
                                 foregroundColor: Colors.white,
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(
@@ -639,12 +629,10 @@ class _EventModalState extends ConsumerState<EventModal> {
                             width: double.infinity,
                             child: TextButton(
                               onPressed: widget.onClose,
-                              child: Text(
+                              child: const Text(
                                 'İptal',
                                 style: TextStyle(
-                                  color: isDark
-                                      ? AppColors.darkTextSecondary
-                                      : AppColors.slate,
+                                  color: Color(0xFF6B7280),
                                 ),
                               ),
                             ),
@@ -668,12 +656,10 @@ class _EventModalState extends ConsumerState<EventModal> {
   Widget _sectionLabel(String text) {
     return Text(
       text,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w700,
-        color: Theme.of(context).brightness == Brightness.dark
-            ? AppColors.darkTextSecondary
-            : AppColors.slate,
+        color: Color(0xFF6B7280),
         letterSpacing: 0.5,
       ),
     );
@@ -682,13 +668,13 @@ class _EventModalState extends ConsumerState<EventModal> {
   Color _categoryColor(EventCategory cat) {
     return switch (cat) {
       EventCategory.appointment => AppColors.error,
-      EventCategory.birthday => AppColors.pink,
-      EventCategory.school => AppColors.warning,
-      EventCategory.activity => AppColors.success,
-      EventCategory.work => AppColors.cobalt,
-      EventCategory.family => AppColors.purple,
+      EventCategory.birthday => const Color(0xFFEC4899),
+      EventCategory.school => const Color(0xFFF59E0B),
+      EventCategory.activity => const Color(0xFF10B981),
+      EventCategory.work => const Color(0xFF6366F1),
+      EventCategory.family => const Color(0xFF8B5CF6),
       EventCategory.travel => AppColors.cyan,
-      EventCategory.other => AppColors.slate,
+      EventCategory.other => const Color(0xFF6B7280),
     };
   }
 
@@ -753,7 +739,7 @@ class _DateTimeRow extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
               decoration: BoxDecoration(
                 color: isDark
-                    ? AppColors.darkBackground
+                    ? const Color(0xFF0A0A0F)
                     : const Color(0xFFF8FAFC),
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -762,17 +748,15 @@ class _DateTimeRow extends StatelessWidget {
                   const Icon(
                     Icons.calendar_today_outlined,
                     size: 18,
-                    color: AppColors.cobalt,
+                    color: Color(0xFF6366F1),
                   ),
                   const SizedBox(width: 10),
                   Text(
                     DateFormat('d MMM yyyy', 'tr_TR').format(date),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: isDark
-                          ? AppColors.darkTextPrimary
-                          : AppColors.dark,
+                      color: Color(0xFFE5E7EB),
                     ),
                   ),
                 ],
@@ -789,22 +773,20 @@ class _DateTimeRow extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
               decoration: BoxDecoration(
                 color: isDark
-                    ? AppColors.darkBackground
+                    ? const Color(0xFF0A0A0F)
                     : const Color(0xFFF8FAFC),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.access_time, size: 18, color: AppColors.cobalt),
+                  const Icon(Icons.access_time, size: 18, color: Color(0xFF6366F1)),
                   const SizedBox(width: 10),
                   Text(
                     DateFormat('HH:mm').format(date),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: isDark
-                          ? AppColors.darkTextPrimary
-                          : AppColors.dark,
+                      color: Color(0xFFE5E7EB),
                     ),
                   ),
                 ],

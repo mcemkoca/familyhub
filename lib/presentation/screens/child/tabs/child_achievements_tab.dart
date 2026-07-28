@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
-import '../../../../config/constants.dart';
 
 class ChildAchievementsTab extends StatefulWidget {
   final String childName;
@@ -12,21 +12,25 @@ class ChildAchievementsTab extends StatefulWidget {
 
 class _ChildAchievementsTabState extends State<ChildAchievementsTab>
     with SingleTickerProviderStateMixin {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   late AnimationController _starController;
-  final int _level = 7;
-  final int _totalPoints = 1340;
+  // Gerçek kazanılan rozetlerden hesaplanır (sahte sabit puan yok).
+  int get _totalPoints =>
+      _badges.where((b) => b.earned).fold<int>(0, (s, b) => s + b.points);
+  int get _level => (_totalPoints ~/ 200) + 1;
   final int _pointsToNext = 200;
 
   static const _badges = [
-    _Badge('Görev Ustası', '🏆', 50, true, Color(0xFFF59E0B),
+    _Badge('Görev Ustası', '🏆', 50, false, Color(0xFFF59E0B),
         'İlk görevini tamamladın!'),
-    _Badge('5 Gün Seri', '🔥', 100, true, Color(0xFFEF4444),
+    _Badge('5 Gün Seri', '🔥', 100, false, Color(0xFFEF4444),
         '5 gün boyunca görevleri eksik yapmadın.'),
-    _Badge('Süper Okuyucu', '📚', 75, true, Color(0xFF3B82F6),
+    _Badge('Süper Okuyucu', '📚', 75, false, Color(0xFF3B82F6),
         '10 kitap okudun!'),
     _Badge('Matematik Dâhi', '🔢', 120, false, Color(0xFF8B5CF6),
         '20 matematik aktivitesi tamamla.'),
-    _Badge('Sporcu', '⚽', 80, true, Color(0xFF10B981),
+    _Badge('Sporcu', '⚽', 80, false, Color(0xFF10B981),
         'Bir haftada her gün spor yaptın.'),
     _Badge('Sanatkâr', '🎨', 60, false, Color(0xFFEC4899),
         '5 sanat aktivitesi tamamla.'),
@@ -36,7 +40,7 @@ class _ChildAchievementsTabState extends State<ChildAchievementsTab>
         '5 STEM aktivitesi tamamla.'),
     _Badge('Dil Ustası', '🌍', 110, false, Color(0xFF6366F1),
         '7 gün boyunca dil öğrenimi yap.'),
-    _Badge('Mutfak Şefi', '👨‍🍳', 85, true, Color(0xFFF97316),
+    _Badge('Mutfak Şefi', '👨‍🍳', 85, false, Color(0xFFF97316),
         'Bir yemek tarifini tamamladın!'),
     _Badge('Ekip Oyuncusu', '🤝', 70, false, Color(0xFF10B981),
         'Ailece 3 aktivite tamamla.'),
@@ -61,7 +65,6 @@ class _ChildAchievementsTabState extends State<ChildAchievementsTab>
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final earned = _badges.where((b) => b.earned).toList();
     final notEarned = _badges.where((b) => !b.earned).toList();
 
@@ -71,11 +74,11 @@ class _ChildAchievementsTabState extends State<ChildAchievementsTab>
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-            child: Text('Kazanılan Rozetler (${earned.length})',
-                style: TextStyle(
+            child: Text(AppLocalizations.of(context).catEarned(earned.length),
+                style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
-                    color: isDark ? AppColors.darkTextPrimary : AppColors.dark)),
+                    color: Color(0xFFE5E7EB))),
           ),
         ),
         SliverPadding(
@@ -96,11 +99,11 @@ class _ChildAchievementsTabState extends State<ChildAchievementsTab>
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
-            child: Text('Kazanılmayı Bekleyen (${notEarned.length})',
-                style: TextStyle(
+            child: Text(AppLocalizations.of(context).catPending(notEarned.length),
+                style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
-                    color: isDark ? AppColors.darkTextPrimary : AppColors.dark)),
+                    color: Color(0xFFE5E7EB))),
           ),
         ),
         SliverPadding(
@@ -174,7 +177,7 @@ class _ChildAchievementsTabState extends State<ChildAchievementsTab>
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Seviye $_level • Kahraman',
+                      Text(AppLocalizations.of(context).catLevel(_level),
                           style: const TextStyle(
                               color: Colors.white70, fontSize: 12)),
                       const SizedBox(height: 2),
@@ -196,8 +199,8 @@ class _ChildAchievementsTabState extends State<ChildAchievementsTab>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Sonraki seviyeye:',
-                    style: TextStyle(color: Colors.white70, fontSize: 12)),
+                Text(AppLocalizations.of(context).catNextLevel,
+                    style: const TextStyle(color: Colors.white70, fontSize: 12)),
                 Text('$_pointsToNext XP kaldı',
                     style: const TextStyle(
                         color: Colors.white,
@@ -252,7 +255,7 @@ class _BadgeTile extends StatelessWidget {
             actions: [
               TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Tamam')),
+                  child: Text(AppLocalizations.of(context).catOk)),
             ],
           ),
         );
@@ -261,11 +264,11 @@ class _BadgeTile extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: locked
-              ? (isDark ? AppColors.darkCard : Colors.white)
+              ? (const Color(0xFF13131A))
               : badge.color.withAlpha(20),
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-              color: locked ? AppColors.border : badge.color.withAlpha(60),
+              color: locked ? const Color(0x1EFFFFFF) : badge.color.withAlpha(60),
               width: locked ? 1 : 2),
         ),
         child: Column(
@@ -297,16 +300,14 @@ class _BadgeTile extends StatelessWidget {
                     fontSize: 10,
                     fontWeight: FontWeight.w700,
                     color: locked
-                        ? AppColors.slate
-                        : (isDark
-                            ? AppColors.darkTextPrimary
-                            : AppColors.dark))),
+                        ? const Color(0xFF6B7280)
+                        : (const Color(0xFFE5E7EB)))),
             const SizedBox(height: 3),
             Text('+${badge.points} XP',
                 style: TextStyle(
                     fontSize: 9,
                     fontWeight: FontWeight.w700,
-                    color: locked ? AppColors.slate : badge.color)),
+                    color: locked ? const Color(0xFF6B7280) : badge.color)),
           ],
         ),
       ),

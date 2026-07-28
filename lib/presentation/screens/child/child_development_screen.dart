@@ -1,11 +1,59 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
+import '../../widgets/growing_tree.dart';
+import '../../../services/ai/pedagogy_engine.dart';
+import '../../../services/hive_service.dart';
+import '../../../core/supabase_client.dart';
+import '../../../repositories/child_account_repository.dart';
+import '../../providers/child_context_provider.dart';
 
 // ── WHO Milestone Data ──
+/// Gelişim/eğitim kategori etiketini aktif dile çevirir (veri değeri değişmez).
+String devCategoryLabel(BuildContext context, String cat) {
+  final t = AppLocalizations.of(context);
+  switch (cat) {
+    case 'Motor':
+      return t.devCatMotor;
+    case 'Sosyal':
+      return t.devCatSocial;
+    case 'Dil':
+      return t.devCatLanguage;
+    case 'Görme':
+      return t.devCatVision;
+    case 'Bilişsel':
+      return t.devCatCognitive;
+    case 'Özbakım':
+      return t.devCatSelfcare;
+    case 'Duygusal':
+      return t.devCatEmotional;
+    case 'Beden':
+      return t.devCatPhysical;
+    case 'Din':
+      return t.devCatReligion;
+    case 'Akademik':
+      return t.devCatAcademic;
+    case 'Dijital':
+      return t.devCatDigital;
+    case 'Fen':
+      return t.devCatScience;
+    case 'Matematik':
+      return t.devCatMath;
+    case 'Müzik':
+      return t.devCatMusic;
+    case 'Resim':
+      return t.devCatArt;
+    case 'Türkçe':
+      return t.devCatTurkish;
+    case 'Diğer':
+      return t.evCatOther;
+    default:
+      return cat;
+  }
+}
 
 const _milestonesByAge = {
   '0-3 ay': [
@@ -94,9 +142,8 @@ class _ChildDevHive {
   static const _box = 'child_development';
   static const _childrenKey = 'children';
 
-  static Future<Box> get box async => Hive.isBoxOpen(_box)
-      ? Hive.box(_box)
-      : await Hive.openBox(_box);
+  static Future<Box<dynamic>> get box async =>
+      Hive.isBoxOpen(_box) ? Hive.box(_box) : await Hive.openBox(_box);
 
   static Future<void> save(String key, dynamic v) async {
     final b = await box;
@@ -139,8 +186,7 @@ class ChildProfile {
 
   int get ageMonths {
     final now = DateTime.now();
-    return (now.year - birthDate.year) * 12 +
-        (now.month - birthDate.month);
+    return (now.year - birthDate.year) * 12 + (now.month - birthDate.month);
   }
 
   String get ageLabel {
@@ -169,37 +215,38 @@ class ChildProfile {
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'emoji': emoji,
-        'birthDate': birthDate.toIso8601String(),
-        'schoolName': schoolName,
-        'grade': grade,
-        'completedMilestones': completedMilestones,
-        'subjects': subjects.map((s) => s.toJson()).toList(),
-        'homework': homework.map((h) => h.toJson()).toList(),
-        'growthLog': growthLog.map((g) => g.toJson()).toList(),
-      };
+    'id': id,
+    'name': name,
+    'emoji': emoji,
+    'birthDate': birthDate.toIso8601String(),
+    'schoolName': schoolName,
+    'grade': grade,
+    'completedMilestones': completedMilestones,
+    'subjects': subjects.map((s) => s.toJson()).toList(),
+    'homework': homework.map((h) => h.toJson()).toList(),
+    'growthLog': growthLog.map((g) => g.toJson()).toList(),
+  };
 
   factory ChildProfile.fromJson(Map<String, dynamic> j) => ChildProfile(
-        id: j['id'] as String,
-        name: j['name'] as String,
-        emoji: j['emoji'] as String? ?? '👶',
-        birthDate: DateTime.parse(j['birthDate'] as String),
-        schoolName: j['schoolName'] as String?,
-        grade: j['grade'] as String?,
-        completedMilestones:
-            List<String>.from(j['completedMilestones'] as List? ?? []),
-        subjects: (j['subjects'] as List? ?? [])
-            .map((e) => SchoolSubject.fromJson(e as Map<String, dynamic>))
-            .toList(),
-        homework: (j['homework'] as List? ?? [])
-            .map((e) => HomeworkEntry.fromJson(e as Map<String, dynamic>))
-            .toList(),
-        growthLog: (j['growthLog'] as List? ?? [])
-            .map((e) => GrowthEntry.fromJson(e as Map<String, dynamic>))
-            .toList(),
-      );
+    id: j['id'] as String,
+    name: j['name'] as String,
+    emoji: j['emoji'] as String? ?? '👶',
+    birthDate: DateTime.parse(j['birthDate'] as String),
+    schoolName: j['schoolName'] as String?,
+    grade: j['grade'] as String?,
+    completedMilestones: List<String>.from(
+      j['completedMilestones'] as List? ?? [],
+    ),
+    subjects: (j['subjects'] as List? ?? [])
+        .map((e) => SchoolSubject.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    homework: (j['homework'] as List? ?? [])
+        .map((e) => HomeworkEntry.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    growthLog: (j['growthLog'] as List? ?? [])
+        .map((e) => GrowthEntry.fromJson(e as Map<String, dynamic>))
+        .toList(),
+  );
 
   ChildProfile copyWith({
     List<String>? completedMilestones,
@@ -208,20 +255,18 @@ class ChildProfile {
     List<GrowthEntry>? growthLog,
     String? schoolName,
     String? grade,
-  }) =>
-      ChildProfile(
-        id: id,
-        name: name,
-        emoji: emoji,
-        birthDate: birthDate,
-        schoolName: schoolName ?? this.schoolName,
-        grade: grade ?? this.grade,
-        completedMilestones:
-            completedMilestones ?? this.completedMilestones,
-        subjects: subjects ?? this.subjects,
-        homework: homework ?? this.homework,
-        growthLog: growthLog ?? this.growthLog,
-      );
+  }) => ChildProfile(
+    id: id,
+    name: name,
+    emoji: emoji,
+    birthDate: birthDate,
+    schoolName: schoolName ?? this.schoolName,
+    grade: grade ?? this.grade,
+    completedMilestones: completedMilestones ?? this.completedMilestones,
+    subjects: subjects ?? this.subjects,
+    homework: homework ?? this.homework,
+    growthLog: growthLog ?? this.growthLog,
+  );
 }
 
 class SchoolSubject {
@@ -243,20 +288,20 @@ class SchoolSubject {
       grades.isEmpty ? 0 : grades.reduce((a, b) => a + b) / grades.length;
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'emoji': emoji,
-        'grades': grades,
-        'notes': notes,
-      };
+    'id': id,
+    'name': name,
+    'emoji': emoji,
+    'grades': grades,
+    'notes': notes,
+  };
 
   factory SchoolSubject.fromJson(Map<String, dynamic> j) => SchoolSubject(
-        id: j['id'] as String,
-        name: j['name'] as String,
-        emoji: j['emoji'] as String? ?? '📚',
-        grades: List<int>.from(j['grades'] as List? ?? []),
-        notes: j['notes'] as String? ?? '',
-      );
+    id: j['id'] as String,
+    name: j['name'] as String,
+    emoji: j['emoji'] as String? ?? '📚',
+    grades: List<int>.from(j['grades'] as List? ?? []),
+    notes: j['notes'] as String? ?? '',
+  );
 }
 
 class HomeworkEntry {
@@ -275,20 +320,20 @@ class HomeworkEntry {
   });
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'subject': subject,
-        'description': description,
-        'dueDate': dueDate,
-        'completed': completed,
-      };
+    'id': id,
+    'subject': subject,
+    'description': description,
+    'dueDate': dueDate,
+    'completed': completed,
+  };
 
   factory HomeworkEntry.fromJson(Map<String, dynamic> j) => HomeworkEntry(
-        id: j['id'] as String,
-        subject: j['subject'] as String,
-        description: j['description'] as String,
-        dueDate: j['dueDate'] as String,
-        completed: j['completed'] as bool? ?? false,
-      );
+    id: j['id'] as String,
+    subject: j['subject'] as String,
+    description: j['description'] as String,
+    dueDate: j['dueDate'] as String,
+    completed: j['completed'] as bool? ?? false,
+  );
 }
 
 class GrowthEntry {
@@ -298,22 +343,25 @@ class GrowthEntry {
 
   const GrowthEntry({required this.date, this.height, this.weight});
 
-  Map<String, dynamic> toJson() =>
-      {'date': date, 'height': height, 'weight': weight};
+  Map<String, dynamic> toJson() => {
+    'date': date,
+    'height': height,
+    'weight': weight,
+  };
 
   factory GrowthEntry.fromJson(Map<String, dynamic> j) => GrowthEntry(
-        date: j['date'] as String,
-        height: (j['height'] as num?)?.toDouble(),
-        weight: (j['weight'] as num?)?.toDouble(),
-      );
+    date: j['date'] as String,
+    height: (j['height'] as num?)?.toDouble(),
+    weight: (j['weight'] as num?)?.toDouble(),
+  );
 }
 
 // ── Provider ──
 
 final childDevProvider =
     StateNotifierProvider<ChildDevNotifier, List<ChildProfile>>(
-  (ref) => ChildDevNotifier(),
-);
+      (ref) => ChildDevNotifier(),
+    );
 
 class ChildDevNotifier extends StateNotifier<List<ChildProfile>> {
   ChildDevNotifier() : super([]) {
@@ -322,17 +370,67 @@ class ChildDevNotifier extends StateNotifier<List<ChildProfile>> {
 
   Future<void> _load() async {
     final data = await _ChildDevHive.load(_ChildDevHive._childrenKey);
+    final list = <ChildProfile>[];
     if (data != null) {
-      state = (data as List)
-          .map((e) => ChildProfile.fromJson(e as Map<String, dynamic>))
-          .toList();
+      list.addAll(
+        (data as List).map(
+          (e) => ChildProfile.fromJson(e as Map<String, dynamic>),
+        ),
+      );
+    }
+    // Köprü: "Çocuk Hesapları"nda (ChildAccountRepository) eklenmiş ama gelişim
+    // listesinde olmayan çocukları içe aktar — böylece hesap ekliyken "çocuk
+    // yok" uyarısı çıkmaz.
+    await _mergeChildAccounts(list);
+    state = list;
+  }
+
+  Future<void> _mergeChildAccounts(List<ChildProfile> list) async {
+    try {
+      var familyId = ChildAccountRepository.localFamilyId;
+      final client = SupabaseConfig.safeClient;
+      final uid = client?.auth.currentUser?.id;
+      if (client != null && uid != null) {
+        final p = await client
+            .from('profiles')
+            .select('family_id')
+            .eq('id', uid)
+            .maybeSingle();
+        final fid = p?['family_id'] as String?;
+        if (fid != null && fid.isNotEmpty) familyId = fid;
+      }
+      final accounts = await ChildAccountRepository().getChildrenForFamily(
+        familyId,
+      );
+      final now = DateTime.now();
+      for (final a in accounts) {
+        final exists = list.any(
+          (c) =>
+              c.id == a.id ||
+              c.name.toLowerCase().trim() == a.name.toLowerCase().trim(),
+        );
+        if (!exists) {
+          final age = a.age ?? 6;
+          list.add(
+            ChildProfile(
+              id: a.id,
+              name: a.name,
+              emoji: '🧒',
+              birthDate: DateTime(now.year - age, now.month, now.day),
+            ),
+          );
+        }
+      }
+    } catch (_) {
+      // Bulut/aile yoksa sessiz geç — yerel gelişim profilleri yine gösterilir.
     }
   }
 
   Future<void> _persist() async {
     await _ChildDevHive.save(
-        _ChildDevHive._childrenKey,
-        state.map((c) => c.toJson()).toList());
+      _ChildDevHive._childrenKey,
+      state.map((c) => c.toJson()).toList(),
+    );
   }
 
   Future<void> addChild(ChildProfile child) async {
@@ -397,8 +495,7 @@ class ChildDevNotifier extends StateNotifier<List<ChildProfile>> {
     await _persist();
   }
 
-  Future<void> addGrade(
-      String childId, String subjectId, int grade) async {
+  Future<void> addGrade(String childId, String subjectId, int grade) async {
     state = state.map((c) {
       if (c.id != childId) return c;
       return c.copyWith(
@@ -428,8 +525,7 @@ class ChildDevelopmentScreen extends ConsumerStatefulWidget {
       _ChildDevelopmentScreenState();
 }
 
-class _ChildDevelopmentScreenState
-    extends ConsumerState<ChildDevelopmentScreen>
+class _ChildDevelopmentScreenState extends ConsumerState<ChildDevelopmentScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tab;
   int _selectedChild = 0;
@@ -449,9 +545,15 @@ class _ChildDevelopmentScreenState
   @override
   Widget build(BuildContext context) {
     final children = ref.watch(childDevProvider);
-    final child = children.isEmpty
-        ? null
-        : children[_selectedChild.clamp(0, children.length - 1)];
+    // Seçili çocuğu merkezi context'ten türet (bölümler arası paylaşımlı).
+    final activeChildId = ref.watch(activeChildIdProvider);
+    var selIndex = _selectedChild;
+    if (activeChildId != null) {
+      final found = children.indexWhere((c) => c.id == activeChildId);
+      if (found >= 0) selIndex = found;
+    }
+    selIndex = children.isEmpty ? 0 : selIndex.clamp(0, children.length - 1);
+    final child = children.isEmpty ? null : children[selIndex];
 
     return Scaffold(
       body: CustomScrollView(
@@ -463,7 +565,7 @@ class _ChildDevelopmentScreenState
               background: Container(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Color(0xFFFF6B6B), Color(0xFFFFD93D)],
+                    colors: [Color(0xFF071520), Color(0xFF0A2535)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -473,25 +575,30 @@ class _ChildDevelopmentScreenState
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const SizedBox(height: 8),
-                      const Text('🌱 Çocuk Gelişimi & Okul',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w900)),
-                      const Text('Büyüme takibi · Dersler · Ödevler',
-                          style: TextStyle(
-                              color: Colors.white70, fontSize: 12)),
+                      Text(
+                        '🌱 ${AppLocalizations.of(context).childDevTitle}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      Text(
+                        AppLocalizations.of(context).cdSubtitle,
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 12,
+                        ),
+                      ),
                       const SizedBox(height: 12),
                       // Child selector
                       SizedBox(
                         height: 54,
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: 16),
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
                           itemCount: children.length + 1,
-                          separatorBuilder: (_, _) =>
-                              const SizedBox(width: 8),
+                          separatorBuilder: (_, _) => const SizedBox(width: 8),
                           itemBuilder: (_, i) {
                             if (i == children.length) {
                               return GestureDetector(
@@ -503,24 +610,33 @@ class _ChildDevelopmentScreenState
                                     color: Colors.white.withAlpha(30),
                                     shape: BoxShape.circle,
                                     border: Border.all(
-                                        color: Colors.white.withAlpha(80),
-                                        width: 1.5),
+                                      color: Colors.white.withAlpha(80),
+                                      width: 1.5,
+                                    ),
                                   ),
-                                  child: const Icon(Icons.add,
-                                      color: Colors.white, size: 20),
+                                  child: const Icon(
+                                    Icons.add,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
                                 ),
                               );
                             }
                             final c = children[i];
-                            final sel = _selectedChild == i;
+                            final sel = selIndex == i;
                             return GestureDetector(
-                              onTap: () =>
-                                  setState(() => _selectedChild = i),
+                              onTap: () {
+                                setState(() => _selectedChild = i);
+                                // Seçimi merkezi context'e yaz → tüm bölümler
+                                // aynı çocuğu görür (kalıcı).
+                                ref
+                                    .read(activeChildIdProvider.notifier)
+                                    .select(c.id);
+                              },
                               child: Column(
                                 children: [
                                   AnimatedContainer(
-                                    duration:
-                                        const Duration(milliseconds: 150),
+                                    duration: const Duration(milliseconds: 150),
                                     width: 44,
                                     height: 44,
                                     decoration: BoxDecoration(
@@ -529,22 +645,30 @@ class _ChildDevelopmentScreenState
                                           : Colors.white.withAlpha(30),
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                          color: Colors.white
-                                              .withAlpha(sel ? 255 : 80),
-                                          width: 2),
+                                        color: Colors.white.withAlpha(
+                                          sel ? 255 : 80,
+                                        ),
+                                        width: 2,
+                                      ),
                                     ),
                                     child: Center(
-                                        child: Text(c.emoji,
-                                            style: const TextStyle(
-                                                fontSize: 22))),
+                                      child: Text(
+                                        c.emoji,
+                                        style: const TextStyle(fontSize: 22),
+                                      ),
+                                    ),
                                   ),
                                   const SizedBox(height: 2),
-                                  Text(c.ageLabel,
-                                      style: TextStyle(
-                                          color: Colors.white
-                                              .withAlpha(sel ? 255 : 160),
-                                          fontSize: 9,
-                                          fontWeight: FontWeight.w700)),
+                                  Text(
+                                    c.ageLabel,
+                                    style: TextStyle(
+                                      color: Colors.white.withAlpha(
+                                        sel ? 255 : 160,
+                                      ),
+                                      fontSize: 9,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
                                 ],
                               ),
                             );
@@ -563,8 +687,10 @@ class _ChildDevelopmentScreenState
               indicatorColor: Colors.white,
               labelColor: Colors.white,
               unselectedLabelColor: Colors.white60,
-              labelStyle:
-                  const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+              labelStyle: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+              ),
               tabs: const [
                 Tab(text: '🌱 Gelişim'),
                 Tab(text: '📚 Dersler'),
@@ -582,24 +708,31 @@ class _ChildDevelopmentScreenState
                   children: [
                     const Text('👶', style: TextStyle(fontSize: 48)),
                     const SizedBox(height: 12),
-                    const Text('Çocuk profili ekleyin',
-                        style: TextStyle(color: Color(0xFF9CA3AF))),
+                    Text(
+                      AppLocalizations.of(context).cdAddProfile,
+                      style: const TextStyle(color: Color(0xFF9CA3AF)),
+                    ),
                     const SizedBox(height: 16),
                     GestureDetector(
                       onTap: _showAddChildSheet,
                       child: Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 24, vertical: 12),
+                          horizontal: 24,
+                          vertical: 12,
+                        ),
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
-                            colors: [Color(0xFFFF6B6B), Color(0xFFFFD93D)],
+                            colors: [Color(0xFF06B6D4), Color(0xFF0891B2)],
                           ),
                           borderRadius: BorderRadius.circular(14),
                         ),
-                        child: const Text('+ Çocuk Ekle',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w800)),
+                        child: Text(
+                          '+ ${AppLocalizations.of(context).childAddChild}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -625,29 +758,43 @@ class _ChildDevelopmentScreenState
           ? null
           : FloatingActionButton.extended(
               onPressed: () => _addItem(child),
-              backgroundColor: const Color(0xFFFF6B6B),
+              backgroundColor: const Color(0xFF06B6D4),
               icon: const Icon(Icons.add, color: Colors.white),
-              label: Text(_fabLabel(),
-                  style: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w700)),
+              label: Text(
+                _fabLabel(),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
             ),
     );
   }
 
   String _fabLabel() {
     switch (_tab.index) {
-      case 1: return 'Ders Ekle';
-      case 2: return 'Ödev Ekle';
-      case 3: return 'Ölçüm Ekle';
-      default: return 'Güncelle';
+      case 1:
+        return 'Ders Ekle';
+      case 2:
+        return 'Ödev Ekle';
+      case 3:
+        return 'Ölçüm Ekle';
+      default:
+        return 'Güncelle';
     }
   }
 
   void _addItem(ChildProfile child) {
     switch (_tab.index) {
-      case 1: _showAddSubjectSheet(child); break;
-      case 2: _showAddHomeworkSheet(child); break;
-      case 3: _showAddGrowthSheet(child); break;
+      case 1:
+        _showAddSubjectSheet(child);
+        break;
+      case 2:
+        _showAddHomeworkSheet(child);
+        break;
+      case 3:
+        _showAddGrowthSheet(child);
+        break;
     }
   }
 
@@ -655,8 +802,7 @@ class _ChildDevelopmentScreenState
     final nameCtrl = TextEditingController();
     final schoolCtrl = TextEditingController();
     String emoji = '👧';
-    DateTime birthDate =
-        DateTime.now().subtract(const Duration(days: 365 * 5));
+    DateTime birthDate = DateTime.now().subtract(const Duration(days: 365 * 5));
     final emojis = ['👧', '👦', '🧒', '👶'];
 
     showModalBottomSheet(
@@ -665,7 +811,7 @@ class _ChildDevelopmentScreenState
       backgroundColor: Colors.transparent,
       builder: (_) => StatefulBuilder(
         builder: (ctx, setSt) => _DevSheet(
-          title: '👶 Çocuk Profili Oluştur',
+          title: '👶 ${AppLocalizations.of(context).childCreateProfile}',
           child: Column(
             children: [
               Wrap(
@@ -679,49 +825,60 @@ class _ChildDevelopmentScreenState
                       height: 50,
                       decoration: BoxDecoration(
                         color: sel
-                            ? const Color(0xFFFF6B6B).withAlpha(25)
+                            ? const Color(0xFF06B6D4).withAlpha(25)
                             : Colors.grey.withAlpha(20),
                         shape: BoxShape.circle,
                         border: Border.all(
                           color: sel
-                              ? const Color(0xFFFF6B6B)
+                              ? const Color(0xFF06B6D4)
                               : Colors.transparent,
                           width: 2,
                         ),
                       ),
                       child: Center(
-                          child:
-                              Text(e, style: const TextStyle(fontSize: 26))),
+                        child: Text(e, style: const TextStyle(fontSize: 26)),
+                      ),
                     ),
                   );
                 }).toList(),
               ),
               const SizedBox(height: 14),
-              _DevField(controller: nameCtrl, label: 'Çocuğun adı'),
+              _DevField(
+                controller: nameCtrl,
+                label: AppLocalizations.of(context).cdChildName,
+              ),
               const SizedBox(height: 10),
               GestureDetector(
                 onTap: () async {
                   final d = await showDatePicker(
                     context: ctx,
                     initialDate: birthDate,
-                    firstDate: DateTime.now()
-                        .subtract(const Duration(days: 365 * 14)),
+                    firstDate: DateTime.now().subtract(
+                      const Duration(days: 365 * 14),
+                    ),
                     lastDate: DateTime.now(),
                   );
                   if (d != null) setSt(() => birthDate = d);
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 14, vertical: 13),
+                    horizontal: 14,
+                    vertical: 13,
+                  ),
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: const Color(0xFFFF6B6B), width: 1.5),
+                      color: const Color(0xFF06B6D4),
+                      width: 1.5,
+                    ),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.cake,
-                          color: Color(0xFFFF6B6B), size: 18),
+                      const Icon(
+                        Icons.cake,
+                        color: Color(0xFF06B6D4),
+                        size: 18,
+                      ),
                       const SizedBox(width: 8),
                       Text(
                         'Doğum tarihi: ${DateFormat('dd MMMM yyyy', 'tr').format(birthDate)}',
@@ -733,18 +890,19 @@ class _ChildDevelopmentScreenState
               ),
               const SizedBox(height: 10),
               _DevField(
-                  controller: schoolCtrl,
-                  label: 'Okul adı (isteğe bağlı)'),
+                controller: schoolCtrl,
+                label: AppLocalizations.of(context).cdSchoolName,
+              ),
               const SizedBox(height: 16),
               _DevBtn(
-                label: 'Profil Oluştur',
+                label: AppLocalizations.of(context).cdCreateProfile,
                 onTap: () {
                   if (nameCtrl.text.trim().isEmpty) return;
-                  ref.read(childDevProvider.notifier).addChild(
+                  ref
+                      .read(childDevProvider.notifier)
+                      .addChild(
                         ChildProfile(
-                          id: DateTime.now()
-                              .millisecondsSinceEpoch
-                              .toString(),
+                          id: DateTime.now().millisecondsSinceEpoch.toString(),
                           name: nameCtrl.text.trim(),
                           emoji: emoji,
                           birthDate: birthDate,
@@ -767,9 +925,16 @@ class _ChildDevelopmentScreenState
     final nameCtrl = TextEditingController();
     String emoji = '📚';
     const subjectEmojis = [
-      ('Türkçe', '📖'), ('Matematik', '➕'), ('Fen', '🔬'),
-      ('Sosyal', '🌍'), ('İngilizce', '🇬🇧'), ('Müzik', '🎵'),
-      ('Beden', '⚽'), ('Resim', '🎨'), ('Din', '📿'), ('Diğer', '📚'),
+      ('Türkçe', '📖'),
+      ('Matematik', '➕'),
+      ('Fen', '🔬'),
+      ('Sosyal', '🌍'),
+      ('İngilizce', '🇬🇧'),
+      ('Müzik', '🎵'),
+      ('Beden', '⚽'),
+      ('Resim', '🎨'),
+      ('Din', '📿'),
+      ('Diğer', '📚'),
     ];
 
     showModalBottomSheet(
@@ -778,15 +943,18 @@ class _ChildDevelopmentScreenState
       backgroundColor: Colors.transparent,
       builder: (_) => StatefulBuilder(
         builder: (ctx, setSt) => _DevSheet(
-          title: '📚 Ders Ekle',
+          title: '📚 ${AppLocalizations.of(context).childAddLesson}',
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Ders seç veya kendin yaz:',
-                  style: TextStyle(
-                      fontSize: 12,
-                      color: Color(0xFF6B7280),
-                      fontWeight: FontWeight.w600)),
+              Text(
+                AppLocalizations.of(context).cdPickOrWriteLesson,
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Color(0xFF6B7280),
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
               const SizedBox(height: 8),
               Wrap(
                 spacing: 6,
@@ -802,39 +970,47 @@ class _ChildDevelopmentScreenState
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 6),
+                        horizontal: 10,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
                         color: nameCtrl.text == name
-                            ? const Color(0xFFFF6B6B).withAlpha(20)
+                            ? const Color(0xFF06B6D4).withAlpha(20)
                             : Colors.grey.withAlpha(15),
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
                           color: nameCtrl.text == name
-                              ? const Color(0xFFFF6B6B)
+                              ? const Color(0xFF06B6D4)
                               : Colors.transparent,
                         ),
                       ),
-                      child: Text('$em $name',
-                          style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600)),
+                      child: Text(
+                        '$em $name',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
                   );
                 }).toList(),
               ),
               const SizedBox(height: 10),
-              _DevField(controller: nameCtrl, label: 'Ders adı'),
+              _DevField(
+                controller: nameCtrl,
+                label: AppLocalizations.of(context).cdLessonName,
+              ),
               const SizedBox(height: 14),
               _DevBtn(
-                label: 'Ders Ekle',
+                label: AppLocalizations.of(context).cdAddLesson,
                 onTap: () {
                   if (nameCtrl.text.trim().isEmpty) return;
-                  ref.read(childDevProvider.notifier).addSubject(
+                  ref
+                      .read(childDevProvider.notifier)
+                      .addSubject(
                         child.id,
                         SchoolSubject(
-                          id: DateTime.now()
-                              .millisecondsSinceEpoch
-                              .toString(),
+                          id: DateTime.now().millisecondsSinceEpoch.toString(),
                           name: nameCtrl.text.trim(),
                           emoji: emoji,
                         ),
@@ -860,15 +1036,18 @@ class _ChildDevelopmentScreenState
       backgroundColor: Colors.transparent,
       builder: (_) => StatefulBuilder(
         builder: (ctx, setSt) => _DevSheet(
-          title: '📝 Ödev Ekle — ${child.name}',
+          title:
+              '📝 ${AppLocalizations.of(context).childAddHomework(child.name)}',
           child: Column(
             children: [
               _DevField(
-                  controller: subjectCtrl, label: 'Ders adı'),
+                controller: subjectCtrl,
+                label: AppLocalizations.of(context).cdLessonName,
+              ),
               const SizedBox(height: 10),
               _DevField(
                 controller: descCtrl,
-                label: 'Ödev açıklaması',
+                label: AppLocalizations.of(context).cdHomeworkDesc,
                 maxLines: 2,
               ),
               const SizedBox(height: 10),
@@ -878,23 +1057,29 @@ class _ChildDevelopmentScreenState
                     context: ctx,
                     initialDate: dueDate,
                     firstDate: DateTime.now(),
-                    lastDate:
-                        DateTime.now().add(const Duration(days: 90)),
+                    lastDate: DateTime.now().add(const Duration(days: 90)),
                   );
                   if (d != null) setSt(() => dueDate = d);
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 14, vertical: 13),
+                    horizontal: 14,
+                    vertical: 13,
+                  ),
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: const Color(0xFFFF6B6B), width: 1.5),
+                      color: const Color(0xFF06B6D4),
+                      width: 1.5,
+                    ),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.event,
-                          color: Color(0xFFFF6B6B), size: 18),
+                      const Icon(
+                        Icons.event,
+                        color: Color(0xFF06B6D4),
+                        size: 18,
+                      ),
                       const SizedBox(width: 8),
                       Text(
                         'Teslim: ${DateFormat('dd MMMM', 'tr').format(dueDate)}',
@@ -906,19 +1091,18 @@ class _ChildDevelopmentScreenState
               ),
               const SizedBox(height: 14),
               _DevBtn(
-                label: 'Ödevi Kaydet',
+                label: AppLocalizations.of(context).cdSaveHomework,
                 onTap: () {
                   if (subjectCtrl.text.trim().isEmpty) return;
-                  ref.read(childDevProvider.notifier).addHomework(
+                  ref
+                      .read(childDevProvider.notifier)
+                      .addHomework(
                         child.id,
                         HomeworkEntry(
-                          id: DateTime.now()
-                              .millisecondsSinceEpoch
-                              .toString(),
+                          id: DateTime.now().millisecondsSinceEpoch.toString(),
                           subject: subjectCtrl.text.trim(),
                           description: descCtrl.text.trim(),
-                          dueDate:
-                              DateFormat('dd.MM.yyyy').format(dueDate),
+                          dueDate: DateFormat('dd.MM.yyyy').format(dueDate),
                         ),
                       );
                   Navigator.pop(ctx);
@@ -939,32 +1123,33 @@ class _ChildDevelopmentScreenState
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (_) => _DevSheet(
-        title: '📏 Büyüme Ölçümü — ${child.name}',
+        title: '📏 ${AppLocalizations.of(context).childAddGrowth(child.name)}',
         child: Column(
           children: [
             _DevField(
               controller: heightCtrl,
-              label: 'Boy (cm)',
+              label: AppLocalizations.of(context).cdHeightCm,
               keyboard: TextInputType.number,
             ),
             const SizedBox(height: 10),
             _DevField(
               controller: weightCtrl,
-              label: 'Kilo (kg)',
+              label: AppLocalizations.of(context).cdWeightKg,
               keyboard: TextInputType.number,
             ),
             const SizedBox(height: 14),
             _DevBtn(
-              label: 'Kaydet',
+              label: AppLocalizations.of(context).save,
               onTap: () {
                 final h = double.tryParse(heightCtrl.text);
                 final w = double.tryParse(weightCtrl.text);
                 if (h == null && w == null) return;
-                ref.read(childDevProvider.notifier).addGrowthEntry(
+                ref
+                    .read(childDevProvider.notifier)
+                    .addGrowthEntry(
                       child.id,
                       GrowthEntry(
-                        date: DateFormat('dd.MM.yyyy')
-                            .format(DateTime.now()),
+                        date: DateFormat('dd.MM.yyyy').format(DateTime.now()),
                         height: h,
                         weight: w,
                       ),
@@ -994,8 +1179,9 @@ class _MilestoneTab extends ConsumerWidget {
     final group = fresh.devGroup;
     final milestones = _milestonesByAge[group] ?? [];
 
-    final completed =
-        milestones.where((m) => fresh.completedMilestones.contains('$group-${m.$2}')).length;
+    final completed = milestones
+        .where((m) => fresh.completedMilestones.contains('$group-${m.$2}'))
+        .length;
 
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -1005,7 +1191,7 @@ class _MilestoneTab extends ConsumerWidget {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             gradient: const LinearGradient(
-              colors: [Color(0xFFFF6B6B), Color(0xFFFFD93D)],
+              colors: [Color(0xFF06B6D4), Color(0xFF0891B2)],
             ),
             borderRadius: BorderRadius.circular(16),
           ),
@@ -1017,30 +1203,45 @@ class _MilestoneTab extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(fresh.name,
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w900,
-                            fontSize: 18)),
-                    Text(fresh.ageLabel,
-                        style: const TextStyle(
-                            color: Colors.white70, fontSize: 13)),
-                    Text('Gelişim grubu: $group',
-                        style: const TextStyle(
-                            color: Colors.white70, fontSize: 12)),
+                    Text(
+                      fresh.name,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 18,
+                      ),
+                    ),
+                    Text(
+                      fresh.ageLabel,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 13,
+                      ),
+                    ),
+                    Text(
+                      AppLocalizations.of(context).cdDevGroup(group),
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 12,
+                      ),
+                    ),
                   ],
                 ),
               ),
               Column(
                 children: [
-                  Text('$completed/${milestones.length}',
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 22)),
-                  const Text('tamamlandı',
-                      style: TextStyle(
-                          color: Colors.white70, fontSize: 10)),
+                  Text(
+                    '$completed/${milestones.length}',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 22,
+                    ),
+                  ),
+                  Text(
+                    AppLocalizations.of(context).cdCompleted,
+                    style: const TextStyle(color: Colors.white70, fontSize: 10),
+                  ),
                 ],
               ),
             ],
@@ -1052,20 +1253,87 @@ class _MilestoneTab extends ConsumerWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: LinearProgressIndicator(
-            value: milestones.isEmpty
-                ? 0
-                : completed / milestones.length,
+            value: milestones.isEmpty ? 0 : completed / milestones.length,
             backgroundColor: Colors.grey.withAlpha(30),
-            valueColor: const AlwaysStoppedAnimation(Color(0xFFFF6B6B)),
+            valueColor: const AlwaysStoppedAnimation(Color(0xFF06B6D4)),
             minHeight: 8,
           ),
         ),
         const SizedBox(height: 16),
 
+        // Büyüyen gelişim ağacı — her basamak ağacı büyütür
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFF0E1F13), Color(0xFF13131A)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(color: const Color(0xFF2E7D32).withAlpha(60)),
+          ),
+          child: Column(
+            children: [
+              Text(
+                '${fresh.name}\'in Gelişim Ağacı',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                AppLocalizations.of(context).cdStepGrowsTree,
+                style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 11),
+              ),
+              const SizedBox(height: 8),
+              GrowingTree(
+                progress: milestones.isEmpty
+                    ? 0
+                    : completed / milestones.length,
+                size: 190,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 12),
+
+        // AI ile kişisel haftalık plan üret
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton.icon(
+            onPressed: () => showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              builder: (_) => _AiPlanSheet(child: fresh),
+            ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF8B5CF6),
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14),
+              ),
+            ),
+            icon: const Icon(Icons.auto_awesome, color: Colors.white, size: 18),
+            label: Text(
+              AppLocalizations.of(context).cdWeeklyPlanFor(fresh.name),
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+
         // Current group milestones
-        Text('$group Gelişim Basamakları',
-            style: const TextStyle(
-                fontWeight: FontWeight.w800, fontSize: 14)),
+        Text(
+          '$group Gelişim Basamakları',
+          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
+        ),
         const SizedBox(height: 8),
         ...milestones.map((m) {
           final key = '$group-${m.$2}';
@@ -1079,12 +1347,12 @@ class _MilestoneTab extends ConsumerWidget {
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: done
-                    ? const Color(0xFFFF6B6B).withAlpha(12)
+                    ? const Color(0xFF06B6D4).withAlpha(12)
                     : Colors.grey.withAlpha(8),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
                   color: done
-                      ? const Color(0xFFFF6B6B).withAlpha(50)
+                      ? const Color(0xFF06B6D4).withAlpha(50)
                       : Colors.grey.withAlpha(30),
                 ),
               ),
@@ -1096,19 +1364,24 @@ class _MilestoneTab extends ConsumerWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(m.$2,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                color: done
-                                    ? const Color(0xFFFF6B6B)
-                                    : Colors.black87)),
-                        Text(m.$1,
-                            style: TextStyle(
-                                fontSize: 11,
-                                color: done
-                                    ? const Color(0xFFFF6B6B)
-                                        .withAlpha(160)
-                                    : const Color(0xFF9CA3AF))),
+                        Text(
+                          m.$2,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: done
+                                ? const Color(0xFF06B6D4)
+                                : Colors.black87,
+                          ),
+                        ),
+                        Text(
+                          devCategoryLabel(context, m.$1),
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: done
+                                ? const Color(0xFF06B6D4).withAlpha(160)
+                                : const Color(0xFF9CA3AF),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -1118,19 +1391,18 @@ class _MilestoneTab extends ConsumerWidget {
                     height: 24,
                     decoration: BoxDecoration(
                       color: done
-                          ? const Color(0xFFFF6B6B)
+                          ? const Color(0xFF06B6D4)
                           : Colors.transparent,
                       shape: BoxShape.circle,
                       border: Border.all(
                         color: done
-                            ? const Color(0xFFFF6B6B)
+                            ? const Color(0xFF06B6D4)
                             : Colors.grey.withAlpha(80),
                         width: 1.5,
                       ),
                     ),
                     child: done
-                        ? const Icon(Icons.check,
-                            color: Colors.white, size: 14)
+                        ? const Icon(Icons.check, color: Colors.white, size: 14)
                         : null,
                   ),
                 ],
@@ -1160,15 +1432,17 @@ class _SchoolTab extends ConsumerWidget {
         .firstWhere((c) => c.id == child.id, orElse: () => child);
 
     if (fresh.subjects.isEmpty) {
-      return const Center(
+      return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('📚', style: TextStyle(fontSize: 48)),
-            SizedBox(height: 12),
-            Text('Henüz ders eklenmedi\n+ ile ekleyin',
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Color(0xFF9CA3AF))),
+            const Text('📚', style: TextStyle(fontSize: 48)),
+            const SizedBox(height: 12),
+            Text(
+              AppLocalizations.of(context).cdNoLessons,
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Color(0xFF9CA3AF)),
+            ),
           ],
         ),
       );
@@ -1181,18 +1455,18 @@ class _SchoolTab extends ConsumerWidget {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: const Color(0xFFFF6B6B).withAlpha(10),
+              color: const Color(0xFF06B6D4).withAlpha(10),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                  color: const Color(0xFFFF6B6B).withAlpha(40)),
+              border: Border.all(color: const Color(0xFF06B6D4).withAlpha(40)),
             ),
             child: Row(
               children: [
                 const Text('🏫', style: TextStyle(fontSize: 24)),
                 const SizedBox(width: 10),
-                Text(fresh.schoolName!,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w700)),
+                Text(
+                  fresh.schoolName!,
+                  style: const TextStyle(fontWeight: FontWeight.w700),
+                ),
               ],
             ),
           ),
@@ -1204,16 +1478,9 @@ class _SchoolTab extends ConsumerWidget {
             margin: const EdgeInsets.only(bottom: 10),
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: const Color(0xFF13131A),
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: Colors.grey.withAlpha(30)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withAlpha(8),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
+              border: Border.all(color: const Color(0xFF262631)),
             ),
             child: Row(
               children: [
@@ -1223,20 +1490,25 @@ class _SchoolTab extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(s.name,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w800)),
+                      Text(
+                        s.name,
+                        style: const TextStyle(fontWeight: FontWeight.w800),
+                      ),
                       if (s.grades.isEmpty)
-                        const Text('Not girilmedi',
-                            style: TextStyle(
-                                fontSize: 11,
-                                color: Color(0xFF9CA3AF)))
+                        Text(
+                          AppLocalizations.of(context).cdNoGrade,
+                          style: const TextStyle(
+                            fontSize: 11,
+                            color: Color(0xFF9CA3AF),
+                          ),
+                        )
                       else
                         Text(
                           s.grades.map((g) => g.toString()).join(' · '),
                           style: const TextStyle(
-                              fontSize: 11,
-                              color: Color(0xFF6B7280)),
+                            fontSize: 11,
+                            color: Color(0xFF6B7280),
+                          ),
                         ),
                     ],
                   ),
@@ -1252,10 +1524,10 @@ class _SchoolTab extends ConsumerWidget {
                           color: _gradeColor(avg),
                         ),
                       ),
-                      Text('ort.',
-                          style: TextStyle(
-                              fontSize: 9,
-                              color: _gradeColor(avg))),
+                      Text(
+                        AppLocalizations.of(context).cdAvg,
+                        style: TextStyle(fontSize: 9, color: _gradeColor(avg)),
+                      ),
                     ],
                   ),
                   const SizedBox(width: 8),
@@ -1267,11 +1539,14 @@ class _SchoolTab extends ConsumerWidget {
                     width: 32,
                     height: 32,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFFF6B6B).withAlpha(20),
+                      color: const Color(0xFF06B6D4).withAlpha(20),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: const Icon(Icons.add,
-                        color: Color(0xFFFF6B6B), size: 18),
+                    child: const Icon(
+                      Icons.add,
+                      color: Color(0xFF06B6D4),
+                      size: 18,
+                    ),
                   ),
                 ),
               ],
@@ -1283,7 +1558,11 @@ class _SchoolTab extends ConsumerWidget {
   }
 
   void _addGrade(
-      BuildContext context, WidgetRef ref, String childId, SchoolSubject s) {
+    BuildContext context,
+    WidgetRef ref,
+    String childId,
+    SchoolSubject s,
+  ) {
     final ctrl = TextEditingController();
     showDialog(
       context: context,
@@ -1292,15 +1571,15 @@ class _SchoolTab extends ConsumerWidget {
         content: TextField(
           controller: ctrl,
           keyboardType: TextInputType.number,
-          decoration: const InputDecoration(
-            labelText: 'Not (0-100)',
-            border: OutlineInputBorder(),
+          decoration: InputDecoration(
+            labelText: AppLocalizations.of(context).cdGradeRange,
+            border: const OutlineInputBorder(),
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('İptal'),
+            child: Text(AppLocalizations.of(context).cancel),
           ),
           ElevatedButton(
             onPressed: () {
@@ -1313,9 +1592,12 @@ class _SchoolTab extends ConsumerWidget {
               Navigator.pop(context);
             },
             style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFFF6B6B)),
-            child: const Text('Kaydet',
-                style: TextStyle(color: Colors.white)),
+              backgroundColor: const Color(0xFF06B6D4),
+            ),
+            child: Text(
+              AppLocalizations.of(context).save,
+              style: const TextStyle(color: Colors.white),
+            ),
           ),
         ],
       ),
@@ -1333,19 +1615,20 @@ class _HomeworkTab extends ConsumerWidget {
         .watch(childDevProvider)
         .firstWhere((c) => c.id == child.id, orElse: () => child);
 
-    final pending =
-        fresh.homework.where((h) => !h.completed).toList();
+    final pending = fresh.homework.where((h) => !h.completed).toList();
     final done = fresh.homework.where((h) => h.completed).toList();
 
     if (fresh.homework.isEmpty) {
-      return const Center(
+      return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('📝', style: TextStyle(fontSize: 48)),
-            SizedBox(height: 12),
-            Text('Ödev yok — harika! 🎉',
-                style: TextStyle(color: Color(0xFF9CA3AF))),
+            const Text('📝', style: TextStyle(fontSize: 48)),
+            const SizedBox(height: 12),
+            Text(
+              AppLocalizations.of(context).cdNoHomework,
+              style: const TextStyle(color: Color(0xFF9CA3AF)),
+            ),
           ],
         ),
       );
@@ -1356,20 +1639,12 @@ class _HomeworkTab extends ConsumerWidget {
       children: [
         if (pending.isNotEmpty) ...[
           _Label('Bekleyen Ödevler (${pending.length})'),
-          ...pending.map((h) => _HwTile(
-                hw: h,
-                childId: fresh.id,
-                ref: ref,
-              )),
+          ...pending.map((h) => _HwTile(hw: h, childId: fresh.id, ref: ref)),
         ],
         if (done.isNotEmpty) ...[
           const SizedBox(height: 8),
           _Label('Tamamlanan (${done.length})'),
-          ...done.map((h) => _HwTile(
-                hw: h,
-                childId: fresh.id,
-                ref: ref,
-              )),
+          ...done.map((h) => _HwTile(hw: h, childId: fresh.id, ref: ref)),
         ],
       ],
     );
@@ -1380,8 +1655,7 @@ class _HwTile extends StatelessWidget {
   final HomeworkEntry hw;
   final String childId;
   final WidgetRef ref;
-  const _HwTile(
-      {required this.hw, required this.childId, required this.ref});
+  const _HwTile({required this.hw, required this.childId, required this.ref});
 
   @override
   Widget build(BuildContext context) {
@@ -1419,8 +1693,7 @@ class _HwTile extends StatelessWidget {
                 ),
               ),
               child: hw.completed
-                  ? const Icon(Icons.check,
-                      color: Colors.white, size: 13)
+                  ? const Icon(Icons.check, color: Colors.white, size: 13)
                   : null,
             ),
             const SizedBox(width: 10),
@@ -1428,26 +1701,32 @@ class _HwTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(hw.subject,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w800,
-                          color:
-                              hw.completed ? Colors.grey : Colors.black87)),
+                  Text(
+                    hw.subject,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      color: hw.completed ? Colors.grey : Colors.black87,
+                    ),
+                  ),
                   if (hw.description.isNotEmpty)
-                    Text(hw.description,
-                        style: const TextStyle(
-                            fontSize: 12,
-                            color: Color(0xFF6B7280))),
+                    Text(
+                      hw.description,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Color(0xFF6B7280),
+                      ),
+                    ),
                 ],
               ),
             ),
-            Text('📅 ${hw.dueDate}',
-                style: TextStyle(
-                    fontSize: 10,
-                    color: hw.completed
-                        ? Colors.grey
-                        : Colors.orange.shade700,
-                    fontWeight: FontWeight.w600)),
+            Text(
+              '📅 ${hw.dueDate}',
+              style: TextStyle(
+                fontSize: 10,
+                color: hw.completed ? Colors.grey : Colors.orange.shade700,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ],
         ),
       ),
@@ -1468,24 +1747,34 @@ class _GrowthTab extends ConsumerWidget {
     final log = fresh.growthLog.reversed.toList();
 
     if (log.isEmpty) {
-      return const Center(
+      return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('📏', style: TextStyle(fontSize: 48)),
-            SizedBox(height: 12),
-            Text('Henüz ölçüm girilmedi\n+ ile ekleyin',
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Color(0xFF9CA3AF))),
+            const Text('📏', style: TextStyle(fontSize: 48)),
+            const SizedBox(height: 12),
+            Text(
+              AppLocalizations.of(context).cdNoMeasurements,
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Color(0xFF9CA3AF)),
+            ),
           ],
         ),
       );
     }
 
-    final lastHeight =
-        log.firstWhere((g) => g.height != null, orElse: () => GrowthEntry(date: '')).height;
-    final lastWeight =
-        log.firstWhere((g) => g.weight != null, orElse: () => GrowthEntry(date: '')).weight;
+    final lastHeight = log
+        .firstWhere(
+          (g) => g.height != null,
+          orElse: () => const GrowthEntry(date: ''),
+        )
+        .height;
+    final lastWeight = log
+        .firstWhere(
+          (g) => g.weight != null,
+          orElse: () => const GrowthEntry(date: ''),
+        )
+        .weight;
 
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -1496,55 +1785,62 @@ class _GrowthTab extends ConsumerWidget {
             Expanded(
               child: _GrowthCard(
                 emoji: '📏',
-                label: 'Boy',
+                label: AppLocalizations.of(context).cdHeight,
                 value: lastHeight != null
                     ? '${lastHeight.toStringAsFixed(1)} cm'
                     : '—',
-                color: const Color(0xFFFF6B6B),
+                color: const Color(0xFF06B6D4),
               ),
             ),
             const SizedBox(width: 10),
             Expanded(
               child: _GrowthCard(
                 emoji: '⚖️',
-                label: 'Kilo',
+                label: AppLocalizations.of(context).cdWeight,
                 value: lastWeight != null
                     ? '${lastWeight.toStringAsFixed(1)} kg'
                     : '—',
-                color: const Color(0xFFFFD93D),
+                color: const Color(0xFF0891B2),
               ),
             ),
           ],
         ),
         const SizedBox(height: 16),
-        _Label('Ölçüm Geçmişi'),
-        ...log.map((g) => Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.grey.withAlpha(8),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.grey.withAlpha(30)),
-              ),
-              child: Row(
-                children: [
-                  const Text('📅', style: TextStyle(fontSize: 18)),
-                  const SizedBox(width: 8),
-                  Text(g.date,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w700)),
-                  const Spacer(),
-                  if (g.height != null)
-                    Text('📏 ${g.height!.toStringAsFixed(1)} cm',
-                        style: const TextStyle(fontSize: 12)),
-                  if (g.height != null && g.weight != null)
-                    const SizedBox(width: 12),
-                  if (g.weight != null)
-                    Text('⚖️ ${g.weight!.toStringAsFixed(1)} kg',
-                        style: const TextStyle(fontSize: 12)),
-                ],
-              ),
-            )),
+        const _Label('Ölçüm Geçmişi'),
+        ...log.map(
+          (g) => Container(
+            margin: const EdgeInsets.only(bottom: 8),
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.grey.withAlpha(8),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.grey.withAlpha(30)),
+            ),
+            child: Row(
+              children: [
+                const Text('📅', style: TextStyle(fontSize: 18)),
+                const SizedBox(width: 8),
+                Text(
+                  g.date,
+                  style: const TextStyle(fontWeight: FontWeight.w700),
+                ),
+                const Spacer(),
+                if (g.height != null)
+                  Text(
+                    '📏 ${g.height!.toStringAsFixed(1)} cm',
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                if (g.height != null && g.weight != null)
+                  const SizedBox(width: 12),
+                if (g.weight != null)
+                  Text(
+                    '⚖️ ${g.weight!.toStringAsFixed(1)} kg',
+                    style: const TextStyle(fontSize: 12),
+                  ),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -1555,11 +1851,12 @@ class _GrowthCard extends StatelessWidget {
   final String label;
   final String value;
   final Color color;
-  const _GrowthCard(
-      {required this.emoji,
-      required this.label,
-      required this.value,
-      required this.color});
+  const _GrowthCard({
+    required this.emoji,
+    required this.label,
+    required this.value,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1574,14 +1871,18 @@ class _GrowthCard extends StatelessWidget {
         children: [
           Text(emoji, style: const TextStyle(fontSize: 28)),
           const SizedBox(height: 4),
-          Text(value,
-              style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 18,
-                  color: color)),
-          Text(label,
-              style: const TextStyle(
-                  fontSize: 11, color: Color(0xFF9CA3AF))),
+          Text(
+            value,
+            style: TextStyle(
+              fontWeight: FontWeight.w900,
+              fontSize: 18,
+              color: color,
+            ),
+          ),
+          Text(
+            label,
+            style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+          ),
         ],
       ),
     );
@@ -1599,10 +1900,11 @@ class _DevSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom),
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
       child: Container(
         decoration: const BoxDecoration(
-          color: Colors.white,
+          color: Color(0xFF13131A),
           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
         padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
@@ -1612,17 +1914,23 @@ class _DevSheet extends StatelessWidget {
           children: [
             Center(
               child: Container(
-                width: 36, height: 4,
+                width: 36,
+                height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.grey.withAlpha(60),
+                  color: Colors.white.withAlpha(40),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
             ),
             const SizedBox(height: 14),
-            Text(title,
-                style: const TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.w900)),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w900,
+                color: Colors.white,
+              ),
+            ),
             const SizedBox(height: 16),
             child,
           ],
@@ -1650,22 +1958,28 @@ class _DevField extends StatelessWidget {
       controller: controller,
       maxLines: maxLines,
       keyboardType: keyboard,
+      style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
         labelText: label,
+        labelStyle: const TextStyle(color: Color(0xFF9CA3AF)),
         filled: true,
-        fillColor: const Color(0xFFF9FAFB),
+        fillColor: const Color(0xFF1A1A24),
         border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Color(0xFFE5E7EB))),
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Color(0x22FFFFFF)),
+        ),
         enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Color(0xFFE5E7EB))),
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Color(0x22FFFFFF)),
+        ),
         focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(
-                color: Color(0xFFFF6B6B), width: 1.5)),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Color(0xFF06B6D4), width: 1.5),
+        ),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 14,
+          vertical: 12,
+        ),
       ),
     );
   }
@@ -1684,23 +1998,26 @@ class _DevBtn extends StatelessWidget {
         height: 50,
         decoration: BoxDecoration(
           gradient: const LinearGradient(
-            colors: [Color(0xFFFF6B6B), Color(0xFFFFD93D)],
+            colors: [Color(0xFF06B6D4), Color(0xFF0891B2)],
           ),
           borderRadius: BorderRadius.circular(14),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFFFF6B6B).withAlpha(60),
+              color: const Color(0xFF06B6D4).withAlpha(60),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
           ],
         ),
         child: Center(
-          child: Text(label,
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 15)),
+          child: Text(
+            label,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w800,
+              fontSize: 15,
+            ),
+          ),
         ),
       ),
     );
@@ -1715,11 +2032,462 @@ class _Label extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
-      child: Text(text,
-          style: const TextStyle(
-              fontSize: 12,
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w800,
+          color: Color(0xFF6B7280),
+        ),
+      ),
+    );
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// AI Haftalık Plan — PedagogyEngine ile çocuğa özel plan üretir ve gösterir
+// ═══════════════════════════════════════════════════════════════════════════
+class _AiPlanSheet extends StatefulWidget {
+  final ChildProfile child;
+  const _AiPlanSheet({required this.child});
+
+  @override
+  State<_AiPlanSheet> createState() => _AiPlanSheetState();
+}
+
+class _AiPlanSheetState extends State<_AiPlanSheet> {
+  Map<String, dynamic>? _plan;
+  bool _loading = true;
+  bool _error = false;
+  String _focus = 'genel gelişim';
+  final _interestsCtrl = TextEditingController();
+
+  static const _focusOptions = [
+    'genel gelişim',
+    'dil gelişimi',
+    'matematik',
+    'sosyal-duygusal',
+    'motor beceriler',
+    'sorumluluk',
+    'okuma alışkanlığı',
+    'okul başarısı',
+  ];
+
+  String get _lang {
+    final l = HiveService.getSetting('language') ?? 'Türkçe';
+    switch (l) {
+      case 'English':
+        return 'en';
+      case 'Français':
+        return 'fr';
+      case 'Nederlands':
+        return 'nl';
+      default:
+        return 'tr';
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _generate();
+  }
+
+  @override
+  void dispose() {
+    _interestsCtrl.dispose();
+    super.dispose();
+  }
+
+  Future<void> _generate() async {
+    setState(() {
+      _loading = true;
+      _error = false;
+    });
+    final ageYears = (widget.child.ageMonths ~/ 12).clamp(1, 18);
+    final plan = await PedagogyEngine.generateWeeklyPlan(
+      childName: widget.child.name,
+      age: ageYears,
+      language: _lang,
+      focus: _focus,
+      interests: _interestsCtrl.text.trim(),
+      minutesPerDay: 20,
+      difficulty: 'easy',
+    );
+    if (!mounted) return;
+    setState(() {
+      _plan = plan;
+      _loading = false;
+      _error = plan == null;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DraggableScrollableSheet(
+      initialChildSize: 0.92,
+      maxChildSize: 0.95,
+      minChildSize: 0.5,
+      expand: false,
+      builder: (_, ctrl) => Container(
+        decoration: const BoxDecoration(
+          color: Color(0xFF13131A),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        ),
+        child: Column(
+          children: [
+            const SizedBox(height: 10),
+            Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: Colors.white.withAlpha(40),
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 14, 20, 8),
+              child: Row(
+                children: [
+                  const Icon(Icons.auto_awesome, color: Color(0xFF8B5CF6)),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      '${widget.child.name} · AI Haftalık Plan',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: _loading ? null : _generate,
+                    icon: const Icon(Icons.refresh, color: Color(0xFF8B5CF6)),
+                    tooltip: AppLocalizations.of(context).cdRegenerate,
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: _loading
+                  ? _buildLoading()
+                  : _error
+                  ? _buildError()
+                  : _buildPlan(ctrl),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLoading() => Center(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const CircularProgressIndicator(color: Color(0xFF8B5CF6)),
+        const SizedBox(height: 16),
+        Text(
+          AppLocalizations.of(context).cdGeneratingPlan,
+          style: const TextStyle(color: Color(0xFF9CA3AF)),
+        ),
+      ],
+    ),
+  );
+
+  Widget _buildError() => Center(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Icon(Icons.cloud_off, color: Color(0xFF6B7280), size: 48),
+        const SizedBox(height: 12),
+        Text(
+          AppLocalizations.of(context).cdPlanFailed,
+          style: const TextStyle(color: Color(0xFF9CA3AF)),
+        ),
+        const SizedBox(height: 12),
+        ElevatedButton(
+          onPressed: _generate,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF8B5CF6),
+          ),
+          child: Text(
+            AppLocalizations.of(context).cdRetry,
+            style: const TextStyle(color: Colors.white),
+          ),
+        ),
+      ],
+    ),
+  );
+
+  Widget _buildPlan(ScrollController ctrl) {
+    final p = _plan!;
+    final days = (p['days'] as List?) ?? [];
+    // parent_checklist bazen string dizisi, bazen {item/text}-nesne dizisi gelir.
+    final checklist = ((p['parent_checklist'] as List?) ?? [])
+        .map(
+          (e) => e is Map
+              ? (e['item'] ??
+                        e['text'] ??
+                        e['description'] ??
+                        e.values.join(' '))
+                    .toString()
+              : e.toString(),
+        )
+        .toList();
+    return ListView(
+      controller: ctrl,
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+      children: [
+        // Odak seçimi + yeniden üret
+        Wrap(
+          spacing: 6,
+          runSpacing: 6,
+          children: _focusOptions.map((f) {
+            final sel = _focus == f;
+            return GestureDetector(
+              onTap: () {
+                setState(() => _focus = f);
+                _generate();
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: sel
+                      ? const Color(0xFF8B5CF6)
+                      : const Color(0xFF1A1A24),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  f,
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                    color: sel ? Colors.white : const Color(0xFF9CA3AF),
+                  ),
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+        const SizedBox(height: 14),
+        // Tema + hedef
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFF8B5CF6), Color(0xFF6366F1)],
+            ),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                (p['week_theme'] ?? 'Haftalık Plan').toString(),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                (p['weekly_goal'] ?? '').toString(),
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 13,
+                  height: 1.4,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 14),
+        ...days.map((d) => _dayCard(d as Map<String, dynamic>)),
+        if (checklist.isNotEmpty) ...[
+          const SizedBox(height: 8),
+          Text(
+            AppLocalizations.of(context).cdParentChecklist,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 15,
               fontWeight: FontWeight.w800,
-              color: Color(0xFF6B7280))),
+            ),
+          ),
+          const SizedBox(height: 8),
+          ...checklist.map(
+            (c) => Padding(
+              padding: const EdgeInsets.only(bottom: 6),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(
+                    Icons.check_box_outline_blank,
+                    size: 16,
+                    color: Color(0xFF8B5CF6),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      c,
+                      style: const TextStyle(
+                        color: Color(0xFFD1D5DB),
+                        fontSize: 13,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+        if (p['end_of_week_review'] != null) ...[
+          const SizedBox(height: 12),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: const Color(0xFF1A1A24),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              '📋 ${p['end_of_week_review']}',
+              style: const TextStyle(
+                color: Color(0xFF9CA3AF),
+                fontSize: 12.5,
+                height: 1.4,
+              ),
+            ),
+          ),
+        ],
+      ],
+    );
+  }
+
+  static const _dayTr = {
+    'Monday': 'Pazartesi',
+    'Tuesday': 'Salı',
+    'Wednesday': 'Çarşamba',
+    'Thursday': 'Perşembe',
+    'Friday': 'Cuma',
+    'Saturday': 'Cumartesi',
+    'Sunday': 'Pazar',
+  };
+
+  Widget _dayCard(Map<String, dynamic> d) {
+    final day = (d['day'] ?? '').toString();
+    final lesson = d['lesson'] as Map<String, dynamic>?;
+    final homework = d['homework'] as Map<String, dynamic>?;
+    final task = d['daily_task'] as Map<String, dynamic>?;
+    final family = (d['family_activity'] ?? '').toString();
+    final reflection = (d['reflection_question'] ?? '').toString();
+
+    Widget row(
+      IconData ic,
+      Color c,
+      String label,
+      String? title,
+      String? desc,
+    ) {
+      if (title == null || title.isEmpty) return const SizedBox.shrink();
+      return Padding(
+        padding: const EdgeInsets.only(top: 8),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(ic, size: 15, color: c),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '$label: $title',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  if (desc != null && desc.isNotEmpty)
+                    Text(
+                      desc,
+                      style: const TextStyle(
+                        color: Color(0xFF9CA3AF),
+                        fontSize: 12,
+                        height: 1.35,
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1A1A24),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: const Color(0x18FFFFFF)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            _dayTr[day] ?? day,
+            style: const TextStyle(
+              color: Color(0xFF8B5CF6),
+              fontSize: 14,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          row(
+            Icons.school,
+            const Color(0xFF06B6D4),
+            'Ders',
+            lesson?['title']?.toString(),
+            lesson?['description']?.toString(),
+          ),
+          row(
+            Icons.edit_note,
+            const Color(0xFFF59E0B),
+            'Ödev',
+            homework?['title']?.toString(),
+            homework?['description']?.toString(),
+          ),
+          row(
+            Icons.star,
+            const Color(0xFF10B981),
+            'Görev',
+            task?['title']?.toString(),
+            task?['description']?.toString(),
+          ),
+          if (family.isNotEmpty)
+            row(
+              Icons.family_restroom,
+              const Color(0xFFEC4899),
+              'Aile',
+              family,
+              null,
+            ),
+          if (reflection.isNotEmpty)
+            row(
+              Icons.help_outline,
+              const Color(0xFF9CA3AF),
+              'Soru',
+              reflection,
+              null,
+            ),
+        ],
+      ),
     );
   }
 }

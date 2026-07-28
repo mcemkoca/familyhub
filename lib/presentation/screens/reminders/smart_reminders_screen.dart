@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/supabase_client.dart';
-import '../../../config/constants.dart';
 import '../../../config/routes.dart';
 import '../../../domain/models/smart_reminder.dart';
 import '../../../repositories/smart_reminder_repository.dart';
@@ -11,6 +10,7 @@ import '../../../services/auth_service.dart';
 import '../../../services/smart_reminder_background_service.dart';
 import '../../../services/smart_reminder_service.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../../core/app_logger.dart';
 
 class SmartRemindersScreen extends StatefulWidget {
   const SmartRemindersScreen({super.key});
@@ -20,8 +20,11 @@ class SmartRemindersScreen extends StatefulWidget {
 }
 
 class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   List<SmartReminder> _reminders = [];
   bool _loading = false;
+  StreamSubscription<List<SmartReminder>>? _sub;
 
   @override
   void initState() {
@@ -40,8 +43,18 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
 
   @override
   void dispose() {
+    _sub?.cancel();
     SmartReminderService.stopAll();
     super.dispose();
+  }
+
+  /// Realtime abonelik — hatırlatıcı eklenince/değişince ekran anında güncellenir.
+  void _subscribeRealtime(String familyId) {
+    _sub?.cancel();
+    _sub = SmartReminderRepository().watchReminders(familyId).listen((rems) {
+      if (mounted) setState(() => _reminders = rems);
+    }, onError: (Object e) =>
+        AppLogger.logBestEffort(e, module: 'reminders', operation: 'remindersRealtime'));
   }
 
   Future<String?> _getFamilyId() async {
@@ -64,6 +77,7 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
         _reminders = reminders;
         _loading = false;
       });
+      _subscribeRealtime(familyId);
     } else {
       setState(() => _loading = false);
     }
@@ -108,9 +122,8 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bgColor = isDark ? AppColors.darkBackground : AppColors.background;
-    final textColor = isDark ? Colors.white : Colors.black87;
+    final bgColor = const Color(0xFF0A0A0F);
+    final textColor = const Color(0xFFE5E7EB);
 
     return Scaffold(
       backgroundColor: bgColor,
@@ -120,11 +133,14 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
             expandedHeight: 120,
             floating: true,
             pinned: true,
-            backgroundColor: isDark ? const Color(0xFF1A1A2E) : const Color(0xFFF8F9FA),
+            backgroundColor: const Color(0xFF1A1A2E),
             flexibleSpace: FlexibleSpaceBar(
-              title: const Text(
-                '🧠 Akıllı Hatırlatıcılar',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              title: Text(
+                AppLocalizations.of(context).akilliHatirlaticilar,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               background: Container(
                 decoration: BoxDecoration(
@@ -139,10 +155,7 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
               ),
             ),
             actions: [
-              IconButton(
-                icon: const Icon(Icons.refresh),
-                onPressed: _refresh,
-              ),
+              IconButton(icon: const Icon(Icons.refresh), onPressed: _refresh),
             ],
           ),
           SliverToBoxAdapter(
@@ -178,13 +191,10 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
             )
           else
             SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final reminder = _reminders[index];
-                  return _buildReminderCard(reminder, isDark, textColor);
-                },
-                childCount: _reminders.length,
-              ),
+              delegate: SliverChildBuilderDelegate((context, index) {
+                final reminder = _reminders[index];
+                return _buildReminderCard(reminder, isDark, textColor);
+              }, childCount: _reminders.length),
             ),
           const SliverToBoxAdapter(child: SizedBox(height: 100)),
         ],
@@ -193,22 +203,31 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
         onPressed: _navigateToCreate,
         icon: const Icon(Icons.add),
         label: Text(AppLocalizations.of(context).yeniHatirlatici),
-        backgroundColor: AppColors.cobalt,
+        backgroundColor: const Color(0xFF6366F1),
       ),
     );
   }
 
   Widget _buildStatsCard(bool isDark, Color textColor) {
-    final activeCount = _reminders.where((r) => r.status.state == ReminderState.active).length;
-    final totalTriggers = _reminders.fold<int>(0, (sum, r) => sum + r.status.triggerCount);
+    final activeCount = _reminders
+        .where((r) => r.status.state == ReminderState.active)
+        .length;
+    final totalTriggers = _reminders.fold<int>(
+      0,
+      (sum, r) => sum + r.status.triggerCount,
+    );
     final avgRate = _reminders.isEmpty
         ? 0
-        : _reminders.fold<double>(0, (sum, r) => sum + r.status.completionRate) / _reminders.length;
+        : _reminders.fold<double>(
+                0,
+                (sum, r) => sum + r.status.completionRate,
+              ) /
+              _reminders.length;
 
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF16213E) : Colors.white,
+        color: const Color(0xFFE5E7EB),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -221,15 +240,35 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildStatItem('Aktif', '$activeCount', Icons.notifications_active, Colors.green),
-          _buildStatItem('Tetiklenme', '$totalTriggers', Icons.flash_on, Colors.orange),
-          _buildStatItem('Başarı', '%${avgRate.toStringAsFixed(0)}', Icons.trending_up, Colors.blue),
+          _buildStatItem(
+            'Aktif',
+            '$activeCount',
+            Icons.notifications_active,
+            Colors.green,
+          ),
+          _buildStatItem(
+            'Tetiklenme',
+            '$totalTriggers',
+            Icons.flash_on,
+            Colors.orange,
+          ),
+          _buildStatItem(
+            'Başarı',
+            '%${avgRate.toStringAsFixed(0)}',
+            Icons.trending_up,
+            Colors.blue,
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildStatItem(String label, String value, IconData icon, Color color) {
+  Widget _buildStatItem(
+    String label,
+    String value,
+    IconData icon,
+    Color color,
+  ) {
     return Column(
       children: [
         Icon(icon, color: color, size: 28),
@@ -247,20 +286,20 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
     final suggestions = [
       _AiSuggestion(
         icon: '💡',
-        title: 'Çocuk okuldan gelince su içir',
-        subtitle: 'Lokasyon: Okul çıkışı pattern',
+        title: AppLocalizations.of(context).cocukOkuldanGelinceSuIcir,
+        subtitle: AppLocalizations.of(context).lokasyonOkulCikisiPattern,
       ),
       _AiSuggestion(
         icon: '💡',
-        title: 'Akşam yemeğinden önce 1 saat hazırlık',
-        subtitle: 'Zaman: 17:00, Görev: Yemek',
+        title: AppLocalizations.of(context).aksamYemegindenOnce1SaatHazirlik,
+        subtitle: AppLocalizations.of(context).zaman1700GorevYemek,
       ),
     ];
 
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF16213E) : Colors.white,
+        color: const Color(0xFFE5E7EB),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -278,7 +317,7 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
               Icon(Icons.auto_awesome, color: Colors.purple[400]),
               const SizedBox(width: 8),
               Text(
-                'AI Önerileri',
+                AppLocalizations.of(context).aiOnerileri,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -327,13 +366,17 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
     );
   }
 
-  Widget _buildReminderCard(SmartReminder reminder, bool isDark, Color textColor) {
+  Widget _buildReminderCard(
+    SmartReminder reminder,
+    bool isDark,
+    Color textColor,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       child: Card(
         elevation: 2,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        color: isDark ? const Color(0xFF16213E) : Colors.white,
+        color: const Color(0xFFE5E7EB),
         child: InkWell(
           onTap: () => _navigateToDetail(reminder),
           borderRadius: BorderRadius.circular(16),
@@ -387,7 +430,11 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
                       onPressed: () => _navigateToDetail(reminder),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.delete, size: 18, color: Colors.red),
+                      icon: const Icon(
+                        Icons.delete,
+                        size: 18,
+                        color: Colors.red,
+                      ),
                       onPressed: () => _deleteReminder(reminder),
                     ),
                   ],
@@ -409,7 +456,11 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
       ),
       child: Text(
         text,
-        style: TextStyle(fontSize: 11, color: color, fontWeight: FontWeight.w600),
+        style: TextStyle(
+          fontSize: 11,
+          color: color,
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }
@@ -419,18 +470,28 @@ class _SmartRemindersScreenState extends State<SmartRemindersScreen> {
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(AppLocalizations.of(context).hatirlaticiyiSil),
-        content: Text('"${reminder.title}" silinecek. Emin misiniz?'),
+        content: Text(
+          AppLocalizations.of(context).confirmDeleteNamed(reminder.title),
+        ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(AppLocalizations.of(context).cancel)),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: Text(AppLocalizations.of(context).cancel),
+          ),
           TextButton(
             onPressed: () async {
-              setState(() => _reminders.removeWhere((r) => r.id == reminder.id));
+              setState(
+                () => _reminders.removeWhere((r) => r.id == reminder.id),
+              );
               Navigator.pop(ctx);
               HapticFeedback.mediumImpact();
               await SmartReminderRepository().delete(reminder.id);
               await SmartReminderBackgroundService.cancelReminder(reminder.id);
             },
-            child: const Text('Sil', style: TextStyle(color: Colors.red)),
+            child: Text(
+              AppLocalizations.of(context).budDelete,
+              style: const TextStyle(color: Colors.red),
+            ),
           ),
         ],
       ),
@@ -443,5 +504,9 @@ class _AiSuggestion {
   final String title;
   final String subtitle;
 
-  _AiSuggestion({required this.icon, required this.title, required this.subtitle});
+  _AiSuggestion({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+  });
 }

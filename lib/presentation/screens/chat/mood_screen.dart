@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../config/constants.dart';
 import '../../providers/app_providers.dart';
 
 class MoodScreen extends ConsumerWidget {
@@ -12,11 +12,11 @@ class MoodScreen extends ConsumerWidget {
     final members = ref.watch(familyMembersProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Aile Ruh Hali'), centerTitle: true),
+      appBar: AppBar(title: Text(AppLocalizations.of(context).moodTitle), centerTitle: true),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          Text('Bugün nasıl hissediyorsun?', style: Theme.of(context).textTheme.displaySmall),
+          Text(AppLocalizations.of(context).bugunNasilHissediyorsun, style: Theme.of(context).textTheme.displaySmall),
           const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -29,9 +29,9 @@ class MoodScreen extends ConsumerWidget {
                   width: 56,
                   height: 56,
                   decoration: BoxDecoration(
-                    color: AppColors.card,
+                    color: const Color(0xFF13131A),
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: AppColors.border),
+                    border: Border.all(color: const Color(0x1EFFFFFF)),
                   ),
                   child: Center(child: Text(emoji, style: const TextStyle(fontSize: 28))),
                 ),
@@ -39,7 +39,7 @@ class MoodScreen extends ConsumerWidget {
             }).toList(),
           ),
           const SizedBox(height: 32),
-          Text('Aile Ruh Hali', style: Theme.of(context).textTheme.displaySmall),
+          Text(AppLocalizations.of(context).moodTitle, style: Theme.of(context).textTheme.displaySmall),
           const SizedBox(height: 12),
           ...moods.map((mood) {
             final member = members.firstWhere((m) => m.id == mood.userId, orElse: () => members.first);
@@ -47,9 +47,9 @@ class MoodScreen extends ConsumerWidget {
               margin: const EdgeInsets.only(bottom: 10),
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: AppColors.card,
+                color: const Color(0xFF13131A),
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: AppColors.border),
+                border: Border.all(color: const Color(0x1EFFFFFF)),
               ),
               child: Row(
                 children: [
@@ -60,7 +60,7 @@ class MoodScreen extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(member.name, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
-                        if (mood.note != null) Text(mood.note!, style: const TextStyle(fontSize: 13, color: AppColors.gray)),
+                        if (mood.note != null) Text(mood.note!, style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
                       ],
                     ),
                   ),

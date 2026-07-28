@@ -16,58 +16,52 @@ class AppearanceSettingsScreen extends ConsumerStatefulWidget {
 }
 
 class _AppearanceSettingsScreenState extends ConsumerState<AppearanceSettingsScreen> {
-  late ThemeMode _selectedThemeMode;
   late Color _selectedAccent;
   late String _selectedAccentKey;
-  late double _selectedFontScale;
   bool _hasChanges = false;
 
-  late final ThemeMode _originalThemeMode;
   late final Color _originalAccent;
-  late final double _originalFontScale;
+  late double _fontScale;
+
+  static const _fontOptions = [
+    (0.9, 'Küçük'),
+    (1.0, 'Orta'),
+    (1.15, 'Büyük'),
+    (1.3, 'Çok Büyük'),
+  ];
 
   @override
   void initState() {
     super.initState();
-    _selectedThemeMode = ref.read(themeModeProvider);
     _selectedAccent = ref.read(accentColorProvider);
-    _selectedFontScale = ref.read(fontScaleProvider);
 
-    _originalThemeMode = _selectedThemeMode;
     _originalAccent = _selectedAccent;
-    _originalFontScale = _selectedFontScale;
 
     final savedAccent = HiveService.getSetting('accentColor') ?? 'cobalt';
     _selectedAccentKey = savedAccent;
+    _fontScale = ref.read(fontScaleProvider);
+  }
+
+  // Yazı boyutu anında uygulanır (MaterialApp fontScaleProvider'ı izler).
+  Future<void> _setFont(double scale) async {
+    HapticFeedback.selectionClick();
+    setState(() => _fontScale = scale);
+    ref.read(fontScaleProvider.notifier).state = scale;
+    await HiveService.setDoubleSetting('fontScale', scale);
   }
 
   void _markChanged() {
     setState(() {
-      _hasChanges = _selectedThemeMode != _originalThemeMode ||
-          _selectedAccent != _originalAccent ||
-          _selectedFontScale != _originalFontScale;
+      _hasChanges = _selectedAccent != _originalAccent;
     });
   }
 
   Future<void> _save() async {
     HapticFeedback.mediumImpact();
 
-    final themeValue = switch (_selectedThemeMode) {
-      ThemeMode.dark => 'dark',
-      ThemeMode.system => 'system',
-      _ => 'light',
-    };
-    await HiveService.setSetting('themeMode', themeValue);
     await HiveService.setSetting('accentColor', _selectedAccentKey);
-    await HiveService.setDoubleSetting('fontScale', _selectedFontScale);
 
-    ref.read(themeModeProvider.notifier).state = _selectedThemeMode;
     ref.read(accentColorProvider.notifier).state = _selectedAccent;
-    ref.read(fontScaleProvider.notifier).state = _selectedFontScale;
-
-    _originalThemeMode = _selectedThemeMode;
-    _originalAccent = _selectedAccent;
-    _originalFontScale = _selectedFontScale;
 
     setState(() => _hasChanges = false);
 
@@ -81,33 +75,19 @@ class _AppearanceSettingsScreenState extends ConsumerState<AppearanceSettingsScr
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    final themeOptions = [
-      {'icon': Icons.wb_sunny, 'label': 'Açık', 'mode': ThemeMode.light},
-      {'icon': Icons.nights_stay, 'label': 'Karanlık', 'mode': ThemeMode.dark},
-      {'icon': Icons.brightness_auto, 'label': 'Sistem', 'mode': ThemeMode.system},
-    ];
 
     final accentOptions = [
-      {'color': AppColors.cobalt, 'label': 'Kobalt', 'key': 'cobalt'},
+      {'color': const Color(0xFF6366F1), 'label': 'Kobalt', 'key': 'cobalt'},
       {'color': AppColors.green, 'label': 'Yeşil', 'key': 'green'},
       {'color': AppColors.orange, 'label': 'Turuncu', 'key': 'orange'},
-      {'color': AppColors.purple, 'label': 'Mor', 'key': 'purple'},
+      {'color': const Color(0xFF8B5CF6), 'label': 'Mor', 'key': 'purple'},
       {'color': AppColors.red, 'label': 'Kırmızı', 'key': 'red'},
     ];
 
-    final fontOptions = [
-      {'scale': 0.875, 'label': 'Küçük'},
-      {'scale': 1.0, 'label': 'Normal'},
-      {'scale': 1.125, 'label': 'Büyük'},
-      {'scale': 1.25, 'label': 'Çok Büyük'},
-    ];
-
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
-        title: 'Görünüm',
+        title: AppLocalizations.of(context).gorunum,
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -115,81 +95,12 @@ class _AppearanceSettingsScreenState extends ConsumerState<AppearanceSettingsScr
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(16),
         children: [
-          Text(
-            'Tema',
-            style: TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w700,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
-              letterSpacing: 0.5,
-            ),
-          ),
-          const SizedBox(height: 12),
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: isDark ? AppColors.darkCard : Colors.white,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: isDark ? AppColors.darkBorder : AppColors.border,
-              ),
-            ),
-            child: Row(
-              children: themeOptions.map((opt) {
-                final selected = _selectedThemeMode == opt['mode'];
-                return Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      HapticFeedback.selectionClick();
-                      setState(() => _selectedThemeMode = opt['mode'] as ThemeMode);
-                      ref.read(themeModeProvider.notifier).state = opt['mode'] as ThemeMode;
-                      _markChanged();
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 4),
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      decoration: BoxDecoration(
-                        color: selected
-                            ? (isDark ? _selectedAccent.withAlpha(30) : _selectedAccent.withAlpha(15))
-                            : Colors.transparent,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: selected ? _selectedAccent : Colors.transparent,
-                          width: 1.5,
-                        ),
-                      ),
-                      child: Column(
-                        children: [
-                          Icon(
-                            opt['icon'] as IconData,
-                            color: selected ? _selectedAccent : (isDark ? AppColors.darkTextSecondary : AppColors.slate),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            opt['label'] as String,
-                            style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
-                              color: selected
-                                  ? _selectedAccent
-                                  : (isDark ? AppColors.darkTextSecondary : AppColors.slate),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
-          const SizedBox(height: 24),
-          Text(
+          const Text(
             'Aksan Rengi',
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w700,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: Color(0xFF6B7280),
               letterSpacing: 0.5,
             ),
           ),
@@ -197,10 +108,10 @@ class _AppearanceSettingsScreenState extends ConsumerState<AppearanceSettingsScr
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: isDark ? AppColors.darkCard : Colors.white,
+              color: const Color(0xFF13131A),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: isDark ? AppColors.darkBorder : AppColors.border,
+                color: const Color(0x1EFFFFFF),
               ),
             ),
             child: Row(
@@ -243,7 +154,7 @@ class _AppearanceSettingsScreenState extends ConsumerState<AppearanceSettingsScr
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
-                          color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                          color: const Color(0xFF6B7280),
                         ),
                       ),
                     ],
@@ -252,79 +163,72 @@ class _AppearanceSettingsScreenState extends ConsumerState<AppearanceSettingsScr
               }).toList(),
             ),
           ),
-          const SizedBox(height: 24),
-          Text(
-            'Yazı Boyutu',
-            style: TextStyle(
+          const SizedBox(height: 28),
+          Text(AppLocalizations.of(context).fontSize,
+            style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w700,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: Color(0xFF6B7280),
               letterSpacing: 0.5,
             ),
           ),
           const SizedBox(height: 12),
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: isDark ? AppColors.darkCard : Colors.white,
+              color: const Color(0xFF13131A),
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: isDark ? AppColors.darkBorder : AppColors.border,
-              ),
+              border: Border.all(color: const Color(0x1EFFFFFF)),
             ),
-            child: Column(
-              children: fontOptions.map((opt) {
-                final selected = _selectedFontScale == opt['scale'];
-                return GestureDetector(
-                  onTap: () {
-                    HapticFeedback.selectionClick();
-                    setState(() => _selectedFontScale = opt['scale'] as double);
-                    ref.read(fontScaleProvider.notifier).state = opt['scale'] as double;
-                    _markChanged();
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.only(bottom: 8),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                    decoration: BoxDecoration(
-                      color: selected
-                          ? (isDark ? _selectedAccent.withAlpha(30) : _selectedAccent.withAlpha(15))
-                          : Colors.transparent,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: selected ? _selectedAccent : Colors.transparent,
-                        width: 1.5,
+            child: Row(
+              children: _fontOptions.map((o) {
+                final sel = (_fontScale - o.$1).abs() < 0.01;
+                return Expanded(
+                  child: GestureDetector(
+                    onTap: () => _setFont(o.$1),
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 4),
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      decoration: BoxDecoration(
+                        color: sel
+                            ? _selectedAccent.withAlpha(35)
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: sel ? _selectedAccent : const Color(0x1EFFFFFF),
+                          width: sel ? 1.6 : 1,
+                        ),
                       ),
-                    ),
-                    child: Row(
-                      children: [
-                        Text(
-                          'Aa',
-                          style: TextStyle(
-                            fontSize: 16 * (opt['scale'] as double),
-                            fontWeight: FontWeight.w600,
-                            color: selected ? _selectedAccent : (isDark ? AppColors.darkTextPrimary : AppColors.dark),
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Text(
-                          opt['label'] as String,
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
-                            color: selected ? _selectedAccent : (isDark ? AppColors.darkTextSecondary : AppColors.slate),
-                          ),
-                        ),
-                        const Spacer(),
-                        if (selected)
-                          Icon(Icons.check_circle, color: _selectedAccent, size: 20),
-                      ],
+                      child: Column(
+                        children: [
+                          Text(AppLocalizations.of(context).apAa,
+                              style: TextStyle(
+                                  color: sel
+                                      ? _selectedAccent
+                                      : const Color(0xFFE5E7EB),
+                                  fontSize: 14 + (o.$1 - 1.0) * 14,
+                                  fontWeight: FontWeight.w800)),
+                          const SizedBox(height: 6),
+                          Text(o.$2,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: sel
+                                      ? _selectedAccent
+                                      : const Color(0xFF9CA3AF),
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w600)),
+                        ],
+                      ),
                     ),
                   ),
                 );
               }).toList(),
             ),
           ),
-          const SizedBox(height: 32),
+          const SizedBox(height: 10),
+          Text(AppLocalizations.of(context).apFontSizeNote,
+              style: const TextStyle(color: Color(0xFF6B7280), fontSize: 12)),
+          const SizedBox(height: 28),
           SizedBox(
             width: double.infinity,
             height: 56,
@@ -334,8 +238,8 @@ class _AppearanceSettingsScreenState extends ConsumerState<AppearanceSettingsScr
                 backgroundColor: _selectedAccent,
                 foregroundColor: Colors.white,
                 elevation: 0,
-                disabledBackgroundColor: isDark ? AppColors.darkBorder : AppColors.border,
-                disabledForegroundColor: isDark ? AppColors.darkTextSecondary : AppColors.lightGray,
+                disabledBackgroundColor: const Color(0x1EFFFFFF),
+                disabledForegroundColor: const Color(0xFF6B7280),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),

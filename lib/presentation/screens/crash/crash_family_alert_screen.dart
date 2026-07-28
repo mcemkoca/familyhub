@@ -2,6 +2,7 @@
 // Family member view when a crash is detected for another member
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../domain/models/crash_event.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
@@ -65,16 +66,24 @@ class CrashFamilyAlertScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 12),
-                    _row(Icons.location_on, 'Konum: D100 Karayolu, 15. km'),
+                    _row(
+                        Icons.location_on,
+                        'Konum: ${event.sensorData.gps.latitude.toStringAsFixed(5)}, '
+                            '${event.sensorData.gps.longitude.toStringAsFixed(5)}'),
                     _row(Icons.directions_car, 'Durum: Araç hareketsiz'),
                     const SizedBox(height: 12),
                     Wrap(
                       spacing: 8,
                       runSpacing: 8,
                       children: [
-                        _actionChip(Icons.map, 'Haritada Gör', Colors.blue),
-                        _actionChip(Icons.directions, 'Yol Tarifi', Colors.green),
-                        _actionChip(Icons.phone, '${event.memberName}\'i Ara', Colors.teal),
+                        _actionChip(Icons.map, 'Haritada Gör', Colors.blue,
+                            onPressed: () => _openMap(
+                                event.sensorData.gps.latitude,
+                                event.sensorData.gps.longitude)),
+                        _actionChip(Icons.directions, 'Yol Tarifi', Colors.green,
+                            onPressed: () => _openDirections(
+                                event.sensorData.gps.latitude,
+                                event.sensorData.gps.longitude)),
                       ],
                     ),
                     const SizedBox(height: 12),
@@ -91,8 +100,7 @@ class CrashFamilyAlertScreen extends StatelessWidget {
                             children: [
                               const Icon(Icons.location_searching, color: Colors.greenAccent, size: 18),
                               const SizedBox(width: 8),
-                              Text(
-                                'Canlı Konum',
+                              Text(AppLocalizations.of(context).canliKonum,
                                 style: TextStyle(color: Colors.greenAccent.shade100, fontWeight: FontWeight.w600),
                               ),
                             ],
@@ -140,11 +148,13 @@ class CrashFamilyAlertScreen extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton.icon(
-                          onPressed: () {},
+                          onPressed: () => _openMap(
+                              event.sensorData.gps.latitude,
+                              event.sensorData.gps.longitude),
                           icon: const Icon(Icons.article),
                           label: Text(AppLocalizations.of(context).detayliRapor),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey.shade700,
+                            backgroundColor: const Color(0xFF6B7280),
                             foregroundColor: Colors.white,
                           ),
                         ),
@@ -161,7 +171,7 @@ class CrashFamilyAlertScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () => launchUrl(Uri.parse('tel:112')),
                       icon: const Icon(Icons.emergency),
                       label: Text(AppLocalizations.of(context).yardimCagir),
                       style: ElevatedButton.styleFrom(
@@ -174,7 +184,9 @@ class CrashFamilyAlertScreen extends StatelessWidget {
                   const SizedBox(width: 12),
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () => _openDirections(
+                          event.sensorData.gps.latitude,
+                          event.sensorData.gps.longitude),
                       icon: const Icon(Icons.phone_forwarded),
                       label: Text(AppLocalizations.of(context).aileyiBilgilendir),
                       style: ElevatedButton.styleFrom(
@@ -206,13 +218,31 @@ class CrashFamilyAlertScreen extends StatelessWidget {
     );
   }
 
-  Widget _actionChip(IconData icon, String label, Color color) {
+  Widget _actionChip(IconData icon, String label, Color color,
+      {VoidCallback? onPressed}) {
     return ActionChip(
       avatar: Icon(icon, color: Colors.white, size: 18),
       label: Text(label, style: const TextStyle(color: Colors.white, fontSize: 12)),
       backgroundColor: color.withAlpha(178),
-      onPressed: () {},
+      onPressed: onPressed ?? () {},
     );
+  }
+
+  Future<void> _openMap(double lat, double lng) async {
+    final geo = Uri.parse('geo:$lat,$lng?q=$lat,$lng');
+    final web = Uri.parse(
+        'https://www.google.com/maps/search/?api=1&query=$lat,$lng');
+    if (await canLaunchUrl(geo)) {
+      await launchUrl(geo, mode: LaunchMode.externalApplication);
+    } else {
+      await launchUrl(web, mode: LaunchMode.externalApplication);
+    }
+  }
+
+  Future<void> _openDirections(double lat, double lng) async {
+    final uri = Uri.parse(
+        'https://www.google.com/maps/dir/?api=1&destination=$lat,$lng');
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
   }
 
   Widget _checkItem(bool done, String text, {bool active = false}) {

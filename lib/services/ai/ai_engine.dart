@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/foundation.dart' show debugPrint, kDebugMode;
 import 'package:http/http.dart' as http;
 import '../../core/analytics/analytics_service.dart';
+import '../../core/supabase_client.dart';
 
 /// Supported LLM providers with fallback chain:
 /// OpenAI → Anthropic → Google Gemini → Local (rule-based)
@@ -37,10 +39,11 @@ class AIResponse {
 
 /// Production-ready multi-provider LLM engine with automatic fallback.
 ///
-/// API keys are injected via `--dart-define` at build time:
+/// OpenAI/Anthropic anahtarları `--dart-define` ile verilir. GEMINI ise artık
+/// istemcide TUTULMAZ: istekler `family-ai` Supabase Edge Function üzerinden
+/// geçer ve GEMINI_API_KEY yalnızca sunucuda (Supabase secret) bulunur.
 ///   --dart-define=OPENAI_API_KEY=sk-...
 ///   --dart-define=ANTHROPIC_API_KEY=sk-ant-...
-///   --dart-define=GEMINI_API_KEY=AIza...
 class AIEngine {
   AIEngine._();
 
@@ -48,9 +51,10 @@ class AIEngine {
   static const String _anthropicKey = String.fromEnvironment(
     'ANTHROPIC_API_KEY',
   );
-  static const String _geminiKey = String.fromEnvironment('GEMINI_API_KEY');
-
-  static const Duration _timeout = Duration(seconds: 10);
+  // Gemini artık İSTEMCİDEN DOĞRUDAN çağrılmaz. İstekler `family-ai` Supabase
+  // Edge Function'ı üzerinden geçer; GEMINI_API_KEY yalnızca sunucuda (Supabase
+  // secret) tutulur ve APK'ye hiç girmez. Gömülü/dart-define key KALDIRILDI.
+  static const Duration _timeout = Duration(seconds: 30);
 
   /// Primary entry-point: tries providers in fallback chain.
   static Future<AIResponse> generate({
@@ -119,8 +123,9 @@ class AIEngine {
       }
     }
 
-    // Fallback to Gemini
-    if (_geminiKey.isNotEmpty) {
+    // Fallback to Gemini (family-ai Edge Function üzerinden — key sunucuda).
+    // Oturum yoksa geçit çağrılamaz → doğrudan local fallback'e düşülür.
+    if (SupabaseConfig.safeClient?.auth.currentSession != null) {
       try {
         final response = await _callGemini(
           prompt: prompt,
@@ -137,6 +142,7 @@ class AIEngine {
           latency: stopwatch.elapsed,
         );
       } catch (e) {
+        if (kDebugMode) debugPrint('Gemini fallback: $e');
         AnalyticsService.track(
           'llm_fallback',
           properties: {'from': 'gemini', 'to': 'local', 'error': e.toString()},
@@ -295,24 +301,42 @@ class AIEngine {
       'generationConfig': {
         'maxOutputTokens': maxTokens,
         'temperature': temperature,
+        if (format == AIResponseFormat.json)
+          'responseMimeType': 'application/json',
+        // gemini-2.5-flash düşünen model; düşünmeyi kapatarak token bütçesini
+        // tamamen yanıta ayır (yoksa boş/eksik yanıt dönebilir).
+        'thinkingConfig': {'thinkingBudget': 0},
       },
     };
 
-    final response = await http
-        .post(
-          Uri.parse(
-            'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=$_geminiKey',
-          ),
-          headers: {'Content-Type': 'application/json'},
-          body: jsonEncode(body),
-        )
-        .timeout(_timeout);
-
-    if (response.statusCode != 200) {
-      throw _ProviderException('Gemini', response.statusCode, response.body);
+    // Gemini'yi DOĞRUDAN çağırmak yerine `family-ai` Edge Function'ına yolla.
+    // Fonksiyon JWT + aile üyeliği doğrular, key'i sunucuda ekler, model
+    // yönlendirmesini (429 → sıradaki model) sunucuda yapar ve HAM Gemini
+    // yanıtını ({candidates:...}) döndürür — parse mantığı değişmez.
+    final client = SupabaseConfig.safeClient;
+    if (client == null) {
+      throw _ProviderException('Gemini', 0, 'Sunucu bağlantısı yok');
     }
 
-    final data = jsonDecode(response.body) as Map<String, dynamic>;
+    final Map<String, dynamic> data;
+    try {
+      final res = await client.functions
+          .invoke('family-ai', body: {'request': body})
+          .timeout(_timeout);
+      if (res.status != 200) {
+        throw _ProviderException(
+            'Gemini', res.status, res.data?.toString() ?? 'gateway error');
+      }
+      final decoded = res.data;
+      data = decoded is Map<String, dynamic>
+          ? decoded
+          : jsonDecode(decoded.toString()) as Map<String, dynamic>;
+    } on _ProviderException {
+      rethrow;
+    } catch (e) {
+      throw _ProviderException('Gemini', 0, e.toString());
+    }
+
     final candidates = data['candidates'] as List<dynamic>?;
     if (candidates == null || candidates.isEmpty) {
       throw _ProviderException('Gemini', 200, 'Empty candidates');
@@ -326,6 +350,9 @@ class AIEngine {
 
     return text;
   }
+
+  // Not: 429 kota yönetimi ve model yönlendirmesi artık `family-ai` Edge
+  // Function'ında (sunucu tarafı) yapılıyor.
 
   // ── Local rule-based fallback ─────────────────────────────────────────
 

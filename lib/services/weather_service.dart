@@ -2,8 +2,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:geolocator/geolocator.dart';
+import 'localization/locale_service.dart';
 
 class WeatherService {
+  static String _text(Map<String, String> values) {
+    final lang = LocaleService.resolveInitialLocale().languageCode;
+    return values[lang] ?? values['tr']!;
+  }
   static Future<WeatherData> fetchWeather(double lat, double lon, {bool celsius = true}) async {
     final unit = celsius ? 'celsius' : 'fahrenheit';
     final url = Uri.parse(
@@ -21,17 +26,18 @@ class WeatherService {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
       return WeatherData.fromJson(data);
     }
-    throw Exception('Hava durumu alınamadı');
+    throw Exception(_text(const {'tr': 'Hava durumu alınamadı', 'en': 'Could not retrieve the weather', 'nl': 'Het weer kon niet worden opgehaald', 'fr': 'Impossible de récupérer la météo'}));
   }
 
   static Future<WeatherData> fetchWeatherForLocation({bool celsius = true}) async {
     try {
       final pos = await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(accuracy: LocationAccuracy.best),
+        locationSettings: const LocationSettings(
+            accuracy: LocationAccuracy.best, timeLimit: Duration(seconds: 8)),
       );
       return fetchWeather(pos.latitude, pos.longitude, celsius: celsius);
     } catch (e) {
-      throw Exception('Konum alınamadı: $e');
+      throw Exception('${_text(const {'tr': 'Konum alınamadı', 'en': 'Could not get the location', 'nl': 'De locatie kon niet worden bepaald', 'fr': 'Impossible d’obtenir la position'})}: $e');
     }
   }
 
@@ -72,18 +78,43 @@ class WeatherService {
   }
 
   static String weatherDescription(int code) {
-    if (code == 0) return 'Güneşli';
-    if (code <= 3) return 'Parçalı Bulutlu';
-    if (code <= 48) return 'Sisli';
-    if (code <= 67) return 'Yağmurlu';
-    if (code <= 77) return 'Karlı';
-    if (code <= 82) return 'Sağanak Yağışlı';
-    if (code <= 86) return 'Kar Fırtınası';
-    if (code <= 99) return 'Gök Gürültülü';
-    return 'Bilinmiyor';
+    if (code == 0) return _text(const {'tr': 'Güneşli', 'en': 'Sunny', 'nl': 'Zonnig', 'fr': 'Ensoleillé'});
+    if (code <= 3) return _text(const {'tr': 'Parçalı Bulutlu', 'en': 'Partly Cloudy', 'nl': 'Gedeeltelijk bewolkt', 'fr': 'Partiellement nuageux'});
+    if (code <= 48) return _text(const {'tr': 'Sisli', 'en': 'Foggy', 'nl': 'Mistig', 'fr': 'Brumeux'});
+    if (code <= 67) return _text(const {'tr': 'Yağmurlu', 'en': 'Rainy', 'nl': 'Regenachtig', 'fr': 'Pluvieux'});
+    if (code <= 77) return _text(const {'tr': 'Karlı', 'en': 'Snowy', 'nl': 'Sneeuw', 'fr': 'Neigeux'});
+    if (code <= 82) return _text(const {'tr': 'Sağanak Yağışlı', 'en': 'Showers', 'nl': 'Regenbuien', 'fr': 'Averses'});
+    if (code <= 86) return _text(const {'tr': 'Kar Fırtınası', 'en': 'Snowstorm', 'nl': 'Sneeuwstorm', 'fr': 'Tempête de neige'});
+    if (code <= 99) return _text(const {'tr': 'Gök Gürültülü', 'en': 'Thunderstorms', 'nl': 'Onweer', 'fr': 'Orageux'});
+    return _text(const {'tr': 'Bilinmiyor', 'en': 'Unknown', 'nl': 'Onbekend', 'fr': 'Inconnu'});
+  }
+
+  /// Anlık hava koşullarına göre aile için pratik uyarı (yoksa null).
+  /// WMO kodu + sıcaklık + rüzgâr esas alınır. Emoji ile döner.
+  static String? weatherWarning(WeatherData w) {
+    final c = w.weatherCode;
+    if (c >= 95) return _text(const {'tr': '⛈️ Gök gürültülü fırtına — dışarı çıkmadan önce dikkat.', 'en': '⛈️ Thunderstorm — take care before going outside.', 'nl': '⛈️ Onweer — wees voorzichtig voordat je naar buiten gaat.', 'fr': '⛈️ Orage — soyez prudent avant de sortir.'});
+    if (c >= 85) return _text(const {'tr': '🌨️ Kar fırtınası — yollar kapanabilir, erken çıkın.', 'en': '🌨️ Snowstorm — roads may close, leave early.', 'nl': '🌨️ Sneeuwstorm — wegen kunnen sluiten, vertrek op tijd.', 'fr': '🌨️ Tempête de neige — des routes peuvent fermer, partez tôt.'});
+    if (c >= 80) return _text(const {'tr': '🌧️ Sağanak yağış — şemsiye ve su geçirmez montu alın.', 'en': '🌧️ Heavy showers — take an umbrella and waterproof coat.', 'nl': '🌧️ Zware buien — neem een paraplu en waterdichte jas mee.', 'fr': '🌧️ Fortes averses — prenez un parapluie et un manteau imperméable.'});
+    if (c >= 71) return _text(const {'tr': '❄️ Kar yağışı — çocukları sıcak giydirin, yol kaygan olabilir.', 'en': '❄️ Snowfall — dress children warmly; roads may be slippery.', 'nl': '❄️ Sneeuw — kleed kinderen warm aan; de weg kan glad zijn.', 'fr': '❄️ Neige — habillez chaudement les enfants ; la route peut être glissante.'});
+    if (c >= 51) return _text(const {'tr': '☔ Yağmur bekleniyor — şemsiyeyi unutmayın.', 'en': '☔ Rain is expected — do not forget your umbrella.', 'nl': '☔ Er wordt regen verwacht — vergeet je paraplu niet.', 'fr': '☔ De la pluie est prévue — n’oubliez pas votre parapluie.'});
+    if (c >= 45) return _text(const {'tr': '🌫️ Sisli hava — trafikte görüş mesafesi düşük, dikkatli olun.', 'en': '🌫️ Fog — visibility is low in traffic, take care.', 'nl': '🌫️ Mist — het zicht in het verkeer is beperkt, wees voorzichtig.', 'fr': '🌫️ Brouillard — la visibilité est réduite, soyez prudent.'});
+    if (w.windSpeed >= 45) return _text(const {'tr': '💨 Kuvvetli rüzgâr — gevşek nesnelere dikkat.', 'en': '💨 Strong winds — watch out for loose objects.', 'nl': '💨 Sterke wind — let op losse voorwerpen.', 'fr': '💨 Vent fort — attention aux objets non fixés.'});
+    if (w.temperature <= 0) return _text(const {'tr': '🥶 Donma riski — sıcak giyinin, buzlanmaya dikkat.', 'en': '🥶 Freezing risk — dress warmly and watch for ice.', 'nl': '🥶 Vorstgevaar — kleed je warm aan en let op gladheid.', 'fr': '🥶 Risque de gel — habillez-vous chaudement et attention au verglas.'});
+    if (w.temperature >= 32) return _text(const {'tr': '🥵 Aşırı sıcak — bol su için, güneşten korunun.', 'en': '🥵 Extreme heat — drink plenty of water and protect yourself from the sun.', 'nl': '🥵 Extreme hitte — drink voldoende water en bescherm je tegen de zon.', 'fr': '🥵 Chaleur extrême — buvez beaucoup d’eau et protégez-vous du soleil.'});
+    return null;
   }
 
   static final List<Map<String, dynamic>> cities = [
+    // Belçika (varsayılan pazar)
+    {'name': 'Brüksel', 'lat': 50.8503, 'lon': 4.3517},
+    {'name': 'Antwerp', 'lat': 51.2194, 'lon': 4.4025},
+    {'name': 'Gent', 'lat': 51.0543, 'lon': 3.7174},
+    {'name': 'Charleroi', 'lat': 50.4108, 'lon': 4.4446},
+    {'name': 'Liège', 'lat': 50.6326, 'lon': 5.5797},
+    {'name': 'Brugge', 'lat': 51.2093, 'lon': 3.2247},
+    {'name': 'Namur', 'lat': 50.4674, 'lon': 4.8720},
+    {'name': 'Leuven', 'lat': 50.8798, 'lon': 4.7005},
     // Türkiye
     {'name': 'İstanbul', 'lat': 41.0082, 'lon': 28.9784},
     {'name': 'Ankara', 'lat': 39.9334, 'lon': 32.8597},

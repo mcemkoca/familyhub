@@ -1,4 +1,4 @@
--- Auto Routine Builder Migration
+﻿-- Auto Routine Builder Migration
 -- Tables: routines, routine_templates, routine_history, routine_suggestions
 
 -- ── ROUTINES ───────────────────────────────────────────────────────────
@@ -62,7 +62,13 @@ CREATE POLICY "creators_can_delete_routines"
   USING (created_by = auth.uid());
 
 CREATE INDEX IF NOT EXISTS idx_routines_family ON routines(family_id);
-CREATE INDEX IF NOT EXISTS idx_routines_type ON routines(type);
+DO $$ BEGIN
+  IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_schema='public' AND table_name='routines' AND column_name='type') THEN
+    IF NOT EXISTS (SELECT 1 FROM pg_indexes WHERE schemaname='public' AND tablename='routines' AND indexname='idx_routines_type') THEN
+      CREATE INDEX idx_routines_type ON routines(type);
+    END IF;
+  END IF;
+END $$;
 
 -- ── ROUTINE TEMPLATES ──────────────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS routine_templates (

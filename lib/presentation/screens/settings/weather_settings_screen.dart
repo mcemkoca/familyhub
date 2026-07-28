@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../services/hive_service.dart';
 import 'package:intl/intl.dart';
-import '../../../config/constants.dart';
 import '../../../domain/entities.dart';
 import '../../../services/weather_service.dart';
 import '../../../services/location_service.dart';
@@ -21,7 +20,9 @@ class WeatherSettingsScreen extends ConsumerStatefulWidget {
 }
 
 class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
-  String _selectedCity = 'İstanbul';
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
+  String _selectedCity = 'Brüksel';
   bool _useCelsius = true;
   bool _useCurrentLocation = true;
   bool _isRequestingPermission = false;
@@ -30,7 +31,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
   @override
   void initState() {
     super.initState();
-    _selectedCity = HiveService.getSetting('weatherCity') ?? 'İstanbul';
+    _selectedCity = HiveService.getSetting('weatherCity') ?? 'Brüksel';
     _useCelsius = HiveService.getBoolSetting('weatherCelsius', defaultValue: true);
     _useCurrentLocation = HiveService.getBoolSetting('weatherUseLocation', defaultValue: true);
     _savedLocation = HiveService.getLocation();
@@ -60,11 +61,10 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
       setState(() => _useCurrentLocation = false);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              'Konum izni verilmedi. Şehir seçimi veya haritadan konum seçimi kullanılabilir.',
+          SnackBar(
+            content: Text(AppLocalizations.of(context).konumIzniVerilmediSehirSecimiVeyaHaritadanKonumSecimiKullanilabilir,
             ),
-            duration: Duration(seconds: 4),
+            duration: const Duration(seconds: 4),
           ),
         );
       }
@@ -78,7 +78,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Row(
           children: [
-            const Icon(Icons.location_on, color: AppColors.cobalt),
+            const Icon(Icons.location_on, color: Color(0xFF6366F1)),
             const SizedBox(width: 8),
             Text(AppLocalizations.of(context).konumIzniGerekli),
           ],
@@ -125,13 +125,12 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final weatherAsync = ref.watch(weatherProvider);
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
-        title: 'Hava Durumu',
+        title: AppLocalizations.of(context).wtTitle,
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -162,17 +161,17 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
                     Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: AppColors.cobalt.withAlpha(20),
+                        color: const Color(0xFF6366F1).withAlpha(20),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: const Icon(
                         Icons.my_location,
-                        color: AppColors.cobalt,
+                        color: Color(0xFF6366F1),
                         size: 22,
                       ),
                     ),
                     const SizedBox(width: 14),
-                    Expanded(
+                    const Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -181,18 +180,14 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
-                              color: isDark
-                                  ? AppColors.darkTextPrimary
-                                  : AppColors.dark,
+                              color: Color(0xFFE5E7EB),
                             ),
                           ),
                           Text(
                             'GPS ile otomatik konum belirleme',
                             style: TextStyle(
                               fontSize: 13,
-                              color: isDark
-                                  ? AppColors.darkTextSecondary
-                                  : AppColors.slate,
+                              color: Color(0xFF6B7280),
                             ),
                           ),
                         ],
@@ -205,10 +200,10 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
                         child: CircularProgressIndicator(strokeWidth: 2),
                       )
                     else
-                      Switch.adaptive(
+                      Switch(
                         value: _useCurrentLocation,
                         onChanged: _toggleLocation,
-                        activeTrackColor: AppColors.cobalt,
+                        activeTrackColor: const Color(0xFF6366F1),
                       ),
                   ],
                 ),
@@ -217,25 +212,23 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: AppColors.cobalt.withAlpha(15),
+                      color: const Color(0xFF6366F1).withAlpha(15),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Row(
                       children: [
                         const Icon(
                           Icons.place,
-                          color: AppColors.cobalt,
+                          color: Color(0xFF6366F1),
                           size: 18,
                         ),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             _savedLocation!.fullAddress,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 13,
-                              color: isDark
-                                  ? AppColors.darkTextPrimary
-                                  : AppColors.dark,
+                              color: Color(0xFFE5E7EB),
                             ),
                           ),
                         ),
@@ -254,22 +247,18 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Haritadan Konum Seç',
-                  style: TextStyle(
+                Text(AppLocalizations.of(context).haritadanKonumSec,
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                    color: Color(0xFFE5E7EB),
                   ),
                 ),
                 const SizedBox(height: 4),
-                Text(
-                  'OpenStreetMap haritasından istediğiniz noktayı seçin',
-                  style: TextStyle(
+                Text(AppLocalizations.of(context).openstreetmapHaritasindanIstediginizNoktayiSecin,
+                  style: const TextStyle(
                     fontSize: 13,
-                    color: isDark
-                        ? AppColors.darkTextSecondary
-                        : AppColors.slate,
+                    color: Color(0xFF6B7280),
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -278,15 +267,15 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
                     padding: const EdgeInsets.all(12),
                     margin: const EdgeInsets.only(bottom: 12),
                     decoration: BoxDecoration(
-                      color: AppColors.cobalt.withAlpha(15),
+                      color: const Color(0xFF6366F1).withAlpha(15),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: AppColors.cobalt.withAlpha(40)),
+                      border: Border.all(color: const Color(0xFF6366F1).withAlpha(40)),
                     ),
                     child: Row(
                       children: [
                         const Icon(
                           Icons.place,
-                          color: AppColors.cobalt,
+                          color: Color(0xFF6366F1),
                           size: 18,
                         ),
                         const SizedBox(width: 8),
@@ -296,21 +285,17 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
                             children: [
                               Text(
                                 _savedLocation!.address,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
-                                  color: isDark
-                                      ? AppColors.darkTextPrimary
-                                      : AppColors.dark,
+                                  color: Color(0xFFE5E7EB),
                                 ),
                               ),
                               Text(
                                 _savedLocation!.fullAddress,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 12,
-                                  color: isDark
-                                      ? AppColors.darkTextSecondary
-                                      : AppColors.slate,
+                                  color: Color(0xFF6B7280),
                                 ),
                               ),
                             ],
@@ -324,16 +309,15 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
                   height: 48,
                   child: OutlinedButton.icon(
                     onPressed: _openLocationPicker,
-                    icon: const Icon(Icons.map, color: AppColors.cobalt),
-                    label: const Text(
-                      'Haritayı Aç',
-                      style: TextStyle(
-                        color: AppColors.cobalt,
+                    icon: const Icon(Icons.map, color: Color(0xFF6366F1)),
+                    label: Text(AppLocalizations.of(context).haritayiAc,
+                      style: const TextStyle(
+                        color: Color(0xFF6366F1),
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: AppColors.cobalt),
+                      side: const BorderSide(color: Color(0xFF6366F1)),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -345,56 +329,22 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
           ),
           const SizedBox(height: 16),
 
-          // City selection (fallback)
+          // Şehir seçimi kaldırıldı — konum cihazdan izinle alınır
           _buildSectionCard(
             isDark: isDark,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: const Row(
               children: [
-                Text(
-                  'Şehir Seçimi (Yedek)',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                Icon(Icons.my_location,
+                    color: Color(0xFF10B981), size: 20),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    'Konum cihazınızdan otomatik alınır. Doğru hava durumu için konum iznini açık tutun.',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Color(0xFF9CA3AF),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'Konum seçilmezse şehir listesinden kullanılır',
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: isDark
-                        ? AppColors.darkTextSecondary
-                        : AppColors.slate,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: WeatherService.cities.map((city) {
-                    final selected = _selectedCity == city['name'];
-                    return ChoiceChip(
-                      label: Text(city['name'] as String),
-                      selected: selected,
-                      onSelected: (_) => setState(
-                        () => _selectedCity = city['name'] as String,
-                      ),
-                      selectedColor: AppColors.cobalt.withAlpha(30),
-                      checkmarkColor: AppColors.cobalt,
-                      labelStyle: TextStyle(
-                        color: selected
-                            ? AppColors.cobalt
-                            : (isDark
-                                  ? AppColors.darkTextPrimary
-                                  : AppColors.dark),
-                        fontWeight: selected
-                            ? FontWeight.w600
-                            : FontWeight.normal,
-                      ),
-                    );
-                  }).toList(),
                 ),
               ],
             ),
@@ -407,12 +357,11 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Sıcaklık Birimi',
-                  style: TextStyle(
+                Text(AppLocalizations.of(context).sicaklikBirimi,
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                    color: Color(0xFFE5E7EB),
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -420,7 +369,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
                   children: [
                     Expanded(
                       child: _UnitOption(
-                        label: 'Celsius (°C)',
+                        label: AppLocalizations.of(context).wtCelsius,
                         selected: _useCelsius,
                         onTap: () => setState(() => _useCelsius = true),
                       ),
@@ -428,7 +377,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
                     const SizedBox(width: 12),
                     Expanded(
                       child: _UnitOption(
-                        label: 'Fahrenheit (°F)',
+                        label: AppLocalizations.of(context).wtFahrenheit,
                         selected: !_useCelsius,
                         onTap: () => setState(() => _useCelsius = false),
                       ),
@@ -451,7 +400,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
             child: ElevatedButton(
               onPressed: _saveSettings,
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.cobalt,
+                backgroundColor: const Color(0xFF6366F1),
                 foregroundColor: Colors.white,
                 elevation: 0,
                 shape: RoundedRectangleBorder(
@@ -485,10 +434,10 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkCard : Colors.white,
+        color: const Color(0xFF13131A),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isDark ? AppColors.darkBorder : AppColors.border,
+          color: const Color(0x1EFFFFFF),
         ),
       ),
       child: child,
@@ -499,7 +448,7 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
     return Container(
       height: 200,
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkCard : Colors.white,
+        color: const Color(0xFF13131A),
         borderRadius: BorderRadius.circular(20),
       ),
       child: const Center(child: CircularProgressIndicator()),
@@ -510,17 +459,17 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
     return Container(
       height: 200,
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkCard : Colors.white,
+        color: const Color(0xFF13131A),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: isDark ? AppColors.darkBorder : AppColors.border,
+          color: const Color(0x1EFFFFFF),
         ),
       ),
       child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.cloud_off, size: 40, color: AppColors.gray),
+            const Icon(Icons.cloud_off, size: 40, color: Color(0xFF6B7280)),
             const SizedBox(height: 8),
             Text(AppLocalizations.of(context).havaDurumuAlinamadi),
           ],
@@ -533,12 +482,11 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          '7 Günlük Tahmin',
-          style: TextStyle(
+        Text(AppLocalizations.of(context).gunlukTahmin,
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w700,
-            color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+            color: Color(0xFFE5E7EB),
           ),
         ),
         const SizedBox(height: 12),
@@ -563,13 +511,13 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
                 ),
                 decoration: BoxDecoration(
                   color: isToday
-                      ? AppColors.cobalt.withAlpha(20)
-                      : (isDark ? AppColors.darkCard : Colors.white),
+                      ? const Color(0xFF6366F1).withAlpha(20)
+                      : (const Color(0xFF13131A)),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
                     color: isToday
-                        ? AppColors.cobalt.withAlpha(60)
-                        : (isDark ? AppColors.darkBorder : AppColors.border),
+                        ? const Color(0xFF6366F1).withAlpha(60)
+                        : (const Color(0x1EFFFFFF)),
                   ),
                 ),
                 child: Column(
@@ -581,10 +529,8 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
                         fontSize: 12,
                         fontWeight: isToday ? FontWeight.w700 : FontWeight.w500,
                         color: isToday
-                            ? AppColors.cobalt
-                            : (isDark
-                                  ? AppColors.darkTextSecondary
-                                  : AppColors.slate),
+                            ? const Color(0xFF6366F1)
+                            : (const Color(0xFF6B7280)),
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -596,22 +542,18 @@ class _WeatherSettingsScreenState extends ConsumerState<WeatherSettingsScreen> {
                     const SizedBox(height: 8),
                     Text(
                       '${day.maxTemp.round()}°',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
-                        color: isDark
-                            ? AppColors.darkTextPrimary
-                            : AppColors.dark,
+                        color: Color(0xFFE5E7EB),
                       ),
                     ),
                     const SizedBox(height: 2),
                     Text(
                       '${day.minTemp.round()}°',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.slate,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                   ],
@@ -648,13 +590,13 @@ class _WeatherPreviewCard extends StatelessWidget {
           end: Alignment.bottomRight,
           colors: [
             WeatherService.weatherColor(weather.weatherCode).withAlpha(220),
-            AppColors.cobalt.withAlpha(180),
+            const Color(0xFF6366F1).withAlpha(180),
           ],
         ),
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: AppColors.cobalt.withAlpha(40),
+            color: const Color(0xFF6366F1).withAlpha(40),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),
@@ -716,22 +658,22 @@ class _WeatherPreviewCard extends StatelessWidget {
               children: [
                 _MetricItem(
                   icon: Icons.thermostat,
-                  label: 'Hissedilen',
+                  label: AppLocalizations.of(context).wtFeelsLike,
                   value: '${weather.feelsLike.round()}$unit',
                 ),
                 _MetricItem(
                   icon: Icons.water_drop,
-                  label: 'Nem',
+                  label: AppLocalizations.of(context).wtHumidity,
                   value: '${weather.humidity}%',
                 ),
                 _MetricItem(
                   icon: Icons.air,
-                  label: 'Rüzgar',
+                  label: AppLocalizations.of(context).ruzgar,
                   value: '${weather.windSpeed.round()} km/s',
                 ),
                 _MetricItem(
                   icon: Icons.speed,
-                  label: 'Basınç',
+                  label: AppLocalizations.of(context).basinc,
                   value: '${weather.pressure.round()} hPa',
                 ),
               ],
@@ -799,14 +741,14 @@ class _UnitOption extends StatelessWidget {
         decoration: BoxDecoration(
           color: selected
               ? (isDark
-                    ? AppColors.cobalt.withAlpha(30)
-                    : AppColors.cobalt.withAlpha(15))
+                    ? const Color(0xFF6366F1).withAlpha(30)
+                    : const Color(0xFF6366F1).withAlpha(15))
               : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: selected
-                ? AppColors.cobalt
-                : (isDark ? AppColors.darkBorder : AppColors.border),
+                ? const Color(0xFF6366F1)
+                : (const Color(0x1EFFFFFF)),
             width: 1.5,
           ),
         ),
@@ -817,8 +759,8 @@ class _UnitOption extends StatelessWidget {
               fontSize: 14,
               fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
               color: selected
-                  ? AppColors.cobalt
-                  : (isDark ? AppColors.darkTextPrimary : AppColors.dark),
+                  ? const Color(0xFF6366F1)
+                  : (const Color(0xFFE5E7EB)),
             ),
           ),
         ),

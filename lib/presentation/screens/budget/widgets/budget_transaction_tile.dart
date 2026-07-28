@@ -28,12 +28,12 @@ class _TransactionTile extends StatelessWidget {
           color: AppColors.error,
           borderRadius: BorderRadius.circular(16),
         ),
-        child: const Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Icon(Icons.delete, color: Colors.white),
-            SizedBox(width: 8),
-            Text('Sil', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+            const Icon(Icons.delete, color: Colors.white),
+            const SizedBox(width: 8),
+            Text(AppLocalizations.of(context).budDelete, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
           ],
         ),
       ),
@@ -47,22 +47,30 @@ class _TransactionTile extends StatelessWidget {
               TextButton(onPressed: () => Navigator.pop(context, false), child: Text(AppLocalizations.of(context).cancel)),
               TextButton(
                 onPressed: () => Navigator.pop(context, true),
-                child: const Text('Sil', style: TextStyle(color: AppColors.error)),
+                child: Text(AppLocalizations.of(context).budDelete, style: const TextStyle(color: AppColors.error)),
               ),
             ],
           ),
         );
       },
       onDismissed: (_) => onDelete(),
-      child: Container(
+      child: Builder(
+        builder: (context) {
+          final isDark = Theme.of(context).brightness == Brightness.dark;
+          return Container(
         margin: const EdgeInsets.fromLTRB(20, 4, 20, 4),
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: isDark ? const Color(0xFF13131A) : Colors.white,
           borderRadius: BorderRadius.circular(16),
+          border: isDark
+              ? Border.all(color: Colors.white.withAlpha(15), width: 0.5)
+              : null,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.shade100,
+              color: isDark
+                  ? Colors.black.withAlpha(60)
+                  : const Color(0xFF9CA3AF).withAlpha(80),
               blurRadius: 4,
               offset: const Offset(0, 2),
             ),
@@ -95,7 +103,7 @@ class _TransactionTile extends StatelessWidget {
                   if (transaction.description != null && transaction.description!.isNotEmpty)
                     Text(
                       transaction.description!,
-                      style: TextStyle(fontSize: 11, color: Colors.grey.shade500),
+                      style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280)),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -106,16 +114,16 @@ class _TransactionTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  '${isIncome ? '+' : '-'}${NumberFormat.currency(symbol: '₺').format(transaction.amount)}',
+                  '${isIncome ? '+' : '-'}${NumberFormat.currency(symbol: '€').format(transaction.amount)}',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
-                    color: isIncome ? AppColors.green : AppColors.dark,
+                    color: isIncome ? AppColors.green : const Color(0xFFE5E7EB),
                   ),
                 ),
                 Text(
                   DateFormat('HH:mm').format(transaction.createdAt),
-                  style: TextStyle(fontSize: 10, color: Colors.grey.shade400),
+                  style: const TextStyle(fontSize: 10, color: Color(0xFF9CA3AF)),
                 ),
               ],
             ),
@@ -125,14 +133,16 @@ class _TransactionTile extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
-                  color: AppColors.cobalt.withAlpha(15),
+                  color: const Color(0xFF6366F1).withAlpha(15),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.edit, size: 16, color: AppColors.cobalt),
+                child: const Icon(Icons.edit, size: 16, color: Color(0xFF6366F1)),
               ),
             ),
           ],
         ),
+      );
+        },
       ),
     );
   }

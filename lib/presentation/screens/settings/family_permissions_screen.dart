@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -6,8 +7,12 @@ import '../../../config/constants.dart';
 import '../../../core/supabase_client.dart';
 import '../../../domain/entities.dart';
 import '../../../services/auth_service.dart';
+import '../../../services/hive_service.dart';
+import '../../../services/koca_seed.dart';
+import '../../providers/app_providers.dart' show localFamilyMembers;
 import '../../widgets/settings/screen_header.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../../core/app_logger.dart';
 
 class FamilyPermissionsScreen extends StatefulWidget {
   const FamilyPermissionsScreen({super.key});
@@ -30,34 +35,67 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
     _checkAdminAndLoad();
   }
 
+  static const _localFamilyId = 'local_family';
+
   Future<void> _checkAdminAndLoad() async {
     final client = SupabaseConfig.safeClient;
     final userId = _myUserId;
-    if (client == null || userId == null) {
-      setState(() => _isLoading = false);
-      return;
-    }
 
-    try {
-      final fm = await client
-          .from('family_members')
-          .select('family_id, role')
-          .eq('user_id', userId)
-          .maybeSingle();
+    if (client != null && userId != null) {
+      try {
+        final fm = await client
+            .from('family_members')
+            .select('family_id, role')
+            .eq('user_id', userId)
+            .maybeSingle();
 
-      final familyId = fm?['family_id'] as String?;
-      final role = fm?['role'] as String?;
-      _familyId = familyId;
-      _isAdmin = role == 'admin';
-
-      if (familyId != null && _isAdmin) {
-        await _loadMembers(client, familyId);
+        final familyId = fm?['family_id'] as String?;
+        final role = fm?['role'] as String?;
+        if (familyId != null) {
+          _familyId = familyId;
+          _isAdmin = role == 'admin';
+          if (_isAdmin) await _loadMembers(client, familyId);
+          setState(() => _isLoading = false);
+          return;
+        }
+      } catch (e) {
+        debugPrint('FamilyPermissions cloud error: $e');
       }
-    } catch (e) {
-      debugPrint('FamilyPermissions error: $e');
-    } finally {
-      setState(() => _isLoading = false);
     }
+
+    // Yerel mod — bulut ailesi yoksa yerel üyeleri yönet (cihaz sahibi admin).
+    _loadLocal();
+    setState(() => _isLoading = false);
+  }
+
+  void _loadLocal() {
+    _familyId = _localFamilyId;
+    _isAdmin = true;
+    _members = localFamilyMembers();
+    final raw = HiveService.getSetting('local_member_perms');
+    if (raw != null && raw.isNotEmpty) {
+      try {
+        final map = jsonDecode(raw) as Map<String, dynamic>;
+        map.forEach((k, v) {
+          _memberPermissions[k] =
+              (v as Map<String, dynamic>).cast<String, bool>();
+        });
+      } catch (e, st) {
+        // Güvenlik: izin haritası sessizce boşalırsa ekran varsayılanları
+        // gösterir ve kaydetme, ayarlanmış kısıtlamaları silebilir.
+        AppLogger.logError(
+          e,
+          module: 'settings',
+          operation: 'loadMemberPermissions',
+          stackTrace: st,
+        );
+      }
+    }
+  }
+
+  Future<void> _saveLocalPerms() async {
+    await HiveService.setSetting(
+        'local_member_perms', jsonEncode(_memberPermissions));
   }
 
   Future<void> _loadMembers(SupabaseClient client, String familyId) async {
@@ -128,6 +166,21 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
     );
   }
 
+  /// Dropdown seçenekleri — standart rol seti + üyenin mevcut rolü (garanti
+  /// eşleşme, aksi halde DropdownButton "exactly one item" assertion'ı atar).
+  static List<MemberRole> _roleOptions(MemberRole current) {
+    final base = <MemberRole>[
+      MemberRole.admin,
+      MemberRole.parent,
+      MemberRole.teen,
+      MemberRole.child,
+      MemberRole.elder,
+      MemberRole.guest,
+    ];
+    if (!base.contains(current)) base.add(current);
+    return base;
+  }
+
   String _roleLabel(MemberRole role) {
     return switch (role) {
       MemberRole.admin => 'Yönetici',
@@ -142,6 +195,27 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
 
   Future<void> _changeRole(String userId, MemberRole newRole) async {
     if (_familyId == null) return;
+
+    // Yerel mod — KocaSeed üyesinin rolünü Hive'da güncelle.
+    if (_familyId == _localFamilyId) {
+      final idx = int.tryParse(userId.replaceFirst('local_', ''));
+      final list = List<Map<String, dynamic>>.from(KocaSeed.localMembers());
+      if (idx != null && idx >= 0 && idx < list.length) {
+        list[idx] = {...list[idx], 'role': _roleLabel(newRole)};
+        await KocaSeed.setMembers(list);
+      }
+      HapticFeedback.mediumImpact();
+      setState(() {
+        _members = localFamilyMembers();
+      });
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(AppLocalizations.of(context).fpRoleUpdated(_roleLabel(newRole)))),
+        );
+      }
+      return;
+    }
+
     final client = SupabaseConfig.safeClient;
     if (client == null) return;
 
@@ -155,7 +229,7 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
       HapticFeedback.mediumImpact();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Rol güncellendi: ${_roleLabel(newRole)}')),
+          SnackBar(content: Text(AppLocalizations.of(context).fpRoleUpdated(_roleLabel(newRole)))),
         );
       }
       setState(() => _isLoading = true);
@@ -164,7 +238,7 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Rol güncellenemedi: $e'), backgroundColor: AppColors.error),
+          SnackBar(content: Text(AppLocalizations.of(context).fmnRoleUpdateFailed('$e')), backgroundColor: AppColors.error),
         );
       }
     }
@@ -172,13 +246,21 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
 
   Future<void> _updatePermission(String userId, String key, bool value) async {
     if (_familyId == null) return;
-    final client = SupabaseConfig.safeClient;
-    if (client == null) return;
 
     setState(() {
       _memberPermissions.putIfAbsent(userId, () => {});
       _memberPermissions[userId]![key] = value;
     });
+
+    // Yerel mod — Hive'a kaydet.
+    if (_familyId == _localFamilyId) {
+      await _saveLocalPerms();
+      HapticFeedback.mediumImpact();
+      return;
+    }
+
+    final client = SupabaseConfig.safeClient;
+    if (client == null) return;
 
     try {
       await client
@@ -191,7 +273,7 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Yetki güncellenemedi: $e'), backgroundColor: AppColors.error),
+          SnackBar(content: Text(AppLocalizations.of(context).fpPermUpdateFailed('$e')), backgroundColor: AppColors.error),
         );
       }
     }
@@ -243,13 +325,12 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     if (!_isAdmin) {
       return Scaffold(
-        backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+        backgroundColor: const Color(0xFF0A0A0F),
         appBar: ScreenHeader(
-          title: 'İzinler ve Roller',
+          title: AppLocalizations.of(context).izinlerVeRoller,
           showBack: true,
           onBack: () => context.pop(),
         ),
@@ -258,9 +339,9 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
     }
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
-        title: 'İzinler ve Roller',
+        title: AppLocalizations.of(context).izinlerVeRoller,
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -275,10 +356,10 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
                     child: Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: isDark ? AppColors.darkCard : const Color(0xFFFEF3C7),
+                        color: const Color(0xFF13131A),
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(
-                          color: isDark ? AppColors.darkBorder : const Color(0xFFFDE68A),
+                          color: const Color(0x1EFFFFFF),
                         ),
                       ),
                       child: Row(
@@ -286,11 +367,10 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
                           const Icon(Icons.info_outline, color: Color(0xFFF59E0B)),
                           const SizedBox(width: 12),
                           Expanded(
-                            child: Text(
-                              'Yönetici olarak üyelerin rollerini ve yetkilerini düzenleyebilirsiniz.',
-                              style: TextStyle(
+                            child: Text(AppLocalizations.of(context).yoneticiOlarakUyelerinRolleriniVeYetkileriniDuzenleyebilirsiniz,
+                              style: const TextStyle(
                                 fontSize: 13,
-                                color: isDark ? Colors.white70 : const Color(0xFF92400E),
+                                color: Colors.white70,
                               ),
                             ),
                           ),
@@ -303,14 +383,16 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
                       final member = _members[index];
-                      final permissions = _memberPermissions[member.id] ?? _defaultPermissions[member.role.name] ?? {};
+                      final permissions = _memberPermissions[member.id] ??
+                          _defaultPermissions[member.role.name] ??
+                          _defaultPermissions['child']!;
                       return Container(
                         margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
                         decoration: BoxDecoration(
-                          color: isDark ? AppColors.darkCard : Colors.white,
+                          color: const Color(0xFF13131A),
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
-                            color: isDark ? AppColors.darkBorder : AppColors.border,
+                            color: const Color(0x1EFFFFFF),
                           ),
                         ),
                         child: Theme(
@@ -327,17 +409,17 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
                             ),
                             title: Text(
                               member.name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
-                                color: isDark ? Colors.white : Colors.black87,
+                                color: Color(0xFFE5E7EB),
                               ),
                             ),
                             subtitle: Text(
                               _roleLabel(member.role),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 12,
-                                color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                                color: Color(0xFF6B7280),
                               ),
                             ),
                             children: [
@@ -346,10 +428,10 @@ class _FamilyPermissionsScreenState extends State<FamilyPermissionsScreen> {
                                   title: Text(AppLocalizations.of(context).role),
                                   trailing: DropdownButton<String>(
                                     value: member.role.name,
-                                    items: ['admin', 'parent', 'member', 'child'].map((role) {
+                                    items: _roleOptions(member.role).map((role) {
                                       return DropdownMenuItem(
-                                        value: role,
-                                        child: Text(_roleLabel(_parseRole(role))),
+                                        value: role.name,
+                                        child: Text(_roleLabel(role)),
                                       );
                                     }).toList(),
                                     onChanged: (newRole) {

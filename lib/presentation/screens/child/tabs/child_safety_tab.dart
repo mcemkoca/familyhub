@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../../../../config/constants.dart';
 import '../../../../config/routes.dart';
 import '../../../../services/child_auth_service.dart';
@@ -121,8 +122,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
               Text(AppLocalizations.of(context).emergency),
             ],
           ),
-          content: const Text(
-            'Acil durum bildirimi ailene gönderildi ve konumun paylaşıldı.',
+          content: Text(AppLocalizations.of(context).emergencySent,
           ),
           actions: [
             TextButton(
@@ -138,15 +138,23 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
   Future<void> _shareLocation() async {
     setState(() => _locationLoading = true);
     try {
-      final granted = await LocationService.requestPermissions();
-      if (!granted) {
-        if (mounted) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(const SnackBar(content: Text('Konum izni gerekli')));
-        }
-        return;
-      }
+      final granted = await LocationService.requestPermissionsWithFallback(
+        onDeniedForever: () async {
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(AppLocalizations.of(context).cstLocationDenied),
+              backgroundColor: const Color(0xFF13131A),
+              action: SnackBarAction(
+                label: AppLocalizations.of(context).sfSettings,
+                textColor: const Color(0xFF6366F1),
+                onPressed: openAppSettings,
+              ),
+            ),
+          );
+        },
+      );
+      if (!granted) return;
       final ok = await LocationTrackingService.shareCurrentLocation();
       setState(() => _sharingLocation = ok);
       if (mounted) {
@@ -163,7 +171,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Konum paylaşılamadı: $e')));
+        ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).cstShareFailed('$e'))));
       }
     } finally {
       if (mounted) setState(() => _locationLoading = false);
@@ -224,7 +232,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.success,
+                backgroundColor: const Color(0xFF10B981),
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
@@ -255,9 +263,8 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
             ),
           ),
           const SizedBox(height: 4),
-          Text(
-            'Butona 3 saniye basılı tut',
-            style: TextStyle(fontSize: 13, color: Colors.grey.shade400),
+          Text(AppLocalizations.of(context).butona3SaniyeBasiliTut,
+            style: const TextStyle(fontSize: 13, color: Color(0xFF9CA3AF)),
           ),
           const SizedBox(height: 20),
           GestureDetector(
@@ -317,9 +324,8 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
             ),
           ),
           const SizedBox(height: 12),
-          Text(
-            'Basılı Tut',
-            style: TextStyle(fontSize: 13, color: Colors.grey.shade500),
+          Text(AppLocalizations.of(context).basiliTut,
+            style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
           ),
         ],
       ),
@@ -330,12 +336,11 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'HIZLI İŞLEMLER',
-          style: TextStyle(
+        Text(AppLocalizations.of(context).hizliIslemler,
+          style: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w700,
-            color: Colors.grey.shade500,
+            color: Color(0xFF6B7280),
             letterSpacing: 1,
           ),
         ),
@@ -372,9 +377,8 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Konumumu Paylaş',
-                        style: TextStyle(
+                      Text(AppLocalizations.of(context).konumumuPaylas,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
@@ -384,8 +388,8 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
                         _sharingLocation
                             ? 'Son konum paylaşıldı'
                             : 'Canlı konumun ailene gönder',
-                        style: TextStyle(
-                          color: Colors.grey.shade500,
+                        style: const TextStyle(
+                          color: Color(0xFF6B7280),
                           fontSize: 13,
                         ),
                       ),
@@ -422,21 +426,19 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
                   child: const Icon(Icons.timer, color: Colors.orange),
                 ),
                 const SizedBox(width: 14),
-                const Expanded(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Güvenli Varış',
-                        style: TextStyle(
+                      Text(AppLocalizations.of(context).guvenliVaris,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Text(
-                        'Aile varış planlarını gör',
-                        style: TextStyle(color: Colors.grey, fontSize: 13),
+                      Text(AppLocalizations.of(context).aileVarisPlanlariniGor,
+                        style: const TextStyle(color: Colors.grey, fontSize: 13),
                       ),
                     ],
                   ),
@@ -458,8 +460,7 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'AKTİF UYARILAR',
+        Text(AppLocalizations.of(context).aktifUyarilar,
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w700,
@@ -505,9 +506,8 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
                         color: Colors.red.withAlpha(30),
                         borderRadius: BorderRadius.circular(6),
                       ),
-                      child: const Text(
-                        'AKTİF',
-                        style: TextStyle(
+                      child: Text(AppLocalizations.of(context).aktif,
+                        style: const TextStyle(
                           color: Colors.red,
                           fontSize: 10,
                           fontWeight: FontWeight.w700,
@@ -519,12 +519,12 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
                 const SizedBox(height: 6),
                 Text(
                   (alert['message'] as String?) ?? 'Acil durum!',
-                  style: TextStyle(color: Colors.grey.shade300, fontSize: 13),
+                  style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13),
                 ),
                 if (alert['lat'] != null && alert['lng'] != null)
                   Text(
                     'Konum: ${(alert['lat'] as num).toStringAsFixed(4)}, ${(alert['lng'] as num).toStringAsFixed(4)}',
-                    style: TextStyle(color: Colors.grey.shade500, fontSize: 11),
+                    style: const TextStyle(color: Color(0xFF6B7280), fontSize: 11),
                   ),
               ],
             ),
@@ -557,21 +557,19 @@ class _ChildSafetyTabState extends State<ChildSafetyTab> {
               child: const Icon(Icons.favorite, color: Colors.teal),
             ),
             const SizedBox(width: 14),
-            const Expanded(
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Sağlık Kartım',
-                    style: TextStyle(
+                  Text(AppLocalizations.of(context).saglikKartim,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  Text(
-                    'Alerji ve sağlık bilgilerin',
-                    style: TextStyle(color: Colors.grey, fontSize: 13),
+                  Text(AppLocalizations.of(context).alerjiVeSaglikBilgilerin,
+                    style: const TextStyle(color: Colors.grey, fontSize: 13),
                   ),
                 ],
               ),

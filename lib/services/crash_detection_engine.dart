@@ -517,8 +517,8 @@ class CrashDetectionEngine {
           peakG: peakG,
         ),
         gps: const CrashGpsData(
-          latitude: 41.0082,
-          longitude: 28.9784,
+          latitude: 0.0,
+          longitude: 0.0,
           speed: 15,
         ),
       ),

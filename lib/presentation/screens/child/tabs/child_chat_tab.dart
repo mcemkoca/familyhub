@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../../../config/constants.dart';
 import '../../../../domain/entities.dart';
 import '../../../../repositories/child_chat_repository.dart';
@@ -48,7 +49,7 @@ class _ChildChatTabState extends State<ChildChatTab> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Mesaj gönderilemedi: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context).cctSendFailed('$e'))),
         );
       }
     } finally {
@@ -126,7 +127,7 @@ class _ChatBubble extends StatelessWidget {
       alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width * 0.75,
+          maxWidth: MediaQuery.sizeOf(context).width * 0.75,
         ),
         child: Column(
           crossAxisAlignment:
@@ -154,7 +155,7 @@ class _ChatBubble extends StatelessWidget {
                 vertical: AppSpacing.sm,
               ),
               decoration: BoxDecoration(
-                color: isMe ? const Color(0xFF10B981) : Colors.grey.shade100,
+                color: isMe ? const Color(0xFF10B981) : const Color(0xFF9CA3AF),
                 borderRadius: BorderRadius.only(
                   topLeft: const Radius.circular(AppRadius.large),
                   topRight: const Radius.circular(AppRadius.large),
@@ -177,7 +178,7 @@ class _ChatBubble extends StatelessWidget {
                     _formatTime(message.createdAt),
                     style: TextStyle(
                       fontSize: 10,
-                      color: isMe ? Colors.white70 : Colors.grey.shade500,
+                      color: isMe ? Colors.white70 : const Color(0xFF6B7280),
                     ),
                   ),
                 ],
@@ -213,9 +214,9 @@ class _ChatInput extends StatelessWidget {
           horizontal: AppSpacing.md,
           vertical: AppSpacing.sm,
         ),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
-          border: Border(top: BorderSide(color: Colors.grey.shade200)),
+          border: Border(top: BorderSide(color: Color(0xFF9CA3AF))),
         ),
         child: Row(
           children: [
@@ -223,9 +224,9 @@ class _ChatInput extends StatelessWidget {
               child: TextField(
                 controller: controller,
                 decoration: InputDecoration(
-                  hintText: 'Mesaj yaz...',
+                  hintText: AppLocalizations.of(context).ccMsgHint,
                   filled: true,
-                  fillColor: Colors.grey.shade50,
+                  fillColor: const Color(0x1AFFFFFF),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(AppRadius.large),
                     borderSide: BorderSide.none,
@@ -267,22 +268,20 @@ class _EmptyChatView extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.chat_bubble_outline, size: 64, color: Colors.grey.shade300),
+          const Icon(Icons.chat_bubble_outline, size: 64, color: Color(0xFF9CA3AF)),
           const SizedBox(height: AppSpacing.md),
-          Text(
-            'Aile sohbetine ilk mesajı sen gönder! 💬',
-            style: TextStyle(
+          Text(AppLocalizations.of(context).aileSohbetineIlkMesajiSenGonder,
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
-              color: Colors.grey.shade600,
+              color: Color(0xFF6B7280),
             ),
           ),
           const SizedBox(height: AppSpacing.sm),
-          Text(
-            'Mesajların burada görünecek.',
-            style: TextStyle(
+          Text(AppLocalizations.of(context).mesajlarinBuradaGorunecek,
+            style: const TextStyle(
               fontSize: 14,
-              color: Colors.grey.shade500,
+              color: Color(0xFF6B7280),
             ),
           ),
         ],

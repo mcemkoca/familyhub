@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../config/constants.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../widgets/settings/screen_header.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,6 +11,8 @@ class UserGuideScreen extends StatefulWidget {
 }
 
 class _UserGuideScreenState extends State<UserGuideScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   final _expanded = <int>{};
 
   final _guides = const [
@@ -117,13 +119,12 @@ class _UserGuideScreenState extends State<UserGuideScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = isDark ? AppColors.darkBackground : AppColors.cloudWhite;
+    final bg = const Color(0xFF0A0A0F);
 
     return Scaffold(
       backgroundColor: bg,
       appBar: ScreenHeader(
-        title: 'Kullanım Kılavuzu',
+        title: AppLocalizations.of(context).kullanimKilavuzu,
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -142,13 +143,11 @@ class _UserGuideScreenState extends State<UserGuideScreen> {
             curve: Curves.easeInOut,
             margin: const EdgeInsets.only(bottom: 12),
             decoration: BoxDecoration(
-              color: isDark ? AppColors.darkCard : Colors.white,
+              color: const Color(0xFF13131A),
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: isDark
-                      ? Colors.black.withAlpha(20)
-                      : Colors.black.withAlpha(5),
+                  color: Colors.black.withAlpha(20),
                   blurRadius: 12,
                   offset: const Offset(0, 2),
                 ),
@@ -168,7 +167,7 @@ class _UserGuideScreenState extends State<UserGuideScreen> {
                           width: 48,
                           height: 48,
                           decoration: BoxDecoration(
-                            color: color.withAlpha(isDark ? 30 : 20),
+                            color: color.withAlpha(30),
                             borderRadius: BorderRadius.circular(14),
                           ),
                           child: Icon(
@@ -184,22 +183,18 @@ class _UserGuideScreenState extends State<UserGuideScreen> {
                             children: [
                               Text(
                                 g['title'] as String,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
-                                  color: isDark
-                                      ? AppColors.darkTextPrimary
-                                      : AppColors.dark,
+                                  color: Color(0xFFE5E7EB),
                                 ),
                               ),
                               const SizedBox(height: 4),
                               Text(
                                 g['desc'] as String,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 13,
-                                  color: isDark
-                                      ? AppColors.darkTextSecondary
-                                      : AppColors.slate,
+                                  color: Color(0xFF6B7280),
                                 ),
                               ),
                             ],
@@ -211,8 +206,8 @@ class _UserGuideScreenState extends State<UserGuideScreen> {
                           child: Icon(
                             Icons.keyboard_arrow_down,
                             color: isDark
-                                ? AppColors.darkBorder
-                                : AppColors.lightGray,
+                                ? const Color(0x1EFFFFFF)
+                                : const Color(0xFF9CA3AF),
                           ),
                         ),
                       ],
@@ -234,7 +229,7 @@ class _UserGuideScreenState extends State<UserGuideScreen> {
                                     height: 22,
                                     margin: const EdgeInsets.only(right: 10),
                                     decoration: BoxDecoration(
-                                      color: color.withAlpha(isDark ? 40 : 15),
+                                      color: color.withAlpha(40),
                                       shape: BoxShape.circle,
                                     ),
                                     child: Center(
@@ -255,8 +250,8 @@ class _UserGuideScreenState extends State<UserGuideScreen> {
                                         fontSize: 14,
                                         height: 1.5,
                                         color: isDark
-                                            ? AppColors.darkTextSecondary
-                                            : AppColors.dark.withAlpha(200),
+                                            ? const Color(0xFF6B7280)
+                                            : const Color(0xFFE5E7EB).withAlpha(200),
                                       ),
                                     ),
                                   ),

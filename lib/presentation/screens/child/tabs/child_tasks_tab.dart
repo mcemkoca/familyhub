@@ -141,7 +141,7 @@ class _TaskCard extends StatelessWidget {
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppRadius.medium),
-        side: BorderSide(color: Colors.grey.shade200),
+        side: const BorderSide(color: Color(0xFF9CA3AF)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(AppSpacing.md),
@@ -182,7 +182,7 @@ class _TaskCard extends StatelessWidget {
                       task.description!,
                       style: TextStyle(
                         fontSize: 13,
-                        color: Colors.grey.shade600,
+                        color: const Color(0xFF6B7280),
                         decoration: isCompleted
                             ? TextDecoration.lineThrough
                             : null,
@@ -214,10 +214,10 @@ class _TaskCard extends StatelessWidget {
                       ),
                       if (task.dueDate != null) ...[
                         const SizedBox(width: AppSpacing.md),
-                        Icon(
+                        const Icon(
                           Icons.calendar_today,
                           size: 12,
-                          color: Colors.grey.shade500,
+                          color: Color(0xFF6B7280),
                         ),
                         const SizedBox(width: 4),
                         Text(
@@ -226,7 +226,7 @@ class _TaskCard extends StatelessWidget {
                             fontSize: 12,
                             color: _isOverdue(task.dueDate!) && !isCompleted
                                 ? Colors.red
-                                : Colors.grey.shade600,
+                                : const Color(0xFF6B7280),
                           ),
                         ),
                       ],
@@ -266,7 +266,7 @@ class _SectionTitle extends StatelessWidget {
       text,
       style: Theme.of(context).textTheme.titleSmall?.copyWith(
         fontWeight: FontWeight.w700,
-        color: Colors.grey.shade700,
+        color: const Color(0xFF6B7280),
       ),
     );
   }
@@ -281,20 +281,18 @@ class _EmptyTasksView extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.task_alt, size: 64, color: Colors.grey.shade300),
+          const Icon(Icons.task_alt, size: 64, color: Color(0xFF9CA3AF)),
           const SizedBox(height: AppSpacing.md),
-          Text(
-            'Henüz görevin yok! 🌟',
-            style: TextStyle(
+          Text(AppLocalizations.of(context).henuzGorevinYok,
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
-              color: Colors.grey.shade600,
+              color: Color(0xFF6B7280),
             ),
           ),
           const SizedBox(height: AppSpacing.sm),
-          Text(
-            'Görevlerin eklendiğinde burada görünecek.',
-            style: TextStyle(fontSize: 14, color: Colors.grey.shade500),
+          Text(AppLocalizations.of(context).gorevlerinEklendigindeBuradaGorunecek,
+            style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
           ),
         ],
       ),

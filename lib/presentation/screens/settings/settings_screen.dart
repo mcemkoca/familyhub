@@ -5,18 +5,17 @@ import 'package:go_router/go_router.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../../../config/constants.dart';
-import '../../../config/routes.dart';
+import '../../../core/app_logger.dart';
+import '../../../../config/routes.dart';
 import '../../../core/supabase_client.dart';
 import '../../../repositories/backup_repository.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/hive_service.dart';
-import '../../providers/app_providers.dart';
+import '../../providers/app_providers.dart' show localFamilyMembers;
 import '../../widgets/settings/profile_card.dart';
 import '../../widgets/settings/premium_card.dart';
 import '../../widgets/settings/settings_section.dart';
 import '../../widgets/settings/settings_item.dart';
-import '../../widgets/settings/settings_toggle.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
@@ -30,10 +29,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   String _accentLabel = 'Kobalt Mavi';
   String _fontLabel = 'Orta';
   String _languageLabel = 'Türkçe';
+  late final Future<int> _memberCountFuture;
 
   @override
   void initState() {
     super.initState();
+    _memberCountFuture = _getMemberCount();
     WidgetsBinding.instance.addPostFrameCallback((_) => _loadDynamicLabels());
   }
 
@@ -44,46 +45,42 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       'orange' => 'Turuncu',
       'purple' => 'Mor',
       'red' => 'Kırmızı',
-      _ => 'Kobalt Mavi',
+      _ => 'İndigo',
     };
 
-    final fontScale = HiveService.getDoubleSetting('fontScale') ?? 1.0;
-    _fontLabel = switch (fontScale) {
-      0.875 => 'Küçük',
-      1.125 => 'Büyük',
-      1.25 => 'Çok Büyük',
+    // Floating point comparison via string key instead of double equality
+    final fontScaleStr = HiveService.getSetting('fontScale') ?? '1.0';
+    _fontLabel = switch (fontScaleStr) {
+      '0.875' => 'Küçük',
+      '1.125' => 'Büyük',
+      '1.25' => 'Çok Büyük',
       _ => 'Orta',
     };
 
     _languageLabel = HiveService.getSetting('language') ?? 'Türkçe';
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    final themeMode = ref.watch(themeModeProvider);
-    final isDark = themeMode == ThemeMode.dark;
     final safeBottom = MediaQuery.of(context).viewPadding.bottom;
-    final safeTop = MediaQuery.of(context).viewPadding.top;
 
     return Scaffold(
-      backgroundColor: AppColors.darkBackground,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         bottom: false,
         child: CustomScrollView(
           physics: const BouncingScrollPhysics(),
           slivers: [
-            SliverToBoxAdapter(
-              child: SizedBox(height: safeTop > 0 ? 8 : 16),
-            ),
+            // Başlık
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Ayarlar',
+                      AppLocalizations.of(context).stgTitle,
                       style: Theme.of(context)
                           .textTheme
                           .displayLarge
@@ -91,168 +88,125 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'FamilyHub\'ınızı yönetin',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(
-                            color: isDark
-                                ? AppColors.darkTextSecondary
-                                : AppColors.slate,
-                          ),
+                      AppLocalizations.of(context).stgSubtitle,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Theme.of(context).colorScheme.onSurface.withAlpha(128),
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
+            // Profil kartı
             const SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: ProfileCard(),
               ),
             ),
-            const SliverToBoxAdapter(child: SizedBox(height: 24)),
-            // Görünüm
+            const SliverToBoxAdapter(child: SizedBox(height: 8)),
+
+            // ── PLANLAR ─────────────────────────────────────────────
             SliverToBoxAdapter(
               child: SettingsSection(
-                title: 'GÖRÜNÜM',
-                icon: Icons.palette_outlined,
+                title: AppLocalizations.of(context).plansTitle,
+                icon: Icons.workspace_premium_outlined,
                 children: [
-                  SettingsToggle(
-                    icon: Icons.dark_mode_outlined,
+                  SettingsItem(
+                    icon: Icons.workspace_premium_outlined,
                     iconColor: const Color(0xFF6366F1),
-                    label: 'Koyu Tema',
-                    description: 'Gece modunda daha rahat kullanım',
-                    value: isDark,
-                    onToggle: (v) async {
-                      await HiveService.setSetting('themeMode', v ? 'dark' : 'light');
-                      ref.read(themeModeProvider.notifier).state = v ? ThemeMode.dark : ThemeMode.light;
-                    },
-                  ),
-                  SettingsItem(
-                    icon: Icons.color_lens_outlined,
-                    iconColor: const Color(0xFFEC4899),
-                    label: 'Aksan Rengi',
-                    description: 'Uygulama vurgu rengini değiştir',
-                    showValue: _accentLabel,
-                    onTap: () => context.push(AppRoutes.appearanceSettings),
-                  ),
-                  SettingsItem(
-                    icon: Icons.text_fields,
-                    iconColor: const Color(0xFF8B5CF6),
-                    label: 'Yazı Boyutu',
-                    description: 'Metin boyutunu ayarla',
-                    showValue: _fontLabel,
-                    onTap: () => context.push(AppRoutes.appearanceSettings),
+                    label: AppLocalizations.of(context).plansTitle,
+                    description: AppLocalizations.of(context).planPlusTagline,
+                    onTap: () => context.push(AppRoutes.plans),
                     isLast: true,
                   ),
                 ],
               ),
             ),
-            // Bildirimler
+
+            // ── BİLDİRİMLER ─────────────────────────────────────────
             SliverToBoxAdapter(
               child: SettingsSection(
-                title: 'BİLDİRİMLER',
+                title: AppLocalizations.of(context).bildirimler,
                 icon: Icons.notifications_outlined,
                 children: [
                   SettingsItem(
-                    icon: Icons.calendar_today,
-                    iconColor: AppColors.cobalt,
-                    label: 'Etkinlik Hatırlatmaları',
-                    description: 'Yaklaşan etkinlikler için bildirimler',
-                    showValue: HiveService.getSetting('notifyEvents') ?? 'Açık',
-                    onTap: () => context.push(AppRoutes.notificationSettings),
-                  ),
-                  SettingsItem(
-                    icon: Icons.check_circle_outline,
-                    iconColor: AppColors.success,
-                    label: 'Görev Bildirimleri',
-                    description: 'Atanan ve yaklaşan görevler',
-                    showValue: HiveService.getSetting('notifyTasks') ?? 'Açık',
-                    onTap: () => context.push(AppRoutes.notificationSettings),
-                  ),
-                  SettingsItem(
-                    icon: Icons.warning_amber_rounded,
-                    iconColor: AppColors.error,
-                    label: 'Acil Durum Uyarıları',
-                    description: 'Panik butonu ve güvenlik bildirimleri',
-                    showValue: HiveService.getSetting('notifyEmergency') ?? 'Yüksek Öncelik',
-                    onTap: () => context.push(AppRoutes.notificationSettings),
-                  ),
-                  SettingsItem(
-                    icon: Icons.chat_bubble_outline,
-                    iconColor: const Color(0xFF8B5CF6),
-                    label: 'Sohbet Bildirimleri',
-                    description: 'Mesajlar, duyurular ve etiketlemeler',
-                    showValue: HiveService.getSetting('notifyChat') ?? 'Açık',
-                    onTap: () => context.push(AppRoutes.notificationSettings),
-                  ),
-                  SettingsItem(
-                    icon: Icons.location_on_outlined,
-                    iconColor: const Color(0xFFF59E0B),
-                    label: 'Konum Bildirimleri',
-                    description: 'Güvenli bölge giriş/çıkış uyarıları',
-                    showValue: HiveService.getSetting('notifyLocation') ?? 'Açık',
+                    icon: Icons.notifications_active_outlined,
+                    iconColor: const Color(0xFF6366F1),
+                    label: AppLocalizations.of(context).bildirimAyarlari,
+                    description:
+                        AppLocalizations.of(context).stgNotifDesc,
                     onTap: () => context.push(AppRoutes.notificationSettings),
                     isLast: true,
                   ),
                 ],
               ),
             ),
-            // Aile
+
+            // ── AİLE ────────────────────────────────────────────────
             SliverToBoxAdapter(
               child: SettingsSection(
-                title: 'AİLE',
+                title: AppLocalizations.of(context).aile,
                 icon: Icons.people_outline,
                 children: [
                   SettingsItem(
                     icon: Icons.people_outline,
-                    iconColor: AppColors.cobalt,
-                    label: 'Aile Yönetimi',
-                    description: 'Üyeleri görüntüle, rolleri düzenle',
+                    iconColor: const Color(0xFF6366F1),
+                    label: AppLocalizations.of(context).aileYonetimi,
+                    description: AppLocalizations.of(context).uyeleriGoruntuleRolleriDuzenle,
                     showValueWidget: FutureBuilder<int>(
-                      future: _getMemberCount(),
+                      future: _memberCountFuture,
                       builder: (context, snapshot) {
-                        if (!snapshot.hasData) return const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2));
-                        return Text('${snapshot.data} Üye');
+                        if (!snapshot.hasData) {
+                          return const SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: Color(0xFF6B7280),
+                            ),
+                          );
+                        }
+                        return Text(AppLocalizations.of(context).stgMemberCount('${snapshot.data}'));
                       },
                     ),
                     onTap: () => context.push(AppRoutes.familyManage),
                   ),
                   SettingsItem(
                     icon: Icons.person_add_alt,
-                    iconColor: AppColors.success,
-                    label: 'Davet Kodu Oluştur',
-                    description: 'Yeni üyeleri aileye davet et',
+                    iconColor: const Color(0xFF10B981),
+                    label: AppLocalizations.of(context).davetKoduOlustur,
+                    description: AppLocalizations.of(context).yeniUyeleriAileyeDavetEt,
                     onTap: () => context.push(AppRoutes.inviteCode),
                   ),
                   SettingsItem(
                     icon: Icons.admin_panel_settings_outlined,
                     iconColor: const Color(0xFFF59E0B),
-                    label: 'İzinler ve Roller',
-                    description: 'Her üye için yetki ayarları',
+                    label: AppLocalizations.of(context).izinlerVeRoller,
+                    description: AppLocalizations.of(context).herUyeIcinYetkiAyarlari,
                     onTap: () => context.push(AppRoutes.familyPermissions),
                   ),
                   SettingsItem(
                     icon: Icons.child_care,
-                    iconColor: Colors.orange,
-                    label: 'Çocuk Hesapları',
-                    description: 'PIN ile çocuk girişleri yönetin',
+                    iconColor: const Color(0xFF06B6D4),
+                    label: AppLocalizations.of(context).cocukHesaplari,
+                    description: AppLocalizations.of(context).pinIleCocukGirisleriYonetin,
                     onTap: () => context.push(AppRoutes.childManagement),
                   ),
                   SettingsItem(
                     icon: Icons.timer_outlined,
                     iconColor: const Color(0xFFEC4899),
-                    label: 'Ekran Süresi',
-                    description: 'Çocuk üyeler için kullanım limitleri',
-                    showValue: 'Aktif',
+                    label: AppLocalizations.of(context).ekranSuresi,
+                    description: AppLocalizations.of(context).cocukUyelerIcinKullanimLimitleri,
+                    showValue: AppLocalizations.of(context).setActive,
                     onTap: () => context.push(AppRoutes.screenTimeSettings),
                   ),
                   SettingsItem(
                     icon: Icons.exit_to_app,
-                    iconColor: AppColors.error,
-                    label: 'Aileden Ayrıl',
-                    description: 'Bu aileden çıkış yap',
+                    iconColor: const Color(0xFFEF4444),
+                    label: AppLocalizations.of(context).ailedenAyril,
+                    description: AppLocalizations.of(context).buAiledenCikisYap,
                     onTap: () => _showLeaveDialog(context),
                     isDanger: true,
                     isLast: true,
@@ -260,39 +214,48 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 ],
               ),
             ),
-            // Hesap
+
+            // ── HESAP ───────────────────────────────────────────────
             SliverToBoxAdapter(
               child: SettingsSection(
-                title: 'HESAP',
+                title: AppLocalizations.of(context).setAccount,
                 icon: Icons.person_outline,
                 children: [
                   SettingsItem(
                     icon: Icons.person_outline,
-                    iconColor: AppColors.cobalt,
-                    label: 'Profil Bilgileri',
-                    description: 'Ad, fotoğraf, telefon numarası',
+                    iconColor: const Color(0xFF6366F1),
+                    label: AppLocalizations.of(context).setProfileInfo,
+                    description: AppLocalizations.of(context).adFotografTelefonNumarasi,
                     onTap: () => context.push(AppRoutes.profileEdit),
                   ),
                   SettingsItem(
                     icon: Icons.key_outlined,
                     iconColor: const Color(0xFFF59E0B),
-                    label: 'Güvenlik',
-                    description: 'Şifre, iki faktör, biyometrik giriş',
-                    showValue: 'Güvenli',
+                    label: AppLocalizations.of(context).safety,
+                    description: AppLocalizations.of(context).sifreIkiFaktorBiyometrikGiris,
+                    showValue: AppLocalizations.of(context).setSecure,
                     onTap: () => context.push(AppRoutes.securitySettings),
                   ),
                   SettingsItem(
                     icon: Icons.lock_outline,
-                    iconColor: AppColors.success,
-                    label: 'Gizlilik',
-                    description: 'Veri paylaşımı, konum izinleri',
+                    iconColor: const Color(0xFF10B981),
+                    label: AppLocalizations.of(context).setPrivacy,
+                    description: AppLocalizations.of(context).veriPaylasimiKonumIzinleri,
                     onTap: () => context.push(AppRoutes.privacySettings),
+                  ),
+                  SettingsItem(
+                    icon: Icons.psychology_outlined,
+                    iconColor: const Color(0xFF6366F1),
+                    label: 'FamilyHub Hafızası',
+                    description:
+                        'AI’ın hatırladığı bilgileri görün, düzeltin, silin',
+                    onTap: () => context.push(AppRoutes.memoryCenter),
                   ),
                   SettingsItem(
                     icon: Icons.language,
                     iconColor: const Color(0xFF8B5CF6),
-                    label: 'Dil ve Bölge',
-                    description: 'Uygulama dili ve tarih formatı',
+                    label: AppLocalizations.of(context).dilVeBolge,
+                    description: AppLocalizations.of(context).uygulamaDiliVeTarihFormati,
                     showValue: _languageLabel,
                     onTap: () => context.push(AppRoutes.languageSettings),
                     isLast: true,
@@ -300,21 +263,22 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 ],
               ),
             ),
-            // Hava Durumu
+
+            // ── HAVA DURUMU ─────────────────────────────────────────
             SliverToBoxAdapter(
               child: SettingsSection(
-                title: 'HAVA DURUMU',
+                title: AppLocalizations.of(context).setWeatherSection,
                 icon: Icons.wb_sunny_outlined,
                 children: [
                   SettingsItem(
                     icon: Icons.wb_sunny,
                     iconColor: const Color(0xFFF59E0B),
-                    label: 'Hava Durumu Ayarları',
-                    description: 'Şehir, birim ve konum tercihleri',
+                    label: AppLocalizations.of(context).havaDurumuAyarlari,
+                    description: AppLocalizations.of(context).sehirBirimVeKonumTercihleri,
                     showValueWidget: FutureBuilder<String?>(
                       future: Future.value(HiveService.getSetting('weatherCity')),
                       builder: (context, snapshot) {
-                        return Text(snapshot.data ?? 'İstanbul');
+                        return Text(snapshot.data ?? 'Brüksel');
                       },
                     ),
                     onTap: () => context.push(AppRoutes.weatherSettings),
@@ -323,17 +287,18 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 ],
               ),
             ),
-            // Veri ve Depolama
+
+            // ── VERİ VE DEPOLAMA ─────────────────────────────────────
             SliverToBoxAdapter(
               child: SettingsSection(
-                title: 'VERİ VE DEPOLAMA',
+                title: AppLocalizations.of(context).veriVeDepolama,
                 icon: Icons.storage_outlined,
                 children: [
                   SettingsItem(
                     icon: Icons.backup_outlined,
-                    iconColor: AppColors.cobalt,
-                    label: 'Yedekleme',
-                    description: 'Verilerinizi buluta yedekleyin',
+                    iconColor: const Color(0xFF6366F1),
+                    label: AppLocalizations.of(context).setBackupRestore,
+                    description: AppLocalizations.of(context).setBackupRestoreDesc,
                     showValueWidget: FutureBuilder<String>(
                       future: _getLastBackupTime(),
                       builder: (context, snapshot) {
@@ -343,25 +308,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     onTap: () => context.push(AppRoutes.backupSettings),
                   ),
                   SettingsItem(
-                    icon: Icons.restore,
-                    iconColor: AppColors.success,
-                    label: 'Geri Yükle',
-                    description: 'Önceki yedekten veri kurtarın',
-                    onTap: () => context.push(AppRoutes.backupSettings),
-                  ),
-                  SettingsItem(
-                    icon: Icons.delete_outline,
-                    iconColor: AppColors.error,
-                    label: 'Verileri Sil',
-                    description: 'Tüm verilerinizi kalıcı olarak silin',
-                    onTap: () => _showDeleteDataDialog(context),
-                    isDanger: true,
-                  ),
-                  SettingsItem(
                     icon: Icons.cleaning_services_outlined,
-                    iconColor: AppColors.gray,
-                    label: 'Önbelleği Temizle',
-                    description: 'Geçici dosyaları temizleyin',
+                    iconColor: const Color(0xFF6B7280),
+                    label: AppLocalizations.of(context).onbellegiTemizle,
+                    description: AppLocalizations.of(context).geciciDosyalariTemizleyin,
                     showValueWidget: FutureBuilder<String>(
                       future: _getCacheSize(),
                       builder: (context, snapshot) {
@@ -369,15 +319,24 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       },
                     ),
                     onTap: () => _showClearCacheDialog(context),
+                  ),
+                  SettingsItem(
+                    icon: Icons.delete_outline,
+                    iconColor: const Color(0xFFEF4444),
+                    label: AppLocalizations.of(context).setDeleteData,
+                    description: AppLocalizations.of(context).tumVerileriniziKaliciOlarakSilin,
+                    onTap: () => _showDeleteDataDialog(context),
+                    isDanger: true,
                     isLast: true,
                   ),
                 ],
               ),
             ),
-            // Premium
+
+            // ── PREMIUM ─────────────────────────────────────────────
             SliverToBoxAdapter(
               child: SettingsSection(
-                title: 'PREMIUM',
+                title: AppLocalizations.of(context).setPremiumSection,
                 icon: Icons.star_outline,
                 highlight: true,
                 children: [
@@ -385,40 +344,33 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     builder: (context, ref, child) {
                       final premiumAsync = ref.watch(isPremiumProvider);
                       return premiumAsync.when(
-                        data: (isPremium) {
-                          if (!isPremium) {
-                            return Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: PremiumCard(
-                                tier: 'Ücretsiz',
-                                expiry: null,
-                                features: const [
-                                  'Temel özellikler',
-                                  '4 aile üyesi',
-                                  '1 GB depolama',
-                                ],
-                                onManage: () => context.push(AppRoutes.premium),
-                              ),
-                            );
-                          }
-                          return Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: PremiumCard(
-                              tier: 'Premium',
-                              expiry: 'Aktif',
-                              features: const [
-                                'Sınırsız fotoğraf depolama',
-                                '8 aile üyesi',
-                                'AI asistan',
-                                'Gelişmiş güvenlik',
-                              ],
-                              onManage: () => context.push(AppRoutes.premium),
-                            ),
-                          );
-                        },
+                        data: (isPremium) => Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: PremiumCard(
+                            tier: isPremium ? AppLocalizations.of(context).setPremiumTier : AppLocalizations.of(context).setFreeTier,
+                            expiry: isPremium ? AppLocalizations.of(context).setActive : null,
+                            features: isPremium
+                                ? [
+                                    AppLocalizations.of(context).setFeatUnlimitedPhotos,
+                                    AppLocalizations.of(context).setFeat8Members,
+                                    AppLocalizations.of(context).setFeatAI,
+                                    AppLocalizations.of(context).setFeatAdvSecurity,
+                                  ]
+                                : [
+                                    AppLocalizations.of(context).setFeatBasic,
+                                    AppLocalizations.of(context).setFeat4Members,
+                                    AppLocalizations.of(context).setFeat1GB,
+                                  ],
+                            onManage: () => context.push(AppRoutes.premium),
+                          ),
+                        ),
                         loading: () => const Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Center(child: CircularProgressIndicator()),
+                          padding: EdgeInsets.all(24),
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              color: Color(0xFF6366F1),
+                            ),
+                          ),
                         ),
                         error: (e, s) => const SizedBox.shrink(),
                       );
@@ -427,78 +379,97 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 ],
               ),
             ),
-            // Yardım
+
+            // ── YARDIM ──────────────────────────────────────────────
+            // Yalnızca Kullanım Kılavuzu. Destek/Hata Bildir/Değerlendir
+            // kaldırıldı (iletişim minimal olarak Hakkında altında).
             SliverToBoxAdapter(
               child: SettingsSection(
-                title: 'YARDIM VE DESTEK',
+                title: AppLocalizations.of(context).setHelpSection,
                 icon: Icons.help_outline,
                 children: [
                   SettingsItem(
                     icon: Icons.menu_book_outlined,
-                    iconColor: AppColors.cobalt,
-                    label: 'Kullanım Kılavuzu',
-                    description: 'FamilyHub\'ı nasıl kullanacağınızı öğrenin',
+                    iconColor: const Color(0xFF6366F1),
+                    label: AppLocalizations.of(context).kullanimKilavuzu,
+                    description: AppLocalizations.of(context).setUserGuideDesc,
                     onTap: () => context.push(AppRoutes.userGuide),
-                  ),
-                  SettingsItem(
-                    icon: Icons.support_agent_outlined,
-                    iconColor: AppColors.success,
-                    label: 'Destek ile İletişim',
-                    description: 'Sorularınızı ve önerilerinizi paylaşın',
-                    onTap: () => _openSupport(context),
-                  ),
-                  SettingsItem(
-                    icon: Icons.bug_report_outlined,
-                    iconColor: const Color(0xFFF59E0B),
-                    label: 'Hata Bildir',
-                    description: 'Karşılaştığınız sorunu raporlayın',
-                    onTap: () => _openBugReport(context),
-                  ),
-                  SettingsItem(
-                    icon: Icons.star_outline,
-                    iconColor: const Color(0xFFEC4899),
-                    label: 'Bizi Değerlendirin',
-                    description: 'App Store\'da puan verin',
-                    onTap: () => _openAppStore(context),
                     isLast: true,
                   ),
                 ],
               ),
             ),
-            // Yasal
+
+            // ── YASAL ───────────────────────────────────────────────
             SliverToBoxAdapter(
               child: SettingsSection(
-                title: 'YASAL',
+                title: AppLocalizations.of(context).setLegalSection,
                 icon: Icons.description_outlined,
                 children: [
                   SettingsItem(
                     icon: Icons.privacy_tip_outlined,
-                    iconColor: AppColors.gray,
-                    label: 'Gizlilik Politikası',
-                    description: 'Verileriniz nasıl korunuyor',
+                    iconColor: const Color(0xFF6B7280),
+                    label: AppLocalizations.of(context).gizlilikPolitikasi,
+                    description: AppLocalizations.of(context).verilerinizNasilKorunuyor,
                     onTap: () => context.push(AppRoutes.privacyPolicy),
                   ),
                   SettingsItem(
                     icon: Icons.description_outlined,
-                    iconColor: AppColors.gray,
-                    label: 'Kullanım Koşulları',
-                    description: 'Hizmet şartları ve sorumluluklar',
+                    iconColor: const Color(0xFF6B7280),
+                    label: AppLocalizations.of(context).kullanimKosullari,
+                    description: AppLocalizations.of(context).hizmetSartlariVeSorumluluklar,
                     onTap: () => context.push(AppRoutes.termsOfService),
                   ),
                   SettingsItem(
                     icon: Icons.info_outline,
-                    iconColor: AppColors.gray,
-                    label: 'Hakkında',
-                    description: 'Sürüm 2.1.0 · FamilyHub Inc.',
-                    showValue: 'Güncel',
+                    iconColor: const Color(0xFF6B7280),
+                    label: AppLocalizations.of(context).hakkinda,
+                    description: AppLocalizations.of(context).surum210FamilyhubInc,
+                    showValue: AppLocalizations.of(context).setCurrent,
                     onTap: () => context.push(AppRoutes.aboutApp),
                     isLast: true,
                   ),
                 ],
               ),
             ),
+
+            // ── GÖRÜNÜM ─────────────────────────────────────────────
+            SliverToBoxAdapter(
+              child: SettingsSection(
+                title: AppLocalizations.of(context).gorunum1,
+                icon: Icons.palette_outlined,
+                children: [
+                  SettingsItem(
+                    icon: Icons.color_lens_outlined,
+                    iconColor: const Color(0xFFEC4899),
+                    label: AppLocalizations.of(context).setAccentColor,
+                    description: AppLocalizations.of(context).uygulamaVurguRenginiDegistir,
+                    showValue: _accentLabel,
+                    onTap: () => context.push(AppRoutes.appearanceSettings),
+                  ),
+                  SettingsItem(
+                    icon: Icons.text_fields,
+                    iconColor: const Color(0xFF8B5CF6),
+                    label: AppLocalizations.of(context).fontSize,
+                    description: AppLocalizations.of(context).setFontSizeDesc,
+                    showValue: _fontLabel,
+                    onTap: () => context.push(AppRoutes.appearanceSettings),
+                  ),
+                  SettingsItem(
+                    icon: Icons.dashboard_customize_outlined,
+                    iconColor: const Color(0xFF06B6D4),
+                    label: AppLocalizations.of(context).setCustomizeHome,
+                    description: AppLocalizations.of(context).setCustomizeHomeDesc,
+                    onTap: () => context.push(AppRoutes.hubCustomize),
+                    isLast: true,
+                  ),
+                ],
+              ),
+            ),
+
             const SliverToBoxAdapter(child: SizedBox(height: 32)),
-            // Sign Out
+
+            // ── ÇIKIŞ ──────────────────────────────────────────────
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -513,17 +484,19 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           if (context.mounted) context.go(AppRoutes.login);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              AppColors.error.withAlpha(isDark ? 25 : 15),
-                          foregroundColor: AppColors.error,
+                          backgroundColor: const Color(0xFFEF4444).withAlpha(25),
+                          foregroundColor: const Color(0xFFEF4444),
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
+                            side: BorderSide(
+                              color: const Color(0xFFEF4444).withAlpha(60),
+                              width: 0.5,
+                            ),
                           ),
                         ),
-                        child: const Text(
-                          'Çıkış Yap',
-                          style: TextStyle(
+                        child: Text(AppLocalizations.of(context).logout,
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                           ),
@@ -535,9 +508,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       'FamilyHub v2.1.0 (Build 2100)',
                       style: TextStyle(
                         fontSize: 12,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.lightGray,
+                        color: Theme.of(context).colorScheme.onSurface.withAlpha(100),
                       ),
                     ),
                     SizedBox(height: safeBottom + 120),
@@ -550,6 +521,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       ),
     );
   }
+
+  // ── Dialoglar ────────────────────────────────────────────────────────────
 
   void _showLeaveDialog(BuildContext context) {
     showDialog(
@@ -569,7 +542,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               Navigator.of(dialogContext).pop();
               await _leaveFamily();
             },
-            child: const Text('Ayrıl', style: TextStyle(color: AppColors.error)),
+            child: Text(AppLocalizations.of(context).ayril, style: const TextStyle(color: Color(0xFFEF4444))),
           ),
         ],
       ),
@@ -580,9 +553,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     showDialog(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: const Text('Verileri Sil'),
-        content: const Text(
-          'Tüm verileriniz kalıcı olarak silinecek. Bu işlem geri alınamaz.',
+        title: Text(AppLocalizations.of(context).setDeleteData),
+        content: Text(AppLocalizations.of(context).tumVerilerinizKaliciOlarakSilinecekBuIslemGeriAlinamaz,
         ),
         actions: [
           TextButton(
@@ -594,7 +566,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               Navigator.of(dialogContext).pop();
               await _deleteAllData();
             },
-            child: const Text('Sil', style: TextStyle(color: AppColors.error)),
+            child: Text(AppLocalizations.of(context).budDelete, style: const TextStyle(color: Color(0xFFEF4444))),
           ),
         ],
       ),
@@ -606,7 +578,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       context: context,
       builder: (dialogContext) => AlertDialog(
         title: Text(AppLocalizations.of(context).onbellegiTemizle),
-        content: Text(AppLocalizations.of(context).geciciDosyalarSilinecekUygulamaBirazDahaYavasBaslayabilir),
+        content: Text(AppLocalizations.of(context).geciciDosyalarSilinecekUygulamaBirazDahaYavasBaslayabilir,
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
@@ -617,35 +590,20 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               Navigator.of(dialogContext).pop();
               await _clearCache();
             },
-            child: const Text('Temizle'),
+            child: Text(AppLocalizations.of(context).stgClear, style: const TextStyle(color: Color(0xFF6366F1))),
           ),
         ],
       ),
     );
   }
 
-  void _openSupport(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('destek@familyhub.app')),
-    );
-  }
-
-  void _openBugReport(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('hata@familyhub.app')),
-    );
-  }
-
-  void _openAppStore(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(AppLocalizations.of(context).degerlendirmeSayfasiAciliyor)),
-    );
-  }
+  // ── Async İşlemler ────────────────────────────────────────────────────────
 
   Future<int> _getMemberCount() async {
+    final local = localFamilyMembers().length;
     final client = SupabaseConfig.safeClient;
     final userId = AuthService.currentUserId;
-    if (client == null || userId == null) return 0;
+    if (client == null || userId == null) return local;
     try {
       final fm = await client
           .from('family_members')
@@ -653,7 +611,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           .eq('user_id', userId)
           .maybeSingle();
       final familyId = fm?['family_id'] as String?;
-      if (familyId == null) return 0;
+      if (familyId == null) return local;
       final adultCount = await client
           .from('family_members')
           .select('id')
@@ -666,9 +624,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           .eq('family_id', familyId)
           .eq('is_active', true)
           .count(CountOption.exact);
-      return adultCount.count + childCount.count;
+      final total = adultCount.count + childCount.count;
+      return total > 0 ? total : local;
     } catch (_) {
-      return 0;
+      return local;
     }
   }
 
@@ -677,11 +636,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final userId = AuthService.currentUserId;
     if (client == null || userId == null) return;
     try {
-      await client.from('family_members').update({'is_active': false}).eq('user_id', userId);
+      await client
+          .from('family_members')
+          .update({'is_active': false})
+          .eq('user_id', userId);
       await AuthService.signOut();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context).ailedenAyrildiniz)),
+          SnackBar(content: Text(AppLocalizations.of(context).stgLeftFamily)),
         );
         await Future.delayed(const Duration(seconds: 1));
         if (mounted) context.go(AppRoutes.login);
@@ -689,7 +651,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Ayrılma hatası: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context).stgLeaveFailed('$e'))),
         );
       }
     }
@@ -697,7 +659,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   Future<void> _deleteAllData() async {
     try {
-      await Hive.deleteFromDisk();
       final client = SupabaseConfig.safeClient;
       final userId = AuthService.currentUserId;
       if (client != null && userId != null) {
@@ -708,9 +669,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         await client.rpc('delete_user_account', params: {'user_id': userId});
         await AuthService.signOut();
       }
+      // Hive'ı kapattıktan sonra sil — açık box'ları kapatmadan silmek crash'e neden olur
+      await Hive.close();
+      await Hive.deleteFromDisk();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context).tumVerilerSilindi)),
+          SnackBar(content: Text(AppLocalizations.of(context).stgAllDeleted)),
         );
         await Future.delayed(const Duration(seconds: 1));
         if (mounted) context.go(AppRoutes.login);
@@ -718,7 +682,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Silme hatası: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context).stgDeleteFailed('$e'))),
         );
       }
     }
@@ -726,24 +690,31 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   Future<void> _clearCache() async {
     try {
-      final dir = await getApplicationDocumentsDirectory();
-      final hiveDir = Directory('${dir.path}/hive');
-      if (hiveDir.existsSync()) {
-        await hiveDir.delete(recursive: true);
-      }
-      final cacheDir = Directory('${dir.path}/cache');
+      // Sadece uygulama cache dizinini temizle; Hive data'sına dokunma
+      final cacheDir = await getTemporaryDirectory();
       if (cacheDir.existsSync()) {
-        await cacheDir.delete(recursive: true);
+        for (final entity in cacheDir.listSync()) {
+          try {
+            await entity.delete(recursive: true);
+          } catch (e) {
+            // Best-effort: kullanımdaki/kilitli dosya silinemez — diğerlerine
+            // devam edilir. Kısmi temizlik beklenen davranış.
+            AppLogger.logBestEffort(e,
+                module: 'settings', operation: 'clearCacheEntry');
+          }
+        }
       }
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context).onbellekTemizlendi)),
+          SnackBar(content: Text(AppLocalizations.of(context).stgCacheCleared)),
         );
+        // Yeni boyutu yansıt
+        setState(() {});
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Temizleme hatası: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context).stgClearFailed('$e'))),
         );
       }
     }
@@ -766,17 +737,17 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   Future<String> _getCacheSize() async {
     try {
-      final dir = await getApplicationDocumentsDirectory();
-      final hiveDir = Directory('${dir.path}/hive');
-      if (!hiveDir.existsSync()) return '0 MB';
+      final cacheDir = await getTemporaryDirectory();
+      if (!cacheDir.existsSync()) return '0 KB';
       int totalSize = 0;
-      await for (final file in hiveDir.list()) {
-        if (file is File) totalSize += await file.length();
+      await for (final entity in cacheDir.list(recursive: true)) {
+        if (entity is File) totalSize += await entity.length();
       }
+      if (totalSize < 1024) return '$totalSize B';
       if (totalSize < 1024 * 1024) return '${(totalSize / 1024).toStringAsFixed(0)} KB';
       return '${(totalSize / 1024 / 1024).toStringAsFixed(1)} MB';
     } catch (_) {
-      return '0 MB';
+      return '0 KB';
     }
   }
 }

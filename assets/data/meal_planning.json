@@ -1,231 +1,2665 @@
 {
-  "cuisine_focus": "Turkish (Anatolian & Ottoman traditions)",
-  "region_adaptation": "Belgium ingredient availability",
-  "currency": "EUR",
-  "module": "meal_planning",
-  "version": "2.0",
-  "language": "tr",
-  "region": "BE",
-  "generated_at": "2026-05-03T00:00:00Z",
-  "recipes": [
-    {
-      "id": "mercimek_corbasi",
-      "name": "Mercimek Çorbası (Anne Usulü)",
-      "description": "Kırmızı mercimek, havuç, patates ve tereyağlı sos ile klasik Türk ev yemeği",
-      "prep_time": "10 dk",
-      "cook_time": "30 dk",
-      "servings": 6,
-      "difficulty": "Kolay",
-      "ingredients": [
-        {"item": "Kırmızı mercimek", "amount": "1.5 su bardağı", "alternative": "Yeşil mercimek", "belgium_availability": "Aldi, Lidl, Colruyt, Türk marketleri"},
-        {"item": "Havuç", "amount": "1 adet (rendelenmiş)", "alternative": null, "belgium_availability": "Her supermarket"},
-        {"item": "Patates", "amount": "1 adet (küçük doğranmış)", "alternative": null, "belgium_availability": "Her supermarket"},
-        {"item": "Soğan", "amount": "1 adet", "alternative": null, "belgium_availability": "Her supermarket"},
-        {"item": "Tereyağı", "amount": "2 yemek kaşığı", "alternative": "Zeytinyağı", "belgium_availability": "Her supermarket"},
-        {"item": "Pul biber", "amount": "1 tatlı kaşığı", "alternative": "Paprika", "belgium_availability": "Türk marketleri, Delhaize"},
-        {"item": "Nane", "amount": "1 çay kaşığı", "alternative": "Kuru nane", "belgium_availability": "Türk marketleri"},
-        {"item": "Limon", "amount": "Yarım adet", "alternative": null, "belgium_availability": "Her supermarket"}
-      ],
-      "instructions": [
-        "Mercimekleri yıkayıp süzün",
-        "Tencerede soğanı tereyağında kavurun",
-        "Havuç ve patatesi ekleyip 2 dk daha kavurun",
-        "Mercimek ve 6 su bardağı suyu ekleyin",
-        "Kaynadıktan sonra kısık ateşte 20 dk pişirin",
-        "Blenderdan geçirin, tuz ve baharatları ekleyin",
-        "Tereyağında pul biber kavurup üzerine gezdirin"
-      ],
-      "nutritional_highlights": ["Yüksek protein", "Demir kaynağı", "Lif açısından zengin"],
-      "kid_friendly_modifications": "Limon suyu ve pul biberi ayrı servis edin, çocuk versiyonu daha az baharatlı",
-      "cost_estimate_eur": 4.5,
-      "season": "Kış",
-      "tags": ["vegan", "glutensiz", "batch_cookable", "freezer_friendly"],
-      "turkish_cuisine_category": "corba",
-      "story": "Türk mutfağının en sevilen çorbalarından biri. Her evin kendine özgü tarifi vardır."
+    "cuisine_focus": "Turkish (Anatolian & Ottoman traditions)",
+    "region_adaptation": "Belgium ingredient availability",
+    "currency": "EUR",
+    "module": "meal_planning",
+    "version": "3.0",
+    "language": "tr",
+    "default_language": "tr",
+    "supported_languages": [
+        "tr",
+        "en",
+        "fr",
+        "nl"
+    ],
+    "region": "BE",
+    "generated_at": "2026-07-15T00:00:00Z",
+    "recipes": [
+        {
+            "id": "mercimek_corbasi",
+            "name": "Mercimek Çorbası (Anne Usulü)",
+            "description": "Kırmızı mercimek, havuç, patates ve tereyağlı sos ile klasik Türk ev yemeği",
+            "prep_time": "10 dk",
+            "cook_time": "30 dk",
+            "servings": 6,
+            "difficulty": "Kolay",
+            "ingredients": [
+                {
+                    "item": "Kırmızı mercimek",
+                    "amount": "1.5 su bardağı",
+                    "alternative": "Yeşil mercimek",
+                    "belgium_availability": "Aldi, Lidl, Colruyt, Türk marketleri"
+                },
+                {
+                    "item": "Havuç",
+                    "amount": "1 adet (rendelenmiş)",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Patates",
+                    "amount": "1 adet (küçük doğranmış)",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Soğan",
+                    "amount": "1 adet",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Tereyağı",
+                    "amount": "2 yemek kaşığı",
+                    "alternative": "Zeytinyağı",
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Pul biber",
+                    "amount": "1 tatlı kaşığı",
+                    "alternative": "Paprika",
+                    "belgium_availability": "Türk marketleri, Delhaize"
+                },
+                {
+                    "item": "Nane",
+                    "amount": "1 çay kaşığı",
+                    "alternative": "Kuru nane",
+                    "belgium_availability": "Türk marketleri"
+                },
+                {
+                    "item": "Limon",
+                    "amount": "Yarım adet",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                }
+            ],
+            "instructions": [
+                "Mercimekleri yıkayıp süzün",
+                "Tencerede soğanı tereyağında kavurun",
+                "Havuç ve patatesi ekleyip 2 dk daha kavurun",
+                "Mercimek ve 6 su bardağı suyu ekleyin",
+                "Kaynadıktan sonra kısık ateşte 20 dk pişirin",
+                "Blenderdan geçirin, tuz ve baharatları ekleyin",
+                "Tereyağında pul biber kavurup üzerine gezdirin"
+            ],
+            "nutritional_highlights": [
+                "Yüksek protein",
+                "Demir kaynağı",
+                "Lif açısından zengin"
+            ],
+            "kid_friendly_modifications": "Limon suyu ve pul biberi ayrı servis edin, çocuk versiyonu daha az baharatlı",
+            "cost_estimate_eur": 4.5,
+            "season": "Kış",
+            "tags": [
+                "vegan",
+                "glutensiz",
+                "batch_cookable",
+                "freezer_friendly"
+            ],
+            "turkish_cuisine_category": "corba",
+            "story": "Türk mutfağının en sevilen çorbalarından biri. Her evin kendine özgü tarifi vardır."
+        },
+        {
+            "id": "zeytinyagli_fasulye",
+            "name": "Zeytinyağlı Taze Fasulye",
+            "description": "Yaz sebzeleriyle hafif ve sağlıklı zeytinyağlı yemek",
+            "prep_time": "15 dk",
+            "cook_time": "25 dk",
+            "servings": 4,
+            "difficulty": "Kolay",
+            "ingredients": [
+                {
+                    "item": "Taze fasulye",
+                    "amount": "500g (ayıklanmış)",
+                    "alternative": "Dondurulmuş fasulye",
+                    "belgium_availability": "Yaz: her supermarket; Kış: dondurulmuş"
+                },
+                {
+                    "item": "Domates",
+                    "amount": "2 adet (doğranmış)",
+                    "alternative": "Konserve domates",
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Soğan",
+                    "amount": "1 adet",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Sarımsak",
+                    "amount": "2 diş",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Zeytinyağı",
+                    "amount": "3 yemek kaşığı",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Şeker",
+                    "amount": "1 çay kaşığı",
+                    "alternative": "Bal",
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Dereotu",
+                    "amount": "Yarım demet",
+                    "alternative": "Maydanoz",
+                    "belgium_availability": "Her supermarket"
+                }
+            ],
+            "instructions": [
+                "Fasulyeleri yıkayıp uçlarını ayıklayın",
+                "Zeytinyağında soğan ve sarımsağı kavurun",
+                "Domatesleri ekleyip 5 dk pişirin",
+                "Fasulyeleri ekleyip üzerini geçecek kadar su koyun",
+                "Şeker ve tuzu ekleyip kısık ateşte 20 dk pişirin",
+                "Soğuyunca üzerine dereotu serpin, zeytinyağı gezdirin"
+            ],
+            "nutritional_highlights": [
+                "A vitamini",
+                "Antioksidan",
+                "Düşük kalori"
+            ],
+            "kid_friendly_modifications": "Küçük parçalar halinde doğrayın, yanında yoğurt servis edin",
+            "cost_estimate_eur": 6,
+            "season": "Yaz",
+            "tags": [
+                "vegan",
+                "zeytinyağlı",
+                "soğuk_yenebilir",
+                "hafif"
+            ],
+            "turkish_cuisine_category": "zeytinyagli",
+            "story": "Ege ve Akdeniz mutfağının vazgeçilmezi. Soğuk olarak da servis edilen bu yemek yaz aylarının favorisidir."
+        },
+        {
+            "id": "anne_koftesi",
+            "name": "Anne Köftesi (Fırında)",
+            "description": "Fırında pişirilmiş, sebzeli, sağlıklı köfte tarifi",
+            "prep_time": "20 dk",
+            "cook_time": "35 dk",
+            "servings": 5,
+            "difficulty": "Orta",
+            "ingredients": [
+                {
+                    "item": "Kıyma (dana)",
+                    "amount": "500g",
+                    "alternative": "Kıyma (kuzu-dana karışık)",
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Soğan",
+                    "amount": "1 adet (rendelenmiş)",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Galeta unu",
+                    "amount": "Yarım su bardağı",
+                    "alternative": "Ekmek içi",
+                    "belgium_availability": "Türk marketleri, Carrefour"
+                },
+                {
+                    "item": "Yumurta",
+                    "amount": "1 adet",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Patates",
+                    "amount": "3 adet",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Domates",
+                    "amount": "2 adet",
+                    "alternative": "Konserve domates",
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Biber",
+                    "amount": "2 adet",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Yoğurt",
+                    "amount": "1 kase",
+                    "alternative": "Greek yogurt",
+                    "belgium_availability": "Her supermarket"
+                }
+            ],
+            "instructions": [
+                "Kıymaya soğan, galeta unu, yumurta, tuz ve baharat yoğurun",
+                "Köfte şekli verip tepsiye dizin",
+                "Patatesleri dilimleyip köftelerin arasına yerleştirin",
+                "Domates ve biberleri doğrayın üzerine serpin",
+                "Üzerine 1 su bardağı su gezdirin",
+                "180°C fırında 35 dk pişirin",
+                "Sarımsaklı yoğurt ile servis edin"
+            ],
+            "nutritional_highlights": [
+                "Yüksek protein",
+                "B12 vitamini",
+                "Karbonhidrat dengesi"
+            ],
+            "kid_friendly_modifications": "Köfteleri küçük top şeklinde yapın, patatesleri parmak şeklinde kesin",
+            "cost_estimate_eur": 10.5,
+            "season": "Her mevsim",
+            "tags": [
+                "protein_zengini",
+                "fırın_yemeği",
+                "aile_yemeği"
+            ],
+            "turkish_cuisine_category": "et_yemegi",
+            "story": "Her annenin kendine özgü tarifi olan bu köfte, fırında pişirilerek daha az yağlı ve daha sağlıklı hale getirilir."
+        },
+        {
+            "id": "tavuk_sote",
+            "name": "Tavuk Sote",
+            "description": "Hızlı ve pratik ev yemeği, sebzelerle birlikte",
+            "prep_time": "10 dk",
+            "cook_time": "20 dk",
+            "servings": 4,
+            "difficulty": "Kolay",
+            "ingredients": [
+                {
+                    "item": "Tavuk göğsü",
+                    "amount": "500g (kuşbaşı)",
+                    "alternative": "Tavuk but",
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Soğan",
+                    "amount": "1 adet",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Biber",
+                    "amount": "2 adet",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Mantar",
+                    "amount": "200g",
+                    "alternative": "Konserve mantar",
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Domates salçası",
+                    "amount": "1 yemek kaşığı",
+                    "alternative": null,
+                    "belgium_availability": "Türk marketleri"
+                },
+                {
+                    "item": "Sarımsak",
+                    "amount": "2 diş",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Zeytinyağı",
+                    "amount": "2 yemek kaşığı",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                }
+            ],
+            "instructions": [
+                "Tavukları zeytinyağında kavurun",
+                "Soğan ve sarımsağı ekleyip kavurun",
+                "Biber ve mantarı ekleyin",
+                "Salçayı ekleyip karıştırın",
+                "Kısık ateşte 15 dk pişirin"
+            ],
+            "nutritional_highlights": [
+                "Düşük yağ",
+                "Yüksek protein",
+                "Vitamin C"
+            ],
+            "kid_friendly_modifications": "Baharatı azaltın, yanında pilav servis edin",
+            "cost_estimate_eur": 8,
+            "season": "Her mevsim",
+            "tags": [
+                "hızlı",
+                "protein",
+                "30_dk_altı"
+            ],
+            "turkish_cuisine_category": "et_yemegi",
+            "story": "İş günlerinin kurtarıcısı. 30 dakikadan kısa sürede hazır olan bu yemek, hem pratik hem besleyicidir."
+        },
+        {
+            "id": "karniyarik",
+            "name": "Karnıyarık (Anne Usulü)",
+            "description": "Kıymalı patlıcan yemeği, yaz akşamlarının vazgeçilmezi. Fırında pişirilmiş, hafif yağlı versiyon.",
+            "prep_time": "25 dk",
+            "cook_time": "40 dk",
+            "servings": 5,
+            "difficulty": "Orta",
+            "ingredients": [
+                {
+                    "item": "Patlıcan",
+                    "amount": "6 adet (ince uzun)",
+                    "alternative": null,
+                    "belgium_availability": "Türk marketleri, yaz mevsimi Carrefour/Delhaize"
+                },
+                {
+                    "item": "Kıyma (dana)",
+                    "amount": "400g",
+                    "alternative": "Kıyma (kuzu-dana karışık)",
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Soğan",
+                    "amount": "2 adet",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Domates",
+                    "amount": "3 adet",
+                    "alternative": "Konserve domates",
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Biber",
+                    "amount": "2 adet",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Sarımsak",
+                    "amount": "3 diş",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Zeytinyağı",
+                    "amount": "3 yemek kaşığı",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                }
+            ],
+            "instructions": [
+                "Patlıcanları alacalı soyup tuzlu suda 30 dk bekletin",
+                "Zeytinyağında kızartın veya fırında 200°C'de 15 dk pişirin",
+                "Soğan ve sarımsağı kavurun, kıymayı ekleyin",
+                "Domates ve biberi ekleyip 10 dk pişirin",
+                "Patlıcanları ortadan yarıp içine kıymalı harç doldurun",
+                "Üzerine domates dilimi koyup 180°C fırında 25 dk pişirin"
+            ],
+            "nutritional_highlights": [
+                "Lif açısından zengin",
+                "Antioksidan",
+                "Düşük karbonhidrat"
+            ],
+            "kid_friendly_modifications": "Patlıcanları küçük parçalar halinde kesip kıymayla karıştırın, üzerine kaşar peyniri serpin",
+            "cost_estimate_eur": 9.5,
+            "season": "Yaz",
+            "tags": [
+                "geleneksel",
+                "fırın_yemeği",
+                "aile_yemeği",
+                "sebze_ağırlıklı"
+            ],
+            "turkish_cuisine_category": "et_yemegi",
+            "story": "Adını patlıcanın ortadan yarılıp içinin doldurulmasından alır. Güneydoğu Anadolu'nun en sevilen yemeklerinden biridir."
+        },
+        {
+            "id": "ezogelin_corbasi",
+            "name": "Ezo Gelin Çorbası",
+            "description": "Kırmızı mercimek, bulgur ve pirinçle hazırlanan, Gaziantep'in meşhur çorbası. Ezo Gelin'in hikayesini taşır.",
+            "prep_time": "10 dk",
+            "cook_time": "35 dk",
+            "servings": 6,
+            "difficulty": "Kolay",
+            "ingredients": [
+                {
+                    "item": "Kırmızı mercimek",
+                    "amount": "1 su bardağı",
+                    "alternative": null,
+                    "belgium_availability": "Aldi, Lidl, Türk marketleri"
+                },
+                {
+                    "item": "Bulgur",
+                    "amount": "Yarım su bardağı",
+                    "alternative": "Kuskus",
+                    "belgium_availability": "Türk marketleri, some bio shops"
+                },
+                {
+                    "item": "Pirinç",
+                    "amount": "2 yemek kaşığı",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Soğan",
+                    "amount": "1 adet",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Sarımsak",
+                    "amount": "3 diş",
+                    "alternative": null,
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Tereyağı",
+                    "amount": "2 yemek kaşığı",
+                    "alternative": "Zeytinyağı",
+                    "belgium_availability": "Her supermarket"
+                },
+                {
+                    "item": "Nane",
+                    "amount": "1 çay kaşığı",
+                    "alternative": "Kuru nane",
+                    "belgium_availability": "Türk marketleri"
+                },
+                {
+                    "item": "Pul biber",
+                    "amount": "1 tatlı kaşığı",
+                    "alternative": "Paprika",
+                    "belgium_availability": "Türk marketleri, Delhaize"
+                }
+            ],
+            "instructions": [
+                "Mercimeği yıkayıp süzün",
+                "Tencerede tereyağında soğan ve sarımsağı kavurun",
+                "Mercimek, bulgur ve pirinci ekleyip karıştırın",
+                "6 su bardağı su ekleyip kaynatın",
+                "Kısık ateşte 25 dk pişirin",
+                "Blenderdan geçirin, nane ve tuz ekleyin",
+                "Tereyağında pul biber kavurup üzerine gezdirin"
+            ],
+            "nutritional_highlights": [
+                "Yüksek protein",
+                "Lif açısından zengin",
+                "B vitamini kaynağı"
+            ],
+            "kid_friendly_modifications": "Baharatları azaltın, üzerine limon suyu ve kruton ekleyin",
+            "cost_estimate_eur": 3.5,
+            "season": "Kış",
+            "tags": [
+                "vegan",
+                "glutensiz",
+                "geleneksel",
+                "dondurucuya_uygun"
+            ],
+            "turkish_cuisine_category": "corba",
+            "story": "Gaziantep'e gelin gelen Ezo'nun hazırladığı çorba, Güneydoğu'nun en sevilen lezzetlerinden biri olmuştur."
+        }
+    ],
+    "weekly_template": {
+        "pazartesi": {
+            "breakfast": "Menemen + Peynir + Zeytin",
+            "lunch": "Mercimek Çorbası + Salata",
+            "dinner": "Fırında Köfte + Patates"
+        },
+        "sali": {
+            "breakfast": "Börek (hazır yufka) + Çay",
+            "lunch": "Zeytinyağlı Taze Fasulye + Yoğurt",
+            "dinner": "Tavuk Sote + Pirinç Pilavı"
+        },
+        "carsamba": {
+            "breakfast": "Sahanda Yumurta + Ekmek",
+            "lunch": "Ezogelin Çorbası + Salata",
+            "dinner": "Karnıyarık + Bulgur Pilavı"
+        },
+        "persembe": {
+            "breakfast": "Peynirli Gözleme",
+            "lunch": "Nohutlu Pilav (düdüklü)",
+            "dinner": "Izgara Balık + Roka Salatası"
+        },
+        "cuma": {
+            "breakfast": "Simit + Peynir + Domates",
+            "lunch": "Yayla Çorbası + Ekmek",
+            "dinner": "Mantı (hazır) + Sarımsaklı Yoğurt"
+        },
+        "cumartesi": {
+            "breakfast": "Aile Kahvaltısı (serpme)",
+            "lunch": "Kumpir (ev yapımı)",
+            "dinner": "Lahmacun (ev yapımı) + Salata"
+        },
+        "pazar": {
+            "breakfast": "Sucuklu Yumurta + Börek",
+            "lunch": "Türlü (sebze yemeği)",
+            "dinner": "Kuru Fasulye + Pilav + Turşu"
+        }
     },
-    {
-      "id": "zeytinyagli_fasulye",
-      "name": "Zeytinyağlı Taze Fasulye",
-      "description": "Yaz sebzeleriyle hafif ve sağlıklı zeytinyağlı yemek",
-      "prep_time": "15 dk",
-      "cook_time": "25 dk",
-      "servings": 4,
-      "difficulty": "Kolay",
-      "ingredients": [
-        {"item": "Taze fasulye", "amount": "500g (ayıklanmış)", "alternative": "Dondurulmuş fasulye", "belgium_availability": "Yaz: her supermarket; Kış: dondurulmuş"},
-        {"item": "Domates", "amount": "2 adet (doğranmış)", "alternative": "Konserve domates", "belgium_availability": "Her supermarket"},
-        {"item": "Soğan", "amount": "1 adet", "alternative": null, "belgium_availability": "Her supermarket"},
-        {"item": "Sarımsak", "amount": "2 diş", "alternative": null, "belgium_availability": "Her supermarket"},
-        {"item": "Zeytinyağı", "amount": "3 yemek kaşığı", "alternative": null, "belgium_availability": "Her supermarket"},
-        {"item": "Şeker", "amount": "1 çay kaşığı", "alternative": "Bal", "belgium_availability": "Her supermarket"},
-        {"item": "Dereotu", "amount": "Yarım demet", "alternative": "Maydanoz", "belgium_availability": "Her supermarket"}
-      ],
-      "instructions": [
-        "Fasulyeleri yıkayıp uçlarını ayıklayın",
-        "Zeytinyağında soğan ve sarımsağı kavurun",
-        "Domatesleri ekleyip 5 dk pişirin",
-        "Fasulyeleri ekleyip üzerini geçecek kadar su koyun",
-        "Şeker ve tuzu ekleyip kısık ateşte 20 dk pişirin",
-        "Soğuyunca üzerine dereotu serpin, zeytinyağı gezdirin"
-      ],
-      "nutritional_highlights": ["A vitamini", "Antioksidan", "Düşük kalori"],
-      "kid_friendly_modifications": "Küçük parçalar halinde doğrayın, yanında yoğurt servis edin",
-      "cost_estimate_eur": 6.0,
-      "season": "Yaz",
-      "tags": ["vegan", "zeytinyağlı", "soğuk_yenebilir", "hafif"],
-      "turkish_cuisine_category": "zeytinyagli",
-      "story": "Ege ve Akdeniz mutfağının vazgeçilmezi. Soğuk olarak da servis edilen bu yemek yaz aylarının favorisidir."
-    },
-    {
-      "id": "anne_koftesi",
-      "name": "Anne Köftesi (Fırında)",
-      "description": "Fırında pişirilmiş, sebzeli, sağlıklı köfte tarifi",
-      "prep_time": "20 dk",
-      "cook_time": "35 dk",
-      "servings": 5,
-      "difficulty": "Orta",
-      "ingredients": [
-        {"item": "Kıyma (dana)", "amount": "500g", "alternative": "Kıyma (kuzu-dana karışık)", "belgium_availability": "Her supermarket"},
-        {"item": "Soğan", "amount": "1 adet (rendelenmiş)", "alternative": null, "belgium_availability": "Her supermarket"},
-        {"item": "Galeta unu", "amount": "Yarım su bardağı", "alternative": "Ekmek içi", "belgium_availability": "Türk marketleri, Carrefour"},
-        {"item": "Yumurta", "amount": "1 adet", "alternative": null, "belgium_availability": "Her supermarket"},
-        {"item": "Patates", "amount": "3 adet", "alternative": null, "belgium_availability": "Her supermarket"},
-        {"item": "Domates", "amount": "2 adet", "alternative": "Konserve domates", "belgium_availability": "Her supermarket"},
-        {"item": "Biber", "amount": "2 adet", "alternative": null, "belgium_availability": "Her supermarket"},
-        {"item": "Yoğurt", "amount": "1 kase", "alternative": "Greek yogurt", "belgium_availability": "Her supermarket"}
-      ],
-      "instructions": [
-        "Kıymaya soğan, galeta unu, yumurta, tuz ve baharat yoğurun",
-        "Köfte şekli verip tepsiye dizin",
-        "Patatesleri dilimleyip köftelerin arasına yerleştirin",
-        "Domates ve biberleri doğrayın üzerine serpin",
-        "Üzerine 1 su bardağı su gezdirin",
-        "180°C fırında 35 dk pişirin",
-        "Sarımsaklı yoğurt ile servis edin"
-      ],
-      "nutritional_highlights": ["Yüksek protein", "B12 vitamini", "Karbonhidrat dengesi"],
-      "kid_friendly_modifications": "Köfteleri küçük top şeklinde yapın, patatesleri parmak şeklinde kesin",
-      "cost_estimate_eur": 10.5,
-      "season": "Her mevsim",
-      "tags": ["protein_zengini", "fırın_yemeği", "aile_yemeği"],
-      "turkish_cuisine_category": "et_yemegi",
-      "story": "Her annenin kendine özgü tarifi olan bu köfte, fırında pişirilerek daha az yağlı ve daha sağlıklı hale getirilir."
-    },
-    {
-      "id": "tavuk_sote",
-      "name": "Tavuk Sote",
-      "description": "Hızlı ve pratik ev yemeği, sebzelerle birlikte",
-      "prep_time": "10 dk",
-      "cook_time": "20 dk",
-      "servings": 4,
-      "difficulty": "Kolay",
-      "ingredients": [
-        {"item": "Tavuk göğsü", "amount": "500g (kuşbaşı)", "alternative": "Tavuk but", "belgium_availability": "Her supermarket"},
-        {"item": "Soğan", "amount": "1 adet", "alternative": null, "belgium_availability": "Her supermarket"},
-        {"item": "Biber", "amount": "2 adet", "alternative": null, "belgium_availability": "Her supermarket"},
-        {"item": "Mantar", "amount": "200g", "alternative": "Konserve mantar", "belgium_availability": "Her supermarket"},
-        {"item": "Domates salçası", "amount": "1 yemek kaşığı", "alternative": null, "belgium_availability": "Türk marketleri"},
-        {"item": "Sarımsak", "amount": "2 diş", "alternative": null, "belgium_availability": "Her supermarket"},
-        {"item": "Zeytinyağı", "amount": "2 yemek kaşığı", "alternative": null, "belgium_availability": "Her supermarket"}
-      ],
-      "instructions": [
-        "Tavukları zeytinyağında kavurun",
-        "Soğan ve sarımsağı ekleyip kavurun",
-        "Biber ve mantarı ekleyin",
-        "Salçayı ekleyip karıştırın",
-        "Kısık ateşte 15 dk pişirin"
-      ],
-      "nutritional_highlights": ["Düşük yağ", "Yüksek protein", "Vitamin C"],
-      "kid_friendly_modifications": "Baharatı azaltın, yanında pilav servis edin",
-      "cost_estimate_eur": 8.0,
-      "season": "Her mevsim",
-      "tags": ["hızlı", "protein", "30_dk_altı"],
-      "turkish_cuisine_category": "et_yemegi",
-      "story": "İş günlerinin kurtarıcısı. 30 dakikadan kısa sürede hazır olan bu yemek, hem pratik hem besleyicidir."
-    },
-    {
-      "id": "karniyarik",
-      "name": "Karnıyarık (Anne Usulü)",
-      "description": "Kıymalı patlıcan yemeği, yaz akşamlarının vazgeçilmezi. Fırında pişirilmiş, hafif yağlı versiyon.",
-      "prep_time": "25 dk",
-      "cook_time": "40 dk",
-      "servings": 5,
-      "difficulty": "Orta",
-      "ingredients": [
-        {"item": "Patlıcan", "amount": "6 adet (ince uzun)", "alternative": null, "belgium_availability": "Türk marketleri, yaz mevsimi Carrefour/Delhaize"},
-        {"item": "Kıyma (dana)", "amount": "400g", "alternative": "Kıyma (kuzu-dana karışık)", "belgium_availability": "Her supermarket"},
-        {"item": "Soğan", "amount": "2 adet", "alternative": null, "belgium_availability": "Her supermarket"},
-        {"item": "Domates", "amount": "3 adet", "alternative": "Konserve domates", "belgium_availability": "Her supermarket"},
-        {"item": "Biber", "amount": "2 adet", "alternative": null, "belgium_availability": "Her supermarket"},
-        {"item": "Sarımsak", "amount": "3 diş", "alternative": null, "belgium_availability": "Her supermarket"},
-        {"item": "Zeytinyağı", "amount": "3 yemek kaşığı", "alternative": null, "belgium_availability": "Her supermarket"}
-      ],
-      "instructions": [
-        "Patlıcanları alacalı soyup tuzlu suda 30 dk bekletin",
-        "Zeytinyağında kızartın veya fırında 200°C'de 15 dk pişirin",
-        "Soğan ve sarımsağı kavurun, kıymayı ekleyin",
-        "Domates ve biberi ekleyip 10 dk pişirin",
-        "Patlıcanları ortadan yarıp içine kıymalı harç doldurun",
-        "Üzerine domates dilimi koyup 180°C fırında 25 dk pişirin"
-      ],
-      "nutritional_highlights": ["Lif açısından zengin", "Antioksidan", "Düşük karbonhidrat"],
-      "kid_friendly_modifications": "Patlıcanları küçük parçalar halinde kesip kıymayla karıştırın, üzerine kaşar peyniri serpin",
-      "cost_estimate_eur": 9.5,
-      "season": "Yaz",
-      "tags": ["geleneksel", "fırın_yemeği", "aile_yemeği", "sebze_ağırlıklı"],
-      "turkish_cuisine_category": "et_yemegi",
-      "story": "Adını patlıcanın ortadan yarılıp içinin doldurulmasından alır. Güneydoğu Anadolu'nun en sevilen yemeklerinden biridir."
-    },
-    {
-      "id": "ezogelin_corbasi",
-      "name": "Ezo Gelin Çorbası",
-      "description": "Kırmızı mercimek, bulgur ve pirinçle hazırlanan, Gaziantep'in meşhur çorbası. Ezo Gelin'in hikayesini taşır.",
-      "prep_time": "10 dk",
-      "cook_time": "35 dk",
-      "servings": 6,
-      "difficulty": "Kolay",
-      "ingredients": [
-        {"item": "Kırmızı mercimek", "amount": "1 su bardağı", "alternative": null, "belgium_availability": "Aldi, Lidl, Türk marketleri"},
-        {"item": "Bulgur", "amount": "Yarım su bardağı", "alternative": "Kuskus", "belgium_availability": "Türk marketleri, some bio shops"},
-        {"item": "Pirinç", "amount": "2 yemek kaşığı", "alternative": null, "belgium_availability": "Her supermarket"},
-        {"item": "Soğan", "amount": "1 adet", "alternative": null, "belgium_availability": "Her supermarket"},
-        {"item": "Sarımsak", "amount": "3 diş", "alternative": null, "belgium_availability": "Her supermarket"},
-        {"item": "Tereyağı", "amount": "2 yemek kaşığı", "alternative": "Zeytinyağı", "belgium_availability": "Her supermarket"},
-        {"item": "Nane", "amount": "1 çay kaşığı", "alternative": "Kuru nane", "belgium_availability": "Türk marketleri"},
-        {"item": "Pul biber", "amount": "1 tatlı kaşığı", "alternative": "Paprika", "belgium_availability": "Türk marketleri, Delhaize"}
-      ],
-      "instructions": [
-        "Mercimeği yıkayıp süzün",
-        "Tencerede tereyağında soğan ve sarımsağı kavurun",
-        "Mercimek, bulgur ve pirinci ekleyip karıştırın",
-        "6 su bardağı su ekleyip kaynatın",
-        "Kısık ateşte 25 dk pişirin",
-        "Blenderdan geçirin, nane ve tuz ekleyin",
-        "Tereyağında pul biber kavurup üzerine gezdirin"
-      ],
-      "nutritional_highlights": ["Yüksek protein", "Lif açısından zengin", "B vitamini kaynağı"],
-      "kid_friendly_modifications": "Baharatları azaltın, üzerine limon suyu ve kruton ekleyin",
-      "cost_estimate_eur": 3.5,
-      "season": "Kış",
-      "tags": ["vegan", "glutensiz", "geleneksel", "dondurucuya_uygun"],
-      "turkish_cuisine_category": "corba",
-      "story": "Gaziantep'e gelin gelen Ezo'nun hazırladığı çorba, Güneydoğu'nun en sevilen lezzetlerinden biri olmuştur."
+    "meal_tips": [
+        "Haftalık liste ile alışveriş yapın, aç karnına gitmeyin",
+        "Aldi/Lidl gibi marketlerden temel ürünleri alın",
+        "Pazar günü haftalık yemek hazırlığı yapın (batch cooking)",
+        "Çocuklar için tabakları renkli ve eğlenceli sunun",
+        "Belgium'da taze sebze mevsimlerini takip edin"
+    ],
+    "i18n": {
+        "tr": {
+            "cuisine_focus": "Turkish (Anatolian & Ottoman traditions)",
+            "region_adaptation": "Belgium ingredient availability",
+            "recipes": [
+                {
+                    "id": "mercimek_corbasi",
+                    "name": "Mercimek Çorbası (Anne Usulü)",
+                    "description": "Kırmızı mercimek, havuç, patates ve tereyağlı sos ile klasik Türk ev yemeği",
+                    "prep_time": "10 dk",
+                    "cook_time": "30 dk",
+                    "servings": 6,
+                    "difficulty": "Kolay",
+                    "ingredients": [
+                        {
+                            "item": "Kırmızı mercimek",
+                            "amount": "1.5 su bardağı",
+                            "alternative": "Yeşil mercimek",
+                            "belgium_availability": "Aldi, Lidl, Colruyt, Türk marketleri"
+                        },
+                        {
+                            "item": "Havuç",
+                            "amount": "1 adet (rendelenmiş)",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Patates",
+                            "amount": "1 adet (küçük doğranmış)",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Soğan",
+                            "amount": "1 adet",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Tereyağı",
+                            "amount": "2 yemek kaşığı",
+                            "alternative": "Zeytinyağı",
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Pul biber",
+                            "amount": "1 tatlı kaşığı",
+                            "alternative": "Paprika",
+                            "belgium_availability": "Türk marketleri, Delhaize"
+                        },
+                        {
+                            "item": "Nane",
+                            "amount": "1 çay kaşığı",
+                            "alternative": "Kuru nane",
+                            "belgium_availability": "Türk marketleri"
+                        },
+                        {
+                            "item": "Limon",
+                            "amount": "Yarım adet",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        }
+                    ],
+                    "instructions": [
+                        "Mercimekleri yıkayıp süzün",
+                        "Tencerede soğanı tereyağında kavurun",
+                        "Havuç ve patatesi ekleyip 2 dk daha kavurun",
+                        "Mercimek ve 6 su bardağı suyu ekleyin",
+                        "Kaynadıktan sonra kısık ateşte 20 dk pişirin",
+                        "Blenderdan geçirin, tuz ve baharatları ekleyin",
+                        "Tereyağında pul biber kavurup üzerine gezdirin"
+                    ],
+                    "nutritional_highlights": [
+                        "Yüksek protein",
+                        "Demir kaynağı",
+                        "Lif açısından zengin"
+                    ],
+                    "kid_friendly_modifications": "Limon suyu ve pul biberi ayrı servis edin, çocuk versiyonu daha az baharatlı",
+                    "cost_estimate_eur": 4.5,
+                    "season": "Kış",
+                    "tags": [
+                        "vegan",
+                        "glutensiz",
+                        "batch_cookable",
+                        "freezer_friendly"
+                    ],
+                    "turkish_cuisine_category": "corba",
+                    "story": "Türk mutfağının en sevilen çorbalarından biri. Her evin kendine özgü tarifi vardır."
+                },
+                {
+                    "id": "zeytinyagli_fasulye",
+                    "name": "Zeytinyağlı Taze Fasulye",
+                    "description": "Yaz sebzeleriyle hafif ve sağlıklı zeytinyağlı yemek",
+                    "prep_time": "15 dk",
+                    "cook_time": "25 dk",
+                    "servings": 4,
+                    "difficulty": "Kolay",
+                    "ingredients": [
+                        {
+                            "item": "Taze fasulye",
+                            "amount": "500g (ayıklanmış)",
+                            "alternative": "Dondurulmuş fasulye",
+                            "belgium_availability": "Yaz: her supermarket; Kış: dondurulmuş"
+                        },
+                        {
+                            "item": "Domates",
+                            "amount": "2 adet (doğranmış)",
+                            "alternative": "Konserve domates",
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Soğan",
+                            "amount": "1 adet",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Sarımsak",
+                            "amount": "2 diş",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Zeytinyağı",
+                            "amount": "3 yemek kaşığı",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Şeker",
+                            "amount": "1 çay kaşığı",
+                            "alternative": "Bal",
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Dereotu",
+                            "amount": "Yarım demet",
+                            "alternative": "Maydanoz",
+                            "belgium_availability": "Her supermarket"
+                        }
+                    ],
+                    "instructions": [
+                        "Fasulyeleri yıkayıp uçlarını ayıklayın",
+                        "Zeytinyağında soğan ve sarımsağı kavurun",
+                        "Domatesleri ekleyip 5 dk pişirin",
+                        "Fasulyeleri ekleyip üzerini geçecek kadar su koyun",
+                        "Şeker ve tuzu ekleyip kısık ateşte 20 dk pişirin",
+                        "Soğuyunca üzerine dereotu serpin, zeytinyağı gezdirin"
+                    ],
+                    "nutritional_highlights": [
+                        "A vitamini",
+                        "Antioksidan",
+                        "Düşük kalori"
+                    ],
+                    "kid_friendly_modifications": "Küçük parçalar halinde doğrayın, yanında yoğurt servis edin",
+                    "cost_estimate_eur": 6,
+                    "season": "Yaz",
+                    "tags": [
+                        "vegan",
+                        "zeytinyağlı",
+                        "soğuk_yenebilir",
+                        "hafif"
+                    ],
+                    "turkish_cuisine_category": "zeytinyagli",
+                    "story": "Ege ve Akdeniz mutfağının vazgeçilmezi. Soğuk olarak da servis edilen bu yemek yaz aylarının favorisidir."
+                },
+                {
+                    "id": "anne_koftesi",
+                    "name": "Anne Köftesi (Fırında)",
+                    "description": "Fırında pişirilmiş, sebzeli, sağlıklı köfte tarifi",
+                    "prep_time": "20 dk",
+                    "cook_time": "35 dk",
+                    "servings": 5,
+                    "difficulty": "Orta",
+                    "ingredients": [
+                        {
+                            "item": "Kıyma (dana)",
+                            "amount": "500g",
+                            "alternative": "Kıyma (kuzu-dana karışık)",
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Soğan",
+                            "amount": "1 adet (rendelenmiş)",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Galeta unu",
+                            "amount": "Yarım su bardağı",
+                            "alternative": "Ekmek içi",
+                            "belgium_availability": "Türk marketleri, Carrefour"
+                        },
+                        {
+                            "item": "Yumurta",
+                            "amount": "1 adet",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Patates",
+                            "amount": "3 adet",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Domates",
+                            "amount": "2 adet",
+                            "alternative": "Konserve domates",
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Biber",
+                            "amount": "2 adet",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Yoğurt",
+                            "amount": "1 kase",
+                            "alternative": "Greek yogurt",
+                            "belgium_availability": "Her supermarket"
+                        }
+                    ],
+                    "instructions": [
+                        "Kıymaya soğan, galeta unu, yumurta, tuz ve baharat yoğurun",
+                        "Köfte şekli verip tepsiye dizin",
+                        "Patatesleri dilimleyip köftelerin arasına yerleştirin",
+                        "Domates ve biberleri doğrayın üzerine serpin",
+                        "Üzerine 1 su bardağı su gezdirin",
+                        "180°C fırında 35 dk pişirin",
+                        "Sarımsaklı yoğurt ile servis edin"
+                    ],
+                    "nutritional_highlights": [
+                        "Yüksek protein",
+                        "B12 vitamini",
+                        "Karbonhidrat dengesi"
+                    ],
+                    "kid_friendly_modifications": "Köfteleri küçük top şeklinde yapın, patatesleri parmak şeklinde kesin",
+                    "cost_estimate_eur": 10.5,
+                    "season": "Her mevsim",
+                    "tags": [
+                        "protein_zengini",
+                        "fırın_yemeği",
+                        "aile_yemeği"
+                    ],
+                    "turkish_cuisine_category": "et_yemegi",
+                    "story": "Her annenin kendine özgü tarifi olan bu köfte, fırında pişirilerek daha az yağlı ve daha sağlıklı hale getirilir."
+                },
+                {
+                    "id": "tavuk_sote",
+                    "name": "Tavuk Sote",
+                    "description": "Hızlı ve pratik ev yemeği, sebzelerle birlikte",
+                    "prep_time": "10 dk",
+                    "cook_time": "20 dk",
+                    "servings": 4,
+                    "difficulty": "Kolay",
+                    "ingredients": [
+                        {
+                            "item": "Tavuk göğsü",
+                            "amount": "500g (kuşbaşı)",
+                            "alternative": "Tavuk but",
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Soğan",
+                            "amount": "1 adet",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Biber",
+                            "amount": "2 adet",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Mantar",
+                            "amount": "200g",
+                            "alternative": "Konserve mantar",
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Domates salçası",
+                            "amount": "1 yemek kaşığı",
+                            "alternative": null,
+                            "belgium_availability": "Türk marketleri"
+                        },
+                        {
+                            "item": "Sarımsak",
+                            "amount": "2 diş",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Zeytinyağı",
+                            "amount": "2 yemek kaşığı",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        }
+                    ],
+                    "instructions": [
+                        "Tavukları zeytinyağında kavurun",
+                        "Soğan ve sarımsağı ekleyip kavurun",
+                        "Biber ve mantarı ekleyin",
+                        "Salçayı ekleyip karıştırın",
+                        "Kısık ateşte 15 dk pişirin"
+                    ],
+                    "nutritional_highlights": [
+                        "Düşük yağ",
+                        "Yüksek protein",
+                        "Vitamin C"
+                    ],
+                    "kid_friendly_modifications": "Baharatı azaltın, yanında pilav servis edin",
+                    "cost_estimate_eur": 8,
+                    "season": "Her mevsim",
+                    "tags": [
+                        "hızlı",
+                        "protein",
+                        "30_dk_altı"
+                    ],
+                    "turkish_cuisine_category": "et_yemegi",
+                    "story": "İş günlerinin kurtarıcısı. 30 dakikadan kısa sürede hazır olan bu yemek, hem pratik hem besleyicidir."
+                },
+                {
+                    "id": "karniyarik",
+                    "name": "Karnıyarık (Anne Usulü)",
+                    "description": "Kıymalı patlıcan yemeği, yaz akşamlarının vazgeçilmezi. Fırında pişirilmiş, hafif yağlı versiyon.",
+                    "prep_time": "25 dk",
+                    "cook_time": "40 dk",
+                    "servings": 5,
+                    "difficulty": "Orta",
+                    "ingredients": [
+                        {
+                            "item": "Patlıcan",
+                            "amount": "6 adet (ince uzun)",
+                            "alternative": null,
+                            "belgium_availability": "Türk marketleri, yaz mevsimi Carrefour/Delhaize"
+                        },
+                        {
+                            "item": "Kıyma (dana)",
+                            "amount": "400g",
+                            "alternative": "Kıyma (kuzu-dana karışık)",
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Soğan",
+                            "amount": "2 adet",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Domates",
+                            "amount": "3 adet",
+                            "alternative": "Konserve domates",
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Biber",
+                            "amount": "2 adet",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Sarımsak",
+                            "amount": "3 diş",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Zeytinyağı",
+                            "amount": "3 yemek kaşığı",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        }
+                    ],
+                    "instructions": [
+                        "Patlıcanları alacalı soyup tuzlu suda 30 dk bekletin",
+                        "Zeytinyağında kızartın veya fırında 200°C'de 15 dk pişirin",
+                        "Soğan ve sarımsağı kavurun, kıymayı ekleyin",
+                        "Domates ve biberi ekleyip 10 dk pişirin",
+                        "Patlıcanları ortadan yarıp içine kıymalı harç doldurun",
+                        "Üzerine domates dilimi koyup 180°C fırında 25 dk pişirin"
+                    ],
+                    "nutritional_highlights": [
+                        "Lif açısından zengin",
+                        "Antioksidan",
+                        "Düşük karbonhidrat"
+                    ],
+                    "kid_friendly_modifications": "Patlıcanları küçük parçalar halinde kesip kıymayla karıştırın, üzerine kaşar peyniri serpin",
+                    "cost_estimate_eur": 9.5,
+                    "season": "Yaz",
+                    "tags": [
+                        "geleneksel",
+                        "fırın_yemeği",
+                        "aile_yemeği",
+                        "sebze_ağırlıklı"
+                    ],
+                    "turkish_cuisine_category": "et_yemegi",
+                    "story": "Adını patlıcanın ortadan yarılıp içinin doldurulmasından alır. Güneydoğu Anadolu'nun en sevilen yemeklerinden biridir."
+                },
+                {
+                    "id": "ezogelin_corbasi",
+                    "name": "Ezo Gelin Çorbası",
+                    "description": "Kırmızı mercimek, bulgur ve pirinçle hazırlanan, Gaziantep'in meşhur çorbası. Ezo Gelin'in hikayesini taşır.",
+                    "prep_time": "10 dk",
+                    "cook_time": "35 dk",
+                    "servings": 6,
+                    "difficulty": "Kolay",
+                    "ingredients": [
+                        {
+                            "item": "Kırmızı mercimek",
+                            "amount": "1 su bardağı",
+                            "alternative": null,
+                            "belgium_availability": "Aldi, Lidl, Türk marketleri"
+                        },
+                        {
+                            "item": "Bulgur",
+                            "amount": "Yarım su bardağı",
+                            "alternative": "Kuskus",
+                            "belgium_availability": "Türk marketleri, some bio shops"
+                        },
+                        {
+                            "item": "Pirinç",
+                            "amount": "2 yemek kaşığı",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Soğan",
+                            "amount": "1 adet",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Sarımsak",
+                            "amount": "3 diş",
+                            "alternative": null,
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Tereyağı",
+                            "amount": "2 yemek kaşığı",
+                            "alternative": "Zeytinyağı",
+                            "belgium_availability": "Her supermarket"
+                        },
+                        {
+                            "item": "Nane",
+                            "amount": "1 çay kaşığı",
+                            "alternative": "Kuru nane",
+                            "belgium_availability": "Türk marketleri"
+                        },
+                        {
+                            "item": "Pul biber",
+                            "amount": "1 tatlı kaşığı",
+                            "alternative": "Paprika",
+                            "belgium_availability": "Türk marketleri, Delhaize"
+                        }
+                    ],
+                    "instructions": [
+                        "Mercimeği yıkayıp süzün",
+                        "Tencerede tereyağında soğan ve sarımsağı kavurun",
+                        "Mercimek, bulgur ve pirinci ekleyip karıştırın",
+                        "6 su bardağı su ekleyip kaynatın",
+                        "Kısık ateşte 25 dk pişirin",
+                        "Blenderdan geçirin, nane ve tuz ekleyin",
+                        "Tereyağında pul biber kavurup üzerine gezdirin"
+                    ],
+                    "nutritional_highlights": [
+                        "Yüksek protein",
+                        "Lif açısından zengin",
+                        "B vitamini kaynağı"
+                    ],
+                    "kid_friendly_modifications": "Baharatları azaltın, üzerine limon suyu ve kruton ekleyin",
+                    "cost_estimate_eur": 3.5,
+                    "season": "Kış",
+                    "tags": [
+                        "vegan",
+                        "glutensiz",
+                        "geleneksel",
+                        "dondurucuya_uygun"
+                    ],
+                    "turkish_cuisine_category": "corba",
+                    "story": "Gaziantep'e gelin gelen Ezo'nun hazırladığı çorba, Güneydoğu'nun en sevilen lezzetlerinden biri olmuştur."
+                }
+            ],
+            "weekly_template": {
+                "pazartesi": {
+                    "breakfast": "Menemen + Peynir + Zeytin",
+                    "lunch": "Mercimek Çorbası + Salata",
+                    "dinner": "Fırında Köfte + Patates"
+                },
+                "sali": {
+                    "breakfast": "Börek (hazır yufka) + Çay",
+                    "lunch": "Zeytinyağlı Taze Fasulye + Yoğurt",
+                    "dinner": "Tavuk Sote + Pirinç Pilavı"
+                },
+                "carsamba": {
+                    "breakfast": "Sahanda Yumurta + Ekmek",
+                    "lunch": "Ezogelin Çorbası + Salata",
+                    "dinner": "Karnıyarık + Bulgur Pilavı"
+                },
+                "persembe": {
+                    "breakfast": "Peynirli Gözleme",
+                    "lunch": "Nohutlu Pilav (düdüklü)",
+                    "dinner": "Izgara Balık + Roka Salatası"
+                },
+                "cuma": {
+                    "breakfast": "Simit + Peynir + Domates",
+                    "lunch": "Yayla Çorbası + Ekmek",
+                    "dinner": "Mantı (hazır) + Sarımsaklı Yoğurt"
+                },
+                "cumartesi": {
+                    "breakfast": "Aile Kahvaltısı (serpme)",
+                    "lunch": "Kumpir (ev yapımı)",
+                    "dinner": "Lahmacun (ev yapımı) + Salata"
+                },
+                "pazar": {
+                    "breakfast": "Sucuklu Yumurta + Börek",
+                    "lunch": "Türlü (sebze yemeği)",
+                    "dinner": "Kuru Fasulye + Pilav + Turşu"
+                }
+            },
+            "meal_tips": [
+                "Haftalık liste ile alışveriş yapın, aç karnına gitmeyin",
+                "Aldi/Lidl gibi marketlerden temel ürünleri alın",
+                "Pazar günü haftalık yemek hazırlığı yapın (batch cooking)",
+                "Çocuklar için tabakları renkli ve eğlenceli sunun",
+                "Belgium'da taze sebze mevsimlerini takip edin"
+            ]
+        },
+        "en": {
+            "cuisine_focus": "Turkish (Anatolian & Ottoman traditions)",
+            "region_adaptation": "Belgium availability ingredient",
+            "recipes": [
+                {
+                    "id": "mercimek_corbasi",
+                    "name": "Lentil Soup (Mother's Style)",
+                    "description": "Classic Turkish home-cooked meal with red lentils, carrots, potatoes and butter sauce",
+                    "prep_time": "10 min",
+                    "cook_time": "30 min",
+                    "servings": 6,
+                    "difficulty": "easy",
+                    "ingredients": [
+                        {
+                            "item": "red lentils",
+                            "amount": "1.5 cups",
+                            "alternative": "green lentils",
+                            "belgium_availability": "Aldi, Lidl, Colruyt, Turkish markets"
+                        },
+                        {
+                            "item": "carrot",
+                            "amount": "1 piece (grated)",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "potato",
+                            "amount": "1 piece (chopped small)",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "onion",
+                            "amount": "1 piece",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "butter",
+                            "amount": "2 tablespoons",
+                            "alternative": "olive oil",
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "red pepper flakes",
+                            "amount": "1 teaspoon",
+                            "alternative": "paprika",
+                            "belgium_availability": "Turkish markets, Delhaize"
+                        },
+                        {
+                            "item": "mint",
+                            "amount": "1 teaspoon",
+                            "alternative": "dried mint",
+                            "belgium_availability": "Turkish markets"
+                        },
+                        {
+                            "item": "lemon",
+                            "amount": "half piece",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        }
+                    ],
+                    "instructions": [
+                        "Wash and drain the lentils",
+                        "Fry the onion in butter in a pot",
+                        "Add carrots and potatoes and fry for another 2 minutes.",
+                        "Add lentils and 6 cups of water.",
+                        "After boiling, cook on low heat for 20 minutes.",
+                        "Blend, add salt and spices.",
+                        "Roast red pepper flakes in butter and pour over it."
+                    ],
+                    "nutritional_highlights": [
+                        "high protein",
+                        "iron source",
+                        "Rich in fiber"
+                    ],
+                    "kid_friendly_modifications": "Serve lemon juice and chili flakes separately, children's version is less spicy",
+                    "cost_estimate_eur": 4.5,
+                    "season": "winter",
+                    "tags": [
+                        "vegan",
+                        "glutensiz",
+                        "batch_cookable",
+                        "freezer_friendly"
+                    ],
+                    "turkish_cuisine_category": "corba",
+                    "story": "One of the most popular soups of Turkish cuisine. Every house has its own recipe."
+                },
+                {
+                    "id": "zeytinyagli_fasulye",
+                    "name": "Green Beans with Olive Oil",
+                    "description": "Light and healthy dish with summer vegetables and olive oil",
+                    "prep_time": "15 min",
+                    "cook_time": "25 min",
+                    "servings": 4,
+                    "difficulty": "easy",
+                    "ingredients": [
+                        {
+                            "item": "green beans",
+                            "amount": "500g (sorted)",
+                            "alternative": "frozen beans",
+                            "belgium_availability": "Write: every supermarket; Winter: frozen"
+                        },
+                        {
+                            "item": "tomato",
+                            "amount": "2 pieces (chopped)",
+                            "alternative": "canned tomatoes",
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "onion",
+                            "amount": "1 piece",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "garlic",
+                            "amount": "2 teeth",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "olive oil",
+                            "amount": "3 tablespoons",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "sugar",
+                            "amount": "1 teaspoon",
+                            "alternative": "honey",
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "dill",
+                            "amount": "half bunch",
+                            "alternative": "parsley",
+                            "belgium_availability": "Every supermarket"
+                        }
+                    ],
+                    "instructions": [
+                        "Wash the beans and remove the ends",
+                        "Fry onion and garlic in olive oil",
+                        "Add tomatoes and cook for 5 minutes",
+                        "Add the beans and add enough water to cover them.",
+                        "Add sugar and salt and cook on low heat for 20 minutes.",
+                        "When it cools down, sprinkle dill on it and drizzle with olive oil."
+                    ],
+                    "nutritional_highlights": [
+                        "vitamin A",
+                        "antioxidant",
+                        "low calories"
+                    ],
+                    "kid_friendly_modifications": "Chop it into small pieces and serve with yoghurt.",
+                    "cost_estimate_eur": 6,
+                    "season": "summer",
+                    "tags": [
+                        "vegan",
+                        "zeytinyağlı",
+                        "soğuk_yenebilir",
+                        "hafif"
+                    ],
+                    "turkish_cuisine_category": "zeytinyagli",
+                    "story": "It is indispensable for Aegean and Mediterranean cuisine. This dish, which can also be served cold, is a favorite in the summer months."
+                },
+                {
+                    "id": "anne_koftesi",
+                    "name": "Mother's Meatballs (Baked)",
+                    "description": "Healthy meatballs recipe with vegetables, baked in the oven",
+                    "prep_time": "20 min",
+                    "cook_time": "35 min",
+                    "servings": 5,
+                    "difficulty": "medium",
+                    "ingredients": [
+                        {
+                            "item": "Minced meat (beef)",
+                            "amount": "500g",
+                            "alternative": "Minced meat (lamb-beef mixed)",
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "onion",
+                            "amount": "1 piece (grated)",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "breadcrumbs",
+                            "amount": "half a glass of water",
+                            "alternative": "inside of bread",
+                            "belgium_availability": "Turkish markets, Carrefour"
+                        },
+                        {
+                            "item": "egg",
+                            "amount": "1 piece",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "potato",
+                            "amount": "3 pieces",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "tomato",
+                            "amount": "2 pieces",
+                            "alternative": "canned tomatoes",
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "pepper",
+                            "amount": "2 pieces",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "yoghurt",
+                            "amount": "1 bowl",
+                            "alternative": "Greek yogurt",
+                            "belgium_availability": "Every supermarket"
+                        }
+                    ],
+                    "instructions": [
+                        "Knead onion, breadcrumbs, egg, salt and spices into the minced meat.",
+                        "Shape into meatballs and place on the tray",
+                        "Slice the potatoes and place them between the meatballs.",
+                        "Chop tomatoes and peppers and sprinkle on top",
+                        "Pour 1 glass of water over it.",
+                        "Bake in the oven at 180°C for 35 minutes",
+                        "Serve with garlic yoghurt"
+                    ],
+                    "nutritional_highlights": [
+                        "high protein",
+                        "vitamin B12",
+                        "carbohydrate balance"
+                    ],
+                    "kid_friendly_modifications": "Make the meatballs into small balls, cut the potatoes into finger shapes.",
+                    "cost_estimate_eur": 10.5,
+                    "season": "all seasons",
+                    "tags": [
+                        "protein_zengini",
+                        "fırın_yemeği",
+                        "aile_yemeği"
+                    ],
+                    "turkish_cuisine_category": "et_yemegi",
+                    "story": "This meatball, which is a unique recipe for every mother, is made less fatty and healthier by baking it in the oven."
+                },
+                {
+                    "id": "tavuk_sote",
+                    "name": "Sauteed Chicken",
+                    "description": "Quick and practical home-cooked meal with vegetables",
+                    "prep_time": "10 min",
+                    "cook_time": "20 min",
+                    "servings": 4,
+                    "difficulty": "easy",
+                    "ingredients": [
+                        {
+                            "item": "chicken breast",
+                            "amount": "500g (cubed)",
+                            "alternative": "chicken leg",
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "onion",
+                            "amount": "1 piece",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "pepper",
+                            "amount": "2 pieces",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "mushroom",
+                            "amount": "200g",
+                            "alternative": "canned mushrooms",
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "tomato paste",
+                            "amount": "1 tablespoon",
+                            "alternative": null,
+                            "belgium_availability": "Turkish markets"
+                        },
+                        {
+                            "item": "garlic",
+                            "amount": "2 teeth",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "olive oil",
+                            "amount": "2 tablespoons",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        }
+                    ],
+                    "instructions": [
+                        "Roast chicken in olive oil",
+                        "Add onion and garlic and fry",
+                        "Add pepper and mushrooms",
+                        "Add tomato paste and mix",
+                        "Cook for 15 minutes on low heat"
+                    ],
+                    "nutritional_highlights": [
+                        "low fat",
+                        "high protein",
+                        "Vitamin C"
+                    ],
+                    "kid_friendly_modifications": "Reduce the spice and serve rice on the side",
+                    "cost_estimate_eur": 8,
+                    "season": "all seasons",
+                    "tags": [
+                        "hızlı",
+                        "protein",
+                        "30_dk_altı"
+                    ],
+                    "turkish_cuisine_category": "et_yemegi",
+                    "story": "Savior of workdays. This meal, which is ready in less than 30 minutes, is both practical and nutritious."
+                },
+                {
+                    "id": "karniyarik",
+                    "name": "Karnıyarık (Mother's Style)",
+                    "description": "Eggplant dish with minced meat is an indispensable part of summer evenings. Baked, lightly oiled version.",
+                    "prep_time": "25 min",
+                    "cook_time": "40 min",
+                    "servings": 5,
+                    "difficulty": "medium",
+                    "ingredients": [
+                        {
+                            "item": "eggplant",
+                            "amount": "6 pieces (long thin)",
+                            "alternative": null,
+                            "belgium_availability": "Turkish markets, summer season Carrefour/Delhaize"
+                        },
+                        {
+                            "item": "Minced meat (beef)",
+                            "amount": "400g",
+                            "alternative": "Minced meat (lamb-beef mixed)",
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "onion",
+                            "amount": "2 pieces",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "tomato",
+                            "amount": "3 pieces",
+                            "alternative": "canned tomatoes",
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "pepper",
+                            "amount": "2 pieces",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "garlic",
+                            "amount": "3 teeth",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "olive oil",
+                            "amount": "3 tablespoons",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        }
+                    ],
+                    "instructions": [
+                        "Peel the eggplants and soak them in salt water for 30 minutes.",
+                        "Fry in olive oil or bake in the oven at 200°C for 15 minutes",
+                        "Fry the onion and garlic, add the minced meat.",
+                        "Add tomatoes and peppers and cook for 10 minutes.",
+                        "Cut the eggplants in half and fill them with minced meat mixture.",
+                        "Put tomato slices on top and bake in the oven at 180°C for 25 minutes."
+                    ],
+                    "nutritional_highlights": [
+                        "Rich in fiber",
+                        "antioxidant",
+                        "low carb"
+                    ],
+                    "kid_friendly_modifications": "Cut the eggplants into small pieces, mix them with minced meat, and sprinkle cheddar cheese on top.",
+                    "cost_estimate_eur": 9.5,
+                    "season": "summer",
+                    "tags": [
+                        "geleneksel",
+                        "fırın_yemeği",
+                        "aile_yemeği",
+                        "sebze_ağırlıklı"
+                    ],
+                    "turkish_cuisine_category": "et_yemegi",
+                    "story": "It gets its name from the fact that the eggplant is split in half and stuffed inside. It is one of the most popular dishes of Southeastern Anatolia."
+                },
+                {
+                    "id": "ezogelin_corbasi",
+                    "name": "Ezo Bride Soup",
+                    "description": "Famous soup of Gaziantep, prepared with red lentils, bulgur and rice. It carries the story of Ezo Gelin.",
+                    "prep_time": "10 min",
+                    "cook_time": "35 min",
+                    "servings": 6,
+                    "difficulty": "easy",
+                    "ingredients": [
+                        {
+                            "item": "red lentils",
+                            "amount": "1 cup",
+                            "alternative": null,
+                            "belgium_availability": "Aldi, Lidl, Turkish markets"
+                        },
+                        {
+                            "item": "bulgur",
+                            "amount": "half a glass of water",
+                            "alternative": "couscous",
+                            "belgium_availability": "Turkish markets, some bio shops"
+                        },
+                        {
+                            "item": "rice",
+                            "amount": "2 tablespoons",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "onion",
+                            "amount": "1 piece",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "garlic",
+                            "amount": "3 teeth",
+                            "alternative": null,
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "butter",
+                            "amount": "2 tablespoons",
+                            "alternative": "olive oil",
+                            "belgium_availability": "Every supermarket"
+                        },
+                        {
+                            "item": "mint",
+                            "amount": "1 teaspoon",
+                            "alternative": "dried mint",
+                            "belgium_availability": "Turkish markets"
+                        },
+                        {
+                            "item": "red pepper flakes",
+                            "amount": "1 teaspoon",
+                            "alternative": "paprika",
+                            "belgium_availability": "Turkish markets, Delhaize"
+                        }
+                    ],
+                    "instructions": [
+                        "Wash and drain the lentils",
+                        "Fry onion and garlic in butter in a pot",
+                        "Add lentils, bulgur and rice and mix.",
+                        "Add 6 cups of water and boil",
+                        "Cook for 25 minutes on low heat",
+                        "Blend, add mint and salt.",
+                        "Roast red pepper flakes in butter and pour over it."
+                    ],
+                    "nutritional_highlights": [
+                        "high protein",
+                        "Rich in fiber",
+                        "source of vitamin B"
+                    ],
+                    "kid_friendly_modifications": "Reduce spices, add lemon juice and croutons.",
+                    "cost_estimate_eur": 3.5,
+                    "season": "winter",
+                    "tags": [
+                        "vegan",
+                        "glutensiz",
+                        "geleneksel",
+                        "dondurucuya_uygun"
+                    ],
+                    "turkish_cuisine_category": "corba",
+                    "story": "The soup prepared by Ezo, who came to Gaziantep as a bride, has become one of the most popular flavors of the Southeast."
+                }
+            ],
+            "weekly_template": {
+                "pazartesi": {
+                    "breakfast": "Menemen + Cheese + Olives",
+                    "lunch": "Lentil Soup + Salad",
+                    "dinner": "Baked Meatballs + Potatoes"
+                },
+                "sali": {
+                    "breakfast": "Pastry (ready-made phyllo dough) + Tea",
+                    "lunch": "Green Beans with Olive Oil + Yogurt",
+                    "dinner": "Chicken Saute + Rice Pilaf"
+                },
+                "carsamba": {
+                    "breakfast": "Fried Egg + Bread",
+                    "lunch": "Ezogelin Soup + Salad",
+                    "dinner": "Karnıyarık + Bulgur Pilaf"
+                },
+                "persembe": {
+                    "breakfast": "Cheese Pancake",
+                    "lunch": "Chickpea Rice (pressure)",
+                    "dinner": "Grilled Fish + Arugula Salad"
+                },
+                "cuma": {
+                    "breakfast": "Bagel + Cheese + Tomato",
+                    "lunch": "Yayla Soup + Bread",
+                    "dinner": "Ravioli (ready-made) + Garlic Yogurt"
+                },
+                "cumartesi": {
+                    "breakfast": "Family Breakfast (sprinkle)",
+                    "lunch": "Kumpir (homemade)",
+                    "dinner": "Lahmacun (homemade) + Salad"
+                },
+                "pazar": {
+                    "breakfast": "Sausage Egg + Pastry",
+                    "lunch": "Türlü (vegetable dish)",
+                    "dinner": "Dried Beans + Rice + Pickles"
+                }
+            },
+            "meal_tips": [
+                "Shop with a weekly list, don't go on an empty stomach",
+                "Buy essentials from grocery stores like Aldi/Lidl",
+                "Prepare weekly meals on Sunday (batch cooking)",
+                "Present colorful and fun plates for children",
+                "Follow fresh vegetable seasons in Belgium"
+            ]
+        },
+        "fr": {
+            "cuisine_focus": "Turc (traditions anatoliennes et ottomanes)",
+            "region_adaptation": "Ingrédient de disponibilité en Belgique",
+            "recipes": [
+                {
+                    "id": "mercimek_corbasi",
+                    "name": "Soupe aux lentilles (à la manière de la mère)",
+                    "description": "Repas turc classique fait maison avec lentilles rouges, carottes, pommes de terre et sauce au beurre",
+                    "prep_time": "10 minutes",
+                    "cook_time": "30 minutes",
+                    "servings": 6,
+                    "difficulty": "facile",
+                    "ingredients": [
+                        {
+                            "item": "lentilles rouges",
+                            "amount": "1,5 tasses",
+                            "alternative": "lentilles vertes",
+                            "belgium_availability": "Aldi, Lidl, Colruyt, marchés turcs"
+                        },
+                        {
+                            "item": "carotte",
+                            "amount": "1 morceau (râpé)",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "pomme de terre",
+                            "amount": "1 morceau (haché petit)",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "oignon",
+                            "amount": "1 pièce",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "beurre",
+                            "amount": "2 cuillères à soupe",
+                            "alternative": "huile d'olive",
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "flocons de piment rouge",
+                            "amount": "1 cuillère à café",
+                            "alternative": "paprika",
+                            "belgium_availability": "Marchés turcs, Delhaize"
+                        },
+                        {
+                            "item": "menthe",
+                            "amount": "1 cuillère à café",
+                            "alternative": "menthe séchée",
+                            "belgium_availability": "Marchés turcs"
+                        },
+                        {
+                            "item": "citron",
+                            "amount": "demi-pièce",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        }
+                    ],
+                    "instructions": [
+                        "Laver et égoutter les lentilles",
+                        "Faire revenir l'oignon dans le beurre dans une casserole",
+                        "Ajouter les carottes et les pommes de terre et faire revenir encore 2 minutes.",
+                        "Ajouter les lentilles et 6 tasses d'eau.",
+                        "Après ébullition, faites cuire à feu doux pendant 20 minutes.",
+                        "Mélangez, ajoutez le sel et les épices.",
+                        "Rôtir les flocons de piment rouge dans le beurre et verser dessus."
+                    ],
+                    "nutritional_highlights": [
+                        "riche en protéines",
+                        "source de fer",
+                        "Riche en fibres"
+                    ],
+                    "kid_friendly_modifications": "Servir le jus de citron et les flocons de piment séparément, la version pour enfants est moins épicée",
+                    "cost_estimate_eur": 4.5,
+                    "season": "hiver",
+                    "tags": [
+                        "vegan",
+                        "glutensiz",
+                        "batch_cookable",
+                        "freezer_friendly"
+                    ],
+                    "turkish_cuisine_category": "corba",
+                    "story": "L'une des soupes les plus populaires de la cuisine turque. Chaque maison a sa propre recette."
+                },
+                {
+                    "id": "zeytinyagli_fasulye",
+                    "name": "Haricots verts à l'huile d'olive",
+                    "description": "Plat léger et sain aux légumes d'été et à l'huile d'olive",
+                    "prep_time": "15 minutes",
+                    "cook_time": "25 minutes",
+                    "servings": 4,
+                    "difficulty": "facile",
+                    "ingredients": [
+                        {
+                            "item": "haricots verts",
+                            "amount": "500g (trié)",
+                            "alternative": "haricots surgelés",
+                            "belgium_availability": "Écrivez : chaque supermarché ; Hiver : gelé"
+                        },
+                        {
+                            "item": "tomate",
+                            "amount": "2 morceaux (hachés)",
+                            "alternative": "tomates en conserve",
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "oignon",
+                            "amount": "1 pièce",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "ail",
+                            "amount": "2 dents",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "huile d'olive",
+                            "amount": "3 cuillères à soupe",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "sucre",
+                            "amount": "1 cuillère à café",
+                            "alternative": "chérie",
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "aneth",
+                            "amount": "demi-botte",
+                            "alternative": "persil",
+                            "belgium_availability": "Chaque supermarché"
+                        }
+                    ],
+                    "instructions": [
+                        "Lavez les haricots et retirez les extrémités",
+                        "Faire revenir l'oignon et l'ail dans l'huile d'olive",
+                        "Ajouter les tomates et cuire 5 minutes",
+                        "Ajoutez les haricots et ajoutez suffisamment d'eau pour les couvrir.",
+                        "Ajoutez le sucre et le sel et faites cuire à feu doux pendant 20 minutes.",
+                        "Une fois refroidi, saupoudrez-le d'aneth et arrosez-le d'huile d'olive."
+                    ],
+                    "nutritional_highlights": [
+                        "vitamine A",
+                        "antioxydant",
+                        "faible en calories"
+                    ],
+                    "kid_friendly_modifications": "Coupez-le en petits morceaux et servez-le avec du yaourt.",
+                    "cost_estimate_eur": 6,
+                    "season": "l'été",
+                    "tags": [
+                        "vegan",
+                        "zeytinyağlı",
+                        "soğuk_yenebilir",
+                        "hafif"
+                    ],
+                    "turkish_cuisine_category": "zeytinyagli",
+                    "story": "Il est indispensable à la cuisine égéenne et méditerranéenne. Ce plat, qui peut également être servi froid, est un des favoris des mois d'été."
+                },
+                {
+                    "id": "anne_koftesi",
+                    "name": "Boulettes de viande de maman (au four)",
+                    "description": "Recette de boulettes de viande saines aux légumes, cuites au four",
+                    "prep_time": "20 minutes",
+                    "cook_time": "35 minutes",
+                    "servings": 5,
+                    "difficulty": "moyen",
+                    "ingredients": [
+                        {
+                            "item": "Viande hachée (bœuf)",
+                            "amount": "500g",
+                            "alternative": "Viande hachée (mélange agneau-bœuf)",
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "oignon",
+                            "amount": "1 morceau (râpé)",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "fil d'Ariane",
+                            "amount": "un demi verre d'eau",
+                            "alternative": "à l'intérieur du pain",
+                            "belgium_availability": "Marchés turcs, Carrefour"
+                        },
+                        {
+                            "item": "oeuf",
+                            "amount": "1 pièce",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "pomme de terre",
+                            "amount": "3 pièces",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "tomate",
+                            "amount": "2 pièces",
+                            "alternative": "tomates en conserve",
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "poivre",
+                            "amount": "2 pièces",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "yaourt",
+                            "amount": "1 bol",
+                            "alternative": "yaourt grec",
+                            "belgium_availability": "Chaque supermarché"
+                        }
+                    ],
+                    "instructions": [
+                        "Pétrir l'oignon, la chapelure, l'œuf, le sel et les épices dans la viande hachée.",
+                        "Façonner des boulettes de viande et déposer sur le plateau",
+                        "Coupez les pommes de terre en tranches et placez-les entre les boulettes de viande.",
+                        "Hacher les tomates et les poivrons et saupoudrer dessus",
+                        "Versez dessus 1 verre d’eau.",
+                        "Cuire au four à 180°C pendant 35 minutes",
+                        "Servir avec du yaourt à l'ail"
+                    ],
+                    "nutritional_highlights": [
+                        "riche en protéines",
+                        "vitamine B12",
+                        "équilibre des glucides"
+                    ],
+                    "kid_friendly_modifications": "Façonnez les boulettes de viande en petites boules, coupez les pommes de terre en forme de doigts.",
+                    "cost_estimate_eur": 10.5,
+                    "season": "toutes les saisons",
+                    "tags": [
+                        "protein_zengini",
+                        "fırın_yemeği",
+                        "aile_yemeği"
+                    ],
+                    "turkish_cuisine_category": "et_yemegi",
+                    "story": "Cette boulette de viande, qui est une recette unique pour chaque maman, est rendue moins grasse et plus saine en la cuisant au four."
+                },
+                {
+                    "id": "tavuk_sote",
+                    "name": "Poulet Sauté",
+                    "description": "Repas fait maison rapide et pratique avec des légumes",
+                    "prep_time": "10 minutes",
+                    "cook_time": "20 minutes",
+                    "servings": 4,
+                    "difficulty": "facile",
+                    "ingredients": [
+                        {
+                            "item": "poitrine de poulet",
+                            "amount": "500g (en cubes)",
+                            "alternative": "cuisse de poulet",
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "oignon",
+                            "amount": "1 pièce",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "poivre",
+                            "amount": "2 pièces",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "champignon",
+                            "amount": "200g",
+                            "alternative": "champignons en conserve",
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "concentré de tomate",
+                            "amount": "1 cuillère à soupe",
+                            "alternative": null,
+                            "belgium_availability": "Marchés turcs"
+                        },
+                        {
+                            "item": "ail",
+                            "amount": "2 dents",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "huile d'olive",
+                            "amount": "2 cuillères à soupe",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        }
+                    ],
+                    "instructions": [
+                        "Poulet rôti à l'huile d'olive",
+                        "Ajouter l'oignon et l'ail et faire revenir",
+                        "Ajouter le poivre et les champignons",
+                        "Ajouter le concentré de tomate et mélanger",
+                        "Cuire 15 minutes à feu doux"
+                    ],
+                    "nutritional_highlights": [
+                        "faible en gras",
+                        "riche en protéines",
+                        "Vitamine C"
+                    ],
+                    "kid_friendly_modifications": "Réduire les épices et servir le riz à côté",
+                    "cost_estimate_eur": 8,
+                    "season": "toutes les saisons",
+                    "tags": [
+                        "hızlı",
+                        "protein",
+                        "30_dk_altı"
+                    ],
+                    "turkish_cuisine_category": "et_yemegi",
+                    "story": "Sauveur des journées de travail. Ce repas prêt en moins de 30 minutes est à la fois pratique et nutritif."
+                },
+                {
+                    "id": "karniyarik",
+                    "name": "Karnıyarık (le style de la mère)",
+                    "description": "Le plat d'aubergines à la viande hachée est un incontournable des soirées d'été. Version cuite au four et légèrement huilée.",
+                    "prep_time": "25 minutes",
+                    "cook_time": "40 minutes",
+                    "servings": 5,
+                    "difficulty": "moyen",
+                    "ingredients": [
+                        {
+                            "item": "aubergine",
+                            "amount": "6 pièces (longues et fines)",
+                            "alternative": null,
+                            "belgium_availability": "Marchés turcs, saison estivale Carrefour/Delhaize"
+                        },
+                        {
+                            "item": "Viande hachée (bœuf)",
+                            "amount": "400g",
+                            "alternative": "Viande hachée (mélange agneau-bœuf)",
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "oignon",
+                            "amount": "2 pièces",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "tomate",
+                            "amount": "3 pièces",
+                            "alternative": "tomates en conserve",
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "poivre",
+                            "amount": "2 pièces",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "ail",
+                            "amount": "3 dents",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "huile d'olive",
+                            "amount": "3 cuillères à soupe",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        }
+                    ],
+                    "instructions": [
+                        "Épluchez les aubergines et faites-les tremper dans l'eau salée pendant 30 minutes.",
+                        "Faire revenir dans l'huile d'olive ou cuire au four à 200°C pendant 15 minutes",
+                        "Faites revenir l'oignon et l'ail, ajoutez la viande hachée.",
+                        "Ajouter les tomates et les poivrons et cuire 10 minutes.",
+                        "Coupez les aubergines en deux et remplissez-les du mélange de viande hachée.",
+                        "Disposez dessus les tranches de tomates et enfournez à 180°C pendant 25 minutes."
+                    ],
+                    "nutritional_highlights": [
+                        "Riche en fibres",
+                        "antioxydant",
+                        "faible teneur en glucides"
+                    ],
+                    "kid_friendly_modifications": "Coupez les aubergines en petits morceaux, mélangez-les avec la viande hachée et saupoudrez dessus de cheddar.",
+                    "cost_estimate_eur": 9.5,
+                    "season": "l'été",
+                    "tags": [
+                        "geleneksel",
+                        "fırın_yemeği",
+                        "aile_yemeği",
+                        "sebze_ağırlıklı"
+                    ],
+                    "turkish_cuisine_category": "et_yemegi",
+                    "story": "Son nom vient du fait que l'aubergine est divisée en deux et farcie à l'intérieur. C'est l'un des plats les plus populaires du sud-est de l'Anatolie."
+                },
+                {
+                    "id": "ezogelin_corbasi",
+                    "name": "Soupe de mariée Ezo",
+                    "description": "Célèbre soupe de Gaziantep, préparée avec des lentilles rouges, du boulgour et du riz. Il porte l'histoire d'Ezo Gelin.",
+                    "prep_time": "10 minutes",
+                    "cook_time": "35 minutes",
+                    "servings": 6,
+                    "difficulty": "facile",
+                    "ingredients": [
+                        {
+                            "item": "lentilles rouges",
+                            "amount": "1 tasse",
+                            "alternative": null,
+                            "belgium_availability": "Aldi, Lidl, marchés turcs"
+                        },
+                        {
+                            "item": "boulgour",
+                            "amount": "un demi verre d'eau",
+                            "alternative": "couscous",
+                            "belgium_availability": "Marchés turcs, quelques magasins bio"
+                        },
+                        {
+                            "item": "riz",
+                            "amount": "2 cuillères à soupe",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "oignon",
+                            "amount": "1 pièce",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "ail",
+                            "amount": "3 dents",
+                            "alternative": null,
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "beurre",
+                            "amount": "2 cuillères à soupe",
+                            "alternative": "huile d'olive",
+                            "belgium_availability": "Chaque supermarché"
+                        },
+                        {
+                            "item": "menthe",
+                            "amount": "1 cuillère à café",
+                            "alternative": "menthe séchée",
+                            "belgium_availability": "Marchés turcs"
+                        },
+                        {
+                            "item": "flocons de piment rouge",
+                            "amount": "1 cuillère à café",
+                            "alternative": "paprika",
+                            "belgium_availability": "Marchés turcs, Delhaize"
+                        }
+                    ],
+                    "instructions": [
+                        "Laver et égoutter les lentilles",
+                        "Faire revenir l'oignon et l'ail dans le beurre dans une casserole",
+                        "Ajouter les lentilles, le boulgour et le riz et mélanger.",
+                        "Ajouter 6 tasses d'eau et faire bouillir",
+                        "Cuire 25 minutes à feu doux",
+                        "Mélangez, ajoutez la menthe et le sel.",
+                        "Rôtir les flocons de piment rouge dans le beurre et verser dessus."
+                    ],
+                    "nutritional_highlights": [
+                        "riche en protéines",
+                        "Riche en fibres",
+                        "source de vitamine B"
+                    ],
+                    "kid_friendly_modifications": "Réduisez les épices, ajoutez le jus de citron et les croûtons.",
+                    "cost_estimate_eur": 3.5,
+                    "season": "hiver",
+                    "tags": [
+                        "vegan",
+                        "glutensiz",
+                        "geleneksel",
+                        "dondurucuya_uygun"
+                    ],
+                    "turkish_cuisine_category": "corba",
+                    "story": "La soupe préparée par Ezo, venue à Gaziantep en tant que mariée, est devenue l'une des saveurs les plus populaires du Sud-Est."
+                }
+            ],
+            "weekly_template": {
+                "pazartesi": {
+                    "breakfast": "Menemen + Fromage + Olives",
+                    "lunch": "Soupe Aux Lentilles + Salade",
+                    "dinner": "Boulettes de viande au four + pommes de terre"
+                },
+                "sali": {
+                    "breakfast": "Pâtisserie (pâte phyllo toute prête) + Thé",
+                    "lunch": "Haricots Verts à l'Huile d'Olive + Yaourt",
+                    "dinner": "Sauté de Poulet + Riz Pilaf"
+                },
+                "carsamba": {
+                    "breakfast": "Oeuf Au Plat + Pain",
+                    "lunch": "Soupe Ezogelin + Salade",
+                    "dinner": "Karnıyarık + Boulgour Pilaf"
+                },
+                "persembe": {
+                    "breakfast": "Crêpe Au Fromage",
+                    "lunch": "Riz aux pois chiches (pression)",
+                    "dinner": "Poisson Grillé + Salade De Roquette"
+                },
+                "cuma": {
+                    "breakfast": "Bagel + Fromage + Tomate",
+                    "lunch": "Soupe Yayla + Pain",
+                    "dinner": "Raviolis (prêts) + Yaourt à l'Ail"
+                },
+                "cumartesi": {
+                    "breakfast": "Petit-déjeuner familial (saupoudrer)",
+                    "lunch": "Kumpir (fait maison)",
+                    "dinner": "Lahmacun (fait maison) + Salade"
+                },
+                "pazar": {
+                    "breakfast": "Oeuf De Saucisse + Pâtisserie",
+                    "lunch": "Türlü (plat de légumes)",
+                    "dinner": "Haricots secs + Riz + Cornichons"
+                }
+            },
+            "meal_tips": [
+                "Achetez avec une liste hebdomadaire, ne partez pas le ventre vide",
+                "Achetez des produits essentiels dans des épiceries comme Aldi/Lidl",
+                "Préparer les repas hebdomadaires du dimanche (batch cooking)",
+                "Présenter des assiettes colorées et amusantes aux enfants",
+                "Suivez les saisons des légumes frais en Belgique"
+            ]
+        },
+        "nl": {
+            "cuisine_focus": "Turks (Anatolische en Ottomaanse tradities)",
+            "region_adaptation": "Beschikbaarheidsingrediënt in België",
+            "recipes": [
+                {
+                    "id": "mercimek_corbasi",
+                    "name": "Linzensoep (Moederstijl)",
+                    "description": "Klassieke Turkse huisgemaakte maaltijd met rode linzen, wortelen, aardappelen en botersaus",
+                    "prep_time": "10 minuten",
+                    "cook_time": "30 minuten",
+                    "servings": 6,
+                    "difficulty": "gemakkelijk",
+                    "ingredients": [
+                        {
+                            "item": "rode linzen",
+                            "amount": "1,5 kopjes",
+                            "alternative": "groene linzen",
+                            "belgium_availability": "Aldi, Lidl, Colruyt, Turkse markten"
+                        },
+                        {
+                            "item": "wortel",
+                            "amount": "1 stuk (geraspt)",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "aardappel",
+                            "amount": "1 stuk (klein gesneden)",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "ui",
+                            "amount": "1 stuk",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "boter",
+                            "amount": "2 eetlepels",
+                            "alternative": "olijfolie",
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "rode pepervlokken",
+                            "amount": "1 theelepel",
+                            "alternative": "paprika",
+                            "belgium_availability": "Turkse markten, Delhaize"
+                        },
+                        {
+                            "item": "munt",
+                            "amount": "1 theelepel",
+                            "alternative": "gedroogde munt",
+                            "belgium_availability": "Turkse markten"
+                        },
+                        {
+                            "item": "citroen",
+                            "amount": "half stuk",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        }
+                    ],
+                    "instructions": [
+                        "Was de linzen en laat ze uitlekken",
+                        "Fruit de ui in boter in een pan",
+                        "Voeg wortels en aardappelen toe en bak nog 2 minuten.",
+                        "Voeg linzen en 6 kopjes water toe.",
+                        "Na het koken op laag vuur gedurende 20 minuten koken.",
+                        "Meng, voeg zout en kruiden toe.",
+                        "Rooster de rode pepervlokken in boter en giet eroverheen."
+                    ],
+                    "nutritional_highlights": [
+                        "hoog eiwit",
+                        "ijzeren bron",
+                        "Rijk aan vezels"
+                    ],
+                    "kid_friendly_modifications": "Serveer citroensap en chilivlokken apart, de kinderversie is minder pittig",
+                    "cost_estimate_eur": 4.5,
+                    "season": "winter",
+                    "tags": [
+                        "vegan",
+                        "glutensiz",
+                        "batch_cookable",
+                        "freezer_friendly"
+                    ],
+                    "turkish_cuisine_category": "corba",
+                    "story": "Een van de meest populaire soepen uit de Turkse keuken. Ieder huis heeft zijn eigen recept."
+                },
+                {
+                    "id": "zeytinyagli_fasulye",
+                    "name": "Sperziebonen met olijfolie",
+                    "description": "Licht en gezond gerecht met zomergroenten en olijfolie",
+                    "prep_time": "15 minuten",
+                    "cook_time": "25 minuten",
+                    "servings": 4,
+                    "difficulty": "gemakkelijk",
+                    "ingredients": [
+                        {
+                            "item": "groene bonen",
+                            "amount": "500g (gesorteerd)",
+                            "alternative": "bevroren bonen",
+                            "belgium_availability": "Schrijf: elke supermarkt; Winter: bevroren"
+                        },
+                        {
+                            "item": "tomaat",
+                            "amount": "2 stuks (gehakt)",
+                            "alternative": "ingeblikte tomaten",
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "ui",
+                            "amount": "1 stuk",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "knoflook",
+                            "amount": "2 tanden",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "olijfolie",
+                            "amount": "3 eetlepels",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "suiker",
+                            "amount": "1 theelepel",
+                            "alternative": "honing",
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "dille",
+                            "amount": "halve bos",
+                            "alternative": "peterselie",
+                            "belgium_availability": "Elke supermarkt"
+                        }
+                    ],
+                    "instructions": [
+                        "Was de bonen en verwijder de uiteinden",
+                        "Fruit ui en knoflook in olijfolie",
+                        "Voeg de tomaten toe en kook gedurende 5 minuten",
+                        "Voeg de bonen toe en voeg voldoende water toe zodat ze onder water staan.",
+                        "Voeg suiker en zout toe en kook op laag vuur gedurende 20 minuten.",
+                        "Als het afkoelt, strooi er dille over en besprenkel met olijfolie."
+                    ],
+                    "nutritional_highlights": [
+                        "vitamine A",
+                        "antioxidant",
+                        "weinig calorieën"
+                    ],
+                    "kid_friendly_modifications": "Snijd het in kleine stukjes en serveer met yoghurt.",
+                    "cost_estimate_eur": 6,
+                    "season": "zomer",
+                    "tags": [
+                        "vegan",
+                        "zeytinyağlı",
+                        "soğuk_yenebilir",
+                        "hafif"
+                    ],
+                    "turkish_cuisine_category": "zeytinyagli",
+                    "story": "Het is onmisbaar in de Egeïsche en mediterrane keuken. Dit gerecht, dat ook koud geserveerd kan worden, is favoriet in de zomermaanden."
+                },
+                {
+                    "id": "anne_koftesi",
+                    "name": "Moeders Gehaktballetjes (Gebakken)",
+                    "description": "Recept voor gezonde gehaktballetjes met groenten, gebakken in de oven",
+                    "prep_time": "20 min",
+                    "cook_time": "35 minuten",
+                    "servings": 5,
+                    "difficulty": "middelmatig",
+                    "ingredients": [
+                        {
+                            "item": "Gehakt (rundvlees)",
+                            "amount": "500g",
+                            "alternative": "Gehakt (lams-rund gemengd)",
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "ui",
+                            "amount": "1 stuk (geraspt)",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "broodkruimels",
+                            "amount": "een half glas water",
+                            "alternative": "binnenkant van brood",
+                            "belgium_availability": "Turkse markten, Carrefour"
+                        },
+                        {
+                            "item": "ei",
+                            "amount": "1 stuk",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "aardappel",
+                            "amount": "3 stuks",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "tomaat",
+                            "amount": "2 stuks",
+                            "alternative": "ingeblikte tomaten",
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "peper",
+                            "amount": "2 stuks",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "yoghurt",
+                            "amount": "1 kom",
+                            "alternative": "Griekse yoghurt",
+                            "belgium_availability": "Elke supermarkt"
+                        }
+                    ],
+                    "instructions": [
+                        "Kneed de ui, paneermeel, ei, zout en kruiden door het gehakt.",
+                        "Vorm er gehaktballetjes van en leg ze op de bakplaat",
+                        "Snijd de aardappelen in plakjes en plaats ze tussen de gehaktballetjes.",
+                        "Tomaten en paprika fijnsnijden en erover strooien",
+                        "Giet er 1 glas water overheen.",
+                        "Bak in de oven op 180°C gedurende 35 minuten",
+                        "Serveer met knoflookyoghurt"
+                    ],
+                    "nutritional_highlights": [
+                        "hoog eiwit",
+                        "vitamine B12",
+                        "koolhydraatbalans"
+                    ],
+                    "kid_friendly_modifications": "Maak van de gehaktballetjes kleine balletjes, snijd de aardappelen in vingervormpjes.",
+                    "cost_estimate_eur": 10.5,
+                    "season": "alle seizoenen",
+                    "tags": [
+                        "protein_zengini",
+                        "fırın_yemeği",
+                        "aile_yemeği"
+                    ],
+                    "turkish_cuisine_category": "et_yemegi",
+                    "story": "Deze gehaktbal, een uniek recept voor iedere moeder, wordt minder vet en gezonder door hem in de oven te bakken."
+                },
+                {
+                    "id": "tavuk_sote",
+                    "name": "Gebakken kip",
+                    "description": "Snelle en praktische huisgemaakte maaltijd met groenten",
+                    "prep_time": "10 minuten",
+                    "cook_time": "20 min",
+                    "servings": 4,
+                    "difficulty": "gemakkelijk",
+                    "ingredients": [
+                        {
+                            "item": "kipfilet",
+                            "amount": "500 g (in blokjes)",
+                            "alternative": "kippenpoot",
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "ui",
+                            "amount": "1 stuk",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "peper",
+                            "amount": "2 stuks",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "paddestoel",
+                            "amount": "200g",
+                            "alternative": "ingeblikte champignons",
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "tomatenpuree",
+                            "amount": "1 eetlepel",
+                            "alternative": null,
+                            "belgium_availability": "Turkse markten"
+                        },
+                        {
+                            "item": "knoflook",
+                            "amount": "2 tanden",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "olijfolie",
+                            "amount": "2 eetlepels",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        }
+                    ],
+                    "instructions": [
+                        "Gebraden kip in olijfolie",
+                        "Voeg ui en knoflook toe en bak",
+                        "Voeg peper en champignons toe",
+                        "Tomatenpuree toevoegen en mengen",
+                        "Kook gedurende 15 minuten op laag vuur"
+                    ],
+                    "nutritional_highlights": [
+                        "laag vetgehalte",
+                        "hoog eiwit",
+                        "Vitamine C"
+                    ],
+                    "kid_friendly_modifications": "Verminder de kruiden en serveer rijst ernaast",
+                    "cost_estimate_eur": 8,
+                    "season": "alle seizoenen",
+                    "tags": [
+                        "hızlı",
+                        "protein",
+                        "30_dk_altı"
+                    ],
+                    "turkish_cuisine_category": "et_yemegi",
+                    "story": "Redder van werkdagen. Deze maaltijd, die in minder dan 30 minuten klaar is, is zowel praktisch als voedzaam."
+                },
+                {
+                    "id": "karniyarik",
+                    "name": "Karnıyarık (moederstijl)",
+                    "description": "Aubergineschotel met gehakt is een onmisbaar onderdeel van zomeravonden. Gebakken, licht geoliede versie.",
+                    "prep_time": "25 minuten",
+                    "cook_time": "40 min",
+                    "servings": 5,
+                    "difficulty": "middelmatig",
+                    "ingredients": [
+                        {
+                            "item": "aubergine",
+                            "amount": "6 stuks (lang dun)",
+                            "alternative": null,
+                            "belgium_availability": "Turkse markten, zomerseizoen Carrefour/Delhaize"
+                        },
+                        {
+                            "item": "Gehakt (rundvlees)",
+                            "amount": "400g",
+                            "alternative": "Gehakt (lams-rund gemengd)",
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "ui",
+                            "amount": "2 stuks",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "tomaat",
+                            "amount": "3 stuks",
+                            "alternative": "ingeblikte tomaten",
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "peper",
+                            "amount": "2 stuks",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "knoflook",
+                            "amount": "3 tanden",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "olijfolie",
+                            "amount": "3 eetlepels",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        }
+                    ],
+                    "instructions": [
+                        "Schil de aubergines en laat ze 30 minuten in zout water weken.",
+                        "Bak in olijfolie of bak in de oven op 200°C gedurende 15 minuten",
+                        "Fruit de ui en knoflook, voeg het gehakt toe.",
+                        "Voeg tomaten en paprika toe en kook gedurende 10 minuten.",
+                        "Snij de aubergines doormidden en vul ze met het gehaktmengsel.",
+                        "Leg de plakjes tomaat erop en bak in de oven op 180°C gedurende 25 minuten."
+                    ],
+                    "nutritional_highlights": [
+                        "Rijk aan vezels",
+                        "antioxidant",
+                        "weinig koolhydraten"
+                    ],
+                    "kid_friendly_modifications": "Snijd de aubergines in kleine stukjes, meng ze met gehakt en strooi er cheddarkaas over.",
+                    "cost_estimate_eur": 9.5,
+                    "season": "zomer",
+                    "tags": [
+                        "geleneksel",
+                        "fırın_yemeği",
+                        "aile_yemeği",
+                        "sebze_ağırlıklı"
+                    ],
+                    "turkish_cuisine_category": "et_yemegi",
+                    "story": "Het dankt zijn naam aan het feit dat de aubergine in tweeën wordt gedeeld en erin wordt gevuld. Het is een van de meest populaire gerechten van Zuidoost-Anatolië."
+                },
+                {
+                    "id": "ezogelin_corbasi",
+                    "name": "Ezo Bruidssoep",
+                    "description": "Beroemde soep van Gaziantep, bereid met rode linzen, bulgur en rijst. Het draagt ​​het verhaal van Ezo Gelin.",
+                    "prep_time": "10 minuten",
+                    "cook_time": "35 minuten",
+                    "servings": 6,
+                    "difficulty": "gemakkelijk",
+                    "ingredients": [
+                        {
+                            "item": "rode linzen",
+                            "amount": "1 kopje",
+                            "alternative": null,
+                            "belgium_availability": "Aldi, Lidl, Turkse markten"
+                        },
+                        {
+                            "item": "bulgur",
+                            "amount": "een half glas water",
+                            "alternative": "couscous",
+                            "belgium_availability": "Turkse markten, enkele biowinkels"
+                        },
+                        {
+                            "item": "rijst",
+                            "amount": "2 eetlepels",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "ui",
+                            "amount": "1 stuk",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "knoflook",
+                            "amount": "3 tanden",
+                            "alternative": null,
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "boter",
+                            "amount": "2 eetlepels",
+                            "alternative": "olijfolie",
+                            "belgium_availability": "Elke supermarkt"
+                        },
+                        {
+                            "item": "munt",
+                            "amount": "1 theelepel",
+                            "alternative": "gedroogde munt",
+                            "belgium_availability": "Turkse markten"
+                        },
+                        {
+                            "item": "rode pepervlokken",
+                            "amount": "1 theelepel",
+                            "alternative": "paprika",
+                            "belgium_availability": "Turkse markten, Delhaize"
+                        }
+                    ],
+                    "instructions": [
+                        "Was de linzen en laat ze uitlekken",
+                        "Fruit de ui en knoflook in boter in een pan",
+                        "Voeg linzen, bulgur en rijst toe en meng.",
+                        "Voeg 6 kopjes water toe en kook",
+                        "Kook gedurende 25 minuten op laag vuur",
+                        "Meng, voeg munt en zout toe.",
+                        "Rooster de rode pepervlokken in boter en giet eroverheen."
+                    ],
+                    "nutritional_highlights": [
+                        "hoog eiwit",
+                        "Rijk aan vezels",
+                        "bron van vitamine B"
+                    ],
+                    "kid_friendly_modifications": "Verminder de kruiden, voeg citroensap en croutons toe.",
+                    "cost_estimate_eur": 3.5,
+                    "season": "winter",
+                    "tags": [
+                        "vegan",
+                        "glutensiz",
+                        "geleneksel",
+                        "dondurucuya_uygun"
+                    ],
+                    "turkish_cuisine_category": "corba",
+                    "story": "De soep bereid door Ezo, die als bruid naar Gaziantep kwam, is een van de meest populaire smaken van het zuidoosten geworden."
+                }
+            ],
+            "weekly_template": {
+                "pazartesi": {
+                    "breakfast": "Menemen + Kaas + Olijven",
+                    "lunch": "Linzensoep + Salade",
+                    "dinner": "Gebakken Gehaktballetjes + Aardappelen"
+                },
+                "sali": {
+                    "breakfast": "Gebak (kant-en-klaar filodeeg) + Thee",
+                    "lunch": "Sperziebonen met olijfolie + yoghurt",
+                    "dinner": "Kipfilet + Rijstpilaf"
+                },
+                "carsamba": {
+                    "breakfast": "Gebakken ei + brood",
+                    "lunch": "Ezogelinsoep + Salade",
+                    "dinner": "Karnıyarık + Bulgur Pilaf"
+                },
+                "persembe": {
+                    "breakfast": "Kaas pannenkoek",
+                    "lunch": "Kikkererwtenrijst (druk)",
+                    "dinner": "Gegrilde vis + rucolasalade"
+                },
+                "cuma": {
+                    "breakfast": "Bagel + Kaas + Tomaat",
+                    "lunch": "Yaylasoep + Brood",
+                    "dinner": "Ravioli (kant-en-klaar) + Knoflookyoghurt"
+                },
+                "cumartesi": {
+                    "breakfast": "Familieontbijt (strooi)",
+                    "lunch": "Kumpir (huisgemaakt)",
+                    "dinner": "Lahmacun (zelfgemaakt) + Salade"
+                },
+                "pazar": {
+                    "breakfast": "Worst Ei + Gebak",
+                    "lunch": "Türlü (groentegerecht)",
+                    "dinner": "Gedroogde bonen + rijst + augurken"
+                }
+            },
+            "meal_tips": [
+                "Winkel met een weeklijst, ga niet op een lege maag",
+                "Koop basisbenodigdheden bij supermarkten zoals Aldi/Lidl",
+                "Wekelijkse maaltijden bereiden op zondag (batch koken)",
+                "Presenteer kleurrijke en leuke borden voor kinderen",
+                "Volg de verse groenteseizoenen in België"
+            ]
+        }
     }
-  ],
-  "weekly_template": {
-    "pazartesi": {"breakfast": "Menemen + Peynir + Zeytin", "lunch": "Mercimek Çorbası + Salata", "dinner": "Fırında Köfte + Patates"},
-    "sali": {"breakfast": "Börek (hazır yufka) + Çay", "lunch": "Zeytinyağlı Taze Fasulye + Yoğurt", "dinner": "Tavuk Sote + Pirinç Pilavı"},
-    "carsamba": {"breakfast": "Sahanda Yumurta + Ekmek", "lunch": "Ezogelin Çorbası + Salata", "dinner": "Karnıyarık + Bulgur Pilavı"},
-    "persembe": {"breakfast": "Peynirli Gözleme", "lunch": "Nohutlu Pilav (düdüklü)", "dinner": "Izgara Balık + Roka Salatası"},
-    "cuma": {"breakfast": "Simit + Peynir + Domates", "lunch": "Yayla Çorbası + Ekmek", "dinner": "Mantı (hazır) + Sarımsaklı Yoğurt"},
-    "cumartesi": {"breakfast": "Aile Kahvaltısı (serpme)", "lunch": "Kumpir (ev yapımı)", "dinner": "Lahmacun (ev yapımı) + Salata"},
-    "pazar": {"breakfast": "Sucuklu Yumurta + Börek", "lunch": "Türlü (sebze yemeği)", "dinner": "Kuru Fasulye + Pilav + Turşu"}
-  },
-  "meal_tips": [
-    "Haftalık liste ile alışveriş yapın, aç karnına gitmeyin",
-    "Aldi/Lidl gibi marketlerden temel ürünleri alın",
-    "Pazar günü haftalık yemek hazırlığı yapın (batch cooking)",
-    "Çocuklar için tabakları renkli ve eğlenceli sunun",
-    "Belgium'da taze sebze mevsimlerini takip edin"
-  ]
 }

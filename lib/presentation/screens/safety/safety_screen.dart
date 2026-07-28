@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../../../config/constants.dart';
 import '../../../config/routes.dart';
 import '../../../domain/entities.dart';
@@ -56,7 +57,7 @@ class _SafetyScreenState extends State<SafetyScreen>
             content: Text('🛡️ ${alert.message}'),
             backgroundColor: alert.severity == AlertSeverity.critical
                 ? AppColors.error
-                : AppColors.cobalt,
+                : const Color(0xFF6366F1),
             behavior: SnackBarBehavior.floating,
             duration: const Duration(seconds: 4),
           ),
@@ -66,7 +67,22 @@ class _SafetyScreenState extends State<SafetyScreen>
   }
 
   Future<void> _initLocation() async {
-    final granted = await LocationService.requestPermissions();
+    final granted = await LocationService.requestPermissionsWithFallback(
+      onDeniedForever: () async {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(AppLocalizations.of(context).sfLocationDenied),
+            backgroundColor: const Color(0xFF13131A),
+            action: SnackBarAction(
+              label: AppLocalizations.of(context).sfSettings,
+              textColor: const Color(0xFF6366F1),
+              onPressed: openAppSettings,
+            ),
+          ),
+        );
+      },
+    );
     if (granted) {
       final pos = await LocationService.getCurrentLocation();
       final addr = await LocationService.getCurrentAddress();
@@ -96,7 +112,9 @@ class _SafetyScreenState extends State<SafetyScreen>
           _currentAddress = addr;
         });
       }
-    } catch (e) { debugPrint('Safety screen error: $e'); }
+    } catch (e) {
+      debugPrint('Safety screen error: $e');
+    }
   }
 
   @override
@@ -141,6 +159,7 @@ class _SafetyScreenState extends State<SafetyScreen>
   }
 
   Future<void> _activateSOS() async {
+    final defaultUser = AppLocalizations.of(context).commonUser;
     setState(() {
       _sosActive = true;
       _sosProgress = 0;
@@ -155,8 +174,10 @@ class _SafetyScreenState extends State<SafetyScreen>
     setState(() => _currentLocation = location);
 
     final user = AuthService.currentUser;
-    final userName = user?.userMetadata?['display_name'] as String? ?? 'Kullanıcı';
-    final familyId = AuthService.currentUser?.userMetadata?['family_id'] as String?;
+    final userName =
+        user?.userMetadata?['display_name'] as String? ?? defaultUser;
+    final familyId =
+        AuthService.currentUser?.userMetadata?['family_id'] as String?;
     if (familyId != null && familyId.isNotEmpty) {
       await EmergencyService.triggerSOS(
         familyId: familyId,
@@ -181,18 +202,17 @@ class _SafetyScreenState extends State<SafetyScreen>
         context: context,
         barrierDismissible: false,
         builder: (context) => AlertDialog(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          title: const Row(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          title: Row(
             children: [
-              Icon(Icons.warning_amber_rounded, color: AppColors.error),
-              SizedBox(width: 8),
-              Text('ACİL DURUM AKTİF'),
+              const Icon(Icons.warning_amber_rounded, color: AppColors.error),
+              const SizedBox(width: 8),
+              Text(AppLocalizations.of(context).sfEmergencyActive),
             ],
           ),
-          content: const Text(
-            'Aile üyelerine bildirim gönderildi. Canlı konum paylaşılıyor.',
-          ),
+          content: Text(AppLocalizations.of(context).sfNotifSent),
           actions: [
             TextButton(
               onPressed: () {
@@ -200,11 +220,11 @@ class _SafetyScreenState extends State<SafetyScreen>
                 _callEmergency();
               },
               style: TextButton.styleFrom(foregroundColor: AppColors.error),
-              child: const Text('112 Ara'),
+              child: Text(AppLocalizations.of(context).sfCall112),
             ),
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('Konumu Güncelle'),
+              child: Text(AppLocalizations.of(context).sfUpdateLocation),
             ),
             TextButton(
               onPressed: () {
@@ -228,7 +248,9 @@ class _SafetyScreenState extends State<SafetyScreen>
     _toggleLocationSharing(force: false);
 
     final user = AuthService.currentUser;
-    final userName = user?.userMetadata?['display_name'] as String? ?? 'Kullanıcı';
+    final userName =
+        user?.userMetadata?['display_name'] as String? ??
+        AppLocalizations.of(context).commonUser;
     await EmergencyService.sendSOSCancel(
       userName: userName,
       familyId: AuthService.currentUserId ?? '',
@@ -255,7 +277,9 @@ class _SafetyScreenState extends State<SafetyScreen>
             pos.longitude,
           );
           if (mounted) setState(() => _currentAddress = addr);
-        } catch (e) { debugPrint('Safety screen error: $e'); }
+        } catch (e) {
+          debugPrint('Safety screen error: $e');
+        }
       });
     } else {
       LocationService.stopLiveSharing();
@@ -269,19 +293,22 @@ class _SafetyScreenState extends State<SafetyScreen>
     final ok = await EmergencyService.callEmergency();
     if (!ok && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context).telefonUygulamasiAcilamiyor)),
+        SnackBar(
+          content: Text(
+            AppLocalizations.of(context).telefonUygulamasiAcilamiyor,
+          ),
+        ),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final safeBottom = MediaQuery.of(context).viewPadding.bottom;
     final safeTop = MediaQuery.of(context).viewPadding.top;
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       body: SafeArea(
         bottom: false,
         child: CustomScrollView(
@@ -296,20 +323,17 @@ class _SafetyScreenState extends State<SafetyScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Güvenlik',
-                      style: Theme.of(context)
-                          .textTheme
-                          .displayLarge
-                          ?.copyWith(fontSize: 32),
+                      AppLocalizations.of(context).safety,
+                      style: Theme.of(
+                        context,
+                      ).textTheme.displayLarge?.copyWith(fontSize: 32),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Ailenizin koruma kalkanı',
+                      AppLocalizations.of(context).ailenizinKorumaKalkani,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: isDark
-                                ? AppColors.darkTextSecondary
-                                : AppColors.slate,
-                          ),
+                        color: const Color(0xFF6B7280),
+                      ),
                     ),
                   ],
                 ),
@@ -320,13 +344,11 @@ class _SafetyScreenState extends State<SafetyScreen>
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(
-                  color: isDark ? AppColors.darkCard : Colors.white,
+                  color: const Color(0xFF13131A),
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: isDark
-                          ? Colors.black.withAlpha(20)
-                          : Colors.black.withAlpha(5),
+                      color: Colors.black.withAlpha(20),
                       blurRadius: 16,
                       offset: const Offset(0, 4),
                     ),
@@ -336,13 +358,11 @@ class _SafetyScreenState extends State<SafetyScreen>
                   children: [
                     const SizedBox(height: 16),
                     Text(
-                      'Acil Durum Butonu',
-                      style: TextStyle(
+                      AppLocalizations.of(context).emTitle,
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
-                        color: isDark
-                            ? AppColors.darkTextPrimary
-                            : AppColors.dark,
+                        color: Color(0xFFE5E7EB),
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -350,11 +370,9 @@ class _SafetyScreenState extends State<SafetyScreen>
                       _sosActive
                           ? 'Acil durum aktif — aile bilgilendirildi'
                           : 'Butona 3 saniye basılı tutun',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 13,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.slate,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                     SOSButton(
@@ -375,17 +393,17 @@ class _SafetyScreenState extends State<SafetyScreen>
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: isDark ? AppColors.darkCard : Colors.white,
+                  color: const Color(0xFF13131A),
                   borderRadius: BorderRadius.circular(16),
                   border: _locationSharing
                       ? Border.all(
-                          color: AppColors.success.withAlpha(80), width: 1.5)
+                          color: const Color(0xFF10B981).withAlpha(80),
+                          width: 1.5,
+                        )
                       : null,
                   boxShadow: [
                     BoxShadow(
-                      color: isDark
-                          ? Colors.black.withAlpha(20)
-                          : Colors.black.withAlpha(5),
+                      color: Colors.black.withAlpha(20),
                       blurRadius: 12,
                       offset: const Offset(0, 2),
                     ),
@@ -399,21 +417,19 @@ class _SafetyScreenState extends State<SafetyScreen>
                         Icon(
                           Icons.location_on,
                           color: _locationSharing
-                              ? AppColors.success
-                              : AppColors.slate,
+                              ? const Color(0xFF10B981)
+                              : const Color(0xFF6B7280),
                           size: 18,
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          'Canlı Konum',
+                          AppLocalizations.of(context).canliKonum,
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
                             color: _locationSharing
-                                ? AppColors.success
-                                : (isDark
-                                    ? AppColors.darkTextPrimary
-                                    : AppColors.dark),
+                                ? const Color(0xFF10B981)
+                                : (const Color(0xFFE5E7EB)),
                           ),
                         ),
                         const Spacer(),
@@ -422,20 +438,22 @@ class _SafetyScreenState extends State<SafetyScreen>
                           height: 8,
                           decoration: BoxDecoration(
                             color: _locationSharing
-                                ? AppColors.success
-                                : AppColors.lightGray,
+                                ? const Color(0xFF10B981)
+                                : const Color(0xFF9CA3AF),
                             shape: BoxShape.circle,
                           ),
                         ),
                         const SizedBox(width: 6),
                         Text(
-                          _locationSharing ? 'Aktif' : 'Pasif',
+                          _locationSharing
+                              ? AppLocalizations.of(context).commonActive
+                              : AppLocalizations.of(context).commonPassive,
                           style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
                             color: _locationSharing
-                                ? AppColors.success
-                                : AppColors.lightGray,
+                                ? const Color(0xFF10B981)
+                                : const Color(0xFF9CA3AF),
                           ),
                         ),
                       ],
@@ -447,34 +465,28 @@ class _SafetyScreenState extends State<SafetyScreen>
                         children: [
                           Text(
                             _currentAddress!.fullAddress,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 13,
-                              color: isDark
-                                  ? AppColors.darkTextSecondary
-                                  : AppColors.slate,
+                              color: Color(0xFF6B7280),
                             ),
                           ),
                           const SizedBox(height: 2),
                           Text(
                             'Lat: ${_currentLocation?.latitude.toStringAsFixed(4) ?? '-'}, '
                             'Lng: ${_currentLocation?.longitude.toStringAsFixed(4) ?? '-'}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 11,
-                              color: isDark
-                                  ? AppColors.darkTextSecondary
-                                  : AppColors.slate,
+                              color: Color(0xFF6B7280),
                             ),
                           ),
                         ],
                       )
                     else
                       Text(
-                        'Konum alınıyor...',
-                        style: TextStyle(
+                        AppLocalizations.of(context).konumAliniyor,
+                        style: const TextStyle(
                           fontSize: 13,
-                          color: isDark
-                              ? AppColors.darkTextSecondary
-                              : AppColors.slate,
+                          color: Color(0xFF6B7280),
                         ),
                       ),
                     const SizedBox(height: 12),
@@ -489,11 +501,11 @@ class _SafetyScreenState extends State<SafetyScreen>
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
                 child: Text(
-                  'HIZLI İŞLEMLER',
-                  style: TextStyle(
+                  AppLocalizations.of(context).hizliIslemler,
+                  style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
-                    color: isDark ? AppColors.slateLight : AppColors.slate,
+                    color: Color(0xFF9CA3AF),
                     letterSpacing: 0.5,
                   ),
                 ),
@@ -506,12 +518,12 @@ class _SafetyScreenState extends State<SafetyScreen>
                   children: [
                     QuickActionButton(
                       icon: Icons.location_on_outlined,
-                      iconBg: const Color(0xFFDBEAFE),
-                      iconColor: AppColors.cobalt,
-                      label: 'Konumumu Paylaş',
+                      iconBg: const Color(0xFF6366F1).withAlpha(30),
+                      iconColor: const Color(0xFF6366F1),
+                      label: AppLocalizations.of(context).konumumuPaylas,
                       description: _locationSharing
-                          ? 'Canlı konum aktif'
-                          : 'Canlı konum gönder',
+                          ? AppLocalizations.of(context).sfLiveActive
+                          : AppLocalizations.of(context).sfLiveSend,
                       isActive: _locationSharing,
                       pulse: _locationSharing,
                       onPress: () => _toggleLocationSharing(),
@@ -519,21 +531,25 @@ class _SafetyScreenState extends State<SafetyScreen>
                     const SizedBox(height: 12),
                     QuickActionButton(
                       icon: Icons.call,
-                      iconBg: const Color(0xFFD1FAE5),
-                      iconColor: const Color(0xFF059669),
-                      label: "112'yi Ara",
-                      description: 'Acil çağrı merkezi',
+                      iconBg: const Color(0xFF10B981).withAlpha(30),
+                      iconColor: const Color(0xFF10B981),
+                      label: AppLocalizations.of(context).callEmergency112,
+                      description: AppLocalizations.of(
+                        context,
+                      ).acilCagriMerkezi,
                       danger: true,
                       onPress: _callEmergency,
                     ),
                     const SizedBox(height: 12),
                     QuickActionButton(
                       icon: Icons.health_and_safety_outlined,
-                      iconBg: const Color(0xFFEDE9FE),
+                      iconBg: const Color(0xFF8B5CF6).withAlpha(30),
                       iconColor: const Color(0xFF7C3AED),
-                      label: 'Sağlık Kartım',
-                      description: 'Alerji ve ilaç bilgileri',
-                      badge: 'Güncel',
+                      label: AppLocalizations.of(context).saglikKartim,
+                      description: AppLocalizations.of(
+                        context,
+                      ).alerjiVeIlacBilgileri,
+                      badge: AppLocalizations.of(context).setCurrent,
                       onPress: () => context.push(AppRoutes.healthCard),
                     ),
                   ],
@@ -557,30 +573,38 @@ class _SafetyScreenState extends State<SafetyScreen>
                   tools: [
                     SafetyTool(
                       icon: Icons.shield_outlined,
-                      iconColor: AppColors.cobalt,
-                      label: 'Güvenli Bölgeler',
-                      description: 'Ev, okul, iş için geofence',
+                      iconColor: const Color(0xFF6366F1),
+                      label: AppLocalizations.of(context).guvenliBolgeler,
+                      description: AppLocalizations.of(
+                        context,
+                      ).evOkulIsIcinGeofence,
                       onTap: () => context.push(AppRoutes.safeZones),
                     ),
                     SafetyTool(
                       icon: Icons.timer_outlined,
-                      iconColor: AppColors.success,
-                      label: 'Güvenli Varış',
-                      description: 'Belirli sürede varış kontrolü',
+                      iconColor: const Color(0xFF10B981),
+                      label: AppLocalizations.of(context).guvenliVaris,
+                      description: AppLocalizations.of(
+                        context,
+                      ).belirliSuredeVarisKontrolu,
                       onTap: () => context.push(AppRoutes.safeArrival),
                     ),
                     SafetyTool(
                       icon: Icons.mic_none,
-                      iconColor: AppColors.warning,
-                      label: 'Ortam Dinleme',
-                      description: 'Acil durumda ses kaydı',
+                      iconColor: const Color(0xFFF59E0B),
+                      label: AppLocalizations.of(context).sfAmbientListen,
+                      description: AppLocalizations.of(
+                        context,
+                      ).acilDurumdaSesKaydi,
                       onTap: () => context.push(AppRoutes.ambientListening),
                     ),
                     SafetyTool(
                       icon: Icons.flashlight_on_outlined,
-                      iconColor: AppColors.purple,
-                      label: 'Fener',
-                      description: 'Telefon fenerini aç',
+                      iconColor: const Color(0xFF8B5CF6),
+                      label: AppLocalizations.of(context).sfFlashlight,
+                      description: AppLocalizations.of(
+                        context,
+                      ).telefonFeneriniAc,
                       onTap: () => context.push(AppRoutes.flashlight),
                     ),
                   ],
@@ -589,9 +613,7 @@ class _SafetyScreenState extends State<SafetyScreen>
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 32)),
             // Bottom padding for safe area + nav
-            SliverToBoxAdapter(
-              child: SizedBox(height: safeBottom + 120),
-            ),
+            SliverToBoxAdapter(child: SizedBox(height: safeBottom + 120)),
           ],
         ),
       ),

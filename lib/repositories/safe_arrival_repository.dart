@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 import '../core/supabase_client.dart';
 import '../core/utils/repository_mixin.dart';
 import '../services/auth_service.dart';
@@ -138,23 +136,5 @@ class SafeArrivalRepository with RepositoryErrorHandler {
           })
           .eq('id', id);
     }, 'cancelMonitor');
-  }
-
-  Stream<List<Map<String, dynamic>>> watchFamilyArrivals() async* {
-    try {
-      final familyId = await _getFamilyId();
-      if (familyId == null) {
-        yield [];
-        return;
-      }
-      yield* _client
-          .from('safe_arrivals')
-          .stream(primaryKey: ['id'])
-          .eq('family_id', familyId)
-          .map((data) => data.cast<Map<String, dynamic>>());
-    } catch (e) {
-      debugPrint('SafeArrivalRepository.watchFamilyArrivals error: $e');
-      yield* Stream.error(RepositoryException('Beklenmeyen hata [watchFamilyArrivals]: $e'));
-    }
   }
 }

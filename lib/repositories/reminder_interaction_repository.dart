@@ -71,8 +71,8 @@ class ReminderInteractionRepository with RepositoryErrorHandler {
     return handleRepositoryCall(() async {
       final response = await _client
           .rpc('get_reminder_analytics', params: {'p_reminder_id': reminderId})
-          .single();
-      return response;
+          .maybeSingle();
+      return response ?? {};
     }, 'getAnalytics');
   }
 }

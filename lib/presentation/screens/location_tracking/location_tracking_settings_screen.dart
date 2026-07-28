@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import '../../../domain/models/location_tracking.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../../core/settings_store.dart';
 
 class LocationTrackingSettingsScreen extends StatefulWidget {
   const LocationTrackingSettingsScreen({super.key});
@@ -33,12 +34,12 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
         actions: [
           IconButton(
             icon: const Icon(Icons.auto_awesome),
-            tooltip: 'AI Optimize Et',
+            tooltip: AppLocalizations.of(context).ltAiOptimize,
             onPressed: () {},
           ),
           IconButton(
             icon: const Icon(Icons.save),
-            tooltip: 'Kaydet',
+            tooltip: AppLocalizations.of(context).save,
             onPressed: _save,
           ),
         ],
@@ -50,17 +51,17 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
             SwitchListTile(
               value: _enabled,
               onChanged: (v) => setState(() => _enabled = v),
-              title: const Text('Konum takibi aktif'),
+              title: Text(AppLocalizations.of(context).ltTrackingActive),
               secondary: const Icon(Icons.location_on, color: Colors.green),
             ),
             const SizedBox(height: 8),
-            const Text('Öncelik:', style: TextStyle(fontWeight: FontWeight.w600)),
+            Text(AppLocalizations.of(context).oncelik1, style: const TextStyle(fontWeight: FontWeight.w600)),
             const SizedBox(height: 8),
             SegmentedButton<TrackingPriority>(
               segments: [
-                const ButtonSegment(value: TrackingPriority.battery, label: Text('Batarya')),
-                const ButtonSegment(value: TrackingPriority.balanced, label: Text('Dengeli')),
-                const ButtonSegment(value: TrackingPriority.accuracy, label: Text('Hassas')),
+                ButtonSegment(value: TrackingPriority.battery, label: Text(AppLocalizations.of(context).fssBattery)),
+                ButtonSegment(value: TrackingPriority.balanced, label: Text(AppLocalizations.of(context).ltBalanced)),
+                ButtonSegment(value: TrackingPriority.accuracy, label: Text(AppLocalizations.of(context).ltAccuracy)),
                 ButtonSegment(value: TrackingPriority.custom, label: Text(AppLocalizations.of(context).ozel)),
               ],
               selected: {_priority},
@@ -69,7 +70,7 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
             const SizedBox(height: 8),
             Text(
               _priorityDescription(),
-              style: TextStyle(color: Colors.grey.shade400, fontSize: 13),
+              style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13),
             ),
           ]),
 
@@ -77,11 +78,11 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
             LinearProgressIndicator(
               value: 0.58,
               minHeight: 12,
-              backgroundColor: Colors.grey.shade800,
+              backgroundColor: const Color(0xFF374151),
               valueColor: AlwaysStoppedAnimation<Color>(Colors.green.shade400),
             ),
             const SizedBox(height: 8),
-            const Text('58% - Tahmini kalan süre:', style: TextStyle(fontWeight: FontWeight.w600)),
+            Text(AppLocalizations.of(context).tahminiKalanSure, style: const TextStyle(fontWeight: FontWeight.w600)),
             _estimateRow('Mevcut modda', '18 saat'),
             _estimateRow('Batarya dostu', '36 saat'),
             _estimateRow('Hassas modda', '8 saat'),
@@ -97,14 +98,14 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
             ),
           ]),
 
-          _section('HAREKET PROFİLLERİ', children: [
+          _section(AppLocalizations.of(context).hareketProfilleri, children: [
             _profileTile('stationary', 'Durağan', Icons.stop_circle, Colors.grey),
             _profileTile('walking', 'Yürüyüş', Icons.directions_walk, Colors.blue),
             _profileTile('driving', 'Araç', Icons.directions_car, Colors.orange),
             _profileTile('emergency', 'Acil Durum', Icons.emergency, Colors.red),
           ]),
 
-          _section('GELİŞMİŞ AYARLAR', children: [
+          _section(AppLocalizations.of(context).gelismisAyarlar, children: [
             _switchTile('Adaptif ekran parlaklığı', _adaptiveBrightness, (v) => setState(() => _adaptiveBrightness = v)),
             _switchTile('Arka plan yenileme optimizasyonu', _backgroundRefresh, (v) => setState(() => _backgroundRefresh = v)),
             _switchTile('Ağ isteklerini toplama', _networkBatching, (v) => setState(() => _networkBatching = v)),
@@ -117,7 +118,7 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
           ElevatedButton.icon(
             onPressed: _save,
             icon: const Icon(Icons.save),
-            label: const Text('KAYDET', style: TextStyle(fontSize: 16)),
+            label: Text(AppLocalizations.of(context).crashSaveUpper, style: const TextStyle(fontSize: 16)),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.green.shade700,
               foregroundColor: Colors.white,
@@ -154,7 +155,7 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(color: Colors.grey.shade400, fontSize: 13)),
+          Text(label, style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
           Text(value, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
         ],
       ),
@@ -170,7 +171,7 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
         config != null
             ? '${config.updateIntervalSeconds}s | ${config.accuracy} | ${config.providers.join('+')}'
             : '',
-        style: TextStyle(color: Colors.grey.shade400, fontSize: 12),
+        style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 12),
       ),
       trailing: TextButton.icon(
         onPressed: () => _editProfile(key, label, icon, color),
@@ -211,9 +212,45 @@ class _LocationTrackingSettingsScreenState extends State<LocationTrackingSetting
     });
   }
 
-  void _save() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Ayarlar kaydedildi')),
-    );
+  static const _storeName = 'location_tracking_settings';
+
+  /// Ayarları GERÇEKTEN kaydeder (önceden yalnızca mesaj gösteriliyordu).
+  Future<void> _save() async {
+    final messenger = ScaffoldMessenger.of(context);
+    final okMsg = AppLocalizations.of(context).crashSettingsSaved;
+    final failMsg = AppLocalizations.of(context).settingsSaveFailed;
+    final ok = await SettingsStore.save(_storeName, {
+      'enabled': _enabled,
+      'adaptiveBrightness': _adaptiveBrightness,
+      'backgroundRefresh': _backgroundRefresh,
+      'networkBatching': _networkBatching,
+      'locationCache': _locationCache,
+      'motionCoProcessor': _motionCoProcessor,
+      'geofenceOptimization': _geofenceOptimization,
+    });
+    messenger.showSnackBar(SnackBar(
+      content: Text(ok ? okMsg : failMsg),
+      backgroundColor: ok ? null : const Color(0xFFB42318),
+    ));
+  }
+
+  void _loadSettings() {
+    final j = SettingsStore.load(_storeName);
+    if (j.isEmpty) return;
+    setState(() {
+      _enabled = j['enabled'] as bool? ?? _enabled;
+      _adaptiveBrightness = j['adaptiveBrightness'] as bool? ?? _adaptiveBrightness;
+      _backgroundRefresh = j['backgroundRefresh'] as bool? ?? _backgroundRefresh;
+      _networkBatching = j['networkBatching'] as bool? ?? _networkBatching;
+      _locationCache = j['locationCache'] as bool? ?? _locationCache;
+      _motionCoProcessor = j['motionCoProcessor'] as bool? ?? _motionCoProcessor;
+      _geofenceOptimization = j['geofenceOptimization'] as bool? ?? _geofenceOptimization;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSettings();
   }
 }

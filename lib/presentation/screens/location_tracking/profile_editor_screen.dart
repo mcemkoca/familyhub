@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../../core/settings_store.dart';
 
 class ProfileEditorScreen extends StatefulWidget {
   const ProfileEditorScreen({super.key});
@@ -36,7 +37,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profil Düzenle: $label'),
+        title: Text(AppLocalizations.of(context).peTitle(label)),
         actions: [
           IconButton(icon: const Icon(Icons.save), onPressed: _save),
           IconButton(icon: const Icon(Icons.restore), onPressed: _reset),
@@ -50,7 +51,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
             'GENEL',
             children: [
               TextField(
-                decoration: const InputDecoration(labelText: 'İsim'),
+                decoration: InputDecoration(labelText: AppLocalizations.of(context).isim),
                 controller: TextEditingController(text: label),
               ),
               const SizedBox(height: 12),
@@ -64,7 +65,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
                   ),
                   const SizedBox(width: 8),
                   Chip(
-                    label: Text('Renk: $color'),
+                    label: Text(AppLocalizations.of(context).peColor(color)),
                     backgroundColor: color.withAlpha(51),
                   ),
                 ],
@@ -73,17 +74,15 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
           ),
 
           // Update settings
-          _section(
-            'GÜNCELLEME AYARLARI',
+          _section(AppLocalizations.of(context).guncellemeAyarlari,
             children: [
               _numberField(
                 'Sıklık (saniye)',
                 _updateInterval.toString(),
                 (v) => _updateInterval = int.tryParse(v) ?? 10,
               ),
-              const Text(
-                '5-60 sn arası',
-                style: TextStyle(color: Colors.white54, fontSize: 12),
+              Text(AppLocalizations.of(context).snArasi,
+                style: const TextStyle(color: Colors.white54, fontSize: 12),
               ),
               const SizedBox(height: 12),
               _numberField(
@@ -91,49 +90,45 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
                 _distanceFilter.toString(),
                 (v) => _distanceFilter = int.tryParse(v) ?? 10,
               ),
-              const Text(
-                'Konum değişmeden güncelleme yok',
-                style: TextStyle(color: Colors.white54, fontSize: 12),
+              Text(AppLocalizations.of(context).konumDegismedenGuncellemeYok,
+                style: const TextStyle(color: Colors.white54, fontSize: 12),
               ),
               const SizedBox(height: 12),
               CheckboxListTile(
                 value: true,
                 onChanged: (_) {},
                 title: Text(AppLocalizations.of(context).zamanlayiciYedek),
-                subtitle: const Text(
-                  'Konum değişmese bile zorunlu güncelleme',
-                  style: TextStyle(fontSize: 12),
+                subtitle: Text(AppLocalizations.of(context).konumDegismeseBileZorunluGuncelleme,
+                  style: const TextStyle(fontSize: 12),
                 ),
               ),
             ],
           ),
 
           // Accuracy
-          _section(
-            'HASSASİYET',
+          _section(AppLocalizations.of(context).hassasiyet,
             children: [
               SegmentedButton<String>(
-                segments: const [
-                  ButtonSegment(value: 'high', label: Text('Yüksek (10m)')),
-                  ButtonSegment(value: 'medium', label: Text('Orta (50m)')),
-                  ButtonSegment(value: 'low', label: Text('Düşük (100m+)')),
+                segments: [
+                  ButtonSegment(value: 'high', label: Text(AppLocalizations.of(context).peHigh)),
+                  ButtonSegment(value: 'medium', label: Text(AppLocalizations.of(context).peMedium)),
+                  ButtonSegment(value: 'low', label: Text(AppLocalizations.of(context).peLow)),
                 ],
                 selected: {_accuracy},
                 onSelectionChanged: (s) => setState(() => _accuracy = s.first),
               ),
               const SizedBox(height: 12),
-              const Text(
-                'GPS kalitesi düşükse:',
-                style: TextStyle(fontWeight: FontWeight.w600),
+              Text(AppLocalizations.of(context).gpsKalitesiDusukse,
+                style: const TextStyle(fontWeight: FontWeight.w600),
               ),
               RadioListTile(
-                title: const Text('WiFi + Cellular dene'),
+                title: Text(AppLocalizations.of(context).peWifiCellular),
                 value: 'fallback',
                 groupValue: 'fallback',
                 onChanged: (_) {},
               ),
               RadioListTile(
-                title: const Text('Son bilinen konumu kullan'),
+                title: Text(AppLocalizations.of(context).peLastKnown),
                 value: 'cached',
                 groupValue: 'fallback',
                 onChanged: (_) {},
@@ -142,8 +137,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
           ),
 
           // Power management
-          _section(
-            'GÜÇ YÖNETİMİ',
+          _section(AppLocalizations.of(context).gucYonetimi,
             children: [
               SwitchListTile(
                 value: _limitGpsTime,
@@ -162,34 +156,31 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
               SwitchListTile(
                 value: _quickFix,
                 onChanged: (v) => setState(() => _quickFix = v),
-                title: const Text('Hızlı fix (önceki konumdan)'),
+                title: Text(AppLocalizations.of(context).peFastFix),
               ),
               SwitchListTile(
                 value: _motionTrigger,
                 onChanged: (v) => setState(() => _motionTrigger = v),
                 title: Text(AppLocalizations.of(context).hareketAlgilayiciIleTetikle),
-                subtitle: const Text(
-                  'Telefon sallanınca aktif ol',
-                  style: TextStyle(fontSize: 12),
+                subtitle: Text(AppLocalizations.of(context).telefonSallanincaAktifOl,
+                  style: const TextStyle(fontSize: 12),
                 ),
               ),
             ],
           ),
 
           // Transition rules
-          _section(
-            'GEÇİŞ KURALLARI',
+          _section(AppLocalizations.of(context).gecisKurallari,
             children: [
-              const Text(
-                'Bu profile geçiş:',
-                style: TextStyle(fontWeight: FontWeight.w600),
+              Text(AppLocalizations.of(context).buProfileGecis,
+                style: const TextStyle(fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 8),
               SegmentedButton<String>(
                 segments: [
                   ButtonSegment(value: 'speed', label: Text(AppLocalizations.of(context).hizEsigi)),
-                  const ButtonSegment(value: 'activity', label: Text('Aktivite')),
-                  const ButtonSegment(value: 'manual', label: Text('Manuel')),
+                  ButtonSegment(value: 'activity', label: Text(AppLocalizations.of(context).peActivity)),
+                  ButtonSegment(value: 'manual', label: Text(AppLocalizations.of(context).peManual)),
                 ],
                 selected: {_transitionType},
                 onSelectionChanged: (s) =>
@@ -209,9 +200,8 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
                 ),
               ],
               const SizedBox(height: 16),
-              const Text(
-                'Bu profilden çıkış:',
-                style: TextStyle(fontWeight: FontWeight.w600),
+              Text(AppLocalizations.of(context).buProfildenCikis,
+                style: const TextStyle(fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 8),
               _numberField(
@@ -219,9 +209,8 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
                 _exitDuration.toString(),
                 (v) => _exitDuration = int.tryParse(v) ?? 60,
               ),
-              const Text(
-                'Bu süre boyunca hareketsiz kalınca düşük profil',
-                style: TextStyle(color: Colors.white54, fontSize: 12),
+              Text(AppLocalizations.of(context).buSureBoyuncaHareketsizKalincaDusukProfil,
+                style: const TextStyle(color: Colors.white54, fontSize: 12),
               ),
             ],
           ),
@@ -230,7 +219,7 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
           ElevatedButton.icon(
             onPressed: _save,
             icon: const Icon(Icons.save),
-            label: const Text('KAYDET', style: TextStyle(fontSize: 16)),
+            label: Text(AppLocalizations.of(context).crashSaveUpper, style: const TextStyle(fontSize: 16)),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.green.shade700,
               foregroundColor: Colors.white,
@@ -281,10 +270,54 @@ class _ProfileEditorScreenState extends State<ProfileEditorScreen> {
     );
   }
 
-  void _save() {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Profil kaydedildi')));
+  static const _storeName = 'location_profile';
+
+  /// Profili GERÇEKTEN kaydeder (önceden yalnızca mesaj gösteriliyordu).
+  Future<void> _save() async {
+    final messenger = ScaffoldMessenger.of(context);
+    final okMsg = AppLocalizations.of(context).peSaved;
+    final failMsg = AppLocalizations.of(context).settingsSaveFailed;
+    final ok = await SettingsStore.save(_storeName, {
+      'updateInterval': _updateInterval,
+      'distanceFilter': _distanceFilter,
+      'accuracy': _accuracy,
+      'limitGpsTime': _limitGpsTime,
+      'maxGpsSearch': _maxGpsSearch,
+      'quickFix': _quickFix,
+      'motionTrigger': _motionTrigger,
+      'transitionType': _transitionType,
+      'speedThreshold': _speedThreshold,
+      'stabilizationDelay': _stabilizationDelay,
+      'exitDuration': _exitDuration,
+    });
+    messenger.showSnackBar(SnackBar(
+      content: Text(ok ? okMsg : failMsg),
+      backgroundColor: ok ? null : const Color(0xFFB42318),
+    ));
+  }
+
+  void _loadProfile() {
+    final j = SettingsStore.load(_storeName);
+    if (j.isEmpty) return;
+    setState(() {
+      _updateInterval = (j['updateInterval'] as num?)?.toInt() ?? _updateInterval;
+      _distanceFilter = (j['distanceFilter'] as num?)?.toInt() ?? _distanceFilter;
+      _accuracy = j['accuracy'] as String? ?? _accuracy;
+      _limitGpsTime = j['limitGpsTime'] as bool? ?? _limitGpsTime;
+      _maxGpsSearch = (j['maxGpsSearch'] as num?)?.toInt() ?? _maxGpsSearch;
+      _quickFix = j['quickFix'] as bool? ?? _quickFix;
+      _motionTrigger = j['motionTrigger'] as bool? ?? _motionTrigger;
+      _transitionType = j['transitionType'] as String? ?? _transitionType;
+      _speedThreshold = (j['speedThreshold'] as num?)?.toInt() ?? _speedThreshold;
+      _stabilizationDelay = (j['stabilizationDelay'] as num?)?.toInt() ?? _stabilizationDelay;
+      _exitDuration = (j['exitDuration'] as num?)?.toInt() ?? _exitDuration;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadProfile();
   }
 
   void _reset() {

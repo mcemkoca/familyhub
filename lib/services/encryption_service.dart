@@ -6,7 +6,7 @@ import 'package:encrypt/encrypt.dart' as enc;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:local_auth_android/local_auth_android.dart';
-import 'package:local_auth_darwin/local_auth_darwin.dart';
+import 'localization/locale_service.dart';
 
 /// AES-256 encryption service for sensitive local data.
 ///
@@ -15,15 +15,16 @@ import 'package:local_auth_darwin/local_auth_darwin.dart';
 /// - Master key stored in FlutterSecureStorage with hardware-backed options
 /// - Optional biometric unlock before key access
 class EncryptionService {
+  static String _text(Map<String, String> values) {
+    final language = LocaleService.resolveInitialLocale().languageCode;
+    return values[language] ?? values['tr']!;
+  }
+
   static const _storage = FlutterSecureStorage(
     aOptions: AndroidOptions(
       encryptedSharedPreferences: true,
       keyCipherAlgorithm: KeyCipherAlgorithm.RSA_ECB_PKCS1Padding,
       storageCipherAlgorithm: StorageCipherAlgorithm.AES_GCM_NoPadding,
-    ),
-    iOptions: IOSOptions(
-      accountName: 'familyhub_secure_v1',
-      accessibility: KeychainAccessibility.unlocked_this_device,
     ),
   );
   static const _keyStorageKey = 'app_encryption_key_v2';
@@ -197,15 +198,17 @@ class EncryptionService {
     if (!isAvailable) return false;
 
     final result = await localAuth.authenticate(
-      localizedReason: 'Şifrelenmiş verilere erişmek için kimlik doğrulama',
-      authMessages: const [
+      localizedReason: _text(const {
+        'tr': 'Şifrelenmiş verilere erişmek için kimliğinizi doğrulayın',
+        'en': 'Verify your identity to access encrypted data',
+        'nl': 'Verifieer je identiteit om versleutelde gegevens te openen',
+        'fr': 'Vérifiez votre identité pour accéder aux données chiffrées',
+      }),
+      authMessages: [
         AndroidAuthMessages(
-          signInTitle: 'FamilyHub Güvenlik',
-          cancelButton: 'İptal',
-          signInHint: 'Biyometrik doğrulama',
-        ),
-        IOSAuthMessages(
-          cancelButton: 'İptal',
+          signInTitle: _text(const {'tr': 'FamilyHub Güvenlik', 'en': 'FamilyHub Security', 'nl': 'FamilyHub-beveiliging', 'fr': 'Sécurité FamilyHub'}),
+          cancelButton: _text(const {'tr': 'İptal', 'en': 'Cancel', 'nl': 'Annuleren', 'fr': 'Annuler'}),
+          signInHint: _text(const {'tr': 'Biyometrik doğrulama', 'en': 'Biometric authentication', 'nl': 'Biometrische verificatie', 'fr': 'Authentification biométrique'}),
         ),
       ],
       biometricOnly: true,

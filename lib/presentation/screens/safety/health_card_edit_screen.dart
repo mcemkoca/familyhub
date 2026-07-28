@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import '../../../config/constants.dart';
 import '../../../services/health_card_service.dart';
@@ -14,6 +15,8 @@ class HealthCardEditScreen extends StatefulWidget {
 }
 
 class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   bool _isLoading = true;
   bool _saving = false;
 
@@ -134,7 +137,7 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
       if (mounted) {
         setState(() => _saving = false);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Sağlık kartı güncellendi')),
+          SnackBar(content: Text(AppLocalizations.of(context).hcUpdated)),
         );
         if (context.mounted) context.pop();
       }
@@ -143,7 +146,7 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
         setState(() => _saving = false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Kaydedilemedi: $e'),
+            content: Text(AppLocalizations.of(context).fdSaveFailed('$e')),
             backgroundColor: AppColors.error,
           ),
         );
@@ -168,14 +171,13 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = isDark ? AppColors.darkBackground : AppColors.cloudWhite;
+    final bg = const Color(0xFF0A0A0F);
 
     if (_isLoading) {
       return Scaffold(
         backgroundColor: bg,
         appBar: ScreenHeader(
-          title: 'Sağlık Kartını Düzenle',
+          title: AppLocalizations.of(context).saglikKartiniDuzenle,
           showBack: true,
           onBack: () => context.pop(),
         ),
@@ -186,7 +188,7 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
     return Scaffold(
       backgroundColor: bg,
       appBar: ScreenHeader(
-        title: 'Sağlık Kartını Düzenle',
+        title: AppLocalizations.of(context).saglikKartiniDuzenle,
         showBack: true,
         onBack: () => context.pop(),
         rightAction: TextButton(
@@ -197,13 +199,13 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
                   height: 16,
                   child: CircularProgressIndicator(
                     strokeWidth: 2,
-                    color: AppColors.cobalt,
+                    color: Color(0xFF6366F1),
                   ),
                 )
               : const Text(
                   'Kaydet',
                   style: TextStyle(
-                    color: AppColors.cobalt,
+                    color: Color(0xFF6366F1),
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -220,7 +222,7 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
                 children: [
                   // Sağlık Bilgileri
                   SettingsSection(
-                    title: 'SAĞLIK BİLGİLERİ',
+                    title: AppLocalizations.of(context).hcHealthInfo,
                     icon: Icons.health_and_safety_outlined,
                     children: [
                       Padding(
@@ -228,14 +230,12 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Kan Grubu',
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w500,
-                                color: isDark
-                                    ? AppColors.darkTextSecondary
-                                    : AppColors.slate,
+                                color: Color(0xFF6B7280),
                               ),
                             ),
                             const SizedBox(height: 10),
@@ -251,9 +251,7 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
                                   labelStyle: TextStyle(
                                     color: selected
                                         ? Colors.white
-                                        : (isDark
-                                              ? AppColors.darkTextPrimary
-                                              : AppColors.dark),
+                                        : (const Color(0xFFE5E7EB)),
                                   ),
                                   onSelected: (_) =>
                                       setState(() => _bloodType = type),
@@ -264,25 +262,25 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
                         ),
                       ),
                       _buildInput(
-                        label: 'Alerjiler',
+                        label: AppLocalizations.of(context).hcAllergies,
                         controller: _allergiesController,
                         hint: 'Örn: yer fıstığı, polen, antibiyotik',
                         icon: Icons.healing_outlined,
                       ),
                       _buildInput(
-                        label: 'Kronik Hastalıklar',
+                        label: AppLocalizations.of(context).chronicConditions,
                         controller: _conditionsController,
                         hint: 'Örn: astım, diyabet, hipertansiyon',
                         icon: Icons.medical_services_outlined,
                       ),
                       _buildInput(
-                        label: 'İlaçlar',
+                        label: AppLocalizations.of(context).medications,
                         controller: _medicationsController,
                         hint: 'Örn: Aspirin (100mg), Metformin (500mg)',
                         icon: Icons.medication_outlined,
                       ),
                       _buildSwitch(
-                        label: 'Organ Bağışçısı',
+                        label: AppLocalizations.of(context).hcOrganDonor,
                         value: _organDonor,
                         onChanged: (v) => setState(() => _organDonor = v),
                       ),
@@ -291,22 +289,22 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
                   const SizedBox(height: 8),
                   // Acil Durum Kişisi
                   SettingsSection(
-                    title: 'ACİL DURUM KİŞİSİ',
+                    title: AppLocalizations.of(context).hcEmergencyContact,
                     icon: Icons.emergency_outlined,
                     children: [
                       _buildInput(
-                        label: 'Ad Soyad',
+                        label: AppLocalizations.of(context).hcFullName,
                         controller: _emergencyNameController,
                         icon: Icons.person_outline,
                       ),
                       _buildInput(
-                        label: 'Telefon',
+                        label: AppLocalizations.of(context).crashPhone,
                         controller: _emergencyPhoneController,
                         icon: Icons.phone_outlined,
                         keyboardType: TextInputType.phone,
                       ),
                       _buildInput(
-                        label: 'Yakınlık Derecesi',
+                        label: AppLocalizations.of(context).yakinlikDerecesi,
                         controller: _emergencyRelationController,
                         hint: 'Örn: Eş, Anne, Baba, Kardeş',
                         icon: Icons.people_outline,
@@ -316,22 +314,22 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
                   const SizedBox(height: 8),
                   // Doktor Bilgileri
                   SettingsSection(
-                    title: 'DOKTOR BİLGİLERİ',
+                    title: AppLocalizations.of(context).hcDoctorInfo,
                     icon: Icons.local_hospital_outlined,
                     children: [
                       _buildInput(
-                        label: 'Doktor Adı',
+                        label: AppLocalizations.of(context).doktorAdi,
                         controller: _doctorNameController,
                         icon: Icons.person_outline,
                       ),
                       _buildInput(
-                        label: 'Telefon',
+                        label: AppLocalizations.of(context).crashPhone,
                         controller: _doctorPhoneController,
                         icon: Icons.phone_outlined,
                         keyboardType: TextInputType.phone,
                       ),
                       _buildInput(
-                        label: 'Hastane / Klinik',
+                        label: AppLocalizations.of(context).fhHospitalClinic,
                         controller: _doctorHospitalController,
                         icon: Icons.local_hospital_outlined,
                       ),
@@ -340,11 +338,11 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
                   const SizedBox(height: 8),
                   // Ek Notlar
                   SettingsSection(
-                    title: 'EK NOTLAR',
+                    title: AppLocalizations.of(context).hcExtraNotes,
                     icon: Icons.notes_outlined,
                     children: [
                       _buildInput(
-                        label: 'Notlar',
+                        label: AppLocalizations.of(context).hcNotes,
                         controller: _notesController,
                         hint: 'Eklemek istediğiniz sağlık notları...',
                         icon: Icons.notes_outlined,
@@ -370,7 +368,6 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
     TextInputType? keyboardType,
     int maxLines = 1,
   }) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
       child: Column(
@@ -378,10 +375,10 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
         children: [
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w500,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: Color(0xFF6B7280),
             ),
           ),
           const SizedBox(height: 8),
@@ -393,16 +390,16 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
               hintText: hint,
               hintStyle: TextStyle(
                 color: isDark
-                    ? AppColors.darkTextSecondary
-                    : AppColors.lightGray,
+                    ? const Color(0xFF6B7280)
+                    : const Color(0xFF9CA3AF),
               ),
               prefixIcon: Icon(
                 icon,
                 size: 20,
-                color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                color: const Color(0xFF6B7280),
               ),
               filled: true,
-              fillColor: isDark ? AppColors.darkCard : const Color(0xFFF8FAFC),
+              fillColor: const Color(0xFF13131A),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
@@ -412,8 +409,8 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
                 vertical: 14,
               ),
             ),
-            style: TextStyle(
-              color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+            style: const TextStyle(
+              color: Color(0xFFE5E7EB),
             ),
           ),
         ],
@@ -426,16 +423,15 @@ class _HealthCardEditScreenState extends State<HealthCardEditScreen> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
       child: SwitchListTile(
         title: Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.w500,
-            color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+            color: Color(0xFFE5E7EB),
           ),
         ),
         value: value,

@@ -5,6 +5,7 @@ import '../../../domain/entities.dart';
 import '../../../repositories/family_members_repository.dart';
 import '../../../services/auth_service.dart';
 import '../../../services/call_service.dart';
+import '../../../services/permission_service.dart';
 import 'voice_call_screen.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
@@ -68,8 +69,7 @@ class _CallContactListScreenState extends State<CallContactListScreen> {
           context: context,
           builder: (_) => AlertDialog(
             title: Text(AppLocalizations.of(context).aramaHazirlaniyor),
-            content: const Text(
-              'Sesli arama özelliği şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin.',
+            content: Text(AppLocalizations.of(context).sesliAramaOzelligiSuAndaKullanilamiyorLutfenDahaSonraTekrarDeneyin,
             ),
             actions: [
               TextButton(
@@ -82,6 +82,9 @@ class _CallContactListScreenState extends State<CallContactListScreen> {
       }
       return;
     }
+
+    final micGranted = await PermissionService.requestMicrophone(context);
+    if (!micGranted) return;
 
     HapticFeedback.mediumImpact();
     try {
@@ -104,7 +107,7 @@ class _CallContactListScreenState extends State<CallContactListScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Arama başlatılamadı: $e'),
+            content: Text(AppLocalizations.of(context).ccCallFailed('$e')),
             backgroundColor: AppColors.error,
           ),
         );
@@ -120,16 +123,15 @@ class _CallContactListScreenState extends State<CallContactListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: AppBar(
         backgroundColor:
-            isDark ? AppColors.darkBackground : AppColors.cloudWhite,
-        foregroundColor: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+            const Color(0xFF0A0A0F),
+        foregroundColor: const Color(0xFFE5E7EB),
         elevation: 0,
-        title: const Text('Aile Rehberi'),
+        title: Text(AppLocalizations.of(context).conTitle),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
@@ -144,10 +146,10 @@ class _CallContactListScreenState extends State<CallContactListScreen> {
               controller: _searchController,
               onChanged: _onSearch,
               decoration: InputDecoration(
-                hintText: 'Aile üyesi ara...',
+                hintText: AppLocalizations.of(context).aileUyesiAra,
                 prefixIcon: const Icon(Icons.search),
                 filled: true,
-                fillColor: isDark ? AppColors.darkCard : const Color(0xFFF8FAFC),
+                fillColor: const Color(0xFF13131A),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,
@@ -160,7 +162,7 @@ class _CallContactListScreenState extends State<CallContactListScreen> {
             child: _isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : _filtered.isEmpty
-                    ? _buildEmpty(isDark)
+                    ? _buildEmpty()
                     : ListView.builder(
                         padding: const EdgeInsets.symmetric(vertical: 8),
                         itemCount: _filtered.length,
@@ -189,23 +191,19 @@ class _CallContactListScreenState extends State<CallContactListScreen> {
                                 ? IconButton(
                                     icon: const Icon(
                                       Icons.phone,
-                                      color: AppColors.cobalt,
+                                      color: Color(0xFF6366F1),
                                     ),
                                     onPressed: () => _startCall(member),
                                   )
-                                : Chip(
+                                : const Chip(
                                     label: Text(
                                       'Aranamaz',
                                       style: TextStyle(
                                         fontSize: 11,
-                                        color: isDark
-                                            ? AppColors.darkTextSecondary
-                                            : AppColors.gray,
+                                        color: Color(0xFF6B7280),
                                       ),
                                     ),
-                                    backgroundColor: isDark
-                                        ? AppColors.darkCard
-                                        : Colors.grey.shade200,
+                                    backgroundColor: Color(0xFF13131A),
                                     padding: EdgeInsets.zero,
                                     visualDensity: VisualDensity.compact,
                                   ),
@@ -218,21 +216,20 @@ class _CallContactListScreenState extends State<CallContactListScreen> {
     );
   }
 
-  Widget _buildEmpty(bool isDark) {
+  Widget _buildEmpty() {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.people_outline,
             size: 64,
-            color: isDark ? AppColors.darkTextSecondary : AppColors.gray,
+            color: Color(0xFF6B7280),
           ),
           const SizedBox(height: 16),
-          Text(
-            'Henüz aranabilecek aile üyesi yok',
-            style: TextStyle(
-              color: isDark ? AppColors.darkTextSecondary : AppColors.gray,
+          Text(AppLocalizations.of(context).henuzAranabilecekAileUyesiYok,
+            style: const TextStyle(
+              color: Color(0xFF6B7280),
             ),
           ),
         ],

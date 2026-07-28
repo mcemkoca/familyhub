@@ -31,7 +31,7 @@ class HubTabItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         decoration: isActive
             ? BoxDecoration(
-                color: AppColors.cobalt.withAlpha(30),
+                color: const Color(0xFF6366F1).withAlpha(30),
                 borderRadius: BorderRadius.circular(14),
               )
             : null,
@@ -47,7 +47,7 @@ class HubTabItem extends StatelessWidget {
                 children: [
                   Icon(
                     icon,
-                    color: isActive ? AppColors.cobalt : AppColors.slateLight,
+                    color: isActive ? const Color(0xFF6366F1) : const Color(0xFF9CA3AF),
                     size: isActive ? 26 : 22,
                   ),
                   if (badge != null && badge! > 0)
@@ -59,7 +59,7 @@ class HubTabItem extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: AppColors.error,
                           borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: AppColors.cloudWhite, width: 1.5),
+                          border: Border.all(color: const Color(0xFF0A0A0F), width: 1.5),
                         ),
                         constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
                         child: Center(
@@ -79,7 +79,7 @@ class HubTabItem extends StatelessWidget {
               style: TextStyle(
                 fontSize: 11,
                 fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
-                color: isActive ? AppColors.cobalt : AppColors.slateLight,
+                color: isActive ? const Color(0xFF6366F1) : const Color(0xFF9CA3AF),
               ),
               child: Text(label),
             ),

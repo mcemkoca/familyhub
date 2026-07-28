@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../config/constants.dart';
 import '../../../../config/routes.dart';
@@ -71,9 +72,8 @@ class _GreetingHeader extends StatelessWidget {
           ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: AppSpacing.xs),
-        Text(
-          'Bugün neler yapacağına bir bakalım.',
-          style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+        Text(AppLocalizations.of(context).bugunNelerYapacaginaBirBakalim,
+          style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
         ),
       ],
     );
@@ -111,9 +111,8 @@ class _TasksProgressCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Günlük Görevler',
-                style: TextStyle(
+              Text(AppLocalizations.of(context).gunlukGorevler,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -168,7 +167,7 @@ class _QuickStatsRow extends StatelessWidget {
                   .length;
               return _StatCard(
                 icon: Icons.check_circle_outline,
-                label: 'Bekleyen Görev',
+                label: AppLocalizations.of(context).bekleyenGorev,
                 value: pending.toString(),
                 color: Colors.green,
               );
@@ -185,7 +184,7 @@ class _QuickStatsRow extends StatelessWidget {
                   .length;
               return _StatCard(
                 icon: Icons.assignment_outlined,
-                label: 'Bekleyen Ödev',
+                label: AppLocalizations.of(context).bekleyenOdev,
                 value: pending.toString(),
                 color: Colors.blue,
               );
@@ -202,7 +201,7 @@ class _QuickStatsRow extends StatelessWidget {
               final streak = snapshot.data?.currentStreak ?? 0;
               return _StatCard(
                 icon: Icons.local_fire_department,
-                label: 'Gün Streak',
+                label: AppLocalizations.of(context).gunStreak,
                 value: streak.toString(),
                 color: Colors.orange,
               );
@@ -252,7 +251,7 @@ class _StatCard extends StatelessWidget {
           Text(
             label,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
+            style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280)),
           ),
         ],
       ),
@@ -270,8 +269,7 @@ class _TodaySchedulePreview extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Bugünkü Derslerim',
+        Text(AppLocalizations.of(context).bugunkuDerslerim,
           style: Theme.of(
             context,
           ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
@@ -290,16 +288,15 @@ class _TodaySchedulePreview extends StatelessWidget {
               return Container(
                 padding: const EdgeInsets.all(AppSpacing.md),
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade50,
+                  color: const Color(0x1AFFFFFF),
                   borderRadius: BorderRadius.circular(AppRadius.medium),
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.beach_access, color: Colors.grey.shade400),
+                    const Icon(Icons.beach_access, color: Color(0xFF9CA3AF)),
                     const SizedBox(width: AppSpacing.sm),
-                    Text(
-                      'Bugün ders yok! Keyfini çıkar.',
-                      style: TextStyle(color: Colors.grey.shade500),
+                    Text(AppLocalizations.of(context).bugunDersYokKeyfiniCikar,
+                      style: const TextStyle(color: Color(0xFF6B7280)),
                     ),
                   ],
                 ),
@@ -359,8 +356,7 @@ class _UpcomingHomeworksPreview extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Yaklaşan Ödevler',
+        Text(AppLocalizations.of(context).yaklasanOdevler,
           style: Theme.of(
             context,
           ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
@@ -378,16 +374,15 @@ class _UpcomingHomeworksPreview extends StatelessWidget {
               return Container(
                 padding: const EdgeInsets.all(AppSpacing.md),
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade50,
+                  color: const Color(0x1AFFFFFF),
                   borderRadius: BorderRadius.circular(AppRadius.medium),
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.celebration, color: Colors.grey.shade400),
+                    const Icon(Icons.celebration, color: Color(0xFF9CA3AF)),
                     const SizedBox(width: AppSpacing.sm),
-                    Text(
-                      'Tüm ödevler tamamlandı! 🎉',
-                      style: TextStyle(color: Colors.grey.shade500),
+                    Text(AppLocalizations.of(context).tumOdevlerTamamlandi,
+                      style: const TextStyle(color: Color(0xFF6B7280)),
                     ),
                   ],
                 ),
@@ -437,7 +432,7 @@ class _UpcomingHomeworksPreview extends StatelessWidget {
                                 fontSize: 11,
                                 color: h.isOverdue
                                     ? Colors.red
-                                    : Colors.grey.shade500,
+                                    : const Color(0xFF6B7280),
                               ),
                             ),
                         ],
@@ -504,8 +499,7 @@ class _AiSuggestionsSectionState extends State<_AiSuggestionsSection> {
           children: [
             const Icon(Icons.auto_awesome, color: Color(0xFFA855F7), size: 20),
             const SizedBox(width: AppSpacing.sm),
-            Text(
-              'AI Önerileri',
+            Text(AppLocalizations.of(context).aiOnerileri,
               style: Theme.of(
                 context,
               ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
@@ -513,7 +507,7 @@ class _AiSuggestionsSectionState extends State<_AiSuggestionsSection> {
             const Spacer(),
             GestureDetector(
               onTap: _refresh,
-              child: Icon(Icons.refresh, size: 18, color: Colors.grey.shade500),
+              child: const Icon(Icons.refresh, size: 18, color: Color(0xFF6B7280)),
             ),
           ],
         ),
@@ -546,23 +540,21 @@ class _AiSuggestionsSectionState extends State<_AiSuggestionsSection> {
                 ),
                 child: Column(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.lightbulb_outline,
-                      color: Colors.grey.shade500,
+                      color: Color(0xFF6B7280),
                       size: 32,
                     ),
                     const SizedBox(height: AppSpacing.sm),
-                    Text(
-                      'Henüz AI önerisi yok',
-                      style: TextStyle(color: Colors.grey.shade400),
+                    Text(AppLocalizations.of(context).henuzAiOnerisiYok,
+                      style: const TextStyle(color: Color(0xFF9CA3AF)),
                     ),
                     const SizedBox(height: AppSpacing.xs),
-                    Text(
-                      'Daha fazla aktivite kaydı oluşunca öneriler gelecek.',
+                    Text(AppLocalizations.of(context).dahaFazlaAktiviteKaydiOlusuncaOnerilerGelecek,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
-                        color: Colors.grey.shade600,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                   ],
@@ -639,14 +631,14 @@ class _AiSuggestionCard extends StatelessWidget {
                 const SizedBox(height: AppSpacing.xs),
                 Text(
                   suggestion.description,
-                  style: TextStyle(fontSize: 12, color: Colors.grey.shade400),
+                  style: const TextStyle(fontSize: 12, color: Color(0xFF9CA3AF)),
                 ),
                 const SizedBox(height: AppSpacing.xs),
                 Text(
                   suggestion.reason,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 11,
-                    color: Colors.grey.shade500,
+                    color: Color(0xFF6B7280),
                     fontStyle: FontStyle.italic,
                   ),
                 ),
@@ -681,8 +673,7 @@ class _QuickAccessGrid extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Hızlı Erişim',
+        Text(AppLocalizations.of(context).hizliErisim,
           style: Theme.of(
             context,
           ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
@@ -692,23 +683,23 @@ class _QuickAccessGrid extends StatelessWidget {
           children: [
             _QuickAccessCard(
               icon: Icons.check_circle,
-              label: 'Görevlerim',
+              label: AppLocalizations.of(context).gorevlerim,
               color: Colors.green,
-              onTap: () {},
+              onTap: () => context.push(AppRoutes.tasks),
             ),
             const SizedBox(width: AppSpacing.md),
             _QuickAccessCard(
               icon: Icons.chat_bubble,
-              label: 'Aile Sohbeti',
+              label: AppLocalizations.of(context).chtFamilyChat,
               color: Colors.blue,
-              onTap: () {},
+              onTap: () => context.push(AppRoutes.chat),
             ),
             const SizedBox(width: AppSpacing.md),
             _QuickAccessCard(
               icon: Icons.location_on,
-              label: 'Konumum',
+              label: AppLocalizations.of(context).chtMyLocation,
               color: Colors.purple,
-              onTap: () {},
+              onTap: () => context.push(AppRoutes.location),
             ),
           ],
         ),
@@ -717,21 +708,21 @@ class _QuickAccessGrid extends StatelessWidget {
           children: [
             _QuickAccessCard(
               icon: Icons.family_restroom,
-              label: 'Ailem',
+              label: AppLocalizations.of(context).chtMyFamily,
               color: Colors.teal,
               onTap: () => context.push('/family-manage'),
             ),
             const SizedBox(width: AppSpacing.md),
             _QuickAccessCard(
               icon: Icons.backup,
-              label: 'Yedekleme',
+              label: AppLocalizations.of(context).chtBackup,
               color: const Color(0xFF4285F4),
               onTap: () => context.push('/google-drive-backup'),
             ),
             const SizedBox(width: AppSpacing.md),
             _QuickAccessCard(
               icon: Icons.auto_awesome,
-              label: 'Rotasyon',
+              label: AppLocalizations.of(context).chtRotation,
               color: const Color(0xFF8B5CF6),
               onTap: () => context.push(
                 AppRoutes.smartRotation,

@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import '../../../config/constants.dart';
 import '../../../domain/models/call_session_model.dart';
 import '../../../services/call_service.dart';
 import '../../../core/supabase_client.dart';
+import '../../../core/app_logger.dart';
 
 enum VoiceCallMode {
   outgoing,
@@ -90,7 +92,8 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
           _transitionToConnected();
         }
       },
-      onError: (_) {},
+      onError: (Object e) =>
+          AppLogger.logBestEffort(e, module: 'call', operation: 'callStatusStream'),
     );
   }
 
@@ -133,7 +136,7 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Arama kabul edilemedi: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context).vcAcceptFailed('$e'))),
         );
       }
     }
@@ -212,7 +215,7 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.darkBackground,
+      backgroundColor: const Color(0xFF0A0A0F),
       body: SafeArea(
         child: Column(
           children: [
@@ -255,13 +258,13 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
       return CircleAvatar(
         radius: 60,
         backgroundImage: NetworkImage(_avatarUrl!),
-        backgroundColor: AppColors.darkCard,
+        backgroundColor: const Color(0xFF13131A),
       );
     }
     final initial = _displayName.isNotEmpty ? _displayName[0].toUpperCase() : '?';
     return CircleAvatar(
       radius: 60,
-      backgroundColor: AppColors.cobalt,
+      backgroundColor: const Color(0xFF6366F1),
       child: Text(
         initial,
         style: const TextStyle(
@@ -281,13 +284,13 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
           _roundButton(
             icon: Icons.call_end,
             color: AppColors.error,
-            label: 'Reddet',
+            label: AppLocalizations.of(context).vcReject,
             onTap: _rejectCall,
           ),
           _roundButton(
             icon: Icons.call,
             color: AppColors.green,
-            label: 'Kabul Et',
+            label: AppLocalizations.of(context).aisAccept,
             onTap: _acceptCall,
           ),
         ],
@@ -298,7 +301,7 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
       return _roundButton(
         icon: Icons.call_end,
         color: AppColors.error,
-        label: 'İptal Et',
+        label: AppLocalizations.of(context).iptalEt,
         size: 72,
         onTap: _endCall,
       );
@@ -318,13 +321,13 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
         _roundButton(
           icon: Icons.call_end,
           color: AppColors.error,
-          label: 'Kapat',
+          label: AppLocalizations.of(context).vcHangup,
           size: 72,
           onTap: _endCall,
         ),
         _roundButton(
           icon: _isSpeakerOn ? Icons.volume_up : Icons.volume_down,
-          color: _isSpeakerOn ? AppColors.cobalt : Colors.white24,
+          color: _isSpeakerOn ? const Color(0xFF6366F1) : Colors.white24,
           iconColor: _isSpeakerOn ? Colors.white : Colors.white,
           label: _isSpeakerOn ? 'Hoparlör' : 'Kulaklık',
           onTap: _toggleSpeaker,

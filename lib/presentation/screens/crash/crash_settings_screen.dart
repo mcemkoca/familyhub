@@ -1,11 +1,15 @@
 // lib/presentation/screens/crash/crash_settings_screen.dart
 // Crash detection settings, thresholds, SOS config, test mode
 
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import '../../../services/hive_service.dart';
 
 import '../../../domain/models/crash_settings.dart';
 import '../../../services/crash_detection_service.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../../core/app_logger.dart';
+import '../../../core/settings_store.dart';
 
 class CrashSettingsScreen extends StatefulWidget {
   const CrashSettingsScreen({super.key});
@@ -37,6 +41,40 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
   bool _maxVolume = true;
   bool _bypassDnd = false;
 
+  // Acil kişiler (yerel, Hive) — crash/SOS akışı bunları arar/mesaj atar.
+  List<Map<String, String>> _emergencyContacts = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadContacts();
+    _loadSettings();
+  }
+
+  void _loadContacts() {
+    final raw = HiveService.getSetting('emergency_contacts');
+    if (raw == null || raw.isEmpty) return;
+    try {
+      _emergencyContacts = (jsonDecode(raw) as List)
+          .map((e) => (e as Map).map((k, v) => MapEntry('$k', '$v')))
+          .toList();
+    } catch (e, st) {
+      // Sessizce boş kalırsa kullanıcı acil kişilerini silinmiş sanır ve
+      // üzerine yazar — kayıp kalıcı olur.
+      AppLogger.logError(
+        e,
+        module: 'safety',
+        operation: 'loadEmergencyContacts',
+        stackTrace: st,
+      );
+    }
+  }
+
+  Future<void> _saveContacts() async {
+    await HiveService.setSetting(
+        'emergency_contacts', jsonEncode(_emergencyContacts));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,12 +83,12 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.science),
-            tooltip: 'Test Et',
+            tooltip: AppLocalizations.of(context).crashTest,
             onPressed: _showTestDialog,
           ),
           IconButton(
             icon: const Icon(Icons.save),
-            tooltip: 'Kaydet',
+            tooltip: AppLocalizations.of(context).save,
             onPressed: _saveSettings,
           ),
         ],
@@ -64,7 +102,7 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
               SwitchListTile(
                 value: _enabled,
                 onChanged: (v) => setState(() => _enabled = v),
-                title: const Text('Kaza tespiti aktif'),
+                title: Text(AppLocalizations.of(context).crashDetectionActive),
                 secondary: const Icon(Icons.shield, color: Colors.green),
               ),
               const SizedBox(height: 8),
@@ -99,8 +137,7 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
               if (_sensitivity == CrashSensitivity.high)
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
-                  child: Text(
-                    'Yüksek: Daha hassas, daha fazla yanlış alarm olabilir',
+                  child: Text(AppLocalizations.of(context).yuksekDahaHassasDahaFazlaYanlisAlarmOlabilir,
                     style: TextStyle(
                       color: Colors.orange.shade700,
                       fontSize: 12,
@@ -156,11 +193,10 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
                 (v) => setState(() => _autoCallEmergency = v),
               ),
               if (_autoCallEmergency)
-                const Padding(
-                  padding: EdgeInsets.only(left: 16, bottom: 8),
-                  child: Text(
-                    '⚠️ Yasal sorumluluk bildirimi: Yanlış arama cezası kullanıcı sorumluluğundadır.',
-                    style: TextStyle(color: Colors.orange, fontSize: 12),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, bottom: 8),
+                  child: Text(AppLocalizations.of(context).yasalSorumlulukBildirimiYanlisAramaCezasiKullaniciSorumlulugundadir,
+                    style: const TextStyle(color: Colors.orange, fontSize: 12),
                   ),
                 ),
               _buildSwitch(
@@ -195,13 +231,13 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
                   padding: const EdgeInsets.only(left: 16),
                   child: DropdownButtonFormField<String>(
                     initialValue: _soundType,
-                    decoration: const InputDecoration(labelText: 'Ses'),
+                    decoration: InputDecoration(labelText: AppLocalizations.of(context).crashSound),
                     items: [
-                      const DropdownMenuItem(
+                      DropdownMenuItem(
                         value: 'crash_alarm',
-                        child: Text('Acil alarm'),
+                        child: Text(AppLocalizations.of(context).crashEmergencyAlarm),
                       ),
-                      const DropdownMenuItem(value: 'siren', child: Text('Siren')),
+                      DropdownMenuItem(value: 'siren', child: Text(AppLocalizations.of(context).crashSiren)),
                       DropdownMenuItem(value: 'plain', child: Text(AppLocalizations.of(context).duzSes)),
                     ],
                     onChanged: (v) => setState(() => _soundType = v!),
@@ -217,13 +253,13 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
                   padding: const EdgeInsets.only(left: 16),
                   child: SegmentedButton<VibrationPattern>(
                     segments: [
-                      const ButtonSegment(
+                      ButtonSegment(
                         value: VibrationPattern.sos,
-                        label: Text('SOS'),
+                        label: Text(AppLocalizations.of(context).crashSos),
                       ),
-                      const ButtonSegment(
+                      ButtonSegment(
                         value: VibrationPattern.alarm,
-                        label: Text('Alarm'),
+                        label: Text(AppLocalizations.of(context).crashAlarm),
                       ),
                       ButtonSegment(
                         value: VibrationPattern.pulse,
@@ -256,9 +292,8 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
           _buildSection(
             'TEST MODU',
             children: [
-              const Text(
-                'Son test: 15 Mart 2025 - BAŞARILI',
-                style: TextStyle(color: Colors.white70),
+              Text(AppLocalizations.of(context).sonTest15Mart2025Basarili,
+                style: const TextStyle(color: Colors.white70),
               ),
               const SizedBox(height: 12),
               ElevatedButton.icon(
@@ -282,7 +317,7 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
           ElevatedButton.icon(
             onPressed: _saveSettings,
             icon: const Icon(Icons.save),
-            label: const Text('KAYDET', style: TextStyle(fontSize: 16)),
+            label: Text(AppLocalizations.of(context).crashSaveUpper, style: const TextStyle(fontSize: 16)),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.green.shade700,
               foregroundColor: Colors.white,
@@ -349,22 +384,186 @@ class _CrashSettingsScreenState extends State<CrashSettingsScreen> {
   }
 
   void _editContacts() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Acil kişiler yakında düzenlenebilecek')),
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setSheet) {
+          final onS = Theme.of(ctx).colorScheme.onSurface;
+          Future<void> addOne() async {
+            final nameC = TextEditingController();
+            final phoneC = TextEditingController();
+            final ok = await showDialog<bool>(
+              context: ctx,
+              builder: (d) => AlertDialog(
+                title: Text(AppLocalizations.of(context).crashAddContact),
+                content: Column(mainAxisSize: MainAxisSize.min, children: [
+                  TextField(
+                      controller: nameC,
+                      decoration: InputDecoration(labelText: AppLocalizations.of(context).isim)),
+                  TextField(
+                      controller: phoneC,
+                      keyboardType: TextInputType.phone,
+                      decoration: InputDecoration(labelText: AppLocalizations.of(context).crashPhone)),
+                ]),
+                actions: [
+                  TextButton(
+                      onPressed: () => Navigator.pop(d, false),
+                      child: Text(AppLocalizations.of(context).cancel)),
+                  FilledButton(
+                      onPressed: () => Navigator.pop(d, true),
+                      child: Text(AppLocalizations.of(context).crashAdd)),
+                ],
+              ),
+            );
+            if (ok == true &&
+                nameC.text.trim().isNotEmpty &&
+                phoneC.text.trim().isNotEmpty) {
+              setSheet(() => _emergencyContacts.add(
+                  {'name': nameC.text.trim(), 'phone': phoneC.text.trim()}));
+              await _saveContacts();
+              setState(() {});
+            }
+          }
+
+          return Padding(
+            padding: EdgeInsets.only(
+                left: 20,
+                right: 20,
+                top: 16,
+                bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(children: [
+                  const Icon(Icons.contacts, color: Color(0xFFEF4444)),
+                  const SizedBox(width: 8),
+                  Text(AppLocalizations.of(context).crashContacts,
+                      style: TextStyle(
+                          color: onS,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w800)),
+                  const Spacer(),
+                  IconButton(
+                      onPressed: addOne,
+                      icon: const Icon(Icons.add_circle,
+                          color: Color(0xFF10B981))),
+                ]),
+                const SizedBox(height: 8),
+                if (_emergencyContacts.isEmpty)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: Text(AppLocalizations.of(context).crashNoContacts,
+                        style: TextStyle(color: onS.withAlpha(150))),
+                  )
+                else
+                  ..._emergencyContacts.asMap().entries.map((e) => ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        leading: const Icon(Icons.person, color: Color(0xFF6366F1)),
+                        title: Text(e.value['name'] ?? '',
+                            style: TextStyle(color: onS)),
+                        subtitle: Text(e.value['phone'] ?? '',
+                            style: TextStyle(color: onS.withAlpha(160))),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.delete_outline,
+                              color: Color(0xFFEF4444)),
+                          onPressed: () async {
+                            setSheet(() => _emergencyContacts.removeAt(e.key));
+                            await _saveContacts();
+                            setState(() {});
+                          },
+                        ),
+                      )),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 
-  void _saveSettings() {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Ayarlar kaydedildi')));
+  static const _storeName = 'crash_settings';
+
+  /// Kaza tespiti ayarlarını GERÇEKTEN kaydeder.
+  ///
+  /// Önceden hiçbir şey saklanmadan "kaydedildi" deniyordu; kullanıcı
+  /// hassasiyet/112-arama/konum-paylaşımı tercihlerinin geçerli olduğunu
+  /// sanıyordu ama ekran her açılışta varsayılana dönüyordu.
+  Future<void> _saveSettings() async {
+    final messenger = ScaffoldMessenger.of(context);
+    final okMsg = AppLocalizations.of(context).crashSettingsSaved;
+    final failMsg = AppLocalizations.of(context).settingsSaveFailed;
+
+    final ok = await SettingsStore.save(_storeName, {
+      'enabled': _enabled,
+      'sensitivity': _sensitivity.name,
+      'minImpactG': _minImpactGCtrl.text,
+      'speedChange': _speedChangeCtrl.text,
+      'rollover': _rolloverCtrl.text,
+      'confirmation': _confirmationCtrl.text,
+      'autoCallEmergency': _autoCallEmergency,
+      'autoNotifyFamily': _autoNotifyFamily,
+      'autoNotifyContacts': _autoNotifyContacts,
+      'shareLocation': _shareLocation,
+      'shareMedicalInfo': _shareMedicalInfo,
+      'soundAlert': _soundAlert,
+      'soundType': _soundType,
+      'vibration': _vibration,
+      'vibrationPattern': _vibrationPattern.name,
+      'screenFlash': _screenFlash,
+      'maxVolume': _maxVolume,
+      'bypassDnd': _bypassDnd,
+    });
+
+    messenger.showSnackBar(SnackBar(
+      content: Text(ok ? okMsg : failMsg),
+      backgroundColor: ok ? null : const Color(0xFFB42318),
+    ));
+  }
+
+  /// Kayıtlı ayarları geri yükler (yoksa varsayılanlar korunur).
+  void _loadSettings() {
+    final j = SettingsStore.load(_storeName);
+    if (j.isEmpty) return;
+    setState(() {
+      _enabled = j['enabled'] as bool? ?? _enabled;
+      _sensitivity = CrashSensitivity.values.firstWhere(
+          (e) => e.name == j['sensitivity'],
+          orElse: () => _sensitivity);
+      _minImpactGCtrl.text = j['minImpactG'] as String? ?? _minImpactGCtrl.text;
+      _speedChangeCtrl.text =
+          j['speedChange'] as String? ?? _speedChangeCtrl.text;
+      _rolloverCtrl.text = j['rollover'] as String? ?? _rolloverCtrl.text;
+      _confirmationCtrl.text =
+          j['confirmation'] as String? ?? _confirmationCtrl.text;
+      _autoCallEmergency =
+          j['autoCallEmergency'] as bool? ?? _autoCallEmergency;
+      _autoNotifyFamily = j['autoNotifyFamily'] as bool? ?? _autoNotifyFamily;
+      _autoNotifyContacts =
+          j['autoNotifyContacts'] as bool? ?? _autoNotifyContacts;
+      _shareLocation = j['shareLocation'] as bool? ?? _shareLocation;
+      _shareMedicalInfo = j['shareMedicalInfo'] as bool? ?? _shareMedicalInfo;
+      _soundAlert = j['soundAlert'] as bool? ?? _soundAlert;
+      _soundType = j['soundType'] as String? ?? _soundType;
+      _vibration = j['vibration'] as bool? ?? _vibration;
+      _vibrationPattern = VibrationPattern.values.firstWhere(
+          (e) => e.name == j['vibrationPattern'],
+          orElse: () => _vibrationPattern);
+      _screenFlash = j['screenFlash'] as bool? ?? _screenFlash;
+      _maxVolume = j['maxVolume'] as bool? ?? _maxVolume;
+      _bypassDnd = j['bypassDnd'] as bool? ?? _bypassDnd;
+    });
   }
 
   void _showTestDialog() {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Test Modu'),
+        title: Text(AppLocalizations.of(context).crashTestMode),
         content: Text(AppLocalizations.of(context).telefonuSallayarakKazaSimulasyonunuBaslatin),
         actions: [
           TextButton(

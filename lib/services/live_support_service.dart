@@ -1,18 +1,23 @@
 import 'package:geolocator/geolocator.dart';
 import '../core/supabase_client.dart';
+import 'localization/locale_service.dart';
 
 class LiveSupportService {
+  static String _text(Map<String, String> values) {
+    final lang = LocaleService.resolveInitialLocale().languageCode;
+    return values[lang] ?? values['tr']!;
+  }
   static Future<SupportSession> initiateLiveSupport() async {
     final user = SupabaseConfig.safeClient?.auth.currentUser;
     if (user == null) {
-      throw SupportException('Giriş yapmalısınız');
+      throw SupportException(_text(const {'tr': 'Giriş yapmalısınız', 'en': 'You must sign in', 'nl': 'Je moet inloggen', 'fr': 'Vous devez vous connecter'}));
     }
 
     // 2. Konum al
     final Position? position = await _getSafePosition();
     final String locationText = position != null
         ? '${position.latitude},${position.longitude}'
-        : 'Konum alınamadı';
+        : _text(const {'tr': 'Konum alınamadı', 'en': 'Location unavailable', 'nl': 'Locatie niet beschikbaar', 'fr': 'Position indisponible'});
 
     // 3. Supabase Realtime'e session aç
     final session = await SupabaseConfig.safeClient!
@@ -41,7 +46,8 @@ class LiveSupportService {
       if (permission == LocationPermission.deniedForever) return null;
 
       return await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(accuracy: LocationAccuracy.medium),
+        locationSettings: const LocationSettings(
+            accuracy: LocationAccuracy.medium, timeLimit: Duration(seconds: 8)),
       );
     } catch (e) {
       return null;

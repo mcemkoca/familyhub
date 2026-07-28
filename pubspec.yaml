@@ -1,7 +1,7 @@
 name: familyhub
 description: "A new Flutter project."
 publish_to: 'none'
-version: 1.0.0+10
+version: 1.16.276+276
 
 environment:
   sdk: ^3.11.0
@@ -11,7 +11,6 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  cupertino_icons: ^1.0.8
   flutter_riverpod: ^2.6.1
   go_router: ^14.8.1
   google_fonts: ^6.2.1
@@ -25,7 +24,6 @@ dependencies:
   hive_flutter: ^1.1.0
   local_auth: ^3.0.1
   local_auth_android: ^2.0.0
-  local_auth_darwin: ^2.0.0
   url_launcher: ^6.3.2
   share_plus: ^13.1.0
   geolocator: ^13.0.4
@@ -39,6 +37,7 @@ dependencies:
   torch_light: ^1.1.0
   emoji_picker_flutter: ^4.3.0
   image_picker: ^1.1.2
+  file_selector: ^1.0.3
   record: ^6.0.0
   permission_handler: ^11.4.0
   crypto: ^3.0.3
@@ -91,7 +90,7 @@ dev_dependencies:
 
 flutter_launcher_icons:
   android: true
-  ios: true
+  ios: false
   image_path: "assets/images/app_icon.png"
   adaptive_icon_background: "#FFFFFF"
   adaptive_icon_foreground: "assets/images/app_icon.png"
@@ -102,8 +101,14 @@ flutter:
   assets:
     # App icon
     - assets/images/app_icon.png
+    # Hub tile icons (premium PNG)
+    - assets/icons/tiles/
+    # Bottom nav icons (premium neon PNG)
+    - assets/icons/nav/
     # Onboarding
     - assets/images/onboarding/
+    # Bölüm arkaplanları (alışveriş, çocuk)
+    - assets/images/backgrounds/
     # Data
     - assets/data/child_development.json
     - assets/data/meal_planning.json
@@ -127,6 +132,9 @@ flutter:
     - assets/data/suggestions/meal_nutrition.json
     - assets/data/suggestions/social_activities.json
     - assets/data/suggestions/digital_balance.json
+    - assets/data/legal/be.json
+    - assets/data/daily_suggestions.json
+    - assets/data/health/vaccinations_be.json
     - assets/images/google_logo.svg
     # Icons
     - assets/icons/

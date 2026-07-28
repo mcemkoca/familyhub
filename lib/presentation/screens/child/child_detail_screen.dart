@@ -104,7 +104,7 @@ class _ChildDetailScreenState extends ConsumerState<ChildDetailScreen>
           controller: _tabController,
           isScrollable: true,
           labelColor: Colors.white,
-          unselectedLabelColor: Colors.grey.shade500,
+          unselectedLabelColor: const Color(0xFF6B7280),
           indicatorColor: child.color,
           tabs: const [
             Tab(icon: Icon(Icons.check_circle_outline), text: 'Görevler'),
@@ -159,10 +159,10 @@ class _TasksTabState extends State<_TasksTab> {
       context: context,
       builder: (c) => AlertDialog(
         backgroundColor: const Color(0xFF1E293B),
-        title: const Text('Görev Sil', style: TextStyle(color: Colors.white)),
+        title: Text(AppLocalizations.of(context).gorevSil, style: const TextStyle(color: Colors.white)),
         content: Text(
           '"${task.title}" görevini silmek istiyor musun?',
-          style: TextStyle(color: Colors.grey.shade300),
+          style: const TextStyle(color: Color(0xFF9CA3AF)),
         ),
         actions: [
           TextButton(
@@ -284,7 +284,7 @@ class _HomeworksTabState extends State<_HomeworksTab> {
             right: 20,
             top: 20,
           ),
-          child: Column(
+          child: SingleChildScrollView(child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -293,15 +293,14 @@ class _HomeworksTabState extends State<_HomeworksTab> {
                   width: 40,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade700,
+                    color: const Color(0xFF6B7280),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
-                'Yeni Ödev Ekle',
-                style: TextStyle(
+              Text(AppLocalizations.of(context).yeniOdevEkle,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -356,9 +355,9 @@ class _HomeworksTabState extends State<_HomeworksTab> {
                   ),
                   child: Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.calendar_today,
-                        color: Colors.grey.shade400,
+                        color: Color(0xFF9CA3AF),
                         size: 20,
                       ),
                       const SizedBox(width: 12),
@@ -368,7 +367,7 @@ class _HomeworksTabState extends State<_HomeworksTab> {
                             : '${_dueDate!.day}/${_dueDate!.month}/${_dueDate!.year}',
                         style: TextStyle(
                           color: _dueDate == null
-                              ? Colors.grey.shade400
+                              ? const Color(0xFF9CA3AF)
                               : Colors.white,
                         ),
                       ),
@@ -389,15 +388,14 @@ class _HomeworksTabState extends State<_HomeworksTab> {
                     ),
                   ),
                   onPressed: () => _createHomework(),
-                  child: const Text(
-                    'Ödev Ekle',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  child: Text(AppLocalizations.of(context).odevEkle,
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
               const SizedBox(height: 12),
             ],
-          ),
+          )),
         ),
       ),
     );
@@ -433,7 +431,7 @@ class _HomeworksTabState extends State<_HomeworksTab> {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Hata: $e')));
+        ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).srError('$e'))));
       }
     }
   }
@@ -443,10 +441,9 @@ class _HomeworksTabState extends State<_HomeworksTab> {
       context: context,
       builder: (c) => AlertDialog(
         backgroundColor: const Color(0xFF1E293B),
-        title: const Text('Ödev Sil', style: TextStyle(color: Colors.white)),
-        content: const Text(
-          'Bu ödevi silmek istiyor musun?',
-          style: TextStyle(color: Colors.white70),
+        title: Text(AppLocalizations.of(context).odevSil, style: const TextStyle(color: Colors.white)),
+        content: Text(AppLocalizations.of(context).buOdeviSilmekIstiyorMusun,
+          style: const TextStyle(color: Colors.white70),
         ),
         actions: [
           TextButton(
@@ -571,7 +568,7 @@ class _ScheduleTabState extends State<_ScheduleTab> {
             right: 20,
             top: 20,
           ),
-          child: Column(
+          child: SingleChildScrollView(child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -580,7 +577,7 @@ class _ScheduleTabState extends State<_ScheduleTab> {
                   width: 40,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade700,
+                    color: const Color(0xFF6B7280),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -619,9 +616,8 @@ class _ScheduleTabState extends State<_ScheduleTab> {
                 ),
               ),
               const SizedBox(height: 12),
-              Text(
-                'Gün',
-                style: TextStyle(color: Colors.grey.shade400, fontSize: 14),
+              Text(AppLocalizations.of(context).gun,
+                style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 14),
               ),
               const SizedBox(height: 8),
               Wrap(
@@ -634,7 +630,7 @@ class _ScheduleTabState extends State<_ScheduleTab> {
                         style: TextStyle(
                           color: _dayOfWeek == i
                               ? Colors.white
-                              : Colors.grey.shade400,
+                              : const Color(0xFF9CA3AF),
                         ),
                       ),
                       selected: _dayOfWeek == i,
@@ -711,9 +707,9 @@ class _ScheduleTabState extends State<_ScheduleTab> {
                 ],
               ),
               const SizedBox(height: 12),
-              Text(
+              const Text(
                 'Renk',
-                style: TextStyle(color: Colors.grey.shade400, fontSize: 14),
+                style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 14),
               ),
               const SizedBox(height: 8),
               Wrap(
@@ -767,7 +763,7 @@ class _ScheduleTabState extends State<_ScheduleTab> {
               ),
               const SizedBox(height: 12),
             ],
-          ),
+          )),
         ),
       ),
     );
@@ -795,8 +791,8 @@ class _ScheduleTabState extends State<_ScheduleTab> {
         Navigator.pop(context);
         setState(() {});
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Ders eklendi'),
+          SnackBar(
+            content: Text(AppLocalizations.of(context).cdtLessonAdded),
             backgroundColor: Colors.green,
           ),
         );
@@ -805,7 +801,7 @@ class _ScheduleTabState extends State<_ScheduleTab> {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Hata: $e')));
+        ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).srError('$e'))));
       }
     }
   }
@@ -815,7 +811,7 @@ class _ScheduleTabState extends State<_ScheduleTab> {
       context: context,
       builder: (c) => AlertDialog(
         backgroundColor: const Color(0xFF1E293B),
-        title: const Text('Ders Sil', style: TextStyle(color: Colors.white)),
+        title: Text(AppLocalizations.of(context).cdtDeleteLesson, style: const TextStyle(color: Colors.white)),
         content: const Text(
           'Bu dersi silmek istiyor musun?',
           style: TextStyle(color: Colors.white70),
@@ -939,7 +935,7 @@ class _DevelopmentTabState extends State<_DevelopmentTab> {
             right: 20,
             top: 20,
           ),
-          child: Column(
+          child: SingleChildScrollView(child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -948,15 +944,14 @@ class _DevelopmentTabState extends State<_DevelopmentTab> {
                   width: 40,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade700,
+                    color: const Color(0xFF6B7280),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
-                'Yeni Gelişim Kaydı',
-                style: TextStyle(
+              Text(AppLocalizations.of(context).yeniGelisimKaydi,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -973,7 +968,7 @@ class _DevelopmentTabState extends State<_DevelopmentTab> {
                           style: TextStyle(
                             color: _logType == t
                                 ? Colors.white
-                                : Colors.grey.shade400,
+                                : const Color(0xFF9CA3AF),
                           ),
                         ),
                         selected: _logType == t,
@@ -1034,7 +1029,7 @@ class _DevelopmentTabState extends State<_DevelopmentTab> {
               ),
               const SizedBox(height: 12),
             ],
-          ),
+          )),
         ),
       ),
     );
@@ -1057,8 +1052,8 @@ class _DevelopmentTabState extends State<_DevelopmentTab> {
         Navigator.pop(context);
         setState(() {});
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Kaydedildi'),
+          SnackBar(
+            content: Text(AppLocalizations.of(context).cdtSaved),
             backgroundColor: Colors.green,
           ),
         );
@@ -1067,7 +1062,7 @@ class _DevelopmentTabState extends State<_DevelopmentTab> {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Hata: $e')));
+        ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).srError('$e'))));
       }
     }
   }
@@ -1077,10 +1072,9 @@ class _DevelopmentTabState extends State<_DevelopmentTab> {
       context: context,
       builder: (c) => AlertDialog(
         backgroundColor: const Color(0xFF1E293B),
-        title: const Text('Kayıt Sil', style: TextStyle(color: Colors.white)),
-        content: const Text(
-          'Bu kaydı silmek istiyor musun?',
-          style: TextStyle(color: Colors.white70),
+        title: Text(AppLocalizations.of(context).kayitSil, style: const TextStyle(color: Colors.white)),
+        content: Text(AppLocalizations.of(context).buKaydiSilmekIstiyorMusun,
+          style: const TextStyle(color: Colors.white70),
         ),
         actions: [
           TextButton(
@@ -1209,10 +1203,10 @@ class _LocationTab extends StatelessWidget {
                       children: [
                         Icon(Icons.location_on, color: Colors.green.shade400),
                         const SizedBox(width: 8),
-                        Text(
+                        const Text(
                           'Son Konum',
                           style: TextStyle(
-                            color: Colors.grey.shade300,
+                            color: Color(0xFF9CA3AF),
                             fontSize: 14,
                           ),
                         ),
@@ -1230,24 +1224,24 @@ class _LocationTab extends StatelessWidget {
                     if (loc['accuracy'] != null)
                       Text(
                         'Doğruluk: ${(loc['accuracy'] as num?)?.toStringAsFixed(1)}m',
-                        style: TextStyle(
-                          color: Colors.grey.shade400,
+                        style: const TextStyle(
+                          color: Color(0xFF9CA3AF),
                           fontSize: 13,
                         ),
                       ),
                     if (loc['battery_level'] != null)
                       Text(
                         'Pil: ${loc['battery_level']}%',
-                        style: TextStyle(
-                          color: Colors.grey.shade400,
+                        style: const TextStyle(
+                          color: Color(0xFF9CA3AF),
                           fontSize: 13,
                         ),
                       ),
                     const SizedBox(height: 8),
                     Text(
                       _formatTime(loc['created_at']),
-                      style: TextStyle(
-                        color: Colors.grey.shade500,
+                      style: const TextStyle(
+                        color: Color(0xFF6B7280),
                         fontSize: 12,
                       ),
                     ),
@@ -1330,8 +1324,7 @@ class _StreakWidget extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
-                    'günlük seri',
+                  Text(AppLocalizations.of(context).gunlukSeri,
                     style: TextStyle(
                       color: Colors.white.withAlpha(200),
                       fontSize: 14,
@@ -1367,10 +1360,10 @@ class _StreakWidget extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Text(
+                        const Text(
                           'En iyi',
                           style: TextStyle(
-                            color: Colors.grey.shade400,
+                            color: Color(0xFF9CA3AF),
                             fontSize: 12,
                           ),
                         ),
@@ -1402,10 +1395,10 @@ class _StreakWidget extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Text(
+                        const Text(
                           'Toplam',
                           style: TextStyle(
-                            color: Colors.grey.shade400,
+                            color: Color(0xFF9CA3AF),
                             fontSize: 12,
                           ),
                         ),
@@ -1427,10 +1420,9 @@ class _StreakWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'HAFTALIK GÖRÜNÜM',
-                    style: TextStyle(
-                      color: Colors.grey.shade500,
+                  Text(AppLocalizations.of(context).haftalikGorunum,
+                    style: const TextStyle(
+                      color: Color(0xFF6B7280),
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
                       letterSpacing: 1,
@@ -1495,7 +1487,7 @@ class _DayDot extends StatelessWidget {
         Text(
           day,
           style: TextStyle(
-            color: isCompleted ? Colors.white : Colors.grey.shade500,
+            color: isCompleted ? Colors.white : const Color(0xFF6B7280),
             fontSize: 11,
           ),
         ),
@@ -1516,10 +1508,10 @@ class _SectionTitle extends StatelessWidget {
     padding: const EdgeInsets.only(bottom: 12, left: 4),
     child: Text(
       text,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w700,
-        color: Colors.grey.shade400,
+        color: Color(0xFF9CA3AF),
       ),
     ),
   );
@@ -1539,21 +1531,21 @@ class _EmptyState extends StatelessWidget {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(icon, size: 64, color: Colors.grey.shade600),
+        Icon(icon, size: 64, color: const Color(0xFF6B7280)),
         const SizedBox(height: 16),
         Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: Colors.grey.shade400,
+            color: Color(0xFF9CA3AF),
           ),
         ),
         const SizedBox(height: 8),
         Text(
           subtext,
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+          style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
         ),
       ],
     ),
@@ -1578,21 +1570,21 @@ class _EmptyStateWithAction extends StatelessWidget {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(icon, size: 64, color: Colors.grey.shade600),
+        Icon(icon, size: 64, color: const Color(0xFF6B7280)),
         const SizedBox(height: 16),
         Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: Colors.grey.shade400,
+            color: Color(0xFF9CA3AF),
           ),
         ),
         const SizedBox(height: 8),
         Text(
           subtext,
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+          style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
         ),
         const SizedBox(height: 24),
         SizedBox(
@@ -1646,22 +1638,20 @@ class _AddTaskButton extends StatelessWidget {
             child: const Icon(Icons.add, color: Color(0xFF3B82F6), size: 22),
           ),
           const SizedBox(width: 14),
-          const Expanded(
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Yeni Görev Ekle',
-                  style: TextStyle(
+                Text(AppLocalizations.of(context).yeniGorevEkle,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                SizedBox(height: 2),
-                Text(
-                  'Çocuğuna yeni bir görev ata',
-                  style: TextStyle(color: Colors.grey, fontSize: 13),
+                const SizedBox(height: 2),
+                Text(AppLocalizations.of(context).cocugunaYeniBirGorevAta,
+                  style: const TextStyle(color: Colors.grey, fontSize: 13),
                 ),
               ],
             ),
@@ -1675,8 +1665,8 @@ class _AddTaskButton extends StatelessWidget {
 
 InputDecoration _inputDec(String label, IconData icon) => InputDecoration(
   labelText: label,
-  labelStyle: TextStyle(color: Colors.grey.shade500),
-  prefixIcon: Icon(icon, color: Colors.grey.shade500),
+  labelStyle: const TextStyle(color: Color(0xFF6B7280)),
+  prefixIcon: Icon(icon, color: const Color(0xFF6B7280)),
   filled: true,
   fillColor: const Color(0xFF334155),
   border: OutlineInputBorder(
@@ -1720,7 +1710,7 @@ class _TaskCard extends StatelessWidget {
               Text(
                 task.title,
                 style: TextStyle(
-                  color: isDone ? Colors.grey.shade500 : Colors.white,
+                  color: isDone ? const Color(0xFF6B7280) : Colors.white,
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
                   decoration: isDone ? TextDecoration.lineThrough : null,
@@ -1729,7 +1719,7 @@ class _TaskCard extends StatelessWidget {
               if (task.description != null && task.description!.isNotEmpty)
                 Text(
                   task.description!,
-                  style: TextStyle(color: Colors.grey.shade500, fontSize: 13),
+                  style: const TextStyle(color: Color(0xFF6B7280), fontSize: 13),
                 ),
             ],
           ),
@@ -1789,13 +1779,13 @@ class _HomeworkCard extends StatelessWidget {
                 ),
                 Text(
                   '${homework.subject} • ${homework.displayStatus}',
-                  style: TextStyle(color: Colors.grey.shade400, fontSize: 12),
+                  style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 12),
                 ),
                 if (homework.dueDate != null)
                   Text(
                     'Teslim: ${homework.dueDate!.day}/${homework.dueDate!.month}/${homework.dueDate!.year}',
                     style: TextStyle(
-                      color: isOverdue ? Colors.red : Colors.grey.shade500,
+                      color: isOverdue ? Colors.red : const Color(0xFF6B7280),
                       fontSize: 11,
                     ),
                   ),
@@ -1849,7 +1839,7 @@ class _ScheduleCard extends StatelessWidget {
               ),
               Text(
                 '${schedule.startTime} - ${schedule.endTime}${schedule.teacher != null && schedule.teacher!.isNotEmpty ? ' • ${schedule.teacher}' : ''}',
-                style: TextStyle(color: Colors.grey.shade400, fontSize: 12),
+                style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 12),
               ),
             ],
           ),
@@ -1901,7 +1891,7 @@ class _DevelopmentCard extends StatelessWidget {
               ),
               Text(
                 '${log.loggedAt.day}/${log.loggedAt.month}/${log.loggedAt.year}${log.notes != null && log.notes!.isNotEmpty ? ' • ${log.notes}' : ''}',
-                style: TextStyle(color: Colors.grey.shade400, fontSize: 12),
+                style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 12),
               ),
             ],
           ),

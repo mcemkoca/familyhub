@@ -2,13 +2,26 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:crypto/crypto.dart';
-import 'dart:convert';
+import '../features/security/domain/pin_hasher.dart';
+import 'localization/locale_service.dart';
 
 class BiometricService {
   static final LocalAuthentication _localAuth = LocalAuthentication();
   static const _secureStorage = FlutterSecureStorage();
   static const _pinHashKey = 'biometric_fallback_pin_hash';
+
+  static String get _languageCode =>
+      LocaleService.resolveInitialLocale().languageCode;
+
+  static String _text(Map<String, String> values) =>
+      values[_languageCode] ?? values['tr']!;
+
+  static String get _defaultAuthenticationReason => _text(const {
+        'tr': 'FamilyHub’a giriş yapmak için kimliğinizi doğrulayın',
+        'en': 'Verify your identity to sign in to FamilyHub',
+        'nl': 'Verifieer je identiteit om in te loggen bij FamilyHub',
+        'fr': 'Vérifiez votre identité pour vous connecter à FamilyHub',
+      });
 
   static Future<bool> isAvailable() async {
     try {
@@ -28,10 +41,10 @@ class BiometricService {
     }
   }
 
-  static Future<bool> authenticate({String reason = 'FamilyHub\'a giriş için biyometrik doğrulama'}) async {
+  static Future<bool> authenticate({String? reason}) async {
     try {
       return await _localAuth.authenticate(
-        localizedReason: reason,
+        localizedReason: reason ?? _defaultAuthenticationReason,
         biometricOnly: false,
         sensitiveTransaction: true,
         persistAcrossBackgrounding: true,
@@ -47,22 +60,30 @@ class BiometricService {
     return await _validatePin(fallbackPin);
   }
 
-  /// Stores a hashed PIN for fallback authentication.
+  /// Fallback PIN'i salt'lı + iterasyonlu olarak güvenli depoya yazar.
   static Future<void> registerPin(String pin) async {
-    final hash = _hashPin(pin);
-    await _secureStorage.write(key: _pinHashKey, value: hash);
+    await _secureStorage.write(key: _pinHashKey, value: PinHasher.hash(pin));
+  }
+
+  /// Kayıtlı bir fallback PIN var mı?
+  static Future<bool> hasPin() async {
+    final stored = await _secureStorage.read(key: _pinHashKey);
+    return stored != null && stored.isNotEmpty;
+  }
+
+  /// Kayıtlı PIN'i siler.
+  static Future<void> clearPin() async {
+    await _secureStorage.delete(key: _pinHashKey);
   }
 
   static Future<bool> _validatePin(String pin) async {
     final storedHash = await _secureStorage.read(key: _pinHashKey);
     if (storedHash == null || storedHash.isEmpty) return false;
-    final inputHash = _hashPin(pin);
-    return storedHash == inputHash;
-  }
-
-  static String _hashPin(String pin) {
-    final bytes = utf8.encode(pin);
-    final digest = sha256.convert(bytes);
-    return digest.toString();
+    final ok = PinHasher.verify(pin, storedHash);
+    // Eski saltsız kayıt doğru PIN ile açıldıysa yeni formata yükselt.
+    if (ok && PinHasher.isLegacyFormat(storedHash)) {
+      await _secureStorage.write(key: _pinHashKey, value: PinHasher.hash(pin));
+    }
+    return ok;
   }
 }

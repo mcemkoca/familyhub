@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/supabase_client.dart';
 import '../core/utils/repository_mixin.dart';
@@ -80,23 +79,6 @@ class ChildLocationRepository with RepositoryErrorHandler {
           .limit(limit);
       return (response as List).cast<Map<String, dynamic>>();
     }, 'getLocationHistory');
-  }
-
-  /// Watch family geolocations (for parents to see child's location)
-  Stream<List<Map<String, dynamic>>> watchFamilyLocations() {
-    try {
-      final familyId = _familyId;
-      if (familyId == null) return Stream.value([]);
-      return _client
-          .from('geolocations')
-          .stream(primaryKey: ['id'])
-          .eq('family_id', familyId)
-          .order('created_at')
-          .map((data) => data.cast<Map<String, dynamic>>().toList());
-    } catch (e) {
-      debugPrint('ChildLocationRepository.watchFamilyLocations error: $e');
-      return Stream.error(RepositoryException('Beklenmeyen hata [watchFamilyLocations]: $e'));
-    }
   }
 
   /// Get last location for any child (parent view)

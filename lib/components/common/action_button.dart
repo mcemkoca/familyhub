@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../config/constants.dart';
 import '../../core/navigation/action_registry.dart';
 
@@ -10,7 +11,7 @@ import '../../core/navigation/action_registry.dart';
 /// ActionButton(
 ///   action: 'login',
 ///   params: {'email': 'a@b.com', 'password': '...'},
-///   label: 'Giriş Yap',
+///   label: AppLocalizations.of(context).login,
 ///   icon: Icons.login,
 /// )
 /// ```
@@ -65,7 +66,7 @@ class _ActionButtonState extends State<ActionButton> {
               ),
             ),
             const SizedBox(width: 12),
-            const Text('İşleniyor...'),
+            Text(AppLocalizations.of(context).abProcessing),
           ],
         ),
         duration: const Duration(days: 1),
@@ -84,7 +85,7 @@ class _ActionButtonState extends State<ActionButton> {
           scaffold.showSnackBar(
             const SnackBar(
               content: Text('✅ İşlem başarılı'),
-              backgroundColor: AppColors.success,
+              backgroundColor: Color(0xFF10B981),
               behavior: SnackBarBehavior.floating,
               duration: Duration(seconds: 2),
             ),
@@ -106,7 +107,7 @@ class _ActionButtonState extends State<ActionButton> {
               backgroundColor: AppColors.error,
               behavior: SnackBarBehavior.floating,
               action: SnackBarAction(
-                label: 'Tekrar Dene',
+                label: AppLocalizations.of(context).cdRetry,
                 textColor: Colors.white,
                 onPressed: _handlePress,
               ),
@@ -143,18 +144,17 @@ class _ActionButtonState extends State<ActionButton> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     if (widget.icon != null) {
       return ElevatedButton.icon(
         onPressed: _isLoading ? null : _handlePress,
         icon: _isLoading
-            ? SizedBox(
+            ? const SizedBox(
                 width: 18,
                 height: 18,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  color: isDark ? Colors.white70 : Colors.white,
+                  color: Colors.white70,
                 ),
               )
             : Icon(widget.icon),
@@ -167,12 +167,12 @@ class _ActionButtonState extends State<ActionButton> {
       onPressed: _isLoading ? null : _handlePress,
       style: widget.style,
       child: _isLoading
-          ? SizedBox(
+          ? const SizedBox(
               width: 18,
               height: 18,
               child: CircularProgressIndicator(
                 strokeWidth: 2,
-                color: isDark ? Colors.white70 : Colors.white,
+                color: Colors.white70,
               ),
             )
           : Text(widget.label),

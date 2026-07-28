@@ -26,22 +26,18 @@ class _TrendChart extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: const Color(0xFF13131A),
           borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade200,
-              blurRadius: 12,
-              offset: const Offset(0, 4),
-            ),
-          ],
+          border: Border.all(color: const Color(0xFF262631)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Son 7 Gün Trendi',
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+            Text(AppLocalizations.of(context).son7GunTrendi,
+              style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white),
             ),
             const SizedBox(height: 16),
             SizedBox(
@@ -64,7 +60,7 @@ class _TrendChart extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 8),
                             child: Text(
                               DateFormat('E', 'tr_TR').format(days[idx]).substring(0, 2),
-                              style: TextStyle(fontSize: 11, color: Colors.grey.shade500),
+                              style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280)),
                             ),
                           );
                         },
@@ -80,21 +76,21 @@ class _TrendChart extends StatelessWidget {
                     LineChartBarData(
                       spots: spots,
                       isCurved: true,
-                      color: AppColors.cobalt,
+                      color: const Color(0xFF6366F1),
                       barWidth: 3,
                       dotData: FlDotData(
                         show: true,
                         getDotPainter: (spot, percent, bar, idx) =>
                             FlDotCirclePainter(
                           radius: 4,
-                          color: AppColors.cobalt,
+                          color: const Color(0xFF6366F1),
                           strokeWidth: 2,
                           strokeColor: Colors.white,
                         ),
                       ),
                       belowBarData: BarAreaData(
                         show: true,
-                        color: AppColors.cobalt.withAlpha(20),
+                        color: const Color(0xFF6366F1).withAlpha(20),
                       ),
                     ),
                   ],

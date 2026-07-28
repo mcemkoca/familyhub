@@ -10,7 +10,10 @@ class ChildDevelopmentData {
   final String language;
   final String region;
   final Map<String, AgeGroup> ageGroups;
+  final Map<String, List<WeeklyActivityTemplate>> weeklyActivityCatalog;
+  final List<WeeklyActivityVariant> weeklyActivityVariants;
   final List<String> universalSafetyNotes;
+  final Map<String, List<String>> universalSafetyNotesI18n;
   final List<String> sources;
 
   const ChildDevelopmentData({
@@ -19,7 +22,10 @@ class ChildDevelopmentData {
     required this.language,
     required this.region,
     required this.ageGroups,
+    this.weeklyActivityCatalog = const {},
+    this.weeklyActivityVariants = const [],
     required this.universalSafetyNotes,
+    this.universalSafetyNotesI18n = const {},
     required this.sources,
   });
 
@@ -32,9 +38,104 @@ class ChildDevelopmentData {
       ageGroups: (json['age_groups'] as Map<String, dynamic>).map(
         (k, v) => MapEntry(k, AgeGroup.fromJson(v as Map<String, dynamic>)),
       ),
+      weeklyActivityCatalog:
+          (json['weekly_activity_catalog'] as Map<String, dynamic>? ?? {})
+              .map(
+                (key, value) => MapEntry(
+                  key,
+                  (value as List<dynamic>)
+                      .map(
+                        (item) => WeeklyActivityTemplate.fromJson(
+                          item as Map<String, dynamic>,
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+      weeklyActivityVariants:
+          (json['weekly_variants'] as List<dynamic>? ?? [])
+              .map(
+                (item) => WeeklyActivityVariant.fromJson(
+                  item as Map<String, dynamic>,
+                ),
+              )
+              .toList(),
       universalSafetyNotes: (json['universal_safety_notes'] as List<dynamic>)
           .cast<String>(),
+      universalSafetyNotesI18n:
+          (json['universal_safety_notes_i18n'] as Map<String, dynamic>? ?? {})
+              .map(
+                (key, value) => MapEntry(
+                  key,
+                  (value as List<dynamic>).cast<String>(),
+                ),
+              ),
       sources: (json['sources'] as List<dynamic>).cast<String>(),
+    );
+  }
+}
+
+class WeeklyActivityVariant {
+  final String id;
+  final Map<String, String> i18n;
+
+  const WeeklyActivityVariant({required this.id, required this.i18n});
+
+  factory WeeklyActivityVariant.fromJson(Map<String, dynamic> json) {
+    return WeeklyActivityVariant(
+      id: json['id'] as String,
+      i18n: (json['i18n'] as Map<String, dynamic>).map(
+        (key, value) => MapEntry(key, value as String),
+      ),
+    );
+  }
+
+  String text(String language) => i18n[language] ?? i18n['tr'] ?? '';
+}
+
+class WeeklyActivityTemplate {
+  final String id;
+  final int durationMinutes;
+  final Map<String, Map<String, dynamic>> i18n;
+
+  const WeeklyActivityTemplate({
+    required this.id,
+    required this.durationMinutes,
+    required this.i18n,
+  });
+
+  factory WeeklyActivityTemplate.fromJson(Map<String, dynamic> json) {
+    return WeeklyActivityTemplate(
+      id: json['id'] as String,
+      durationMinutes: (json['duration_minutes'] as num?)?.toInt() ?? 15,
+      i18n: (json['i18n'] as Map<String, dynamic>).map(
+        (key, value) => MapEntry(
+          key,
+          Map<String, dynamic>.from(value as Map<String, dynamic>),
+        ),
+      ),
+    );
+  }
+
+  Activity localize({
+    required String language,
+    required WeeklyActivityVariant variant,
+    required String ageGroup,
+  }) {
+    final localized = i18n[language] ?? i18n['tr'] ?? const {};
+    final baseDescription = localized['description'] as String? ?? '';
+    final variantText = variant.text(language);
+    return Activity(
+      name: localized['name'] as String? ?? id,
+      description: variantText.isEmpty
+          ? baseDescription
+          : '$baseDescription $variantText',
+      durationMinutes: durationMinutes,
+      materials: (localized['materials'] as List<dynamic>? ?? const [])
+          .cast<String>(),
+      learningOutcome: localized['learning_outcome'] as String? ?? '',
+      safetyNotes: localized['safety_notes'] as String? ?? '',
+      ageRange: ageGroup,
     );
   }
 }
@@ -45,6 +146,7 @@ class AgeGroup {
   final List<Activity> activities;
   final List<String> nutritionTips;
   final SleepGuidelines sleepGuidelines;
+  final Map<String, Map<String, dynamic>> i18n;
 
   const AgeGroup({
     required this.milestones,
@@ -52,6 +154,7 @@ class AgeGroup {
     required this.activities,
     required this.nutritionTips,
     required this.sleepGuidelines,
+    this.i18n = const {},
   });
 
   factory AgeGroup.fromJson(Map<String, dynamic> json) {
@@ -67,7 +170,19 @@ class AgeGroup {
       sleepGuidelines: SleepGuidelines.fromJson(
         json['sleep_guidelines'] as Map<String, dynamic>,
       ),
+      i18n: (json['i18n'] as Map<String, dynamic>? ?? {}).map(
+        (key, value) => MapEntry(
+          key,
+          Map<String, dynamic>.from(value as Map<String, dynamic>),
+        ),
+      ),
     );
+  }
+
+  Map<String, dynamic> localized(String language) {
+    const supported = {'tr', 'en', 'fr', 'nl'};
+    final locale = supported.contains(language) ? language : 'tr';
+    return i18n[locale] ?? i18n['tr'] ?? const {};
   }
 }
 
@@ -152,6 +267,7 @@ class MealPlanningData {
   final List<Recipe> recipes;
   final Map<String, DailyMeals> weeklyTemplate;
   final List<String> mealTips;
+  final Map<String, Map<String, dynamic>> i18n;
 
   const MealPlanningData({
     required this.module,
@@ -159,6 +275,7 @@ class MealPlanningData {
     required this.recipes,
     required this.weeklyTemplate,
     required this.mealTips,
+    this.i18n = const {},
   });
 
   factory MealPlanningData.fromJson(Map<String, dynamic> json) {
@@ -172,7 +289,19 @@ class MealPlanningData {
         (k, v) => MapEntry(k, DailyMeals.fromJson(v as Map<String, dynamic>)),
       ),
       mealTips: (json['meal_tips'] as List<dynamic>).cast<String>(),
+      i18n: (json['i18n'] as Map<String, dynamic>? ?? const {}).map(
+        (key, value) => MapEntry(
+          key,
+          Map<String, dynamic>.from(value as Map<String, dynamic>),
+        ),
+      ),
     );
+  }
+
+  Map<String, dynamic> localized(String languageCode) {
+    const supported = {'tr', 'en', 'fr', 'nl'};
+    final locale = supported.contains(languageCode) ? languageCode : 'tr';
+    return i18n[locale] ?? i18n['tr'] ?? const {};
   }
 }
 
@@ -292,6 +421,10 @@ class HouseholdData {
   final Map<String, List<String>> seasonalTasks;
   final Gamification gamification;
   final List<String> ecoTips;
+  final Map<String, List<String>> weeklyScheduleTaskRefs;
+  final Map<String, List<String>> seasonalTaskRefs;
+  final Map<String, dynamic> taskSource;
+  final Map<String, Map<String, dynamic>> i18n;
 
   const HouseholdData({
     required this.module,
@@ -302,6 +435,10 @@ class HouseholdData {
     required this.seasonalTasks,
     required this.gamification,
     required this.ecoTips,
+    this.weeklyScheduleTaskRefs = const {},
+    this.seasonalTaskRefs = const {},
+    this.taskSource = const {},
+    this.i18n = const {},
   });
 
   factory HouseholdData.fromJson(Map<String, dynamic> json) {
@@ -323,7 +460,37 @@ class HouseholdData {
         json['gamification'] as Map<String, dynamic>,
       ),
       ecoTips: (json['eco_tips'] as List<dynamic>).cast<String>(),
+      weeklyScheduleTaskRefs:
+          (json['weekly_schedule_task_refs'] as Map<String, dynamic>? ?? {})
+              .map(
+                (key, value) => MapEntry(
+                  key,
+                  (value as List<dynamic>).cast<String>(),
+                ),
+              ),
+      seasonalTaskRefs:
+          (json['seasonal_task_refs'] as Map<String, dynamic>? ?? {}).map(
+            (key, value) => MapEntry(
+              key,
+              (value as List<dynamic>).cast<String>(),
+            ),
+          ),
+      taskSource: Map<String, dynamic>.from(
+        json['task_source'] as Map? ?? const {},
+      ),
+      i18n: (json['i18n'] as Map<String, dynamic>? ?? const {}).map(
+        (key, value) => MapEntry(
+          key,
+          Map<String, dynamic>.from(value as Map<String, dynamic>),
+        ),
+      ),
     );
+  }
+
+  Map<String, dynamic> localized(String languageCode) {
+    const supported = {'tr', 'en', 'nl', 'fr'};
+    final locale = supported.contains(languageCode) ? languageCode : 'tr';
+    return i18n[locale] ?? i18n['tr'] ?? const {};
   }
 }
 
@@ -332,12 +499,16 @@ class DailyRoutine {
   final String time;
   final List<String> tasks;
   final String familyRole;
+  final String? id;
+  final List<String> taskRefs;
 
   const DailyRoutine({
     required this.name,
     required this.time,
     required this.tasks,
     required this.familyRole,
+    this.id,
+    this.taskRefs = const [],
   });
 
   factory DailyRoutine.fromJson(Map<String, dynamic> json) {
@@ -346,6 +517,8 @@ class DailyRoutine {
       time: json['time'] as String,
       tasks: (json['tasks'] as List<dynamic>).cast<String>(),
       familyRole: json['family_role'] as String,
+      id: json['id'] as String?,
+      taskRefs: (json['task_refs'] as List<dynamic>? ?? const []).cast<String>(),
     );
   }
 }
@@ -539,24 +712,40 @@ class EmergencyFund {
 class FuturePlanningData {
   final String module;
   final String version;
+  final String language;
+  final String region;
   final Map<String, dynamic> educationPathways;
   final EmergencyPlan emergencyPlan;
   final GoalFramework goalFramework;
   final List<String> legalChecklist;
+  final List<Map<String, dynamic>> weeklyPlanningCatalog;
+  final List<Map<String, dynamic>> familyFutureDomains;
+  final Map<String, dynamic> remoteUpdate;
+  final Map<String, dynamic> updateHistory;
+  final Map<String, Map<String, dynamic>> i18n;
 
   const FuturePlanningData({
     required this.module,
     required this.version,
+    required this.language,
+    required this.region,
     required this.educationPathways,
     required this.emergencyPlan,
     required this.goalFramework,
     required this.legalChecklist,
+    this.weeklyPlanningCatalog = const [],
+    this.familyFutureDomains = const [],
+    this.remoteUpdate = const {},
+    this.updateHistory = const {},
+    this.i18n = const {},
   });
 
   factory FuturePlanningData.fromJson(Map<String, dynamic> json) {
     return FuturePlanningData(
       module: json['module'] as String,
       version: json['version'] as String,
+      language: json['language'] as String? ?? 'tr',
+      region: json['region'] as String? ?? 'BE',
       educationPathways:
           json['education_pathways_belgium'] as Map<String, dynamic>,
       emergencyPlan: EmergencyPlan.fromJson(
@@ -567,7 +756,33 @@ class FuturePlanningData {
       ),
       legalChecklist: (json['legal_checklist_belgium'] as List<dynamic>)
           .cast<String>(),
+      weeklyPlanningCatalog:
+          (json['weekly_planning_catalog'] as List<dynamic>? ?? const [])
+              .map((item) => Map<String, dynamic>.from(item as Map))
+              .toList(),
+      familyFutureDomains:
+          (json['family_future_domains'] as List<dynamic>? ?? const [])
+              .map((item) => Map<String, dynamic>.from(item as Map))
+              .toList(),
+      remoteUpdate: Map<String, dynamic>.from(
+        json['remote_update'] as Map? ?? const {},
+      ),
+      updateHistory: Map<String, dynamic>.from(
+        json['update_history'] as Map? ?? const {},
+      ),
+      i18n: (json['i18n'] as Map<String, dynamic>? ?? const {}).map(
+        (key, value) => MapEntry(
+          key,
+          Map<String, dynamic>.from(value as Map<String, dynamic>),
+        ),
+      ),
     );
+  }
+
+  Map<String, dynamic> localized(String languageCode) {
+    const supported = {'tr', 'en', 'nl', 'fr'};
+    final locale = supported.contains(languageCode) ? languageCode : 'tr';
+    return i18n[locale] ?? i18n['tr'] ?? const {};
   }
 }
 

@@ -1,7 +1,9 @@
 // lib/presentation/screens/emergency/sos_main_screen.dart
 // SOS main screen with panic button and quick categories
 
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../config/routes.dart';
@@ -16,9 +18,54 @@ class SosMainScreen extends StatefulWidget {
   State<SosMainScreen> createState() => _SosMainScreenState();
 }
 
-class _SosMainScreenState extends State<SosMainScreen> {
+class _SosMainScreenState extends State<SosMainScreen>
+    with SingleTickerProviderStateMixin {
   final _engine = EmergencyAutoActionsEngine();
   bool _isHolding = false;
+  bool _triggering = false;
+  Timer? _holdTimer;
+  late final AnimationController _progress = AnimationController(
+    vsync: this,
+    duration: const Duration(seconds: 3),
+  )..addStatusListener((status) {
+      if (status == AnimationStatus.completed) _onHoldComplete();
+    });
+
+  @override
+  void dispose() {
+    _holdTimer?.cancel();
+    _progress.dispose();
+    super.dispose();
+  }
+
+  // Basılı tutma başladı — 3 sn ilerleme + haptic geri bildirim.
+  void _startHold() {
+    if (_triggering) return;
+    setState(() => _isHolding = true);
+    HapticFeedback.mediumImpact();
+    _progress
+      ..reset()
+      ..forward();
+    _holdTimer?.cancel();
+    _holdTimer = Timer(const Duration(seconds: 3), _onHoldComplete);
+  }
+
+  // Parmak erken kalktı/iptal — sıfırla.
+  void _cancelHold() {
+    if (_triggering) return;
+    setState(() => _isHolding = false);
+    _holdTimer?.cancel();
+    _progress.reset();
+  }
+
+  void _onHoldComplete() {
+    if (_triggering) return;
+    _triggering = true;
+    _holdTimer?.cancel();
+    HapticFeedback.heavyImpact();
+    setState(() => _isHolding = false);
+    _triggerSOS(EmergencyCategory.accident);
+  }
 
   void _triggerSOS(EmergencyCategory category, {String? description}) async {
     await _engine.triggerSOS(
@@ -29,6 +76,7 @@ class _SosMainScreenState extends State<SosMainScreen> {
       initialSeverity: EmergencySeverity.high,
     );
     if (mounted) {
+      _triggering = false;
       context.push(AppRoutes.sosActive);
     }
   }
@@ -53,10 +101,29 @@ class _SosMainScreenState extends State<SosMainScreen> {
               Expanded(
                 child: Center(
                   child: GestureDetector(
-                    onTapDown: (_) => setState(() => _isHolding = true),
-                    onTapUp: (_) => setState(() => _isHolding = false),
-                    onTapCancel: () => setState(() => _isHolding = false),
-                    child: AnimatedContainer(
+                    onTapDown: (_) => _startHold(),
+                    onTapUp: (_) => _cancelHold(),
+                    onTapCancel: _cancelHold,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                    // Basılı tutma ilerleme halkası (3 sn'de dolar).
+                    SizedBox(
+                      width: 236,
+                      height: 236,
+                      child: AnimatedBuilder(
+                        animation: _progress,
+                        builder: (_, _) => CircularProgressIndicator(
+                          value: _progress.value == 0 ? null : _progress.value,
+                          strokeWidth: 6,
+                          backgroundColor: Colors.white12,
+                          valueColor: AlwaysStoppedAnimation(
+                            _isHolding ? Colors.redAccent : Colors.transparent,
+                          ),
+                        ),
+                      ),
+                    ),
+                    AnimatedContainer(
                       duration: const Duration(milliseconds: 300),
                       width: 220,
                       height: 220,
@@ -92,6 +159,8 @@ class _SosMainScreenState extends State<SosMainScreen> {
                         ],
                       ),
                     ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -106,9 +175,8 @@ class _SosMainScreenState extends State<SosMainScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'HIZLI SOS KATEGORİLERİ',
-                      style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                    Text(AppLocalizations.of(context).hizliSosKategorileri,
+                      style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 12),
                     Wrap(
@@ -139,13 +207,14 @@ class _SosMainScreenState extends State<SosMainScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'SON SOS GEÇMİŞİ',
-                      style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                    Text(AppLocalizations.of(context).sonSosGecmisi,
+                      style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 12),
-                    _historyItem('15 Mart 2025 - 14:32', 'Çözüldü (Yanlış alarm)', Icons.check_circle, Colors.green),
-                    _historyItem('2 Şubat 2025 - 08:15', 'Gerçek acil durum', Icons.emergency, Colors.red),
+                    const Text(
+                      'Henüz SOS kaydı yok.',
+                      style: TextStyle(color: Colors.white70, fontSize: 13.5),
+                    ),
                   ],
                 ),
               ),
@@ -157,7 +226,7 @@ class _SosMainScreenState extends State<SosMainScreen> {
                     child: OutlinedButton.icon(
                       onPressed: () => context.push(AppRoutes.sosSettings),
                       icon: const Icon(Icons.settings, color: Colors.white70),
-                      label: const Text('SOS Ayarları', style: TextStyle(color: Colors.white70)),
+                      label: Text(AppLocalizations.of(context).sosAyarlari, style: const TextStyle(color: Colors.white70)),
                     ),
                   ),
                 ],
@@ -178,24 +247,4 @@ class _SosMainScreenState extends State<SosMainScreen> {
     );
   }
 
-  Widget _historyItem(String date, String status, IconData icon, Color color) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Row(
-        children: [
-          Icon(icon, color: color, size: 20),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(date, style: const TextStyle(color: Colors.white70, fontSize: 13)),
-                Text(status, style: TextStyle(color: color, fontSize: 12)),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }

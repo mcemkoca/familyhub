@@ -1,0 +1,86 @@
+# FamilyHub — Haftalık doğrulanmış içerik kaynak kayıtları.
+# Öncelik: Belçika resmî kurumları > kamu hizmetleri > sağlık/çocuk/eğitim
+# resmî kurumları > uluslararası kuruluşlar > akademik > güvenilir STK/yayıncı.
+# NOT: Bu dosya kaynak KAYITLARINI tanımlar; gerçek fetch haftalık workflow'da
+# çalışır ve secret/çeviri sağlayıcı gerektirir (bkz. weekly-content-sync.yml).
+
+version: 1
+country: BE
+locales: [tr, nl, fr, en]
+
+# Güvenli varsayılan işlem limitleri (workflow env ile override edilebilir).
+limits:
+  max_new_items_per_run: 40
+  max_updated_items_per_run: 100
+  max_requests_per_source: 50
+  request_timeout_seconds: 20
+  max_retries: 3
+
+sources:
+  - id: kind_en_gezin
+    name: Kind en Gezin (Opgroeien)
+    base_url: https://www.kindengezin.be
+    country: BE
+    regions: [VLG]
+    categories: [child_health, child_development]
+    source_language: nl
+    fetch_type: html          # sitemap/RSS tercih; HTML son çare
+    enabled: true
+    trust_level: official
+    refresh_interval: weekly
+    rate_limit: 30
+    timeout_seconds: 20
+    content_selector: "main article"
+    canonical_url_selector: "link[rel=canonical]"
+    published_date_selector: "meta[property='article:published_time']"
+
+  - id: one_be
+    name: ONE — Office de la Naissance et de l'Enfance
+    base_url: https://www.one.be
+    country: BE
+    regions: [WAL, BRU]
+    categories: [child_health, child_development]
+    source_language: fr
+    fetch_type: html
+    enabled: true
+    trust_level: official
+    refresh_interval: weekly
+    rate_limit: 30
+    timeout_seconds: 20
+    content_selector: "main article"
+    canonical_url_selector: "link[rel=canonical]"
+    published_date_selector: "meta[property='article:published_time']"
+
+  - id: belgium_be
+    name: Belgium.be — Federal portal
+    base_url: https://www.belgium.be
+    country: BE
+    regions: [VLG, WAL, BRU]
+    categories: [legal, financial, social_rights]
+    source_language: nl
+    fetch_type: html
+    enabled: true
+    trust_level: official
+    refresh_interval: weekly
+    rate_limit: 30
+    timeout_seconds: 20
+    content_selector: "main"
+    canonical_url_selector: "link[rel=canonical]"
+    published_date_selector: "meta[property='article:modified_time']"
+
+  - id: who_child
+    name: WHO — Child health & development
+    base_url: https://www.who.int
+    country: INT
+    regions: []
+    categories: [health, child_development]
+    source_language: en
+    fetch_type: html
+    enabled: false            # uluslararası; BE resmî kaynaklar önceliklidir
+    trust_level: international
+    refresh_interval: weekly
+    rate_limit: 20
+    timeout_seconds: 20
+    content_selector: "article"
+    canonical_url_selector: "link[rel=canonical]"
+    published_date_selector: "meta[property='article:published_time']"

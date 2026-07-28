@@ -11,7 +11,85 @@ enum MemberRole { admin, parent, teen, child, elder, guest, baby }
 enum EventCategory { appointment, birthday, school, activity, work, family, travel, other }
 enum TransactionType { income, expense }
 enum ShoppingCategory { grocery, pharmacy, stationery, household, other }
-enum MessageType { text, image, audio, location, event, system, gif, video, file }
+
+/// Ölçü birimi — STABLE KEY olarak saklanır (çeviri değil). UI'da lokalize gösterilir.
+enum ShoppingUnit {
+  piece, pack, box, bottle, jar,
+  liter, milliliter, kilogram, gram,
+  bunch, dozen, portion,
+}
+
+/// Enum ↔ stable string (storage/JSON). Bilinmeyen değer → piece.
+ShoppingUnit shoppingUnitFromKey(String? key) {
+  for (final u in ShoppingUnit.values) {
+    if (u.name == key) return u;
+  }
+  return ShoppingUnit.piece;
+}
+enum MessageType { text, image, audio, location, event, system, gif, video, file, poll }
+
+/// Sohbet anketi. [votes] her seçenek için oy veren üye id'lerini tutar.
+class PollData {
+  final String question;
+  final List<String> options;
+  final List<List<String>> votes; // options ile aynı sıra
+  final bool multiple;
+
+  const PollData({
+    required this.question,
+    required this.options,
+    required this.votes,
+    this.multiple = false,
+  });
+
+  int get totalVotes => votes.fold(0, (s, v) => s + v.length);
+
+  bool hasVoted(String userId) => votes.any((v) => v.contains(userId));
+
+  /// [userId]'nin [index] seçeneğindeki oyunu değiştirir (aç/kapa).
+  PollData toggleVote(int index, String userId) {
+    final next = votes.map((v) => List<String>.from(v)).toList();
+    final already = next[index].contains(userId);
+    if (!multiple) {
+      for (final v in next) {
+        v.remove(userId);
+      }
+    }
+    if (already) {
+      next[index].remove(userId);
+    } else {
+      next[index].add(userId);
+    }
+    return PollData(
+      question: question,
+      options: options,
+      votes: next,
+      multiple: multiple,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'question': question,
+        'options': options,
+        'votes': votes,
+        'multiple': multiple,
+      };
+
+  factory PollData.fromJson(Map<String, dynamic> json) => PollData(
+        question: json['question']?.toString() ?? '',
+        options: (json['options'] as List?)
+                ?.map((e) => e.toString())
+                .toList() ??
+            const [],
+        votes: (json['votes'] as List?)
+                ?.map((v) =>
+                    (v as List?)?.map((e) => e.toString()).toList() ??
+                    <String>[])
+                .toList() ??
+            const [],
+        multiple: json['multiple'] == true,
+      );
+}
 
 class FamilyMember {
   final String id;
@@ -289,6 +367,7 @@ class ShoppingItem {
   final String id;
   final String name;
   final String? quantity;
+  final ShoppingUnit unit;
   final ShoppingCategory category;
   final String requestedBy;
   final bool isCompleted;
@@ -298,6 +377,7 @@ class ShoppingItem {
     required this.id,
     required this.name,
     this.quantity,
+    this.unit = ShoppingUnit.piece,
     this.category = ShoppingCategory.grocery,
     required this.requestedBy,
     this.isCompleted = false,
@@ -309,6 +389,7 @@ class ShoppingItem {
       id: id,
       name: name,
       quantity: quantity,
+      unit: unit,
       category: category,
       requestedBy: requestedBy,
       isCompleted: isCompleted ?? this.isCompleted,
@@ -316,10 +397,23 @@ class ShoppingItem {
     );
   }
 
+  /// Bulut kaydı 'unit' döndürmediğinde yerel seçimi korumak için.
+  ShoppingItem copyWithUnit(ShoppingUnit u) => ShoppingItem(
+        id: id,
+        name: name,
+        quantity: quantity,
+        unit: u,
+        category: category,
+        requestedBy: requestedBy,
+        isCompleted: isCompleted,
+        completedBy: completedBy,
+      );
+
   Map<String, dynamic> toJson() => {
     'id': id,
     'name': name,
     'quantity': quantity,
+    'unit': unit.name,
     'category': category.index,
     'requestedBy': requestedBy,
     'isCompleted': isCompleted,
@@ -330,6 +424,7 @@ class ShoppingItem {
     id: json['id'] as String,
     name: json['name'] as String,
     quantity: json['quantity'] as String?,
+    unit: shoppingUnitFromKey(json['unit'] as String?),
     category: ShoppingCategory.values[json['category'] as int],
     requestedBy: json['requestedBy'] as String,
     isCompleted: json['isCompleted'] as bool? ?? false,
@@ -370,12 +465,15 @@ class ChatMessage {
   final String? videoUrl;
   final String? fileName;
   final int? fileSize;
+  final double? latitude; // konum mesajı için
+  final double? longitude;
   final List<MessageReaction> reactions;
   final String? replyToId;
   final String? replyToContent;
   final String? replyToSender;
   final bool isPinned;
   final int readCount;
+  final PollData? poll;
 
   const ChatMessage({
     required this.id,
@@ -392,12 +490,15 @@ class ChatMessage {
     this.videoUrl,
     this.fileName,
     this.fileSize,
+    this.latitude,
+    this.longitude,
     this.reactions = const [],
     this.replyToId,
     this.replyToContent,
     this.replyToSender,
     this.isPinned = false,
     this.readCount = 0,
+    this.poll,
   });
 
   ChatMessage copyWith({
@@ -408,6 +509,7 @@ class ChatMessage {
     List<MessageReaction>? reactions,
     bool? isPinned,
     int? readCount,
+    PollData? poll,
   }) {
     return ChatMessage(
       id: id ?? this.id,
@@ -424,12 +526,15 @@ class ChatMessage {
       videoUrl: videoUrl,
       fileName: fileName,
       fileSize: fileSize,
+      latitude: latitude,
+      longitude: longitude,
       reactions: reactions ?? this.reactions,
       replyToId: replyToId,
       replyToContent: replyToContent,
       replyToSender: replyToSender,
       isPinned: isPinned ?? this.isPinned,
       readCount: readCount ?? this.readCount,
+      poll: poll ?? this.poll,
     );
   }
 }

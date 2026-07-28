@@ -1,9 +1,54 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:uuid/uuid.dart';
 import '../core/supabase_client.dart';
 import '../core/errors.dart' as app_errors;
 import '../core/utils/repository_mixin.dart';
+import '../services/hive_service.dart';
+import '../core/settings_store.dart';
+
+/// Document categories matching Belgium family needs.
+enum DocumentCategory {
+  identity,
+  health,
+  insurance,
+  school,
+  residence,
+  vehicle,
+  tax,
+  mutualite,
+  other,
+}
+
+extension DocumentCategoryExt on DocumentCategory {
+  String get label => switch (this) {
+    DocumentCategory.identity  => 'Kimlik / Pasaport',
+    DocumentCategory.health    => 'Sağlık',
+    DocumentCategory.insurance => 'Sigorta',
+    DocumentCategory.school    => 'Okul',
+    DocumentCategory.residence => 'İkamet',
+    DocumentCategory.vehicle   => 'Araç',
+    DocumentCategory.tax       => 'Vergi',
+    DocumentCategory.mutualite => 'Mutualité',
+    DocumentCategory.other     => 'Diğer',
+  };
+
+  String get dbValue => name;
+
+  static DocumentCategory fromString(String? v) => switch (v) {
+    'identity'  => DocumentCategory.identity,
+    'health'    => DocumentCategory.health,
+    'insurance' => DocumentCategory.insurance,
+    'school'    => DocumentCategory.school,
+    'residence' => DocumentCategory.residence,
+    'vehicle'   => DocumentCategory.vehicle,
+    'tax'       => DocumentCategory.tax,
+    'mutualite' => DocumentCategory.mutualite,
+    _           => DocumentCategory.other,
+  };
+}
 
 class FamilyDocument {
   final String id;
@@ -16,6 +61,8 @@ class FamilyDocument {
   final String? relatedTaskId;
   final String? uploadedBy;
   final DateTime createdAt;
+  final DocumentCategory category;
+  final DateTime? expiryDate;
 
   FamilyDocument({
     required this.id,
@@ -28,6 +75,8 @@ class FamilyDocument {
     this.relatedTaskId,
     this.uploadedBy,
     required this.createdAt,
+    this.category = DocumentCategory.other,
+    this.expiryDate,
   });
 
   factory FamilyDocument.fromJson(Map<String, dynamic> json) => FamilyDocument(
@@ -43,7 +92,27 @@ class FamilyDocument {
     createdAt: DateTime.parse(
       (json['created_at'] as String?) ?? DateTime.now().toIso8601String(),
     ),
+    category: DocumentCategoryExt.fromString(json['category'] as String?),
+    expiryDate: json['expiry_date'] != null
+        ? DateTime.tryParse(json['expiry_date'] as String)
+        : null,
   );
+
+  /// Days until expiry. Negative = already expired.
+  int? get daysUntilExpiry {
+    if (expiryDate == null) return null;
+    return expiryDate!.difference(DateTime.now()).inDays;
+  }
+
+  bool get isExpiringSoon {
+    final d = daysUntilExpiry;
+    return d != null && d >= 0 && d <= 30;
+  }
+
+  bool get isExpired {
+    final d = daysUntilExpiry;
+    return d != null && d < 0;
+  }
 }
 
 class DocumentRepository with RepositoryErrorHandler {
@@ -57,6 +126,52 @@ class DocumentRepository with RepositoryErrorHandler {
     if (_userId == null) {
       throw app_errors.AppAuthException('Giriş yapmalısınız');
     }
+  }
+
+  /// Gerçek aile yoksa kullanılan yerel evrak kasası (Hive'da dosya yolları).
+  static const String localFamilyId = 'local_family';
+
+  List<Map<String, dynamic>> _localRaw() {
+    final raw = HiveService.getSetting(SettingsStore.scopedKey('documents_local'));
+    if (raw == null || raw.isEmpty) return [];
+    try {
+      return (jsonDecode(raw) as List).cast<Map<String, dynamic>>();
+    } catch (_) {
+      return [];
+    }
+  }
+
+  List<FamilyDocument> getLocalDocuments() =>
+      _localRaw().map((e) => FamilyDocument.fromJson(e)).toList()
+        ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
+
+  Future<FamilyDocument> addLocalDocument({
+    required File file,
+    required String title,
+    String fileType = 'pdf',
+    DocumentCategory category = DocumentCategory.other,
+    DateTime? expiryDate,
+  }) async {
+    final map = {
+      'id': 'local_${const Uuid().v4()}',
+      'title': title,
+      'file_url': file.path,
+      'file_type': fileType,
+      'uploaded_by': _userId,
+      'category': category.dbValue,
+      'expiry_date': expiryDate?.toIso8601String(),
+      'created_at': DateTime.now().toIso8601String(),
+    };
+    final all = _localRaw()..insert(0, map);
+    await HiveService.setSetting(
+        SettingsStore.scopedKey('documents_local'), jsonEncode(all));
+    return FamilyDocument.fromJson(map);
+  }
+
+  Future<void> deleteLocalDocument(String id) async {
+    final all = _localRaw()..removeWhere((e) => e['id'] == id);
+    await HiveService.setSetting(
+        SettingsStore.scopedKey('documents_local'), jsonEncode(all));
   }
 
   Future<List<FamilyDocument>> getDocuments(String familyId) async {
@@ -99,6 +214,8 @@ class DocumentRepository with RepositoryErrorHandler {
     String fileType = 'pdf',
     String? ocrText,
     Map<String, dynamic>? extractedData,
+    DocumentCategory category = DocumentCategory.other,
+    DateTime? expiryDate,
   }) async {
     return handleRepositoryCall(() async {
       _checkAuth();
@@ -122,6 +239,8 @@ class DocumentRepository with RepositoryErrorHandler {
             'ocr_text': ocrText,
             'extracted_data': extractedData,
             'uploaded_by': _userId,
+            'category': category.dbValue,
+            'expiry_date': expiryDate?.toIso8601String(),
           })
           .select()
           .single();

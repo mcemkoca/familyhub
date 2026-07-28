@@ -6,13 +6,15 @@ import '../../core/errors.dart';
 import '../../core/supabase_client.dart';
 import '../notification_service.dart';
 import '../../core/analytics/analytics_service.dart';
+import '../localization/locale_service.dart';
 
 class ReferralService {
+  static String _text(Map<String, String> values) { final lang = LocaleService.resolveInitialLocale().languageCode; return values[lang] ?? values['tr']!; }
   static const String _inviteLinkBase = 'https://familyhub.app/join';
 
   static Future<String> generateInviteLink(String familyId) async {
     final userId = SupabaseConfig.client.auth.currentUser?.id;
-    if (userId == null) throw AppAuthException('Giriş yapmalısınız');
+    if (userId == null) throw AppAuthException(_text(const {'tr': 'Giriş yapmalısınız', 'en': 'You must sign in', 'nl': 'Je moet inloggen', 'fr': 'Vous devez vous connecter'}));
 
     final code = _generateReferralCode(userId, familyId);
 
@@ -54,8 +56,9 @@ class ReferralService {
         })
         .eq('code', code)
         .select()
-        .single();
+        .maybeSingle();
 
+    if (referral == null) return;
     await _rewardInviter(referral['inviter_id'] as String);
 
     AnalyticsService.track(
@@ -76,8 +79,8 @@ class ReferralService {
       );
 
       await NotificationService.showInstantNotification(
-        title: '🎉 Davet Ödülü!',
-        body: 'Bir arkadaşını davet ettin! 7 gün Premium kazandın.',
+        title: _text(const {'tr': '🎉 Davet Ödülü!', 'en': '🎉 Referral Reward!', 'nl': '🎉 Uitnodigingsbeloning!', 'fr': '🎉 Récompense de parrainage !'}),
+        body: _text(const {'tr': 'Bir arkadaşını davet ettin! 7 gün Premium kazandın.', 'en': 'You invited a friend and earned 7 days of Premium!', 'nl': 'Je hebt een vriend uitgenodigd en 7 dagen Premium verdiend!', 'fr': 'Vous avez invité un ami et gagné 7 jours de Premium !'}),
       );
     } catch (_) {
       // Reward failure is non-critical

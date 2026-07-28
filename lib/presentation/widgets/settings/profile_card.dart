@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
-import '../../../config/constants.dart';
 import '../../../config/routes.dart';
 import '../../../core/supabase_client.dart';
 import '../../../domain/models/profile_model.dart';
@@ -18,7 +18,6 @@ class ProfileCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final profileAsync = ref.watch(_profileCardDataProvider);
 
     return InkWell(
@@ -27,22 +26,14 @@ class ProfileCard extends ConsumerWidget {
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: isDark ? AppColors.darkCard : Colors.white,
+          color: const Color(0xFF13131A),
           borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: isDark
-                  ? Colors.black.withAlpha(20)
-                  : Colors.black.withAlpha(8),
-              blurRadius: 16,
-              offset: const Offset(0, 4),
-            ),
-          ],
+          border: Border.all(color: const Color(0x1EFFFFFF), width: 0.5),
         ),
         child: profileAsync.when(
           data: (profile) => _ProfileContent(profile: profile),
-          loading: () => _ProfileSkeleton(isDark: isDark),
-          error: (e, s) => _ProfileError(isDark: isDark, error: e),
+          loading: () => const _ProfileSkeleton(),
+          error: (e, s) => _ProfileError(error: e),
         ),
       ),
     );
@@ -56,8 +47,6 @@ class _ProfileContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Row(
       children: [
         Container(
@@ -66,22 +55,13 @@ class _ProfileContent extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: profile.avatarUrl == null
                 ? const LinearGradient(
-                    colors: AppColors.fabGradient,
+                    colors: [Color(0xFF6366F1), Color(0xFF4F46E5)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   )
                 : null,
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: isDark ? AppColors.darkCard : Colors.white,
-              width: 3,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.cobalt.withAlpha(40),
-                blurRadius: 12,
-              ),
-            ],
+            border: Border.all(color: const Color(0x1EFFFFFF), width: 2),
             image: profile.avatarUrl != null
                 ? DecorationImage(
                     image: NetworkImage(profile.avatarUrl!),
@@ -109,27 +89,24 @@ class _ProfileContent extends StatelessWidget {
             children: [
               Text(
                 profile.displayName,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
-                  color: isDark
-                      ? AppColors.darkTextPrimary
-                      : AppColors.dark,
+                  color: Color(0xFFE5E7EB),
                 ),
               ),
               const SizedBox(height: 6),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
-                  color: AppColors.cobalt.withAlpha(isDark ? 30 : 15),
+                  color: const Color(0xFF6366F1).withAlpha(30),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Text(
-                  profile.roleDisplay,
-                  style: const TextStyle(
+                child: const Text(
+                  'Profili Görüntüle',
+                  style: TextStyle(
                     fontSize: 12,
-                    color: AppColors.cobalt,
+                    color: Color(0xFF6366F1),
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -137,11 +114,9 @@ class _ProfileContent extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 profile.familyName ?? 'Ailem',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 13,
-                  color: isDark
-                      ? AppColors.darkTextSecondary
-                      : AppColors.slate,
+                  color: Color(0xFF6B7280),
                 ),
               ),
               const SizedBox(height: 8),
@@ -151,7 +126,7 @@ class _ProfileContent extends StatelessWidget {
                     child: Container(
                       height: 6,
                       decoration: BoxDecoration(
-                        color: isDark ? Colors.grey.shade800 : Colors.grey.shade200,
+                        color: Theme.of(context).colorScheme.onSurface.withAlpha(30),
                         borderRadius: BorderRadius.circular(3),
                       ),
                       child: FractionallySizedBox(
@@ -160,7 +135,7 @@ class _ProfileContent extends StatelessWidget {
                         child: Container(
                           decoration: BoxDecoration(
                             gradient: const LinearGradient(
-                              colors: [Color(0xFF3B82F6), Color(0xFF8B5CF6)],
+                              colors: [Color(0xFF6366F1), Color(0xFFEC4899)],
                             ),
                             borderRadius: BorderRadius.circular(3),
                           ),
@@ -174,7 +149,7 @@ class _ProfileContent extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w700,
-                      color: AppColors.cobalt,
+                      color: Color(0xFF6366F1),
                     ),
                   ),
                 ],
@@ -221,21 +196,21 @@ class _ProfileContent extends StatelessWidget {
               ],
             ),
           ),
+        const SizedBox(width: 8),
+        Icon(Icons.chevron_right, color: Theme.of(context).colorScheme.onSurface.withAlpha(100), size: 20),
       ],
     );
   }
 }
 
 class _ProfileSkeleton extends StatelessWidget {
-  final bool isDark;
-
-  const _ProfileSkeleton({required this.isDark});
+  const _ProfileSkeleton();
 
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: isDark ? AppColors.darkCard : Colors.grey.shade300,
-      highlightColor: isDark ? AppColors.darkBorder : Colors.grey.shade100,
+      baseColor: const Color(0xFF1F2937),
+      highlightColor: const Color(0xFF374151),
       child: Row(
         children: [
           Container(
@@ -278,10 +253,9 @@ class _ProfileSkeleton extends StatelessWidget {
 }
 
 class _ProfileError extends ConsumerWidget {
-  final bool isDark;
   final Object? error;
 
-  const _ProfileError({required this.isDark, this.error});
+  const _ProfileError({this.error});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -297,7 +271,7 @@ class _ProfileError extends ConsumerWidget {
           height: 64,
           decoration: BoxDecoration(
             gradient: const LinearGradient(
-              colors: AppColors.fabGradient,
+              colors: [Color(0xFF6366F1), Color(0xFF4F46E5)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -318,22 +292,18 @@ class _ProfileError extends ConsumerWidget {
             children: [
               Text(
                 displayName,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
-                  color: isDark
-                      ? AppColors.darkTextPrimary
-                      : AppColors.dark,
+                  color: Color(0xFFE5E7EB),
                 ),
               ),
               const SizedBox(height: 6),
-              Text(
+              const Text(
                 'Profil bilgilerine ulaşılamadı',
                 style: TextStyle(
                   fontSize: 13,
-                  color: isDark
-                      ? AppColors.darkTextSecondary
-                      : AppColors.slate,
+                  color: Color(0xFF6B7280),
                 ),
               ),
               const SizedBox(height: 8),
@@ -342,10 +312,10 @@ class _ProfileError extends ConsumerWidget {
                   OutlinedButton.icon(
                     onPressed: () => context.push(AppRoutes.profileEdit),
                     icon: const Icon(Icons.edit, size: 14),
-                    label: const Text('Düzenle'),
+                    label: Text(AppLocalizations.of(context).pcEdit),
                     style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.cobalt,
-                      side: BorderSide(color: AppColors.cobalt.withAlpha(60)),
+                      foregroundColor: const Color(0xFF6366F1),
+                      side: const BorderSide(color: Color(0x336366F1)),
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                       minimumSize: Size.zero,
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -356,10 +326,10 @@ class _ProfileError extends ConsumerWidget {
                   OutlinedButton.icon(
                     onPressed: () => ref.refresh(_profileCardDataProvider),
                     icon: const Icon(Icons.refresh, size: 14),
-                    label: const Text('Tekrar Dene'),
+                    label: Text(AppLocalizations.of(context).cdRetry),
                     style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.success,
-                      side: BorderSide(color: AppColors.success.withAlpha(60)),
+                      foregroundColor: const Color(0xFF10B981),
+                      side: const BorderSide(color: Color(0x3310B981)),
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                       minimumSize: Size.zero,
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,

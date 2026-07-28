@@ -1,18 +1,27 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
+import '../../widgets/language_suggestion_dialog.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../config/routes.dart';
-import '../../../repositories/hub_repository.dart';
+import '../../../core/supabase_client.dart';
 import '../../providers/app_providers.dart';
 import '../../../domain/entities.dart';
-import '../../../services/weather_service.dart';
 import '../../../services/hive_service.dart';
+import '../../widgets/notification_prompt.dart';
 import '../../../components/hub/ai_suggestions_widget.dart';
-import '../../../components/hub/content_widgets/content_highlights_widget.dart';
+import '../../../components/hub/hub_ai_panel.dart';
+import '../../../components/hub/daily_briefing_card.dart';
+import '../../../components/hub/smart_insights_card.dart';
+import '../../../components/hub/family_mood_strip.dart';
 import '../../../services/location_tracking_service.dart';
 
 // ─── Notification model ───────────────────────────────────────────────────────
@@ -32,13 +41,60 @@ class _HubNotif {
 }
 
 // ─── Quick-access feature model ───────────────────────────────────────────────
+
+/// Quick-access tile anahtarını aktif dildeki etikete çevirir.
+String hubFeatureLabel(BuildContext context, String key) {
+  final l = AppLocalizations.of(context);
+  switch (key) {
+    case 'shopping':
+      return l.hubShopping;
+    case 'kitchen':
+      return l.hubKitchen;
+    case 'child':
+      return l.hubChild;
+    case 'development':
+      return l.hubDevelopment;
+    case 'health':
+      return l.hubHealth;
+    case 'location':
+      return l.hubLocationTile;
+    case 'emergency':
+      return l.hubEmergency;
+    case 'budget':
+      return l.hubBudget;
+    case 'expenses':
+      return l.hubExpenses;
+    case 'gallery':
+      return l.hubGallery;
+    case 'education':
+      return l.hubEducation;
+    case 'ai':
+      return l.hubAI;
+    case 'legal':
+      return l.hubLegal;
+    case 'intelligence':
+      return l.hubIntelligence;
+    default:
+      return key;
+  }
+}
+
 class _Feature {
   final IconData icon;
   final String label;
   final List<Color> gradient;
   final Color shadow;
   final String route;
-  const _Feature(this.icon, this.label, this.gradient, this.shadow, this.route);
+  final String?
+  asset; // premium PNG tile (varsa gradient+ikon yerine kullanılır)
+  const _Feature(
+    this.icon,
+    this.label,
+    this.gradient,
+    this.shadow,
+    this.route, {
+    this.asset,
+  });
 }
 
 // ─── Hub Screen ───────────────────────────────────────────────────────────────
@@ -50,64 +106,143 @@ class HubScreen extends ConsumerStatefulWidget {
 
 class _HubScreenState extends ConsumerState<HubScreen>
     with TickerProviderStateMixin {
-
   // notification ticker
   int _notifIdx = 0;
   bool _notifExpanded = false;
+  // Gerçek verilerden üretilen canlı bildirimler (build'de doldurulur).
+  List<_HubNotif> _liveNotifs = const [];
   late Timer _tickerTimer;
   late AnimationController _tickerFade;
 
   // sample notifications (will come from Supabase / FCM in production)
-  static const _notifs = [
-    _HubNotif(
-      icon: Icons.medication_outlined,
-      color: Color(0xFFEF4444),
-      title: "Elif'in vitamini alınmadı",
-      source: 'Sağlık · hatırlatıcı',
-      time: '09:41',
-    ),
-    _HubNotif(
-      icon: Icons.calendar_today_outlined,
-      color: Color(0xFF6366F1),
-      title: 'Diş hekimi randevusu — 14:00',
-      source: 'Takvim · 2 saat sonra',
-      time: '09:38',
-    ),
-    _HubNotif(
-      icon: Icons.location_on_outlined,
-      color: Color(0xFF10B981),
-      title: 'Kerem okula ulaştı',
-      source: 'Konum · otomatik',
-      time: '08:21',
-    ),
-    _HubNotif(
-      icon: Icons.credit_card_outlined,
-      color: Color(0xFFF59E0B),
-      title: 'Netflix yenileniyor — 3 gün',
-      source: 'Abonelik · hatırlatıcı',
-      time: '08:00',
-    ),
-  ];
 
   static final _features = <_Feature>[
-    _Feature(Icons.shopping_cart_outlined,   'Alışveriş',   [Color(0xFF10B981), Color(0xFF059669)], Color(0xFF064E3B), AppRoutes.shopping),
-    _Feature(Icons.restaurant_outlined,      'Mutfak',      [Color(0xFFF59E0B), Color(0xFFD97706)], Color(0xFF78350F), AppRoutes.kitchen),
-    _Feature(Icons.child_care_outlined,      'Çocuk',       [Color(0xFF06B6D4), Color(0xFF0891B2)], Color(0xFF164E63), AppRoutes.childManagement),
-    _Feature(Icons.eco_outlined,             'Gelişim',     [Color(0xFFF43F5E), Color(0xFFE11D48)], Color(0xFF881337), AppRoutes.childDevelopment),
-    _Feature(Icons.monitor_heart_outlined,   'Sağlık',      [Color(0xFF14B8A6), Color(0xFF0D9488)], Color(0xFF134E4A), AppRoutes.familyHealth),
-    _Feature(Icons.map_outlined,             'Konum',       [Color(0xFF3B82F6), Color(0xFF2563EB)], Color(0xFF1E3A8A), AppRoutes.familyMap),
-    _Feature(Icons.emergency_outlined,       'Acil',        [Color(0xFFEF4444), Color(0xFFDC2626)], Color(0xFF7F1D1D), AppRoutes.emergency),
-    _Feature(Icons.account_balance_wallet_outlined, 'Bütçe',[Color(0xFFA855F7), Color(0xFF9333EA)], Color(0xFF581C87), AppRoutes.budget),
-    _Feature(Icons.subscriptions_outlined,   'Abonelik',    [Color(0xFF6366F1), Color(0xFF4F46E5)], Color(0xFF312E81), AppRoutes.subscriptions),
-    _Feature(Icons.photo_library_outlined,   'Galeri',      [Color(0xFFEC4899), Color(0xFFDB2777)], Color(0xFF831843), AppRoutes.gallery),
-    _Feature(Icons.menu_book_outlined,       'Eğitim',      [Color(0xFF8B5CF6), Color(0xFF7C3AED)], Color(0xFF4C1D95), AppRoutes.education),
-    _Feature(Icons.psychology_outlined,      'AI',          [Color(0xFF4776E6), Color(0xFF2D3A8C)], Color(0xFF1E1B4B), AppRoutes.aiAssistant),
+    const _Feature(
+      Icons.shopping_bag_rounded,
+      'shopping',
+      [Color(0xFF10B981), Color(0xFF059669)],
+      Color(0xFF064E3B),
+      AppRoutes.shopping,
+      asset: 'assets/icons/tiles/shopping.png',
+    ),
+    const _Feature(
+      Icons.ramen_dining_rounded,
+      'kitchen',
+      [Color(0xFFF59E0B), Color(0xFFD97706)],
+      Color(0xFF78350F),
+      AppRoutes.kitchen,
+      asset: 'assets/icons/tiles/kitchen.png',
+    ),
+    const _Feature(
+      Icons.child_care_rounded,
+      'child',
+      [Color(0xFF06B6D4), Color(0xFF0891B2)],
+      Color(0xFF164E63),
+      AppRoutes.childManagement,
+      asset: 'assets/icons/tiles/child.png',
+    ),
+    const _Feature(
+      Icons.emoji_nature_rounded,
+      'development',
+      [Color(0xFFF43F5E), Color(0xFFE11D48)],
+      Color(0xFF881337),
+      AppRoutes.childDevelopment,
+      asset: 'assets/icons/tiles/growth.png',
+    ),
+    const _Feature(
+      Icons.favorite_rounded,
+      'health',
+      [Color(0xFF14B8A6), Color(0xFF0D9488)],
+      Color(0xFF134E4A),
+      AppRoutes.familyHealth,
+      asset: 'assets/icons/tiles/health.png',
+    ),
+    const _Feature(
+      Icons.location_on_rounded,
+      'location',
+      [Color(0xFF3B82F6), Color(0xFF2563EB)],
+      Color(0xFF1E3A8A),
+      AppRoutes.familyMap,
+      asset: 'assets/icons/tiles/location.png',
+    ),
+    const _Feature(
+      Icons.emergency_rounded,
+      'emergency',
+      [Color(0xFFEF4444), Color(0xFFDC2626)],
+      Color(0xFF7F1D1D),
+      AppRoutes.emergency,
+      asset: 'assets/icons/tiles/emergency.png',
+    ),
+    const _Feature(
+      Icons.savings_rounded,
+      'budget',
+      [Color(0xFFA855F7), Color(0xFF9333EA)],
+      Color(0xFF581C87),
+      AppRoutes.budget,
+      asset: 'assets/icons/tiles/budget.png',
+    ),
+    const _Feature(
+      Icons.receipt_long_rounded,
+      'expenses',
+      [Color(0xFF6366F1), Color(0xFF4F46E5)],
+      Color(0xFF312E81),
+      AppRoutes.subscriptions,
+      asset: 'assets/icons/tiles/expenses.png',
+    ),
+    const _Feature(
+      Icons.collections_rounded,
+      'gallery',
+      [Color(0xFFEC4899), Color(0xFFDB2777)],
+      Color(0xFF831843),
+      AppRoutes.gallery,
+      asset: 'assets/icons/tiles/gallery.png',
+    ),
+    const _Feature(
+      Icons.school_rounded,
+      'education',
+      [Color(0xFF8B5CF6), Color(0xFF7C3AED)],
+      Color(0xFF4C1D95),
+      AppRoutes.education,
+      asset: 'assets/icons/tiles/education.png',
+    ),
+    const _Feature(
+      Icons.auto_awesome_rounded,
+      'ai',
+      [Color(0xFF4776E6), Color(0xFF2D3A8C)],
+      Color(0xFF1E1B4B),
+      AppRoutes.aiAssistant,
+      asset: 'assets/icons/tiles/ai.png',
+    ),
+    // Yeni bağımsız modüller — asset yok, gradient+ikon fallback.
+    const _Feature(
+      Icons.gavel_rounded,
+      'legal',
+      [Color(0xFF10B981), Color(0xFF059669)],
+      Color(0xFF064E3B),
+      AppRoutes.legalBenefits,
+    ),
+    // Tek AI merkezi: Aile Zekâsı. Eski "FamilyHub AI" tile'ı kaldırıldı
+    // (spec §4.3); /familyhub-ai route'u artık buraya yönlendiriyor.
+    const _Feature(
+      Icons.auto_awesome_mosaic_rounded,
+      'intelligence',
+      [Color(0xFF8B5CF6), Color(0xFF6366F1)],
+      Color(0xFF3730A3),
+      AppRoutes.familyIntelligence,
+    ),
   ];
 
   @override
   void initState() {
     super.initState();
     LocationTrackingService.startTracking();
+
+    // İlk açılışta önce dil önerisi (gerekliyse), sonra bildirim izni promptu.
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (!mounted) return;
+      await LanguageSuggestionDialog.maybeShow(context, ref);
+      if (mounted) NotificationPrompt.maybeShow(context);
+    });
 
     _tickerFade = AnimationController(
       vsync: this,
@@ -123,7 +258,7 @@ class _HubScreenState extends ConsumerState<HubScreen>
   Future<void> _cycleNotif() async {
     await _tickerFade.reverse();
     if (!mounted) return;
-    setState(() => _notifIdx = (_notifIdx + 1) % _notifs.length);
+    setState(() => _notifIdx = (_notifIdx + 1) % _liveNotifs.length);
     await _tickerFade.forward();
   }
 
@@ -138,60 +273,288 @@ class _HubScreenState extends ConsumerState<HubScreen>
     ref.invalidate(todaySummaryProvider);
     ref.invalidate(upcomingEventsProvider);
     ref.invalidate(myTasksProvider);
-    ref.invalidate(familyMoodsProvider);
     ref.invalidate(weatherProvider);
     await Future.delayed(const Duration(milliseconds: 500));
+  }
+
+  // Ana Ekran Özelleştir'de kaydedilen kutucuk sırasını uygular.
+  List<_Feature> _applyOrder(List<_Feature> features) {
+    final raw = HiveService.getSetting('hub_tile_order');
+    if (raw == null || raw.isEmpty) return features;
+    final order = raw.split('|');
+    final ranked = [...features];
+    ranked.sort((a, b) {
+      final ia = order.indexOf(a.route);
+      final ib = order.indexOf(b.route);
+      return (ia < 0 ? 9999 : ia).compareTo(ib < 0 ? 9999 : ib);
+    });
+    return ranked;
+  }
+
+  /// Returns the subset of features visible to the given role.
+  List<_Feature> _featuresForRole(MemberRole role) {
+    switch (role) {
+      case MemberRole.child:
+      case MemberRole.baby:
+        // Kids see only tasks, education, and chat
+        return _features
+            .where(
+              (f) =>
+                  f.route == AppRoutes.childManagement ||
+                  f.route == AppRoutes.childDevelopment ||
+                  f.route == AppRoutes.education,
+            )
+            .toList();
+      case MemberRole.elder:
+        // Elders: health-first ordering, no child management
+        final priority = [
+          AppRoutes.familyHealth,
+          AppRoutes.emergency,
+          AppRoutes.shopping,
+          AppRoutes.budget,
+          AppRoutes.gallery,
+          AppRoutes.aiAssistant,
+        ];
+        return [
+          ..._features.where((f) => priority.contains(f.route)),
+          ..._features.where(
+            (f) =>
+                !priority.contains(f.route) &&
+                f.route != AppRoutes.childManagement &&
+                f.route != AppRoutes.childDevelopment,
+          ),
+        ];
+      case MemberRole.guest:
+        // Guests: shared shopping and gallery only
+        return _features
+            .where(
+              (f) =>
+                  f.route == AppRoutes.shopping || f.route == AppRoutes.gallery,
+            )
+            .toList();
+      case MemberRole.teen:
+        // Teens: everything except child management tools
+        return _features
+            .where((f) => f.route != AppRoutes.childManagement)
+            .toList();
+      case MemberRole.admin:
+      case MemberRole.parent:
+        return _features;
+    }
+  }
+
+  // Gerçek verilerden (yaklaşan etkinlikler + görevler) bildirim şeridi üretir.
+  // Veri yoksa dostça bir varsayılan gösterir.
+  List<_HubNotif> _buildLiveNotifs() {
+    final events = ref.watch(upcomingEventsProvider).valueOrNull ?? [];
+    final tasks = ref.watch(myTasksProvider).valueOrNull ?? [];
+    String hhmm(DateTime d) =>
+        '${d.hour.toString().padLeft(2, '0')}:${d.minute.toString().padLeft(2, '0')}';
+    String rel(DateTime d) {
+      final diff = d.difference(DateTime.now());
+      if (diff.isNegative) return 'geçti';
+      if (diff.inMinutes < 60) return '${diff.inMinutes} dk sonra';
+      if (diff.inHours < 24) return '${diff.inHours} saat sonra';
+      return '${diff.inDays} gün sonra';
+    }
+
+    final list = <_HubNotif>[];
+    for (final e in events.take(4)) {
+      list.add(
+        _HubNotif(
+          icon: Icons.calendar_today_outlined,
+          color: const Color(0xFF6366F1),
+          title: e.title,
+          source: 'Takvim · ${rel(e.start)}',
+          time: hhmm(e.start),
+        ),
+      );
+    }
+    for (final t in tasks.take(4)) {
+      list.add(
+        _HubNotif(
+          icon: Icons.check_circle_outline,
+          color: const Color(0xFF10B981),
+          title: t.title,
+          source: t.dueDate != null ? 'Görev · ${rel(t.dueDate!)}' : 'Görev',
+          time: t.dueDate != null ? hhmm(t.dueDate!) : '',
+        ),
+      );
+    }
+    if (list.isEmpty) {
+      list.add(
+        _HubNotif(
+          icon: Icons.notifications_none_rounded,
+          color: const Color(0xFF6B7280),
+          title: AppLocalizations.of(context).hbNoNotifications,
+          source: AppLocalizations.of(context).hbAllUpToDate,
+          time: '',
+        ),
+      );
+    }
+    return list;
   }
 
   @override
   Widget build(BuildContext context) {
     final members = ref.watch(familyMembersProvider);
+    final role = ref.watch(currentMemberRoleProvider);
+    final visibleFeatures = _applyOrder(_featuresForRole(role));
+    // Hub realtime senkronu canlı tutulsun (events/moods/tasks → anlık tazeleme).
+    ref.watch(hubRealtimeSyncProvider);
+    _liveNotifs = _buildLiveNotifs();
+
     final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.light,
+      value: isDark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark,
       child: Scaffold(
-        backgroundColor: const Color(0xFF0A0A0F),
-        body: RefreshIndicator(
-          onRefresh: _refresh,
-          color: const Color(0xFF6366F1),
-          backgroundColor: const Color(0xFF1A1A2E),
-          child: CustomScrollView(
-            slivers: [
-              // ── Ticker notification bar ──────────────────────────────────
-              SliverToBoxAdapter(child: _NotifTicker(
-                notifs: _notifs,
-                currentIdx: _notifIdx,
-                expanded: _notifExpanded,
-                fade: _tickerFade,
-                onTap: () => setState(() => _notifExpanded = !_notifExpanded),
-                onDismiss: (i) => setState(() {}),
-              )),
+        backgroundColor: const Color(0xFF07060D),
+        body: Stack(
+          children: [
+            // ── Family Mode arka planı: sıcak + soğuk dengeli derinlik ──
+            const Positioned.fill(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color(0xFF2A1830), // üst: sıcak mor-bordo
+                      Color(0xFF1A1230),
+                      Color(0xFF0E0B18),
+                      Color(0xFF0A0810), // alt: sıcak-koyu
+                    ],
+                    stops: [0.0, 0.32, 0.68, 1.0],
+                  ),
+                ),
+              ),
+            ),
+            // ── Sıcak parıltı (mercan/şeftali) — aile sıcaklığı ──
+            Positioned(
+              top: -150,
+              right: -90,
+              child: Container(
+                width: 360,
+                height: 360,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      const Color(
+                        0xFFFF6B8B,
+                      ).withAlpha(70), // sıcak pembe-mercan
+                      const Color(0xFFFF6B8B).withAlpha(0),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            // ── Soğuk parıltı (indigo/teal) — denge ──
+            Positioned(
+              top: -70,
+              left: -120,
+              child: Container(
+                width: 320,
+                height: 320,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      const Color(0xFF5B8DEF).withAlpha(64), // soğuk mavi
+                      const Color(0xFF5B8DEF).withAlpha(0),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            // ── Alt sıcak amber tabanı (yuva hissi) ──
+            Positioned(
+              bottom: -160,
+              right: -60,
+              child: Container(
+                width: 300,
+                height: 300,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      const Color(0xFFFFB27A).withAlpha(38), // sıcak amber
+                      const Color(0xFFFFB27A).withAlpha(0),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SafeArea(
+              bottom: false,
+              child: RefreshIndicator(
+                onRefresh: _refresh,
+                color: const Color(0xFF6366F1),
+                backgroundColor: const Color(0xFF1A1A2E),
+                child: CustomScrollView(
+                  slivers: [
+                    // ── Çevrimdışı rozeti ────────────────────────────────────────
+                    if (ref.watch(connectivityProvider).valueOrNull == false)
+                      const SliverToBoxAdapter(child: _OfflineBanner()),
 
-              // ── Cover + profiles ─────────────────────────────────────────
-              SliverToBoxAdapter(child: _CoverSection(members: members)),
+                    // ── Ticker notification bar ──────────────────────────────────
+                    SliverToBoxAdapter(
+                      child: _NotifTicker(
+                        notifs: _liveNotifs,
+                        currentIdx: _notifIdx.clamp(0, _liveNotifs.length - 1),
+                        expanded: _notifExpanded,
+                        fade: _tickerFade,
+                        onTap: () =>
+                            setState(() => _notifExpanded = !_notifExpanded),
+                        onDismiss: (i) => setState(() {}),
+                      ),
+                    ),
 
-              // ── 3×4 Quick access grid ────────────────────────────────────
-              SliverToBoxAdapter(child: _QuickGrid(features: _features)),
+                    // ── Cover + profiles ─────────────────────────────────────────
+                    SliverToBoxAdapter(child: _CoverSection(members: members)),
 
-              // ── Stat strip ───────────────────────────────────────────────
-              const SliverToBoxAdapter(child: _StatStrip()),
+                    // ── Günlük Zeka Özeti (hub'ın beyni) ─────────────────────────
+                    const SliverToBoxAdapter(child: DailyBriefingCard()),
 
-              // ── AI Suggestions ───────────────────────────────────────────
-              const SliverToBoxAdapter(child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12),
-                child: AISuggestionsWidget(),
-              )),
+                    // ── Akıllı Uyarılar (gerçek veriden içgörüler) ───────────────
+                    const SliverToBoxAdapter(child: SmartInsightsCard()),
 
-              // ── Content highlights ───────────────────────────────────────
-              const SliverToBoxAdapter(child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12),
-                child: ContentHighlightsWidget(),
-              )),
+                    // ── Günlük Öneriler (eski Keşfet'in yerinde, collapse) ────────
+                    if (HiveService.getBoolSetting(
+                      'hub_show_smart_card',
+                      defaultValue: true,
+                    ))
+                      const SliverToBoxAdapter(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 12),
+                          child: AISuggestionsWidget(),
+                        ),
+                      ),
 
-              const SliverToBoxAdapter(child: SizedBox(height: 32)),
-            ],
-          ),
+                    // ── Ailenin ruh hali (mood_entries — gerçek, realtime) ──────
+                    const SliverToBoxAdapter(child: FamilyMoodStrip()),
+
+                    // Yasal Haklar artık home'u dolduran büyük kart DEĞİL (spec §17);
+                    // "Yasal Haklar" bölümüne hızlı erişim ızgarasındaki tile'dan
+                    // ulaşılır (bağımsız ana bölüm).
+
+                    // ── Quick access grid (butonlar hemen gorunsun) ──────────────
+                    SliverToBoxAdapter(
+                      child: _QuickGrid(features: visibleFeatures),
+                    ),
+
+                    // ── Hub gömülü mini AI sohbet paneli ──────────────────────────
+                    const SliverToBoxAdapter(child: HubAiPanel()),
+
+                    // ── Stat strip ───────────────────────────────────────────────
+                    const SliverToBoxAdapter(child: _StatStrip()),
+
+                    const SliverToBoxAdapter(child: SizedBox(height: 32)),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -231,7 +594,8 @@ class _NotifTicker extends StatelessWidget {
               children: [
                 // colored icon
                 Container(
-                  width: 22, height: 22,
+                  width: 22,
+                  height: 22,
                   decoration: BoxDecoration(
                     color: notif.color,
                     borderRadius: BorderRadius.circular(7),
@@ -258,22 +622,28 @@ class _NotifTicker extends StatelessWidget {
                 const SizedBox(width: 8),
                 // dots
                 Row(
-                  children: List.generate(notifs.length, (i) => Container(
-                    width: i == currentIdx ? 14 : 4,
-                    height: 4,
-                    margin: const EdgeInsets.only(right: 3),
-                    decoration: BoxDecoration(
-                      color: i == currentIdx
-                          ? const Color(0xFF6366F1)
-                          : Colors.white.withAlpha(40),
-                      borderRadius: BorderRadius.circular(2),
+                  children: List.generate(
+                    notifs.length,
+                    (i) => Container(
+                      width: i == currentIdx ? 14 : 4,
+                      height: 4,
+                      margin: const EdgeInsets.only(right: 3),
+                      decoration: BoxDecoration(
+                        color: i == currentIdx
+                            ? const Color(0xFF6366F1)
+                            : Colors.white.withAlpha(40),
+                        borderRadius: BorderRadius.circular(2),
+                      ),
                     ),
-                  )),
+                  ),
                 ),
                 const SizedBox(width: 6),
                 // count badge
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 7,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
                     color: const Color(0xFF6366F1).withAlpha(50),
                     borderRadius: BorderRadius.circular(8),
@@ -291,8 +661,11 @@ class _NotifTicker extends StatelessWidget {
                 AnimatedRotation(
                   turns: expanded ? 0.5 : 0,
                   duration: const Duration(milliseconds: 250),
-                  child: const Icon(Icons.keyboard_arrow_down,
-                      size: 16, color: Color(0xFF6B7280)),
+                  child: const Icon(
+                    Icons.keyboard_arrow_down,
+                    size: 16,
+                    color: Color(0xFF6B7280),
+                  ),
                 ),
               ],
             ),
@@ -322,24 +695,33 @@ class _NotifTicker extends StatelessWidget {
                         child: Container(
                           margin: const EdgeInsets.only(bottom: 6),
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 10),
+                            horizontal: 12,
+                            vertical: 10,
+                          ),
                           decoration: BoxDecoration(
                             color: n.color.withAlpha(15),
                             borderRadius: BorderRadius.circular(14),
                             border: Border(
                               left: BorderSide(color: n.color, width: 3),
                               top: BorderSide(
-                                  color: n.color.withAlpha(40), width: 0.5),
+                                color: n.color.withAlpha(40),
+                                width: 0.5,
+                              ),
                               right: BorderSide(
-                                  color: n.color.withAlpha(40), width: 0.5),
+                                color: n.color.withAlpha(40),
+                                width: 0.5,
+                              ),
                               bottom: BorderSide(
-                                  color: n.color.withAlpha(40), width: 0.5),
+                                color: n.color.withAlpha(40),
+                                width: 0.5,
+                              ),
                             ),
                           ),
                           child: Row(
                             children: [
                               Container(
-                                width: 30, height: 30,
+                                width: 30,
+                                height: 30,
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [n.color, n.color.withAlpha(180)],
@@ -348,31 +730,44 @@ class _NotifTicker extends StatelessWidget {
                                   ),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                child: Icon(n.icon, size: 15, color: Colors.white),
+                                child: Icon(
+                                  n.icon,
+                                  size: 15,
+                                  color: Colors.white,
+                                ),
                               ),
                               const SizedBox(width: 10),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(n.title,
-                                        style: const TextStyle(
-                                            fontSize: 11,
-                                            fontWeight: FontWeight.w700,
-                                            color: Color(0xFFE5E7EB))),
+                                    Text(
+                                      n.title,
+                                      style: const TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w700,
+                                        color: Color(0xFFE5E7EB),
+                                      ),
+                                    ),
                                     const SizedBox(height: 2),
-                                    Text(n.source,
-                                        style: const TextStyle(
-                                            fontSize: 9,
-                                            color: Color(0xFF6B7280))),
+                                    Text(
+                                      n.source,
+                                      style: const TextStyle(
+                                        fontSize: 9,
+                                        color: Color(0xFF6B7280),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
-                              Text(n.time,
-                                  style: const TextStyle(
-                                      fontSize: 9,
-                                      color: Color(0xFF4B5563),
-                                      fontWeight: FontWeight.w600)),
+                              Text(
+                                n.time,
+                                style: const TextStyle(
+                                  fontSize: 9,
+                                  color: Color(0xFF6B7280),
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -391,6 +786,14 @@ class _NotifTicker extends StatelessWidget {
 }
 
 // ─── Cover Section ────────────────────────────────────────────────────────────
+/// Aile kapak fotoğrafı: yerel dosya yolu veya uzak URL. Yerel kopya
+/// öncelikli — Supabase yüklemesi başarısız olsa (403) bile fotoğraf görünür.
+final coverPhotoProvider = StateProvider<String?>(
+  (ref) =>
+      HiveService.getSetting('cover_photo_local') ??
+      HiveService.getSetting('cover_photo_url'),
+);
+
 class _CoverSection extends ConsumerWidget {
   final List<FamilyMember> members;
   const _CoverSection({required this.members});
@@ -399,7 +802,7 @@ class _CoverSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final weatherAsync = ref.watch(weatherProvider);
     final familyName = HiveService.getSetting('family_name') ?? 'Ailem';
-    final coverPhotoUrl = HiveService.getSetting('cover_photo_url');
+    final coverPhoto = ref.watch(coverPhotoProvider);
 
     return Container(
       margin: const EdgeInsets.fromLTRB(12, 10, 12, 0),
@@ -419,15 +822,22 @@ class _CoverSection extends ConsumerWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            // cover photo or gradient
-            coverPhotoUrl != null
-                ? CachedNetworkImage(
-                    imageUrl: coverPhotoUrl,
-                    fit: BoxFit.cover,
-                    placeholder: (_, __) => _CoverGradient(),
-                    errorWidget: (_, __, ___) => _CoverGradient(),
-                  )
-                : _CoverGradient(),
+            // cover photo (yerel dosya veya URL) ya da gradyan
+            if (coverPhoto == null)
+              _CoverGradient()
+            else if (coverPhoto.startsWith('http'))
+              CachedNetworkImage(
+                imageUrl: coverPhoto,
+                fit: BoxFit.cover,
+                placeholder: (_, _) => _CoverGradient(),
+                errorWidget: (_, _, _) => _CoverGradient(),
+              )
+            else
+              Image.file(
+                File(coverPhoto),
+                fit: BoxFit.cover,
+                errorBuilder: (_, _, _) => _CoverGradient(),
+              ),
 
             // gradient overlay
             DecoratedBox(
@@ -447,28 +857,32 @@ class _CoverSection extends ConsumerWidget {
 
             // top row: logo + weather + edit
             Positioned(
-              top: 12, left: 12, right: 12,
+              top: 12,
+              left: 12,
+              right: 12,
               child: Row(
                 children: [
                   // logo
                   Container(
-                    width: 30, height: 30,
+                    width: 30,
+                    height: 30,
                     decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [Color(0xFF6366F1), Color(0xFFEC4899)],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(9),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF6366F1).withAlpha(120),
+                          color: Colors.black.withAlpha(40),
                           blurRadius: 10,
                         ),
                       ],
                     ),
-                    child: const Icon(Icons.home_outlined,
-                        size: 16, color: Colors.white),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(9),
+                      child: Image.asset(
+                        'assets/images/logo_icon.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                   const SizedBox(width: 8),
                   const Text(
@@ -482,34 +896,43 @@ class _CoverSection extends ConsumerWidget {
                   const Spacer(),
                   // weather
                   weatherAsync.when(
-                    data: (w) => _WeatherPill(
-                        temp: w.temperature.round()),
+                    data: (w) => _WeatherPill(temp: w.temperature.round()),
                     loading: () => const SizedBox.shrink(),
-                    error: (_, __) => const SizedBox.shrink(),
+                    error: (_, _) => const SizedBox.shrink(),
                   ),
                   const SizedBox(width: 6),
                   // edit cover
                   GestureDetector(
-                    onTap: () => _pickCoverPhoto(context),
+                    onTap: () => _pickCoverPhoto(context, ref),
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 5),
+                        horizontal: 8,
+                        vertical: 5,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.black.withAlpha(80),
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
-                            color: Colors.white.withAlpha(40), width: 0.5),
+                          color: Colors.white.withAlpha(40),
+                          width: 0.5,
+                        ),
                       ),
-                      child: const Row(
+                      child: Row(
                         children: [
-                          Icon(Icons.camera_alt_outlined,
-                              size: 11, color: Color(0xFF9CA3AF)),
-                          SizedBox(width: 3),
-                          Text('Fotoğraf',
-                              style: TextStyle(
-                                  fontSize: 9,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xFF9CA3AF))),
+                          const Icon(
+                            Icons.camera_alt_outlined,
+                            size: 11,
+                            color: Color(0xFF9CA3AF),
+                          ),
+                          const SizedBox(width: 3),
+                          Text(
+                            AppLocalizations.of(context).image,
+                            style: const TextStyle(
+                              fontSize: 9,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xFF9CA3AF),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -520,7 +943,9 @@ class _CoverSection extends ConsumerWidget {
 
             // bottom: family name + location + member profiles
             Positioned(
-              bottom: 12, left: 12, right: 12,
+              bottom: 12,
+              left: 12,
+              right: 12,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -547,14 +972,69 @@ class _CoverSection extends ConsumerWidget {
     );
   }
 
-  void _pickCoverPhoto(BuildContext context) {
-    // TODO: image_picker → upload to Supabase storage → save URL
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Kapak fotoğrafı seçimi yakında'),
-        backgroundColor: Color(0xFF1F2937),
-      ),
+  Future<void> _pickCoverPhoto(BuildContext context, WidgetRef ref) async {
+    final messenger = ScaffoldMessenger.of(context);
+    final coverUpdatedMsg = AppLocalizations.of(context).hbCoverUpdated;
+    final coverFailedMsg = AppLocalizations.of(context).hbCoverFailed;
+    final picker = ImagePicker();
+    final picked = await picker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 80,
     );
+    if (picked == null) return;
+
+    // 1) Önce yerel kopyayı kaydet → fotoğraf anında görünür (403 olsa bile).
+    String? localPath;
+    try {
+      final dir = await getApplicationDocumentsDirectory();
+      final ext = picked.path.split('.').last;
+      final dest = File('${dir.path}/cover_photo.$ext');
+      await dest.writeAsBytes(await File(picked.path).readAsBytes());
+      localPath = dest.path;
+      await HiveService.setSetting('cover_photo_local', localPath);
+      ref.read(coverPhotoProvider.notifier).state = localPath;
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(coverUpdatedMsg),
+          backgroundColor: const Color(0xFF6366F1),
+        ),
+      );
+    } catch (_) {
+      // Yerel kopya bile başarısızsa devam etme.
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(coverFailedMsg),
+          backgroundColor: const Color(0xFFEF4444),
+        ),
+      );
+      return;
+    }
+
+    // 2) Buluta yükle (opsiyonel senkron). Başarısız olursa yerel görsel kalır.
+    try {
+      final client = SupabaseConfig.safeClient;
+      final userId = client?.auth.currentUser?.id;
+      if (client == null || userId == null) return;
+
+      final bytes = await File(picked.path).readAsBytes();
+      final ext = picked.path.split('.').last;
+      final path = 'cover_photos/$userId/cover.$ext';
+      await client.storage
+          .from('family-assets')
+          .uploadBinary(
+            path,
+            bytes,
+            fileOptions: FileOptions(contentType: 'image/$ext', upsert: true),
+          );
+      final url = client.storage.from('family-assets').getPublicUrl(path);
+      await client
+          .from('profiles')
+          .update({'cover_photo_url': url})
+          .eq('id', userId);
+      await HiveService.setSetting('cover_photo_url', url);
+    } catch (_) {
+      // Bulut senkronu başarısız (ör. 403 / bucket yok) — yerel görsel geçerli.
+    }
   }
 }
 
@@ -585,6 +1065,7 @@ class _OrbPainter extends CustomPainter {
     p.color = const Color(0xFF06B6D4).withAlpha(60);
     canvas.drawCircle(Offset(size.width * 0.5, size.height * 0.5), 40, p);
   }
+
   @override
   bool shouldRepaint(_) => false;
 }
@@ -605,13 +1086,52 @@ class _WeatherPill extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.wb_sunny_outlined, size: 12, color: Color(0xFFFBBF24)),
+          const Icon(
+            Icons.wb_sunny_outlined,
+            size: 12,
+            color: Color(0xFFFBBF24),
+          ),
           const SizedBox(width: 4),
-          Text('$temp°',
-              style: const TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white)),
+          Text(
+            '$temp°',
+            style: const TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.w700,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _OfflineBanner extends StatelessWidget {
+  const _OfflineBanner();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      color: const Color(0xFFF59E0B).withAlpha(38),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(
+            Icons.cloud_off_rounded,
+            size: 15,
+            color: Color(0xFFF59E0B),
+          ),
+          const SizedBox(width: 8),
+          Text(
+            AppLocalizations.of(context).hubOffline,
+            style: const TextStyle(
+              color: Color(0xFFF59E0B),
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
         ],
       ),
     );
@@ -621,19 +1141,24 @@ class _WeatherPill extends StatelessWidget {
 class _LocationRow extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final locationModel = HiveService.getLocation();
+    // Provider konumu GPS'ten çözüp Hive'a önbellekler; beklerken cache'i göster.
+    final resolved = ref.watch(currentLocationProvider).valueOrNull;
+    final locationModel = resolved ?? HiveService.getLocation();
     final city = locationModel != null && locationModel.city.isNotEmpty
         ? locationModel.city
-        : 'Konum ayarlanmadı';
+        : AppLocalizations.of(context).hubLocating;
     final country = locationModel?.country ?? '';
     return Row(
       children: [
-        const Icon(Icons.location_on_outlined,
-            size: 11, color: Color(0xFF818CF8)),
+        const Icon(
+          Icons.location_on_outlined,
+          size: 11,
+          color: Color(0xFF818CF8),
+        ),
         const SizedBox(width: 3),
         Text(
           country.isNotEmpty ? '$city, $country' : city,
-          style: const TextStyle(fontSize: 10, color: Color(0xFF6B7280)),
+          style: const TextStyle(fontSize: 10, color: Color(0xFFD1D5DB)),
         ),
       ],
     );
@@ -647,9 +1172,7 @@ class _MemberProfiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final show = members.isEmpty
-        ? <FamilyMember>[]
-        : members.take(5).toList();
+    final show = members.isEmpty ? <FamilyMember>[] : members.take(5).toList();
 
     return Row(
       children: [
@@ -664,12 +1187,13 @@ class _MemberProfiles extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                  color: Colors.white.withAlpha(40), width: 1.5,
-                  strokeAlign: BorderSide.strokeAlignInside),
+                color: Colors.white.withAlpha(40),
+                width: 1.5,
+                strokeAlign: BorderSide.strokeAlignInside,
+              ),
               color: Colors.white.withAlpha(15),
             ),
-            child: const Icon(Icons.add,
-                size: 18, color: Color(0xFF6B7280)),
+            child: const Icon(Icons.add, size: 18, color: Color(0xFF6B7280)),
           ),
         ),
       ],
@@ -691,11 +1215,10 @@ class _ProfileAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final idx = member.name.codeUnits.fold(0, (a, b) => a + b) % _gradients.length;
+    final idx =
+        member.name.codeUnits.fold(0, (a, b) => a + b) % _gradients.length;
     final colors = _gradients[idx];
-    final initial = member.name.isNotEmpty
-        ? member.name[0].toUpperCase()
-        : '?';
+    final initial = member.name.isNotEmpty ? member.name[0].toUpperCase() : '?';
 
     return GestureDetector(
       onTap: () => context.push(AppRoutes.family),
@@ -720,10 +1243,12 @@ class _ProfileAvatar extends StatelessWidget {
                   width: 2,
                 ),
                 boxShadow: member.isOnline
-                    ? [BoxShadow(
-                        color: const Color(0xFF22C55E).withAlpha(80),
-                        blurRadius: 8,
-                      )]
+                    ? [
+                        BoxShadow(
+                          color: const Color(0xFF22C55E).withAlpha(80),
+                          blurRadius: 8,
+                        ),
+                      ]
                     : null,
               ),
               child: member.avatarUrl != null && member.avatarUrl!.isNotEmpty
@@ -731,35 +1256,42 @@ class _ProfileAvatar extends StatelessWidget {
                       child: CachedNetworkImage(
                         imageUrl: member.avatarUrl!,
                         fit: BoxFit.cover,
-                        errorWidget: (_, __, ___) => Center(
-                          child: Text(initial,
-                              style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w800,
-                                  color: Colors.white)),
+                        errorWidget: (_, _, _) => Center(
+                          child: Text(
+                            initial,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
                     )
                   : Center(
-                      child: Text(initial,
-                          style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w800,
-                              color: Colors.white)),
+                      child: Text(
+                        initial,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
             ),
             // online/offline dot
             Positioned(
-              right: 0, bottom: 0,
+              right: 0,
+              bottom: 0,
               child: Container(
-                width: 12, height: 12,
+                width: 12,
+                height: 12,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: member.isOnline
                       ? const Color(0xFF22C55E)
                       : const Color(0xFF4B5563),
-                  border: Border.all(
-                      color: const Color(0xFF0A0A0F), width: 2),
+                  border: Border.all(color: const Color(0xFF0A0A0F), width: 2),
                 ),
               ),
             ),
@@ -791,7 +1323,8 @@ class _QuickGrid extends StatelessWidget {
           Row(
             children: [
               Container(
-                width: 6, height: 6,
+                width: 6,
+                height: 6,
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   gradient: LinearGradient(
@@ -800,9 +1333,9 @@ class _QuickGrid extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 6),
-              const Text(
-                'QUICK ACCESS',
-                style: TextStyle(
+              Text(
+                AppLocalizations.of(context).hubQuickAccess,
+                style: const TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
                   color: Color(0xFF6B7280),
@@ -815,17 +1348,15 @@ class _QuickGrid extends StatelessWidget {
           GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: features.length + 1, // +1 for "more" slot
+            itemCount: features.length, // 12 özellik → 3x4, "more" kaldırıldı
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              mainAxisSpacing: 14,
+              mainAxisSpacing: 10,
               crossAxisSpacing: 8,
-              childAspectRatio: 0.85,
+              // Daha büyük butonlar için artırılmış hücre yüksekliği.
+              mainAxisExtent: 138,
             ),
             itemBuilder: (context, i) {
-              if (i == features.length) {
-                return _MoreSlot();
-              }
               final f = features[i];
               return _FeatureTile(feature: f);
             },
@@ -862,110 +1393,107 @@ class _FeatureTileState extends State<_FeatureTile> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              width: 62, height: 62,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: f.gradient,
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.circular(18),
-                boxShadow: [
-                  BoxShadow(
-                    color: f.shadow.withAlpha(_pressed ? 60 : 100),
-                    blurRadius: _pressed ? 6 : 14,
-                    offset: Offset(0, _pressed ? 2 : 5),
+            if (f.asset != null)
+              // Premium PNG tile — kendi renkli zemini + parıltısı ile.
+              SizedBox(
+                width: 92,
+                height: 92,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: f.shadow.withAlpha(_pressed ? 50 : 90),
+                        blurRadius: _pressed ? 8 : 18,
+                        offset: Offset(0, _pressed ? 2 : 6),
+                      ),
+                    ],
                   ),
-                  BoxShadow(
-                    color: f.gradient[0].withAlpha(_pressed ? 30 : 60),
-                    blurRadius: 0,
-                    offset: Offset(0, _pressed ? 1 : 4),
-                  ),
-                ],
-                border: Border(
-                  bottom: BorderSide(
-                      color: Colors.black.withAlpha(60), width: 2),
+                  child: Image.asset(f.asset!, fit: BoxFit.contain),
                 ),
-              ),
-              child: Stack(
-                children: [
-                  // gloss
-                  Positioned(
-                    top: 0, left: 0, right: 0,
-                    height: 31,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(18)),
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.white.withAlpha(45),
-                            Colors.transparent,
-                          ],
+              )
+            else
+              Container(
+                width: 92,
+                height: 92,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: f.gradient,
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(22),
+                  boxShadow: [
+                    BoxShadow(
+                      color: f.shadow.withAlpha(_pressed ? 60 : 100),
+                      blurRadius: _pressed ? 6 : 14,
+                      offset: Offset(0, _pressed ? 2 : 5),
+                    ),
+                    BoxShadow(
+                      color: f.gradient[0].withAlpha(_pressed ? 30 : 60),
+                      blurRadius: 0,
+                      offset: Offset(0, _pressed ? 1 : 4),
+                    ),
+                  ],
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Colors.black.withAlpha(60),
+                      width: 2,
+                    ),
+                  ),
+                ),
+                child: Stack(
+                  children: [
+                    // gloss
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: 38,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(22),
+                          ),
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Colors.white.withAlpha(45),
+                              Colors.transparent,
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Center(
-                    child: Icon(f.icon, size: 28, color: Colors.white,
+                    Center(
+                      child: Icon(
+                        f.icon,
+                        size: 42,
+                        color: Colors.white,
                         shadows: [
                           Shadow(
                             color: Colors.black.withAlpha(100),
                             blurRadius: 6,
                           ),
-                        ]),
-                  ),
-                ],
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 6),
+            const SizedBox(height: 8),
             Text(
-              f.label,
+              hubFeatureLabel(context, f.label),
               style: const TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF9CA3AF),
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFFC7CBD4),
               ),
               textAlign: TextAlign.center,
             ),
           ],
         ),
       ),
-    );
-  }
-}
-
-class _MoreSlot extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 62, height: 62,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(18),
-            border: Border.all(
-                color: Colors.white.withAlpha(30),
-                width: 1.5,
-                strokeAlign: BorderSide.strokeAlignInside),
-            color: Colors.white.withAlpha(8),
-          ),
-          child: const Center(
-            child: Icon(Icons.more_horiz,
-                size: 22, color: Color(0xFF4B5563)),
-          ),
-        ),
-        const SizedBox(height: 6),
-        const Text('More',
-            style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF374151))),
-      ],
     );
   }
 }
@@ -978,17 +1506,24 @@ class _StatStrip extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tasksAsync = ref.watch(myTasksProvider);
     final taskCount = tasksAsync.valueOrNull?.length ?? 0;
+    // Gerçek aile streak'i (tasks tamamlanma tarihlerinden). Sahte '7' kaldırıldı.
+    final streak = ref.watch(familyStreakProvider).valueOrNull?.currentStreak;
+    // Çevrim içi üye sayısı gerçek presence verisi olmadan gösterilmiyor
+    // (sahte sabit yerine görünmez). Presence eklenince buraya bağlanacak.
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 10, 12, 0),
       child: Row(
         children: [
-          _StatCard(value: '$taskCount', label: 'TASKS TODAY'),
+          _StatCard(
+            value: '$taskCount',
+            label: AppLocalizations.of(context).hbTodayTask,
+          ),
           const SizedBox(width: 8),
-          _StatCard(value: '🔥 7', label: 'DAY STREAK'),
-          const SizedBox(width: 8),
-          _StatCard(value: '3', label: 'ONLINE NOW',
-              accent: const Color(0xFF22C55E)),
+          _StatCard(
+            value: streak == null ? '🔥 –' : '🔥 $streak',
+            label: AppLocalizations.of(context).hbDayStreak,
+          ),
         ],
       ),
     );
@@ -998,8 +1533,7 @@ class _StatStrip extends ConsumerWidget {
 class _StatCard extends StatelessWidget {
   final String value;
   final String label;
-  final Color? accent;
-  const _StatCard({required this.value, required this.label, this.accent});
+  const _StatCard({required this.value, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -1014,20 +1548,24 @@ class _StatCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(value,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w800,
-                  color: accent ?? Colors.white,
-                )),
+            Text(
+              value,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w800,
+                color: Colors.white,
+              ),
+            ),
             const SizedBox(height: 2),
-            Text(label,
-                style: const TextStyle(
-                  fontSize: 8,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF4B5563),
-                  letterSpacing: 0.4,
-                )),
+            Text(
+              label,
+              style: const TextStyle(
+                fontSize: 8,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF6B7280),
+                letterSpacing: 0.4,
+              ),
+            ),
           ],
         ),
       ),

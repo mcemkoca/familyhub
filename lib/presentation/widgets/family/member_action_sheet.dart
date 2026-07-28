@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import '../../../config/constants.dart';
 import '../../../domain/entities.dart';
@@ -39,7 +40,6 @@ class MemberActionSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return GestureDetector(
       onTap: onClose,
       child: Container(
@@ -50,9 +50,9 @@ class MemberActionSheet extends StatelessWidget {
             onTap: () {},
             child: Container(
               padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: isDark ? AppColors.darkCard : Colors.white,
-                borderRadius: const BorderRadius.vertical(
+              decoration: const BoxDecoration(
+                color: Color(0xFF13131A),
+                borderRadius: BorderRadius.vertical(
                   top: Radius.circular(24),
                 ),
               ),
@@ -66,8 +66,8 @@ class MemberActionSheet extends StatelessWidget {
                       height: 4,
                       decoration: BoxDecoration(
                         color: isDark
-                            ? AppColors.darkBorder
-                            : AppColors.border,
+                            ? const Color(0x1EFFFFFF)
+                            : const Color(0x1EFFFFFF),
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -94,41 +94,37 @@ class MemberActionSheet extends StatelessWidget {
                     const SizedBox(height: 12),
                     Text(
                       member.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
-                        color: isDark
-                            ? AppColors.darkTextPrimary
-                            : AppColors.dark,
+                        color: Color(0xFFE5E7EB),
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       _roleLabel(member.role),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.slate,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                     const SizedBox(height: 20),
                     // Actions
                     _ActionButton(
                       icon: Icons.person_outline,
-                      label: 'Profili Görüntüle',
+                      label: AppLocalizations.of(context).masViewProfile,
                       onTap: onViewProfile ?? onClose,
                     ),
                     _ActionButton(
                       icon: Icons.health_and_safety_outlined,
-                      label: 'Sağlık Kartı',
-                      iconColor: AppColors.success,
+                      label: AppLocalizations.of(context).masHealthCard,
+                      iconColor: const Color(0xFF10B981),
                       onTap: onViewHealth ?? onClose,
                     ),
                     _ActionButton(
                       icon: Icons.location_on_outlined,
-                      label: 'Canlı Konum',
-                      iconColor: AppColors.cobalt,
+                      label: AppLocalizations.of(context).masLiveLocation,
+                      iconColor: const Color(0xFF6366F1),
                       onTap: onViewLocation ?? onClose,
                     ),
                     // Role change (admin only, not self)
@@ -136,18 +132,16 @@ class MemberActionSheet extends StatelessWidget {
                       const SizedBox(height: 12),
                       Divider(
                         color: isDark
-                            ? AppColors.darkBorder
-                            : AppColors.border,
+                            ? const Color(0x1EFFFFFF)
+                            : const Color(0x1EFFFFFF),
                       ),
                       const SizedBox(height: 8),
-                      Text(
+                      const Text(
                         'ROL DEĞİŞTİR',
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w700,
-                          color: isDark
-                              ? AppColors.darkTextSecondary
-                              : AppColors.slate,
+                          color: Color(0xFF6B7280),
                           letterSpacing: 0.5,
                         ),
                       ),
@@ -168,15 +162,15 @@ class MemberActionSheet extends StatelessWidget {
                     const SizedBox(height: 12),
                     Divider(
                       color: isDark
-                          ? AppColors.darkBorder
-                          : AppColors.border,
+                          ? const Color(0x1EFFFFFF)
+                          : const Color(0x1EFFFFFF),
                     ),
                     const SizedBox(height: 8),
                     // Remove / Leave
                     if (isMe)
                       _ActionButton(
                         icon: Icons.exit_to_app,
-                        label: 'Aileden Ayrıl',
+                        label: AppLocalizations.of(context).masLeaveFamily,
                         iconColor: AppColors.error,
                         onTap: () {
                           onClose();
@@ -186,7 +180,7 @@ class MemberActionSheet extends StatelessWidget {
                     else if (isAdmin)
                       _ActionButton(
                         icon: Icons.person_remove_outlined,
-                        label: 'Üyeyi Çıkar',
+                        label: AppLocalizations.of(context).masRemoveMember,
                         iconColor: AppColors.error,
                         onTap: () {
                           onClose();
@@ -201,11 +195,11 @@ class MemberActionSheet extends StatelessWidget {
                         onPressed: onClose,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: isDark
-                              ? AppColors.darkBackground
+                              ? const Color(0xFF0A0A0F)
                               : const Color(0xFFF1F5F9),
                           foregroundColor: isDark
-                              ? AppColors.darkTextPrimary
-                              : AppColors.slate,
+                              ? const Color(0xFFE5E7EB)
+                              : const Color(0xFF6B7280),
                           elevation: 0,
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
@@ -259,11 +253,10 @@ class _ActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return ListTile(
       leading: Icon(
         icon,
-        color: iconColor ?? AppColors.cobalt,
+        color: iconColor ?? const Color(0xFF6366F1),
         size: 22,
       ),
       title: Text(
@@ -273,9 +266,7 @@ class _ActionButton extends StatelessWidget {
           fontWeight: FontWeight.w500,
           color: iconColor == AppColors.error
               ? AppColors.error
-              : (isDark
-                  ? AppColors.darkTextPrimary
-                  : AppColors.dark),
+              : (const Color(0xFFE5E7EB)),
         ),
       ),
       onTap: onTap,
@@ -298,7 +289,6 @@ class _RoleOption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final label = switch (role) {
       MemberRole.admin => 'Yönetici',
       MemberRole.parent => 'Ebeveyn',
@@ -309,12 +299,12 @@ class _RoleOption extends StatelessWidget {
       MemberRole.baby => 'Bebek',
     };
     final color = switch (role) {
-      MemberRole.admin => AppColors.cobalt,
-      MemberRole.parent => AppColors.pink,
-      MemberRole.teen => AppColors.warning,
-      MemberRole.child => AppColors.success,
-      MemberRole.elder => AppColors.purple,
-      MemberRole.guest => AppColors.slate,
+      MemberRole.admin => const Color(0xFF6366F1),
+      MemberRole.parent => const Color(0xFFEC4899),
+      MemberRole.teen => const Color(0xFFF59E0B),
+      MemberRole.child => const Color(0xFF10B981),
+      MemberRole.elder => const Color(0xFF8B5CF6),
+      MemberRole.guest => const Color(0xFF6B7280),
       MemberRole.baby => AppColors.cyan,
     };
 
@@ -325,7 +315,7 @@ class _RoleOption extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
           color: isSelected
-              ? AppColors.cobalt.withAlpha(isDark ? 25 : 15)
+              ? const Color(0xFF6366F1).withAlpha(25)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(10),
         ),
@@ -335,7 +325,7 @@ class _RoleOption extends StatelessWidget {
               width: 32,
               height: 32,
               decoration: BoxDecoration(
-                color: color.withAlpha(isDark ? 25 : 15),
+                color: color.withAlpha(25),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
@@ -348,17 +338,15 @@ class _RoleOption extends StatelessWidget {
             Expanded(
               child: Text(
                 label,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
-                  color: isDark
-                      ? AppColors.darkTextPrimary
-                      : AppColors.dark,
+                  color: Color(0xFFE5E7EB),
                 ),
               ),
             ),
             if (isSelected)
-              const Icon(Icons.check, color: AppColors.cobalt, size: 20),
+              const Icon(Icons.check, color: Color(0xFF6366F1), size: 20),
           ],
         ),
       ),

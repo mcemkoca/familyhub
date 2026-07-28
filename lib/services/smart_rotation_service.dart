@@ -1,10 +1,15 @@
 import 'dart:math';
 import 'package:uuid/uuid.dart';
 import '../domain/models/smart_rotation.dart';
+import 'localization/locale_service.dart';
 
 /// Akıllı Görev Rotasyon Servisi
 /// Adalet algoritması + genetik optimizasyon ile görev dağıtımı
 class SmartRotationService {
+  static String _text(Map<String, String> values) {
+    final lang = LocaleService.resolveInitialLocale().languageCode;
+    return values[lang] ?? values['tr']!;
+  }
   static final _uuid = const Uuid();
   static final Random _random = Random();
 
@@ -68,11 +73,11 @@ class SmartRotationService {
     final enrichedAssignments = assignments.map((a) {
       final compat = compatibilityMatrix[a.taskId]![a.memberId]!;
       final reasons = <String>[];
-      if (compat.skillMatch > 0.7) reasons.add('Beceri uyumu yüksek');
-      if (compat.energyMatch > 0.7) reasons.add('Enerji seviyesi uygun');
-      if (compat.timeMatch > 0) reasons.add('Zaman müsait');
-      if (compat.preferenceMatch > 0.7) reasons.add('Tercih ettiği kategori');
-      if (reasons.isEmpty) reasons.add('Adalet dengesi için atandı');
+      if (compat.skillMatch > 0.7) reasons.add(_text(const {'tr': 'Beceri uyumu yüksek', 'en': 'Strong skill match', 'nl': 'Sterke vaardigheidsmatch', 'fr': 'Forte correspondance des compétences'}));
+      if (compat.energyMatch > 0.7) reasons.add(_text(const {'tr': 'Enerji seviyesi uygun', 'en': 'Suitable energy level', 'nl': 'Geschikt energieniveau', 'fr': 'Niveau d’énergie adapté'}));
+      if (compat.timeMatch > 0) reasons.add(_text(const {'tr': 'Zamanı müsait', 'en': 'Available at this time', 'nl': 'Beschikbaar op dit moment', 'fr': 'Disponible à ce moment'}));
+      if (compat.preferenceMatch > 0.7) reasons.add(_text(const {'tr': 'Tercih ettiği kategori', 'en': 'Preferred category', 'nl': 'Voorkeurscategorie', 'fr': 'Catégorie préférée'}));
+      if (reasons.isEmpty) reasons.add(_text(const {'tr': 'Adalet dengesi için atandı', 'en': 'Assigned to maintain fairness', 'nl': 'Toegewezen voor een eerlijke verdeling', 'fr': 'Attribué pour préserver l’équité'}));
 
       return Assignment(
         taskId: a.taskId,
@@ -300,7 +305,7 @@ class SmartRotationService {
           Assignment(
             taskId: task.id,
             memberId: chosen.id,
-            reason: 'Başlangıç dağıtımı',
+            reason: _text(const {'tr': 'Başlangıç dağıtımı', 'en': 'Initial assignment', 'nl': 'Eerste toewijzing', 'fr': 'Attribution initiale'}),
           ),
         );
       }
@@ -408,7 +413,7 @@ class SmartRotationService {
           sol.assignments[i] = Assignment(
             taskId: sol.assignments[i].taskId,
             memberId: newMember.id,
-            reason: 'Mutasyon',
+            reason: _text(const {'tr': 'Optimizasyon değişikliği', 'en': 'Optimization adjustment', 'nl': 'Optimalisatie-aanpassing', 'fr': 'Ajustement d’optimisation'}),
           );
         }
       }

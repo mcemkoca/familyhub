@@ -1,22 +1,79 @@
 import 'dart:convert';
+import 'package:flutter/services.dart' show PlatformException;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:googleapis/drive/v3.dart' as drive;
 import 'package:extension_google_sign_in_as_googleapis_auth/extension_google_sign_in_as_googleapis_auth.dart';
 import 'package:hive/hive.dart';
 import '../domain/models/drive_backup_model.dart';
 
+/// Google Drive yedekleme hata türleri — ham exception yerine kullanıcıya
+/// anlaşılır mesaj göstermek için sınıflandırma.
+enum GoogleAuthError {
+  cancelled,
+  configuration, // SHA-1/OAuth client yanlış (ApiException:10 DEVELOPER_ERROR)
+  network,
+  scopeDenied,
+  driveUnavailable,
+  unknown,
+}
+
+/// Kullanıcı işlemi iptal ettiğinde fırlatılmayan sessiz durum.
+class GoogleSignInCancelled implements Exception {
+  const GoogleSignInCancelled();
+}
+
+class GoogleDriveException implements Exception {
+  final GoogleAuthError type;
+  GoogleDriveException(this.type);
+}
+
 class GoogleDriveService {
   static final GoogleDriveService _instance = GoogleDriveService._internal();
   factory GoogleDriveService() => _instance;
   GoogleDriveService._internal();
 
+  // auth_service ile aynı server (web) client ID — Android'de doğru OAuth
+  // için gerekli. Eksikliği "connection error" (ApiException:10) sebebiydi.
+  static const _serverClientId =
+      '631270363894-2c8m0ea0ub83u01ne379cpvc5mp6221d.apps.googleusercontent.com';
+
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: ['https://www.googleapis.com/auth/drive.file'],
+    serverClientId: _serverClientId,
   );
 
   GoogleSignInAccount? get currentUser => _googleSignIn.currentUser;
 
-  Future<GoogleSignInAccount?> signIn() => _googleSignIn.signIn();
+  /// Google hata kodunu anlaşılır türe çevirir. Raw exception UI'a sızmaz.
+  static GoogleAuthError classifyError(Object e) {
+    if (e is GoogleSignInCancelled) return GoogleAuthError.cancelled;
+    if (e is PlatformException) {
+      switch (e.code) {
+        case 'sign_in_canceled':
+        case 'canceled':
+          return GoogleAuthError.cancelled;
+        case 'network_error':
+          return GoogleAuthError.network;
+        case 'sign_in_failed':
+          // Genelde code 10 = DEVELOPER_ERROR (SHA-1/OAuth yapılandırması).
+          return GoogleAuthError.configuration;
+        default:
+          return GoogleAuthError.unknown;
+      }
+    }
+    final s = e.toString().toLowerCase();
+    if (s.contains('network')) return GoogleAuthError.network;
+    if (s.contains('scope')) return GoogleAuthError.scopeDenied;
+    if (s.contains('drive')) return GoogleAuthError.driveUnavailable;
+    return GoogleAuthError.unknown;
+  }
+
+  /// Giriş — kullanıcı iptal ederse [GoogleSignInCancelled] fırlatır (hata değil).
+  Future<GoogleSignInAccount?> signIn() async {
+    final account = await _googleSignIn.signIn();
+    if (account == null) throw const GoogleSignInCancelled();
+    return account;
+  }
   Future<void> signOut() => _googleSignIn.signOut();
   Future<bool> isSignedIn() => _googleSignIn.isSignedIn();
 

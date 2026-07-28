@@ -21,6 +21,8 @@ class ProfileEditScreen extends ConsumerStatefulWidget {
 }
 
 class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
@@ -92,13 +94,17 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
       if (client == null) return;
 
       final fileExt = picked.path.split('.').last;
-      final fileName = '$userId.$fileExt';
+      // RLS politikası ilk klasörün kullanıcı id'sine eşit olmasını ister
+      // (storage.foldername(name)[1] = auth.uid). Bu yüzden "<userId>/avatar.ext".
+      final fileName = '$userId/avatar.$fileExt';
 
       await client.storage
           .from('avatars')
           .upload(fileName, file, fileOptions: const FileOptions(upsert: true));
 
-      final publicUrl = client.storage.from('avatars').getPublicUrl(fileName);
+      // Cache-bust için sürüm parametresi ekle (aynı yol upsert edildiğinden).
+      final publicUrl =
+          '${client.storage.from('avatars').getPublicUrl(fileName)}?v=${DateTime.now().millisecondsSinceEpoch}';
       setState(() => _avatarUrl = publicUrl);
 
       await AuthService.updateProfile(avatarUrl: publicUrl);
@@ -112,7 +118,7 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Fotoğraf yüklenemedi: $e'),
+            content: Text(AppLocalizations.of(context).fdPhotoFailed('$e')),
             backgroundColor: AppColors.error,
           ),
         );
@@ -156,7 +162,7 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
       if (mounted) {
         setState(() => _saving = false);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Profil bilgileri kaydedildi')),
+          SnackBar(content: Text(AppLocalizations.of(context).pfSaved)),
         );
         if (context.mounted) context.pop();
       }
@@ -186,17 +192,16 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                'E-posta değişikliği için onay bağlantısı gönderilecektir.',
-                style: TextStyle(fontSize: 13),
+              Text(AppLocalizations.of(context).epostaDegisikligiIcinOnayBaglantisiGonderilecektir,
+                style: const TextStyle(fontSize: 13),
               ),
               const SizedBox(height: 12),
               TextField(
                 controller: controller,
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  labelText: 'Yeni E-posta',
-                  prefixIcon: Icon(Icons.email_outlined),
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context).pfNewEmail,
+                  prefixIcon: const Icon(Icons.email_outlined),
                 ),
               ),
             ],
@@ -230,9 +235,8 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
                         Navigator.pop(dialogContext);
                         if (!mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text(
-                              'Onay bağlantısı yeni e-posta adresinize gönderildi',
+                          SnackBar(
+                            content: Text(AppLocalizations.of(context).onayBaglantisiYeniEpostaAdresinizeGonderildi,
                             ),
                           ),
                         );
@@ -241,7 +245,7 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
                         if (!mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('Hata: $e'),
+                            content: Text(AppLocalizations.of(context).srError('$e')),
                             backgroundColor: AppColors.error,
                           ),
                         );
@@ -271,14 +275,13 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = isDark ? AppColors.darkBackground : AppColors.cloudWhite;
+    final bg = const Color(0xFF0A0A0F);
 
     if (_isLoading) {
       return Scaffold(
         backgroundColor: bg,
         appBar: ScreenHeader(
-          title: 'Profili Düzenle',
+          title: AppLocalizations.of(context).profiliDuzenle,
           showBack: true,
           onBack: () => context.pop(),
         ),
@@ -289,7 +292,7 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
     return Scaffold(
       backgroundColor: bg,
       appBar: ScreenHeader(
-        title: 'Profili Düzenle',
+        title: AppLocalizations.of(context).profiliDuzenle,
         showBack: true,
         onBack: () => context.pop(),
         rightAction: TextButton(
@@ -302,15 +305,15 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
                   height: 16,
                   child: CircularProgressIndicator(
                     strokeWidth: 2,
-                    color: AppColors.cobalt,
+                    color: Color(0xFF6366F1),
                   ),
                 )
               : Text(
                   'Kaydet',
                   style: TextStyle(
                     color: _nameController.text.trim().isEmpty
-                        ? AppColors.lightGray
-                        : AppColors.cobalt,
+                        ? const Color(0xFF9CA3AF)
+                        : const Color(0xFF6366F1),
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -333,10 +336,10 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
                           width: 100,
                           height: 100,
                           decoration: BoxDecoration(
-                            color: _avatarUrl == null ? AppColors.cobalt : null,
+                            color: _avatarUrl == null ? const Color(0xFF6366F1) : null,
                             borderRadius: BorderRadius.circular(32),
                             border: Border.all(
-                              color: isDark ? AppColors.darkCard : Colors.white,
+                              color: const Color(0xFF13131A),
                               width: 4,
                             ),
                             image: _avatarUrl != null
@@ -368,12 +371,10 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
                             width: 32,
                             height: 32,
                             decoration: BoxDecoration(
-                              color: AppColors.cobalt,
+                              color: const Color(0xFF6366F1),
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
-                                color: isDark
-                                    ? AppColors.darkCard
-                                    : Colors.white,
+                                color: const Color(0xFFE5E7EB),
                                 width: 2,
                               ),
                             ),
@@ -391,25 +392,25 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
                 const SizedBox(height: 24),
                 // Form
                 SettingsSection(
-                  title: 'KİŞİSEL BİLGİLER',
+                  title: AppLocalizations.of(context).kisiselBilgiler,
                   icon: Icons.person_outline,
                   children: [
                     _buildInput(
-                      label: 'Ad Soyad',
+                      label: AppLocalizations.of(context).hcFullName,
                       controller: _nameController,
                       hint: 'Adınızı girin',
                       icon: Icons.person_outline,
                       onChanged: () => setState(() {}),
                     ),
                     _buildInput(
-                      label: 'Telefon',
+                      label: AppLocalizations.of(context).crashPhone,
                       controller: _phoneController,
                       hint: 'Telefon numarası',
                       icon: Icons.phone_outlined,
                       keyboardType: TextInputType.phone,
                     ),
                     _buildInput(
-                      label: 'E-posta',
+                      label: AppLocalizations.of(context).conEmail,
                       controller: _emailController,
                       icon: Icons.email_outlined,
                       enabled: false,
@@ -438,7 +439,6 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
     Widget? suffix,
     VoidCallback? onChanged,
   }) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
       child: Column(
@@ -446,10 +446,10 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
         children: [
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w500,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: Color(0xFF6B7280),
             ),
           ),
           const SizedBox(height: 8),
@@ -462,17 +462,17 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
               hintText: hint,
               hintStyle: TextStyle(
                 color: isDark
-                    ? AppColors.darkTextSecondary
-                    : AppColors.lightGray,
+                    ? const Color(0xFF6B7280)
+                    : const Color(0xFF9CA3AF),
               ),
               prefixIcon: Icon(
                 icon,
                 size: 20,
-                color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                color: const Color(0xFF6B7280),
               ),
               suffixIcon: suffix,
               filled: true,
-              fillColor: isDark ? AppColors.darkCard : const Color(0xFFF8FAFC),
+              fillColor: const Color(0xFF13131A),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
@@ -484,8 +484,8 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
             ),
             style: TextStyle(
               color: enabled
-                  ? (isDark ? AppColors.darkTextPrimary : AppColors.dark)
-                  : AppColors.lightGray,
+                  ? (const Color(0xFFE5E7EB))
+                  : const Color(0xFF9CA3AF),
             ),
           ),
         ],

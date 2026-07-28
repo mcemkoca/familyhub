@@ -4,11 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
-import '../../../config/constants.dart';
 import '../../../domain/entities.dart';
 import '../../providers/app_providers.dart';
 import '../../widgets/calendar/event_card.dart';
 import '../../widgets/calendar/event_modal.dart';
+import '../../widgets/calendar_permission_prompt.dart';
 import '../../../services/ocr_event_service.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
@@ -25,12 +25,17 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
   DateTime? _selectedDay;
   CalendarEvent? _editingEvent;
   bool _showModal = false;
+  bool _agendaMode = false;
   Map<DateTime, List<CalendarEvent>>? _cachedMarkedDates;
 
   @override
   void initState() {
     super.initState();
     _selectedDay = _focusedDay;
+    // İlk kez takvim ekranına girildiğinde takvim izni promptunu göster.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) CalendarPermissionPrompt.maybeShow(context);
+    });
   }
 
   void _openModal({CalendarEvent? event, DateTime? date}) {
@@ -38,6 +43,66 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
       _editingEvent = event;
       _showModal = true;
     });
+  }
+
+  // Ajanda (timetable) görünümü — bugünden itibaren güne göre gruplu,
+  // renk kodlu ve üye avatarlı etkinlik kartları (5. görsel).
+  Widget _buildAgenda(List<CalendarEvent> events) {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final upcoming = events
+        .where((e) => !DateTime(e.start.year, e.start.month, e.start.day)
+            .isBefore(today))
+        .toList()
+      ..sort((a, b) => a.start.compareTo(b.start));
+
+    if (upcoming.isEmpty) {
+      return _EmptyState(onCreate: () => _openModal(date: today));
+    }
+
+    final groups = <DateTime, List<CalendarEvent>>{};
+    for (final e in upcoming) {
+      final day = DateTime(e.start.year, e.start.month, e.start.day);
+      groups.putIfAbsent(day, () => []).add(e);
+    }
+    final days = groups.keys.toList()..sort();
+
+    return ListView.builder(
+      padding: const EdgeInsets.only(bottom: 100, top: 4),
+      itemCount: days.length,
+      itemBuilder: (context, i) {
+        final day = days[i];
+        final dayEvents = groups[day]!;
+        final isToday = isSameDay(day, today);
+        final dateStr =
+            DateFormat('EEEE, d MMMM', 'tr_TR').format(day).toUpperCase();
+        final label = isToday ? 'BUGÜN · $dateStr' : dateStr;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 16, 20, 6),
+              child: Text(
+                label,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 0.5,
+                  color: isToday
+                      ? const Color(0xFF6366F1)
+                      : Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withAlpha(140),
+                ),
+              ),
+            ),
+            ...dayEvents.map((e) =>
+                EventCard(event: e, onTap: () => _openModal(event: e))),
+          ],
+        );
+      },
+    );
   }
 
   void _closeModal() => setState(() => _showModal = false);
@@ -70,7 +135,6 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     final events = ref.watch(eventsProvider.select((v) => v.valueOrNull ?? []));
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final safeBottom = MediaQuery.of(context).viewPadding.bottom;
 
     ref.listen(eventsProvider, (prev, next) {
@@ -97,7 +161,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
     }();
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         bottom: false,
         child: Stack(
@@ -118,12 +182,23 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
                       ),
                       const Spacer(),
                       IconButton(
-                        onPressed: () => context.push('/calendar-sync'),
+                        onPressed: () =>
+                            setState(() => _agendaMode = !_agendaMode),
                         icon: Icon(
+                          _agendaMode
+                              ? Icons.calendar_month
+                              : Icons.view_agenda_outlined,
+                          color: _agendaMode
+                              ? const Color(0xFF6366F1)
+                              : const Color(0xFF6B7280),
+                        ),
+                        tooltip: _agendaMode ? 'Takvim Görünümü' : 'Ajanda',
+                      ),
+                      IconButton(
+                        onPressed: () => context.push('/calendar-sync'),
+                        icon: const Icon(
                           Icons.sync,
-                          color: isDark
-                              ? AppColors.darkTextSecondary
-                              : AppColors.slate,
+                          color: Color(0xFF6B7280),
                         ),
                         tooltip: 'Takvim Senkronizasyonu',
                       ),
@@ -134,27 +209,24 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
                             _selectedDay = DateTime.now();
                           });
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.today,
-                          color: isDark
-                              ? AppColors.darkTextSecondary
-                              : AppColors.slate,
+                          color: Color(0xFF6B7280),
                         ),
                       ),
                     ],
                   ),
                 ),
-                // Calendar
+                // Calendar (ajanda modunda gizli)
+                if (!_agendaMode)
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 12),
                   decoration: BoxDecoration(
-                    color: isDark ? AppColors.darkCard : Colors.white,
+                    color: const Color(0x1AFFFFFF),
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: isDark
-                            ? Colors.black.withAlpha(15)
-                            : Colors.black.withAlpha(5),
+                        color: Colors.black.withAlpha(15),
                         blurRadius: 12,
                         offset: const Offset(0, 2),
                       ),
@@ -186,7 +258,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
                       titleCentered: true,
                       formatButtonVisible: true,
                       formatButtonDecoration: BoxDecoration(
-                        color: AppColors.cobalt,
+                        color: const Color(0xFF6366F1),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       formatButtonTextStyle:
@@ -194,21 +266,15 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
                       titleTextStyle: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.w700,
-                        color: isDark
-                            ? AppColors.darkTextPrimary
-                            : AppColors.dark,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                       leftChevronIcon: Icon(
                         Icons.chevron_left,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.slate,
+                        color: Theme.of(context).colorScheme.onSurface.withAlpha(150),
                       ),
                       rightChevronIcon: Icon(
                         Icons.chevron_right,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.slate,
+                        color: Theme.of(context).colorScheme.onSurface.withAlpha(150),
                       ),
                     ),
                     calendarStyle: CalendarStyle(
@@ -219,44 +285,34 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
                       // markerOffset removed for compatibility,
                       markersAlignment: Alignment.bottomCenter,
                       markerDecoration: const BoxDecoration(
-                        color: AppColors.cobalt,
+                        color: Color(0xFF6366F1),
                         shape: BoxShape.circle,
                       ),
                       todayDecoration: BoxDecoration(
-                        color: AppColors.cobalt.withAlpha(isDark ? 40 : 25),
+                        color: const Color(0xFF6366F1).withAlpha(40),
                         shape: BoxShape.circle,
                       ),
                       todayTextStyle: TextStyle(
-                        color: isDark
-                            ? AppColors.darkTextPrimary
-                            : AppColors.cobalt,
+                        color: Theme.of(context).colorScheme.onSurface,
                         fontWeight: FontWeight.w700,
                       ),
                       selectedDecoration: const BoxDecoration(
-                        color: AppColors.cobalt,
+                        color: Color(0xFF6366F1),
                         shape: BoxShape.circle,
                       ),
                       selectedTextStyle:
                           const TextStyle(color: Colors.white),
                       defaultTextStyle: TextStyle(
-                        color: isDark
-                            ? AppColors.darkTextPrimary
-                            : AppColors.dark,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                       weekendTextStyle: TextStyle(
-                        color: isDark
-                            ? AppColors.darkTextPrimary
-                            : AppColors.dark,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                       outsideTextStyle: TextStyle(
-                        color: isDark
-                            ? AppColors.darkBorder
-                            : AppColors.lightGray,
+                        color: Theme.of(context).colorScheme.onSurface.withAlpha(80),
                       ),
                       disabledTextStyle: TextStyle(
-                        color: isDark
-                            ? AppColors.darkBorder
-                            : AppColors.lightGray,
+                        color: Theme.of(context).colorScheme.onSurface.withAlpha(60),
                       ),
                       tablePadding: const EdgeInsets.symmetric(horizontal: 8),
                     ),
@@ -264,22 +320,19 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
                       weekdayStyle: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.slate,
+                        color: Theme.of(context).colorScheme.onSurface.withAlpha(150),
                       ),
                       weekendStyle: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.slate,
+                        color: Theme.of(context).colorScheme.onSurface.withAlpha(150),
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
-                // Date header
+                if (!_agendaMode) const SizedBox(height: 16),
+                // Date header (ajanda modunda gizli)
+                if (!_agendaMode)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
@@ -292,9 +345,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
-                          color: isDark
-                              ? AppColors.darkTextPrimary
-                              : AppColors.dark,
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                       const Spacer(),
@@ -302,31 +353,32 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
                         '${selectedEvents.length} etkinlik',
                         style: TextStyle(
                           fontSize: 13,
-                          color: isDark
-                              ? AppColors.darkTextSecondary
-                              : AppColors.slate,
+                          color: Theme.of(context).colorScheme.onSurface.withAlpha(150),
                         ),
                       ),
                     ],
                   ),
                 ),
                 const SizedBox(height: 8),
-                // Events list
+                // Events list — ajanda modunda tüm yaklaşan etkinlikler gruplu
                 Expanded(
-                  child: selectedEvents.isEmpty
-                      ? _EmptyState(onCreate: () => _openModal(date: _selectedDay))
-                      : ListView.builder(
-                          padding: const EdgeInsets.only(bottom: 100),
-                          itemCount: selectedEvents.length,
-                          itemBuilder: (context, index) {
-                            return EventCard(
-                              event: selectedEvents[index],
-                              onTap: () => _openModal(
-                                event: selectedEvents[index],
-                              ),
-                            );
-                          },
-                        ),
+                  child: _agendaMode
+                      ? _buildAgenda(events)
+                      : selectedEvents.isEmpty
+                          ? _EmptyState(
+                              onCreate: () => _openModal(date: _selectedDay))
+                          : ListView.builder(
+                              padding: const EdgeInsets.only(bottom: 100),
+                              itemCount: selectedEvents.length,
+                              itemBuilder: (context, index) {
+                                return EventCard(
+                                  event: selectedEvents[index],
+                                  onTap: () => _openModal(
+                                    event: selectedEvents[index],
+                                  ),
+                                );
+                              },
+                            ),
                 ),
                 SizedBox(height: safeBottom + 8),
               ],
@@ -349,15 +401,15 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
           FloatingActionButton.small(
             heroTag: 'ocr',
             onPressed: _scanPhoto,
-            backgroundColor: Colors.orange,
-            tooltip: 'Fotoğraftan Etkinlik',
+            backgroundColor: const Color(0xFF6366F1),
+            tooltip: AppLocalizations.of(context).fotograftanEtkinlik,
             child: const Icon(Icons.document_scanner, color: Colors.white),
           ),
           const SizedBox(height: 8),
           FloatingActionButton(
             heroTag: 'add',
             onPressed: () => _openModal(date: _selectedDay),
-            backgroundColor: AppColors.cobalt,
+            backgroundColor: const Color(0xFF6366F1),
             child: const Icon(Icons.add, color: Colors.white),
           ),
         ],
@@ -373,7 +425,6 @@ class _EmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -381,7 +432,7 @@ class _EmptyState extends StatelessWidget {
           Icon(
             Icons.event_available_outlined,
             size: 56,
-            color: isDark ? AppColors.darkBorder : const Color(0xFFCBD5E1),
+            color: Theme.of(context).colorScheme.onSurface.withAlpha(60),
           ),
           const SizedBox(height: 16),
           Text(
@@ -389,17 +440,14 @@ class _EmptyState extends StatelessWidget {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w700,
-              color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
           const SizedBox(height: 4),
-          Text(
-            'Bu gün için planlanmış etkinlik yok',
+          Text(AppLocalizations.of(context).buGunIcinPlanlanmisEtkinlikYok,
             style: TextStyle(
               fontSize: 14,
-              color: isDark
-                  ? AppColors.darkTextSecondary
-                  : AppColors.slate,
+              color: Theme.of(context).colorScheme.onSurface.withAlpha(150),
             ),
           ),
           const SizedBox(height: 20),
@@ -408,7 +456,7 @@ class _EmptyState extends StatelessWidget {
             icon: const Icon(Icons.add, size: 18),
             label: Text(AppLocalizations.of(context).addEvent),
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.cobalt,
+              backgroundColor: const Color(0xFF6366F1),
               foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
@@ -424,3 +472,6 @@ class _EmptyState extends StatelessWidget {
     );
   }
 }
+
+
+

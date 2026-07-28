@@ -94,12 +94,11 @@ class _LocationPickerScreenState extends ConsumerState<LocationPickerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
-        title: 'Konum Seç',
+        title: AppLocalizations.of(context).konumSec,
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -109,14 +108,14 @@ class _LocationPickerScreenState extends ConsumerState<LocationPickerScreen> {
           FlutterMap(
             mapController: _mapController,
             options: MapOptions(
-              initialCenter: _selectedLatLng ?? const LatLng(41.0082, 28.9784),
+              initialCenter: _selectedLatLng ?? const LatLng(0.0, 0.0),
               initialZoom: _selectedLatLng != null ? 16 : 11,
               onTap: (_, latLng) => _onMapTapped(latLng),
             ),
             children: [
               TileLayer(
                 urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                userAgentPackageName: 'com.familyhub.app',
+                userAgentPackageName: 'com.miro.familyhub',
               ),
               if (_selectedLatLng != null)
                 MarkerLayer(
@@ -143,7 +142,7 @@ class _LocationPickerScreenState extends ConsumerState<LocationPickerScreen> {
             child: FloatingActionButton(
               heroTag: 'currentLocation',
               onPressed: _isLoadingCurrentLocation ? null : _goToCurrentLocation,
-              backgroundColor: AppColors.cobalt,
+              backgroundColor: const Color(0xFF6366F1),
               child: _isLoadingCurrentLocation
                   ? const SizedBox(
                       width: 22,
@@ -166,10 +165,10 @@ class _LocationPickerScreenState extends ConsumerState<LocationPickerScreen> {
               child: Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: isDark ? AppColors.darkCard : Colors.white,
+                  color: const Color(0xFF13131A),
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
-                    color: isDark ? AppColors.darkBorder : AppColors.border,
+                    color: const Color(0x1EFFFFFF),
                   ),
                   boxShadow: [
                     BoxShadow(
@@ -188,12 +187,12 @@ class _LocationPickerScreenState extends ConsumerState<LocationPickerScreen> {
                         Container(
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            color: AppColors.cobalt.withAlpha(20),
+                            color: const Color(0xFF6366F1).withAlpha(20),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: const Icon(
                             Icons.location_on,
-                            color: AppColors.cobalt,
+                            color: Color(0xFF6366F1),
                             size: 22,
                           ),
                         ),
@@ -208,22 +207,18 @@ class _LocationPickerScreenState extends ConsumerState<LocationPickerScreen> {
                                     : (_locationInfo?.address.isNotEmpty == true
                                         ? _locationInfo!.address
                                         : 'Bilinmeyen Adres'),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700,
-                                  color: isDark
-                                      ? AppColors.darkTextPrimary
-                                      : AppColors.dark,
+                                  color: Color(0xFFE5E7EB),
                                 ),
                               ),
                               if (!_isLoadingAddress && _locationInfo != null)
                                 Text(
                                   '${_locationInfo!.city}${_locationInfo!.country.isNotEmpty ? ', ${_locationInfo!.country}' : ''}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 13,
-                                    color: isDark
-                                        ? AppColors.darkTextSecondary
-                                        : AppColors.slate,
+                                    color: Color(0xFF6B7280),
                                   ),
                                 ),
                             ],
@@ -235,11 +230,9 @@ class _LocationPickerScreenState extends ConsumerState<LocationPickerScreen> {
                       const SizedBox(height: 12),
                       Text(
                         _locationInfo!.fullAddress,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
-                          color: isDark
-                              ? AppColors.darkTextSecondary
-                              : AppColors.slate,
+                          color: Color(0xFF6B7280),
                         ),
                       ),
                     ],
@@ -250,10 +243,10 @@ class _LocationPickerScreenState extends ConsumerState<LocationPickerScreen> {
                       child: ElevatedButton(
                         onPressed: _locationInfo != null ? _saveLocation : null,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.cobalt,
+                          backgroundColor: const Color(0xFF6366F1),
                           foregroundColor: Colors.white,
                           elevation: 0,
-                          disabledBackgroundColor: AppColors.cobalt.withAlpha(60),
+                          disabledBackgroundColor: const Color(0xFF6366F1).withAlpha(60),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(14),
                           ),

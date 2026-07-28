@@ -8,6 +8,7 @@ import '../../../config/routes.dart';
 import '../../../core/supabase_client.dart';
 import '../../../core/validation/input_validator.dart';
 import '../../../services/auth_service.dart';
+import '../../../services/biometric_service.dart';
 import '../../../services/hive_service.dart';
 import '../../widgets/settings/screen_header.dart';
 import '../../widgets/settings/settings_section.dart';
@@ -23,12 +24,128 @@ class SecuritySettingsScreen extends StatefulWidget {
 class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
   bool _biometricEnabled = false;
   bool _biometricAvailable = false;
+  bool _hasPin = false;
   final _localAuth = LocalAuthentication();
 
   @override
   void initState() {
     super.initState();
     _checkBiometric();
+    _loadPinState();
+  }
+
+  Future<void> _loadPinState() async {
+    final has = await BiometricService.hasPin();
+    if (mounted) setState(() => _hasPin = has);
+  }
+
+  /// PIN belirleme/değiştirme diyaloğu — salt'lı hash olarak saklanır.
+  void _showSetPinDialog() {
+    final pinController = TextEditingController();
+    final confirmController = TextEditingController();
+    bool saving = false;
+    final t = AppLocalizations.of(context);
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) => StatefulBuilder(
+        builder: (context, setDialogState) => AlertDialog(
+          title: Text(_hasPin ? t.pinChange : t.pinSet),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: pinController,
+                obscureText: true,
+                keyboardType: TextInputType.number,
+                maxLength: 6,
+                decoration: InputDecoration(
+                  labelText: t.pinLabel,
+                  prefixIcon: const Icon(Icons.pin_outlined),
+                  counterText: '',
+                ),
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: confirmController,
+                obscureText: true,
+                keyboardType: TextInputType.number,
+                maxLength: 6,
+                decoration: InputDecoration(
+                  labelText: t.pinConfirmLabel,
+                  prefixIcon: const Icon(Icons.pin_outlined),
+                  counterText: '',
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: saving ? null : () => Navigator.pop(dialogContext),
+              child: Text(t.cancel),
+            ),
+            TextButton(
+              onPressed: saving
+                  ? null
+                  : () async {
+                      final pin = pinController.text.trim();
+                      final confirm = confirmController.text.trim();
+                      if (pin.length < 4) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(t.pinTooShort)),
+                        );
+                        return;
+                      }
+                      if (pin != confirm) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(t.pinMismatch)),
+                        );
+                        return;
+                      }
+                      setDialogState(() => saving = true);
+                      final messenger = ScaffoldMessenger.of(context);
+                      await BiometricService.registerPin(pin);
+                      if (!dialogContext.mounted) return;
+                      Navigator.pop(dialogContext);
+                      await _loadPinState();
+                      messenger.showSnackBar(
+                        SnackBar(content: Text(t.pinSaved)),
+                      );
+                    },
+              child: Text(t.save),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _removePin() async {
+    final t = AppLocalizations.of(context);
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(t.pinRemove),
+        content: Text(t.pinRemoveConfirm),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: Text(t.cancel)),
+          TextButton(
+              onPressed: () => Navigator.pop(ctx, true),
+              child: Text(t.pinRemove,
+                  style: const TextStyle(color: AppColors.error))),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+    await BiometricService.clearPin();
+    await _loadPinState();
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context).pinRemoved)),
+      );
+    }
   }
 
   Future<void> _checkBiometric() async {
@@ -67,7 +184,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
       } catch (e) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Biyometrik hata: $e')),
+            SnackBar(content: Text(AppLocalizations.of(context).secBiometricError('$e'))),
           );
         }
         return;
@@ -84,7 +201,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
         await client.from('settings').upsert({
           'user_id': userId,
           'security': {'biometric_enabled': enabled},
-        });
+        }, onConflict: 'user_id');
       } catch (e) {
         debugPrint('Supabase sync hatası: $e');
       }
@@ -95,8 +212,8 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
         SnackBar(
           content: Text(
             enabled
-                ? 'Biyometrik giriş etkinleştirildi'
-                : 'Biyometrik giriş devre dışı bırakıldı',
+                ? AppLocalizations.of(context).secBioEnabled
+                : AppLocalizations.of(context).secBioDisabled,
           ),
         ),
       );
@@ -121,29 +238,28 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
                 TextField(
                   controller: currentController,
                   obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Mevcut Şifre',
-                    prefixIcon: Icon(Icons.lock_outline),
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context).mevcutSifre,
+                    prefixIcon: const Icon(Icons.lock_outline),
                   ),
                 ),
                 const SizedBox(height: 12),
                 TextField(
                   controller: newController,
                   obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Yeni Şifre',
-                    prefixIcon: Icon(Icons.lock_outline),
-                    helperText:
-                        'En az 8 karakter, büyük/küçük harf, rakam ve özel karakter',
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context).yeniSifre,
+                    prefixIcon: const Icon(Icons.lock_outline),
+                    helperText: AppLocalizations.of(context).enAz8KarakterBuyukkucukHarfRakamVeOzelKarakter,
                   ),
                 ),
                 const SizedBox(height: 12),
                 TextField(
                   controller: confirmController,
                   obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Yeni Şifre (Tekrar)',
-                    prefixIcon: Icon(Icons.lock_outline),
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context).secNewPasswordRepeat,
+                    prefixIcon: const Icon(Icons.lock_outline),
                   ),
                 ),
               ],
@@ -232,12 +348,10 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: const Text(
-          'Hesabı Sil',
-          style: TextStyle(color: AppColors.error),
+        title: Text(AppLocalizations.of(context).hesabiSil,
+          style: const TextStyle(color: AppColors.error),
         ),
-        content: const Text(
-          'Hesabınızı silmek geri alınamaz. Tüm verileriniz kalıcı olarak silinecek.',
+        content: Text(AppLocalizations.of(context).hesabiniziSilmekGeriAlinamazTumVerilerinizKaliciOlarakSilinecek,
         ),
         actions: [
           TextButton(
@@ -246,7 +360,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
           ),
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, true),
-            child: const Text('Sil', style: TextStyle(color: AppColors.error)),
+            child: Text(AppLocalizations.of(context).budDelete, style: const TextStyle(color: AppColors.error)),
           ),
         ],
       ),
@@ -273,7 +387,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Hesap silme hatası: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context).secAccountDeleteFailed('$e'))),
         );
       }
     }
@@ -281,12 +395,11 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
-        title: 'Güvenlik',
+        title: AppLocalizations.of(context).safety,
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -295,13 +408,13 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
         slivers: [
           SliverToBoxAdapter(
             child: SettingsSection(
-              title: 'ŞİFRE YÖNETİMİ',
+              title: AppLocalizations.of(context).sifreYonetimi,
               icon: Icons.password_outlined,
               children: [
                 ListTile(
                   leading: const Icon(
                     Icons.lock_reset,
-                    color: AppColors.cobalt,
+                    color: Color(0xFF6366F1),
                   ),
                   title: Text(AppLocalizations.of(context).sifreDegistir),
                   subtitle: Text(AppLocalizations.of(context).mevcutSifreniziGuncelleyin),
@@ -314,8 +427,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
                     color: Color(0xFF10B981),
                   ),
                   title: Text(AppLocalizations.of(context).guvenlikSorulari),
-                  subtitle: const Text(
-                    'Şifre unutma durumunda kullanılacak 2 soru',
+                  subtitle: Text(AppLocalizations.of(context).sifreUnutmaDurumundaKullanilacak2Soru,
                   ),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () => context.push(AppRoutes.securityQuestionsSetup),
@@ -325,13 +437,40 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
           ),
           SliverToBoxAdapter(
             child: SettingsSection(
-              title: 'GİRİŞ SEÇENEKLERİ',
+              title: AppLocalizations.of(context).pinSection,
+              icon: Icons.pin_outlined,
+              children: [
+                ListTile(
+                  leading: const Icon(Icons.pin_outlined,
+                      color: Color(0xFF6366F1)),
+                  title: Text(_hasPin
+                      ? AppLocalizations.of(context).pinChange
+                      : AppLocalizations.of(context).pinSet),
+                  subtitle:
+                      Text(AppLocalizations.of(context).pinSubtitle),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: _showSetPinDialog,
+                ),
+                if (_hasPin)
+                  ListTile(
+                    leading: const Icon(Icons.lock_open_outlined,
+                        color: AppColors.error),
+                    title: Text(AppLocalizations.of(context).pinRemove,
+                        style: const TextStyle(color: AppColors.error)),
+                    onTap: _removePin,
+                  ),
+              ],
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: SettingsSection(
+              title: AppLocalizations.of(context).girisSecenekleri,
               icon: Icons.fingerprint,
               children: [
                 SwitchListTile(
                   secondary: const Icon(
                     Icons.fingerprint,
-                    color: AppColors.success,
+                    color: Color(0xFF10B981),
                   ),
                   title: Text(AppLocalizations.of(context).biyometrikGiris),
                   subtitle: Text(
@@ -340,7 +479,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
                         : 'Cihazınız biyometriği desteklemiyor',
                   ),
                   value: _biometricEnabled,
-                  activeThumbColor: AppColors.cobalt,
+                  activeThumbColor: const Color(0xFF6366F1),
                   onChanged: _biometricAvailable ? _toggleBiometric : null,
                 ),
               ],
@@ -348,7 +487,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
           ),
           SliverToBoxAdapter(
             child: SettingsSection(
-              title: 'TEHLİKE BÖLGESİ',
+              title: AppLocalizations.of(context).tehlikeBolgesi,
               icon: Icons.warning_amber_rounded,
               children: [
                 ListTile(
@@ -356,12 +495,10 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
                     Icons.delete_forever,
                     color: AppColors.error,
                   ),
-                  title: const Text(
-                    'Hesabı Sil',
-                    style: TextStyle(color: AppColors.error),
+                  title: Text(AppLocalizations.of(context).hesabiSil,
+                    style: const TextStyle(color: AppColors.error),
                   ),
-                  subtitle: const Text(
-                    'Tüm verileriniz kalıcı olarak silinecek',
+                  subtitle: Text(AppLocalizations.of(context).tumVerilerinizKaliciOlarakSilinecek,
                   ),
                   onTap: _showDeleteAccountDialog,
                 ),

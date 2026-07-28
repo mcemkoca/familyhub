@@ -16,6 +16,8 @@ class HealthCardScreen extends StatefulWidget {
 }
 
 class _HealthCardScreenState extends State<HealthCardScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   HealthCardData? _data;
   bool _loading = true;
   bool _showQR = false;
@@ -56,7 +58,6 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     if (_loading) {
       return const Scaffold(
@@ -65,17 +66,17 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
     }
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).healthCard),
         centerTitle: true,
-        backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
-        foregroundColor: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+        backgroundColor: const Color(0xFF0A0A0F),
+        foregroundColor: const Color(0xFFE5E7EB),
         elevation: 0,
         actions: [
           IconButton(
             icon: const Icon(Icons.edit_outlined),
-            tooltip: 'Düzenle',
+            tooltip: AppLocalizations.of(context).edit,
             onPressed: () => context.push(AppRoutes.healthCardEdit),
           ),
         ],
@@ -88,24 +89,21 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
-                  'Acil durumlarda kullanılabilir bilgiler',
-                  style: TextStyle(
+                Text(AppLocalizations.of(context).acilDurumlardaKullanilabilirBilgiler,
+                  style: const TextStyle(
                     fontSize: 14,
-                    color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                    color: Color(0xFF6B7280),
                   ),
                 ),
             const SizedBox(height: 20),
             // Main Health Card
             Container(
               decoration: BoxDecoration(
-                color: isDark ? AppColors.darkCard : Colors.white,
+                color: const Color(0xFF13131A),
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: isDark
-                        ? Colors.black.withAlpha(20)
-                        : Colors.black.withAlpha(5),
+                    color: Colors.black.withAlpha(20),
                     blurRadius: 16,
                     offset: const Offset(0, 4),
                   ),
@@ -146,9 +144,8 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'SAĞLIK KARTI',
-                                style: TextStyle(
+                              Text(AppLocalizations.of(context).saglikKarti,
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w800,
@@ -171,20 +168,20 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                   ),
                   // Info Rows
                   _InfoRow(
-                    label: 'Kan Grubu',
+                    label: AppLocalizations.of(context).hcsBloodType,
                     value: _data?.bloodType ?? '-',
                     highlight: true,
                   ),
                   const Divider(height: 1, indent: 20, endIndent: 20),
                   _InfoRow(
-                    label: 'Alerjiler',
+                    label: AppLocalizations.of(context).hcAllergies,
                     value: _data?.allergies.isNotEmpty == true
                         ? _data!.allergies.join(', ')
                         : 'Yok',
                   ),
                   const Divider(height: 1, indent: 20, endIndent: 20),
                   _InfoRow(
-                    label: 'İlaçlar',
+                    label: AppLocalizations.of(context).medications,
                     value: _data?.medications.isNotEmpty == true
                         ? _data!.medications
                             .map((m) => '${m.name} ${m.dosage}')
@@ -193,14 +190,14 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                   ),
                   const Divider(height: 1, indent: 20, endIndent: 20),
                   _InfoRow(
-                    label: 'Kronik Hastalıklar',
+                    label: AppLocalizations.of(context).chronicConditions,
                     value: _data?.chronicConditions.isNotEmpty == true
                         ? _data!.chronicConditions.join(', ')
                         : 'Yok',
                   ),
                   const Divider(height: 1, indent: 20, endIndent: 20),
                   _InfoRow(
-                    label: 'Organ Bağışı',
+                    label: AppLocalizations.of(context).organDonor,
                     value: (_data?.organDonor ?? false) ? 'Evet ✓' : 'Hayır',
                   ),
                   const SizedBox(height: 16),
@@ -212,13 +209,11 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: isDark ? AppColors.darkCard : Colors.white,
+                color: const Color(0xFF13131A),
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: isDark
-                        ? Colors.black.withAlpha(20)
-                        : Colors.black.withAlpha(5),
+                    color: Colors.black.withAlpha(20),
                     blurRadius: 12,
                     offset: const Offset(0, 2),
                   ),
@@ -227,14 +222,12 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Acil Durumda Ara',
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w700,
-                      color: isDark
-                          ? AppColors.darkTextSecondary
-                          : AppColors.slate,
+                      color: Color(0xFF6B7280),
                       letterSpacing: 0.5,
                     ),
                   ),
@@ -245,7 +238,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                     child: Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: AppColors.error.withAlpha(isDark ? 25 : 15),
+                        color: AppColors.error.withAlpha(25),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
@@ -267,11 +260,9 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                                 const SizedBox(height: 2),
                                 Text(
                                   '${_data?.emergencyContactName ?? '-'} (${_data?.emergencyContactRelation ?? '-'})',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 13,
-                                    color: isDark
-                                        ? AppColors.darkTextSecondary
-                                        : AppColors.slate,
+                                    color: Color(0xFF6B7280),
                                   ),
                                 ),
                               ],
@@ -296,12 +287,12 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppColors.warning.withAlpha(isDark ? 25 : 15),
+                  color: const Color(0xFFF59E0B).withAlpha(25),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.info_outline, color: AppColors.warning, size: 20),
+                    const Icon(Icons.info_outline, color: Color(0xFFF59E0B), size: 20),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
@@ -309,8 +300,8 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                         style: TextStyle(
                           fontSize: 13,
                           color: isDark
-                              ? AppColors.darkTextSecondary
-                              : AppColors.dark,
+                              ? const Color(0xFF6B7280)
+                              : const Color(0xFFE5E7EB),
                         ),
                       ),
                     ),
@@ -324,7 +315,7 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
               icon: const Icon(Icons.qr_code, size: 20),
               label: Text(AppLocalizations.of(context).qrKodIlePaylas),
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.cobalt,
+                backgroundColor: const Color(0xFF6366F1),
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
@@ -339,8 +330,8 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                 style: TextStyle(
                   fontSize: 12,
                   color: isDark
-                      ? AppColors.darkTextSecondary
-                      : AppColors.lightGray,
+                      ? const Color(0xFF6B7280)
+                      : const Color(0xFF9CA3AF),
                 ),
               ),
             ),
@@ -361,30 +352,25 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                   margin: const EdgeInsets.all(32),
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
-                    color: isDark ? AppColors.darkCard : Colors.white,
+                    color: const Color(0xFF13131A),
                     borderRadius: BorderRadius.circular(24),
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
-                        'Sağlık Kartı QR',
-                        style: TextStyle(
+                      Text(AppLocalizations.of(context).qrShare,
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
-                          color: isDark
-                              ? AppColors.darkTextPrimary
-                              : AppColors.dark,
+                          color: Color(0xFFE5E7EB),
                         ),
                       ),
                       const SizedBox(height: 4),
-                      Text(
+                      const Text(
                         'Ambulans personeli okutabilir',
                         style: TextStyle(
                           fontSize: 13,
-                          color: isDark
-                              ? AppColors.darkTextSecondary
-                              : AppColors.slate,
+                          color: Color(0xFF6B7280),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -401,11 +387,11 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                           backgroundColor: Colors.white,
                           eyeStyle: const QrEyeStyle(
                             eyeShape: QrEyeShape.square,
-                            color: AppColors.dark,
+                            color: Color(0xFFE5E7EB),
                           ),
                           dataModuleStyle: const QrDataModuleStyle(
                             dataModuleShape: QrDataModuleShape.square,
-                            color: AppColors.dark,
+                            color: Color(0xFFE5E7EB),
                           ),
                         ),
                       ),
@@ -415,15 +401,15 @@ class _HealthCardScreenState extends State<HealthCardScreen> {
                         style: TextStyle(
                           fontSize: 12,
                           color: isDark
-                              ? AppColors.darkTextSecondary
-                              : AppColors.lightGray,
+                              ? const Color(0xFF6B7280)
+                              : const Color(0xFF9CA3AF),
                         ),
                       ),
                       const SizedBox(height: 16),
                       ElevatedButton(
                         onPressed: () => setState(() => _showQR = false),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.cobalt,
+                          backgroundColor: const Color(0xFF6366F1),
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(
                             horizontal: 32,
@@ -461,7 +447,6 @@ class _InfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       child: Row(
@@ -471,12 +456,10 @@ class _InfoRow extends StatelessWidget {
             flex: 2,
             child: Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
-                color: isDark
-                    ? AppColors.darkTextSecondary
-                    : AppColors.slate,
+                color: Color(0xFF6B7280),
               ),
             ),
           ),
@@ -489,9 +472,7 @@ class _InfoRow extends StatelessWidget {
                 fontWeight: highlight ? FontWeight.w700 : FontWeight.w500,
                 color: highlight
                     ? AppColors.error
-                    : (isDark
-                        ? AppColors.darkTextPrimary
-                        : AppColors.dark),
+                    : (const Color(0xFFE5E7EB)),
               ),
             ),
           ),
@@ -515,39 +496,33 @@ class _DoctorRow extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: isDark ? AppColors.darkBackground : const Color(0xFFF8FAFC),
+              color: const Color(0xFF0A0A0F),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Doktor',
                   style: TextStyle(
                     fontSize: 12,
-                    color: isDark
-                        ? AppColors.darkTextSecondary
-                        : AppColors.slate,
+                    color: Color(0xFF6B7280),
                   ),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   data?.doctorName ?? '-',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    color: isDark
-                        ? AppColors.darkTextPrimary
-                        : AppColors.dark,
+                    color: Color(0xFFE5E7EB),
                   ),
                 ),
                 Text(
                   data?.doctorHospital ?? '-',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
-                    color: isDark
-                        ? AppColors.darkTextSecondary
-                        : AppColors.slate,
+                    color: Color(0xFF6B7280),
                   ),
                 ),
               ],

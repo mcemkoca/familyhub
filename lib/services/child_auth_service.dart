@@ -4,11 +4,26 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../core/supabase_client.dart';
 import '../core/errors.dart';
 import '../domain/models/child_session.dart';
+import '../repositories/child_account_repository.dart';
+import 'localization/locale_service.dart';
 
 class ChildAuthService {
   static const _secureStorage = FlutterSecureStorage();
   static const _childSessionKey = 'child_session';
   static const _childModeKey = 'child_mode_active';
+
+  static String get _languageCode =>
+      LocaleService.resolveInitialLocale().languageCode;
+
+  static String _text(Map<String, String> values) =>
+      values[_languageCode] ?? values['tr']!;
+
+  static String get _invalidPinOrAccount => _text(const {
+        'tr': 'PIN hatalı veya hesap bulunamadı',
+        'en': 'The PIN is incorrect or the account was not found',
+        'nl': 'De pincode is onjuist of het account is niet gevonden',
+        'fr': 'Le code PIN est incorrect ou le compte est introuvable',
+      });
 
   static ChildSession? _currentSession;
 
@@ -34,7 +49,14 @@ class ChildAuthService {
     required String pin,
   }) async {
     final supabase = SupabaseConfig.safeClient;
-    if (supabase == null) throw AppAuthException('Sunucu bağlantısı kurulmadı');
+    if (supabase == null) {
+      throw AppAuthException(_text(const {
+        'tr': 'Sunucu bağlantısı kurulamadı',
+        'en': 'Could not connect to the server',
+        'nl': 'Kan geen verbinding maken met de server',
+        'fr': 'Impossible de se connecter au serveur',
+      }));
+    }
 
     // Use RPC function to verify PIN and create session
     final response = await supabase.rpc(
@@ -47,11 +69,36 @@ class ChildAuthService {
     );
 
     if (response == null || (response as List).isEmpty) {
-      throw AppAuthException('PIN hatalı veya hesap bulunamadı');
+      throw AppAuthException(_invalidPinOrAccount);
     }
 
     final session = ChildSession.fromJson(
       (response).first as Map<String, dynamic>,
+    );
+    await _persistSession(session);
+    _currentSession = session;
+    return session;
+  }
+
+  /// Yerel (Hive) çocuk hesabıyla oturum aç — tek cihaz, sunucusuz. PIN
+  /// ChildAccountRepository.verifyLocalPin ile doğrulanır.
+  static Future<ChildSession> signInLocal({
+    required String childId,
+    required String pin,
+    required String childName,
+    required String childRole,
+    required String familyId,
+  }) async {
+    if (!ChildAccountRepository().verifyLocalPin(childId, pin)) {
+      throw AppAuthException(_invalidPinOrAccount);
+    }
+    final session = ChildSession(
+      token: 'local_$childId',
+      expiresAt: DateTime.now().add(const Duration(days: 3650)),
+      childName: childName,
+      childRole: childRole,
+      familyId: familyId,
+      childId: childId,
     );
     await _persistSession(session);
     _currentSession = session;
@@ -71,6 +118,12 @@ class ChildAuthService {
       if (session.isExpired) {
         await signOut();
         return false;
+      }
+
+      // Yerel oturum (sunucusuz) → sunucu doğrulamasını atla.
+      if (session.token.startsWith('local_')) {
+        _currentSession = session;
+        return true;
       }
 
       // Validate with server

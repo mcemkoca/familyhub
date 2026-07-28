@@ -14,6 +14,8 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   int _step = 0; // 0 = email, 1 = security questions, 2 = new password, 3 = success
   String _email = '';
   String? _question1;
@@ -155,7 +157,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: AppColors.success,
+        backgroundColor: const Color(0xFF10B981),
         behavior: SnackBarBehavior.floating,
       ),
     );
@@ -173,16 +175,15 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final accentColor = Theme.of(context).colorScheme.primary;
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: isDark ? Colors.white : Colors.black87),
+          icon: const Icon(Icons.arrow_back, color: Color(0xFFE5E7EB)),
           onPressed: () {
             if (_step > 0) {
               setState(() => _step--);
@@ -191,10 +192,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             }
           },
         ),
-        title: Text(
-          'Şifremi Unuttum',
-          style: TextStyle(
-            color: isDark ? Colors.white : Colors.black87,
+        title: Text(AppLocalizations.of(context).sifremiUnuttum,
+          style: const TextStyle(
+            color: Color(0xFFE5E7EB),
             fontSize: 18,
             fontWeight: FontWeight.w600,
           ),
@@ -246,11 +246,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         ),
         const SizedBox(height: 24),
         Center(
-          child: Text(
-            'Şifrenizi mi unuttunuz?',
+          child: Text(AppLocalizations.of(context).sifreniziMiUnuttunuz,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.w700,
-              color: isDark ? Colors.white : Colors.black87,
+              color: const Color(0xFFE5E7EB),
             ),
           ),
         ),
@@ -260,7 +259,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             'Hesabınıza ait e-posta adresini girin. Güvenlik sorularınız varsa onları cevaplayıp şifrenizi değiştirebilirsiniz.',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: const Color(0xFF6B7280),
             ),
           ),
         ),
@@ -271,18 +270,18 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           textInputAction: TextInputAction.done,
           onSubmitted: (_) => _submitEmail(),
           decoration: InputDecoration(
-            labelText: 'E-posta Adresi',
+            labelText: AppLocalizations.of(context).fpEmailAddr,
             prefixIcon: const Icon(Icons.email_outlined),
             filled: true,
-            fillColor: isDark ? AppColors.darkCard : Colors.grey.shade50,
+            fillColor: const Color(0x1AFFFFFF),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppRadius.medium),
               borderSide: BorderSide.none,
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppRadius.medium),
-              borderSide: BorderSide(
-                color: isDark ? AppColors.darkBorder : AppColors.border,
+              borderSide: const BorderSide(
+                color: Color(0x1EFFFFFF),
               ),
             ),
             focusedBorder: OutlineInputBorder(
@@ -349,21 +348,19 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         ),
         const SizedBox(height: 24),
         Center(
-          child: Text(
-            'Güvenlik Doğrulaması',
+          child: Text(AppLocalizations.of(context).guvenlikDogrulamasi,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.w700,
-              color: isDark ? Colors.white : Colors.black87,
+              color: const Color(0xFFE5E7EB),
             ),
           ),
         ),
         const SizedBox(height: 8),
         Center(
-          child: Text(
-            'Hesabınızı korumak için lütfen kayıtlı güvenlik sorularınızı cevaplayın.',
+          child: Text(AppLocalizations.of(context).hesabiniziKorumakIcinLutfenKayitliGuvenlikSorulariniziCevaplayin,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: const Color(0xFF6B7280),
             ),
           ),
         ),
@@ -371,10 +368,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: isDark ? AppColors.darkCard : Colors.grey.shade50,
+            color: const Color(0x1AFFFFFF),
             borderRadius: BorderRadius.circular(AppRadius.medium),
             border: Border.all(
-              color: isDark ? AppColors.darkBorder : AppColors.border,
+              color: const Color(0x1EFFFFFF),
             ),
           ),
           child: Column(
@@ -387,9 +384,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   Expanded(
                     child: Text(
                       _question1 ?? '',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.w600,
-                        color: isDark ? Colors.white : Colors.black87,
+                        color: Color(0xFFE5E7EB),
                       ),
                     ),
                   ),
@@ -400,17 +397,17 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 controller: _answer1Controller,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
-                  hintText: 'Cevabınızı yazın',
+                  hintText: AppLocalizations.of(context).cevabiniziYazin,
                   filled: true,
-                  fillColor: isDark ? AppColors.darkBackground : Colors.white,
+                  fillColor: const Color(0xFF0A0A0F),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide.none,
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(
-                      color: isDark ? AppColors.darkBorder : AppColors.border,
+                    borderSide: const BorderSide(
+                      color: Color(0x1EFFFFFF),
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
@@ -427,10 +424,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: isDark ? AppColors.darkCard : Colors.grey.shade50,
+            color: const Color(0x1AFFFFFF),
             borderRadius: BorderRadius.circular(AppRadius.medium),
             border: Border.all(
-              color: isDark ? AppColors.darkBorder : AppColors.border,
+              color: const Color(0x1EFFFFFF),
             ),
           ),
           child: Column(
@@ -443,9 +440,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   Expanded(
                     child: Text(
                       _question2 ?? '',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.w600,
-                        color: isDark ? Colors.white : Colors.black87,
+                        color: Color(0xFFE5E7EB),
                       ),
                     ),
                   ),
@@ -457,17 +454,17 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 textInputAction: TextInputAction.done,
                 onSubmitted: (_) => _verifyAnswers(),
                 decoration: InputDecoration(
-                  hintText: 'Cevabınızı yazın',
+                  hintText: AppLocalizations.of(context).cevabiniziYazin,
                   filled: true,
-                  fillColor: isDark ? AppColors.darkBackground : Colors.white,
+                  fillColor: const Color(0xFF0A0A0F),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide.none,
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(
-                      color: isDark ? AppColors.darkBorder : AppColors.border,
+                    borderSide: const BorderSide(
+                      color: Color(0x1EFFFFFF),
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
@@ -502,9 +499,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       strokeWidth: 2,
                     ),
                   )
-                : const Text(
-                    'Doğrula ve Devam Et',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                : Text(AppLocalizations.of(context).dogrulaVeDevamEt,
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
           ),
         ),
@@ -531,21 +527,19 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         ),
         const SizedBox(height: 24),
         Center(
-          child: Text(
-            'Yeni Şifre Belirle',
+          child: Text(AppLocalizations.of(context).yeniSifreBelirle,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.w700,
-              color: isDark ? Colors.white : Colors.black87,
+              color: const Color(0xFFE5E7EB),
             ),
           ),
         ),
         const SizedBox(height: 8),
         Center(
-          child: Text(
-            'Güvenlik doğrulamanız başarılı. Lütfen yeni şifrenizi belirleyin.',
+          child: Text(AppLocalizations.of(context).guvenlikDogrulamanizBasariliLutfenYeniSifreniziBelirleyin,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: const Color(0xFF6B7280),
             ),
           ),
         ),
@@ -555,19 +549,19 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           obscureText: true,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
-            labelText: 'Yeni Şifre',
+            labelText: AppLocalizations.of(context).yeniSifre,
             prefixIcon: const Icon(Icons.lock_outline),
-            helperText: 'En az 8 karakter, büyük/küçük harf, rakam ve özel karakter',
+            helperText: AppLocalizations.of(context).enAz8KarakterBuyukkucukHarfRakamVeOzelKarakter,
             filled: true,
-            fillColor: isDark ? AppColors.darkCard : Colors.grey.shade50,
+            fillColor: const Color(0x1AFFFFFF),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppRadius.medium),
               borderSide: BorderSide.none,
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppRadius.medium),
-              borderSide: BorderSide(
-                color: isDark ? AppColors.darkBorder : AppColors.border,
+              borderSide: const BorderSide(
+                color: Color(0x1EFFFFFF),
               ),
             ),
             focusedBorder: OutlineInputBorder(
@@ -583,18 +577,18 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           textInputAction: TextInputAction.done,
           onSubmitted: (_) => _changePassword(),
           decoration: InputDecoration(
-            labelText: 'Yeni Şifre (Tekrar)',
+            labelText: AppLocalizations.of(context).secNewPasswordRepeat,
             prefixIcon: const Icon(Icons.lock_outline),
             filled: true,
-            fillColor: isDark ? AppColors.darkCard : Colors.grey.shade50,
+            fillColor: const Color(0x1AFFFFFF),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppRadius.medium),
               borderSide: BorderSide.none,
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppRadius.medium),
-              borderSide: BorderSide(
-                color: isDark ? AppColors.darkBorder : AppColors.border,
+              borderSide: const BorderSide(
+                color: Color(0x1EFFFFFF),
               ),
             ),
             focusedBorder: OutlineInputBorder(
@@ -625,9 +619,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       strokeWidth: 2,
                     ),
                   )
-                : const Text(
-                    'Şifremi Değiştir',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                : Text(AppLocalizations.of(context).sifremiDegistir,
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
           ),
         ),
@@ -645,18 +638,17 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           width: 96,
           height: 96,
           decoration: BoxDecoration(
-            color: AppColors.success.withAlpha(20),
+            color: const Color(0xFF10B981).withAlpha(20),
             shape: BoxShape.circle,
           ),
-          child: const Icon(Icons.check_circle, color: AppColors.success, size: 48),
+          child: const Icon(Icons.check_circle, color: Color(0xFF10B981), size: 48),
         ),
         const SizedBox(height: 32),
-        Text(
-          'Şifreniz Güncellendi!',
+        Text(AppLocalizations.of(context).sifrenizGuncellendi,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
             fontWeight: FontWeight.w700,
-            color: isDark ? Colors.white : Colors.black87,
+            color: const Color(0xFFE5E7EB),
           ),
         ),
         const SizedBox(height: 12),
@@ -664,7 +656,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           'Yeni şifrenizle giriş yapabilirsiniz. Hesabınızın güvenliği için güvenlik sorularınızı düzenli olarak güncellemenizi öneririz.',
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+            color: const Color(0xFF6B7280),
           ),
         ),
         const Spacer(),
@@ -680,9 +672,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 borderRadius: BorderRadius.circular(AppRadius.medium),
               ),
             ),
-            child: const Text(
-              'Giriş Yap',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            child: Text(AppLocalizations.of(context).login,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
           ),
         ),

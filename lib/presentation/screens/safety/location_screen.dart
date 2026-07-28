@@ -1,8 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../../../config/constants.dart';
 import '../../../services/location_service.dart';
+import '../../../services/location_tracking_service.dart';
+import '../../providers/app_providers.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
 class LocationScreen extends StatefulWidget {
@@ -37,12 +41,48 @@ class _LocationScreenState extends State<LocationScreen> {
       _error = null;
     });
 
-    final granted = await LocationService.requestPermissions();
+    final granted = await LocationService.requestPermissionsWithFallback(
+      onDeniedForever: () async {
+        if (!mounted) return;
+        await showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            backgroundColor: const Color(0xFF13131A),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+              side: const BorderSide(color: Color(0x1EFFFFFF), width: 0.5),
+            ),
+            title: Row(children: [
+              const Icon(Icons.location_off, color: Color(0xFFF59E0B)),
+              const SizedBox(width: 12),
+              Text(AppLocalizations.of(context).konumIzniGerekli, style: const TextStyle(color: Color(0xFFE5E7EB))),
+            ]),
+            content: const Text(
+              'Konum izni kalıcı olarak reddedildi. Ayarlar > Uygulamalar > FamilyHub > İzinler > Konum menüsünden izni etkinleştirin.',
+              style: TextStyle(color: Color(0xFF9CA3AF)),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(AppLocalizations.of(context).commonClose, style: const TextStyle(color: Color(0xFF6B7280))),
+              ),
+              ElevatedButton.icon(
+                onPressed: () { Navigator.pop(context); openAppSettings(); },
+                icon: const Icon(Icons.open_in_new, size: 18),
+                label: Text(AppLocalizations.of(context).ayarlariAc),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF6366F1),
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
     if (!granted) {
-      setState(() {
-        _loading = false;
-        _error = 'Konum izni verilmedi. Ayarlardan izin vermeniz gerekiyor.';
-      });
+      setState(() { _loading = false; _error = 'Konum izni verilmedi.'; });
       return;
     }
 
@@ -74,6 +114,9 @@ class _LocationScreenState extends State<LocationScreen> {
   void _startSharing() {
     try {
       LocationService.startLiveSharing();
+      // Konumu aileyle GERÇEKTEN paylaş — geolocations tablosuna yükle
+      // (yoksa harita/aile üyeleri konumu göremez).
+      LocationTrackingService.startTracking();
       _positionStream = LocationService.locationStream.listen(
         (pos) {
           if (mounted) setState(() => _currentPosition = pos);
@@ -95,23 +138,21 @@ class _LocationScreenState extends State<LocationScreen> {
 
   void _stopSharing() {
     LocationService.stopLiveSharing();
+    LocationTrackingService.stopTracking();
     _positionStream?.cancel();
     setState(() => _isSharing = false);
   }
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).canliKonum),
         centerTitle: true,
-        backgroundColor: isDark
-            ? AppColors.darkBackground
-            : AppColors.cloudWhite,
-        foregroundColor: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+        backgroundColor: const Color(0xFF0A0A0F),
+        foregroundColor: const Color(0xFFE5E7EB),
         elevation: 0,
         actions: [
           if (_error != null)
@@ -131,20 +172,18 @@ class _LocationScreenState extends State<LocationScreen> {
             Container(
               height: 280,
               decoration: BoxDecoration(
-                color: isDark ? AppColors.darkCard : const Color(0xFFE0F2FE),
+                color: const Color(0xFF13131A),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: isDark
-                      ? AppColors.darkBorder
-                      : const Color(0xFFBAE6FD),
+                  color: const Color(0x1EFFFFFF),
                 ),
               ),
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  CustomPaint(
-                    size: const Size(double.infinity, 280),
-                    painter: _MapGridPainter(isDark: isDark),
+                  const CustomPaint(
+                    size: Size(double.infinity, 280),
+                    painter: _MapGridPainter(),
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -153,8 +192,8 @@ class _LocationScreenState extends State<LocationScreen> {
                         Icons.location_on,
                         size: 48,
                         color: _isSharing
-                            ? AppColors.success
-                            : AppColors.cobalt,
+                            ? const Color(0xFF10B981)
+                            : const Color(0xFF6366F1),
                       ),
                       const SizedBox(height: 8),
                       Container(
@@ -164,8 +203,8 @@ class _LocationScreenState extends State<LocationScreen> {
                         ),
                         decoration: BoxDecoration(
                           color: _isSharing
-                              ? AppColors.success
-                              : AppColors.cobalt,
+                              ? const Color(0xFF10B981)
+                              : const Color(0xFF6366F1),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: const Text(
@@ -179,16 +218,6 @@ class _LocationScreenState extends State<LocationScreen> {
                       ),
                     ],
                   ),
-                  const Positioned(
-                    top: 60,
-                    right: 50,
-                    child: _MemberPin(name: 'Üye 2', color: AppColors.pink),
-                  ),
-                  const Positioned(
-                    bottom: 80,
-                    left: 60,
-                    child: _MemberPin(name: 'Üye 3', color: AppColors.orange),
-                  ),
                 ],
               ),
             ),
@@ -197,13 +226,11 @@ class _LocationScreenState extends State<LocationScreen> {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: isDark ? AppColors.darkCard : Colors.white,
+                color: const Color(0xFF13131A),
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: isDark
-                        ? Colors.black.withAlpha(20)
-                        : Colors.black.withAlpha(5),
+                    color: Colors.black.withAlpha(20),
                     blurRadius: 12,
                     offset: const Offset(0, 2),
                   ),
@@ -212,14 +239,12 @@ class _LocationScreenState extends State<LocationScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Mevcut Konumunuz',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: isDark
-                          ? AppColors.darkTextPrimary
-                          : AppColors.dark,
+                      color: Color(0xFFE5E7EB),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -264,21 +289,21 @@ class _LocationScreenState extends State<LocationScreen> {
                     )
                   else ...[
                     _CoordRow(
-                      label: 'Enlem',
+                      label: AppLocalizations.of(context).srLatitude,
                       value:
                           _currentPosition?.latitude.toStringAsFixed(6) ?? '-',
                       icon: Icons.north,
                     ),
                     const SizedBox(height: 12),
                     _CoordRow(
-                      label: 'Boylam',
+                      label: AppLocalizations.of(context).srLongitude,
                       value:
                           _currentPosition?.longitude.toStringAsFixed(6) ?? '-',
                       icon: Icons.east,
                     ),
                     const SizedBox(height: 12),
                     _CoordRow(
-                      label: 'Doğruluk',
+                      label: AppLocalizations.of(context).dogruluk,
                       value: _currentPosition?.accuracy != null
                           ? '${_currentPosition!.accuracy.toStringAsFixed(1)} m'
                           : '-',
@@ -293,53 +318,52 @@ class _LocationScreenState extends State<LocationScreen> {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: isDark ? AppColors.darkCard : Colors.white,
+                color: const Color(0xFF13131A),
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: isDark
-                        ? Colors.black.withAlpha(20)
-                        : Colors.black.withAlpha(5),
+                    color: Colors.black.withAlpha(20),
                     blurRadius: 12,
                     offset: const Offset(0, 2),
                   ),
                 ],
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Aile Üyeleri',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                      color: isDark
-                          ? AppColors.darkTextPrimary
-                          : AppColors.dark,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  const _LocationRow(
-                    name: 'Üye 1',
-                    status: 'Evde',
-                    color: AppColors.blue,
-                    isOnline: true,
-                  ),
-                  const Divider(height: 24),
-                  const _LocationRow(
-                    name: 'Üye 2',
-                    status: 'İşte',
-                    color: AppColors.pink,
-                    isOnline: true,
-                  ),
-                  const Divider(height: 24),
-                  const _LocationRow(
-                    name: 'Üye 3',
-                    status: 'Okulda',
-                    color: AppColors.orange,
-                    isOnline: false,
-                  ),
-                ],
+              child: Consumer(
+                builder: (context, ref, _) {
+                  final members = ref.watch(familyMembersProvider);
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(AppLocalizations.of(context).aileUyeleri,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xFFE5E7EB),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      if (members.isEmpty)
+                        const Text(
+                          'Henüz aile üyesi yok. Üye ekleyip konum paylaşımını '
+                          'açtığınızda burada görünürler.',
+                          style: TextStyle(
+                              color: Color(0xFF9CA3AF), fontSize: 13.5),
+                        )
+                      else
+                        for (var i = 0; i < members.length; i++) ...[
+                          if (i > 0) const Divider(height: 24),
+                          _LocationRow(
+                            name: members[i].name,
+                            status: members[i].isOnline
+                                ? 'Çevrimiçi'
+                                : 'Çevrimdışı',
+                            color: members[i].color,
+                            isOnline: members[i].isOnline,
+                          ),
+                        ],
+                    ],
+                  );
+                },
               ),
             ),
             const SizedBox(height: 24),
@@ -367,7 +391,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: _isSharing
                       ? AppColors.error
-                      : AppColors.cobalt,
+                      : const Color(0xFF6366F1),
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
@@ -384,16 +408,12 @@ class _LocationScreenState extends State<LocationScreen> {
 }
 
 class _MapGridPainter extends CustomPainter {
-  final bool isDark;
-
-  _MapGridPainter({required this.isDark});
+  const _MapGridPainter();
 
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = isDark
-          ? AppColors.darkBorder.withAlpha(40)
-          : const Color(0xFFBAE6FD).withAlpha(60)
+      ..color = const Color(0x1EFFFFFF).withAlpha(40)
       ..strokeWidth = 1;
 
     const spacing = 40.0;
@@ -409,37 +429,6 @@ class _MapGridPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
-class _MemberPin extends StatelessWidget {
-  final String name;
-  final Color color;
-
-  const _MemberPin({required this.name, required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Icon(Icons.location_on, size: 32, color: color),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(6),
-          ),
-          child: Text(
-            name,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 11,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
 class _CoordRow extends StatelessWidget {
   final String label;
   final String value;
@@ -453,29 +442,28 @@ class _CoordRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Row(
       children: [
         Icon(
           icon,
           size: 18,
-          color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+          color: const Color(0xFF6B7280),
         ),
         const SizedBox(width: 12),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 14,
-            color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+            color: Color(0xFF6B7280),
           ),
         ),
         const Spacer(),
         Text(
           value,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
-            color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+            color: Color(0xFFE5E7EB),
           ),
         ),
       ],
@@ -498,7 +486,6 @@ class _LocationRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Row(
       children: [
         Stack(
@@ -528,10 +515,10 @@ class _LocationRow extends StatelessWidget {
                   width: 12,
                   height: 12,
                   decoration: BoxDecoration(
-                    color: AppColors.success,
+                    color: const Color(0xFF10B981),
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: isDark ? AppColors.darkCard : Colors.white,
+                      color: const Color(0xFF13131A),
                       width: 2,
                     ),
                   ),
@@ -546,17 +533,17 @@ class _LocationRow extends StatelessWidget {
             children: [
               Text(
                 name,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
-                  color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                  color: Color(0xFFE5E7EB),
                 ),
               ),
               Text(
                 status,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 13,
-                  color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                  color: Color(0xFF6B7280),
                 ),
               ),
             ],
@@ -566,7 +553,7 @@ class _LocationRow extends StatelessWidget {
           width: 8,
           height: 8,
           decoration: BoxDecoration(
-            color: isOnline ? AppColors.success : AppColors.lightGray,
+            color: isOnline ? const Color(0xFF10B981) : const Color(0xFF9CA3AF),
             shape: BoxShape.circle,
           ),
         ),

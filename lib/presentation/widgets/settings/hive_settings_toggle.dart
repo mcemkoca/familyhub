@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../config/constants.dart';
 import '../../../services/hive_service.dart';
 
 class HiveSettingsToggle extends StatefulWidget {
@@ -48,7 +47,6 @@ class _HiveSettingsToggleState extends State<HiveSettingsToggle> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Semantics(
       button: true,
@@ -64,34 +62,34 @@ class _HiveSettingsToggleState extends State<HiveSettingsToggle> {
                 children: [
                   Text(
                     widget.title,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                      color: Color(0xFFE5E7EB),
                     ),
                   ),
                   if (widget.subtitle != null) ...[
                     const SizedBox(height: 2),
                     Text(
                       widget.subtitle!,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 13,
-                        color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                   ],
                 ],
               ),
             ),
-            Switch.adaptive(
+            Switch(
               value: _value,
               onChanged: (v) {
                 HapticFeedback.selectionClick();
                 _onChanged(v);
               },
-              activeTrackColor: AppColors.cobalt,
+              activeTrackColor: const Color(0xFF6366F1),
               activeThumbColor: Colors.white,
-              inactiveTrackColor: isDark ? AppColors.darkBorder : const Color(0xFFE2E8F0),
+              inactiveTrackColor: const Color(0x1EFFFFFF),
               inactiveThumbColor: Colors.white,
             ),
           ],

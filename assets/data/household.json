@@ -1,78 +1,982 @@
 {
-  "module": "household",
-  "version": "2.0",
-  "language": "tr",
-  "region": "BE",
-  "generated_at": "2026-05-03T00:00:00Z",
-  "daily_routines": [
-    {
-      "name": "15 Dakikalık Hızlı Temizlik",
-      "time": "Akşam yatmadan önce",
-      "tasks": [
-        "Mutfak tezgahı silinir (3 dk)",
-        "Oyuncaklar toplanır (5 dk)",
-        "Yerdeki eşyalar yerine konur (4 dk)",
-        "Çöp kontrolü (3 dk)"
-      ],
-      "family_role": "Tüm aile üyeleri katılır"
+    "module": "household",
+    "version": "3.0",
+    "language": "tr",
+    "default_language": "tr",
+    "supported_languages": [
+        "tr",
+        "en",
+        "nl",
+        "fr"
+    ],
+    "region": "BE",
+    "generated_at": "2026-07-15T00:00:00Z",
+    "task_source": {
+        "asset": "assets/data/household_tasks.json",
+        "module": "household_tasks",
+        "relation": "task_id",
+        "fallback_language": "tr",
+        "sync_frequency": "weekly"
     },
-    {
-      "name": "Sabah Rutini",
-      "time": "Kahvaltı sonrası",
-      "tasks": [
-        "Yataklar toplanır",
-        "Kahvaltı tabakları bulaşığa/makineye",
-        "Çocukların okul çantası kontrolü"
-      ],
-      "family_role": "Ebeveyn + çocuk (yaşa uygun görevler)"
+    "daily_routines": [
+        {
+            "id": "evening_quick_reset",
+            "name": "15 Dakikalık Akşam Düzeni",
+            "time": "Akşam yatmadan önce",
+            "tasks": [
+                "Mutfak tezgâhını silin",
+                "Oyuncakları toplayın",
+                "Yerdeki eşyaları kaldırın",
+                "Çöp ve geri dönüşümü kontrol edin"
+            ],
+            "task_refs": [
+                "weekly_kitchen_high_touch",
+                "weekly_family_reset",
+                "weekly_waste_sort"
+            ],
+            "family_role": "Tüm aile üyeleri yaşına uygun bir adım seçer"
+        },
+        {
+            "id": "morning_reset",
+            "name": "Sabah Hazırlık Rutini",
+            "time": "Kahvaltı sonrası",
+            "tasks": [
+                "Yatakları düzeltin",
+                "Kahvaltı alanını toparlayın",
+                "Okul ve iş çantalarını kontrol edin",
+                "Giriş yolunu açık bırakın"
+            ],
+            "task_refs": [
+                "weekly_entry_reset",
+                "weekly_desk_reset"
+            ],
+            "family_role": "Ebeveyn ve çocuklar görevleri yaşa göre paylaşır"
+        },
+        {
+            "id": "after_meal_reset",
+            "name": "Yemek Sonrası Mutfak Sıfırlama",
+            "time": "Ana öğünlerden sonra",
+            "tasks": [
+                "Artan yemeği güvenli biçimde kaldırın",
+                "Bulaşıkları makineye veya yıkama alanına alın",
+                "Tezgâhı temizleyin",
+                "Zemindeki döküntüyü alın"
+            ],
+            "task_refs": [
+                "weekly_kitchen_high_touch",
+                "weekly_food_inventory"
+            ],
+            "family_role": "Bir kişi yiyecekleri, bir kişi yüzeyleri düzenler"
+        },
+        {
+            "id": "weekly_family_reset_routine",
+            "name": "Haftalık Aile Sıfırlaması",
+            "time": "Hafta sonu belirlenen 30 dakika",
+            "tasks": [
+                "Haftanın görevini açın",
+                "Görevleri aile üyelerine dağıtın",
+                "Eksik malzemeyi not edin",
+                "Tamamlanan işi kaydedin"
+            ],
+            "task_refs": [
+                "weekly_family_reset",
+                "weekly_safety_scan"
+            ],
+            "family_role": "Görevler süre ve yaş uygunluğuna göre paylaşılır"
+        }
+    ],
+    "weekly_schedule": {
+        "pazartesi": "Banyo temas noktaları ve lavabo çevresi",
+        "sali": "Çamaşır alanı ve tekstil bakımı",
+        "carsamba": "Mutfak rafı ve gıda envanteri",
+        "persembe": "Yatak odası ve toz azaltma",
+        "cuma": "Salon tekstilleri ve ortak alanlar",
+        "cumartesi": "Haftanın dönen ayrıntılı görevi",
+        "pazar": "Aile düzeni, atık kontrolü ve yeni hafta planı"
+    },
+    "weekly_schedule_task_refs": {
+        "pazartesi": [
+            "weekly_bathroom_touch"
+        ],
+        "sali": [
+            "weekly_laundry_care"
+        ],
+        "carsamba": [
+            "weekly_fridge_shelf",
+            "weekly_food_inventory",
+            "weekly_pantry_zone"
+        ],
+        "persembe": [
+            "weekly_bedroom_dust"
+        ],
+        "cuma": [
+            "weekly_living_textiles",
+            "weekly_door_handles"
+        ],
+        "cumartesi": [
+            "@weekly_rotation"
+        ],
+        "pazar": [
+            "weekly_family_reset",
+            "weekly_waste_sort",
+            "weekly_safety_scan"
+        ]
+    },
+    "seasonal_tasks": {
+        "spring": [
+            "Dolap ve tekstil geçişini düzenleyin",
+            "Erişilebilir pencere ve çerçeveleri temizleyin",
+            "Balkon giderini ve güvenliğini kontrol edin",
+            "Kışlık eşyaları temiz ve kuru kaldırın"
+        ],
+        "summer": [
+            "Buzdolabı ve gıda stoklarını gözden geçirin",
+            "Havalandırma ve filtre bakım tarihini kontrol edin",
+            "Balkondaki gevşek eşyaları sabitleyin",
+            "Seyahat sonrası çanta ve tekstilleri düzenleyin"
+        ],
+        "autumn": [
+            "Isıtma sistemi için yetkili bakım planlayın",
+            "Nem ve su sızıntısı belirtilerini kontrol edin",
+            "Kışlık ayakkabı ve dış giyimi düzenleyin",
+            "Acil durum aydınlatmasını kontrol edin"
+        ],
+        "winter": [
+            "Nem ve küf belirtisi olan alanları kontrol edin",
+            "Taşınabilir ısıtıcı çevresini güvenli tutun",
+            "Acil durum çantası ve iletişim listesini yenileyin",
+            "Giriş alanında ıslak zemin riskini azaltın"
+        ]
+    },
+    "seasonal_task_refs": {
+        "spring": [
+            "weekly_window_zone",
+            "weekly_balcony_check"
+        ],
+        "summer": [
+            "weekly_fridge_shelf",
+            "weekly_balcony_check"
+        ],
+        "autumn": [
+            "weekly_safety_scan",
+            "weekly_entry_reset"
+        ],
+        "winter": [
+            "weekly_safety_scan",
+            "weekly_entry_reset"
+        ]
+    },
+    "room_guides": {
+        "mutfak": {
+            "deep_clean_frequency": "Ayda bir ve görünür kir olduğunda",
+            "tips": [
+                "Gıda temas yüzeyinde yüzeye uygun ürün kullanın",
+                "Önce temizleyin; yalnızca gerektiğinde dezenfekte edin",
+                "Gıdaları temizlik sırasında güvenli sıcaklıkta tutun"
+            ]
+        },
+        "banyo": {
+            "deep_clean_frequency": "Ayda bir; temas noktaları haftalık",
+            "tips": [
+                "İyi havalandırma sağlayın",
+                "Temizlik ürünlerini karıştırmayın",
+                "Islak zemini kayma riski bırakmadan kurutun"
+            ]
+        },
+        "salon": {
+            "deep_clean_frequency": "Ayda bir",
+            "tips": [
+                "Tekstillerin bakım etiketini izleyin",
+                "Tozu yüksekten aşağıya alın",
+                "Kabloları geçiş yolundan uzak tutun"
+            ]
+        },
+        "yatak_odasi": {
+            "deep_clean_frequency": "Ayda bir; yatak tekstilleri ihtiyaca göre",
+            "tips": [
+                "Odayı düzenli havalandırın",
+                "Tozu nemli mikrofiber bezle alın",
+                "Yatak çevresindeki geçişi açık bırakın"
+            ]
+        },
+        "koridor": {
+            "deep_clean_frequency": "Ayda bir; giriş alanı haftalık",
+            "tips": [
+                "Acil çıkışı ve geçiş yolunu açık tutun",
+                "Islak ayakkabıları kurutun",
+                "Gevşek kablo ve paspasları sabitleyin"
+            ]
+        },
+        "balkon": {
+            "deep_clean_frequency": "Mevsim geçişlerinde",
+            "tips": [
+                "Korkuluğa tırmanmayın veya dışarı sarkmayın",
+                "Giderleri güvenli erişim sınırında kontrol edin",
+                "Rüzgârda gevşek eşya bırakmayın"
+            ]
+        },
+        "genel": {
+            "deep_clean_frequency": "Ayda bir bölgesel temizlik",
+            "tips": [
+                "Tek seferde bir bölge seçin",
+                "Ürün etiketini izleyin",
+                "Kimyasalları çocuklardan ve evcil hayvanlardan uzak tutun"
+            ]
+        }
+    },
+    "eco_tips": [
+        "Görünür kir için çoğu durumda su, uygun temizleyici ve mekanik silme yeterlidir",
+        "Tek kullanımlık ürün yerine yıkanabilir bez tercih edin",
+        "Ürünü etikette belirtilenden fazla kullanmayın",
+        "Çamaşır ve bulaşık makinelerini uygun olduğunda tam yükte çalıştırın",
+        "Atıkları belediyenin güncel ayırma kurallarına göre ayırın",
+        "Belirsiz çevre iddiaları yerine doğrulanabilir ürün etiketlerini kontrol edin"
+    ],
+    "gamification": {
+        "point_system": {
+            "daily_task": 5,
+            "weekly_task": 15,
+            "seasonal_task": 30,
+            "bonus": 10
+        },
+        "rewards": [
+            "100 puan: Aile film veya oyun gecesi seçimi",
+            "200 puan: Birlikte özel atıştırmalık hazırlama",
+            "500 puan: Düşük bütçeli aile gezisi veya ortak etkinlik"
+        ]
+    },
+    "i18n": {
+        "tr": {
+            "daily_routines": [
+                {
+                    "id": "evening_quick_reset",
+                    "name": "15 Dakikalık Akşam Düzeni",
+                    "time": "Akşam yatmadan önce",
+                    "tasks": [
+                        "Mutfak tezgâhını silin",
+                        "Oyuncakları toplayın",
+                        "Yerdeki eşyaları kaldırın",
+                        "Çöp ve geri dönüşümü kontrol edin"
+                    ],
+                    "task_refs": [
+                        "weekly_kitchen_high_touch",
+                        "weekly_family_reset",
+                        "weekly_waste_sort"
+                    ],
+                    "family_role": "Tüm aile üyeleri yaşına uygun bir adım seçer"
+                },
+                {
+                    "id": "morning_reset",
+                    "name": "Sabah Hazırlık Rutini",
+                    "time": "Kahvaltı sonrası",
+                    "tasks": [
+                        "Yatakları düzeltin",
+                        "Kahvaltı alanını toparlayın",
+                        "Okul ve iş çantalarını kontrol edin",
+                        "Giriş yolunu açık bırakın"
+                    ],
+                    "task_refs": [
+                        "weekly_entry_reset",
+                        "weekly_desk_reset"
+                    ],
+                    "family_role": "Ebeveyn ve çocuklar görevleri yaşa göre paylaşır"
+                },
+                {
+                    "id": "after_meal_reset",
+                    "name": "Yemek Sonrası Mutfak Sıfırlama",
+                    "time": "Ana öğünlerden sonra",
+                    "tasks": [
+                        "Artan yemeği güvenli biçimde kaldırın",
+                        "Bulaşıkları makineye veya yıkama alanına alın",
+                        "Tezgâhı temizleyin",
+                        "Zemindeki döküntüyü alın"
+                    ],
+                    "task_refs": [
+                        "weekly_kitchen_high_touch",
+                        "weekly_food_inventory"
+                    ],
+                    "family_role": "Bir kişi yiyecekleri, bir kişi yüzeyleri düzenler"
+                },
+                {
+                    "id": "weekly_family_reset_routine",
+                    "name": "Haftalık Aile Sıfırlaması",
+                    "time": "Hafta sonu belirlenen 30 dakika",
+                    "tasks": [
+                        "Haftanın görevini açın",
+                        "Görevleri aile üyelerine dağıtın",
+                        "Eksik malzemeyi not edin",
+                        "Tamamlanan işi kaydedin"
+                    ],
+                    "task_refs": [
+                        "weekly_family_reset",
+                        "weekly_safety_scan"
+                    ],
+                    "family_role": "Görevler süre ve yaş uygunluğuna göre paylaşılır"
+                }
+            ],
+            "weekly_schedule": {
+                "pazartesi": "Banyo temas noktaları ve lavabo çevresi",
+                "sali": "Çamaşır alanı ve tekstil bakımı",
+                "carsamba": "Mutfak rafı ve gıda envanteri",
+                "persembe": "Yatak odası ve toz azaltma",
+                "cuma": "Salon tekstilleri ve ortak alanlar",
+                "cumartesi": "Haftanın dönen ayrıntılı görevi",
+                "pazar": "Aile düzeni, atık kontrolü ve yeni hafta planı"
+            },
+            "seasonal_tasks": {
+                "spring": [
+                    "Dolap ve tekstil geçişini düzenleyin",
+                    "Erişilebilir pencere ve çerçeveleri temizleyin",
+                    "Balkon giderini ve güvenliğini kontrol edin",
+                    "Kışlık eşyaları temiz ve kuru kaldırın"
+                ],
+                "summer": [
+                    "Buzdolabı ve gıda stoklarını gözden geçirin",
+                    "Havalandırma ve filtre bakım tarihini kontrol edin",
+                    "Balkondaki gevşek eşyaları sabitleyin",
+                    "Seyahat sonrası çanta ve tekstilleri düzenleyin"
+                ],
+                "autumn": [
+                    "Isıtma sistemi için yetkili bakım planlayın",
+                    "Nem ve su sızıntısı belirtilerini kontrol edin",
+                    "Kışlık ayakkabı ve dış giyimi düzenleyin",
+                    "Acil durum aydınlatmasını kontrol edin"
+                ],
+                "winter": [
+                    "Nem ve küf belirtisi olan alanları kontrol edin",
+                    "Taşınabilir ısıtıcı çevresini güvenli tutun",
+                    "Acil durum çantası ve iletişim listesini yenileyin",
+                    "Giriş alanında ıslak zemin riskini azaltın"
+                ]
+            },
+            "room_guides": {
+                "mutfak": {
+                    "deep_clean_frequency": "Ayda bir ve görünür kir olduğunda",
+                    "tips": [
+                        "Gıda temas yüzeyinde yüzeye uygun ürün kullanın",
+                        "Önce temizleyin; yalnızca gerektiğinde dezenfekte edin",
+                        "Gıdaları temizlik sırasında güvenli sıcaklıkta tutun"
+                    ]
+                },
+                "banyo": {
+                    "deep_clean_frequency": "Ayda bir; temas noktaları haftalık",
+                    "tips": [
+                        "İyi havalandırma sağlayın",
+                        "Temizlik ürünlerini karıştırmayın",
+                        "Islak zemini kayma riski bırakmadan kurutun"
+                    ]
+                },
+                "salon": {
+                    "deep_clean_frequency": "Ayda bir",
+                    "tips": [
+                        "Tekstillerin bakım etiketini izleyin",
+                        "Tozu yüksekten aşağıya alın",
+                        "Kabloları geçiş yolundan uzak tutun"
+                    ]
+                },
+                "yatak_odasi": {
+                    "deep_clean_frequency": "Ayda bir; yatak tekstilleri ihtiyaca göre",
+                    "tips": [
+                        "Odayı düzenli havalandırın",
+                        "Tozu nemli mikrofiber bezle alın",
+                        "Yatak çevresindeki geçişi açık bırakın"
+                    ]
+                },
+                "koridor": {
+                    "deep_clean_frequency": "Ayda bir; giriş alanı haftalık",
+                    "tips": [
+                        "Acil çıkışı ve geçiş yolunu açık tutun",
+                        "Islak ayakkabıları kurutun",
+                        "Gevşek kablo ve paspasları sabitleyin"
+                    ]
+                },
+                "balkon": {
+                    "deep_clean_frequency": "Mevsim geçişlerinde",
+                    "tips": [
+                        "Korkuluğa tırmanmayın veya dışarı sarkmayın",
+                        "Giderleri güvenli erişim sınırında kontrol edin",
+                        "Rüzgârda gevşek eşya bırakmayın"
+                    ]
+                },
+                "genel": {
+                    "deep_clean_frequency": "Ayda bir bölgesel temizlik",
+                    "tips": [
+                        "Tek seferde bir bölge seçin",
+                        "Ürün etiketini izleyin",
+                        "Kimyasalları çocuklardan ve evcil hayvanlardan uzak tutun"
+                    ]
+                }
+            },
+            "eco_tips": [
+                "Görünür kir için çoğu durumda su, uygun temizleyici ve mekanik silme yeterlidir",
+                "Tek kullanımlık ürün yerine yıkanabilir bez tercih edin",
+                "Ürünü etikette belirtilenden fazla kullanmayın",
+                "Çamaşır ve bulaşık makinelerini uygun olduğunda tam yükte çalıştırın",
+                "Atıkları belediyenin güncel ayırma kurallarına göre ayırın",
+                "Belirsiz çevre iddiaları yerine doğrulanabilir ürün etiketlerini kontrol edin"
+            ],
+            "gamification": {
+                "point_system": {
+                    "daily_task": 5,
+                    "weekly_task": 15,
+                    "seasonal_task": 30,
+                    "bonus": 10
+                },
+                "rewards": [
+                    "100 puan: Aile film veya oyun gecesi seçimi",
+                    "200 puan: Birlikte özel atıştırmalık hazırlama",
+                    "500 puan: Düşük bütçeli aile gezisi veya ortak etkinlik"
+                ]
+            }
+        },
+        "en": {
+            "daily_routines": [
+                {
+                    "id": "evening_quick_reset",
+                    "name": "15-Minute Evening Routine",
+                    "time": "Before going to bed in the evening",
+                    "tasks": [
+                        "Wipe the kitchen counter",
+                        "Collect the toys",
+                        "Remove items from the floor",
+                        "Control garbage and recycling"
+                    ],
+                    "task_refs": [
+                        "weekly_kitchen_high_touch",
+                        "weekly_family_reset",
+                        "weekly_waste_sort"
+                    ],
+                    "family_role": "All family members choose an age-appropriate step"
+                },
+                {
+                    "id": "morning_reset",
+                    "name": "Morning Preparation Routine",
+                    "time": "after breakfast",
+                    "tasks": [
+                        "fix the beds",
+                        "Tidy up the breakfast area",
+                        "Check school and work bags",
+                        "Leave the entryway open"
+                    ],
+                    "task_refs": [
+                        "weekly_entry_reset",
+                        "weekly_desk_reset"
+                    ],
+                    "family_role": "Parents and children share tasks by age"
+                },
+                {
+                    "id": "after_meal_reset",
+                    "name": "Post-Meal Kitchen Reset",
+                    "time": "After main meals",
+                    "tasks": [
+                        "Safely remove leftover food",
+                        "Take the dishes to the machine or washing area",
+                        "Clean the counter",
+                        "Pick up debris from the floor"
+                    ],
+                    "task_refs": [
+                        "weekly_kitchen_high_touch",
+                        "weekly_food_inventory"
+                    ],
+                    "family_role": "One person organizes food, one organizes surfaces"
+                },
+                {
+                    "id": "weekly_family_reset_routine",
+                    "name": "Weekly Family Reset",
+                    "time": "30 minutes set on weekends",
+                    "tasks": [
+                        "Open the task of the week",
+                        "Distribute tasks to family members",
+                        "Note missing ingredients",
+                        "Save completed work"
+                    ],
+                    "task_refs": [
+                        "weekly_family_reset",
+                        "weekly_safety_scan"
+                    ],
+                    "family_role": "Tasks are shared according to duration and age appropriateness"
+                }
+            ],
+            "weekly_schedule": {
+                "pazartesi": "Bathroom touch points and sink surroundings",
+                "sali": "Laundry area and textile care",
+                "carsamba": "Kitchen shelf and food inventory",
+                "persembe": "Bedroom and dust reduction",
+                "cuma": "Living room textiles and common areas",
+                "cumartesi": "Rotating detailed mission of the week",
+                "pazar": "Family order, waste control and new week plan"
+            },
+            "seasonal_tasks": {
+                "spring": [
+                    "Organize closet and textile transition",
+                    "Clean accessible windows and frames",
+                    "Check balcony drain and security",
+                    "Store winter items clean and dry"
+                ],
+                "summer": [
+                    "Review refrigerator and food stocks",
+                    "Check the ventilation and filter maintenance date",
+                    "Secure loose items on the balcony",
+                    "Organize post-travel bags and textiles"
+                ],
+                "autumn": [
+                    "Schedule competent maintenance for the heating system",
+                    "Check for signs of moisture and water leaks",
+                    "Organize winter shoes and outerwear",
+                    "Check emergency lighting"
+                ],
+                "winter": [
+                    "Check areas for signs of moisture and mold",
+                    "Keep portable heater surroundings safe",
+                    "Replenish emergency kit and contact list",
+                    "Reduce the risk of wet floors in the entrance area"
+                ]
+            },
+            "room_guides": {
+                "mutfak": {
+                    "deep_clean_frequency": "Once a month and when there is visible dirt",
+                    "tips": [
+                        "Use a product suitable for the food contact surface.",
+                        "Clean first; Disinfect only when necessary",
+                        "Keep food at safe temperature during cleaning"
+                    ]
+                },
+                "banyo": {
+                    "deep_clean_frequency": "Once a month; touch points weekly",
+                    "tips": [
+                        "Provide good ventilation",
+                        "Do not mix cleaning products",
+                        "Dry the wet floor without risk of slipping"
+                    ]
+                },
+                "salon": {
+                    "deep_clean_frequency": "once a month",
+                    "tips": [
+                        "Follow the care label of textiles",
+                        "Take the powder from high to low",
+                        "Keep cables out of the passageway"
+                    ]
+                },
+                "yatak_odasi": {
+                    "deep_clean_frequency": "Once a month; bed textiles according to need",
+                    "tips": [
+                        "Ventilate the room regularly",
+                        "Remove dust with a damp microfiber cloth",
+                        "Leave the passage around the bed open"
+                    ]
+                },
+                "koridor": {
+                    "deep_clean_frequency": "Once a month; login area weekly",
+                    "tips": [
+                        "Keep emergency exits and passageways clear",
+                        "Dry wet shoes",
+                        "Fix loose cables and mats"
+                    ]
+                },
+                "balkon": {
+                    "deep_clean_frequency": "During seasonal transitions",
+                    "tips": [
+                        "Do not climb or lean out of the railing",
+                        "Control expenses at the secure access limit",
+                        "Do not leave loose items in the wind"
+                    ]
+                },
+                "genel": {
+                    "deep_clean_frequency": "Regional cleaning once a month",
+                    "tips": [
+                        "Select one region at a time",
+                        "Follow the product label",
+                        "Keep chemicals away from children and pets"
+                    ]
+                }
+            },
+            "eco_tips": [
+                "For visible dirt, water, suitable cleaner and mechanical wiping are sufficient in most cases.",
+                "Choose washable cloth instead of disposable products",
+                "Do not use the product more than directed on the label",
+                "Run washing machines and dishwashers at full load when appropriate",
+                "Separate waste according to the municipality's current separation rules",
+                "Check for verifiable product labels instead of vague environmental claims"
+            ],
+            "gamification": {
+                "point_system": {
+                    "daily_task": 5,
+                    "weekly_task": 15,
+                    "seasonal_task": 30,
+                    "bonus": 10
+                },
+                "rewards": [
+                    "100 points: Choice of family movie or game night",
+                    "200 points: Creating a special snack together",
+                    "500 points: Low-budget family trip or shared activity"
+                ]
+            }
+        },
+        "nl": {
+            "daily_routines": [
+                {
+                    "id": "evening_quick_reset",
+                    "name": "Avondroutine van 15 minuten",
+                    "time": "Voordat u 's avonds naar bed gaat",
+                    "tasks": [
+                        "Veeg het aanrecht af",
+                        "Verzamel het speelgoed",
+                        "Verwijder voorwerpen van de vloer",
+                        "Beheers afval en recycling"
+                    ],
+                    "task_refs": [
+                        "weekly_kitchen_high_touch",
+                        "weekly_family_reset",
+                        "weekly_waste_sort"
+                    ],
+                    "family_role": "Alle gezinsleden kiezen een stap die bij hun leeftijd past"
+                },
+                {
+                    "id": "morning_reset",
+                    "name": "Ochtendvoorbereidingsroutine",
+                    "time": "na het ontbijt",
+                    "tasks": [
+                        "maak de bedden vast",
+                        "Ruim de ontbijtruimte op",
+                        "Controleer school- en werktassen",
+                        "Laat de ingang open"
+                    ],
+                    "task_refs": [
+                        "weekly_entry_reset",
+                        "weekly_desk_reset"
+                    ],
+                    "family_role": "Ouders en kinderen verdelen de taken naar leeftijd"
+                },
+                {
+                    "id": "after_meal_reset",
+                    "name": "Keukenreset na de maaltijd",
+                    "time": "Na de hoofdmaaltijden",
+                    "tasks": [
+                        "Verwijder overgebleven voedsel veilig",
+                        "Breng de vaat naar de machine of wasplaats",
+                        "Maak de toonbank schoon",
+                        "Raap het vuil van de vloer op"
+                    ],
+                    "task_refs": [
+                        "weekly_kitchen_high_touch",
+                        "weekly_food_inventory"
+                    ],
+                    "family_role": "Eén persoon organiseert voedsel, één organiseert oppervlakken"
+                },
+                {
+                    "id": "weekly_family_reset_routine",
+                    "name": "Wekelijkse gezinsreset",
+                    "time": "30 minuten ingesteld in het weekend",
+                    "tasks": [
+                        "Open de taak van de week",
+                        "Verdeel taken onder gezinsleden",
+                        "Noteer ontbrekende ingrediënten",
+                        "Bewaar voltooid werk"
+                    ],
+                    "task_refs": [
+                        "weekly_family_reset",
+                        "weekly_safety_scan"
+                    ],
+                    "family_role": "Taken worden verdeeld op basis van duur en leeftijdsgeschiktheid"
+                }
+            ],
+            "weekly_schedule": {
+                "pazartesi": "Aanraakpunten in de badkamer en wastafelomgeving",
+                "sali": "Wasruimte en textielverzorging",
+                "carsamba": "Keukenplank en voedselinventaris",
+                "persembe": "Slaapkamer- en stofreductie",
+                "cuma": "Woonkamertextiel en gemeenschappelijke ruimtes",
+                "cumartesi": "Roterende gedetailleerde missie van de week",
+                "pazar": "Familieorde, afvalbeheersing en nieuw weekplan"
+            },
+            "seasonal_tasks": {
+                "spring": [
+                    "Organiseer kast en textielovergang",
+                    "Maak toegankelijke ramen en kozijnen schoon",
+                    "Controleer balkonafvoer en beveiliging",
+                    "Bewaar winterspullen schoon en droog"
+                ],
+                "summer": [
+                    "Bekijk de koelkast- en voedselvoorraden",
+                    "Controleer de ventilatie- en filteronderhoudsdatum",
+                    "Zet losse spullen vast op het balkon",
+                    "Organiseer post-reistassen en textiel"
+                ],
+                "autumn": [
+                    "Plan vakkundig onderhoud voor het verwarmingssysteem",
+                    "Controleer op tekenen van vocht en waterlekken",
+                    "Organiseer winterschoenen en bovenkleding",
+                    "Controleer noodverlichting"
+                ],
+                "winter": [
+                    "Controleer de plekken op tekenen van vocht en schimmel",
+                    "Houd de omgeving van de draagbare verwarming veilig",
+                    "Vul het noodpakket en de contactlijst aan",
+                    "Verminder het risico op natte vloeren bij de entree"
+                ]
+            },
+            "room_guides": {
+                "mutfak": {
+                    "deep_clean_frequency": "Eén keer per maand en bij zichtbaar vuil",
+                    "tips": [
+                        "Gebruik een product dat geschikt is voor oppervlakken die in contact komen met voedsel.",
+                        "Maak eerst schoon; Desinfecteer alleen wanneer dat nodig is",
+                        "Houd voedsel tijdens het schoonmaken op een veilige temperatuur"
+                    ]
+                },
+                "banyo": {
+                    "deep_clean_frequency": "Eén keer per maand; wekelijks contactmomenten",
+                    "tips": [
+                        "Zorg voor goede ventilatie",
+                        "Meng geen schoonmaakproducten",
+                        "Droog de natte vloer zonder risico op uitglijden"
+                    ]
+                },
+                "salon": {
+                    "deep_clean_frequency": "een keer per maand",
+                    "tips": [
+                        "Volg het waslabel van textiel",
+                        "Neem het poeder van hoog naar laag",
+                        "Houd kabels uit de doorgang"
+                    ]
+                },
+                "yatak_odasi": {
+                    "deep_clean_frequency": "Eén keer per maand; bedtextiel naar behoefte",
+                    "tips": [
+                        "Ventileer de kamer regelmatig",
+                        "Verwijder stof met een vochtige microvezeldoek",
+                        "Laat de doorgang rond het bed open"
+                    ]
+                },
+                "koridor": {
+                    "deep_clean_frequency": "Eén keer per maand; inloggedeelte wekelijks",
+                    "tips": [
+                        "Houd nooduitgangen en doorgangen vrij",
+                        "Droge natte schoenen",
+                        "Bevestig losse kabels en matten"
+                    ]
+                },
+                "balkon": {
+                    "deep_clean_frequency": "Tijdens seizoensovergangen",
+                    "tips": [
+                        "Klim of leun niet uit de reling",
+                        "Beheers de uitgaven binnen de beveiligde toegangslimiet",
+                        "Laat geen losse spullen in de wind liggen"
+                    ]
+                },
+                "genel": {
+                    "deep_clean_frequency": "Regionale schoonmaak één keer per maand",
+                    "tips": [
+                        "Selecteer één regio tegelijk",
+                        "Volg het productlabel",
+                        "Houd chemicaliën uit de buurt van kinderen en huisdieren"
+                    ]
+                }
+            },
+            "eco_tips": [
+                "Bij zichtbaar vuil zijn water, een geschikt schoonmaakmiddel en mechanisch afnemen in de meeste gevallen voldoende.",
+                "Kies wasbare doekjes in plaats van wegwerpproducten",
+                "Gebruik het product niet vaker dan aangegeven op het etiket",
+                "Laat wasmachines en vaatwassers indien nodig op volle capaciteit draaien",
+                "Afval scheiden volgens de huidige scheidingsregels van de gemeente",
+                "Controleer op verifieerbare productlabels in plaats van op vage milieuclaims"
+            ],
+            "gamification": {
+                "point_system": {
+                    "daily_task": 5,
+                    "weekly_task": 15,
+                    "seasonal_task": 30,
+                    "bonus": 10
+                },
+                "rewards": [
+                    "100 punten: Keuze uit familiefilm of spelletjesavond",
+                    "200 punten: Samen een speciaal tussendoortje creëren",
+                    "500 punten: Low-budget gezinsuitje of gedeelde activiteit"
+                ]
+            }
+        },
+        "fr": {
+            "daily_routines": [
+                {
+                    "id": "evening_quick_reset",
+                    "name": "Routine du soir de 15 minutes",
+                    "time": "Avant de se coucher le soir",
+                    "tasks": [
+                        "Essuyez le comptoir de la cuisine",
+                        "Collectionnez les jouets",
+                        "Retirer les objets du sol",
+                        "Contrôler les déchets et le recyclage"
+                    ],
+                    "task_refs": [
+                        "weekly_kitchen_high_touch",
+                        "weekly_family_reset",
+                        "weekly_waste_sort"
+                    ],
+                    "family_role": "Tous les membres de la famille choisissent une étape adaptée à leur âge"
+                },
+                {
+                    "id": "morning_reset",
+                    "name": "Routine de préparation du matin",
+                    "time": "après le petit déjeuner",
+                    "tasks": [
+                        "réparer les lits",
+                        "Ranger la salle du petit-déjeuner",
+                        "Vérifiez les sacs d'école et de travail",
+                        "Laissez l'entrée ouverte"
+                    ],
+                    "task_refs": [
+                        "weekly_entry_reset",
+                        "weekly_desk_reset"
+                    ],
+                    "family_role": "Parents et enfants partagent les tâches selon l'âge"
+                },
+                {
+                    "id": "after_meal_reset",
+                    "name": "Réinitialisation de la cuisine après le repas",
+                    "time": "Après les repas principaux",
+                    "tasks": [
+                        "Retirez les restes de nourriture en toute sécurité",
+                        "Apportez la vaisselle à la machine ou à l'aire de lavage",
+                        "Nettoyer le comptoir",
+                        "Ramasser les débris du sol"
+                    ],
+                    "task_refs": [
+                        "weekly_kitchen_high_touch",
+                        "weekly_food_inventory"
+                    ],
+                    "family_role": "Une personne organise la nourriture, une autre organise les surfaces"
+                },
+                {
+                    "id": "weekly_family_reset_routine",
+                    "name": "Réinitialisation familiale hebdomadaire",
+                    "time": "30 minutes programmées le week-end",
+                    "tasks": [
+                        "Ouvrir la tâche de la semaine",
+                        "Répartir les tâches entre les membres de la famille",
+                        "Notez les ingrédients manquants",
+                        "Enregistrer le travail terminé"
+                    ],
+                    "task_refs": [
+                        "weekly_family_reset",
+                        "weekly_safety_scan"
+                    ],
+                    "family_role": "Les tâches sont partagées en fonction de la durée et de l'âge"
+                }
+            ],
+            "weekly_schedule": {
+                "pazartesi": "Points de contact de la salle de bain et environs du lavabo",
+                "sali": "Espace buanderie et entretien des textiles",
+                "carsamba": "Étagère de cuisine et inventaire alimentaire",
+                "persembe": "Chambre à coucher et réduction de la poussière",
+                "cuma": "Textiles de salon et espaces communs",
+                "cumartesi": "Mission détaillée tournante de la semaine",
+                "pazar": "Ordre familial, contrôle des déchets et plan de nouvelle semaine"
+            },
+            "seasonal_tasks": {
+                "spring": [
+                    "Organiser la transition placard et textile",
+                    "Nettoyer les fenêtres et les cadres accessibles",
+                    "Vérifier le drain du balcon et la sécurité",
+                    "Rangez les articles d’hiver propres et secs"
+                ],
+                "summer": [
+                    "Examiner les stocks de réfrigérateur et de nourriture",
+                    "Vérifier la date d'entretien de la ventilation et du filtre",
+                    "Sécurisez les objets en vrac sur le balcon",
+                    "Organiser les sacs et textiles après le voyage"
+                ],
+                "autumn": [
+                    "Planifier un entretien compétent du système de chauffage",
+                    "Vérifiez les signes d’humidité et de fuites d’eau",
+                    "Organiser les chaussures d'hiver et les vêtements d'extérieur",
+                    "Vérifier l'éclairage de secours"
+                ],
+                "winter": [
+                    "Vérifiez les zones pour détecter tout signe d'humidité et de moisissure.",
+                    "Protégez l’environnement du radiateur portable",
+                    "Réapprovisionner la trousse d’urgence et la liste de contacts",
+                    "Réduisez le risque de sols mouillés dans la zone d’entrée"
+                ]
+            },
+            "room_guides": {
+                "mutfak": {
+                    "deep_clean_frequency": "Une fois par mois et lorsqu'il y a des saletés visibles",
+                    "tips": [
+                        "Utiliser un produit adapté à la surface en contact avec les aliments.",
+                        "Nettoyez d’abord ; Désinfecter uniquement lorsque cela est nécessaire",
+                        "Gardez les aliments à une température sécuritaire pendant le nettoyage"
+                    ]
+                },
+                "banyo": {
+                    "deep_clean_frequency": "Une fois par mois ; points de contact hebdomadaires",
+                    "tips": [
+                        "Assurer une bonne ventilation",
+                        "Ne mélangez pas les produits de nettoyage",
+                        "Sécher le sol mouillé sans risque de glisser"
+                    ]
+                },
+                "salon": {
+                    "deep_clean_frequency": "une fois par mois",
+                    "tips": [
+                        "Suivez l'étiquette d'entretien des textiles",
+                        "Prendre la poudre de haut en bas",
+                        "Gardez les câbles hors du passage"
+                    ]
+                },
+                "yatak_odasi": {
+                    "deep_clean_frequency": "Une fois par mois ; textiles de lit selon les besoins",
+                    "tips": [
+                        "Aérer régulièrement la pièce",
+                        "Enlever la poussière avec un chiffon en microfibre humide",
+                        "Laisser le passage autour du lit ouvert"
+                    ]
+                },
+                "koridor": {
+                    "deep_clean_frequency": "Une fois par mois ; espace de connexion hebdomadaire",
+                    "tips": [
+                        "Gardez les sorties de secours et les passages dégagés",
+                        "Chaussures mouillées et sèches",
+                        "Réparez les câbles et les tapis lâches"
+                    ]
+                },
+                "balkon": {
+                    "deep_clean_frequency": "Pendant les transitions saisonnières",
+                    "tips": [
+                        "Ne grimpez pas et ne vous penchez pas hors de la balustrade",
+                        "Contrôlez les dépenses à la limite d’accès sécurisée",
+                        "Ne laissez pas d'objets en vrac au vent"
+                    ]
+                },
+                "genel": {
+                    "deep_clean_frequency": "Nettoyage régional une fois par mois",
+                    "tips": [
+                        "Sélectionnez une région à la fois",
+                        "Suivez l'étiquette du produit",
+                        "Gardez les produits chimiques hors de portée des enfants et des animaux domestiques"
+                    ]
+                }
+            },
+            "eco_tips": [
+                "Pour les salissures visibles, de l'eau, un nettoyant approprié et un essuyage mécanique suffisent dans la plupart des cas.",
+                "Choisissez des tissus lavables plutôt que des produits jetables",
+                "N'utilisez pas le produit plus que ce qui est indiqué sur l'étiquette",
+                "Faites fonctionner les machines à laver et les lave-vaisselle à pleine charge, le cas échéant",
+                "Trier les déchets selon les règles de tri en vigueur de la municipalité",
+                "Vérifiez les étiquettes des produits vérifiables au lieu de vagues allégations environnementales"
+            ],
+            "gamification": {
+                "point_system": {
+                    "daily_task": 5,
+                    "weekly_task": 15,
+                    "seasonal_task": 30,
+                    "bonus": 10
+                },
+                "rewards": [
+                    "100 points : Choix entre un film familial ou une soirée de jeux",
+                    "200 points : Créer ensemble une collation spéciale",
+                    "500 points : Voyage en famille à petit budget ou activité partagée"
+                ]
+            }
+        }
     }
-  ],
-  "weekly_schedule": {
-    "pazartesi": "Banyo derinlemesine temizlik",
-    "sali": "Çamaşır yıkama (renkliler)",
-    "carsamba": "Mutfak dolapları ve buzdolabı kontrolü",
-    "persembe": "Çamaşır yıkama (beyazlar)",
-    "cuma": "Salon ve ortak alanlar toz alma",
-    "cumartesi": "Elektrikli süpürge ile genel süpürme",
-    "pazar": "Haftalık planlama ve pazar alışverişi listesi"
-  },
-  "seasonal_tasks": {
-    "spring": [
-      "Dolap bahar temizliği",
-      "Kışlıkları kaldır, yazlıkları çıkar",
-      "Pencere ve perde temizliği",
-      "Balkon/bahçe hazırlığı"
-    ],
-    "summer": [
-      "Buzdolabı derinlemesine temizlik",
-      "Klima/filtre kontrolü",
-      "Güneşlik/perde değişimi",
-      "Seyahat çantası hazırlık listesi"
-    ],
-    "autumn": [
-      "Kombi/boiler bakımı",
-      "Kışlık ayakkabı/mont kontrolü",
-      "Balkon kış hazırlığı",
-      "Okul malzemeleri organizasyonu"
-    ],
-    "winter": [
-      "Nem/küf kontrolü",
-      "Elektrikli ısıtıcı güvenlik kontrolü",
-      "Deprem/acil durum çantası kontrolü",
-      "Yılbaşı temizliği ve dekorasyon"
-    ]
-  },
-  "gamification": {
-    "point_system": {
-      "daily_task": 5,
-      "weekly_task": 15,
-      "seasonal_task": 30,
-      "bonus": 10
-    },
-    "rewards": [
-      "100 puan: Aile film gecesi seçim hakkı",
-      "200 puan: Özel tatlı yapımı",
-      "500 puan: Küçük aile gezisi"
-    ]
-  }
 }

@@ -1,0 +1,175 @@
+{
+  "countryCode": "BE",
+  "version": 1,
+  "note": "Bilgilendirme amaçlıdır; tıbbi tavsiye değildir. Kesin tarih, doz ve uygunluk için resmî aşı kaydı (Vaccinnet / ONE) ve hekiminize başvurun.",
+  "sources": {
+    "child": [
+      {"authority": "Agentschap Zorg en Gezondheid — Vaccinnet (Vlaanderen)", "url": "https://www.laatjevaccineren.be/", "trustLevel": 1},
+      {"authority": "ONE — Office de la Naissance et de l'Enfance (Wallonie/Bruxelles)", "url": "https://www.one.be/", "trustLevel": 1}
+    ],
+    "adult": [
+      {"authority": "Vlaams Agentschap Zorg en Gezondheid", "url": "https://www.laatjevaccineren.be/volwassenen", "trustLevel": 1}
+    ],
+    "pregnancy": [
+      {"authority": "Laat je vaccineren — zwangerschap", "url": "https://www.laatjevaccineren.be/zwangere-vrouwen", "trustLevel": 1}
+    ],
+    "travel": [
+      {"authority": "Instituut voor Tropische Geneeskunde (ITG) — Reisgeneeskunde", "url": "https://www.itg.be/", "trustLevel": 1},
+      {"authority": "wanda.be — reisadvies", "url": "https://www.wanda.be/", "trustLevel": 1}
+    ]
+  },
+  "categories": [
+    {
+      "key": "child",
+      "i18n": {
+        "tr": {"label": "Çocuk", "desc": "Bebeklik ve çocukluk temel aşı takvimi (Vaccinnet basisschema)."},
+        "en": {"label": "Child", "desc": "Infant and childhood basic vaccination schedule (Vaccinnet)."},
+        "fr": {"label": "Enfant", "desc": "Schéma de vaccination de base du nourrisson et de l'enfant."},
+        "nl": {"label": "Kind", "desc": "Basisvaccinatieschema voor baby's en kinderen (Vaccinnet)."}
+      },
+      "vaccines": [
+        {"id": "hexa1", "ageBand": "8w", "i18n": {
+          "tr": {"name": "6'lı aşı (difteri, tetanoz, boğmaca, polio, Hib, hepatit B) — 1. doz", "timing": "8. hafta", "note": "Tek enjeksiyonda altı hastalık."},
+          "en": {"name": "Hexavalent (diphtheria, tetanus, pertussis, polio, Hib, hepatitis B) — dose 1", "timing": "8 weeks", "note": "Six diseases in one shot."},
+          "fr": {"name": "Hexavalent (diphtérie, tétanos, coqueluche, polio, Hib, hépatite B) — dose 1", "timing": "8 semaines", "note": "Six maladies en une injection."},
+          "nl": {"name": "Hexavalent (difterie, tetanus, kinkhoest, polio, Hib, hepatitis B) — dosis 1", "timing": "8 weken", "note": "Zes ziekten in één prik."}
+        }},
+        {"id": "pneumo1", "ageBand": "8w", "i18n": {
+          "tr": {"name": "Pnömokok — 1. doz", "timing": "8. hafta", "note": ""},
+          "en": {"name": "Pneumococcal — dose 1", "timing": "8 weeks", "note": ""},
+          "fr": {"name": "Pneumocoque — dose 1", "timing": "8 semaines", "note": ""},
+          "nl": {"name": "Pneumokokken — dosis 1", "timing": "8 weken", "note": ""}
+        }},
+        {"id": "rota1", "ageBand": "8w", "i18n": {
+          "tr": {"name": "Rotavirüs — 1. doz (ağızdan)", "timing": "8. hafta", "note": "Zaman penceresine dikkat edin."},
+          "en": {"name": "Rotavirus — dose 1 (oral)", "timing": "8 weeks", "note": "Mind the time window."},
+          "fr": {"name": "Rotavirus — dose 1 (orale)", "timing": "8 semaines", "note": "Respectez la fenêtre de temps."},
+          "nl": {"name": "Rotavirus — dosis 1 (oraal)", "timing": "8 weken", "note": "Let op het tijdsvenster."}
+        }},
+        {"id": "hexa2", "ageBand": "12w", "i18n": {
+          "tr": {"name": "6'lı aşı — 2. doz", "timing": "12. hafta", "note": ""},
+          "en": {"name": "Hexavalent — dose 2", "timing": "12 weeks", "note": ""},
+          "fr": {"name": "Hexavalent — dose 2", "timing": "12 semaines", "note": ""},
+          "nl": {"name": "Hexavalent — dosis 2", "timing": "12 weken", "note": ""}
+        }},
+        {"id": "hexa3", "ageBand": "16w", "i18n": {
+          "tr": {"name": "6'lı aşı — 3. doz", "timing": "16. hafta", "note": ""},
+          "en": {"name": "Hexavalent — dose 3", "timing": "16 weeks", "note": ""},
+          "fr": {"name": "Hexavalent — dose 3", "timing": "16 semaines", "note": ""},
+          "nl": {"name": "Hexavalent — dosis 3", "timing": "16 weken", "note": ""}
+        }},
+        {"id": "pneumo2", "ageBand": "16w", "i18n": {
+          "tr": {"name": "Pnömokok — 2. doz", "timing": "16. hafta", "note": ""},
+          "en": {"name": "Pneumococcal — dose 2", "timing": "16 weeks", "note": ""},
+          "fr": {"name": "Pneumocoque — dose 2", "timing": "16 semaines", "note": ""},
+          "nl": {"name": "Pneumokokken — dosis 2", "timing": "16 weken", "note": ""}
+        }},
+        {"id": "mmr1", "ageBand": "12m", "i18n": {
+          "tr": {"name": "KKK (kızamık, kabakulak, kızamıkçık) — 1. doz", "timing": "~12. ay", "note": ""},
+          "en": {"name": "MMR (measles, mumps, rubella) — dose 1", "timing": "~12 months", "note": ""},
+          "fr": {"name": "RRO (rougeole, oreillons, rubéole) — dose 1", "timing": "~12 mois", "note": ""},
+          "nl": {"name": "BMR (bof, mazelen, rodehond) — dosis 1", "timing": "~12 maanden", "note": ""}
+        }},
+        {"id": "menc", "ageBand": "12m", "i18n": {
+          "tr": {"name": "Meningokok C", "timing": "~12. ay", "note": ""},
+          "en": {"name": "Meningococcal C", "timing": "~12 months", "note": ""},
+          "fr": {"name": "Méningocoque C", "timing": "~12 mois", "note": ""},
+          "nl": {"name": "Meningokokken C", "timing": "~12 maanden", "note": ""}
+        }},
+        {"id": "hexa4", "ageBand": "15m", "i18n": {
+          "tr": {"name": "6'lı aşı — pekiştirme (4. doz)", "timing": "~15. ay", "note": ""},
+          "en": {"name": "Hexavalent — booster (dose 4)", "timing": "~15 months", "note": ""},
+          "fr": {"name": "Hexavalent — rappel (dose 4)", "timing": "~15 mois", "note": ""},
+          "nl": {"name": "Hexavalent — herhaling (dosis 4)", "timing": "~15 maanden", "note": ""}
+        }},
+        {"id": "dtpa_ipv_child", "ageBand": "5-7y", "i18n": {
+          "tr": {"name": "DTaP-IPV pekiştirme (difteri-tetanoz-boğmaca-polio)", "timing": "5-7 yaş", "note": "Okul öncesi/okul dönemi."},
+          "en": {"name": "DTaP-IPV booster (diphtheria-tetanus-pertussis-polio)", "timing": "5-7 years", "note": "Around school entry."},
+          "fr": {"name": "Rappel DTPa-IPV (diphtérie-tétanos-coqueluche-polio)", "timing": "5-7 ans", "note": "Vers l'entrée à l'école."},
+          "nl": {"name": "DTPa-IPV herhaling (difterie-tetanus-kinkhoest-polio)", "timing": "5-7 jaar", "note": "Rond schoolstart."}
+        }},
+        {"id": "hpv", "ageBand": "~12y", "i18n": {
+          "tr": {"name": "HPV (human papillomavirus)", "timing": "~12 yaş (okul programı)", "note": "Kız ve erkek çocuklara önerilir."},
+          "en": {"name": "HPV (human papillomavirus)", "timing": "~12 years (school programme)", "note": "Recommended for girls and boys."},
+          "fr": {"name": "HPV (papillomavirus humain)", "timing": "~12 ans (programme scolaire)", "note": "Recommandé filles et garçons."},
+          "nl": {"name": "HPV (humaan papillomavirus)", "timing": "~12 jaar (schoolprogramma)", "note": "Aanbevolen voor meisjes en jongens."}
+        }},
+        {"id": "dtpa_teen", "ageBand": "~14y", "i18n": {
+          "tr": {"name": "dTpa pekiştirme (difteri-tetanoz-boğmaca)", "timing": "~14-16 yaş", "note": ""},
+          "en": {"name": "dTpa booster (diphtheria-tetanus-pertussis)", "timing": "~14-16 years", "note": ""},
+          "fr": {"name": "Rappel dTpa (diphtérie-tétanos-coqueluche)", "timing": "~14-16 ans", "note": ""},
+          "nl": {"name": "dTpa herhaling (difterie-tetanus-kinkhoest)", "timing": "~14-16 jaar", "note": ""}
+        }}
+      ]
+    },
+    {
+      "key": "adult",
+      "i18n": {
+        "tr": {"label": "Yetişkin", "desc": "Yetişkinler için pekiştirme ve mevsimsel aşılar."},
+        "en": {"label": "Adult", "desc": "Booster and seasonal vaccines for adults."},
+        "fr": {"label": "Adulte", "desc": "Rappels et vaccins saisonniers pour adultes."},
+        "nl": {"label": "Volwassene", "desc": "Herhalings- en seizoensvaccins voor volwassenen."}
+      },
+      "vaccines": [
+        {"id": "tetanus_adult", "ageBand": "10y", "i18n": {
+          "tr": {"name": "Tetanoz-difteri pekiştirme", "timing": "Her 10 yılda bir", "note": "Yaralanmada erken doz gerekebilir."},
+          "en": {"name": "Tetanus-diphtheria booster", "timing": "Every 10 years", "note": "May be needed earlier after injury."},
+          "fr": {"name": "Rappel tétanos-diphtérie", "timing": "Tous les 10 ans", "note": "Parfois plus tôt après une blessure."},
+          "nl": {"name": "Tetanus-difterie herhaling", "timing": "Elke 10 jaar", "note": "Soms eerder na een verwonding."}
+        }},
+        {"id": "flu_adult", "ageBand": "season", "i18n": {
+          "tr": {"name": "Grip (influenza)", "timing": "Her yıl sonbahar", "note": "Risk grupları için özellikle önerilir."},
+          "en": {"name": "Influenza (flu)", "timing": "Every autumn", "note": "Especially advised for risk groups."},
+          "fr": {"name": "Grippe (influenza)", "timing": "Chaque automne", "note": "Surtout conseillé aux groupes à risque."},
+          "nl": {"name": "Griep (influenza)", "timing": "Elke herfst", "note": "Vooral aangeraden voor risicogroepen."}
+        }},
+        {"id": "covid_adult", "ageBand": "authority", "i18n": {
+          "tr": {"name": "COVID-19", "timing": "Resmî öneriye göre", "note": "Güncel öneri için resmî kaynağa bakın."},
+          "en": {"name": "COVID-19", "timing": "Per official advice", "note": "Check the official source for current advice."},
+          "fr": {"name": "COVID-19", "timing": "Selon l'avis officiel", "note": "Consultez la source officielle."},
+          "nl": {"name": "COVID-19", "timing": "Volgens officieel advies", "note": "Raadpleeg de officiële bron."}
+        }}
+      ]
+    },
+    {
+      "key": "pregnancy",
+      "i18n": {
+        "tr": {"label": "Hamilelik", "desc": "Hamilelik döneminde önerilen aşılar."},
+        "en": {"label": "Pregnancy", "desc": "Vaccines recommended during pregnancy."},
+        "fr": {"label": "Grossesse", "desc": "Vaccins recommandés pendant la grossesse."},
+        "nl": {"label": "Zwangerschap", "desc": "Aanbevolen vaccins tijdens de zwangerschap."}
+      },
+      "vaccines": [
+        {"id": "pertussis_preg", "ageBand": "each", "i18n": {
+          "tr": {"name": "Boğmaca (dTpa)", "timing": "Her hamilelikte (genellikle 24-32. hafta)", "note": "Bebeği doğumdan sonra korur."},
+          "en": {"name": "Pertussis (dTpa)", "timing": "Each pregnancy (usually weeks 24-32)", "note": "Protects the baby after birth."},
+          "fr": {"name": "Coqueluche (dTpa)", "timing": "À chaque grossesse (souvent 24-32 sem.)", "note": "Protège le bébé après la naissance."},
+          "nl": {"name": "Kinkhoest (dTpa)", "timing": "Elke zwangerschap (meestal week 24-32)", "note": "Beschermt de baby na de geboorte."}
+        }},
+        {"id": "flu_preg", "ageBand": "season", "i18n": {
+          "tr": {"name": "Grip (influenza)", "timing": "Grip mevsiminde", "note": ""},
+          "en": {"name": "Influenza (flu)", "timing": "During flu season", "note": ""},
+          "fr": {"name": "Grippe (influenza)", "timing": "Pendant la saison grippale", "note": ""},
+          "nl": {"name": "Griep (influenza)", "timing": "Tijdens het griepseizoen", "note": ""}
+        }}
+      ]
+    },
+    {
+      "key": "travel",
+      "i18n": {
+        "tr": {"label": "Seyahat", "desc": "Gidilecek ülkeye göre değişir — seyahat kliniğine danışın."},
+        "en": {"label": "Travel", "desc": "Depends on destination — consult a travel clinic."},
+        "fr": {"label": "Voyage", "desc": "Selon la destination — consultez une clinique du voyage."},
+        "nl": {"label": "Reis", "desc": "Afhankelijk van bestemming — raadpleeg een reiskliniek."}
+      },
+      "vaccines": [
+        {"id": "travel_generic", "ageBand": "trip", "i18n": {
+          "tr": {"name": "Ülkeye özel aşılar (ör. hepatit A, tifo, sarıhumma)", "timing": "Seyahatten 4-6 hafta önce", "note": "Kesin liste için ITG/wanda.be'ye danışın."},
+          "en": {"name": "Destination-specific vaccines (e.g. hepatitis A, typhoid, yellow fever)", "timing": "4-6 weeks before travel", "note": "Consult ITG/wanda.be for the exact list."},
+          "fr": {"name": "Vaccins selon la destination (ex. hépatite A, typhoïde, fièvre jaune)", "timing": "4-6 semaines avant le voyage", "note": "Consultez ITG/wanda.be pour la liste exacte."},
+          "nl": {"name": "Bestemmingsgebonden vaccins (bv. hepatitis A, tyfus, gele koorts)", "timing": "4-6 weken voor de reis", "note": "Raadpleeg ITG/wanda.be voor de exacte lijst."}
+        }}
+      ]
+    }
+  ]
+}

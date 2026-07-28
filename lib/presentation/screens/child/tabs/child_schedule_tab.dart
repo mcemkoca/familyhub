@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../../../config/constants.dart';
 import '../../../../domain/models/child_homework.dart';
 import '../../../../domain/models/child_schedule.dart';
@@ -53,7 +54,7 @@ class _ChildScheduleTabState extends State<ChildScheduleTab>
             controller: _tabController,
             isScrollable: true,
             labelColor: const Color(0xFF10B981),
-            unselectedLabelColor: Colors.grey.shade500,
+            unselectedLabelColor: const Color(0xFF6B7280),
             indicatorColor: const Color(0xFF10B981),
             tabs: _dayNames.map((d) => Tab(text: d)).toList(),
           ),
@@ -110,7 +111,7 @@ class _DayView extends StatelessWidget {
                   children: [
                     _SectionHeader(
                       icon: Icons.schedule,
-                      title: 'Ders Programı',
+                      title: AppLocalizations.of(context).dersProgrami,
                       count: daySchedules.length,
                     ),
                     const SizedBox(height: AppSpacing.md),
@@ -138,7 +139,7 @@ class _DayView extends StatelessWidget {
                   children: [
                     _SectionHeader(
                       icon: Icons.assignment,
-                      title: 'Ödevlerim',
+                      title: AppLocalizations.of(context).odevlerim,
                       count: pendingHomeworks.length,
                     ),
                     const SizedBox(height: AppSpacing.md),
@@ -210,13 +211,13 @@ class _ScheduleCard extends StatelessWidget {
                     const SizedBox(height: AppSpacing.xs),
                     Row(
                       children: [
-                        Icon(Icons.access_time, size: 13, color: Colors.grey.shade500),
+                        const Icon(Icons.access_time, size: 13, color: Color(0xFF6B7280)),
                         const SizedBox(width: 4),
                         Text(
                           '${schedule.startTime} - ${schedule.endTime}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 12,
-                            color: Colors.grey.shade600,
+                            color: Color(0xFF6B7280),
                           ),
                         ),
                       ],
@@ -226,13 +227,13 @@ class _ScheduleCard extends StatelessWidget {
                         padding: const EdgeInsets.only(top: AppSpacing.xs),
                         child: Row(
                           children: [
-                            Icon(Icons.person, size: 13, color: Colors.grey.shade500),
+                            const Icon(Icons.person, size: 13, color: Color(0xFF6B7280)),
                             const SizedBox(width: 4),
                             Text(
                               schedule.teacher!,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 12,
-                                color: Colors.grey.shade600,
+                                color: Color(0xFF6B7280),
                               ),
                             ),
                           ],
@@ -270,7 +271,7 @@ class _HomeworkCard extends StatelessWidget {
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppRadius.medium),
-        side: BorderSide(color: Colors.grey.shade200),
+        side: const BorderSide(color: Color(0xFF9CA3AF)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(AppSpacing.md),
@@ -303,9 +304,9 @@ class _HomeworkCard extends StatelessWidget {
                   const SizedBox(height: AppSpacing.xs),
                   Text(
                     homework.subject,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
-                      color: Colors.grey.shade600,
+                      color: Color(0xFF6B7280),
                     ),
                   ),
                   if (homework.dueDate != null)
@@ -313,7 +314,7 @@ class _HomeworkCard extends StatelessWidget {
                       'Teslim: ${_formatDate(homework.dueDate!)}',
                       style: TextStyle(
                         fontSize: 11,
-                        color: homework.isOverdue ? Colors.red : Colors.grey.shade500,
+                        color: homework.isOverdue ? Colors.red : const Color(0xFF6B7280),
                       ),
                     ),
                 ],
@@ -384,16 +385,16 @@ class _EmptyCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Colors.grey.shade50,
+        color: const Color(0x1AFFFFFF),
         borderRadius: BorderRadius.circular(AppRadius.medium),
-        border: Border.all(color: Colors.grey.shade200),
+        border: Border.all(color: const Color(0xFF9CA3AF)),
       ),
       child: Text(
         message,
         textAlign: TextAlign.center,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 14,
-          color: Colors.grey.shade500,
+          color: Color(0xFF6B7280),
         ),
       ),
     );

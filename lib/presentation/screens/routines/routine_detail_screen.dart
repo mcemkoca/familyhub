@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../config/constants.dart';
 import '../../../domain/models/routine.dart';
 import '../../../repositories/routine_repository.dart';
 import '../../../services/routine_service.dart';
@@ -15,6 +14,8 @@ class RoutineDetailScreen extends StatefulWidget {
 }
 
 class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   Routine? _routine;
   bool _loading = true;
 
@@ -82,8 +83,7 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final textColor = isDark ? Colors.white : Colors.black87;
+    final textColor = const Color(0xFFE5E7EB);
 
     if (_loading) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
@@ -98,8 +98,8 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
 
     return Scaffold(
       backgroundColor: isDark
-          ? AppColors.darkBackground
-          : AppColors.background,
+          ? const Color(0xFF0A0A0F)
+          : const Color(0xFF0A0A0F),
       appBar: AppBar(
         title: Text(r.name),
         backgroundColor: isDark
@@ -145,8 +145,7 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                'Tüm Adımlar',
+              child: Text(AppLocalizations.of(context).tumAdimlar,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -180,7 +179,7 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF16213E) : Colors.white,
+        color: const Color(0xFFE5E7EB),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -196,8 +195,7 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'İlerleme',
+              Text(AppLocalizations.of(context).ilerleme,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -291,9 +289,8 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
             children: [
               const Icon(Icons.celebration, size: 48, color: Colors.amber),
               const SizedBox(height: 12),
-              const Text(
-                '🎉 Rutin Tamamlandı!',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(AppLocalizations.of(context).rutinTamamlandi,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               Text(AppLocalizations.of(context).tumAdimlariBasariylaTamamladiniz),
             ],
@@ -320,8 +317,7 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'ŞU ANKİ ADIM',
+          Text(AppLocalizations.of(context).suAnkiAdim,
             style: TextStyle(
               fontSize: 11,
               color: Colors.white.withAlpha(204),
@@ -427,7 +423,7 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
               ? BorderSide(color: color, width: 2)
               : BorderSide.none,
         ),
-        color: isDark ? const Color(0xFF16213E) : Colors.white,
+        color: const Color(0xFFE5E7EB),
         child: ListTile(
           leading: CircleAvatar(
             backgroundColor: isCompleted

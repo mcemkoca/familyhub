@@ -3,11 +3,32 @@ import 'package:device_calendar/device_calendar.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/timezone.dart' as tz;
 import '../domain/models/calendar_sync.dart';
+import 'localization/locale_service.dart';
 
 /// Harici Takvim Senkronizasyon Servisi
 /// device_calendar paketi ile telefonun yerel takvimlerine erişim
 class CalendarSyncService {
   static final DeviceCalendarPlugin _plugin = DeviceCalendarPlugin();
+
+  static String get _languageCode =>
+      LocaleService.resolveInitialLocale().languageCode;
+
+  static String _text(Map<String, String> values) =>
+      values[_languageCode] ?? values['tr']!;
+
+  static String get _unnamedCalendar => _text(const {
+        'tr': 'İsimsiz Takvim',
+        'en': 'Unnamed Calendar',
+        'nl': 'Naamloze agenda',
+        'fr': 'Calendrier sans nom',
+      });
+
+  static String get _untitledEvent => _text(const {
+        'tr': 'İsimsiz Etkinlik',
+        'en': 'Untitled Event',
+        'nl': 'Naamloze activiteit',
+        'fr': 'Événement sans titre',
+      });
 
   // ── İZİN YÖNETİMİ ───────────────────────────────────────────────────────
 
@@ -38,7 +59,7 @@ class CalendarSyncService {
         .map(
           (c) => ExternalCalendar(
             id: c.id ?? 'unknown',
-            name: c.name ?? 'İsimsiz Takvim',
+            name: c.name ?? _unnamedCalendar,
             description: c.accountName,
             isPrimary: c.isDefault ?? false,
             color: c.color?.toRadixString(16),
@@ -195,7 +216,15 @@ class CalendarSyncService {
         timestamp: timestamp,
       );
     } catch (e) {
-      return SyncResult(error: e.toString(), timestamp: timestamp);
+      return SyncResult(
+        error: '${_text(const {
+          'tr': 'Takvim senkronizasyonu başarısız oldu',
+          'en': 'Calendar synchronization failed',
+          'nl': 'Agendasynchronisatie is mislukt',
+          'fr': 'La synchronisation du calendrier a échoué',
+        })}: $e',
+        timestamp: timestamp,
+      );
     }
   }
 
@@ -205,7 +234,7 @@ class CalendarSyncService {
     return ExternalEvent(
       id: e.eventId ?? 'event-${e.hashCode}',
       externalId: e.eventId,
-      title: e.title ?? 'İsimsiz Etkinlik',
+      title: e.title ?? _untitledEvent,
       description: e.description,
       start: e.start?.toLocal() ?? DateTime.now(),
       end: e.end?.toLocal() ?? DateTime.now(),

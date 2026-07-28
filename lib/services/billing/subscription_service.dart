@@ -89,7 +89,7 @@ class SubscriptionService {
   static bool canAddMember(int currentCount) => currentCount < 4 || _isPremium();
   static bool canAccessHistory() => _isPremium();
   static bool canExportData() => _isPremium();
-  static bool canUseAI() => _isPremium();
+  static bool canUseAI() => true; // Local pool tüm kullanıcılara açık
   static bool canEnableSmartHome() => _isPremium();
   static bool canViewHealthSummary() => _isPremium();
 

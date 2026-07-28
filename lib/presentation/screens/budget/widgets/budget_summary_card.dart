@@ -1,4 +1,4 @@
-part of '../budget_screen.dart';
+﻿part of '../budget_screen.dart';
 
 
 class _SummaryCard extends StatelessWidget {
@@ -51,7 +51,7 @@ class _SummaryCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      NumberFormat.currency(symbol: '₺', decimalDigits: 0).format(amount),
+                      NumberFormat.currency(symbol: '€', decimalDigits: 0).format(amount),
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

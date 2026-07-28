@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_contacts/flutter_contacts.dart' as phone_contacts;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:permission_handler/permission_handler.dart';
 import '../../../config/constants.dart';
 import '../../../repositories/contacts_repository.dart';
 import '../../../services/auth_service.dart';
+import '../../../services/permission_service.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
 
 class ContactsScreen extends ConsumerStatefulWidget {
@@ -95,15 +95,8 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
   }
 
   Future<void> _importFromPhone() async {
-    final status = await Permission.contacts.request();
-    if (!status.isGranted) {
-      if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('Rehber izni gerekli')));
-      }
-      return;
-    }
+    final granted = await PermissionService.requestContactsRead(context);
+    if (!granted) return;
     setState(() => _isLoading = true);
     try {
       final phoneContacts = await phone_contacts.FlutterContacts.getContacts(
@@ -136,7 +129,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('İçe aktarma hatası: $e')));
+        ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).conImportFailed('$e'))));
       }
     } finally {
       setState(() => _isLoading = false);
@@ -166,7 +159,8 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
               right: 24,
               top: 24,
             ),
-            child: Column(
+            child: SingleChildScrollView(
+              child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -177,27 +171,27 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
                 const SizedBox(height: 16),
                 TextField(
                   controller: _nameController,
-                  decoration: const InputDecoration(labelText: 'Ad Soyad'),
+                  decoration: InputDecoration(labelText: AppLocalizations.of(context).hcFullName),
                 ),
                 const SizedBox(height: 12),
                 TextField(
                   controller: _phoneController,
                   keyboardType: TextInputType.phone,
-                  decoration: const InputDecoration(labelText: 'Telefon'),
+                  decoration: InputDecoration(labelText: AppLocalizations.of(context).crashPhone),
                 ),
                 const SizedBox(height: 12),
                 TextField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(labelText: 'E-posta'),
+                  decoration: InputDecoration(labelText: AppLocalizations.of(context).conEmail),
                 ),
                 const SizedBox(height: 12),
                 TextField(
                   controller: _notesController,
-                  decoration: const InputDecoration(labelText: 'Notlar'),
+                  decoration: InputDecoration(labelText: AppLocalizations.of(context).hcNotes),
                 ),
                 const SizedBox(height: 12),
-                Text('Tür', style: Theme.of(context).textTheme.bodySmall),
+                Text(AppLocalizations.of(context).tur, style: Theme.of(context).textTheme.bodySmall),
                 const SizedBox(height: 8),
                 Wrap(
                   spacing: 8,
@@ -262,7 +256,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
                       Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.cobalt,
+                      backgroundColor: const Color(0xFF6366F1),
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
@@ -273,6 +267,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
                 ),
                 const SizedBox(height: 24),
               ],
+            ),
             ),
           );
         },
@@ -293,7 +288,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Sil', style: TextStyle(color: AppColors.error)),
+            child: Text(AppLocalizations.of(context).budDelete, style: const TextStyle(color: AppColors.error)),
           ),
         ],
       ),
@@ -320,12 +315,12 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Aile Rehberi'),
+        title: Text(AppLocalizations.of(context).conTitle),
         centerTitle: true,
         actions: [
           IconButton(
             icon: const Icon(Icons.download),
-            tooltip: 'Telefondan İçe Aktar',
+            tooltip: AppLocalizations.of(context).telefondanIceAktar,
             onPressed: _isLoading ? null : _importFromPhone,
           ),
         ],
@@ -337,7 +332,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'Ara...',
+                hintText: AppLocalizations.of(context).conSearchHint,
                 prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
@@ -348,19 +343,18 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
           if (_isLoading) const LinearProgressIndicator(),
           Expanded(
             child: _filtered.isEmpty
-                ? const Center(
+                ? Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.contacts,
                           size: 64,
-                          color: AppColors.lightGray,
+                          color: Color(0xFF9CA3AF),
                         ),
-                        SizedBox(height: 16),
-                        Text(
-                          'Henüz kişi yok',
-                          style: TextStyle(fontSize: 18, color: AppColors.gray),
+                        const SizedBox(height: 16),
+                        Text(AppLocalizations.of(context).henuzKisiYok,
+                          style: const TextStyle(fontSize: 18, color: Color(0xFF6B7280)),
                         ),
                       ],
                     ),
@@ -387,10 +381,10 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
                           ),
                           child: ListTile(
                             leading: CircleAvatar(
-                              backgroundColor: AppColors.cobalt.withAlpha(30),
+                              backgroundColor: const Color(0xFF6366F1).withAlpha(30),
                               child: Icon(
                                 _typeIcon(c.type),
-                                color: AppColors.cobalt,
+                                color: const Color(0xFF6366F1),
                               ),
                             ),
                             title: Text(
@@ -428,7 +422,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showAddSheet(),
-        backgroundColor: AppColors.cobalt,
+        backgroundColor: const Color(0xFF6366F1),
         child: const Icon(Icons.add, color: Colors.white),
       ),
     );

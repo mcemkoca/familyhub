@@ -62,7 +62,6 @@ class _ChildrenStepState extends State<ChildrenStep> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Column(
       children: [
@@ -72,22 +71,19 @@ class _ChildrenStepState extends State<ChildrenStep> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Çocuk Hesapları',
-                  style: TextStyle(
+                Text(AppLocalizations.of(context).cocukHesaplari,
+                  style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                    color: Color(0xFFE5E7EB),
                   ),
                 ),
                 const SizedBox(height: 4),
-                Text(
+                const Text(
                   'Çocuklarınızın hesaplarını ekleyin (isteğe bağlı)',
                   style: TextStyle(
                     fontSize: 14,
-                    color: isDark
-                        ? AppColors.darkTextSecondary
-                        : AppColors.slate,
+                    color: Color(0xFF6B7280),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -154,15 +150,14 @@ class _ChildrenStepState extends State<ChildrenStep> {
             child: ElevatedButton(
               onPressed: _save,
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.cobalt,
+                backgroundColor: const Color(0xFF6366F1),
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
-              child: const Text(
-                'İleri',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              child: Text(AppLocalizations.of(context).next,
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
             ),
           ),
@@ -195,15 +190,15 @@ class _AddChildDialogState extends State<_AddChildDialog> {
   final _pinController = TextEditingController();
   final _pinConfirmController = TextEditingController();
   String _role = 'child';
-  Color _color = AppColors.cobalt;
+  Color _color = const Color(0xFF6366F1);
 
   final _colors = [
-    AppColors.cobalt,
+    const Color(0xFF6366F1),
     AppColors.green,
     AppColors.orange,
-    AppColors.purple,
+    const Color(0xFF8B5CF6),
     AppColors.red,
-    AppColors.pink,
+    const Color(0xFFEC4899),
   ];
 
   void _add() {
@@ -253,16 +248,16 @@ class _AddChildDialogState extends State<_AddChildDialog> {
           children: [
             TextField(
               controller: _nameController,
-              decoration: const InputDecoration(labelText: 'İsim'),
+              decoration: InputDecoration(labelText: AppLocalizations.of(context).isim),
             ),
             const SizedBox(height: 12),
             DropdownButtonFormField<String>(
               initialValue: _role,
-              decoration: const InputDecoration(labelText: 'Rol'),
+              decoration: InputDecoration(labelText: AppLocalizations.of(context).fmnRole),
               items: [
                 DropdownMenuItem(value: 'child', child: Text(AppLocalizations.of(context).child)),
                 DropdownMenuItem(value: 'teen', child: Text(AppLocalizations.of(context).genc)),
-                const DropdownMenuItem(value: 'baby', child: Text('Bebek')),
+                DropdownMenuItem(value: 'baby', child: Text(AppLocalizations.of(context).cmBaby)),
               ],
               onChanged: (v) => setState(() => _role = v!),
             ),
@@ -271,9 +266,9 @@ class _AddChildDialogState extends State<_AddChildDialog> {
               controller: _pinController,
               keyboardType: TextInputType.number,
               obscureText: true,
-              decoration: const InputDecoration(
-                labelText: 'PIN (4-6 hane)',
-                prefixIcon: Icon(Icons.pin),
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context).pinLabel,
+                prefixIcon: const Icon(Icons.pin),
               ),
               maxLength: 6,
             ),
@@ -281,9 +276,9 @@ class _AddChildDialogState extends State<_AddChildDialog> {
               controller: _pinConfirmController,
               keyboardType: TextInputType.number,
               obscureText: true,
-              decoration: const InputDecoration(
-                labelText: 'PIN Tekrar',
-                prefixIcon: Icon(Icons.pin),
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context).cmPinRepeat,
+                prefixIcon: const Icon(Icons.pin),
               ),
               maxLength: 6,
             ),

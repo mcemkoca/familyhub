@@ -57,17 +57,14 @@ class AppShadows {
 
   /// Returns the appropriate shadow set based on current brightness.
   static List<BoxShadow> sm(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? darkSm : lightSm;
+    return darkSm;
   }
 
   static List<BoxShadow> md(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? darkMd : lightMd;
+    return darkMd;
   }
 
   static List<BoxShadow> lg(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? darkLg : lightLg;
+    return darkLg;
   }
 }

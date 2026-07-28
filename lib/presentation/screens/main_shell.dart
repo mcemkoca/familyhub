@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../config/constants.dart';
 import '../../config/routes.dart';
 import '../../services/call_service.dart';
@@ -17,6 +18,8 @@ class MainShell extends StatefulWidget {
 }
 
 class _MainShellState extends State<MainShell> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   int _currentIndex = 0;
   bool _menuOpen = false;
   StreamSubscription<dynamic>? _incomingCallSub;
@@ -25,27 +28,31 @@ class _MainShellState extends State<MainShell> {
     {
       'route': AppRoutes.hub,
       'icon': Icons.home_rounded,
+      'asset': 'assets/icons/nav/merkez.png',
       'label': 'Merkez',
     },
     {
       'route': AppRoutes.chat,
-      'icon': Icons.chat_bubble_outline,
+      'icon': Icons.forum_rounded,
+      'asset': 'assets/icons/nav/sohbet.png',
       'label': 'Sohbet',
-      'badge': 3,
     },
     {
       'route': AppRoutes.kitchen,
-      'icon': Icons.restaurant,
+      'icon': Icons.ramen_dining_rounded,
+      'asset': 'assets/icons/nav/mutfak.png',
       'label': 'Mutfak',
     },
     {
       'route': AppRoutes.education,
-      'icon': Icons.school_outlined,
+      'icon': Icons.school_rounded,
+      'asset': 'assets/icons/nav/egitim.png',
       'label': 'Eğitim',
     },
     {
       'route': AppRoutes.settings,
-      'icon': Icons.settings_outlined,
+      'icon': Icons.settings_rounded,
+      'asset': 'assets/icons/nav/ayarlar.png',
       'label': 'Ayarlar',
     },
   ];
@@ -109,7 +116,6 @@ class _MainShellState extends State<MainShell> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final safeBottom = MediaQuery.of(context).padding.bottom;
 
     return Scaffold(
@@ -127,64 +133,103 @@ class _MainShellState extends State<MainShell> {
       bottomNavigationBar: Container(
         padding: EdgeInsets.only(
           bottom: safeBottom > 0 ? 8 : 12,
-          left: 16,
-          right: 16,
+          left: 14,
+          right: 14,
         ),
-        child: Container(
-          height: 84,
-          decoration: BoxDecoration(
-            color: isDark
-                ? const Color(0xFF13131A).withAlpha(240)
-                : Colors.white.withAlpha(245),
-            borderRadius: BorderRadius.circular(32),
-            border: Border.all(
-              color: isDark
-                  ? Colors.white.withAlpha(18)
-                  : Colors.white.withAlpha(200),
-              width: 0.5,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: const Color(0xFF6366F1).withAlpha(isDark ? 25 : 12),
-                blurRadius: 24,
-                offset: const Offset(0, 8),
+        child: SizedBox(
+          height: 88,
+          child: Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.bottomCenter,
+            children: [
+              // İki cam pill yarısı + ortada FAB için boşluk.
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: Row(
+                  children: [
+                    Expanded(child: _pill([0, 1])),
+                    const SizedBox(width: 84), // FAB çentiği
+                    Expanded(child: _pill([2, 3, 4])),
+                  ],
+                ),
               ),
-              BoxShadow(
-                color: Colors.black.withAlpha(isDark ? 60 : 12),
-                blurRadius: 20,
-                offset: const Offset(0, 4),
+              // Yükseltilmiş merkez FAB.
+              Positioned(
+                bottom: 16,
+                child: _buildFab(),
               ),
             ],
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(32),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _buildNavItem(0),
-                  _buildNavItem(1),
-                  _buildFabSlot(),
-                  _buildNavItem(2),
-                  _buildNavItem(3),
-                  _buildNavItem(4),
-                ],
-              ),
-            ),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildNavItem(int index) {
+  /// Tek bir cam pill yarısı — verilen sekme indeksleriyle.
+  Widget _pill(List<int> indices) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    return Container(
+      height: 72,
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xB80A0C1C) : Colors.white.withAlpha(245),
+        borderRadius: BorderRadius.circular(28),
+        border: Border.all(
+          color: isDark
+              ? const Color(0xFF8B5CF6).withAlpha(55)
+              : Colors.white.withAlpha(200),
+          width: 1,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF6366F1).withAlpha(22),
+            blurRadius: 22,
+            offset: const Offset(0, 8),
+          ),
+          BoxShadow(
+            color: Colors.black.withAlpha(55),
+            blurRadius: 18,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(28),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [for (final i in indices) _buildNavItem(i)],
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// Seçili dile göre nav etiketi (sabit Türkçe yerine — dil değişince güncellenir).
+  String _navLabel(int index) {
+    final l = AppLocalizations.of(context);
+    switch (index) {
+      case 0:
+        return l.navMerkez;
+      case 1:
+        return l.chat;
+      case 2:
+        return l.mutfak;
+      case 3:
+        return l.egitim;
+      default:
+        return l.settings;
+    }
+  }
+
+  Widget _buildNavItem(int index) {
     final isActive = _currentIndex == index;
     final tab = _tabs[index];
     final icon = tab['icon'] as IconData;
-    final label = tab['label'] as String;
+    final asset = tab['asset'] as String?;
+    final label = _navLabel(index);
     final badge = tab['badge'] as int?;
 
     return Expanded(
@@ -203,10 +248,10 @@ class _MainShellState extends State<MainShell> {
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
                     curve: Curves.easeOut,
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
                       color: isActive
-                          ? const Color(0xFF6366F1).withAlpha(isDark ? 40 : 20)
+                          ? const Color(0xFF6366F1).withAlpha(40)
                           : Colors.transparent,
                       shape: BoxShape.circle,
                       boxShadow: isActive && isDark
@@ -218,15 +263,22 @@ class _MainShellState extends State<MainShell> {
                             ]
                           : null,
                     ),
-                    child: Icon(
-                      icon,
-                      size: isActive ? 26 : 24,
-                      color: isActive
-                          ? const Color(0xFF6366F1)
-                          : (isDark
-                              ? AppColors.darkTextSecondary
-                              : AppColors.slate),
-                    ),
+                    child: asset != null
+                        ? SizedBox(
+                            width: isActive ? 25 : 22,
+                            height: isActive ? 25 : 22,
+                            child: Opacity(
+                              opacity: isActive ? 1.0 : 0.55,
+                              child: Image.asset(asset, fit: BoxFit.contain),
+                            ),
+                          )
+                        : Icon(
+                            icon,
+                            size: isActive ? 26 : 24,
+                            color: isActive
+                                ? const Color(0xFF6366F1)
+                                : (const Color(0xFF6B7280)),
+                          ),
                   ),
                   if (badge != null && badge > 0)
                     Positioned(
@@ -256,14 +308,35 @@ class _MainShellState extends State<MainShell> {
               const SizedBox(height: 2),
               Text(
                 label,
+                // Alt nav etiketi global yazı-boyutu ayarından etkilenmesin
+                // (yoksa pill'i taşırır — RenderFlex overflow).
+                textScaler: TextScaler.noScaling,
                 style: TextStyle(
-                  fontSize: isActive ? 12 : 11,
+                  fontSize: isActive ? 11.5 : 11,
                   fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
                   color: isActive
-                      ? const Color(0xFF6366F1)
-                      : (isDark
-                          ? AppColors.darkTextSecondary
-                          : AppColors.slate),
+                      ? const Color(0xFF6C63FF)
+                      : (const Color(0xFF8B8FA3)),
+                ),
+              ),
+              const SizedBox(height: 2),
+              // Aktif sekme altı neon gösterge çizgisi.
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 220),
+                curve: Curves.easeOut,
+                height: 3,
+                width: isActive ? 20 : 0,
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                      colors: [Color(0xFF4D8DFF), Color(0xFF8B5CF6)]),
+                  borderRadius: BorderRadius.circular(2),
+                  boxShadow: isActive
+                      ? [
+                          BoxShadow(
+                              color: const Color(0xFF6C63FF).withAlpha(120),
+                              blurRadius: 8),
+                        ]
+                      : null,
                 ),
               ),
             ],
@@ -273,46 +346,36 @@ class _MainShellState extends State<MainShell> {
     );
   }
 
-  Widget _buildFabSlot() {
-    return Expanded(
-      child: Transform.translate(
-        offset: const Offset(0, -16),
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: _toggleMenu,
-          child: Container(
-            height: double.infinity,
-            alignment: Alignment.topCenter,
-            child: Container(
-              width: 68,
-              height: 68,
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF6366F1), Color(0xFF4F46E5)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color(0xFF6366F1).withAlpha(80),
-                    blurRadius: 24,
-                    spreadRadius: 2,
-                    offset: const Offset(0, 8),
-                  ),
-                ],
-              ),
-              child: AnimatedRotation(
-                turns: _menuOpen ? 0.125 : 0,
-                duration: const Duration(milliseconds: 250),
-                curve: Curves.easeOutBack,
-                child: const Icon(
-                  Icons.add,
-                  color: Colors.white,
-                  size: 32,
-                ),
-              ),
+  Widget _buildFab() {
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: _toggleMenu,
+      child: Container(
+        width: 72,
+        height: 72,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xFF6C63FF).withAlpha(140),
+              blurRadius: 30,
+              spreadRadius: 2,
+              offset: const Offset(0, 8),
             ),
+            BoxShadow(
+              color: const Color(0xFF4D8DFF).withAlpha(80),
+              blurRadius: 16,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: AnimatedRotation(
+          turns: _menuOpen ? 0.125 : 0,
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.easeOutBack,
+          child: Image.asset(
+            'assets/icons/nav/fab.png',
+            fit: BoxFit.contain,
           ),
         ),
       ),

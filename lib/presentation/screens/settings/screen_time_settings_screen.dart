@@ -8,6 +8,7 @@ import '../../widgets/settings/screen_header.dart';
 import '../../widgets/settings/settings_section.dart';
 import 'package:go_router/go_router.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../../core/app_logger.dart';
 
 class ScreenTimeSettingsScreen extends ConsumerStatefulWidget {
   const ScreenTimeSettingsScreen({super.key});
@@ -30,33 +31,31 @@ class _ScreenTimeSettingsScreenState
 
   Future<void> _loadChildren() async {
     try {
+      // Aile id'sini profilden çöz; yoksa yerel aileye düş (çocuklar Hive'da).
+      String? familyId;
       final userId = AuthService.currentUserId;
-      if (userId == null) return;
-
       final client = SupabaseConfig.safeClient;
-      if (client == null) return;
-
-      // Get family_id from profile
-      final profile = await client
-          .from('profiles')
-          .select('family_id')
-          .eq('id', userId)
-          .maybeSingle();
-
-      final familyId = profile?['family_id'] as String?;
-      if (familyId == null) {
-        setState(() => _isLoading = false);
-        return;
+      if (userId != null && client != null) {
+        try {
+          final profile = await client
+              .from('profiles')
+              .select('family_id')
+              .eq('id', userId)
+              .maybeSingle();
+          familyId = profile?['family_id'] as String?;
+        } catch (e) {
+          // Best-effort: familyId null kalır, çağıran yerel moda düşer.
+          AppLogger.logBestEffort(e, module: 'settings', operation: 'lookupFamilyId');
+        }
       }
+      familyId ??= ChildAccountRepository.localFamilyId;
 
-      final response = await client
-          .from('child_accounts')
-          .select('*')
-          .eq('family_id', familyId)
-          .order('name');
+      // Repository yerel + bulut çocukları birleştirir.
+      final list =
+          await ChildAccountRepository().getChildrenForFamily(familyId);
 
       setState(() {
-        _children = (response as List).cast<Map<String, dynamic>>();
+        _children = list.map((c) => c.toJson()).toList();
         _isLoading = false;
       });
     } catch (e) {
@@ -66,13 +65,9 @@ class _ScreenTimeSettingsScreenState
 
   Future<void> _updateScreenTime(String childId, int? minutes) async {
     try {
-      final client = SupabaseConfig.safeClient;
-      if (client == null) return;
-
-      await client
-          .from('child_accounts')
-          .update({'daily_screen_time_minutes': minutes})
-          .eq('id', childId);
+      // Repo yerel (Hive) ve bulut çocukları destekler.
+      await ChildAccountRepository()
+          .updateChild(childId, dailyScreenTimeMinutes: minutes ?? 120);
 
       setState(() {
         final index = _children.indexWhere((c) => c['id'] == childId);
@@ -92,7 +87,7 @@ class _ScreenTimeSettingsScreenState
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Hata: $e'), backgroundColor: AppColors.error),
+          SnackBar(content: Text(AppLocalizations.of(context).srError('$e')), backgroundColor: AppColors.error),
         );
       }
     }
@@ -111,14 +106,14 @@ class _ScreenTimeSettingsScreenState
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('$childName $lockMinutes dk boyunca kilitlendi'),
-            backgroundColor: AppColors.cobalt,
+            backgroundColor: const Color(0xFF6366F1),
           ),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Kilitleme başarısız: $e'), backgroundColor: AppColors.error),
+          SnackBar(content: Text(AppLocalizations.of(context).stLockFailed('$e')), backgroundColor: AppColors.error),
         );
       }
     }
@@ -145,7 +140,7 @@ class _ScreenTimeSettingsScreenState
               children: [
                 Text(AppLocalizations.of(context).buCihaziHemenKilitleyinCocukGirisYapamayacak),
                 const SizedBox(height: 16),
-                Text('Süre: ${selectedMinutes ~/ 60}s ${selectedMinutes % 60}d',
+                Text(AppLocalizations.of(context).stDuration(selectedMinutes ~/ 60, selectedMinutes % 60),
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Slider(
@@ -158,9 +153,9 @@ class _ScreenTimeSettingsScreenState
                 ),
                 TextField(
                   controller: reasonController,
-                  decoration: const InputDecoration(
-                    labelText: 'Neden (isteğe bağlı)',
-                    hintText: 'Örn: Ödev zamanı',
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context).stReasonOptional,
+                    hintText: AppLocalizations.of(context).ornOdevZamani,
                   ),
                 ),
               ],
@@ -177,7 +172,7 @@ class _ScreenTimeSettingsScreenState
                 _lockChild(childId, childName, selectedMinutes, reasonController.text);
               },
               icon: const Icon(Icons.lock),
-              label: const Text('Kilitle'),
+              label: Text(AppLocalizations.of(context).stLock),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.error,
                 foregroundColor: Colors.white,
@@ -237,12 +232,11 @@ class _ScreenTimeSettingsScreenState
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
-        title: 'Ekran Süresi',
+        title: AppLocalizations.of(context).ekranSuresi,
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -254,13 +248,10 @@ class _ScreenTimeSettingsScreenState
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.all(16),
-                    child: Text(
-                      'Çocuk üyeler için günlük ekran süresi limitleri belirleyin.',
-                      style: TextStyle(
+                    child: Text(AppLocalizations.of(context).cocukUyelerIcinGunlukEkranSuresiLimitleriBelirleyin,
+                      style: const TextStyle(
                         fontSize: 14,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.slate,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                   ),
@@ -299,7 +290,7 @@ class _ScreenTimeSettingsScreenState
                                   : 'Limit yok',
                             ),
                             value: isEnabled,
-                            activeThumbColor: AppColors.cobalt,
+                            activeThumbColor: const Color(0xFF6366F1),
                             onChanged: (v) {
                               _updateScreenTime(
                                 child['id'] as String,

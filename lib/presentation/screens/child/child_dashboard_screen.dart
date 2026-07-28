@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../config/routes.dart';
@@ -9,7 +10,6 @@ import 'tabs/child_achievements_tab.dart';
 import 'tabs/child_chat_tab.dart';
 import 'tabs/child_home_tab.dart';
 import 'tabs/child_safety_tab.dart';
-import 'tabs/child_schedule_tab.dart';
 import 'tabs/child_tasks_tab.dart';
 
 class ChildDashboardScreen extends ConsumerStatefulWidget {
@@ -57,19 +57,18 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
+                  color: const Color(0xFF9CA3AF),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
               const SizedBox(height: 16),
-              const Text(
-                'Hızlı Aksiyon',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(AppLocalizations.of(context).hizliAksiyon,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
               _QuickActionTile(
                 icon: Icons.chat_bubble_outline,
-                label: 'Mesaj Gönder',
+                label: AppLocalizations.of(context).mesajGonder,
                 color: Colors.blue,
                 onTap: () {
                   Navigator.pop(context);
@@ -78,7 +77,7 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
               ),
               _QuickActionTile(
                 icon: Icons.check_circle_outline,
-                label: 'Görevlerime Git',
+                label: AppLocalizations.of(context).gorevlerimeGit,
                 color: Colors.green,
                 onTap: () {
                   Navigator.pop(context);
@@ -87,7 +86,7 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
               ),
               _QuickActionTile(
                 icon: Icons.calendar_today_outlined,
-                label: 'Ders Programım',
+                label: AppLocalizations.of(context).dersProgramim,
                 color: Colors.orange,
                 onTap: () {
                   Navigator.pop(context);
@@ -96,7 +95,7 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
               ),
               _QuickActionTile(
                 icon: Icons.location_on_outlined,
-                label: 'Konumumu Paylaş',
+                label: AppLocalizations.of(context).konumumuPaylas,
                 color: Colors.purple,
                 onTap: () {
                   Navigator.pop(context);
@@ -105,7 +104,7 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
               ),
               _QuickActionTile(
                 icon: Icons.auto_awesome,
-                label: 'Akıllı Rotasyon',
+                label: AppLocalizations.of(context).akilliRotasyon,
                 color: const Color(0xFF8B5CF6),
                 onTap: () {
                   Navigator.pop(context);
@@ -120,7 +119,7 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
               ),
               _QuickActionTile(
                 icon: Icons.timer,
-                label: 'Güvenli Varış',
+                label: AppLocalizations.of(context).guvenliVaris,
                 color: Colors.orange,
                 onTap: () {
                   Navigator.pop(context);
@@ -154,38 +153,39 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
     ];
 
     final navItems = [
-      const _NavItem(
+      _NavItem(
         icon: Icons.home_outlined,
         activeIcon: Icons.home,
-        label: 'Ana Sayfa',
+        label: AppLocalizations.of(context).cdbHome,
       ),
-      const _NavItem(
+      _NavItem(
         icon: Icons.check_circle_outline,
         activeIcon: Icons.check_circle,
-        label: 'Görevlerim',
+        label: AppLocalizations.of(context).gorevlerim,
       ),
-      const _NavItem(
+      _NavItem(
         icon: Icons.chat_bubble_outline,
         activeIcon: Icons.chat_bubble,
-        label: 'Sohbet',
+        label: AppLocalizations.of(context).cdbChat,
       ),
-      const _NavItem(
+      _NavItem(
         icon: Icons.emoji_events_outlined,
         activeIcon: Icons.emoji_events,
-        label: 'Rozetler',
+        label: AppLocalizations.of(context).cdbBadges,
       ),
-      const _NavItem(
+      _NavItem(
         icon: Icons.shield_outlined,
         activeIcon: Icons.shield,
-        label: 'Güvenlik',
+        label: AppLocalizations.of(context).safety,
       ),
     ];
 
     return Scaffold(
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black87,
+        backgroundColor: const Color(0xFF13131A),
+        foregroundColor: Colors.white,
         title: Row(
           children: [
             CircleAvatar(
@@ -208,7 +208,7 @@ class _ChildDashboardScreenState extends ConsumerState<ChildDashboardScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.logout_outlined, size: 22),
-            tooltip: 'Çıkış Yap',
+            tooltip: AppLocalizations.of(context).logout,
             onPressed: _signOut,
           ),
         ],
@@ -255,7 +255,7 @@ class _NavItem {
   final IconData icon;
   final IconData activeIcon;
   final String label;
-  const _NavItem({
+  _NavItem({
     required this.icon,
     required this.activeIcon,
     required this.label,
@@ -316,7 +316,7 @@ class _ChildBottomNav extends StatelessWidget {
     final isSelected = selectedIndex == index;
     final item = items[index];
     final activeColor = const Color(0xFF3B82F6);
-    final inactiveColor = Colors.grey.shade400;
+    final inactiveColor = const Color(0xFF9CA3AF);
 
     return GestureDetector(
       onTap: () => onTap(index),

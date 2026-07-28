@@ -39,22 +39,20 @@ class _AIAnalysisCard extends StatelessWidget {
               child: const Icon(Icons.auto_awesome, color: Colors.white, size: 24),
             ),
             const SizedBox(width: 14),
-            const Expanded(
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'AI ile Bütçe Analizi',
-                    style: TextStyle(
+                  Text(AppLocalizations.of(context).aiIleButceAnalizi,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 4),
-                  Text(
-                    'Harcama alışkanlıklarınızı analiz edin, tasarruf önerileri alın.',
-                    style: TextStyle(
+                  const SizedBox(height: 4),
+                  Text(AppLocalizations.of(context).harcamaAliskanliklariniziAnalizEdinTasarrufOnerileriAlin,
+                    style: const TextStyle(
                       color: Colors.white70,
                       fontSize: 12,
                     ),

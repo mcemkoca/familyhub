@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 
@@ -19,7 +18,7 @@ class EmojiPickerWidget extends StatelessWidget {
         height: 280,
         emojiViewConfig: EmojiViewConfig(
           columns: 7,
-          emojiSizeMax: 32 * (Platform.isIOS ? 1.30 : 1.0),
+          emojiSizeMax: 32.0,
           verticalSpacing: 0,
           horizontalSpacing: 0,
           gridPadding: EdgeInsets.zero,

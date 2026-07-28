@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import '../../../../config/constants.dart';
 import '../../../../core/validation/input_validator.dart';
@@ -13,6 +14,8 @@ class ProfileStep extends StatefulWidget {
 }
 
 class _ProfileStepState extends State<ProfileStep> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   final _phoneController = TextEditingController();
   DateTime? _dateOfBirth;
   String _language = 'tr';
@@ -60,33 +63,32 @@ class _ProfileStepState extends State<ProfileStep> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Profil Bilgileri',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+              color: Color(0xFFE5E7EB),
             ),
           ),
           const SizedBox(height: 4),
-          Text(
+          const Text(
             'Kişisel bilgilerinizi ekleyin (isteğe bağlı)',
             style: TextStyle(
               fontSize: 14,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: Color(0xFF6B7280),
             ),
           ),
           const SizedBox(height: 24),
           _buildTextField(
             controller: _phoneController,
-            label: 'Telefon Numarası',
+            label: AppLocalizations.of(context).telefonnumarasi1,
             icon: Icons.phone_outlined,
             keyboardType: TextInputType.phone,
             hintText: '+90 5xx xxx xx xx',
@@ -95,7 +97,7 @@ class _ProfileStepState extends State<ProfileStep> {
           _buildDatePicker(isDark),
           const SizedBox(height: 16),
           _buildDropdown(
-            label: 'Tercih Edilen Dil',
+            label: AppLocalizations.of(context).psPreferredLang,
             value: _language,
             items: const [
               {'value': 'tr', 'label': 'Türkçe'},
@@ -105,7 +107,7 @@ class _ProfileStepState extends State<ProfileStep> {
           ),
           const SizedBox(height: 16),
           _buildDropdown(
-            label: 'Tema Tercihi',
+            label: AppLocalizations.of(context).psThemePref,
             value: _theme,
             items: const [
               {'value': 'light', 'label': 'Açık'},
@@ -121,13 +123,13 @@ class _ProfileStepState extends State<ProfileStep> {
             child: ElevatedButton(
               onPressed: _save,
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.cobalt,
+                backgroundColor: const Color(0xFF6366F1),
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
-              child: const Text('İleri', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+              child: Text(AppLocalizations.of(context).next, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             ),
           ),
         ],
@@ -142,22 +144,21 @@ class _ProfileStepState extends State<ProfileStep> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         decoration: BoxDecoration(
-          color: isDark ? AppColors.darkCard : const Color(0xFFF8FAFC),
+          color: const Color(0xFF13131A),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
           children: [
-            Icon(Icons.calendar_today, color: isDark ? AppColors.darkTextSecondary : AppColors.slate),
+            const Icon(Icons.calendar_today, color: Color(0xFF6B7280)),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Doğum Tarihi',
-                    style: TextStyle(
+                  Text(AppLocalizations.of(context).dogumTarihi,
+                    style: const TextStyle(
                       fontSize: 12,
-                      color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                      color: Color(0xFF6B7280),
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -165,9 +166,9 @@ class _ProfileStepState extends State<ProfileStep> {
                     _dateOfBirth != null
                         ? '${_dateOfBirth!.day}/${_dateOfBirth!.month}/${_dateOfBirth!.year}'
                         : 'Seçilmedi',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
-                      color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                      color: Color(0xFFE5E7EB),
                     ),
                   ),
                 ],
@@ -186,11 +187,10 @@ class _ProfileStepState extends State<ProfileStep> {
     required List<Map<String, String>> items,
     required ValueChanged<String?> onChanged,
   }) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkCard : const Color(0xFFF8FAFC),
+        color: const Color(0xFF13131A),
         borderRadius: BorderRadius.circular(12),
       ),
       child: DropdownButtonHideUnderline(
@@ -217,7 +217,6 @@ class _ProfileStepState extends State<ProfileStep> {
     TextInputType? keyboardType,
     String? hintText,
   }) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return TextField(
       controller: controller,
       keyboardType: keyboardType,
@@ -226,7 +225,7 @@ class _ProfileStepState extends State<ProfileStep> {
         hintText: hintText,
         prefixIcon: Icon(icon),
         filled: true,
-        fillColor: isDark ? AppColors.darkCard : const Color(0xFFF8FAFC),
+        fillColor: const Color(0xFF13131A),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,

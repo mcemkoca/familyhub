@@ -10,10 +10,15 @@ import '../repositories/context_snapshot_repository.dart';
 import '../repositories/reminder_interaction_repository.dart';
 import 'notification_service.dart';
 import 'location_service.dart';
+import 'localization/locale_service.dart';
 
 /// Core engine for context-aware smart reminders.
 /// Evaluates triggers based on location, time, and behavior context.
 class SmartReminderService {
+  static String _text(Map<String, String> values) {
+    final lang = LocaleService.resolveInitialLocale().languageCode;
+    return values[lang] ?? values['tr']!;
+  }
   static final _reminderRepo = SmartReminderRepository();
   static final _contextRepo = ContextSnapshotRepository();
   static final _interactionRepo = ReminderInteractionRepository();
@@ -81,7 +86,10 @@ class SmartReminderService {
   ) async {
     Position? position;
     try {
-      position = await Geolocator.getCurrentPosition();
+      position = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+            accuracy: LocationAccuracy.medium, timeLimit: Duration(seconds: 8)),
+      );
     } catch (e) { debugPrint('Smart reminder error: $e'); }
 
     final now = DateTime.now();
@@ -522,13 +530,15 @@ class SmartReminderService {
     var body = reminder.description ?? '';
 
     final variables = <String, String>{
-      '{location}': context.location.placeName ?? 'burada',
+      '{location}': context.location.placeName ?? _text(const {'tr': 'burada', 'en': 'here', 'nl': 'hier', 'fr': 'ici'}),
       '{time}': _formatTime(DateTime.now()),
-      '{weather}': context.environment.weather ?? 'güzel',
-      '{energy}': context.cognitive.estimatedEnergy > 70 ? 'enerjik' : 'rahat',
+      '{weather}': context.environment.weather ?? _text(const {'tr': 'güzel', 'en': 'pleasant', 'nl': 'aangenaam', 'fr': 'agréable'}),
+      '{energy}': context.cognitive.estimatedEnergy > 70
+          ? _text(const {'tr': 'enerjik', 'en': 'energetic', 'nl': 'energiek', 'fr': 'énergique'})
+          : _text(const {'tr': 'rahat', 'en': 'relaxed', 'nl': 'ontspannen', 'fr': 'détendu'}),
       '{nearby_member}': context.social.nearbyFamilyMembers.isNotEmpty
           ? context.social.nearbyFamilyMembers.first
-          : 'kimse',
+          : _text(const {'tr': 'kimse', 'en': 'no one', 'nl': 'niemand', 'fr': 'personne'}),
     };
 
     variables.forEach((key, value) {
@@ -539,7 +549,7 @@ class SmartReminderService {
     // Tone adjustment
     if (reminder.personalization.tone == ReminderTone.gentle &&
         context.cognitive.estimatedEnergy < 40) {
-      body = 'Biraz dinlenmiş olabilirsin, ama $body';
+      body = _text({'tr': 'Biraz dinlenmiş olabilirsin, ama $body', 'en': 'You may have had some rest, but $body', 'nl': 'Je hebt misschien wat gerust, maar $body', 'fr': 'Tu t’es peut-être reposé, mais $body'});
     }
 
     if (reminder.personalization.tone == ReminderTone.urgent &&
@@ -550,7 +560,7 @@ class SmartReminderService {
     // Context suffix
     if (reminder.personalization.includeContext &&
         context.location.placeName != null) {
-      body += '\n(Şu an ${context.location.placeName}\'dasın)';
+      body += _text({'tr': '\n(Şu an ${context.location.placeName} konumundasın)', 'en': '\n(You are currently at ${context.location.placeName})', 'nl': '\n(Je bent momenteel bij ${context.location.placeName})', 'fr': '\n(Tu es actuellement à ${context.location.placeName})'});
     }
 
     return PersonalizedMessage(

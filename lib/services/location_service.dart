@@ -7,30 +7,60 @@ import '../domain/entities.dart';
 class LocationService {
   static Stream<Position>? _locationStream;
 
+  /// YAN ETKİSİZ durum sorgusu (FH-07): izin DIALOGU AÇMAZ.
+  ///
+  /// Eski [checkPermission] "check" adına rağmen izin istiyordu; bu yüzden
+  /// salt-okunur çağrılar beklenmedik sistem dialogu tetikliyordu ve
+  /// whileInUse/always ayrımı görünmüyordu. Yeni kod bunu kullanmalı.
+  static Future<LocationPermissionStatus> checkPermissionStatus() async {
+    final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    final permission = await Geolocator.checkPermission();
+    return mapGeolocatorPermission(permission, serviceEnabled: serviceEnabled);
+  }
+
+  /// AÇIKÇA izin ister (kullanıcı eylemiyle çağrılmalı).
+  static Future<LocationPermissionStatus> requestPermission() async {
+    final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) return LocationPermissionStatus.serviceDisabled;
+    final permission = await Geolocator.requestPermission();
+    return mapGeolocatorPermission(permission, serviceEnabled: true);
+  }
+
+  /// Cihaz konum ayarlarını açar (deniedForever / serviceDisabled akışı).
+  static Future<bool> openSettings({bool locationSettings = false}) {
+    return locationSettings
+        ? Geolocator.openLocationSettings()
+        : Geolocator.openAppSettings();
+  }
+
+  /// Geriye-uyum: mevcut çağıranlar için korunur (reddedilmişse izin ister).
+  /// Yeni kod [checkPermissionStatus] + [requestPermission] kullanmalı.
   static Future<LocationPermissionStatus> checkPermission() async {
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return LocationPermissionStatus.serviceDisabled;
+    var status = await checkPermissionStatus();
+    if (status == LocationPermissionStatus.denied) {
+      status = await requestPermission();
     }
-
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return LocationPermissionStatus.denied;
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      return LocationPermissionStatus.deniedForever;
-    }
-
-    return LocationPermissionStatus.granted;
+    if (status.isGranted) return LocationPermissionStatus.granted;
+    return status;
   }
 
   static Future<bool> requestPermissions() async {
     final status = await checkPermission();
     return status == LocationPermissionStatus.granted;
+  }
+
+  /// Returns true if granted, false if denied.
+  /// Calls [onDeniedForever] when permanently denied so the caller can show
+  /// an "Open Settings" dialog without duplicating Geolocator logic.
+  static Future<bool> requestPermissionsWithFallback({
+    required Future<void> Function() onDeniedForever,
+  }) async {
+    final status = await checkPermission();
+    if (status == LocationPermissionStatus.granted) return true;
+    if (status == LocationPermissionStatus.deniedForever) {
+      await onDeniedForever();
+    }
+    return false;
   }
 
   static Future<LocationModel?> getCurrentAddress() async {
@@ -107,9 +137,18 @@ class LocationService {
   static Future<Position?> getCurrentPosition() async {
     final status = await checkPermission();
     if (status != LocationPermissionStatus.granted) return null;
-    return Geolocator.getCurrentPosition(
-      locationSettings: const LocationSettings(accuracy: LocationAccuracy.best),
-    );
+    // Timeout'lu — GPS fix yoksa (emülatör) sonsuz bekleme yerine son bilinen
+    // konuma düşer.
+    try {
+      return await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.best,
+          timeLimit: Duration(seconds: 8),
+        ),
+      );
+    } catch (_) {
+      return Geolocator.getLastKnownPosition();
+    }
   }
 
   static Future<Position?> getCurrentLocation() async {
@@ -135,9 +174,50 @@ class LocationService {
   }
 }
 
+/// Konum izni durumları (FH-07 / spec §11 — granüler).
+///
+/// [granted] geriye-uyum içindir; yeni kod [whileInUse]/[always] ayrımını
+/// kullanmalıdır (arka plan takibi yalnızca [always] ile çalışır).
 enum LocationPermissionStatus {
-  granted,
-  denied,
-  deniedForever,
-  serviceDisabled,
+  granted, // legacy — whileInUse|always çatısı
+  whileInUse, // yalnızca uygulama açıkken
+  always, // arka planda da izinli
+  denied, // reddedildi, tekrar sorulabilir
+  deniedForever, // kalıcı red → cihaz ayarları gerekir
+  serviceDisabled, // konum servisi kapalı
+  unknown, // belirlenemedi
+}
+
+extension LocationPermissionStatusX on LocationPermissionStatus {
+  /// Konum okunabilir mi? (ön plan yeterli)
+  bool get isGranted =>
+      this == LocationPermissionStatus.granted ||
+      this == LocationPermissionStatus.whileInUse ||
+      this == LocationPermissionStatus.always;
+
+  /// Arka planda konum takibi yapılabilir mi? (yalnızca 'always')
+  bool get canTrackInBackground => this == LocationPermissionStatus.always;
+
+  /// Kullanıcı tekrar sorulabilir mi? (deniedForever → hayır, ayarlar gerekir)
+  bool get isAskable => this == LocationPermissionStatus.denied;
+
+  /// Cihaz ayarlarına yönlendirme gerekiyor mu?
+  bool get needsSettings =>
+      this == LocationPermissionStatus.deniedForever ||
+      this == LocationPermissionStatus.serviceDisabled;
+}
+
+/// Geolocator izni → uygulama durumu (SAF fonksiyon — test edilebilir).
+LocationPermissionStatus mapGeolocatorPermission(
+  LocationPermission permission, {
+  required bool serviceEnabled,
+}) {
+  if (!serviceEnabled) return LocationPermissionStatus.serviceDisabled;
+  return switch (permission) {
+    LocationPermission.always => LocationPermissionStatus.always,
+    LocationPermission.whileInUse => LocationPermissionStatus.whileInUse,
+    LocationPermission.denied => LocationPermissionStatus.denied,
+    LocationPermission.deniedForever => LocationPermissionStatus.deniedForever,
+    LocationPermission.unableToDetermine => LocationPermissionStatus.unknown,
+  };
 }

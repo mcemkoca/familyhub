@@ -35,8 +35,7 @@ class OcrEventService {
     // Try to find date patterns
     final datePatterns = [
       RegExp(r'(\d{1,2})[/.](\d{1,2})[/.](\d{2,4})'),           // 15/05/2026
-      RegExp(r'(\d{1,2})\s+(Ocak|Şubat|Mart|Nisan|Mayıs|Haziran|Temmuz|Ağustos|Eylül|Ekim|Kasım|Aralık)\s+(\d{4})', caseSensitive: false),
-      RegExp(r'(\d{1,2})\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{4})', caseSensitive: false),
+      RegExp(r'(\d{1,2})\s+([A-Za-zÀ-ÿİıŞşĞğÜüÖöÇç]+)\s+(\d{4})', caseSensitive: false),
     ];
 
     final timePattern = RegExp(r'(\d{1,2}):(\d{2})');
@@ -74,7 +73,7 @@ class OcrEventService {
       }
 
       // Location heuristic: lines containing common location keywords
-      final locationKeywords = ['kafe', 'restoran', 'otel', 'hastane', 'okul', 'salon', 'sokak', 'cadde', 'mahallesi', 'caddesi', 'sokak', 'no:', 'kat:', 'daire', 'ofis', 'merkez'];
+      final locationKeywords = ['kafe', 'restoran', 'otel', 'hastane', 'okul', 'salon', 'sokak', 'cadde', 'mahallesi', 'caddesi', 'no:', 'kat:', 'daire', 'ofis', 'merkez', 'cafe', 'restaurant', 'hotel', 'hospital', 'school', 'street', 'avenue', 'office', 'center', 'centrum', 'ziekenhuis', 'school', 'straat', 'laan', 'bureau', 'centre', 'hôpital', 'école', 'rue'];
       final lower = line.toLowerCase();
       if (locationKeywords.any((k) => lower.contains(k))) {
         location = line;
@@ -97,6 +96,10 @@ class OcrEventService {
       'temmuz': 7, 'ağustos': 8, 'eylül': 9, 'ekim': 10, 'kasım': 11, 'aralık': 12,
       'january': 1, 'february': 2, 'march': 3, 'april': 4, 'may': 5, 'june': 6,
       'july': 7, 'august': 8, 'september': 9, 'october': 10, 'november': 11, 'december': 12,
+      'januari': 1, 'februari': 2, 'maart': 3, 'mei': 5, 'juni': 6,
+      'juli': 7, 'augustus': 8, 'oktober': 10,
+      'janvier': 1, 'février': 2, 'mars': 3, 'avril': 4, 'mai': 5, 'juin': 6,
+      'juillet': 7, 'août': 8, 'septembre': 9, 'octobre': 10, 'novembre': 11, 'décembre': 12,
     };
     return map[month.toLowerCase()] ?? 1;
   }

@@ -34,10 +34,10 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
   String _editAssignedTo = '';
 
   final _priorities = [
-    {'key': 'low', 'label': 'Düşük', 'color': AppColors.green},
-    {'key': 'medium', 'label': 'Orta', 'color': AppColors.blue},
-    {'key': 'high', 'label': 'Yüksek', 'color': AppColors.orange},
-    {'key': 'urgent', 'label': 'Acil', 'color': AppColors.red},
+    {'key': 'low', 'color': AppColors.green},
+    {'key': 'medium', 'color': AppColors.blue},
+    {'key': 'high', 'color': AppColors.orange},
+    {'key': 'urgent', 'color': AppColors.red},
   ];
 
   Future<String?> _getFamilyId() async {
@@ -54,8 +54,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
   StreamSubscription<List<Task>>? _tasksSub;
 
   Future<void> _loadTasks() async {
-    final familyId = await _getFamilyId();
-    if (familyId == null) return;
+    final familyId = await _getFamilyId() ?? 'local_family';
     final tasks = await TaskRepository().getTasks(familyId);
     ref.read(tasksProvider.notifier).state = tasks;
     await HiveService.saveTasks(tasks);
@@ -63,7 +62,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
 
   void _subscribeToTasks() async {
     final familyId = await _getFamilyId();
-    if (familyId == null) return;
+    if (familyId == null) return; // yerel modda realtime yok, cache yeterli
     _tasksSub?.cancel();
     _tasksSub = TaskRepository().watchTasks(familyId).listen((tasks) {
       ref.read(tasksProvider.notifier).state = tasks;
@@ -90,15 +89,11 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
 
   void _addTask() async {
     if (_titleController.text.isEmpty) {
-      _showSnack('Görev başlığı boş olamaz');
+      _showSnack(AppLocalizations.of(context).taskTitleRequired);
       return;
     }
     try {
-      final familyId = await _getFamilyId();
-      if (familyId == null) {
-        _showSnack('Aile bilgisi bulunamadı, lütfen tekrar giriş yapın');
-        return;
-      }
+      final familyId = await _getFamilyId() ?? 'local_family';
       final userId = AuthService.currentUserId ?? '';
       final newTask = Task(
         id: const Uuid().v4(),
@@ -108,17 +103,25 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
         priority: _selectedPriority,
         dueDate: _dueDate,
       );
-      await TaskRepository().createTask(newTask, familyId);
+      final created = await TaskRepository().createTask(newTask, familyId);
       if (!mounted) return;
+      // Yeni görevi ANINDA listeye ekle. Yerel ailede realtime abonelik yok;
+      // eskiden liste yenilenmediği için "ekleme yapılmıyor" görünüyordu.
+      final current = ref.read(tasksProvider);
+      if (!current.any((t) => t.id == created.id)) {
+        final updated = [created, ...current];
+        ref.read(tasksProvider.notifier).state = updated;
+        await HiveService.saveTasks(updated);
+      }
       _titleController.clear();
       _descController.clear();
       _selectedPriority = 'medium';
       _dueDate = null;
       _assignedTo = '';
-      Navigator.pop(context);
-      _showSnack('Görev eklendi');
+      if (mounted) Navigator.pop(context);
+      if (mounted) _showSnack(AppLocalizations.of(context).gorevEklendi);
     } catch (e) {
-      _showSnack('Görev eklenirken hata: $e');
+      if (mounted) _showSnack(AppLocalizations.of(context).taskAddError('$e'));
     }
   }
 
@@ -156,79 +159,92 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Görevi Düzenle',
+                    AppLocalizations.of(context).goreviDuzenle,
                     style: Theme.of(context).textTheme.displaySmall,
                   ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: _editController,
-                  autofocus: true,
-                  decoration: const InputDecoration(labelText: 'Görev Başlığı'),
-                ),
-                const SizedBox(height: 12),
-                TextField(
-                  controller: _editDescController,
-                  decoration: const InputDecoration(labelText: 'Açıklama'),
-                ),
-                const SizedBox(height: 12),
-                Wrap(
-                  spacing: 8,
-                  children: _priorities.map((p) {
-                    final selected = _selectedPriority == p['key'];
-                    return ChoiceChip(
-                      label: Text(p['label'] as String),
-                      selected: selected,
-                      onSelected: (_) => setModalState(
-                        () => _selectedPriority = p['key'] as String,
-                      ),
-                      selectedColor: (p['color'] as Color).withAlpha(30),
-                      checkmarkColor: p['color'] as Color,
-                    );
-                  }).toList(),
-                ),
-                const SizedBox(height: 12),
-                ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  leading: const Icon(
-                    Icons.calendar_today,
-                    color: AppColors.cobalt,
+                  const SizedBox(height: 16),
+                  TextField(
+                    controller: _editController,
+                    autofocus: true,
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context).taskTitle,
+                    ),
                   ),
-                  title: Text(
-                    _editDueDate == null
-                        ? 'Bitiş Tarihi Seç'
-                        : 'Bitiş: ${_editDueDate!.day}/${_editDueDate!.month}/${_editDueDate!.year}',
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: _editDescController,
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context).description,
+                    ),
                   ),
-                  trailing: _editDueDate != null
-                      ? IconButton(
-                          icon: const Icon(Icons.clear, size: 18),
-                          onPressed: () =>
-                              setModalState(() => _editDueDate = null),
-                        )
-                      : null,
-                  onTap: () async {
-                    final picked = await showDatePicker(
-                      context: context,
-                      initialDate: _editDueDate ?? DateTime.now(),
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime.now().add(const Duration(days: 365)),
-                    );
-                    if (picked != null) {
-                      setModalState(() => _editDueDate = picked);
-                    }
-                  },
-                ),
-                if (members.isNotEmpty)
-                  DropdownButtonFormField<String>(
-                    initialValue: _editAssignedTo.isEmpty
-                        ? null
-                        : _editAssignedTo,
-                    decoration: const InputDecoration(labelText: 'Atanan Kişi'),
-                    items: members.map((m) {
-                      return DropdownMenuItem(value: m.id, child: Text(m.name));
+                  const SizedBox(height: 12),
+                  Wrap(
+                    spacing: 8,
+                    children: _priorities.map((p) {
+                      final selected = _selectedPriority == p['key'];
+                      return ChoiceChip(
+                        label: Text(
+                          _priorityLabel(context, p['key'] as String),
+                        ),
+                        selected: selected,
+                        onSelected: (_) => setModalState(
+                          () => _selectedPriority = p['key'] as String,
+                        ),
+                        selectedColor: (p['color'] as Color).withAlpha(30),
+                        checkmarkColor: p['color'] as Color,
+                      );
                     }).toList(),
-                    onChanged: (v) =>
-                        setModalState(() => _editAssignedTo = v ?? ''),
                   ),
+                  const SizedBox(height: 12),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: const Icon(
+                      Icons.calendar_today,
+                      color: Color(0xFF6366F1),
+                    ),
+                    title: Text(
+                      _editDueDate == null
+                          ? AppLocalizations.of(context).pickDueDate
+                          : AppLocalizations.of(context).dueLabel(
+                              '${_editDueDate!.day}/${_editDueDate!.month}/${_editDueDate!.year}',
+                            ),
+                    ),
+                    trailing: _editDueDate != null
+                        ? IconButton(
+                            icon: const Icon(Icons.clear, size: 18),
+                            onPressed: () =>
+                                setModalState(() => _editDueDate = null),
+                          )
+                        : null,
+                    onTap: () async {
+                      final picked = await showDatePicker(
+                        context: context,
+                        initialDate: _editDueDate ?? DateTime.now(),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime.now().add(const Duration(days: 365)),
+                      );
+                      if (picked != null) {
+                        setModalState(() => _editDueDate = picked);
+                      }
+                    },
+                  ),
+                  if (members.isNotEmpty)
+                    DropdownButtonFormField<String>(
+                      initialValue: _editAssignedTo.isEmpty
+                          ? null
+                          : _editAssignedTo,
+                      decoration: InputDecoration(
+                        labelText: AppLocalizations.of(context).atananKisi,
+                      ),
+                      items: members.map((m) {
+                        return DropdownMenuItem(
+                          value: m.id,
+                          child: Text(m.name),
+                        );
+                      }).toList(),
+                      onChanged: (v) =>
+                          setModalState(() => _editAssignedTo = v ?? ''),
+                    ),
                   const SizedBox(height: 24),
                   SizedBox(
                     width: double.infinity,
@@ -236,7 +252,9 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                     child: ElevatedButton(
                       onPressed: () async {
                         if (_editController.text.isEmpty) {
-                          _showSnack('Görev başlığı boş olamaz');
+                          _showSnack(
+                            AppLocalizations.of(context).taskTitleRequired,
+                          );
                           return;
                         }
                         try {
@@ -256,13 +274,19 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                           await TaskRepository().updateTask(updatedTask);
                           if (!context.mounted) return;
                           Navigator.pop(context);
-                          _showSnack('Görev güncellendi');
+                          _showSnack(AppLocalizations.of(context).taskUpdated);
                         } catch (e) {
-                          _showSnack('Görev güncellenirken hata: $e');
+                          if (mounted) {
+                            _showSnack(
+                              AppLocalizations.of(
+                                context,
+                              ).taskUpdateError('$e'),
+                            );
+                          }
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.purple,
+                        backgroundColor: const Color(0xFF8B5CF6),
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
@@ -293,11 +317,15 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
         status: task.status == TaskStatus.completed
             ? TaskStatus.pending
             : TaskStatus.completed,
-        completedAt: task.status == TaskStatus.completed ? null : DateTime.now(),
+        completedAt: task.status == TaskStatus.completed
+            ? null
+            : DateTime.now(),
       );
       await TaskRepository().updateTask(updated);
     } catch (e) {
-      _showSnack('Durum değiştirilirken hata: $e');
+      if (mounted) {
+        _showSnack(AppLocalizations.of(context).taskStatusError('$e'));
+      }
     }
   }
 
@@ -313,8 +341,10 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Görevi Sil'),
-        content: Text('"${task.title}" silinecek. Emin misiniz?'),
+        title: Text(AppLocalizations.of(context).tskDeleteTask),
+        content: Text(
+          AppLocalizations.of(context).confirmDeleteNamed(task.title),
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -322,7 +352,10 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Sil', style: TextStyle(color: AppColors.error)),
+            child: Text(
+              AppLocalizations.of(context).budDelete,
+              style: const TextStyle(color: AppColors.error),
+            ),
           ),
         ],
       ),
@@ -360,76 +393,90 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Yeni Görev',
+                    AppLocalizations.of(context).yeniGorev,
                     style: Theme.of(context).textTheme.displaySmall,
                   ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: _titleController,
-                  autofocus: true,
-                  decoration: const InputDecoration(labelText: 'Görev Başlığı'),
-                ),
-                const SizedBox(height: 12),
-                TextField(
-                  controller: _descController,
-                  decoration: const InputDecoration(
-                    labelText: 'Açıklama (opsiyonel)',
+                  const SizedBox(height: 16),
+                  TextField(
+                    controller: _titleController,
+                    autofocus: true,
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context).taskTitle,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 12),
-                Wrap(
-                  spacing: 8,
-                  children: _priorities.map((p) {
-                    final selected = _selectedPriority == p['key'];
-                    return ChoiceChip(
-                      label: Text(p['label'] as String),
-                      selected: selected,
-                      onSelected: (_) => setModalState(
-                        () => _selectedPriority = p['key'] as String,
-                      ),
-                      selectedColor: (p['color'] as Color).withAlpha(30),
-                      checkmarkColor: p['color'] as Color,
-                    );
-                  }).toList(),
-                ),
-                const SizedBox(height: 12),
-                ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  leading: const Icon(
-                    Icons.calendar_today,
-                    color: AppColors.cobalt,
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: _descController,
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context).budDescOptional,
+                    ),
                   ),
-                  title: Text(
-                    _dueDate == null
-                        ? 'Bitiş Tarihi Seç (opsiyonel)'
-                        : 'Bitiş: ${_dueDate!.day}/${_dueDate!.month}/${_dueDate!.year}',
-                  ),
-                  trailing: _dueDate != null
-                      ? IconButton(
-                          icon: const Icon(Icons.clear, size: 18),
-                          onPressed: () => setModalState(() => _dueDate = null),
-                        )
-                      : null,
-                  onTap: () async {
-                    final picked = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime.now().add(const Duration(days: 365)),
-                    );
-                    if (picked != null) setModalState(() => _dueDate = picked);
-                  },
-                ),
-                if (members.isNotEmpty)
-                  DropdownButtonFormField<String>(
-                    initialValue: _assignedTo.isEmpty ? null : _assignedTo,
-                    decoration: const InputDecoration(labelText: 'Atanan Kişi'),
-                    items: members.map((m) {
-                      return DropdownMenuItem(value: m.id, child: Text(m.name));
+                  const SizedBox(height: 12),
+                  Wrap(
+                    spacing: 8,
+                    children: _priorities.map((p) {
+                      final selected = _selectedPriority == p['key'];
+                      return ChoiceChip(
+                        label: Text(
+                          _priorityLabel(context, p['key'] as String),
+                        ),
+                        selected: selected,
+                        onSelected: (_) => setModalState(
+                          () => _selectedPriority = p['key'] as String,
+                        ),
+                        selectedColor: (p['color'] as Color).withAlpha(30),
+                        checkmarkColor: p['color'] as Color,
+                      );
                     }).toList(),
-                    onChanged: (v) =>
-                        setModalState(() => _assignedTo = v ?? ''),
                   ),
+                  const SizedBox(height: 12),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: const Icon(
+                      Icons.calendar_today,
+                      color: Color(0xFF6366F1),
+                    ),
+                    title: Text(
+                      _dueDate == null
+                          ? AppLocalizations.of(context).pickDueDateOptional
+                          : AppLocalizations.of(context).dueLabel(
+                              '${_dueDate!.day}/${_dueDate!.month}/${_dueDate!.year}',
+                            ),
+                    ),
+                    trailing: _dueDate != null
+                        ? IconButton(
+                            icon: const Icon(Icons.clear, size: 18),
+                            onPressed: () =>
+                                setModalState(() => _dueDate = null),
+                          )
+                        : null,
+                    onTap: () async {
+                      final picked = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime.now().add(const Duration(days: 365)),
+                      );
+                      if (picked != null) {
+                        setModalState(() => _dueDate = picked);
+                      }
+                    },
+                  ),
+                  if (members.isNotEmpty)
+                    DropdownButtonFormField<String>(
+                      initialValue: _assignedTo.isEmpty ? null : _assignedTo,
+                      decoration: InputDecoration(
+                        labelText: AppLocalizations.of(context).atananKisi,
+                      ),
+                      items: members.map((m) {
+                        return DropdownMenuItem(
+                          value: m.id,
+                          child: Text(m.name),
+                        );
+                      }).toList(),
+                      onChanged: (v) =>
+                          setModalState(() => _assignedTo = v ?? ''),
+                    ),
                   const SizedBox(height: 24),
                   SizedBox(
                     width: double.infinity,
@@ -437,7 +484,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                     child: ElevatedButton(
                       onPressed: _addTask,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.purple,
+                        backgroundColor: const Color(0xFF8B5CF6),
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
@@ -475,16 +522,17 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
     }
   }
 
-  String _priorityLabel(String p) {
+  String _priorityLabel(BuildContext context, String p) {
+    final l = AppLocalizations.of(context);
     switch (p) {
       case 'urgent':
-        return 'Acil';
+        return l.priorityUrgent;
       case 'high':
-        return 'Yüksek';
+        return l.priorityHigh;
       case 'low':
-        return 'Düşük';
+        return l.priorityLow;
       default:
-        return 'Orta';
+        return l.priorityMedium;
     }
   }
 
@@ -500,7 +548,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.auto_awesome),
-            tooltip: 'Akıllı Rotasyon',
+            tooltip: AppLocalizations.of(context).akilliRotasyon,
             onPressed: () => context.push(AppRoutes.smartRotation),
           ),
         ],
@@ -508,24 +556,31 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
       body: Stack(
         children: [
           tasks.isEmpty
-              ? const Center(
+              ? Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.task_alt, size: 64, color: AppColors.lightGray),
-                      SizedBox(height: 16),
+                      const Icon(
+                        Icons.task_alt,
+                        size: 64,
+                        color: Color(0xFF9CA3AF),
+                      ),
+                      const SizedBox(height: 16),
                       Text(
-                        'Henüz görev yok',
-                        style: TextStyle(
+                        AppLocalizations.of(context).henuzGorevYok,
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.gray,
+                          color: Color(0xFF6B7280),
                         ),
                       ),
-                      SizedBox(height: 8),
-                      Text(
+                      const SizedBox(height: 8),
+                      const Text(
                         'Yeni görev eklemek için + butonuna basın',
-                        style: TextStyle(fontSize: 14, color: AppColors.slate),
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Color(0xFF6B7280),
+                        ),
                       ),
                     ],
                   ),
@@ -567,7 +622,13 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                           decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.surface,
                             borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: const Color(0xFFF3F4F6)),
+                            border: Border.all(
+                              color:
+                                  Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.white.withAlpha(20)
+                                  : const Color(0xFFF3F4F6),
+                            ),
                           ),
                           child: ListTile(
                             leading: GestureDetector(
@@ -584,7 +645,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                                   border: Border.all(
                                     color: isCompleted
                                         ? AppColors.green
-                                        : AppColors.border,
+                                        : Colors.white.withAlpha(80),
                                     width: 2,
                                   ),
                                 ),
@@ -605,7 +666,9 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                                 decoration: isCompleted
                                     ? TextDecoration.lineThrough
                                     : null,
-                                color: isCompleted ? AppColors.gray : null,
+                                color: isCompleted
+                                    ? const Color(0xFF6B7280)
+                                    : null,
                               ),
                             ),
                             subtitle: Row(
@@ -620,7 +683,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                                   ),
                                 ),
                                 Text(
-                                  _priorityLabel(task.priority),
+                                  _priorityLabel(context, task.priority),
                                   style: const TextStyle(fontSize: 11),
                                 ),
                               ],
@@ -634,7 +697,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                                   icon: const Icon(
                                     Icons.edit,
                                     size: 20,
-                                    color: AppColors.cobalt,
+                                    color: Color(0xFF6366F1),
                                   ),
                                   onPressed: () => _editTask(task, members),
                                 ),
@@ -659,7 +722,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
             bottom: MediaQuery.of(context).padding.bottom + 100,
             child: FloatingActionButton(
               onPressed: () => _showAddSheet(members),
-              backgroundColor: AppColors.purple,
+              backgroundColor: const Color(0xFF8B5CF6),
               child: const Icon(Icons.add, color: Colors.white),
             ),
           ),

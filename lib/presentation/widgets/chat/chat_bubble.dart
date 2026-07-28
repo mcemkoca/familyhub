@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:audioplayers/audioplayers.dart';
-import '../../../config/constants.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../domain/entities.dart';
+import '../../../services/auth_service.dart';
 
 class ChatBubble extends StatelessWidget {
   final ChatMessage message;
@@ -10,6 +12,10 @@ class ChatBubble extends StatelessWidget {
   final bool showSender;
   final VoidCallback? onReply;
   final VoidCallback? onReact;
+  final void Function(int optionIndex)? onVote;
+  /// Gerçek okundu sayısı (chat_read_states'ten hesaplanır). null → mesaj
+  /// modelindeki readCount'a düşer (geriye-uyum).
+  final int? readCountOverride;
 
   const ChatBubble({
     super.key,
@@ -18,12 +24,12 @@ class ChatBubble extends StatelessWidget {
     this.showSender = true,
     this.onReply,
     this.onReact,
+    this.onVote,
+    this.readCountOverride,
   });
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Column(
       crossAxisAlignment: isMe
           ? CrossAxisAlignment.end
@@ -69,14 +75,13 @@ class ChatBubble extends StatelessWidget {
                     vertical: 10,
                   ),
                   constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.72,
+                    maxWidth: MediaQuery.sizeOf(context).width * 0.72,
                   ),
                   decoration: BoxDecoration(
                     color: isMe
-                        ? AppColors.cobalt
-                        : (isDark
-                              ? AppColors.darkCard
-                              : const Color(0xFFF1F5F9)),
+                        ? const Color(0xFF6366F1)
+                        : const Color(0x1AFFFFFF),
+                    border: isMe ? null : Border.all(color: const Color(0x1EFFFFFF), width: 0.5),
                     borderRadius: BorderRadius.only(
                       topLeft: const Radius.circular(18),
                       topRight: const Radius.circular(18),
@@ -86,8 +91,8 @@ class ChatBubble extends StatelessWidget {
                     boxShadow: [
                       BoxShadow(
                         color: isMe
-                            ? AppColors.cobalt.withAlpha(30)
-                            : Colors.black.withAlpha(8),
+                            ? const Color(0xFF6366F1).withAlpha(50)
+                            : Colors.black.withAlpha(20),
                         blurRadius: 6,
                         offset: const Offset(0, 2),
                       ),
@@ -98,7 +103,10 @@ class ChatBubble extends StatelessWidget {
                     children: [
                       // Location message
                       if (message.type == MessageType.location)
-                        _LocationPreview(content: message.content)
+                        _LocationPreview(
+                            content: message.content,
+                            latitude: message.latitude,
+                            longitude: message.longitude)
                       else if (message.type == MessageType.audio)
                         _AudioMessagePlayer(
                           audioUrl: message.audioUrl,
@@ -121,6 +129,14 @@ class ChatBubble extends StatelessWidget {
                           fileSize: message.fileSize,
                           isMe: isMe,
                         )
+                      else if (message.type == MessageType.poll &&
+                          message.poll != null)
+                        _PollCard(
+                          poll: message.poll!,
+                          isMe: isMe,
+                          currentUserId: AuthService.currentUserId ?? '',
+                          onVote: onVote,
+                        )
                       else
                         Text(
                           message.content,
@@ -128,10 +144,8 @@ class ChatBubble extends StatelessWidget {
                             fontSize: 15,
                             height: 1.35,
                             color: isMe
-                                ? Colors.white
-                                : (isDark
-                                      ? AppColors.darkTextPrimary
-                                      : AppColors.dark),
+                                ? Colors.white.withAlpha(220)
+                                : Theme.of(context).colorScheme.onSurface,
                           ),
                         ),
                       const SizedBox(height: 4),
@@ -144,15 +158,15 @@ class ChatBubble extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 11,
                               color: isMe
-                                  ? Colors.white.withAlpha(180)
-                                  : (isDark
-                                        ? AppColors.darkTextSecondary
-                                        : AppColors.lightGray),
+                                  ? Colors.white.withAlpha(120)
+                                  : Theme.of(context).colorScheme.onSurface.withAlpha(120),
                             ),
                           ),
                           if (isMe) ...[
                             const SizedBox(width: 4),
-                            _ReadStatus(readCount: message.readCount),
+                            _ReadStatus(
+                                readCount:
+                                    readCountOverride ?? message.readCount),
                           ],
                         ],
                       ),
@@ -226,12 +240,12 @@ class _ReplyPreview extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
         color: isMe
-            ? AppColors.cobalt.withAlpha(40)
+            ? const Color(0xFF6366F1).withAlpha(40)
             : (isDark
-                  ? AppColors.darkBackground.withAlpha(80)
+                  ? const Color(0xFF0A0A0F).withAlpha(80)
                   : Colors.white.withAlpha(80)),
         borderRadius: BorderRadius.circular(10),
-        border: const Border(left: BorderSide(color: AppColors.cobalt, width: 3)),
+        border: const Border(left: BorderSide(color: Color(0xFF6366F1), width: 3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -241,7 +255,7 @@ class _ReplyPreview extends StatelessWidget {
             style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: AppColors.cobalt,
+              color: Color(0xFF6366F1),
             ),
           ),
           const SizedBox(height: 2),
@@ -253,7 +267,7 @@ class _ReplyPreview extends StatelessWidget {
               fontSize: 12,
               color: isMe
                   ? Colors.white.withAlpha(180)
-                  : (isDark ? AppColors.darkTextSecondary : AppColors.slate),
+                  : (const Color(0xFF6B7280)),
             ),
           ),
         ],
@@ -307,7 +321,6 @@ class _ReactionsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: EdgeInsets.only(
         left: isMe ? 0 : 44,
@@ -321,10 +334,10 @@ class _ReactionsRow extends StatelessWidget {
             margin: const EdgeInsets.only(right: 4),
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
             decoration: BoxDecoration(
-              color: isDark ? AppColors.darkCard : Colors.white,
+              color: const Color(0xFF13131A),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: isDark ? AppColors.darkBorder : const Color(0xFFE2E8F0),
+                color: const Color(0x1EFFFFFF),
               ),
               boxShadow: [
                 BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 4),
@@ -337,12 +350,10 @@ class _ReactionsRow extends StatelessWidget {
                 const SizedBox(width: 2),
                 Text(
                   '${r.count}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w600,
-                    color: isDark
-                        ? AppColors.darkTextSecondary
-                        : AppColors.slate,
+                    color: Color(0xFF6B7280),
                   ),
                 ),
               ],
@@ -370,6 +381,8 @@ class _AudioMessagePlayer extends StatefulWidget {
 }
 
 class _AudioMessagePlayerState extends State<_AudioMessagePlayer> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   final AudioPlayer _player = AudioPlayer();
   bool _isPlaying = false;
   int _currentPosition = 0;
@@ -417,7 +430,6 @@ class _AudioMessagePlayerState extends State<_AudioMessagePlayer> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final displayDuration = _isPlaying
         ? _currentPosition
         : widget.durationSeconds;
@@ -433,12 +445,12 @@ class _AudioMessagePlayerState extends State<_AudioMessagePlayer> {
             decoration: BoxDecoration(
               color: widget.isMe
                   ? Colors.white.withAlpha(30)
-                  : AppColors.cobalt.withAlpha(20),
+                  : const Color(0xFF6366F1).withAlpha(20),
               shape: BoxShape.circle,
             ),
             child: Icon(
               _isPlaying ? Icons.pause : Icons.play_arrow,
-              color: widget.isMe ? Colors.white : AppColors.cobalt,
+              color: widget.isMe ? Colors.white : const Color(0xFF6366F1),
               size: 20,
             ),
           ),
@@ -453,7 +465,7 @@ class _AudioMessagePlayerState extends State<_AudioMessagePlayer> {
               decoration: BoxDecoration(
                 color: widget.isMe
                     ? Colors.white.withAlpha(80)
-                    : AppColors.cobalt.withAlpha(30),
+                    : const Color(0xFF6366F1).withAlpha(30),
                 borderRadius: BorderRadius.circular(2),
               ),
               child: FractionallySizedBox(
@@ -463,7 +475,7 @@ class _AudioMessagePlayerState extends State<_AudioMessagePlayer> {
                     : 0,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: widget.isMe ? Colors.white : AppColors.cobalt,
+                    color: widget.isMe ? Colors.white : const Color(0xFF6366F1),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -477,8 +489,8 @@ class _AudioMessagePlayerState extends State<_AudioMessagePlayer> {
                 color: widget.isMe
                     ? Colors.white.withAlpha(180)
                     : (isDark
-                          ? AppColors.darkTextSecondary
-                          : AppColors.lightGray),
+                          ? const Color(0xFF6B7280)
+                          : const Color(0xFF9CA3AF)),
               ),
             ),
           ],
@@ -490,46 +502,68 @@ class _AudioMessagePlayerState extends State<_AudioMessagePlayer> {
 
 class _LocationPreview extends StatelessWidget {
   final String content;
+  final double? latitude;
+  final double? longitude;
 
-  const _LocationPreview({required this.content});
+  const _LocationPreview(
+      {required this.content, this.latitude, this.longitude});
+
+  Future<void> _openMap() async {
+    if (latitude == null || longitude == null) return;
+    final geo = Uri.parse('geo:$latitude,$longitude?q=$latitude,$longitude');
+    final web = Uri.parse(
+        'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude');
+    if (await canLaunchUrl(geo)) {
+      await launchUrl(geo, mode: LaunchMode.externalApplication);
+    } else {
+      await launchUrl(web, mode: LaunchMode.externalApplication);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final hasCoords = latitude != null && longitude != null;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          height: 100,
-          decoration: BoxDecoration(
-            color: const Color(0xFFE0F2FE),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              const Icon(Icons.map, size: 40, color: Color(0xFFBAE6FD)),
-              Positioned(
-                bottom: 8,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppColors.cobalt,
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: const Text(
-                    'Haritada Göster',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w600,
+        GestureDetector(
+          onTap: hasCoords ? _openMap : null,
+          child: Container(
+            height: 100,
+            width: 220,
+            decoration: BoxDecoration(
+              color: const Color(0xFF6366F1).withAlpha(30),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                const Icon(Icons.location_on, size: 40, color: Color(0xFF6366F1)),
+                Positioned(
+                  bottom: 8,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: hasCoords
+                          ? const Color(0xFF6366F1)
+                          : const Color(0xFF6366F1).withAlpha(120),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Text(
+                      hasCoords ? 'Haritada Göster' : 'Konum',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         const SizedBox(height: 8),
@@ -555,9 +589,9 @@ class _ImagePreview extends StatelessWidget {
       borderRadius: BorderRadius.circular(8),
       child: isNetwork
           ? Image.network(imageUrl, width: 220, height: 160, fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => _placeholder('📷'))
+              errorBuilder: (_, _, _) => _placeholder('📷'))
           : Image.asset(imageUrl, width: 220, height: 160, fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => _placeholder('📷')),
+              errorBuilder: (_, _, _) => _placeholder('📷')),
     );
   }
 
@@ -581,9 +615,9 @@ class _GifPreview extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: Image.network(gifUrl, width: 220, height: 160, fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) => Container(
+            errorBuilder: (_, _, _) => Container(
               width: 220, height: 120, color: Colors.black26,
-              child: const Center(child: Text('GIF', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold))),
+              child: Center(child: Text(AppLocalizations.of(context).chatGif, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold))),
             ),
           ),
         ),
@@ -591,7 +625,7 @@ class _GifPreview extends StatelessWidget {
           margin: const EdgeInsets.only(top: 2),
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
           decoration: BoxDecoration(color: Colors.black38, borderRadius: BorderRadius.circular(4)),
-          child: const Text('GIF', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+          child: Text(AppLocalizations.of(context).chatGif, style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
         ),
       ],
     );
@@ -638,7 +672,6 @@ class _FilePreview extends StatelessWidget {
     if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(1)}KB';
     return '${(bytes / (1024 * 1024)).toStringAsFixed(1)}MB';
   }
-
   IconData _fileIcon(String name) {
     final ext = name.split('.').last.toLowerCase();
     if (ext == 'pdf') return Icons.picture_as_pdf;
@@ -659,24 +692,167 @@ class _FilePreview extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: isMe ? Colors.white24 : Colors.blueGrey.shade100,
+            color: isMe ? Colors.white24 : const Color(0xFF6366F1).withAlpha(30),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Icon(_fileIcon(fileName), size: 28, color: isMe ? Colors.white : Colors.blueGrey),
+          child: Icon(_fileIcon(fileName), size: 28, color: isMe ? Colors.white : const Color(0xFF6366F1)),
         ),
         const SizedBox(width: 10),
         Flexible(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(fileName, style: TextStyle(color: isMe ? Colors.white : Colors.black87, fontWeight: FontWeight.w600, fontSize: 13),
+              Text(fileName, style: TextStyle(color: isMe ? Colors.white : null, fontWeight: FontWeight.w600, fontSize: 13),
                 maxLines: 2, overflow: TextOverflow.ellipsis),
               if (fileSize != null)
-                Text(_formatSize(fileSize), style: TextStyle(color: isMe ? Colors.white70 : Colors.black45, fontSize: 11)),
+                Text(_formatSize(fileSize), style: TextStyle(color: isMe ? Colors.white70 : null, fontSize: 11)),
             ],
           ),
         ),
       ],
+    );
+  }
+}
+
+/// Sohbet içi anket kartı — dokununca oy verir, yüzde çubuklarını gösterir.
+class _PollCard extends StatelessWidget {
+  final PollData poll;
+  final bool isMe;
+  final String currentUserId;
+  final void Function(int optionIndex)? onVote;
+
+  const _PollCard({
+    required this.poll,
+    required this.isMe,
+    required this.currentUserId,
+    this.onVote,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final total = poll.totalVotes;
+    final voted = poll.hasVoted(currentUserId);
+    final onColor = isMe ? Colors.white : Theme.of(context).colorScheme.onSurface;
+    final accent = isMe ? Colors.white : const Color(0xFF8B5CF6);
+
+    return SizedBox(
+      width: MediaQuery.sizeOf(context).width * 0.66,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.poll_rounded, size: 16, color: accent),
+              const SizedBox(width: 6),
+              Text(AppLocalizations.of(context).chatPoll,
+                  style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.3,
+                      color: accent)),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Text(poll.question,
+              style: TextStyle(
+                  fontSize: 15,
+                  height: 1.3,
+                  fontWeight: FontWeight.w700,
+                  color: onColor)),
+          const SizedBox(height: 10),
+          for (int i = 0; i < poll.options.length; i++)
+            _option(context, i, total, voted, onColor, accent),
+          const SizedBox(height: 2),
+          Row(
+            children: [
+              Text(
+                total == 0 ? 'Henüz oy yok' : '$total oy',
+                style: TextStyle(
+                    fontSize: 11,
+                    color: onColor.withAlpha(150),
+                    fontWeight: FontWeight.w500),
+              ),
+              // Çoklu seçim anketinde kullanıcı birden fazla seçebileceğini
+              // bilmeli; tek seçimde seçim değiştirilebilir.
+              const SizedBox(width: 6),
+              Text(
+                poll.multiple ? '· Birden fazla seçilebilir' : '· Tek seçim',
+                style: TextStyle(
+                    fontSize: 10,
+                    color: onColor.withAlpha(110),
+                    fontStyle: FontStyle.italic),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _option(BuildContext context, int i, int total, bool voted,
+      Color onColor, Color accent) {
+    final count = poll.votes[i].length;
+    final pct = total == 0 ? 0.0 : count / total;
+    final mine = poll.votes[i].contains(currentUserId);
+    final fill = isMe ? Colors.white.withAlpha(40) : accent.withAlpha(38);
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: GestureDetector(
+        onTap: onVote == null ? null : () => onVote!(i),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: FractionallySizedBox(
+                  alignment: Alignment.centerLeft,
+                  widthFactor: voted ? pct.clamp(0.0, 1.0) : 0.0,
+                  child: Container(color: fill),
+                ),
+              ),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: mine ? accent : onColor.withAlpha(45),
+                    width: mine ? 1.5 : 1,
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      mine
+                          ? Icons.check_circle_rounded
+                          : Icons.radio_button_unchecked_rounded,
+                      size: 18,
+                      color: mine ? accent : onColor.withAlpha(120),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(poll.options[i],
+                          style: TextStyle(
+                              fontSize: 13.5,
+                              fontWeight:
+                                  mine ? FontWeight.w700 : FontWeight.w500,
+                              color: onColor)),
+                    ),
+                    if (voted) ...[
+                      const SizedBox(width: 8),
+                      Text('${(pct * 100).round()}%',
+                          style: TextStyle(
+                              fontSize: 12.5,
+                              fontWeight: FontWeight.w700,
+                              color: onColor.withAlpha(200))),
+                    ],
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

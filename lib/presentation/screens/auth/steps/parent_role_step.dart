@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import '../../../../config/constants.dart';
 
@@ -14,22 +15,44 @@ class ParentRoleStep extends StatefulWidget {
 class _ParentRoleStepState extends State<ParentRoleStep> {
   String _role = 'admin';
   final _displayNameController = TextEditingController();
-  Color _selectedColor = AppColors.cobalt;
+  Color _selectedColor = const Color(0xFF6366F1);
 
   final _colors = [
-    {'color': AppColors.cobalt, 'name': 'Mavi', 'hex': '2563EB'},
-    {'color': AppColors.green, 'name': 'Yeşil', 'hex': '10B981'},
-    {'color': AppColors.orange, 'name': 'Turuncu', 'hex': 'F97316'},
-    {'color': AppColors.purple, 'name': 'Mor', 'hex': '8B5CF6'},
-    {'color': AppColors.red, 'name': 'Kırmızı', 'hex': 'EF4444'},
-    {'color': AppColors.pink, 'name': 'Pembe', 'hex': 'EC4899'},
+    {'color': const Color(0xFF6366F1), 'name': 'blue', 'hex': '2563EB'},
+    {'color': AppColors.green, 'name': 'green', 'hex': '10B981'},
+    {'color': AppColors.orange, 'name': 'orange', 'hex': 'F97316'},
+    {'color': const Color(0xFF8B5CF6), 'name': 'purple', 'hex': '8B5CF6'},
+    {'color': AppColors.red, 'name': 'red', 'hex': 'EF4444'},
+    {'color': const Color(0xFFEC4899), 'name': 'pink', 'hex': 'EC4899'},
   ];
+
+  String _colorName(BuildContext context, String key) {
+    final l = AppLocalizations.of(context);
+    switch (key) {
+      case 'blue':
+        return l.colorBlue;
+      case 'green':
+        return l.colorGreen;
+      case 'orange':
+        return l.colorOrange;
+      case 'purple':
+        return l.colorPurple;
+      case 'red':
+        return l.colorRed;
+      case 'pink':
+        return l.colorPink;
+      default:
+        return key;
+    }
+  }
 
   void _save() {
     HapticFeedback.mediumImpact();
     widget.onSaved({
       'role': _role,
-      'display_name': _displayNameController.text.trim().isEmpty ? null : _displayNameController.text.trim(),
+      'display_name': _displayNameController.text.trim().isEmpty
+          ? null
+          : _displayNameController.text.trim(),
       'color': '#${_selectedColor.toARGB32().toRadixString(16).substring(2)}',
     });
   }
@@ -42,36 +65,31 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Aile Rolü',
-            style: TextStyle(
+            AppLocalizations.of(context).aileRolu,
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+              color: Color(0xFFE5E7EB),
             ),
           ),
           const SizedBox(height: 4),
           Text(
-            'Ailedeki rolünüzü ve görünümünüzü seçin',
-            style: TextStyle(
-              fontSize: 14,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
-            ),
+            AppLocalizations.of(context).ailedekiRolunuzuVeGorunumunuzuSecin,
+            style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
           ),
           const SizedBox(height: 24),
           Text(
-            'Rolünüz',
-            style: TextStyle(
+            AppLocalizations.of(context).rolunuz,
+            style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: Color(0xFF6B7280),
             ),
           ),
           const SizedBox(height: 12),
@@ -79,7 +97,7 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
             children: [
               Expanded(
                 child: _RoleChip(
-                  label: 'Yönetici',
+                  label: AppLocalizations.of(context).admin,
                   icon: Icons.admin_panel_settings,
                   selected: _role == 'admin',
                   onTap: () => setState(() => _role = 'admin'),
@@ -88,7 +106,7 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
               const SizedBox(width: 12),
               Expanded(
                 child: _RoleChip(
-                  label: 'Ebeveyn',
+                  label: AppLocalizations.of(context).roleParent,
                   icon: Icons.people,
                   selected: _role == 'parent',
                   onTap: () => setState(() => _role = 'parent'),
@@ -100,11 +118,11 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
           TextField(
             controller: _displayNameController,
             decoration: InputDecoration(
-              labelText: 'Ailede Görünen Adınız',
-              hintText: 'Örn: Anne, Baba, Mehmet',
+              labelText: AppLocalizations.of(context).ailedeGorunenAdiniz,
+              hintText: AppLocalizations.of(context).ornAnneBabaMehmet,
               prefixIcon: const Icon(Icons.badge_outlined),
               filled: true,
-              fillColor: isDark ? AppColors.darkCard : const Color(0xFFF8FAFC),
+              fillColor: const Color(0xFF13131A),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
@@ -113,11 +131,11 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
           ),
           const SizedBox(height: 24),
           Text(
-            'Renk Seçimi',
-            style: TextStyle(
+            AppLocalizations.of(context).renkSecimi,
+            style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              color: Color(0xFF6B7280),
             ),
           ),
           const SizedBox(height: 12),
@@ -143,19 +161,28 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
                           width: 3,
                         ),
                         boxShadow: selected
-                            ? [BoxShadow(color: color.withAlpha(80), blurRadius: 12)]
+                            ? [
+                                BoxShadow(
+                                  color: color.withAlpha(80),
+                                  blurRadius: 12,
+                                ),
+                              ]
                             : null,
                       ),
                       child: selected
-                          ? const Icon(Icons.check, color: Colors.white, size: 20)
+                          ? const Icon(
+                              Icons.check,
+                              color: Colors.white,
+                              size: 20,
+                            )
                           : null,
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      c['name'] as String,
-                      style: TextStyle(
+                      _colorName(context, c['name'] as String),
+                      style: const TextStyle(
                         fontSize: 11,
-                        color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                   ],
@@ -170,13 +197,19 @@ class _ParentRoleStepState extends State<ParentRoleStep> {
             child: ElevatedButton(
               onPressed: _save,
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.cobalt,
+                backgroundColor: const Color(0xFF6366F1),
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
-              child: const Text('İleri', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+              child: Text(
+                AppLocalizations.of(context).next,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ),
           ),
         ],
@@ -200,18 +233,17 @@ class _RoleChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 16),
         decoration: BoxDecoration(
           color: selected
-              ? AppColors.cobalt.withAlpha(isDark ? 30 : 15)
-              : (isDark ? AppColors.darkCard : const Color(0xFFF8FAFC)),
+              ? const Color(0xFF6366F1).withAlpha(30)
+              : (const Color(0xFF13131A)),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: selected ? AppColors.cobalt : Colors.transparent,
+            color: selected ? const Color(0xFF6366F1) : Colors.transparent,
             width: 1.5,
           ),
         ),
@@ -219,14 +251,18 @@ class _RoleChip extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: selected ? AppColors.cobalt : (isDark ? AppColors.darkTextSecondary : AppColors.slate),
+              color: selected
+                  ? const Color(0xFF6366F1)
+                  : (const Color(0xFF6B7280)),
             ),
             const SizedBox(height: 8),
             Text(
               label,
               style: TextStyle(
                 fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
-                color: selected ? AppColors.cobalt : (isDark ? AppColors.darkTextSecondary : AppColors.slate),
+                color: selected
+                    ? const Color(0xFF6366F1)
+                    : (const Color(0xFF6B7280)),
               ),
             ),
           ],

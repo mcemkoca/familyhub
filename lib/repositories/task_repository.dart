@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:uuid/uuid.dart';
 import '../core/utils/repository_mixin.dart';
 import '../domain/entities.dart';
 import '../services/auth_service.dart';
 import '../services/gamification_service.dart';
+import '../services/hive_service.dart';
 
 class TaskRepository with RepositoryErrorHandler {
   static final TaskRepository _instance = TaskRepository._internal();
@@ -18,21 +20,48 @@ class TaskRepository with RepositoryErrorHandler {
   String get _table => 'tasks';
 
   Future<List<Task>> getTasks(String familyId) async {
-    return handleRepositoryCall(() async {
+    // Bulut-öncelikli; hata/bağlantı yoksa yerel önbelleğe düş. Yerel-only
+    // (local_) görevleri koru.
+    try {
       final response = await _client
           .from(_table)
           .select('*')
           .eq('family_id', familyId)
           .order('due_date', ascending: true);
-      return (response as List).map((e) => _fromJson(e as Map<String, dynamic>)).toList();
-    }, 'getTasks');
+      final cloud = (response as List)
+          .map((e) => _fromJson(e as Map<String, dynamic>))
+          .toList();
+      final locals =
+          HiveService.getTasks().where((t) => t.id.startsWith('local_')).toList();
+      return [...locals, ...cloud];
+    } catch (e) {
+      debugPrint('getTasks cloud failed, using cache: $e');
+      return HiveService.getTasks();
+    }
   }
 
   Future<Task> createTask(Task task, String familyId) async {
-    return handleRepositoryCall(() async {
-      final userId = AuthService.currentUserId;
-      if (userId == null) throw Exception('Giriş yapmalısınız');
+    final userId = AuthService.currentUserId;
 
+    Future<Task> saveLocal() async {
+      final local = Task(
+        id: 'local_${const Uuid().v4()}',
+        title: task.title,
+        description: task.description,
+        assignedTo: task.assignedTo,
+        status: task.status,
+        priority: task.priority,
+        dueDate: task.dueDate,
+        completedAt: task.completedAt,
+      );
+      final all = HiveService.getTasks();
+      await HiveService.saveTasks([local, ...all]);
+      return local;
+    }
+
+    if (userId == null || AuthService.safeClient == null) return saveLocal();
+
+    try {
       final response = await _client
           .from(_table)
           .insert({
@@ -50,10 +79,19 @@ class TaskRepository with RepositoryErrorHandler {
           .single();
 
       return _fromJson(response);
-    }, 'createTask');
+    } catch (e) {
+      debugPrint('createTask cloud failed, saving local: $e');
+      return saveLocal();
+    }
   }
 
   Future<void> updateTask(Task task) async {
+    if (task.id.startsWith('local_')) {
+      final all = HiveService.getTasks();
+      await HiveService.saveTasks(
+          all.map((t) => t.id == task.id ? task : t).toList());
+      return;
+    }
     return handleRepositoryCall(() async {
       await _client
           .from(_table)
@@ -71,12 +109,27 @@ class TaskRepository with RepositoryErrorHandler {
   }
 
   Future<void> deleteTask(String id) async {
+    if (id.startsWith('local_')) {
+      final all = HiveService.getTasks();
+      await HiveService.saveTasks(all.where((t) => t.id != id).toList());
+      return;
+    }
     return handleRepositoryCall(() async {
       await _client.from(_table).delete().eq('id', id);
     }, 'deleteTask');
   }
 
   Future<void> completeTask(String id) async {
+    if (id.startsWith('local_')) {
+      final all = HiveService.getTasks();
+      await HiveService.saveTasks(all
+          .map((t) => t.id == id
+              ? t.copyWith(
+                  status: TaskStatus.completed, completedAt: DateTime.now())
+              : t)
+          .toList());
+      return;
+    }
     return handleRepositoryCall(() async {
       await _client
           .from(_table)

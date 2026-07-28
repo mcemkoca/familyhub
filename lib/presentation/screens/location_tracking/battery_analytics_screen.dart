@@ -16,6 +16,60 @@ class BatteryAnalyticsScreen extends StatefulWidget {
 class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
   final tracker = BatteryAwareLocationTracker();
 
+  /// Güncel optimizasyon önerilerini gösterir (gerçek tracker verisi).
+  void _showOptimizationSuggestions() {
+    final suggestions = tracker.generateOptimizationSuggestions();
+    final t = AppLocalizations.of(context);
+    showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: const Color(0xFF13131A),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(t.baOptimize,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700)),
+              const SizedBox(height: 12),
+              if (suggestions.isEmpty)
+                Text(t.baNoSuggestions,
+                    style: const TextStyle(color: Color(0xFF9CA3AF)))
+              else
+                ...suggestions.map(
+                  (s) => Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Icon(Icons.bolt,
+                            size: 16, color: Color(0xFF10B981)),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            '${s.description} — %${s.potentialSaving.toStringAsFixed(0)}',
+                            style: const TextStyle(
+                                color: Color(0xFFE5E7EB), fontSize: 13),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final suggestions = tracker.generateOptimizationSuggestions();
@@ -28,86 +82,131 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
         padding: const EdgeInsets.all(16),
         children: [
           // Battery consumption
-          _section('BATARYA TÜKETİMİ (7 Gün)', children: [
-            const Text('Günlük ortalama: %18', style: TextStyle(fontWeight: FontWeight.w600)),
-            const SizedBox(height: 12),
-            _dayBar('Pazartesi', 0.16),
-            _dayBar('Salı', 0.20, highlight: true),
-            _dayBar('Çarşamba', 0.14),
-            _dayBar('Perşembe', 0.16),
-            _dayBar('Cuma', 0.22, highlight: true),
-            _dayBar('Cumartesi', 0.12, good: true),
-            _dayBar('Pazar', 0.14),
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                _legend(Colors.red, 'Yüksek'),
-                const SizedBox(width: 12),
-                _legend(Colors.green, 'Düşük'),
-              ],
-            ),
-          ]),
+          _section(
+            AppLocalizations.of(context).battChartTitle,
+            children: [
+              Text(
+                AppLocalizations.of(context).gunlukOrtalama18,
+                style: const TextStyle(fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(height: 12),
+              _dayBar(AppLocalizations.of(context).dowMon, 0.16),
+              _dayBar(
+                AppLocalizations.of(context).dowTue,
+                0.20,
+                highlight: true,
+              ),
+              _dayBar(AppLocalizations.of(context).dowWed, 0.14),
+              _dayBar(AppLocalizations.of(context).dowThu, 0.16),
+              _dayBar(
+                AppLocalizations.of(context).dowFri,
+                0.22,
+                highlight: true,
+              ),
+              _dayBar(AppLocalizations.of(context).dowSat, 0.12, good: true),
+              _dayBar(AppLocalizations.of(context).dowSun, 0.14),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  _legend(Colors.red, AppLocalizations.of(context).battHigh),
+                  const SizedBox(width: 12),
+                  _legend(Colors.green, AppLocalizations.of(context).battLow),
+                ],
+              ),
+            ],
+          ),
 
           // Profile usage
-          _section('PROFİL KULLANIMI', children: [
-            _profileBar('Durağan', 0.45, Colors.grey),
-            _profileBar('Yürüyüş', 0.25, Colors.blue),
-            _profileBar('Araç', 0.15, Colors.orange),
-            _profileBar('Koşu', 0.08, Colors.teal),
-            _profileBar('Acil', 0.05, Colors.red),
-            _profileBar('Bisiklet', 0.02, Colors.purple),
-            const SizedBox(height: 8),
-            ElevatedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.track_changes),
-              label: const Text('Optimize Et'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green.shade700,
-                foregroundColor: Colors.white,
-              ),
-            ),
-          ]),
-
-          // Efficiency metrics
-          _section('VERİMLİLİK METRİKLERİ', children: [
-            _metricRow('Konum/Batarya', '2.5 nokta/%', target: '3.0+'),
-            _metricRow('Ortalama hassasiyet', '35m', target: '<50m'),
-            _metricRow('Optimal profil oranı', '%68', target: '%80+'),
-            _metricRow('Yanlış profil geçişi', '12/gün', target: '<5/gün'),
-          ]),
-
-          // AI suggestions
-          _section('🤖 AI OPTİMİZASYON ÖNERİLERİ', children: [
-            ...suggestions.map((s) => _suggestionCard(s)),
-          ]),
-
-          const SizedBox(height: 16),
-          Row(
+          _section(
+            AppLocalizations.of(context).profilKullanimi,
             children: [
-              Expanded(
-                child: ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.download),
-                  label: Text(AppLocalizations.of(context).raporIndir),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey.shade700,
-                    foregroundColor: Colors.white,
-                  ),
-                ),
+              _profileBar(
+                AppLocalizations.of(context).battProfileStationary,
+                0.45,
+                Colors.grey,
               ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.calculate),
-                  label: const Text('Yeniden Hesapla'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue.shade700,
-                    foregroundColor: Colors.white,
-                  ),
+              _profileBar(
+                AppLocalizations.of(context).battProfileWalking,
+                0.25,
+                Colors.blue,
+              ),
+              _profileBar(
+                AppLocalizations.of(context).battProfileDriving,
+                0.15,
+                Colors.orange,
+              ),
+              _profileBar(
+                AppLocalizations.of(context).battProfileRunning,
+                0.08,
+                Colors.teal,
+              ),
+              _profileBar(
+                AppLocalizations.of(context).battProfileEmergency,
+                0.05,
+                Colors.red,
+              ),
+              _profileBar(
+                AppLocalizations.of(context).battProfileCycling,
+                0.02,
+                Colors.purple,
+              ),
+              const SizedBox(height: 8),
+              ElevatedButton.icon(
+                onPressed: _showOptimizationSuggestions,
+                icon: const Icon(Icons.track_changes),
+                label: Text(AppLocalizations.of(context).baOptimize),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green.shade700,
+                  foregroundColor: Colors.white,
                 ),
               ),
             ],
+          ),
+
+          // Efficiency metrics
+          _section(
+            AppLocalizations.of(context).verimlilikMetrikleri,
+            children: [
+              _metricRow('Konum/Batarya', '2.5 nokta/%', target: '3.0+'),
+              _metricRow(
+                AppLocalizations.of(context).baAvgAccuracy,
+                '35m',
+                target: '<50m',
+              ),
+              _metricRow(
+                AppLocalizations.of(context).baOptimalRatio,
+                '%68',
+                target: '%80+',
+              ),
+              _metricRow(
+                AppLocalizations.of(context).baWrongSwitch,
+                '12/gün',
+                target: '<5/gün',
+              ),
+            ],
+          ),
+
+          // AI suggestions
+          _section(
+            AppLocalizations.of(context).aiOptimizasyonOnerileri,
+            children: [...suggestions.map((s) => _suggestionCard(s))],
+          ),
+
+          const SizedBox(height: 16),
+          // Not: "Rapor İndir" kaldırıldı — dosya üretimi/paylaşımı yok;
+          // tıklanıp hiçbir şey yapmıyordu.
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              // Tahminleri güncel pil seviyesiyle yeniden hesaplar.
+              onPressed: () => setState(() {}),
+              icon: const Icon(Icons.calculate),
+              label: Text(AppLocalizations.of(context).baRecalculate),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue.shade700,
+                foregroundColor: Colors.white,
+              ),
+            ),
           ),
         ],
       ),
@@ -125,7 +224,14 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+          Text(
+            title,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           const SizedBox(height: 12),
           ...children,
         ],
@@ -133,26 +239,44 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
     );
   }
 
-  Widget _dayBar(String day, double value, {bool highlight = false, bool good = false}) {
+  Widget _dayBar(
+    String day,
+    double value, {
+    bool highlight = false,
+    bool good = false,
+  }) {
     final color = highlight ? Colors.red : (good ? Colors.green : Colors.blue);
     return Padding(
       padding: const EdgeInsets.only(bottom: 6),
       child: Row(
         children: [
-          SizedBox(width: 80, child: Text(day, style: const TextStyle(color: Colors.white70, fontSize: 13))),
+          SizedBox(
+            width: 80,
+            child: Text(
+              day,
+              style: const TextStyle(color: Colors.white70, fontSize: 13),
+            ),
+          ),
           Expanded(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(4),
               child: LinearProgressIndicator(
                 value: value,
                 minHeight: 10,
-                backgroundColor: Colors.grey.shade800,
+                backgroundColor: const Color(0xFF374151),
                 valueColor: AlwaysStoppedAnimation<Color>(color),
               ),
             ),
           ),
           const SizedBox(width: 8),
-          Text('${(value * 100).toInt()}%', style: TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.bold)),
+          Text(
+            '${(value * 100).toInt()}%',
+            style: TextStyle(
+              color: color,
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     );
@@ -163,7 +287,10 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
       children: [
         CircleAvatar(radius: 6, backgroundColor: color),
         const SizedBox(width: 6),
-        Text(label, style: const TextStyle(color: Colors.white70, fontSize: 12)),
+        Text(
+          label,
+          style: const TextStyle(color: Colors.white70, fontSize: 12),
+        ),
       ],
     );
   }
@@ -173,20 +300,33 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
       padding: const EdgeInsets.only(bottom: 6),
       child: Row(
         children: [
-          SizedBox(width: 80, child: Text(label, style: const TextStyle(color: Colors.white70, fontSize: 13))),
+          SizedBox(
+            width: 80,
+            child: Text(
+              label,
+              style: const TextStyle(color: Colors.white70, fontSize: 13),
+            ),
+          ),
           Expanded(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(4),
               child: LinearProgressIndicator(
                 value: value,
                 minHeight: 10,
-                backgroundColor: Colors.grey.shade800,
+                backgroundColor: const Color(0xFF374151),
                 valueColor: AlwaysStoppedAnimation<Color>(color),
               ),
             ),
           ),
           const SizedBox(width: 8),
-          Text('${(value * 100).toInt()}%', style: TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.bold)),
+          Text(
+            '${(value * 100).toInt()}%',
+            style: TextStyle(
+              color: color,
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     );
@@ -203,11 +343,23 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
               children: [
                 Text(label, style: const TextStyle(color: Colors.white70)),
                 if (target != null)
-                  Text('Hedef: $target', style: TextStyle(color: Colors.grey.shade500, fontSize: 12)),
+                  Text(
+                    AppLocalizations.of(context).batteryTarget(target),
+                    style: const TextStyle(
+                      color: Color(0xFF6B7280),
+                      fontSize: 12,
+                    ),
+                  ),
               ],
             ),
           ),
-          Text(value, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+          Text(
+            value,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     );
@@ -232,7 +384,11 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
               Expanded(
                 child: Text(
                   s.description,
-                  style: const TextStyle(color: Colors.white, fontSize: 13, height: 1.4),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 13,
+                    height: 1.4,
+                  ),
                 ),
               ),
             ],
@@ -244,15 +400,10 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
                 'Tasarruf: %${s.potentialSaving.toStringAsFixed(0)}',
                 style: TextStyle(color: Colors.green.shade400, fontSize: 12),
               ),
-              const Spacer(),
-              TextButton(
-                onPressed: () {},
-                child: const Text('Uygula'),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: const Text('Detay'),
-              ),
+              // Not: "Uygula/Detay" butonları kaldırıldı — tracker'da bu
+              // öneriyi tek tıkla uygulayacak bir API yok; tıklanıp hiçbir şey
+              // yapmayan buton kullanıcıyı yanıltıyordu. Öneri metni zaten
+              // uygulanabilir bilgi veriyor.
             ],
           ),
         ],

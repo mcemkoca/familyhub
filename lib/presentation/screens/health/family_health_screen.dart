@@ -1,21 +1,21 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
-import '../../../config/constants.dart';
-import '../../providers/app_providers.dart';
+import 'package:file_selector/file_selector.dart';
+import '../../../services/notification_service.dart';
+import '../../../core/app_logger.dart';
 
 // ── Hive models (lightweight, no codegen needed — stored as JSON strings) ──
 
 class FamilyHealthHive {
   static const _boxName = 'family_health';
 
-  static Future<Box> get box async =>
-      Hive.isBoxOpen(_boxName)
-          ? Hive.box(_boxName)
-          : await Hive.openBox(_boxName);
+  static Future<Box<dynamic>> get box async => Hive.isBoxOpen(_boxName)
+      ? Hive.box(_boxName)
+      : await Hive.openBox(_boxName);
 
   static Future<void> save(String key, dynamic value) async {
     final b = await box;
@@ -56,16 +56,16 @@ class FamilyMemberHealth {
   });
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'emoji': emoji,
-        'bloodType': bloodType,
-        'allergies': allergies,
-        'medicines': medicines.map((m) => m.toJson()).toList(),
-        'vitamins': vitamins.map((v) => v.toJson()).toList(),
-        'reports': reports.map((r) => r.toJson()).toList(),
-        'appointments': appointments.map((a) => a.toJson()).toList(),
-      };
+    'id': id,
+    'name': name,
+    'emoji': emoji,
+    'bloodType': bloodType,
+    'allergies': allergies,
+    'medicines': medicines.map((m) => m.toJson()).toList(),
+    'vitamins': vitamins.map((v) => v.toJson()).toList(),
+    'reports': reports.map((r) => r.toJson()).toList(),
+    'appointments': appointments.map((a) => a.toJson()).toList(),
+  };
 
   factory FamilyMemberHealth.fromJson(Map<String, dynamic> j) =>
       FamilyMemberHealth(
@@ -95,18 +95,17 @@ class FamilyMemberHealth {
     List<DoctorAppointment>? appointments,
     String? bloodType,
     List<String>? allergies,
-  }) =>
-      FamilyMemberHealth(
-        id: id,
-        name: name,
-        emoji: emoji,
-        bloodType: bloodType ?? this.bloodType,
-        allergies: allergies ?? this.allergies,
-        medicines: medicines ?? this.medicines,
-        vitamins: vitamins ?? this.vitamins,
-        reports: reports ?? this.reports,
-        appointments: appointments ?? this.appointments,
-      );
+  }) => FamilyMemberHealth(
+    id: id,
+    name: name,
+    emoji: emoji,
+    bloodType: bloodType ?? this.bloodType,
+    allergies: allergies ?? this.allergies,
+    medicines: medicines ?? this.medicines,
+    vitamins: vitamins ?? this.vitamins,
+    reports: reports ?? this.reports,
+    appointments: appointments ?? this.appointments,
+  );
 }
 
 class Medicine {
@@ -131,37 +130,37 @@ class Medicine {
   });
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'dosage': dosage,
-        'frequency': frequency,
-        'startDate': startDate,
-        'endDate': endDate,
-        'notes': notes,
-        'active': active,
-      };
+    'id': id,
+    'name': name,
+    'dosage': dosage,
+    'frequency': frequency,
+    'startDate': startDate,
+    'endDate': endDate,
+    'notes': notes,
+    'active': active,
+  };
 
   factory Medicine.fromJson(Map<String, dynamic> j) => Medicine(
-        id: j['id'] as String,
-        name: j['name'] as String,
-        dosage: j['dosage'] as String,
-        frequency: j['frequency'] as String,
-        startDate: j['startDate'] as String,
-        endDate: j['endDate'] as String?,
-        notes: j['notes'] as String? ?? '',
-        active: j['active'] as bool? ?? true,
-      );
+    id: j['id'] as String,
+    name: j['name'] as String,
+    dosage: j['dosage'] as String,
+    frequency: j['frequency'] as String,
+    startDate: j['startDate'] as String,
+    endDate: j['endDate'] as String?,
+    notes: j['notes'] as String? ?? '',
+    active: j['active'] as bool? ?? true,
+  );
 
   Medicine copyWith({bool? active}) => Medicine(
-        id: id,
-        name: name,
-        dosage: dosage,
-        frequency: frequency,
-        startDate: startDate,
-        endDate: endDate,
-        notes: notes,
-        active: active ?? this.active,
-      );
+    id: id,
+    name: name,
+    dosage: dosage,
+    frequency: frequency,
+    startDate: startDate,
+    endDate: endDate,
+    notes: notes,
+    active: active ?? this.active,
+  );
 }
 
 class Vitamin {
@@ -180,20 +179,20 @@ class Vitamin {
   });
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'amount': amount,
-        'timing': timing,
-        'active': active,
-      };
+    'id': id,
+    'name': name,
+    'amount': amount,
+    'timing': timing,
+    'active': active,
+  };
 
   factory Vitamin.fromJson(Map<String, dynamic> j) => Vitamin(
-        id: j['id'] as String,
-        name: j['name'] as String,
-        amount: j['amount'] as String,
-        timing: j['timing'] as String,
-        active: j['active'] as bool? ?? true,
-      );
+    id: j['id'] as String,
+    name: j['name'] as String,
+    amount: j['amount'] as String,
+    timing: j['timing'] as String,
+    active: j['active'] as bool? ?? true,
+  );
 }
 
 class DoctorReport {
@@ -214,22 +213,22 @@ class DoctorReport {
   });
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'title': title,
-        'doctor': doctor,
-        'date': date,
-        'notes': notes,
-        'reportType': reportType,
-      };
+    'id': id,
+    'title': title,
+    'doctor': doctor,
+    'date': date,
+    'notes': notes,
+    'reportType': reportType,
+  };
 
   factory DoctorReport.fromJson(Map<String, dynamic> j) => DoctorReport(
-        id: j['id'] as String,
-        title: j['title'] as String,
-        doctor: j['doctor'] as String,
-        date: j['date'] as String,
-        notes: j['notes'] as String? ?? '',
-        reportType: j['reportType'] as String? ?? 'Muayene',
-      );
+    id: j['id'] as String,
+    title: j['title'] as String,
+    doctor: j['doctor'] as String,
+    date: j['date'] as String,
+    notes: j['notes'] as String? ?? '',
+    reportType: j['reportType'] as String? ?? 'Muayene',
+  );
 }
 
 class DoctorAppointment {
@@ -250,13 +249,13 @@ class DoctorAppointment {
   });
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'doctorName': doctorName,
-        'specialty': specialty,
-        'dateTime': dateTime,
-        'location': location,
-        'completed': completed,
-      };
+    'id': id,
+    'doctorName': doctorName,
+    'specialty': specialty,
+    'dateTime': dateTime,
+    'location': location,
+    'completed': completed,
+  };
 
   factory DoctorAppointment.fromJson(Map<String, dynamic> j) =>
       DoctorAppointment(
@@ -269,21 +268,21 @@ class DoctorAppointment {
       );
 
   DoctorAppointment copyWith({bool? completed}) => DoctorAppointment(
-        id: id,
-        doctorName: doctorName,
-        specialty: specialty,
-        dateTime: dateTime,
-        location: location,
-        completed: completed ?? this.completed,
-      );
+    id: id,
+    doctorName: doctorName,
+    specialty: specialty,
+    dateTime: dateTime,
+    location: location,
+    completed: completed ?? this.completed,
+  );
 }
 
 // ── Providers ──
 
 final familyHealthProvider =
     StateNotifierProvider<FamilyHealthNotifier, List<FamilyMemberHealth>>(
-  (ref) => FamilyHealthNotifier(),
-);
+      (ref) => FamilyHealthNotifier(),
+    );
 
 class FamilyHealthNotifier extends StateNotifier<List<FamilyMemberHealth>> {
   FamilyHealthNotifier() : super([]) {
@@ -334,8 +333,11 @@ class FamilyHealthNotifier extends StateNotifier<List<FamilyMemberHealth>> {
       if (m.id != memberId) return m;
       return m.copyWith(
         medicines: m.medicines
-            .map((med) =>
-                med.id == medicineId ? med.copyWith(active: !med.active) : med)
+            .map(
+              (med) => med.id == medicineId
+                  ? med.copyWith(active: !med.active)
+                  : med,
+            )
             .toList(),
       );
     }).toList();
@@ -346,7 +348,8 @@ class FamilyHealthNotifier extends StateNotifier<List<FamilyMemberHealth>> {
     state = state.map((m) {
       if (m.id != memberId) return m;
       return m.copyWith(
-          medicines: m.medicines.where((med) => med.id != medicineId).toList());
+        medicines: m.medicines.where((med) => med.id != medicineId).toList(),
+      );
     }).toList();
     await _persist();
   }
@@ -368,24 +371,53 @@ class FamilyHealthNotifier extends StateNotifier<List<FamilyMemberHealth>> {
   }
 
   Future<void> addAppointment(
-      String memberId, DoctorAppointment appointment) async {
+    String memberId,
+    DoctorAppointment appointment,
+  ) async {
     state = state.map((m) {
       if (m.id != memberId) return m;
-      return m.copyWith(
-          appointments: [...m.appointments, appointment]);
+      return m.copyWith(appointments: [...m.appointments, appointment]);
     }).toList();
     await _persist();
+    await _scheduleAppointmentReminder(appointment);
+  }
+
+  /// Randevu gününde 09:00'da hatırlatma bildirimi kurar (dd.MM.yyyy).
+  Future<void> _scheduleAppointmentReminder(DoctorAppointment a) async {
+    try {
+      final d = DateFormat('dd.MM.yyyy').parseStrict(a.dateTime);
+      final when = DateTime(d.year, d.month, d.day, 9, 0);
+      if (when.isBefore(DateTime.now())) return;
+      await NotificationService.requestPermission();
+      await NotificationService.scheduleNotification(
+        id: a.id.hashCode & 0x7fffff,
+        title: '🩺 Doktor Randevusu',
+        body:
+            '${a.doctorName}${a.specialty.isNotEmpty ? ' · ${a.specialty}' : ''} bugün'
+            '${a.location.isNotEmpty ? ' · ${a.location}' : ''}',
+        scheduledDate: when,
+        payload: 'appointment:${a.id}',
+      );
+    } catch (e, st) {
+      // FH-03: sessizce yutma — hatırlatma kurulamadıysa iz bırak (teşhis
+      // edilebilir olsun). Kullanıcı akışı kesilmez; randevu yine kaydedilir.
+      AppLogger.logError(e,
+          module: 'health',
+          operation: 'scheduleAppointmentReminder',
+          stackTrace: st,
+          context: {'appointmentId': a.id});
+    }
   }
 
   Future<void> completeAppointment(
-      String memberId, String appointmentId) async {
+    String memberId,
+    String appointmentId,
+  ) async {
     state = state.map((m) {
       if (m.id != memberId) return m;
       return m.copyWith(
         appointments: m.appointments
-            .map((a) => a.id == appointmentId
-                ? a.copyWith(completed: true)
-                : a)
+            .map((a) => a.id == appointmentId ? a.copyWith(completed: true) : a)
             .toList(),
       );
     }).toList();
@@ -396,7 +428,9 @@ class FamilyHealthNotifier extends StateNotifier<List<FamilyMemberHealth>> {
 // ── Main Screen ──
 
 class FamilyHealthScreen extends ConsumerStatefulWidget {
-  const FamilyHealthScreen({super.key});
+  /// Açılışta seçili sekme (0=İlaçlar, 1=Vitaminler, 2=Raporlar, 3=Randevular).
+  final int initialTab;
+  const FamilyHealthScreen({super.key, this.initialTab = 0});
 
   @override
   ConsumerState<FamilyHealthScreen> createState() => _FamilyHealthScreenState();
@@ -407,12 +441,21 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
   late TabController _tab;
   int _selectedMember = 0;
 
-  static const _tabs = ['💊 İlaçlar', '🌿 Vitaminler', '📋 Raporlar', '📅 Randevular'];
+  static const _tabs = [
+    '💊 İlaçlar',
+    '🌿 Vitaminler',
+    '📋 Raporlar',
+    '📅 Randevular',
+  ];
 
   @override
   void initState() {
     super.initState();
-    _tab = TabController(length: 4, vsync: this);
+    _tab = TabController(
+      length: 4,
+      vsync: this,
+      initialIndex: widget.initialTab.clamp(0, 3),
+    );
   }
 
   @override
@@ -424,7 +467,9 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
   @override
   Widget build(BuildContext context) {
     final members = ref.watch(familyHealthProvider);
-    final member = members.isEmpty ? null : members[_selectedMember.clamp(0, members.length - 1)];
+    final member = members.isEmpty
+        ? null
+        : members[_selectedMember.clamp(0, members.length - 1)];
 
     const teal = Color(0xFF14B8A6);
     return Scaffold(
@@ -445,7 +490,9 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  border: Border(bottom: BorderSide(color: teal.withAlpha(30), width: 0.5)),
+                  border: Border(
+                    bottom: BorderSide(color: teal.withAlpha(30), width: 0.5),
+                  ),
                 ),
                 child: SafeArea(
                   child: Column(
@@ -456,21 +503,39 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            width: 34, height: 34,
+                            width: 34,
+                            height: 34,
                             decoration: BoxDecoration(
-                              gradient: const LinearGradient(colors: [Color(0xFF14B8A6), Color(0xFF0D9488)]),
+                              gradient: const LinearGradient(
+                                colors: [Color(0xFF14B8A6), Color(0xFF0D9488)],
+                              ),
                               borderRadius: BorderRadius.circular(11),
                             ),
-                            child: const Icon(Icons.monitor_heart_outlined, color: Colors.white, size: 18),
+                            child: const Icon(
+                              Icons.monitor_heart_outlined,
+                              color: Colors.white,
+                              size: 18,
+                            ),
                           ),
                           const SizedBox(width: 10),
-                          const Text('Aile Hekimi',
-                              style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900)),
+                          Text(
+                            AppLocalizations.of(context).fhFamilyDoctor,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(height: 4),
-                      const Text('Sağlık takibi & ilaç yönetimi',
-                          style: TextStyle(color: Color(0xFF6B7280), fontSize: 12)),
+                      Text(
+                        AppLocalizations.of(context).fhSubtitle,
+                        style: const TextStyle(
+                          color: Color(0xFF6B7280),
+                          fontSize: 12,
+                        ),
+                      ),
                       const SizedBox(height: 12),
                       // Member selector
                       SizedBox(
@@ -491,12 +556,16 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
                                     color: Colors.white.withAlpha(30),
                                     shape: BoxShape.circle,
                                     border: Border.all(
-                                        color: Colors.white.withAlpha(80),
-                                        width: 1.5,
-                                        style: BorderStyle.solid),
+                                      color: Colors.white.withAlpha(80),
+                                      width: 1.5,
+                                      style: BorderStyle.solid,
+                                    ),
                                   ),
-                                  child: const Icon(Icons.add,
-                                      color: Colors.white, size: 20),
+                                  child: const Icon(
+                                    Icons.add,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
                                 ),
                               );
                             }
@@ -516,14 +585,18 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
                                           : Colors.white.withAlpha(30),
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                          color: Colors.white
-                                              .withAlpha(sel ? 255 : 80),
-                                          width: 2),
+                                        color: Colors.white.withAlpha(
+                                          sel ? 255 : 80,
+                                        ),
+                                        width: 2,
+                                      ),
                                     ),
                                     child: Center(
-                                        child: Text(m.emoji,
-                                            style: const TextStyle(
-                                                fontSize: 22))),
+                                      child: Text(
+                                        m.emoji,
+                                        style: const TextStyle(fontSize: 22),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -543,14 +616,19 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
               indicatorColor: teal,
               labelColor: teal,
               unselectedLabelColor: const Color(0xFF6B7280),
-              labelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+              labelStyle: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+              ),
               tabs: _tabs.map((t) => Tab(text: t)).toList(),
             ),
           ),
 
           if (member == null)
-            const SliverFillRemaining(
-              child: Center(child: Text('Aile üyesi ekleyin')),
+            SliverFillRemaining(
+              child: Center(
+                child: Text(AppLocalizations.of(context).fhAddMember),
+              ),
             )
           else
             SliverFillRemaining(
@@ -576,7 +654,9 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
               label: Text(
                 _fabLabel(),
                 style: const TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.w700),
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
     );
@@ -584,20 +664,33 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
 
   String _fabLabel() {
     switch (_tab.index) {
-      case 0: return 'İlaç Ekle';
-      case 1: return 'Vitamin Ekle';
-      case 2: return 'Rapor Ekle';
-      case 3: return 'Randevu Ekle';
-      default: return 'Ekle';
+      case 0:
+        return 'İlaç Ekle';
+      case 1:
+        return 'Vitamin Ekle';
+      case 2:
+        return 'Rapor Ekle';
+      case 3:
+        return 'Randevu Ekle';
+      default:
+        return 'Ekle';
     }
   }
 
   void _addItem(FamilyMemberHealth member) {
     switch (_tab.index) {
-      case 0: _showAddMedicineSheet(member); break;
-      case 1: _showAddVitaminSheet(member); break;
-      case 2: _showAddReportSheet(member); break;
-      case 3: _showAddAppointmentSheet(member); break;
+      case 0:
+        _showAddMedicineSheet(member);
+        break;
+      case 1:
+        _showAddVitaminSheet(member);
+        break;
+      case 2:
+        _showAddReportSheet(member);
+        break;
+      case 3:
+        _showAddAppointmentSheet(member);
+        break;
     }
   }
 
@@ -611,7 +704,7 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
       backgroundColor: Colors.transparent,
       builder: (_) => StatefulBuilder(
         builder: (ctx, setSt) => _Sheet(
-          title: '👤 Aile Üyesi Ekle',
+          title: '👤 ${AppLocalizations.of(context).healthAddMember}',
           child: Column(
             children: [
               Wrap(
@@ -635,20 +728,25 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
                         ),
                       ),
                       child: Center(
-                          child: Text(e,
-                              style: const TextStyle(fontSize: 22))),
+                        child: Text(e, style: const TextStyle(fontSize: 22)),
+                      ),
                     ),
                   );
                 }).toList(),
               ),
               const SizedBox(height: 14),
-              _Field(controller: nameCtrl, label: 'Ad (örn. Anne, Ahmet)'),
+              _Field(
+                controller: nameCtrl,
+                label: AppLocalizations.of(context).fhNameHint,
+              ),
               const SizedBox(height: 16),
               _GradBtn(
-                label: 'Ekle',
+                label: AppLocalizations.of(context).fhAdd,
                 onTap: () {
                   if (nameCtrl.text.trim().isEmpty) return;
-                  ref.read(familyHealthProvider.notifier).addMember(
+                  ref
+                      .read(familyHealthProvider.notifier)
+                      .addMember(
                         FamilyMemberHealth(
                           id: DateTime.now().millisecondsSinceEpoch.toString(),
                           name: nameCtrl.text.trim(),
@@ -675,34 +773,47 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (_) => _Sheet(
-        title: '💊 İlaç Ekle — ${member.name}',
+        title:
+            '💊 ${AppLocalizations.of(context).healthAddMedication(member.name)}',
         child: Column(
           children: [
-            _Field(controller: nameCtrl, label: 'İlaç adı'),
-            const SizedBox(height: 10),
-            _Field(controller: dosageCtrl, label: 'Doz (örn. 500mg, 1 tablet)'),
+            _Field(
+              controller: nameCtrl,
+              label: AppLocalizations.of(context).fhMedName,
+            ),
             const SizedBox(height: 10),
             _Field(
-                controller: freqCtrl,
-                label: 'Kullanım (örn. Günde 2 kez, sabah)'),
+              controller: dosageCtrl,
+              label: AppLocalizations.of(context).fhDoseHint,
+            ),
             const SizedBox(height: 10),
             _Field(
-                controller: notesCtrl,
-                label: 'Notlar (isteğe bağlı)',
-                maxLines: 2),
+              controller: freqCtrl,
+              label: AppLocalizations.of(context).fhUsageHint,
+            ),
+            const SizedBox(height: 10),
+            _Field(
+              controller: notesCtrl,
+              label: AppLocalizations.of(context).fhNotesOptional,
+              maxLines: 2,
+            ),
             const SizedBox(height: 16),
             _GradBtn(
-              label: 'İlacı Kaydet',
+              label: AppLocalizations.of(context).fhSaveMed,
               onTap: () {
                 if (nameCtrl.text.trim().isEmpty) return;
-                ref.read(familyHealthProvider.notifier).addMedicine(
+                ref
+                    .read(familyHealthProvider.notifier)
+                    .addMedicine(
                       member.id,
                       Medicine(
                         id: DateTime.now().millisecondsSinceEpoch.toString(),
                         name: nameCtrl.text.trim(),
                         dosage: dosageCtrl.text.trim(),
                         frequency: freqCtrl.text.trim(),
-                        startDate: DateFormat('dd.MM.yyyy').format(DateTime.now()),
+                        startDate: DateFormat(
+                          'dd.MM.yyyy',
+                        ).format(DateTime.now()),
                         notes: notesCtrl.text.trim(),
                       ),
                     );
@@ -726,16 +837,27 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
       backgroundColor: Colors.transparent,
       builder: (_) => StatefulBuilder(
         builder: (_, setSt) => _Sheet(
-          title: '🌿 Vitamin/Takviye Ekle',
+          title: '🌿 ${AppLocalizations.of(context).healthAddVitamin}',
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _Field(controller: nameCtrl, label: 'Vitamin adı (örn. D3, Omega-3)'),
+              _Field(
+                controller: nameCtrl,
+                label: AppLocalizations.of(context).fhVitaminName,
+              ),
               const SizedBox(height: 10),
-              _Field(controller: amountCtrl, label: 'Miktar (örn. 1000 IU, 2 kapsül)'),
+              _Field(
+                controller: amountCtrl,
+                label: AppLocalizations.of(context).fhAmountHint,
+              ),
               const SizedBox(height: 12),
-              const Text('Kullanım zamanı',
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
+              Text(
+                AppLocalizations.of(context).fhUsageTime,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 13,
+                ),
+              ),
               const SizedBox(height: 8),
               Wrap(
                 spacing: 6,
@@ -745,33 +867,38 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
                     onTap: () => setSt(() => timing = t),
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 6),
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
                         color: sel
                             ? const Color(0xFF11998E)
                             : Colors.grey.withAlpha(20),
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: Text(t,
-                          style: TextStyle(
-                              color: sel ? Colors.white : Colors.black87,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 12)),
+                      child: Text(
+                        t,
+                        style: TextStyle(
+                          color: sel ? Colors.white : Colors.black87,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12,
+                        ),
+                      ),
                     ),
                   );
                 }).toList(),
               ),
               const SizedBox(height: 16),
               _GradBtn(
-                label: 'Vitamin Kaydet',
+                label: AppLocalizations.of(context).fhSaveVitamin,
                 onTap: () {
                   if (nameCtrl.text.trim().isEmpty) return;
-                  ref.read(familyHealthProvider.notifier).addVitamin(
+                  ref
+                      .read(familyHealthProvider.notifier)
+                      .addVitamin(
                         member.id,
                         Vitamin(
-                          id: DateTime.now()
-                              .millisecondsSinceEpoch
-                              .toString(),
+                          id: DateTime.now().millisecondsSinceEpoch.toString(),
                           name: nameCtrl.text.trim(),
                           amount: amountCtrl.text.trim(),
                           timing: timing,
@@ -792,23 +919,42 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
     final doctorCtrl = TextEditingController();
     final notesCtrl = TextEditingController();
     String type = 'Muayene';
-    final types = ['Muayene', 'Kan Tahlili', 'Röntgen', 'MR/BT', 'Reçete', 'Diğer'];
+    String? docName; // seçilen belge dosya adı
+    final types = [
+      'Muayene',
+      'Kan Tahlili',
+      'Röntgen',
+      'MR/BT',
+      'Reçete',
+      'Diğer',
+    ];
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (_) => StatefulBuilder(
         builder: (_, setSt) => _Sheet(
-          title: '📋 Rapor / Belge Ekle',
+          title: '📋 ${AppLocalizations.of(context).healthAddReport}',
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _Field(controller: titleCtrl, label: 'Başlık (örn. Yıllık check-up)'),
+              _Field(
+                controller: titleCtrl,
+                label: AppLocalizations.of(context).fhReportTitleHint,
+              ),
               const SizedBox(height: 10),
-              _Field(controller: doctorCtrl, label: 'Doktor / Klinik adı'),
+              _Field(
+                controller: doctorCtrl,
+                label: AppLocalizations.of(context).fhDoctorClinic,
+              ),
               const SizedBox(height: 10),
-              const Text('Rapor türü',
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
+              Text(
+                AppLocalizations.of(context).fhReportType,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 13,
+                ),
+              ),
               const SizedBox(height: 6),
               Wrap(
                 spacing: 6,
@@ -819,76 +965,91 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
                     onTap: () => setSt(() => type = t),
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 5),
+                        horizontal: 10,
+                        vertical: 5,
+                      ),
                       decoration: BoxDecoration(
                         color: sel
                             ? const Color(0xFF11998E)
                             : Colors.grey.withAlpha(20),
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: Text(t,
-                          style: TextStyle(
-                              color: sel ? Colors.white : Colors.black87,
-                              fontSize: 11,
-                              fontWeight: FontWeight.w600)),
+                      child: Text(
+                        t,
+                        style: TextStyle(
+                          color: sel ? Colors.white : Colors.black87,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
                   );
                 }).toList(),
               ),
               const SizedBox(height: 10),
               _Field(
-                  controller: notesCtrl,
-                  label: 'Notlar / Bulgular',
-                  maxLines: 3),
+                controller: notesCtrl,
+                label: AppLocalizations.of(context).fhNotesFindings,
+                maxLines: 3,
+              ),
               const SizedBox(height: 8),
-              // Document upload placeholder
+              // Belge / fotoğraf ekle (file_selector ile gerçek seçim).
               GestureDetector(
-                onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                          '📎 Belge yükleme yakında aktif olacak (Firebase Storage)'),
-                      behavior: SnackBarBehavior.floating,
-                    ),
-                  );
+                onTap: () async {
+                  final f = await openFile();
+                  if (f != null) setSt(() => docName = f.name);
                 },
                 child: Container(
                   height: 52,
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: const Color(0xFF11998E).withAlpha(80),
-                        width: 1.5),
+                      color: const Color(0xFF11998E).withAlpha(80),
+                      width: 1.5,
+                    ),
                     borderRadius: BorderRadius.circular(12),
                     color: const Color(0xFF11998E).withAlpha(10),
                   ),
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.attach_file, color: Color(0xFF11998E)),
-                      SizedBox(width: 8),
-                      Text('Belge / Fotoğraf Ekle (PDF, JPG)',
-                          style: TextStyle(
-                              color: Color(0xFF11998E),
-                              fontWeight: FontWeight.w700)),
+                      Icon(
+                        docName == null
+                            ? Icons.attach_file
+                            : Icons.check_circle,
+                        color: const Color(0xFF11998E),
+                      ),
+                      const SizedBox(width: 8),
+                      Flexible(
+                        child: Text(
+                          docName ?? 'Belge / Fotoğraf Ekle (PDF, JPG)',
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: Color(0xFF11998E),
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
               const SizedBox(height: 14),
               _GradBtn(
-                label: 'Raporu Kaydet',
+                label: AppLocalizations.of(context).fhSaveReport,
                 onTap: () {
                   if (titleCtrl.text.trim().isEmpty) return;
-                  ref.read(familyHealthProvider.notifier).addReport(
+                  ref
+                      .read(familyHealthProvider.notifier)
+                      .addReport(
                         member.id,
                         DoctorReport(
-                          id: DateTime.now()
-                              .millisecondsSinceEpoch
-                              .toString(),
+                          id: DateTime.now().millisecondsSinceEpoch.toString(),
                           title: titleCtrl.text.trim(),
                           doctor: doctorCtrl.text.trim(),
                           date: DateFormat('dd.MM.yyyy').format(DateTime.now()),
-                          notes: notesCtrl.text.trim(),
+                          notes: docName != null
+                              ? '${notesCtrl.text.trim()}\n📎 $docName'.trim()
+                              : notesCtrl.text.trim(),
                           reportType: type,
                         ),
                       );
@@ -913,16 +1074,24 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
       backgroundColor: Colors.transparent,
       builder: (_) => StatefulBuilder(
         builder: (_, setSt) => _Sheet(
-          title: '📅 Randevu Ekle — ${member.name}',
+          title:
+              '📅 ${AppLocalizations.of(context).healthAddAppt(member.name)}',
           child: Column(
             children: [
-              _Field(controller: doctorCtrl, label: 'Doktor adı'),
+              _Field(
+                controller: doctorCtrl,
+                label: AppLocalizations.of(context).fhDoctorName,
+              ),
               const SizedBox(height: 10),
               _Field(
-                  controller: specialtyCtrl,
-                  label: 'Uzmanlık (Kardiyoloji, Göz vb.)'),
+                controller: specialtyCtrl,
+                label: AppLocalizations.of(context).fhSpecialtyHint,
+              ),
               const SizedBox(height: 10),
-              _Field(controller: locationCtrl, label: 'Hastane / Klinik'),
+              _Field(
+                controller: locationCtrl,
+                label: AppLocalizations.of(context).fhHospitalClinic,
+              ),
               const SizedBox(height: 12),
               GestureDetector(
                 onTap: () async {
@@ -935,17 +1104,24 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
                   if (d != null) setSt(() => selectedDate = d);
                 },
                 child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
                   decoration: BoxDecoration(
-                    border:
-                        Border.all(color: const Color(0xFF11998E), width: 1.5),
+                    border: Border.all(
+                      color: const Color(0xFF11998E),
+                      width: 1.5,
+                    ),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.calendar_today,
-                          color: Color(0xFF11998E), size: 18),
+                      const Icon(
+                        Icons.calendar_today,
+                        color: Color(0xFF11998E),
+                        size: 18,
+                      ),
                       const SizedBox(width: 10),
                       Text(
                         DateFormat('dd MMMM yyyy', 'tr').format(selectedDate),
@@ -957,7 +1133,7 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
               ),
               const SizedBox(height: 16),
               _GradBtn(
-                label: 'Randevuyu Kaydet',
+                label: AppLocalizations.of(context).fhSaveAppointment,
                 onTap: () {
                   if (doctorCtrl.text.trim().isEmpty) return;
                   ref
@@ -965,13 +1141,12 @@ class _FamilyHealthScreenState extends ConsumerState<FamilyHealthScreen>
                       .addAppointment(
                         member.id,
                         DoctorAppointment(
-                          id: DateTime.now()
-                              .millisecondsSinceEpoch
-                              .toString(),
+                          id: DateTime.now().millisecondsSinceEpoch.toString(),
                           doctorName: doctorCtrl.text.trim(),
                           specialty: specialtyCtrl.text.trim(),
-                          dateTime: DateFormat('dd.MM.yyyy')
-                              .format(selectedDate),
+                          dateTime: DateFormat(
+                            'dd.MM.yyyy',
+                          ).format(selectedDate),
                           location: locationCtrl.text.trim(),
                         ),
                       );
@@ -1000,8 +1175,10 @@ class _MedicineTab extends ConsumerWidget {
         .firstWhere((m) => m.id == member.id, orElse: () => member);
 
     if (freshMember.medicines.isEmpty) {
-      return _EmptyState(
-          emoji: '💊', text: 'Henüz ilaç eklenmedi\n+ butonuna dokun');
+      return const _EmptyState(
+        emoji: '💊',
+        text: 'Henüz ilaç eklenmedi\n+ butonuna dokun',
+      );
     }
 
     final active = freshMember.medicines.where((m) => m.active).toList();
@@ -1012,20 +1189,18 @@ class _MedicineTab extends ConsumerWidget {
       children: [
         if (active.isNotEmpty) ...[
           _SectionLabel('Aktif İlaçlar (${active.length})'),
-          ...active.map((m) => _MedicineTile(
-                medicine: m,
-                memberId: freshMember.id,
-                ref: ref,
-              )),
+          ...active.map(
+            (m) =>
+                _MedicineTile(medicine: m, memberId: freshMember.id, ref: ref),
+          ),
         ],
         if (passive.isNotEmpty) ...[
           const SizedBox(height: 8),
           _SectionLabel('Pasif / Tamamlanan (${passive.length})'),
-          ...passive.map((m) => _MedicineTile(
-                medicine: m,
-                memberId: freshMember.id,
-                ref: ref,
-              )),
+          ...passive.map(
+            (m) =>
+                _MedicineTile(medicine: m, memberId: freshMember.id, ref: ref),
+          ),
         ],
       ],
     );
@@ -1036,8 +1211,11 @@ class _MedicineTile extends StatelessWidget {
   final Medicine medicine;
   final String memberId;
   final WidgetRef ref;
-  const _MedicineTile(
-      {required this.medicine, required this.memberId, required this.ref});
+  const _MedicineTile({
+    required this.medicine,
+    required this.memberId,
+    required this.ref,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1067,31 +1245,47 @@ class _MedicineTile extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
             child: const Center(
-                child: Text('💊', style: TextStyle(fontSize: 20))),
+              child: Text('💊', style: TextStyle(fontSize: 20)),
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(medicine.name,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w800,
-                        color: medicine.active
-                            ? Colors.black87
-                            : Colors.grey)),
+                Text(
+                  medicine.name,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    color: medicine.active ? Colors.black87 : Colors.grey,
+                  ),
+                ),
                 if (medicine.dosage.isNotEmpty)
-                  Text(medicine.dosage,
-                      style: const TextStyle(
-                          fontSize: 12, color: Color(0xFF6B7280))),
+                  Text(
+                    medicine.dosage,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFF6B7280),
+                    ),
+                  ),
                 if (medicine.frequency.isNotEmpty)
-                  Text(medicine.frequency,
-                      style: const TextStyle(
-                          fontSize: 11, color: Color(0xFF9CA3AF))),
+                  Text(
+                    medicine.frequency,
+                    style: const TextStyle(
+                      fontSize: 11,
+                      color: Color(0xFF9CA3AF),
+                    ),
+                  ),
                 if (medicine.startDate.isNotEmpty)
-                  Text('Başlangıç: ${medicine.startDate}',
-                      style: const TextStyle(
-                          fontSize: 10, color: Color(0xFFB0B7C0))),
+                  Text(
+                    AppLocalizations.of(
+                      context,
+                    ).fhStartDate(medicine.startDate),
+                    style: const TextStyle(
+                      fontSize: 10,
+                      color: Color(0xFFB0B7C0),
+                    ),
+                  ),
               ],
             ),
           ),
@@ -1104,7 +1298,9 @@ class _MedicineTile extends StatelessWidget {
                     .toggleMedicine(memberId, medicine.id),
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 8, vertical: 4),
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: medicine.active
                         ? Colors.green.withAlpha(20)
@@ -1114,11 +1310,10 @@ class _MedicineTile extends StatelessWidget {
                   child: Text(
                     medicine.active ? '✓ Aktif' : 'Pasif',
                     style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w700,
-                        color: medicine.active
-                            ? Colors.green
-                            : Colors.grey),
+                      fontSize: 10,
+                      fontWeight: FontWeight.w700,
+                      color: medicine.active ? Colors.green : Colors.grey,
+                    ),
                   ),
                 ),
               ),
@@ -1127,8 +1322,11 @@ class _MedicineTile extends StatelessWidget {
                 onTap: () => ref
                     .read(familyHealthProvider.notifier)
                     .deleteMedicine(memberId, medicine.id),
-                child: const Icon(Icons.delete_outline,
-                    color: Color(0xFFEF4444), size: 18),
+                child: const Icon(
+                  Icons.delete_outline,
+                  color: Color(0xFFEF4444),
+                  size: 18,
+                ),
               ),
             ],
           ),
@@ -1149,8 +1347,10 @@ class _VitaminTab extends ConsumerWidget {
         .firstWhere((m) => m.id == member.id, orElse: () => member);
 
     if (fresh.vitamins.isEmpty) {
-      return _EmptyState(
-          emoji: '🌿', text: 'Henüz vitamin/takviye eklenmedi');
+      return const _EmptyState(
+        emoji: '🌿',
+        text: 'Henüz vitamin/takviye eklenmedi',
+      );
     }
 
     return ListView(
@@ -1162,8 +1362,7 @@ class _VitaminTab extends ConsumerWidget {
           decoration: BoxDecoration(
             color: const Color(0xFF38EF7D).withAlpha(15),
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(
-                color: const Color(0xFF38EF7D).withAlpha(60)),
+            border: Border.all(color: const Color(0xFF38EF7D).withAlpha(60)),
           ),
           child: Row(
             children: [
@@ -1173,31 +1372,42 @@ class _VitaminTab extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(v.name,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w800)),
+                    Text(
+                      v.name,
+                      style: const TextStyle(fontWeight: FontWeight.w800),
+                    ),
                     if (v.amount.isNotEmpty)
-                      Text(v.amount,
-                          style: const TextStyle(
-                              fontSize: 12, color: Color(0xFF6B7280))),
-                    Text('⏰ ${v.timing}',
+                      Text(
+                        v.amount,
                         style: const TextStyle(
-                            fontSize: 11, color: Color(0xFF9CA3AF))),
+                          fontSize: 12,
+                          color: Color(0xFF6B7280),
+                        ),
+                      ),
+                    Text(
+                      '⏰ ${v.timing}',
+                      style: const TextStyle(
+                        fontSize: 11,
+                        color: Color(0xFF9CA3AF),
+                      ),
+                    ),
                   ],
                 ),
               ),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
                   color: Colors.green.withAlpha(20),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Text('✓ Aktif',
-                    style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.green)),
+                child: Text(
+                  '✓ ${AppLocalizations.of(context).healthActive}',
+                  style: const TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.green,
+                  ),
+                ),
               ),
             ],
           ),
@@ -1227,8 +1437,10 @@ class _ReportsTab extends ConsumerWidget {
         .firstWhere((m) => m.id == member.id, orElse: () => member);
 
     if (fresh.reports.isEmpty) {
-      return _EmptyState(
-          emoji: '📋', text: 'Henüz rapor / belge eklenmedi');
+      return const _EmptyState(
+        emoji: '📋',
+        text: 'Henüz rapor / belge eklenmedi',
+      );
     }
 
     return ListView(
@@ -1245,49 +1457,66 @@ class _ReportsTab extends ConsumerWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(_typeIcon[r.reportType] ?? '📄',
-                  style: const TextStyle(fontSize: 28)),
+              Text(
+                _typeIcon[r.reportType] ?? '📄',
+                style: const TextStyle(fontSize: 28),
+              ),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(r.title,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w800)),
+                    Text(
+                      r.title,
+                      style: const TextStyle(fontWeight: FontWeight.w800),
+                    ),
                     if (r.doctor.isNotEmpty)
-                      Text('👨‍⚕️ ${r.doctor}',
-                          style: const TextStyle(
-                              fontSize: 12,
-                              color: Color(0xFF6B7280))),
-                    Text(r.date,
+                      Text(
+                        '👨‍⚕️ ${r.doctor}',
                         style: const TextStyle(
-                            fontSize: 11,
-                            color: Color(0xFF9CA3AF))),
+                          fontSize: 12,
+                          color: Color(0xFF6B7280),
+                        ),
+                      ),
+                    Text(
+                      r.date,
+                      style: const TextStyle(
+                        fontSize: 11,
+                        color: Color(0xFF9CA3AF),
+                      ),
+                    ),
                     if (r.notes.isNotEmpty) ...[
                       const SizedBox(height: 4),
-                      Text(r.notes,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              fontSize: 12,
-                              color: Color(0xFF374151))),
+                      Text(
+                        r.notes,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Color(0xFF374151),
+                        ),
+                      ),
                     ],
                     const SizedBox(height: 4),
                     Row(
                       children: [
                         Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 3),
+                            horizontal: 8,
+                            vertical: 3,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.blue.withAlpha(20),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Text(r.reportType,
-                              style: const TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.w700)),
+                          child: Text(
+                            r.reportType,
+                            style: const TextStyle(
+                              fontSize: 10,
+                              color: Colors.blue,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -1312,16 +1541,12 @@ class _AppointmentsTab extends ConsumerWidget {
         .watch(familyHealthProvider)
         .firstWhere((m) => m.id == member.id, orElse: () => member);
 
-    final upcoming = fresh.appointments
-        .where((a) => !a.completed)
-        .toList()
+    final upcoming = fresh.appointments.where((a) => !a.completed).toList()
       ..sort((a, b) => a.dateTime.compareTo(b.dateTime));
-    final done =
-        fresh.appointments.where((a) => a.completed).toList();
+    final done = fresh.appointments.where((a) => a.completed).toList();
 
     if (fresh.appointments.isEmpty) {
-      return _EmptyState(
-          emoji: '📅', text: 'Henüz randevu eklenmedi');
+      return const _EmptyState(emoji: '📅', text: 'Henüz randevu eklenmedi');
     }
 
     return ListView(
@@ -1329,20 +1554,18 @@ class _AppointmentsTab extends ConsumerWidget {
       children: [
         if (upcoming.isNotEmpty) ...[
           _SectionLabel('Yaklaşan Randevular (${upcoming.length})'),
-          ...upcoming.map((a) => _AppointmentTile(
-                appointment: a,
-                memberId: fresh.id,
-                ref: ref,
-              )),
+          ...upcoming.map(
+            (a) =>
+                _AppointmentTile(appointment: a, memberId: fresh.id, ref: ref),
+          ),
         ],
         if (done.isNotEmpty) ...[
           const SizedBox(height: 8),
           _SectionLabel('Tamamlanan (${done.length})'),
-          ...done.map((a) => _AppointmentTile(
-                appointment: a,
-                memberId: fresh.id,
-                ref: ref,
-              )),
+          ...done.map(
+            (a) =>
+                _AppointmentTile(appointment: a, memberId: fresh.id, ref: ref),
+          ),
         ],
       ],
     );
@@ -1353,10 +1576,11 @@ class _AppointmentTile extends StatelessWidget {
   final DoctorAppointment appointment;
   final String memberId;
   final WidgetRef ref;
-  const _AppointmentTile(
-      {required this.appointment,
-      required this.memberId,
-      required this.ref});
+  const _AppointmentTile({
+    required this.appointment,
+    required this.memberId,
+    required this.ref,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1376,31 +1600,45 @@ class _AppointmentTile extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Text(appointment.completed ? '✅' : '📅',
-              style: const TextStyle(fontSize: 26)),
+          Text(
+            appointment.completed ? '✅' : '📅',
+            style: const TextStyle(fontSize: 26),
+          ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(appointment.doctorName,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w800,
-                        color: appointment.completed
-                            ? Colors.grey
-                            : Colors.black87)),
+                Text(
+                  appointment.doctorName,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    color: appointment.completed ? Colors.grey : Colors.black87,
+                  ),
+                ),
                 if (appointment.specialty.isNotEmpty)
-                  Text(appointment.specialty,
-                      style: const TextStyle(
-                          fontSize: 12, color: Color(0xFF6B7280))),
-                Text('📍 ${appointment.location.isNotEmpty ? appointment.location : "Belirtilmedi"}',
+                  Text(
+                    appointment.specialty,
                     style: const TextStyle(
-                        fontSize: 11, color: Color(0xFF9CA3AF))),
-                Text('🗓 ${appointment.dateTime}',
-                    style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFF374151))),
+                      fontSize: 12,
+                      color: Color(0xFF6B7280),
+                    ),
+                  ),
+                Text(
+                  '📍 ${appointment.location.isNotEmpty ? appointment.location : "Belirtilmedi"}',
+                  style: const TextStyle(
+                    fontSize: 11,
+                    color: Color(0xFF9CA3AF),
+                  ),
+                ),
+                Text(
+                  '🗓 ${appointment.dateTime}',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF374151),
+                  ),
+                ),
               ],
             ),
           ),
@@ -1411,18 +1649,22 @@ class _AppointmentTile extends StatelessWidget {
                   .completeAppointment(memberId, appointment.id),
               child: Container(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 10, vertical: 6),
+                  horizontal: 10,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.green.withAlpha(20),
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                      color: Colors.green.withAlpha(80)),
+                  border: Border.all(color: Colors.green.withAlpha(80)),
                 ),
-                child: const Text('Tamamla',
-                    style: TextStyle(
-                        fontSize: 11,
-                        color: Colors.green,
-                        fontWeight: FontWeight.w700)),
+                child: Text(
+                  AppLocalizations.of(context).fhComplete,
+                  style: const TextStyle(
+                    fontSize: 11,
+                    color: Colors.green,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
               ),
             ),
         ],
@@ -1442,7 +1684,8 @@ class _Sheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom),
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
       child: Container(
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -1464,9 +1707,14 @@ class _Sheet extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 14),
-            Text(title,
-                style: const TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.w900)),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w900,
+                color: Color(0xFF111827),
+              ),
+            ),
             const SizedBox(height: 16),
             child,
           ],
@@ -1480,18 +1728,21 @@ class _Field extends StatelessWidget {
   final TextEditingController controller;
   final String label;
   final int maxLines;
-  const _Field(
-      {required this.controller,
-      required this.label,
-      this.maxLines = 1});
+  const _Field({
+    required this.controller,
+    required this.label,
+    this.maxLines = 1,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
       maxLines: maxLines,
+      style: const TextStyle(color: Color(0xFF111827)),
       decoration: InputDecoration(
         labelText: label,
+        labelStyle: const TextStyle(color: Color(0xFF6B7280)),
         filled: true,
         fillColor: const Color(0xFFF9FAFB),
         border: OutlineInputBorder(
@@ -1504,11 +1755,12 @@ class _Field extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide:
-              const BorderSide(color: Color(0xFF11998E), width: 1.5),
+          borderSide: const BorderSide(color: Color(0xFF11998E), width: 1.5),
         ),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 14,
+          vertical: 12,
+        ),
       ),
     );
   }
@@ -1527,7 +1779,8 @@ class _GradBtn extends StatelessWidget {
         height: 50,
         decoration: BoxDecoration(
           gradient: const LinearGradient(
-              colors: [Color(0xFF11998E), Color(0xFF38EF7D)]),
+            colors: [Color(0xFF11998E), Color(0xFF38EF7D)],
+          ),
           borderRadius: BorderRadius.circular(14),
           boxShadow: [
             BoxShadow(
@@ -1538,11 +1791,14 @@ class _GradBtn extends StatelessWidget {
           ],
         ),
         child: Center(
-          child: Text(label,
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 15)),
+          child: Text(
+            label,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w800,
+              fontSize: 15,
+            ),
+          ),
         ),
       ),
     );
@@ -1562,10 +1818,11 @@ class _EmptyState extends StatelessWidget {
         children: [
           Text(emoji, style: const TextStyle(fontSize: 48)),
           const SizedBox(height: 12),
-          Text(text,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                  color: Color(0xFF9CA3AF), fontSize: 14)),
+          Text(
+            text,
+            textAlign: TextAlign.center,
+            style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 14),
+          ),
         ],
       ),
     );
@@ -1583,10 +1840,11 @@ class _SectionLabel extends StatelessWidget {
       child: Text(
         text,
         style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w800,
-            color: Color(0xFF6B7280),
-            letterSpacing: .3),
+          fontSize: 12,
+          fontWeight: FontWeight.w800,
+          color: Color(0xFF6B7280),
+          letterSpacing: .3,
+        ),
       ),
     );
   }

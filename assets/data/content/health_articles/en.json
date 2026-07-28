@@ -1,0 +1,80 @@
+[
+  {
+    "id": "immunity", "category": "aile", "categoryLabel": "Immunity",
+    "color": "22C55E", "emoji": "🥗", "dateLabel": "Today",
+    "imageUrl": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500&q=60",
+    "title": "10 Habits That Strengthen Your Immune System",
+    "summary": "Simple yet effective methods you can apply every day.",
+    "body": [
+      "The immune system is the body's first line of defence against illness. Daily habits make a big difference to a strong immune system.",
+      "1) Eat colourful fruit and vegetables (vitamins C and A).\n2) Sleep 7-8 hours a night.\n3) Exercise regularly.\n4) Drink enough water.\n5) Manage stress (breathing, breaks).",
+      "6) Cut back on processed sugar.\n7) Mind your hand hygiene.\n8) Get vitamin D from sunlight.\n9) Eat probiotic foods.\n10) Avoid smoking and alcohol.",
+      "Note: this content is informational only. Consult a doctor for any health concerns."
+    ]
+  },
+  {
+    "id": "child_fever", "category": "cocuk", "categoryLabel": "Child Health",
+    "color": "3B82F6", "emoji": "🤒", "dateLabel": "Yesterday",
+    "imageUrl": "https://images.unsplash.com/photo-1584515933487-779824d29309?w=500&q=60",
+    "title": "Fever in Children: When to Worry?",
+    "summary": "Causes of fever, how to measure it correctly and when to see a doctor.",
+    "body": [
+      "Fever is a sign that the body is fighting an infection and is usually harmless. What matters most is monitoring the child's general condition.",
+      "Correct measurement: in young children, measure under the arm or in the ear with a reliable thermometer. Above 38 °C is considered a fever.",
+      "See a doctor: DO NOT DELAY with any fever in a baby under 3 months, a fever above 39 °C that won't come down, breathing difficulty, a rash, extreme weakness or convulsions.",
+      "This content is informational and does not diagnose. If worried, consult a paediatrician."
+    ]
+  },
+  {
+    "id": "menstrual", "category": "kadin", "categoryLabel": "Women's Health",
+    "color": "EC4899", "emoji": "🌸", "dateLabel": "3 days ago",
+    "imageUrl": "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=500&q=60",
+    "title": "What You Need to Know About the Menstrual Cycle",
+    "summary": "The phases of the cycle, symptoms and things to watch for.",
+    "body": [
+      "The menstrual cycle averages 28 days, but 21-35 days is normal. The cycle has four phases: menstruation, follicular, ovulation and luteal.",
+      "Ovulation usually occurs around day 14 of the cycle and is the most fertile period. Tracking this window is useful for planning.",
+      "See a gynaecologist if you have irregularity, severe pain or very heavy bleeding.",
+      "This content is informational and does not replace medical advice."
+    ]
+  },
+  {
+    "id": "vitamin_d", "category": "aile", "categoryLabel": "Nutrition",
+    "color": "F59E0B", "emoji": "☀️", "dateLabel": "3 days ago",
+    "imageUrl": "https://images.unsplash.com/photo-1550572017-edd951b55104?w=500&q=60",
+    "title": "Signs of Vitamin D Deficiency",
+    "summary": "How to recognise the signals of a vitamin D deficiency.",
+    "body": [
+      "Vitamin D is essential for bone health, immunity and muscle function. Deficiency is common, especially with little sun exposure.",
+      "Symptoms: constant tiredness, bone/muscle pain, getting ill often, hair loss and low mood.",
+      "Recommendations: from sunlight (15-20 min a day), oily fish, egg yolk and supplements. Consult a doctor before taking supplements.",
+      "This content is informational. See your doctor for a blood test and treatment."
+    ]
+  },
+  {
+    "id": "sleep", "category": "aile", "categoryLabel": "Sleep",
+    "color": "8B5CF6", "emoji": "🌙", "dateLabel": "4 days ago",
+    "imageUrl": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=500&q=60",
+    "title": "7 Tips for Quality Sleep",
+    "summary": "Practical tips to sleep better and wake up refreshed.",
+    "body": [
+      "Quality sleep is the foundation of physical and mental health. Adults are advised to get 7-9 hours a night.",
+      "1) Go to bed and get up at the same time daily.\n2) Put screens away 1 hour before bed.\n3) Keep the room dark and cool.\n4) Reduce caffeine in the evening.",
+      "5) Avoid heavy meals before bed.\n6) Stay active during the day.\n7) Build a calming routine (reading, breathing).",
+      "If sleep problems persist, consult a specialist."
+    ]
+  },
+  {
+    "id": "child_nutrition", "category": "cocuk", "categoryLabel": "Child Nutrition",
+    "color": "14B8A6", "emoji": "🍎", "dateLabel": "5 days ago",
+    "imageUrl": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&q=60",
+    "title": "Healthy Eating Habits in Children",
+    "summary": "Practical, balanced nutrition tips for picky eaters.",
+    "body": [
+      "Eating habits built in childhood last a lifetime. Offering a colourful and varied plate is important.",
+      "Tips: eat together, offer new foods again and again without pressure, and limit sugary snacks.",
+      "Forcing a child to eat can backfire; set an example and be patient.",
+      "If you are worried about growth or nutrition, consult a paediatrician."
+    ]
+  }
+]

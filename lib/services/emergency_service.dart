@@ -3,11 +3,17 @@ import '../core/supabase_client.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:geolocator/geolocator.dart';
+import 'localization/locale_service.dart';
 
 /// Global realtime SOS service.
 /// All SOS alerts are persisted to Supabase `sos_alerts` table and
 /// broadcast via realtime to every family member (parents + children).
 class EmergencyService {
+  static String _text(Map<String, String> values) {
+    final language = LocaleService.resolveInitialLocale().languageCode;
+    return values[language] ?? values['tr']!;
+  }
+
   static final _sosController = StreamController<SOSAlert>.broadcast();
   static final _cancelController = StreamController<SOSCancel>.broadcast();
   static Stream<SOSAlert> get sosStream => _sosController.stream;
@@ -63,8 +69,12 @@ class EmergencyService {
     required String senderName,
     required String senderType, // 'parent' | 'child'
     required Position? location,
-    String message = 'Acil durum!',
+    String? message,
   }) async {
+    message ??= _text(const {
+      'tr': 'Acil durum!', 'en': 'Emergency!',
+      'nl': 'Noodgeval!', 'fr': 'Urgence !',
+    });
     HapticFeedback.vibrate();
     await Future.delayed(const Duration(milliseconds: 200));
     HapticFeedback.vibrate();
@@ -87,7 +97,10 @@ class EmergencyService {
         userName: senderName,
         lat: location?.latitude ?? 0,
         lng: location?.longitude ?? 0,
-        message: '$message (Çevrimdışı)',
+        message: '$message ${_text(const {
+          'tr': '(Çevrimdışı)', 'en': '(Offline)',
+          'nl': '(Offline)', 'fr': '(Hors ligne)',
+        })}',
         timestamp: DateTime.now(),
       ));
       rethrow;
@@ -155,10 +168,16 @@ class EmergencyService {
       for (final row in rows.where((r) => r['status'] == 'active')) {
         _sosController.add(SOSAlert(
           id: row['id'] as String?,
-          userName: row['sender_name'] as String? ?? 'Bilinmeyen',
+          userName: row['sender_name'] as String? ?? _text(const {
+            'tr': 'Bilinmeyen', 'en': 'Unknown',
+            'nl': 'Onbekend', 'fr': 'Inconnu',
+          }),
           lat: (row['lat'] as num?)?.toDouble() ?? 0,
           lng: (row['lng'] as num?)?.toDouble() ?? 0,
-          message: row['message'] as String? ?? 'Acil durum!',
+          message: row['message'] as String? ?? _text(const {
+            'tr': 'Acil durum!', 'en': 'Emergency!',
+            'nl': 'Noodgeval!', 'fr': 'Urgence !',
+          }),
           timestamp: DateTime.tryParse(row['created_at']?.toString() ?? '') ?? DateTime.now(),
           senderType: row['sender_type'] as String?,
         ));

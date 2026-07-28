@@ -8,6 +8,7 @@ import '../../../domain/models/child_account.dart';
 import '../../../repositories/child_account_repository.dart';
 import '../../providers/app_providers.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../../core/app_logger.dart';
 
 class ChildLoginScreen extends ConsumerStatefulWidget {
   const ChildLoginScreen({super.key});
@@ -44,21 +45,20 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
         return;
       }
 
-      // Get current user's family
-      final response = await _repo.client
-          .from('family_members')
-          .select('family_id')
-          .eq('user_id', userId)
-          .maybeSingle();
-
-      final familyId = response?['family_id'] as String?;
-      if (familyId == null) {
-        setState(() {
-          _isLoadingChildren = false;
-          _error = 'Aile bilgisi bulunamadı. Lütfen önce aile oluşturun.';
-        });
-        return;
+      // Aile id'sini bul; bulunamazsa yerel aileye düş (yerel çocuklar Hive'da).
+      String? familyId;
+      try {
+        final response = await _repo.client
+            .from('family_members')
+            .select('family_id')
+            .eq('user_id', userId)
+            .maybeSingle();
+        familyId = response?['family_id'] as String?;
+      } catch (e) {
+        // Best-effort: aşağıdaki yerel familyId fallback'i devreye girer.
+        AppLogger.logBestEffort(e, module: 'auth', operation: 'lookupChildFamilyId');
       }
+      familyId ??= ChildAccountRepository.localFamilyId;
 
       final children = await _repo.getChildrenForFamily(familyId);
       setState(() {
@@ -111,7 +111,17 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
     setState(() => _isLoading = true);
 
     try {
-      await ChildAuthService.signIn(childId: child.id, pin: pin);
+      if (child.id.startsWith('local_')) {
+        await ChildAuthService.signInLocal(
+          childId: child.id,
+          pin: pin,
+          childName: child.name,
+          childRole: child.role.name,
+          familyId: child.familyId,
+        );
+      } else {
+        await ChildAuthService.signIn(childId: child.id, pin: pin);
+      }
 
       if (mounted) {
         context.go(AppRoutes.childDashboard);
@@ -149,7 +159,6 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final accentColor = ref.watch(accentColorProvider);
 
     return Scaffold(
@@ -187,8 +196,7 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
               ),
               const SizedBox(height: AppSpacing.lg),
               Center(
-                child: Text(
-                  'Çocuk Girişi',
+                child: Text(AppLocalizations.of(context).cocukGirisi,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     color: accentColor,
                     fontWeight: FontWeight.bold,
@@ -197,12 +205,9 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
               ),
               const SizedBox(height: AppSpacing.sm),
               Center(
-                child: Text(
-                  'İsmini seç ve PINini gir',
+                child: Text(AppLocalizations.of(context).isminiSecVePininiGir,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: isDark
-                        ? AppColors.darkTextSecondary
-                        : AppColors.gray,
+                    color: const Color(0xFF6B7280),
                   ),
                 ),
               ),
@@ -224,32 +229,27 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
                   ),
                 )
               else if (_children.isEmpty)
-                Center(
+                const Center(
                   child: Column(
                     children: [
                       Icon(
                         Icons.person_off_outlined,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.gray,
+                        color: Color(0xFF6B7280),
                         size: 48,
                       ),
-                      const SizedBox(height: AppSpacing.md),
+                      SizedBox(height: AppSpacing.md),
                       Text(
                         'Henüz çocuk hesabı eklenmemiş.\nEbeveyn girişi yaparak ekleyebilirsiniz.',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: isDark
-                              ? AppColors.darkTextSecondary
-                              : AppColors.gray,
+                          color: Color(0xFF6B7280),
                         ),
                       ),
                     ],
                   ),
                 )
               else ...[
-                Text(
-                  'Çocuk Seç',
+                Text(AppLocalizations.of(context).cocukSec,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -311,11 +311,9 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
                                 ),
                                 Text(
                                   child.displayRole,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 12,
-                                    color: isDark
-                                        ? AppColors.darkTextSecondary
-                                        : AppColors.gray,
+                                    color: Color(0xFF6B7280),
                                   ),
                                 ),
                               ],
@@ -341,17 +339,15 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
                   maxLength: 6,
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 24, letterSpacing: 16),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: '••••••',
                     hintStyle: TextStyle(
                       fontSize: 24,
                       letterSpacing: 16,
-                      color: isDark
-                          ? AppColors.darkTextSecondary
-                          : AppColors.gray,
+                      color: Color(0xFF6B7280),
                     ),
                     counterText: '',
-                    prefixIcon: const Icon(Icons.lock_outline),
+                    prefixIcon: Icon(Icons.lock_outline),
                   ),
                   onSubmitted: (_) => _signIn(),
                 ),
@@ -379,9 +375,8 @@ class _ChildLoginScreenState extends ConsumerState<ChildLoginScreen> {
                               strokeWidth: 2,
                             ),
                           )
-                        : const Text(
-                            'Giriş Yap',
-                            style: TextStyle(
+                        : Text(AppLocalizations.of(context).login,
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
                             ),

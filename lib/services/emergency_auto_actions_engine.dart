@@ -2,14 +2,21 @@
 // Emergency auto-actions engine: triggers, messages, calls, escalation chain
 
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:record/record.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'package:supabase_flutter/supabase_flutter.dart';
+import '../core/supabase_client.dart';
 import '../domain/models/emergency_action.dart';
 import '../domain/models/emergency_template.dart';
+import '../repositories/emergency_action_repository.dart';
+import 'localization/locale_service.dart';
 
 /// High-level engine that orchestrates the entire emergency response pipeline.
 class EmergencyAutoActionsEngine {
@@ -18,7 +25,21 @@ class EmergencyAutoActionsEngine {
   factory EmergencyAutoActionsEngine() => _instance;
   EmergencyAutoActionsEngine._internal();
 
+  String get _languageCode =>
+      LocaleService.resolveInitialLocale().languageCode;
+
+  String _text(Map<String, String> values) =>
+      values[_languageCode] ?? values['tr']!;
+
+  String get _helpCall => _text(const {
+        'tr': 'Acil durum yardım çağrısı',
+        'en': 'Emergency assistance request',
+        'nl': 'Noodoproep',
+        'fr': 'Demande d’aide d’urgence',
+      });
+
   final FlutterTts _tts = FlutterTts();
+  final AudioRecorder _recorder = AudioRecorder();
 
   // ── Active action ──
   EmergencyAction? _activeAction;
@@ -50,16 +71,20 @@ class EmergencyAutoActionsEngine {
     Position? position;
     try {
       position = await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(accuracy: LocationAccuracy.best),
+        locationSettings: const LocationSettings(
+            accuracy: LocationAccuracy.best, timeLimit: Duration(seconds: 8)),
       );
     } catch (e) {
       // ignore: empty_catches
     }
 
+    // 1b. Resolve family_id (aileye realtime ulaşması için gerekli)
+    final familyId = await _resolveFamilyId();
+
     // 2. Build action
     final now = DateTime.now();
     final action = EmergencyAction(
-      familyId: '', // Filled by service layer
+      familyId: familyId ?? '',
       triggeredBy: triggeredBy,
       trigger: EmergencyTrigger(
         type: EmergencyTriggerType.values.firstWhere(
@@ -73,7 +98,7 @@ class EmergencyAutoActionsEngine {
       emergency: EmergencyDetails(
         severity: initialSeverity,
         category: category,
-        description: description ?? 'Acil durum yardım çağrısı',
+        description: description ?? _helpCall,
       ),
       autoActions: const AutoActions(),
       escalationChain: const EscalationChain(),
@@ -85,6 +110,12 @@ class EmergencyAutoActionsEngine {
     _activeAction = action;
     _statusController.add(action);
     onSOSStarted?.call();
+
+    // 2b. Buluta yaz + aileye anlık push — best-effort (çevrimdışıysa akış sürer).
+    //     Aile üyeleri emergency_actions'a realtime abone olduğunda anında görür.
+    if (familyId != null && familyId.isNotEmpty) {
+      unawaited(_broadcastToFamily(action, description ?? _helpCall));
+    }
 
     // 3. Execute auto actions
     await _executeAutoActions(action);
@@ -170,7 +201,9 @@ class EmergencyAutoActionsEngine {
     try {
       // ignore: unused_local_variable
       final pos = await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(accuracy: LocationAccuracy.bestForNavigation),
+        locationSettings: const LocationSettings(
+            accuracy: LocationAccuracy.bestForNavigation,
+            timeLimit: Duration(seconds: 8)),
       );
     } catch (e) {
       // ignore: empty_catches
@@ -190,7 +223,7 @@ class EmergencyAutoActionsEngine {
 
     final template = await _getTemplate(config.templateId);
     final messageText = _resolveTemplate(template.smsContent, {
-      'name': 'Kullanıcı',
+      'name': _text(const {'tr': 'Kullanıcı', 'en': 'User', 'nl': 'Gebruiker', 'fr': 'Utilisateur'}),
       'location':
           '${action.trigger.latitude ?? 0}, ${action.trigger.longitude ?? 0}',
       'time': _fmtTime(action.trigger.timestamp),
@@ -201,7 +234,7 @@ class EmergencyAutoActionsEngine {
         await _sendSms(_getRecipientTarget(config), messageText);
         break;
       case MessageChannel.push:
-        // TODO: Push via FCM
+        await _sendFcmPush(messageText);
         break;
       case MessageChannel.whatsapp:
         await _sendWhatsApp(_getRecipientTarget(config), messageText);
@@ -241,11 +274,69 @@ class EmergencyAutoActionsEngine {
   Future<void> _sendEmail(String email, String message) async {
     if (email.isEmpty) return;
     final uri = Uri(scheme: 'mailto', path: email, queryParameters: {
-      'subject': 'Acil Durum Yardım Çağrısı',
+      'subject': _helpCall,
       'body': message,
     });
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
+    }
+  }
+
+  /// Giriş yapan kullanıcının family_id'sini profiles'tan çözer.
+  Future<String?> _resolveFamilyId() async {
+    try {
+      final client = SupabaseConfig.safeClient;
+      final userId = client?.auth.currentUser?.id;
+      if (client == null || userId == null) return null;
+      final profile = await client
+          .from('profiles')
+          .select('family_id')
+          .eq('id', userId)
+          .maybeSingle();
+      return profile?['family_id'] as String?;
+    } catch (e) {
+      debugPrint('[Emergency] family_id çözülemedi: $e');
+      return null;
+    }
+  }
+
+  /// SOS'u emergency_actions tablosuna yazar (aile realtime görür) + FCM push.
+  Future<void> _broadcastToFamily(EmergencyAction action, String message) async {
+    try {
+      final id = await EmergencyActionRepository().createAction(action);
+      action.actionId = id;
+    } catch (e) {
+      debugPrint('[Emergency] bulut kaydı başarısız: $e');
+    }
+    await _sendFcmPush(message);
+  }
+
+  Future<void> _sendFcmPush(String message) async {
+    try {
+      final client = SupabaseConfig.safeClient;
+      if (client == null) return;
+
+      // Get FCM tokens of all family members via Supabase Edge Function
+      final userId = client.auth.currentUser?.id;
+      if (userId == null) return;
+
+      final profile = await client
+          .from('profiles')
+          .select('family_id')
+          .eq('id', userId)
+          .maybeSingle();
+      final familyId = profile?['family_id'] as String?;
+      if (familyId == null) return;
+
+      // Call Supabase Edge Function to send FCM to all family members
+      await client.functions.invoke('send-emergency-push', body: {
+        'family_id': familyId,
+        'sender_id': userId,
+        'message': message,
+        'title': _text(const {'tr': '🆘 ACİL DURUM', 'en': '🆘 EMERGENCY', 'nl': '🆘 NOODGEVAL', 'fr': '🆘 URGENCE'}),
+      });
+    } catch (e) {
+      debugPrint('[Emergency] FCM push failed: $e');
     }
   }
 
@@ -278,7 +369,7 @@ class EmergencyAutoActionsEngine {
     if (config.autoDial) {
       await _autoDial(
         number,
-        config.messageText ?? 'Acil durum yardım çağrısı',
+        config.messageText ?? _helpCall,
       );
     } else {
       // Prepare manual call UI
@@ -295,6 +386,9 @@ class EmergencyAutoActionsEngine {
     await Future.delayed(const Duration(seconds: 5));
     await _tts.setSpeechRate(0.8);
     await _tts.setVolume(1.0);
+    await _tts.setLanguage(switch (_languageCode) {
+      'en' => 'en-GB', 'nl' => 'nl-NL', 'fr' => 'fr-FR', _ => 'tr-TR',
+    });
     await _tts.speak(message);
   }
 
@@ -302,9 +396,49 @@ class EmergencyAutoActionsEngine {
   // AUDIO RECORDING
   // ═══════════════════════════════════════════
   Future<void> _startAudioRecording(EmergencyAction action) async {
-    // ignore: unused_local_variable
-    final duration = action.autoActions.audioRecording.durationSeconds;
-    // TODO: Use record package for actual recording
+    final durationSeconds = action.autoActions.audioRecording.durationSeconds;
+    try {
+      final hasPermission = await _recorder.hasPermission();
+      if (!hasPermission) return;
+
+      final dir = await getTemporaryDirectory();
+      final path = '${dir.path}/emergency_recording_${DateTime.now().millisecondsSinceEpoch}.m4a';
+
+      await _recorder.start(
+        const RecordConfig(encoder: AudioEncoder.aacLc, bitRate: 64000),
+        path: path,
+      );
+
+      await Future.delayed(Duration(seconds: durationSeconds));
+
+      if (await _recorder.isRecording()) {
+        final recordedPath = await _recorder.stop();
+        if (recordedPath != null) {
+          await _uploadEmergencyRecording(recordedPath, action);
+        }
+      }
+    } catch (e) {
+      debugPrint('[Emergency] Audio recording failed: $e');
+    }
+  }
+
+  Future<void> _uploadEmergencyRecording(String filePath, EmergencyAction action) async {
+    try {
+      final client = SupabaseConfig.safeClient;
+      if (client == null) return;
+      final userId = client.auth.currentUser?.id;
+      if (userId == null) return;
+
+      final bytes = await File(filePath).readAsBytes();
+      final fileName = 'emergency_${userId}_${DateTime.now().millisecondsSinceEpoch}.m4a';
+      await client.storage.from('emergency-recordings').uploadBinary(
+        fileName,
+        bytes,
+        fileOptions: const FileOptions(contentType: 'audio/mp4'),
+      );
+    } catch (e) {
+      debugPrint('[Emergency] Recording upload failed: $e');
+    }
   }
 
   // ═══════════════════════════════════════════
@@ -376,11 +510,11 @@ class EmergencyAutoActionsEngine {
       case EscalationAction.call:
         // Auto-dial emergency number
         final number = step.recipients.isNotEmpty ? step.recipients.first : '112';
-        await _autoDial(number, 'Acil durum yardım çağrısı');
+        await _autoDial(number, _helpCall);
         break;
       case EscalationAction.alertServices:
         // Alert emergency services (112)
-        await _autoDial('112', 'Acil durum yardım çağrısı');
+        await _autoDial('112', _helpCall);
         break;
       case EscalationAction.soundAlarm:
         // Sound alarm is handled by CrashDetectionService
@@ -435,18 +569,40 @@ class EmergencyAutoActionsEngine {
     return false;
   }
 
+  EmergencyTemplate get _defaultTemplate => EmergencyTemplate(
+    templateId: 'default',
+    name: _text(const {'tr': 'Varsayılan', 'en': 'Default', 'nl': 'Standaard', 'fr': 'Par défaut'}),
+    smsContent: _text(const {
+      'tr': '🆘 ACİL: {name} yardım istiyor! Konum: {location} Saat: {time}',
+      'en': '🆘 EMERGENCY: {name} needs help! Location: {location} Time: {time}',
+      'nl': '🆘 NOODGEVAL: {name} heeft hulp nodig! Locatie: {location} Tijd: {time}',
+      'fr': '🆘 URGENCE : {name} demande de l’aide ! Position : {location} Heure : {time}',
+    }),
+    pushContent: _text(const {
+      'tr': 'Yardım çağrısı! Konum: {location}', 'en': 'Help request! Location: {location}',
+      'nl': 'Hulpverzoek! Locatie: {location}', 'fr': 'Demande d’aide ! Position : {location}',
+    }),
+    voiceContent: _text(const {
+      'tr': 'Bu otomatik bir acil durum çağrısıdır. {name} yardım istiyor.',
+      'en': 'This is an automated emergency call. {name} needs help.',
+      'nl': 'Dit is een automatische noodoproep. {name} heeft hulp nodig.',
+      'fr': 'Ceci est un appel d’urgence automatique. {name} demande de l’aide.',
+    }),
+    emailContent: _text(const {
+      'tr': 'Acil durum yardım çağrısı. {name} konum: {location}',
+      'en': 'Emergency assistance request. {name}, location: {location}',
+      'nl': 'Noodoproep. {name}, locatie: {location}',
+      'fr': 'Demande d’aide d’urgence. {name}, position : {location}',
+    }),
+  );
+
   Future<EmergencyTemplate> _getTemplate(String templateId) async {
-    // TODO: Load from repository
-    return const EmergencyTemplate(
-      templateId: 'default',
-      name: 'Varsayılan',
-      smsContent:
-          '🆘 ACİL: {name} yardım istiyor! Konum: {location} Saat: {time}',
-      pushContent: 'Yardım çağrısı! Konum: {location}',
-      voiceContent:
-          'Bu otomatik bir acil durum çağrısıdır. {name} yardım istiyor.',
-      emailContent: 'Acil durum yardım çağrısı. {name} konum: {location}',
-    );
+    try {
+      final template = await EmergencyActionRepository().getTemplateById(templateId);
+      return template ?? _defaultTemplate;
+    } catch (_) {
+      return _defaultTemplate;
+    }
   }
 
   String _resolveTemplate(String template, Map<String, String> vars) {

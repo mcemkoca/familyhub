@@ -13,8 +13,7 @@ class AppTypography {
     double? letterSpacing,
     Color? color,
   }) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final defaultColor = isDark ? AppColors.darkTextPrimary : AppColors.dark;
+    final defaultColor = const Color(0xFFE5E7EB);
     return TextStyle(
       fontSize: fontSize,
       fontWeight: fontWeight ?? FontWeight.normal,
@@ -132,9 +131,7 @@ class AppTypography {
   // ── Semantic helpers ──────────────────────────────────────────────────
 
   static TextStyle caption(BuildContext context) => bodySmall(context).copyWith(
-    color: Theme.of(context).brightness == Brightness.dark
-        ? AppColors.darkTextSecondary
-        : AppColors.gray,
+    color: const Color(0xFF6B7280),
   );
 
   static TextStyle error(BuildContext context) => bodyMedium(context).copyWith(
@@ -142,6 +139,6 @@ class AppTypography {
   );
 
   static TextStyle success(BuildContext context) => bodyMedium(context).copyWith(
-    color: AppColors.success,
+    color: const Color(0xFF10B981),
   );
 }

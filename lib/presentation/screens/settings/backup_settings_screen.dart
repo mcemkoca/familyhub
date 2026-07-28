@@ -46,6 +46,19 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
     } catch (e) { debugPrint('Backup settings error: $e'); }
   }
 
+  /// Google hata türünü lokalize mesaja çevirir (ham exception gösterme).
+  String _googleErrMessage(GoogleAuthError type) {
+    final t = AppLocalizations.of(context);
+    return switch (type) {
+      GoogleAuthError.cancelled => t.googleErrCancelled,
+      GoogleAuthError.configuration => t.googleErrConfig,
+      GoogleAuthError.network => t.googleErrNetwork,
+      GoogleAuthError.scopeDenied => t.googleErrScope,
+      GoogleAuthError.driveUnavailable => t.googleErrDrive,
+      GoogleAuthError.unknown => t.googleErrUnknown,
+    };
+  }
+
   Future<void> _signIn() async {
     HapticFeedback.mediumImpact();
     try {
@@ -58,11 +71,17 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
         await _loadBackups();
       }
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Giriş hatası: $e'), backgroundColor: AppColors.error),
-        );
-      }
+      if (!mounted) return;
+      final type = GoogleDriveService.classifyError(e);
+      // İptal bir hata değildir — kırmızı hata yerine nötr bilgi göster.
+      final isCancel = type == GoogleAuthError.cancelled;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(_googleErrMessage(type)),
+          backgroundColor: isCancel ? null : AppColors.error,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
     }
   }
 
@@ -103,7 +122,7 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Yedekleme hatası: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context).cbBackupFailed('$e'))),
         );
       }
     } finally {
@@ -128,7 +147,7 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Geri yükleme hatası: $e'),
+            content: Text(AppLocalizations.of(context).cbRestoreFailed('$e')),
             backgroundColor: Colors.red,
           ),
         );
@@ -193,13 +212,12 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = isDark ? AppColors.darkBackground : AppColors.cloudWhite;
+    final bg = const Color(0xFF0A0A0F);
 
     return Scaffold(
       backgroundColor: bg,
       appBar: ScreenHeader(
-        title: 'Yedekleme Ayarları',
+        title: AppLocalizations.of(context).yedeklemeAyarlari,
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -271,9 +289,8 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
                         child: ElevatedButton.icon(
                           onPressed: _signIn,
                           icon: const Icon(Icons.login, color: Color(0xFF4285F4)),
-                          label: const Text(
-                            'Google Hesabı Bağla',
-                            style: TextStyle(color: Color(0xFF4285F4)),
+                          label: Text(AppLocalizations.of(context).googleHesabiBagla,
+                            style: const TextStyle(color: Color(0xFF4285F4)),
                           ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
@@ -291,9 +308,8 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
                         child: OutlinedButton.icon(
                           onPressed: _signOut,
                           icon: const Icon(Icons.logout, color: Colors.white),
-                          label: const Text(
-                            'Bağlantıyı Kes',
-                            style: TextStyle(color: Colors.white),
+                          label: Text(AppLocalizations.of(context).baglantiyiKes,
+                            style: const TextStyle(color: Colors.white),
                           ),
                           style: OutlinedButton.styleFrom(
                             side: const BorderSide(color: Colors.white70),
@@ -308,15 +324,15 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
               ),
             ),
           ),
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: SettingsSection(
-              title: 'AYARLAR',
+              title: AppLocalizations.of(context).bsSettingsSection,
               icon: Icons.settings_outlined,
               children: [
                 HiveSettingsToggle(
                   settingsKey: 'auto_backup_enabled',
-                  title: 'Otomatik Yedekleme',
-                  subtitle: 'Her hafta otomatik yedekle',
+                  title: AppLocalizations.of(context).bsAutoBackup,
+                  subtitle: AppLocalizations.of(context).bsAutoBackupSub,
                   defaultValue: false,
                 ),
               ],
@@ -331,18 +347,18 @@ class _BackupSettingsScreenState extends State<BackupSettingsScreen> {
                 child: ElevatedButton.icon(
                   onPressed: _backingUp || !_isSignedIn ? null : _triggerBackup,
                   icon: _backingUp
-                      ? SizedBox(
+                      ? const SizedBox(
                           width: 20,
                           height: 20,
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
-                            color: isDark ? AppColors.dark : Colors.white,
+                            color: Color(0xFFE5E7EB),
                           ),
                         )
                       : const Icon(Icons.cloud_upload),
                   label: Text(_backingUp ? 'Yedekleniyor...' : 'Şimdi Yedekle'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.cobalt,
+                    backgroundColor: const Color(0xFF6366F1),
                     foregroundColor: Colors.white,
                     elevation: 0,
                     shape: RoundedRectangleBorder(

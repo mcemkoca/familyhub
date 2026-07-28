@@ -1,4 +1,4 @@
--- Migration: 011_crash_detection.sql
+﻿-- Migration: 011_crash_detection.sql
 -- Crash Detection System tables
 
 -- ─────────────────────────────────────────────
@@ -7,7 +7,7 @@
 create table if not exists crash_events (
     id uuid primary key default gen_random_uuid(),
     family_id uuid references families(id) on delete cascade,
-    member_id uuid references family_members(id) on delete cascade,
+    member_id uuid references public.profiles(id) on delete cascade,
     member_name text,
 
     -- Detection info
@@ -36,7 +36,7 @@ create table if not exists crash_events (
     -- Meta
     created_at timestamptz not null default now(),
     resolved_at timestamptz,
-    reviewed_by uuid references family_members(id),
+    reviewed_by uuid references public.profiles(id),
     is_false_positive boolean not null default false,
 
     -- Indexes
@@ -55,7 +55,7 @@ create index if not exists idx_crash_events_false_positive on crash_events(is_fa
 -- ─────────────────────────────────────────────
 create table if not exists crash_detection_settings (
     id uuid primary key default gen_random_uuid(),
-    member_id uuid references family_members(id) on delete cascade unique,
+    member_id uuid references public.profiles(id) on delete cascade unique,
 
     enabled boolean not null default true,
     sensitivity text not null default 'medium',
@@ -99,7 +99,7 @@ create table if not exists crash_detection_settings (
 -- ─────────────────────────────────────────────
 create table if not exists sensor_logs (
     id uuid primary key default gen_random_uuid(),
-    member_id uuid references family_members(id) on delete cascade,
+    member_id uuid references public.profiles(id) on delete cascade,
     timestamp timestamptz not null default now(),
 
     accelerometer jsonb,

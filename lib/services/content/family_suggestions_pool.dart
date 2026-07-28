@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../../domain/models/ai_suggestion.dart';
+import 'content_localizer.dart';
+import '../localization/locale_service.dart';
 
 /// 10 kategoride toplam 1000+ aile önerisi havuzu.
 /// Asset JSON'larını yükler, Hive cache'ler, kategorilere göre filtreler.
@@ -13,23 +15,27 @@ class FamilySuggestionsPool {
   static FamilySuggestionsPool get instance => _instance;
 
   static const String _boxName = 'family_suggestions_cache';
-  static const String _cacheKey = 'familyhub_suggestions_v2';
+  static const String _cacheKey = 'familyhub_suggestions_v3';
 
   final List<AISuggestion> _all = [];
   bool _initialized = false;
 
   /// Kategoriler ve display isimleri
-  static const Map<String, String> categoryLabels = {
-    'communication': 'Aile İletişimi',
-    'health': 'Sağlıklı Yaşam',
-    'education': 'Çocuk Gelişimi',
-    'chore': 'Ev Düzeni',
-    'finance': 'Bütçe Yönetimi',
-    'safety': 'Güvenlik',
-    'recipe': 'Yemek & Beslenme',
-    'social': 'Sosyal Aktiviteler',
-    'digital': 'Dijital Denge',
-  };
+  static Map<String, String> get categoryLabels {
+    final lang = LocaleService.resolveInitialLocale().languageCode;
+    const labels = <String, Map<String, String>>{
+      'communication': {'tr': 'Aile İletişimi', 'en': 'Family Communication', 'nl': 'Gezinscommunicatie', 'fr': 'Communication familiale'},
+      'health': {'tr': 'Sağlıklı Yaşam', 'en': 'Healthy Living', 'nl': 'Gezond leven', 'fr': 'Vie saine'},
+      'education': {'tr': 'Çocuk Gelişimi', 'en': 'Child Development', 'nl': 'Kinderontwikkeling', 'fr': 'Développement de l’enfant'},
+      'chore': {'tr': 'Ev Düzeni', 'en': 'Household', 'nl': 'Huishouden', 'fr': 'Organisation du foyer'},
+      'finance': {'tr': 'Bütçe Yönetimi', 'en': 'Budget Management', 'nl': 'Budgetbeheer', 'fr': 'Gestion du budget'},
+      'safety': {'tr': 'Güvenlik', 'en': 'Safety', 'nl': 'Veiligheid', 'fr': 'Sécurité'},
+      'recipe': {'tr': 'Yemek ve Beslenme', 'en': 'Food & Nutrition', 'nl': 'Voeding', 'fr': 'Alimentation et nutrition'},
+      'social': {'tr': 'Sosyal Aktiviteler', 'en': 'Social Activities', 'nl': 'Sociale activiteiten', 'fr': 'Activités sociales'},
+      'digital': {'tr': 'Dijital Denge', 'en': 'Digital Balance', 'nl': 'Digitale balans', 'fr': 'Équilibre numérique'},
+    };
+    return labels.map((key, value) => MapEntry(key, value[lang] ?? value['tr']!));
+  }
 
   static const List<String> _assetPaths = [
     'assets/data/suggestions/family_communication.json',
@@ -52,16 +58,20 @@ class FamilySuggestionsPool {
   Future<void> _load() async {
     if (_initialized) return;
 
+    final lang = LocaleService.resolveInitialLocale().languageCode;
+    final localizedCacheKey = '${_cacheKey}_$lang';
+
     final box = Hive.isBoxOpen(_boxName)
         ? Hive.box<String>(_boxName)
         : await Hive.openBox<String>(_boxName);
 
     // Try cache first
-    final cached = box.get(_cacheKey);
+    final cached = box.get(localizedCacheKey);
     if (cached != null && cached.isNotEmpty) {
       try {
-        // ignore: unnecessary_cast
-        final list = List<Map<String, dynamic>>.from(jsonDecode(cached as String) as List<dynamic>);
+        final list = List<Map<String, dynamic>>.from(
+          jsonDecode(cached) as List<dynamic>,
+        );
         _all.addAll(list.map((e) => _fromJson(e)));
         _initialized = true;
         return;
@@ -77,7 +87,9 @@ class FamilySuggestionsPool {
         final data = jsonDecode(raw) as Map<String, dynamic>;
         final suggestions = data['suggestions'] as List<dynamic>;
         for (final s in suggestions) {
-          _all.add(_fromJson(s as Map<String, dynamic>));
+          _all.add(
+            _fromJson(normalizeContent(s, lang) as Map<String, dynamic>),
+          );
         }
       } catch (e) {
         debugPrint('FamilySuggestionsPool: Error loading $path: $e');
@@ -87,8 +99,10 @@ class FamilySuggestionsPool {
     // Save to cache
     try {
       final encoded = jsonEncode(_all.map((s) => s.toJson()).toList());
-      await box.put(_cacheKey, encoded);
-    } catch (e) { debugPrint('Suggestions pool error: $e'); }
+      await box.put(localizedCacheKey, encoded);
+    } catch (e) {
+      debugPrint('Suggestions pool error: $e');
+    }
 
     _initialized = true;
   }
@@ -208,5 +222,3 @@ class FamilySuggestionsPool {
     );
   }
 }
-
-

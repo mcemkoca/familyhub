@@ -1,1706 +1,4718 @@
 {
   "module": "social_activities",
   "version": "1.0.0",
-  "language": "tr",
+  "default_language": "tr",
+  "language_order": [
+    "tr",
+    "en",
+    "nl",
+    "fr"
+  ],
+  "languages": {
+    "tr": "Türkçe",
+    "en": "English",
+    "nl": "Nederlands",
+    "fr": "Français"
+  },
   "region": "TR",
   "suggestions": [
     {
       "id": "sa001",
-      "title": "Aile Oyun Gecesi",
-      "description": "Tabu, kutu oyunları, kart. Kazanan sonrakini seçsin.",
+      "title": {
+        "tr": "Aile Oyun Gecesi",
+        "en": "Family Game Night",
+        "nl": "Familie spelletjesavond",
+        "fr": "Soirée de jeux en famille"
+      },
+      "description": {
+        "tr": "Tabu, kutu oyunları, kart. Kazanan sonrakini seçsin.",
+        "en": "Taboo, board games, cards. Let the winner choose the next one.",
+        "nl": "Taboe, bordspellen, kaarten. Laat de winnaar de volgende kiezen.",
+        "fr": "Tabou, jeux de société, cartes. Laissez le gagnant choisir le suivant."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 90,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "oyun"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "oyun",
+          "en": "game",
+          "nl": "spel",
+          "fr": "jeu"
+        }
       ],
       "tips": [
-        "Müzik ve atıştırmalık hazır bulundurun."
+        {
+          "tr": "Müzik ve atıştırmalık hazır bulundurun.",
+          "en": "Have music and snacks available.",
+          "nl": "Zorg dat er muziek en snacks beschikbaar zijn.",
+          "fr": "Ayez de la musique et des collations à disposition."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa002",
-      "title": "Bugün Piknik Planlayın",
-      "description": "En yakın parka battaniye, sandviç ve meyve.",
+      "title": {
+        "tr": "Bugün Piknik Planlayın",
+        "en": "Plan a Picnic Today",
+        "nl": "Plan vandaag nog een picknick",
+        "fr": "Planifiez un pique-nique aujourd'hui"
+      },
+      "description": {
+        "tr": "En yakın parka battaniye, sandviç ve meyve.",
+        "en": "Take a blanket, sandwiches, and fruit to a nearby park.",
+        "nl": "Neem een deken, broodjes en fruit mee naar een park in de buurt.",
+        "fr": "Emportez une couverture, des sandwichs et des fruits dans un parc proche."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 185,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "piknik"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "piknik",
+          "en": "picnic",
+          "nl": "picknick",
+          "fr": "pique-nique"
+        }
       ],
       "tips": [
-        "Hava durumunu kontrol edin."
+        {
+          "tr": "Hava durumunu kontrol edin.",
+          "en": "Check the weather forecast.",
+          "nl": "Controleer de weersvoorspelling.",
+          "fr": "Consultez les prévisions météorologiques."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa003",
-      "title": "Bu Hafta Sonu Film Maratonu",
-      "description": "Herkes bir film seçsin, popcorn hazırlayın.",
+      "title": {
+        "tr": "Bu Hafta Sonu Film Maratonu",
+        "en": "Movie Marathon This Weekend",
+        "nl": "Filmmarathon dit weekend",
+        "fr": "Marathon du cinéma ce week-end"
+      },
+      "description": {
+        "tr": "Herkes bir film seçsin, popcorn hazırlayın.",
+        "en": "Have everyone choose a movie and prepare some popcorn.",
+        "nl": "Laat iedereen een film kiezen en maak popcorn klaar.",
+        "fr": "Demandez à chacun de choisir un film et préparez du pop-corn."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 160,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "film"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "film",
+          "en": "movie",
+          "nl": "film",
+          "fr": "film"
+        }
       ],
       "tips": [
-        "Yaş grubuna uygun filmler seçin."
+        {
+          "tr": "Yaş grubuna uygun filmler seçin.",
+          "en": "Choose movies suitable for the age group.",
+          "nl": "Kies films die geschikt zijn voor de leeftijdsgroep.",
+          "fr": "Choisissez des films adaptés à la tranche d’âge."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa004",
-      "title": "Ailece Gezinti Yürüyüşü",
-      "description": "Mahallede veya ormanda 30 dk yürüyüş.",
+      "title": {
+        "tr": "Ailece Gezinti Yürüyüşü",
+        "en": "Family Leisure Walk",
+        "nl": "Ontspannen gezinswandeling",
+        "fr": "Promenade détente en famille"
+      },
+      "description": {
+        "tr": "Mahallede veya ormanda 30 dk yürüyüş.",
+        "en": "30-minute walk in the neighborhood or in the forest.",
+        "nl": "30 minuten wandelen in de buurt of in het bos.",
+        "fr": "30 minutes de marche dans le quartier ou en forêt."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 45,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "doğa"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "doğa",
+          "en": "nature",
+          "nl": "natuur",
+          "fr": "naturel"
+        }
       ],
       "tips": [
-        "Fotoğraf makinesi götürün."
+        {
+          "tr": "Fotoğraf makinesi götürün.",
+          "en": "Take a camera.",
+          "nl": "Neem een camera.",
+          "fr": "Prenez un appareil photo."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa005",
-      "title": "Akşam Mangal Keyfi",
-      "description": "Balkonda veya bahçede pratik mangal.",
+      "title": {
+        "tr": "Akşam Mangal Keyfi",
+        "en": "Family Barbecue Evening",
+        "nl": "Barbecueavond met het gezin",
+        "fr": "Soirée barbecue en famille"
+      },
+      "description": {
+        "tr": "Balkonda veya bahçede pratik mangal.",
+        "en": "Prepare a simple barbecue in the garden or another permitted outdoor area.",
+        "nl": "Organiseer een eenvoudige barbecue in de tuin of op een andere toegestane buitenplek.",
+        "fr": "Organisez un barbecue simple dans le jardin ou dans un autre espace extérieur autorisé."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 140,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "mangal"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "mangal",
+          "en": "barbecue",
+          "nl": "barbecueën",
+          "fr": "barbecue"
+        }
       ],
       "tips": [
-        "Kömürü önceden hazırlayın."
+        {
+          "tr": "Kömürü önceden hazırlayın.",
+          "en": "Prepare the coal in advance.",
+          "nl": "Bereid de steenkool van tevoren voor.",
+          "fr": "Préparez le charbon à l'avance."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa006",
-      "title": "Bisiklet Turu",
-      "description": "Güvenli rotada ailece bisiklet.",
+      "title": {
+        "tr": "Bisiklet Turu",
+        "en": "Bike Tour",
+        "nl": "Fietstocht",
+        "fr": "Visite à vélo"
+      },
+      "description": {
+        "tr": "Güvenli rotada ailece bisiklet.",
+        "en": "Cycling as a family on a safe route.",
+        "nl": "Fietsen als gezin op een veilige route.",
+        "fr": "Faire du vélo en famille sur un itinéraire sécurisé."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 60,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "bisiklet"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "bisiklet",
+          "en": "bike",
+          "nl": "fiets",
+          "fr": "vélo"
+        }
       ],
       "tips": [
-        "Kask takmayı unutmayın."
+        {
+          "tr": "Kask takmayı unutmayın.",
+          "en": "Don't forget to wear a helmet.",
+          "nl": "Vergeet niet een helm te dragen.",
+          "fr": "N'oubliez pas de porter un casque."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa007",
-      "title": "Bugün Müze Ziyareti",
-      "description": "Çocuklar için etkileşimli müzeler.",
+      "title": {
+        "tr": "Bugün Müze Ziyareti",
+        "en": "Museum Visit Today",
+        "nl": "Museumbezoek vandaag",
+        "fr": "Visite du musée aujourd'hui"
+      },
+      "description": {
+        "tr": "Çocuklar için etkileşimli müzeler.",
+        "en": "Interactive museums for children.",
+        "nl": "Interactieve musea voor kinderen.",
+        "fr": "Musées interactifs pour enfants."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 125,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "müze"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "müze",
+          "en": "museum",
+          "nl": "museum",
+          "fr": "musée"
+        }
       ],
       "tips": [
-        "Önceden internetten araştırma yapın."
+        {
+          "tr": "Önceden internetten araştırma yapın.",
+          "en": "Do research online beforehand.",
+          "nl": "Doe vooraf online onderzoek.",
+          "fr": "Faites des recherches en ligne au préalable."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa008",
-      "title": "Bu Hafta Sonu Aile Fotoğraf Çekimi",
-      "description": "Komik pozlar verin, galeriye ekleyin.",
+      "title": {
+        "tr": "Bu Hafta Sonu Aile Fotoğraf Çekimi",
+        "en": "Family Photo Shoot This Weekend",
+        "nl": "Familiefotoshoot dit weekend",
+        "fr": "Séance photo de famille ce week-end"
+      },
+      "description": {
+        "tr": "Komik pozlar verin, galeriye ekleyin.",
+        "en": "Make funny poses, add them to the gallery.",
+        "nl": "Maak grappige poses, voeg ze toe aan de galerij.",
+        "fr": "Faites des poses amusantes, ajoutez-les à la galerie."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 40,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "fotoğraf"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "fotoğraf",
+          "en": "photo",
+          "nl": "foto",
+          "fr": "photos"
+        }
       ],
       "tips": [
-        "Tripod kullanın."
+        {
+          "tr": "Tripod kullanın.",
+          "en": "Use a tripod.",
+          "nl": "Gebruik een statief.",
+          "fr": "Utilisez un trépied."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa009",
-      "title": "Ailece Balkonda Kamp",
-      "description": "Çadır kurun, el feneri hikayeleri.",
+      "title": {
+        "tr": "Ailece Balkonda Kamp",
+        "en": "Balcony Camping as a Family",
+        "nl": "Kamperen op het balkon met het gezin",
+        "fr": "Camping sur le balcon en famille"
+      },
+      "description": {
+        "tr": "Çadır kurun, el feneri hikayeleri.",
+        "en": "Pitch a tent and tell stories by flashlight.",
+        "nl": "Zet een tent op en vertel verhalen bij het licht van een zaklamp.",
+        "fr": "Montez une tente et racontez des histoires à la lampe de poche."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 75,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "kamp"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "kamp",
+          "en": "camp",
+          "nl": "kamp",
+          "fr": "campement"
+        }
       ],
       "tips": [
-        "Yıldız gözlem uygulaması kullanın."
+        {
+          "tr": "Yıldız gözlem uygulaması kullanın.",
+          "en": "Use a stargazing app.",
+          "nl": "Gebruik een sterrenwacht-app.",
+          "fr": "Utilisez une application d'observation des étoiles."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa010",
-      "title": "Akşam Kitap Okuma Saati",
-      "description": "Herkes kendi kitabını okur, özet anlatır.",
+      "title": {
+        "tr": "Akşam Kitap Okuma Saati",
+        "en": "Evening Reading Time",
+        "nl": "Avondleestijd",
+        "fr": "Heure de lecture du soir"
+      },
+      "description": {
+        "tr": "Herkes kendi kitabını okur, özet anlatır.",
+        "en": "Everyone reads their own book and gives a summary.",
+        "nl": "Iedereen leest zijn eigen boek en geeft een samenvatting.",
+        "fr": "Chacun lit son propre livre et en fait un résumé."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 65,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "kitap"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "kitap",
+          "en": "book",
+          "nl": "boek",
+          "fr": "livre"
+        }
       ],
       "tips": [
-        "Sessiz ve rahat bir köşe hazırlayın."
+        {
+          "tr": "Sessiz ve rahat bir köşe hazırlayın.",
+          "en": "Prepare a quiet and cozy corner.",
+          "nl": "Zorg voor een rustig en gezellig hoekje.",
+          "fr": "Préparez un coin calme et cosy."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa011",
-      "title": "Origami Etkinliği",
-      "description": "Kağıttan hayvan, gemi, uçak yapımı.",
+      "title": {
+        "tr": "Origami Etkinliği",
+        "en": "Origami Activity",
+        "nl": "Origami-activiteit",
+        "fr": "Activité Origami"
+      },
+      "description": {
+        "tr": "Kağıttan hayvan, gemi, uçak yapımı.",
+        "en": "Making animals, ships and planes from paper.",
+        "nl": "Dieren, schepen en vliegtuigen maken van papier.",
+        "fr": "Fabriquer des animaux, des bateaux et des avions en papier."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 40,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "origami"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "origami",
+          "en": "origami",
+          "nl": "origami",
+          "fr": "origami"
+        }
       ],
       "tips": [
-        "Renkli kağıtlar kullanın."
+        {
+          "tr": "Renkli kağıtlar kullanın.",
+          "en": "Use colored papers.",
+          "nl": "Gebruik gekleurd papier.",
+          "fr": "Utilisez des papiers de couleur."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa012",
-      "title": "Bugün Aile Müzik Gecesi",
-      "description": "Herkes sevdiği şarkıyı söyler.",
+      "title": {
+        "tr": "Bugün Aile Müzik Gecesi",
+        "en": "Family Music Night Today",
+        "nl": "Muziekavond met het gezin vandaag",
+        "fr": "Soirée musicale en famille aujourd’hui"
+      },
+      "description": {
+        "tr": "Herkes sevdiği şarkıyı söyler.",
+        "en": "Everyone sings their favorite song.",
+        "nl": "Iedereen zingt zijn favoriete liedje.",
+        "fr": "Tout le monde chante sa chanson préférée."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 65,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "müzik"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "müzik",
+          "en": "music",
+          "nl": "muziek",
+          "fr": "musique"
+        }
       ],
       "tips": [
-        "Karaoke uygulaması kullanın."
+        {
+          "tr": "Karaoke uygulaması kullanın.",
+          "en": "Use a karaoke app.",
+          "nl": "Gebruik een karaoke-app.",
+          "fr": "Utilisez une application de karaoké."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa013",
-      "title": "Bu Hafta Sonu Hayvanat Bahçesi",
-      "description": "Çocuklarla hayvanları besleyin.",
+      "title": {
+        "tr": "Bu Hafta Sonu Hayvanat Bahçesi",
+        "en": "The Zoo This Weekend",
+        "nl": "De dierentuin dit weekend",
+        "fr": "Le zoo ce week-end"
+      },
+      "description": {
+        "tr": "Çocuklarla hayvanları besleyin.",
+        "en": "Feed the animals with the children only where the zoo permits it.",
+        "nl": "Voer de dieren samen met de kinderen, maar alleen waar de dierentuin dit toestaat.",
+        "fr": "Nourrissez les animaux avec les enfants uniquement là où le zoo l’autorise."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 190,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "hayvanat"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "hayvanat",
+          "en": "zoo",
+          "nl": "dierentuin",
+          "fr": "zoo"
+        }
       ],
       "tips": [
-        "Su ve atıştırmalık götürün."
+        {
+          "tr": "Su ve atıştırmalık götürün.",
+          "en": "Bring water and snacks.",
+          "nl": "Breng water en snacks mee.",
+          "fr": "Apportez de l'eau et des collations."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa014",
-      "title": "Ailece Doğa Yürüyüşü",
-      "description": "Hafta sonu trekking parkuru.",
+      "title": {
+        "tr": "Ailece Doğa Yürüyüşü",
+        "en": "Family Nature Walk",
+        "nl": "Familie natuurwandeling",
+        "fr": "Promenade nature en famille"
+      },
+      "description": {
+        "tr": "Hafta sonu trekking parkuru.",
+        "en": "Weekend trekking trail.",
+        "nl": "Weekendtrekkingsparcours.",
+        "fr": "Sentier de randonnée du week-end."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 195,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "doğa"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "doğa",
+          "en": "nature",
+          "nl": "natuur",
+          "fr": "naturel"
+        }
       ],
       "tips": [
-        "Uygun ayakkabı giyin."
+        {
+          "tr": "Uygun ayakkabı giyin.",
+          "en": "Wear appropriate shoes.",
+          "nl": "Draag geschikte schoenen.",
+          "fr": "Portez des chaussures appropriées."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa015",
-      "title": "Akşam Aile Yarışması",
-      "description": "Mini olimpiyat: ip atlama, balon patlatma.",
+      "title": {
+        "tr": "Akşam Aile Yarışması",
+        "en": "Evening Family Competition",
+        "nl": "Avond familiewedstrijd",
+        "fr": "Concours familial en soirée"
+      },
+      "description": {
+        "tr": "Mini olimpiyat: ip atlama, balon patlatma.",
+        "en": "Mini Olympics: rope jumping, balloon popping.",
+        "nl": "Mini Olympische Spelen: touwspringen, ballon knallen.",
+        "fr": "Mini Jeux olympiques : saut à la corde, éclatement de ballons."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 80,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "yarışma"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "yarışma",
+          "en": "competition",
+          "nl": "concurrentie",
+          "fr": "compétition"
+        }
       ],
       "tips": [
-        "Küçük ödüller hazırlayın."
+        {
+          "tr": "Küçük ödüller hazırlayın.",
+          "en": "Prepare small rewards.",
+          "nl": "Bereid kleine beloningen voor.",
+          "fr": "Préparez de petites récompenses."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa016",
-      "title": "Yıldız İzleme",
-      "description": "Battaniye serin, yıldızları sayın.",
+      "title": {
+        "tr": "Yıldız İzleme",
+        "en": "Stargazing",
+        "nl": "Sterrenkijken",
+        "fr": "Observation des étoiles"
+      },
+      "description": {
+        "tr": "Battaniye serin, yıldızları sayın.",
+        "en": "Spread the blanket, count the stars.",
+        "nl": "Spreid de deken uit, tel de sterren.",
+        "fr": "Étalez la couverture, comptez les étoiles."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 45,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "gökyüzü"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "gökyüzü",
+          "en": "sky",
+          "nl": "hemel",
+          "fr": "ciel"
+        }
       ],
       "tips": [
-        "Uygulama ile takımyıldızları tanıyın."
+        {
+          "tr": "Uygulama ile takımyıldızları tanıyın.",
+          "en": "Use an app to identify constellations.",
+          "nl": "Gebruik een app om sterrenbeelden te herkennen.",
+          "fr": "Utilisez une application pour reconnaître les constellations."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa017",
-      "title": "Bugün Boyama Etkinliği",
-      "description": "Mandal, kum boyama, tuval.",
+      "title": {
+        "tr": "Bugün Boyama Etkinliği",
+        "en": "Art Activity Today",
+        "nl": "Knutselactiviteit vandaag",
+        "fr": "Activité artistique aujourd’hui"
+      },
+      "description": {
+        "tr": "Mandal, kum boyama, tuval.",
+        "en": "Try clothespin painting, sand art, or painting on canvas.",
+        "nl": "Probeer schilderen met wasknijpers, zandkunst of schilderen op doek.",
+        "fr": "Essayez la peinture avec des pinces à linge, l’art sur sable ou la peinture sur toile."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 65,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "sanat"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "sanat",
+          "en": "art",
+          "nl": "kunst",
+          "fr": "art"
+        }
       ],
       "tips": [
-        "Önlük giydirin."
+        {
+          "tr": "Önlük giydirin.",
+          "en": "Put on an apron.",
+          "nl": "Doe een schort aan.",
+          "fr": "Mettez un tablier."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa018",
-      "title": "Bu Hafta Sonu Podcast Dinleme",
-      "description": "Eğitici podcast, tartışın.",
+      "title": {
+        "tr": "Bu Hafta Sonu Podcast Dinleme",
+        "en": "Listening to Podcasts This Weekend",
+        "nl": "Podcasts luisteren dit weekend",
+        "fr": "Écouter des podcasts ce week-end"
+      },
+      "description": {
+        "tr": "Eğitici podcast, tartışın.",
+        "en": "Listen to an educational podcast and discuss it together.",
+        "nl": "Luister naar een educatieve podcast en bespreek die samen.",
+        "fr": "Écoutez un podcast éducatif et discutez-en ensemble."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 40,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "podcast"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "podcast",
+          "en": "podcast",
+          "nl": "podcast",
+          "fr": "podcast"
+        }
       ],
       "tips": [
-        "Herkes farklı bir bölüm seçsin."
+        {
+          "tr": "Herkes farklı bir bölüm seçsin.",
+          "en": "Have everyone choose a different episode.",
+          "nl": "Laat iedereen een andere aflevering kiezen.",
+          "fr": "Demandez à chacun de choisir un épisode différent."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa019",
-      "title": "Ailece Yerel Pazara Gitmek",
-      "description": "Semt pazarında taze sebze meyve.",
+      "title": {
+        "tr": "Ailece Yerel Pazara Gitmek",
+        "en": "Going to the Local Market as a Family",
+        "nl": "Als gezin naar de lokale markt gaan",
+        "fr": "Aller au marché local en famille"
+      },
+      "description": {
+        "tr": "Semt pazarında taze sebze meyve.",
+        "en": "Fresh vegetables and fruits at the street market.",
+        "nl": "Verse groenten en fruit op de straatmarkt.",
+        "fr": "Légumes et fruits frais au marché de rue."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 105,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "pazar"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "pazar",
+          "en": "sunday",
+          "nl": "zondag",
+          "fr": "dimanche"
+        }
       ],
       "tips": [
-        "Pazarlık yapmayı öğretin."
+        {
+          "tr": "Pazarlık yapmayı öğretin.",
+          "en": "Teach bargaining.",
+          "nl": "Leer onderhandelen.",
+          "fr": "Enseigner la négociation."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa020",
-      "title": "Akşam Aile Vlog Çekimi",
-      "description": "Gününüzü çekin, montaj yapın.",
+      "title": {
+        "tr": "Akşam Aile Vlog Çekimi",
+        "en": "Make a Family Vlog This Evening",
+        "nl": "Maak vanavond een gezinsvlog",
+        "fr": "Réalisez un vlog familial ce soir"
+      },
+      "description": {
+        "tr": "Gününüzü çekin, montaj yapın.",
+        "en": "Film moments from your day and edit them into a short video.",
+        "nl": "Film momenten van de dag en monteer ze tot een korte video.",
+        "fr": "Filmez des moments de votre journée et montez-les en une courte vidéo."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 80,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "vlog"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "vlog",
+          "en": "vlog",
+          "nl": "vloggen",
+          "fr": "blog vidéo"
+        }
       ],
       "tips": [
-        "Kısa ve eğlenceli tutun."
+        {
+          "tr": "Kısa ve eğlenceli tutun.",
+          "en": "Keep it short and fun.",
+          "nl": "Houd het kort en leuk.",
+          "fr": "Soyez bref et amusant."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa021",
-      "title": "Kahvaltı Dışarıda",
-      "description": "Ailece brunch, farklı bir mekan.",
+      "title": {
+        "tr": "Kahvaltı Dışarıda",
+        "en": "Breakfast Out",
+        "nl": "Ontbijt uit",
+        "fr": "Petit-déjeuner à l'extérieur"
+      },
+      "description": {
+        "tr": "Ailece brunch, farklı bir mekan.",
+        "en": "Family brunch, a different place.",
+        "nl": "Familiebrunch, een andere plek.",
+        "fr": "Le brunch familial, un endroit différent."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 90,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "kahvaltı"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "kahvaltı",
+          "en": "breakfast",
+          "nl": "ontbijt",
+          "fr": "petit déjeuner"
+        }
       ],
       "tips": [
-        "Rezervasyon yaptırın."
+        {
+          "tr": "Rezervasyon yaptırın.",
+          "en": "Make a reservation.",
+          "nl": "Maak een reservering.",
+          "fr": "Faites une réservation."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa022",
-      "title": "Bugün Scavenger Hunt",
-      "description": "Evde veya parkta ipuçlu hazine avı.",
+      "title": {
+        "tr": "Bugün Scavenger Hunt",
+        "en": "Scavenger Hunt today",
+        "nl": "Vandaag speurtocht",
+        "fr": "Chasse au trésor aujourd'hui"
+      },
+      "description": {
+        "tr": "Evde veya parkta ipuçlu hazine avı.",
+        "en": "Treasure hunt with clues at home or in the park.",
+        "nl": "Schattenjacht met aanwijzingen thuis of in het park.",
+        "fr": "Chasse au trésor avec indices à la maison ou dans le parc."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 65,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "oyun"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "oyun",
+          "en": "game",
+          "nl": "spel",
+          "fr": "jeu"
+        }
       ],
       "tips": [
-        "Ödül hazırlayın."
+        {
+          "tr": "Ödül hazırlayın.",
+          "en": "Prepare a reward.",
+          "nl": "Bereid een beloning voor.",
+          "fr": "Préparez une récompense."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa023",
-      "title": "Bu Hafta Sonu Aile Resim Sergisi",
-      "description": "Çocukların resimlerini duvara asın.",
+      "title": {
+        "tr": "Bu Hafta Sonu Aile Resim Sergisi",
+        "en": "Family Art Exhibition This Weekend",
+        "nl": "Gezinskunsttentoonstelling dit weekend",
+        "fr": "Exposition artistique familiale ce week-end"
+      },
+      "description": {
+        "tr": "Çocukların resimlerini duvara asın.",
+        "en": "Display the children's artwork on the wall.",
+        "nl": "Hang de kunstwerken van de kinderen aan de muur.",
+        "fr": "Exposez les dessins des enfants au mur."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 40,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "sergi"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "sergi",
+          "en": "exhibition",
+          "nl": "tentoonstelling",
+          "fr": "exposition"
+        }
       ],
       "tips": [
-        "Açılış kokteyli yapın."
+        {
+          "tr": "Açılış kokteyli yapın.",
+          "en": "Prepare drinks and snacks for a small opening reception.",
+          "nl": "Zorg voor drankjes en hapjes bij een kleine opening.",
+          "fr": "Préparez des boissons et des collations pour un petit vernissage."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa024",
-      "title": "Ailece Gece Yürüyüşü",
-      "description": "Fenerli, güvenli parkta akşam yürüyüşü.",
+      "title": {
+        "tr": "Ailece Gece Yürüyüşü",
+        "en": "Family Night Walk",
+        "nl": "Familie avondwandeling",
+        "fr": "Promenade nocturne en famille"
+      },
+      "description": {
+        "tr": "Fenerli, güvenli parkta akşam yürüyüşü.",
+        "en": "Take an evening walk with flashlights in a safe park.",
+        "nl": "Maak met zaklampen een avondwandeling in een veilig park.",
+        "fr": "Faites une promenade du soir avec des lampes de poche dans un parc sûr."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 45,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "yürüyüş"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "yürüyüş",
+          "en": "walking",
+          "nl": "lopen",
+          "fr": "marcher"
+        }
       ],
       "tips": [
-        "Yansıtıcı aksesuarlar takın."
+        {
+          "tr": "Yansıtıcı aksesuarlar takın.",
+          "en": "Wear reflective accessories.",
+          "nl": "Draag reflecterende accessoires.",
+          "fr": "Portez des accessoires réfléchissants."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa025",
-      "title": "Akşam Aile Bingo Gecesi",
-      "description": "Kendiniz kart yapın, ödüller koyun.",
+      "title": {
+        "tr": "Akşam Aile Bingo Gecesi",
+        "en": "Family Bingo Night",
+        "nl": "Bingoavond met het gezin",
+        "fr": "Soirée bingo en famille"
+      },
+      "description": {
+        "tr": "Kendiniz kart yapın, ödüller koyun.",
+        "en": "Make your own bingo cards and prepare prizes.",
+        "nl": "Maak zelf bingokaarten en zorg voor prijzen.",
+        "fr": "Créez vos propres cartes de bingo et préparez des prix."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 80,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "bingo"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "bingo",
+          "en": "bingo",
+          "nl": "bingo",
+          "fr": "bingo"
+        }
       ],
       "tips": [
-        "Aile içi şakalar içeren kartlar yapın."
+        {
+          "tr": "Aile içi şakalar içeren kartlar yapın.",
+          "en": "Make cards with family jokes.",
+          "nl": "Maak kaarten met familiegrappen.",
+          "fr": "Créez des cartes avec des blagues familiales."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa026",
-      "title": "Aile Oyun Gecesi",
-      "description": "Tabu, kutu oyunları, kart. Kazanan sonrakini seçsin.",
+      "title": {
+        "tr": "Aile Oyun Gecesi",
+        "en": "Family Game Night",
+        "nl": "Familie spelletjesavond",
+        "fr": "Soirée de jeux en famille"
+      },
+      "description": {
+        "tr": "Tabu, kutu oyunları, kart. Kazanan sonrakini seçsin.",
+        "en": "Taboo, board games, cards. Let the winner choose the next one.",
+        "nl": "Taboe, bordspellen, kaarten. Laat de winnaar de volgende kiezen.",
+        "fr": "Tabou, jeux de société, cartes. Laissez le gagnant choisir le suivant."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 90,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "oyun"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "oyun",
+          "en": "game",
+          "nl": "spel",
+          "fr": "jeu"
+        }
       ],
       "tips": [
-        "Müzik ve atıştırmalık hazır bulundurun."
+        {
+          "tr": "Müzik ve atıştırmalık hazır bulundurun.",
+          "en": "Have music and snacks available.",
+          "nl": "Zorg dat er muziek en snacks beschikbaar zijn.",
+          "fr": "Ayez de la musique et des collations à disposition."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa027",
-      "title": "Bugün Piknik Planlayın",
-      "description": "En yakın parka battaniye, sandviç ve meyve.",
+      "title": {
+        "tr": "Bugün Piknik Planlayın",
+        "en": "Plan a Picnic Today",
+        "nl": "Plan vandaag nog een picknick",
+        "fr": "Planifiez un pique-nique aujourd'hui"
+      },
+      "description": {
+        "tr": "En yakın parka battaniye, sandviç ve meyve.",
+        "en": "Take a blanket, sandwiches, and fruit to a nearby park.",
+        "nl": "Neem een deken, broodjes en fruit mee naar een park in de buurt.",
+        "fr": "Emportez une couverture, des sandwichs et des fruits dans un parc proche."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 185,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "piknik"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "piknik",
+          "en": "picnic",
+          "nl": "picknick",
+          "fr": "pique-nique"
+        }
       ],
       "tips": [
-        "Hava durumunu kontrol edin."
+        {
+          "tr": "Hava durumunu kontrol edin.",
+          "en": "Check the weather forecast.",
+          "nl": "Controleer de weersvoorspelling.",
+          "fr": "Consultez les prévisions météorologiques."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa028",
-      "title": "Bu Hafta Sonu Film Maratonu",
-      "description": "Herkes bir film seçsin, popcorn hazırlayın.",
+      "title": {
+        "tr": "Bu Hafta Sonu Film Maratonu",
+        "en": "Movie Marathon This Weekend",
+        "nl": "Filmmarathon dit weekend",
+        "fr": "Marathon du cinéma ce week-end"
+      },
+      "description": {
+        "tr": "Herkes bir film seçsin, popcorn hazırlayın.",
+        "en": "Have everyone choose a movie and prepare some popcorn.",
+        "nl": "Laat iedereen een film kiezen en maak popcorn klaar.",
+        "fr": "Demandez à chacun de choisir un film et préparez du pop-corn."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 160,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "film"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "film",
+          "en": "movie",
+          "nl": "film",
+          "fr": "film"
+        }
       ],
       "tips": [
-        "Yaş grubuna uygun filmler seçin."
+        {
+          "tr": "Yaş grubuna uygun filmler seçin.",
+          "en": "Choose movies suitable for the age group.",
+          "nl": "Kies films die geschikt zijn voor de leeftijdsgroep.",
+          "fr": "Choisissez des films adaptés à la tranche d’âge."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa029",
-      "title": "Ailece Gezinti Yürüyüşü",
-      "description": "Mahallede veya ormanda 30 dk yürüyüş.",
+      "title": {
+        "tr": "Ailece Gezinti Yürüyüşü",
+        "en": "Family Leisure Walk",
+        "nl": "Ontspannen gezinswandeling",
+        "fr": "Promenade détente en famille"
+      },
+      "description": {
+        "tr": "Mahallede veya ormanda 30 dk yürüyüş.",
+        "en": "30-minute walk in the neighborhood or in the forest.",
+        "nl": "30 minuten wandelen in de buurt of in het bos.",
+        "fr": "30 minutes de marche dans le quartier ou en forêt."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 45,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "doğa"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "doğa",
+          "en": "nature",
+          "nl": "natuur",
+          "fr": "naturel"
+        }
       ],
       "tips": [
-        "Fotoğraf makinesi götürün."
+        {
+          "tr": "Fotoğraf makinesi götürün.",
+          "en": "Take a camera.",
+          "nl": "Neem een camera.",
+          "fr": "Prenez un appareil photo."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa030",
-      "title": "Akşam Mangal Keyfi",
-      "description": "Balkonda veya bahçede pratik mangal.",
+      "title": {
+        "tr": "Akşam Mangal Keyfi",
+        "en": "Family Barbecue Evening",
+        "nl": "Barbecueavond met het gezin",
+        "fr": "Soirée barbecue en famille"
+      },
+      "description": {
+        "tr": "Balkonda veya bahçede pratik mangal.",
+        "en": "Prepare a simple barbecue in the garden or another permitted outdoor area.",
+        "nl": "Organiseer een eenvoudige barbecue in de tuin of op een andere toegestane buitenplek.",
+        "fr": "Organisez un barbecue simple dans le jardin ou dans un autre espace extérieur autorisé."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 140,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "mangal"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "mangal",
+          "en": "barbecue",
+          "nl": "barbecueën",
+          "fr": "barbecue"
+        }
       ],
       "tips": [
-        "Kömürü önceden hazırlayın."
+        {
+          "tr": "Kömürü önceden hazırlayın.",
+          "en": "Prepare the coal in advance.",
+          "nl": "Bereid de steenkool van tevoren voor.",
+          "fr": "Préparez le charbon à l'avance."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa031",
-      "title": "Bisiklet Turu",
-      "description": "Güvenli rotada ailece bisiklet.",
+      "title": {
+        "tr": "Bisiklet Turu",
+        "en": "Bike Tour",
+        "nl": "Fietstocht",
+        "fr": "Visite à vélo"
+      },
+      "description": {
+        "tr": "Güvenli rotada ailece bisiklet.",
+        "en": "Cycling as a family on a safe route.",
+        "nl": "Fietsen als gezin op een veilige route.",
+        "fr": "Faire du vélo en famille sur un itinéraire sécurisé."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 60,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "bisiklet"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "bisiklet",
+          "en": "bike",
+          "nl": "fiets",
+          "fr": "vélo"
+        }
       ],
       "tips": [
-        "Kask takmayı unutmayın."
+        {
+          "tr": "Kask takmayı unutmayın.",
+          "en": "Don't forget to wear a helmet.",
+          "nl": "Vergeet niet een helm te dragen.",
+          "fr": "N'oubliez pas de porter un casque."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa032",
-      "title": "Bugün Müze Ziyareti",
-      "description": "Çocuklar için etkileşimli müzeler.",
+      "title": {
+        "tr": "Bugün Müze Ziyareti",
+        "en": "Museum Visit Today",
+        "nl": "Museumbezoek vandaag",
+        "fr": "Visite du musée aujourd'hui"
+      },
+      "description": {
+        "tr": "Çocuklar için etkileşimli müzeler.",
+        "en": "Interactive museums for children.",
+        "nl": "Interactieve musea voor kinderen.",
+        "fr": "Musées interactifs pour enfants."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 125,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "müze"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "müze",
+          "en": "museum",
+          "nl": "museum",
+          "fr": "musée"
+        }
       ],
       "tips": [
-        "Önceden internetten araştırma yapın."
+        {
+          "tr": "Önceden internetten araştırma yapın.",
+          "en": "Do research online beforehand.",
+          "nl": "Doe vooraf online onderzoek.",
+          "fr": "Faites des recherches en ligne au préalable."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa033",
-      "title": "Bu Hafta Sonu Aile Fotoğraf Çekimi",
-      "description": "Komik pozlar verin, galeriye ekleyin.",
+      "title": {
+        "tr": "Bu Hafta Sonu Aile Fotoğraf Çekimi",
+        "en": "Family Photo Shoot This Weekend",
+        "nl": "Familiefotoshoot dit weekend",
+        "fr": "Séance photo de famille ce week-end"
+      },
+      "description": {
+        "tr": "Komik pozlar verin, galeriye ekleyin.",
+        "en": "Make funny poses, add them to the gallery.",
+        "nl": "Maak grappige poses, voeg ze toe aan de galerij.",
+        "fr": "Faites des poses amusantes, ajoutez-les à la galerie."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 40,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "fotoğraf"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "fotoğraf",
+          "en": "photo",
+          "nl": "foto",
+          "fr": "photos"
+        }
       ],
       "tips": [
-        "Tripod kullanın."
+        {
+          "tr": "Tripod kullanın.",
+          "en": "Use a tripod.",
+          "nl": "Gebruik een statief.",
+          "fr": "Utilisez un trépied."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa034",
-      "title": "Ailece Balkonda Kamp",
-      "description": "Çadır kurun, el feneri hikayeleri.",
+      "title": {
+        "tr": "Ailece Balkonda Kamp",
+        "en": "Balcony Camping as a Family",
+        "nl": "Kamperen op het balkon met het gezin",
+        "fr": "Camping sur le balcon en famille"
+      },
+      "description": {
+        "tr": "Çadır kurun, el feneri hikayeleri.",
+        "en": "Pitch a tent and tell stories by flashlight.",
+        "nl": "Zet een tent op en vertel verhalen bij het licht van een zaklamp.",
+        "fr": "Montez une tente et racontez des histoires à la lampe de poche."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 75,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "kamp"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "kamp",
+          "en": "camp",
+          "nl": "kamp",
+          "fr": "campement"
+        }
       ],
       "tips": [
-        "Yıldız gözlem uygulaması kullanın."
+        {
+          "tr": "Yıldız gözlem uygulaması kullanın.",
+          "en": "Use a stargazing app.",
+          "nl": "Gebruik een sterrenwacht-app.",
+          "fr": "Utilisez une application d'observation des étoiles."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa035",
-      "title": "Akşam Kitap Okuma Saati",
-      "description": "Herkes kendi kitabını okur, özet anlatır.",
+      "title": {
+        "tr": "Akşam Kitap Okuma Saati",
+        "en": "Evening Reading Time",
+        "nl": "Avondleestijd",
+        "fr": "Heure de lecture du soir"
+      },
+      "description": {
+        "tr": "Herkes kendi kitabını okur, özet anlatır.",
+        "en": "Everyone reads their own book and gives a summary.",
+        "nl": "Iedereen leest zijn eigen boek en geeft een samenvatting.",
+        "fr": "Chacun lit son propre livre et en fait un résumé."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 65,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "kitap"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "kitap",
+          "en": "book",
+          "nl": "boek",
+          "fr": "livre"
+        }
       ],
       "tips": [
-        "Sessiz ve rahat bir köşe hazırlayın."
+        {
+          "tr": "Sessiz ve rahat bir köşe hazırlayın.",
+          "en": "Prepare a quiet and cozy corner.",
+          "nl": "Zorg voor een rustig en gezellig hoekje.",
+          "fr": "Préparez un coin calme et cosy."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa036",
-      "title": "Origami Etkinliği",
-      "description": "Kağıttan hayvan, gemi, uçak yapımı.",
+      "title": {
+        "tr": "Origami Etkinliği",
+        "en": "Origami Activity",
+        "nl": "Origami-activiteit",
+        "fr": "Activité Origami"
+      },
+      "description": {
+        "tr": "Kağıttan hayvan, gemi, uçak yapımı.",
+        "en": "Making animals, ships and planes from paper.",
+        "nl": "Dieren, schepen en vliegtuigen maken van papier.",
+        "fr": "Fabriquer des animaux, des bateaux et des avions en papier."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 40,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "origami"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "origami",
+          "en": "origami",
+          "nl": "origami",
+          "fr": "origami"
+        }
       ],
       "tips": [
-        "Renkli kağıtlar kullanın."
+        {
+          "tr": "Renkli kağıtlar kullanın.",
+          "en": "Use colored papers.",
+          "nl": "Gebruik gekleurd papier.",
+          "fr": "Utilisez des papiers de couleur."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa037",
-      "title": "Bugün Aile Müzik Gecesi",
-      "description": "Herkes sevdiği şarkıyı söyler.",
+      "title": {
+        "tr": "Bugün Aile Müzik Gecesi",
+        "en": "Family Music Night Today",
+        "nl": "Muziekavond met het gezin vandaag",
+        "fr": "Soirée musicale en famille aujourd’hui"
+      },
+      "description": {
+        "tr": "Herkes sevdiği şarkıyı söyler.",
+        "en": "Everyone sings their favorite song.",
+        "nl": "Iedereen zingt zijn favoriete liedje.",
+        "fr": "Tout le monde chante sa chanson préférée."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 65,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "müzik"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "müzik",
+          "en": "music",
+          "nl": "muziek",
+          "fr": "musique"
+        }
       ],
       "tips": [
-        "Karaoke uygulaması kullanın."
+        {
+          "tr": "Karaoke uygulaması kullanın.",
+          "en": "Use a karaoke app.",
+          "nl": "Gebruik een karaoke-app.",
+          "fr": "Utilisez une application de karaoké."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa038",
-      "title": "Bu Hafta Sonu Hayvanat Bahçesi",
-      "description": "Çocuklarla hayvanları besleyin.",
+      "title": {
+        "tr": "Bu Hafta Sonu Hayvanat Bahçesi",
+        "en": "The Zoo This Weekend",
+        "nl": "De dierentuin dit weekend",
+        "fr": "Le zoo ce week-end"
+      },
+      "description": {
+        "tr": "Çocuklarla hayvanları besleyin.",
+        "en": "Feed the animals with the children only where the zoo permits it.",
+        "nl": "Voer de dieren samen met de kinderen, maar alleen waar de dierentuin dit toestaat.",
+        "fr": "Nourrissez les animaux avec les enfants uniquement là où le zoo l’autorise."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 190,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "hayvanat"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "hayvanat",
+          "en": "zoo",
+          "nl": "dierentuin",
+          "fr": "zoo"
+        }
       ],
       "tips": [
-        "Su ve atıştırmalık götürün."
+        {
+          "tr": "Su ve atıştırmalık götürün.",
+          "en": "Bring water and snacks.",
+          "nl": "Breng water en snacks mee.",
+          "fr": "Apportez de l'eau et des collations."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa039",
-      "title": "Ailece Doğa Yürüyüşü",
-      "description": "Hafta sonu trekking parkuru.",
+      "title": {
+        "tr": "Ailece Doğa Yürüyüşü",
+        "en": "Family Nature Walk",
+        "nl": "Familie natuurwandeling",
+        "fr": "Promenade nature en famille"
+      },
+      "description": {
+        "tr": "Hafta sonu trekking parkuru.",
+        "en": "Weekend trekking trail.",
+        "nl": "Weekendtrekkingsparcours.",
+        "fr": "Sentier de randonnée du week-end."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 195,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "doğa"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "doğa",
+          "en": "nature",
+          "nl": "natuur",
+          "fr": "naturel"
+        }
       ],
       "tips": [
-        "Uygun ayakkabı giyin."
+        {
+          "tr": "Uygun ayakkabı giyin.",
+          "en": "Wear appropriate shoes.",
+          "nl": "Draag geschikte schoenen.",
+          "fr": "Portez des chaussures appropriées."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa040",
-      "title": "Akşam Aile Yarışması",
-      "description": "Mini olimpiyat: ip atlama, balon patlatma.",
+      "title": {
+        "tr": "Akşam Aile Yarışması",
+        "en": "Evening Family Competition",
+        "nl": "Avond familiewedstrijd",
+        "fr": "Concours familial en soirée"
+      },
+      "description": {
+        "tr": "Mini olimpiyat: ip atlama, balon patlatma.",
+        "en": "Mini Olympics: rope jumping, balloon popping.",
+        "nl": "Mini Olympische Spelen: touwspringen, ballon knallen.",
+        "fr": "Mini Jeux olympiques : saut à la corde, éclatement de ballons."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 80,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "yarışma"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "yarışma",
+          "en": "competition",
+          "nl": "concurrentie",
+          "fr": "compétition"
+        }
       ],
       "tips": [
-        "Küçük ödüller hazırlayın."
+        {
+          "tr": "Küçük ödüller hazırlayın.",
+          "en": "Prepare small rewards.",
+          "nl": "Bereid kleine beloningen voor.",
+          "fr": "Préparez de petites récompenses."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa041",
-      "title": "Yıldız İzleme",
-      "description": "Battaniye serin, yıldızları sayın.",
+      "title": {
+        "tr": "Yıldız İzleme",
+        "en": "Stargazing",
+        "nl": "Sterrenkijken",
+        "fr": "Observation des étoiles"
+      },
+      "description": {
+        "tr": "Battaniye serin, yıldızları sayın.",
+        "en": "Spread the blanket, count the stars.",
+        "nl": "Spreid de deken uit, tel de sterren.",
+        "fr": "Étalez la couverture, comptez les étoiles."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 45,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "gökyüzü"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "gökyüzü",
+          "en": "sky",
+          "nl": "hemel",
+          "fr": "ciel"
+        }
       ],
       "tips": [
-        "Uygulama ile takımyıldızları tanıyın."
+        {
+          "tr": "Uygulama ile takımyıldızları tanıyın.",
+          "en": "Use an app to identify constellations.",
+          "nl": "Gebruik een app om sterrenbeelden te herkennen.",
+          "fr": "Utilisez une application pour reconnaître les constellations."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa042",
-      "title": "Bugün Boyama Etkinliği",
-      "description": "Mandal, kum boyama, tuval.",
+      "title": {
+        "tr": "Bugün Boyama Etkinliği",
+        "en": "Art Activity Today",
+        "nl": "Knutselactiviteit vandaag",
+        "fr": "Activité artistique aujourd’hui"
+      },
+      "description": {
+        "tr": "Mandal, kum boyama, tuval.",
+        "en": "Try clothespin painting, sand art, or painting on canvas.",
+        "nl": "Probeer schilderen met wasknijpers, zandkunst of schilderen op doek.",
+        "fr": "Essayez la peinture avec des pinces à linge, l’art sur sable ou la peinture sur toile."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 65,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "sanat"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "sanat",
+          "en": "art",
+          "nl": "kunst",
+          "fr": "art"
+        }
       ],
       "tips": [
-        "Önlük giydirin."
+        {
+          "tr": "Önlük giydirin.",
+          "en": "Put on an apron.",
+          "nl": "Doe een schort aan.",
+          "fr": "Mettez un tablier."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa043",
-      "title": "Bu Hafta Sonu Podcast Dinleme",
-      "description": "Eğitici podcast, tartışın.",
+      "title": {
+        "tr": "Bu Hafta Sonu Podcast Dinleme",
+        "en": "Listening to Podcasts This Weekend",
+        "nl": "Podcasts luisteren dit weekend",
+        "fr": "Écouter des podcasts ce week-end"
+      },
+      "description": {
+        "tr": "Eğitici podcast, tartışın.",
+        "en": "Listen to an educational podcast and discuss it together.",
+        "nl": "Luister naar een educatieve podcast en bespreek die samen.",
+        "fr": "Écoutez un podcast éducatif et discutez-en ensemble."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 40,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "podcast"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "podcast",
+          "en": "podcast",
+          "nl": "podcast",
+          "fr": "podcast"
+        }
       ],
       "tips": [
-        "Herkes farklı bir bölüm seçsin."
+        {
+          "tr": "Herkes farklı bir bölüm seçsin.",
+          "en": "Have everyone choose a different episode.",
+          "nl": "Laat iedereen een andere aflevering kiezen.",
+          "fr": "Demandez à chacun de choisir un épisode différent."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa044",
-      "title": "Ailece Yerel Pazara Gitmek",
-      "description": "Semt pazarında taze sebze meyve.",
+      "title": {
+        "tr": "Ailece Yerel Pazara Gitmek",
+        "en": "Going to the Local Market as a Family",
+        "nl": "Als gezin naar de lokale markt gaan",
+        "fr": "Aller au marché local en famille"
+      },
+      "description": {
+        "tr": "Semt pazarında taze sebze meyve.",
+        "en": "Fresh vegetables and fruits at the street market.",
+        "nl": "Verse groenten en fruit op de straatmarkt.",
+        "fr": "Légumes et fruits frais au marché de rue."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 105,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "pazar"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "pazar",
+          "en": "sunday",
+          "nl": "zondag",
+          "fr": "dimanche"
+        }
       ],
       "tips": [
-        "Pazarlık yapmayı öğretin."
+        {
+          "tr": "Pazarlık yapmayı öğretin.",
+          "en": "Teach bargaining.",
+          "nl": "Leer onderhandelen.",
+          "fr": "Enseigner la négociation."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa045",
-      "title": "Akşam Aile Vlog Çekimi",
-      "description": "Gününüzü çekin, montaj yapın.",
+      "title": {
+        "tr": "Akşam Aile Vlog Çekimi",
+        "en": "Make a Family Vlog This Evening",
+        "nl": "Maak vanavond een gezinsvlog",
+        "fr": "Réalisez un vlog familial ce soir"
+      },
+      "description": {
+        "tr": "Gününüzü çekin, montaj yapın.",
+        "en": "Film moments from your day and edit them into a short video.",
+        "nl": "Film momenten van de dag en monteer ze tot een korte video.",
+        "fr": "Filmez des moments de votre journée et montez-les en une courte vidéo."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 80,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "vlog"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "vlog",
+          "en": "vlog",
+          "nl": "vloggen",
+          "fr": "blog vidéo"
+        }
       ],
       "tips": [
-        "Kısa ve eğlenceli tutun."
+        {
+          "tr": "Kısa ve eğlenceli tutun.",
+          "en": "Keep it short and fun.",
+          "nl": "Houd het kort en leuk.",
+          "fr": "Soyez bref et amusant."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa046",
-      "title": "Kahvaltı Dışarıda",
-      "description": "Ailece brunch, farklı bir mekan.",
+      "title": {
+        "tr": "Kahvaltı Dışarıda",
+        "en": "Breakfast Out",
+        "nl": "Ontbijt uit",
+        "fr": "Petit-déjeuner à l'extérieur"
+      },
+      "description": {
+        "tr": "Ailece brunch, farklı bir mekan.",
+        "en": "Family brunch, a different place.",
+        "nl": "Familiebrunch, een andere plek.",
+        "fr": "Le brunch familial, un endroit différent."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 90,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "kahvaltı"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "kahvaltı",
+          "en": "breakfast",
+          "nl": "ontbijt",
+          "fr": "petit déjeuner"
+        }
       ],
       "tips": [
-        "Rezervasyon yaptırın."
+        {
+          "tr": "Rezervasyon yaptırın.",
+          "en": "Make a reservation.",
+          "nl": "Maak een reservering.",
+          "fr": "Faites une réservation."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa047",
-      "title": "Bugün Scavenger Hunt",
-      "description": "Evde veya parkta ipuçlu hazine avı.",
+      "title": {
+        "tr": "Bugün Scavenger Hunt",
+        "en": "Scavenger Hunt today",
+        "nl": "Vandaag speurtocht",
+        "fr": "Chasse au trésor aujourd'hui"
+      },
+      "description": {
+        "tr": "Evde veya parkta ipuçlu hazine avı.",
+        "en": "Treasure hunt with clues at home or in the park.",
+        "nl": "Schattenjacht met aanwijzingen thuis of in het park.",
+        "fr": "Chasse au trésor avec indices à la maison ou dans le parc."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 65,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "oyun"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "oyun",
+          "en": "game",
+          "nl": "spel",
+          "fr": "jeu"
+        }
       ],
       "tips": [
-        "Ödül hazırlayın."
+        {
+          "tr": "Ödül hazırlayın.",
+          "en": "Prepare a reward.",
+          "nl": "Bereid een beloning voor.",
+          "fr": "Préparez une récompense."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa048",
-      "title": "Bu Hafta Sonu Aile Resim Sergisi",
-      "description": "Çocukların resimlerini duvara asın.",
+      "title": {
+        "tr": "Bu Hafta Sonu Aile Resim Sergisi",
+        "en": "Family Art Exhibition This Weekend",
+        "nl": "Gezinskunsttentoonstelling dit weekend",
+        "fr": "Exposition artistique familiale ce week-end"
+      },
+      "description": {
+        "tr": "Çocukların resimlerini duvara asın.",
+        "en": "Display the children's artwork on the wall.",
+        "nl": "Hang de kunstwerken van de kinderen aan de muur.",
+        "fr": "Exposez les dessins des enfants au mur."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 40,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "sergi"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "sergi",
+          "en": "exhibition",
+          "nl": "tentoonstelling",
+          "fr": "exposition"
+        }
       ],
       "tips": [
-        "Açılış kokteyli yapın."
+        {
+          "tr": "Açılış kokteyli yapın.",
+          "en": "Prepare drinks and snacks for a small opening reception.",
+          "nl": "Zorg voor drankjes en hapjes bij een kleine opening.",
+          "fr": "Préparez des boissons et des collations pour un petit vernissage."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa049",
-      "title": "Ailece Gece Yürüyüşü",
-      "description": "Fenerli, güvenli parkta akşam yürüyüşü.",
+      "title": {
+        "tr": "Ailece Gece Yürüyüşü",
+        "en": "Family Night Walk",
+        "nl": "Familie avondwandeling",
+        "fr": "Promenade nocturne en famille"
+      },
+      "description": {
+        "tr": "Fenerli, güvenli parkta akşam yürüyüşü.",
+        "en": "Take an evening walk with flashlights in a safe park.",
+        "nl": "Maak met zaklampen een avondwandeling in een veilig park.",
+        "fr": "Faites une promenade du soir avec des lampes de poche dans un parc sûr."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 45,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "yürüyüş"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "yürüyüş",
+          "en": "walking",
+          "nl": "lopen",
+          "fr": "marcher"
+        }
       ],
       "tips": [
-        "Yansıtıcı aksesuarlar takın."
+        {
+          "tr": "Yansıtıcı aksesuarlar takın.",
+          "en": "Wear reflective accessories.",
+          "nl": "Draag reflecterende accessoires.",
+          "fr": "Portez des accessoires réfléchissants."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa050",
-      "title": "Akşam Aile Bingo Gecesi",
-      "description": "Kendiniz kart yapın, ödüller koyun.",
+      "title": {
+        "tr": "Akşam Aile Bingo Gecesi",
+        "en": "Family Bingo Night",
+        "nl": "Bingoavond met het gezin",
+        "fr": "Soirée bingo en famille"
+      },
+      "description": {
+        "tr": "Kendiniz kart yapın, ödüller koyun.",
+        "en": "Make your own bingo cards and prepare prizes.",
+        "nl": "Maak zelf bingokaarten en zorg voor prijzen.",
+        "fr": "Créez vos propres cartes de bingo et préparez des prix."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 80,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "bingo"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "bingo",
+          "en": "bingo",
+          "nl": "bingo",
+          "fr": "bingo"
+        }
       ],
       "tips": [
-        "Aile içi şakalar içeren kartlar yapın."
+        {
+          "tr": "Aile içi şakalar içeren kartlar yapın.",
+          "en": "Make cards with family jokes.",
+          "nl": "Maak kaarten met familiegrappen.",
+          "fr": "Créez des cartes avec des blagues familiales."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa051",
-      "title": "Aile Oyun Gecesi",
-      "description": "Tabu, kutu oyunları, kart. Kazanan sonrakini seçsin.",
+      "title": {
+        "tr": "Aile Oyun Gecesi",
+        "en": "Family Game Night",
+        "nl": "Familie spelletjesavond",
+        "fr": "Soirée de jeux en famille"
+      },
+      "description": {
+        "tr": "Tabu, kutu oyunları, kart. Kazanan sonrakini seçsin.",
+        "en": "Taboo, board games, cards. Let the winner choose the next one.",
+        "nl": "Taboe, bordspellen, kaarten. Laat de winnaar de volgende kiezen.",
+        "fr": "Tabou, jeux de société, cartes. Laissez le gagnant choisir le suivant."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 90,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "oyun"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "oyun",
+          "en": "game",
+          "nl": "spel",
+          "fr": "jeu"
+        }
       ],
       "tips": [
-        "Müzik ve atıştırmalık hazır bulundurun."
+        {
+          "tr": "Müzik ve atıştırmalık hazır bulundurun.",
+          "en": "Have music and snacks available.",
+          "nl": "Zorg dat er muziek en snacks beschikbaar zijn.",
+          "fr": "Ayez de la musique et des collations à disposition."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa052",
-      "title": "Bugün Piknik Planlayın",
-      "description": "En yakın parka battaniye, sandviç ve meyve.",
+      "title": {
+        "tr": "Bugün Piknik Planlayın",
+        "en": "Plan a Picnic Today",
+        "nl": "Plan vandaag nog een picknick",
+        "fr": "Planifiez un pique-nique aujourd'hui"
+      },
+      "description": {
+        "tr": "En yakın parka battaniye, sandviç ve meyve.",
+        "en": "Take a blanket, sandwiches, and fruit to a nearby park.",
+        "nl": "Neem een deken, broodjes en fruit mee naar een park in de buurt.",
+        "fr": "Emportez une couverture, des sandwichs et des fruits dans un parc proche."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 185,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "piknik"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "piknik",
+          "en": "picnic",
+          "nl": "picknick",
+          "fr": "pique-nique"
+        }
       ],
       "tips": [
-        "Hava durumunu kontrol edin."
+        {
+          "tr": "Hava durumunu kontrol edin.",
+          "en": "Check the weather forecast.",
+          "nl": "Controleer de weersvoorspelling.",
+          "fr": "Consultez les prévisions météorologiques."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa053",
-      "title": "Bu Hafta Sonu Film Maratonu",
-      "description": "Herkes bir film seçsin, popcorn hazırlayın.",
+      "title": {
+        "tr": "Bu Hafta Sonu Film Maratonu",
+        "en": "Movie Marathon This Weekend",
+        "nl": "Filmmarathon dit weekend",
+        "fr": "Marathon du cinéma ce week-end"
+      },
+      "description": {
+        "tr": "Herkes bir film seçsin, popcorn hazırlayın.",
+        "en": "Have everyone choose a movie and prepare some popcorn.",
+        "nl": "Laat iedereen een film kiezen en maak popcorn klaar.",
+        "fr": "Demandez à chacun de choisir un film et préparez du pop-corn."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 160,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "film"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "film",
+          "en": "movie",
+          "nl": "film",
+          "fr": "film"
+        }
       ],
       "tips": [
-        "Yaş grubuna uygun filmler seçin."
+        {
+          "tr": "Yaş grubuna uygun filmler seçin.",
+          "en": "Choose movies suitable for the age group.",
+          "nl": "Kies films die geschikt zijn voor de leeftijdsgroep.",
+          "fr": "Choisissez des films adaptés à la tranche d’âge."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa054",
-      "title": "Ailece Gezinti Yürüyüşü",
-      "description": "Mahallede veya ormanda 30 dk yürüyüş.",
+      "title": {
+        "tr": "Ailece Gezinti Yürüyüşü",
+        "en": "Family Leisure Walk",
+        "nl": "Ontspannen gezinswandeling",
+        "fr": "Promenade détente en famille"
+      },
+      "description": {
+        "tr": "Mahallede veya ormanda 30 dk yürüyüş.",
+        "en": "30-minute walk in the neighborhood or in the forest.",
+        "nl": "30 minuten wandelen in de buurt of in het bos.",
+        "fr": "30 minutes de marche dans le quartier ou en forêt."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 45,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "doğa"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "doğa",
+          "en": "nature",
+          "nl": "natuur",
+          "fr": "naturel"
+        }
       ],
       "tips": [
-        "Fotoğraf makinesi götürün."
+        {
+          "tr": "Fotoğraf makinesi götürün.",
+          "en": "Take a camera.",
+          "nl": "Neem een camera.",
+          "fr": "Prenez un appareil photo."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa055",
-      "title": "Akşam Mangal Keyfi",
-      "description": "Balkonda veya bahçede pratik mangal.",
+      "title": {
+        "tr": "Akşam Mangal Keyfi",
+        "en": "Family Barbecue Evening",
+        "nl": "Barbecueavond met het gezin",
+        "fr": "Soirée barbecue en famille"
+      },
+      "description": {
+        "tr": "Balkonda veya bahçede pratik mangal.",
+        "en": "Prepare a simple barbecue in the garden or another permitted outdoor area.",
+        "nl": "Organiseer een eenvoudige barbecue in de tuin of op een andere toegestane buitenplek.",
+        "fr": "Organisez un barbecue simple dans le jardin ou dans un autre espace extérieur autorisé."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 140,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "mangal"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "mangal",
+          "en": "barbecue",
+          "nl": "barbecueën",
+          "fr": "barbecue"
+        }
       ],
       "tips": [
-        "Kömürü önceden hazırlayın."
+        {
+          "tr": "Kömürü önceden hazırlayın.",
+          "en": "Prepare the coal in advance.",
+          "nl": "Bereid de steenkool van tevoren voor.",
+          "fr": "Préparez le charbon à l'avance."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa056",
-      "title": "Bisiklet Turu",
-      "description": "Güvenli rotada ailece bisiklet.",
+      "title": {
+        "tr": "Bisiklet Turu",
+        "en": "Bike Tour",
+        "nl": "Fietstocht",
+        "fr": "Visite à vélo"
+      },
+      "description": {
+        "tr": "Güvenli rotada ailece bisiklet.",
+        "en": "Cycling as a family on a safe route.",
+        "nl": "Fietsen als gezin op een veilige route.",
+        "fr": "Faire du vélo en famille sur un itinéraire sécurisé."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 60,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "bisiklet"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "bisiklet",
+          "en": "bike",
+          "nl": "fiets",
+          "fr": "vélo"
+        }
       ],
       "tips": [
-        "Kask takmayı unutmayın."
+        {
+          "tr": "Kask takmayı unutmayın.",
+          "en": "Don't forget to wear a helmet.",
+          "nl": "Vergeet niet een helm te dragen.",
+          "fr": "N'oubliez pas de porter un casque."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa057",
-      "title": "Bugün Müze Ziyareti",
-      "description": "Çocuklar için etkileşimli müzeler.",
+      "title": {
+        "tr": "Bugün Müze Ziyareti",
+        "en": "Museum Visit Today",
+        "nl": "Museumbezoek vandaag",
+        "fr": "Visite du musée aujourd'hui"
+      },
+      "description": {
+        "tr": "Çocuklar için etkileşimli müzeler.",
+        "en": "Interactive museums for children.",
+        "nl": "Interactieve musea voor kinderen.",
+        "fr": "Musées interactifs pour enfants."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 125,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "müze"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "müze",
+          "en": "museum",
+          "nl": "museum",
+          "fr": "musée"
+        }
       ],
       "tips": [
-        "Önceden internetten araştırma yapın."
+        {
+          "tr": "Önceden internetten araştırma yapın.",
+          "en": "Do research online beforehand.",
+          "nl": "Doe vooraf online onderzoek.",
+          "fr": "Faites des recherches en ligne au préalable."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa058",
-      "title": "Bu Hafta Sonu Aile Fotoğraf Çekimi",
-      "description": "Komik pozlar verin, galeriye ekleyin.",
+      "title": {
+        "tr": "Bu Hafta Sonu Aile Fotoğraf Çekimi",
+        "en": "Family Photo Shoot This Weekend",
+        "nl": "Familiefotoshoot dit weekend",
+        "fr": "Séance photo de famille ce week-end"
+      },
+      "description": {
+        "tr": "Komik pozlar verin, galeriye ekleyin.",
+        "en": "Make funny poses, add them to the gallery.",
+        "nl": "Maak grappige poses, voeg ze toe aan de galerij.",
+        "fr": "Faites des poses amusantes, ajoutez-les à la galerie."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 40,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "fotoğraf"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "fotoğraf",
+          "en": "photo",
+          "nl": "foto",
+          "fr": "photos"
+        }
       ],
       "tips": [
-        "Tripod kullanın."
+        {
+          "tr": "Tripod kullanın.",
+          "en": "Use a tripod.",
+          "nl": "Gebruik een statief.",
+          "fr": "Utilisez un trépied."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa059",
-      "title": "Ailece Balkonda Kamp",
-      "description": "Çadır kurun, el feneri hikayeleri.",
+      "title": {
+        "tr": "Ailece Balkonda Kamp",
+        "en": "Balcony Camping as a Family",
+        "nl": "Kamperen op het balkon met het gezin",
+        "fr": "Camping sur le balcon en famille"
+      },
+      "description": {
+        "tr": "Çadır kurun, el feneri hikayeleri.",
+        "en": "Pitch a tent and tell stories by flashlight.",
+        "nl": "Zet een tent op en vertel verhalen bij het licht van een zaklamp.",
+        "fr": "Montez une tente et racontez des histoires à la lampe de poche."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 75,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "kamp"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "kamp",
+          "en": "camp",
+          "nl": "kamp",
+          "fr": "campement"
+        }
       ],
       "tips": [
-        "Yıldız gözlem uygulaması kullanın."
+        {
+          "tr": "Yıldız gözlem uygulaması kullanın.",
+          "en": "Use a stargazing app.",
+          "nl": "Gebruik een sterrenwacht-app.",
+          "fr": "Utilisez une application d'observation des étoiles."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa060",
-      "title": "Akşam Kitap Okuma Saati",
-      "description": "Herkes kendi kitabını okur, özet anlatır.",
+      "title": {
+        "tr": "Akşam Kitap Okuma Saati",
+        "en": "Evening Reading Time",
+        "nl": "Avondleestijd",
+        "fr": "Heure de lecture du soir"
+      },
+      "description": {
+        "tr": "Herkes kendi kitabını okur, özet anlatır.",
+        "en": "Everyone reads their own book and gives a summary.",
+        "nl": "Iedereen leest zijn eigen boek en geeft een samenvatting.",
+        "fr": "Chacun lit son propre livre et en fait un résumé."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 65,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "kitap"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "kitap",
+          "en": "book",
+          "nl": "boek",
+          "fr": "livre"
+        }
       ],
       "tips": [
-        "Sessiz ve rahat bir köşe hazırlayın."
+        {
+          "tr": "Sessiz ve rahat bir köşe hazırlayın.",
+          "en": "Prepare a quiet and cozy corner.",
+          "nl": "Zorg voor een rustig en gezellig hoekje.",
+          "fr": "Préparez un coin calme et cosy."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa061",
-      "title": "Origami Etkinliği",
-      "description": "Kağıttan hayvan, gemi, uçak yapımı.",
+      "title": {
+        "tr": "Origami Etkinliği",
+        "en": "Origami Activity",
+        "nl": "Origami-activiteit",
+        "fr": "Activité Origami"
+      },
+      "description": {
+        "tr": "Kağıttan hayvan, gemi, uçak yapımı.",
+        "en": "Making animals, ships and planes from paper.",
+        "nl": "Dieren, schepen en vliegtuigen maken van papier.",
+        "fr": "Fabriquer des animaux, des bateaux et des avions en papier."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 40,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "origami"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "origami",
+          "en": "origami",
+          "nl": "origami",
+          "fr": "origami"
+        }
       ],
       "tips": [
-        "Renkli kağıtlar kullanın."
+        {
+          "tr": "Renkli kağıtlar kullanın.",
+          "en": "Use colored papers.",
+          "nl": "Gebruik gekleurd papier.",
+          "fr": "Utilisez des papiers de couleur."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa062",
-      "title": "Bugün Aile Müzik Gecesi",
-      "description": "Herkes sevdiği şarkıyı söyler.",
+      "title": {
+        "tr": "Bugün Aile Müzik Gecesi",
+        "en": "Family Music Night Today",
+        "nl": "Muziekavond met het gezin vandaag",
+        "fr": "Soirée musicale en famille aujourd’hui"
+      },
+      "description": {
+        "tr": "Herkes sevdiği şarkıyı söyler.",
+        "en": "Everyone sings their favorite song.",
+        "nl": "Iedereen zingt zijn favoriete liedje.",
+        "fr": "Tout le monde chante sa chanson préférée."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 65,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "müzik"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "müzik",
+          "en": "music",
+          "nl": "muziek",
+          "fr": "musique"
+        }
       ],
       "tips": [
-        "Karaoke uygulaması kullanın."
+        {
+          "tr": "Karaoke uygulaması kullanın.",
+          "en": "Use a karaoke app.",
+          "nl": "Gebruik een karaoke-app.",
+          "fr": "Utilisez une application de karaoké."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa063",
-      "title": "Bu Hafta Sonu Hayvanat Bahçesi",
-      "description": "Çocuklarla hayvanları besleyin.",
+      "title": {
+        "tr": "Bu Hafta Sonu Hayvanat Bahçesi",
+        "en": "The Zoo This Weekend",
+        "nl": "De dierentuin dit weekend",
+        "fr": "Le zoo ce week-end"
+      },
+      "description": {
+        "tr": "Çocuklarla hayvanları besleyin.",
+        "en": "Feed the animals with the children only where the zoo permits it.",
+        "nl": "Voer de dieren samen met de kinderen, maar alleen waar de dierentuin dit toestaat.",
+        "fr": "Nourrissez les animaux avec les enfants uniquement là où le zoo l’autorise."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 190,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "hayvanat"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "hayvanat",
+          "en": "zoo",
+          "nl": "dierentuin",
+          "fr": "zoo"
+        }
       ],
       "tips": [
-        "Su ve atıştırmalık götürün."
+        {
+          "tr": "Su ve atıştırmalık götürün.",
+          "en": "Bring water and snacks.",
+          "nl": "Breng water en snacks mee.",
+          "fr": "Apportez de l'eau et des collations."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa064",
-      "title": "Ailece Doğa Yürüyüşü",
-      "description": "Hafta sonu trekking parkuru.",
+      "title": {
+        "tr": "Ailece Doğa Yürüyüşü",
+        "en": "Family Nature Walk",
+        "nl": "Familie natuurwandeling",
+        "fr": "Promenade nature en famille"
+      },
+      "description": {
+        "tr": "Hafta sonu trekking parkuru.",
+        "en": "Weekend trekking trail.",
+        "nl": "Weekendtrekkingsparcours.",
+        "fr": "Sentier de randonnée du week-end."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 195,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "doğa"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "doğa",
+          "en": "nature",
+          "nl": "natuur",
+          "fr": "naturel"
+        }
       ],
       "tips": [
-        "Uygun ayakkabı giyin."
+        {
+          "tr": "Uygun ayakkabı giyin.",
+          "en": "Wear appropriate shoes.",
+          "nl": "Draag geschikte schoenen.",
+          "fr": "Portez des chaussures appropriées."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa065",
-      "title": "Akşam Aile Yarışması",
-      "description": "Mini olimpiyat: ip atlama, balon patlatma.",
+      "title": {
+        "tr": "Akşam Aile Yarışması",
+        "en": "Evening Family Competition",
+        "nl": "Avond familiewedstrijd",
+        "fr": "Concours familial en soirée"
+      },
+      "description": {
+        "tr": "Mini olimpiyat: ip atlama, balon patlatma.",
+        "en": "Mini Olympics: rope jumping, balloon popping.",
+        "nl": "Mini Olympische Spelen: touwspringen, ballon knallen.",
+        "fr": "Mini Jeux olympiques : saut à la corde, éclatement de ballons."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 80,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "yarışma"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "yarışma",
+          "en": "competition",
+          "nl": "concurrentie",
+          "fr": "compétition"
+        }
       ],
       "tips": [
-        "Küçük ödüller hazırlayın."
+        {
+          "tr": "Küçük ödüller hazırlayın.",
+          "en": "Prepare small rewards.",
+          "nl": "Bereid kleine beloningen voor.",
+          "fr": "Préparez de petites récompenses."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa066",
-      "title": "Yıldız İzleme",
-      "description": "Battaniye serin, yıldızları sayın.",
+      "title": {
+        "tr": "Yıldız İzleme",
+        "en": "Stargazing",
+        "nl": "Sterrenkijken",
+        "fr": "Observation des étoiles"
+      },
+      "description": {
+        "tr": "Battaniye serin, yıldızları sayın.",
+        "en": "Spread the blanket, count the stars.",
+        "nl": "Spreid de deken uit, tel de sterren.",
+        "fr": "Étalez la couverture, comptez les étoiles."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 45,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "gökyüzü"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "gökyüzü",
+          "en": "sky",
+          "nl": "hemel",
+          "fr": "ciel"
+        }
       ],
       "tips": [
-        "Uygulama ile takımyıldızları tanıyın."
+        {
+          "tr": "Uygulama ile takımyıldızları tanıyın.",
+          "en": "Use an app to identify constellations.",
+          "nl": "Gebruik een app om sterrenbeelden te herkennen.",
+          "fr": "Utilisez une application pour reconnaître les constellations."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa067",
-      "title": "Bugün Boyama Etkinliği",
-      "description": "Mandal, kum boyama, tuval.",
+      "title": {
+        "tr": "Bugün Boyama Etkinliği",
+        "en": "Art Activity Today",
+        "nl": "Knutselactiviteit vandaag",
+        "fr": "Activité artistique aujourd’hui"
+      },
+      "description": {
+        "tr": "Mandal, kum boyama, tuval.",
+        "en": "Try clothespin painting, sand art, or painting on canvas.",
+        "nl": "Probeer schilderen met wasknijpers, zandkunst of schilderen op doek.",
+        "fr": "Essayez la peinture avec des pinces à linge, l’art sur sable ou la peinture sur toile."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 65,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "sanat"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "sanat",
+          "en": "art",
+          "nl": "kunst",
+          "fr": "art"
+        }
       ],
       "tips": [
-        "Önlük giydirin."
+        {
+          "tr": "Önlük giydirin.",
+          "en": "Put on an apron.",
+          "nl": "Doe een schort aan.",
+          "fr": "Mettez un tablier."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa068",
-      "title": "Bu Hafta Sonu Podcast Dinleme",
-      "description": "Eğitici podcast, tartışın.",
+      "title": {
+        "tr": "Bu Hafta Sonu Podcast Dinleme",
+        "en": "Listening to Podcasts This Weekend",
+        "nl": "Podcasts luisteren dit weekend",
+        "fr": "Écouter des podcasts ce week-end"
+      },
+      "description": {
+        "tr": "Eğitici podcast, tartışın.",
+        "en": "Listen to an educational podcast and discuss it together.",
+        "nl": "Luister naar een educatieve podcast en bespreek die samen.",
+        "fr": "Écoutez un podcast éducatif et discutez-en ensemble."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 40,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "podcast"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "podcast",
+          "en": "podcast",
+          "nl": "podcast",
+          "fr": "podcast"
+        }
       ],
       "tips": [
-        "Herkes farklı bir bölüm seçsin."
+        {
+          "tr": "Herkes farklı bir bölüm seçsin.",
+          "en": "Have everyone choose a different episode.",
+          "nl": "Laat iedereen een andere aflevering kiezen.",
+          "fr": "Demandez à chacun de choisir un épisode différent."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa069",
-      "title": "Ailece Yerel Pazara Gitmek",
-      "description": "Semt pazarında taze sebze meyve.",
+      "title": {
+        "tr": "Ailece Yerel Pazara Gitmek",
+        "en": "Going to the Local Market as a Family",
+        "nl": "Als gezin naar de lokale markt gaan",
+        "fr": "Aller au marché local en famille"
+      },
+      "description": {
+        "tr": "Semt pazarında taze sebze meyve.",
+        "en": "Fresh vegetables and fruits at the street market.",
+        "nl": "Verse groenten en fruit op de straatmarkt.",
+        "fr": "Légumes et fruits frais au marché de rue."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 105,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "pazar"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "pazar",
+          "en": "sunday",
+          "nl": "zondag",
+          "fr": "dimanche"
+        }
       ],
       "tips": [
-        "Pazarlık yapmayı öğretin."
+        {
+          "tr": "Pazarlık yapmayı öğretin.",
+          "en": "Teach bargaining.",
+          "nl": "Leer onderhandelen.",
+          "fr": "Enseigner la négociation."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa070",
-      "title": "Akşam Aile Vlog Çekimi",
-      "description": "Gününüzü çekin, montaj yapın.",
+      "title": {
+        "tr": "Akşam Aile Vlog Çekimi",
+        "en": "Make a Family Vlog This Evening",
+        "nl": "Maak vanavond een gezinsvlog",
+        "fr": "Réalisez un vlog familial ce soir"
+      },
+      "description": {
+        "tr": "Gününüzü çekin, montaj yapın.",
+        "en": "Film moments from your day and edit them into a short video.",
+        "nl": "Film momenten van de dag en monteer ze tot een korte video.",
+        "fr": "Filmez des moments de votre journée et montez-les en une courte vidéo."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 80,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "vlog"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "vlog",
+          "en": "vlog",
+          "nl": "vloggen",
+          "fr": "blog vidéo"
+        }
       ],
       "tips": [
-        "Kısa ve eğlenceli tutun."
+        {
+          "tr": "Kısa ve eğlenceli tutun.",
+          "en": "Keep it short and fun.",
+          "nl": "Houd het kort en leuk.",
+          "fr": "Soyez bref et amusant."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa071",
-      "title": "Kahvaltı Dışarıda",
-      "description": "Ailece brunch, farklı bir mekan.",
+      "title": {
+        "tr": "Kahvaltı Dışarıda",
+        "en": "Breakfast Out",
+        "nl": "Ontbijt uit",
+        "fr": "Petit-déjeuner à l'extérieur"
+      },
+      "description": {
+        "tr": "Ailece brunch, farklı bir mekan.",
+        "en": "Family brunch, a different place.",
+        "nl": "Familiebrunch, een andere plek.",
+        "fr": "Le brunch familial, un endroit différent."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 90,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "kahvaltı"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "kahvaltı",
+          "en": "breakfast",
+          "nl": "ontbijt",
+          "fr": "petit déjeuner"
+        }
       ],
       "tips": [
-        "Rezervasyon yaptırın."
+        {
+          "tr": "Rezervasyon yaptırın.",
+          "en": "Make a reservation.",
+          "nl": "Maak een reservering.",
+          "fr": "Faites une réservation."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa072",
-      "title": "Bugün Scavenger Hunt",
-      "description": "Evde veya parkta ipuçlu hazine avı.",
+      "title": {
+        "tr": "Bugün Scavenger Hunt",
+        "en": "Scavenger Hunt today",
+        "nl": "Vandaag speurtocht",
+        "fr": "Chasse au trésor aujourd'hui"
+      },
+      "description": {
+        "tr": "Evde veya parkta ipuçlu hazine avı.",
+        "en": "Treasure hunt with clues at home or in the park.",
+        "nl": "Schattenjacht met aanwijzingen thuis of in het park.",
+        "fr": "Chasse au trésor avec indices à la maison ou dans le parc."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 65,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "oyun"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "oyun",
+          "en": "game",
+          "nl": "spel",
+          "fr": "jeu"
+        }
       ],
       "tips": [
-        "Ödül hazırlayın."
+        {
+          "tr": "Ödül hazırlayın.",
+          "en": "Prepare a reward.",
+          "nl": "Bereid een beloning voor.",
+          "fr": "Préparez une récompense."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa073",
-      "title": "Bu Hafta Sonu Aile Resim Sergisi",
-      "description": "Çocukların resimlerini duvara asın.",
+      "title": {
+        "tr": "Bu Hafta Sonu Aile Resim Sergisi",
+        "en": "Family Art Exhibition This Weekend",
+        "nl": "Gezinskunsttentoonstelling dit weekend",
+        "fr": "Exposition artistique familiale ce week-end"
+      },
+      "description": {
+        "tr": "Çocukların resimlerini duvara asın.",
+        "en": "Display the children's artwork on the wall.",
+        "nl": "Hang de kunstwerken van de kinderen aan de muur.",
+        "fr": "Exposez les dessins des enfants au mur."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 40,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "sergi"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "sergi",
+          "en": "exhibition",
+          "nl": "tentoonstelling",
+          "fr": "exposition"
+        }
       ],
       "tips": [
-        "Açılış kokteyli yapın."
+        {
+          "tr": "Açılış kokteyli yapın.",
+          "en": "Prepare drinks and snacks for a small opening reception.",
+          "nl": "Zorg voor drankjes en hapjes bij een kleine opening.",
+          "fr": "Préparez des boissons et des collations pour un petit vernissage."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa074",
-      "title": "Ailece Gece Yürüyüşü",
-      "description": "Fenerli, güvenli parkta akşam yürüyüşü.",
+      "title": {
+        "tr": "Ailece Gece Yürüyüşü",
+        "en": "Family Night Walk",
+        "nl": "Familie avondwandeling",
+        "fr": "Promenade nocturne en famille"
+      },
+      "description": {
+        "tr": "Fenerli, güvenli parkta akşam yürüyüşü.",
+        "en": "Take an evening walk with flashlights in a safe park.",
+        "nl": "Maak met zaklampen een avondwandeling in een veilig park.",
+        "fr": "Faites une promenade du soir avec des lampes de poche dans un parc sûr."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 45,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "yürüyüş"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "yürüyüş",
+          "en": "walking",
+          "nl": "lopen",
+          "fr": "marcher"
+        }
       ],
       "tips": [
-        "Yansıtıcı aksesuarlar takın."
+        {
+          "tr": "Yansıtıcı aksesuarlar takın.",
+          "en": "Wear reflective accessories.",
+          "nl": "Draag reflecterende accessoires.",
+          "fr": "Portez des accessoires réfléchissants."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa075",
-      "title": "Akşam Aile Bingo Gecesi",
-      "description": "Kendiniz kart yapın, ödüller koyun.",
+      "title": {
+        "tr": "Akşam Aile Bingo Gecesi",
+        "en": "Family Bingo Night",
+        "nl": "Bingoavond met het gezin",
+        "fr": "Soirée bingo en famille"
+      },
+      "description": {
+        "tr": "Kendiniz kart yapın, ödüller koyun.",
+        "en": "Make your own bingo cards and prepare prizes.",
+        "nl": "Maak zelf bingokaarten en zorg voor prijzen.",
+        "fr": "Créez vos propres cartes de bingo et préparez des prix."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 80,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "bingo"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "bingo",
+          "en": "bingo",
+          "nl": "bingo",
+          "fr": "bingo"
+        }
       ],
       "tips": [
-        "Aile içi şakalar içeren kartlar yapın."
+        {
+          "tr": "Aile içi şakalar içeren kartlar yapın.",
+          "en": "Make cards with family jokes.",
+          "nl": "Maak kaarten met familiegrappen.",
+          "fr": "Créez des cartes avec des blagues familiales."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa076",
-      "title": "Aile Oyun Gecesi",
-      "description": "Tabu, kutu oyunları, kart. Kazanan sonrakini seçsin.",
+      "title": {
+        "tr": "Aile Oyun Gecesi",
+        "en": "Family Game Night",
+        "nl": "Familie spelletjesavond",
+        "fr": "Soirée de jeux en famille"
+      },
+      "description": {
+        "tr": "Tabu, kutu oyunları, kart. Kazanan sonrakini seçsin.",
+        "en": "Taboo, board games, cards. Let the winner choose the next one.",
+        "nl": "Taboe, bordspellen, kaarten. Laat de winnaar de volgende kiezen.",
+        "fr": "Tabou, jeux de société, cartes. Laissez le gagnant choisir le suivant."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 90,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "oyun"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "oyun",
+          "en": "game",
+          "nl": "spel",
+          "fr": "jeu"
+        }
       ],
       "tips": [
-        "Müzik ve atıştırmalık hazır bulundurun."
+        {
+          "tr": "Müzik ve atıştırmalık hazır bulundurun.",
+          "en": "Have music and snacks available.",
+          "nl": "Zorg dat er muziek en snacks beschikbaar zijn.",
+          "fr": "Ayez de la musique et des collations à disposition."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa077",
-      "title": "Bugün Piknik Planlayın",
-      "description": "En yakın parka battaniye, sandviç ve meyve.",
+      "title": {
+        "tr": "Bugün Piknik Planlayın",
+        "en": "Plan a Picnic Today",
+        "nl": "Plan vandaag nog een picknick",
+        "fr": "Planifiez un pique-nique aujourd'hui"
+      },
+      "description": {
+        "tr": "En yakın parka battaniye, sandviç ve meyve.",
+        "en": "Take a blanket, sandwiches, and fruit to a nearby park.",
+        "nl": "Neem een deken, broodjes en fruit mee naar een park in de buurt.",
+        "fr": "Emportez une couverture, des sandwichs et des fruits dans un parc proche."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 185,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "piknik"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "piknik",
+          "en": "picnic",
+          "nl": "picknick",
+          "fr": "pique-nique"
+        }
       ],
       "tips": [
-        "Hava durumunu kontrol edin."
+        {
+          "tr": "Hava durumunu kontrol edin.",
+          "en": "Check the weather forecast.",
+          "nl": "Controleer de weersvoorspelling.",
+          "fr": "Consultez les prévisions météorologiques."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa078",
-      "title": "Bu Hafta Sonu Film Maratonu",
-      "description": "Herkes bir film seçsin, popcorn hazırlayın.",
+      "title": {
+        "tr": "Bu Hafta Sonu Film Maratonu",
+        "en": "Movie Marathon This Weekend",
+        "nl": "Filmmarathon dit weekend",
+        "fr": "Marathon du cinéma ce week-end"
+      },
+      "description": {
+        "tr": "Herkes bir film seçsin, popcorn hazırlayın.",
+        "en": "Have everyone choose a movie and prepare some popcorn.",
+        "nl": "Laat iedereen een film kiezen en maak popcorn klaar.",
+        "fr": "Demandez à chacun de choisir un film et préparez du pop-corn."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 160,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "film"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "film",
+          "en": "movie",
+          "nl": "film",
+          "fr": "film"
+        }
       ],
       "tips": [
-        "Yaş grubuna uygun filmler seçin."
+        {
+          "tr": "Yaş grubuna uygun filmler seçin.",
+          "en": "Choose movies suitable for the age group.",
+          "nl": "Kies films die geschikt zijn voor de leeftijdsgroep.",
+          "fr": "Choisissez des films adaptés à la tranche d’âge."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa079",
-      "title": "Ailece Gezinti Yürüyüşü",
-      "description": "Mahallede veya ormanda 30 dk yürüyüş.",
+      "title": {
+        "tr": "Ailece Gezinti Yürüyüşü",
+        "en": "Family Leisure Walk",
+        "nl": "Ontspannen gezinswandeling",
+        "fr": "Promenade détente en famille"
+      },
+      "description": {
+        "tr": "Mahallede veya ormanda 30 dk yürüyüş.",
+        "en": "30-minute walk in the neighborhood or in the forest.",
+        "nl": "30 minuten wandelen in de buurt of in het bos.",
+        "fr": "30 minutes de marche dans le quartier ou en forêt."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 45,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "doğa"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "doğa",
+          "en": "nature",
+          "nl": "natuur",
+          "fr": "naturel"
+        }
       ],
       "tips": [
-        "Fotoğraf makinesi götürün."
+        {
+          "tr": "Fotoğraf makinesi götürün.",
+          "en": "Take a camera.",
+          "nl": "Neem een camera.",
+          "fr": "Prenez un appareil photo."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa080",
-      "title": "Akşam Mangal Keyfi",
-      "description": "Balkonda veya bahçede pratik mangal.",
+      "title": {
+        "tr": "Akşam Mangal Keyfi",
+        "en": "Family Barbecue Evening",
+        "nl": "Barbecueavond met het gezin",
+        "fr": "Soirée barbecue en famille"
+      },
+      "description": {
+        "tr": "Balkonda veya bahçede pratik mangal.",
+        "en": "Prepare a simple barbecue in the garden or another permitted outdoor area.",
+        "nl": "Organiseer een eenvoudige barbecue in de tuin of op een andere toegestane buitenplek.",
+        "fr": "Organisez un barbecue simple dans le jardin ou dans un autre espace extérieur autorisé."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 140,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "mangal"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "mangal",
+          "en": "barbecue",
+          "nl": "barbecueën",
+          "fr": "barbecue"
+        }
       ],
       "tips": [
-        "Kömürü önceden hazırlayın."
+        {
+          "tr": "Kömürü önceden hazırlayın.",
+          "en": "Prepare the coal in advance.",
+          "nl": "Bereid de steenkool van tevoren voor.",
+          "fr": "Préparez le charbon à l'avance."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa081",
-      "title": "Bisiklet Turu",
-      "description": "Güvenli rotada ailece bisiklet.",
+      "title": {
+        "tr": "Bisiklet Turu",
+        "en": "Bike Tour",
+        "nl": "Fietstocht",
+        "fr": "Visite à vélo"
+      },
+      "description": {
+        "tr": "Güvenli rotada ailece bisiklet.",
+        "en": "Cycling as a family on a safe route.",
+        "nl": "Fietsen als gezin op een veilige route.",
+        "fr": "Faire du vélo en famille sur un itinéraire sécurisé."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 60,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "bisiklet"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "bisiklet",
+          "en": "bike",
+          "nl": "fiets",
+          "fr": "vélo"
+        }
       ],
       "tips": [
-        "Kask takmayı unutmayın."
+        {
+          "tr": "Kask takmayı unutmayın.",
+          "en": "Don't forget to wear a helmet.",
+          "nl": "Vergeet niet een helm te dragen.",
+          "fr": "N'oubliez pas de porter un casque."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa082",
-      "title": "Bugün Müze Ziyareti",
-      "description": "Çocuklar için etkileşimli müzeler.",
+      "title": {
+        "tr": "Bugün Müze Ziyareti",
+        "en": "Museum Visit Today",
+        "nl": "Museumbezoek vandaag",
+        "fr": "Visite du musée aujourd'hui"
+      },
+      "description": {
+        "tr": "Çocuklar için etkileşimli müzeler.",
+        "en": "Interactive museums for children.",
+        "nl": "Interactieve musea voor kinderen.",
+        "fr": "Musées interactifs pour enfants."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 125,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "müze"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "müze",
+          "en": "museum",
+          "nl": "museum",
+          "fr": "musée"
+        }
       ],
       "tips": [
-        "Önceden internetten araştırma yapın."
+        {
+          "tr": "Önceden internetten araştırma yapın.",
+          "en": "Do research online beforehand.",
+          "nl": "Doe vooraf online onderzoek.",
+          "fr": "Faites des recherches en ligne au préalable."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa083",
-      "title": "Bu Hafta Sonu Aile Fotoğraf Çekimi",
-      "description": "Komik pozlar verin, galeriye ekleyin.",
+      "title": {
+        "tr": "Bu Hafta Sonu Aile Fotoğraf Çekimi",
+        "en": "Family Photo Shoot This Weekend",
+        "nl": "Familiefotoshoot dit weekend",
+        "fr": "Séance photo de famille ce week-end"
+      },
+      "description": {
+        "tr": "Komik pozlar verin, galeriye ekleyin.",
+        "en": "Make funny poses, add them to the gallery.",
+        "nl": "Maak grappige poses, voeg ze toe aan de galerij.",
+        "fr": "Faites des poses amusantes, ajoutez-les à la galerie."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 40,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "fotoğraf"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "fotoğraf",
+          "en": "photo",
+          "nl": "foto",
+          "fr": "photos"
+        }
       ],
       "tips": [
-        "Tripod kullanın."
+        {
+          "tr": "Tripod kullanın.",
+          "en": "Use a tripod.",
+          "nl": "Gebruik een statief.",
+          "fr": "Utilisez un trépied."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa084",
-      "title": "Ailece Balkonda Kamp",
-      "description": "Çadır kurun, el feneri hikayeleri.",
+      "title": {
+        "tr": "Ailece Balkonda Kamp",
+        "en": "Balcony Camping as a Family",
+        "nl": "Kamperen op het balkon met het gezin",
+        "fr": "Camping sur le balcon en famille"
+      },
+      "description": {
+        "tr": "Çadır kurun, el feneri hikayeleri.",
+        "en": "Pitch a tent and tell stories by flashlight.",
+        "nl": "Zet een tent op en vertel verhalen bij het licht van een zaklamp.",
+        "fr": "Montez une tente et racontez des histoires à la lampe de poche."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 75,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "kamp"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "kamp",
+          "en": "camp",
+          "nl": "kamp",
+          "fr": "campement"
+        }
       ],
       "tips": [
-        "Yıldız gözlem uygulaması kullanın."
+        {
+          "tr": "Yıldız gözlem uygulaması kullanın.",
+          "en": "Use a stargazing app.",
+          "nl": "Gebruik een sterrenwacht-app.",
+          "fr": "Utilisez une application d'observation des étoiles."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa085",
-      "title": "Akşam Kitap Okuma Saati",
-      "description": "Herkes kendi kitabını okur, özet anlatır.",
+      "title": {
+        "tr": "Akşam Kitap Okuma Saati",
+        "en": "Evening Reading Time",
+        "nl": "Avondleestijd",
+        "fr": "Heure de lecture du soir"
+      },
+      "description": {
+        "tr": "Herkes kendi kitabını okur, özet anlatır.",
+        "en": "Everyone reads their own book and gives a summary.",
+        "nl": "Iedereen leest zijn eigen boek en geeft een samenvatting.",
+        "fr": "Chacun lit son propre livre et en fait un résumé."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 65,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "kitap"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "kitap",
+          "en": "book",
+          "nl": "boek",
+          "fr": "livre"
+        }
       ],
       "tips": [
-        "Sessiz ve rahat bir köşe hazırlayın."
+        {
+          "tr": "Sessiz ve rahat bir köşe hazırlayın.",
+          "en": "Prepare a quiet and cozy corner.",
+          "nl": "Zorg voor een rustig en gezellig hoekje.",
+          "fr": "Préparez un coin calme et cosy."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa086",
-      "title": "Origami Etkinliği",
-      "description": "Kağıttan hayvan, gemi, uçak yapımı.",
+      "title": {
+        "tr": "Origami Etkinliği",
+        "en": "Origami Activity",
+        "nl": "Origami-activiteit",
+        "fr": "Activité Origami"
+      },
+      "description": {
+        "tr": "Kağıttan hayvan, gemi, uçak yapımı.",
+        "en": "Making animals, ships and planes from paper.",
+        "nl": "Dieren, schepen en vliegtuigen maken van papier.",
+        "fr": "Fabriquer des animaux, des bateaux et des avions en papier."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 40,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "origami"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "origami",
+          "en": "origami",
+          "nl": "origami",
+          "fr": "origami"
+        }
       ],
       "tips": [
-        "Renkli kağıtlar kullanın."
+        {
+          "tr": "Renkli kağıtlar kullanın.",
+          "en": "Use colored papers.",
+          "nl": "Gebruik gekleurd papier.",
+          "fr": "Utilisez des papiers de couleur."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa087",
-      "title": "Bugün Aile Müzik Gecesi",
-      "description": "Herkes sevdiği şarkıyı söyler.",
+      "title": {
+        "tr": "Bugün Aile Müzik Gecesi",
+        "en": "Family Music Night Today",
+        "nl": "Muziekavond met het gezin vandaag",
+        "fr": "Soirée musicale en famille aujourd’hui"
+      },
+      "description": {
+        "tr": "Herkes sevdiği şarkıyı söyler.",
+        "en": "Everyone sings their favorite song.",
+        "nl": "Iedereen zingt zijn favoriete liedje.",
+        "fr": "Tout le monde chante sa chanson préférée."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 65,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "müzik"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "müzik",
+          "en": "music",
+          "nl": "muziek",
+          "fr": "musique"
+        }
       ],
       "tips": [
-        "Karaoke uygulaması kullanın."
+        {
+          "tr": "Karaoke uygulaması kullanın.",
+          "en": "Use a karaoke app.",
+          "nl": "Gebruik een karaoke-app.",
+          "fr": "Utilisez une application de karaoké."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa088",
-      "title": "Bu Hafta Sonu Hayvanat Bahçesi",
-      "description": "Çocuklarla hayvanları besleyin.",
+      "title": {
+        "tr": "Bu Hafta Sonu Hayvanat Bahçesi",
+        "en": "The Zoo This Weekend",
+        "nl": "De dierentuin dit weekend",
+        "fr": "Le zoo ce week-end"
+      },
+      "description": {
+        "tr": "Çocuklarla hayvanları besleyin.",
+        "en": "Feed the animals with the children only where the zoo permits it.",
+        "nl": "Voer de dieren samen met de kinderen, maar alleen waar de dierentuin dit toestaat.",
+        "fr": "Nourrissez les animaux avec les enfants uniquement là où le zoo l’autorise."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 190,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "hayvanat"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "hayvanat",
+          "en": "zoo",
+          "nl": "dierentuin",
+          "fr": "zoo"
+        }
       ],
       "tips": [
-        "Su ve atıştırmalık götürün."
+        {
+          "tr": "Su ve atıştırmalık götürün.",
+          "en": "Bring water and snacks.",
+          "nl": "Breng water en snacks mee.",
+          "fr": "Apportez de l'eau et des collations."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa089",
-      "title": "Ailece Doğa Yürüyüşü",
-      "description": "Hafta sonu trekking parkuru.",
+      "title": {
+        "tr": "Ailece Doğa Yürüyüşü",
+        "en": "Family Nature Walk",
+        "nl": "Familie natuurwandeling",
+        "fr": "Promenade nature en famille"
+      },
+      "description": {
+        "tr": "Hafta sonu trekking parkuru.",
+        "en": "Weekend trekking trail.",
+        "nl": "Weekendtrekkingsparcours.",
+        "fr": "Sentier de randonnée du week-end."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 195,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "doğa"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "doğa",
+          "en": "nature",
+          "nl": "natuur",
+          "fr": "naturel"
+        }
       ],
       "tips": [
-        "Uygun ayakkabı giyin."
+        {
+          "tr": "Uygun ayakkabı giyin.",
+          "en": "Wear appropriate shoes.",
+          "nl": "Draag geschikte schoenen.",
+          "fr": "Portez des chaussures appropriées."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa090",
-      "title": "Akşam Aile Yarışması",
-      "description": "Mini olimpiyat: ip atlama, balon patlatma.",
+      "title": {
+        "tr": "Akşam Aile Yarışması",
+        "en": "Evening Family Competition",
+        "nl": "Avond familiewedstrijd",
+        "fr": "Concours familial en soirée"
+      },
+      "description": {
+        "tr": "Mini olimpiyat: ip atlama, balon patlatma.",
+        "en": "Mini Olympics: rope jumping, balloon popping.",
+        "nl": "Mini Olympische Spelen: touwspringen, ballon knallen.",
+        "fr": "Mini Jeux olympiques : saut à la corde, éclatement de ballons."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 80,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "yarışma"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "yarışma",
+          "en": "competition",
+          "nl": "concurrentie",
+          "fr": "compétition"
+        }
       ],
       "tips": [
-        "Küçük ödüller hazırlayın."
+        {
+          "tr": "Küçük ödüller hazırlayın.",
+          "en": "Prepare small rewards.",
+          "nl": "Bereid kleine beloningen voor.",
+          "fr": "Préparez de petites récompenses."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa091",
-      "title": "Yıldız İzleme",
-      "description": "Battaniye serin, yıldızları sayın.",
+      "title": {
+        "tr": "Yıldız İzleme",
+        "en": "Stargazing",
+        "nl": "Sterrenkijken",
+        "fr": "Observation des étoiles"
+      },
+      "description": {
+        "tr": "Battaniye serin, yıldızları sayın.",
+        "en": "Spread the blanket, count the stars.",
+        "nl": "Spreid de deken uit, tel de sterren.",
+        "fr": "Étalez la couverture, comptez les étoiles."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 45,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "gökyüzü"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "gökyüzü",
+          "en": "sky",
+          "nl": "hemel",
+          "fr": "ciel"
+        }
       ],
       "tips": [
-        "Uygulama ile takımyıldızları tanıyın."
+        {
+          "tr": "Uygulama ile takımyıldızları tanıyın.",
+          "en": "Use an app to identify constellations.",
+          "nl": "Gebruik een app om sterrenbeelden te herkennen.",
+          "fr": "Utilisez une application pour reconnaître les constellations."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa092",
-      "title": "Bugün Boyama Etkinliği",
-      "description": "Mandal, kum boyama, tuval.",
+      "title": {
+        "tr": "Bugün Boyama Etkinliği",
+        "en": "Art Activity Today",
+        "nl": "Knutselactiviteit vandaag",
+        "fr": "Activité artistique aujourd’hui"
+      },
+      "description": {
+        "tr": "Mandal, kum boyama, tuval.",
+        "en": "Try clothespin painting, sand art, or painting on canvas.",
+        "nl": "Probeer schilderen met wasknijpers, zandkunst of schilderen op doek.",
+        "fr": "Essayez la peinture avec des pinces à linge, l’art sur sable ou la peinture sur toile."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 65,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "sanat"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "sanat",
+          "en": "art",
+          "nl": "kunst",
+          "fr": "art"
+        }
       ],
       "tips": [
-        "Önlük giydirin."
+        {
+          "tr": "Önlük giydirin.",
+          "en": "Put on an apron.",
+          "nl": "Doe een schort aan.",
+          "fr": "Mettez un tablier."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa093",
-      "title": "Bu Hafta Sonu Podcast Dinleme",
-      "description": "Eğitici podcast, tartışın.",
+      "title": {
+        "tr": "Bu Hafta Sonu Podcast Dinleme",
+        "en": "Listening to Podcasts This Weekend",
+        "nl": "Podcasts luisteren dit weekend",
+        "fr": "Écouter des podcasts ce week-end"
+      },
+      "description": {
+        "tr": "Eğitici podcast, tartışın.",
+        "en": "Listen to an educational podcast and discuss it together.",
+        "nl": "Luister naar een educatieve podcast en bespreek die samen.",
+        "fr": "Écoutez un podcast éducatif et discutez-en ensemble."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 40,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "podcast"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "podcast",
+          "en": "podcast",
+          "nl": "podcast",
+          "fr": "podcast"
+        }
       ],
       "tips": [
-        "Herkes farklı bir bölüm seçsin."
+        {
+          "tr": "Herkes farklı bir bölüm seçsin.",
+          "en": "Have everyone choose a different episode.",
+          "nl": "Laat iedereen een andere aflevering kiezen.",
+          "fr": "Demandez à chacun de choisir un épisode différent."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa094",
-      "title": "Ailece Yerel Pazara Gitmek",
-      "description": "Semt pazarında taze sebze meyve.",
+      "title": {
+        "tr": "Ailece Yerel Pazara Gitmek",
+        "en": "Going to the Local Market as a Family",
+        "nl": "Als gezin naar de lokale markt gaan",
+        "fr": "Aller au marché local en famille"
+      },
+      "description": {
+        "tr": "Semt pazarında taze sebze meyve.",
+        "en": "Fresh vegetables and fruits at the street market.",
+        "nl": "Verse groenten en fruit op de straatmarkt.",
+        "fr": "Légumes et fruits frais au marché de rue."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 105,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "pazar"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "pazar",
+          "en": "sunday",
+          "nl": "zondag",
+          "fr": "dimanche"
+        }
       ],
       "tips": [
-        "Pazarlık yapmayı öğretin."
+        {
+          "tr": "Pazarlık yapmayı öğretin.",
+          "en": "Teach bargaining.",
+          "nl": "Leer onderhandelen.",
+          "fr": "Enseigner la négociation."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa095",
-      "title": "Akşam Aile Vlog Çekimi",
-      "description": "Gününüzü çekin, montaj yapın.",
+      "title": {
+        "tr": "Akşam Aile Vlog Çekimi",
+        "en": "Make a Family Vlog This Evening",
+        "nl": "Maak vanavond een gezinsvlog",
+        "fr": "Réalisez un vlog familial ce soir"
+      },
+      "description": {
+        "tr": "Gününüzü çekin, montaj yapın.",
+        "en": "Film moments from your day and edit them into a short video.",
+        "nl": "Film momenten van de dag en monteer ze tot een korte video.",
+        "fr": "Filmez des moments de votre journée et montez-les en une courte vidéo."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 80,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "vlog"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "vlog",
+          "en": "vlog",
+          "nl": "vloggen",
+          "fr": "blog vidéo"
+        }
       ],
       "tips": [
-        "Kısa ve eğlenceli tutun."
+        {
+          "tr": "Kısa ve eğlenceli tutun.",
+          "en": "Keep it short and fun.",
+          "nl": "Houd het kort en leuk.",
+          "fr": "Soyez bref et amusant."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa096",
-      "title": "Kahvaltı Dışarıda",
-      "description": "Ailece brunch, farklı bir mekan.",
+      "title": {
+        "tr": "Kahvaltı Dışarıda",
+        "en": "Breakfast Out",
+        "nl": "Ontbijt uit",
+        "fr": "Petit-déjeuner à l'extérieur"
+      },
+      "description": {
+        "tr": "Ailece brunch, farklı bir mekan.",
+        "en": "Family brunch, a different place.",
+        "nl": "Familiebrunch, een andere plek.",
+        "fr": "Le brunch familial, un endroit différent."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 90,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "kahvaltı"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "kahvaltı",
+          "en": "breakfast",
+          "nl": "ontbijt",
+          "fr": "petit déjeuner"
+        }
       ],
       "tips": [
-        "Rezervasyon yaptırın."
+        {
+          "tr": "Rezervasyon yaptırın.",
+          "en": "Make a reservation.",
+          "nl": "Maak een reservering.",
+          "fr": "Faites une réservation."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa097",
-      "title": "Bugün Scavenger Hunt",
-      "description": "Evde veya parkta ipuçlu hazine avı.",
+      "title": {
+        "tr": "Bugün Scavenger Hunt",
+        "en": "Scavenger Hunt today",
+        "nl": "Vandaag speurtocht",
+        "fr": "Chasse au trésor aujourd'hui"
+      },
+      "description": {
+        "tr": "Evde veya parkta ipuçlu hazine avı.",
+        "en": "Treasure hunt with clues at home or in the park.",
+        "nl": "Schattenjacht met aanwijzingen thuis of in het park.",
+        "fr": "Chasse au trésor avec indices à la maison ou dans le parc."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 65,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "oyun"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "oyun",
+          "en": "game",
+          "nl": "spel",
+          "fr": "jeu"
+        }
       ],
       "tips": [
-        "Ödül hazırlayın."
+        {
+          "tr": "Ödül hazırlayın.",
+          "en": "Prepare a reward.",
+          "nl": "Bereid een beloning voor.",
+          "fr": "Préparez une récompense."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa098",
-      "title": "Bu Hafta Sonu Aile Resim Sergisi",
-      "description": "Çocukların resimlerini duvara asın.",
+      "title": {
+        "tr": "Bu Hafta Sonu Aile Resim Sergisi",
+        "en": "Family Art Exhibition This Weekend",
+        "nl": "Gezinskunsttentoonstelling dit weekend",
+        "fr": "Exposition artistique familiale ce week-end"
+      },
+      "description": {
+        "tr": "Çocukların resimlerini duvara asın.",
+        "en": "Display the children's artwork on the wall.",
+        "nl": "Hang de kunstwerken van de kinderen aan de muur.",
+        "fr": "Exposez les dessins des enfants au mur."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 40,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "sergi"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "sergi",
+          "en": "exhibition",
+          "nl": "tentoonstelling",
+          "fr": "exposition"
+        }
       ],
       "tips": [
-        "Açılış kokteyli yapın."
+        {
+          "tr": "Açılış kokteyli yapın.",
+          "en": "Prepare drinks and snacks for a small opening reception.",
+          "nl": "Zorg voor drankjes en hapjes bij een kleine opening.",
+          "fr": "Préparez des boissons et des collations pour un petit vernissage."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa099",
-      "title": "Ailece Gece Yürüyüşü",
-      "description": "Fenerli, güvenli parkta akşam yürüyüşü.",
+      "title": {
+        "tr": "Ailece Gece Yürüyüşü",
+        "en": "Family Night Walk",
+        "nl": "Familie avondwandeling",
+        "fr": "Promenade nocturne en famille"
+      },
+      "description": {
+        "tr": "Fenerli, güvenli parkta akşam yürüyüşü.",
+        "en": "Take an evening walk with flashlights in a safe park.",
+        "nl": "Maak met zaklampen een avondwandeling in een veilig park.",
+        "fr": "Faites une promenade du soir avec des lampes de poche dans un parc sûr."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 45,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "yürüyüş"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "yürüyüş",
+          "en": "walking",
+          "nl": "lopen",
+          "fr": "marcher"
+        }
       ],
       "tips": [
-        "Yansıtıcı aksesuarlar takın."
+        {
+          "tr": "Yansıtıcı aksesuarlar takın.",
+          "en": "Wear reflective accessories.",
+          "nl": "Draag reflecterende accessoires.",
+          "fr": "Portez des accessoires réfléchissants."
+        }
       ],
       "action_type": "show_detail"
     },
     {
       "id": "sa100",
-      "title": "Akşam Aile Bingo Gecesi",
-      "description": "Kendiniz kart yapın, ödüller koyun.",
+      "title": {
+        "tr": "Akşam Aile Bingo Gecesi",
+        "en": "Family Bingo Night",
+        "nl": "Bingoavond met het gezin",
+        "fr": "Soirée bingo en famille"
+      },
+      "description": {
+        "tr": "Kendiniz kart yapın, ödüller koyun.",
+        "en": "Make your own bingo cards and prepare prizes.",
+        "nl": "Maak zelf bingokaarten en zorg voor prijzen.",
+        "fr": "Créez vos propres cartes de bingo et préparez des prix."
+      },
       "category": "social",
-      "difficulty": "Kolay",
+      "difficulty": {
+        "tr": "Kolay",
+        "en": "Easy",
+        "nl": "Makkelijk",
+        "fr": "Facile"
+      },
       "duration_minutes": 80,
       "participants": 4,
       "tags": [
-        "sosyal",
-        "bingo"
+        {
+          "tr": "sosyal",
+          "en": "social",
+          "nl": "sociaal",
+          "fr": "social"
+        },
+        {
+          "tr": "bingo",
+          "en": "bingo",
+          "nl": "bingo",
+          "fr": "bingo"
+        }
       ],
       "tips": [
-        "Aile içi şakalar içeren kartlar yapın."
+        {
+          "tr": "Aile içi şakalar içeren kartlar yapın.",
+          "en": "Make cards with family jokes.",
+          "nl": "Maak kaarten met familiegrappen.",
+          "fr": "Créez des cartes avec des blagues familiales."
+        }
       ],
       "action_type": "show_detail"
     }

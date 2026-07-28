@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/services.dart';
+import '../../core/app_logger.dart';
+import '../localization/locale_service.dart';
 
 /// Tokensiz yerel AI servisi.
 /// API çağrısı yapmaz — tüm içerik assets/data/content/ JSON dosyalarından gelir.
@@ -15,18 +17,39 @@ class LocalAIService {
   List<Map<String, dynamic>> _activities = [];
   bool _loaded = false;
 
+  String _text(Map<String, String> values) {
+    final code = LocaleService.resolveInitialLocale().languageCode;
+    return values[code] ?? values['tr']!;
+  }
+
   Future<void> _ensureLoaded() async {
     if (_loaded) return;
     try {
       final recipeRaw =
           await rootBundle.loadString('assets/data/content/recipes.json');
       _recipes = (jsonDecode(recipeRaw) as List).cast<Map<String, dynamic>>();
-    } catch (_) {}
+    } catch (e, st) {
+      // Asset eksik/bozuksa yerel AI sessizce boş döner — bu bir paketleme
+      // hatasıdır, kullanıcı hatası değil. Görünür olmalı.
+      AppLogger.logError(
+        e,
+        module: 'ai',
+        operation: 'loadRecipesAsset',
+        stackTrace: st,
+      );
+    }
     try {
       final eduRaw =
           await rootBundle.loadString('assets/data/content/education.json');
       _activities = (jsonDecode(eduRaw) as List).cast<Map<String, dynamic>>();
-    } catch (_) {}
+    } catch (e, st) {
+      AppLogger.logError(
+        e,
+        module: 'ai',
+        operation: 'loadEducationAsset',
+        stackTrace: st,
+      );
+    }
     _loaded = true;
   }
 
@@ -70,10 +93,10 @@ class LocalAIService {
       final recipe = _recipes[_rng.nextInt(_recipes.length)];
       suggestions.add(AISuggestion(
         icon: '🍽️',
-        title: 'Bugünkü Tarif',
-        body: recipe['title'] ?? 'Lezzetli bir yemek',
+        title: _text(const {'tr': 'Bugünkü Tarif', 'en': "Today’s Recipe", 'nl': 'Recept van vandaag', 'fr': 'Recette du jour'}),
+        body: (recipe['title'] ?? _text(const {'tr': 'Lezzetli bir yemek', 'en': 'A delicious meal', 'nl': 'Een heerlijke maaltijd', 'fr': 'Un délicieux repas'})).toString(),
         category: SuggestionCategory.kitchen,
-        action: 'Tarife Bak',
+        action: _text(const {'tr': 'Tarife Bak', 'en': 'View Recipe', 'nl': 'Bekijk recept', 'fr': 'Voir la recette'}),
         actionRoute: '/kitchen',
       ));
     }
@@ -84,10 +107,10 @@ class LocalAIService {
       final ageGroup = act['age_group'] as Map<String, dynamic>? ?? {};
       suggestions.add(AISuggestion(
         icon: '🎯',
-        title: 'Günün Aktivitesi',
-        body: '${act['title']} (${ageGroup['min']}-${ageGroup['max']} yaş)',
+        title: _text(const {'tr': 'Günün Aktivitesi', 'en': 'Activity of the Day', 'nl': 'Activiteit van de dag', 'fr': 'Activité du jour'}),
+        body: '${act['title']} (${ageGroup['min']}-${ageGroup['max']} ${_text(const {'tr': 'yaş', 'en': 'years', 'nl': 'jaar', 'fr': 'ans'})})',
         category: SuggestionCategory.education,
-        action: 'Aktiviteye Bak',
+        action: _text(const {'tr': 'Aktiviteye Bak', 'en': 'View Activity', 'nl': 'Bekijk activiteit', 'fr': "Voir l’activité"}),
         actionRoute: '/education',
       ));
     }
@@ -99,27 +122,27 @@ class LocalAIService {
   List<AISuggestion> _morningRoutine(int childCount) => [
         AISuggestion(
           icon: '☀️',
-          title: 'Günaydın Rutini',
-          body: 'Kahvaltıyı birlikte hazırlayın, günün planını paylaşın.',
+          title: _text(const {'tr': 'Günaydın Rutini', 'en': 'Good Morning Routine', 'nl': 'Goedemorgenroutine', 'fr': 'Routine du matin'}),
+          body: _text(const {'tr': 'Kahvaltıyı birlikte hazırlayın, günün planını paylaşın.', 'en': 'Prepare breakfast together and share the plan for the day.', 'nl': 'Maak samen het ontbijt en bespreek de planning van de dag.', 'fr': 'Préparez le petit-déjeuner ensemble et partagez le programme du jour.'}),
           category: SuggestionCategory.family,
-          action: 'Rutinlere Bak',
+          action: _text(const {'tr': 'Rutinlere Bak', 'en': 'View Routines', 'nl': 'Bekijk routines', 'fr': 'Voir les routines'}),
           actionRoute: '/routines',
         ),
         if (childCount > 0)
           AISuggestion(
             icon: '🎒',
-            title: 'Okul Hazırlığı',
-            body: 'Çantaları kontrol edin, ödevleri hatırlatın.',
+            title: _text(const {'tr': 'Okul Hazırlığı', 'en': 'School Preparation', 'nl': 'Voorbereiding op school', 'fr': "Préparation pour l’école"}),
+            body: _text(const {'tr': 'Çantaları kontrol edin, ödevleri hatırlatın.', 'en': 'Check the bags and remind everyone about homework.', 'nl': 'Controleer de tassen en herinner iedereen aan het huiswerk.', 'fr': 'Vérifiez les sacs et rappelez les devoirs à chacun.'}),
             category: SuggestionCategory.child,
-            action: 'Görevler',
+            action: _text(const {'tr': 'Görevler', 'en': 'Tasks', 'nl': 'Taken', 'fr': 'Tâches'}),
             actionRoute: '/tasks',
           ),
         AISuggestion(
           icon: '💸',
-          title: 'Gün Bütçesi',
-          body: 'Bugünkü harcama planını gözden geçirin.',
+          title: _text(const {'tr': 'Gün Bütçesi', 'en': 'Daily Budget', 'nl': 'Dagbudget', 'fr': 'Budget du jour'}),
+          body: _text(const {'tr': 'Bugünkü harcama planını gözden geçirin.', 'en': "Review today’s spending plan.", 'nl': 'Bekijk het uitgavenplan van vandaag.', 'fr': 'Passez en revue le budget prévu pour aujourd’hui.'}),
           category: SuggestionCategory.budget,
-          action: 'Bütçeye Bak',
+          action: _text(const {'tr': 'Bütçeye Bak', 'en': 'View Budget', 'nl': 'Bekijk budget', 'fr': 'Voir le budget'}),
           actionRoute: '/budget',
         ),
       ];
@@ -127,18 +150,18 @@ class LocalAIService {
   List<AISuggestion> _midDayIdeas() => [
         AISuggestion(
           icon: '🛒',
-          title: 'Alışveriş Zamanı',
-          body: 'Listenizde 3 ürün eksik. Markete uğrayın.',
+          title: _text(const {'tr': 'Alışveriş Zamanı', 'en': 'Shopping Time', 'nl': 'Tijd om boodschappen te doen', 'fr': 'À vos courses'}),
+          body: _text(const {'tr': 'Listenizde 3 ürün eksik. Markete uğrayın.', 'en': 'Three items are missing from your list. Stop by the store.', 'nl': 'Er ontbreken drie producten op je lijst. Ga even langs de winkel.', 'fr': 'Il manque trois articles à votre liste. Passez au magasin.'}),
           category: SuggestionCategory.shopping,
-          action: 'Listeyi Aç',
+          action: _text(const {'tr': 'Listeyi Aç', 'en': 'Open List', 'nl': 'Open lijst', 'fr': 'Ouvrir la liste'}),
           actionRoute: '/shopping',
         ),
         AISuggestion(
           icon: '📍',
-          title: 'Aile Konumu',
-          body: 'Aile üyelerinin konumunu kontrol edin.',
+          title: _text(const {'tr': 'Aile Konumu', 'en': 'Family Location', 'nl': 'Gezinslocatie', 'fr': 'Localisation de la famille'}),
+          body: _text(const {'tr': 'Aile üyelerinin konumunu kontrol edin.', 'en': 'Check the location of family members.', 'nl': 'Bekijk de locatie van gezinsleden.', 'fr': 'Vérifiez la localisation des membres de la famille.'}),
           category: SuggestionCategory.location,
-          action: 'Haritayı Aç',
+          action: _text(const {'tr': 'Haritayı Aç', 'en': 'Open Map', 'nl': 'Open kaart', 'fr': 'Ouvrir la carte'}),
           actionRoute: '/family-map',
         ),
       ];
@@ -147,18 +170,18 @@ class LocalAIService {
         if (childCount > 0)
           AISuggestion(
             icon: '🎨',
-            title: 'Okul Sonrası',
-            body: 'Çocuklarla birlikte yaratıcı bir aktivite yapın.',
+            title: _text(const {'tr': 'Okul Sonrası', 'en': 'After School', 'nl': 'Na school', 'fr': "Après l’école"}),
+            body: _text(const {'tr': 'Çocuklarla birlikte yaratıcı bir aktivite yapın.', 'en': 'Do a creative activity with the children.', 'nl': 'Doe een creatieve activiteit met de kinderen.', 'fr': 'Faites une activité créative avec les enfants.'}),
             category: SuggestionCategory.education,
-            action: 'Aktiviteler',
+            action: _text(const {'tr': 'Aktiviteler', 'en': 'Activities', 'nl': 'Activiteiten', 'fr': 'Activités'}),
             actionRoute: '/education',
           ),
         AISuggestion(
           icon: '📸',
-          title: 'An Paylaşımı',
-          body: 'Bugünkü güzel anları galeriye ekleyin.',
+          title: _text(const {'tr': 'An Paylaşımı', 'en': 'Share a Moment', 'nl': 'Deel een moment', 'fr': 'Partager un moment'}),
+          body: _text(const {'tr': 'Bugünkü güzel anları galeriye ekleyin.', 'en': "Add today’s lovely moments to the gallery.", 'nl': 'Voeg de mooie momenten van vandaag toe aan de galerij.', 'fr': 'Ajoutez les beaux moments de la journée à la galerie.'}),
           category: SuggestionCategory.gallery,
-          action: 'Galeriyi Aç',
+          action: _text(const {'tr': 'Galeriyi Aç', 'en': 'Open Gallery', 'nl': 'Open galerij', 'fr': 'Ouvrir la galerie'}),
           actionRoute: '/gallery',
         ),
       ];
@@ -166,26 +189,26 @@ class LocalAIService {
   List<AISuggestion> _eveningRoutine() => [
         AISuggestion(
           icon: '🍳',
-          title: 'Akşam Yemeği',
-          body: 'Haftalık yemek planınıza göre bugün ne pişiriyorsunuz?',
+          title: _text(const {'tr': 'Akşam Yemeği', 'en': 'Dinner', 'nl': 'Avondeten', 'fr': 'Dîner'}),
+          body: _text(const {'tr': 'Haftalık yemek planınıza göre bugün ne pişiriyorsunuz?', 'en': 'What are you cooking today based on your weekly meal plan?', 'nl': 'Wat kook je vandaag volgens je wekelijkse maaltijdplan?', 'fr': 'Que cuisinez-vous aujourd’hui selon votre menu de la semaine ?'}),
           category: SuggestionCategory.kitchen,
-          action: 'Mutfak',
+          action: _text(const {'tr': 'Mutfak', 'en': 'Kitchen', 'nl': 'Keuken', 'fr': 'Cuisine'}),
           actionRoute: '/kitchen',
         ),
         AISuggestion(
           icon: '💬',
-          title: 'Aile Sohbeti',
-          body: 'Gün nasıl geçti? Herkesle paylaşın.',
+          title: _text(const {'tr': 'Aile Sohbeti', 'en': 'Family Chat', 'nl': 'Gezinsgesprek', 'fr': 'Discussion en famille'}),
+          body: _text(const {'tr': 'Gün nasıl geçti? Herkesle paylaşın.', 'en': 'How was your day? Share it with everyone.', 'nl': 'Hoe was je dag? Deel het met iedereen.', 'fr': 'Comment s’est passée votre journée ? Partagez-la avec tout le monde.'}),
           category: SuggestionCategory.family,
-          action: 'Sohbet',
+          action: _text(const {'tr': 'Sohbet', 'en': 'Chat', 'nl': 'Gesprek', 'fr': 'Discussion'}),
           actionRoute: '/chat',
         ),
         AISuggestion(
           icon: '📊',
-          title: 'Günlük Özet',
-          body: 'Bugünkü harcamaları kaydedin.',
+          title: _text(const {'tr': 'Günlük Özet', 'en': 'Daily Summary', 'nl': 'Dagoverzicht', 'fr': 'Résumé du jour'}),
+          body: _text(const {'tr': 'Bugünkü harcamaları kaydedin.', 'en': "Record today’s expenses.", 'nl': 'Registreer de uitgaven van vandaag.', 'fr': 'Enregistrez les dépenses du jour.'}),
           category: SuggestionCategory.budget,
-          action: 'Bütçe',
+          action: _text(const {'tr': 'Bütçe', 'en': 'Budget', 'nl': 'Budget', 'fr': 'Budget'}),
           actionRoute: '/budget',
         ),
       ];
@@ -193,18 +216,18 @@ class LocalAIService {
   List<AISuggestion> _nightWindDown() => [
         AISuggestion(
           icon: '🌙',
-          title: 'Gece Rutini',
-          body: 'Yarın için liste hazırlayın, çocukları uyutun.',
+          title: _text(const {'tr': 'Gece Rutini', 'en': 'Night Routine', 'nl': 'Avondroutine', 'fr': 'Routine du soir'}),
+          body: _text(const {'tr': 'Yarın için liste hazırlayın, çocukları uyutun.', 'en': 'Prepare a list for tomorrow and put the children to bed.', 'nl': 'Maak een lijst voor morgen en breng de kinderen naar bed.', 'fr': 'Préparez une liste pour demain et couchez les enfants.'}),
           category: SuggestionCategory.family,
-          action: 'Rutinler',
+          action: _text(const {'tr': 'Rutinler', 'en': 'Routines', 'nl': 'Routines', 'fr': 'Routines'}),
           actionRoute: '/routines',
         ),
         AISuggestion(
           icon: '📅',
-          title: 'Yarın Planı',
-          body: 'Takvime göz atın, yarınki önemli etkinlikler.',
+          title: _text(const {'tr': 'Yarın Planı', 'en': "Tomorrow’s Plan", 'nl': 'Planning voor morgen', 'fr': 'Programme de demain'}),
+          body: _text(const {'tr': 'Takvime göz atın, yarınki önemli etkinlikler.', 'en': "Check the calendar for tomorrow’s important events.", 'nl': 'Bekijk de belangrijke afspraken van morgen in de agenda.', 'fr': 'Consultez le calendrier pour les événements importants de demain.'}),
           category: SuggestionCategory.family,
-          action: 'Takvim',
+          action: _text(const {'tr': 'Takvim', 'en': 'Calendar', 'nl': 'Agenda', 'fr': 'Calendrier'}),
           actionRoute: '/calendar',
         ),
       ];
@@ -212,18 +235,18 @@ class LocalAIService {
   List<AISuggestion> _alwaysRelevant() => [
         AISuggestion(
           icon: '💊',
-          title: 'İlaç Takibi',
-          body: 'Aile üyelerinin günlük ilaç alımını kontrol edin.',
+          title: _text(const {'tr': 'İlaç Takibi', 'en': 'Medication Tracking', 'nl': 'Medicatie bijhouden', 'fr': 'Suivi des médicaments'}),
+          body: _text(const {'tr': 'Aile üyelerinin günlük ilaç alımını kontrol edin.', 'en': 'Check the daily medication of family members.', 'nl': 'Controleer de dagelijkse medicatie van gezinsleden.', 'fr': 'Vérifiez la prise quotidienne de médicaments des membres de la famille.'}),
           category: SuggestionCategory.health,
-          action: 'Sağlık',
+          action: _text(const {'tr': 'Sağlık', 'en': 'Health', 'nl': 'Gezondheid', 'fr': 'Santé'}),
           actionRoute: '/family-health',
         ),
         AISuggestion(
           icon: '📱',
-          title: 'Abonelikler',
-          body: 'Bu ay biten aboneliklerinizi gözden geçirin.',
+          title: _text(const {'tr': 'Abonelikler', 'en': 'Subscriptions', 'nl': 'Abonnementen', 'fr': 'Abonnements'}),
+          body: _text(const {'tr': 'Bu ay biten aboneliklerinizi gözden geçirin.', 'en': 'Review subscriptions ending this month.', 'nl': 'Bekijk de abonnementen die deze maand aflopen.', 'fr': 'Vérifiez les abonnements qui se terminent ce mois-ci.'}),
           category: SuggestionCategory.budget,
-          action: 'Abonelikler',
+          action: _text(const {'tr': 'Abonelikler', 'en': 'Subscriptions', 'nl': 'Abonnementen', 'fr': 'Abonnements'}),
           actionRoute: '/subscriptions',
         ),
       ];
@@ -243,7 +266,7 @@ class LocalAIService {
     if (recipe.isEmpty) return [];
 
     final ingredients = (recipe['ingredients'] as List?)
-            ?.map((i) => (i['name'] as String? ?? '').toLowerCase())
+            ?.map((i) => ((i as Map?)?['name'] as String? ?? '').toLowerCase())
             .toList() ??
         [];
     final available =
@@ -300,15 +323,28 @@ class LocalAIService {
       final topCat = categorySpending.entries
           .toList()
           ..sort((a, b) => b.value.compareTo(a.value));
-      final cat = topCat.firstOrNull?.key ?? 'harcamalar';
-      return '⚠️ Bütçenizin %${pct.toStringAsFixed(0)}\'ini kullandınız. '
-          '$cat kategorisinde tasarruf etmeyi düşünün.';
+      final cat = topCat.firstOrNull?.key ?? _text(const {'tr': 'harcamalar', 'en': 'spending', 'nl': 'uitgaven', 'fr': 'dépenses'});
+      return _text({
+        'tr': '⚠️ Bütçenizin %${pct.toStringAsFixed(0)}\'ini kullandınız. $cat kategorisinde tasarruf etmeyi düşünün.',
+        'en': '⚠️ You have used ${pct.toStringAsFixed(0)}% of your budget. Consider saving in the $cat category.',
+        'nl': '⚠️ Je hebt ${pct.toStringAsFixed(0)}% van je budget gebruikt. Overweeg te besparen in de categorie $cat.',
+        'fr': '⚠️ Vous avez utilisé ${pct.toStringAsFixed(0)} % de votre budget. Pensez à économiser dans la catégorie $cat.',
+      });
     } else if (pct > 70) {
-      return '📊 Bütçenizin %${pct.toStringAsFixed(0)}\'ini kullandınız. '
-          'Kalan ${(budgetLimit - totalExpense).toStringAsFixed(0)} ₺ ile hafta sonuna kadar idare edin.';
+      final remaining = (budgetLimit - totalExpense).toStringAsFixed(0);
+      return _text({
+        'tr': '📊 Bütçenizin %${pct.toStringAsFixed(0)}\'ini kullandınız. Kalan $remaining € ile hafta sonuna kadar idare edin.',
+        'en': '📊 You have used ${pct.toStringAsFixed(0)}% of your budget. Make the remaining €$remaining last until the weekend.',
+        'nl': '📊 Je hebt ${pct.toStringAsFixed(0)}% van je budget gebruikt. Probeer met de resterende €$remaining het weekend te halen.',
+        'fr': '📊 Vous avez utilisé ${pct.toStringAsFixed(0)} % de votre budget. Tenez jusqu’au week-end avec les $remaining € restants.',
+      });
     } else {
-      return '✅ Bütçe kontrolü iyi! '
-          'Toplam harcama: ${totalExpense.toStringAsFixed(0)} ₺ (limit: ${budgetLimit.toStringAsFixed(0)} ₺)';
+      return _text({
+        'tr': '✅ Bütçe kontrolü iyi! Toplam harcama: ${totalExpense.toStringAsFixed(0)} € (limit: ${budgetLimit.toStringAsFixed(0)} €)',
+        'en': '✅ Your budget is under control! Total spending: €${totalExpense.toStringAsFixed(0)} (limit: €${budgetLimit.toStringAsFixed(0)})',
+        'nl': '✅ Je budget is onder controle! Totale uitgaven: €${totalExpense.toStringAsFixed(0)} (limiet: €${budgetLimit.toStringAsFixed(0)})',
+        'fr': '✅ Votre budget est bien maîtrisé ! Dépenses totales : ${totalExpense.toStringAsFixed(0)} € (limite : ${budgetLimit.toStringAsFixed(0)} €)',
+      });
     }
   }
 }

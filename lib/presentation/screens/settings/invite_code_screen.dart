@@ -17,6 +17,8 @@ class InviteCodeScreen extends StatefulWidget {
 }
 
 class _InviteCodeScreenState extends State<InviteCodeScreen> {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   String? _code;
   bool _generating = false;
   String _role = 'parent'; // 'parent' or 'child'
@@ -28,7 +30,10 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
       final client = SupabaseConfig.safeClient;
       final userId = AuthService.currentUserId;
       if (client == null || userId == null) {
-        throw Exception('Oturum açık değil');
+        // Davet kodu gerçek cross-device özelliği — hesap + bulut aile gerekir.
+        throw Exception(
+            'Davet kodu için önce hesabınızla giriş yapıp bir aile oluşturun. '
+            '(Çevrimdışı modda davet kodu paylaşılamaz.)');
       }
 
       final fm = await client
@@ -38,7 +43,9 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
           .maybeSingle();
       final familyId = fm?['family_id'] as String?;
       if (familyId == null) {
-        throw Exception('Aile bulunamadı');
+        throw Exception(
+            'Aile bulunamadı. Ayarlar > Aile Yönetimi\'nden bir aile '
+            'oluşturduktan sonra davet kodu üretebilirsiniz.');
       }
 
       final code = await client.rpc(
@@ -57,7 +64,7 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
         setState(() => _generating = false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Davet kodu oluşturulamadı: $e'),
+            content: Text(AppLocalizations.of(context).icCreateFailed('$e')),
             behavior: SnackBarBehavior.floating,
             backgroundColor: AppColors.error,
           ),
@@ -80,23 +87,24 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
 
   void _shareCode() {
     if (_code == null) return;
+    const baseUrl = 'https://familyhub.app/join';
+    final deepLink = '$baseUrl?code=$_code';
     SharePlus.instance.share(
       ShareParams(
-        text: 'FamilyHub\'a katıl! Davet kodun: $_code',
-        subject: 'FamilyHub Davet Kodu',
+        text: 'FamilyHub\'a katılmak için bağlantıya tıkla:\n$deepLink\n\nYa da kodu manuel gir: $_code',
+        subject: 'FamilyHub Aile Daveti',
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = isDark ? AppColors.darkBackground : AppColors.cloudWhite;
+    final bg = const Color(0xFF0A0A0F);
 
     return Scaffold(
       backgroundColor: bg,
       appBar: ScreenHeader(
-        title: 'Davet Kodu',
+        title: AppLocalizations.of(context).icTitle,
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -110,33 +118,30 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
                 width: 80,
                 height: 80,
                 decoration: BoxDecoration(
-                  color: AppColors.success.withAlpha(isDark ? 30 : 20),
+                  color: const Color(0xFF10B981).withAlpha(30),
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: const Icon(
                   Icons.person_add_alt,
                   size: 36,
-                  color: AppColors.success,
+                  color: Color(0xFF10B981),
                 ),
               ),
               const SizedBox(height: 24),
-              Text(
+              const Text(
                 'Aileye Davet Et',
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                  color: Color(0xFFE5E7EB),
                 ),
               ),
               const SizedBox(height: 8),
-              Text(
-                'Yeni üyeleri davet etmek için bir kod oluşturun. Kod 24 saat geçerlidir.',
+              Text(AppLocalizations.of(context).yeniUyeleriDavetEtmekIcinBirKodOlusturunKod24SaatGecerlidir,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
-                  color: isDark
-                      ? AppColors.darkTextSecondary
-                      : AppColors.slate,
+                  color: Color(0xFF6B7280),
                 ),
               ),
               const SizedBox(height: 24),
@@ -144,7 +149,7 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
               Container(
                 padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
-                  color: isDark ? AppColors.darkCard : const Color(0xFFF3F4F6),
+                  color: const Color(0xFF13131A),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
@@ -156,7 +161,7 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           decoration: BoxDecoration(
                             color: _role == 'parent'
-                                ? (isDark ? AppColors.darkBackground : Colors.white)
+                                ? (const Color(0xFF0A0A0F))
                                 : Colors.transparent,
                             borderRadius: BorderRadius.circular(10),
                             boxShadow: _role == 'parent'
@@ -169,7 +174,7 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
                               Icon(
                                 Icons.admin_panel_settings_outlined,
                                 size: 18,
-                                color: _role == 'parent' ? AppColors.cobalt : AppColors.gray,
+                                color: _role == 'parent' ? const Color(0xFF6366F1) : const Color(0xFF6B7280),
                               ),
                               const SizedBox(width: 6),
                               Text(
@@ -177,8 +182,8 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   color: _role == 'parent'
-                                      ? AppColors.cobalt
-                                      : (isDark ? AppColors.darkTextSecondary : AppColors.gray),
+                                      ? const Color(0xFF6366F1)
+                                      : (const Color(0xFF6B7280)),
                                 ),
                               ),
                             ],
@@ -193,7 +198,7 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           decoration: BoxDecoration(
                             color: _role == 'child'
-                                ? (isDark ? AppColors.darkBackground : Colors.white)
+                                ? (const Color(0xFF0A0A0F))
                                 : Colors.transparent,
                             borderRadius: BorderRadius.circular(10),
                             boxShadow: _role == 'child'
@@ -206,16 +211,15 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
                               Icon(
                                 Icons.child_care_outlined,
                                 size: 18,
-                                color: _role == 'child' ? AppColors.pink : AppColors.gray,
+                                color: _role == 'child' ? const Color(0xFFEC4899) : const Color(0xFF6B7280),
                               ),
                               const SizedBox(width: 6),
-                              Text(
-                                'Çocuk',
+                              Text(AppLocalizations.of(context).child,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   color: _role == 'child'
-                                      ? AppColors.pink
-                                      : (isDark ? AppColors.darkTextSecondary : AppColors.gray),
+                                      ? const Color(0xFFEC4899)
+                                      : (const Color(0xFF6B7280)),
                                 ),
                               ),
                             ],
@@ -234,12 +238,12 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
                     vertical: 16,
                   ),
                   decoration: BoxDecoration(
-                    color: isDark ? AppColors.darkCard : Colors.white,
+                    color: const Color(0xFF13131A),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
                       color: isDark
-                          ? AppColors.darkBorder
-                          : AppColors.border,
+                          ? const Color(0x1EFFFFFF)
+                          : const Color(0x1EFFFFFF),
                     ),
                   ),
                   child: Row(
@@ -247,19 +251,17 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
                     children: [
                       Text(
                         _code!,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 2,
-                          color: isDark
-                              ? AppColors.darkTextPrimary
-                              : AppColors.dark,
+                          color: Color(0xFFE5E7EB),
                         ),
                       ),
                       const SizedBox(width: 16),
                       IconButton(
                         onPressed: _copyCode,
-                        icon: const Icon(Icons.copy, color: AppColors.cobalt),
+                        icon: const Icon(Icons.copy, color: Color(0xFF6366F1)),
                       ),
                     ],
                   ),
@@ -271,18 +273,18 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
                 child: ElevatedButton.icon(
                   onPressed: _generating ? null : _generateCode,
                   icon: _generating
-                      ? SizedBox(
+                      ? const SizedBox(
                           width: 20,
                           height: 20,
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
-                            color: isDark ? AppColors.dark : Colors.white,
+                            color: Color(0xFFE5E7EB),
                           ),
                         )
                       : const Icon(Icons.refresh),
                   label: Text(_code == null ? 'Kod Oluştur' : 'Yeni Kod Oluştur'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.cobalt,
+                    backgroundColor: const Color(0xFF6366F1),
                     foregroundColor: Colors.white,
                     elevation: 0,
                     shape: RoundedRectangleBorder(
@@ -301,8 +303,8 @@ class _InviteCodeScreenState extends State<InviteCodeScreen> {
                     icon: const Icon(Icons.share),
                     label: Text(AppLocalizations.of(context).share),
                     style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.cobalt,
-                      side: const BorderSide(color: AppColors.cobalt),
+                      foregroundColor: const Color(0xFF6366F1),
+                      side: const BorderSide(color: Color(0xFF6366F1)),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),

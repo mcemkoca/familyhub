@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../config/constants.dart';
 
 class SettingsSection extends StatelessWidget {
   final String title;
@@ -17,55 +16,49 @@ class SettingsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(4, 8, 4, 8),
-          child: Row(
-            children: [
-              if (highlight)
-                Container(
-                  width: 3,
-                  height: 16,
-                  margin: const EdgeInsets.only(right: 8),
-                  decoration: BoxDecoration(
-                    color: AppColors.cobalt,
-                    borderRadius: BorderRadius.circular(2),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 4),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 20, bottom: 8, left: 4),
+            child: Row(
+              children: [
+                if (highlight)
+                  Container(
+                    width: 3,
+                    height: 16,
+                    margin: const EdgeInsets.only(right: 8),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF6366F1),
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                Icon(icon, size: 14, color: const Color(0xFF6B7280)),
+                const SizedBox(width: 6),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF6B7280),
+                    letterSpacing: 0.8,
                   ),
                 ),
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w700,
-                  color: isDark ? AppColors.slateLight : AppColors.slate,
-                  letterSpacing: 0.5,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(bottom: 16),
-          decoration: BoxDecoration(
-            color: isDark ? AppColors.darkCard : Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: isDark
-                    ? Colors.black.withAlpha(20)
-                    : Colors.black.withAlpha(5),
-                blurRadius: 12,
-                offset: const Offset(0, 2),
-              ),
-            ],
+          Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Theme.of(context).dividerColor, width: 0.5),
+            ),
+            child: Column(children: children),
           ),
-          child: Column(children: children),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

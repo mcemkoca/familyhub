@@ -57,3 +57,12 @@ node_modules/
 
 familyhub-27bf2-firebase-adminsdk*.json
 
+
+# Release signing — ASLA commit edilmez (secret)
+*.jks
+*.keystore
+android/key.properties
+.env.prod
+.env.*.local
+# Obfuscation debug sembolleri
+/symbols/

@@ -437,6 +437,15 @@ class HiveService {
     }
   }
 
+  /// Oturum kapanışında / hesap değişiminde çağrılır — bir kullanıcının
+  /// alışveriş cache'inin başka hesaba sızmasını önler. Kullanıcı VERİSİNİ
+  /// (buluttaki kayıtları) silmez; yalnızca yereldeki geçici önbelleği temizler.
+  static Future<void> clearShoppingItems() async {
+    if (Hive.isBoxOpen('shopping')) {
+      await _shoppingBox.clear();
+    }
+  }
+
   // ========== FAMILY MEMBERS ==========
   static Future<void> saveFamilyMembers(List<FamilyMember> list) async {
     final data = list.map((e) => e.toJson()).toList();

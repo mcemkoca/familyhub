@@ -19,6 +19,7 @@ import 'domain/entities.dart';
 import 'presentation/providers/app_providers.dart';
 import 'services/notification_service.dart';
 import 'services/hive_service.dart';
+import 'services/koca_seed.dart';
 import 'services/auth_service.dart';
 import 'services/billing/subscription_service.dart';
 import 'services/content/content_engine.dart';
@@ -85,25 +86,29 @@ void main() async {
 }
 
 Future<void> _initAndRunApp() async {
-  ThemeMode themeMode = ThemeMode.light;
-  Color accentColor = AppColors.cobalt;
+  ThemeMode themeMode = ThemeMode.system;
+  Color accentColor = const Color(0xFF6366F1);
   double fontScale = 1.0;
   List<Task> savedTasks = [];
   List<ChatMessage> savedChatMessages = [];
   List<StreakEntry> savedStreaks = [];
 
   try {
-    // Fast local init first
+    // Fast local init first — desteklenen tüm diller için tarih/sayı biçimi verisi
+    // (aksi halde en/fr/nl tarihleri DateFormat'ta hata verir).
     await _safeInit(
-      () => initializeDateFormatting('tr_TR', null),
+      () => initializeDateFormatting(),
       'dateFormatting',
-      ms: 2000,
+      ms: 3000,
     );
     await _safeInit(Hive.initFlutter, 'Hive', ms: 2000);
     await _safeInit(HiveService.init, 'HiveService', ms: 2000);
 
+    // Koca Ailesi başlangıç verisini (bir kez) kur.
+    await _safeInit(KocaSeed.ensure, 'KocaSeed', ms: 2000);
+
     // Load settings immediately so app can open
-    final savedTheme = HiveService.getSetting('themeMode') ?? 'system';
+    final savedTheme = HiveService.getSetting('themeMode') ?? 'system'; // default: follow system
     themeMode = switch (savedTheme) {
       'dark' => ThemeMode.dark,
       'system' => ThemeMode.system,
@@ -113,9 +118,9 @@ Future<void> _initAndRunApp() async {
     accentColor = switch (savedAccent) {
       'green' => AppColors.green,
       'orange' => AppColors.orange,
-      'purple' => AppColors.purple,
+      'purple' => const Color(0xFF8B5CF6),
       'red' => AppColors.red,
-      _ => AppColors.cobalt,
+      _ => const Color(0xFF6366F1),
     };
     fontScale = HiveService.getDoubleSetting('fontScale') ?? 1.0;
 
@@ -200,9 +205,9 @@ Future<void> _initAndRunApp() async {
               accentColor = switch (pAccent) {
                 'green' => AppColors.green,
                 'orange' => AppColors.orange,
-                'purple' => AppColors.purple,
+                'purple' => const Color(0xFF8B5CF6),
                 'red' => AppColors.red,
-                _ => AppColors.cobalt,
+                _ => const Color(0xFF6366F1),
               };
             }
           }
@@ -341,7 +346,6 @@ class _FamilyHubAppState extends ConsumerState<FamilyHubApp>
 
   @override
   Widget build(BuildContext context) {
-    final themeMode = ref.watch(themeModeProvider);
     final fontScale = ref.watch(fontScaleProvider);
     final accentColor = ref.watch(accentColorProvider);
     final brightness = Theme.of(context).brightness;
@@ -366,18 +370,39 @@ class _FamilyHubAppState extends ConsumerState<FamilyHubApp>
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: const [Locale('tr', 'TR'), Locale('en', 'US')],
+        supportedLocales: const [
+          Locale('tr', 'TR'),
+          Locale('en', 'GB'),
+          Locale('fr', 'BE'),
+          Locale('nl', 'BE'),
+        ],
         locale: ref.watch(localeProvider),
-        theme: AppTheme.lightTheme(accentColor, fontScale: fontScale),
-        darkTheme: AppTheme.darkTheme(accentColor, fontScale: fontScale),
-        themeMode: themeMode,
+        // ── TEK TEMA: "Family Mode" (light/dark ayrimi yok) ──
+        // Her iki slot da ayni aile temasina baglandi, mod sabit.
+        // Yazı ölçekleme yalnızca MediaQuery.textScaler ile yapılır (aşağıda),
+        // çift ölçeklemeyi önlemek için temaya 1.0 verilir.
+        theme: AppTheme.darkTheme(accentColor),
+        darkTheme: AppTheme.darkTheme(accentColor),
+        themeMode: ThemeMode.dark,
         routerConfig: router,
-        builder: (context, child) => AnimatedTheme(
-          data: Theme.of(context),
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-          child: child!,
-        ),
+        builder: (context, child) {
+          // Yazı boyutu ayarını TÜM uygulamaya uygula. Ekranlarda sabit
+          // fontSize kullanıldığından tema fontScale'i tek başına yetmez;
+          // MediaQuery.textScaler her Text'i ölçekler. Cihazın kendi yazı
+          // boyutuyla çarpışmayı önlemek için sabitlenir (0.85–1.35 aralığı).
+          final mq = MediaQuery.of(context);
+          return MediaQuery(
+            data: mq.copyWith(
+              textScaler: TextScaler.linear(fontScale.clamp(0.85, 1.35)),
+            ),
+            child: AnimatedTheme(
+              data: Theme.of(context),
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+              child: child!,
+            ),
+          );
+        },
       ),
     );
   }

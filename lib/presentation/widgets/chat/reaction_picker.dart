@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../config/constants.dart';
 
 class ReactionPicker extends StatelessWidget {
   final VoidCallback onClose;
@@ -15,7 +14,6 @@ class ReactionPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return GestureDetector(
       onTap: onClose,
@@ -28,7 +26,7 @@ class ReactionPicker extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 40),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
-                color: isDark ? AppColors.darkCard : Colors.white,
+                color: const Color(0xFF13131A),
                 borderRadius: BorderRadius.circular(40),
                 boxShadow: [
                   BoxShadow(

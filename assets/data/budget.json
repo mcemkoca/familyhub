@@ -1,70 +1,123 @@
 {
   "module": "budget",
-  "version": "1.0",
-  "language": "tr",
+  "version": "1.1",
+  "schema_version": "1.0",
+  "default_language": "tr",
+  "language_order": ["tr", "en", "nl", "fr"],
+  "languages": {
+    "tr": "Türkçe",
+    "en": "English",
+    "nl": "Nederlands",
+    "fr": "Français"
+  },
   "region": "BE",
   "generated_at": "2026-04-27T00:00:00Z",
   "currency": "EUR",
   "sample_family_budget": {
     "monthly_income": 4500,
     "allocation": {
-      "kira_ev_kredisi": {"amount": 1350, "percentage": 30, "type": "sabit"},
-      "market_yemek": {"amount": 675, "percentage": 15, "type": "degisken"},
-      "elektrik_su_dogalgaz": {"amount": 300, "percentage": 6.7, "type": "sabit"},
-      "internet_telefon_tv": {"amount": 100, "percentage": 2.2, "type": "sabit"},
-      "ulasim": {"amount": 200, "percentage": 4.4, "type": "degisken"},
-      "cocuk_giderleri": {"amount": 675, "percentage": 15, "type": "degisken"},
-      "saglik_sigorta": {"amount": 150, "percentage": 3.3, "type": "sabit"},
-      "birikim": {"amount": 675, "percentage": 15, "type": "sabit"},
-      "diger": {"amount": 375, "percentage": 8.3, "type": "degisken"}
+      "kira_ev_kredisi": {
+        "label": {"tr": "Kira / ev kredisi", "en": "Rent / mortgage", "nl": "Huur / hypotheek", "fr": "Loyer / crédit hypothécaire"},
+        "amount": 1350,
+        "percentage": 30,
+        "type": {"key": "fixed", "label": {"tr": "Sabit", "en": "Fixed", "nl": "Vast", "fr": "Fixe"}}
+      },
+      "market_yemek": {
+        "label": {"tr": "Market / yemek", "en": "Groceries / food", "nl": "Boodschappen / voeding", "fr": "Courses / alimentation"},
+        "amount": 675,
+        "percentage": 15,
+        "type": {"key": "variable", "label": {"tr": "Değişken", "en": "Variable", "nl": "Variabel", "fr": "Variable"}}
+      },
+      "elektrik_su_dogalgaz": {
+        "label": {"tr": "Elektrik / su / doğal gaz", "en": "Electricity / water / gas", "nl": "Elektriciteit / water / gas", "fr": "Électricité / eau / gaz"},
+        "amount": 300,
+        "percentage": 6.7,
+        "type": {"key": "fixed", "label": {"tr": "Sabit", "en": "Fixed", "nl": "Vast", "fr": "Fixe"}}
+      },
+      "internet_telefon_tv": {
+        "label": {"tr": "İnternet / telefon / TV", "en": "Internet / phone / TV", "nl": "Internet / telefoon / tv", "fr": "Internet / téléphone / TV"},
+        "amount": 100,
+        "percentage": 2.2,
+        "type": {"key": "fixed", "label": {"tr": "Sabit", "en": "Fixed", "nl": "Vast", "fr": "Fixe"}}
+      },
+      "ulasim": {
+        "label": {"tr": "Ulaşım", "en": "Transport", "nl": "Vervoer", "fr": "Transport"},
+        "amount": 200,
+        "percentage": 4.4,
+        "type": {"key": "variable", "label": {"tr": "Değişken", "en": "Variable", "nl": "Variabel", "fr": "Variable"}}
+      },
+      "cocuk_giderleri": {
+        "label": {"tr": "Çocuk giderleri", "en": "Child-related expenses", "nl": "Uitgaven voor kinderen", "fr": "Dépenses liées aux enfants"},
+        "amount": 675,
+        "percentage": 15,
+        "type": {"key": "variable", "label": {"tr": "Değişken", "en": "Variable", "nl": "Variabel", "fr": "Variable"}}
+      },
+      "saglik_sigorta": {
+        "label": {"tr": "Sağlık / sigorta", "en": "Health / insurance", "nl": "Gezondheid / verzekering", "fr": "Santé / assurance"},
+        "amount": 150,
+        "percentage": 3.3,
+        "type": {"key": "fixed", "label": {"tr": "Sabit", "en": "Fixed", "nl": "Vast", "fr": "Fixe"}}
+      },
+      "birikim": {
+        "label": {"tr": "Birikim", "en": "Savings", "nl": "Spaargeld", "fr": "Épargne"},
+        "amount": 675,
+        "percentage": 15,
+        "type": {"key": "fixed", "label": {"tr": "Sabit", "en": "Fixed", "nl": "Vast", "fr": "Fixe"}}
+      },
+      "diger": {
+        "label": {"tr": "Diğer", "en": "Other", "nl": "Overige", "fr": "Autres"},
+        "amount": 375,
+        "percentage": 8.3,
+        "type": {"key": "variable", "label": {"tr": "Değişken", "en": "Variable", "nl": "Variabel", "fr": "Variable"}}
+      }
     }
   },
   "belgium_specific_benefits": {
     "kindergeld": {
-      "description": "Çocuk yardımı",
-      "amount_per_child": "~170 EUR/ay (yaşa göre değişir)",
-      "eligibility": "Belgium'da ikamet eden tüm aileler"
+      "description": {"tr": "Çocuk yardımı", "en": "Child benefit", "nl": "Groeipakket / kinderbijslag", "fr": "Allocations familiales"},
+      "amount_per_child": {"tr": "Çocuk başına aylık yaklaşık 170 EUR (yaşa göre değişir)", "en": "Approximately EUR 170 per child per month (varies by age)", "nl": "Ongeveer 170 EUR per kind per maand (afhankelijk van de leeftijd)", "fr": "Environ 170 EUR par enfant et par mois (selon l’âge)"},
+      "eligibility": {"tr": "Belçika'da ikamet eden tüm aileler", "en": "All families residing in Belgium", "nl": "Alle gezinnen die in België wonen", "fr": "Toutes les familles résidant en Belgique"}
     },
     "school_allowance": {
-      "description": "Okul yardımı",
-      "amount": "Yıllık ~100-400 EUR (gelir durumuna göre)"
+      "description": {"tr": "Okul yardımı", "en": "School allowance", "nl": "Schooltoeslag", "fr": "Allocation scolaire"},
+      "amount": {"tr": "Yıllık yaklaşık 100-400 EUR (gelire göre)", "en": "Approximately EUR 100–400 per year (depending on income)", "nl": "Ongeveer 100–400 EUR per jaar (afhankelijk van het inkomen)", "fr": "Environ 100 à 400 EUR par an (selon les revenus)"}
     },
     "tax_advantages": [
-      "Çocuk bakımı vergi indirimi (crèche, okul öncesi)",
-      "13. maaş vergi avantajı",
-      "Ev alımında vergi indirimleri (Flanders)"
+      {"tr": "Çocuk bakımı için vergi indirimi (kreş, okul öncesi bakım)", "en": "Tax relief for childcare (daycare, preschool care)", "nl": "Belastingvermindering voor kinderopvang (crèche, voorschoolse opvang)", "fr": "Réduction d’impôt pour la garde d’enfants (crèche, accueil préscolaire)"},
+      {"tr": "13. maaş için vergi avantajı", "en": "Tax advantage for the 13th-month salary", "nl": "Belastingvoordeel voor de dertiende maand", "fr": "Avantage fiscal sur le treizième mois"},
+      {"tr": "Ev alımında vergi indirimleri (Flaman Bölgesi)", "en": "Tax reductions when buying a home (Flemish Region)", "nl": "Belastingverminderingen bij de aankoop van een woning (Vlaams Gewest)", "fr": "Réductions fiscales lors de l’achat d’un logement (Région flamande)"}
     ]
   },
   "saving_strategies": [
     {
-      "name": "Kavanoz Yöntemi (Envelope System)",
-      "description": "Her kategori için fiziksel/dijital kavanoz, nakit bittiğinde harcama biter",
-      "difficulty": "Kolay",
-      "estimated_savings": "%15-20 bütçe disiplini"
+      "name": {"tr": "Zarf Yöntemi", "en": "Envelope System", "nl": "Enveloppenmethode", "fr": "Méthode des enveloppes"},
+      "description": {"tr": "Her kategori için fiziksel veya dijital bir zarf ayırın; para bittiğinde harcama da biter.", "en": "Use a physical or digital envelope for each category; when the money runs out, spending stops.", "nl": "Gebruik voor elke categorie een fysieke of digitale envelop; zodra het geld op is, stopt u met uitgeven.", "fr": "Utilisez une enveloppe physique ou numérique pour chaque catégorie ; lorsqu’elle est vide, les dépenses s’arrêtent."},
+      "difficulty": {"key": "easy", "label": {"tr": "Kolay", "en": "Easy", "nl": "Makkelijk", "fr": "Facile"}},
+      "estimated_savings": {"tr": "Bütçede %15-20 daha fazla disiplin", "en": "15–20% greater budget discipline", "nl": "15–20% meer budgetdiscipline", "fr": "15 à 20 % de discipline budgétaire en plus"}
     },
     {
-      "name": "50/30/20 Kuralı (Aile Uyarlaması)",
-      "description": "50% ihtiyaçlar, 30% çocuk/aile, 20% birikim",
-      "difficulty": "Orta",
-      "estimated_savings": "Düzenli birikim alışkanlığı"
+      "name": {"tr": "50/30/20 Kuralı (Aile Uyarlaması)", "en": "50/30/20 Rule (Family Version)", "nl": "50/30/20-regel (gezinsversie)", "fr": "Règle 50/30/20 (version familiale)"},
+      "description": {"tr": "%50 ihtiyaçlar, %30 çocuk ve aile giderleri, %20 birikim", "en": "50% needs, 30% child and family expenses, 20% savings", "nl": "50% behoeften, 30% uitgaven voor kinderen en gezin, 20% sparen", "fr": "50 % pour les besoins, 30 % pour les enfants et la famille, 20 % pour l’épargne"},
+      "difficulty": {"key": "medium", "label": {"tr": "Orta", "en": "Medium", "nl": "Gemiddeld", "fr": "Moyenne"}},
+      "estimated_savings": {"tr": "Düzenli birikim alışkanlığı", "en": "A consistent savings habit", "nl": "Een vaste spaargewoonte", "fr": "Une habitude d’épargne régulière"}
     },
     {
-      "name": "Otomatik Transfer",
-      "description": "Maaş günü otomatik birikim hesabına transfer",
-      "difficulty": "Kolay",
-      "estimated_savings": "Psikolojik direnci kaldırır"
+      "name": {"tr": "Otomatik Transfer", "en": "Automatic Transfer", "nl": "Automatische overschrijving", "fr": "Virement automatique"},
+      "description": {"tr": "Maaş gününde birikim hesabına otomatik transfer yapın.", "en": "Automatically transfer money to a savings account on payday.", "nl": "Schrijf op de betaaldag automatisch geld over naar een spaarrekening.", "fr": "Effectuez automatiquement un virement vers un compte d’épargne le jour de paie."},
+      "difficulty": {"key": "easy", "label": {"tr": "Kolay", "en": "Easy", "nl": "Makkelijk", "fr": "Facile"}},
+      "estimated_savings": {"tr": "Birikime karşı psikolojik direnci azaltır", "en": "Reduces psychological resistance to saving", "nl": "Vermindert de psychologische weerstand tegen sparen", "fr": "Réduit la résistance psychologique à l’épargne"}
     }
   ],
   "cost_cutting_tips": [
-    {"category": "market", "tip": "Haftalık liste ile alışveriş, aç karnına gitmeme", "monthly_savings_eur": 80},
-    {"category": "market", "tip": "Aldi/Lidl gibi marketlerden temel ürünler", "monthly_savings_eur": 60},
-    {"category": "elektrik", "tip": "Gece tarifesi kullanımı (bulaşık, çamaşır)", "monthly_savings_eur": 25},
-    {"category": "ulasim", "tip": "De Lijn/STIB aylık abonelik vs tek bilet", "monthly_savings_eur": 40},
-    {"category": "cocuk", "tip": "Oyuncak takası grupları, kütüphane üyeliği", "monthly_savings_eur": 50}
+    {"category": {"key": "groceries", "label": {"tr": "Market", "en": "Groceries", "nl": "Boodschappen", "fr": "Courses"}}, "tip": {"tr": "Haftalık bir listeyle alışveriş yapın ve markete aç gitmeyin.", "en": "Shop with a weekly list and avoid going to the store hungry.", "nl": "Doe boodschappen met een weeklijst en ga niet met honger naar de winkel.", "fr": "Faites vos courses avec une liste hebdomadaire et évitez d’y aller le ventre vide."}, "monthly_savings_eur": 80},
+    {"category": {"key": "groceries", "label": {"tr": "Market", "en": "Groceries", "nl": "Boodschappen", "fr": "Courses"}}, "tip": {"tr": "Temel ürünleri Aldi veya Lidl gibi marketlerden alın.", "en": "Buy staple products from supermarkets such as Aldi or Lidl.", "nl": "Koop basisproducten bij supermarkten zoals Aldi of Lidl.", "fr": "Achetez les produits de base dans des supermarchés comme Aldi ou Lidl."}, "monthly_savings_eur": 60},
+    {"category": {"key": "electricity", "label": {"tr": "Elektrik", "en": "Electricity", "nl": "Elektriciteit", "fr": "Électricité"}}, "tip": {"tr": "Bulaşık ve çamaşır makinelerini gece tarifesinde çalıştırın.", "en": "Run the dishwasher and washing machine during off-peak hours.", "nl": "Laat de vaatwasser en wasmachine tijdens het nachttarief draaien.", "fr": "Faites fonctionner le lave-vaisselle et le lave-linge pendant les heures creuses."}, "monthly_savings_eur": 25},
+    {"category": {"key": "transport", "label": {"tr": "Ulaşım", "en": "Transport", "nl": "Vervoer", "fr": "Transport"}}, "tip": {"tr": "Tek bilet yerine De Lijn veya STIB aylık abonmanlarını karşılaştırın.", "en": "Compare De Lijn or STIB monthly passes with single tickets.", "nl": "Vergelijk maandabonnementen van De Lijn of MIVB met losse tickets.", "fr": "Comparez les abonnements mensuels De Lijn ou STIB aux tickets à l’unité."}, "monthly_savings_eur": 40},
+    {"category": {"key": "children", "label": {"tr": "Çocuk", "en": "Children", "nl": "Kinderen", "fr": "Enfants"}}, "tip": {"tr": "Oyuncak takas gruplarını ve kütüphane üyeliğini kullanın.", "en": "Use toy-swap groups and library memberships.", "nl": "Maak gebruik van speelgoedruilgroepen en een bibliotheekabonnement.", "fr": "Profitez des groupes d’échange de jouets et des abonnements à la bibliothèque."}, "monthly_savings_eur": 50}
   ],
   "emergency_fund": {
     "recommended_months": 6,
     "for_families_months": 9,
-    "calculation_example": "Aylık gider 3000 EUR → Acil durum fonu: 18,000-27,000 EUR"
+    "calculation_example": {"tr": "Aylık gider 3.000 EUR → Acil durum fonu: 18.000-27.000 EUR", "en": "Monthly expenses of EUR 3,000 → Emergency fund: EUR 18,000–27,000", "nl": "Maandelijkse uitgaven van 3.000 EUR → Noodfonds: 18.000–27.000 EUR", "fr": "Dépenses mensuelles de 3 000 EUR → Fonds d’urgence : 18 000 à 27 000 EUR"}
   }
 }

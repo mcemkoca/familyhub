@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:uuid/uuid.dart';
 
 import '../core/supabase_client.dart';
 import '../core/utils/repository_mixin.dart';
@@ -26,57 +27,124 @@ class ShoppingRepository with RepositoryErrorHandler {
   }
 
   Future<List<ShoppingItem>> getItems() async {
-    return handleRepositoryCall(() async {
-      final cached = HiveService.getShoppingItems();
-      if (cached.isNotEmpty) return cached;
+    String? familyId;
+    try {
+      familyId = await _getFamilyId();
+    } catch (_) {
+      familyId = null;
+    }
+    // Aile/oturum yoksa yerel (Hive) — çevrimdışı.
+    if (familyId == null) return HiveService.getShoppingItems();
 
-      final familyId = await _getFamilyId();
-      if (familyId == null) return [];
-
+    // Bulut-öncelikli: başka üyelerin değişiklikleri senkron olsun. Buluttan
+    // çek, yerel-only (senkronlanmamış) öğeleri koru, cache'i tazele.
+    try {
       final response = await _client
           .from('shopping_items')
           .select('*')
           .eq('family_id', familyId)
           .order('created_at', ascending: false);
-
-      final items = (response as List).map((e) => _fromJson(e as Map<String, dynamic>)).toList();
-      await HiveService.saveShoppingItems(items);
-      return items;
-    }, 'getItems');
+      final cloud = (response as List)
+          .map((e) => _fromJson(e as Map<String, dynamic>))
+          .toList();
+      final locals = HiveService.getShoppingItems()
+          .where((i) => i.id.startsWith('local_'))
+          .toList();
+      final merged = [...locals, ...cloud];
+      await HiveService.saveShoppingItems(merged);
+      return merged;
+    } catch (e) {
+      debugPrint('getItems cloud failed, using cache: $e');
+      return HiveService.getShoppingItems();
+    }
   }
 
   Future<ShoppingItem> createItem(
     String name, {
     ShoppingCategory category = ShoppingCategory.grocery,
     int quantity = 1,
+    ShoppingUnit unit = ShoppingUnit.piece,
   }) async {
-    return handleRepositoryCall(() async {
-      final familyId = await _getFamilyId();
-      final userId = AuthService.currentUserId;
-      if (familyId == null) throw Exception('Aile bilgisi bulunamadı');
+    final userId = AuthService.currentUserId;
+    String? familyId;
+    try {
+      familyId = await _getFamilyId();
+    } catch (_) {
+      familyId = null;
+    }
 
+    // Aile/oturum yoksa ya da bulut yazma başarısızsa yerel (Hive) öğe üret —
+    // özellik çevrimdışı da çalışsın, kullanıcıya hata gösterme.
+    ShoppingItem localItem() => ShoppingItem(
+          id: 'local_${const Uuid().v4()}',
+          name: name,
+          quantity: quantity.toString(),
+          unit: unit,
+          category: category,
+          requestedBy: userId ?? '',
+          isCompleted: false,
+        );
+
+    Future<ShoppingItem> saveLocal() async {
+      final item = localItem();
+      final all = HiveService.getShoppingItems();
+      await HiveService.saveShoppingItems([...all, item]);
+      return item;
+    }
+
+    if (familyId == null) return saveLocal();
+
+    // Temel payload — 'unit' kolonu migration uygulanmamış DB'lerde olmayabilir.
+    // Önce unit ile dene; kolon yoksa unit'siz tekrar dene (bulut akışını bozma).
+    final base = <String, dynamic>{
+      'family_id': familyId,
+      'name': name,
+      'category': _categoryToString(category),
+      'quantity': quantity,
+      'requested_by': userId,
+    };
+
+    Future<ShoppingItem> insert(Map<String, dynamic> payload) async {
       final response = await _client
           .from('shopping_items')
-          .insert({
-            'family_id': familyId,
-            'name': name,
-            'category': _categoryToString(category),
-            'quantity': quantity,
-            'requested_by': userId,
-          })
+          .insert(payload)
           .select()
           .single();
-
-      final created = _fromJson(response);
-      final all = await getItems();
+      // Bulut 'unit' döndürmezse yerel seçimi koru.
+      final created = _fromJson(response).copyWithUnit(unit);
+      final all = HiveService.getShoppingItems();
       await HiveService.saveShoppingItems([...all, created]);
       return created;
-    }, 'createItem');
+    }
+
+    try {
+      return await insert({...base, 'unit': unit.name});
+    } catch (_) {
+      // 'unit' kolonu yok olabilir — unit'siz tekrar dene.
+      try {
+        return await insert(base);
+      } catch (e) {
+        debugPrint('createItem cloud failed, saving local: $e');
+        return saveLocal();
+      }
+    }
   }
 
   Future<void> toggleItem(String itemId, bool isCompleted) async {
+    final userId = AuthService.currentUserId;
+    // Yerel öğe — sadece Hive güncelle.
+    if (itemId.startsWith('local_')) {
+      final all = HiveService.getShoppingItems();
+      await HiveService.saveShoppingItems(all
+          .map((i) => i.id == itemId
+              ? i.copyWith(
+                  isCompleted: isCompleted,
+                  completedBy: isCompleted ? userId : null)
+              : i)
+          .toList());
+      return;
+    }
     return handleRepositoryCall(() async {
-      final userId = AuthService.currentUserId;
       await _client
           .from('shopping_items')
           .update({
@@ -102,6 +170,12 @@ class ShoppingRepository with RepositoryErrorHandler {
   }
 
   Future<void> deleteItem(String itemId) async {
+    if (itemId.startsWith('local_')) {
+      final all = HiveService.getShoppingItems();
+      await HiveService.saveShoppingItems(
+          all.where((i) => i.id != itemId).toList());
+      return;
+    }
     return handleRepositoryCall(() async {
       await _client.from('shopping_items').delete().eq('id', itemId);
       final all = await getItems();
@@ -130,6 +204,7 @@ class ShoppingRepository with RepositoryErrorHandler {
       id: json['id'] as String,
       name: json['name'] as String,
       quantity: json['quantity']?.toString(),
+      unit: shoppingUnitFromKey(json['unit'] as String?),
       category: _categoryFromString(json['category'] as String?),
       requestedBy: json['requested_by'] as String? ?? '',
       isCompleted: json['is_completed'] as bool? ?? false,

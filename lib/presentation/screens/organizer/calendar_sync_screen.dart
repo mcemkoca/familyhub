@@ -5,6 +5,7 @@ import '../../../config/constants.dart';
 import '../../../domain/models/calendar_sync.dart';
 import '../../../services/calendar_sync_service.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../../core/app_logger.dart';
 
 class CalendarSyncScreen extends StatefulWidget {
   const CalendarSyncScreen({super.key});
@@ -15,6 +16,8 @@ class CalendarSyncScreen extends StatefulWidget {
 
 class _CalendarSyncScreenState extends State<CalendarSyncScreen>
     with WidgetsBindingObserver {
+  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+
   List<CalendarConnection> _connections = [];
   final List<SyncLog> _logs = [];
   bool _loading = false;
@@ -72,7 +75,13 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
       );
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('${externalEvents.length} etkinlik senkronize edildi')),
+          SnackBar(
+            content: Text(
+              AppLocalizations.of(
+                context,
+              ).csEventsSynced(externalEvents.length),
+            ),
+          ),
         );
       }
       setState(() {
@@ -86,7 +95,10 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Senkronizasyon hatası: $e'), backgroundColor: Colors.red),
+          SnackBar(
+            content: Text(AppLocalizations.of(context).csSyncFailed('$e')),
+            backgroundColor: Colors.red,
+          ),
         );
       }
     } finally {
@@ -100,13 +112,25 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
       final calendars = await CalendarSyncService.listCalendars();
       if (calendars.isNotEmpty && mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('${calendars.length} takvim bulundu')),
+          SnackBar(
+            content: Text(
+              AppLocalizations.of(context).csCalendarsFound(calendars.length),
+            ),
+          ),
         );
       }
-    } catch (e) {
-      // Demo modda çalışmaya devam et
+    } catch (e, st) {
+      // Sessizce yutulamaz: kullanıcı takvimlerinin neden gelmediğini
+      // bilmelidir (izin reddi / cihaz takvimi yok).
+      AppLogger.logError(e,
+          module: 'calendar', operation: 'listCalendars', stackTrace: st);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(AppLocalizations.of(context).csNoCalendars)),
+        );
+      }
     }
-    setState(() => _loading = false);
+    if (mounted) setState(() => _loading = false);
   }
 
   void _showConnectionSettings(CalendarConnection conn) {
@@ -131,23 +155,19 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: AppBar(
-        title: const Text('📅 Takvim Senkronizasyonu'),
+        title: Text('📅 ${AppLocalizations.of(context).calSyncTitle}'),
         centerTitle: true,
-        backgroundColor: isDark
-            ? AppColors.darkBackground
-            : AppColors.cloudWhite,
-        foregroundColor: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+        backgroundColor: const Color(0xFF0A0A0F),
+        foregroundColor: const Color(0xFFE5E7EB),
         elevation: 0,
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: _loadRealCalendars,
-            tooltip: 'Takvimleri Tara',
+            tooltip: AppLocalizations.of(context).csScanCalendars,
           ),
         ],
       ),
@@ -173,23 +193,20 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
             ),
             const SizedBox(height: 16),
             Text(
-              'Takvim Erişim İzni Gerekli',
-              style: TextStyle(
+              AppLocalizations.of(context).takvimErisimIzniGerekli,
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
-                color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                color: Color(0xFFE5E7EB),
               ),
             ),
             const SizedBox(height: 8),
             Text(
               wasChecked
-                  ? 'Takvim erişim izni gerekli. Ayarlardan izin verin.'
-                  : 'Takvimlerinizi senkronize etmek için takvim erişim izni vermeniz gerekiyor.',
+                  ? AppLocalizations.of(context).csPermNeededShort
+                  : AppLocalizations.of(context).csPermNeededBody,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 14,
-                color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
-              ),
+              style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
             ),
             const SizedBox(height: 20),
             if (wasChecked)
@@ -198,9 +215,12 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
                 icon: const Icon(Icons.settings),
                 label: Text(AppLocalizations.of(context).ayarlariAc),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.cobalt,
+                  backgroundColor: const Color(0xFF6366F1),
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
                 ),
               )
             else
@@ -209,9 +229,12 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
                 icon: const Icon(Icons.check_circle),
                 label: Text(AppLocalizations.of(context).izinVer),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.cobalt,
+                  backgroundColor: const Color(0xFF6366F1),
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
                 ),
               ),
           ],
@@ -296,7 +319,9 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
           ),
           const SizedBox(height: 14),
           Text(
-            '${_connections.where((c) => c.syncEnabled).length} aktif bağlantı',
+            AppLocalizations.of(context).csActiveConnections(
+              _connections.where((c) => c.syncEnabled).length,
+            ),
             style: TextStyle(color: Colors.white.withAlpha(180), fontSize: 13),
           ),
         ],
@@ -308,13 +333,11 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkCard : Colors.white,
+        color: const Color(0xFF13131A),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: isDark
-                ? Colors.black.withAlpha(20)
-                : Colors.black.withAlpha(5),
+            color: Colors.black.withAlpha(20),
             blurRadius: 12,
             offset: const Offset(0, 2),
           ),
@@ -324,11 +347,11 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Bağlı Takvimler',
-            style: TextStyle(
+            AppLocalizations.of(context).bagliTakvimler,
+            style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w700,
-              color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+              color: Color(0xFFE5E7EB),
             ),
           ),
           const SizedBox(height: 12),
@@ -347,18 +370,11 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
       alignment: Alignment.center,
       child: Column(
         children: [
-          Icon(
-            Icons.link_off,
-            size: 40,
-            color: isDark ? AppColors.darkTextSecondary : AppColors.lightGray,
-          ),
+          const Icon(Icons.link_off, size: 40, color: Color(0xFF6B7280)),
           const SizedBox(height: 10),
           Text(
-            'Henüz takvim bağlantısı yok',
-            style: TextStyle(
-              fontSize: 14,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
-            ),
+            AppLocalizations.of(context).henuzTakvimBaglantisiYok,
+            style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
           ),
         ],
       ),
@@ -375,12 +391,12 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkBackground : const Color(0xFFF8FAFC),
+        color: const Color(0xFF0A0A0F),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: isConnected
               ? providerColor.withAlpha(40)
-              : (isDark ? AppColors.darkBorder : Colors.grey.shade200),
+              : (const Color(0x1EFFFFFF)),
         ),
       ),
       child: Column(
@@ -404,21 +420,17 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
                   children: [
                     Text(
                       _providerLabel(conn.provider),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
-                        color: isDark
-                            ? AppColors.darkTextPrimary
-                            : AppColors.dark,
+                        color: Color(0xFFE5E7EB),
                       ),
                     ),
                     Text(
                       conn.email,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.slate,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                   ],
@@ -428,7 +440,9 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
                 width: 8,
                 height: 8,
                 decoration: BoxDecoration(
-                  color: isConnected ? AppColors.success : AppColors.lightGray,
+                  color: isConnected
+                      ? const Color(0xFF10B981)
+                      : const Color(0xFF9CA3AF),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -438,7 +452,9 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
-                  color: isConnected ? AppColors.success : AppColors.lightGray,
+                  color: isConnected
+                      ? const Color(0xFF10B981)
+                      : const Color(0xFF9CA3AF),
                 ),
               ),
             ],
@@ -478,13 +494,11 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
               Expanded(
                 child: Text(
                   lastSync != null
-                      ? '🔄 Son senkronizasyon: ${_timeAgo(lastSync)}'
-                      : '🔄 Henüz senkronize edilmedi',
-                  style: TextStyle(
+                      ? '🔄 ${AppLocalizations.of(context).csLastSync(_timeAgo(context, lastSync))}'
+                      : '🔄 ${AppLocalizations.of(context).csNeverSynced}',
+                  style: const TextStyle(
                     fontSize: 11,
-                    color: isDark
-                        ? AppColors.darkTextSecondary
-                        : AppColors.slate,
+                    color: Color(0xFF6B7280),
                   ),
                 ),
               ),
@@ -495,14 +509,14 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
                     _buildActionButton(
                       icon: Icons.settings_outlined,
                       onTap: () => _showConnectionSettings(conn),
-                      tooltip: 'Ayarla',
+                      tooltip: AppLocalizations.of(context).csConfigure,
                     ),
                     const SizedBox(width: 4),
                     _buildActionButton(
                       icon: _loading ? Icons.hourglass_top : Icons.sync,
                       onTap: _loading ? null : () => _syncConnection(conn),
-                      tooltip: 'Şimdi Senkronize',
-                      color: AppColors.success,
+                      tooltip: AppLocalizations.of(context).simdiSenkronize,
+                      color: const Color(0xFF10B981),
                     ),
                   ],
                 ),
@@ -525,15 +539,15 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
       child: Container(
         padding: const EdgeInsets.all(6),
         decoration: BoxDecoration(
-          color: (color ?? AppColors.cobalt).withAlpha(15),
+          color: (color ?? const Color(0xFF6366F1)).withAlpha(15),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Icon(
           icon,
           size: 18,
           color: onTap != null
-              ? (color ?? AppColors.cobalt)
-              : AppColors.lightGray,
+              ? (color ?? const Color(0xFF6366F1))
+              : const Color(0xFF9CA3AF),
         ),
       ),
     );
@@ -552,13 +566,11 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkCard : Colors.white,
+        color: const Color(0xFF13131A),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: isDark
-                ? Colors.black.withAlpha(20)
-                : Colors.black.withAlpha(5),
+            color: Colors.black.withAlpha(20),
             blurRadius: 12,
             offset: const Offset(0, 2),
           ),
@@ -568,48 +580,49 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Senkronizasyon İstatistikleri',
-            style: TextStyle(
+            AppLocalizations.of(context).senkronizasyonIstatistikleri,
+            style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w700,
-              color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+              color: Color(0xFFE5E7EB),
             ),
           ),
           const SizedBox(height: 14),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _statItem('📥 Eklenen', totalAdded.toString(), AppColors.success),
               _statItem(
-                '🔄 Güncellenen',
-                totalUpdated.toString(),
-                AppColors.cobalt,
+                '📥 ${AppLocalizations.of(context).csAdded}',
+                totalAdded.toString(),
+                const Color(0xFF10B981),
               ),
               _statItem(
-                '🗑️ Silinen',
+                '🔄 ${AppLocalizations.of(context).csUpdated}',
+                totalUpdated.toString(),
+                const Color(0xFF6366F1),
+              ),
+              _statItem(
+                '🗑️ ${AppLocalizations.of(context).csDeleted}',
                 totalDeleted.toString(),
                 AppColors.error,
               ),
             ],
           ),
           const SizedBox(height: 12),
-          Divider(color: isDark ? AppColors.darkBorder : Colors.grey.shade200),
+          const Divider(color: Color(0x1EFFFFFF)),
           const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'Toplam: ${totalAdded + totalUpdated + totalDeleted} etkinlik',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
-                ),
+                style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
               ),
               const Text(
                 'Son hata: Yok',
                 style: TextStyle(
                   fontSize: 12,
-                  color: AppColors.success,
+                  color: Color(0xFF10B981),
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -632,7 +645,10 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
           ),
         ),
         const SizedBox(height: 2),
-        Text(label, style: const TextStyle(fontSize: 11, color: AppColors.slate)),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280)),
+        ),
       ],
     );
   }
@@ -641,13 +657,11 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkCard : Colors.white,
+        color: const Color(0xFF13131A),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: isDark
-                ? Colors.black.withAlpha(20)
-                : Colors.black.withAlpha(5),
+            color: Colors.black.withAlpha(20),
             blurRadius: 12,
             offset: const Offset(0, 2),
           ),
@@ -656,31 +670,31 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Genel Ayarlar',
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w700,
-              color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+              color: Color(0xFFE5E7EB),
             ),
           ),
           const SizedBox(height: 14),
           _buildSettingTile(
             icon: Icons.schedule,
-            title: 'Senkronizasyon sıklığı',
-            subtitle: '15 dakikada bir',
+            title: AppLocalizations.of(context).senkronizasyonSikligi,
+            subtitle: AppLocalizations.of(context).calSyncEvery15,
             isDark: isDark,
           ),
           _buildSettingTile(
             icon: Icons.merge_type,
-            title: 'Çakışma çözümü',
-            subtitle: 'Son yazan kazanır',
+            title: AppLocalizations.of(context).cakismaCozumu,
+            subtitle: AppLocalizations.of(context).sonYazanKazanir,
             isDark: isDark,
           ),
           _buildSettingTile(
             icon: Icons.swap_horiz,
-            title: 'Senkronizasyon yönü',
-            subtitle: 'Çift yönlü',
+            title: AppLocalizations.of(context).senkronizasyonYonu,
+            subtitle: AppLocalizations.of(context).ciftYonlu,
             isDark: isDark,
           ),
         ],
@@ -701,10 +715,10 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: AppColors.cobalt.withAlpha(15),
+              color: const Color(0xFF6366F1).withAlpha(15),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(icon, size: 18, color: AppColors.cobalt),
+            child: Icon(icon, size: 18, color: const Color(0xFF6366F1)),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -713,25 +727,23 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
               children: [
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                    color: Color(0xFFE5E7EB),
                   ),
                 ),
                 Text(
                   subtitle,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
-                    color: isDark
-                        ? AppColors.darkTextSecondary
-                        : AppColors.slate,
+                    color: Color(0xFF6B7280),
                   ),
                 ),
               ],
             ),
           ),
-          const Icon(Icons.chevron_right, size: 18, color: AppColors.lightGray),
+          const Icon(Icons.chevron_right, size: 18, color: Color(0xFF9CA3AF)),
         ],
       ),
     );
@@ -761,7 +773,7 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
       case CalendarProvider.outlook:
         return const Color(0xFF0078D4);
       case CalendarProvider.local:
-        return AppColors.cobalt;
+        return const Color(0xFF6366F1);
     }
   }
 
@@ -778,12 +790,13 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
     }
   }
 
-  String _timeAgo(DateTime date) {
+  String _timeAgo(BuildContext context, DateTime date) {
+    final l = AppLocalizations.of(context);
     final diff = DateTime.now().difference(date);
-    if (diff.inMinutes < 1) return 'Az önce';
-    if (diff.inMinutes < 60) return '${diff.inMinutes} dk önce';
-    if (diff.inHours < 24) return '${diff.inHours} saat önce';
-    return '${diff.inDays} gün önce';
+    if (diff.inMinutes < 1) return l.timeAgoJustNow;
+    if (diff.inMinutes < 60) return l.timeAgoMinutes(diff.inMinutes);
+    if (diff.inHours < 24) return l.timeAgoHours(diff.inHours);
+    return l.timeAgoDays(diff.inDays);
   }
 }
 
@@ -814,8 +827,6 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Padding(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom + 20,
@@ -837,11 +848,13 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  '${_providerLabel(_conn.provider)} Ayarları',
-                  style: TextStyle(
+                  AppLocalizations.of(
+                    context,
+                  ).csProviderSettings(_providerLabel(_conn.provider)),
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
-                    color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                    color: Color(0xFFE5E7EB),
                   ),
                 ),
               ),
@@ -854,12 +867,12 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
           const SizedBox(height: 16),
 
           // Senkronize edilecek takvimler
-          Text(
+          const Text(
             'Senkronize Edilecek Takvimler',
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w700,
-              color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+              color: Color(0xFFE5E7EB),
             ),
           ),
           const SizedBox(height: 10),
@@ -880,13 +893,13 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
               },
               title: Text(
                 c.name,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
-                ),
+                style: const TextStyle(fontSize: 14, color: Color(0xFFE5E7EB)),
               ),
               subtitle: c.isPrimary
-                  ? const Text('Ana takvim', style: TextStyle(fontSize: 12))
+                  ? Text(
+                      AppLocalizations.of(context).csMainCalendar,
+                      style: const TextStyle(fontSize: 12),
+                    )
                   : null,
               controlAffinity: ListTileControlAffinity.leading,
               dense: true,
@@ -894,16 +907,16 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
           }),
 
           const SizedBox(height: 16),
-          Divider(color: isDark ? AppColors.darkBorder : Colors.grey.shade200),
+          const Divider(color: Color(0x1EFFFFFF)),
           const SizedBox(height: 10),
 
           // Senkronizasyon yönü
           Text(
-            'Senkronizasyon Yönü',
-            style: TextStyle(
+            AppLocalizations.of(context).senkronizasyonyonu1,
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w700,
-              color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+              color: Color(0xFFE5E7EB),
             ),
           ),
           const SizedBox(height: 8),
@@ -916,22 +929,22 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
                   setState(() => _conn = _conn.copyWith(syncDirection: v));
                 }
               },
-              title: Text(_directionLabel(d)),
+              title: Text(_directionLabel(context, d)),
               dense: true,
             ),
           ),
 
           const SizedBox(height: 16),
-          Divider(color: isDark ? AppColors.darkBorder : Colors.grey.shade200),
+          const Divider(color: Color(0x1EFFFFFF)),
           const SizedBox(height: 10),
 
           // Çakışma stratejisi
           Text(
-            'Çakışma Çözümü',
-            style: TextStyle(
+            AppLocalizations.of(context).cakismacozumu1,
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w700,
-              color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+              color: Color(0xFFE5E7EB),
             ),
           ),
           const SizedBox(height: 8),
@@ -944,7 +957,7 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
                   setState(() => _conn = _conn.copyWith(conflictStrategy: v));
                 }
               },
-              title: Text(_conflictLabel(s)),
+              title: Text(_conflictLabel(context, s)),
               dense: true,
             ),
           ),
@@ -960,7 +973,7 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
               icon: const Icon(Icons.save),
               label: Text(AppLocalizations.of(context).save),
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.cobalt,
+                backgroundColor: const Color(0xFF6366F1),
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14),
@@ -975,9 +988,9 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
               Navigator.pop(context);
             },
             icon: const Icon(Icons.link_off, color: AppColors.error),
-            label: const Text(
-              'Bağlantıyı Kes',
-              style: TextStyle(color: AppColors.error),
+            label: Text(
+              AppLocalizations.of(context).baglantiyiKes,
+              style: const TextStyle(color: AppColors.error),
             ),
           ),
         ],
@@ -985,27 +998,29 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
     );
   }
 
-  String _directionLabel(SyncDirection d) {
+  String _directionLabel(BuildContext context, SyncDirection d) {
+    final l = AppLocalizations.of(context);
     switch (d) {
       case SyncDirection.toExternal:
-        return 'FamilyHub → Dışarı';
+        return l.csDirToExternal;
       case SyncDirection.fromExternal:
-        return 'Dışarı → FamilyHub';
+        return l.csDirFromExternal;
       case SyncDirection.bidirectional:
-        return 'Çift yönlü';
+        return l.csDirBidirectional;
     }
   }
 
-  String _conflictLabel(ConflictStrategy s) {
+  String _conflictLabel(BuildContext context, ConflictStrategy s) {
+    final l = AppLocalizations.of(context);
     switch (s) {
       case ConflictStrategy.lastWriteWins:
-        return 'Son yazan kazanır';
+        return l.csConflictLastWrite;
       case ConflictStrategy.manual:
-        return 'Her zaman sor';
+        return l.csConflictManual;
       case ConflictStrategy.merge:
-        return 'Birleştir';
+        return l.csConflictMerge;
       case ConflictStrategy.sourcePriority:
-        return 'Kaynak önceliği';
+        return l.csConflictSourcePriority;
     }
   }
 
@@ -1031,7 +1046,7 @@ class _ConnectionSettingsSheetState extends State<_ConnectionSettingsSheet> {
       case CalendarProvider.outlook:
         return const Color(0xFF0078D4);
       case CalendarProvider.local:
-        return AppColors.cobalt;
+        return const Color(0xFF6366F1);
     }
   }
 

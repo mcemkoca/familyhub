@@ -7,21 +7,20 @@ class FamilySuggestionSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? const Color(0xFF0f172a) : const Color(0xFFF8FAFC),
+      backgroundColor: const Color(0xFF0f172a),
       appBar: ScreenHeader(
         title: AppLocalizations.of(context).family,
         showBack: true,
         onBack: () => Navigator.pop(context),
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'Yakında',
           style: TextStyle(
             fontSize: 16,
-            color: isDark ? const Color(0xFF94a3b8) : const Color(0xFF475569),
+            color: Color(0xFF94a3b8),
           ),
         ),
       ),

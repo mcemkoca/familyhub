@@ -102,6 +102,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get hub => 'Ana Sayfa';
 
   @override
+  String get mutfak => 'Mutfak';
+
+  @override
+  String get navMerkez => 'Merkez';
+
+  @override
   String get notifications => 'Bildirimler';
 
   @override
@@ -325,7 +331,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get turkish => 'Türkçe';
 
   @override
-  String get english => 'English';
+  String get english => 'İngilizce';
 
   @override
   String get theme => 'Tema';
@@ -2625,6 +2631,938 @@ class AppLocalizationsTr extends AppLocalizations {
   String get tarihFormati => 'TARİH FORMATI';
 
   @override
+  String get saatFormati => 'SAAT FORMATI';
+
+  @override
+  String get haftaninIlkGunu => 'HAFTANIN İLK GÜNÜ';
+
+  @override
+  String get olcuBirimi => 'ÖLÇÜ BİRİMİ';
+
+  @override
+  String get sicaklikBirimi => 'Sıcaklık Birimi';
+
+  @override
+  String get sifirlama => 'SIFIRLAMA';
+
+  @override
+  String get ulkeBolge => 'ÜLKE / BÖLGE';
+
+  @override
+  String get cihazDiliOtomatik => 'Cihaz Dili (Otomatik)';
+
+  @override
+  String sistemDili(Object lang) {
+    return 'Sistem dili: $lang';
+  }
+
+  @override
+  String get kaydet => 'Kaydet';
+
+  @override
+  String get kaydedildi => 'Kaydedildi';
+
+  @override
+  String get saat24 => '24 saat';
+
+  @override
+  String get saat12 => '12 saat (AM/PM)';
+
+  @override
+  String get pazartesi => 'Pazartesi';
+
+  @override
+  String get pazar => 'Pazar';
+
+  @override
+  String get metrik => 'Metrik (kg, cm)';
+
+  @override
+  String get imperyal => 'İmperyal (lb, in)';
+
+  @override
+  String get celsius => 'Celsius (°C)';
+
+  @override
+  String get fahrenheit => 'Fahrenheit (°F)';
+
+  @override
+  String get vazgec => 'Vazgeç';
+
+  @override
+  String get sifirla => 'Sıfırla';
+
+  @override
+  String get dilTercihiniSifirla => 'Dil tercihini sıfırla';
+
+  @override
+  String get dilTercihiniSifirlaAcik =>
+      'Dil seçimini temizler, cihaz diline döner. Verileriniz silinmez.';
+
+  @override
+  String get bolgeAyarlariniSifirla => 'Bölge ayarlarını varsayılana döndür';
+
+  @override
+  String get bolgeAyarlariniSifirlaAcik =>
+      'Tarih/saat/birim biçimlerini varsayılana alır. Verileriniz silinmez.';
+
+  @override
+  String get dilTercihiniSifirlaOnay =>
+      'Dil seçiminiz temizlenecek ve uygulama cihazınızın sistem diline dönecek. Aile, sağlık, bütçe gibi verileriniz SİLİNMEZ.';
+
+  @override
+  String get bolgeAyarlariniSifirlaOnay =>
+      'Tarih, saat, ölçü ve sıcaklık biçimleri varsayılana dönecek. Verileriniz SİLİNMEZ.';
+
+  @override
+  String get dilBolgeKaydedildi => 'Dil ve bölge ayarları kaydedildi';
+
+  @override
+  String get dilTercihiSifirlandi => 'Dil tercihi sıfırlandı';
+
+  @override
+  String get bolgeAyarlariSifirlandi => 'Bölge ayarları varsayılana döndürüldü';
+
+  @override
+  String get ulkeSecimiBilgi =>
+      'Ülke seçimi; para birimi, ev gideri ve market içeriğini belirler.';
+
+  @override
+  String get shoppingEkle => 'Ekle';
+
+  @override
+  String get shoppingListeyeEkle => 'Listeye Ekle';
+
+  @override
+  String get shoppingUrunAdi => 'Ürün adı';
+
+  @override
+  String get shoppingAdetOpsiyonel => 'Adet (isteğe bağlı)';
+
+  @override
+  String get shoppingKategori => 'Kategori';
+
+  @override
+  String get shoppingBekleyen => 'Bekleyen';
+
+  @override
+  String get shoppingTamamlanan => 'Tamamlanan';
+
+  @override
+  String get shoppingHizliEkle => 'Hızlı Ekle';
+
+  @override
+  String get shoppingListenBos => 'Alışveriş listen boş';
+
+  @override
+  String get shoppingBosAciklama =>
+      'Ürün ekle, tarife göre otomatik doldur ya da AI ile hızlı liste oluştur.';
+
+  @override
+  String get shoppingTariften => 'Tariften';
+
+  @override
+  String get shoppingAiListe => 'AI Liste';
+
+  @override
+  String get shoppingKatMarket => 'Market';
+
+  @override
+  String get shoppingKatEczane => 'Eczane';
+
+  @override
+  String get shoppingKatKirtasiye => 'Kırtasiye';
+
+  @override
+  String get shoppingKatEv => 'Ev';
+
+  @override
+  String get shoppingKatDiger => 'Diğer';
+
+  @override
+  String shoppingAdet(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count adet',
+      one: '$count adet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String shoppingTamamlandiOran(Object done, Object total) {
+    return '$done / $total tamamlandı';
+  }
+
+  @override
+  String get shoppingGeriAl => 'Geri al';
+
+  @override
+  String shoppingSilindi(Object name) {
+    return '\"$name\" silindi';
+  }
+
+  @override
+  String shoppingZatenListede(Object name) {
+    return '\"$name\" zaten listede';
+  }
+
+  @override
+  String get shoppingGecerliMiktar => 'Geçerli bir miktar girin (1 veya üzeri)';
+
+  @override
+  String get shoppingYuklenemedi =>
+      'Alışveriş listeniz şu anda yüklenemedi. Lütfen tekrar deneyin.';
+
+  @override
+  String get shoppingTekrarDene => 'Tekrar Dene';
+
+  @override
+  String get shoppingTipYakinMarket => 'Yakındaki Marketler (Harita)';
+
+  @override
+  String get shoppingTipMarketKatalogu => 'Market Kataloğu';
+
+  @override
+  String get shoppingTipAiMarket => 'AI Market Listesi';
+
+  @override
+  String get shoppingTipTarifeGore => 'Tarife Göre Ekle';
+
+  @override
+  String shoppingMalzemeEklendi(Object title, Object count) {
+    return '$title için $count malzeme eklendi';
+  }
+
+  @override
+  String shoppingListeyeEklendi(Object name) {
+    return '$name listeye eklendi';
+  }
+
+  @override
+  String get shoppingTumUrunlerEklendi => 'Tüm ürünler listeye eklendi';
+
+  @override
+  String get shoppingKonumAliniyor => 'Konum alınıyor…';
+
+  @override
+  String get shoppingKonumIzniYok =>
+      'Konum izni verilmedi. Ayarlardan izin verin.';
+
+  @override
+  String shoppingKonumBulundu(Object coords) {
+    return 'Konumun: $coords — harita açılıyor';
+  }
+
+  @override
+  String get shoppingKonumAlinamadi =>
+      'Konum alınamadı. Lütfen tekrar deneyin.';
+
+  @override
+  String get shoppingAiHazirlaniyor => 'AI market listesi hazırlanıyor…';
+
+  @override
+  String get shoppingListeOlusturulamadi =>
+      'Liste oluşturulamadı. İnternet bağlantısını kontrol edin.';
+
+  @override
+  String get shoppingAiMarketBaslik => 'AI Market Listesi';
+
+  @override
+  String get shoppingDokunEkle => 'Ürüne dokunarak listene ekle.';
+
+  @override
+  String get shoppingTumunuEkle => 'Tümünü Ekle';
+
+  @override
+  String get shoppingTarifeGoreBaslik => 'Tarife Göre Alışveriş';
+
+  @override
+  String shoppingTarifSayisi(Object count) {
+    return '$count tarif';
+  }
+
+  @override
+  String get shoppingTarifAra => 'Tarif ara...';
+
+  @override
+  String shoppingTarifMeta(Object time, Object count) {
+    return '$time dk · $count malzeme';
+  }
+
+  @override
+  String get shoppingFiyatGuncellenemedi =>
+      'Fiyat güncellenemedi (AI kotası dolu olabilir)';
+
+  @override
+  String get shoppingFiyatBasarisiz => 'Fiyat güncelleme başarısız';
+
+  @override
+  String get shoppingFiyatlariGuncelle => 'Fiyatları Güncelle (AI)';
+
+  @override
+  String shoppingGuncellendi(Object date) {
+    return 'Güncellendi: $date';
+  }
+
+  @override
+  String get shoppingMarketKatalogu => 'Market Kataloğu';
+
+  @override
+  String get shoppingHaftaninFirsatlari => 'Bu Haftanın Fırsatları';
+
+  @override
+  String get shoppingTumu => 'Tümü';
+
+  @override
+  String get unitPiece => 'adet';
+
+  @override
+  String get unitPack => 'paket';
+
+  @override
+  String get unitBox => 'kutu';
+
+  @override
+  String get unitBottle => 'şişe';
+
+  @override
+  String get unitJar => 'kavanoz';
+
+  @override
+  String get unitLiter => 'L';
+
+  @override
+  String get unitMilliliter => 'mL';
+
+  @override
+  String get unitKilogram => 'kg';
+
+  @override
+  String get unitGram => 'g';
+
+  @override
+  String get unitBunch => 'demet';
+
+  @override
+  String get unitDozen => 'düzine';
+
+  @override
+  String get unitPortion => 'porsiyon';
+
+  @override
+  String get shoppingBirim => 'Birim';
+
+  @override
+  String get legalBenefitsTitle => 'Yasal Haklar ve Avantajlar';
+
+  @override
+  String legalBenefitsSubtitle(Object country) {
+    return '$country · ailenizi ilgilendiren haklar ve destekler';
+  }
+
+  @override
+  String get legalSearchHint => 'Hak veya avantaj ara...';
+
+  @override
+  String get legalSavedOnly => 'Kaydedilenler';
+
+  @override
+  String get legalAll => 'Tümü';
+
+  @override
+  String get legalOfficialSource => 'Resmî kaynak';
+
+  @override
+  String get legalOpenSource => 'Resmî kaynağı aç';
+
+  @override
+  String get legalSave => 'Kaydet';
+
+  @override
+  String get legalSaved => 'Kaydedildi';
+
+  @override
+  String get legalExpired => 'Süresi geçmiş';
+
+  @override
+  String get legalStale => 'Doğrulama tarihi eski';
+
+  @override
+  String legalLastVerified(Object date) {
+    return 'Son doğrulama: $date';
+  }
+
+  @override
+  String get legalPossibleEligibility =>
+      'Profilinize göre uygun olabilirsiniz. Şartları resmî kaynaktan doğrulayın.';
+
+  @override
+  String get legalDisclaimer =>
+      'Bu bilgiler genel bilgilendirme amaçlıdır, hukuki danışmanlık değildir. Kurallar değişebilir; nihai uygunluk ilgili kurum tarafından belirlenir.';
+
+  @override
+  String get legalEmptyTitle => 'Sonuç bulunamadı';
+
+  @override
+  String get legalEmptyDesc => 'Arama veya filtreyi değiştirmeyi deneyin.';
+
+  @override
+  String get legalCatFamilySupport => 'Aile destekleri';
+
+  @override
+  String get legalCatChildBenefits => 'Çocuk yardımları';
+
+  @override
+  String get legalCatHealthRights => 'Sağlık hakları';
+
+  @override
+  String get legalCatEducationSupport => 'Eğitim destekleri';
+
+  @override
+  String get legalCatTaxBenefits => 'Vergi avantajları';
+
+  @override
+  String get legalCatHousingSupport => 'Konut destekleri';
+
+  @override
+  String get legalCatEmployeeRights => 'Çalışan hakları';
+
+  @override
+  String get legalCatParentalLeave => 'Doğum ve ebeveyn izni';
+
+  @override
+  String get legalCatResidencyRights => 'Oturum hakları';
+
+  @override
+  String get legalCatDisabilitySupport => 'Engellilik destekleri';
+
+  @override
+  String get legalCatSocialAid => 'Sosyal yardımlar';
+
+  @override
+  String get legalCatOther => 'Diğer';
+
+  @override
+  String get legalRegionFederal => 'Federal';
+
+  @override
+  String get legalRegionFlanders => 'Flaman Bölgesi';
+
+  @override
+  String get legalRegionWallonia => 'Valon Bölgesi';
+
+  @override
+  String get legalRegionBrussels => 'Brüksel-Başkent';
+
+  @override
+  String get legalRegionMunicipality => 'Belediye';
+
+  @override
+  String get legalRegionOther => 'Diğer';
+
+  @override
+  String get reminderScheduleFailed =>
+      'Hatırlatma kurulamadı. Bildirim izni ve bağlantıyı kontrol edin.';
+
+  @override
+  String get mediaPickFailed =>
+      'Medya seçilemedi. Galeri/kamera izinlerini kontrol edin.';
+
+  @override
+  String get aiActionConfirmTitle => 'Bu işlemi onaylıyor musun?';
+
+  @override
+  String get aiActionConfirm => 'Onayla';
+
+  @override
+  String get aiActionDone => 'İşlem tamamlandı.';
+
+  @override
+  String get aiActionFailed => 'İşlem YAPILAMADI. Bağlantı veya yetki hatası.';
+
+  @override
+  String get aiActionInvalid => 'İstek anlaşılamadı, işlem yapılmadı.';
+
+  @override
+  String get vaccTitle => 'Aşı Takvimi';
+
+  @override
+  String get vaccSubtitle =>
+      'Kişiye göre aşı takvimini seçin. Kaynak: resmî aşı programı.';
+
+  @override
+  String get vaccEmpty => 'Bu ülke için aşı takvimi bulunamadı.';
+
+  @override
+  String get vaccSources => 'Resmî kaynaklar';
+
+  @override
+  String get vaccDisclaimer =>
+      'Bu bilgi geneldir; tıbbi tavsiye değildir. Kesin tarih, doz ve uygunluk için resmî aşı kaydınıza (Vaccinnet/ONE) ve hekiminize başvurun.';
+
+  @override
+  String get vaccMarkDone => 'Yapıldı olarak işaretle';
+
+  @override
+  String get vaccMarkUndone => 'Yapıldı işaretini kaldır';
+
+  @override
+  String get hrTitle => 'Sağlık Kayıtları';
+
+  @override
+  String get hrAdd => 'Kayıt ekle';
+
+  @override
+  String get hrAll => 'Tümü';
+
+  @override
+  String get hrEmpty =>
+      'Henüz sağlık kaydı yok. İlk kaydı eklemek için + düğmesine dokunun.';
+
+  @override
+  String get hrError => 'Kayıtlar yüklenemedi.';
+
+  @override
+  String get hrNewRecord => 'Yeni Sağlık Kaydı';
+
+  @override
+  String get hrRecTitle => 'Başlık';
+
+  @override
+  String get hrType => 'Kayıt türü';
+
+  @override
+  String get hrMember => 'Kime ait?';
+
+  @override
+  String get hrSelf => 'Kendim';
+
+  @override
+  String get hrDoctor => 'Doktor';
+
+  @override
+  String get hrInstitution => 'Kurum';
+
+  @override
+  String get hrDesc => 'Açıklama';
+
+  @override
+  String get hrSave => 'Kaydet';
+
+  @override
+  String get hrSaveFailed => 'Kaydedilemedi. Bağlantıyı kontrol edin.';
+
+  @override
+  String get hrDeleted => 'Kayıt silindi';
+
+  @override
+  String get hrDeleteTitle => 'Kaydı sil?';
+
+  @override
+  String get legalRemind => 'Hatırlat';
+
+  @override
+  String get legalArtDetails => 'Detayları gör';
+
+  @override
+  String get legalArtOverview => 'Genel bakış';
+
+  @override
+  String get legalArtWhoCanApply => 'Kimler başvurabilir?';
+
+  @override
+  String get legalArtConditions => 'Koşullar';
+
+  @override
+  String get legalArtBenefits => 'Sağladığı avantajlar';
+
+  @override
+  String get legalArtSteps => 'Başvuru adımları';
+
+  @override
+  String get legalArtDocuments => 'Gerekli belgeler';
+
+  @override
+  String get legalArtWarnings => 'Önemli uyarılar';
+
+  @override
+  String get legalArtSources => 'Resmî kaynaklar';
+
+  @override
+  String get kitchenTitle => 'Aile Mutfağı';
+
+  @override
+  String get privacyAiSection => 'AI VERİ İZİNLERİ';
+
+  @override
+  String get privacyAiDesc =>
+      'FamilyHub AI hangi verilere erişebilir; hassas veriler varsayılan kapalı';
+
+  @override
+  String get privacySensitive => 'Hassas';
+
+  @override
+  String get privacyModCalendar => 'Takvim';
+
+  @override
+  String get privacyModTasks => 'Görevler';
+
+  @override
+  String get privacyModShopping => 'Alışveriş';
+
+  @override
+  String get privacyModKitchen => 'Mutfak';
+
+  @override
+  String get privacyModHealth => 'Sağlık';
+
+  @override
+  String get privacyModFinance => 'Finans';
+
+  @override
+  String get privacyModChild => 'Çocuk';
+
+  @override
+  String get privacyModLocation => 'Konum';
+
+  @override
+  String kitchenRecipeCount(Object count) {
+    return '$count tarif · haftalık plan';
+  }
+
+  @override
+  String get kitchenAddRecipe => 'Tarif';
+
+  @override
+  String get kitchenTabRecipes => 'Tarifler';
+
+  @override
+  String get kitchenTabWeekly => 'Haftalık';
+
+  @override
+  String get kitchenTabShopping => 'Alışveriş';
+
+  @override
+  String get kitchenSearchHint => 'Tarif ara...';
+
+  @override
+  String get kitchenFillWeeklyFirst => 'Önce Haftalık Plan sekmesini doldur';
+
+  @override
+  String get kitchenAutoIngredientList =>
+      'Malzeme listesi otomatik oluşturulur';
+
+  @override
+  String get kitchenAddAllToShopping => 'Tümünü Alışveriş Listesine Ekle';
+
+  @override
+  String get legalReminderSet => 'Hatırlatma kuruldu';
+
+  @override
+  String get legalReminderRemoved => 'Hatırlatma kaldırıldı';
+
+  @override
+  String get legalReminderTitle => 'Ne zaman hatırlatılsın?';
+
+  @override
+  String get legalRemindIn1Day => '1 gün sonra';
+
+  @override
+  String get legalRemindIn7Days => '7 gün sonra';
+
+  @override
+  String get legalRemindIn30Days => '30 gün sonra';
+
+  @override
+  String get legalReminderNotifTitle => 'Yasal hak hatırlatması';
+
+  @override
+  String legalReminderNotifBody(Object title) {
+    return '$title — resmî kaynaktan güncel bilgileri kontrol et.';
+  }
+
+  @override
+  String get familyIntelligenceTitle => 'Aile Zekası';
+
+  @override
+  String get familyIntelligenceSubtitle => 'Ailen için bugünün öncelikleri';
+
+  @override
+  String get fiPriorityCritical => 'Kritik';
+
+  @override
+  String get fiPriorityHigh => 'Yüksek';
+
+  @override
+  String get fiPriorityNormal => 'Normal';
+
+  @override
+  String get fiPriorityInfo => 'Bilgi';
+
+  @override
+  String get fiWhyShown => 'Neden gösterildi?';
+
+  @override
+  String get fiRuleBasedNote =>
+      'Bu özet, aile verilerinden kural tabanlı olarak üretildi.';
+
+  @override
+  String get fiEmptyTitle => 'Şu an öne çıkan bir şey yok';
+
+  @override
+  String get fiEmptyDesc =>
+      'Aile verilerin güncel. Yeni öncelikler burada görünecek.';
+
+  @override
+  String get fiInsightOverdueTitle => 'Geciken görevler';
+
+  @override
+  String fiInsightOverdueBody(Object count) {
+    return '$count görevin süresi geçmiş. Gözden geçir.';
+  }
+
+  @override
+  String get fiReasonOverdue =>
+      'Bitiş tarihi geçmiş ve tamamlanmamış görevler var.';
+
+  @override
+  String get fiInsightPaymentTitle => 'Yaklaşan ödeme';
+
+  @override
+  String fiInsightPaymentBody(Object days) {
+    return '$days gün içinde bir ödeme var.';
+  }
+
+  @override
+  String get fiReasonPayment => 'Bütçende yaklaşan bir ödeme tarihi bulundu.';
+
+  @override
+  String get fiInsightTodayEventsTitle => 'Bugünkü etkinlikler';
+
+  @override
+  String fiInsightTodayEventsBody(Object count) {
+    return 'Bugün $count planlı etkinliğin var.';
+  }
+
+  @override
+  String get fiReasonTodayEvents => 'Takviminde bugüne ait etkinlikler var.';
+
+  @override
+  String get fiInsightShoppingTitle => 'Alışveriş listesi';
+
+  @override
+  String fiInsightShoppingBody(Object count) {
+    return 'Listende $count bekleyen ürün var.';
+  }
+
+  @override
+  String get fiReasonShopping => 'Tamamlanmamış alışveriş öğeleri birikmiş.';
+
+  @override
+  String get fiInsightPendingTasksTitle => 'Bekleyen görevler';
+
+  @override
+  String fiInsightPendingTasksBody(Object count) {
+    return '$count görevin seni bekliyor.';
+  }
+
+  @override
+  String get fiReasonPendingTasks => 'Henüz tamamlanmamış görevlerin var.';
+
+  @override
+  String get fiInsightAllClearTitle => 'Her şey yolunda';
+
+  @override
+  String get fiInsightAllClearBody =>
+      'Bekleyen görev veya alışveriş yok. Harika!';
+
+  @override
+  String get fiReasonAllClear =>
+      'Geciken görev, bekleyen görev ve alışveriş öğesi bulunmadı.';
+
+  @override
+  String get fiInsightBusyDayTitle => 'Yoğun bir gün';
+
+  @override
+  String fiInsightBusyDayBody(Object events, Object tasks) {
+    return 'Bugün $events etkinlik ve $tasks görev var. Görevleri paylaşmayı düşün.';
+  }
+
+  @override
+  String get fiReasonBusyDay =>
+      'Bugünkü etkinlik sayısı ve bekleyen görevler birlikte yüksek.';
+
+  @override
+  String get fiInsightShareShoppingTitle => 'Alışverişi paylaş';
+
+  @override
+  String fiInsightShareShoppingBody(Object count) {
+    return 'Listende $count ürün var. Bir aile üyesiyle paylaşabilirsin.';
+  }
+
+  @override
+  String get fiReasonShareShopping =>
+      'Alışveriş listesi dolu ve ailede birden fazla üye var.';
+
+  @override
+  String get fiNotifyTop => 'Öne çıkanı bildir';
+
+  @override
+  String get fiNotified => 'Bildirim gönderildi';
+
+  @override
+  String get fiDailySummary => 'Günlük özet bildirimi';
+
+  @override
+  String get fiDailySummaryDesc =>
+      'Her gün belirlediğin saatte öne çıkanları bildir';
+
+  @override
+  String fiDailySummaryOn(Object hour) {
+    return 'Açık · her gün $hour:00';
+  }
+
+  @override
+  String get fiDailySummaryNotifTitle => 'Aile Zekası';
+
+  @override
+  String get fiDailySummaryNotifBody =>
+      'Bugünün öncelikleri hazır. Görmek için dokun.';
+
+  @override
+  String get fiPickHour => 'Saat';
+
+  @override
+  String get fiQuietHours => 'Sessiz saatlerdesin — bildirim gönderilmedi';
+
+  @override
+  String get fiPreparingDay => 'Bugünü senin için hazırlıyorum…';
+
+  @override
+  String get googleErrCancelled => 'Giriş iptal edildi';
+
+  @override
+  String get googleErrConfig =>
+      'Google bağlantısı şu an yapılandırılamadı. Lütfen daha sonra tekrar deneyin.';
+
+  @override
+  String get googleErrNetwork =>
+      'İnternet bağlantınızı kontrol edip tekrar deneyin.';
+
+  @override
+  String get googleErrScope => 'Gerekli Google Drive izni verilmedi.';
+
+  @override
+  String get googleErrDrive => 'Google Drive şu anda kullanılamıyor.';
+
+  @override
+  String get googleErrUnknown =>
+      'Google\'a bağlanılamadı. Lütfen tekrar deneyin.';
+
+  @override
+  String get familyHubAITitle => 'FamilyHub AI';
+
+  @override
+  String get familyHubAISubtitle => 'Ailen için akıllı asistan';
+
+  @override
+  String get fhaSummaryTitle => 'Bugünün bağlamı';
+
+  @override
+  String get fhaQuickActionsTitle => 'Hızlı aksiyonlar';
+
+  @override
+  String get fhaQuickReviewTasks => 'Görevleri gözden geçir';
+
+  @override
+  String get fhaQuickShopping => 'Alışveriş listesini aç';
+
+  @override
+  String get fhaQuickPlanDay => 'Bugünü planla';
+
+  @override
+  String get fhaQuickBudget => 'Bütçeyi özetle';
+
+  @override
+  String get fhaQuickLegal => 'Yasal hakları göster';
+
+  @override
+  String get fhaContextInfo =>
+      'Öneriler yalnızca sayısal aile özetinden üretilir; isim, sağlık ve finans detayları AI\'ya gönderilmez.';
+
+  @override
+  String get fhaDisclaimer =>
+      'FamilyHub AI önerileri bilgilendirme amaçlıdır; sağlık, hukuk veya finans konusunda kesin tavsiye değildir. Kritik işlemler onayınızla yapılır.';
+
+  @override
+  String get fhaChatComingSoon =>
+      'Doğal dil sohbeti yakında. Şimdilik bağlamsal hızlı aksiyonları kullanabilirsin.';
+
+  @override
+  String get fhaConfirmTitle => 'Bu işlemi onaylıyor musun?';
+
+  @override
+  String get fhaConfirm => 'Onayla';
+
+  @override
+  String get fhaPin => 'Sabitle';
+
+  @override
+  String get fhaUnpin => 'Sabiti kaldır';
+
+  @override
+  String get fhaEditSuggestion => 'Öneriyi düzenle';
+
+  @override
+  String get fhaDeleteSuggestion => 'Öneriyi sil';
+
+  @override
+  String get fhaHideSuggestion => 'Öneriyi gizle';
+
+  @override
+  String get fhaAddSuggestion => 'Özel öneri ekle';
+
+  @override
+  String get fhaSuggestionHint => 'Öneri metnini yaz…';
+
+  @override
+  String get fhaCancel => 'İptal';
+
+  @override
+  String get fhaPreviewAddItems => 'Şu ürünler alışveriş listene eklenecek:';
+
+  @override
+  String fhaAddedItems(Object count) {
+    return '$count ürün listeye eklendi';
+  }
+
+  @override
+  String get fhaQuickAddItems => 'Önerilen ürünleri ekle';
+
+  @override
+  String get fhaActionFailed => 'İşlem yapılamadı';
+
+  @override
+  String get fhaActionUnsupported => 'Bu işlem için ilgili modülü kullan';
+
+  @override
+  String get fhaQuickRemindTasks => 'Yarın görevleri hatırlat';
+
+  @override
+  String get fhaRemindTasksNotifTitle => 'Görev hatırlatması';
+
+  @override
+  String get fhaRemindTasksNotifBody => 'Geciken görevlerini gözden geçir.';
+
+  @override
+  String get fhaReminderPreview => 'Yarın için bir hatırlatma kurulacak:';
+
+  @override
+  String get fhaReminderSet => 'Hatırlatma kuruldu';
+
+  @override
   String get henuzVeriYok => 'Henüz veri yok';
 
   @override
@@ -3245,9 +4183,6 @@ class AppLocalizationsTr extends AppLocalizations {
       'Konum seçilmezse şehir listesinden kullanılır';
 
   @override
-  String get sicaklikBirimi => 'Sıcaklık Birimi';
-
-  @override
   String get havaDurumuAlinamadi => 'Hava durumu alınamadı';
 
   @override
@@ -3463,4 +4398,3047 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get gorevlerinEklendigindeBuradaGorunecek =>
       'Görevlerin eklendiğinde burada görünecek.';
+
+  @override
+  String get planBasic => 'Temel';
+
+  @override
+  String get planPlus => 'Plus';
+
+  @override
+  String get planComplete => 'Complete';
+
+  @override
+  String get planBasicTagline => 'Aileni yönetmeye başla';
+
+  @override
+  String get planPlusTagline => 'Akıllı özellikler + daha fazla alan';
+
+  @override
+  String get planCompleteTagline => 'Tam otomasyon ve sınırsız';
+
+  @override
+  String get planFeatCore => 'Takvim, görevler, alışveriş, bütçe';
+
+  @override
+  String get planFeatPlusIntel => 'Gelişmiş Aile Zekası';
+
+  @override
+  String get planFeatLegal => 'Yasal Haklar & yardımlar';
+
+  @override
+  String get planFeatExport => 'PDF/CSV dışa aktarma';
+
+  @override
+  String get planFeatProactive => 'Proaktif zeka & otomasyon';
+
+  @override
+  String get planFeatRoutines => 'Aile rutinleri';
+
+  @override
+  String get planFeatGuest => 'Misafir erişimi & roller';
+
+  @override
+  String get planFeatUnlimitedHistory => 'Sınırsız geçmiş';
+
+  @override
+  String planFeatStorage(Object size) {
+    return '$size depolama';
+  }
+
+  @override
+  String planFeatHistory(Object days) {
+    return '$days gün geçmiş';
+  }
+
+  @override
+  String get plansTitle => 'Planlar';
+
+  @override
+  String get plansMonthly => 'Aylık';
+
+  @override
+  String get plansYearly => 'Yıllık';
+
+  @override
+  String get plansFree => 'Ücretsiz';
+
+  @override
+  String get plansPopular => 'POPÜLER';
+
+  @override
+  String get plansCurrent => 'MEVCUT';
+
+  @override
+  String get plansComingSoon => 'Satın alma yakında etkinleşecek.';
+
+  @override
+  String plansSave(Object percent) {
+    return '%$percent tasarruf';
+  }
+
+  @override
+  String plansChoose(Object plan) {
+    return '$plan seç';
+  }
+
+  @override
+  String get gateTitle => 'Bu özellik kilitli';
+
+  @override
+  String gateBody(Object plan) {
+    return 'Bu özellik $plan planında açılır.';
+  }
+
+  @override
+  String get gatePerMonth => '/ay';
+
+  @override
+  String get gatePerYear => '/yıl';
+
+  @override
+  String get gateSeePlans => 'Planları gör';
+
+  @override
+  String get gateNotNow => 'Şimdi değil';
+
+  @override
+  String get exportCsvTooltip => 'CSV olarak dışa aktar';
+
+  @override
+  String get exportShopping => 'FamilyHub alışveriş listesi';
+
+  @override
+  String get exportEmpty => 'Dışa aktarılacak öğe yok.';
+
+  @override
+  String get exportFailed => 'Dışa aktarma başarısız.';
+
+  @override
+  String get exportColName => 'Ürün';
+
+  @override
+  String get exportColQty => 'Miktar';
+
+  @override
+  String get exportColUnit => 'Birim';
+
+  @override
+  String get exportColCategory => 'Kategori';
+
+  @override
+  String get exportColDone => 'Tamamlandı';
+
+  @override
+  String get pinSection => 'Uygulama PIN\'i';
+
+  @override
+  String get pinSubtitle => 'Biyometrik başarısız olursa PIN ile giriş';
+
+  @override
+  String get pinSet => 'PIN belirle';
+
+  @override
+  String get pinChange => 'PIN\'i değiştir';
+
+  @override
+  String get pinRemove => 'PIN\'i kaldır';
+
+  @override
+  String get pinRemoveConfirm => 'Uygulama PIN\'i kaldırılsın mı?';
+
+  @override
+  String get pinRemoved => 'PIN kaldırıldı';
+
+  @override
+  String get pinLabel => 'PIN (4-6 hane)';
+
+  @override
+  String get pinConfirmLabel => 'PIN (tekrar)';
+
+  @override
+  String get pinTooShort => 'PIN en az 4 hane olmalı';
+
+  @override
+  String get pinMismatch => 'PIN\'ler eşleşmiyor';
+
+  @override
+  String get pinSaved => 'PIN kaydedildi';
+
+  @override
+  String get setAccount => 'HESAP';
+
+  @override
+  String get setProfileInfo => 'Profil Bilgileri';
+
+  @override
+  String get setPrivacy => 'Gizlilik';
+
+  @override
+  String get setSecure => 'Güvenli';
+
+  @override
+  String get setWeatherSection => 'HAVA DURUMU';
+
+  @override
+  String get setBackupRestore => 'Yedekleme ve Geri Yükleme';
+
+  @override
+  String get setBackupRestoreDesc =>
+      'Verilerinizi buluta yedekleyin veya kurtarın';
+
+  @override
+  String get setDeleteData => 'Verileri Sil';
+
+  @override
+  String get setPremiumSection => 'PREMIUM';
+
+  @override
+  String get setPremiumTier => 'Premium';
+
+  @override
+  String get setFreeTier => 'Ücretsiz';
+
+  @override
+  String get setActive => 'Aktif';
+
+  @override
+  String get setFeatUnlimitedPhotos => 'Sınırsız fotoğraf depolama';
+
+  @override
+  String get setFeat8Members => '8 aile üyesi';
+
+  @override
+  String get setFeatAI => 'AI asistan';
+
+  @override
+  String get setFeatAdvSecurity => 'Gelişmiş güvenlik';
+
+  @override
+  String get setFeatBasic => 'Temel özellikler';
+
+  @override
+  String get setFeat4Members => '4 aile üyesi';
+
+  @override
+  String get setFeat1GB => '1 GB depolama';
+
+  @override
+  String get setHelpSection => 'YARDIM';
+
+  @override
+  String get setUserGuideDesc => 'FamilyHub\'ı nasıl kullanacağınızı öğrenin';
+
+  @override
+  String get setLegalSection => 'YASAL';
+
+  @override
+  String get setCurrent => 'Güncel';
+
+  @override
+  String get setAccentColor => 'Aksan Rengi';
+
+  @override
+  String get setFontSizeDesc => 'Metin boyutunu ayarla';
+
+  @override
+  String get setCustomizeHome => 'Ana Ekranı Özelleştir';
+
+  @override
+  String get setCustomizeHomeDesc => 'Akıllı kart, ipuçları ve kutucuk sırası';
+
+  @override
+  String get cdSubtitle => 'Büyüme takibi · Dersler · Ödevler';
+
+  @override
+  String get cdAddProfile => 'Çocuk profili ekleyin';
+
+  @override
+  String get cdChildName => 'Çocuğun adı';
+
+  @override
+  String get cdSchoolName => 'Okul adı (isteğe bağlı)';
+
+  @override
+  String get cdCreateProfile => 'Profil Oluştur';
+
+  @override
+  String get cdPickOrWriteLesson => 'Ders seç veya kendin yaz:';
+
+  @override
+  String get cdLessonName => 'Ders adı';
+
+  @override
+  String get cdAddLesson => 'Ders Ekle';
+
+  @override
+  String get cdHomeworkDesc => 'Ödev açıklaması';
+
+  @override
+  String get cdSaveHomework => 'Ödevi Kaydet';
+
+  @override
+  String get cdHeightCm => 'Boy (cm)';
+
+  @override
+  String get cdWeightKg => 'Kilo (kg)';
+
+  @override
+  String cdDevGroup(Object group) {
+    return 'Gelişim grubu: $group';
+  }
+
+  @override
+  String get cdCompleted => 'tamamlandı';
+
+  @override
+  String get cdStepGrowsTree => 'Her tamamlanan basamak ağacı büyütür';
+
+  @override
+  String cdWeeklyPlanFor(Object name) {
+    return 'AI ile $name\'e Özel Haftalık Plan';
+  }
+
+  @override
+  String get cdNoLessons => 'Henüz ders eklenmedi\n+ ile ekleyin';
+
+  @override
+  String get cdNoGrade => 'Not girilmedi';
+
+  @override
+  String get cdAvg => 'ort.';
+
+  @override
+  String get cdGradeRange => 'Not (0-100)';
+
+  @override
+  String get cdNoHomework => 'Ödev yok — harika! 🎉';
+
+  @override
+  String get cdNoMeasurements => 'Henüz ölçüm girilmedi\n+ ile ekleyin';
+
+  @override
+  String get cdHeight => 'Boy';
+
+  @override
+  String get cdWeight => 'Kilo';
+
+  @override
+  String get cdRegenerate => 'Yeniden üret';
+
+  @override
+  String get cdGeneratingPlan => 'Gemini kişisel plan hazırlıyor...';
+
+  @override
+  String get cdPlanFailed => 'Plan üretilemedi (bağlantı/kota).';
+
+  @override
+  String get cdRetry => 'Tekrar Dene';
+
+  @override
+  String get cdParentChecklist => 'Ebeveyn Kontrol Listesi';
+
+  @override
+  String get fhFamilyDoctor => 'Aile Hekimi';
+
+  @override
+  String get fhSubtitle => 'Sağlık takibi & ilaç yönetimi';
+
+  @override
+  String get fhAddMember => 'Aile üyesi ekleyin';
+
+  @override
+  String get fhNameHint => 'Ad (örn. Anne, Ahmet)';
+
+  @override
+  String get fhAdd => 'Ekle';
+
+  @override
+  String get fhMedName => 'İlaç adı';
+
+  @override
+  String get fhDoseHint => 'Doz (örn. 500mg, 1 tablet)';
+
+  @override
+  String get fhUsageHint => 'Kullanım (örn. Günde 2 kez, sabah)';
+
+  @override
+  String get fhNotesOptional => 'Notlar (isteğe bağlı)';
+
+  @override
+  String get fhSaveMed => 'İlacı Kaydet';
+
+  @override
+  String get fhVitaminName => 'Vitamin adı (örn. D3, Omega-3)';
+
+  @override
+  String get fhAmountHint => 'Miktar (örn. 1000 IU, 2 kapsül)';
+
+  @override
+  String get fhUsageTime => 'Kullanım zamanı';
+
+  @override
+  String get fhSaveVitamin => 'Vitamin Kaydet';
+
+  @override
+  String get fhReportTitleHint => 'Başlık (örn. Yıllık check-up)';
+
+  @override
+  String get fhDoctorClinic => 'Doktor / Klinik adı';
+
+  @override
+  String get fhReportType => 'Rapor türü';
+
+  @override
+  String get fhNotesFindings => 'Notlar / Bulgular';
+
+  @override
+  String get fhSaveReport => 'Raporu Kaydet';
+
+  @override
+  String get fhDoctorName => 'Doktor adı';
+
+  @override
+  String get fhSpecialtyHint => 'Uzmanlık (Kardiyoloji, Göz vb.)';
+
+  @override
+  String get fhHospitalClinic => 'Hastane / Klinik';
+
+  @override
+  String get fhSaveAppointment => 'Randevuyu Kaydet';
+
+  @override
+  String fhStartDate(Object date) {
+    return 'Başlangıç: $date';
+  }
+
+  @override
+  String get fhComplete => 'Tamamla';
+
+  @override
+  String get eduTitle => 'Aile Eğitimi';
+
+  @override
+  String get eduSearchHint => 'Aktivite ara...';
+
+  @override
+  String get eduNoActivity => 'Aktivite bulunamadı';
+
+  @override
+  String get eduFilterByAge => 'Yaşa Göre Filtrele';
+
+  @override
+  String get eduPracticalTips => 'Pratik İpuçları';
+
+  @override
+  String get eduYoutubeSearch => 'YouTube video araması';
+
+  @override
+  String get eduWatchYoutube => 'YouTube\'da video rehberleri izle';
+
+  @override
+  String get eduRelatedActivities => 'İlgili Aktiviteler';
+
+  @override
+  String get eduLearningTree => 'Öğrenme Ağacın';
+
+  @override
+  String get eduTreeGrows => 'Her tamamlanan aktivite ağacını büyütür';
+
+  @override
+  String get eduOverallProgress => 'Genel İlerleme';
+
+  @override
+  String get eduStopwatch => 'Kronometre';
+
+  @override
+  String get eduEnterTitle => 'Lütfen bir başlık girin';
+
+  @override
+  String get eduAddActivity => 'Yeni Aktivite Ekle';
+
+  @override
+  String get eduCreateOwn => 'Kendi eğitim içeriğinizi oluşturun';
+
+  @override
+  String get eduCategory => 'Kategori';
+
+  @override
+  String get eduAgeRange => 'Yaş aralığı';
+
+  @override
+  String get eduDuration => 'Süre';
+
+  @override
+  String get eduMaterials => 'Gerekenler (her satıra bir malzeme)';
+
+  @override
+  String get eduHowTo => 'Nasıl Yapılır? (her satıra bir adım)';
+
+  @override
+  String get eduEnterTopic => 'Önce bir konu yazın';
+
+  @override
+  String get eduGenerateAI => 'AI Ders / Görev Üret';
+
+  @override
+  String get eduTopicHint => 'Örn: saat okuma, geri dönüşüm, çarpım tablosu';
+
+  @override
+  String get eduAge => 'Yaş';
+
+  @override
+  String get eduGenFailed =>
+      'İçerik üretilemedi (bağlantı/kota). Tekrar deneyin.';
+
+  @override
+  String get eduSteps => 'Adımlar';
+
+  @override
+  String eduParentTip(Object tip) {
+    return 'Ebeveyn ipucu: $tip';
+  }
+
+  @override
+  String get kitRecipe => 'Tarif';
+
+  @override
+  String get kitNoRecipe => 'Tarif bulunamadı';
+
+  @override
+  String get kitCreateWeeklyPlan => 'Haftalık Plan Oluştur';
+
+  @override
+  String get kitAIFillWeek => 'AI tüm haftayı otomatik doldursun';
+
+  @override
+  String get kitFill => 'Doldur';
+
+  @override
+  String get kitTapToChange => 'Değiştirmek için dokun';
+
+  @override
+  String get kitPickMeal => 'Yemek seç...';
+
+  @override
+  String get kitNewFoodIdea => 'Yeni Yemek Fikri';
+
+  @override
+  String get kitAddOwnRecipe => 'Kendi Tarifini Ekle';
+
+  @override
+  String get kitAddWebRecipe => 'Web Tarifi Ekle';
+
+  @override
+  String get kitWebRecipeSub =>
+      'Web\'de bulduğun güzel bir tarifin linkini yapıştır.';
+
+  @override
+  String get kitEnterNameForAI =>
+      'Önce tarif adını yazın, AI gerisini doldursun';
+
+  @override
+  String get kitAINoResponse => 'AI şu an yanıt veremedi, elle doldurabilirsin';
+
+  @override
+  String get kitEnterRecipeName => 'Lütfen bir tarif adı girin';
+
+  @override
+  String get kitPasteLink => 'Lütfen tarif linkini yapıştırın';
+
+  @override
+  String get kitCategory => 'Kategori';
+
+  @override
+  String get kitWeeklyAISuggestions => 'Bu Haftanın AI Önerileri';
+
+  @override
+  String get kitIngredients => 'Malzemeler';
+
+  @override
+  String get kitPreparation => 'Hazırlanışı';
+
+  @override
+  String get chatGettingLocation => 'Konum alınıyor…';
+
+  @override
+  String get chatCreatePoll => 'Anket Oluştur';
+
+  @override
+  String get chatAddOption => 'Seçenek ekle';
+
+  @override
+  String get chatSendPoll => 'Anketi Gönder';
+
+  @override
+  String get chatFileFailed => 'Dosya seçilemedi';
+
+  @override
+  String get chatSearchMessages => 'Mesajlarda Ara';
+
+  @override
+  String get chatClearChat => 'Sohbeti Temizle';
+
+  @override
+  String get chatCamera => 'Kamera';
+
+  @override
+  String get chatGallery => 'Galeri';
+
+  @override
+  String get chatLocation => 'Konum';
+
+  @override
+  String get chatEvent => 'Etkinlik';
+
+  @override
+  String get chatPoll => 'Anket';
+
+  @override
+  String get chatGif => 'GIF';
+
+  @override
+  String get chatVideo => 'Video';
+
+  @override
+  String get chatFile => 'Dosya';
+
+  @override
+  String get subHomeExpenses => 'Ev Giderleri';
+
+  @override
+  String get subHomeExpensesSub => 'Kira, faturalar ve abonelikler';
+
+  @override
+  String get subMonthly => 'Aylık';
+
+  @override
+  String get subYearly => 'Yıllık';
+
+  @override
+  String get subActive => 'Aktif';
+
+  @override
+  String get subCountryTemplate => 'Ülke şablonu';
+
+  @override
+  String get subNoSubscription => 'Abonelik bulunamadı\n+ butonuna dokun';
+
+  @override
+  String get subAddExpense => 'Gider Ekle';
+
+  @override
+  String get subAddCountryTemplate => 'Ülke gider şablonu ekle';
+
+  @override
+  String get subCommonExpenses => 'Sık Kullanılan Giderler';
+
+  @override
+  String get subServiceName => 'Servis adı';
+
+  @override
+  String subAmount(Object cur) {
+    return 'Tutar ($cur)';
+  }
+
+  @override
+  String get subAddSubscription => 'Abonelik Ekle';
+
+  @override
+  String srError(Object msg) {
+    return 'Hata: $msg';
+  }
+
+  @override
+  String get srBasicInfo => 'Temel Bilgiler';
+
+  @override
+  String get srLatitude => 'Enlem';
+
+  @override
+  String get srLongitude => 'Boylam';
+
+  @override
+  String srGeofenceRadius(Object m) {
+    return 'Geofence Yarıçapı: ${m}m';
+  }
+
+  @override
+  String srProximity(Object m) {
+    return 'Yaklaşma Mesafesi: ${m}m';
+  }
+
+  @override
+  String get srTime => 'Saat';
+
+  @override
+  String get srAnd => 'AND';
+
+  @override
+  String get srOr => 'OR';
+
+  @override
+  String srInterruptibility(Object pct) {
+    return 'Rahatsız Edilebilirlik: $pct%';
+  }
+
+  @override
+  String get srTone => 'Ton';
+
+  @override
+  String get srSmartChoice => 'Akıllı seçim (AI önerir)';
+
+  @override
+  String get budIncome => 'Gelir';
+
+  @override
+  String get budExpense => 'Gider';
+
+  @override
+  String get budBalance => 'Bakiye';
+
+  @override
+  String get budAnalyzing => 'Gemini analiz ediyor…';
+
+  @override
+  String get budMonthlyLimit => 'Aylık Limit (€)';
+
+  @override
+  String get budDelete => 'Sil';
+
+  @override
+  String get budAmount => 'Tutar';
+
+  @override
+  String get budCategory => 'Kategori';
+
+  @override
+  String get budDescOptional => 'Açıklama (opsiyonel)';
+
+  @override
+  String budAiSuggestion(Object cat) {
+    return 'AI önerisi: $cat';
+  }
+
+  @override
+  String get budSuggestCategory => 'AI ile kategori öner';
+
+  @override
+  String get budEnterValidAmount => 'Geçerli bir tutar girin';
+
+  @override
+  String get crashTest => 'Test Et';
+
+  @override
+  String get crashDetectionActive => 'Kaza tespiti aktif';
+
+  @override
+  String get crashSound => 'Ses';
+
+  @override
+  String get crashEmergencyAlarm => 'Acil alarm';
+
+  @override
+  String get crashSiren => 'Siren';
+
+  @override
+  String get crashSos => 'SOS';
+
+  @override
+  String get crashAlarm => 'Alarm';
+
+  @override
+  String get crashSaveUpper => 'KAYDET';
+
+  @override
+  String get crashAddContact => 'Acil Kişi Ekle';
+
+  @override
+  String get crashPhone => 'Telefon';
+
+  @override
+  String get crashAdd => 'Ekle';
+
+  @override
+  String get crashContacts => 'Acil Kişiler';
+
+  @override
+  String get crashNoContacts => 'Henüz acil kişi yok. + ile ekleyin.';
+
+  @override
+  String get crashSettingsSaved => 'Ayarlar kaydedildi';
+
+  @override
+  String get crashTestMode => 'Test Modu';
+
+  @override
+  String get medEnterName => 'Lütfen ilaç adını girin.';
+
+  @override
+  String get medTime => 'İlaç Zamanı 💊';
+
+  @override
+  String get medNewRecordSub => 'Yeni ilaç kaydı oluştur';
+
+  @override
+  String get medWhose => 'Kime ait?';
+
+  @override
+  String get medName => 'İlaç Adı';
+
+  @override
+  String get medType => 'İlaç Türü';
+
+  @override
+  String get medDose => 'Doz';
+
+  @override
+  String get medFrequency => 'Kullanım Sıklığı';
+
+  @override
+  String get medStart => 'Başlangıç';
+
+  @override
+  String get medEndOptional => 'Bitiş (opsiyonel)';
+
+  @override
+  String get medReminder => 'Hatırlatma';
+
+  @override
+  String get medReminderTime => 'Hatırlatma Saati';
+
+  @override
+  String get medNote => 'Not';
+
+  @override
+  String get fdTitle => 'Aile Detayları';
+
+  @override
+  String get fdPhotoUpdated => 'Aile fotoğrafı güncellendi';
+
+  @override
+  String fdPhotoFailed(Object msg) {
+    return 'Fotoğraf yüklenemedi: $msg';
+  }
+
+  @override
+  String get fdInfoSaved => 'Aile bilgileri kaydedildi';
+
+  @override
+  String fdSaveFailed(Object msg) {
+    return 'Kaydedilemedi: $msg';
+  }
+
+  @override
+  String get fdDeleteMemoryConfirm =>
+      'Bu anı silmek istediğinize emin misiniz?';
+
+  @override
+  String get fdMemoryDeleted => 'Anı silindi';
+
+  @override
+  String fdDeleteFailed(Object msg) {
+    return 'Silinemedi: $msg';
+  }
+
+  @override
+  String get fdAddMemory => 'Anı Ekle';
+
+  @override
+  String fdAddFailed(Object msg) {
+    return 'Eklenemedi: $msg';
+  }
+
+  @override
+  String get fdDetailOptional => 'Detay (isteğe bağlı)';
+
+  @override
+  String get hcUpdated => 'Sağlık kartı güncellendi';
+
+  @override
+  String get hcHealthInfo => 'SAĞLIK BİLGİLERİ';
+
+  @override
+  String get hcAllergies => 'Alerjiler';
+
+  @override
+  String get hcOrganDonor => 'Organ Bağışçısı';
+
+  @override
+  String get hcEmergencyContact => 'ACİL DURUM KİŞİSİ';
+
+  @override
+  String get hcFullName => 'Ad Soyad';
+
+  @override
+  String get hcDoctorInfo => 'DOKTOR BİLGİLERİ';
+
+  @override
+  String get hcExtraNotes => 'EK NOTLAR';
+
+  @override
+  String get hcNotes => 'Notlar';
+
+  @override
+  String peTitle(Object label) {
+    return 'Profil Düzenle: $label';
+  }
+
+  @override
+  String peColor(Object color) {
+    return 'Renk: $color';
+  }
+
+  @override
+  String get peHigh => 'Yüksek (10m)';
+
+  @override
+  String get peMedium => 'Orta (50m)';
+
+  @override
+  String get peLow => 'Düşük (100m+)';
+
+  @override
+  String get peWifiCellular => 'WiFi + Cellular dene';
+
+  @override
+  String get peLastKnown => 'Son bilinen konumu kullan';
+
+  @override
+  String get peFastFix => 'Hızlı fix (önceki konumdan)';
+
+  @override
+  String get peActivity => 'Aktivite';
+
+  @override
+  String get peManual => 'Manuel';
+
+  @override
+  String get peSaved => 'Profil kaydedildi';
+
+  @override
+  String get evTitleRequired => 'Başlık zorunlu';
+
+  @override
+  String get evDeleteEvent => 'Etkinliği Sil';
+
+  @override
+  String get evTitleHint => 'Etkinlik başlığı...';
+
+  @override
+  String get evEnd => 'Bitiş';
+
+  @override
+  String get evLocationHint => 'Konum ekle...';
+
+  @override
+  String get evDescHint => 'Açıklama ekle...';
+
+  @override
+  String get cddObservation => 'Gözlem';
+
+  @override
+  String get cddSources => 'İçeriklerimizin kaynakları';
+
+  @override
+  String get cddOverallScore => 'Genel Gelişim Skoru';
+
+  @override
+  String get cddTodayTasks => 'Bugünün Görevleri';
+
+  @override
+  String get cddTapToStart => 'Başlamak için dokun';
+
+  @override
+  String get cddAiComment => 'AI Yorumu';
+
+  @override
+  String get cddNoObservation =>
+      'Henüz gözlem yok — \"Gözlem\" ile ilk kaydı ekleyin.';
+
+  @override
+  String get cddNoChildProfile => 'Henüz çocuk profili yok';
+
+  @override
+  String get hchTitle => 'Çocuk Sağlığı';
+
+  @override
+  String get hchSubtitle => 'Çocuk için sağlık takibi';
+
+  @override
+  String get hchHealthSummary => 'Sağlık Özeti';
+
+  @override
+  String get hchNoUpcoming => 'Yaklaşan randevu yok';
+
+  @override
+  String get hchHeightWeight => 'Boy & Kilo';
+
+  @override
+  String get hchVaccineSchedule => 'Aşı Takvimi';
+
+  @override
+  String get hchVaccineSub => 'Aşı takvimini görüntüleyin ve takip edin.';
+
+  @override
+  String get hchView => 'Gör';
+
+  @override
+  String get hchTodayTip => 'Bugünkü İpucu';
+
+  @override
+  String get docInfo => 'Belge Bilgileri';
+
+  @override
+  String get docName => 'Belge Adı';
+
+  @override
+  String docUploadFailed(Object msg) {
+    return 'Yükleme hatası: $msg';
+  }
+
+  @override
+  String get docDeleteDoc => 'Belgeyi Sil';
+
+  @override
+  String get docVault => 'Evrak Kasası';
+
+  @override
+  String galSyncFailed(Object msg) {
+    return 'Senkron hatası: $msg';
+  }
+
+  @override
+  String get galDeleteConfirm => 'Bu medya silinecek. Emin misiniz?';
+
+  @override
+  String get galPickMulti => 'Galeriden Seç (Çoklu)';
+
+  @override
+  String get galSyncDevice => 'Cihaz Galerisini Senkronla';
+
+  @override
+  String get galSyncDeviceSub => 'Son fotoğrafları aile galerisine aktar';
+
+  @override
+  String get galAutoSync => 'Otomatik Senkron';
+
+  @override
+  String get galTitle => 'Aile Galerisi';
+
+  @override
+  String get sfLocationDenied =>
+      'Konum izni kalıcı reddedildi. Ayarlardan etkinleştirin.';
+
+  @override
+  String get sfSettings => 'Ayarlar';
+
+  @override
+  String get sfEmergencyActive => 'ACİL DURUM AKTİF';
+
+  @override
+  String get sfUpdateLocation => 'Konumu Güncelle';
+
+  @override
+  String get sfAmbientListen => 'Ortam Dinleme';
+
+  @override
+  String get sfFlashlight => 'Fener';
+
+  @override
+  String conImportFailed(Object msg) {
+    return 'İçe aktarma hatası: $msg';
+  }
+
+  @override
+  String get conEmail => 'E-posta';
+
+  @override
+  String get conTitle => 'Aile Rehberi';
+
+  @override
+  String get conSearchHint => 'Ara...';
+
+  @override
+  String get fmTitle => 'Aile Haritası';
+
+  @override
+  String get fmKmh => 'km/h';
+
+  @override
+  String get fmCall => 'Ara';
+
+  @override
+  String get fmMessage => 'Mesaj';
+
+  @override
+  String get fmRoute => 'Yol';
+
+  @override
+  String get fmTodayActivities => 'Bugünkü Aktiviteler';
+
+  @override
+  String get fmNoActivity => 'Bugün için konum aktivitesi yok.';
+
+  @override
+  String get szCenterCurrent => 'Şu anki konumun merkez alınır.';
+
+  @override
+  String get szZoneName => 'Bölge adı';
+
+  @override
+  String get szZoneNameHint => 'Örn: Ev, Okul, İş';
+
+  @override
+  String szRadius(Object m) {
+    return 'Yarıçap: $m m';
+  }
+
+  @override
+  String get szEnterName => 'Lütfen bölge adı girin';
+
+  @override
+  String get szNoLocation => 'Konum alınamadı. GPS açık olmalı.';
+
+  @override
+  String szDiameter(Object m) {
+    return 'Çap: ${m}m';
+  }
+
+  @override
+  String szDistance(Object d) {
+    return 'Mesafe: $d';
+  }
+
+  @override
+  String fssEta(Object eta) {
+    return 'ETA: $eta';
+  }
+
+  @override
+  String get fssMap => 'Harita';
+
+  @override
+  String get fssSendReminder => 'Hatırlatıcı Gönder';
+
+  @override
+  String get fssSpeed => 'Hız';
+
+  @override
+  String get fssBattery => 'Batarya';
+
+  @override
+  String get fssSignal => 'Sinyal';
+
+  @override
+  String get obsSaved => 'Gözlem kaydedildi';
+
+  @override
+  String get obsAdd => 'Gözlem Ekle';
+
+  @override
+  String get obsDevArea => 'Gelişim Alanı';
+
+  @override
+  String get obsYourObs => 'Gözleminiz';
+
+  @override
+  String get obsMood => 'Durum / Ruh Hali';
+
+  @override
+  String get obsSkillStatus => 'Beceri Durumu';
+
+  @override
+  String get obsHint => 'Bugün ne fark ettiniz?';
+
+  @override
+  String get obsMaxFiles => 'Maks. 5 dosya • JPG, PNG, MP4';
+
+  @override
+  String cmDeleteFailed(Object msg) {
+    return 'Silme başarısız: $msg';
+  }
+
+  @override
+  String get cmTapToAddMember => 'Aile üyesi eklemek için aşağıya dokun';
+
+  @override
+  String get cmBaby => 'Bebek';
+
+  @override
+  String get cmPermissions => 'İzinler';
+
+  @override
+  String get cmCanMessage => 'Mesaj gönderebilir';
+
+  @override
+  String get cmCanApproveTask => 'Görev onaylayabilir';
+
+  @override
+  String get cmCanSeeBudget => 'Bütçeyi görebilir';
+
+  @override
+  String get cmDailyScreenTime => 'Günlük ekran süresi';
+
+  @override
+  String get cmPinRepeat => 'PIN Tekrar';
+
+  @override
+  String get rtNewRoutine => 'Yeni Rutin';
+
+  @override
+  String rtNow(Object step) {
+    return 'Şu an: $step';
+  }
+
+  @override
+  String get rtContinue => 'Devam Et';
+
+  @override
+  String get rtApply => 'Uygula';
+
+  @override
+  String get rtDeleteRoutine => 'Rutini Sil';
+
+  @override
+  String cbSignInFailed(Object msg) {
+    return 'Giriş hatası: $msg';
+  }
+
+  @override
+  String cbDisconnectFailed(Object msg) {
+    return 'Bağlantı kesme hatası: $msg';
+  }
+
+  @override
+  String cbBackupFailed(Object msg) {
+    return 'Yedekleme hatası: $msg';
+  }
+
+  @override
+  String cbRestoreFailed(Object msg) {
+    return 'Geri yükleme hatası: $msg';
+  }
+
+  @override
+  String get cbBackupDeleted => 'Yedek silindi';
+
+  @override
+  String cbDeleteFailed(Object msg) {
+    return 'Silme hatası: $msg';
+  }
+
+  @override
+  String get cbTitle => 'Google Drive Yedekleme';
+
+  @override
+  String get hMoodQuestion => 'Bugün kendini nasıl hissediyorsun?';
+
+  @override
+  String get hTodaySuggestion => 'Bugünün Önerisi';
+
+  @override
+  String hdWelcome(Object name) {
+    return 'Hoş geldin $name';
+  }
+
+  @override
+  String get hdJourneyStart => 'Sağlık yolculuğun burada başlıyor.';
+
+  @override
+  String get hdDailySummary => 'Günlük Sağlık Özeti';
+
+  @override
+  String get hdArticles => 'Sağlık Makaleleri';
+
+  @override
+  String get hdArticlesSub => 'Güncel, güvenilir sağlık içerikleri.';
+
+  @override
+  String get hfTitle => 'Aile Sağlığı';
+
+  @override
+  String get hfSubtitle => 'Anne ve baba için sağlık merkezi';
+
+  @override
+  String get hfFamilyContent => 'Aile İçeriği';
+
+  @override
+  String get hfNoParent => 'Henüz ebeveyn eklenmedi. Aile üyelerini ekleyin.';
+
+  @override
+  String get hfSetValue => 'Değeri ayarla';
+
+  @override
+  String get hfDailySuggestion => 'Günlük Öneri';
+
+  @override
+  String get hwTitle => 'Kadın Sağlığı';
+
+  @override
+  String get hwSubtitle => 'Anne için kişisel sağlık alanı';
+
+  @override
+  String get hwCycleTracking => 'Döngü Takibi';
+
+  @override
+  String hwCycleDay(Object day) {
+    return 'Adet döneminin $day. günündesin.';
+  }
+
+  @override
+  String get hwTapToChangeStart => 'Başlangıç tarihini değiştirmek için dokun';
+
+  @override
+  String get hwSymptomTracking => 'Semptom Takibi';
+
+  @override
+  String get sosTriggerWord => 'Trigger word analizi';
+
+  @override
+  String get ltAiOptimize => 'AI Optimize Et';
+
+  @override
+  String get ltTrackingActive => 'Konum takibi aktif';
+
+  @override
+  String get ltBalanced => 'Dengeli';
+
+  @override
+  String get ltAccuracy => 'Hassas';
+
+  @override
+  String stLockFailed(Object msg) {
+    return 'Kilitleme başarısız: $msg';
+  }
+
+  @override
+  String stDuration(Object h, Object m) {
+    return 'Süre: ${h}s ${m}d';
+  }
+
+  @override
+  String get stReasonOptional => 'Neden (isteğe bağlı)';
+
+  @override
+  String get stLock => 'Kilitle';
+
+  @override
+  String get apAa => 'Aa';
+
+  @override
+  String get apFontSizeNote => 'Yazı boyutu tüm uygulamaya anında uygulanır.';
+
+  @override
+  String get bsSettingsSection => 'AYARLAR';
+
+  @override
+  String get bsAutoBackup => 'Otomatik Yedekleme';
+
+  @override
+  String get bsAutoBackupSub => 'Her hafta otomatik yedekle';
+
+  @override
+  String get pfSaved => 'Profil bilgileri kaydedildi';
+
+  @override
+  String get pfNewEmail => 'Yeni E-posta';
+
+  @override
+  String get sgWellDone =>
+      'Duyularını harika kullandın! Yarın yeni bir keşif seni bekliyor.';
+
+  @override
+  String get sgPlayAgain => 'Tekrar Oyna';
+
+  @override
+  String get sgFinish => 'Bitir';
+
+  @override
+  String get sgTitle => 'Duyusal Keşif';
+
+  @override
+  String sgTodayGame(Object game) {
+    return 'Bugünün oyunu: $game';
+  }
+
+  @override
+  String sgRound(Object r, Object total) {
+    return 'Tur $r/$total';
+  }
+
+  @override
+  String get sgFindThis => 'Bunu bul:';
+
+  @override
+  String get wtTitle => 'Hava Durumu';
+
+  @override
+  String get wtCelsius => 'Celsius (°C)';
+
+  @override
+  String get wtFahrenheit => 'Fahrenheit (°F)';
+
+  @override
+  String get wtFeelsLike => 'Hissedilen';
+
+  @override
+  String get wtHumidity => 'Nem';
+
+  @override
+  String get dsAuthSources => 'Resmi ve otoriter kaynaklar';
+
+  @override
+  String get aisShared => 'Aile grubuna paylaşıldı';
+
+  @override
+  String get aisMissing => 'Eksik';
+
+  @override
+  String aisTurn(Object who) {
+    return 'Sıra: $who';
+  }
+
+  @override
+  String get aisCommentHint => 'Bu öneri hakkında düşünceleriniz...';
+
+  @override
+  String get aisCommentSaved => 'Yorum kaydedildi';
+
+  @override
+  String get aisAccept => 'Kabul Et';
+
+  @override
+  String get aisPostpone => 'Ertele';
+
+  @override
+  String get aisShowLess => 'Daha Az Göster';
+
+  @override
+  String get huShowSmartCard => 'Akıllı Kartı Göster';
+
+  @override
+  String get huShowTips => 'İpuçlarını Göster';
+
+  @override
+  String get huEditTiles => 'Ana Ekran Kutucuklarını Düzenle';
+
+  @override
+  String get huDragSort => 'Kutucukları Sürükle-Sırala';
+
+  @override
+  String get mrMedTime => 'İlaç Zamanı';
+
+  @override
+  String get mrTaken => 'İlaç alındı olarak işaretlendi ✓';
+
+  @override
+  String get mrTook => 'Aldım';
+
+  @override
+  String get mrSnooze15 => '15 dk. sonra hatırlat';
+
+  @override
+  String get mrSnoozeMsg => '15 dakika sonra tekrar hatırlatılacak.';
+
+  @override
+  String get cdtLessonAdded => 'Ders eklendi';
+
+  @override
+  String get cdtDeleteLesson => 'Ders Sil';
+
+  @override
+  String get cdtSaved => 'Kaydedildi';
+
+  @override
+  String get chtFamilyChat => 'Aile Sohbeti';
+
+  @override
+  String get chtMyLocation => 'Konumum';
+
+  @override
+  String get chtMyFamily => 'Ailem';
+
+  @override
+  String get chtBackup => 'Yedekleme';
+
+  @override
+  String get chtRotation => 'Rotasyon';
+
+  @override
+  String get frpTitle => 'Aile Karnesi';
+
+  @override
+  String get frpCategories => 'Kategoriler';
+
+  @override
+  String get frpOverallScore => 'Genel Aile Skoru';
+
+  @override
+  String get frpAiPreparing => 'AI yorumu hazırlanıyor…';
+
+  @override
+  String get frpAiComment => 'AI Aile Yorumu';
+
+  @override
+  String get roleAdmin => 'Yönetici';
+
+  @override
+  String get roleParent => 'Ebeveyn';
+
+  @override
+  String get roleTeen => 'Genç';
+
+  @override
+  String get roleChild => 'Çocuk';
+
+  @override
+  String get roleElder => 'Büyük';
+
+  @override
+  String get roleGuest => 'Misafir';
+
+  @override
+  String get evCatAppointment => 'Randevu';
+
+  @override
+  String get evCatBirthday => 'Doğum Günü';
+
+  @override
+  String get evCatSchool => 'Okul';
+
+  @override
+  String get evCatWork => 'İş';
+
+  @override
+  String get evCatFamily => 'Aile';
+
+  @override
+  String get evCatTravel => 'Seyahat';
+
+  @override
+  String get evCatOther => 'Diğer';
+
+  @override
+  String get hbNoNotifications => 'Şimdilik yeni bildirim yok';
+
+  @override
+  String get hbCoverUpdated => 'Kapak fotoğrafı güncellendi';
+
+  @override
+  String get hbCoverFailed => 'Fotoğraf kaydedilemedi';
+
+  @override
+  String get hbTodayTask => 'BUGÜN GÖREV';
+
+  @override
+  String get hbDayStreak => 'GÜN SERİSİ';
+
+  @override
+  String get hbOnline => 'ÇEVRİMİÇİ';
+
+  @override
+  String get fmnRole => 'Rol';
+
+  @override
+  String get fmnEnterName => 'Lütfen ad girin';
+
+  @override
+  String fmnRoleUpdateFailed(Object msg) {
+    return 'Rol güncellenemedi: $msg';
+  }
+
+  @override
+  String fmnOpFailed(Object msg) {
+    return 'İşlem başarısız: $msg';
+  }
+
+  @override
+  String get hsAllergyHint =>
+      'Örn: yer fıstığı, polen, antibiyotik (virgülle ayırın)';
+
+  @override
+  String get hsConditionHint => 'Örn: astım, diyabet (virgülle ayırın)';
+
+  @override
+  String catEarned(Object n) {
+    return 'Kazanılan Rozetler ($n)';
+  }
+
+  @override
+  String catPending(Object n) {
+    return 'Kazanılmayı Bekleyen ($n)';
+  }
+
+  @override
+  String catLevel(Object n) {
+    return 'Seviye $n • Kahraman';
+  }
+
+  @override
+  String get catNextLevel => 'Sonraki seviyeye:';
+
+  @override
+  String get catOk => 'Tamam';
+
+  @override
+  String get hbAllUpToDate => 'Her şey güncel';
+
+  @override
+  String get stgTitle => 'Ayarlar';
+
+  @override
+  String get stgSubtitle => 'FamilyHub\'ınızı yönetin';
+
+  @override
+  String get stgNotifDesc =>
+      'Etkinlik, görev, acil durum, sohbet ve konum bildirimleri';
+
+  @override
+  String stgMemberCount(Object n) {
+    return '$n Üye';
+  }
+
+  @override
+  String get stgClear => 'Temizle';
+
+  @override
+  String get stgLeftFamily => 'Aileden ayrıldınız.';
+
+  @override
+  String stgLeaveFailed(Object msg) {
+    return 'Ayrılma hatası: $msg';
+  }
+
+  @override
+  String get stgAllDeleted => 'Tüm veriler silindi.';
+
+  @override
+  String stgDeleteFailed(Object msg) {
+    return 'Silme hatası: $msg';
+  }
+
+  @override
+  String get stgCacheCleared => 'Önbellek temizlendi.';
+
+  @override
+  String stgClearFailed(Object msg) {
+    return 'Temizleme hatası: $msg';
+  }
+
+  @override
+  String get regEmailHint => 'E-posta adresiniz';
+
+  @override
+  String get regFamilyCodeHint => 'Aile Kodu (Örn: FH-123456)';
+
+  @override
+  String get regFamilyNameHint => 'Aile Adı (Örn: Yılmaz Ailesi)';
+
+  @override
+  String get regOr => 'veya';
+
+  @override
+  String get regPasswordHint => 'Şifre (en az 8 karakter)';
+
+  @override
+  String get privExportShareText => 'FamilyHub Veri Dışa Aktarımı';
+
+  @override
+  String get privActivityStatus => 'Aktivite Durumu';
+
+  @override
+  String get baOptimize => 'Optimize Et';
+
+  @override
+  String get baRecalculate => 'Yeniden Hesapla';
+
+  @override
+  String get baAvgAccuracy => 'Ortalama hassasiyet';
+
+  @override
+  String get baOptimalRatio => 'Optimal profil oranı';
+
+  @override
+  String get baWrongSwitch => 'Yanlış profil geçişi';
+
+  @override
+  String get stTime => 'Hikaye Zamanı';
+
+  @override
+  String get stDailySub => 'Bugünün 4 görselli hikayesi';
+
+  @override
+  String stPageRead(Object n) {
+    return '$n sayfa · Oku';
+  }
+
+  @override
+  String get stIllustrated => 'Görselli hikaye';
+
+  @override
+  String get stLesson => 'Hikayeden Ders';
+
+  @override
+  String get chatPickGif => 'GIF Seç';
+
+  @override
+  String get chatToday => 'Bugün';
+
+  @override
+  String get chatYesterday => 'Dün';
+
+  @override
+  String get ambMicRequired => 'Mikrofon izni gerekli';
+
+  @override
+  String ambRecordSaved(Object name) {
+    return 'Kayıt kaydedildi: $name';
+  }
+
+  @override
+  String get ambManualButton => 'Manuel Buton';
+
+  @override
+  String get masViewProfile => 'Profili Görüntüle';
+
+  @override
+  String get masHealthCard => 'Sağlık Kartı';
+
+  @override
+  String get masLiveLocation => 'Canlı Konum';
+
+  @override
+  String get masLeaveFamily => 'Aileden Ayrıl';
+
+  @override
+  String get masRemoveMember => 'Üyeyi Çıkar';
+
+  @override
+  String fpRoleUpdated(Object role) {
+    return 'Rol güncellendi: $role';
+  }
+
+  @override
+  String fpPermUpdateFailed(Object msg) {
+    return 'Yetki güncellenemedi: $msg';
+  }
+
+  @override
+  String get chlAnotherSuggestion => 'Başka Öneri';
+
+  @override
+  String get chlTodayMeal => 'Bugünün Yemeği';
+
+  @override
+  String get chlHousework => 'Ev İşleri';
+
+  @override
+  String get chlSaveTip => 'Tasarruf İpucu';
+
+  @override
+  String get chlEmergency => 'Acil Durum';
+
+  @override
+  String get strTitleHint => 'Başlık (örn: Egzersiz, Kitap Okuma)';
+
+  @override
+  String get strNoteHint => 'Not (isteğe bağlı)';
+
+  @override
+  String get strTitle => 'Streak';
+
+  @override
+  String get strAddNew => 'Yeni Streak Ekle';
+
+  @override
+  String get hapFullChat => 'Tam sohbet';
+
+  @override
+  String get hapThinking => 'Düşünüyor…';
+
+  @override
+  String get hapAskHint => 'FamilyHub AI\'ya sor…';
+
+  @override
+  String get flStandard => 'Standart';
+
+  @override
+  String get flStrobe => 'Strobe';
+
+  @override
+  String vcAcceptFailed(Object msg) {
+    return 'Arama kabul edilemedi: $msg';
+  }
+
+  @override
+  String get vcReject => 'Reddet';
+
+  @override
+  String get vcHangup => 'Kapat';
+
+  @override
+  String get tskDeleteTask => 'Görevi Sil';
+
+  @override
+  String csSyncFailed(Object msg) {
+    return 'Senkronizasyon hatası: $msg';
+  }
+
+  @override
+  String get csScanCalendars => 'Takvimleri Tara';
+
+  @override
+  String get csConfigure => 'Ayarla';
+
+  @override
+  String get csMainCalendar => 'Ana takvim';
+
+  @override
+  String secBiometricError(Object msg) {
+    return 'Biyometrik hata: $msg';
+  }
+
+  @override
+  String get secNewPasswordRepeat => 'Yeni Şifre (Tekrar)';
+
+  @override
+  String secAccountDeleteFailed(Object msg) {
+    return 'Hesap silme hatası: $msg';
+  }
+
+  @override
+  String get secBioEnabled => 'Biyometrik giriş etkinleştirildi';
+
+  @override
+  String get secBioDisabled => 'Biyometrik giriş devre dışı bırakıldı';
+
+  @override
+  String get cstLocationDenied => 'Konum izni kalıcı reddedildi.';
+
+  @override
+  String cstShareFailed(Object msg) {
+    return 'Konum paylaşılamadı: $msg';
+  }
+
+  @override
+  String get abProcessing => 'İşleniyor...';
+
+  @override
+  String get pgUpgrade => 'Premium\'a Yükselt';
+
+  @override
+  String get pgNotNow => 'Şimdi Değil';
+
+  @override
+  String get pgNoProduct =>
+      'Şu anda ürün bulunamadı. Lütfen daha sonra tekrar deneyin.';
+
+  @override
+  String get pgActive => 'Premium aktif! 🎉';
+
+  @override
+  String get pgRequired => 'Premium Gerekli';
+
+  @override
+  String pgFeatureLabel(Object feature) {
+    return '$feature Özelliği';
+  }
+
+  @override
+  String get pgUpgradeDesc =>
+      'Bu özelliği kullanmak için Premium\'a yükseltin.';
+
+  @override
+  String get invCopied => 'Kod kopyalandı';
+
+  @override
+  String get invCopy => 'Kopyala';
+
+  @override
+  String get invShare => 'Paylaş';
+
+  @override
+  String get accFamilyCode => 'Aile Kodu';
+
+  @override
+  String get devCatMotor => 'Motor';
+
+  @override
+  String get devCatSocial => 'Sosyal';
+
+  @override
+  String get devCatLanguage => 'Dil';
+
+  @override
+  String get devCatVision => 'Görme';
+
+  @override
+  String get devCatCognitive => 'Bilişsel';
+
+  @override
+  String get devCatSelfcare => 'Özbakım';
+
+  @override
+  String get devCatEmotional => 'Duygusal';
+
+  @override
+  String get devCatPhysical => 'Beden';
+
+  @override
+  String get devCatReligion => 'Din';
+
+  @override
+  String get devCatAcademic => 'Akademik';
+
+  @override
+  String get devCatDigital => 'Dijital';
+
+  @override
+  String get devCatScience => 'Fen';
+
+  @override
+  String get devCatMath => 'Matematik';
+
+  @override
+  String get devCatMusic => 'Müzik';
+
+  @override
+  String get devCatArt => 'Resim';
+
+  @override
+  String get devCatTurkish => 'Türkçe';
+
+  @override
+  String get lgPassword => 'Şifreniz';
+
+  @override
+  String get psPreferredLang => 'Tercih Edilen Dil';
+
+  @override
+  String get psThemePref => 'Tema Tercihi';
+
+  @override
+  String get szsHome => 'Ev';
+
+  @override
+  String get szsSchool => 'Okul';
+
+  @override
+  String szsRadius(Object m) {
+    return 'Yarıçap: ${m}m';
+  }
+
+  @override
+  String get atLow => 'Düşük';
+
+  @override
+  String get atMedium => 'Orta';
+
+  @override
+  String get atHigh => 'Yüksek';
+
+  @override
+  String get aiaTitle => 'AI Asistan';
+
+  @override
+  String get aiaSub => 'Alışveriş • Mutfak • Bütçe';
+
+  @override
+  String get aiaHint => 'Ne yapmamı istersin?';
+
+  @override
+  String get emTitle => 'Acil Durum Butonu';
+
+  @override
+  String get cdbHome => 'Ana Sayfa';
+
+  @override
+  String get cdbChat => 'Sohbet';
+
+  @override
+  String get cdbBadges => 'Rozetler';
+
+  @override
+  String get cdaTitle => 'Beceri Değerlendirme';
+
+  @override
+  String cdaProgress(Object pct) {
+    return 'İlerlemeniz: %$pct';
+  }
+
+  @override
+  String get cdaViewSources => 'Kaynakları gör';
+
+  @override
+  String get elLeaving => 'Uygulamadan Ayrılıyorsunuz';
+
+  @override
+  String get ccSaving => 'Kaydediliyor...';
+
+  @override
+  String get ccMsgHint => 'Mesaj yaz...';
+
+  @override
+  String privExportFailed(Object msg) {
+    return 'Veri dışa aktarma başarısız: $msg';
+  }
+
+  @override
+  String get saAttempt => 'Deneme: 1/3';
+
+  @override
+  String get steMsgHint => 'Sesli mesaj metni...';
+
+  @override
+  String get llMapView => 'Harita Görünümü';
+
+  @override
+  String get llRefresh => 'Yenile';
+
+  @override
+  String famRemoveFailed(Object msg) {
+    return 'Üye çıkarılamadı: $msg';
+  }
+
+  @override
+  String get famInvite => 'Davet Et';
+
+  @override
+  String get commonActive => 'Aktif';
+
+  @override
+  String get commonPassive => 'Pasif';
+
+  @override
+  String get commonUser => 'Kullanıcı';
+
+  @override
+  String get sfNotifSent =>
+      'Aile üyelerine bildirim gönderildi. Canlı konum paylaşılıyor.';
+
+  @override
+  String get sfLiveActive => 'Canlı konum aktif';
+
+  @override
+  String get sfLiveSend => 'Canlı konum gönder';
+
+  @override
+  String get srTestReminder => 'Test Hatırlatıcı';
+
+  @override
+  String get srEnter => 'Girince';
+
+  @override
+  String get srExit => 'Çıkınca';
+
+  @override
+  String get srApproach => 'Yaklaşınca';
+
+  @override
+  String eduAgeYears(Object age) {
+    return '$age yaş';
+  }
+
+  @override
+  String get sfCall112 => '112 Ara';
+
+  @override
+  String get commonClose => 'Kapat';
+
+  @override
+  String pmPayFailed(Object msg) {
+    return 'Ödeme başarısız: $msg';
+  }
+
+  @override
+  String get pmPlans => 'Premium Planlar';
+
+  @override
+  String get jfJoined => 'Aileye başarıyla katıldınız!';
+
+  @override
+  String icCreateFailed(Object msg) {
+    return 'Davet kodu oluşturulamadı: $msg';
+  }
+
+  @override
+  String get icTitle => 'Davet Kodu';
+
+  @override
+  String get actTitle => 'Son Aktiviteler';
+
+  @override
+  String get moodTitle => 'Aile Ruh Hali';
+
+  @override
+  String ccCallFailed(Object msg) {
+    return 'Arama başlatılamadı: $msg';
+  }
+
+  @override
+  String get sqAnswer1 => 'Cevap 1';
+
+  @override
+  String get sqAnswer2 => 'Cevap 2';
+
+  @override
+  String get sarDestination => 'Hedef';
+
+  @override
+  String cctSendFailed(Object msg) {
+    return 'Mesaj gönderilemedi: $msg';
+  }
+
+  @override
+  String get pcEdit => 'Düzenle';
+
+  @override
+  String get fmsTitle => 'Ailenin Ruh Hali';
+
+  @override
+  String get cpsOfflinePlan =>
+      'Çevrimdışı plan hazırlandı (AI\'ya ulaşılamadı).';
+
+  @override
+  String get cpsTitle => 'Haftalık Gelişim Planı';
+
+  @override
+  String cpsSubtitle(Object name) {
+    return '$name için kişiselleştirilmiş plan';
+  }
+
+  @override
+  String get cpsCreating => 'Oluşturuluyor...';
+
+  @override
+  String get cpsCreate => 'Planı Oluştur';
+
+  @override
+  String get fpEmailAddr => 'E-posta Adresi';
+
+  @override
+  String srSaveFailed(Object msg) {
+    return 'Atama kaydedilemedi: $msg';
+  }
+
+  @override
+  String srRejectFailed(Object msg) {
+    return 'Reddetme kaydedilemedi: $msg';
+  }
+
+  @override
+  String get srPoints => 'puan';
+
+  @override
+  String get srApprove => 'Onayla';
+
+  @override
+  String srdApplied(Object s) {
+    return 'Uygulandı: $s';
+  }
+
+  @override
+  String get hcsBloodType => 'Kan Grubu';
+
+  @override
+  String get sicTitle => 'Akıllı Uyarılar';
+
+  @override
+  String cadScore(Object score) {
+    return 'Gelişim skoru: %$score';
+  }
+
+  @override
+  String get cadAiPreparing => 'AI öneriler hazırlanıyor…';
+
+  @override
+  String get srReminderBody => 'Hatırlatma zamanı!';
+
+  @override
+  String get srExitHome => 'Evden çıkınca';
+
+  @override
+  String get srArriveWork => 'İşe varınca';
+
+  @override
+  String get srExactTime => 'Kesin zaman';
+
+  @override
+  String get srRelativeTime => 'Göreli zaman';
+
+  @override
+  String get srRecurring => 'Tekrarlayan';
+
+  @override
+  String get srSmartWindow => 'Akıllı pencere';
+
+  @override
+  String get srAppOpen => 'App açılınca';
+
+  @override
+  String get srTaskDone => 'Görev tamamlanınca';
+
+  @override
+  String get srLocationPattern => 'Lokasyon pattern';
+
+  @override
+  String get srInactivity => 'Hareketsizlik';
+
+  @override
+  String get srEnergyLevel => 'Enerji seviyesi';
+
+  @override
+  String get srSocialContext => 'Sosyal bağlam';
+
+  @override
+  String get srWeatherChange => 'Hava değişimi';
+
+  @override
+  String get srShoppingIntent => 'Alışveriş niyeti';
+
+  @override
+  String get srToneFormal => 'Resmi';
+
+  @override
+  String get srToneFriendly => 'Arkadaşça';
+
+  @override
+  String get srToneUrgent => 'Acil';
+
+  @override
+  String get srToneGentle => 'Nazik';
+
+  @override
+  String get chatPollQuestion => 'Soru (ör. Akşam ne yiyelim?)';
+
+  @override
+  String chatOption(Object n) {
+    return 'Seçenek $n';
+  }
+
+  @override
+  String get authWelcomeTitle => 'Ailenize Hoş Geldiniz';
+
+  @override
+  String get authWelcomeSubtitle => 'Birlikte daha güçlüsünüz';
+
+  @override
+  String get authFamilyBadge => 'Aile';
+
+  @override
+  String get authChildLoginPin => 'Çocuk Girişi (PIN ile)';
+
+  @override
+  String get authCreateFamilyCta => 'Aile Kur';
+
+  @override
+  String get authErrOffline =>
+      'İnternet bağlantısı bulunamadı. Bağlantınızı kontrol edip tekrar deneyin.';
+
+  @override
+  String get authErrServerUnavailable =>
+      'Giriş servisine şu anda ulaşılamıyor. Lütfen tekrar deneyin.';
+
+  @override
+  String get authErrInvalidCredentials => 'E-posta adresi veya parola hatalı.';
+
+  @override
+  String get authErrEmailNotConfirmed =>
+      'Devam etmek için e-posta adresinizi doğrulayın.';
+
+  @override
+  String get authErrRateLimited =>
+      'Çok fazla giriş denemesi yapıldı. Bir süre sonra tekrar deneyin.';
+
+  @override
+  String get authErrConfiguration =>
+      'Google ile giriş şu anda yapılandırılamadı. Lütfen e-posta ile giriş yapın.';
+
+  @override
+  String get authErrSessionMissing =>
+      'Oturumunuz bulunamadı. Lütfen tekrar giriş yapın.';
+
+  @override
+  String get authErrUnknown => 'Giriş yapılamadı. Lütfen tekrar deneyin.';
+
+  @override
+  String get authBiometricNotAvailable =>
+      'Biyometrik kimlik doğrulama desteklenmiyor';
+
+  @override
+  String get authBiometricNeedLoginFirst =>
+      'Önce e-posta ile giriş yapın, sonra parmak izi aktifleşir';
+
+  @override
+  String get devColorGameWin =>
+      'Harika iş çıkardın! Yarın yeni renkler seni bekliyor.';
+
+  @override
+  String get commonPlayAgain => 'Tekrar Oyna';
+
+  @override
+  String get commonFinish => 'Bitir';
+
+  @override
+  String get devColorGameTitle => 'Renkleri Eşleştir';
+
+  @override
+  String devColorGameToday(Object theme) {
+    return 'Bugünün oyunu: $theme';
+  }
+
+  @override
+  String devColorGameRound(Object current, Object total) {
+    return 'Tur $current/$total';
+  }
+
+  @override
+  String get devColorGameFindColor => 'Bu rengi bul:';
+
+  @override
+  String devStoryLabel(Object index) {
+    return 'Hikaye $index';
+  }
+
+  @override
+  String get devStoryReadOnline => 'İnternetten devamını oku';
+
+  @override
+  String get priorityLow => 'Düşük';
+
+  @override
+  String get priorityMedium => 'Orta';
+
+  @override
+  String get priorityHigh => 'Yüksek';
+
+  @override
+  String get taskTitleRequired => 'Görev başlığı gerekli';
+
+  @override
+  String subFilterActive(Object count) {
+    return 'Aktif ($count)';
+  }
+
+  @override
+  String subFilterInactive(Object count) {
+    return 'Pasif ($count)';
+  }
+
+  @override
+  String subRenewal(Object date) {
+    return 'Yenileme: $date';
+  }
+
+  @override
+  String get callEmergency112 => '112 Ara';
+
+  @override
+  String get growthTracking => 'Boy / Kilo Takibi';
+
+  @override
+  String get childDevTitle => 'Çocuk Gelişimi & Okul';
+
+  @override
+  String get childAddChild => 'Çocuk Ekle';
+
+  @override
+  String get childCreateProfile => 'Çocuk Profili Oluştur';
+
+  @override
+  String get childAddLesson => 'Ders Ekle';
+
+  @override
+  String childAddHomework(Object name) {
+    return 'Ödev Ekle — $name';
+  }
+
+  @override
+  String childAddGrowth(Object name) {
+    return 'Büyüme Ölçümü — $name';
+  }
+
+  @override
+  String get remTest => 'Test Et';
+
+  @override
+  String get remTriggers => 'Tetikleyiciler (Context)';
+
+  @override
+  String get remLocationLabel => 'Lokasyon';
+
+  @override
+  String get remTimeLabel => 'Zaman';
+
+  @override
+  String get remSnooze10 => '10dk Ertele';
+
+  @override
+  String get eduTimeUp => 'Süre doldu! Aktivite tamamlandı';
+
+  @override
+  String get eduActivityAdded => 'Aktiviteniz eklendi';
+
+  @override
+  String kitchenRecipeAdded(Object title) {
+    return '\"$title\" tarif kutuna eklendi';
+  }
+
+  @override
+  String get healthDoctorAppt => 'Doktor Randevusu';
+
+  @override
+  String get healthAddMember => 'Aile Üyesi Ekle';
+
+  @override
+  String healthAddMedication(Object name) {
+    return 'İlaç Ekle — $name';
+  }
+
+  @override
+  String get healthAddVitamin => 'Vitamin/Takviye Ekle';
+
+  @override
+  String get healthAddReport => 'Rapor / Belge Ekle';
+
+  @override
+  String healthAddAppt(Object name) {
+    return 'Randevu Ekle — $name';
+  }
+
+  @override
+  String get healthActive => 'Aktif';
+
+  @override
+  String batteryTarget(Object target) {
+    return 'Hedef: $target';
+  }
+
+  @override
+  String get commonApply => 'Uygula';
+
+  @override
+  String get commonDetail => 'Detay';
+
+  @override
+  String get insightSpendingHighTitle => 'Harcamalar gelire yaklaştı';
+
+  @override
+  String insightSpendingHighMsg(Object expense, Object income, Object percent) {
+    return 'Bu ay giderin (€$expense) gelirinin (€$income) yaklaşık %$percent kadarına ulaştı.';
+  }
+
+  @override
+  String get insightSavingTitle => 'Tasarruf yolundasın';
+
+  @override
+  String insightSavingMsg(Object percent) {
+    return 'Bu ay gelirinin yaklaşık %$percent kadarını biriktiriyorsun. Harika!';
+  }
+
+  @override
+  String get insightFixedTitle => 'Aylık sabit giderin';
+
+  @override
+  String insightFixedMsg(Object count, Object total) {
+    return '$count abonelik/gider · toplam ≈€$total/ay.';
+  }
+
+  @override
+  String insightChildAssessTitle(Object name) {
+    return '$name için değerlendirme';
+  }
+
+  @override
+  String insightChildAssessMsg(Object name) {
+    return '$name için beceri değerlendirmesi henüz yapılmadı. Gelişimi takip etmek için başlayın.';
+  }
+
+  @override
+  String get insightShoppingEmptyTitle => 'Alışveriş listen boş';
+
+  @override
+  String get insightShoppingEmptyMsg =>
+      'AI market listesiyle hızlıca bir alışveriş listesi oluşturabilirsin.';
+
+  @override
+  String get insightShoppingTimeTitle => 'Alışveriş zamanı';
+
+  @override
+  String insightShoppingTimeMsg(Object count) {
+    return 'Listende $count bekleyen ürün var.';
+  }
+
+  @override
+  String confirmDeleteNamed(Object name) {
+    return '\"$name\" silinecek. Emin misiniz?';
+  }
+
+  @override
+  String get priorityUrgent => 'Acil';
+
+  @override
+  String get rtMorning => 'Sabah';
+
+  @override
+  String get rtEvening => 'Akşam';
+
+  @override
+  String get rtWeekly => 'Haftalık';
+
+  @override
+  String get rtCustom => 'Özel';
+
+  @override
+  String get rtSeasonal => 'Mevsimsel';
+
+  @override
+  String get rtEventBased => 'Etkinlik';
+
+  @override
+  String taskAddError(Object error) {
+    return 'Görev eklenirken hata: $error';
+  }
+
+  @override
+  String get taskUpdated => 'Görev güncellendi';
+
+  @override
+  String taskUpdateError(Object error) {
+    return 'Görev güncellenirken hata: $error';
+  }
+
+  @override
+  String taskStatusError(Object error) {
+    return 'Durum değiştirilirken hata: $error';
+  }
+
+  @override
+  String get pickDueDate => 'Bitiş Tarihi Seç';
+
+  @override
+  String get pickDueDateOptional => 'Bitiş Tarihi Seç (opsiyonel)';
+
+  @override
+  String dueLabel(Object date) {
+    return 'Bitiş: $date';
+  }
+
+  @override
+  String rtStarted(Object name) {
+    return '$name başlatıldı!';
+  }
+
+  @override
+  String get rtRoutinesTitle => 'Rutinler';
+
+  @override
+  String get rtStateScheduled => 'Planlandı';
+
+  @override
+  String get rtStateActive => 'Aktif';
+
+  @override
+  String get rtStatePaused => 'Duraklatıldı';
+
+  @override
+  String get rtStateCompleted => 'Tamamlandı';
+
+  @override
+  String get rtStateCancelled => 'İptal';
+
+  @override
+  String get calSyncTitle => 'Takvim Senkronizasyonu';
+
+  @override
+  String get calSyncEvery15 => '15 dakikada bir';
+
+  @override
+  String get crashTotalEvents => 'TOPLAM OLAYLAR';
+
+  @override
+  String get crashDetected => 'Tespit edilen';
+
+  @override
+  String get crashFalseAlarm => 'Yanlış alarm';
+
+  @override
+  String get crashRealCrash => 'Gerçek kaza';
+
+  @override
+  String get crashRealCrashUpper => 'GERÇEK KAZA';
+
+  @override
+  String get crashPending => 'Bekleyen';
+
+  @override
+  String get crash112Called => '112 arandı';
+
+  @override
+  String get crash112NotCalled => '112 aranmadı (kullanıcı iptal etti)';
+
+  @override
+  String get crashUserOk => 'Kullanıcı \"İyiyim\" dedi';
+
+  @override
+  String get battChartTitle => 'BATARYA TÜKETİMİ (7 Gün)';
+
+  @override
+  String get battHigh => 'Yüksek';
+
+  @override
+  String get battLow => 'Düşük';
+
+  @override
+  String get dowMon => 'Pazartesi';
+
+  @override
+  String get dowTue => 'Salı';
+
+  @override
+  String get dowWed => 'Çarşamba';
+
+  @override
+  String get dowThu => 'Perşembe';
+
+  @override
+  String get dowFri => 'Cuma';
+
+  @override
+  String get dowSat => 'Cumartesi';
+
+  @override
+  String get dowSun => 'Pazar';
+
+  @override
+  String get battProfileStationary => 'Durağan';
+
+  @override
+  String get battProfileWalking => 'Yürüyüş';
+
+  @override
+  String get battProfileDriving => 'Araç';
+
+  @override
+  String get battProfileRunning => 'Koşu';
+
+  @override
+  String get battProfileEmergency => 'Acil';
+
+  @override
+  String get battProfileCycling => 'Bisiklet';
+
+  @override
+  String get csDirToExternal => 'FamilyHub → Dışarı';
+
+  @override
+  String get csDirFromExternal => 'Dışarı → FamilyHub';
+
+  @override
+  String get csDirBidirectional => 'Çift yönlü';
+
+  @override
+  String get csConflictLastWrite => 'Son yazan kazanır';
+
+  @override
+  String get csConflictManual => 'Her zaman sor';
+
+  @override
+  String get csConflictMerge => 'Birleştir';
+
+  @override
+  String get csConflictSourcePriority => 'Kaynak önceliği';
+
+  @override
+  String get timeAgoJustNow => 'Az önce';
+
+  @override
+  String timeAgoMinutes(Object n) {
+    return '$n dk önce';
+  }
+
+  @override
+  String timeAgoHours(Object n) {
+    return '$n saat önce';
+  }
+
+  @override
+  String timeAgoDays(Object n) {
+    return '$n gün önce';
+  }
+
+  @override
+  String csActiveConnections(Object n) {
+    return '$n aktif bağlantı';
+  }
+
+  @override
+  String csLastSync(Object time) {
+    return 'Son senkronizasyon: $time';
+  }
+
+  @override
+  String get csNeverSynced => 'Henüz senkronize edilmedi';
+
+  @override
+  String get csAdded => 'Eklenen';
+
+  @override
+  String get csUpdated => 'Güncellenen';
+
+  @override
+  String get csDeleted => 'Silinen';
+
+  @override
+  String csEventsSynced(Object n) {
+    return '$n etkinlik senkronize edildi';
+  }
+
+  @override
+  String csCalendarsFound(Object n) {
+    return '$n takvim bulundu';
+  }
+
+  @override
+  String csProviderSettings(Object provider) {
+    return '$provider Ayarları';
+  }
+
+  @override
+  String get csPermNeededShort =>
+      'Takvim erişim izni gerekli. Ayarlardan izin verin.';
+
+  @override
+  String get csPermNeededBody =>
+      'Takvimlerinizi senkronize etmek için takvim erişim izni vermeniz gerekiyor.';
+
+  @override
+  String get childPermissions => 'İzinler';
+
+  @override
+  String get budgetTapToEdit => 'Düzenlemek için dokun';
+
+  @override
+  String get colorBlue => 'Mavi';
+
+  @override
+  String get colorGreen => 'Yeşil';
+
+  @override
+  String get colorOrange => 'Turuncu';
+
+  @override
+  String get colorPurple => 'Mor';
+
+  @override
+  String get colorRed => 'Kırmızı';
+
+  @override
+  String get colorPink => 'Pembe';
+
+  @override
+  String childDeleteConfirm(Object name) {
+    return '$name adlı çocuk hesabını silmek istediğinize emin misiniz?';
+  }
+
+  @override
+  String get haTitle => 'Sağlık Makaleleri';
+
+  @override
+  String get haSubtitle =>
+      'Sağlıklı bir yaşam için doğru bilgi, her gün seninle.';
+
+  @override
+  String get haSeeAll => 'Tüm Makaleleri Gör';
+
+  @override
+  String get haBrowseAll => 'Sağlıkla ilgili tüm içeriklere göz atın.';
+
+  @override
+  String get haArticleBadge => 'Sağlık Makalesi';
+
+  @override
+  String get haCatCurrent => 'Güncel';
+
+  @override
+  String get haCatForYou => 'Senin için';
+
+  @override
+  String get haCatPopular => 'Popüler';
+
+  @override
+  String get haCatChild => 'Çocuk';
+
+  @override
+  String get haCatWomen => 'Kadın';
+
+  @override
+  String get haCatFamily => 'Aile';
+
+  @override
+  String get haDateToday => 'Bugün';
+
+  @override
+  String get commonRefresh => 'Yenile';
+
+  @override
+  String get commonRefreshing => 'Yenileniyor…';
+
+  @override
+  String get greetMorning => 'Günaydın';
+
+  @override
+  String get greetDay => 'İyi günler';
+
+  @override
+  String get greetEvening => 'İyi akşamlar';
+
+  @override
+  String get greetNight => 'İyi geceler';
+
+  @override
+  String briefingSummary(Object greeting, Object family, Object day) {
+    return '$greeting! $family için güzel bir $day. Bugünü planlamak için harika bir zaman.';
+  }
+
+  @override
+  String get briefingAddEvent => 'Takvime bir etkinlik ekle';
+
+  @override
+  String briefingReviewEvents(Object count) {
+    return '$count etkinliğini gözden geçir';
+  }
+
+  @override
+  String get briefingCreateTask => 'Aileye bir görev oluştur';
+
+  @override
+  String briefingCompleteTasks(Object count) {
+    return '$count görevini tamamla';
+  }
+
+  @override
+  String get briefingUpdateShopping => 'Alışveriş listeni güncelle';
+
+  @override
+  String get hubQuickAccess => 'HIZLI ERİŞİM';
+
+  @override
+  String get hubLocating => 'Konum alınıyor…';
+
+  @override
+  String get hubOffline =>
+      'Çevrimdışısın — değişiklikler bağlanınca senkronlanacak';
+
+  @override
+  String get hubShopping => 'Alışveriş';
+
+  @override
+  String get hubKitchen => 'Mutfak';
+
+  @override
+  String get hubChild => 'Çocuk';
+
+  @override
+  String get hubDevelopment => 'Gelişim';
+
+  @override
+  String get hubHealth => 'Sağlık';
+
+  @override
+  String get hubLocationTile => 'Konum';
+
+  @override
+  String get hubEmergency => 'Acil';
+
+  @override
+  String get hubBudget => 'Bütçe';
+
+  @override
+  String get hubExpenses => 'Ev Giderleri';
+
+  @override
+  String get hubGallery => 'Galeri';
+
+  @override
+  String get hubEducation => 'Eğitim';
+
+  @override
+  String get hubAI => 'AI';
+
+  @override
+  String get hubLegal => 'Yasal Haklar';
+
+  @override
+  String get hubIntelligence => 'Aile Zekası';
+
+  @override
+  String get hubFamilyHubAI => 'FamilyHub AI';
+
+  @override
+  String get sugDaily => 'Günlük Öneriler';
+
+  @override
+  String sugReadyTap(Object count) {
+    return '$count kişisel öneri hazır — göstermek için dokun';
+  }
+
+  @override
+  String get sugAlternatives => 'Alternatif Öneriler';
+
+  @override
+  String sugAgeRange(Object min, Object max) {
+    return '$min-$max yaş';
+  }
+
+  @override
+  String get sugCatMeal => 'Bugünün Yemeği';
+
+  @override
+  String get sugCatChildDev => 'Çocuk Gelişimi';
+
+  @override
+  String get sugCatSaving => 'Tasarruf Önerileri';
+
+  @override
+  String get sugCatChores => 'Ev İşleri';
+
+  @override
+  String get sugCatHealth => 'Sağlık';
+
+  @override
+  String get sugCatSafety => 'Güvenlik';
+
+  @override
+  String get sugCatGeneric => 'Öneri';
+
+  @override
+  String get sugError =>
+      'Öneriler yüklenirken bir hata oluştu. Tekrar deneyin.';
+
+  @override
+  String get sugEmpty => 'Henüz öneri yok. Yenilemeyi deneyin.';
+
+  @override
+  String get sugNutrition => 'Besin Değerleri';
+
+  @override
+  String get sugIngredients => 'Malzemeler';
+
+  @override
+  String get sugSteps => 'Adımlar';
+
+  @override
+  String get sugAiTips => 'AI İpuçları';
+
+  @override
+  String get sugFat => 'Yağ';
+
+  @override
+  String sugAddedToShopping(Object count) {
+    return '$count ürün alışveriş listesine eklendi';
+  }
+
+  @override
+  String sugRemindIn(Object minutes) {
+    return '$minutes dakika sonra hatırlatılacak';
+  }
+
+  @override
+  String sugSelected(Object title) {
+    return '\"$title\" seçildi';
+  }
+
+  @override
+  String get sugCatSocial => 'Sosyal';
+
+  @override
+  String get sugProgress => 'İlerleme';
+
+  @override
+  String get sugAddComment => 'Yorum Ekle';
+
+  @override
+  String get sugRemoveFavorite => 'Favorilerden Çıkar';
+
+  @override
+  String get sugWhenRemind => 'Ne zaman hatırlatayım?';
+
+  @override
+  String sugLastDone(Object date) {
+    return 'Son yapılma: $date';
+  }
+
+  @override
+  String get chatNoFamily => 'Önce bir aileye katılın';
+
+  @override
+  String get chatSendFailed => 'Mesaj gönderilemedi';
+
+  @override
+  String get chatUploading => 'Yükleniyor…';
+
+  @override
+  String get chatUploadFailed => 'Dosya yüklenemedi';
+
+  @override
+  String get chatPhoto => 'Fotoğraf';
+
+  @override
+  String get chatVoiceMessage => 'Sesli mesaj';
+
+  @override
+  String get chatFileTooLarge => 'Dosya çok büyük (en fazla 50 MB)';
+
+  @override
+  String get chatNoResults => 'Sonuç bulunamadı';
+
+  @override
+  String get chatClearForMeDesc =>
+      'Bu cihazdaki yerel sohbet kopyası temizlenir. Aile mesajları korunur.';
+
+  @override
+  String get chatCleared => 'Yerel sohbet temizlendi';
+
+  @override
+  String chatTypingOne(String name) {
+    return '$name yazıyor…';
+  }
+
+  @override
+  String chatTypingTwo(String a, String b) {
+    return '$a ve $b yazıyor…';
+  }
+
+  @override
+  String get chatTypingMany => 'Birkaç kişi yazıyor…';
+
+  @override
+  String get csNoCalendars =>
+      'Cihaz takvimlerine erişilemedi. Takvim iznini kontrol edin.';
+
+  @override
+  String get baNoSuggestions => 'Şu anda optimizasyon önerisi yok.';
+
+  @override
+  String get srdNoDataYet =>
+      'Henüz yeterli veri yok. Hatırlatıcı tetiklendikçe burası dolar.';
+
+  @override
+  String get srdLoadFailed => 'Hatırlatıcı yüklenemedi.';
+
+  @override
+  String get subStripeSoon =>
+      'Stripe ödeme sistemi yakında aktif olacak — aboneliklerinizi buradan yönetebileceksiniz.';
+
+  @override
+  String get sosSettingsSaveFailed => 'SOS ayarları kaydedilemedi.';
+
+  @override
+  String get sosEscalationNote =>
+      'Bu adımlar yukarıdaki ayarlarınıza göre belirlenir. Kapalı adımlar acil durumda çalışmaz.';
+
+  @override
+  String get settingsSaveFailed => 'Ayarlar kaydedilemedi.';
 }

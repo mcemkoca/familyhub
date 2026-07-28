@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../config/constants.dart';
+import 'package:familyhub/l10n/app_localizations.dart';
 import '../../widgets/settings/screen_header.dart';
 import 'package:go_router/go_router.dart';
 
@@ -36,13 +36,12 @@ class PrivacyPolicyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = isDark ? AppColors.darkBackground : AppColors.cloudWhite;
+    final bg = const Color(0xFF0A0A0F);
 
     return Scaffold(
       backgroundColor: bg,
       appBar: ScreenHeader(
-        title: 'Gizlilik Politikası',
+        title: AppLocalizations.of(context).gizlilikPolitikasi,
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -56,7 +55,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 16),
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: isDark ? AppColors.darkCard : Colors.white,
+              color: const Color(0xFF13131A),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
@@ -64,21 +63,19 @@ class PrivacyPolicyScreen extends StatelessWidget {
               children: [
                 Text(
                   s['title']!,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                    color: Color(0xFFE5E7EB),
                   ),
                 ),
                 const SizedBox(height: 8),
                 Text(
                   s['content']!,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     height: 1.6,
-                    color: isDark
-                        ? AppColors.darkTextSecondary
-                        : AppColors.slate,
+                    color: Color(0xFF6B7280),
                   ),
                 ),
               ],

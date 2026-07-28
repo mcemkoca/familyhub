@@ -3,8 +3,13 @@ import '../domain/models/routine.dart';
 import '../domain/models/routine_template.dart';
 import '../repositories/routine_repository.dart';
 import 'notification_service.dart';
+import 'localization/locale_service.dart';
 
 class RoutineService {
+  static String _text(Map<String, String> values) {
+    final lang = LocaleService.resolveInitialLocale().languageCode;
+    return values[lang] ?? values['tr']!;
+  }
   static final _repo = RoutineRepository();
   static final _activeRoutines = <String, Routine>{};
   // ignore: close_sinks
@@ -59,9 +64,8 @@ class RoutineService {
     _activeRoutines[routineId] = updated;
 
     await NotificationService.showInstantNotification(
-      title: '🚀 ${routine.name} Başladı!',
-      body:
-          '${routine.steps.length} adım, ${routine.estimatedTotalDuration} dk',
+      title: _text({'tr': '🚀 ${routine.name} Başladı!', 'en': '🚀 ${routine.name} Started!', 'nl': '🚀 ${routine.name} is gestart!', 'fr': '🚀 ${routine.name} a commencé !'}),
+      body: _text({'tr': '${routine.steps.length} adım, ${routine.estimatedTotalDuration} dk', 'en': '${routine.steps.length} steps, ${routine.estimatedTotalDuration} min', 'nl': '${routine.steps.length} stappen, ${routine.estimatedTotalDuration} min', 'fr': '${routine.steps.length} étapes, ${routine.estimatedTotalDuration} min'}),
       payload: 'routine:$routineId',
     );
   }
@@ -131,8 +135,8 @@ class RoutineService {
     if (isComplete) {
       _activeRoutines.remove(routineId);
       await NotificationService.showInstantNotification(
-        title: '🎉 ${routine.name} Tamamlandı!',
-        body: 'Tebrikler, tüm adımları tamamladınız!',
+        title: _text({'tr': '🎉 ${routine.name} Tamamlandı!', 'en': '🎉 ${routine.name} Completed!', 'nl': '🎉 ${routine.name} is voltooid!', 'fr': '🎉 ${routine.name} est terminée !'}),
+        body: _text(const {'tr': 'Tebrikler, tüm adımları tamamladınız!', 'en': 'Congratulations, you completed every step!', 'nl': 'Gefeliciteerd, je hebt alle stappen voltooid!', 'fr': 'Félicitations, vous avez terminé toutes les étapes !'}),
         payload: 'routine:$routineId:completed',
       );
     }
@@ -257,8 +261,7 @@ class RoutineService {
     if (lowCompletionSteps.isNotEmpty) {
       suggestions.add({
         'type': 'modify_routine',
-        'reason':
-            '${lowCompletionSteps.first.title} adımı uzun sürüyor, süreyi kısaltabilirsiniz',
+        'reason': _text({'tr': '${lowCompletionSteps.first.title} adımı uzun sürüyor, süreyi kısaltabilirsiniz', 'en': 'The ${lowCompletionSteps.first.title} step takes a long time; you could shorten it', 'nl': 'De stap ${lowCompletionSteps.first.title} duurt lang; je kunt de duur verkorten', 'fr': 'L’étape ${lowCompletionSteps.first.title} prend beaucoup de temps ; vous pourriez la raccourcir'}),
         'confidence': 0.75,
       });
     }
@@ -266,8 +269,7 @@ class RoutineService {
     if (routine.steps.length > 5) {
       suggestions.add({
         'type': 'reorder_steps',
-        'reason':
-            'AI öğrenen optimal sıralama ile rutini %15 hızlandırabilirsiniz',
+        'reason': _text(const {'tr': 'Yapay zekânın öğrendiği en uygun sıralamayla rutini %15 hızlandırabilirsiniz', 'en': 'You could speed up the routine by 15% with the AI-optimized order', 'nl': 'Je kunt de routine met 15% versnellen met de door AI geoptimaliseerde volgorde', 'fr': 'Vous pourriez accélérer la routine de 15 % grâce à l’ordre optimisé par l’IA'}),
         'confidence': 0.82,
       });
     }
@@ -275,7 +277,7 @@ class RoutineService {
     if (routine.type == RoutineType.morning) {
       suggestions.add({
         'type': 'new_routine',
-        'reason': 'Hafta sonları için "Yavaş Başlangıç" rutini öneriyorum',
+        'reason': _text(const {'tr': 'Hafta sonları için “Yavaş Başlangıç” rutini öneriyorum', 'en': 'I recommend a “Slow Start” routine for weekends', 'nl': 'Ik raad een routine “Rustige start” aan voor het weekend', 'fr': 'Je recommande une routine « Démarrage en douceur » pour le week-end'}),
         'confidence': 0.68,
       });
     }

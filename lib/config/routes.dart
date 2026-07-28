@@ -10,6 +10,8 @@ import '../presentation/screens/education/education_screen.dart';
 import '../presentation/screens/organizer/tasks_screen.dart';
 import '../presentation/screens/organizer/calendar_screen.dart';
 import '../presentation/screens/organizer/shopping_list_screen.dart';
+import '../features/legal_benefits/presentation/legal_benefits_screen.dart';
+import '../features/family_intelligence/presentation/family_intelligence_screen.dart';
 import '../presentation/screens/organizer/smart_rotation_screen.dart';
 import '../presentation/screens/organizer/calendar_sync_screen.dart';
 import '../presentation/screens/reminders/smart_reminders_screen.dart';
@@ -19,21 +21,24 @@ import '../presentation/screens/routines/routines_screen.dart';
 import '../presentation/screens/routines/routine_detail_screen.dart';
 import '../presentation/screens/crash/crash_screens.dart';
 import '../presentation/screens/location_tracking/location_tracking_screens.dart';
-import '../presentation/screens/location_tracking/family_map_screen.dart';
 import '../presentation/screens/emergency/emergency_screens.dart';
 import '../presentation/screens/budget/budget_screen.dart';
 import '../presentation/screens/family/family_screen.dart';
+import '../presentation/screens/family/family_detail_screen.dart';
 import '../presentation/screens/call/call_contact_list_screen.dart';
 import '../presentation/screens/chat/chat_screen.dart';
 import '../presentation/screens/chat/mood_screen.dart';
 import '../presentation/screens/settings/settings_screen.dart';
 import '../presentation/screens/settings/appearance_settings_screen.dart';
+import '../presentation/screens/settings/hub_customize_screen.dart';
 import '../presentation/screens/settings/cloud_backup_screen.dart';
 import '../presentation/screens/settings/weather_settings_screen.dart';
 import '../presentation/screens/safety/safety_screen.dart';
 import '../presentation/screens/safety/location_screen.dart';
 
 import '../presentation/screens/safety/health_card_screen.dart';
+import '../presentation/screens/safety/health_card_edit_screen.dart';
+import '../presentation/screens/insights/family_report_screen.dart';
 import '../presentation/screens/safety/safe_zones_screen.dart';
 import '../presentation/screens/safety/safe_arrival_screen.dart';
 import '../presentation/screens/safety/ambient_listening_screen.dart';
@@ -56,6 +61,7 @@ import '../presentation/screens/settings/backup_settings_screen.dart';
 import '../presentation/screens/settings/user_guide_screen.dart';
 import '../presentation/screens/settings/about_app_screen.dart';
 import '../presentation/screens/settings/invite_code_screen.dart';
+import '../presentation/screens/settings/join_family_screen.dart';
 import '../presentation/screens/settings/terms_of_service_screen.dart';
 import '../presentation/screens/settings/privacy_policy_screen.dart';
 import '../presentation/screens/settings/screen_time_settings_screen.dart';
@@ -72,10 +78,14 @@ import '../presentation/screens/child/child_management_screen.dart';
 import '../presentation/screens/activities/activities_screen.dart';
 import '../presentation/screens/streak/streak_screen.dart';
 import '../presentation/screens/main_shell.dart';
-import '../presentation/screens/health/family_health_screen.dart';
+import '../presentation/screens/health/health_dashboard.dart';
+import '../features/vaccinations/presentation/vaccination_screen.dart';
+import '../features/health_records/presentation/health_records_screen.dart';
 import '../presentation/screens/budget/subscription_screen.dart';
-import '../presentation/screens/child/child_development_screen.dart';
+import '../features/subscription/presentation/plans_screen.dart';
+import '../presentation/screens/child/child_dev_dashboard.dart';
 import '../presentation/screens/ai/ai_assistant_screen.dart';
+import '../features/context_memory/presentation/memory_center_screen.dart';
 import '../services/auth_service.dart';
 import '../services/child_auth_service.dart';
 import '../domain/models/crash_event.dart';
@@ -94,6 +104,10 @@ class AppRoutes {
   static const String calendarSync = '/calendar-sync';
   static const String calendar = '/calendar';
   static const String shopping = '/shopping';
+  static const String legalBenefits = '/legal-benefits';
+  static const String familyIntelligence = '/family-intelligence';
+  static const String dailyIntelligence = '/daily-intelligence'; // legacy → redirect
+  static const String familyHubAI = '/familyhub-ai';
   static const String budget = '/budget';
   static const String family = '/family';
   static const String familyDetail = '/family/detail';
@@ -121,11 +135,13 @@ class AppRoutes {
   static const String languageSettings = '/language-settings';
   static const String backupSettings = '/backup-settings';
   static const String appearanceSettings = '/appearance-settings';
+  static const String hubCustomize = '/hub-customize';
   static const String googleDriveBackup = '/cloud-backup';
   static const String weatherSettings = '/weather-settings';
   static const String userGuide = '/user-guide';
   static const String aboutApp = '/about-app';
   static const String inviteCode = '/invite-code';
+  static const String joinFamily = '/join';
   static const String termsOfService = '/terms-of-service';
   static const String privacyPolicy = '/privacy-policy';
   static const String screenTimeSettings = '/settings/screen-time';
@@ -167,9 +183,14 @@ class AppRoutes {
   static const String documents = '/documents';
   static const String familyMap = '/family-map';
   static const String familyHealth = '/family-health';
+  static const String vaccinations = '/health/vaccinations';
+  static const String healthRecords = '/health/records';
   static const String subscriptions = '/subscriptions';
+  static const String plans = '/plans';
   static const String childDevelopment = '/child-development';
   static const String aiAssistant = '/ai-assistant';
+  static const String memoryCenter = '/memory-center';
+  static const String familyReport = '/family-report';
 }
 
 final _publicRoutes = <String>{
@@ -217,6 +238,12 @@ final router = GoRouter(
         GoRoute(path: AppRoutes.calendarSync, builder: (context, state) => const CalendarSyncScreen()),
         GoRoute(path: AppRoutes.calendar, builder: (context, state) => const CalendarScreen()),
         GoRoute(path: AppRoutes.shopping, builder: (context, state) => const ShoppingListScreen()),
+        GoRoute(path: AppRoutes.legalBenefits, builder: (context, state) => const LegalBenefitsScreen()),
+        GoRoute(path: AppRoutes.familyIntelligence, builder: (context, state) => const FamilyIntelligenceScreen()),
+        // Legacy: eski "Günlük Zeka Özeti" route → Aile Zekası'na yönlendir.
+        GoRoute(path: AppRoutes.dailyIntelligence, redirect: (context, state) => AppRoutes.familyIntelligence),
+        // Eski "FamilyHub AI" tek AI merkezine (Aile Zekâsı) yönlendirildi (spec §4.3).
+        GoRoute(path: AppRoutes.familyHubAI, redirect: (context, state) => AppRoutes.familyIntelligence),
         GoRoute(path: AppRoutes.budget, builder: (context, state) => const BudgetScreen()),
         GoRoute(path: AppRoutes.family, builder: (context, state) => const FamilyScreen()),
         GoRoute(path: AppRoutes.chat, builder: (context, state) => const ChatScreen()),
@@ -232,6 +259,8 @@ final router = GoRouter(
     GoRoute(path: AppRoutes.location, builder: (context, state) => const LocationScreen()),
     GoRoute(path: AppRoutes.emergency, builder: (context, state) => const SosMainScreen()),
     GoRoute(path: AppRoutes.healthCard, builder: (context, state) => const HealthCardScreen()),
+    GoRoute(path: AppRoutes.healthCardEdit, builder: (context, state) => const HealthCardEditScreen()),
+    GoRoute(path: AppRoutes.familyReport, builder: (context, state) => const FamilyReportScreen()),
     GoRoute(path: AppRoutes.safeZones, builder: (context, state) => const SafeZonesScreen()),
     GoRoute(path: AppRoutes.safeArrival, builder: (context, state) => const SafeArrivalScreen()),
     GoRoute(path: AppRoutes.ambientListening, builder: (context, state) => const AmbientListeningScreen()),
@@ -241,17 +270,25 @@ final router = GoRouter(
     GoRoute(path: AppRoutes.growth, builder: (context, state) => const GrowthScreen()),
     GoRoute(path: AppRoutes.premium, builder: (context, state) => const PremiumScreen()),
     GoRoute(path: AppRoutes.familyManage, builder: (context, state) => const FamilyManageScreen()),
+    GoRoute(path: AppRoutes.familyDetail, builder: (context, state) => FamilyDetailScreen(familyId: state.extra as String?)),
     GoRoute(path: AppRoutes.profileEdit, builder: (context, state) => const ProfileEditScreen()),
     GoRoute(path: AppRoutes.notificationSettings, builder: (context, state) => const NotificationSettingsScreen()),
     GoRoute(path: AppRoutes.privacySettings, builder: (context, state) => const PrivacySettingsScreen()),
     GoRoute(path: AppRoutes.languageSettings, builder: (context, state) => const LanguageSettingsScreen()),
     GoRoute(path: AppRoutes.backupSettings, builder: (context, state) => const BackupSettingsScreen()),
     GoRoute(path: AppRoutes.appearanceSettings, builder: (context, state) => const AppearanceSettingsScreen()),
+    GoRoute(path: AppRoutes.hubCustomize, builder: (context, state) => const HubCustomizeScreen()),
     GoRoute(path: AppRoutes.googleDriveBackup, builder: (context, state) => const CloudBackupScreen()),
     GoRoute(path: AppRoutes.weatherSettings, builder: (context, state) => const WeatherSettingsScreen()),
     GoRoute(path: AppRoutes.userGuide, builder: (context, state) => const UserGuideScreen()),
     GoRoute(path: AppRoutes.aboutApp, builder: (context, state) => const AboutAppScreen()),
     GoRoute(path: AppRoutes.inviteCode, builder: (context, state) => const InviteCodeScreen()),
+    GoRoute(
+      path: AppRoutes.joinFamily,
+      builder: (context, state) => JoinFamilyScreen(
+        initialCode: state.uri.queryParameters['code'],
+      ),
+    ),
     GoRoute(path: AppRoutes.termsOfService, builder: (context, state) => const TermsOfServiceScreen()),
     GoRoute(path: AppRoutes.privacyPolicy, builder: (context, state) => const PrivacyPolicyScreen()),
     GoRoute(path: AppRoutes.screenTimeSettings, builder: (context, state) => const ScreenTimeSettingsScreen()),
@@ -336,9 +373,13 @@ final router = GoRouter(
     GoRoute(path: AppRoutes.contacts, builder: (context, state) => const ContactsScreen()),
     GoRoute(path: AppRoutes.gallery, builder: (context, state) => const GalleryScreen()),
     GoRoute(path: AppRoutes.documents, builder: (context, state) => const DocumentsScreen()),
-    GoRoute(path: AppRoutes.familyHealth, builder: (context, state) => const FamilyHealthScreen()),
+    GoRoute(path: AppRoutes.familyHealth, builder: (context, state) => const HealthDashboard()),
+    GoRoute(path: AppRoutes.vaccinations, builder: (context, state) => const VaccinationScreen()),
+    GoRoute(path: AppRoutes.healthRecords, builder: (context, state) => const HealthRecordsScreen()),
     GoRoute(path: AppRoutes.subscriptions, builder: (context, state) => const SubscriptionScreen()),
-    GoRoute(path: AppRoutes.childDevelopment, builder: (context, state) => const ChildDevelopmentScreen()),
+    GoRoute(path: AppRoutes.plans, builder: (context, state) => const PlansScreen()),
+    GoRoute(path: AppRoutes.childDevelopment, builder: (context, state) => const ChildDevelopmentHome()),
     GoRoute(path: AppRoutes.aiAssistant, builder: (context, state) => const AIAssistantScreen()),
+    GoRoute(path: AppRoutes.memoryCenter, builder: (context, state) => const MemoryCenterScreen()),
   ],
 );

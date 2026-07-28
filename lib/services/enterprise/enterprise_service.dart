@@ -1,8 +1,14 @@
 import '../../core/errors.dart';
 import '../../core/supabase_client.dart';
 import '../../core/analytics/analytics_service.dart';
+import '../localization/locale_service.dart';
 
 class EnterpriseService {
+  static String _text(Map<String, String> values) {
+    final language = LocaleService.resolveInitialLocale().languageCode;
+    return values[language] ?? values['tr']!;
+  }
+
   static Future<Map<String, dynamic>> registerOrganization({
     required String name,
     required String domain,
@@ -10,7 +16,12 @@ class EnterpriseService {
     required String adminEmail,
   }) async {
     final domainExists = await _checkDomain(domain);
-    if (domainExists) throw ValidationException('Bu domain zaten kayıtlı');
+    if (domainExists) {
+      throw ValidationException(_text(const {
+        'tr': 'Bu alan adı zaten kayıtlı', 'en': 'This domain is already registered',
+        'nl': 'Dit domein is al geregistreerd', 'fr': 'Ce domaine est déjà enregistré',
+      }));
+    }
 
     final org = await SupabaseConfig.client.from('organizations').insert({
       'name': name,
@@ -64,7 +75,10 @@ class EnterpriseService {
         await _syncWorkday(orgId);
         break;
       default:
-        throw ValidationException('Desteklenmeyen HR sistemi: $systemType');
+        throw ValidationException('${_text(const {
+          'tr': 'Desteklenmeyen İK sistemi', 'en': 'Unsupported HR system',
+          'nl': 'Niet-ondersteund HR-systeem', 'fr': 'Système RH non pris en charge',
+        })}: $systemType');
     }
   }
 

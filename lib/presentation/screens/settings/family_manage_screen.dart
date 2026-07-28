@@ -8,6 +8,9 @@ import '../../../config/routes.dart';
 import '../../../core/supabase_client.dart';
 import '../../../domain/entities.dart';
 import '../../../services/auth_service.dart';
+import '../../../services/koca_seed.dart';
+import '../../providers/app_providers.dart'
+    show familyMembersProvider, localFamilyMembers;
 
 import '../../widgets/settings/screen_header.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
@@ -38,7 +41,10 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
       final client = SupabaseConfig.safeClient;
       final userId = AuthService.currentUserId;
       if (client == null || userId == null) {
-        setState(() => _isLoading = false);
+        setState(() {
+          _members = localFamilyMembers();
+          _isLoading = false;
+        });
         return;
       }
 
@@ -52,7 +58,10 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
       _familyId = familyId;
 
       if (familyId == null) {
-        setState(() => _isLoading = false);
+        setState(() {
+          _members = localFamilyMembers();
+          _isLoading = false;
+        });
         return;
       }
 
@@ -126,13 +135,18 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
         );
       }).toList();
 
+      final combined = [...adults, ...children];
       setState(() {
-        _members = [...adults, ...children];
+        // Supabase boş dönerse (RLS/çevrimdışı) yerel aile üyelerine düş.
+        _members = combined.isEmpty ? localFamilyMembers() : combined;
         _isLoading = false;
       });
     } catch (e) {
       debugPrint('FamilyManageScreen error: $e');
-      setState(() => _isLoading = false);
+      setState(() {
+        _members = localFamilyMembers();
+        _isLoading = false;
+      });
     }
   }
 
@@ -145,6 +159,210 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
     );
     return me.role == MemberRole.admin || me.role == MemberRole.parent;
   }
+
+  static bool _isLocalMember(FamilyMember m) => m.id.startsWith('local_');
+
+  static int? _localIndexOf(FamilyMember m) =>
+      _isLocalMember(m) ? int.tryParse(m.id.substring(6)) : null;
+
+  static const _roleOptions = <(String, MemberRole)>[
+    ('Ebeveyn', MemberRole.parent),
+    ('Büyük', MemberRole.elder),
+    ('Genç', MemberRole.teen),
+    ('Çocuk', MemberRole.child),
+  ];
+
+  String _roleStringFor(MemberRole role) {
+    return switch (role) {
+      MemberRole.child => 'Çocuk',
+      MemberRole.teen => 'Genç',
+      MemberRole.elder => 'Büyük',
+      MemberRole.baby => 'Bebek',
+      _ => 'Ebeveyn',
+    };
+  }
+
+  Future<void> _showMemberForm({FamilyMember? existing}) async {
+    final nameCtrl = TextEditingController(text: existing?.name ?? '');
+    final ageCtrl = TextEditingController();
+    MemberRole role = existing?.role ?? MemberRole.parent;
+
+    final saved = await showModalBottomSheet<bool>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setSheet) => Padding(
+          padding: EdgeInsets.only(bottom: MediaQuery.of(ctx).viewInsets.bottom),
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Color(0xFF13131A),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+            ),
+            padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
+            child: SingleChildScrollView(
+              child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Center(
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                        color: Colors.white.withAlpha(40),
+                        borderRadius: BorderRadius.circular(2)),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(existing == null ? 'Üye Ekle' : 'Üyeyi Düzenle',
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w800)),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: nameCtrl,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: _fieldDeco('Ad Soyad', 'Örn: Ayşe Koca'),
+                ),
+                const SizedBox(height: 12),
+                Text(AppLocalizations.of(context).fmnRole,
+                    style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 13)),
+                const SizedBox(height: 8),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: _roleOptions.map((r) {
+                    final sel = role == r.$2;
+                    return GestureDetector(
+                      onTap: () => setSheet(() => role = r.$2),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 14, vertical: 9),
+                        decoration: BoxDecoration(
+                          color: sel
+                              ? const Color(0xFF6366F1)
+                              : const Color(0xFF1A1A24),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                              color: sel
+                                  ? const Color(0xFF6366F1)
+                                  : const Color(0xFF262631)),
+                        ),
+                        child: Text(r.$1,
+                            style: TextStyle(
+                                color: sel
+                                    ? Colors.white
+                                    : const Color(0xFFD1D5DB),
+                                fontWeight: FontWeight.w600)),
+                      ),
+                    );
+                  }).toList(),
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: ageCtrl,
+                  keyboardType: TextInputType.number,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: _fieldDeco('Yaş (opsiyonel)', 'Örn: 38'),
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  height: 52,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (nameCtrl.text.trim().isEmpty) {
+                        ScaffoldMessenger.of(ctx).showSnackBar(
+                          SnackBar(content: Text(AppLocalizations.of(context).fmnEnterName)),
+                        );
+                        return;
+                      }
+                      Navigator.pop(ctx, true);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF6366F1),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14)),
+                    ),
+                    child: Text(AppLocalizations.of(context).save,
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700)),
+                  ),
+                ),
+              ],
+            ),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    if (saved != true) return;
+    final name = nameCtrl.text.trim();
+    final age = int.tryParse(ageCtrl.text.trim());
+    final roleStr = _roleStringFor(role);
+
+    if (existing == null) {
+      await KocaSeed.addMember(name: name, role: roleStr, age: age);
+    } else {
+      final idx = _localIndexOf(existing);
+      if (idx != null) {
+        await KocaSeed.updateMemberAt(idx,
+            name: name, role: roleStr, age: age);
+      }
+    }
+    ref.invalidate(familyMembersProvider);
+    await _loadFamilyAndMembers();
+  }
+
+  Future<void> _removeLocalMember(FamilyMember member) async {
+    final idx = _localIndexOf(member);
+    if (idx == null) return;
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: const Color(0xFF13131A),
+        title: Text(AppLocalizations.of(context).removeMember,
+            style: const TextStyle(color: Colors.white)),
+        content: Text('${member.name} aileden çıkarılacak. Emin misiniz?',
+            style: const TextStyle(color: Color(0xFF9CA3AF))),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: Text(AppLocalizations.of(context).cancel)),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
+            child: Text(AppLocalizations.of(context).cikar, style: const TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+    );
+    if (ok != true) return;
+    await KocaSeed.removeMemberAt(idx);
+    ref.invalidate(familyMembersProvider);
+    await _loadFamilyAndMembers();
+  }
+
+  InputDecoration _fieldDeco(String label, String hint) => InputDecoration(
+        labelText: label,
+        hintText: hint,
+        labelStyle: const TextStyle(color: Color(0xFF9CA3AF)),
+        hintStyle: const TextStyle(color: Color(0xFF6B7280)),
+        filled: true,
+        fillColor: const Color(0xFF1A1A24),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Color(0xFF262631)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Color(0xFF6366F1)),
+        ),
+      );
 
   static Color _parseColor(String? hex) {
     if (hex == null || hex.isEmpty) return Colors.blue;
@@ -176,13 +394,13 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
 
   Color _roleColor(MemberRole role) {
     return switch (role) {
-      MemberRole.admin => AppColors.cobalt,
-      MemberRole.parent => AppColors.purple,
+      MemberRole.admin => const Color(0xFF6366F1),
+      MemberRole.parent => const Color(0xFF8B5CF6),
       MemberRole.teen => AppColors.blue,
       MemberRole.child => AppColors.orange,
-      MemberRole.elder => AppColors.slate,
-      MemberRole.guest => AppColors.gray,
-      MemberRole.baby => AppColors.pink,
+      MemberRole.elder => const Color(0xFF6B7280),
+      MemberRole.guest => const Color(0xFF6B7280),
+      MemberRole.baby => const Color(0xFFEC4899),
     };
   }
 
@@ -208,7 +426,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Rol güncellenemedi: $e'), backgroundColor: AppColors.error),
+          SnackBar(content: Text(AppLocalizations.of(context).fmnRoleUpdateFailed('$e')), backgroundColor: AppColors.error),
         );
       }
     }
@@ -272,7 +490,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('İşlem başarısız: $e'), backgroundColor: AppColors.error),
+          SnackBar(content: Text(AppLocalizations.of(context).fmnOpFailed('$e')), backgroundColor: AppColors.error),
         );
       }
     }
@@ -304,7 +522,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                   ),
                   title: Text(_roleLabel(role)),
                   trailing: member.role == role
-                      ? const Icon(Icons.check_circle, color: AppColors.cobalt)
+                      ? const Icon(Icons.check_circle, color: Color(0xFF6366F1))
                       : null,
                   onTap: () {
                     Navigator.pop(context);
@@ -336,7 +554,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: AppColors.border,
+                  color: const Color(0x1EFFFFFF),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -347,9 +565,18 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                 subtitle: Text(_roleLabel(member.role)),
               ),
               const Divider(),
-              if (_isAdmin || isSelf)
+              if (_isLocalMember(member))
                 ListTile(
-                  leading: const Icon(Icons.edit, color: AppColors.cobalt),
+                  leading: const Icon(Icons.edit, color: Color(0xFF6366F1)),
+                  title: Text(AppLocalizations.of(context).edit),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _showMemberForm(existing: member);
+                  },
+                )
+              else if (_isAdmin || isSelf)
+                ListTile(
+                  leading: const Icon(Icons.edit, color: Color(0xFF6366F1)),
                   title: Text(AppLocalizations.of(context).roluDegistir),
                   onTap: () {
                     Navigator.pop(context);
@@ -357,7 +584,7 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                   },
                 ),
               ListTile(
-                leading: const Icon(Icons.location_on, color: AppColors.success),
+                leading: const Icon(Icons.location_on, color: Color(0xFF10B981)),
                 title: Text(AppLocalizations.of(context).konumunuGor),
                 onTap: () {
                   Navigator.pop(context);
@@ -365,14 +592,23 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.health_and_safety, color: AppColors.purple),
+                leading: const Icon(Icons.health_and_safety, color: Color(0xFF8B5CF6)),
                 title: Text(AppLocalizations.of(context).healthCard),
                 onTap: () {
                   Navigator.pop(context);
                   context.push(AppRoutes.healthCard);
                 },
               ),
-              if (_isAdmin || isSelf)
+              if (_isLocalMember(member))
+                ListTile(
+                  leading: const Icon(Icons.person_remove, color: AppColors.error),
+                  title: Text(AppLocalizations.of(context).removeMember),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _removeLocalMember(member);
+                  },
+                )
+              else if (_isAdmin || isSelf)
                 ListTile(
                   leading: const Icon(Icons.exit_to_app, color: AppColors.error),
                   title: Text(isSelf ? 'Aileden Ayrıl' : 'Üyeyi Çıkar'),
@@ -390,7 +626,6 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     final adults = _members.where((m) => m.role != MemberRole.child).toList()
       ..sort((a, b) {
@@ -405,9 +640,9 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
       ..sort((a, b) => a.name.compareTo(b.name));
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.darkBackground : AppColors.cloudWhite,
+      backgroundColor: const Color(0xFF0A0A0F),
       appBar: ScreenHeader(
-        title: 'Aile Yönetimi',
+        title: AppLocalizations.of(context).aileYonetimi,
         showBack: true,
         onBack: () => context.pop(),
       ),
@@ -424,20 +659,19 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                       children: [
                         Text(
                           '${_members.length} Üye',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
-                            color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                            color: Color(0xFF6B7280),
                           ),
                         ),
                         const SizedBox(height: 12),
                         if (adults.isNotEmpty) ...[
-                          Text(
-                            'Ebeveynler ve Yetişkinler',
-                            style: TextStyle(
+                          Text(AppLocalizations.of(context).ebeveynlerVeYetiskinler,
+                            style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
-                              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                              color: Color(0xFF6B7280),
                               letterSpacing: 0.5,
                             ),
                           ),
@@ -453,12 +687,11 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                         ],
                         if (children.isNotEmpty) ...[
                           const SizedBox(height: 16),
-                          Text(
-                            'Çocuklar',
-                            style: TextStyle(
+                          Text(AppLocalizations.of(context).cocuklar,
+                            style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
-                              color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                              color: Color(0xFF6B7280),
                               letterSpacing: 0.5,
                             ),
                           ),
@@ -477,14 +710,35 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                           width: double.infinity,
                           height: 56,
                           child: ElevatedButton.icon(
-                            onPressed: () => context.push(AppRoutes.inviteCode),
-                            icon: const Icon(Icons.person_add, color: Colors.white),
+                            onPressed: () => _showMemberForm(),
+                            icon: const Icon(Icons.person_add_alt_1,
+                                color: Colors.white),
                             label: const Text(
-                              'Yeni Üye Davet Et',
+                              'Üye Ekle',
                               style: TextStyle(color: Colors.white, fontSize: 16),
                             ),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.cobalt,
+                              backgroundColor: const Color(0xFF8B5CF6),
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 56,
+                          child: ElevatedButton.icon(
+                            onPressed: () => context.push(AppRoutes.inviteCode),
+                            icon: const Icon(Icons.qr_code, color: Colors.white),
+                            label: const Text(
+                              'Davet Kodu ile Ekle',
+                              style: TextStyle(color: Colors.white, fontSize: 16),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF6366F1),
                               elevation: 0,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(16),
@@ -499,12 +753,11 @@ class _FamilyManageScreenState extends ConsumerState<FamilyManageScreen> {
                           child: ElevatedButton.icon(
                             onPressed: () => context.push(AppRoutes.childManagement),
                             icon: const Icon(Icons.child_care, color: Colors.white),
-                            label: const Text(
-                              'Çocuk Hesabı Ekle',
-                              style: TextStyle(color: Colors.white, fontSize: 16),
+                            label: Text(AppLocalizations.of(context).cocukHesabiEkle,
+                              style: const TextStyle(color: Colors.white, fontSize: 16),
                             ),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.success,
+                              backgroundColor: const Color(0xFF10B981),
                               elevation: 0,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(16),
@@ -581,7 +834,6 @@ class _MemberTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     String roleLabel() {
       return switch (member.role) {
@@ -598,10 +850,10 @@ class _MemberTile extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkCard : Colors.white,
+        color: const Color(0xFF13131A),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isDark ? AppColors.darkBorder : AppColors.border,
+          color: const Color(0x1EFFFFFF),
         ),
       ),
       child: InkWell(
@@ -622,10 +874,10 @@ class _MemberTile extends StatelessWidget {
                         width: 14,
                         height: 14,
                         decoration: BoxDecoration(
-                          color: AppColors.success,
+                          color: const Color(0xFF10B981),
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: isDark ? AppColors.darkCard : Colors.white,
+                            color: const Color(0xFF13131A),
                             width: 2,
                           ),
                         ),
@@ -642,10 +894,10 @@ class _MemberTile extends StatelessWidget {
                       children: [
                         Text(
                           member.name,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            color: isDark ? AppColors.darkTextPrimary : AppColors.dark,
+                            color: Color(0xFFE5E7EB),
                           ),
                         ),
                         if (isMe)
@@ -653,14 +905,14 @@ class _MemberTile extends StatelessWidget {
                             margin: const EdgeInsets.only(left: 8),
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                             decoration: BoxDecoration(
-                              color: AppColors.cobalt.withAlpha(20),
+                              color: const Color(0xFF6366F1).withAlpha(20),
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: const Text(
                               'Sen',
                               style: TextStyle(
                                 fontSize: 11,
-                                color: AppColors.cobalt,
+                                color: Color(0xFF6366F1),
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -669,16 +921,16 @@ class _MemberTile extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '${roleLabel()} · ${member.isOnline ? 'Çevrimiçi' : _formatLastSeen(member.lastSeen)}',
-                      style: TextStyle(
+                      '${roleLabel()} · ${member.isOnline ? 'Çevrimiçi' : (_formatLastSeen(member.lastSeen) ?? 'Çevrimdışı')}',
+                      style: const TextStyle(
                         fontSize: 13,
-                        color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+                        color: Color(0xFF6B7280),
                       ),
                     ),
                   ],
                 ),
               ),
-              const Icon(Icons.chevron_right, color: AppColors.lightGray),
+              const Icon(Icons.chevron_right, color: Color(0xFF9CA3AF)),
             ],
           ),
         ),

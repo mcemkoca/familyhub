@@ -22,8 +22,9 @@ class GamificationService {
         .from('profiles')
         .select('xp, badges')
         .eq('id', userId)
-        .single();
+        .maybeSingle();
 
+    if (profile == null) return;
     final currentXp = profile['xp'] as int? ?? 0;
     final currentBadges = (profile['badges'] as List<dynamic>? ?? []).cast<String>();
 
