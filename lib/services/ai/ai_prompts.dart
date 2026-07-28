@@ -1,7 +1,11 @@
 import '../../domain/entities.dart';
 
 /// Centralized prompt templates for the AI Engine.
-/// All prompts are in Turkish since FamilyHub targets Turkish families.
+///
+/// FamilyHub Belçika'daki aileleri hedefler (tr/nl/fr/en). Prompt metinleri
+/// şu an Türkçedir; para birimi EUR, saat dilimi Europe/Brussels varsayılır.
+/// Ülkeye özgü varsayım (Türkiye mevzuatı, ₺ vb.) prompt'lara GÖMÜLMEZ —
+/// bölgesel bilgi context üzerinden gelir.
 class AIPrompts {
   AIPrompts._();
 
