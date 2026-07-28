@@ -763,12 +763,26 @@ class _PollCard extends StatelessWidget {
           for (int i = 0; i < poll.options.length; i++)
             _option(context, i, total, voted, onColor, accent),
           const SizedBox(height: 2),
-          Text(
-            total == 0 ? 'Henüz oy yok' : '$total oy',
-            style: TextStyle(
-                fontSize: 11,
-                color: onColor.withAlpha(150),
-                fontWeight: FontWeight.w500),
+          Row(
+            children: [
+              Text(
+                total == 0 ? 'Henüz oy yok' : '$total oy',
+                style: TextStyle(
+                    fontSize: 11,
+                    color: onColor.withAlpha(150),
+                    fontWeight: FontWeight.w500),
+              ),
+              // Çoklu seçim anketinde kullanıcı birden fazla seçebileceğini
+              // bilmeli; tek seçimde seçim değiştirilebilir.
+              const SizedBox(width: 6),
+              Text(
+                poll.multiple ? '· Birden fazla seçilebilir' : '· Tek seçim',
+                style: TextStyle(
+                    fontSize: 10,
+                    color: onColor.withAlpha(110),
+                    fontStyle: FontStyle.italic),
+              ),
+            ],
           ),
         ],
       ),
