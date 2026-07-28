@@ -7,6 +7,7 @@ import '../core/supabase_client.dart';
 import '../core/errors.dart' as app_errors;
 import '../core/utils/repository_mixin.dart';
 import '../services/hive_service.dart';
+import '../core/settings_store.dart';
 
 /// Document categories matching Belgium family needs.
 enum DocumentCategory {
@@ -131,7 +132,7 @@ class DocumentRepository with RepositoryErrorHandler {
   static const String localFamilyId = 'local_family';
 
   List<Map<String, dynamic>> _localRaw() {
-    final raw = HiveService.getSetting('documents_local');
+    final raw = HiveService.getSetting(SettingsStore.scopedKey('documents_local'));
     if (raw == null || raw.isEmpty) return [];
     try {
       return (jsonDecode(raw) as List).cast<Map<String, dynamic>>();
@@ -162,13 +163,15 @@ class DocumentRepository with RepositoryErrorHandler {
       'created_at': DateTime.now().toIso8601String(),
     };
     final all = _localRaw()..insert(0, map);
-    await HiveService.setSetting('documents_local', jsonEncode(all));
+    await HiveService.setSetting(
+        SettingsStore.scopedKey('documents_local'), jsonEncode(all));
     return FamilyDocument.fromJson(map);
   }
 
   Future<void> deleteLocalDocument(String id) async {
     final all = _localRaw()..removeWhere((e) => e['id'] == id);
-    await HiveService.setSetting('documents_local', jsonEncode(all));
+    await HiveService.setSetting(
+        SettingsStore.scopedKey('documents_local'), jsonEncode(all));
   }
 
   Future<List<FamilyDocument>> getDocuments(String familyId) async {

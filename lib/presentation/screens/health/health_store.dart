@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../../../services/hive_service.dart';
 import '../../../services/ai/ai_content_service.dart';
+import '../../../core/settings_store.dart';
 
 /// Sağlık bölümü için yerel veri deposu (ruh hali, günlük metrikler, döngü,
 /// semptomlar, çocuk büyüme) + günlük öneri havuzu.
@@ -33,7 +34,7 @@ class HealthStore {
   static const int periodLength = 5;
 
   static DateTime cycleStart() {
-    final raw = HiveService.getSetting('health_cycle_start');
+    final raw = HiveService.getSetting(SettingsStore.scopedKey('health_cycle_start'));
     if (raw != null) {
       final d = DateTime.tryParse(raw);
       if (d != null) return d;
@@ -44,7 +45,8 @@ class HealthStore {
   }
 
   static Future<void> setCycleStart(DateTime d) =>
-      HiveService.setSetting('health_cycle_start', d.toIso8601String());
+      HiveService.setSetting(
+          SettingsStore.scopedKey('health_cycle_start'), d.toIso8601String());
 
   /// Bugün döngünün kaçıncı günü (1..cycleLength).
   static int cycleDay() {

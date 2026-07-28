@@ -6,6 +6,7 @@ import '../core/supabase_client.dart';
 import '../core/errors.dart' as app_errors;
 import '../core/utils/repository_mixin.dart';
 import '../services/hive_service.dart';
+import '../core/settings_store.dart';
 
 class FamilyMedia {
   final String id;
@@ -56,7 +57,7 @@ class GalleryRepository with RepositoryErrorHandler {
   static const String localFamilyId = 'local_family';
 
   List<FamilyMedia> getLocalMedia() {
-    final raw = HiveService.getSetting('gallery_local');
+    final raw = HiveService.getSetting(SettingsStore.scopedKey('gallery_local'));
     if (raw == null || raw.isEmpty) return [];
     try {
       return (jsonDecode(raw) as List)
@@ -89,7 +90,8 @@ class GalleryRepository with RepositoryErrorHandler {
           'created_at': m.createdAt.toIso8601String(),
         }).toList();
     all.insert(0, map);
-    await HiveService.setSetting('gallery_local', jsonEncode(all));
+    await HiveService.setSetting(
+        SettingsStore.scopedKey('gallery_local'), jsonEncode(all));
     return FamilyMedia.fromJson(map);
   }
 
@@ -106,7 +108,8 @@ class GalleryRepository with RepositoryErrorHandler {
               'created_at': m.createdAt.toIso8601String(),
             })
         .toList();
-    await HiveService.setSetting('gallery_local', jsonEncode(all));
+    await HiveService.setSetting(
+        SettingsStore.scopedKey('gallery_local'), jsonEncode(all));
   }
 
   Future<List<FamilyMedia>> getMedia(String familyId) async {
