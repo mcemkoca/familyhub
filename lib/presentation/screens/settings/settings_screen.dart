@@ -244,6 +244,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     onTap: () => context.push(AppRoutes.privacySettings),
                   ),
                   SettingsItem(
+                    icon: Icons.psychology_outlined,
+                    iconColor: const Color(0xFF6366F1),
+                    label: 'FamilyHub Hafızası',
+                    description:
+                        'AI’ın hatırladığı bilgileri görün, düzeltin, silin',
+                    onTap: () => context.push(AppRoutes.memoryCenter),
+                  ),
+                  SettingsItem(
                     icon: Icons.language,
                     iconColor: const Color(0xFF8B5CF6),
                     label: AppLocalizations.of(context).dilVeBolge,
