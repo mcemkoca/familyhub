@@ -7413,4 +7413,11 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get chatTypingMany => 'Birkaç kişi yazıyor…';
+
+  @override
+  String get csNoCalendars =>
+      'Cihaz takvimlerine erişilemedi. Takvim iznini kontrol edin.';
+
+  @override
+  String get baNoSuggestions => 'Şu anda optimizasyon önerisi yok.';
 }

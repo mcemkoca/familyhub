@@ -2412,5 +2412,7 @@
   "chatCleared": "Local chat cleared",
   "chatTypingOne": "{name} is typing…",
   "chatTypingTwo": "{a} and {b} are typing…",
-  "chatTypingMany": "Several people are typing…"
+  "chatTypingMany": "Several people are typing…",
+  "csNoCalendars": "Could not access device calendars. Check calendar permission.",
+  "baNoSuggestions": "No optimization suggestions right now."
 }

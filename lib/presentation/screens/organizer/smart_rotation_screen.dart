@@ -374,7 +374,7 @@ class _SmartRotationScreenState extends State<SmartRotationScreen> {
   Widget _buildLeaderboard(bool isDark) {
     if (_members.isEmpty) return const SizedBox.shrink();
 
-    // Mock skor hesapla: tamamlanan görev sayısı + streak bonus
+    // Skor GERÇEK iş yükü verisinden: tamamlanan görev x10 + streak x5.
     final scores = _members.map((m) {
       final wl = _workloads[m.id];
       final completed = wl?.completedThisWeek ?? 0;

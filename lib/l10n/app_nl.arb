@@ -2412,5 +2412,7 @@
   "chatCleared": "Lokale chat gewist",
   "chatTypingOne": "{name} is aan het typen…",
   "chatTypingTwo": "{a} en {b} zijn aan het typen…",
-  "chatTypingMany": "Meerdere mensen typen…"
+  "chatTypingMany": "Meerdere mensen typen…",
+  "csNoCalendars": "Geen toegang tot agenda’s. Controleer de agendamachtiging.",
+  "baNoSuggestions": "Momenteel geen optimalisatiesuggesties."
 }

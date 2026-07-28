@@ -2412,5 +2412,7 @@
   "chatCleared": "Discussion locale effacée",
   "chatTypingOne": "{name} écrit…",
   "chatTypingTwo": "{a} et {b} écrivent…",
-  "chatTypingMany": "Plusieurs personnes écrivent…"
+  "chatTypingMany": "Plusieurs personnes écrivent…",
+  "csNoCalendars": "Impossible d'accéder aux calendriers. Vérifiez l'autorisation.",
+  "baNoSuggestions": "Aucune suggestion d'optimisation pour le moment."
 }

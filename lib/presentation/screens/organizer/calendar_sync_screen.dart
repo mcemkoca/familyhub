@@ -5,6 +5,7 @@ import '../../../config/constants.dart';
 import '../../../domain/models/calendar_sync.dart';
 import '../../../services/calendar_sync_service.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
+import '../../../core/app_logger.dart';
 
 class CalendarSyncScreen extends StatefulWidget {
   const CalendarSyncScreen({super.key});
@@ -118,10 +119,18 @@ class _CalendarSyncScreenState extends State<CalendarSyncScreen>
           ),
         );
       }
-    } catch (e) {
-      // Demo modda çalışmaya devam et
+    } catch (e, st) {
+      // Sessizce yutulamaz: kullanıcı takvimlerinin neden gelmediğini
+      // bilmelidir (izin reddi / cihaz takvimi yok).
+      AppLogger.logError(e,
+          module: 'calendar', operation: 'listCalendars', stackTrace: st);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(AppLocalizations.of(context).csNoCalendars)),
+        );
+      }
     }
-    setState(() => _loading = false);
+    if (mounted) setState(() => _loading = false);
   }
 
   void _showConnectionSettings(CalendarConnection conn) {

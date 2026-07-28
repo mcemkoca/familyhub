@@ -7397,4 +7397,11 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get chatTypingMany => 'Meerdere mensen typen…';
+
+  @override
+  String get csNoCalendars =>
+      'Geen toegang tot agenda’s. Controleer de agendamachtiging.';
+
+  @override
+  String get baNoSuggestions => 'Momenteel geen optimalisatiesuggesties.';
 }

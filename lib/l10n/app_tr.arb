@@ -3028,5 +3028,7 @@
       }
     }
   },
-  "chatTypingMany": "Birkaç kişi yazıyor…"
+  "chatTypingMany": "Birkaç kişi yazıyor…",
+  "csNoCalendars": "Cihaz takvimlerine erişilemedi. Takvim iznini kontrol edin.",
+  "baNoSuggestions": "Şu anda optimizasyon önerisi yok."
 }

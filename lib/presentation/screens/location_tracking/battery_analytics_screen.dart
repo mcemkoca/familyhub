@@ -16,6 +16,60 @@ class BatteryAnalyticsScreen extends StatefulWidget {
 class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
   final tracker = BatteryAwareLocationTracker();
 
+  /// Güncel optimizasyon önerilerini gösterir (gerçek tracker verisi).
+  void _showOptimizationSuggestions() {
+    final suggestions = tracker.generateOptimizationSuggestions();
+    final t = AppLocalizations.of(context);
+    showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: const Color(0xFF13131A),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(t.baOptimize,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700)),
+              const SizedBox(height: 12),
+              if (suggestions.isEmpty)
+                Text(t.baNoSuggestions,
+                    style: const TextStyle(color: Color(0xFF9CA3AF)))
+              else
+                ...suggestions.map(
+                  (s) => Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Icon(Icons.bolt,
+                            size: 16, color: Color(0xFF10B981)),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            '${s.description} — %${s.potentialSaving.toStringAsFixed(0)}',
+                            style: const TextStyle(
+                                color: Color(0xFFE5E7EB), fontSize: 13),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final suggestions = tracker.generateOptimizationSuggestions();
@@ -98,7 +152,7 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
               ),
               const SizedBox(height: 8),
               ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: _showOptimizationSuggestions,
                 icon: const Icon(Icons.track_changes),
                 label: Text(AppLocalizations.of(context).baOptimize),
                 style: ElevatedButton.styleFrom(
@@ -139,32 +193,20 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
           ),
 
           const SizedBox(height: 16),
-          Row(
-            children: [
-              Expanded(
-                child: ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.download),
-                  label: Text(AppLocalizations.of(context).raporIndir),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF6B7280),
-                    foregroundColor: Colors.white,
-                  ),
-                ),
+          // Not: "Rapor İndir" kaldırıldı — dosya üretimi/paylaşımı yok;
+          // tıklanıp hiçbir şey yapmıyordu.
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              // Tahminleri güncel pil seviyesiyle yeniden hesaplar.
+              onPressed: () => setState(() {}),
+              icon: const Icon(Icons.calculate),
+              label: Text(AppLocalizations.of(context).baRecalculate),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue.shade700,
+                foregroundColor: Colors.white,
               ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.calculate),
-                  label: Text(AppLocalizations.of(context).baRecalculate),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue.shade700,
-                    foregroundColor: Colors.white,
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ],
       ),
@@ -358,15 +400,10 @@ class _BatteryAnalyticsScreenState extends State<BatteryAnalyticsScreen> {
                 'Tasarruf: %${s.potentialSaving.toStringAsFixed(0)}',
                 style: TextStyle(color: Colors.green.shade400, fontSize: 12),
               ),
-              const Spacer(),
-              TextButton(
-                onPressed: () {},
-                child: Text(AppLocalizations.of(context).commonApply),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: Text(AppLocalizations.of(context).commonDetail),
-              ),
+              // Not: "Uygula/Detay" butonları kaldırıldı — tracker'da bu
+              // öneriyi tek tıkla uygulayacak bir API yok; tıklanıp hiçbir şey
+              // yapmayan buton kullanıcıyı yanıltıyordu. Öneri metni zaten
+              // uygulanabilir bilgi veriyor.
             ],
           ),
         ],

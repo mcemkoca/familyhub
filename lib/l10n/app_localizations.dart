@@ -13829,6 +13829,18 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Birkaç kişi yazıyor…'**
   String get chatTypingMany;
+
+  /// No description provided for @csNoCalendars.
+  ///
+  /// In tr, this message translates to:
+  /// **'Cihaz takvimlerine erişilemedi. Takvim iznini kontrol edin.'**
+  String get csNoCalendars;
+
+  /// No description provided for @baNoSuggestions.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şu anda optimizasyon önerisi yok.'**
+  String get baNoSuggestions;
 }
 
 class _AppLocalizationsDelegate

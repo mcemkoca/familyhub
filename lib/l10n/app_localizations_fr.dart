@@ -7420,4 +7420,12 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatTypingMany => 'Plusieurs personnes écrivent…';
+
+  @override
+  String get csNoCalendars =>
+      'Impossible d\'accéder aux calendriers. Vérifiez l\'autorisation.';
+
+  @override
+  String get baNoSuggestions =>
+      'Aucune suggestion d\'optimisation pour le moment.';
 }
