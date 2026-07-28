@@ -85,6 +85,7 @@ import '../presentation/screens/budget/subscription_screen.dart';
 import '../features/subscription/presentation/plans_screen.dart';
 import '../presentation/screens/child/child_dev_dashboard.dart';
 import '../presentation/screens/ai/ai_assistant_screen.dart';
+import '../features/context_memory/presentation/memory_center_screen.dart';
 import '../services/auth_service.dart';
 import '../services/child_auth_service.dart';
 import '../domain/models/crash_event.dart';
@@ -188,6 +189,7 @@ class AppRoutes {
   static const String plans = '/plans';
   static const String childDevelopment = '/child-development';
   static const String aiAssistant = '/ai-assistant';
+  static const String memoryCenter = '/memory-center';
   static const String familyReport = '/family-report';
 }
 
@@ -378,5 +380,6 @@ final router = GoRouter(
     GoRoute(path: AppRoutes.plans, builder: (context, state) => const PlansScreen()),
     GoRoute(path: AppRoutes.childDevelopment, builder: (context, state) => const ChildDevelopmentHome()),
     GoRoute(path: AppRoutes.aiAssistant, builder: (context, state) => const AIAssistantScreen()),
+    GoRoute(path: AppRoutes.memoryCenter, builder: (context, state) => const MemoryCenterScreen()),
   ],
 );
