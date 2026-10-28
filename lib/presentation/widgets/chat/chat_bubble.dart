@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import '../../../config/constants.dart';
@@ -556,7 +558,7 @@ class _ImagePreview extends StatelessWidget {
       child: isNetwork
           ? Image.network(imageUrl, width: 220, height: 160, fit: BoxFit.cover,
               errorBuilder: (_, __, ___) => _placeholder('📷'))
-          : Image.asset(imageUrl, width: 220, height: 160, fit: BoxFit.cover,
+          : Image.file(File(imageUrl), width: 220, height: 160, fit: BoxFit.cover,
               errorBuilder: (_, __, ___) => _placeholder('📷')),
     );
   }

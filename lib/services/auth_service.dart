@@ -7,6 +7,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../core/errors.dart';
 import '../core/supabase_client.dart';
+import '../core/utils/subscription_status.dart';
 import '../firebase_options.dart';
 import '../domain/models/user_model.dart';
 import 'fcm_service.dart';
@@ -97,66 +98,31 @@ class AuthService {
     final supabase = client;
     if (supabase == null) throw AppAuthException('Sunucu bağlantısı kurulmadı');
 
+    // The auth trigger creates the profile, family and membership atomically.
     final response = await supabase.auth.signUp(
       email: email.trim(),
       password: password,
       data: {'display_name': name.trim(), 'family_name': familyName?.trim()},
     );
-
     if (response.user == null) {
       throw AppAuthException('Kayıt başarısız oldu');
     }
 
-    final userId = response.user!.id;
-
-    // Create profile
-    try {
-      await supabase.from('profiles').upsert({
-        'id': userId,
-        'display_name': name.trim(),
-        'email': email.trim(),
-        'created_at': DateTime.now().toIso8601String(),
-      });
-    } catch (e) {
-      throw AppAuthException('Profil oluşturulamadı: $e');
-    }
-
-    // Create family if familyName provided
-    String? familyId;
-    if (familyName != null && familyName.trim().isNotEmpty) {
-      try {
-        final familyResponse = await supabase
-            .from('families')
-            .insert({
-              'name': familyName.trim(),
-              'created_by': userId,
-            })
-            .select('id')
-            .single();
-        familyId = familyResponse['id'] as String?;
-      } catch (e) {
-        throw AppAuthException('Aile oluşturulamadı: $e');
-      }
-    }
-
-    // Add creator as admin to family + update profile family_id
-    if (familyId != null) {
-      try {
-        await supabase.from('family_members').insert({
-          'family_id': familyId,
-          'user_id': userId,
-          'role': 'admin',
-          'display_name': name.trim(),
-        });
-        await supabase.from('profiles').update({
-          'family_id': familyId,
-        }).eq('id', userId);
-      } catch (e) {
-        throw AppAuthException('Aile üyeliği oluşturulamadı: $e');
-      }
-    }
-
     await _persistSession(response.session);
+    String? familyId;
+    if (response.session != null && familyName?.trim().isNotEmpty == true) {
+      final membership = await supabase
+          .from('family_members')
+          .select('family_id')
+          .eq('user_id', response.user!.id)
+          .maybeSingle();
+      familyId = membership?['family_id'] as String?;
+      if (familyId == null) {
+        throw AppAuthException(
+          'Aile kurulumu tamamlanamadı. Lütfen destek ile iletişime geçin.',
+        );
+      }
+    }
     return (response: response, familyId: familyId);
   }
 
@@ -190,32 +156,20 @@ class AuthService {
     }
 
     try {
-      final result = await supabase.rpc(
+      await supabase.rpc(
         'join_family_by_code',
         params: {'p_code': code.trim()},
       );
-      if (result == true || result != null) {
-        // Try to get the family_id from family_members
-        try {
-          final fm = await supabase
-              .from('family_members')
-              .select('family_id')
-              .eq('user_id', userId)
-              .maybeSingle();
-          final familyId = fm?['family_id'] as String?;
-          if (familyId != null) {
-            await supabase
-                .from('profiles')
-                .update({'family_id': familyId})
-                .eq('id', userId);
-            return familyId;
-          }
-        } catch (e) {
-          debugPrint('joinFamilyByCode family_members lookup error: $e');
-        }
-        return result.toString();
+      final membership = await supabase
+          .from('family_members')
+          .select('family_id')
+          .eq('user_id', userId)
+          .maybeSingle();
+      final familyId = membership?['family_id'] as String?;
+      if (familyId == null) {
+        throw AppAuthException('Aile üyeliği doğrulanamadı');
       }
-      throw AppAuthException('Geçersiz davet kodu');
+      return familyId;
     } catch (e) {
       if (e is AppAuthException) rethrow;
       throw AppAuthException('Aileye katılma başarısız: $e');
@@ -537,22 +491,14 @@ class AuthService {
           .eq('id', userId)
           .maybeSingle();
 
-      // Check subscription tier first
-      final tier = response?['subscription_tier']?.toString();
-      if (tier == 'premium' || tier == 'family') {
-        // Check expiry
-        final expiresAt = response?['subscription_expires_at'];
-        if (expiresAt != null) {
-          final expiry = DateTime.tryParse(expiresAt.toString());
-          if (expiry != null && expiry.isBefore(DateTime.now())) {
-            return false; // Subscription expired
-          }
-        }
-        return true;
-      }
-
-      // Fallback to legacy is_premium flag
-      return response?['is_premium'] == true;
+      final expiresAt = response?['subscription_expires_at'];
+      return hasActivePremium(
+        isPremium: response?['is_premium'] == true,
+        subscriptionTier: response?['subscription_tier']?.toString(),
+        expiresAt: expiresAt == null
+            ? null
+            : DateTime.tryParse(expiresAt.toString()),
+      );
     } catch (_) {
       return false;
     }

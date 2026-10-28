@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
-import '../../../core/supabase_client.dart';
 import '../../../config/constants.dart';
-import '../../../repositories/subscription_repository.dart';
+import '../../../services/billing/subscription_service.dart';
 import '../../../services/auth_service.dart';
 import 'package:go_router/go_router.dart';
 import 'package:familyhub/l10n/app_localizations.dart';
@@ -75,38 +73,28 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
 
   Future<void> _upgrade(PremiumPlan plan) async {
     if (plan.id == 'free') return;
-
     setState(() => _isLoading = true);
 
-    final isAdmin = await AuthService.isAdmin();
-    if (isAdmin) {
-      try {
-        await _activatePremium(plan.id);
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(AppLocalizations.of(context).adminHesabiPremiumAktif),
-              backgroundColor: AppColors.success,
-            ),
-          );
-          ref.invalidate(isPremiumProvider);
-        }
-      } catch (e) {
-        debugPrint('Admin premium activation error: $e');
-      } finally {
-        if (mounted) setState(() => _isLoading = false);
-      }
-      return;
-    }
-
     try {
-      await _payWithStripe(plan);
+      if (!SubscriptionService.isConfigured) {
+        throw Exception('Mağaza abonelikleri henüz yapılandırılmadı');
+      }
+      final activated = await SubscriptionService.purchasePlan(plan.id);
+      if (!mounted) return;
+      if (activated) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(AppLocalizations.of(context).premiumAktiflestirildi),
+            backgroundColor: AppColors.success,
+          ),
+        );
+        ref.invalidate(isPremiumProvider);
+      }
     } catch (e) {
-      debugPrint('Stripe ödeme hatası: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Ödeme başarısız: $e'),
+            content: Text('Ödeme tamamlanamadı: $e'),
             backgroundColor: AppColors.error,
           ),
         );
@@ -114,65 +102,6 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
-  }
-
-  Future<void> _payWithStripe(PremiumPlan plan) async {
-    final userId = AuthService.currentUserId;
-    if (userId == null) throw Exception('Oturum açık değil');
-
-    String? clientSecret;
-    try {
-      final response = await SupabaseConfig.client.functions.invoke(
-        'create-payment-intent',
-        body: {'price_id': plan.stripePriceId, 'user_id': userId},
-      );
-      clientSecret = (response.data as Map<String, dynamic>)['client_secret'] as String?;
-    } catch (e) {
-      debugPrint('Stripe edge function error: $e');
-      // Edge Function yoksa — test modu: doğrudan aktive et
-      await _activatePremium(plan.id);
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(AppLocalizations.of(context).testModuPremiumAktiflestirildi),
-            backgroundColor: AppColors.success,
-          ),
-        );
-        ref.invalidate(isPremiumProvider);
-      }
-      return;
-    }
-
-    if (clientSecret == null) throw Exception('Ödeme bilgisi alınamadı');
-
-    await Stripe.instance.initPaymentSheet(
-      paymentSheetParameters: SetupPaymentSheetParameters(
-        paymentIntentClientSecret: clientSecret,
-        merchantDisplayName: 'FamilyHub',
-        style: ThemeMode.light,
-      ),
-    );
-
-    await Stripe.instance.presentPaymentSheet();
-
-    // Ödeme başarılı — kayıt ekle
-    await _activatePremium(plan.id);
-
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(AppLocalizations.of(context).premiumAktiflestirildi),
-          backgroundColor: AppColors.success,
-        ),
-      );
-      ref.invalidate(isPremiumProvider);
-    }
-  }
-
-  Future<void> _activatePremium(String tier) async {
-    final userId = AuthService.currentUserId;
-    if (userId == null) return;
-    await SubscriptionRepository().activatePremium(userId, tier);
   }
 
   @override

@@ -95,12 +95,8 @@ class TaskRepository with RepositoryErrorHandler {
       return _client
           .from(_table)
           .stream(primaryKey: ['id'])
-          .map(
-            (data) => data
-                .where((e) => e['family_id'] == familyId)
-                .map((e) => _fromJson(e))
-                .toList(),
-          );
+          .eq('family_id', familyId)
+          .map((data) => data.map((e) => _fromJson(e)).toList());
     } catch (e) {
       debugPrint('TaskRepository.watchTasks error: $e');
       return Stream.error(RepositoryException('Beklenmeyen hata [watchTasks]: $e'));
