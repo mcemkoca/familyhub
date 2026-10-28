@@ -73,11 +73,14 @@ class _AccountStepState extends State<AccountStep> {
         familyName: _hasFamilyCode ? null : _familyNameController.text.trim(),
       );
 
+      final familyId = _hasFamilyCode
+          ? await AuthService.joinFamilyByCode(_familyCodeController.text)
+          : result.familyId;
       widget.onAccountCreated(
         name,
         email,
         password,
-        result.familyId,
+        familyId,
         result.response.user!.id,
       );
     } catch (e) {

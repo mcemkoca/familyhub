@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
@@ -55,40 +56,43 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     super.dispose();
   }
 
+  Future<String?> _getFamilyId() async {
+    final userId = AuthService.currentUserId;
+    if (userId == null) return null;
+    final profile = await SupabaseConfig.safeClient
+        ?.from('profiles')
+        .select('family_id')
+        .eq('id', userId)
+        .maybeSingle();
+    return profile?['family_id'] as String?;
+  }
+
   Future<void> _loadFamilyIdAndListen() async {
     try {
-      final userId = AuthService.currentUserId;
-      if (userId == null) return;
-      final profile = await SupabaseConfig.safeClient
-          ?.from('profiles')
-          .select('family_id')
-          .eq('id', userId)
-          .maybeSingle();
-      final familyId = profile?['family_id'] as String?;
-      if (familyId == null) return;
+      final familyId = await _getFamilyId();
+      if (familyId == null || !mounted) return;
 
-      _messagesSub = ChatRepository().watchMessages(familyId).listen((messages) {
-        ref.read(chatMessagesProvider.notifier).state = messages;
-      });
+      final messages = await ChatRepository().getMessages(familyId);
+      if (!mounted) return;
+      ref.read(chatMessagesProvider.notifier).state = messages;
+
+      _messagesSub = ChatRepository().watchMessages(familyId).listen(
+        (messages) {
+          if (!mounted) return;
+          ref.read(chatMessagesProvider.notifier).state = messages;
+        },
+        onError: (Object error) => _showError('Sohbet yüklenemedi: $error'),
+      );
     } catch (e) {
-      debugPrint('ChatScreen _loadFamilyIdAndListen error: $e');
+      _showError('Sohbet bağlantısı kurulamadı: $e');
     }
   }
 
-  void _sendMessage(String text) async {
+  Future<void> _sendMessage(String text) async {
     if (text.trim().isEmpty) return;
-
     try {
-      final userId = AuthService.currentUserId;
-      if (userId == null) return;
-
-      final profile = await SupabaseConfig.safeClient
-          ?.from('profiles')
-          .select('family_id')
-          .eq('id', userId)
-          .maybeSingle();
-      final familyId = profile?['family_id'] as String?;
-      if (familyId == null) return;
+      final familyId = await _getFamilyId();
+      if (familyId == null) throw Exception('Aile bilgisi bulunamadı');
 
       await ChatRepository().sendMessage(
         familyId: familyId,
@@ -97,36 +101,19 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         replyToContent: _replyToMessage?.content,
         replyToSender: _replyToMessage?.senderName,
       );
-      _replyToMessage = null;
-      setState(() {});
-
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _scrollToBottom();
-      });
+      if (!mounted) return;
+      setState(() => _replyToMessage = null);
+      WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
     } catch (e) {
-      debugPrint('ChatScreen _sendMessage error: $e');
-      // Fallback to local provider
-      final current = ref.read(chatMessagesProvider);
-      final userId = AuthService.currentUserId ?? 'unknown';
-      final userName = AuthService.currentUser?.userMetadata?['display_name'] as String? ?? 'Ben';
-      final newMsg = ChatMessage(
-        id: 'msg${current.length + 1}',
-        senderId: userId,
-        senderName: userName,
-        senderColor: AppColors.blue,
-        content: text.trim(),
-        createdAt: DateTime.now(),
-        replyToId: _replyToMessage?.id,
-        replyToContent: _replyToMessage?.content,
-        replyToSender: _replyToMessage?.senderName,
-      );
-      ref.read(chatMessagesProvider.notifier).state = [...current, newMsg];
-      _replyToMessage = null;
-      setState(() {});
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _scrollToBottom();
-      });
+      _showError('Mesaj gönderilemedi: $e');
     }
+  }
+
+  void _showError(String message) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message), backgroundColor: AppColors.error),
+    );
   }
 
   void _scrollToBottom() {
@@ -139,171 +126,125 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     }
   }
 
-  void _addReaction(String emoji) {
-    if (_reactingToMessage == null) return;
-
-    final current = ref.read(chatMessagesProvider);
-    final index = current.indexWhere((m) => m.id == _reactingToMessage!.id);
-    if (index == -1) return;
-
-    final msg = current[index];
-    final reactions = List<MessageReaction>.from(msg.reactions);
-    final existingIndex = reactions.indexWhere((r) => r.emoji == emoji);
-
-    if (existingIndex != -1) {
-      final existing = reactions[existingIndex];
-      if (existing.userIds.contains('m1')) {
-        // Remove my reaction
-        final newUserIds = List<String>.from(existing.userIds)..remove('m1');
-        if (newUserIds.isEmpty) {
-          reactions.removeAt(existingIndex);
-        } else {
-          reactions[existingIndex] = MessageReaction(
-            emoji: emoji,
-            userIds: newUserIds,
-          );
-        }
-      } else {
-        // Add my reaction
-        reactions[existingIndex] = MessageReaction(
-          emoji: emoji,
-          userIds: [...existing.userIds, 'm1'],
-        );
-      }
-    } else {
-      reactions.add(MessageReaction(emoji: emoji, userIds: ['m1']));
+  Future<void> _addReaction(String emoji) async {
+    final message = _reactingToMessage;
+    if (message == null) return;
+    setState(() => _reactingToMessage = null);
+    try {
+      await ChatRepository().toggleReaction(message.id, emoji);
+    } catch (e) {
+      _showError('Tepki kaydedilemedi: $e');
     }
+  }
 
-    final updated = msg.copyWith(reactions: reactions);
-    final newList = List<ChatMessage>.from(current);
-    newList[index] = updated;
-
-    ref.read(chatMessagesProvider.notifier).state = newList;
-    _reactingToMessage = null;
-    setState(() {});
+  Future<void> _sendPickedMedia({
+    required File file,
+    required MessageType type,
+    required String content,
+    int? audioDuration,
+    String? fileName,
+    int? fileSize,
+  }) async {
+    try {
+      final familyId = await _getFamilyId();
+      if (familyId == null) throw Exception('Aile bilgisi bulunamadı');
+      final repository = ChatRepository();
+      final mediaPath = await repository.uploadMedia(
+        familyId: familyId,
+        file: file,
+      );
+      await repository.sendMessage(
+        familyId: familyId,
+        content: content,
+        type: type,
+        imageUrl: type == MessageType.image ? mediaPath : null,
+        audioUrl: type == MessageType.audio ? mediaPath : null,
+        audioDuration: audioDuration,
+        videoUrl: type == MessageType.video ? mediaPath : null,
+        fileName: fileName,
+        fileSize: fileSize,
+      );
+      if (!mounted) return;
+      setState(() => _showAttachmentMenu = false);
+      WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+    } catch (e) {
+      _showError('Medya gönderilemedi: $e');
+    }
   }
 
   Future<void> _pickImage() async {
-    final picker = ImagePicker();
-    final picked = await picker.pickImage(source: ImageSource.gallery);
+    final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (picked == null) return;
-
-    final current = ref.read(chatMessagesProvider);
-    final newMsg = ChatMessage(
-      id: 'msg${current.length + 1}',
-      senderId: '',
-      senderName: 'Ben',
-      senderColor: AppColors.blue,
-      content: '📷 Fotoğraf',
-      createdAt: DateTime.now(),
+    await _sendPickedMedia(
+      file: File(picked.path),
       type: MessageType.image,
-      imageUrl: picked.path,
+      content: '📷 Fotoğraf',
     );
-
-    ref.read(chatMessagesProvider.notifier).state = [...current, newMsg];
-    setState(() => _showAttachmentMenu = false);
   }
 
   Future<void> _takePhoto() async {
-    final picker = ImagePicker();
-    final picked = await picker.pickImage(source: ImageSource.camera);
+    final picked = await ImagePicker().pickImage(source: ImageSource.camera);
     if (picked == null) return;
-
-    final current = ref.read(chatMessagesProvider);
-    final newMsg = ChatMessage(
-      id: 'msg${current.length + 1}',
-      senderId: '',
-      senderName: 'Ben',
-      senderColor: AppColors.blue,
-      content: '📷 Fotoğraf',
-      createdAt: DateTime.now(),
+    await _sendPickedMedia(
+      file: File(picked.path),
       type: MessageType.image,
-      imageUrl: picked.path,
+      content: '📷 Fotoğraf',
     );
-
-    ref.read(chatMessagesProvider.notifier).state = [...current, newMsg];
-    setState(() => _showAttachmentMenu = false);
   }
 
-  void _shareLocation() {
-    final current = ref.read(chatMessagesProvider);
-    final newMsg = ChatMessage(
-      id: 'msg${current.length + 1}',
-      senderId: '',
-      senderName: 'Ben',
-      senderColor: AppColors.blue,
-      content: 'Yoldayım, eve 10 dakika.',
-      createdAt: DateTime.now(),
-      type: MessageType.location,
-    );
-
-    ref.read(chatMessagesProvider.notifier).state = [...current, newMsg];
-    setState(() => _showAttachmentMenu = false);
+  Future<void> _shareLocation() async {
+    try {
+      var permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+      }
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        throw Exception('Konum izni verilmedi');
+      }
+      final position = await Geolocator.getCurrentPosition();
+      final familyId = await _getFamilyId();
+      if (familyId == null) throw Exception('Aile bilgisi bulunamadı');
+      final url = 'https://www.openstreetmap.org/'
+          '?mlat=${position.latitude}&mlon=${position.longitude}';
+      await ChatRepository().sendMessage(
+        familyId: familyId,
+        content: '📍 Konumumu paylaştım\n$url',
+        type: MessageType.location,
+      );
+      if (mounted) setState(() => _showAttachmentMenu = false);
+    } catch (e) {
+      _showError('Konum paylaşılamadı: $e');
+    }
   }
 
   Future<void> _sendVoiceMessage(File file, int durationMs) async {
     final durationSeconds = (durationMs / 1000).round().clamp(1, 9999);
-    final current = ref.read(chatMessagesProvider);
-    final newMsg = ChatMessage(
-      id: 'msg${current.length + 1}',
-      senderId: 'm1',
-      senderName: 'Ben',
-      senderColor: AppColors.blue,
-      content: '🎤 Sesli mesaj',
-      createdAt: DateTime.now(),
+    await _sendPickedMedia(
+      file: file,
       type: MessageType.audio,
-      audioUrl: file.path,
+      content: '🎤 Sesli mesaj',
       audioDuration: durationSeconds,
     );
-
-    ref.read(chatMessagesProvider.notifier).state = [...current, newMsg];
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollToBottom();
-    });
   }
 
   Future<void> _pickVideo() async {
-    final picker = ImagePicker();
-    final picked = await picker.pickVideo(source: ImageSource.gallery);
+    final picked = await ImagePicker().pickVideo(source: ImageSource.gallery);
     if (picked == null) return;
     final file = File(picked.path);
     final size = await file.length();
     final name = picked.path.split('/').last.split('\\').last;
-    final current = ref.read(chatMessagesProvider);
-    ref.read(chatMessagesProvider.notifier).state = [
-      ...current,
-      ChatMessage(
-        id: 'msg${current.length + 1}',
-        senderId: 'm1',
-        senderName: 'Ben',
-        senderColor: AppColors.blue,
-        content: '🎬 $name',
-        createdAt: DateTime.now(),
-        type: MessageType.video,
-        videoUrl: picked.path,
-        fileName: name,
-        fileSize: size,
-      ),
-    ];
-    setState(() => _showAttachmentMenu = false);
-    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
-  }
-
-  Future<void> _pickFile() async {
-    // File picker — shows snackbar if no file_picker package
-    setState(() => _showAttachmentMenu = false);
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Dosya paylaşımı yakında aktif olacak'),
-        duration: Duration(seconds: 2),
-      ),
+    await _sendPickedMedia(
+      file: file,
+      type: MessageType.video,
+      content: '🎬 $name',
+      fileName: name,
+      fileSize: size,
     );
   }
 
   void _showGifPicker() {
     setState(() => _showAttachmentMenu = false);
-    // Popular GIF URLs for demo
     const gifs = [
       'https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif',
       'https://media.giphy.com/media/3oz8xAFtqoOUUrsh7W/giphy.gif',
@@ -332,7 +273,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             children: [
               Container(
                 margin: const EdgeInsets.only(top: 12, bottom: 8),
-                width: 40, height: 4,
+                width: 40,
+                height: 4,
                 decoration: BoxDecoration(
                   color: isDark ? AppColors.darkBorder : AppColors.border,
                   borderRadius: BorderRadius.circular(2),
@@ -349,7 +291,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                 child: GridView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3, mainAxisSpacing: 4, crossAxisSpacing: 4,
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 4,
+                    crossAxisSpacing: 4,
                   ),
                   itemCount: gifs.length,
                   itemBuilder: (_, i) => GestureDetector(
@@ -367,7 +311,11 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                             : const Center(child: CircularProgressIndicator()),
                         errorBuilder: (_, __, ___) => Container(
                           color: Colors.grey.shade200,
-                          child: const Icon(Icons.gif, size: 32, color: Colors.grey),
+                          child: const Icon(
+                            Icons.gif,
+                            size: 32,
+                            color: Colors.grey,
+                          ),
                         ),
                       ),
                     ),
@@ -381,31 +329,29 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     );
   }
 
-  void _sendGif(String gifUrl) {
-    final current = ref.read(chatMessagesProvider);
-    ref.read(chatMessagesProvider.notifier).state = [
-      ...current,
-      ChatMessage(
-        id: 'msg${current.length + 1}',
-        senderId: 'm1',
-        senderName: 'Ben',
-        senderColor: AppColors.blue,
+  Future<void> _sendGif(String gifUrl) async {
+    try {
+      final familyId = await _getFamilyId();
+      if (familyId == null) throw Exception('Aile bilgisi bulunamadı');
+      await ChatRepository().sendMessage(
+        familyId: familyId,
         content: '🎭 GIF',
-        createdAt: DateTime.now(),
         type: MessageType.gif,
         imageUrl: gifUrl,
-      ),
-    ];
-    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+      );
+      WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+    } catch (e) {
+      _showError('GIF gönderilemedi: $e');
+    }
   }
 
-  void _pinMessage(ChatMessage message) {
-    final current = ref.read(chatMessagesProvider);
-    final newList = current.map((m) {
-      return m.copyWith(isPinned: m.id == message.id);
-    }).toList();
-    ref.read(chatMessagesProvider.notifier).state = newList;
-    HapticFeedback.mediumImpact();
+  Future<void> _pinMessage(ChatMessage message) async {
+    try {
+      await ChatRepository().setPinned(message.id, !message.isPinned);
+      HapticFeedback.mediumImpact();
+    } catch (e) {
+      _showError('Mesaj sabitleme güncellenemedi: $e');
+    }
   }
 
   String _dayLabel(DateTime dt) {
@@ -501,10 +447,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             },
             icon: const Icon(Icons.phone_outlined),
           ),
-          IconButton(
-            onPressed: () => _showChatMenu(),
-            icon: const Icon(Icons.more_vert),
-          ),
         ],
       ),
       body: Stack(
@@ -538,7 +480,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                     itemCount: messages.length,
                     itemBuilder: (context, index) {
                       final msg = messages[index];
-                      final isMe = msg.senderId == 'm1';
+                      final isMe = msg.senderId == AuthService.currentUserId;
 
                       // Day separator
                       final showDay = index == 0 ||
@@ -669,7 +611,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               onClose: () => setState(() => _showAttachmentMenu = false),
               onGif: _showGifPicker,
               onVideo: _pickVideo,
-              onFile: _pickFile,
             ),
           // Reaction picker overlay
           if (_reactingToMessage != null)
@@ -687,69 +628,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   }
 
   bool _showSender(ChatMessage msg, List<ChatMessage> messages, int index) {
-    if (msg.senderId == 'm1') return false;
+    if (msg.senderId == AuthService.currentUserId) return false;
     if (index == 0) return true;
     final prev = messages[index - 1];
     return prev.senderId != msg.senderId ||
         !_sameDay(prev.createdAt, msg.createdAt);
   }
-
-  void _showChatMenu() {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (context) {
-        final isDark = Theme.of(context).brightness == Brightness.dark;
-        return Container(
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: isDark ? AppColors.darkCard : Colors.white,
-            borderRadius: const BorderRadius.vertical(
-              top: Radius.circular(24),
-            ),
-          ),
-          child: SafeArea(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: isDark ? AppColors.darkBorder : AppColors.border,
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                _MenuItem(
-                  icon: Icons.search,
-                  label: 'Mesajlarda Ara',
-                  onTap: () => Navigator.pop(context),
-                ),
-                _MenuItem(
-                  icon: Icons.notifications_outlined,
-                  label: 'Bildirim Ayarları',
-                  onTap: () => Navigator.pop(context),
-                ),
-                _MenuItem(
-                  icon: Icons.archive_outlined,
-                  label: 'Sohbeti Arşivle',
-                  onTap: () => Navigator.pop(context),
-                ),
-                _MenuItem(
-                  icon: Icons.delete_outline,
-                  label: 'Sohbeti Temizle',
-                  isDanger: true,
-                  onTap: () => Navigator.pop(context),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
 
 class _DaySeparator extends StatelessWidget {
   final String label;
@@ -851,7 +735,6 @@ class _AttachmentMenu extends StatelessWidget {
   final VoidCallback onClose;
   final VoidCallback? onGif;
   final VoidCallback? onVideo;
-  final VoidCallback? onFile;
 
   const _AttachmentMenu({
     required this.onCamera,
@@ -860,7 +743,6 @@ class _AttachmentMenu extends StatelessWidget {
     required this.onClose,
     this.onGif,
     this.onVideo,
-    this.onFile,
   });
 
   @override
@@ -921,24 +803,6 @@ class _AttachmentMenu extends StatelessWidget {
                           onTap: onLocation,
                         ),
                         _AttachmentItem(
-                          icon: Icons.event,
-                          color: AppColors.warning,
-                          label: 'Etkinlik',
-                          onTap: () {},
-                        ),
-                        _AttachmentItem(
-                          icon: Icons.poll,
-                          color: AppColors.cobalt,
-                          label: 'Anket',
-                          onTap: () {},
-                        ),
-                        _AttachmentItem(
-                          icon: Icons.contact_page,
-                          color: AppColors.pink,
-                          label: 'Kişi',
-                          onTap: () {},
-                        ),
-                        _AttachmentItem(
                           icon: Icons.gif_box_outlined,
                           color: AppColors.orange,
                           label: 'GIF',
@@ -949,12 +813,6 @@ class _AttachmentMenu extends StatelessWidget {
                           color: const Color(0xFF7C3AED),
                           label: 'Video',
                           onTap: onVideo ?? () {},
-                        ),
-                        _AttachmentItem(
-                          icon: Icons.description,
-                          color: AppColors.slate,
-                          label: 'Dosya',
-                          onTap: onFile ?? () {},
                         ),
                       ],
                     ),
@@ -1009,37 +867,3 @@ class _AttachmentItem extends StatelessWidget {
   }
 }
 
-class _MenuItem extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final bool isDanger;
-  final VoidCallback onTap;
-
-  const _MenuItem({
-    required this.icon,
-    required this.label,
-    required this.onTap,
-    this.isDanger = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return ListTile(
-      leading: Icon(
-        icon,
-        color: isDanger ? AppColors.error : AppColors.cobalt,
-      ),
-      title: Text(
-        label,
-        style: TextStyle(
-          color: isDanger
-              ? AppColors.error
-              : (isDark ? AppColors.darkTextPrimary : AppColors.dark),
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-      onTap: onTap,
-    );
-  }
-}

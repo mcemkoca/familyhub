@@ -139,11 +139,18 @@ class HubRepository with RepositoryErrorHandler {
       return _safeClient!
           .from('events')
           .stream(primaryKey: ['id'])
+          .eq('family_id', familyId)
           .order('start_time')
           .limit(20)
           .map(
             (data) => data
-                .where((e) => e['family_id'] == familyId)
+                .where(
+                  (e) =>
+                      e['status'] == 'active' &&
+                      DateTime.tryParse(e['start_time']?.toString() ?? '')
+                              ?.isAfter(DateTime.now()) ==
+                          true,
+                )
                 .map((e) => HubEvent.fromJson(e))
                 .toList(),
           );
@@ -250,14 +257,11 @@ class HubRepository with RepositoryErrorHandler {
       return _safeClient!
           .from('family_moods')
           .stream(primaryKey: ['id'])
+          .eq('family_id', familyId)
+          .eq('is_shared', true)
           .order('created_at', ascending: false)
           .limit(20)
-          .map(
-            (data) => data
-                .where((e) => e['family_id'] == familyId)
-                .map((e) => FamilyMood.fromJson(e))
-                .toList(),
-          );
+          .map((data) => data.map((e) => FamilyMood.fromJson(e)).toList());
     } catch (e) {
       debugPrint('HubRepository.watchFamilyMoods error: $e');
       return Stream.error(

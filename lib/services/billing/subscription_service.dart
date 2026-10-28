@@ -3,9 +3,12 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 
 import '../../core/analytics/analytics_service.dart';
 import '../../core/supabase_client.dart';
+import '../../core/utils/subscription_status.dart';
 
 /// RevenueCat-backed subscription management.
-/// API key via --dart-define=REVENUECAT_API_KEY=...
+///
+/// RevenueCat webhooks are the only authority allowed to update premium fields
+/// in Supabase. The client reads entitlements but never grants them to itself.
 class SubscriptionService {
   static const _apiKey = String.fromEnvironment('REVENUECAT_API_KEY');
 
@@ -15,7 +18,6 @@ class SubscriptionService {
     if (!isConfigured) return;
 
     await Purchases.configure(PurchasesConfiguration(_apiKey));
-
     final userId = SupabaseConfig.client.auth.currentUser?.id;
     if (userId != null) {
       await Purchases.logIn(userId);
@@ -33,27 +35,38 @@ class SubscriptionService {
     }
   }
 
+  static Future<bool> purchasePlan(String planId) async {
+    final offering = await getOfferings();
+    if (offering == null) {
+      throw Exception('Abonelik planları şu anda kullanılamıyor');
+    }
+
+    Package? selected;
+    for (final package in offering.availablePackages) {
+      if (package.identifier == planId ||
+          package.storeProduct.identifier == planId) {
+        selected = package;
+        break;
+      }
+    }
+    if (selected == null) {
+      throw Exception('Seçilen abonelik planı mağazada bulunamadı');
+    }
+    return purchasePackage(selected);
+  }
+
   static Future<bool> purchasePackage(Package package) async {
     if (!isConfigured) return false;
     try {
       final customerInfo = await Purchases.purchasePackage(package);
       final isPremium = customerInfo.entitlements.active.containsKey('premium');
-
       if (isPremium) {
-        final expiration = customerInfo.entitlements.active['premium']?.expirationDate;
-        await SupabaseConfig.client.from('profiles').update({
-          'is_premium': true,
-          'subscription_tier': 'premium',
-          'subscription_expires_at': expiration,
-        }).eq('id', SupabaseConfig.client.auth.currentUser!.id);
-
         AnalyticsService.trackRevenue(
           package.identifier,
           package.storeProduct.price,
           package.storeProduct.currencyCode,
         );
       }
-
       return isPremium;
     } on PlatformException catch (e) {
       final code = PurchasesErrorHelper.getErrorCode(e);
@@ -70,44 +83,23 @@ class SubscriptionService {
   static Future<void> restorePurchases() async {
     if (!isConfigured) return;
     try {
-      final customerInfo = await Purchases.restorePurchases();
-      final isPremium = customerInfo.entitlements.active.containsKey('premium');
-      final expiration = customerInfo.entitlements.active['premium']?.expirationDate;
-
-      await SupabaseConfig.client.from('profiles').update({
-        'is_premium': isPremium,
-        'subscription_tier': isPremium ? 'premium' : 'free',
-        'subscription_expires_at': expiration,
-      }).eq('id', SupabaseConfig.client.auth.currentUser!.id);
+      await Purchases.restorePurchases();
     } catch (e) {
       AnalyticsService.trackBillingError(e.toString());
     }
   }
 
-  // ── Feature gates ──
-  static bool canCreateEvent(int currentCount) => currentCount < 10 || _isPremium();
-  static bool canAddMember(int currentCount) => currentCount < 4 || _isPremium();
-  static bool canAccessHistory() => _isPremium();
-  static bool canExportData() => _isPremium();
-  static bool canUseAI() => _isPremium();
-  static bool canEnableSmartHome() => _isPremium();
-  static bool canViewHealthSummary() => _isPremium();
+  static Future<bool> canCreateEvent(int currentCount) async =>
+      currentCount < 10 || await checkPremiumAsync();
+  static Future<bool> canAddMember(int currentCount) async =>
+      currentCount < 4 || await checkPremiumAsync();
+  static Future<bool> canAccessHistory() => checkPremiumAsync();
+  static Future<bool> canExportData() => checkPremiumAsync();
+  static Future<bool> canUseAI() => checkPremiumAsync();
+  static Future<bool> canEnableSmartHome() => checkPremiumAsync();
+  static Future<bool> canViewHealthSummary() => checkPremiumAsync();
 
-  static bool _isPremium() {
-    final user = SupabaseConfig.client.auth.currentUser;
-    if (user == null) return false;
-
-    // Check user metadata first (fast path)
-    final tier = user.userMetadata?['subscription_tier'];
-    if (tier == 'premium' || tier == 'family') {
-      return true;
-    }
-
-    // Fallback to legacy is_premium flag
-    return user.userMetadata?['is_premium'] == true;
-  }
-
-  /// Async premium check that validates against Supabase and expiry date.
+  /// Validates premium status against the server-managed profile and expiry.
   static Future<bool> checkPremiumAsync() async {
     final user = SupabaseConfig.client.auth.currentUser;
     if (user == null) return false;
@@ -115,24 +107,19 @@ class SubscriptionService {
     try {
       final response = await SupabaseConfig.client
           .from('profiles')
-          .select('subscription_tier, subscription_expires_at')
+          .select('is_premium, subscription_tier, subscription_expires_at')
           .eq('id', user.id)
           .maybeSingle();
 
-      final tier = response?['subscription_tier']?.toString();
-      if (tier == 'premium' || tier == 'family') {
-        final expiresAt = response?['subscription_expires_at'];
-        if (expiresAt != null) {
-          final expiry = DateTime.tryParse(expiresAt.toString());
-          if (expiry != null && expiry.isBefore(DateTime.now())) {
-            return false;
-          }
-        }
-        return true;
-      }
-
-      return response?['is_premium'] == true;
-    } catch (e) {
+      final expiresAt = response?['subscription_expires_at'];
+      return hasActivePremium(
+        isPremium: response?['is_premium'] == true,
+        subscriptionTier: response?['subscription_tier']?.toString(),
+        expiresAt: expiresAt == null
+            ? null
+            : DateTime.tryParse(expiresAt.toString()),
+      );
+    } catch (_) {
       return false;
     }
   }

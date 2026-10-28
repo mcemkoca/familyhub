@@ -121,15 +121,23 @@ class BudgetRepository with RepositoryErrorHandler {
     }, 'getCurrentBudget');
   }
 
-  Stream<List<Transaction>> watchTransactions() {
+  Stream<List<Transaction>> watchTransactions() async* {
     try {
-      return _client
+      final familyId = await _getFamilyId();
+      if (familyId == null) {
+        yield [];
+        return;
+      }
+      yield* _client
           .from('budget_entries')
           .stream(primaryKey: ['id'])
+          .eq('family_id', familyId)
           .map((data) => data.map((e) => _transactionFromJson(e)).toList());
     } catch (e) {
       debugPrint('BudgetRepository.watchTransactions error: $e');
-      return Stream.error(RepositoryException('Beklenmeyen hata [watchTransactions]: $e'));
+      yield* Stream.error(
+        RepositoryException('Beklenmeyen hata [watchTransactions]: $e'),
+      );
     }
   }
 
